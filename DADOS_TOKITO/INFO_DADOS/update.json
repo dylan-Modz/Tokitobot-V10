@@ -6,7 +6,11 @@
   "ref": "main",
   "publishedAt": "2026-08-11",
   "changelog": [
-    "Sistema oficial de licença e atualização preparado."
+    "Novo painel colorido de controle no Connect.",
+    "Configuração do bot pelo console com nome, dono, número, prefixo e tokens.",
+    "Menções corrigidas nos comandos de brincadeira.",
+    "Códigos JavaScript reorganizados no padrão compacto do Tokito V10.",
+    "Aviso de uso gratuito e proibição de venda adicionado aos arquivos JavaScript."
   ],
   "delete": [],
   "archiveSha256": ""

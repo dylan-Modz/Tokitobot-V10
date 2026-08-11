@@ -1,4 +1,34 @@
 /*
+ * ============================================================
+ *                     TOKITO BOT V10
+ * ============================================================
+ *
+ * Projeto disponibilizado gratuitamente para a comunidade.
+ *
+ * Você pode modificar, personalizar e utilizar este bot
+ * conforme sua preferência, inclusive mantendo o nome Tokito.
+ *
+ * REGRAS:
+ * • É proibida a venda ou revenda deste código-fonte.
+ * • Não comercialize versões modificadas deste projeto.
+ * • Não reivindique a autoria original do projeto.
+ * • Respeite os créditos e o trabalho dos desenvolvedores.
+ * • Utilize o projeto com respeito e responsabilidade.
+ *
+ * ATENÇÃO:
+ * A venda, revenda ou comercialização não autorizada deste
+ * projeto poderá resultar em medidas legais para proteção
+ * dos direitos dos autores, incluindo processo judicial,
+ * conforme a legislação aplicável.
+ *
+ * Author: Dylan Modz
+ * API oficial: https://tokito-apis.com.br
+ *
+ * Modifique como quiser. Apenas respeite as regras.
+ * ============================================================
+ */
+
+/*
  * NPM Search + Download
  *
  * Pesquisa informações de pacotes no NPM
@@ -10,323 +40,310 @@
 
 const axios = require("axios")
 
-
 const cortarTexto = (
-  texto,
-  limite = 500
+texto,
+limite = 500
 ) => {
-  const valor = String(
-    texto || ""
-  ).trim()
+const valor = String(
+texto || ""
+).trim()
 
-  if (!valor) {
-    return "Não informado"
-  }
-
-  if (
-    valor.length <= limite
-  ) {
-    return valor
-  }
-
-  return `${valor.slice(0, limite)}...`
+if (!valor) {
+return "Não informado"
 }
 
+if (
+valor.length <= limite
+) {
+return valor
+}
+
+return `${valor.slice(0, limite)}...`
+}
 
 const formatarNumero = valor => {
-  const numero = Number(
-    valor || 0
-  )
+const numero = Number(
+valor || 0
+)
 
-  return numero.toLocaleString(
-    "pt-BR"
-  )
+return numero.toLocaleString(
+"pt-BR"
+)
 }
-
 
 const formatarData = data => {
-  if (!data) {
-    return "Não informado"
-  }
-
-  try {
-    return new Date(
-      data
-    ).toLocaleString(
-      "pt-BR",
-      {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-      }
-    )
-  }
-  catch {
-    return String(
-      data
-    )
-  }
+if (!data) {
+return "Não informado"
 }
 
+try {
+return new Date(
+data
+).toLocaleString(
+"pt-BR",
+{
+day: "2-digit",
+month: "2-digit",
+year: "numeric",
+hour: "2-digit",
+minute: "2-digit"
+}
+)
+}
+catch {
+return String(
+data
+)
+}
+}
 
 const nomeArquivoSeguro = nome => {
-  return String(
-    nome || "pacote"
-  )
-    .replace(
-      /^@/,
-      ""
-    )
-    .replace(
-      /[\/\\:*?"<>|]/g,
-      "-"
-    )
-    .replace(
-      /\s+/g,
-      "-"
-    )
-    .replace(
-      /-+/g,
-      "-"
-    )
-    .trim()
+return String(
+nome || "pacote"
+)
+.replace(
+/^@/,
+""
+)
+.replace(
+/[\/\\:*?"<>|]/g,
+"-"
+)
+.replace(
+/\s+/g,
+"-"
+)
+.replace(
+/-+/g,
+"-"
+)
+.trim()
 }
-
 
 const pegarAutor = (
-  pacote,
-  detalhes
+pacote,
+detalhes
 ) => {
-  if (
-    detalhes?.author?.name
-  ) {
-    return detalhes.author.name
-  }
-
-  if (
-    typeof detalhes?.author ===
-    "string"
-  ) {
-    return detalhes.author
-  }
-
-  if (
-    pacote?.publisher?.username
-  ) {
-    return pacote.publisher.username
-  }
-
-  if (
-    pacote?.publisher?.email
-  ) {
-    return pacote.publisher.email
-  }
-
-  if (
-    pacote?.author?.name
-  ) {
-    return pacote.author.name
-  }
-
-  if (
-    typeof pacote?.author ===
-    "string"
-  ) {
-    return pacote.author
-  }
-
-  return "Não informado"
+if (
+detalhes?.author?.name
+) {
+return detalhes.author.name
 }
 
+if (
+typeof detalhes?.author ===
+"string"
+) {
+return detalhes.author
+}
+
+if (
+pacote?.publisher?.username
+) {
+return pacote.publisher.username
+}
+
+if (
+pacote?.publisher?.email
+) {
+return pacote.publisher.email
+}
+
+if (
+pacote?.author?.name
+) {
+return pacote.author.name
+}
+
+if (
+typeof pacote?.author ===
+"string"
+) {
+return pacote.author
+}
+
+return "Não informado"
+}
 
 const pegarRepositorio = (
-  pacote,
-  detalhes
+pacote,
+detalhes
 ) => {
-  let repositorio =
-    pacote?.links?.repository ||
-    detalhes?.repository?.url ||
-    detalhes?.repository ||
-    ""
+let repositorio =
+pacote?.links?.repository ||
+detalhes?.repository?.url ||
+detalhes?.repository ||
+""
 
-  if (
-    typeof repositorio ===
-    "object"
-  ) {
-    repositorio =
-      repositorio?.url ||
-      ""
-  }
-
-  repositorio = String(
-    repositorio || ""
-  )
-    .replace(
-      /^git\+/i,
-      ""
-    )
-    .replace(
-      /^git:/i,
-      "https:"
-    )
-    .replace(
-      /\.git$/i,
-      ""
-    )
-
-  return repositorio ||
-    null
+if (
+typeof repositorio ===
+"object"
+) {
+repositorio =
+repositorio?.url ||
+""
 }
 
+repositorio = String(
+repositorio || ""
+)
+.replace(
+/^git\+/i,
+""
+)
+.replace(
+/^git:/i,
+"https:"
+)
+.replace(
+/\.git$/i,
+""
+)
+
+return repositorio ||
+null
+}
 
 const pegarHomepage = (
-  pacote,
-  detalhes
+pacote,
+detalhes
 ) => {
-  return (
-    pacote?.links?.homepage ||
-    detalhes?.homepage ||
-    null
-  )
+return (
+pacote?.links?.homepage ||
+detalhes?.homepage ||
+null
+)
 }
-
 
 const pegarDownloads = async nome => {
-  try {
-    const pacote =
-      encodeURIComponent(
-        nome
-      )
+try {
+const pacote =
+encodeURIComponent(
+nome
+)
 
-    const {
-      data
-    } = await axios.get(
-      `https://api.npmjs.org/downloads/point/last-week/${pacote}`,
-      {
-        timeout: 20000
-      }
-    )
-
-    return Number(
-      data?.downloads || 0
-    )
-  }
-  catch {
-    return 0
-  }
+const {
+data
+} = await axios.get(
+`https://api.npmjs.org/downloads/point/last-week/${pacote}`,
+{
+timeout: 20000
 }
+)
 
+return Number(
+data?.downloads || 0
+)
+}
+catch {
+return 0
+}
+}
 
 const pesquisarNpm = async pesquisa => {
-  const {
-    data
-  } = await axios.get(
-    "https://registry.npmjs.org/-/v1/search",
-    {
-      params: {
-        text: pesquisa,
-        size: 10
-      },
+const {
+data
+} = await axios.get(
+"https://registry.npmjs.org/-/v1/search",
+{
+params: {
+text: pesquisa,
+size: 10
+},
 
-      timeout: 30000,
+timeout: 30000,
 
-      headers: {
-        "User-Agent":
-          "TokitoBot/10.0"
-      }
-    }
-  )
-
-  return Array.isArray(
-    data?.objects
-  )
-    ? data.objects
-    : []
+headers: {
+"User-Agent":
+"TokitoBot/10.0"
 }
+}
+)
 
+return Array.isArray(
+data?.objects
+)
+? data.objects
+: []
+}
 
 const escolherPacote = (
-  resultados,
-  pesquisa
+resultados,
+pesquisa
 ) => {
-  const procura = String(
-    pesquisa || ""
-  )
-    .trim()
-    .toLowerCase()
+const procura = String(
+pesquisa || ""
+)
+.trim()
+.toLowerCase()
 
-  const exato =
-    resultados.find(
-      item =>
-        String(
-          item?.package?.name ||
-          ""
-        )
-          .toLowerCase() ===
-        procura
-    )
+const exato =
+resultados.find(
+item =>
+String(
+item?.package?.name ||
+""
+)
+.toLowerCase() ===
+procura
+)
 
-  return exato ||
-    resultados[0] ||
-    null
+return exato ||
+resultados[0] ||
+null
 }
-
 
 const pegarDetalhes = async nome => {
-  const pacote =
-    encodeURIComponent(
-      nome
-    )
+const pacote =
+encodeURIComponent(
+nome
+)
 
-  const {
-    data
-  } = await axios.get(
-    `https://registry.npmjs.org/${pacote}/latest`,
-    {
-      timeout: 30000,
+const {
+data
+} = await axios.get(
+`https://registry.npmjs.org/${pacote}/latest`,
+{
+timeout: 30000,
 
-      headers: {
-        "User-Agent":
-          "TokitoBot/10.0"
-      }
-    }
-  )
+headers: {
+"User-Agent":
+"TokitoBot/10.0"
+}
+}
+)
 
-  return data || {}
+return data || {}
 }
 
-
 module.exports = {
-  nome: "npm",
+nome: "npm",
 
-  comandos: [
-    "npm",
-    "npmsearch"
-  ],
+comandos: [
+"npm",
+"npmsearch"
+],
 
-  categoria: "pesquisa",
+categoria: "pesquisa",
 
-  info: {
-    descricao:
-      "Pesquisa pacotes no NPM e envia o arquivo original.",
+info: {
+descricao:
+"Pesquisa pacotes no NPM e envia o arquivo original.",
 
-    uso:
-      "npm axios",
+uso:
+"npm axios",
 
-    categoria:
-      "pesquisa"
-  },
+categoria:
+"pesquisa"
+},
 
-
-  async executar(ctx) {
-    with (ctx) {
-      if (
-        !q ||
-        !q.trim()
-      ) {
-        return reply(
+async executar(ctx) {
+with (ctx) {
+if (
+!q ||
+!q.trim()
+) {
+return reply(
 `- 📦 \`𝙽𝙿𝙼 𝚂𝙴𝙰𝚁𝙲𝙷\`
 
 > *Digite o nome do pacote que deseja pesquisar.*
@@ -338,259 +355,229 @@ ${prefix + command} baileys
 ${prefix + command} express
 ${prefix + command} yt-search
 ${prefix + command} @whiskeysockets/baileys`
-        )
-      }
+)
+}
 
+try {
+await reagir(
+from,
+"🔎"
+)
 
-      try {
-        await reagir(
-          from,
-          "🔎"
-        )
+const pesquisa =
+q.trim()
 
-
-        const pesquisa =
-          q.trim()
-
-
-        /*
+/*
          * Pesquisa os pacotes.
          */
 
-        const resultados =
-          await pesquisarNpm(
-            pesquisa
-          )
+const resultados =
+await pesquisarNpm(
+pesquisa
+)
 
+if (
+!resultados.length
+) {
+await reagir(
+from,
+"❌"
+).catch(
+() => {}
+)
 
-        if (
-          !resultados.length
-        ) {
-          await reagir(
-            from,
-            "❌"
-          ).catch(
-            () => {}
-          )
+return reply(
+`*❌ | Nenhum pacote encontrado para "${pesquisa}".*`
+)
+}
 
-          return reply(
-            `*❌ | Nenhum pacote encontrado para "${pesquisa}".*`
-          )
-        }
-
-
-        /*
+/*
          * Dá preferência a um resultado
          * com nome exatamente igual.
          */
 
-        const resultado =
-          escolherPacote(
-            resultados,
-            pesquisa
-          )
+const resultado =
+escolherPacote(
+resultados,
+pesquisa
+)
 
+const pacote =
+resultado?.package ||
+{}
 
-        const pacote =
-          resultado?.package ||
-          {}
+const nomePacote =
+pacote?.name ||
+pesquisa
 
-
-        const nomePacote =
-          pacote?.name ||
-          pesquisa
-
-
-        /*
+/*
          * Busca os dados completos
          * da versão mais recente.
          */
 
-        let detalhes = {}
+let detalhes = {}
 
+try {
+detalhes =
+await pegarDetalhes(
+nomePacote
+)
+}
+catch (erroDetalhes) {
+console.log(
+"[NPM DETALHES]",
+erroDetalhes
+?.response
+?.data ||
+erroDetalhes
+?.message ||
+erroDetalhes
+)
+}
 
-        try {
-          detalhes =
-            await pegarDetalhes(
-              nomePacote
-            )
-        }
-        catch (erroDetalhes) {
-          console.log(
-            "[NPM DETALHES]",
-            erroDetalhes
-              ?.response
-              ?.data ||
-            erroDetalhes
-              ?.message ||
-            erroDetalhes
-          )
-        }
+const versao =
+detalhes?.version ||
+pacote?.version ||
+"Não informado"
 
+const descricao =
+detalhes?.description ||
+pacote?.description ||
+"Sem descrição."
 
-        const versao =
-          detalhes?.version ||
-          pacote?.version ||
-          "Não informado"
+const autor =
+pegarAutor(
+pacote,
+detalhes
+)
 
+const licenca =
+detalhes?.license ||
+"Não informado"
 
-        const descricao =
-          detalhes?.description ||
-          pacote?.description ||
-          "Sem descrição."
+const downloads =
+await pegarDownloads(
+nomePacote
+)
 
+const atualizado =
+pacote?.date ||
+null
 
-        const autor =
-          pegarAutor(
-            pacote,
-            detalhes
-          )
+const npmLink =
+pacote?.links?.npm ||
+`https://www.npmjs.com/package/${nomePacote}`
 
+const repositorio =
+pegarRepositorio(
+pacote,
+detalhes
+)
 
-        const licenca =
-          detalhes?.license ||
-          "Não informado"
+const homepage =
+pegarHomepage(
+pacote,
+detalhes
+)
 
+const arquivoNpm =
+detalhes?.dist?.tarball ||
+null
 
-        const downloads =
-          await pegarDownloads(
-            nomePacote
-          )
+const integridade =
+detalhes?.dist?.integrity ||
+detalhes?.dist?.shasum ||
+null
 
+const nodeVersao =
+detalhes?.engines?.node ||
+"Não informado"
 
-        const atualizado =
-          pacote?.date ||
-          null
+const npmVersao =
+detalhes?.engines?.npm ||
+"Não informado"
 
+const dependencias =
+detalhes?.dependencies &&
+typeof detalhes.dependencies ===
+"object"
+? Object.keys(
+detalhes.dependencies
+).length
+: 0
 
-        const npmLink =
-          pacote?.links?.npm ||
-          `https://www.npmjs.com/package/${nomePacote}`
+const devDependencias =
+detalhes?.devDependencies &&
+typeof detalhes.devDependencies ===
+"object"
+? Object.keys(
+detalhes.devDependencies
+).length
+: 0
 
+const peerDependencias =
+detalhes?.peerDependencies &&
+typeof detalhes.peerDependencies ===
+"object"
+? Object.keys(
+detalhes.peerDependencies
+).length
+: 0
 
-        const repositorio =
-          pegarRepositorio(
-            pacote,
-            detalhes
-          )
+let keywords =
+detalhes?.keywords ||
+pacote?.keywords ||
+[]
 
+if (
+typeof keywords ===
+"string"
+) {
+keywords =
+keywords.split(
+/[\s,]+/
+)
+}
 
-        const homepage =
-          pegarHomepage(
-            pacote,
-            detalhes
-          )
+const palavras =
+Array.isArray(
+keywords
+)
+? keywords
+.filter(
+Boolean
+)
+.slice(
+0,
+10
+)
+.join(
+", "
+)
+: "Não informado"
 
-
-        const arquivoNpm =
-          detalhes?.dist?.tarball ||
-          null
-
-
-        const integridade =
-          detalhes?.dist?.integrity ||
-          detalhes?.dist?.shasum ||
-          null
-
-
-        const nodeVersao =
-          detalhes?.engines?.node ||
-          "Não informado"
-
-
-        const npmVersao =
-          detalhes?.engines?.npm ||
-          "Não informado"
-
-
-        const dependencias =
-          detalhes?.dependencies &&
-          typeof detalhes.dependencies ===
-          "object"
-            ? Object.keys(
-                detalhes.dependencies
-              ).length
-            : 0
-
-
-        const devDependencias =
-          detalhes?.devDependencies &&
-          typeof detalhes.devDependencies ===
-          "object"
-            ? Object.keys(
-                detalhes.devDependencies
-              ).length
-            : 0
-
-
-        const peerDependencias =
-          detalhes?.peerDependencies &&
-          typeof detalhes.peerDependencies ===
-          "object"
-            ? Object.keys(
-                detalhes.peerDependencies
-              ).length
-            : 0
-
-
-        let keywords =
-          detalhes?.keywords ||
-          pacote?.keywords ||
-          []
-
-
-        if (
-          typeof keywords ===
-          "string"
-        ) {
-          keywords =
-            keywords.split(
-              /[\s,]+/
-            )
-        }
-
-
-        const palavras =
-          Array.isArray(
-            keywords
-          )
-            ? keywords
-                .filter(
-                  Boolean
-                )
-                .slice(
-                  0,
-                  10
-                )
-                .join(
-                  ", "
-                )
-            : "Não informado"
-
-
-        /*
+/*
          * Pacotes relacionados.
          */
 
-        const relacionados =
-          resultados
-            .filter(
-              item =>
-                item?.package?.name &&
-                item.package.name !==
-                  nomePacote
-            )
-            .slice(
-              0,
-              5
-            )
-            .map(
-              item =>
-                item.package.name
-            )
+const relacionados =
+resultados
+.filter(
+item =>
+item?.package?.name &&
+item.package.name !==
+nomePacote
+)
+.slice(
+0,
+5
+)
+.map(
+item =>
+item.package.name
+)
 
-
-        let texto =
+let texto =
 `- 📦 \`𝙽𝙿𝙼 𝚂𝙴𝙰𝚁𝙲𝙷\`
 
 『 📦 \`𝙿𝙰𝙲𝙾𝚃𝙴\` 』— ${nomePacote}
@@ -623,36 +610,33 @@ ${cortarTexto(palavras, 300)}
 
 ${npmLink}`
 
-
-        if (
-          repositorio
-        ) {
-          texto +=
+if (
+repositorio
+) {
+texto +=
 `
 
 - 💻 \`𝚁𝙴𝙿𝙾𝚂𝙸𝚃𝙾́𝚁𝙸𝙾\`
 
 ${repositorio}`
-        }
+}
 
-
-        if (
-          homepage &&
-          homepage !== repositorio
-        ) {
-          texto +=
+if (
+homepage &&
+homepage !== repositorio
+) {
+texto +=
 `
 
 - 🌐 \`𝚂𝙸𝚃𝙴\`
 
 ${homepage}`
-        }
+}
 
-
-        if (
-          relacionados.length
-        ) {
-          texto +=
+if (
+relacionados.length
+) {
+texto +=
 `
 
 - 🔎 \`𝚁𝙴𝙻𝙰𝙲𝙸𝙾𝙽𝙰𝙳𝙾𝚂\`
@@ -663,51 +647,47 @@ ${relacionados
       `${index + 1}. ${nome}`
   )
   .join("\n")}`
-        }
+}
 
-
-        /*
+/*
          * Envia as informações primeiro.
          */
 
-        await tokito.sendMessage(
-          from,
-          {
-            text: texto,
+await tokito.sendMessage(
+from,
+{
+text: texto,
 
-            contextInfo:
-              typeof canalInfo ===
-              "function"
-                ? canalInfo([])
-                : {}
-          },
-          {
-            quoted: selo
-          }
-        )
+contextInfo:
+typeof canalInfo ===
+"function"
+? canalInfo([])
+: {}
+},
+{
+quoted: selo
+}
+)
 
-
-        /*
+/*
          * Se existir tarball, manda
          * o pacote como documento.
          */
 
-        if (
-          arquivoNpm
-        ) {
-          await reagir(
-            from,
-            "📦"
-          )
+if (
+arquivoNpm
+) {
+await reagir(
+from,
+"📦"
+)
 
+const nomeArquivo =
+nomeArquivoSeguro(
+nomePacote
+)
 
-          const nomeArquivo =
-            nomeArquivoSeguro(
-              nomePacote
-            )
-
-
-          let caption =
+let caption =
 `- 📦 \`𝙿𝙰𝙲𝙾𝚃𝙴 𝙽𝙿𝙼\`
 
 『 📦 \`𝙿𝙰𝙲𝙾𝚃𝙴\` 』— ${nomePacote}
@@ -715,131 +695,125 @@ ${relacionados
 
 > *Arquivo original da versão publicada no NPM.*`
 
-
-          if (
-            integridade
-          ) {
-            caption +=
+if (
+integridade
+) {
+caption +=
 `
 
 `
-          }
+}
 
+try {
+await tokito.sendMessage(
+from,
+{
+document: {
+url: arquivoNpm
+},
 
-          try {
-            await tokito.sendMessage(
-              from,
-              {
-                document: {
-                  url: arquivoNpm
-                },
+mimetype:
+"application/gzip",
 
-                mimetype:
-                  "application/gzip",
+fileName:
+`${nomeArquivo}-${versao}.tgz`,
 
-                fileName:
-                  `${nomeArquivo}-${versao}.tgz`,
+caption,
 
-                caption,
+contextInfo:
+typeof canalInfo ===
+"function"
+? canalInfo([])
+: {}
+},
+{
+quoted: selo
+}
+)
+}
+catch (erroDocumento) {
+console.log(
+"[NPM DOCUMENTO]",
+erroDocumento
+?.response
+?.data ||
+erroDocumento
+?.message ||
+erroDocumento
+)
 
-                contextInfo:
-                  typeof canalInfo ===
-                  "function"
-                    ? canalInfo([])
-                    : {}
-              },
-              {
-                quoted: selo
-              }
-            )
-          }
-          catch (erroDocumento) {
-            console.log(
-              "[NPM DOCUMENTO]",
-              erroDocumento
-                ?.response
-                ?.data ||
-              erroDocumento
-                ?.message ||
-              erroDocumento
-            )
-
-
-            /*
+/*
              * Segunda tentativa:
              * baixa o pacote para Buffer
              * e manda diretamente.
              */
 
-            try {
-              const respostaArquivo =
-                await axios.get(
-                  arquivoNpm,
-                  {
-                    responseType:
-                      "arraybuffer",
+try {
+const respostaArquivo =
+await axios.get(
+arquivoNpm,
+{
+responseType:
+"arraybuffer",
 
-                    timeout:
-                      120000,
+timeout:
+120000,
 
-                    maxContentLength:
-                      Infinity,
+maxContentLength:
+Infinity,
 
-                    maxBodyLength:
-                      Infinity,
+maxBodyLength:
+Infinity,
 
-                    headers: {
-                      "User-Agent":
-                        "TokitoBot/10.0"
-                    }
-                  }
-                )
+headers: {
+"User-Agent":
+"TokitoBot/10.0"
+}
+}
+)
 
+const buffer =
+Buffer.from(
+respostaArquivo.data
+)
 
-              const buffer =
-                Buffer.from(
-                  respostaArquivo.data
-                )
+await tokito.sendMessage(
+from,
+{
+document:
+buffer,
 
+mimetype:
+"application/gzip",
 
-              await tokito.sendMessage(
-                from,
-                {
-                  document:
-                    buffer,
+fileName:
+`${nomeArquivo}-${versao}.tgz`,
 
-                  mimetype:
-                    "application/gzip",
+caption,
 
-                  fileName:
-                    `${nomeArquivo}-${versao}.tgz`,
+contextInfo:
+typeof canalInfo ===
+"function"
+? canalInfo([])
+: {}
+},
+{
+quoted: selo
+}
+)
+}
+catch (erroBuffer) {
+console.log(
+"[NPM BUFFER]",
+erroBuffer
+?.response
+?.data ||
+erroBuffer
+?.message ||
+erroBuffer
+)
 
-                  caption,
-
-                  contextInfo:
-                    typeof canalInfo ===
-                    "function"
-                      ? canalInfo([])
-                      : {}
-                },
-                {
-                  quoted: selo
-                }
-              )
-            }
-            catch (erroBuffer) {
-              console.log(
-                "[NPM BUFFER]",
-                erroBuffer
-                  ?.response
-                  ?.data ||
-                erroBuffer
-                  ?.message ||
-                erroBuffer
-              )
-
-
-              await reply(
+await reply(
 `*⚠️ | Encontrei o pacote, mas não consegui enviar o documento.*
 
 *📦 | Pacote:* ${nomePacote}
@@ -847,43 +821,40 @@ ${relacionados
 
 *🔗 | Download:*
 ${arquivoNpm}`
-              )
-            }
-          }
-        }
-        else {
-          await reply(
-            "*⚠️ | Esse pacote não informou um arquivo de download no NPM.*"
-          )
-        }
+)
+}
+}
+}
+else {
+await reply(
+"*⚠️ | Esse pacote não informou um arquivo de download no NPM.*"
+)
+}
 
+await reagir(
+from,
+"✅"
+)
+}
+catch (e) {
+console.log(
+"[NPM SEARCH]",
+e?.response?.data ||
+e?.message ||
+e
+)
 
-        await reagir(
-          from,
-          "✅"
-        )
-      }
-      catch (e) {
-        console.log(
-          "[NPM SEARCH]",
-          e?.response?.data ||
-          e?.message ||
-          e
-        )
+await reagir(
+from,
+"❌"
+).catch(
+() => {}
+)
 
-
-        await reagir(
-          from,
-          "❌"
-        ).catch(
-          () => {}
-        )
-
-
-        return reply(
-          "*❌ | Não consegui pesquisar esse pacote no NPM.*"
-        )
-      }
-    }
-  }
+return reply(
+"*❌ | Não consegui pesquisar esse pacote no NPM.*"
+)
+}
+}
+}
 }

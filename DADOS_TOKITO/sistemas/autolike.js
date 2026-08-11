@@ -1,3 +1,33 @@
+/*
+ * ============================================================
+ *                     TOKITO BOT V10
+ * ============================================================
+ *
+ * Projeto disponibilizado gratuitamente para a comunidade.
+ *
+ * Você pode modificar, personalizar e utilizar este bot
+ * conforme sua preferência, inclusive mantendo o nome Tokito.
+ *
+ * REGRAS:
+ * • É proibida a venda ou revenda deste código-fonte.
+ * • Não comercialize versões modificadas deste projeto.
+ * • Não reivindique a autoria original do projeto.
+ * • Respeite os créditos e o trabalho dos desenvolvedores.
+ * • Utilize o projeto com respeito e responsabilidade.
+ *
+ * ATENÇÃO:
+ * A venda, revenda ou comercialização não autorizada deste
+ * projeto poderá resultar em medidas legais para proteção
+ * dos direitos dos autores, incluindo processo judicial,
+ * conforme a legislação aplicável.
+ *
+ * Author: Dylan Modz
+ * API oficial: https://tokito-apis.com.br
+ *
+ * Modifique como quiser. Apenas respeite as regras.
+ * ============================================================
+ */
+
 /* Auto Like diário.
  * Dev: Dylan Modz
  */
@@ -7,321 +37,321 @@ const path = require('path')
 const axios = require('axios')
 
 const FILE = path.join(
-  __dirname,
-  '..',
-  'database',
-  'sistemas',
-  'autolike.json'
+__dirname,
+'..',
+'database',
+'sistemas',
+'autolike.json'
 )
 
 const CFG = path.join(
-  __dirname,
-  '..',
-  'INFO_DADOS',
-  'config-all.json'
+__dirname,
+'..',
+'INFO_DADOS',
+'config-all.json'
 )
 
 const ler = () => {
-  try {
-    const d = JSON.parse(
-      fs.readFileSync(
-        FILE,
-        'utf8'
-      )
-    )
+try {
+const d = JSON.parse(
+fs.readFileSync(
+FILE,
+'utf8'
+)
+)
 
-    return Array.isArray(d)
-      ? d
-      : []
-  }
-  catch {
-    return []
-  }
+return Array.isArray(d)
+? d
+: []
+}
+catch {
+return []
+}
 }
 
 const salvar = d => {
-  const pasta = path.dirname(FILE)
+const pasta = path.dirname(FILE)
 
-  if (!fs.existsSync(pasta)) {
-    fs.mkdirSync(
-      pasta,
-      {
-        recursive: true
-      }
-    )
-  }
+if (!fs.existsSync(pasta)) {
+fs.mkdirSync(
+pasta,
+{
+recursive: true
+}
+)
+}
 
-  fs.writeFileSync(
-    FILE,
-    JSON.stringify(
-      d,
-      null,
-      2
-    ) + '\n'
-  )
+fs.writeFileSync(
+FILE,
+JSON.stringify(
+d,
+null,
+2
+) + '\n'
+)
 }
 
 const hoje = () => {
-  return new Intl.DateTimeFormat(
-    'en-CA',
-    {
-      timeZone:
-        'America/Fortaleza',
+return new Intl.DateTimeFormat(
+'en-CA',
+{
+timeZone:
+'America/Fortaleza',
 
-      year:
-        'numeric',
+year:
+'numeric',
 
-      month:
-        '2-digit',
+month:
+'2-digit',
 
-      day:
-        '2-digit'
-    }
-  ).format(
-    new Date()
-  )
+day:
+'2-digit'
+}
+).format(
+new Date()
+)
 }
 
 const cfg = () => {
-  try {
-    return JSON.parse(
-      fs.readFileSync(
-        CFG,
-        'utf8'
-      )
-    )
-  }
-  catch {
-    return {}
-  }
+try {
+return JSON.parse(
+fs.readFileSync(
+CFG,
+'utf8'
+)
+)
+}
+catch {
+return {}
+}
 }
 
 const registrar = (
-  owner,
-  chat,
-  uid
+owner,
+chat,
+uid
 ) => {
-  const d = ler()
+const d = ler()
 
-  const e = d.find(
-    x =>
-      x.owner === owner &&
-      x.uid === uid
-  )
+const e = d.find(
+x =>
+x.owner === owner &&
+x.uid === uid
+)
 
-  if (e) {
-    e.ativo = true
-    e.chat = chat
-  }
-  else {
-    d.push({
-      owner,
-      chat,
-      uid,
-      ativo: true,
-      ultimoSucesso: null,
-      criadoEm: Date.now()
-    })
-  }
+if (e) {
+e.ativo = true
+e.chat = chat
+}
+else {
+d.push({
+owner,
+chat,
+uid,
+ativo: true,
+ultimoSucesso: null,
+criadoEm: Date.now()
+})
+}
 
-  salvar(d)
+salvar(d)
 }
 
 const remover = (
-  owner,
-  uid
+owner,
+uid
 ) => {
-  let d = ler()
+let d = ler()
 
-  const antes =
-    d.length
+const antes =
+d.length
 
-  d = d.filter(
-    x =>
-      !(
-        x.owner === owner &&
-        x.uid === uid
-      )
-  )
+d = d.filter(
+x =>
+!(
+x.owner === owner &&
+x.uid === uid
+)
+)
 
-  salvar(d)
+salvar(d)
 
-  return antes !== d.length
+return antes !== d.length
 }
 
 const enviar = async e => {
-  const c = cfg()
+const c = cfg()
 
-  const token = String(
-    c.TOKEN_LIKE_FF ||
-    process.env.TOKEN_LIKE_FF ||
-    c.API_KEY_TOKITO ||
-    ''
-  ).trim()
+const token = String(
+c.TOKEN_LIKE_FF ||
+process.env.TOKEN_LIKE_FF ||
+c.API_KEY_TOKITO ||
+''
+).trim()
 
-  if (
-    !token ||
-    !c.API_URL
-  ) {
-    return false
-  }
+if (
+!token ||
+!c.API_URL
+) {
+return false
+}
 
-  const {
-    data
-  } = await axios.post(
-    `${c.API_URL}/api/v1/likes`,
-    {
-      player_id:
-        String(e.uid),
+const {
+data
+} = await axios.post(
+`${c.API_URL}/api/v1/likes`,
+{
+player_id:
+String(e.uid),
 
-      region:
-        'BR'
-    },
-    {
-      headers: {
-        Authorization:
-          `Bearer ${token}`,
+region:
+'BR'
+},
+{
+headers: {
+Authorization:
+`Bearer ${token}`,
 
-        'Content-Type':
-          'application/json',
+'Content-Type':
+'application/json',
 
-        Accept:
-          'application/json',
+Accept:
+'application/json',
 
-        'User-Agent':
-          'TokitoBot/1.0'
-      },
+'User-Agent':
+'TokitoBot/1.0'
+},
 
-      timeout:
-        90000
-    }
-  )
+timeout:
+90000
+}
+)
 
-  if (
-    !data?.success ||
-    data?.status !==
-      'SUCESSO_LIKES'
-  ) {
-    return false
-  }
+if (
+!data?.success ||
+data?.status !==
+'SUCESSO_LIKES'
+) {
+return false
+}
 
-  const conta =
-    data?.data?.conta ||
-    {}
+const conta =
+data?.data?.conta ||
+{}
 
-  const likes =
-    data?.data?.likes ||
-    {}
+const likes =
+data?.data?.likes ||
+{}
 
-  const limite =
-    data?.data?.limite ||
-    {}
+const limite =
+data?.data?.limite ||
+{}
 
-  const pedido =
-    data?.data?.pedido ||
-    {}
+const pedido =
+data?.data?.pedido ||
+{}
 
-  const uid =
-    conta.uid ||
-    data.player_id ||
-    e.uid
+const uid =
+conta.uid ||
+data.player_id ||
+e.uid
 
-  const nick =
-    conta.nickname ||
-    data.nickname ||
-    'Não encontrado'
+const nick =
+conta.nickname ||
+data.nickname ||
+'Não encontrado'
 
-  const antes = Number(
-    likes.antes ??
-    data.likes_before ??
-    0
-  )
+const antes = Number(
+likes.antes ??
+data.likes_before ??
+0
+)
 
-  const adicionados = Number(
-    likes.adicionados ??
-    data.likes_added ??
-    0
-  )
+const adicionados = Number(
+likes.adicionados ??
+data.likes_added ??
+0
+)
 
-  const depois = Number(
-    likes.depois ??
-    data.likes_end ??
-    0
-  )
+const depois = Number(
+likes.depois ??
+data.likes_end ??
+0
+)
 
-  const limiteDiario = Number(
-    limite.diario ??
-    data.daily_limit ??
-    0
-  )
+const limiteDiario = Number(
+limite.diario ??
+data.daily_limit ??
+0
+)
 
-  const usadosHoje = Number(
-    limite.usados_hoje ??
-    data.used_today ??
-    0
-  )
+const usadosHoje = Number(
+limite.usados_hoje ??
+data.used_today ??
+0
+)
 
-  const restantes = Number(
-    limite.restantes ??
-    data.remaining_today ??
-    0
-  )
+const restantes = Number(
+limite.restantes ??
+data.remaining_today ??
+0
+)
 
-  const orderId =
-    pedido.order_id ||
-    data.order_id ||
-    'Não informado'
+const orderId =
+pedido.order_id ||
+data.order_id ||
+'Não informado'
 
-  const statusLikes =
-    likes.status ||
-    (
-      adicionados > 0
-        ? 'ENVIADOS'
-        : 'SEM_ALTERACAO'
-    )
+const statusLikes =
+likes.status ||
+(
+adicionados > 0
+? 'ENVIADOS'
+: 'SEM_ALTERACAO'
+)
 
-  e.ultimoSucesso =
-    hoje()
+e.ultimoSucesso =
+hoje()
 
-  return {
-    sucesso: true,
+return {
+sucesso: true,
 
-    uid:
-      String(uid),
+uid:
+String(uid),
 
-    nick,
+nick,
 
-    antes,
+antes,
 
-    adicionados,
+adicionados,
 
-    depois,
+depois,
 
-    limiteDiario,
+limiteDiario,
 
-    usadosHoje,
+usadosHoje,
 
-    restantes,
+restantes,
 
-    orderId,
+orderId,
 
-    statusLikes,
+statusLikes,
 
-    resposta:
-      data
-  }
+resposta:
+data
+}
 }
 
 const mensagemSucesso = r => {
-  const status =
-    r.adicionados > 0
-      ? '✅ Enviados'
-      : r.statusLikes ===
-        'LIMITE_ATINGIDO'
-        ? '⚠️ Limite atingido'
-        : '⚠️ Nenhum like adicionado'
+const status =
+r.adicionados > 0
+? '✅ Enviados'
+: r.statusLikes ===
+'LIMITE_ATINGIDO'
+? '⚠️ Limite atingido'
+: '⚠️ Nenhum like adicionado'
 
-  return `- ❤️ \`𝙰𝚄𝚃𝙾 𝙻𝙸𝙺𝙴\`
+return `- ❤️ \`𝙰𝚄𝚃𝙾 𝙻𝙸𝙺𝙴\`
 
 『 👤 \`𝙽𝙸𝙲𝙺\` 』— ${r.nick}
 『 🆔 \`𝚄𝙸𝙳\` 』— ${r.uid}
@@ -339,108 +369,108 @@ const mensagemSucesso = r => {
 }
 
 const processar = async () => {
-  if (
-    global.__AUTO_LIKE_RODANDO__
-  ) {
-    return
-  }
+if (
+global.__AUTO_LIKE_RODANDO__
+) {
+return
+}
 
-  global.__AUTO_LIKE_RODANDO__ =
-    true
+global.__AUTO_LIKE_RODANDO__ =
+true
 
-  try {
-    const d = ler()
-    const h = hoje()
+try {
+const d = ler()
+const h = hoje()
 
-    let mudou =
-      false
+let mudou =
+false
 
-    for (const e of d) {
-      if (
-        !e.ativo ||
-        e.ultimoSucesso === h
-      ) {
-        continue
-      }
+for (const e of d) {
+if (
+!e.ativo ||
+e.ultimoSucesso === h
+) {
+continue
+}
 
-      try {
-        const r =
-          await enviar(e)
+try {
+const r =
+await enviar(e)
 
-        if (!r) {
-          continue
-        }
+if (!r) {
+continue
+}
 
-        mudou =
-          true
+mudou =
+true
 
-        const bot =
-          global.tokito
+const bot =
+global.tokito
 
-        if (
-          bot &&
-          e.chat
-        ) {
-          await bot.sendMessage(
-            e.chat,
-            {
-              text:
-                mensagemSucesso(r)
-            }
-          ).catch(
-            () => {}
-          )
-        }
-      }
-      catch (err) {
-        console.log(
-          '[AUTO LIKE]',
-          e.uid,
-          err?.response?.data?.message ||
-          err?.message ||
-          err
-        )
-      }
-    }
+if (
+bot &&
+e.chat
+) {
+await bot.sendMessage(
+e.chat,
+{
+text:
+mensagemSucesso(r)
+}
+).catch(
+() => {}
+)
+}
+}
+catch (err) {
+console.log(
+'[AUTO LIKE]',
+e.uid,
+err?.response?.data?.message ||
+err?.message ||
+err
+)
+}
+}
 
-    if (mudou) {
-      salvar(d)
-    }
-  }
-  finally {
-    global.__AUTO_LIKE_RODANDO__ =
-      false
-  }
+if (mudou) {
+salvar(d)
+}
+}
+finally {
+global.__AUTO_LIKE_RODANDO__ =
+false
+}
 }
 
 if (
-  !global.__AUTO_LIKE_INTERVAL__
+!global.__AUTO_LIKE_INTERVAL__
 ) {
-  global.__AUTO_LIKE_INTERVAL__ =
-    setInterval(
-      () =>
-        processar().catch(
-          () => {}
-        ),
+global.__AUTO_LIKE_INTERVAL__ =
+setInterval(
+() =>
+processar().catch(
+() => {}
+),
 
-      15 * 60 * 1000
-    )
+15 * 60 * 1000
+)
 
-  setTimeout(
-    () =>
-      processar().catch(
-        () => {}
-      ),
+setTimeout(
+() =>
+processar().catch(
+() => {}
+),
 
-    15000
-  )
+15000
+)
 }
 
 module.exports = {
-  ler,
-  salvar,
-  registrar,
-  remover,
-  processar,
-  hoje
+ler,
+salvar,
+registrar,
+remover,
+processar,
+hoje
 }
