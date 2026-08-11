@@ -1,0 +1,5 @@
+[
+  {"id":"7d","nome":"Plano 7 dias","preco":5,"dias":7},
+  {"id":"15d","nome":"Plano 15 dias","preco":8,"dias":15},
+  {"id":"30d","nome":"Plano 30 dias","preco":12,"dias":30}
+]

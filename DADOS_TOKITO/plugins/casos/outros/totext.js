@@ -1,0 +1,67 @@
+const modulos = require('../../../sistemas/modulos')
+
+module.exports = {
+  nome: 'totext',
+
+  comandos: [
+    'totext'
+  ],
+
+  categoria: 'outros',
+
+  info: {
+    descricao: 'Transcreve áudio/PTT para texto.',
+    uso: 'totext respondendo um áudio'
+  },
+
+  async executar(ctx) {
+    const audio = modulos.mediaAtual(ctx).audio
+
+    if (!audio) {
+      return ctx.reply(
+        ctx.mess.totextSemAudio(ctx.prefix)
+      )
+    }
+
+    await ctx.reagir(ctx.from, '🎙️').catch(() => {
+    })
+
+    try {
+      const resultado = await modulos.transcrever(ctx, audio)
+      const detalhes = resultado.resultado || {}
+
+      await ctx.reagir(ctx.from, '✅').catch(() => {
+      })
+
+      return ctx.reply(
+        ctx.mess.totextResultado({
+          texto: resultado.texto,
+          idioma: detalhes.idioma,
+          duracao: detalhes.duracao,
+          confidence: detalhes.confidence
+        })
+      )
+    }
+    catch (erro) {
+      await ctx.reagir(ctx.from, '❌').catch(() => {
+      })
+
+      if (modulos.ehErroApi(erro)) {
+        return modulos.responderErroApi(
+          ctx,
+          erro,
+          'TOTEXT API'
+        )
+      }
+
+      console.log(
+        '[TOTEXT]',
+        modulos.sanitizarErro(erro, [ctx.API_KEY_TOKITO])
+      )
+
+      return ctx.reply(
+        ctx.mess.transcricaoFalhou()
+      )
+    }
+  }
+}

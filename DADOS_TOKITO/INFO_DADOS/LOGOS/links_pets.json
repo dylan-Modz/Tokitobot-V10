@@ -1,0 +1,22 @@
+{
+  "comuns": {
+    "gato": "https://files.catbox.moe/aqc0xg.jpg",
+    "cachorro": "https://files.catbox.moe/yd4a0j.jpg",
+    "jabuti": "https://files.catbox.moe/8l7t7q.jpg",
+    "periquito": "https://files.catbox.moe/4dwms2.jpg",
+    "dragao": "https://files.catbox.moe/no3p8x.jpg"
+  },
+  "evoluidos": {
+    "gatoMistico": "https://files.catbox.moe/5cjj9x.jpg",
+    "loboGuardiao": "https://files.catbox.moe/b1wsbt.jpg",
+    "tartarugaGigante": "https://files.catbox.moe/9jas30.jpg",
+    "falcao": "https://files.catbox.moe/cf87ne.jpg"
+  },
+  "raros": {
+    "dragaoDourado": "https://files.catbox.moe/58t7uv.jpg",
+    "fenix": "https://files.catbox.moe/knxwuo.jpg",
+    "demonios": "https://files.catbox.moe/fkhec1.jpg",
+    "grifo": "https://files.catbox.moe/ijpu52.jpg",
+    "axolote": "https://files.catbox.moe/thjxcq.jpg"
+  }
+}
