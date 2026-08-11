@@ -4,17 +4,17 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-11T21:34:48.355Z",
+  "publishedAt": "2026-08-11T21:36:29.941Z",
   "changelog": [
-    "[Melhoria] play.js",
+    "[Correção] play.js",
     "Normalizado",
     "TAVA ACONTECENDO BUG, JA FOI CORRIGIDO"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
+  "type": "Correção",
   "title": "play.js",
   "notice": "Normalizado",
   "required": true,
-  "minimumVersion": "10.0.0"
+  "minimumVersion": "10.0.1"
 }
