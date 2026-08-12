@@ -3108,139 +3108,161 @@ return `- ❌ \`𝚃𝚁𝙰𝙽𝚂𝙲𝚁𝙸𝙲̧𝙰̃𝙾 𝙵𝙰𝙻�
 
 > *ᴛᴇɴᴛᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ ᴄᴏᴍ ᴏᴜᴛʀᴏ ᴀ́ᴜᴅɪᴏ ᴏᴜ ᴘᴛᴛ.*`
 }
-
-// ─────────────────────────────────────────────
-// TOKITO UPDATE
-// ─────────────────────────────────────────────
-const fonteUpdateTokito = {
-a: 'ᴀ', b: 'ʙ', c: 'ᴄ', d: 'ᴅ', e: 'ᴇ', f: 'ғ', g: 'ɢ', h: 'ʜ',
-i: 'ɪ', j: 'ᴊ', k: 'ᴋ', l: 'ʟ', m: 'ᴍ', n: 'ɴ', o: 'ᴏ', p: 'ᴘ',
-q: 'ǫ', r: 'ʀ', s: 's', t: 'ᴛ', u: 'ᴜ', v: 'ᴠ', w: 'ᴡ', x: 'x',
-y: 'ʏ', z: 'ᴢ'
-}
-
-const textoUpdateTokito = texto => String(texto || '').replace(/[A-Za-z]/g, letra => {
-return fonteUpdateTokito[letra.toLowerCase()] || letra
-})
-
 exports.updateNotPublished = () => {
-return `- 🧊 \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
+return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— ɴᴇɴʜᴜᴍᴀ ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ ғᴏɪ ᴘᴜʙʟɪᴄᴀᴅᴀ ᴀɪɴᴅᴀ.*
-
-> *『 𝚅𝙴𝚁𝚂𝙰̃𝙾 』— ᴄᴏɴᴛɪɴᴜᴇ ᴜsᴀɴᴅᴏ ᴀ ᴠᴇʀsᴀ̃ᴏ ᴀᴛᴜᴀʟ ɴᴏʀᴍᴀʟᴍᴇɴᴛᴇ. 🙇‍♂️*`
+『 🧊 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Nenhuma nova versão publicada
+『 🤖 \`𝙱𝙾𝚃\` 』— Tokito Bot V10
+『 ✅ \`𝚂𝙸𝚃𝚄𝙰𝙲̧𝙰̃𝙾\` 』— Você já pode continuar usando a versão atual normalmente`
 }
 
 exports.updateCheckError = () => {
-return `- ⚠️ \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙸𝙽𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻\`
+return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-> *『 𝚂𝙴𝚁𝚅𝙸𝙳𝙾𝚁 』— ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴠᴇʀɪғɪᴄᴀʀ ɴᴏᴠᴀs ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴏ̃ᴇs ᴀɢᴏʀᴀ.*
-
-> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— ᴏ ʙᴏᴛ ᴄᴏɴᴛɪɴᴜᴀʀᴀ́ ғᴜɴᴄɪᴏɴᴀɴᴅᴏ ɴᴏʀᴍᴀʟᴍᴇɴᴛᴇ. 🙇‍♂️*`
+『 ⚠️ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Verificação indisponível
+『 🌐 \`𝚂𝙴𝚁𝚅𝙸𝙳𝙾𝚁\` 』— Não foi possível consultar novas atualizações
+『 🤖 \`𝙱𝙾𝚃\` 』— Continuará funcionando normalmente
+『 🔄 \`𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴\` 』— Aguarde alguns instantes`
 }
 
 exports.updateEmptyFiles = versao => {
-return `- ❌ \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙸𝙽𝙲𝙾𝙼𝙿𝙻𝙴𝚃𝙰\`
+return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-> *『 𝚅𝙴𝚁𝚂𝙰̃𝙾 ${versao || '—'} 』— ᴀ ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ ғᴏɪ ᴘᴜʙʟɪᴄᴀᴅᴀ sᴇᴍ ɴᴇɴʜᴜᴍ ᴀʀǫᴜɪᴠᴏ ᴘᴀʀᴀ ɪɴsᴛᴀʟᴀʀ.*
-
-> *『 𝙿𝚁𝙾𝚃𝙴𝙲̧𝙰̃𝙾 』— ᴀ ᴠᴇʀsᴀ̃ᴏ ʟᴏᴄᴀʟ ɴᴀ̃ᴏ ғᴏɪ ᴀʟᴛᴇʀᴀᴅᴀ. ᴘᴜʙʟɪǫᴜᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ ɪɴᴄʟᴜɪɴᴅᴏ ᴏs ᴀʀǫᴜɪᴠᴏs ᴍᴏᴅɪғɪᴄᴀᴅᴏs. 🙇‍♂️*`
+『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Atualização incompleta
+『 🆕 \`𝚅𝙴𝚁𝚂𝙰̃𝙾\` 』— ${versao || '—'}
+『 📦 \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂\` 』— Nenhum arquivo disponível para instalar
+『 🛡️ \`𝙿𝚁𝙾𝚃𝙴𝙲̧𝙰̃𝙾\` 』— A versão atual do bot não foi alterada`
 }
 
-exports.updateInfo = ({ instalada, disponivel, canal, disponivelAgora, changelog, arquivos, removidos, prefix }) => {
+exports.updateInfo = ({
+instalada,
+disponivel,
+canal,
+disponivelAgora,
+changelog,
+arquivos,
+removidos,
+prefix
+}) => {
 const status = disponivelAgora
-? '🆕 ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ᴅɪsᴘᴏɴɪ́ᴠᴇʟ'
-: '✅ ᴠᴇʀsᴀ̃ᴏ ᴍᴀɪs ʀᴇᴄᴇɴᴛᴇ'
+? 'Atualização disponível'
+: 'Bot atualizado'
 
-const alteracoes = Array.isArray(changelog) && changelog.length
-? changelog.map(item => `> • ${textoUpdateTokito(item)}`).join('\n')
-: '> • sᴇᴍ ɴᴏᴠᴀs ᴀʟᴛᴇʀᴀᴄ̧ᴏ̃ᴇs ɪɴғᴏʀᴍᴀᴅᴀs.'
+const listaArquivos = Array.isArray(arquivos)
+? arquivos.filter(Boolean)
+: []
 
-const listaArquivos = Array.isArray(arquivos) ? arquivos.filter(Boolean) : []
-const listaRemovidos = Array.isArray(removidos) ? removidos.filter(Boolean) : []
+const listaRemovidos = Array.isArray(removidos)
+? removidos.filter(Boolean)
+: []
+
 const totalArquivos = listaArquivos.length + listaRemovidos.length
 
+const alteracoes = Array.isArray(changelog) && changelog.length
+? changelog.map(item => `╰➤ ${item}`).join('\n')
+: '╰➤ Nenhuma nova alteração informada'
+
 const arquivosTexto = totalArquivos
-? `\n\n> *『 𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂 』— ${totalArquivos} ᴀʟᴛᴇʀᴀᴄ̧ᴀ̃ᴏ(ᴏ̃ᴇs)*${
-listaArquivos.length
-? `\n${listaArquivos.slice(0, 8).map(item => `> • ${textoUpdateTokito(String(item).split('/').pop())}`).join('\n')}`
-: ''
-}${
-listaRemovidos.length
-? `\n> • ${listaRemovidos.length} ᴀʀǫᴜɪᴠᴏ(s) ʀᴇᴍᴏᴠɪᴅᴏ(s)`
-: ''
-}`
+? `
+
+『 📦 \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂 𝙰𝙻𝚃𝙴𝚁𝙰𝙳𝙾𝚂\` 』— ${totalArquivos}
+
+${listaArquivos.slice(0, 8).map(item => {
+const caminho = typeof item === 'object'
+? item.path
+: item
+
+return `╰➤ ${String(caminho || '').split('/').pop()}`
+}).join('\n')}${listaRemovidos.length
+? `\n╰➤ ${listaRemovidos.length} arquivo(s) removido(s)`
+: ''}`
 : ''
 
 const instalar = disponivelAgora
-? `\n\n> *『 𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝚁 』— ᴜsᴇ ${prefix}update start ᴘᴀʀᴀ ɪɴsᴛᴀʟᴀʀ.*`
+? `
+
+『 ⚙️ \`𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝚁\` 』— ${prefix}update start`
 : ''
 
-return `- 🧊 \`𝚃𝙾𝙺𝙸𝚃𝙾 𝚄𝙿𝙳𝙰𝚃𝙴\`
+return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-> *『 𝚅𝙴𝚁𝚂𝙰̃𝙾 𝙰𝚃𝚄𝙰𝙻 』— ${instalada}*
-> *『 𝙽𝙾𝚅𝙰 𝚅𝙴𝚁𝚂𝙰̃𝙾 』— ${disponivel}*
-> *『 𝙲𝙰𝙽𝙰𝙻 』— ${textoUpdateTokito(canal)}*
-> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${status}*
+『 🤖 \`𝙱𝙾𝚃\` 』— Tokito Bot V10
+『 🧊 \`𝚅𝙴𝚁𝚂𝙰̃𝙾 𝙰𝚃𝚄𝙰𝙻\` 』— ${instalada}
+『 🆕 \`𝙽𝙾𝚅𝙰 𝚅𝙴𝚁𝚂𝙰̃𝙾\` 』— ${disponivel}
+『 📡 \`𝙲𝙰𝙽𝙰𝙻\` 』— ${canal}
+『 📊 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${status}
+『 📦 \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂\` 』— ${totalArquivos}
 
-> *『 𝙰𝙻𝚃𝙴𝚁𝙰𝙲̧𝙾̃𝙴𝚂 』*
+『 📝 \`𝙰𝙻𝚃𝙴𝚁𝙰𝙲̧𝙾̃𝙴𝚂\` 』
 ${alteracoes}${arquivosTexto}${instalar}`
 }
 
 exports.updatePreparing = () => {
-return `- ⏳ \`𝙿𝚁𝙴𝙿𝙰𝚁𝙰𝙽𝙳𝙾 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
+return `-  \`𝙿𝚁𝙴𝙿𝙰𝚁𝙰𝙽𝙳𝙾 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-> *『 𝙱𝙰𝙲𝙺𝚄𝙿 』— ᴜᴍᴀ ᴄᴏ́ᴘɪᴀ ᴅᴀ ᴠᴇʀsᴀ̃ᴏ ᴀᴛᴜᴀʟ sᴇʀᴀ́ ᴄʀɪᴀᴅᴀ ᴀɴᴛᴇs ᴅᴀ ɪɴsᴛᴀʟᴀᴄ̧ᴀ̃ᴏ.*
-
-> *『 𝙰𝙶𝚄𝙰𝚁𝙳𝙴 』— ɴᴀ̃ᴏ ᴅᴇsʟɪɢᴜᴇ ᴏ ʙᴏᴛ ᴅᴜʀᴀɴᴛᴇ ᴏ ᴘʀᴏᴄᴇssᴏ. 🙇‍♂️*`
+『 ⏳ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Preparando instalação
+『 💾 \`𝙱𝙰𝙲𝙺𝚄𝙿\` 』— Criando cópia da versão atual
+『 📦 \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂\` 』— Preparando novos arquivos
+『 🛡️ \`𝙿𝚁𝙾𝚃𝙴𝙲̧𝙰̃𝙾\` 』— Seus dados e sessão serão preservados
+『 ⚠️ \`𝙰𝚅𝙸𝚂𝙾\` 』— Não desligue o bot durante o processo`
 }
 
 exports.updateAlreadyLatest = versao => {
-return `- ✅ \`𝚃𝙾𝙺𝙸𝚃𝙾 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙳𝙾\`
+return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-> *『 𝚅𝙴𝚁𝚂𝙰̃𝙾 ${versao} 』— ᴠᴏᴄᴇ̂ ᴊᴀ́ ᴇsᴛᴀ́ ᴜsᴀɴᴅᴏ ᴀ ᴠᴇʀsᴀ̃ᴏ ᴍᴀɪs ʀᴇᴄᴇɴᴛᴇ ᴅᴏ ᴛᴏᴋɪᴛᴏ. 🙇‍♂️*`
+『 🤖 \`𝙱𝙾𝚃\` 』— Tokito Bot V10
+『 🧊 \`𝚅𝙴𝚁𝚂𝙰̃𝙾\` 』— ${versao}
+『 ✅ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Você já está usando a versão mais recente
+『 📡 \`𝙲𝙰𝙽𝙰𝙻\` 』— Stable`
 }
 
-exports.updateSuccess = (anterior, nova, arquivos = 0, removidos = 0) => {
-const resumo = Number(arquivos || 0) || Number(removidos || 0)
-? `\n> *『 𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂 』— ${Number(arquivos || 0)} ᴀᴛᴜᴀʟɪᴢᴀᴅᴏ(s) · ${Number(removidos || 0)} ʀᴇᴍᴏᴠɪᴅᴏ(s)*\n`
-: ''
+exports.updateSuccess = (
+anterior,
+nova,
+arquivos = 0,
+removidos = 0
+) => {
+return `-  \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙲𝙾𝙽𝙲𝙻𝚄𝙸́𝙳𝙰\`
 
-return `- ✅ \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙲𝙾𝙽𝙲𝙻𝚄𝙸́𝙳𝙰\`
-
-> *『 𝙰𝙽𝚃𝙴𝚁𝙸𝙾𝚁 』— ${anterior}*
-> *『 𝙰𝚃𝚄𝙰𝙻 』— ${nova}*
-${resumo}
-> *『 𝚁𝙴𝙸𝙽𝙸𝙲𝙸𝙰𝙽𝙳𝙾 』— ᴀ ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ ғᴏɪ ɪɴsᴛᴀʟᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ, ᴏ ʙᴏᴛ sᴇʀᴀ́ ʀᴇɪɴɪᴄɪᴀᴅᴏ. 🙇‍♂️*`
+『 🤖 \`𝙱𝙾𝚃\` 』— Tokito Bot V10
+『 📥 \`𝚅𝙴𝚁𝚂𝙰̃𝙾 𝙰𝙽𝚃𝙴𝚁𝙸𝙾𝚁\` 』— ${anterior}
+『 🆕 \`𝙽𝙾𝚅𝙰 𝚅𝙴𝚁𝚂𝙰̃𝙾\` 』— ${nova}
+『 📦 \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙳𝙾𝚂\` 』— ${Number(arquivos || 0)}
+『 🗑️ \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂 𝚁𝙴𝙼𝙾𝚅𝙸𝙳𝙾𝚂\` 』— ${Number(removidos || 0)}
+『 ✅ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Instalação concluída com sucesso
+『 🔄 \`𝚁𝙴𝙸𝙽𝙸𝙲𝙸𝙰𝙽𝙳𝙾\` 』— O bot será reiniciado agora`
 }
 
 exports.updateError = () => {
-return `- ❌ \`𝙵𝙰𝙻𝙷𝙰 𝙽𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
+return `-  \`𝙵𝙰𝙻𝙷𝙰 𝙽𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-> *『 𝙿𝚁𝙾𝚃𝙴𝙲̧𝙰̃𝙾 』— ᴀ ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ɴᴀ̃ᴏ ᴘᴏ̂ᴅᴇ sᴇʀ ᴄᴏɴᴄʟᴜɪ́ᴅᴀ ᴇ ᴏs ᴅᴀᴅᴏs ᴅᴀ sᴇssᴀ̃ᴏ ғᴏʀᴀᴍ ᴘʀᴇsᴇʀᴠᴀᴅᴏs.*
-
-> *『 𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴 』— ᴀɢᴜᴀʀᴅᴇ ᴜᴍ ᴘᴏᴜᴄᴏ ᴇ ʀᴇᴘɪᴛᴀ ᴏ ᴄᴏᴍᴀɴᴅᴏ. 🙇‍♂️*`
+『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Não foi possível concluir a atualização
+『 🛡️ \`𝙿𝚁𝙾𝚃𝙴𝙲̧𝙰̃𝙾\` 』— Seus dados e sessão foram preservados
+『 🔄 \`𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴\` 』— Aguarde alguns instantes e repita o comando`
 }
 
 exports.updateRollbackSuccess = versao => {
-return `- ↩️ \`𝙱𝙰𝙲𝙺𝚄𝙿 𝚁𝙴𝚂𝚃𝙰𝚄𝚁𝙰𝙳𝙾\`
+return `-  \`𝙱𝙰𝙲𝙺𝚄𝙿 𝚁𝙴𝚂𝚃𝙰𝚄𝚁𝙰𝙳𝙾\`
 
-> *『 𝚅𝙴𝚁𝚂𝙰̃𝙾 ${versao} 』— ᴀ ᴠᴇʀsᴀ̃ᴏ ᴀɴᴛᴇʀɪᴏʀ ғᴏɪ ʀᴇsᴛᴀᴜʀᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ.*
-
-> *『 𝚁𝙴𝙸𝙽𝙸𝙲𝙸𝙰𝙽𝙳𝙾 』— ᴏ ʙᴏᴛ sᴇʀᴀ́ ʀᴇɪɴɪᴄɪᴀᴅᴏ ᴀɢᴏʀᴀ. 🙇‍♂️*`
+『 🤖 \`𝙱𝙾𝚃\` 』— Tokito Bot V10
+『 ↩️ \`𝚅𝙴𝚁𝚂𝙰̃𝙾\` 』— ${versao}
+『 ✅ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Backup restaurado com sucesso
+『 🔄 \`𝚁𝙴𝙸𝙽𝙸𝙲𝙸𝙰𝙽𝙳𝙾\` 』— O bot será reiniciado agora`
 }
 
 exports.updateRollbackError = () => {
-return `- ❌ \`𝙱𝙰𝙲𝙺𝚄𝙿 𝙸𝙽𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻\`
+return `-  \`𝙱𝙰𝙲𝙺𝚄𝙿 𝙸𝙽𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻\`
 
-> *『 𝚁𝙴𝚂𝚃𝙰𝚄𝚁𝙰𝙲̧𝙰̃𝙾 』— ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ʀᴇsᴛᴀᴜʀᴀʀ ᴀ ᴠᴇʀsᴀ̃ᴏ ᴀɴᴛᴇʀɪᴏʀ ɴᴇsᴛᴇ ᴍᴏᴍᴇɴᴛᴏ. 🙇‍♂️*`
+『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Não foi possível restaurar o backup
+『 💾 \`𝙱𝙰𝙲𝙺𝚄𝙿\` 』— Nenhuma restauração foi aplicada
+『 🔄 \`𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴\` 』— Aguarde alguns instantes e tente novamente`
 }
 
 exports.updateUsage = prefix => {
-return `- 🧊 \`𝚃𝙾𝙺𝙸𝚃𝙾 𝚄𝙿𝙳𝙰𝚃𝙴\`
+return `-  \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙳𝙴 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-> *『 𝚅𝙴𝚁𝙸𝙵𝙸𝙲𝙰𝚁 』— ${prefix}update check*
-> *『 𝙸𝙽𝙵𝙾 』— ${prefix}update info*
-> *『 𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝚁 』— ${prefix}update start*
-> *『 𝚁𝙴𝚂𝚃𝙰𝚄𝚁𝙰𝚁 』— ${prefix}update rollback*`
+『 🔎 \`𝚅𝙴𝚁𝙸𝙵𝙸𝙲𝙰𝚁\` 』— ${prefix}update check
+『 📋 \`𝙸𝙽𝙵𝙾\` 』— ${prefix}update info
+『 📥 \`𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝚁\` 』— ${prefix}update start
+『 ↩️ \`𝚁𝙴𝚂𝚃𝙰𝚄𝚁𝙰𝚁\` 』— ${prefix}update rollback`
 }
