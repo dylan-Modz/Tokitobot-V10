@@ -1,23 +1,29 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.4",
+  "version": "10.0.5",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-12T01:11:02.147Z",
+  "publishedAt": "2026-08-12T01:13:02.568Z",
   "changelog": [
-    "[Correção] Menu atualizado",
-    "A versão 10.0.3 já está disponível para atualização.",
-    "Menu atualizado"
+    "[Correção] Comando Playstore atualizado",
+    "A versão 10.0.5 já está disponível para atualização.",
+    "Comando Playstore atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Menu atualizado",
-  "notice": "A versão 10.0.3 já está disponível para atualização.",
+  "title": "Comando Playstore atualizado",
+  "notice": "A versão 10.0.5 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
-  "files": [],
+  "files": [
+    {
+      "path": "DADOS_TOKITO/plugins/casos/downloads/playstore.js",
+      "sha256": "2a2f9c5abebff32afc8d9ec53c5dfec173fd85f407067aca46ec5aec92fb3672",
+      "size": 2351
+    }
+  ],
   "releases": [
     {
       "version": "10.0.3",
@@ -48,6 +54,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-12T01:11:02.147Z"
+    },
+    {
+      "version": "10.0.5",
+      "fromVersion": "10.0.4",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Comando Playstore atualizado",
+      "notice": "A versão 10.0.5 já está disponível para atualização.",
+      "changelog": [
+        "Comando Playstore atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/casos/downloads/playstore.js",
+          "sha256": "2a2f9c5abebff32afc8d9ec53c5dfec173fd85f407067aca46ec5aec92fb3672",
+          "size": 2351
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-12T01:13:02.565Z"
     }
   ]
 }

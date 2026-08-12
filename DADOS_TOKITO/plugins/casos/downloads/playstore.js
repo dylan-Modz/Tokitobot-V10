@@ -51,7 +51,7 @@ const dados = await scraper.buscar(q.trim())
 const lista = Array.isArray(dados) ? dados.slice(0, 5) : itens(dados).slice(0, 5)
 if (!lista.length)
 return reply('*❌ | ɴᴇɴʜᴜᴍ ᴀᴘᴘ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ.*')
-let texto = `*📱 | ᴘʟᴀʏ sᴛᴏʀᴇ*\n\n- *🔎 | ʙᴜsᴄᴀ → ${q.trim()}*\n\n`
+let texto = `*📱 | ᴘʟᴀʏ sᴛᴏʀᴇ*\n\n- *🔎 |  ʙᴜsᴄᴀ → ${q.trim()}*\n\n`
 for (let i = 0; i < lista.length; i++) {
 const item = lista[i]
 texto += `*${i + 1}. ${item?.nome || item?.name || item?.title || 'Aplicativo'}*\n- *🔗 | ʟɪɴᴋ → ${item?.link || item?.url || 'Indisponível'}*\n\n`
