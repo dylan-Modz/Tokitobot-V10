@@ -33,611 +33,318 @@ const path = require('path')
 const base = require('./base.js')
 const mess = require('../database/lib/global.js')
 
-const arq = path.join(__dirname, '..', 'INFO_DADOS', 'nescessario.json')
+const arquivoNecessario = path.join(__dirname, '..', 'INFO_DADOS', 'nescessario.json')
 
-const btn = () => {
-try {
-return JSON.parse(fs.readFileSync(arq, 'utf8')).botoes !== false
-}
-catch {
-return true
-}
+const botoesAtivos = () => {
+try { return JSON.parse(fs.readFileSync(arquivoNecessario, 'utf8')).botoes !== false }
+catch { return true }
 }
 
-const e = global.__TOKITO_APROVACAO_ESTADO__ ||= {
-pendentes: new Map(),
-avisados: new Map(),
-processando: new Set(),
-concluidos: new Map(),
-notificacoesGrupo: new Map(),
-respostas: new Map()
+const estadoGlobal = global.__TOKITO_APROVACAO_ESTADO__ ||= {
+pendentes: new Map(), avisados: new Map(), processando: new Set(), concluidos: new Map(),
+notificacoesGrupo: new Map(), respostas: new Map()
 }
 
-e.respostas ||= new Map()
+const { pendentes, avisados, processando, concluidos, notificacoesGrupo, respostas } = estadoGlobal
 
-const p = e.pendentes
-const a = e.avisados
-const x = e.processando
-const c = e.concluidos
-const n = e.notificacoesGrupo
-const r = e.respostas
-
-const mapa = g => {
-if (!p.has(g))
-p.set(g, new Map())
-return p.get(g)
+const mapa = grupo => {
+if (!pendentes.has(grupo)) pendentes.set(grupo, new Map())
+return pendentes.get(grupo)
 }
 
-const jid = p => String(
-p?.participantPn ||
-p?.phoneNumber ||
-p?.jid ||
-p?.participant ||
-p?.id ||
-''
+const pegarJid = pedido => String(
+pedido?.participantPn || pedido?.phoneNumber || pedido?.jid ||
+pedido?.participant || pedido?.id || ''
 ).trim()
 
-const estado = g => {
-const c = base.config(g)
+const candidatosMembro = m => [
+m?.phoneNumber, m?.participantAlt, m?.participantPn, m?.jid,
+m?.id, m?.participant, m?.lid
+].filter(Boolean).map(String)
 
-return {
-ativo: Boolean(c.aprovacao),
-automatico: Boolean(c.autoaprovacao)
-}
-}
+const numeroJid = j => base.numero(j)
 
-const editar = (g, d, s, f) => {
-const l = Array.isArray(d) && d[0] && typeof s === 'function'
-const x = l ? d : base.lerGrupo(g)
+const resolverMembro = (membros, alvo) => {
+alvo = String(alvo || '').trim()
+if (!alvo) return { jid: '', membro: null }
 
-if (!x[0].funcoes || typeof x[0].funcoes !== 'object')
-x[0].funcoes = {}
-
-f(x[0].funcoes)
-
-if (l)
-s(x)
-else
-base.salvarGrupo(g, x)
-
-return {
-ativo: Boolean(x[0].funcoes.aprovacao),
-automatico: Boolean(x[0].funcoes.autoaprovacao)
-}
-}
-
-const ativar = (g, v, d, s) => editar(g, d, s, f => {
-f.aprovacao = Boolean(v)
-
-if (!v)
-f.autoaprovacao = false
+const n = numeroJid(alvo)
+const membro = (membros || []).find(m => {
+const c = candidatosMembro(m)
+return c.includes(alvo) || (n && c.some(j => numeroJid(j) === n))
 })
 
-const automatico = (g, v, d, s) => editar(g, d, s, f => {
-f.aprovacao = Boolean(v) || Boolean(f.aprovacao)
-f.autoaprovacao = Boolean(v)
-})
+if (!membro) return { jid: alvo, membro: null }
 
-const listar = g => [...mapa(g).values()]
+const c = candidatosMembro(membro)
+const jid = c.find(j => j.endsWith('@s.whatsapp.net')) ||
+c.find(j => j.endsWith('@lid')) || c[0] || alvo
 
-const primeiro = g => listar(g)[0] || null
-
-const remover = (g, j) => mapa(g).delete(j)
-
-const limpar = g => p.delete(g)
-
-const sincronizar = async (t, g) => {
-const ps = await t.groupRequestParticipantsList(g).catch(() => [])
-const m = mapa(g)
-const v = new Set()
-
-for (const p of ps || []) {
-const j = jid(p)
-
-if (!j)
-continue
-
-v.add(j)
-
-m.set(j, {
-...p,
-jid: j
-})
+return { jid, membro }
 }
 
-for (const j of m.keys())
-if (!v.has(j))
-m.delete(j)
-
-return listar(g)
+const estado = grupo => {
+const cfg = base.config(grupo)
+return { ativo: Boolean(cfg.aprovacao), automatico: Boolean(cfg.autoaprovacao) }
 }
 
-const aviso = async (t, g, p, prefix) => {
-const j = p.jid
-const num = base.numero(j)
-const md = await t.groupMetadata(g).catch(() => ({}))
-const nome = md?.subject || 'Grupo'
-
-if (!btn()) {
-const m = await t.sendMessage(g, {
-text: mess.novaSolicitacaoSemBotoes(num, nome),
-mentions: [j],
-contextInfo: {
-mentionedJid: [j]
+const editar = (grupo, dataGp, setGp, alterar) => {
+const local = Array.isArray(dataGp) && dataGp[0] && typeof setGp === 'function'
+const dados = local ? dataGp : base.lerGrupo(grupo)
+if (!dados[0].funcoes || typeof dados[0].funcoes !== 'object') dados[0].funcoes = {}
+alterar(dados[0].funcoes)
+if (local) setGp(dados)
+else base.salvarGrupo(grupo, dados)
+return { ativo: Boolean(dados[0].funcoes.aprovacao), automatico: Boolean(dados[0].funcoes.autoaprovacao) }
 }
+
+const ativar = (grupo, ativo, dataGp, setGp) => editar(grupo, dataGp, setGp, funcoes => {
+funcoes.aprovacao = Boolean(ativo)
+if (!ativo) funcoes.autoaprovacao = false
 })
 
-const id = m?.key?.id
+const automatico = (grupo, ativo, dataGp, setGp) => editar(grupo, dataGp, setGp, funcoes => {
+funcoes.aprovacao = Boolean(ativo) || Boolean(funcoes.aprovacao)
+funcoes.autoaprovacao = Boolean(ativo)
+})
 
+const listar = grupo => [...mapa(grupo).values()]
+const primeiro = grupo => listar(grupo)[0] || null
+const remover = (grupo, jid) => mapa(grupo).delete(jid)
+const limpar = grupo => pendentes.delete(grupo)
+
+const limparRespostas = () => {
+const agora = Date.now()
+for (const [chave, item] of respostas.entries()) if (!item || item.expira <= agora) respostas.delete(chave)
+}
+
+const sincronizar = async (tokito, grupo) => {
+const pedidos = await tokito.groupRequestParticipantsList(grupo).catch(() => [])
+const atual = mapa(grupo), vivos = new Set()
+
+for (const pedido of pedidos || []) {
+const jid = pegarJid(pedido)
+if (!jid) continue
+vivos.add(jid)
+atual.set(jid, { ...pedido, jid })
+}
+
+for (const jid of atual.keys()) if (!vivos.has(jid)) atual.delete(jid)
+return listar(grupo)
+}
+
+const aviso = async (tokito, grupo, pedido, prefix) => {
+const jid = pedido.jid, numero = base.numero(jid)
+const metadata = await tokito.groupMetadata(grupo).catch(() => ({}))
+const nomeGrupo = metadata?.subject || 'Grupo'
+
+if (!botoesAtivos()) {
+const enviada = await tokito.sendMessage(grupo, {
+text: mess.novaSolicitacaoSemBotoes(numero, nomeGrupo),
+mentions: [jid]
+})
+
+const id = enviada?.key?.id
 if (id) {
-r.set(`${g}:${id}`, {
-jid: j,
-t: Date.now()
-})
+limparRespostas()
+respostas.set(`${grupo}:${id}`, { grupo, jid, expira: Date.now() + (10 * 60 * 1000) })
+}
+return enviada
 }
 
-return m
-}
-
-await t.relayMessage(g, {
+await tokito.relayMessage(grupo, {
 interactiveMessage: {
-header: {
-title: '📥 NOVA SOLICITAÇÃO',
-hasMediaAttachment: false
-},
-body: {
-text: mess.novaSolicitacao(num, nome)
-},
-footer: {
-text: 'Sistema de aprovação'
-},
+header: { title: '📥 NOVA SOLICITAÇÃO', hasMediaAttachment: false },
+body: { text: mess.novaSolicitacao(numero, nomeGrupo) },
+footer: { text: 'Sistema de aprovação' },
 nativeFlowMessage: {
 buttons: [
-{
-name: 'quick_reply',
-buttonParamsJson: JSON.stringify({
-display_text: mess.botaoAprovar(),
-id: `${prefix}aprovarpedido ${j}`
-})
-},
-{
-name: 'quick_reply',
-buttonParamsJson: JSON.stringify({
-display_text: mess.botaoRecusar(),
-id: `${prefix}recusarpedido ${j}`
-})
-}
+{ name: 'quick_reply', buttonParamsJson: JSON.stringify({ display_text: mess.botaoAprovar(), id: `${prefix}aprovarpedido ${jid}` }) },
+{ name: 'quick_reply', buttonParamsJson: JSON.stringify({ display_text: mess.botaoRecusar(), id: `${prefix}recusarpedido ${jid}` }) }
 ],
 messageParamsJson: '{}'
 },
-contextInfo: {
-mentionedJid: [j]
-}
+contextInfo: { mentionedJid: [jid] }
 }
 }, {})
 }
 
-const processar = async (t, g, p, prefix) => {
-const cf = estado(g)
+const processar = async (tokito, grupo, pedido, prefix) => {
+const cfg = estado(grupo)
+if (!cfg.ativo) return
 
-if (!cf.ativo)
-return
+const jid = pegarJid(pedido)
+if (!jid) return
 
-const j = jid(p)
+const chave = `${grupo}:${jid}`, concluidoEm = concluidos.get(chave) || 0
+if (Date.now() - concluidoEm < 60000 || processando.has(chave)) return
 
-if (!j)
-return
-
-const k = `${g}:${j}`
-const fim = c.get(k) || 0
-
-if (Date.now() - fim < 60000)
-return
-
-if (x.has(k))
-return
-
-x.add(k)
+processando.add(chave)
 
 try {
-if (cf.automatico) {
-await t.groupRequestParticipantsUpdate(g, [j], 'approve')
-
-remover(g, j)
-c.set(k, Date.now())
-
-await t.sendMessage(g, {
-text: mess.aprovacaoAutomatica(1),
-mentions: [j]
-}).catch(() => {
-})
-
+if (cfg.automatico) {
+await tokito.groupRequestParticipantsUpdate(grupo, [jid], 'approve')
+remover(grupo, jid)
+concluidos.set(chave, Date.now())
+await tokito.sendMessage(grupo, { text: mess.aprovacaoAutomatica(1), mentions: [jid] }).catch(() => {})
 return
 }
 
-const u = a.get(k) || 0
+const ultima = avisados.get(chave) || 0
+if (Date.now() - ultima < 60000) return
 
-if (Date.now() - u < 60000)
-return
-
-mapa(g).set(j, {
-...p,
-jid: j
-})
-
-await aviso(t, g, {
-...p,
-jid: j
-}, prefix)
-
-a.set(k, Date.now())
+mapa(grupo).set(jid, { ...pedido, jid })
+await aviso(tokito, grupo, { ...pedido, jid }, prefix)
+avisados.set(chave, Date.now())
 }
-finally {
-x.delete(k)
-}
+finally { processando.delete(chave) }
 }
 
-const achar = (n, tag) => {
-if (!n)
-return false
-
-if (n.tag === tag)
-return true
-
-const c = Array.isArray(n.content)
-? n.content
-: []
-
-return c.some(i => {
-return i &&
-typeof i === 'object' &&
-achar(i, tag)
-})
+const achar = (node, tag) => {
+if (!node) return false
+if (node.tag === tag) return true
+const conteudo = Array.isArray(node.content) ? node.content : []
+return conteudo.some(item => item && typeof item === 'object' && achar(item, tag))
 }
 
-const txt = m => {
-const x = m?.message || {}
-
-return String(
-x.conversation ||
-x.extendedTextMessage?.text ||
-''
-).trim()
-}
-
-const cit = m => String(
-m?.message
-?.extendedTextMessage
-?.contextInfo
-?.stanzaId ||
-''
-).trim()
-
-const adm = async (t, g, s) => {
-const m = await t.groupMetadata(g).catch(() => null)
-
-if (!m)
-return false
-
-const num = base.numero(s)
-
-return (m.participants || []).some(p => {
-const ids = [
-p.id,
-p.jid,
-p.lid,
-p.phoneNumber
-].filter(Boolean)
-
-const ok = ids.some(i => {
-return i === s ||
-base.numero(i) === num
-})
-
-return ok && Boolean(p.admin)
-})
-}
-
-const resp = async (t, m) => {
-const g = m?.key?.remoteJid
-
-if (!g?.endsWith('@g.us'))
-return
-
-if (m?.key?.fromMe)
-return
-
-const op = txt(m)
-
-if (!['1', '2'].includes(op))
-return
-
-const id = cit(m)
-
-if (!id)
-return
-
-const k = `${g}:${id}`
-const d = r.get(k)
-
-if (!d)
-return
-
-if (Date.now() - d.t > 600000) {
-r.delete(k)
-return
-}
-
-const s = m?.key?.participant
-
-if (!s)
-return
-
-if (!await adm(t, g, s))
-return
-
-const j = d.jid
-const ps = await t.groupRequestParticipantsList(g).catch(() => [])
-
-const ok = ps.some(p => jid(p) === j)
-
-if (!ok) {
-r.delete(k)
-
-await t.sendMessage(g, {
-text: mess.solicitacaoIndisponivel()
-}, {
-quoted: m
-}).catch(() => {
-})
-
-return
-}
-
-const ac = op === '1'
-? 'approve'
-: 'reject'
-
-await t.groupRequestParticipantsUpdate(
-g,
-[j],
-ac
-)
-
-remover(g, j)
-
-c.set(
-`${g}:${j}`,
-Date.now()
-)
-
-r.delete(k)
-
-await t.sendMessage(g, {
-text: mess.solicitacaoRespondida(
-base.numero(j),
-op === '1'
-),
-mentions: [j]
-}, {
-quoted: m
-}).catch(() => {
-})
-}
-
-const iniciar = (t, prefix = '!') => {
-if (!t?.ws?.on || t.aprovacaoTokitoIniciada)
-return
-
-t.aprovacaoTokitoIniciada = true
-
-t.ws.on('CB:notification', async n => {
+const respostaNumerica = async (tokito, upsert) => {
 try {
-if (
-global.__TOKITO_SOCKET_ATUAL__ &&
-global.__TOKITO_SOCKET_ATUAL__ !== t
-)
-return
+if (botoesAtivos()) return
 
-const g = n?.attrs?.from
+for (const m of upsert?.messages || []) {
+const grupo = m?.key?.remoteJid
+if (!grupo?.endsWith('@g.us') || m?.key?.fromMe) continue
 
-if (!g?.endsWith('@g.us'))
-return
+const msg = base.desenrolar(m?.message)
+const texto = base.texto(m?.message).trim()
+if (!['1', '2'].includes(texto)) continue
 
-if (!achar(n, 'created_membership_requests'))
-return
+const citado = msg?.extendedTextMessage?.contextInfo?.stanzaId ||
+msg?.imageMessage?.contextInfo?.stanzaId ||
+msg?.videoMessage?.contextInfo?.stanzaId ||
+msg?.documentMessage?.contextInfo?.stanzaId || ''
 
-const ag = Date.now()
-const u = e.notificacoesGrupo.get(g) || 0
+if (!citado) continue
 
-if (ag - u < 5000)
-return
+limparRespostas()
+const r = respostas.get(`${grupo}:${citado}`)
+if (!r || r.expira <= Date.now()) continue
 
-e.notificacoesGrupo.set(g, ag)
+const metadata = await tokito.groupMetadata(grupo).catch(() => null)
+if (!metadata) continue
 
-const ps = await t.groupRequestParticipantsList(g).catch(() => [])
+const membros = metadata.participants || []
+const autorRaw = m?.key?.participant || m?.participant || ''
+const autorInfo = resolverMembro(membros, autorRaw)
+const autor = autorInfo.jid
+const adm = autorInfo.membro
 
-for (const p of ps || [])
-await processar(t, g, p, prefix)
+if (!autor || !['admin', 'superadmin'].includes(adm?.admin)) continue
+
+const pedidos = await tokito.groupRequestParticipantsList(grupo).catch(() => [])
+const pedido = pedidos.find(p => pegarJid(p) === r.jid || numeroJid(pegarJid(p)) === numeroJid(r.jid))
+
+if (!pedido) {
+respostas.delete(`${grupo}:${citado}`)
+remover(grupo, r.jid)
+
+await tokito.sendMessage(grupo, {
+text: mess.solicitacaoIndisponivel(base.numero(r.jid)),
+mentions: [r.jid]
+}, { quoted: m }).catch(() => {})
+
+continue
 }
-catch (er) {
-console.log(
-'[APROVAÇÃO NOTIFICAÇÃO]',
-er?.message || er
-)
-}
-})
 
-t.ev.on('messages.upsert', async ({ messages }) => {
+const jidPedido = pegarJid(pedido) || r.jid
+const acao = texto === '1' ? 'approve' : 'reject'
+
+await tokito.groupRequestParticipantsUpdate(grupo, [jidPedido], acao)
+remover(grupo, r.jid)
+remover(grupo, jidPedido)
+respostas.delete(`${grupo}:${citado}`)
+concluidos.set(`${grupo}:${jidPedido}`, Date.now())
+
+await tokito.sendMessage(grupo, {
+text: mess.solicitacaoRespondida(base.numero(jidPedido), base.numero(autor), texto === '1'),
+mentions: [jidPedido, autor]
+}, { quoted: m }).catch(() => {})
+}
+}
+catch (error) {
+console.log('[APROVAÇÃO RESPOSTA]', error?.message || error)
+}
+}
+
+const iniciar = (tokito, prefix = '!') => {
+if (tokito?.ev?.on && !tokito.aprovacaoRespostaTokitoIniciada) {
+tokito.aprovacaoRespostaTokitoIniciada = true
+tokito.ev.on('messages.upsert', upsert => respostaNumerica(tokito, upsert))
+}
+
+if (!tokito?.ws?.on || tokito.aprovacaoTokitoIniciada) return
+tokito.aprovacaoTokitoIniciada = true
+
+tokito.ws.on('CB:notification', async node => {
 try {
-if (
-global.__TOKITO_SOCKET_ATUAL__ &&
-global.__TOKITO_SOCKET_ATUAL__ !== t
-)
-return
+if (global.__TOKITO_SOCKET_ATUAL__ && global.__TOKITO_SOCKET_ATUAL__ !== tokito) return
+const grupo = node?.attrs?.from
+if (!grupo?.endsWith('@g.us') || !achar(node, 'created_membership_requests')) return
 
-for (const m of messages || [])
-await resp(t, m)
+const agora = Date.now(), ultima = notificacoesGrupo.get(grupo) || 0
+if (agora - ultima < 5000) return
+notificacoesGrupo.set(grupo, agora)
+
+const pedidos = await tokito.groupRequestParticipantsList(grupo).catch(() => [])
+for (const pedido of pedidos || []) await processar(tokito, grupo, pedido, prefix)
 }
-catch (er) {
-console.log(
-'[APROVAÇÃO RESPOSTA]',
-er?.message || er
-)
+catch (error) {
+console.log('[APROVAÇÃO NOTIFICAÇÃO]', error?.message || error)
 }
 })
 }
 
-const configurar = async ({
-grupo,
-dataGp,
-setGp,
-q,
-prefix,
-command,
-reply,
-automatico: auto = false
-}) => {
-const ac = String(q || '').trim()
-
-const t = auto
-? '𝙰𝙿𝚁𝙾𝚅𝙰𝙲̧𝙰̃𝙾 𝙰𝚄𝚃𝙾𝙼𝙰́𝚃𝙸𝙲𝙰'
-: '𝚂𝙸𝚂𝚃𝙴𝙼𝙰 𝙳𝙴 𝙰𝙿𝚁𝙾𝚅𝙰𝙲̧𝙰̃𝙾'
-
-const d = auto
-? 'ᴀᴘʀᴏᴠᴀ ᴛᴏᴅᴀs ᴀs ɴᴏᴠᴀs sᴏʟɪᴄɪᴛᴀᴄ̧ᴏ̃ᴇs ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀᴍᴇɴᴛᴇ.'
-: 'ᴀᴠɪsᴀ ᴇ ᴍᴏsᴛʀᴀ ᴏᴘᴄ̧ᴏ̃ᴇs ᴘᴀʀᴀ ᴀᴘʀᴏᴠᴀʀ ᴏᴜ ʀᴇᴄᴜsᴀʀ ɴᴏᴠᴏs ᴍᴇᴍʙʀᴏs.'
-
-if (!['0', '1'].includes(ac))
-return reply(
-mess.funcaoUso(
-auto ? '🤖' : '📥',
-t,
-prefix,
-command,
-d
-)
-)
-
-if (auto)
-automatico(
-grupo,
-ac === '1',
-dataGp,
-setGp
-)
-else
-ativar(
-grupo,
-ac === '1',
-dataGp,
-setGp
-)
-
-return reply(
-ac === '1'
-? mess.funcaoAtivada(
-auto ? '🤖' : '📥',
-t,
-d
-)
-: mess.funcaoDesativada(
-auto ? '🤖' : '📥',
-t,
-auto
-? 'ᴀs sᴏʟɪᴄɪᴛᴀᴄ̧ᴏ̃ᴇs ᴠᴏʟᴛᴀʀᴀ̃ᴏ ᴀ sᴇʀ ᴀɴᴀʟɪsᴀᴅᴀs ᴍᴀɴᴜᴀʟᴍᴇɴᴛᴇ.'
-: 'ᴏ ʙᴏᴛ ɴᴀ̃ᴏ ᴀᴠɪsᴀʀᴀ́ sᴏʙʀᴇ ɴᴏᴠᴀs sᴏʟɪᴄɪᴛᴀᴄ̧ᴏ̃ᴇs.'
-)
-)
+const configurar = async ({ grupo, dataGp, setGp, q, prefix, command, reply, automatico: auto = false }) => {
+const acao = String(q || '').trim()
+const titulo = auto ? '𝙰𝙿𝚁𝙾𝚅𝙰𝙲̧𝙰̃𝙾 𝙰𝚄𝚃𝙾𝙼𝙰́𝚃𝙸𝙲𝙰' : '𝚂𝙸𝚂𝚃𝙴𝙼𝙰 𝙳𝙴 𝙰𝙿𝚁𝙾𝚅𝙰𝙲̧𝙰̃𝙾'
+const descricao = auto ? 'ᴀᴘʀᴏᴠᴀ ᴛᴏᴅᴀs ᴀs ɴᴏᴠᴀs sᴏʟɪᴄɪᴛᴀᴄ̧ᴏ̃ᴇs ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀᴍᴇɴᴛᴇ.' : 'ᴀᴠɪsᴀ ᴇ ᴘᴇʀᴍɪᴛᴇ ᴀᴘʀᴏᴠᴀʀ ᴏᴜ ʀᴇᴄᴜsᴀʀ ɴᴏᴠᴏs ᴍᴇᴍʙʀᴏs.'
+if (!['0', '1'].includes(acao)) return reply(mess.funcaoUso(auto ? '🤖' : '📥', titulo, prefix, command, descricao))
+if (auto) automatico(grupo, acao === '1', dataGp, setGp)
+else ativar(grupo, acao === '1', dataGp, setGp)
+return reply(acao === '1'
+? mess.funcaoAtivada(auto ? '🤖' : '📥', titulo, descricao)
+: mess.funcaoDesativada(auto ? '🤖' : '📥', titulo, auto ? 'ᴀs sᴏʟɪᴄɪᴛᴀᴄ̧ᴏ̃ᴇs ᴠᴏʟᴛᴀʀᴀ̃ᴏ ᴀ sᴇʀ ᴀɴᴀʟɪsᴀᴅᴀs ᴍᴀɴᴜᴀʟᴍᴇɴᴛᴇ.' : 'ᴏ ʙᴏᴛ ɴᴀ̃ᴏ ᴀᴠɪsᴀʀᴀ́ sᴏʙʀᴇ ɴᴏᴠᴀs sᴏʟɪᴄɪᴛᴀᴄ̧ᴏ̃ᴇs.'))
 }
 
-const decidir = async ({
-tokito,
-grupo,
-alvo,
-acao
-}) => {
+const decidir = async ({ tokito, grupo, alvo, acao }) => {
 await sincronizar(tokito, grupo)
+const jid = String(alvo || primeiro(grupo)?.jid || '').trim()
+if (!jid) return { ok: false, vazio: true }
 
-const j = String(
-alvo ||
-primeiro(grupo)?.jid ||
-''
-).trim()
+const pedidos = await tokito.groupRequestParticipantsList(grupo).catch(() => [])
+const existe = pedidos.some(p => pegarJid(p) === jid)
 
-if (!j)
-return {
-ok: false,
-vazio: true
+if (!existe) {
+remover(grupo, jid)
+return { ok: false, indisponivel: true, jid }
 }
 
-const ps = await tokito
-.groupRequestParticipantsList(grupo)
-.catch(() => [])
-
-const ok = ps.some(p => jid(p) === j)
-
-if (!ok) {
-remover(grupo, j)
-
-return {
-ok: false,
-indisponivel: true,
-jid: j
-}
+await tokito.groupRequestParticipantsUpdate(grupo, [jid], acao)
+remover(grupo, jid)
+return { ok: true, jid }
 }
 
-await tokito.groupRequestParticipantsUpdate(
-grupo,
-[j],
-acao
-)
+const decidirTodos = async ({ tokito, grupo, acao }) => {
+const pedidos = await sincronizar(tokito, grupo)
+const jids = pedidos.map(p => p.jid).filter(Boolean)
+if (!jids.length) return []
 
-remover(grupo, j)
-
-return {
-ok: true,
-jid: j
-}
-}
-
-const decidirTodos = async ({
-tokito,
-grupo,
-acao
-}) => {
-const ps = await sincronizar(tokito, grupo)
-
-const js = ps
-.map(p => p.jid)
-.filter(Boolean)
-
-if (!js.length)
-return []
-
-await tokito.groupRequestParticipantsUpdate(
-grupo,
-js,
-acao
-)
-
-for (const j of js)
-remover(grupo, j)
-
-return js
+await tokito.groupRequestParticipantsUpdate(grupo, jids, acao)
+for (const jid of jids) remover(grupo, jid)
+return jids
 }
 
 module.exports = {
-iniciar,
-estado,
-ativar,
-automatico,
-listar,
-primeiro,
-remover,
-limpar,
-sincronizar,
-configurar,
-decidir,
-decidirTodos
+iniciar, estado, ativar, automatico, listar, primeiro, remover, limpar,
+sincronizar, configurar, decidir, decidirTodos
 }

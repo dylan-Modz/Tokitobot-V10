@@ -669,28 +669,37 @@ return `-  \`𝙽𝙾𝚅𝙰 𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾\`
 『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${n}
 『 👥 \`𝙶𝚁𝚄𝙿𝙾\` 』— ${g}
 
-『 ✅ \`1\` 』— Aprovar
-『 ❌ \`2\` 』— Recusar
+『 ✅ \`1\` 』— Aprovar entrada
+『 ❌ \`2\` 』— Recusar entrada
 
-> Responda esta mensagem com *1* ou *2*.`
+> *Um administrador deve responder esta mensagem com 1 ou 2.*`
 }
 
-exports.solicitacaoRespondida = (n, a) => {
-return a
-? `- ✅ \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝙰𝙿𝚁𝙾𝚅𝙰𝙳𝙰\`
+exports.solicitacaoRespondida = (u, a, ok) => {
+return ok
+? `-  \`𝙽𝙾𝚅𝙾 𝙼𝙴𝙼𝙱𝚁𝙾 𝙰𝙿𝚁𝙾𝚅𝙰𝙳𝙾\` 🎉
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${n}
-『 ✅ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Entrada aprovada com sucesso.`
-: `- ❌ \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝚁𝙴𝙲𝚄𝚂𝙰𝙳𝙰\`
+『 👤 \`𝙼𝙴𝙼𝙱𝚁𝙾\` 』— @${u}
+『 🛡️ \`𝙰𝙿𝚁𝙾𝚅𝙰𝙳𝙾 𝙿𝙾𝚁\` 』— @${a}
+『 ✅ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Entrada autorizada com sucesso.
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${n}
-『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Solicitação recusada.`
+> *Seja bem-vindo(a) ao grupo, @${u}! Esperamos que aproveite e respeite as regras. 🧊✨*`
+: `-  \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝚁𝙴𝙲𝚄𝚂𝙰𝙳𝙰\` ❌
+
+『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${u}
+『 🛡️ \`𝚁𝙴𝙲𝚄𝚂𝙰𝙳𝙾 𝙿𝙾𝚁\` 』— @${a}
+『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Solicitação de entrada recusada.
+
+> *A solicitação de @${u} não foi aprovada pela administração.*`
 }
 
-exports.solicitacaoIndisponivel = () => {
-return `- ⚠️ \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝙸𝙽𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻\`
+exports.solicitacaoIndisponivel = u => {
+return `-  \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝙸𝙽𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻\` ⚠️
 
-『 📥 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Essa solicitação não está mais pendente.`
+『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${u}
+『 ⚠️ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Esta solicitação não está mais pendente.
+
+> *Ela pode ter sido aprovada, recusada ou cancelada anteriormente.*`
 }
 exports.modoJogosDescricao = () => {
 return `ᴀᴛɪᴠᴀ ᴏs ᴊᴏɢᴏs ᴇ ᴀs ʀᴇsᴘᴏsᴛᴀs ᴀᴜᴛᴏᴍᴀ́ᴛɪᴄᴀs ɴᴇsᴛᴇ ɢʀᴜᴘᴏ.`

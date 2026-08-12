@@ -1,39 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.23",
+  "version": "10.0.24",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-12T17:05:35.010Z",
+  "publishedAt": "2026-08-12T17:30:05.351Z",
   "changelog": [
-    "[Correção] 3 arquivos atualizados",
-    "A versão 10.0.23 já está disponível para atualização.",
-    "Gerarlink atualizado",
-    "Global atualizado",
-    "Modulos atualizado"
+    "[Correção] 2 arquivos atualizados",
+    "A versão 10.0.24 já está disponível para atualização.",
+    "Aprovacao atualizado",
+    "Global atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "3 arquivos atualizados",
-  "notice": "A versão 10.0.23 já está disponível para atualização.",
+  "title": "2 arquivos atualizados",
+  "notice": "A versão 10.0.24 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/casos/outros/gerarlink.js",
-      "sha256": "d514b97de53c158a8e84ee089240037423c5867dbb53c570b00a09942bb6b407",
-      "size": 4035
+      "path": "DADOS_TOKITO/funcoes/aprovacao.js",
+      "sha256": "25e04ba88eb76eba52b25505e234d516bc83f209d61699055f5935d3261d414e",
+      "size": 12004
     },
     {
       "path": "DADOS_TOKITO/database/lib/global.js",
-      "sha256": "9b38f91ba41cf59920f9630b0c38e7d0a7920a3254a2678731aa3d6782fadd13",
-      "size": 144487
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/modulos.js",
-      "sha256": "a29aba11119e815f7dbf9385c0c212d39cac8b945205122a74979d669222ebac",
-      "size": 13185
+      "sha256": "971f2ee2424a3e92778d12e2405c0cafd39a5f9c08490efa389cb960b58c41ac",
+      "size": 144975
     }
   ],
   "releases": [
@@ -459,6 +453,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-12T17:05:35.010Z"
+    },
+    {
+      "version": "10.0.24",
+      "fromVersion": "10.0.23",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "2 arquivos atualizados",
+      "notice": "A versão 10.0.24 já está disponível para atualização.",
+      "changelog": [
+        "Aprovacao atualizado",
+        "Global atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/funcoes/aprovacao.js",
+          "sha256": "25e04ba88eb76eba52b25505e234d516bc83f209d61699055f5935d3261d414e",
+          "size": 12004
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/global.js",
+          "sha256": "971f2ee2424a3e92778d12e2405c0cafd39a5f9c08490efa389cb960b58c41ac",
+          "size": 144975
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-12T17:30:05.351Z"
     }
   ]
 }
