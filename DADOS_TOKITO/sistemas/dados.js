@@ -440,11 +440,17 @@ String(local.repository)
 throw new Error('O update.json remoto aponta para outro repositório.')
 }
 
+const pending = pendingOperations(remote, local.version)
+
 return {
 ok: true,
 available: compareVersions(remote.version, local.version) > 0,
 local,
-remote
+remote,
+incremental: pending.incremental,
+pendingFiles: pending.operations.filter(item => item.type === 'file'),
+pendingDelete: pending.operations.filter(item => item.type === 'delete'),
+pendingReleases: pending.releases
 }
 } catch (error) {
 return {
@@ -457,12 +463,104 @@ error: error.message
 }
 }
 
+function normalizeUpdateFile(item) {
+if (typeof item === 'string') {
+return {
+path: String(item || '').trim(),
+sha256: '',
+size: 0
+}
+}
+
+if (!item || typeof item !== 'object') {
+return {
+path: '',
+sha256: '',
+size: 0
+}
+}
+
+return {
+path: String(item.path || '').trim(),
+sha256: String(item.sha256 || '').trim().toLowerCase(),
+size: Math.max(0, Number(item.size || 0))
+}
+}
+
+function pendingOperations(remote = {}, localVersion = '0.0.0') {
+const hasReleases = Array.isArray(remote.releases)
+const hasFiles = Array.isArray(remote.files)
+const incremental = hasReleases || hasFiles
+const releases = hasReleases
+? remote.releases
+.filter(item => item && typeof item === 'object')
+.filter(item => compareVersions(item.version, localVersion) > 0)
+.filter(item => compareVersions(item.version, remote.version || item.version) <= 0)
+.sort((a, b) => compareVersions(a.version, b.version))
+: [{
+version: remote.version,
+files: Array.isArray(remote.files) ? remote.files : [],
+delete: Array.isArray(remote.delete) ? remote.delete : []
+}]
+
+const firstRelease = releases[0]
+const historyGap = Boolean(
+hasReleases &&
+firstRelease?.fromVersion &&
+compareVersions(localVersion, firstRelease.fromVersion) < 0
+)
+
+if (historyGap) {
+return {
+incremental: false,
+releases,
+operations: []
+}
+}
+
+const operations = new Map()
+
+for (const release of releases) {
+for (const relRaw of Array.isArray(release.delete) ? release.delete : []) {
+const rel = String(relRaw || '').trim()
+if (!rel) continue
+
+operations.set(rel, {
+type: 'delete',
+path: rel,
+version: release.version || remote.version || ''
+})
+}
+
+for (const fileRaw of Array.isArray(release.files) ? release.files : []) {
+const file = normalizeUpdateFile(fileRaw)
+if (!file.path) continue
+
+operations.set(file.path, {
+type: 'file',
+path: file.path,
+sha256: file.sha256,
+size: file.size,
+version: release.version || remote.version || ''
+})
+}
+}
+
+return {
+incremental,
+releases,
+operations: [...operations.values()]
+}
+}
+
 const normalizedRel = value => String(value || '')
 .replace(/\\/g, '/')
 .replace(/^\.\//, '')
 
 function isProtected(rel) {
 const item = normalizedRel(rel)
+
+if (item.startsWith('node_modules/@whiskeysockets/baileys/')) return false
 
 return PROTECTED.some(rule => {
 if (rule.endsWith('/'))
@@ -609,6 +707,305 @@ if (run.status !== 0)
 throw new Error(`Falha ao restaurar backup: ${String(run.stderr || '').trim()}`)
 }
 
+function copyPath(source, target) {
+const stat = fs.statSync(source)
+
+if (stat.isDirectory()) {
+fs.cpSync(source, target, {
+recursive: true,
+force: true
+})
+return
+}
+
+ensure(path.dirname(target))
+fs.copyFileSync(source, target)
+}
+
+function createIncrementalBackup(operations = []) {
+ensure(BACKUP_DIR)
+
+const dir = path.join(
+BACKUP_DIR,
+`partial-${Date.now()}`
+)
+
+ensure(dir)
+
+const unique = new Set([
+'DADOS_TOKITO/INFO_DADOS/update.json',
+...operations.map(item => normalizedRel(item.path)).filter(Boolean)
+])
+
+const entries = []
+
+for (const rel of unique) {
+const target = safeInside(ROOT, rel)
+const backupTarget = safeInside(dir, rel)
+const existed = fs.existsSync(target)
+let directory = false
+
+if (existed) {
+directory = fs.statSync(target).isDirectory()
+ensure(path.dirname(backupTarget))
+copyPath(target, backupTarget)
+}
+
+entries.push({
+path: rel,
+existed,
+directory
+})
+}
+
+writeJson(
+path.join(dir, 'meta.json'),
+{
+createdAt: new Date().toISOString(),
+entries
+}
+)
+
+return dir
+}
+
+function restoreIncrementalBackup(dir) {
+const meta = readJson(
+path.join(dir, 'meta.json'),
+null
+)
+
+if (!meta || !Array.isArray(meta.entries)) {
+throw new Error('Backup incremental inválido.')
+}
+
+for (const entry of meta.entries) {
+const rel = normalizedRel(entry.path)
+if (!rel) continue
+
+const target = safeInside(ROOT, rel)
+
+if (fs.existsSync(target)) {
+fs.rmSync(target, {
+recursive: true,
+force: true
+})
+}
+
+if (!entry.existed) continue
+
+const source = safeInside(dir, rel)
+
+if (!fs.existsSync(source)) {
+throw new Error(`Arquivo ausente no backup: ${rel}`)
+}
+
+ensure(path.dirname(target))
+copyPath(source, target)
+}
+
+return true
+}
+
+function rawRepoFileUrl(repo, ref, rel) {
+const safePath = normalizedRel(rel)
+.split('/')
+.map(item => encodeURIComponent(item))
+.join('/')
+
+return `https://raw.githubusercontent.com/${repo}/${encodeURIComponent(ref)}/${safePath}`
+}
+
+async function downloadIncrementalFiles(repo, ref, operations, temp, onProgress) {
+const files = operations.filter(item => item.type === 'file')
+
+for (let index = 0; index < files.length; index++) {
+const item = files[index]
+const rel = normalizedRel(item.path)
+
+if (!rel || isProtected(rel)) {
+throw new Error(`Arquivo protegido ou inválido na atualização: ${rel || item.path}`)
+}
+
+onProgress(
+`Baixando ${index + 1}/${files.length}: ${rel}`
+)
+
+const response = await axios.get(
+rawRepoFileUrl(repo, ref, rel),
+{
+responseType: 'arraybuffer',
+timeout: 45000,
+maxContentLength: 20 * 1024 * 1024,
+validateStatus: () => true,
+headers: {
+'User-Agent': `TokitoBot-V10/${localInfo().version || '10.0.0'}`
+}
+}
+)
+
+if (response.status !== 200) {
+throw new Error(`Não foi possível baixar ${rel}.`)
+}
+
+const buffer = Buffer.from(response.data)
+
+if (
+item.sha256 &&
+sha256(buffer) !== String(item.sha256).toLowerCase()
+) {
+throw new Error(`A verificação de integridade falhou em ${rel}.`)
+}
+
+const destination = safeInside(temp, rel)
+ensure(path.dirname(destination))
+fs.writeFileSync(destination, buffer)
+}
+}
+
+function applyIncrementalFiles(temp, operations) {
+const added = []
+
+for (const item of operations) {
+const rel = normalizedRel(item.path)
+
+if (!rel || isProtected(rel)) {
+throw new Error(`Arquivo protegido ou inválido na atualização: ${rel || item.path}`)
+}
+
+const target = safeInside(ROOT, rel)
+
+if (item.type === 'delete') {
+if (fs.existsSync(target)) {
+fs.rmSync(target, {
+recursive: true,
+force: true
+})
+}
+continue
+}
+
+const source = safeInside(temp, rel)
+
+if (!fs.existsSync(source)) {
+throw new Error(`Arquivo baixado não encontrado: ${rel}`)
+}
+
+if (!fs.existsSync(target)) {
+added.push(rel)
+}
+
+ensure(path.dirname(target))
+fs.copyFileSync(source, target)
+}
+
+return added
+}
+
+async function instalarUpdateIncremental(check, onProgress) {
+const repo = String(
+check.remote.repository ||
+check.local.repository
+)
+
+const ref = String(
+check.remote.ref ||
+check.local.ref ||
+'main'
+)
+
+if (
+!/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(repo) ||
+!/^[A-Za-z0-9_./-]+$/.test(ref)
+) {
+throw new Error('Destino de atualização inválido.')
+}
+
+const pending = pendingOperations(
+check.remote,
+check.local.version
+)
+
+const operations = pending.operations
+const temp = fs.mkdtempSync(
+path.join(os.tmpdir(), 'tokito-v10-files-')
+)
+
+let backup = ''
+
+try {
+onProgress(
+operations.length
+? `Preparando ${operations.length} arquivo(s) alterado(s)...`
+: 'Preparando informações da nova versão...'
+)
+
+await downloadIncrementalFiles(
+repo,
+ref,
+operations,
+temp,
+onProgress
+)
+
+onProgress('Criando backup dos arquivos que serão alterados...')
+backup = createIncrementalBackup(operations)
+
+onProgress('Aplicando somente os arquivos modificados...')
+const added = applyIncrementalFiles(
+temp,
+operations
+)
+
+writeJson(
+UPDATE_FILE,
+check.remote
+)
+
+saveState({
+lastBackup: backup,
+lastBackupType: 'incremental',
+lastUpdateAt: new Date().toISOString(),
+previousVersion: check.local.version,
+installedVersion: check.remote.version,
+addedByLastUpdate: added,
+lastUpdatedFiles: operations
+.filter(item => item.type === 'file')
+.map(item => normalizedRel(item.path)),
+lastDeletedFiles: operations
+.filter(item => item.type === 'delete')
+.map(item => normalizedRel(item.path))
+})
+
+return {
+updated: true,
+from: check.local.version,
+version: check.remote.version,
+backup,
+remote: check.remote,
+incremental: true,
+filesUpdated: operations.filter(item => item.type === 'file').length,
+filesDeleted: operations.filter(item => item.type === 'delete').length,
+files: operations
+}
+} catch (error) {
+if (backup && fs.existsSync(backup)) {
+try {
+restoreIncrementalBackup(backup)
+} catch {}
+}
+
+throw error
+} finally {
+try {
+fs.rmSync(temp, {
+recursive: true,
+force: true
+})
+} catch {}
+}
+}
+
 async function instalarUpdate(onProgress = () => {}) {
 const check = await verificarUpdate()
 
@@ -630,6 +1027,13 @@ const online = await validarInicio()
 
 if (!online.allowed)
 throw new Error(online.message || 'Licença inválida para atualizar.')
+}
+
+if (check.incremental) {
+return instalarUpdateIncremental(
+check,
+onProgress
+)
 }
 
 const repo = String(
@@ -712,44 +1116,10 @@ String(check.remote.version || '')
 throw new Error('A versão do pacote não corresponde ao update.json remoto.')
 }
 
-const packageFile = path.join(ROOT, 'package.json')
-const packageBefore = fs.existsSync(packageFile)
-? sha256(fs.readFileSync(packageFile))
-: ''
-
-onProgress('Aplicando arquivos oficiais e preservando seus dados...')
-added = copyIncoming(srcRoot, check.remote)
-
-const packageAfter = fs.existsSync(packageFile)
-? sha256(fs.readFileSync(packageFile))
-: ''
-
-if (packageBefore !== packageAfter) {
-onProgress('Dependências alteradas; executando npm install...')
-
-const npm = process.platform === 'win32'
-? 'npm.cmd'
-: 'npm'
-
-const run = spawnSync(
-npm,
-['install', '--omit=dev'],
-{
-cwd: ROOT,
-stdio: 'pipe',
-timeout: 180000
-}
-)
-
-if (run.status !== 0) {
-throw new Error(
-`npm install falhou: ${String(run.stderr || run.stdout || '').slice(-1200)}`
-)
-}
-}
 
 saveState({
 lastBackup: backup,
+lastBackupType: 'full',
 lastUpdateAt: new Date().toISOString(),
 previousVersion: check.local.version,
 installedVersion: check.remote.version,
@@ -785,16 +1155,26 @@ const backup = current.lastBackup
 if (!backup || !fs.existsSync(backup))
 throw new Error('Nenhum backup de atualização disponível para restaurar.')
 
+if (
+current.lastBackupType === 'incremental' ||
+fs.statSync(backup).isDirectory()
+) {
+restoreIncrementalBackup(backup)
+} else {
 restoreBackup(
 backup,
 current.addedByLastUpdate || []
 )
+}
 
 saveState({
 lastRollbackAt: new Date().toISOString(),
 installedVersion: current.previousVersion || null,
 lastBackup: null,
-addedByLastUpdate: []
+lastBackupType: null,
+addedByLastUpdate: [],
+lastUpdatedFiles: [],
+lastDeletedFiles: []
 })
 
 return {

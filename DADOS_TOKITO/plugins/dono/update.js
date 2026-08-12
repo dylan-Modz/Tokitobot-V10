@@ -69,6 +69,12 @@ disponivelAgora: check.available,
 changelog: Array.isArray(check.remote?.changelog)
 ? check.remote.changelog
 : [],
+arquivos: Array.isArray(check.pendingFiles)
+? check.pendingFiles.map(item => item.path)
+: [],
+removidos: Array.isArray(check.pendingDelete)
+? check.pendingDelete.map(item => item.path)
+: [],
 prefix: ctx.prefix
 }))
 }
@@ -85,7 +91,12 @@ if (!result.updated) {
 return ctx.reply(ctx.mess.updateAlreadyLatest(result.version))
 }
 
-await ctx.reply(ctx.mess.updateSuccess(result.from, result.version))
+await ctx.reply(ctx.mess.updateSuccess(
+result.from,
+result.version,
+result.filesUpdated || 0,
+result.filesDeleted || 0
+))
 
 return setTimeout(() => process.exit(0), 1500)
 } catch (error) {

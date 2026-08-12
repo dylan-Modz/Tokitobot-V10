@@ -3139,7 +3139,7 @@ return `- ⚠️ \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙸𝙽𝙳
 > *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— ᴏ ʙᴏᴛ ᴄᴏɴᴛɪɴᴜᴀʀᴀ́ ғᴜɴᴄɪᴏɴᴀɴᴅᴏ ɴᴏʀᴍᴀʟᴍᴇɴᴛᴇ. 🙇‍♂️*`
 }
 
-exports.updateInfo = ({ instalada, disponivel, canal, disponivelAgora, changelog, prefix }) => {
+exports.updateInfo = ({ instalada, disponivel, canal, disponivelAgora, changelog, arquivos, removidos, prefix }) => {
 const status = disponivelAgora
 ? '🆕 ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ᴅɪsᴘᴏɴɪ́ᴠᴇʟ'
 : '✅ ᴠᴇʀsᴀ̃ᴏ ᴍᴀɪs ʀᴇᴄᴇɴᴛᴇ'
@@ -3147,6 +3147,22 @@ const status = disponivelAgora
 const alteracoes = Array.isArray(changelog) && changelog.length
 ? changelog.map(item => `> • ${textoUpdateTokito(item)}`).join('\n')
 : '> • sᴇᴍ ɴᴏᴠᴀs ᴀʟᴛᴇʀᴀᴄ̧ᴏ̃ᴇs ɪɴғᴏʀᴍᴀᴅᴀs.'
+
+const listaArquivos = Array.isArray(arquivos) ? arquivos.filter(Boolean) : []
+const listaRemovidos = Array.isArray(removidos) ? removidos.filter(Boolean) : []
+const totalArquivos = listaArquivos.length + listaRemovidos.length
+
+const arquivosTexto = totalArquivos
+? `\n\n> *『 𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂 』— ${totalArquivos} ᴀʟᴛᴇʀᴀᴄ̧ᴀ̃ᴏ(ᴏ̃ᴇs)*${
+listaArquivos.length
+? `\n${listaArquivos.slice(0, 8).map(item => `> • ${textoUpdateTokito(String(item).split('/').pop())}`).join('\n')}`
+: ''
+}${
+listaRemovidos.length
+? `\n> • ${listaRemovidos.length} ᴀʀǫᴜɪᴠᴏ(s) ʀᴇᴍᴏᴠɪᴅᴏ(s)`
+: ''
+}`
+: ''
 
 const instalar = disponivelAgora
 ? `\n\n> *『 𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝚁 』— ᴜsᴇ ${prefix}update start ᴘᴀʀᴀ ɪɴsᴛᴀʟᴀʀ.*`
@@ -3160,7 +3176,7 @@ return `- 🧊 \`𝚃𝙾𝙺𝙸𝚃𝙾 𝚄𝙿𝙳𝙰𝚃𝙴\`
 > *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${status}*
 
 > *『 𝙰𝙻𝚃𝙴𝚁𝙰𝙲̧𝙾̃𝙴𝚂 』*
-${alteracoes}${instalar}`
+${alteracoes}${arquivosTexto}${instalar}`
 }
 
 exports.updatePreparing = () => {
@@ -3177,12 +3193,16 @@ return `- ✅ \`𝚃𝙾𝙺𝙸𝚃𝙾 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙳�
 > *『 𝚅𝙴𝚁𝚂𝙰̃𝙾 ${versao} 』— ᴠᴏᴄᴇ̂ ᴊᴀ́ ᴇsᴛᴀ́ ᴜsᴀɴᴅᴏ ᴀ ᴠᴇʀsᴀ̃ᴏ ᴍᴀɪs ʀᴇᴄᴇɴᴛᴇ ᴅᴏ ᴛᴏᴋɪᴛᴏ. 🙇‍♂️*`
 }
 
-exports.updateSuccess = (anterior, nova) => {
+exports.updateSuccess = (anterior, nova, arquivos = 0, removidos = 0) => {
+const resumo = Number(arquivos || 0) || Number(removidos || 0)
+? `\n> *『 𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂 』— ${Number(arquivos || 0)} ᴀᴛᴜᴀʟɪᴢᴀᴅᴏ(s) · ${Number(removidos || 0)} ʀᴇᴍᴏᴠɪᴅᴏ(s)*\n`
+: ''
+
 return `- ✅ \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙲𝙾𝙽𝙲𝙻𝚄𝙸́𝙳𝙰\`
 
 > *『 𝙰𝙽𝚃𝙴𝚁𝙸𝙾𝚁 』— ${anterior}*
 > *『 𝙰𝚃𝚄𝙰𝙻 』— ${nova}*
-
+${resumo}
 > *『 𝚁𝙴𝙸𝙽𝙸𝙲𝙸𝙰𝙽𝙳𝙾 』— ᴀ ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ ғᴏɪ ɪɴsᴛᴀʟᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ, ᴏ ʙᴏᴛ sᴇʀᴀ́ ʀᴇɪɴɪᴄɪᴀᴅᴏ. 🙇‍♂️*`
 }
 
