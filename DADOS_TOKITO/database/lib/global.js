@@ -663,15 +663,35 @@ return `> *『 ${prefix}play_audio ${url} 』— ᴜsᴇ ᴏ ᴄᴏᴍᴀɴᴅ�
 > *『 ${prefix}play_video ${url} 』— ᴜsᴇ ᴏ ᴄᴏᴍᴀɴᴅᴏ ᴀᴏ ʟᴀᴅᴏ ᴘᴀʀᴀ ʙᴀɪxᴀʀ ᴇᴍ ᴠɪ́ᴅᴇᴏ. 🙇‍♂️*`
 }
 
-exports.novaSolicitacaoSemBotoes = (numero, grupo, prefix, jid) => {
-return `${exports.novaSolicitacao(numero, grupo)}
+exports.novaSolicitacaoSemBotoes = (n, g) => {
+return `-  \`𝙽𝙾𝚅𝙰 𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾\`
 
-> *『 ${prefix}aprovarpedido ${jid} 』— ᴀᴘʀᴏᴠᴀ ᴀ sᴏʟɪᴄɪᴛᴀᴄ̧ᴀ̃ᴏ.*
-> *『 ${prefix}recusarpedido ${jid} 』— ʀᴇᴄᴜsᴀ ᴀ sᴏʟɪᴄɪᴛᴀᴄ̧ᴀ̃ᴏ. 🙇‍♂️*`
+『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${n}
+『 👥 \`𝙶𝚁𝚄𝙿𝙾\` 』— ${g}
+
+『 ✅ \`1\` 』— Aprovar
+『 ❌ \`2\` 』— Recusar
+
+> Responda esta mensagem com *1* ou *2*.`
 }
-// =====================================================
-// TEXTOS DO SISTEMA DE JOGOS
-// =====================================================
+
+exports.solicitacaoRespondida = (n, a) => {
+return a
+? `- ✅ \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝙰𝙿𝚁𝙾𝚅𝙰𝙳𝙰\`
+
+『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${n}
+『 ✅ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Entrada aprovada com sucesso.`
+: `- ❌ \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝚁𝙴𝙲𝚄𝚂𝙰𝙳𝙰\`
+
+『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${n}
+『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Solicitação recusada.`
+}
+
+exports.solicitacaoIndisponivel = () => {
+return `- ⚠️ \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝙸𝙽𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻\`
+
+『 📥 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Essa solicitação não está mais pendente.`
+}
 exports.modoJogosDescricao = () => {
 return `ᴀᴛɪᴠᴀ ᴏs ᴊᴏɢᴏs ᴇ ᴀs ʀᴇsᴘᴏsᴛᴀs ᴀᴜᴛᴏᴍᴀ́ᴛɪᴄᴀs ɴᴇsᴛᴇ ɢʀᴜᴘᴏ.`
 }
