@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.13",
+  "version": "10.0.14",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-12T08:30:48.930Z",
+  "publishedAt": "2026-08-12T08:33:40.080Z",
   "changelog": [
     "[Correção] Conexão do bot atualizada",
-    "A versão 10.0.13 já está disponível para atualização.",
+    "A versão 10.0.14 já está disponível para atualização.",
     "Conexão do bot atualizada"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
   "title": "Conexão do bot atualizada",
-  "notice": "A versão 10.0.13 já está disponível para atualização.",
+  "notice": "A versão 10.0.14 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/connect.js",
-      "sha256": "03e2561a5e797d62a76b66f1ca0f850f79bd99819f3a905f395be03463ef124d",
-      "size": 299439
+      "sha256": "748c3666396b437088ba027ed56fbe1bd76c8afa6aabcb608eb341e91525ebd1",
+      "size": 28540
     }
   ],
   "releases": [
@@ -225,6 +225,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-12T08:30:48.930Z"
+    },
+    {
+      "version": "10.0.14",
+      "fromVersion": "10.0.13",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Conexão do bot atualizada",
+      "notice": "A versão 10.0.14 já está disponível para atualização.",
+      "changelog": [
+        "Conexão do bot atualizada"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "748c3666396b437088ba027ed56fbe1bd76c8afa6aabcb608eb341e91525ebd1",
+          "size": 28540
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-12T08:33:40.080Z"
     }
   ]
 }
