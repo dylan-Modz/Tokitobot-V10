@@ -3286,3 +3286,27 @@ return `-  \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙳𝙴 𝙰𝚃𝚄𝙰𝙻𝙸�
 『 📥 \`𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝚁\` 』— ${prefix}update start
 『 ↩️ \`𝚁𝙴𝚂𝚃𝙰𝚄𝚁𝙰𝚁\` 』— ${prefix}update rollback`
 }
+
+exports.gerarLinkSemMidia = prefix => {
+return `- 🔗 \`𝙶𝙴𝚁𝙰𝚁 𝙻𝙸𝙽𝙺\`
+
+『 📎 \`𝙼𝙸́𝙳𝙸𝙰\` 』— Responda uma imagem, vídeo, áudio, sticker ou documento.
+『 ⚙️ \`𝚄𝚂𝙾\` 』— ${prefix}gerarlink`
+}
+
+exports.gerarLinkResultado = (tipo, ext, url) => {
+return `- 🔗 \`𝙻𝙸𝙽𝙺 𝙶𝙴𝚁𝙰𝙳𝙾\`
+
+『 📁 \`𝚃𝙸𝙿𝙾\` 』— ${tipo}
+『 🧩 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${String(ext || 'bin').toUpperCase()}
+『 🔗 \`𝚄𝚁𝙻\` 』— ${url}
+
+> *O link foi gerado através do servidor temporário usado pelo Tokito.*`
+}
+
+exports.gerarLinkFalhou = () => {
+return `- ❌ \`𝙵𝙰𝙻𝙷𝙰 𝙰𝙾 𝙶𝙴𝚁𝙰𝚁 𝙻𝙸𝙽𝙺\`
+
+『 ⚠️ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Não foi possível hospedar este arquivo agora.
+『 🔄 \`𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴\` 』— Aguarde alguns instantes e repita o comando.`
+}
