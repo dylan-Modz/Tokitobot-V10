@@ -1,7 +1,7 @@
 {
   "name": "TokitoBot-Md",
   "version": "10.0.0",
-  "description": "Qualquer dúvida chama no WhatsApp: +55 91 98573-1582",
+  "description": "Qualquer dúvida chama no WhatsApp: +55 11 97543-1163",
   "main": "DADOS_TOKITO/connect.js",
   "scripts": {
     "start": "sh start.sh"
