@@ -31,8 +31,7 @@
 const base = require('./base.js')
 const mess = require('../database/lib/global.js')
 
-const regex = /(?:https?:\/\/|www\.|chat\.whatsapp\.com\/|whatsapp\.com\/channel\/|wa\.me\/|t\.me\/|telegram\.me\/|discord\.gg\/|discord\.com\/invite\/|(?:[a-z0-9-]+\.)+(?:com\.br|net\.br|org\.br|com|net|org|br|io|app|dev|site|online|shop|xyz|gg|me|tv|info)(?:\/[\w\-./?%&=+#]*)?)/i
-
+const regex = /(?:https?:\/\/)?(?:www\.)?(?:chat\.whatsapp\.com\/[^\s]+|whatsapp\.com\/channel\/[^\s]+)/i
 const dadosNivel = {
 easy: {
 emoji: '🛡️',

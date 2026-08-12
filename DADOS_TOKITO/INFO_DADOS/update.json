@@ -1,23 +1,29 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.7",
+  "version": "10.0.8",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-12T06:57:03.393Z",
+  "publishedAt": "2026-08-12T07:54:33.805Z",
   "changelog": [
-    "[Correção] Menu atualizado",
-    "A versão 10.0.7 já está disponível para atualização.",
-    "Menu atualizado"
+    "[Correção] Sistema Antilink atualizado",
+    "A versão 10.0.8 já está disponível para atualização.",
+    "Sistema Antilink atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Menu atualizado",
-  "notice": "A versão 10.0.7 já está disponível para atualização.",
+  "title": "Sistema Antilink atualizado",
+  "notice": "A versão 10.0.8 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
-  "files": [],
+  "files": [
+    {
+      "path": "DADOS_TOKITO/funcoes/antilink.js",
+      "sha256": "ee39b64e4c64dc8289aa141331f9f69b3716c1e426138aa09b8e0bcd46f6b051",
+      "size": 5031
+    }
+  ],
   "releases": [
     {
       "version": "10.0.3",
@@ -93,6 +99,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-12T06:57:03.393Z"
+    },
+    {
+      "version": "10.0.8",
+      "fromVersion": "10.0.7",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Sistema Antilink atualizado",
+      "notice": "A versão 10.0.8 já está disponível para atualização.",
+      "changelog": [
+        "Sistema Antilink atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/funcoes/antilink.js",
+          "sha256": "ee39b64e4c64dc8289aa141331f9f69b3716c1e426138aa09b8e0bcd46f6b051",
+          "size": 5031
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-12T07:54:33.805Z"
     }
   ]
 }
