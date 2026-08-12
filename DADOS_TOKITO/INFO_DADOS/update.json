@@ -4,7 +4,7 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-12T01:11:00.143Z",
+  "publishedAt": "2026-08-12T01:11:02.147Z",
   "changelog": [
     "[Correção] Menu atualizado",
     "A versão 10.0.3 já está disponível para atualização.",
@@ -47,7 +47,7 @@
       "files": [],
       "delete": [],
       "required": true,
-      "publishedAt": "2026-08-12T01:11:00.142Z"
+      "publishedAt": "2026-08-12T01:11:02.147Z"
     }
   ]
 }
