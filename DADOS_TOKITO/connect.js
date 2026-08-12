@@ -197,9 +197,9 @@ try {
 info('Gerando código de conexão...')
 const code = await tokito.requestPairingCode(numerosColetados)
 console.log('')
-console.log(colors.magenta('╭━━━✦━━━✦━━━✦━━━╮'))
-console.log(colors.white.bold(`┃ CÓDIGO: ${code}`))
-console.log(colors.magenta('╰━━━✦━━━✦━━━✦━━━╯'))
+topoPainel("❪🧊.ꯧ𝙲𝙾́𝙳𝙸𝙶𝙾 𝙳𝙴 𝙲𝙾𝙽𝙴𝚇𝙰̃𝙾ꯧ⸼🧊❫")
+console.log(colors.cyan("├̟⊹ 🔐 ") + colors.white(`〔 ${code} 〕`))
+fimPainel()
 console.log('')
 info('Abra o WhatsApp > Aparelhos conectados > Conectar com número de telefone.')
 console.log('')
@@ -211,10 +211,9 @@ erroSistema('Não foi possível gerar o código de conexão', error)
 async function openWhatsappSupport() {
 const numero = collectNumbers(ownerNumber)
 console.log('')
-console.log(colors.magenta('╭━━━✦━━━✦━━━✦━━━╮'))
-console.log(colors.white.bold('┃   SUPORTE TOKITO   ┃'))
-console.log(colors.magenta('╰━━━✦━━━✦━━━✦━━━╯'))
-console.log(colors.cyan(`WhatsApp: https://wa.me/${numero || '5511975431163'}`))
+topoPainel("❪🧊.ꯧ𝚂𝚄𝙿𝙾𝚁𝚃𝙴 𝚃𝙾𝙺𝙸𝚃𝙾ꯧ⸼🧊❫")
+console.log(colors.cyan("├̟⊹ 🌊 ") + colors.white(`https://wa.me/${numero || '5511975431163'}`))
+fimPainel()
 console.log('')
 }
 
@@ -229,15 +228,24 @@ return colors.green(`${texto.slice(0, 6)}••••${texto.slice(-4)}`)
 return colors.white(texto)
 }
 
+const tokenValido = token => /^tokito_/i.test(String(token || '').trim())
+
+const topoPainel = titulo => {
+console.log(colors.cyan(titulo))
+console.log(colors.cyan("┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓"))
+}
+
+const fimPainel = () => console.log(colors.cyan("┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛"))
+
 const linhaPainel = (numero, icone, texto) => {
-console.log(colors.blue('┃') + colors.magenta('❯ ') + colors.red(`( ${numero} ) `) + colors.cyan(`${icone} ${texto}`))
+console.log(colors.cyan(`├̟⊹ ${icone} `) + colors.white(`〔 ${numero} 〕`) + colors.red(" ➢ ") + colors.white(texto))
 }
 
 async function editarCampoBot(chave, titulo, opcoes = {}) {
 const config = lerConfigBot()
 const atual = config[chave] ?? ''
 console.log('')
-info(`${titulo} atual: ${String(atual || 'Não configurado')}`)
+info(`${titulo} atual: ${mostrarValor(chave, atual)}`)
 if (opcoes.ponto) console.log(colors.gray('Digite . caso não queira configurar este campo.'))
 console.log(colors.gray('Apenas pressione Enter para manter o valor atual.'))
 let valor = await question(colors.white.bold('╰━━➤ '))
@@ -257,6 +265,10 @@ if (chave === 'prefix' && valor.length > 4) {
 erro('Prefixo muito grande. Use até 4 caracteres.')
 return false
 }
+if (chave === 'API_KEY_TOKITO' && !tokenValido(valor)) {
+erro('Token da API inválido. O token deve começar com tokito_.')
+return false
+}
 config[chave] = valor
 salvarConfigBot(config)
 sucesso(`${titulo} atualizado com sucesso.`)
@@ -265,23 +277,24 @@ return true
 
 async function editarBot() {
 while (true) {
-const config = recarregarConfigBot()
+recarregarConfigBot()
 console.log('')
-console.log(colors.magenta('╭━━━✦━━━✦━━━✦━━━╮'))
-console.log(colors.white.bold('┃     EDITAR BOT      ┃'))
-console.log(colors.magenta('╰━━━✦━━━✦━━━✦━━━╯'))
-console.log(colors.blue('┌─────────────────────────────────────┐'))
-linhaPainel('1', '🤖', `Nome do bot       ${mostrarValor('NomeDoBot', config.NomeDoBot)}`)
-linhaPainel('2', '👑', `Nome do dono      ${mostrarValor('ownerName', config.ownerName)}`)
-linhaPainel('3', '📱', `Número do dono    ${mostrarValor('ownerNumber', config.ownerNumber)}`)
-linhaPainel('4', '🔣', `Prefixo           ${mostrarValor('prefix', config.prefix)}`)
-linhaPainel('5', '🔑', `Token da API      ${mostrarValor('API_KEY_TOKITO', config.API_KEY_TOKITO)}`)
-linhaPainel('6', '🎮', `Token de salas    ${mostrarValor('TOKEN_SALA', config.TOKEN_SALA)}`)
-linhaPainel('7', '👍', `Token de likes    ${mostrarValor('TOKEN_LIKE_FF', config.TOKEN_LIKE_FF)}`)
-linhaPainel('0', '↩️', 'Voltar')
-console.log(colors.blue('└─────────────────────────────────────┘'))
-console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'))
-let option = await question(colors.white.bold('╰━━➤ '))
+topoPainel("❪🧊.ꯧ𝙴𝙳𝙸𝚃𝙰𝚁 𝙿𝙰𝙸𝙽𝙴𝙻ꯧ⸼🧊❫")
+linhaPainel('1', '🤖', 'Nome do bot')
+linhaPainel('2', '👑', 'Nome do dono')
+linhaPainel('3', '📱', 'Número do dono')
+linhaPainel('4', '🧩', 'Prefixo do Bot')
+linhaPainel('5', '🔑', 'Token da API')
+linhaPainel('6', '🎮', 'Token de salas')
+linhaPainel('7', '👍', 'Token de likes')
+linhaPainel('0', '🔙', 'Voltar')
+fimPainel()
+console.log(colors.yellow("• Apenas o Token da API é obrigatório para iniciar o bot."))
+console.log(colors.gray("• Os outros dados já possuem padrão e podem ser alterados quando quiser."))
+console.log(colors.gray("• Se não usar Salas ou Likes, digite . nesses campos."))
+console.log(colors.gray("• Ao editar qualquer campo, pressione Enter para manter o valor atual."))
+console.log(colors.gray("ᴇsᴄᴏʟʜᴀ ᴏ ǫᴜᴇ ᴅᴇsᴇᴊᴀ ᴇᴅɪᴛᴀʀ"))
+let option = await question(colors.white.bold("╰━━➤ "))
 option = option.trim()
 if (option === '0') return
 if (option === '1') await editarCampoBot('NomeDoBot', 'Nome do bot')
@@ -297,38 +310,32 @@ else erro('Opção inválida. Escolha uma opção do painel.')
 
 async function showMenu() {
 console.log('')
-console.log(colors.bgRed.white.bold(' INFO - TOKITO ') + colors.white(' - Escolha como deseja iniciar.'))
+info('Escolha como deseja iniciar.')
 console.log('')
-console.log(colors.magenta('╭━━━✦━━━✦━━━✦━━━╮'))
-console.log(colors.white.bold('┃   PAINEL DE CONTROLE   ┃'))
-console.log(colors.magenta('╰━━━✦━━━✦━━━✦━━━╯'))
-console.log(colors.blue('┌──────────────────────────────┐'))
+topoPainel("❪🧊.ꯧ𝙿𝙰𝙸𝙽𝙴𝙻 𝙳𝙴 𝙲𝙾𝙽𝚃𝚁𝙾𝙻𝙴ꯧ⸼🧊❫")
 linhaPainel('1', '📱', 'Código de conexão')
 linhaPainel('2', '🧊', 'QR-Code WhatsApp')
 linhaPainel('3', '🌊', 'Suporte / Ajuda')
 linhaPainel('4', '⚙️', 'Editar bot')
-console.log(colors.blue('└──────────────────────────────┘'))
-console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'))
-let option = await question(colors.white.bold('╰━━➤ '))
+fimPainel()
+console.log(colors.gray("ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ"))
+let option = await question(colors.white.bold("╰━━➤ "))
 option = option.trim()
 if (option === '1' || option === '2') {
 recarregarConfigBot()
-if (!API_KEY_TOKITO || !API_KEY_TOKITO.startsWith('tokito_')) {
-aviso('Configure primeiro o Token da API na opção 4.')
+if (!tokenValido(API_KEY_TOKITO)) {
+console.log('')
+aviso('Antes de conectar, configure o Token da API.')
+console.log(colors.gray('╰━━➤ Entre em 4 Editar bot > 5 Token da API.'))
+console.log(colors.gray('╰━━➤ O restante é opcional e pode ser configurado depois.'))
 return showMenu()
 }
 metodo = option === '1' ? 'codigo' : 'qr'
 sucesso(option === '1' ? 'Conexão por código selecionada.' : 'Conexão por QR-Code selecionada.')
 return metodo
 }
-if (option === '3') {
-await openWhatsappSupport()
-return showMenu()
-}
-if (option === '4') {
-await editarBot()
-return showMenu()
-}
+if (option === '3') { await openWhatsappSupport(); return showMenu() }
+if (option === '4') { await editarBot(); return showMenu() }
 erro('Opção inválida. Escolha 1, 2, 3 ou 4.')
 return showMenu()
 }
@@ -893,7 +900,7 @@ process.on('unhandledRejection', error => erroSistema('unhandledRejection detect
 
 async function iniciarTokito() {
 recarregarConfigBot()
-if (!sessaoRegistrada() || !API_KEY_TOKITO || process.argv.includes('painel')) await showMenu()
+if (!sessaoRegistrada() || !tokenValido(API_KEY_TOKITO) || process.argv.includes('painel')) await showMenu()
 info('Validando acesso do Tokito Bot V10...')
 const acesso = await dadosSistema.validarInicio()
 if (!acesso.allowed) {
