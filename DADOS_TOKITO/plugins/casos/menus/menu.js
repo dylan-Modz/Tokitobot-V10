@@ -161,15 +161,15 @@ hasMediaAttachment: true,
 headerType: menuMedia.videoMessage ? 'VIDEO' : 'IMAGE',
 body: {
 text: `❪🧊.ꯧᴍᴇɴᴜ ʟɪsᴛꯧ⸼🧊❫
-      ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-      ├⊹ 🧊 ʙᴏᴛ: ${NomeDoBot}
-      ├⊹ 🧊 ᴄʀɪᴀᴅᴏʀ: ${ownerName}
-      ├⊹ 🧊 ᴜsᴜᴀʀɪᴏ: ${pushname}
-      ├⊹ 🧊 ᴄᴀʀɢᴏ: ${isCargo}
-      ├⊹ 🧊 ᴠɪᴘ: ${isChVip}
-      ├⊹ 🧊 ᴅɪsᴘᴏsɪᴛɪᴠᴏ: ${whatIsPhone}
-      ├⊹ 🧊 ʙᴀɪʟᴇʏs: ${baileysVersion}
-      ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛`
+┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├⊹ 🧊 ʙᴏᴛ: ${NomeDoBot}
+├⊹ 🧊 ᴄʀɪᴀᴅᴏʀ: ${ownerName}
+├⊹ 🧊 ᴜsᴜᴀʀɪᴏ: ${pushname}
+├⊹ 🧊 ᴄᴀʀɢᴏ: ${isCargo}
+├⊹ 🧊 ᴠɪᴘ: ${isChVip}
+├⊹ 🧊 ᴅɪsᴘᴏsɪᴛɪᴠᴏ: ${whatIsPhone}
+├⊹ 🧊 ʙᴀɪʟᴇʏs: ${baileysVersion}
+┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛`
 },
 footer: {
 text: 'ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄᴀᴏ ᴀʙᴀɪxᴏ'

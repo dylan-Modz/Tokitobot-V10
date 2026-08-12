@@ -1,10 +1,10 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.3",
+  "version": "10.0.4",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-12T01:08:28.822Z",
+  "publishedAt": "2026-08-12T01:09:54.089Z",
   "changelog": [
     "[Correção] Menu atualizado",
     "A versão 10.0.3 já está disponível para atualização.",
@@ -17,7 +17,13 @@
   "notice": "A versão 10.0.3 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
-  "files": [],
+  "files": [
+    {
+      "path": "DADOS_TOKITO/plugins/casos/menus/menu.js",
+      "sha256": "e00a886af7e964359eea3a7e24f7e4bddf9a64169c6c6ecd6a207c3526eed21f",
+      "size": 6502
+    }
+  ],
   "releases": [
     {
       "version": "10.0.3",
@@ -33,6 +39,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-12T01:08:28.822Z"
+    },
+    {
+      "version": "10.0.4",
+      "fromVersion": "10.0.3",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Menu atualizado",
+      "notice": "A versão 10.0.3 já está disponível para atualização.",
+      "changelog": [
+        "Menu atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/casos/menus/menu.js",
+          "sha256": "e00a886af7e964359eea3a7e24f7e4bddf9a64169c6c6ecd6a207c3526eed21f",
+          "size": 6502
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-12T01:09:54.089Z"
     }
   ]
 }
