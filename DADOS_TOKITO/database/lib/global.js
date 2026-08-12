@@ -3139,6 +3139,14 @@ return `- ⚠️ \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙸𝙽𝙳
 > *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— ᴏ ʙᴏᴛ ᴄᴏɴᴛɪɴᴜᴀʀᴀ́ ғᴜɴᴄɪᴏɴᴀɴᴅᴏ ɴᴏʀᴍᴀʟᴍᴇɴᴛᴇ. 🙇‍♂️*`
 }
 
+exports.updateEmptyFiles = versao => {
+return `- ❌ \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙸𝙽𝙲𝙾𝙼𝙿𝙻𝙴𝚃𝙰\`
+
+> *『 𝚅𝙴𝚁𝚂𝙰̃𝙾 ${versao || '—'} 』— ᴀ ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ ғᴏɪ ᴘᴜʙʟɪᴄᴀᴅᴀ sᴇᴍ ɴᴇɴʜᴜᴍ ᴀʀǫᴜɪᴠᴏ ᴘᴀʀᴀ ɪɴsᴛᴀʟᴀʀ.*
+
+> *『 𝙿𝚁𝙾𝚃𝙴𝙲̧𝙰̃𝙾 』— ᴀ ᴠᴇʀsᴀ̃ᴏ ʟᴏᴄᴀʟ ɴᴀ̃ᴏ ғᴏɪ ᴀʟᴛᴇʀᴀᴅᴀ. ᴘᴜʙʟɪǫᴜᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ ɪɴᴄʟᴜɪɴᴅᴏ ᴏs ᴀʀǫᴜɪᴠᴏs ᴍᴏᴅɪғɪᴄᴀᴅᴏs. 🙇‍♂️*`
+}
+
 exports.updateInfo = ({ instalada, disponivel, canal, disponivelAgora, changelog, arquivos, removidos, prefix }) => {
 const status = disponivelAgora
 ? '🆕 ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ᴅɪsᴘᴏɴɪ́ᴠᴇʟ'

@@ -61,6 +61,14 @@ return ctx.reply(ctx.mess.updateNotPublished())
 return ctx.reply(ctx.mess.updateCheckError())
 }
 
+const totalPendentes =
+(Array.isArray(check.pendingFiles) ? check.pendingFiles.length : 0) +
+(Array.isArray(check.pendingDelete) ? check.pendingDelete.length : 0)
+
+if (check.available && check.incremental && !totalPendentes) {
+return ctx.reply(ctx.mess.updateEmptyFiles(check.remote?.version))
+}
+
 return ctx.reply(ctx.mess.updateInfo({
 instalada: check.local.version || '—',
 disponivel: check.remote.version || '—',
@@ -88,6 +96,10 @@ texto => console.log(`[ UPDATE • TOKITO ] ${texto}`)
 )
 
 if (!result.updated) {
+if (result.reason === 'empty_update') {
+return ctx.reply(ctx.mess.updateEmptyFiles(result.remote?.version))
+}
+
 return ctx.reply(ctx.mess.updateAlreadyLatest(result.version))
 }
 

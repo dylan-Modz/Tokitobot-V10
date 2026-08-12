@@ -399,7 +399,38 @@ return `https://raw.githubusercontent.com/${repo}/${ref}/DADOS_TOKITO/INFO_DADOS
 
 async function verificarUpdate() {
 const local = localInfo()
+let remote = null
+let apiFalhou = false
 
+try {
+const response = await axios.get(
+`${apiBase()}/api/bot/v10/update?t=${Date.now()}`,
+{
+timeout: Math.min(REQUEST_TIMEOUT, 10000),
+validateStatus: () => true,
+headers: {
+'User-Agent': `TokitoBot-V10/${local.version || '10.0.0'}`,
+'Cache-Control': 'no-cache'
+}
+}
+)
+
+if (
+response.status === 200 &&
+response.data &&
+typeof response.data === 'object' &&
+response.data.update &&
+typeof response.data.update === 'object'
+) {
+remote = response.data.update
+} else {
+apiFalhou = true
+}
+} catch {
+apiFalhou = true
+}
+
+if (!remote) {
 try {
 const response = await axios.get(
 `${rawUpdateUrl(local)}?t=${Date.now()}`,
@@ -407,7 +438,8 @@ const response = await axios.get(
 timeout: REQUEST_TIMEOUT,
 validateStatus: () => true,
 headers: {
-'User-Agent': `TokitoBot-V10/${local.version || '10.0.0'}`
+'User-Agent': `TokitoBot-V10/${local.version || '10.0.0'}`,
+'Cache-Control': 'no-cache'
 }
 }
 )
@@ -431,8 +463,20 @@ typeof response.data !== 'object'
 throw new Error(`Servidor de atualização indisponível (${response.status}).`)
 }
 
-const remote = response.data
+remote = response.data
+} catch (error) {
+return {
+ok: false,
+available: false,
+local,
+remote: null,
+apiFalhou,
+error: error.message
+}
+}
+}
 
+try {
 if (
 String(remote.repository || local.repository) !==
 String(local.repository)
@@ -447,6 +491,7 @@ ok: true,
 available: compareVersions(remote.version, local.version) > 0,
 local,
 remote,
+apiFalhou,
 incremental: pending.incremental,
 pendingFiles: pending.operations.filter(item => item.type === 'file'),
 pendingDelete: pending.operations.filter(item => item.type === 'delete'),
@@ -458,6 +503,7 @@ ok: false,
 available: false,
 local,
 remote: null,
+apiFalhou,
 error: error.message
 }
 }
@@ -927,6 +973,13 @@ check.local.version
 )
 
 const operations = pending.operations
+
+if (!operations.length) {
+const error = new Error('A atualização publicada não possui arquivos para instalar.')
+error.code = 'EMPTY_UPDATE'
+throw error
+}
+
 const temp = fs.mkdtempSync(
 path.join(os.tmpdir(), 'tokito-v10-files-')
 )
@@ -1030,6 +1083,19 @@ throw new Error(online.message || 'Licença inválida para atualizar.')
 }
 
 if (check.incremental) {
+const totalOperacoes =
+(Array.isArray(check.pendingFiles) ? check.pendingFiles.length : 0) +
+(Array.isArray(check.pendingDelete) ? check.pendingDelete.length : 0)
+
+if (!totalOperacoes) {
+return {
+updated: false,
+reason: 'empty_update',
+version: check.local.version,
+remote: check.remote
+}
+}
+
 return instalarUpdateIncremental(
 check,
 onProgress
