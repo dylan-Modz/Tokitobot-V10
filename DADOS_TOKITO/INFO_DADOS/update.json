@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.15",
+  "version": "10.0.16",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-12T09:16:49.137Z",
+  "publishedAt": "2026-08-12T09:18:17.305Z",
   "changelog": [
-    "[Correção] Global atualizado",
-    "A versão 10.0.0 já está disponível para atualização.",
-    "Global atualizado"
+    "[Correção] Aprovacao atualizado",
+    "A versão 10.0.16 já está disponível para atualização.",
+    "Aprovacao atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Global atualizado",
-  "notice": "A versão 10.0.0 já está disponível para atualização.",
+  "title": "Aprovacao atualizado",
+  "notice": "A versão 10.0.16 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/database/lib/global.js",
-      "sha256": "7937548fd58028317404c192021aac4666f833b345e37a911b0d7e34e47c2afc",
-      "size": 143521
+      "path": "DADOS_TOKITO/funcoes/aprovacao.js",
+      "sha256": "422c68a1f8aa897876eb1fe8dd276d24d668276842b941a9458bbda0af7c0587",
+      "size": 9814
     }
   ],
   "releases": [
@@ -267,6 +267,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-12T09:16:49.137Z"
+    },
+    {
+      "version": "10.0.16",
+      "fromVersion": "10.0.15",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Aprovacao atualizado",
+      "notice": "A versão 10.0.16 já está disponível para atualização.",
+      "changelog": [
+        "Aprovacao atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/funcoes/aprovacao.js",
+          "sha256": "422c68a1f8aa897876eb1fe8dd276d24d668276842b941a9458bbda0af7c0587",
+          "size": 9814
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-12T09:18:17.305Z"
     }
   ]
 }
