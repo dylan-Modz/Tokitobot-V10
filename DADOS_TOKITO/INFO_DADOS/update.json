@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.25",
+  "version": "10.0.26",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-13T00:06:01.491Z",
+  "publishedAt": "2026-08-13T00:18:33.437Z",
   "changelog": [
-    "[Correção] Marcacoes atualizado",
-    "A versão 10.0.25 já está disponível para atualização.",
-    "Marcacoes atualizado"
+    "[Correção] Akinator atualizado",
+    "A versão 10.0.26 já está disponível para atualização.",
+    "Akinator atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Marcacoes atualizado",
-  "notice": "A versão 10.0.25 já está disponível para atualização.",
+  "title": "Akinator atualizado",
+  "notice": "A versão 10.0.26 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/marcacoes.js",
-      "sha256": "d0524adaf591d006fb1e6512b4a9c7dde5ead650f59d4c120c78376ca67f09f4",
-      "size": 4610
+      "path": "DADOS_TOKITO/plugins/casos/jogos/akinator.js",
+      "sha256": "5e841f18fe96ae558ae670840713fc2d2f10377fd80fd350acf5b82326b80073",
+      "size": 11892
     }
   ],
   "releases": [
@@ -495,6 +495,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-13T00:06:01.491Z"
+    },
+    {
+      "version": "10.0.26",
+      "fromVersion": "10.0.25",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Akinator atualizado",
+      "notice": "A versão 10.0.26 já está disponível para atualização.",
+      "changelog": [
+        "Akinator atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/casos/jogos/akinator.js",
+          "sha256": "5e841f18fe96ae558ae670840713fc2d2f10377fd80fd350acf5b82326b80073",
+          "size": 11892
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-13T00:18:33.437Z"
     }
   ]
 }
