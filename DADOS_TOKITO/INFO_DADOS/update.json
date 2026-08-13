@@ -1,27 +1,45 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.30",
+  "version": "10.0.31",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-13T13:41:07.523Z",
+  "publishedAt": "2026-08-13T23:27:35.822Z",
   "changelog": [
-    "[Correção] Open atualizado",
-    "A versão 10.0.30 já está disponível para atualização.",
-    "Open atualizado"
+    "[Correção] 4 arquivos atualizados",
+    "A versão 10.0.31 já está disponível para atualização.",
+    "04 Bangplit atualizado",
+    "Del atualizado",
+    "Bangplit atualizado",
+    "Plans atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Open atualizado",
-  "notice": "A versão 10.0.30 já está disponível para atualização.",
+  "title": "4 arquivos atualizados",
+  "notice": "A versão 10.0.31 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/open.js",
-      "sha256": "1a1350ee5b6438bef78129169c9f95a4c27e07baecdab28dcbb691ffc7fe0900",
-      "size": 5534
+      "path": "DADOS_TOKITO/plugins/eventos/04-bangplit.js",
+      "sha256": "258fbebf1f0d5c7c475cb68d78e6ee1519901cc425f1db6b8c9476d5577670f0",
+      "size": 3482
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/del.js",
+      "sha256": "50f4e947aa2e5062279bc885583b3c28d1ff809d42e96fbb1faace7d25026317",
+      "size": 3398
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/bangplit.js",
+      "sha256": "c811b477158833427c50c356c7d7280e6680a8289f57ffe8f885a1c9923f6ad2",
+      "size": 5460
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/aluguel/plans.js",
+      "sha256": "003acfeb779ec5110a653d624c6b55e826d57d5c4d96882b50573edb83c38cfa",
+      "size": 6698
     }
   ],
   "releases": [
@@ -612,6 +630,45 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-13T13:41:07.523Z"
+    },
+    {
+      "version": "10.0.31",
+      "fromVersion": "10.0.30",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "4 arquivos atualizados",
+      "notice": "A versão 10.0.31 já está disponível para atualização.",
+      "changelog": [
+        "04 Bangplit atualizado",
+        "Del atualizado",
+        "Bangplit atualizado",
+        "Plans atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/eventos/04-bangplit.js",
+          "sha256": "258fbebf1f0d5c7c475cb68d78e6ee1519901cc425f1db6b8c9476d5577670f0",
+          "size": 3482
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/del.js",
+          "sha256": "50f4e947aa2e5062279bc885583b3c28d1ff809d42e96fbb1faace7d25026317",
+          "size": 3398
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/bangplit.js",
+          "sha256": "c811b477158833427c50c356c7d7280e6680a8289f57ffe8f885a1c9923f6ad2",
+          "size": 5460
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/plans.js",
+          "sha256": "003acfeb779ec5110a653d624c6b55e826d57d5c4d96882b50573edb83c38cfa",
+          "size": 6698
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-13T23:27:35.822Z"
     }
   ]
 }
