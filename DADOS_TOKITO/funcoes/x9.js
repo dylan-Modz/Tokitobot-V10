@@ -219,6 +219,16 @@ try {
 const grupo = item?.id
 if (!grupo?.endsWith('@g.us') || !ativo(grupo))
 continue
+
+const autorOriginal = item?.authorPn || item?.author
+if (!autorOriginal)
+continue
+
+const autorJid = jidEvento(autorOriginal)
+const autor = base.numero(autorJid)
+if (!autorJid || !autor)
+continue
+
 const assinatura = [
 item?.subject,
 item?.desc,
@@ -228,12 +238,12 @@ item?.inviteCode,
 item?.memberAddMode,
 item?.joinApprovalMode,
 item?.ephemeralDuration,
-item?.authorPn || item?.author
+autorOriginal
 ].map(valor => String(valor ?? '')).join('|')
+
 if (eventoDuplicado(`grupo:${grupo}:${assinatura}`, 30000))
 continue
-const autorJid = jidEvento(item?.authorPn || item?.author)
-const autor = base.numero(autorJid) || 'desconhecido'
+
 if (Object.prototype.hasOwnProperty.call(item, 'subject')) {
 await enviar(tokito, grupo, mess.x9Grupo('📝', '𝙽𝙾𝙼𝙴 𝙳𝙾 𝙶𝚁𝚄𝙿𝙾', autor, 'ᴀʟᴛᴇʀᴏᴜ ᴏ ɴᴏᴍᴇ ᴅᴏ ɢʀᴜᴘᴏ ᴘᴀʀᴀ', item.subject || 'sᴇᴍ ɴᴏᴍᴇ'), [autorJid])
 }

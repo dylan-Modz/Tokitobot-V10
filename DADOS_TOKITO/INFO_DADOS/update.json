@@ -1,39 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.28",
+  "version": "10.0.29",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-13T12:36:08.801Z",
+  "publishedAt": "2026-08-13T13:29:02.930Z",
   "changelog": [
-    "[Correção] 3 arquivos atualizados",
-    "A versão 10.0.28 já está disponível para atualização.",
-    "Jogo Akinator atualizado",
-    "Global atualizado",
-    "Menus atualizados"
+    "[Correção] X9 atualizado",
+    "A versão 10.0.29 já está disponível para atualização.",
+    "X9 atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "3 arquivos atualizados",
-  "notice": "A versão 10.0.28 já está disponível para atualização.",
+  "title": "X9 atualizado",
+  "notice": "A versão 10.0.29 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/casos/jogos/akinator.js",
-      "sha256": "bbaa36a30b7eed6553deda99669b14fd967aacb0032e10c8d9b0cc02af2e2813",
-      "size": 12695
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/global.js",
-      "sha256": "7b115615b268845a06150d76926ac4c791dbc68e0187a143a134919c83f52201",
-      "size": 142570
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/menus.js",
-      "sha256": "4643f6d3bd49e450f42d1ad40eb0d48eda7752b7ff8b4ad7f80bf341fed6dfaa",
-      "size": 48391
+      "path": "DADOS_TOKITO/funcoes/x9.js",
+      "sha256": "98f670d9052feee47e25331d7eff8a4409c8a5d3acf9e669a7d1323519a421b4",
+      "size": 14730
     }
   ],
   "releases": [
@@ -582,6 +570,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-13T12:36:08.801Z"
+    },
+    {
+      "version": "10.0.29",
+      "fromVersion": "10.0.28",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "X9 atualizado",
+      "notice": "A versão 10.0.29 já está disponível para atualização.",
+      "changelog": [
+        "X9 atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/funcoes/x9.js",
+          "sha256": "98f670d9052feee47e25331d7eff8a4409c8a5d3acf9e669a7d1323519a421b4",
+          "size": 14730
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-13T13:29:02.930Z"
     }
   ]
 }
