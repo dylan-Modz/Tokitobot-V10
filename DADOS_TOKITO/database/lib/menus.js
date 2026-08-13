@@ -137,6 +137,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}ban @usuario
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}promover @usuario
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}rebaixar @usuario
+┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}apagar 
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}limpar
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}linkgp 
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}marcar mensagem
@@ -329,6 +330,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}delaluguel
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}lista-aluguel
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}veraluguel
+┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}plans
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}lojinha
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}pixaluguel
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}pixcodigo
@@ -341,6 +343,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}entrar link
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}sairgp
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}sairall
+┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}bangplit
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}bangp
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}unbangp
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
