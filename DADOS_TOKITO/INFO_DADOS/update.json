@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.26",
+  "version": "10.0.27",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-13T00:18:33.437Z",
+  "publishedAt": "2026-08-13T00:22:38.899Z",
   "changelog": [
-    "[Correção] Akinator atualizado",
-    "A versão 10.0.26 já está disponível para atualização.",
-    "Akinator atualizado"
+    "[Correção] Menus atualizados",
+    "A versão 10.0.27 já está disponível para atualização.",
+    "Menus atualizados"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Akinator atualizado",
-  "notice": "A versão 10.0.26 já está disponível para atualização.",
+  "title": "Menus atualizados",
+  "notice": "A versão 10.0.27 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/casos/jogos/akinator.js",
-      "sha256": "5e841f18fe96ae558ae670840713fc2d2f10377fd80fd350acf5b82326b80073",
-      "size": 11892
+      "path": "DADOS_TOKITO/database/lib/menus.js",
+      "sha256": "62df55238c8c973fc0b7df623f13bd9e4aff9457f0b0c82ce910375dd56df896",
+      "size": 48345
     }
   ],
   "releases": [
@@ -516,6 +516,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-13T00:18:33.437Z"
+    },
+    {
+      "version": "10.0.27",
+      "fromVersion": "10.0.26",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Menus atualizados",
+      "notice": "A versão 10.0.27 já está disponível para atualização.",
+      "changelog": [
+        "Menus atualizados"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/database/lib/menus.js",
+          "sha256": "62df55238c8c973fc0b7df623f13bd9e4aff9457f0b0c82ce910375dd56df896",
+          "size": 48345
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-13T00:22:38.899Z"
     }
   ]
 }

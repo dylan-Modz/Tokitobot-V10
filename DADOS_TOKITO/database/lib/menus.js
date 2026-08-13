@@ -85,6 +85,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}take
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}roubar
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}rename nome|autor
+┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}packfig 
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}figu 5
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}figuemoji 5
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}figuanime 5
@@ -110,6 +111,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}criador
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}idade 23/12/2007
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}totalcmd
+┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}gerarlink 
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
@@ -466,6 +468,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}cacapalavras
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}adivinhe
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}quiz
+┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}Akinator 
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}mines
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}ppt pedra/papel/tesoura
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
