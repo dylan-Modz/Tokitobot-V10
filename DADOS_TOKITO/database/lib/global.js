@@ -28,10 +28,6 @@
  * ============================================================
  */
 
-/*
-* Mensagens globais utilizadas pela base.
-* Author: dylan Modz.
-*/
 exports.onlyOwner = () => {
 return `- 🧊 \`𝙰𝙲𝙴𝚂𝚂𝙾 𝙳𝙾 𝙳𝙾𝙽𝙾\`
 
@@ -39,16 +35,14 @@ return `- 🧊 \`𝙰𝙲𝙴𝚂𝚂𝙾 𝙳𝙾 𝙳𝙾𝙽𝙾\`
 }
 
 exports.commandNotFound = ({ prefix, command, nome, porcentagem, tempo }) => {
-return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├─ ⊹ 𖤐  𝐶𝑂𝑀𝐴𝑁𝐷𝑂-𝐼𝑁𝑉𝐴́𝐿𝐼𝐷𝑂
-┃࣪ ╎—̳͟͞͞ ❌̸ ᴄᴏᴍᴀɴᴅᴏ: ${prefix}${command || 'desconhecido'}
-┃࣪ ╎—̳͟͞͞ 🔎̸ ᴘᴀʀᴇᴄɪᴅᴏ: ${nome || 'Nenhum'}
-┃࣪ ╎—̳͟͞͞ 📊̸ sᴇᴍᴇʟʜᴀɴᴄ̧ᴀ: ${porcentagem || '0%'}
-┃࣪ ╎—̳͟͞͞ ⚡̸ ᴠᴇʟᴏᴄɪᴅᴀᴅᴇ: ${tempo || '0 ms'}
-┃࣪ ╎—̳͟͞͞ 🧊̸ ᴀᴊᴜᴅᴀ: ${prefix}menu
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
+return `- ❌ \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\`
+
+> *『 ${prefix}${command || 'desconhecido'} 』— ᴄᴏᴍᴀɴᴅᴏ ɪɴғᴏʀᴍᴀᴅᴏ.*
+> *『 ${nome || 'Nenhum'} 』— ᴄᴏᴍᴀɴᴅᴏ ᴍᴀɪs ᴘᴀʀᴇᴄɪᴅᴏ.*
+> *『 ${porcentagem || '0%'} 』— sᴇᴍᴇʟʜᴀɴᴄ̧ᴀ ᴇɴᴄᴏɴᴛʀᴀᴅᴀ.*
+> *『 ${tempo || '0 ms'} 』— ᴛᴇᴍᴘᴏ ᴅᴀ ʙᴜsᴄᴀ.*
+
+> *ᴜsᴇ ${prefix}menu ᴘᴀʀᴀ ᴠᴇʀ ᴏs ᴄᴏᴍᴀɴᴅᴏs ᴅɪsᴘᴏɴɪ́ᴠᴇɪs.*`
 }
 
 exports.sogrupo = () => {
@@ -415,23 +409,23 @@ return `- 🗑️ \`𝙵𝚄𝙽𝙳𝙾𝚂 𝚁𝙴𝙼𝙾𝚅𝙸𝙳𝙾�
 exports.funcaoUso = (emoji, titulo, prefix, comando, descricao) => {
 return `- ${emoji} \`${titulo}\`
 
-『 ✅ \`𝙰𝚃𝙸𝚅𝙰𝚁\` 』— ${prefix}${comando} 1
-『 ❌ \`𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁\` 』— ${prefix}${comando} 0
-『 ℹ️ \`𝙵𝚄𝙽𝙲̧𝙰̃𝙾\` 』— ${descricao}`
+> *『 ✅ 𝙰𝚃𝙸𝚅𝙰𝚁 』— ${prefix}${comando} 1*
+> *『 ❌ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 』— ${prefix}${comando} 0*
+> *『 ℹ️ 𝙵𝚄𝙽𝙲̧𝙰̃𝙾 』— ${descricao}*`
 }
 
 exports.funcaoAtivada = (emoji, titulo, descricao) => {
 return `- ${emoji} \`${titulo}\`
 
-『 📌 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— 🟢 ᴀᴛɪᴠᴀᴅᴏ
-『 ℹ️ \`𝙵𝚄𝙽𝙲̧𝙰̃𝙾\` 』— ${descricao}`
+> *『 📌 𝚂𝚃𝙰𝚃𝚄𝚂 』— 🟢 ᴀᴛɪᴠᴀᴅᴏ*
+> *『 ℹ️ 𝙵𝚄𝙽𝙲̧𝙰̃𝙾 』— ${descricao}*`
 }
 
 exports.funcaoDesativada = (emoji, titulo, descricao) => {
 return `- ${emoji} \`${titulo}\`
 
-『 📌 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— 🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ
-『 ℹ️ \`𝙵𝚄𝙽𝙲̧𝙰̃𝙾\` 』— ${descricao}`
+> *『 📌 𝚂𝚃𝙰𝚃𝚄𝚂 』— 🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ*
+> *『 ℹ️ 𝙵𝚄𝙽𝙲̧𝙰̃𝙾 』— ${descricao}*`
 }
 
 exports.funcaoInvalida = (prefix, comando) => {
@@ -666,11 +660,11 @@ return `> *『 ${prefix}play_audio ${url} 』— ᴜsᴇ ᴏ ᴄᴏᴍᴀɴᴅ�
 exports.novaSolicitacaoSemBotoes = (n, g) => {
 return `-  \`𝙽𝙾𝚅𝙰 𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾\`
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${n}
-『 👥 \`𝙶𝚁𝚄𝙿𝙾\` 』— ${g}
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${n}*
+> *『 👥 𝙶𝚁𝚄𝙿𝙾 』— ${g}*
 
-『 ✅ \`1\` 』— Aprovar entrada
-『 ❌ \`2\` 』— Recusar entrada
+> *『 ✅ 1 』— Aprovar entrada*
+> *『 ❌ 2 』— Recusar entrada*
 
 > *Um administrador deve responder esta mensagem com 1 ou 2.*`
 }
@@ -679,16 +673,16 @@ exports.solicitacaoRespondida = (u, a, ok) => {
 return ok
 ? `-  \`𝙽𝙾𝚅𝙾 𝙼𝙴𝙼𝙱𝚁𝙾 𝙰𝙿𝚁𝙾𝚅𝙰𝙳𝙾\` 🎉
 
-『 👤 \`𝙼𝙴𝙼𝙱𝚁𝙾\` 』— @${u}
-『 🛡️ \`𝙰𝙿𝚁𝙾𝚅𝙰𝙳𝙾 𝙿𝙾𝚁\` 』— @${a}
-『 ✅ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Entrada autorizada com sucesso.
+> *『 👤 𝙼𝙴𝙼𝙱𝚁𝙾 』— @${u}*
+> *『 🛡️ 𝙰𝙿𝚁𝙾𝚅𝙰𝙳𝙾 𝙿𝙾𝚁 』— @${a}*
+> *『 ✅ 𝚂𝚃𝙰𝚃𝚄𝚂 』— Entrada autorizada com sucesso.*
 
 > *Seja bem-vindo(a) ao grupo, @${u}! Esperamos que aproveite e respeite as regras. 🧊✨*`
 : `-  \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝚁𝙴𝙲𝚄𝚂𝙰𝙳𝙰\` ❌
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${u}
-『 🛡️ \`𝚁𝙴𝙲𝚄𝚂𝙰𝙳𝙾 𝙿𝙾𝚁\` 』— @${a}
-『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Solicitação de entrada recusada.
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${u}*
+> *『 🛡️ 𝚁𝙴𝙲𝚄𝚂𝙰𝙳𝙾 𝙿𝙾𝚁 』— @${a}*
+> *『 ❌ 𝚂𝚃𝙰𝚃𝚄𝚂 』— Solicitação de entrada recusada.*
 
 > *A solicitação de @${u} não foi aprovada pela administração.*`
 }
@@ -696,8 +690,8 @@ return ok
 exports.solicitacaoIndisponivel = u => {
 return `-  \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝙸𝙽𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻\` ⚠️
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${u}
-『 ⚠️ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Esta solicitação não está mais pendente.
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${u}*
+> *『 ⚠️ 𝚂𝚃𝙰𝚃𝚄𝚂 』— Esta solicitação não está mais pendente.*
 
 > *Ela pode ter sido aprovada, recusada ou cancelada anteriormente.*`
 }
@@ -1456,69 +1450,69 @@ return `- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙰𝚂 𝙵𝙸𝙶𝚄𝚁𝙸𝙽𝙷�
 exports.getUsuarioUso = ({ prefix, command }) => {
 return `- 🌪️ \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 𝙽𝙰̃𝙾 𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙳𝙾\`
 
-『 \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙰̃𝙾\` 』— Marque um usuário ou digite o número.
-『 \`𝙴𝚇𝙴𝙼𝙿𝙻𝙾\` 』— ${prefix + command} 5511999999999`
+> *『 𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙰̃𝙾 』— Marque um usuário ou digite o número.*
+> *『 𝙴𝚇𝙴𝙼𝙿𝙻𝙾 』— ${prefix + command} 5511999999999*`
 }
 
 exports.getBioCarregando = () => {
 return `- ✨ \`𝙱𝚄𝚂𝙲𝙰𝙽𝙳𝙾 𝙱𝙸𝙾\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Aguarde enquanto busco a biografia do usuário.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Aguarde enquanto busco a biografia do usuário.*`
 }
 
 exports.getBioResultado = ({ numero, bio }) => {
 return `- 🗿 \`𝙱𝙸𝙾𝙶𝚁𝙰𝙵𝙸𝙰 𝙳𝙾 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\`
 
-『 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${numero}
-『 \`𝙱𝙸𝙾\` 』— ${bio}`
+> *『 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${numero}*
+> *『 𝙱𝙸𝙾 』— ${bio}*`
 }
 
 exports.getPerfilCarregando = () => {
 return `- 🙇‍♂️ \`𝙱𝚄𝚂𝙲𝙰𝙽𝙳𝙾 𝙿𝙴𝚁𝙵𝙸𝙻\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Aguarde enquanto busco a foto do usuário.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Aguarde enquanto busco a foto do usuário.*`
 }
 
 exports.getPerfilResultado = ({ numero, prefix }) => {
 return `- ⚡ \`𝙿𝙴𝚁𝙵𝙸𝙻 𝙳𝙾 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\`
 
-『 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${numero}
-『 \`𝙱𝙸𝙾𝙶𝚁𝙰𝙵𝙸𝙰\` 』— Use ${prefix}getbio @${numero}
-『 \`𝙱𝙰𝙽𝙽𝙴𝚁\` 』— Use ${prefix}getbanner @${numero}`
+> *『 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${numero}*
+> *『 𝙱𝙸𝙾𝙶𝚁𝙰𝙵𝙸𝙰 』— Use ${prefix}getbio @${numero}*
+> *『 𝙱𝙰𝙽𝙽𝙴𝚁 』— Use ${prefix}getbanner @${numero}*`
 }
 
 exports.getBannerCarregando = () => {
 return `- 🖼️ \`𝙱𝚄𝚂𝙲𝙰𝙽𝙳𝙾 𝙱𝙰𝙽𝙽𝙴𝚁\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Aguarde enquanto busco o banner do usuário.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Aguarde enquanto busco o banner do usuário.*`
 }
 
 exports.getBannerResultado = ({ numero }) => {
 return `- 🖼️ \`𝙱𝙰𝙽𝙽𝙴𝚁 𝙳𝙾 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\`
 
-『 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${numero}
-『 \`𝙾𝚁𝙸𝙶𝙴𝙼\` 』— WhatsApp Business`
+> *『 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${numero}*
+> *『 𝙾𝚁𝙸𝙶𝙴𝙼 』— WhatsApp Business*`
 }
 
 exports.getBannerNaoEncontrado = ({ numero }) => {
 return `- ❌ \`𝙱𝙰𝙽𝙽𝙴𝚁 𝙽𝙰̃𝙾 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙾\`
 
-『 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${numero}
-『 \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙰̃𝙾\` 』— Esse usuário não possui WhatsApp Business.`
+> *『 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${numero}*
+> *『 𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙰̃𝙾 』— Esse usuário não possui WhatsApp Business.*`
 }
 
 exports.funcaoUsoSimples = (prefix, command) => {
 return `- ⚙️ \`𝙲𝙾𝙽𝙵𝙸𝙶𝚄𝚁𝙰𝙲̧𝙰̃𝙾\`
 
-『 ✅ \`𝙰𝚃𝙸𝚅𝙰𝚁\` 』— ${prefix}${command} 1
-『 ❌ \`𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁\` 』— ${prefix}${command} 0`
+> *『 ✅ 𝙰𝚃𝙸𝚅𝙰𝚁 』— ${prefix}${command} 1*
+> *『 ❌ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 』— ${prefix}${command} 0*`
 }
 
 exports.funcaoAlterada = (nome, ativa) => {
 return `- ${ativa ? '✅' : '❌'} \`${nome}\`
 
-『 📌 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${ativa ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'}
-『 👥 \`𝙶𝚁𝚄𝙿𝙾\` 』— ᴄᴏɴғɪɢᴜʀᴀᴄ̧ᴀ̃ᴏ ᴀᴛᴜᴀʟɪᴢᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ.`
+> *『 📌 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${ativa ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'}*
+> *『 👥 𝙶𝚁𝚄𝙿𝙾 』— ᴄᴏɴғɪɢᴜʀᴀᴄ̧ᴀ̃ᴏ ᴀᴛᴜᴀʟɪᴢᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ.*`
 }
 
 exports.dddUso = (prefix, command) => {
@@ -1602,44 +1596,44 @@ return `- ✅ \`𝙻𝙴𝙶𝙴𝙽𝙳𝙰 𝙳𝙾 𝙱𝙴𝙼-𝚅𝙸𝙽�
 exports.usologo = (prefix, command) => {
 return `- 🎨 \`𝙲𝚁𝙸𝙰𝙳𝙾𝚁 𝙳𝙴 𝙻𝙾𝙶𝙾\`
 
-『 \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾\` 』— ${prefix}${command}
-『 \`𝙴𝚇𝙴𝙼𝙿𝙻𝙾\` 』— ${prefix}${command} Tokito Bot
-『 \`𝙰𝚅𝙸𝚂𝙾\` 』— Digite o texto que será colocado na logo.`
+> *『 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 』— ${prefix}${command}*
+> *『 𝙴𝚇𝙴𝙼𝙿𝙻𝙾 』— ${prefix}${command} Tokito Bot*
+> *『 𝙰𝚅𝙸𝚂𝙾 』— Digite o texto que será colocado na logo.*`
 }
 
 exports.usodupla = (prefix, command) => {
 return `- 🎨 \`𝙻𝙾𝙶𝙾 𝙲𝙾𝙼 𝙳𝙾𝙸𝚂 𝚃𝙴𝚇𝚃𝙾𝚂\`
 
-『 \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾\` 』— ${prefix}${command}
-『 \`𝙴𝚇𝙴𝙼𝙿𝙻𝙾\` 』— ${prefix}${command} Tokito|Bot
-『 \`𝚂𝙴𝙿𝙰𝚁𝙰𝙳𝙾𝚁\` 』— Use o símbolo | entre os dois textos.`
+> *『 𝙲𝙾𝙼𝙰𝙽𝙳𝙾 』— ${prefix}${command}*
+> *『 𝙴𝚇𝙴𝙼𝙿𝙻𝙾 』— ${prefix}${command} Tokito|Bot*
+> *『 𝚂𝙴𝙿𝙰𝚁𝙰𝙳𝙾𝚁 』— Use o símbolo | entre os dois textos.*`
 }
 
 exports.logofeita = command => {
 return `- 🎨 \`𝙻𝙾𝙶𝙾 𝙲𝚁𝙸𝙰𝙳𝙰\`
 
-『 \`𝙴𝙵𝙴𝙸𝚃𝙾\` 』— ${command}
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Criada com sucesso ✅`
+> *『 𝙴𝙵𝙴𝙸𝚃𝙾 』— ${command}*
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Criada com sucesso ✅*`
 }
 
 exports.bnBusca = (tipo, numero) => {
 return `- 🔎 \`𝙿𝙴𝚂𝚀𝚄𝙸𝚂𝙰𝙽𝙳𝙾\`
 
-『 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${numero}
-『 \`𝙵𝙸𝙲𝙷𝙰\` 』— ${tipo}
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Aguarde o resultado...`
+> *『 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${numero}*
+> *『 𝙵𝙸𝙲𝙷𝙰 』— ${tipo}*
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Aguarde o resultado...*`
 }
 
 exports.bnResultado = (emoji, titulo, numero, tipo, valor) => {
 return `- ${emoji} \`${titulo}\`
 
-『 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${numero}
-『 \`𝙿𝙴𝚁𝙶𝚄𝙽𝚃𝙰\` 』— O quanto esse usuário pode ser ${tipo}?
-『 \`𝚁𝙴𝚂𝚄𝙻𝚃𝙰𝙳𝙾\` 』— ${valor}%`
+> *『 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${numero}*
+> *『 𝙿𝙴𝚁𝙶𝚄𝙽𝚃𝙰 』— O quanto esse usuário pode ser ${tipo}?*
+> *『 𝚁𝙴𝚂𝚄𝙻𝚃𝙰𝙳𝙾 』— ${valor}%*`
 }
 
 exports.bnRank = (emoji, titulo, itens) => {
-const lista = itens.map(item => `『 \`${item.posicao}°\` 』— ${item.valor}% • @${item.numero}`).join('\n')
+const lista = itens.map(item => `> *『 ${item.posicao}° 』— ${item.valor}% • @${item.numero}*`).join('\n')
 return `- ${emoji} \`${titulo}\`
 
 ${lista}`
@@ -1648,166 +1642,185 @@ ${lista}`
 exports.afkAtivado = (motivo, prefix) => {
 return `- 💤 \`𝙰𝙵𝙺 𝙰𝚃𝙸𝚅𝙰𝙳𝙾\`
 
-『 \`𝙼𝙾𝚃𝙸𝚅𝙾\` 』— ${motivo}
-『 \`𝚅𝙾𝙻𝚃𝙰𝚁\` 』— Use ${prefix}on ou apenas mande uma mensagem no grupo.`
+> *『 𝙼𝙾𝚃𝙸𝚅𝙾 』— ${motivo}*
+> *『 𝚅𝙾𝙻𝚃𝙰𝚁 』— Use ${prefix}on ou apenas mande uma mensagem no grupo.*`
 }
 
 exports.afkNaoAtivo = () => {
 return `- ⚠️ \`𝙰𝙵𝙺\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Você não está marcado como ausente.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Você não está marcado como ausente.*`
 }
 
 exports.afkAviso = (jid, motivo, tempo) => {
 return `- 💤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 𝙰𝚄𝚂𝙴𝙽𝚃𝙴\`
 
-『 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${String(jid).split('@')[0]}
-『 \`𝙼𝙾𝚃𝙸𝚅𝙾\` 』— ${motivo || 'Sem motivo especificado'}
-『 \`𝚃𝙴𝙼𝙿𝙾\` 』— ${tempo}`
+> *『 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${String(jid).split('@')[0]}*
+> *『 𝙼𝙾𝚃𝙸𝚅𝙾 』— ${motivo || 'Sem motivo especificado'}*
+> *『 𝚃𝙴𝙼𝙿𝙾 』— ${tempo}*`
 }
 
 exports.afkVoltou = (jid, tempo) => {
 return `- 👋 \`𝙱𝙴𝙼-𝚅𝙸𝙽𝙳𝙾 𝙳𝙴 𝚅𝙾𝙻𝚃𝙰\`
 
-『 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${String(jid).split('@')[0]}
-『 \`𝙰𝚄𝚂𝙴𝙽𝚃𝙴 𝙿𝙾𝚁\` 』— ${tempo}
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Sua ausência foi removida automaticamente.`
+> *『 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${String(jid).split('@')[0]}*
+> *『 𝙰𝚄𝚂𝙴𝙽𝚃𝙴 𝙿𝙾𝚁 』— ${tempo}*
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Sua ausência foi removida automaticamente.*`
 }
 
 exports.namoroUso = (prefix, command) => {
 return `- 💍 \`𝙿𝙴𝙳𝙸𝙳𝙾 𝙳𝙴 𝙽𝙰𝙼𝙾𝚁𝙾\`
 
-『 \`𝚄𝚂𝙾\` 』— ${prefix}${command} @usuario
-『 \`𝙴𝚇𝙴𝙼𝙿𝙻𝙾\` 』— Marque a pessoa que você quer pedir em namoro.`
+> *『 𝚄𝚂𝙾 』— ${prefix}${command} @usuario*
+> *『 𝙴𝚇𝙴𝙼𝙿𝙻𝙾 』— Marque a pessoa que você quer pedir em namoro.*`
 }
 
-exports.namoroMesmo = () => `- ❌ \`𝙽𝙰𝙼𝙾𝚁𝙾\`\n\n『 \`𝙰𝚅𝙸𝚂𝙾\` 』— Você não pode pedir namoro para si mesmo.`
+exports.namoroMesmo = () => {
+return `- ❌ \`𝙽𝙰𝙼𝙾𝚁𝙾\`
 
-exports.namoroOcupado = jid => `- 💔 \`𝙽𝙰𝙼𝙾𝚁𝙾\`\n\n『 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${String(jid).split('@')[0]}\n『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Já está em um relacionamento.`
+> *『 ᴀᴠɪsᴏ 』— ᴠᴏᴄᴇ̂ ɴᴀ̃ᴏ ᴘᴏᴅᴇ ᴘᴇᴅɪʀ ɴᴀᴍᴏʀᴏ ᴘᴀʀᴀ sɪ ᴍᴇsᴍᴏ.*`
+}
 
-exports.namoroPendente = jid => `- 💌 \`𝙿𝙴𝙳𝙸𝙳𝙾 𝙿𝙴𝙽𝙳𝙴𝙽𝚃𝙴\`\n\n『 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${String(jid).split('@')[0]}\n『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Você já enviou um pedido para essa pessoa.`
+exports.namoroOcupado = jid => {
+return `- 💔 \`𝙽𝙰𝙼𝙾𝚁𝙾\`
 
-// ===== NAMORO =====
+> *『 @${String(jid).split('@')[0]} 』— ᴊᴀ́ ᴇsᴛᴀ́ ᴇᴍ ᴜᴍ ʀᴇʟᴀᴄɪᴏɴᴀᴍᴇɴᴛᴏ.*`
+}
+
+exports.namoroPendente = jid => {
+return `- 💌 \`𝙿𝙴𝙳𝙸𝙳𝙾 𝙿𝙴𝙽𝙳𝙴𝙽𝚃𝙴\`
+
+> *『 @${String(jid).split('@')[0]} 』— ᴠᴏᴄᴇ̂ ᴊᴀ́ ᴇɴᴠɪᴏᴜ ᴜᴍ ᴘᴇᴅɪᴅᴏ ᴘᴀʀᴀ ᴇssᴀ ᴘᴇssᴏᴀ.*`
+}
+
 exports.namoroSemPedido = () => {
 return `- ⚠️ \`𝙿𝙴𝙳𝙸𝙳𝙾\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Não encontrei esse pedido de namoro para você.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Não encontrei esse pedido de namoro para você.*`
 }
 
 exports.namoroIndisponivel = () => {
 return `- 💔 \`𝙽𝙰𝙼𝙾𝚁𝙾\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Um dos usuários já está em outro relacionamento.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Um dos usuários já está em outro relacionamento.*`
 }
 
 exports.namoroAceito = (a, b) => {
 return `- 💖 \`𝙿𝙴𝙳𝙸𝙳𝙾 𝙰𝙲𝙴𝙸𝚃𝙾\`
 
-『 \`𝙲𝙰𝚂𝙰𝙻\` 』— @${String(a).split('@')[0]} + @${String(b).split('@')[0]}
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Agora vocês estão namorando. 💙`
+> *『 𝙲𝙰𝚂𝙰𝙻 』— @${String(a).split('@')[0]} + @${String(b).split('@')[0]}*
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Agora vocês estão namorando. 💙*`
 }
 
 exports.namoroRecusado = (a, b) => {
 return `- 💔 \`𝙿𝙴𝙳𝙸𝙳𝙾 𝚁𝙴𝙲𝚄𝚂𝙰𝙳𝙾\`
 
-『 \`𝙳𝙴\` 』— @${String(a).split('@')[0]}
-『 \`𝙿𝙾𝚁\` 』— @${String(b).split('@')[0]}`
+> *『 𝙳𝙴 』— @${String(a).split('@')[0]}*
+> *『 𝙿𝙾𝚁 』— @${String(b).split('@')[0]}*`
 }
 
 exports.namoroSemEnvio = () => {
 return `- ⚠️ \`𝙿𝙴𝙳𝙸𝙳𝙾\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Você não possui pedido de namoro enviado.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Você não possui pedido de namoro enviado.*`
 }
 
 exports.namoroCancelado = () => {
 return `- ✅ \`𝙿𝙴𝙳𝙸𝙳𝙾 𝙲𝙰𝙽𝙲𝙴𝙻𝙰𝙳𝙾\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Seu pedido de namoro foi cancelado.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Seu pedido de namoro foi cancelado.*`
 }
 
 exports.namoroSolteiro = () => {
 return `- 💙 \`𝙽𝙰𝙼𝙾𝚁𝙾\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Você não está namorando ninguém.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Você não está namorando ninguém.*`
 }
 
 exports.namoroTerminar = prefix => {
 return `- 💔 \`𝚃𝙴𝚁𝙼𝙸𝙽𝙰𝚁 𝙽𝙰𝙼𝙾𝚁𝙾\`
 
-『 \`𝙲𝙾𝙽𝙵𝙸𝚁𝙼𝙰𝚁\` 』— ${prefix}terminar 1`
+> *『 𝙲𝙾𝙽𝙵𝙸𝚁𝙼𝙰𝚁 』— ${prefix}terminar 1*`
 }
 
 exports.namoroTerminou = (a, b) => {
 return `- 💔 \`𝙽𝙰𝙼𝙾𝚁𝙾 𝙵𝙸𝙽𝙰𝙻𝙸𝚉𝙰𝙳𝙾\`
 
-『 \`𝙲𝙰𝚂𝙰𝙻\` 』— @${String(a).split('@')[0]} + @${String(b).split('@')[0]}
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— O relacionamento chegou ao fim.`
+> *『 𝙲𝙰𝚂𝙰𝙻 』— @${String(a).split('@')[0]} + @${String(b).split('@')[0]}*
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— O relacionamento chegou ao fim.*`
 }
 
 exports.namoroCasal = (a, b, dias) => {
 return `- 💞 \`𝙼𝙴𝚄 𝙲𝙰𝚂𝙰𝙻\`
 
-『 \`𝙿𝙴𝚂𝚂𝙾𝙰 𝟷\` 』— @${String(a).split('@')[0]}
-『 \`𝙿𝙴𝚂𝚂𝙾𝙰 𝟸\` 』— @${String(b).split('@')[0]}
-『 \`𝚃𝙴𝙼𝙿𝙾\` 』— ${dias} dia(s)`
+> *『 𝙿𝙴𝚂𝚂𝙾𝙰 𝟷 』— @${String(a).split('@')[0]}*
+> *『 𝙿𝙴𝚂𝚂𝙾𝙰 𝟸 』— @${String(b).split('@')[0]}*
+> *『 𝚃𝙴𝙼𝙿𝙾 』— ${dias} dia(s)*`
 }
 
 exports.namoroSemCasais = () => {
 return `- 💞 \`𝙲𝙰𝚂𝙰𝙸𝚂\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Ainda não há casais registrados neste grupo.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— Ainda não há casais registrados neste grupo.*`
 }
 
 exports.namoroLista = casais => {
-const lista = casais.map((item, i) => `『 \`${i + 1}°\` 』— @${String(item.a).split('@')[0]} + @${String(item.b).split('@')[0]}`).join('\n')
+const lista = casais.map((item, i) => `> *『 ${i + 1}° 』— @${String(item.a).split('@')[0]} + @${String(item.b).split('@')[0]}*`).join('\n')
 return `- 💞 \`𝙲𝙰𝚂𝙰𝙸𝚂 𝙳𝙾 𝙶𝚁𝚄𝙿𝙾\`
 
 ${lista}`
 }
-// ===== SÓ ADM =====
+
 exports.soadmUso = (prefix, command) => {
 return `- 🛡️ \`𝚂𝙾́ 𝙰𝙳𝙼\`
 
-『 \`𝙰𝚃𝙸𝚅𝙰𝚁\` 』— ${prefix}${command} 1
-『 \`𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁\` 』— ${prefix}${command} 0`
+> *『 𝙰𝚃𝙸𝚅𝙰𝚁 』— ${prefix}${command} 1*
+> *『 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝚁 』— ${prefix}${command} 0*`
 }
 
 exports.soadmJaAtivo = () => {
 return `- ⚠️ \`𝚂𝙾́ 𝙰𝙳𝙼\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— O modo só ADM já está ativado.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— O modo só ADM já está ativado.*`
 }
 
 exports.soadmJaInativo = () => {
 return `- ⚠️ \`𝚂𝙾́ 𝙰𝙳𝙼\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— O modo só ADM já está desativado.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— O modo só ADM já está desativado.*`
 }
 
 exports.soadmAlterado = ativo => {
 return `- ${ativo ? '✅' : '❌'} \`𝚂𝙾́ 𝙰𝙳𝙼\`
 
-『 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${ativo ? 'Ativado' : 'Desativado'} com sucesso neste grupo.`
+> *『 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${ativo ? 'Ativado' : 'Desativado'} com sucesso neste grupo.*`
 }
 
 exports.soadmBloqueado = () => {
 return `- 🛡️ \`𝚂𝙾́ 𝙰𝙳𝙼\`
 
-『 \`𝙰𝚅𝙸𝚂𝙾\` 』— Neste grupo, somente administradores podem usar comandos do bot.`
+> *『 𝙰𝚅𝙸𝚂𝙾 』— Neste grupo, somente administradores podem usar comandos do bot.*`
 }
-// ===== SISTEMAS MODULARES NOVOS =====
-// ===== INFORMAÇÕES DE COMANDOS =====
 exports.infoComando = ({ nome, aliases = [], categoria = 'outros', descricao = 'Sem descrição.', uso = '', permissao = 'Todos', requisitos = '' }) => {
-return `- ℹ️ \`𝙸𝙽𝙵𝙾 𝙳𝙾 𝙲𝙾𝙼𝙰𝙽𝙳𝙾\`
+let texto = `- ℹ️ \`𝙸𝙽𝙵𝙾 𝙳𝙾 𝙲𝙾𝙼𝙰𝙽𝙳𝙾\`
 
-『 🧩 \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾\` 』— ${nome}
-『 📂 \`𝙲𝙰𝚃𝙴𝙶𝙾𝚁𝙸𝙰\` 』— ${categoria}
-『 📝 \`𝙳𝙴𝚂𝙲𝚁𝙸𝙲̧𝙰̃𝙾\` 』— ${descricao}
-『 ⚙️ \`𝚄𝚂𝙾\` 』— ${uso || nome}
-『 👑 \`𝙿𝙴𝚁𝙼𝙸𝚂𝚂𝙰̃𝙾\` 』— ${permissao}
-${requisitos ? `『 🔐 \`𝚁𝙴𝚀𝚄𝙸𝚂𝙸𝚃𝙾𝚂\` 』— ${requisitos}
-` : ''}『 🔁 \`𝙰𝙻𝙸𝙰𝚂\` 』— ${aliases.length ? aliases.join(', ') : 'Nenhum'}`
+> *『 ${nome} 』— ᴄᴏᴍᴀɴᴅᴏ.*
+> *『 ${categoria} 』— ᴄᴀᴛᴇɢᴏʀɪᴀ.*
+> *『 ${descricao} 』— ᴅᴇsᴄʀɪᴄ̧ᴀ̃ᴏ.*
+> *『 ${uso || nome} 』— ᴍᴏᴅᴏ ᴅᴇ ᴜsᴏ.*
+> *『 ${permissao} 』— ᴘᴇʀᴍɪssᴀ̃ᴏ.*`
+
+if (requisitos) {
+texto += `
+
+> *『 ${requisitos} 』— ʀᴇǫᴜɪsɪᴛᴏs.*`
+}
+
+texto += `
+
+> *『 ${aliases.length ? aliases.join(', ') : 'Nenhum'} 』— ᴀʟɪᴀs.*`
+
+return texto
 }
 
 exports.infoUso = prefix => {
@@ -1825,13 +1838,12 @@ return `- ❌ \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙽𝙰̃𝙾 𝙴𝙽𝙲𝙾𝙽
 exports.totalcmd = ({ canonicos, aliases, total, NomeDoBot, prefix }) => {
 return `- 📊 \`𝚃𝙾𝚃𝙰𝙻 𝙳𝙴 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂\`
 
-『 🧩 \`𝙼𝙾́𝙳𝚄𝙻𝙾𝚂\` 』— ${canonicos}
-『 🔁 \`𝙰𝙻𝙸𝙰𝚂\` 』— ${aliases}
-『 📦 \`𝚃𝙾𝚃𝙰𝙻 𝚄𝚃𝙸𝙻𝙸𝚉𝙰́𝚅𝙴𝙻\` 』— ${total}
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 ⚙️ \`𝙿𝚁𝙴𝙵𝙸𝚇𝙾\` 』— ${prefix}`
+> *『 🧩 𝙼𝙾́𝙳𝚄𝙻𝙾𝚂 』— ${canonicos}*
+> *『 🔁 𝙰𝙻𝙸𝙰𝚂 』— ${aliases}*
+> *『 📦 𝚃𝙾𝚃𝙰𝙻 𝚄𝚃𝙸𝙻𝙸𝚉𝙰́𝚅𝙴𝙻 』— ${total}*
+> *『 🤖 𝙱𝙾𝚃 』— ${NomeDoBot}*
+> *『 ⚙️ 𝙿𝚁𝙴𝙵𝙸𝚇𝙾 』— ${prefix}*`
 }
-// ===== COMANDOS VIP =====
 exports.vipCmdUso = prefix => {
 return `- 💎 \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝚅𝙸𝙿\`
 
@@ -1871,7 +1883,7 @@ return `- ❌ \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙸𝙽𝙴𝚇𝙸𝚂𝚃𝙴�
 exports.vipCmdLista = lista => {
 return `- 💎 \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝚅𝙸𝙿\`
 
-${lista.length ? lista.map((x, i) => `『 ${i + 1} 』— ${x}`).join('\n') : '> *ɴᴇɴʜᴜᴍ ᴄᴏᴍᴀɴᴅᴏ ᴠɪᴘ ᴄᴏɴғɪɢᴜʀᴀᴅᴏ.*'}`
+${lista.length ? lista.map((x, i) => `> *『 ${i + 1} 』— ${x}*`).join('\n') : '> *ɴᴇɴʜᴜᴍ ᴄᴏᴍᴀɴᴅᴏ ᴠɪᴘ ᴄᴏɴғɪɢᴜʀᴀᴅᴏ.*'}`
 }
 
 exports.onlyVipCmd = nome => {
@@ -1879,7 +1891,6 @@ return `- 💎 \`𝙰𝙿𝙴𝙽𝙰𝚂 𝚅𝙸𝙿\`
 
 > *『 ${nome} 』— ᴇssᴇ ᴄᴏᴍᴀɴᴅᴏ ᴇ́ ᴇxᴄʟᴜsɪᴠᴏ ᴘᴀʀᴀ ᴜsᴜᴀ́ʀɪᴏs ᴠɪᴘ.*`
 }
-// ===== BLOQUEIO DE COMANDOS =====
 exports.blockCmdUso = prefix => {
 return `- 🚫 \`𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝚁 𝙲𝙾𝙼𝙰𝙽𝙳𝙾\`
 
@@ -1913,7 +1924,7 @@ return `- ⚠️ \`𝙽𝙰̃𝙾 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳𝙾\`
 exports.blockCmdLista = lista => {
 return `- 🚫 \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳𝙾𝚂\`
 
-${lista.length ? lista.map((x, i) => `『 ${i + 1} 』— ${x}`).join('\n') : '> *ɴᴇɴʜᴜᴍ ᴄᴏᴍᴀɴᴅᴏ ʙʟᴏǫᴜᴇᴀᴅᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ.*'}`
+${lista.length ? lista.map((x, i) => `> *『 ${i + 1} 』— ${x}*`).join('\n') : '> *ɴᴇɴʜᴜᴍ ᴄᴏᴍᴀɴᴅᴏ ʙʟᴏǫᴜᴇᴀᴅᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ.*'}`
 }
 
 exports.blockCmdNegado = nome => {
@@ -1921,7 +1932,6 @@ return `- 🚫 \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳�
 
 > *『 ${nome} 』— ᴏs ᴀᴅᴍɪɴɪsᴛʀᴀᴅᴏʀᴇs ʙʟᴏǫᴜᴇᴀʀᴀᴍ ᴇssᴇ ᴄᴏᴍᴀɴᴅᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ.*`
 }
-// ===== ADVERTÊNCIAS =====
 exports.advUso = prefix => {
 return `- ⚠️ \`𝙰𝙳𝚅𝙴𝚁𝚃𝙴̂𝙽𝙲𝙸𝙰\`
 
@@ -1937,10 +1947,10 @@ return `- ❌ \`𝙰𝙳𝚅\`
 exports.advAplicada = (jid, qtd, limite, motivo, removido = false) => {
 return `- ⚠️ \`𝙰𝙳𝚅𝙴𝚁𝚃𝙴̂𝙽𝙲𝙸𝙰\`
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${String(jid).split('@')[0]}
-『 📊 \`𝙰𝙳𝚅\` 』— ${qtd}/${limite}
-『 📝 \`𝙼𝙾𝚃𝙸𝚅𝙾\` 』— ${motivo}
-${removido ? '『 🚫 `𝚂𝚃𝙰𝚃𝚄𝚂` 』— ʀᴇᴍᴏᴠɪᴅᴏ ᴀᴏ ᴀᴛɪɴɢɪʀ ᴏ ʟɪᴍɪᴛᴇ.' : '『 ✅ `𝚂𝚃𝙰𝚃𝚄𝚂` 』— ᴀᴅᴠᴇʀᴛᴇ̂ɴᴄɪᴀ ʀᴇɢɪsᴛʀᴀᴅᴀ.'}`
+> *『 @${String(jid).split('@')[0]} 』— ᴜsᴜᴀ́ʀɪᴏ.*
+> *『 ${qtd}/${limite} 』— ᴀᴅᴠᴇʀᴛᴇ̂ɴᴄɪᴀs.*
+> *『 ${motivo} 』— ᴍᴏᴛɪᴠᴏ.*
+${removido ? '> *『 🚫 』— ʀᴇᴍᴏᴠɪᴅᴏ ᴀᴏ ᴀᴛɪɴɢɪʀ ᴏ ʟɪᴍɪᴛᴇ.*' : '> *『 ✅ 』— ᴀᴅᴠᴇʀᴛᴇ̂ɴᴄɪᴀ ʀᴇɢɪsᴛʀᴀᴅᴀ.*'}`
 }
 
 exports.delAdvUso = prefix => {
@@ -1964,17 +1974,16 @@ return `- ⚠️ \`𝚂𝙴𝙼 𝙰𝙳𝚅\`
 exports.advLista = lista => {
 return `- ⚠️ \`𝙻𝙸𝚂𝚃𝙰 𝙳𝙴 𝙰𝙳𝚅\`
 
-${lista.length ? lista.map((x, i) => `『 ${i + 1} 』— @${x.jid.split('@')[0]} • ${x.quantidade}/3`).join('\n') : '> *ɴᴇɴʜᴜᴍᴀ ᴀᴅᴠᴇʀᴛᴇ̂ɴᴄɪᴀ ʀᴇɢɪsᴛʀᴀᴅᴀ.*'}`
+${lista.length ? lista.map((x, i) => `> *『 ${i + 1} 』— @${x.jid.split('@')[0]} • ${x.quantidade}/3*`).join('\n') : '> *『 0 』— ɴᴇɴʜᴜᴍᴀ ᴀᴅᴠᴇʀᴛᴇ̂ɴᴄɪᴀ ʀᴇɢɪsᴛʀᴀᴅᴀ.*'}`
 }
 
 exports.advAutomatica = (jid, qtd, motivo) => {
 return `- ⚠️ \`𝙰𝙳𝚅 𝙰𝚄𝚃𝙾𝙼𝙰́𝚃𝙸𝙲𝙰\`
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${String(jid).split('@')[0]}
-『 📊 \`𝙰𝙳𝚅\` 』— ${qtd}/3
-『 📝 \`𝙼𝙾𝚃𝙸𝚅𝙾\` 』— ${motivo}`
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${String(jid).split('@')[0]}*
+> *『 📊 𝙰𝙳𝚅 』— ${qtd}/3*
+> *『 📝 𝙼𝙾𝚃𝙸𝚅𝙾 』— ${motivo}*`
 }
-// ===== MUTE =====
 exports.muteUso = prefix => {
 return `- 🔇 \`𝙼𝚄𝚃𝙴\`
 
@@ -1991,8 +2000,8 @@ return `- ❌ \`𝙼𝚄𝚃𝙴\`
 exports.muteAtivado = (jid, modo) => {
 return `- 🔇 \`𝙼𝚄𝚃𝙴 𝙰𝚃𝙸𝚅𝙰𝙳𝙾\`
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${String(jid).split('@')[0]}
-『 ⚙️ \`𝙼𝙾𝙳𝙾\` 』— ${modo === 'ban' ? 'ʀᴇᴍᴏᴠᴇʀ ᴀᴏ ғᴀʟᴀʀ' : 'ᴀᴘᴀɢᴀʀ ᴍᴇɴsᴀɢᴇɴs'}`
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${String(jid).split('@')[0]}*
+> *『 ⚙️ 𝙼𝙾𝙳𝙾 』— ${modo === 'ban' ? 'ʀᴇᴍᴏᴠᴇʀ ᴀᴏ ғᴀʟᴀʀ' : 'ᴀᴘᴀɢᴀʀ ᴍᴇɴsᴀɢᴇɴs'}*`
 }
 
 exports.desmuteUso = prefix => {
@@ -2016,7 +2025,7 @@ return `- ⚠️ \`𝙽𝙰̃𝙾 𝙴𝚂𝚃𝙰́ 𝙼𝚄𝚃𝙰𝙳𝙾\`
 exports.muteLista = lista => {
 return `- 🔇 \`𝙻𝙸𝚂𝚃𝙰 𝙳𝙴 𝙼𝚄𝚃𝙴\`
 
-${lista.length ? lista.map((x, i) => `『 ${i + 1} 』— @${String(x.id).split('@')[0]} • ${x.modo}`).join('\n') : '> *ɴɪɴɢᴜᴇ́ᴍ sɪʟᴇɴᴄɪᴀᴅᴏ.*'}`
+${lista.length ? lista.map((x, i) => `> *『 ${i + 1} 』— @${String(x.id).split('@')[0]} • ${x.modo}*`).join('\n') : '> *『 0 』— ɴɪɴɢᴜᴇ́ᴍ sɪʟᴇɴᴄɪᴀᴅᴏ.*'}`
 }
 
 exports.muteBanDisparado = (jid, ok) => {
@@ -2024,7 +2033,6 @@ return `- 🚫 \`𝙼𝚄𝚃𝙴 𝙱𝙰𝙽\`
 
 > *『 @${String(jid).split('@')[0]} 』— ${ok ? 'ғᴏɪ ʀᴇᴍᴏᴠɪᴅᴏ ᴀᴏ ᴛᴇɴᴛᴀʀ ғᴀʟᴀʀ.' : 'ᴛᴇɴᴛᴏᴜ ғᴀʟᴀʀ, ᴍᴀs ɴᴀ̃ᴏ ᴄᴏɴsᴇɢᴜɪ ʀᴇᴍᴏᴠᴇʀ.'}*`
 }
-// ===== MERCADO PAGO =====
 exports.tokenMpUso = prefix => {
 return `- 💳 \`𝙼𝙴𝚁𝙲𝙰𝙳𝙾 𝙿𝙰𝙶𝙾\`
 
@@ -2048,7 +2056,6 @@ return `- 💳 \`𝙿𝙸𝚇 𝙽𝙰̃𝙾 𝙲𝙾𝙽𝙵𝙸𝙶𝚄𝚁�
 
 > *ᴏ ᴅᴏɴᴏ ᴀɪɴᴅᴀ ɴᴀ̃ᴏ ᴄᴏɴғɪɢᴜʀᴏᴜ ᴏ ᴛᴏᴋᴇɴ ᴅᴏ ᴍᴇʀᴄᴀᴅᴏ ᴘᴀɢᴏ.*`
 }
-// ===== MODOS RPG / N-COINS =====
 exports.modoRpgUso = prefix => {
 return `- 🐉 \`𝙼𝙾𝙳𝙾 𝚁𝙿𝙶\`
 
@@ -2086,7 +2093,6 @@ return `- 🔐 \`𝚁𝙿𝙶 + 𝙲𝙾𝙸𝙽𝚂\`
 
 > *ᴘᴇᴛ/ᴘᴏᴋᴇ́ᴍᴏɴ ᴘʀᴇᴄɪsᴀᴍ ᴅᴇ ${prefix}modorpg 1 ᴇ ${prefix}modocoins 1.*`
 }
-// ===== MODO IA =====
 exports.modoIaUso = prefix => {
 return `- 🧠 \`𝙼𝙾𝙳𝙾 𝙸𝙰\`
 
@@ -2099,8 +2105,8 @@ return `- 🧠 \`𝙼𝙾𝙳𝙾 𝙸𝙰\`
 exports.modoIaAlterado = (ativo, tipo) => {
 return `- 🧠 \`𝙼𝙾𝙳𝙾 𝙸𝙰\`
 
-『 ⚙️ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${ativo ? 'ᴀᴛɪᴠᴀᴅᴏ' : 'ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'}
-『 ${tipo === 'audio' ? '🎙️' : '⌨️'} \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${tipo}`
+> *『 ⚙️ 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${ativo ? 'ᴀᴛɪᴠᴀᴅᴏ' : 'ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'}*
+> *『 ${tipo === 'audio' ? '🎙️' : '⌨️'} 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— ${tipo}*`
 }
 
 exports.iaFale = () => {
@@ -2114,7 +2120,6 @@ return `- ❌ \`𝙼𝙾𝙳𝙾 𝙸𝙰\`
 
 > *ᴅᴇᴜ ᴜᴍ ᴇʀʀᴏ ᴛᴇɴᴛᴀɴᴅᴏ ᴘᴇɴsᴀʀ ɴɪssᴏ.*`
 }
-// ===== ANTI CANAL =====
 exports.antiCanalUso = prefix => {
 return `- 📡 \`𝙰𝙽𝚃𝙸-𝙲𝙰𝙽𝙰𝙻\`
 
@@ -2133,7 +2138,6 @@ return `- 📡 \`𝙰𝙽𝚃𝙸-𝙲𝙰𝙽𝙰𝙻\`
 
 > *『 @${String(jid).split('@')[0]} 』— ғᴏɪ ʀᴇᴍᴏᴠɪᴅᴏ ᴘᴏʀ ᴇɴᴠɪᴀʀ/ᴇɴᴄᴀᴍɪɴʜᴀʀ ᴜᴍ ᴄᴀɴᴀʟ.*`
 }
-// ===== CARGOS DO GRUPO =====
 exports.serAdmOk = jid => {
 return `- 👑 \`𝚂𝙴𝚁 𝙰𝙳𝙼\`
 
@@ -2145,7 +2149,6 @@ return `- 👤 \`𝚂𝙴𝚁 𝙼𝙴𝙼𝙱𝚁𝙾\`
 
 > *『 @${String(jid).split('@')[0]} 』— ᴀɢᴏʀᴀ ᴇ́ ᴍᴇᴍʙʀᴏ ᴄᴏᴍᴜᴍ.*`
 }
-// ===== ALUGUEL =====
 exports.aluguelModo = ativo => {
 return `- 🏠 \`𝙼𝙾𝙳𝙾 𝙰𝙻𝚄𝙶𝚄𝙴𝙻\`
 
@@ -2167,11 +2170,11 @@ return `- 🛒 \`𝙰𝙻𝚄𝙶𝙰𝚁 𝙱𝙾𝚃\`
 exports.aluguelPedido = (nome, link, planos, prefix) => {
 return `- 🛒 \`𝙰𝙻𝚄𝙶𝚄𝙴𝙻 𝙳𝙾 𝙱𝙾𝚃\`
 
-『 📍 \`𝙶𝚁𝚄𝙿𝙾\` 』— ${nome}
-『 🔗 \`𝙻𝙸𝙽𝙺\` 』— ${link}
+> *『 ${nome} 』— ɢʀᴜᴘᴏ.*
+> *『 ${link} 』— ʟɪɴᴋ.*
 
-${planos.map(p => `『 📦 \`${p.nome}\` 』— R$ ${Number(p.preco).toFixed(2)} • ${p.dias} dias
-> ${prefix}pixalugar ${p.preco}`).join('\n\n')}`
+${planos.map(p => `> *『 ${p.nome} 』— R$ ${Number(p.preco).toFixed(2)} • ${p.dias} dias*
+> *『 ${prefix}pixalugar ${p.preco} 』— ɢᴇʀᴀʀ ᴘᴀɢᴀᴍᴇɴᴛᴏ.*`).join('\n\n')}`
 }
 
 exports.aluguelSemPlanos = () => {
@@ -2195,11 +2198,11 @@ return `- ❌ \`𝙿𝙻𝙰𝙽𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\`
 exports.aluguelPix = (item) => {
 return `- 💳 \`𝙿𝙸𝚇 𝙳𝙾 𝙰𝙻𝚄𝙶𝚄𝙴𝙻\`
 
-『 📦 \`𝙿𝙻𝙰𝙽𝙾\` 』— ${item.plano.nome}
-『 💸 \`𝚅𝙰𝙻𝙾𝚁\` 』— R$ ${Number(item.plano.preco).toFixed(2)}
-『 ⏳ \`𝙳𝚄𝚁𝙰𝙲̧𝙰̃𝙾\` 』— ${item.plano.dias} dias
-『 ⚙️ \`𝙸𝙳\` 』— ${item.id}
-『 🪫 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— aguardando pagamento
+> *『 📦 𝙿𝙻𝙰𝙽𝙾 』— ${item.plano.nome}*
+> *『 💸 𝚅𝙰𝙻𝙾𝚁 』— R$ ${Number(item.plano.preco).toFixed(2)}*
+> *『 ⏳ 𝙳𝚄𝚁𝙰𝙲̧𝙰̃𝙾 』— ${item.plano.dias} dias*
+> *『 ⚙️ 𝙸𝙳 』— ${item.id}*
+> *『 🪫 𝚂𝚃𝙰𝚃𝚄𝚂 』— aguardando pagamento*
 
 > *ᴏ sɪsᴛᴇᴍᴀ ᴠᴇʀɪғɪᴄᴀ ᴀ ᴀᴘʀᴏᴠᴀᴄ̧ᴀ̃ᴏ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀᴍᴇɴᴛᴇ.*`
 }
@@ -2230,16 +2233,16 @@ const h = Math.floor(diff / 3600000) % 24
 const m = Math.floor(diff / 60000) % 60
 return `- 🏠 \`𝙰𝙻𝚄𝙶𝚄𝙴𝙻 𝙰𝚃𝙸𝚅𝙾\`
 
-『 📦 \`𝙿𝙻𝙰𝙽𝙾\` 』— ${g.planoNome || 'Plano'}
-『 📅 \`𝚅𝙴𝙽𝙲𝙴\` 』— ${fim.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}
-『 ⏳ \`𝚁𝙴𝚂𝚃𝙰\` 』— ${d}d ${h}h ${m}m`
+> *『 📦 𝙿𝙻𝙰𝙽𝙾 』— ${g.planoNome || 'Plano'}*
+> *『 📅 𝚅𝙴𝙽𝙲𝙴 』— ${fim.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })}*
+> *『 ⏳ 𝚁𝙴𝚂𝚃𝙰 』— ${d}d ${h}h ${m}m*`
 }
 
 exports.aluguelLista = lista => {
 return `- 🏠 \`𝙰𝙻𝚄𝙶𝚄𝙴́𝙸𝚂\`
 
-${lista.length ? lista.map((g, i) => `『 ${i + 1} 』— ${g.id}
-> ${g.ativo !== false ? '✅ ativo' : '❌ expirado'} • ${g.planoNome || 'Plano'} • ${g.expiraEm ? new Date(g.expiraEm).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }) : 'sem vencimento'}`).join('\n\n') : '> *ɴᴇɴʜᴜᴍ ᴀʟᴜɢᴜᴇʟ ʀᴇɢɪsᴛʀᴀᴅᴏ.*'}`
+${lista.length ? lista.map((g, i) => `> *『 ${i + 1} 』— ${g.id}*
+> *『 ${g.ativo !== false ? '✅ ativo' : '❌ expirado'} 』— ${g.planoNome || 'Plano'} • ${g.expiraEm ? new Date(g.expiraEm).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }) : 'sem vencimento'}*`).join('\n\n') : '> *『 0 』— ɴᴇɴʜᴜᴍ ᴀʟᴜɢᴜᴇʟ ʀᴇɢɪsᴛʀᴀᴅᴏ.*'}`
 }
 
 exports.aluguelRemovido = id => {
@@ -2247,14 +2250,13 @@ return `- 🗑️ \`𝙰𝙻𝚄𝙶𝚄𝙴𝙻 𝚁𝙴𝙼𝙾𝚅𝙸𝙳�
 
 > *『 ${id} 』— ʀᴇᴍᴏᴠɪᴅᴏ ᴅᴏ sɪsᴛᴇᴍᴀ.*`
 }
-// ===== PROTEÇÕES / ADVERTÊNCIAS AUTOMÁTICAS =====
 exports.antiCanalAdv = (jid, qtd, removido = false) => {
 return `- 📡 \`𝙰𝙽𝚃𝙸-𝙲𝙰𝙽𝙰𝙻\`
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${String(jid).split('@')[0]}
-『 ⚠️ \`𝙰𝙳𝚅\` 』— ${qtd}/3
-『 📝 \`𝙼𝙾𝚃𝙸𝚅𝙾\` 』— envio/divulgação de canal
-『 🚫 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${removido ? 'removido ao atingir o limite' : 'mensagem apagada e advertência aplicada'}`
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${String(jid).split('@')[0]}*
+> *『 ⚠️ 𝙰𝙳𝚅 』— ${qtd}/3*
+> *『 📝 𝙼𝙾𝚃𝙸𝚅𝙾 』— envio/divulgação de canal*
+> *『 🚫 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${removido ? 'removido ao atingir o limite' : 'mensagem apagada e advertência aplicada'}*`
 }
 
 exports.aluguelBloqueado = prefix => {
@@ -2266,27 +2268,25 @@ return `- 🏠 \`𝙰𝙻𝚄𝙶𝚄𝙴𝙻 𝙴𝚇𝙿𝙸𝚁𝙰𝙳𝙾\`
 exports.protecaoAdv = (emoji, titulo, jid, qtd, motivo, removido = false) => {
 return `- ${emoji} \`${titulo}\`
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${String(jid).split('@')[0]}
-『 ⚠️ \`𝙰𝙳𝚅\` 』— ${qtd}/3
-『 📝 \`𝙼𝙾𝚃𝙸𝚅𝙾\` 』— ${motivo}
-『 🚫 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${removido ? 'removido ao atingir 3 advertências' : 'mensagem apagada e advertência registrada'}`
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${String(jid).split('@')[0]}*
+> *『 ⚠️ 𝙰𝙳𝚅 』— ${qtd}/3*
+> *『 📝 𝙼𝙾𝚃𝙸𝚅𝙾 』— ${motivo}*
+> *『 🚫 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${removido ? 'removido ao atingir 3 advertências' : 'mensagem apagada e advertência registrada'}*`
 }
 
 exports.advAutomaticaDetalhe = (jid, qtd, motivo, removido = false) => {
 return `- ⚠️ \`𝙰𝙳𝚅 𝙰𝚄𝚃𝙾𝙼𝙰́𝚃𝙸𝙲𝙰\`
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${String(jid).split('@')[0]}
-『 📊 \`𝙰𝙳𝚅\` 』— ${qtd}/3
-『 📝 \`𝙼𝙾𝚃𝙸𝚅𝙾\` 』— ${motivo}
-『 🚫 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${removido ? 'removido ao atingir o limite' : 'advertência automática registrada'}`
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${String(jid).split('@')[0]}*
+> *『 📊 𝙰𝙳𝚅 』— ${qtd}/3*
+> *『 📝 𝙼𝙾𝚃𝙸𝚅𝙾 』— ${motivo}*
+> *『 🚫 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${removido ? 'removido ao atingir o limite' : 'advertência automática registrada'}*`
 }
-// ===== RPG / N-COINS / PET / POKÉMON =====
-// ===== N-COINS =====
 exports.coinsSaldo = (jid, saldo) => {
 return `- 🪙 \`𝙽-𝙲𝙾𝙸𝙽𝚂\`
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${String(jid).split('@')[0]}
-『 💰 \`𝚂𝙰𝙻𝙳𝙾\` 』— ${Number(saldo || 0).toLocaleString('pt-BR')} N-Coins`
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${String(jid).split('@')[0]}*
+> *『 💰 𝚂𝙰𝙻𝙳𝙾 』— ${Number(saldo || 0).toLocaleString('pt-BR')} N-Coins*`
 }
 
 exports.coinsCooldown = s => {
@@ -2298,9 +2298,9 @@ return `- ⏳ \`𝙰𝙶𝚄𝙰𝚁𝙳𝙴\`
 exports.coinsMinerado = (jid, g, total) => {
 return `- ⛏️ \`𝙼𝙸𝙽𝙴𝚁𝙰𝙲̧𝙰̃𝙾\`
 
-『 👤 』— @${String(jid).split('@')[0]}
-『 💎 \`𝙶𝙰𝙽𝙷𝙾\` 』— +${g} N-Coins
-『 💰 \`𝚂𝙰𝙻𝙳𝙾\` 』— ${total}`
+> *『 👤 』— @${String(jid).split('@')[0]}*
+> *『 💎 𝙶𝙰𝙽𝙷𝙾 』— +${g} N-Coins*
+> *『 💰 𝚂𝙰𝙻𝙳𝙾 』— ${total}*`
 }
 
 exports.coinsDoarUso = p => {
@@ -2318,23 +2318,23 @@ return `- ❌ \`𝙳𝙾𝙰𝙲̧𝙰̃𝙾\`
 exports.coinsSemSaldo = (v, s) => {
 return `- 💸 \`𝚂𝙰𝙻𝙳𝙾 𝙸𝙽𝚂𝚄𝙵𝙸𝙲𝙸𝙴𝙽𝚃𝙴\`
 
-『 💰 \`𝙽𝙴𝙲𝙴𝚂𝚂𝙰́𝚁𝙸𝙾\` 』— ${v}
-『 🪙 \`𝚂𝙴𝚄 𝚂𝙰𝙻𝙳𝙾\` 』— ${s}`
+> *『 💰 𝙽𝙴𝙲𝙴𝚂𝚂𝙰́𝚁𝙸𝙾 』— ${v}*
+> *『 🪙 𝚂𝙴𝚄 𝚂𝙰𝙻𝙳𝙾 』— ${s}*`
 }
 
 exports.coinsDoado = (a, b, v, s) => {
 return `- ✅ \`𝚃𝚁𝙰𝙽𝚂𝙵𝙴𝚁𝙴̂𝙽𝙲𝙸𝙰\`
 
-『 👤 \`𝙳𝙴\` 』— @${a.split('@')[0]}
-『 👤 \`𝙿𝙰𝚁𝙰\` 』— @${b.split('@')[0]}
-『 🪙 \`𝚅𝙰𝙻𝙾𝚁\` 』— ${v}
-『 💰 \`𝚂𝙰𝙻𝙳𝙾\` 』— ${s}`
+> *『 👤 𝙳𝙴 』— @${a.split('@')[0]}*
+> *『 👤 𝙿𝙰𝚁𝙰 』— @${b.split('@')[0]}*
+> *『 🪙 𝚅𝙰𝙻𝙾𝚁 』— ${v}*
+> *『 💰 𝚂𝙰𝙻𝙳𝙾 』— ${s}*`
 }
 
 exports.coinsRank = l => {
 return `- 🏆 \`𝚁𝙰𝙽𝙺 𝙽-𝙲𝙾𝙸𝙽𝚂\`
 
-${l.length ? l.map((x, i) => `『 ${i + 1}° 』— @${x.jid.split('@')[0]} • ${x.valor.toLocaleString('pt-BR')}`).join('\n') : '> *sem usuários ainda.*'}`
+${l.length ? l.map((x, i) => `> *『 ${i + 1}° 』— @${x.jid.split('@')[0]} • ${x.valor.toLocaleString('pt-BR')}*`).join('\n') : '> *sem usuários ainda.*'}`
 }
 
 exports.coinsGerenciarUso = (p, c) => {
@@ -2348,21 +2348,20 @@ return `- ${r ? '➖' : '➕'} \`𝙽-𝙲𝙾𝙸𝙽𝚂\`
 
 > *@${j.split('@')[0]} agora possui ${s} N-Coins.*`
 }
-// ===== LEVEL =====
 exports.levelPerfil = (j, u, pos) => {
 return `- 🎖️ \`𝙻𝙴𝚅𝙴𝙻\`
 
-『 👤 』— @${j.split('@')[0]}
-『 ⭐ \`𝙻𝙴𝚅𝙴𝙻\` 』— ${u.level}
-『 🧠 \`𝚇𝙿\` 』— ${u.xp}
-『 🎖️ \`𝙿𝙰𝚃𝙴𝙽𝚃𝙴\` 』— ${u.patente}
-『 🏆 \`𝚁𝙰𝙽𝙺\` 』— #${pos || '-'}`
+> *『 👤 』— @${j.split('@')[0]}*
+> *『 ⭐ 𝙻𝙴𝚅𝙴𝙻 』— ${u.level}*
+> *『 🧠 𝚇𝙿 』— ${u.xp}*
+> *『 🎖️ 𝙿𝙰𝚃𝙴𝙽𝚃𝙴 』— ${u.patente}*
+> *『 🏆 𝚁𝙰𝙽𝙺 』— #${pos || '-'}*`
 }
 
 exports.levelRank = l => {
 return `- 🏆 \`𝚁𝙰𝙽𝙺 𝙻𝙴𝚅𝙴𝙻\`
 
-${l.length ? l.map((x, i) => `『 ${i + 1}° 』— @${x.jid.split('@')[0]} • ${x.valor} XP • ${x.u.patente}`).join('\n') : '> *sem XP ainda.*'}`
+${l.length ? l.map((x, i) => `> *『 ${i + 1}° 』— @${x.jid.split('@')[0]} • ${x.valor} XP • ${x.u.patente}*`).join('\n') : '> *『 0 』— sᴇᴍ XP ᴀɪɴᴅᴀ.*'}`
 }
 
 exports.levelUp = (j, u) => {
@@ -2382,12 +2381,11 @@ return `- ${r ? '➖' : '➕'} \`𝚇𝙿\`
 
 > *@${j.split('@')[0]} • ${u.xp} XP • Level ${u.level} • ${u.patente}*`
 }
-// ===== PET =====
 exports.petShop = (pets, p) => {
 return `- 🐾 \`𝙿𝙴𝚃 𝚂𝙷𝙾𝙿\`
 
-${Object.entries(pets).map(([k, v]) => `『 🐾 \`${v.nome}\` 』— ${v.preco} N-Coins
-> ${p}comprarpet ${k}`).join('\n\n')}`
+${Object.entries(pets).map(([k, v]) => `> *『 ${v.nome} 』— ${v.preco} N-Coins*
+> *『 ${p}comprarpet ${k} 』— ᴄᴏᴍᴘʀᴀʀ.*`).join('\n\n')}`
 }
 
 exports.petJaTem = () => {
@@ -2405,21 +2403,21 @@ return `- 🐾 \`𝚂𝙴𝙼 𝙿𝙴𝚃\`
 exports.petComprado = (t, v, s) => {
 return `- 🐾 \`𝙿𝙴𝚃 𝙰𝙳𝙾𝚃𝙰𝙳𝙾\`
 
-『 🐾 \`𝚃𝙸𝙿𝙾\` 』— ${t}
-『 💸 \`𝚅𝙰𝙻𝙾𝚁\` 』— ${v}
-『 🪙 \`𝚂𝙰𝙻𝙳𝙾\` 』— ${s}`
+> *『 🐾 𝚃𝙸𝙿𝙾 』— ${t}*
+> *『 💸 𝚅𝙰𝙻𝙾𝚁 』— ${v}*
+> *『 🪙 𝚂𝙰𝙻𝙳𝙾 』— ${s}*`
 }
 
 exports.petPerfil = (j, p) => {
 return `- 🐾 \`𝙼𝙴𝚄 𝙿𝙴𝚃\`
 
-『 👤 』— @${j.split('@')[0]}
-『 🐾 \`𝙽𝙾𝙼𝙴\` 』— ${p.apelido || p.tipo}
-『 🍖 \`𝙵𝙾𝙼𝙴\` 』— ${p.fome}%
-『 💖 \`𝙰𝙵𝙴𝚃𝙾\` 』— ${p.afeto || 0}
-『 ⭐ \`𝙽𝙸́𝚅𝙴𝙻\` 』— ${p.nivel || 1}
-『 🧠 \`𝚇𝙿\` 』— ${p.xp || 0}
-『 😴 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${p.dormindo ? 'dormindo' : 'acordado'}`
+> *『 👤 』— @${j.split('@')[0]}*
+> *『 🐾 𝙽𝙾𝙼𝙴 』— ${p.apelido || p.tipo}*
+> *『 🍖 𝙵𝙾𝙼𝙴 』— ${p.fome}%*
+> *『 💖 𝙰𝙵𝙴𝚃𝙾 』— ${p.afeto || 0}*
+> *『 ⭐ 𝙽𝙸́𝚅𝙴𝙻 』— ${p.nivel || 1}*
+> *『 🧠 𝚇𝙿 』— ${p.xp || 0}*
+> *『 😴 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${p.dormindo ? 'dormindo' : 'acordado'}*`
 }
 
 exports.petAlimentado = (p, c) => {
@@ -2455,16 +2453,16 @@ return `- 💸 \`𝙿𝙴𝚃 𝚅𝙴𝙽𝙳𝙸𝙳𝙾\`
 exports.petRank = l => {
 return `- 🏆 \`𝚁𝙰𝙽𝙺 𝙿𝙴𝚃𝚂\`
 
-${l.length ? l.map((x, i) => `『 ${i + 1}° 』— @${x.jid.split('@')[0]} • ${x.pet.apelido || x.pet.tipo} • ${x.pet.xp || 0} XP`).join('\n') : '> *sem pets ainda.*'}`
+${l.length ? l.map((x, i) => `> *『 ${i + 1}° 』— @${x.jid.split('@')[0]} • ${x.pet.apelido || x.pet.tipo} • ${x.pet.xp || 0} XP*`).join('\n') : '> *『 0 』— sᴇᴍ ᴘᴇᴛs ᴀɪɴᴅᴀ.*'}`
 }
-// ===== POKÉMON =====
+
 exports.pokemonShop = (itens, p, raro) => {
 return `- ${raro ? '🌌' : '🏪'} \`${raro ? '𝙿𝙾𝙺𝙴́𝙼𝙾𝙽 𝚁𝙰𝚁𝙾𝚂' : '𝙻𝙾𝙹𝙰 𝙿𝙾𝙺𝙴́𝙼𝙾𝙽'}\`
 
-${itens.map(([k, v]) => `『 ⚪ \`${v.nome}\` 』— ${v.tipo}
-『 💸 』— ${v.preco} N-Coins
-『 ✨ 』— ${v.habilidade}
-> ${p}comprarpokemon ${k}`).join('\n\n')}`
+${itens.map(([k, v]) => `> *『 ${v.nome} 』— ${v.tipo}*
+> *『 ${v.preco} N-Coins 』— ᴘʀᴇᴄ̧ᴏ.*
+> *『 ${v.habilidade} 』— ʜᴀʙɪʟɪᴅᴀᴅᴇ.*
+> *『 ${p}comprarpokemon ${k} 』— ᴄᴏᴍᴘʀᴀʀ.*`).join('\n\n')}`
 }
 
 exports.pokemonInvalido = p => {
@@ -2488,30 +2486,30 @@ return `- ⚠️ \`𝚂𝙴𝙼 𝙿𝙾𝙺𝙴́𝙼𝙾𝙽\`
 exports.pokemonComprado = (p, s) => {
 return `- ✅ \`𝙿𝙾𝙺𝙴́𝙼𝙾𝙽 𝙲𝙾𝙼𝙿𝚁𝙰𝙳𝙾\`
 
-『 ⚪ 』— ${p.nome}
-『 💸 』— ${p.preco} N-Coins
-『 🪙 \`𝚂𝙰𝙻𝙳𝙾\` 』— ${s}`
+> *『 ⚪ 』— ${p.nome}*
+> *『 💸 』— ${p.preco} N-Coins*
+> *『 🪙 𝚂𝙰𝙻𝙳𝙾 』— ${s}*`
 }
 
 exports.pokemonPerfil = (j, p, d) => {
 return `- ⚡ \`𝙼𝙴𝚄 𝙿𝙾𝙺𝙴́𝙼𝙾𝙽\`
 
-『 👤 』— @${j.split('@')[0]}
-『 ⚪ \`𝙽𝙾𝙼𝙴\` 』— ${p.apelido || d.nome || p.tipo}
-『 🔮 \`𝚃𝙸𝙿𝙾\` 』— ${d.tipo || '-'}
-『 👑 \`𝚁𝙰𝚁𝙸𝙳𝙰𝙳𝙴\` 』— ${d.raridade || '-'}
-『 🍓 \`𝙵𝙾𝙼𝙴\` 』— ${p.fome}%
-『 💖 \`𝙰𝙵𝙴𝚃𝙾\` 』— ${p.afeto || 0}
-『 ⭐ \`𝙽𝙸́𝚅𝙴𝙻\` 』— ${p.nivel || 1}
-『 🧠 \`𝚇𝙿\` 』— ${p.xp || 0}
-『 ✨ \`𝙷𝙰𝙱𝙸𝙻𝙸𝙳𝙰𝙳𝙴\` 』— ${d.habilidade || '-'}`
+> *『 👤 』— @${j.split('@')[0]}*
+> *『 ⚪ 𝙽𝙾𝙼𝙴 』— ${p.apelido || d.nome || p.tipo}*
+> *『 🔮 𝚃𝙸𝙿𝙾 』— ${d.tipo || '-'}*
+> *『 👑 𝚁𝙰𝚁𝙸𝙳𝙰𝙳𝙴 』— ${d.raridade || '-'}*
+> *『 🍓 𝙵𝙾𝙼𝙴 』— ${p.fome}%*
+> *『 💖 𝙰𝙵𝙴𝚃𝙾 』— ${p.afeto || 0}*
+> *『 ⭐ 𝙽𝙸́𝚅𝙴𝙻 』— ${p.nivel || 1}*
+> *『 🧠 𝚇𝙿 』— ${p.xp || 0}*
+> *『 ✨ 𝙷𝙰𝙱𝙸𝙻𝙸𝙳𝙰𝙳𝙴 』— ${d.habilidade || '-'}*`
 }
 
 exports.pokemonComidas = (c, p) => {
 return `- 🍓 \`𝙲𝙾𝙼𝙸𝙳𝙰𝚂 𝙿𝙾𝙺𝙴́𝙼𝙾𝙽\`
 
-${Object.entries(c).map(([k, v]) => `『 ${v.nome} 』— ${v.preco} • +${v.fome}%
-> ${p}alimentarpokemon ${k}`).join('\n\n')}`
+${Object.entries(c).map(([k, v]) => `> *『 ${v.nome} 』— ${v.preco} • +${v.fome}%*
+> *『 ${p}alimentarpokemon ${k} 』— ᴀʟɪᴍᴇɴᴛᴀʀ.*`).join('\n\n')}`
 }
 
 exports.pokemonAlimentado = (c, p, s) => {
@@ -2565,7 +2563,7 @@ return `- 💸 \`𝙿𝙾𝙺𝙴́𝙼𝙾𝙽 𝚅𝙴𝙽𝙳𝙸𝙳𝙾\`
 exports.pokemonRank = l => {
 return `- 🏆 \`𝚁𝙰𝙽𝙺 𝙿𝙾𝙺𝙴́𝙼𝙾𝙽\`
 
-${l.length ? l.map((x, i) => `『 ${i + 1}° 』— @${x.jid.split('@')[0]} • ${x.pokemon.apelido || x.pokemon.tipo} • ${x.pokemon.xp || 0} XP`).join('\n') : '> *sem Pokémon ainda.*'}`
+${l.length ? l.map((x, i) => `> *『 ${i + 1}° 』— @${x.jid.split('@')[0]} • ${x.pokemon.apelido || x.pokemon.tipo} • ${x.pokemon.xp || 0} XP*`).join('\n') : '> *『 0 』— sᴇᴍ ᴘᴏᴋᴇ́ᴍᴏɴ ᴀɪɴᴅᴀ.*'}`
 }
 
 exports.cidadeRegistrada = n => {
@@ -2577,14 +2575,14 @@ return `- 🌆 \`𝙲𝙸𝙳𝙰𝙳𝙴\`
 exports.cidadePerfil = (j, u) => {
 return `- 🌆 \`𝙿𝙴𝚁𝙵𝙸𝙻 𝙲𝙸𝙳𝙰𝙳𝙴\`
 
-『 👤 』— @${j.split('@')[0]}
-『 🪪 』— ${u.cidade?.nome || 'Sem nome'}
-『 💼 』— ${u.cidade?.cargo || 'Desempregado'}
-『 💰 \`𝙲𝙰𝚁𝚃𝙴𝙸𝚁𝙰\` 』— ${u.coins || 0}
-『 🏦 \`𝙱𝙰𝙽𝙲𝙾\` 』— ${u.cidade?.saldoBanco || 0}
-『 ⚡ 』— ${u.cidade?.energia || 100}
-『 🍔 』— ${u.cidade?.fome || 100}
-『 ❤️ 』— ${u.cidade?.saude || 100}`
+> *『 👤 』— @${j.split('@')[0]}*
+> *『 🪪 』— ${u.cidade?.nome || 'Sem nome'}*
+> *『 💼 』— ${u.cidade?.cargo || 'Desempregado'}*
+> *『 💰 𝙲𝙰𝚁𝚃𝙴𝙸𝚁𝙰 』— ${u.coins || 0}*
+> *『 🏦 𝙱𝙰𝙽𝙲𝙾 』— ${u.cidade?.saldoBanco || 0}*
+> *『 ⚡ 』— ${u.cidade?.energia || 100}*
+> *『 🍔 』— ${u.cidade?.fome || 100}*
+> *『 ❤️ 』— ${u.cidade?.saude || 100}*`
 }
 
 exports.cidadeTrabalho = (g, s) => {
@@ -2602,8 +2600,8 @@ return `- 🏦 \`𝙱𝙰𝙽𝙲𝙾\`
 exports.cidadeBanco = (b, c) => {
 return `- 🏦 \`𝙱𝙰𝙽𝙲𝙾\`
 
-『 🏛️ \`𝚂𝙰𝙻𝙳𝙾 𝙱𝙰𝙽𝙲𝙾\` 』— ${b}
-『 💰 \`𝙲𝙰𝚁𝚃𝙴𝙸𝚁𝙰\` 』— ${c}`
+> *『 🏛️ 𝚂𝙰𝙻𝙳𝙾 𝙱𝙰𝙽𝙲𝙾 』— ${b}*
+> *『 💰 𝙲𝙰𝚁𝚃𝙴𝙸𝚁𝙰 』— ${c}*`
 }
 
 exports.tempoRelacao = ms => {
@@ -2629,8 +2627,8 @@ return `- 💔 \`𝙽𝙰𝙼𝙾𝚁𝙾 𝙴𝙽𝙲𝙴𝚁𝚁𝙰𝙳𝙾\`
 exports.minhaDupla = (a, b, t) => {
 return `- ❤️ \`𝙼𝙸𝙽𝙷𝙰 𝙳𝚄𝙿𝙻𝙰\`
 
-『 💙 』— @${a.split('@')[0]} + @${b.split('@')[0]}
-『 ⏳ \`𝚃𝙴𝙼𝙿𝙾\` 』— ${t}`
+> *『 💙 』— @${a.split('@')[0]} + @${b.split('@')[0]}*
+> *『 ⏳ 𝚃𝙴𝙼𝙿𝙾 』— ${t}*`
 }
 
 exports.casamentoUso = p => {
@@ -2660,8 +2658,8 @@ return `- 💌 \`𝙿𝙴𝙳𝙸𝙳𝙾 𝙿𝙴𝙽𝙳𝙴𝙽𝚃𝙴\`
 exports.casamentoPedido = (a, b, p) => {
 return `- 💍 \`𝙿𝙴𝙳𝙸𝙳𝙾 𝙳𝙴 𝙲𝙰𝚂𝙰𝙼𝙴𝙽𝚃𝙾\`
 
-『 👤 \`𝙳𝙴\` 』— @${a.split('@')[0]}
-『 💖 \`𝙿𝙰𝚁𝙰\` 』— @${b.split('@')[0]}
+> *『 👤 𝙳𝙴 』— @${a.split('@')[0]}*
+> *『 💖 𝙿𝙰𝚁𝙰 』— @${b.split('@')[0]}*
 
 > *Responda S/SIM para aceitar ou N/NÃO para recusar.*`
 }
@@ -2705,30 +2703,28 @@ return `- 💔 \`𝙳𝙸𝚅𝙾́𝚁𝙲𝙸𝙾\`
 exports.casamentoPerfil = (a, b, t) => {
 return `- 💒 \`𝙼𝙴𝚄 𝙲𝙰𝚂𝙰𝙼𝙴𝙽𝚃𝙾\`
 
-『 💍 』— @${a.split('@')[0]} + @${b.split('@')[0]}
-『 ⏳ 』— ${t}`
+> *『 💍 』— @${a.split('@')[0]} + @${b.split('@')[0]}*
+> *『 ⏳ 』— ${t}*`
 }
-// ===== NAMORO COM BOTÕES / RESPOSTA =====
 exports.namoroPedido = (de, para, prefix, botoesAtivos = true) => {
 return `- 💌 \`𝙿𝙴𝙳𝙸𝙳𝙾 𝙳𝙴 𝙽𝙰𝙼𝙾𝚁𝙾\`
 
-『 💞 \`𝙿𝙰𝚁𝙰\` 』— @${String(para).split('@')[0]}
+> *『 💞 𝙿𝙰𝚁𝙰 』— @${String(para).split('@')[0]}*
 > *❤️ | ᴜᴍ ᴄᴏʀᴀᴄ̧ᴀ̃ᴏ ᴇsᴛᴀ́ ᴘᴇɴsᴀɴᴅᴏ ᴇᴍ ᴠᴏᴄᴇ̂…* ↴
 
-『 💘 \`𝙳𝙴\` 』— @${String(de).split('@')[0]}
+> *『 💘 𝙳𝙴 』— @${String(de).split('@')[0]}*
 
 ${botoesAtivos
       ? '> *ᴇsᴄᴏʟʜᴀ ᴀʙᴀɪxᴏ sᴇ ᴅᴇsᴇᴊᴀ ᴀᴄᴇɪᴛᴀʀ ᴏᴜ ʀᴇᴄᴜsᴀʀ ᴇsᴛᴇ ᴘᴇᴅɪᴅᴏ.*'
       : '*_ʀᴇsᴘᴏɴᴅᴀ 『 s / sɪᴍ 』 ᴘᴀʀᴀ ᴀᴄᴇɪᴛᴀʀ ᴏᴜ 『 n / ɴᴀ̃ᴏ 』 ᴘᴀʀᴀ ʀᴇᴄᴜsᴀʀ._*'}
 
-『 🕊️ \`𝙲𝙰𝙽𝙲𝙴𝙻𝙰𝚁\` 』— @${String(de).split('@')[0]} pode usar ${prefix}cancelar`
+> *『 🕊️ 𝙲𝙰𝙽𝙲𝙴𝙻𝙰𝚁 』— @${String(de).split('@')[0]} pode usar ${prefix}cancelar*`
 }
-// ===== GRUPO ABRIR / FECHAR AGORA =====
 exports.grupoUso = prefix => {
 return `- 👥 \`𝙶𝚁𝚄𝙿𝙾\`
 
-『 🔓 \`𝙰𝙱𝚁𝙸𝚁\` 』— ${prefix}grupo a
-『 🔒 \`𝙵𝙴𝙲𝙷𝙰𝚁\` 』— ${prefix}grupo f
+> *『 🔓 𝙰𝙱𝚁𝙸𝚁 』— ${prefix}grupo a*
+> *『 🔒 𝙵𝙴𝙲𝙷𝙰𝚁 』— ${prefix}grupo f*
 
 > *ᴜsᴇ 『 a 』 ᴘᴀʀᴀ ᴀʙʀɪʀ ᴇ 『 f 』 ᴘᴀʀᴀ ғᴇᴄʜᴀʀ ᴏ ɢʀᴜᴘᴏ.*`
 }
@@ -2736,31 +2732,30 @@ return `- 👥 \`𝙶𝚁𝚄𝙿𝙾\`
 exports.grupoAlterado = aberto => {
 return `- ${aberto ? '🔓' : '🔒'} \`𝙶𝚁𝚄𝙿𝙾 ${aberto ? '𝙰𝙱𝙴𝚁𝚃𝙾' : '𝙵𝙴𝙲𝙷𝙰𝙳𝙾'}\`
 
-『 📌 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${aberto ? 'Todos os membros podem enviar mensagens.' : 'Somente administradores podem enviar mensagens.'}`
+> *『 📌 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${aberto ? 'Todos os membros podem enviar mensagens.' : 'Somente administradores podem enviar mensagens.'}*`
 }
-// ===== FREE FIRE / SALAS =====
 exports.ffSalaUso = prefix => {
 return `- 🎮 \`𝙲𝚁𝙸𝙰𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\`
 
-『 📋 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${prefix}criarsala NOME|SENHA|JOGADORES|MODO|REGIÃO
-『 💡 \`𝙴𝚇𝙴𝙼𝙿𝙻𝙾\` 』— ${prefix}criarsala TESTE|1234|12|1|BR`
+> *『 📋 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— ${prefix}criarsala NOME|SENHA|JOGADORES|MODO|REGIÃO*
+> *『 💡 𝙴𝚇𝙴𝙼𝙿𝙻𝙾 』— ${prefix}criarsala TESTE|1234|12|1|BR*`
 }
 
 exports.ffSalaCriada = ({ NomeDoBot, pushname, sala, roomName, roomPassword, maxPlayers, mode, region, data }) => {
 return `- 🎮 \`𝚂𝙰𝙻𝙰 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴 𝙲𝚁𝙸𝙰𝙳𝙰\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— ${pushname}
-『 🏷️ \`𝙽𝙾𝙼𝙴\` 』— ${sala?.roomName || roomName}
-『 🆔 \`𝚁𝙾𝙾𝙼 𝙸𝙳\` 』— ${sala?.roomId || 'Indisponível'}
-『 🔐 \`𝚂𝙴𝚂𝚂𝙸𝙾𝙽 𝙸𝙳\` 』— ${sala?.sessionId || 'Indisponível'}
-『 🔑 \`𝚂𝙴𝙽𝙷𝙰\` 』— ${sala?.password || roomPassword}
-『 🎯 \`𝙼𝙾𝙳𝙾\` 』— ${sala?.modeName || mode}
-『 👥 \`𝙹𝙾𝙶𝙰𝙳𝙾𝚁𝙴𝚂\` 』— ${maxPlayers}
-『 🌎 \`𝚁𝙴𝙶𝙸𝙰̃𝙾\` 』— ${region}
+> *『 🤖 𝙱𝙾𝚃 』— ${NomeDoBot}*
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— ${pushname}*
+> *『 🏷️ 𝙽𝙾𝙼𝙴 』— ${sala?.roomName || roomName}*
+> *『 🆔 𝚁𝙾𝙾𝙼 𝙸𝙳 』— ${sala?.roomId || 'Indisponível'}*
+> *『 🔐 𝚂𝙴𝚂𝚂𝙸𝙾𝙽 𝙸𝙳 』— ${sala?.sessionId || 'Indisponível'}*
+> *『 🔑 𝚂𝙴𝙽𝙷𝙰 』— ${sala?.password || roomPassword}*
+> *『 🎯 𝙼𝙾𝙳𝙾 』— ${sala?.modeName || mode}*
+> *『 👥 𝙹𝙾𝙶𝙰𝙳𝙾𝚁𝙴𝚂 』— ${maxPlayers}*
+> *『 🌎 𝚁𝙴𝙶𝙸𝙰̃𝙾 』— ${region}*
 
-『 📊 \`𝚁𝙴𝚂𝚃𝙰𝙽𝚃𝙴𝚂\` 』— ${data?.limite?.restantes ?? 'N/A'}
-『 📈 \`𝚄𝚂𝙰𝙳𝙰𝚂\` 』— ${data?.limite?.usadas ?? 'N/A'}
+> *『 📊 𝚁𝙴𝚂𝚃𝙰𝙽𝚃𝙴𝚂 』— ${data?.limite?.restantes ?? 'N/A'}*
+> *『 📈 𝚄𝚂𝙰𝙳𝙰𝚂 』— ${data?.limite?.usadas ?? 'N/A'}*
 
 > *✅ Sala criada com sucesso!*`
 }
@@ -2768,18 +2763,18 @@ return `- 🎮 \`𝚂𝙰𝙻𝙰 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴 𝙲𝚁𝙸
 exports.ffVerSalaUso = prefix => {
 return `- 🔎 \`𝚅𝙴𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\`
 
-『 📋 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${prefix}versala SESSION_ID`
+> *『 📋 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— ${prefix}versala SESSION_ID*`
 }
 
 exports.ffSalaInfo = ({ NomeDoBot, pushname, sala, tempo }) => {
 return `- 🔎 \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝚂𝙰𝙻𝙰\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— ${pushname}
-『 🆔 \`𝚁𝙾𝙾𝙼 𝙸𝙳\` 』— ${sala?.roomId || 'Indisponível'}
-『 📡 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${sala?.status || 'Indisponível'}
-『 ⏱️ \`𝙸𝙽𝙸́𝙲𝙸𝙾\` 』— ${tempo}
-『 🚀 \`𝙰𝚄𝚃𝙾 𝚂𝚃𝙰𝚁𝚃\` 』— ${sala?.autoStart ? 'Ativado' : 'Desativado'}
+> *『 🤖 𝙱𝙾𝚃 』— ${NomeDoBot}*
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— ${pushname}*
+> *『 🆔 𝚁𝙾𝙾𝙼 𝙸𝙳 』— ${sala?.roomId || 'Indisponível'}*
+> *『 📡 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${sala?.status || 'Indisponível'}*
+> *『 ⏱️ 𝙸𝙽𝙸́𝙲𝙸𝙾 』— ${tempo}*
+> *『 🚀 𝙰𝚄𝚃𝙾 𝚂𝚃𝙰𝚁𝚃 』— ${sala?.autoStart ? 'Ativado' : 'Desativado'}*
 
 > *✅ Sala encontrada com sucesso!*`
 }
@@ -2787,32 +2782,32 @@ return `- 🔎 \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝚂�
 exports.ffJogadoresUso = prefix => {
 return `- 👥 \`𝙹𝙾𝙶𝙰𝙳𝙾𝚁𝙴𝚂 𝙳𝙰 𝚂𝙰𝙻𝙰\`
 
-『 📋 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${prefix}jogadoressala SESSION_ID`
+> *『 📋 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— ${prefix}jogadoressala SESSION_ID*`
 }
 
 exports.ffJogadores = ({ NomeDoBot, pushname, players, total }) => {
 return `- 👥 \`𝙹𝙾𝙶𝙰𝙳𝙾𝚁𝙴𝚂 𝙳𝙰 𝚂𝙰𝙻𝙰\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— ${pushname}
-『 📊 \`𝚃𝙾𝚃𝙰𝙻\` 』— ${total ?? players.length}
+> *『 ${NomeDoBot} 』— ʙᴏᴛ.*
+> *『 ${pushname} 』— ᴜsᴜᴀ́ʀɪᴏ.*
+> *『 ${total ?? players.length} 』— ᴛᴏᴛᴀʟ.*
 
-${players.length ? players.map((p, i) => `『 ${i + 1}° 』— ${p.nickname || 'Sem nome'}
-> 🆔 ${p.uid || 'N/A'} • 🏳️ Time ${p.team || 'N/A'}`).join('\n\n') : '> *Nenhum jogador encontrado.*'}`
+${players.length ? players.map((p, i) => `> *『 ${i + 1}° 』— ${p.nickname || 'Sem nome'}*
+> *『 ${p.uid || 'N/A'} 』— UID • Time ${p.team || 'N/A'}*`).join('\n\n') : '> *『 0 』— ɴᴇɴʜᴜᴍ ᴊᴏɢᴀᴅᴏʀ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ.*'}`
 }
 
 exports.ffExpulsarUso = prefix => {
 return `- 🚫 \`𝙴𝚇𝙿𝚄𝙻𝚂𝙰𝚁 𝙹𝙾𝙶𝙰𝙳𝙾𝚁\`
 
-『 📋 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${prefix}expulsarsala SESSION_ID|UID`
+> *『 📋 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— ${prefix}expulsarsala SESSION_ID|UID*`
 }
 
 exports.ffExpulso = ({ NomeDoBot, pushname, targetUid, message }) => {
 return `- 🚫 \`𝙹𝙾𝙶𝙰𝙳𝙾𝚁 𝙴𝚇𝙿𝚄𝙻𝚂𝙾\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— ${pushname}
-『 🆔 \`𝚄𝙸𝙳\` 』— ${targetUid}
+> *『 🤖 𝙱𝙾𝚃 』— ${NomeDoBot}*
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— ${pushname}*
+> *『 🆔 𝚄𝙸𝙳 』— ${targetUid}*
 
 > *✅ ${message || 'Kick enviado com sucesso!'}*`
 }
@@ -2820,15 +2815,15 @@ return `- 🚫 \`𝙹𝙾𝙶𝙰𝙳𝙾𝚁 𝙴𝚇𝙿𝚄𝙻𝚂𝙾\`
 exports.ffIniciarUso = prefix => {
 return `- 🚀 \`𝙸𝙽𝙸𝙲𝙸𝙰𝚁 𝚂𝙰𝙻𝙰\`
 
-『 📋 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${prefix}iniciarsala SESSION_ID`
+> *『 📋 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— ${prefix}iniciarsala SESSION_ID*`
 }
 
 exports.ffSalaIniciada = ({ NomeDoBot, pushname, sessionId, message }) => {
 return `- 🚀 \`𝚂𝙰𝙻𝙰 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙰\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— ${pushname}
-『 🔐 \`𝚂𝙴𝚂𝚂𝙸𝙾𝙽 𝙸𝙳\` 』— ${sessionId}
+> *『 🤖 𝙱𝙾𝚃 』— ${NomeDoBot}*
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— ${pushname}*
+> *『 🔐 𝚂𝙴𝚂𝚂𝙸𝙾𝙽 𝙸𝙳 』— ${sessionId}*
 
 > *✅ ${message || 'Sala iniciada com sucesso!'}*`
 }
@@ -2836,15 +2831,15 @@ return `- 🚀 \`𝚂𝙰𝙻𝙰 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙰\`
 exports.ffPararUso = prefix => {
 return `- ⛔ \`𝙿𝙰𝚁𝙰𝚁 𝚂𝙰𝙻𝙰\`
 
-『 📋 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${prefix}pararsala SESSION_ID`
+> *『 📋 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— ${prefix}pararsala SESSION_ID*`
 }
 
 exports.ffSalaParada = ({ NomeDoBot, pushname, sessionId, message }) => {
 return `- ⛔ \`𝚂𝙰𝙻𝙰 𝙿𝙰𝚁𝙰𝙳𝙰\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— ${pushname}
-『 🔐 \`𝚂𝙴𝚂𝚂𝙸𝙾𝙽 𝙸𝙳\` 』— ${sessionId}
+> *『 🤖 𝙱𝙾𝚃 』— ${NomeDoBot}*
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— ${pushname}*
+> *『 🔐 𝚂𝙴𝚂𝚂𝙸𝙾𝙽 𝙸𝙳 』— ${sessionId}*
 
 > *✅ ${message || 'Sala parada com sucesso!'}*`
 }
@@ -2852,20 +2847,19 @@ return `- ⛔ \`𝚂𝙰𝙻𝙰 𝙿𝙰𝚁𝙰𝙳𝙰\`
 exports.ffStatusApi = ({ NomeDoBot, pushname, data }) => {
 return `- 📊 \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙰 𝙰𝙿𝙸 𝙵𝙵\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— ${pushname}
-『 🛠️ \`𝙼𝙰𝙽𝚄𝚃𝙴𝙽𝙲̧𝙰̃𝙾\` 』— ${data?.service?.maintenance_mode ? 'Ativada' : 'Desativada'}
-『 🎮 \`𝚂𝙰𝙻𝙰𝚂 𝚁𝙴𝚂𝚃𝙰𝙽𝚃𝙴𝚂\` 』— ${data?.key?.rooms_remaining ?? 'N/A'}
-『 ♾️ \`𝙻𝙸𝙵𝙴𝚃𝙸𝙼𝙴\` 』— ${data?.key?.lifetime ? 'Sim' : 'Não'}
+> *『 🤖 𝙱𝙾𝚃 』— ${NomeDoBot}*
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— ${pushname}*
+> *『 🛠️ 𝙼𝙰𝙽𝚄𝚃𝙴𝙽𝙲̧𝙰̃𝙾 』— ${data?.service?.maintenance_mode ? 'Ativada' : 'Desativada'}*
+> *『 🎮 𝚂𝙰𝙻𝙰𝚂 𝚁𝙴𝚂𝚃𝙰𝙽𝚃𝙴𝚂 』— ${data?.key?.rooms_remaining ?? 'N/A'}*
+> *『 ♾️ 𝙻𝙸𝙵𝙴𝚃𝙸𝙼𝙴 』— ${data?.key?.lifetime ? 'Sim' : 'Não'}*
 
 > *✅ Serviço online!*`
 }
-// ===== FREE FIRE / LIKES =====
 exports.ffLikesUso = prefix => {
 return `- ❤️ \`𝙻𝙸𝙺𝙴𝚂 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴\`
 
-『 📋 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${prefix}likes UID
-『 💡 \`𝙴𝚇𝙴𝙼𝙿𝙻𝙾\` 』— ${prefix}likes 32793023`
+> *『 📋 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— ${prefix}likes UID*
+> *『 💡 𝙴𝚇𝙴𝙼𝙿𝙻𝙾 』— ${prefix}likes 32793023*`
 }
 
 exports.ffLikesSucesso = ({ NomeDoBot, pushname, player_id, data }) => {
@@ -2873,16 +2867,16 @@ const c = data?.data?.conta
 const l = data?.data?.likes
 return `- ❤️ \`𝙻𝙸𝙺𝙴𝚂 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— ${pushname}
-『 🏷️ \`𝙽𝙸𝙲𝙺\` 』— ${c?.nickname || 'N/A'}
-『 🆔 \`𝚄𝙸𝙳\` 』— ${c?.uid || player_id}
-『 🌎 \`𝚁𝙴𝙶𝙸𝙰̃𝙾\` 』— ${c?.region || 'N/A'}
-『 📊 \`𝙻𝙴𝚅𝙴𝙻\` 』— ${c?.level || 'N/A'}
+> *『 🤖 𝙱𝙾𝚃 』— ${NomeDoBot}*
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— ${pushname}*
+> *『 🏷️ 𝙽𝙸𝙲𝙺 』— ${c?.nickname || 'N/A'}*
+> *『 🆔 𝚄𝙸𝙳 』— ${c?.uid || player_id}*
+> *『 🌎 𝚁𝙴𝙶𝙸𝙰̃𝙾 』— ${c?.region || 'N/A'}*
+> *『 📊 𝙻𝙴𝚅𝙴𝙻 』— ${c?.level || 'N/A'}*
 
-『 ❤️ \`𝙰𝙽𝚃𝙴𝚂\` 』— ${l?.antes || 0}
-『 ➕ \`𝙰𝙳𝙸𝙲𝙸𝙾𝙽𝙰𝙳𝙾𝚂\` 』— ${l?.adicionados || 0}
-『 📈 \`𝙳𝙴𝙿𝙾𝙸𝚂\` 』— ${l?.depois || 0}
+> *『 ❤️ 𝙰𝙽𝚃𝙴𝚂 』— ${l?.antes || 0}*
+> *『 ➕ 𝙰𝙳𝙸𝙲𝙸𝙾𝙽𝙰𝙳𝙾𝚂 』— ${l?.adicionados || 0}*
+> *『 📈 𝙳𝙴𝙿𝙾𝙸𝚂 』— ${l?.depois || 0}*
 
 > *✅ ${data?.message || 'Likes enviados com sucesso!'}*`
 }
@@ -2890,75 +2884,75 @@ return `- ❤️ \`𝙻𝙸𝙺𝙴𝚂 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴\`
 exports.ffCotaLikes = ({ NomeDoBot, pushname, data, reset, expira }) => {
 return `- 📊 \`𝙲𝙾𝚃𝙰 𝙳𝙴 𝙻𝙸𝙺𝙴𝚂 𝙵𝙵\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— ${pushname}
-『 ❤️ \`𝙳𝙸𝙰́𝚁𝙸𝙾\` 』— ${data?.daily_limit ?? 'N/A'}
-『 📤 \`𝚄𝚂𝙰𝙳𝙾𝚂 𝙷𝙾𝙹𝙴\` 』— ${data?.used_today ?? 'N/A'}
-『 📥 \`𝚁𝙴𝚂𝚃𝙰𝙽𝚃𝙴𝚂\` 』— ${data?.remaining_today ?? 'N/A'}
-『 ⏱️ \`𝚁𝙴𝚂𝙴𝚃\` 』— ${reset}
-『 ⌛ \`𝙲𝙾𝙾𝙻𝙳𝙾𝚆𝙽\` 』— ${data?.cooldown_hours || 0} horas
-『 ❤️ \`𝙼𝙰́𝚇𝙸𝙼𝙾\` 』— ${data?.max_likes_per_send || 'N/A'}
-『 🔑 \`𝙴𝚇𝙿𝙸𝚁𝙰\` 』— ${expira}`
+> *『 🤖 𝙱𝙾𝚃 』— ${NomeDoBot}*
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— ${pushname}*
+> *『 ❤️ 𝙳𝙸𝙰́𝚁𝙸𝙾 』— ${data?.daily_limit ?? 'N/A'}*
+> *『 📤 𝚄𝚂𝙰𝙳𝙾𝚂 𝙷𝙾𝙹𝙴 』— ${data?.used_today ?? 'N/A'}*
+> *『 📥 𝚁𝙴𝚂𝚃𝙰𝙽𝚃𝙴𝚂 』— ${data?.remaining_today ?? 'N/A'}*
+> *『 ⏱️ 𝚁𝙴𝚂𝙴𝚃 』— ${reset}*
+> *『 ⌛ 𝙲𝙾𝙾𝙻𝙳𝙾𝚆𝙽 』— ${data?.cooldown_hours || 0} horas*
+> *『 ❤️ 𝙼𝙰́𝚇𝙸𝙼𝙾 』— ${data?.max_likes_per_send || 'N/A'}*
+> *『 🔑 𝙴𝚇𝙿𝙸𝚁𝙰 』— ${expira}*`
 }
 
 exports.ffPlayerUso = prefix => {
 return `- 🔎 \`𝙲𝙾𝙽𝚂𝚄𝙻𝚃𝙰𝚁 𝙹𝙾𝙶𝙰𝙳𝙾𝚁\`
 
-『 📋 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${prefix}player UID`
+> *『 📋 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— ${prefix}player UID*`
 }
 
 exports.ffPlayer = ({ NomeDoBot, pushname, uid, conta }) => {
 return `- 🔎 \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙾 𝙹𝙾𝙶𝙰𝙳𝙾𝚁\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— ${pushname}
-『 🏷️ \`𝙽𝙾𝙼𝙴\` 』— ${conta?.nome_conta || 'N/A'}
-『 🆔 \`𝚄𝙸𝙳\` 』— ${conta?.id_conta || uid}
-『 🌎 \`𝚁𝙴𝙶𝙸𝙰̃𝙾\` 』— ${conta?.region || 'N/A'}
-『 📊 \`𝙻𝙴𝚅𝙴𝙻\` 』— ${conta?.level || 'N/A'}
-『 ✨ \`𝚇𝙿\` 』— ${conta?.experiencia || 'N/A'}
-『 ❤️ \`𝙻𝙸𝙺𝙴𝚂\` 』— ${conta?.likes || 0}
-『 🛡️ \`𝙲𝚁𝙴𝙳𝙸𝙱𝙸𝙻𝙸𝙳𝙰𝙳𝙴\` 』— ${conta?.credibilidade || 'N/A'}
+> *『 🤖 𝙱𝙾𝚃 』— ${NomeDoBot}*
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— ${pushname}*
+> *『 🏷️ 𝙽𝙾𝙼𝙴 』— ${conta?.nome_conta || 'N/A'}*
+> *『 🆔 𝚄𝙸𝙳 』— ${conta?.id_conta || uid}*
+> *『 🌎 𝚁𝙴𝙶𝙸𝙰̃𝙾 』— ${conta?.region || 'N/A'}*
+> *『 📊 𝙻𝙴𝚅𝙴𝙻 』— ${conta?.level || 'N/A'}*
+> *『 ✨ 𝚇𝙿 』— ${conta?.experiencia || 'N/A'}*
+> *『 ❤️ 𝙻𝙸𝙺𝙴𝚂 』— ${conta?.likes || 0}*
+> *『 🛡️ 𝙲𝚁𝙴𝙳𝙸𝙱𝙸𝙻𝙸𝙳𝙰𝙳𝙴 』— ${conta?.credibilidade || 'N/A'}*
 
-『 🏆 \`𝚁𝙰𝙽𝙺 𝙱𝚁\` 』— ${conta?.rank_br?.rank || 'N/A'} • ${conta?.rank_br?.pontos || 'N/A'} pontos
-『 ⚔️ \`𝚁𝙰𝙽𝙺 𝙲𝚂\` 』— ${conta?.rank_cs?.rank || 'N/A'} • ${conta?.rank_cs?.pontos || 'N/A'} pontos`
+> *『 🏆 𝚁𝙰𝙽𝙺 𝙱𝚁 』— ${conta?.rank_br?.rank || 'N/A'} • ${conta?.rank_br?.pontos || 'N/A'} pontos*
+> *『 ⚔️ 𝚁𝙰𝙽𝙺 𝙲𝚂 』— ${conta?.rank_cs?.rank || 'N/A'} • ${conta?.rank_cs?.pontos || 'N/A'} pontos*`
 }
 
 exports.ffStatusLikesUso = prefix => {
 return `- 📦 \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙾 𝙿𝙴𝙳𝙸𝙳𝙾\`
 
-『 📋 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${prefix}statuslikes ORDER_ID`
+> *『 📋 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— ${prefix}statuslikes ORDER_ID*`
 }
 
 exports.ffStatusLikes = ({ NomeDoBot, pushname, orderId, pedido }) => {
 return `- 📦 \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙾 𝙿𝙴𝙳𝙸𝙳𝙾 𝙻𝙸𝙺𝙴𝚂\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— ${NomeDoBot}
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— ${pushname}
-『 🆔 \`𝙿𝙴𝙳𝙸𝙳𝙾\` 』— ${pedido?.orderId || orderId}
-『 📌 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${pedido?.status || 'N/A'}
-『 🎮 \`𝚄𝙸𝙳\` 』— ${pedido?.playerId || 'N/A'}
-『 🏷️ \`𝙽𝙸𝙲𝙺\` 』— ${pedido?.conta?.nickname || 'N/A'}
-『 ❤️ \`𝙰𝙽𝚃𝙴𝚂\` 』— ${pedido?.likes?.antes || 0}
-『 ➕ \`𝙰𝙳𝙸𝙲𝙸𝙾𝙽𝙰𝙳𝙾𝚂\` 』— ${pedido?.likes?.adicionados || 0}
-『 📈 \`𝙳𝙴𝙿𝙾𝙸𝚂\` 』— ${pedido?.likes?.depois || 0}`
+> *『 🤖 𝙱𝙾𝚃 』— ${NomeDoBot}*
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— ${pushname}*
+> *『 🆔 𝙿𝙴𝙳𝙸𝙳𝙾 』— ${pedido?.orderId || orderId}*
+> *『 📌 𝚂𝚃𝙰𝚃𝚄𝚂 』— ${pedido?.status || 'N/A'}*
+> *『 🎮 𝚄𝙸𝙳 』— ${pedido?.playerId || 'N/A'}*
+> *『 🏷️ 𝙽𝙸𝙲𝙺 』— ${pedido?.conta?.nickname || 'N/A'}*
+> *『 ❤️ 𝙰𝙽𝚃𝙴𝚂 』— ${pedido?.likes?.antes || 0}*
+> *『 ➕ 𝙰𝙳𝙸𝙲𝙸𝙾𝙽𝙰𝙳𝙾𝚂 』— ${pedido?.likes?.adicionados || 0}*
+> *『 📈 𝙳𝙴𝙿𝙾𝙸𝚂 』— ${pedido?.likes?.depois || 0}*`
 }
 
 exports.ffListaLikes = data => {
 return `- 📦 \`𝙿𝙴𝙳𝙸𝙳𝙾𝚂 𝙳𝙴 𝙻𝙸𝙺𝙴𝚂 𝙵𝙵\`
 
-『 📊 \`𝚃𝙾𝚃𝙰𝙻\` 』— ${data?.total || 0}
-『 📄 \`𝙼𝙾𝚂𝚃𝚁𝙰𝙽𝙳𝙾\` 』— ${data?.orders?.length || 0}
+> *『 ${data?.total || 0} 』— ᴛᴏᴛᴀʟ.*
+> *『 ${data?.orders?.length || 0} 』— ᴍᴏsᴛʀᴀɴᴅᴏ.*
 
-${(data?.orders || []).map((p, i) => `『 ${i + 1}° 』— ${p.orderId || p.order_id || 'N/A'}
-> 🎮 ${p.playerId || 'N/A'} • 📌 ${p.status || 'N/A'}
-> ❤️ ${p.likes?.antes || 0} → +${p.likes?.adicionados || 0} → ${p.likes?.depois || 0}`).join('\n\n') || '> *Nenhum pedido encontrado.*'}`
+${(data?.orders || []).map((p, i) => `> *『 ${i + 1}° 』— ${p.orderId || p.order_id || 'N/A'}*
+> *『 ${p.playerId || 'N/A'} 』— UID • ${p.status || 'N/A'}*
+> *『 ❤️ 』— ${p.likes?.antes || 0} → +${p.likes?.adicionados || 0} → ${p.likes?.depois || 0}*`).join('\n\n') || '> *『 0 』— ɴᴇɴʜᴜᴍ ᴘᴇᴅɪᴅᴏ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ.*'}`
 }
 
 exports.ffErro = msg => {
 return `- ❌ \`𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴\`
 
-『 ⚠️ \`𝙴𝚁𝚁𝙾\` 』— ${msg || 'Não foi possível concluir a solicitação.'}`
+> *『 ⚠️ 𝙴𝚁𝚁𝙾 』— ${msg || 'Não foi possível concluir a solicitação.'}*`
 }
 
 exports.botaoVerSala = () => {
@@ -2976,32 +2970,28 @@ return `🚀﹚𝐈𝐍𝐈𝐂𝐈𝐀𝐑﹙🚀`
 exports.botaoPararSala = () => {
 return `⛔﹚𝐏𝐀𝐑𝐀𝐑﹙⛔`
 }
-// ===== N-COINS: CARDS E BÔNUS DIÁRIO =====
 exports.coinsBonusDiario = (jid, saldo, prefix) => {
-return `- *💫 | 𝐁𝐎̂𝐍𝐔𝐒 𝐃𝐈𝐀́𝐑𝐈𝐎*
+return `- 💫 \`𝙱𝙾̂𝙽𝚄𝚂 𝙳𝙸𝙰́𝚁𝙸𝙾\`
 
-- *👤 | 𝚄𝚂𝚄Á𝚁𝙸𝙾* → *@${String(jid).split('@')[0]}*
-- *🎁 | 𝚁𝙴𝙲𝙾𝙼𝙿𝙴𝙽𝚂𝙰* → *+50 N-Coins*
-- *⚙️ | 𝚃𝙸𝙿𝙾* → 𝙿𝚁𝙸𝙼𝙴𝙸𝚁𝙰 𝙼𝙴𝙽𝚂𝙰𝙶𝙴𝙼 𝙳𝙾 𝙳𝙸𝙰
-- *💰 | 𝚂𝙰𝙻𝙳𝙾* → *${Number(saldo || 0).toLocaleString('pt-BR')} N-Coins*
-- *✨ | 𝚂𝚃𝙰𝚃𝚄𝚂* → 𝙱𝙾̂𝙽𝚄𝚂 𝚁𝙴𝚂𝙶𝙰𝚃𝙰𝙳𝙾
+> *『 @${String(jid).split('@')[0]} 』— ᴜsᴜᴀ́ʀɪᴏ ǫᴜᴇ ʀᴇᴄᴇʙᴇᴜ ᴏ ʙᴏ̂ɴᴜs.*
+> *『 +50 N-Coins 』— ʀᴇᴄᴏᴍᴘᴇɴsᴀ ᴅᴀ ᴘʀɪᴍᴇɪʀᴀ ᴍᴇɴsᴀɢᴇᴍ ᴅᴏ ᴅɪᴀ.*
+> *『 ${Number(saldo || 0).toLocaleString('pt-BR')} N-Coins 』— sᴀʟᴅᴏ ᴀᴛᴜᴀʟ.*
 
-> Use *${prefix}coins* para ver seu saldo.`
+> *ᴜsᴇ ${prefix}coins ᴘᴀʀᴀ ᴠᴇʀ sᴇᴜ sᴀʟᴅᴏ.*`
 }
 
 exports.coinsCard = (jid, saldo, banco, minerar, cassino, prefix) => {
-return `- *🏦 | 𝐁𝐀𝐍𝐂𝐎 𝐃𝐄 𝐍-𝐂𝐎𝐈𝐍𝐒*
+return `- 🏦 \`𝙱𝙰𝙽𝙲𝙾 𝙳𝙴 𝙽-𝙲𝙾𝙸𝙽𝚂\`
 
-- *👤 | 𝚄𝚂𝚄Á𝚁𝙸𝙾* → *@${String(jid).split('@')[0]}*
-- *💰 | 𝙲𝙰𝚁𝚃𝙴𝙸𝚁𝙰* → *${Number(saldo || 0).toLocaleString('pt-BR')} N-Coins*
-- *🏛️ | 𝙱𝙰𝙽𝙲𝙾* → *${Number(banco || 0).toLocaleString('pt-BR')} N-Coins*
-- *⛏️ | 𝙼𝙸𝙽𝙴𝚁𝙰𝚁* → *${Number(minerar || 0)} tentativas*
-- *🎰 | 𝙲𝙰𝚂𝚂𝙸𝙽𝙾* → *${Number(cassino || 0)} tentativas*
+> *『 @${String(jid).split('@')[0]} 』— ᴜsᴜᴀ́ʀɪᴏ.*
+> *『 ${Number(saldo || 0).toLocaleString('pt-BR')} N-Coins 』— ᴄᴀʀᴛᴇɪʀᴀ.*
+> *『 ${Number(banco || 0).toLocaleString('pt-BR')} N-Coins 』— ʙᴀɴᴄᴏ.*
+> *『 ${Number(minerar || 0)} 』— ᴛᴇɴᴛᴀᴛɪᴠᴀ(s) ᴅᴇ ᴍɪɴᴇʀᴀᴄ̧ᴀ̃ᴏ.*
+> *『 ${Number(cassino || 0)} 』— ᴛᴇɴᴛᴀᴛɪᴠᴀ(s) ᴅᴇ ᴄᴀssɪɴᴏ.*
 
-> Use *${prefix}menucoins* para ver o sistema.`
+> *ᴜsᴇ ${prefix}menucoins ᴘᴀʀᴀ ᴠᴇʀ ᴏ sɪsᴛᴇᴍᴀ.*`
 }
 
-// ===== MENSAGENS CENTRALIZADAS — API / ATIVAÇÕES / TRANSCRIÇÃO / IDADE =====
 exports.erroApi = (site = 'https://tokito-apis.com.br') => {
 let link = 'https://tokito-apis.com.br'
 
@@ -3013,73 +3003,74 @@ catch {
 
 return `- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙰 𝙰𝙿𝙸\`
 
-『 🔑 \`𝙲𝙷𝙰𝚅𝙴\` 』— ᴠᴇʀɪғɪǫᴜᴇ sᴇ sᴜᴀ ᴋᴇʏ ᴇsᴛᴀ́ ᴀᴛɪᴠᴀ.
-『 👤 \`𝙲𝙾𝙽𝚃𝙰\` 』— ᴄᴏɴғɪʀᴀ sᴇ sᴜᴀ ᴄᴏɴᴛᴀ ᴇsᴛᴀ́ ᴀᴛɪᴠᴀ ᴇ sᴇᴍ ʙʟᴏǫᴜᴇɪᴏs.
-『 🌐 \`𝚂𝙸𝚃𝙴\` 』— ${link}
+> *『 🔑 𝙲𝙷𝙰𝚅𝙴 』— ᴠᴇʀɪғɪǫᴜᴇ sᴇ sᴜᴀ ᴋᴇʏ ᴇsᴛᴀ́ ᴀᴛɪᴠᴀ.*
+> *『 👤 𝙲𝙾𝙽𝚃𝙰 』— ᴄᴏɴғɪʀᴀ sᴇ sᴜᴀ ᴄᴏɴᴛᴀ ᴇsᴛᴀ́ ᴀᴛɪᴠᴀ ᴇ sᴇᴍ ʙʟᴏǫᴜᴇɪᴏs.*
+> *『 🌐 𝚂𝙸𝚃𝙴 』— ${link}*
 
 > *ᴀᴄᴇssᴇ ᴏ sɪᴛᴇ ᴀᴄɪᴍᴀ ᴇ ᴠᴇʀɪғɪǫᴜᴇ sᴜᴀ ᴄᴏɴᴛᴀ ᴇ ᴀ sᴜᴀ ᴋᴇʏ. sᴇ ᴇsᴛɪᴠᴇʀ ᴛᴜᴅᴏ ɴᴏʀᴍᴀʟ, ᴛᴇɴᴛᴇ ᴏ ᴄᴏᴍᴀɴᴅᴏ ɴᴏᴠᴀᴍᴇɴᴛᴇ.*`
 }
 
 exports.ativarPainel = ({ itens = [], ativo = () => false } = {}) => {
 const secoes = [
-['✨ → 𝐌𝐈𝐃𝐈𝐀𝐒', 0, 5],
-['🔗 → 𝐋𝐈𝐍𝐊𝐒', 6, 9],
-['👥 → 𝐒𝐄𝐆𝐔𝐑𝐀𝐍𝐂𝐀', 10, 16],
-['⚡ → 𝐀𝐔𝐓𝐎𝐌𝐀𝐂𝐀𝐎', 17, itens.length - 1]
+['✨', '𝙼𝙸́𝙳𝙸𝙰𝚂', 0, 5],
+['🔗', '𝙻𝙸𝙽𝙺𝚂', 6, 9],
+['👥', '𝚂𝙴𝙶𝚄𝚁𝙰𝙽𝙲̧𝙰', 10, 16],
+['⚡', '𝙰𝚄𝚃𝙾𝙼𝙰𝙲̧𝙰̃𝙾', 17, itens.length - 1]
 ]
 
-const item = (i) => {
+const item = i => {
 if (!itens[i]) return ''
-const [chave, nome] = itens[i], status = ativo(chave) ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'
-return `[ ${i + 1} ] ▸ ${nome} • ${status}`
+const [chave, nome] = itens[i]
+const status = ativo(chave) ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'
+return `> *『 ${i + 1} 』— ${nome} • ${status}*`
 }
 
-const painel = secoes.map(([titulo, inicio, fim]) => {
+const painel = secoes.map(([emoji, titulo, inicio, fim]) => {
 const lista = []
 for (let i = inicio; i <= fim && i < itens.length; i++) {
 const linha = item(i)
 if (linha) lista.push(linha)
 }
-return lista.length ? `${titulo}\n${lista.join('\n')}` : ''
-}).filter(Boolean).join('\n─────────────────────\n')
+return lista.length ? `- ${emoji} \`${titulo}\`\n\n${lista.join('\n')}` : ''
+}).filter(Boolean).join('\n\n')
 
-return `\`\`\`⚙️ 𝙰𝚃𝙸𝚅𝙰𝚁 𝚂𝙸𝚂𝚃𝙴𝙼𝙰𝚂\`\`\`
-😻 *ᴇsᴄᴏʟʜᴀ ᴏ ɴᴜ́ᴍᴇʀᴏ ᴅᴏ sɪsᴛᴇᴍᴀ ǫᴜᴇ ᴅᴇsᴇᴊᴀ ᴀʟᴛᴇʀᴀʀ.*
+return `- ⚙️ \`𝙰𝚃𝙸𝚅𝙰𝚁 𝚂𝙸𝚂𝚃𝙴𝙼𝙰𝚂\`
 
-> 🟢 ᴀᴛɪᴠᴀᴅᴏ • 🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ
-─────────────────────
 ${painel}
-─────────────────────
-[ 0 ] ▸ ❌ ᴄᴀɴᴄᴇʟᴀʀ
 
-> *ᴅɪɢɪᴛᴇ ᴀᴘᴇɴᴀs ᴏ ɴᴜ́ᴍᴇʀᴏ • ᴜsᴇ 0 ᴘᴀʀᴀ ᴄᴀɴᴄᴇʟᴀʀ.*`
+> *『 0 』— ᴄᴀɴᴄᴇʟᴀʀ ᴏ ᴘᴀɪɴᴇʟ.*
+
+> *ᴅɪɢɪᴛᴇ ᴀᴘᴇɴᴀs ᴏ ɴᴜ́ᴍᴇʀᴏ ᴅᴏ sɪsᴛᴇᴍᴀ.*`
 }
 
 exports.ativarAlterado = (nome, ativo, painel) => {
-const emoji = ativo ? '✅' : '❌', status = ativo ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'
+const emoji = ativo ? '✅' : '❌'
+const status = ativo ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'
 
-return `\`\`\`${emoji} 𝚂𝙸𝚂𝚃𝙴𝙼𝙰 𝙰𝙻𝚃𝙴𝚁𝙰𝙳𝙾\`\`\`
-『 ⚙️ \`𝚂𝙸𝚂𝚃𝙴𝙼𝙰\` 』— ${nome} • ${status}
+return `- ${emoji} \`𝚂𝙸𝚂𝚃𝙴𝙼𝙰 𝙰𝙻𝚃𝙴𝚁𝙰𝙳𝙾\`
+
+> *『 ${nome} 』— ${status}.*
 
 ${painel}`
 }
 
 exports.ativarCancelado = () => {
-return `\`\`\`❌ 𝙰𝚃𝙸𝚅𝙰𝙲̧𝙰̃𝙾 𝙲𝙰𝙽𝙲𝙴𝙻𝙰𝙳𝙰\`\`\`
-『 📌 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ᴘᴀɪɴᴇʟ ᴇɴᴄᴇʀʀᴀᴅᴏ ᴄᴏᴍ sᴜᴄᴇssᴏ.`
+return `- ❌ \`𝙰𝚃𝙸𝚅𝙰𝙲̧𝙰̃𝙾 𝙲𝙰𝙽𝙲𝙴𝙻𝙰𝙳𝙰\`
+
+> *『 0 』— ᴏ ᴘᴀɪɴᴇʟ ғᴏɪ ᴇɴᴄᴇʀʀᴀᴅᴏ ᴄᴏᴍ sᴜᴄᴇssᴏ.*`
 }
 
 exports.idadeUso = prefix => {
 return `- 🎂 \`𝙸𝙳𝙰𝙳𝙴 𝙳𝙾 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\`
 
-『 📅 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— DD/MM/AAAA
-『 🧩 \`𝙴𝚇𝙴𝙼𝙿𝙻𝙾\` 』— ${prefix}idade 23/12/2007`
+> *『 📅 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— DD/MM/AAAA*
+> *『 🧩 𝙴𝚇𝙴𝙼𝙿𝙻𝙾 』— ${prefix}idade 23/12/2007*`
 }
 
 exports.idadeInvalida = () => {
 return `- ❌ \`𝙳𝙰𝚃𝙰 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙰\`
 
-『 📅 \`𝙽𝙰𝚂𝙲𝙸𝙼𝙴𝙽𝚃𝙾\` 』— ɪɴғᴏʀᴍᴇ ᴜᴍᴀ ᴅᴀᴛᴀ ᴅᴇ ɴᴀsᴄɪᴍᴇɴᴛᴏ ᴠᴀ́ʟɪᴅᴀ.`
+> *『 📅 𝙽𝙰𝚂𝙲𝙸𝙼𝙴𝙽𝚃𝙾 』— ɪɴғᴏʀᴍᴇ ᴜᴍᴀ ᴅᴀᴛᴀ ᴅᴇ ɴᴀsᴄɪᴍᴇɴᴛᴏ ᴠᴀ́ʟɪᴅᴀ.*`
 }
 
 exports.idadeResultado = ({
@@ -3094,31 +3085,31 @@ faltam
 }) => {
 return `- 🎂 \`𝙸𝙳𝙰𝙳𝙴 𝙳𝙾 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\`
 
-『 📅 \`𝙽𝙰𝚂𝙲𝙸𝙼𝙴𝙽𝚃𝙾\` 』— ${nascimento}
-『 🎈 \`𝙸𝙳𝙰𝙳𝙴\` 』— ${anos} anos, ${meses} meses e ${dias} dias
-『 🗓️ \`𝙳𝙸𝙰𝚂 𝚅𝙸𝚅𝙸𝙳𝙾𝚂\` 』— ${Number(diasVividos || 0).toLocaleString('pt-BR')}
-『 ⏰ \`𝙷𝙾𝚁𝙰𝚂 𝚅𝙸𝚅𝙸𝙳𝙰𝚂\` 』— ${Number(horasVividas || 0).toLocaleString('pt-BR')}
-『 ⏱️ \`𝙼𝙸𝙽𝚄𝚃𝙾𝚂 𝚅𝙸𝚅𝙸𝙳𝙾𝚂\` 』— ${Number(minutosVividos || 0).toLocaleString('pt-BR')}
-『 🎉 \`𝙿𝚁𝙾́𝚇𝙸𝙼𝙾 𝙰𝙽𝙸𝚅𝙴𝚁𝚂𝙰́𝚁𝙸𝙾\` 』— ${faltam <= 0 ? 'hoje' : `em ${faltam} dia(s)`}`
+> *『 📅 𝙽𝙰𝚂𝙲𝙸𝙼𝙴𝙽𝚃𝙾 』— ${nascimento}*
+> *『 🎈 𝙸𝙳𝙰𝙳𝙴 』— ${anos} anos, ${meses} meses e ${dias} dias*
+> *『 🗓️ 𝙳𝙸𝙰𝚂 𝚅𝙸𝚅𝙸𝙳𝙾𝚂 』— ${Number(diasVividos || 0).toLocaleString('pt-BR')}*
+> *『 ⏰ 𝙷𝙾𝚁𝙰𝚂 𝚅𝙸𝚅𝙸𝙳𝙰𝚂 』— ${Number(horasVividas || 0).toLocaleString('pt-BR')}*
+> *『 ⏱️ 𝙼𝙸𝙽𝚄𝚃𝙾𝚂 𝚅𝙸𝚅𝙸𝙳𝙾𝚂 』— ${Number(minutosVividos || 0).toLocaleString('pt-BR')}*
+> *『 🎉 𝙿𝚁𝙾́𝚇𝙸𝙼𝙾 𝙰𝙽𝙸𝚅𝙴𝚁𝚂𝙰́𝚁𝙸𝙾 』— ${faltam <= 0 ? 'hoje' : `em ${faltam} dia(s)`}*`
 }
 
 exports.totextSemAudio = prefix => {
 return `- 🎙️ \`𝚃𝚁𝙰𝙽𝚂𝙲𝚁𝙸𝙲̧𝙰̃𝙾\`
 
-『 🎧 \`𝙰́𝚄𝙳𝙸𝙾\` 』— ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜᴍ ᴀ́ᴜᴅɪᴏ ᴏᴜ ᴘᴛᴛ.
-『 🧩 \`𝙴𝚇𝙴𝙼𝙿𝙻𝙾\` 』— ${prefix}totext`
+> *『 🎧 𝙰́𝚄𝙳𝙸𝙾 』— ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜᴍ ᴀ́ᴜᴅɪᴏ ᴏᴜ ᴘᴛᴛ.*
+> *『 🧩 𝙴𝚇𝙴𝙼𝙿𝙻𝙾 』— ${prefix}totext*`
 }
 
 exports.totextResultado = ({ texto, idioma, duracao, confidence } = {}) => {
 const detalhes = [
-idioma ? `『 🌐 \`𝙸𝙳𝙸𝙾𝙼𝙰\` 』— ${idioma}` : '',
-duracao ? `『 ⏱️ \`𝙳𝚄𝚁𝙰𝙲̧𝙰̃𝙾\` 』— ${duracao}` : '',
-confidence != null ? `『 📊 \`𝙲𝙾𝙽𝙵𝙸𝙰𝙽𝙲̧𝙰\` 』— ${confidence}` : ''
+idioma ? `> *『 🌐 𝙸𝙳𝙸𝙾𝙼𝙰 』— ${idioma}*` : '',
+duracao ? `> *『 ⏱️ 𝙳𝚄𝚁𝙰𝙲̧𝙰̃𝙾 』— ${duracao}*` : '',
+confidence != null ? `> *『 📊 𝙲𝙾𝙽𝙵𝙸𝙰𝙽𝙲̧𝙰 』— ${confidence}*` : ''
 ].filter(Boolean).join('\n')
 
 return `- 🎙️ \`𝚃𝚁𝙰𝙽𝚂𝙲𝚁𝙸𝙲̧𝙰̃𝙾 𝙳𝙾 𝙰́𝚄𝙳𝙸𝙾\`
 
-『 📝 \`𝚃𝙴𝚇𝚃𝙾\` 』— ${texto || 'Nenhum texto identificado.'}${detalhes ? `\n\n${detalhes}` : ''}`
+> *『 📝 𝚃𝙴𝚇𝚃𝙾 』— ${texto || 'Nenhum texto identificado.'}${detalhes ? `\n\n${detalhes}` : ''}*`
 }
 
 exports.autortextResultado = (jid, resultado = {}) => {
@@ -3126,41 +3117,35 @@ const numero = String(jid || '').split('@')[0]
 
 return `- 🎙️ \`𝚃𝚁𝙰𝙽𝚂𝙲𝚁𝙸𝙲̧𝙰̃𝙾 𝙰𝚄𝚃𝙾𝙼𝙰́𝚃𝙸𝙲𝙰\`
 
-『 👤 \`𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\` 』— @${numero}
-『 📝 \`𝚃𝙴𝚇𝚃𝙾\` 』— ${resultado.texto || 'Nenhum texto identificado.'}`
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${numero}*
+> *『 📝 𝚃𝙴𝚇𝚃𝙾 』— ${resultado.texto || 'Nenhum texto identificado.'}*`
 }
 
 exports.transcricaoFalhou = () => {
 return `- ❌ \`𝚃𝚁𝙰𝙽𝚂𝙲𝚁𝙸𝙲̧𝙰̃𝙾 𝙵𝙰𝙻𝙷𝙾𝚄\`
 
-『 🎧 \`𝙰́𝚄𝙳𝙸𝙾\` 』— ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴘʀᴏᴄᴇssᴀʀ ᴇssᴇ ᴀ́ᴜᴅɪᴏ ᴀɢᴏʀᴀ.
+> *『 🎧 𝙰́𝚄𝙳𝙸𝙾 』— ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴘʀᴏᴄᴇssᴀʀ ᴇssᴇ ᴀ́ᴜᴅɪᴏ ᴀɢᴏʀᴀ.*
 
 > *ᴛᴇɴᴛᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ ᴄᴏᴍ ᴏᴜᴛʀᴏ ᴀ́ᴜᴅɪᴏ ᴏᴜ ᴘᴛᴛ.*`
 }
 exports.updateNotPublished = () => {
-return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
+return `- 🧊 \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-『 🧊 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Nenhuma nova versão publicada
-『 🤖 \`𝙱𝙾𝚃\` 』— Tokito Bot V10
-『 ✅ \`𝚂𝙸𝚃𝚄𝙰𝙲̧𝙰̃𝙾\` 』— Você já pode continuar usando a versão atual normalmente`
+> *『 ✅ 』— ɴᴇɴʜᴜᴍᴀ ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ ғᴏɪ ᴘᴜʙʟɪᴄᴀᴅᴀ.*`
 }
 
 exports.updateCheckError = () => {
-return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
+return `- ⚠️ \`𝙴𝚁𝚁𝙾 𝙽𝙰 𝚅𝙴𝚁𝙸𝙵𝙸𝙲𝙰𝙲̧𝙰̃𝙾\`
 
-『 ⚠️ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Verificação indisponível
-『 🌐 \`𝚂𝙴𝚁𝚅𝙸𝙳𝙾𝚁\` 』— Não foi possível consultar novas atualizações
-『 🤖 \`𝙱𝙾𝚃\` 』— Continuará funcionando normalmente
-『 🔄 \`𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴\` 』— Aguarde alguns instantes`
+> *『 🌐 』— ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴄᴏɴsᴜʟᴛᴀʀ ɴᴏᴠᴀs ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴏ̃ᴇs.*
+> *『 🔄 』— ᴛᴇɴᴛᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ ᴇᴍ ᴀʟɢᴜɴs ɪɴsᴛᴀɴᴛᴇs.*`
 }
 
 exports.updateEmptyFiles = versao => {
-return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
+return `- ❌ \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙸𝙽𝙲𝙾𝙼𝙿𝙻𝙴𝚃𝙰\`
 
-『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Atualização incompleta
-『 🆕 \`𝚅𝙴𝚁𝚂𝙰̃𝙾\` 』— ${versao || '—'}
-『 📦 \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂\` 』— Nenhum arquivo disponível para instalar
-『 🛡️ \`𝙿𝚁𝙾𝚃𝙴𝙲̧𝙰̃𝙾\` 』— A versão atual do bot não foi alterada`
+> *『 ${versao || '—'} 』— ᴠᴇʀsᴀ̃ᴏ ᴘᴜʙʟɪᴄᴀᴅᴀ sᴇᴍ ᴀʀǫᴜɪᴠᴏs ᴘᴀʀᴀ ɪɴsᴛᴀʟᴀʀ.*
+> *『 🛡️ 』— ᴀ ᴠᴇʀsᴀ̃ᴏ ᴀᴛᴜᴀʟ ɴᴀ̃ᴏ ғᴏɪ ᴀʟᴛᴇʀᴀᴅᴀ.*`
 }
 
 exports.updateInfo = ({
@@ -3173,76 +3158,56 @@ arquivos,
 removidos,
 prefix
 }) => {
-const status = disponivelAgora
-? 'Atualização disponível'
-: 'Bot atualizado'
-
-const listaArquivos = Array.isArray(arquivos)
-? arquivos.filter(Boolean)
-: []
-
-const listaRemovidos = Array.isArray(removidos)
-? removidos.filter(Boolean)
-: []
-
+const listaArquivos = Array.isArray(arquivos) ? arquivos.filter(Boolean) : []
+const listaRemovidos = Array.isArray(removidos) ? removidos.filter(Boolean) : []
 const totalArquivos = listaArquivos.length + listaRemovidos.length
 
 const alteracoes = Array.isArray(changelog) && changelog.length
-? changelog.map(item => `╰➤ ${item}`).join('\n')
-: '╰➤ Nenhuma nova alteração informada'
+? changelog.map(item => `> *『 • 』— ${item}*`).join('\n')
+: '> *『 • 』— ɴᴇɴʜᴜᴍᴀ ɴᴏᴠᴀ ᴀʟᴛᴇʀᴀᴄ̧ᴀ̃ᴏ ɪɴғᴏʀᴍᴀᴅᴀ.*'
 
 const arquivosTexto = totalArquivos
 ? `
 
-『 📦 \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂 𝙰𝙻𝚃𝙴𝚁𝙰𝙳𝙾𝚂\` 』— ${totalArquivos}
+- 📦 \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂\`
 
 ${listaArquivos.slice(0, 8).map(item => {
-const caminho = typeof item === 'object'
-? item.path
-: item
-
-return `╰➤ ${String(caminho || '').split('/').pop()}`
+const caminho = typeof item === 'object' ? item.path : item
+return `> *『 • 』— ${String(caminho || '').split('/').pop()}*`
 }).join('\n')}${listaRemovidos.length
-? `\n╰➤ ${listaRemovidos.length} arquivo(s) removido(s)`
+? `\n> *『 🗑️ 』— ${listaRemovidos.length} ᴀʀǫᴜɪᴠᴏ(s) sᴇʀᴀ̃ᴏ ʀᴇᴍᴏᴠɪᴅᴏ(s).*`
 : ''}`
 : ''
 
 const instalar = disponivelAgora
 ? `
 
-『 ⚙️ \`𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝚁\` 』— ${prefix}update start`
+> *『 📥 』— ᴜsᴇ ${prefix}update start ᴘᴀʀᴀ ɪɴsᴛᴀʟᴀʀ.*`
 : ''
 
-return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
+return `- 🧊 \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— Tokito Bot V10
-『 🧊 \`𝚅𝙴𝚁𝚂𝙰̃𝙾 𝙰𝚃𝚄𝙰𝙻\` 』— ${instalada}
-『 🆕 \`𝙽𝙾𝚅𝙰 𝚅𝙴𝚁𝚂𝙰̃𝙾\` 』— ${disponivel}
-『 📡 \`𝙲𝙰𝙽𝙰𝙻\` 』— ${canal}
-『 📊 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— ${status}
-『 📦 \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂\` 』— ${totalArquivos}
+> *『 ${instalada} 』— ᴠᴇʀsᴀ̃ᴏ ɪɴsᴛᴀʟᴀᴅᴀ.*
+> *『 ${disponivel} 』— ${disponivelAgora ? 'ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ ᴅɪsᴘᴏɴɪ́ᴠᴇʟ.' : 'ᴠᴇʀsᴀ̃ᴏ ᴍᴀɪs ʀᴇᴄᴇɴᴛᴇ.'}*
+> *『 ${totalArquivos} 』— ᴀʀǫᴜɪᴠᴏ(s) ᴀʟᴛᴇʀᴀᴅᴏ(s).*
 
-『 📝 \`𝙰𝙻𝚃𝙴𝚁𝙰𝙲̧𝙾̃𝙴𝚂\` 』
+- 📝 \`𝙰𝙻𝚃𝙴𝚁𝙰𝙲̧𝙾̃𝙴𝚂\`
+
 ${alteracoes}${arquivosTexto}${instalar}`
 }
 
 exports.updatePreparing = () => {
-return `-  \`𝙿𝚁𝙴𝙿𝙰𝚁𝙰𝙽𝙳𝙾 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
+return `- ⏳ \`𝙿𝚁𝙴𝙿𝙰𝚁𝙰𝙽𝙳𝙾 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-『 ⏳ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Preparando instalação
-『 💾 \`𝙱𝙰𝙲𝙺𝚄𝙿\` 』— Criando cópia da versão atual
-『 📦 \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂\` 』— Preparando novos arquivos
-『 🛡️ \`𝙿𝚁𝙾𝚃𝙴𝙲̧𝙰̃𝙾\` 』— Seus dados e sessão serão preservados
-『 ⚠️ \`𝙰𝚅𝙸𝚂𝙾\` 』— Não desligue o bot durante o processo`
+> *『 💾 』— ᴄʀɪᴀɴᴅᴏ ʙᴀᴄᴋᴜᴘ ᴅᴀ ᴠᴇʀsᴀ̃ᴏ ᴀᴛᴜᴀʟ.*
+> *『 📦 』— ᴘʀᴇᴘᴀʀᴀɴᴅᴏ ᴏs ɴᴏᴠᴏs ᴀʀǫᴜɪᴠᴏs.*
+> *『 ⚠️ 』— ɴᴀ̃ᴏ ᴅᴇsʟɪɢᴜᴇ ᴏ ʙᴏᴛ ᴅᴜʀᴀɴᴛᴇ ᴏ ᴘʀᴏᴄᴇssᴏ.*`
 }
 
 exports.updateAlreadyLatest = versao => {
-return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
+return `- ✅ \`𝙱𝙾𝚃 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙳𝙾\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— Tokito Bot V10
-『 🧊 \`𝚅𝙴𝚁𝚂𝙰̃𝙾\` 』— ${versao}
-『 ✅ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Você já está usando a versão mais recente
-『 📡 \`𝙲𝙰𝙽𝙰𝙻\` 』— Stable`
+> *『 ${versao} 』— ᴠᴏᴄᴇ̂ ᴊᴀ́ ᴇsᴛᴀ́ ᴜsᴀɴᴅᴏ ᴀ ᴠᴇʀsᴀ̃ᴏ ᴍᴀɪs ʀᴇᴄᴇɴᴛᴇ.*`
 }
 
 exports.updateSuccess = (
@@ -3251,64 +3216,67 @@ nova,
 arquivos = 0,
 removidos = 0
 ) => {
-return `-  \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙲𝙾𝙽𝙲𝙻𝚄𝙸́𝙳𝙰\`
+let texto = `- ✅ \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙲𝙾𝙽𝙲𝙻𝚄𝙸́𝙳𝙰\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— Tokito Bot V10
-『 📥 \`𝚅𝙴𝚁𝚂𝙰̃𝙾 𝙰𝙽𝚃𝙴𝚁𝙸𝙾𝚁\` 』— ${anterior}
-『 🆕 \`𝙽𝙾𝚅𝙰 𝚅𝙴𝚁𝚂𝙰̃𝙾\` 』— ${nova}
-『 📦 \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙳𝙾𝚂\` 』— ${Number(arquivos || 0)}
-『 🗑️ \`𝙰𝚁𝚀𝚄𝙸𝚅𝙾𝚂 𝚁𝙴𝙼𝙾𝚅𝙸𝙳𝙾𝚂\` 』— ${Number(removidos || 0)}
-『 ✅ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Instalação concluída com sucesso
-『 🔄 \`𝚁𝙴𝙸𝙽𝙸𝙲𝙸𝙰𝙽𝙳𝙾\` 』— O bot será reiniciado agora`
+> *『 ${anterior} → ${nova} 』— ᴠᴇʀsᴀ̃ᴏ ᴀᴛᴜᴀʟɪᴢᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ.*
+> *『 ${Number(arquivos || 0)} 』— ᴀʀǫᴜɪᴠᴏ(s) ᴀᴛᴜᴀʟɪᴢᴀᴅᴏ(s).*`
+
+if (Number(removidos || 0) > 0) {
+texto += `
+
+> *『 ${Number(removidos || 0)} 』— ᴀʀǫᴜɪᴠᴏ(s) ʀᴇᴍᴏᴠɪᴅᴏ(s).*`
+}
+
+texto += `
+
+> *『 🔄 』— ᴏ ʙᴏᴛ sᴇʀᴀ́ ʀᴇɪɴɪᴄɪᴀᴅᴏ ᴀɢᴏʀᴀ.*`
+
+return texto
 }
 
 exports.updateError = () => {
-return `-  \`𝙵𝙰𝙻𝙷𝙰 𝙽𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
+return `- ❌ \`𝙵𝙰𝙻𝙷𝙰 𝙽𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Não foi possível concluir a atualização
-『 🛡️ \`𝙿𝚁𝙾𝚃𝙴𝙲̧𝙰̃𝙾\` 』— Seus dados e sessão foram preservados
-『 🔄 \`𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴\` 』— Aguarde alguns instantes e repita o comando`
+> *『 ⚠️ 』— ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴄᴏɴᴄʟᴜɪʀ ᴀ ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ.*
+> *『 🔄 』— ᴛᴇɴᴛᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ ᴇᴍ ᴀʟɢᴜɴs ɪɴsᴛᴀɴᴛᴇs.*`
 }
 
 exports.updateRollbackSuccess = versao => {
-return `-  \`𝙱𝙰𝙲𝙺𝚄𝙿 𝚁𝙴𝚂𝚃𝙰𝚄𝚁𝙰𝙳𝙾\`
+return `- ↩️ \`𝙱𝙰𝙲𝙺𝚄𝙿 𝚁𝙴𝚂𝚃𝙰𝚄𝚁𝙰𝙳𝙾\`
 
-『 🤖 \`𝙱𝙾𝚃\` 』— Tokito Bot V10
-『 ↩️ \`𝚅𝙴𝚁𝚂𝙰̃𝙾\` 』— ${versao}
-『 ✅ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Backup restaurado com sucesso
-『 🔄 \`𝚁𝙴𝙸𝙽𝙸𝙲𝙸𝙰𝙽𝙳𝙾\` 』— O bot será reiniciado agora`
+> *『 ${versao} 』— ᴠᴇʀsᴀ̃ᴏ ʀᴇsᴛᴀᴜʀᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ.*
+> *『 🔄 』— ᴏ ʙᴏᴛ sᴇʀᴀ́ ʀᴇɪɴɪᴄɪᴀᴅᴏ ᴀɢᴏʀᴀ.*`
 }
 
 exports.updateRollbackError = () => {
-return `-  \`𝙱𝙰𝙲𝙺𝚄𝙿 𝙸𝙽𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻\`
+return `- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙾 𝙱𝙰𝙲𝙺𝚄𝙿\`
 
-『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Não foi possível restaurar o backup
-『 💾 \`𝙱𝙰𝙲𝙺𝚄𝙿\` 』— Nenhuma restauração foi aplicada
-『 🔄 \`𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴\` 』— Aguarde alguns instantes e tente novamente`
+> *『 💾 』— ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ʀᴇsᴛᴀᴜʀᴀʀ ᴏ ʙᴀᴄᴋᴜᴘ.*
+> *『 🔄 』— ᴛᴇɴᴛᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ ᴇᴍ ᴀʟɢᴜɴs ɪɴsᴛᴀɴᴛᴇs.*`
 }
 
 exports.updateUsage = prefix => {
-return `-  \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙳𝙴 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
+return `- ⚙️ \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙳𝙴 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
-『 🔎 \`𝚅𝙴𝚁𝙸𝙵𝙸𝙲𝙰𝚁\` 』— ${prefix}update check
-『 📋 \`𝙸𝙽𝙵𝙾\` 』— ${prefix}update info
-『 📥 \`𝙸𝙽𝚂𝚃𝙰𝙻𝙰𝚁\` 』— ${prefix}update start
-『 ↩️ \`𝚁𝙴𝚂𝚃𝙰𝚄𝚁𝙰𝚁\` 』— ${prefix}update rollback`
+> *『 ${prefix}update check 』— ᴠᴇʀɪғɪᴄᴀʀ ɴᴏᴠᴀs ᴠᴇʀsᴏ̃ᴇs.*
+> *『 ${prefix}update info 』— ᴠᴇʀ ɪɴғᴏʀᴍᴀᴄ̧ᴏ̃ᴇs.*
+> *『 ${prefix}update start 』— ɪɴsᴛᴀʟᴀʀ ᴀ ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ.*
+> *『 ${prefix}update rollback 』— ʀᴇsᴛᴀᴜʀᴀʀ ᴏ ʙᴀᴄᴋᴜᴘ.*`
 }
 
 exports.gerarLinkSemMidia = prefix => {
 return `- 🔗 \`𝙶𝙴𝚁𝙰𝚁 𝙻𝙸𝙽𝙺\`
 
-『 📎 \`𝙼𝙸́𝙳𝙸𝙰\` 』— Responda uma imagem, vídeo, áudio, sticker ou documento.
-『 ⚙️ \`𝚄𝚂𝙾\` 』— ${prefix}gerarlink`
+> *『 📎 𝙼𝙸́𝙳𝙸𝙰 』— Responda uma imagem, vídeo, áudio, sticker ou documento.*
+> *『 ⚙️ 𝚄𝚂𝙾 』— ${prefix}gerarlink*`
 }
 
 exports.gerarLinkResultado = (tipo, ext, url) => {
 return `- 🔗 \`𝙻𝙸𝙽𝙺 𝙶𝙴𝚁𝙰𝙳𝙾\`
 
-『 📁 \`𝚃𝙸𝙿𝙾\` 』— ${tipo}
-『 🧩 \`𝙵𝙾𝚁𝙼𝙰𝚃𝙾\` 』— ${String(ext || 'bin').toUpperCase()}
-『 🔗 \`𝚄𝚁𝙻\` 』— ${url}
+> *『 📁 𝚃𝙸𝙿𝙾 』— ${tipo}*
+> *『 🧩 𝙵𝙾𝚁𝙼𝙰𝚃𝙾 』— ${String(ext || 'bin').toUpperCase()}*
+> *『 🔗 𝚄𝚁𝙻 』— ${url}*
 
 > *O link foi gerado através do servidor temporário usado pelo Tokito.*`
 }
@@ -3316,6 +3284,6 @@ return `- 🔗 \`𝙻𝙸𝙽𝙺 𝙶𝙴𝚁𝙰𝙳𝙾\`
 exports.gerarLinkFalhou = () => {
 return `- ❌ \`𝙵𝙰𝙻𝙷𝙰 𝙰𝙾 𝙶𝙴𝚁𝙰𝚁 𝙻𝙸𝙽𝙺\`
 
-『 ⚠️ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Não foi possível hospedar este arquivo agora.
-『 🔄 \`𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴\` 』— Aguarde alguns instantes e repita o comando.`
+> *『 ⚠️ 𝚂𝚃𝙰𝚃𝚄𝚂 』— Não foi possível hospedar este arquivo agora.*
+> *『 🔄 𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴 』— Aguarde alguns instantes e repita o comando.*`
 }

@@ -138,6 +138,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}promover @usuario
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}rebaixar @usuario
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}limpar
+┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}linkgp 
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}marcar mensagem
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}hidetag mensagem
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}totag mensagem

@@ -67,11 +67,12 @@ delete global.akinatorMensagens[from]
 }
 
 if (jogo && jogo.sender !== sender) {
-return reply(`🧞‍♂️ *ᴀᴋɪɴᴀᴛᴏʀ*
+return reply(`-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️
 
-💭 ᴊᴀ ᴇxɪsᴛᴇ ᴜᴍ ᴊᴏɢᴏ ᴇᴍ ᴀɴᴅᴀᴍᴇɴᴛᴏ.
+『 ⚠️ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Já existe uma partida em andamento.
+『 👤 \`𝙹𝙾𝙶𝙰𝙳𝙾𝚁\` 』— ${jogo.nome || 'Alguém'}
 
-👤 ᴊᴏɢᴀᴅᴏʀ: *${jogo.nome || 'ᴀʟɢᴜᴇᴍ'}*`)
+> *Aguarde a partida atual terminar ou ser cancelada.*`)
 }
 
 const normalizar = (txt = '') => String(txt || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, ' ').trim()
@@ -168,11 +169,11 @@ const etapa = r.etapa || r.step || 1
 const progresso = Number(r.progresso || r.progress || r.progression || 0).toFixed(1)
 const img = `${API_URL}/canvas/akinator?modo=pergunta&etapa=${encodeURIComponent(etapa)}&pergunta=${encodeURIComponent(p)}&progresso=${encodeURIComponent(progresso)}&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
 
-let msg = `🧞‍♂️ *${titulo}*\n\n`
-msg += `❓ ᴘᴇʀɢᴜɴᴛᴀ *${etapa}*\n\n`
-msg += `💭 ${p}\n\n`
-msg += `📊 ᴘʀᴏɢʀᴇssᴀᴏ: *${progresso}%*\n\n`
-msg += `ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ʀᴇsᴘᴏsᴛᴀ ᴀʙᴀɪxᴏ.`
+let msg = `-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️\n\n`
+msg += `『 ❓ \`𝙿𝙴𝚁𝙶𝚄𝙽𝚃𝙰\` 』— ${etapa}\n`
+msg += `『 📊 \`𝙿𝚁𝙾𝙶𝚁𝙴𝚂𝚂𝙾\` 』— ${progresso}%\n\n`
+msg += `> *${p}*\n\n`
+msg += `*Escolha uma resposta abaixo.*`
 
 return interativo({ texto: msg, imagem: img, botoes: botoesResposta })
 }
@@ -180,10 +181,10 @@ return interativo({ texto: msg, imagem: img, botoes: botoesResposta })
 if (!q || !q.trim()) {
 const img = `${API_URL}/canvas/akinator?modo=inicio&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
 
-let msg = `🧞‍♂️ *ᴀᴋɪɴᴀᴛᴏʀ*\n\n`
-msg += `- *💭 | ᴘᴇɴsᴇ ᴇᴍ ᴜᴍ ᴘᴇʀsᴏɴᴀɢᴇᴍ*\n`
-msg += `- *🎭 | ᴘᴏᴅᴇ sᴇʀ ʀᴇᴀʟ ᴏᴜ ғɪᴄᴛɪᴄɪᴏ*\n\n`
-msg += `> ᴄʟɪǫᴜᴇ ɴᴏ ʙᴏᴛᴀᴏ ᴀʙᴀɪxᴏ ᴘᴀʀᴀ ᴄᴏᴍᴇᴄᴀʀ.`
+let msg = `-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️\n\n`
+msg += `『 💭 \`𝙾𝙱𝙹𝙴𝚃𝙸𝚅𝙾\` 』— Pense em um personagem.\n`
+msg += `『 🎭 \`𝚃𝙸𝙿𝙾\` 』— Pode ser real ou fictício.\n\n`
+msg += `> *Toque em Jogar para começar a partida.*`
 
 return interativo({ texto: msg, imagem: img, botoes: botoesInicio })
 }
@@ -191,10 +192,10 @@ return interativo({ texto: msg, imagem: img, botoes: botoesInicio })
 const arg = normalizar(q)
 
 if (['acertei', 'acertou', 'sim acertou'].includes(arg)) {
-let msg = `🧞‍♂️ *ɪɴᴄʀɪᴠᴇʟ!*\n\n`
-msg += `😎 ᴇᴜ sᴀʙɪᴀ!\n\n`
-msg += `✨ ғᴏɪ ᴜᴍ ᴏᴛɪᴍᴏ ᴅᴇsᴀғɪᴏ.\n\n`
-msg += `ᴠᴀᴍᴏs ᴊᴏɢᴀʀ ɴᴏᴠᴀᴍᴇɴᴛᴇ?`
+let msg = `-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️\n\n`
+msg += `『 🎯 \`𝚁𝙴𝚂𝚄𝙻𝚃𝙰𝙳𝙾\` 』— Acertei!\n`
+msg += `『 😎 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Eu sabia que conseguiria.\n\n`
+msg += `> *Foi um ótimo desafio. Quer jogar novamente?*`
 
 await interativo({ texto: msg, botoes: botoesInicio })
 delete global.akinatorJogos[from]
@@ -202,10 +203,10 @@ return
 }
 
 if (['errou', 'nao acertou', 'não acertou', 'naoacertou'].includes(arg)) {
-let msg = `🧞‍♂️ *ᴀʜʜ...*\n\n`
-msg += `😅 ᴅᴇssᴀ ᴠᴇᴢ ᴠᴏᴄᴇ ᴍᴇ ᴠᴇɴᴄᴇᴜ.\n\n`
-msg += `🔮 ɴᴀ ᴘʀᴏxɪᴍᴀ ᴇᴜ ᴠᴏᴜ ᴀᴄᴇʀᴛᴀʀ.\n\n`
-msg += `✨ ᴠᴀᴍᴏs ᴛᴇɴᴛᴀʀ ɴᴏᴠᴀᴍᴇɴᴛᴇ?`
+let msg = `-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️\n\n`
+msg += `『 😅 \`𝚁𝙴𝚂𝚄𝙻𝚃𝙰𝙳𝙾\` 』— Dessa vez eu errei.\n`
+msg += `『 🔮 \`𝙳𝙴𝚂𝙰𝙵𝙸𝙾\` 』— Na próxima eu tento acertar.\n\n`
+msg += `> *Quer começar uma nova partida?*`
 
 await interativo({ texto: msg, botoes: botoesInicio })
 delete global.akinatorJogos[from]
@@ -222,16 +223,19 @@ timeout: 30000
 
 if (!data?.status) {
 delete global.akinatorJogos[from]
-return reply(`🧞‍♂️ *ᴀᴋɪɴᴀᴛᴏʀ*\n\n😅 ɴᴀᴏ ᴄᴏɴsᴇɢᴜɪ ɪɴɪᴄɪᴀʀ ᴏ ᴊᴏɢᴏ.\n\n${data?.resultado || data?.erro || ''}`)
+return reply(`-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️
+
+『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Não foi possível iniciar a partida.
+『 ⚠️ \`𝙼𝙾𝚃𝙸𝚅𝙾\` 』— ${data?.resultado || data?.erro || 'Tente novamente em alguns instantes.'}`)
 }
 
 return pergunta(data.resultado || data.result || {})
 }
 
 if (!jogo) {
-let msg = `🧞‍♂️ *ᴀᴋɪɴᴀᴛᴏʀ*\n\n`
-msg += `💭 ɴᴇɴʜᴜᴍ ᴊᴏɢᴏ ᴇᴍ ᴀɴᴅᴀᴍᴇɴᴛᴏ.\n\n`
-msg += `✨ ᴛᴏǫᴜᴇ ᴇᴍ *ᴊᴏɢᴀʀ* ᴘᴀʀᴀ ᴄᴏᴍᴇᴄᴀʀ.`
+let msg = `-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️\n\n`
+msg += `『 💭 \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Nenhuma partida em andamento.\n\n`
+msg += `> *Toque em Jogar para começar.*`
 
 return interativo({ texto: msg, botoes: botoesInicio })
 }
@@ -246,9 +250,9 @@ timeout: 30000
 
 delete global.akinatorJogos[from]
 
-let msg = `🧞‍♂️ *ᴀᴋɪɴᴀᴛᴏʀ*\n\n`
-msg += `✨ ᴏ ᴊᴏɢᴏ ғᴏɪ ᴇɴᴄᴇʀʀᴀᴅᴏ.\n\n`
-msg += `🔮 ǫᴜᴀɴᴅᴏ ǫᴜɪsᴇʀ, ᴘᴏᴅᴇᴍᴏs ᴛᴇɴᴛᴀʀ ᴅᴇ ɴᴏᴠᴏ.`
+let msg = `-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️\n\n`
+msg += `『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Partida encerrada.\n`
+msg += `『 🔮 \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 』— Quando quiser, podemos tentar novamente.`
 
 return interativo({ texto: msg, botoes: botoesInicio })
 }
@@ -260,7 +264,10 @@ timeout: 30000
 })
 
 if (!data?.status) {
-return reply(`🧞‍♂️ *ᴀᴋɪɴᴀᴛᴏʀ*\n\n😅 ɴᴀᴏ ᴄᴏɴsᴇɢᴜɪ ᴠᴏʟᴛᴀʀ.\n\n${data?.resultado || data?.erro || ''}`)
+return reply(`-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️
+
+『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Não foi possível voltar.
+『 ⚠️ \`𝙼𝙾𝚃𝙸𝚅𝙾\` 』— ${data?.resultado || data?.erro || 'Não existe uma pergunta anterior disponível.'}`)
 }
 
 return pergunta(data.resultado || data.result || {})
@@ -280,7 +287,9 @@ const resposta = mapa[arg]
 
 if (!resposta) {
 return interativo({
-texto: `🧞‍♂️ *ᴀᴋɪɴᴀᴛᴏʀ*\n\n🤔 ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ʀᴇsᴘᴏsᴛᴀ ᴀʙᴀɪxᴏ.`,
+texto: `-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️
+
+『 🤔 \`𝚁𝙴𝚂𝙿𝙾𝚂𝚃𝙰\` 』— Escolha uma das opções abaixo.`,
 botoes: botoesResposta
 })
 }
@@ -291,7 +300,10 @@ timeout: 30000
 })
 
 if (!data?.status) {
-return reply(`🧞‍♂️ *ᴀᴋɪɴᴀᴛᴏʀ*\n\n😅 ᴅᴇᴜ ᴜᴍ ᴘʀᴏʙʟᴇᴍᴀ.\n\n${data?.resultado || data?.erro || ''}`)
+return reply(`-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️
+
+『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Ocorreu um problema ao processar a resposta.
+『 ⚠️ \`𝙼𝙾𝚃𝙸𝚅𝙾\` 』— ${data?.resultado || data?.erro || 'Tente novamente.'}`)
 }
 
 const r = data.resultado || data.result || {}
@@ -306,11 +318,11 @@ const foto = acerto.foto || ''
 const progresso = Number(r.progresso || r.progress || r.progression || 0).toFixed(1)
 const img = `${API_URL}/canvas/akinator?modo=resultado&personagem=${encodeURIComponent(nome)}&descricao=${encodeURIComponent(desc)}&foto=${encodeURIComponent(foto)}&progresso=${encodeURIComponent(progresso)}&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
 
-let msg = `🧞‍♂️ *ᴇᴜ ᴀᴄʜᴏ ǫᴜᴇ ᴇɴᴄᴏɴᴛʀᴇɪ!*\n\n`
-msg += `🎭 *${nome}*\n\n`
-msg += `📖 ${desc}\n\n`
-msg += `📊 ᴄᴏɴғɪᴀɴᴄᴀ: *${progresso}%*\n\n`
-msg += `🤔 ᴀᴄᴇʀᴛᴇɪ?`
+let msg = `-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️\n\n`
+msg += `『 🎭 \`𝙿𝙴𝚁𝚂𝙾𝙽𝙰𝙶𝙴𝙼\` 』— ${nome}\n`
+msg += `『 📊 \`𝙲𝙾𝙽𝙵𝙸𝙰𝙽𝙲̧𝙰\` 』— ${progresso}%\n\n`
+msg += `『 📖 \`𝙳𝙴𝚂𝙲𝚁𝙸𝙲̧𝙰̃𝙾\` 』— ${desc}\n\n`
+msg += `> *Acertei o personagem?*`
 
 return interativo({ texto: msg, imagem: img, botoes: botoesResultado })
 }
@@ -320,7 +332,10 @@ return pergunta(r)
 } catch (e) {
 console.log('[AKINATOR]', e?.response?.data || e?.message || e)
 await reagir(from, '❌').catch(() => {})
-return reply(`🧞‍♂️ *ᴀᴋɪɴᴀᴛᴏʀ*\n\n😅 ᴅᴇᴜ ᴇʀʀᴏ: ${e?.response?.data?.erro || e?.message || 'erro desconhecido'}`)
+return reply(`-  \`𝙰𝙺𝙸𝙽𝙰𝚃𝙾𝚁\` 🧞‍♂️
+
+『 ❌ \`𝚂𝚃𝙰𝚃𝚄𝚂\` 』— Ocorreu um erro no Akinator.
+『 ⚠️ \`𝙴𝚁𝚁𝙾\` 』— ${e?.response?.data?.erro || e?.message || 'Erro desconhecido'}`)
 }
 }
 }
