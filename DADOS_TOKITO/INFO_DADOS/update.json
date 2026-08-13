@@ -1,39 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.33",
+  "version": "10.0.34",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-13T23:49:51.916Z",
+  "publishedAt": "2026-08-13T23:50:09.199Z",
   "changelog": [
-    "[Correção] 3 arquivos atualizados",
-    "A versão 10.0.33 já está disponível para atualização.",
-    "Global atualizado",
-    "Infoplanos atualizado",
-    "Menus atualizados"
+    "[Correção] Plans atualizado",
+    "A versão 10.0.34 já está disponível para atualização.",
+    "Plans atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "3 arquivos atualizados",
-  "notice": "A versão 10.0.33 já está disponível para atualização.",
+  "title": "Plans atualizado",
+  "notice": "A versão 10.0.34 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/database/lib/global.js",
-      "sha256": "fd05dc748529354e6e660721751e7900bec35d943d5e9bbb0fe5fe388213a890",
-      "size": 143590
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/aluguel/infoplanos.js",
-      "sha256": "a2cc6baab6414adc65ddfdc51f7c5b0fb35489ad6cac97c50c659ec830fae3b6",
-      "size": 338
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/menus.js",
-      "sha256": "ddf9559e6832c8bf4e8c7d3d875dba305cf868024b56eaa522a988138ecc903e",
-      "size": 48578
+      "path": "DADOS_TOKITO/plugins/aluguel/plans.js",
+      "sha256": "7fc5c1a588c84edc951e5197b4e976b114f442216f274bce1dd503178add8d63",
+      "size": 6568
     }
   ],
   "releases": [
@@ -717,6 +705,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-13T23:49:51.916Z"
+    },
+    {
+      "version": "10.0.34",
+      "fromVersion": "10.0.33",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Plans atualizado",
+      "notice": "A versão 10.0.34 já está disponível para atualização.",
+      "changelog": [
+        "Plans atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/plans.js",
+          "sha256": "7fc5c1a588c84edc951e5197b4e976b114f442216f274bce1dd503178add8d63",
+          "size": 6568
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-13T23:50:09.199Z"
     }
   ]
 }
