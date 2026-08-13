@@ -28,9 +28,43 @@
  * ============================================================
  */
 
-const modulos = require('../../sistemas/modulos')
-
 const listaJids = ctx => [...new Set((ctx.groupMembers || []).map(m => ctx.nJid(m)).filter(Boolean))]
+
+const quotedMessage = info => {
+const m = info?.message || {}
+return m?.extendedTextMessage?.contextInfo?.quotedMessage ||
+m?.imageMessage?.contextInfo?.quotedMessage ||
+m?.videoMessage?.contextInfo?.quotedMessage ||
+m?.documentMessage?.contextInfo?.quotedMessage ||
+m?.audioMessage?.contextInfo?.quotedMessage ||
+m?.stickerMessage?.contextInfo?.quotedMessage || null
+}
+
+const desenrolar = msg => {
+let m = msg
+for (let i = 0; i < 5; i++) {
+if (m?.ephemeralMessage?.message) { m = m.ephemeralMessage.message; continue }
+if (m?.viewOnceMessage?.message) { m = m.viewOnceMessage.message; continue }
+if (m?.viewOnceMessageV2?.message) { m = m.viewOnceMessageV2.message; continue }
+if (m?.viewOnceMessageV2Extension?.message) { m = m.viewOnceMessageV2Extension.message; continue }
+if (m?.documentWithCaptionMessage?.message) { m = m.documentWithCaptionMessage.message; continue }
+break
+}
+return m || {}
+}
+
+const editarLegenda = (msg, texto) => {
+if (!texto) return msg
+const m = desenrolar(msg)
+const tipos = ['imageMessage', 'videoMessage', 'documentMessage']
+for (const tipo of tipos) {
+if (m?.[tipo]) {
+m[tipo].caption = texto
+break
+}
+}
+return msg
+}
 
 module.exports = {
 nome: 'marcar',
@@ -41,80 +75,75 @@ descricao: 'Marca todos os membros do grupo.',
 uso: 'marcar mensagem | hidetag mensagem',
 permissao: 'ADM'
 },
+
 async executar(ctx) {
-if (!ctx.isGroup)
-return ctx.reply(ctx.mess.sogrupo())
-if (!ctx.isGroupAdmins)
-return ctx.reply(ctx.mess.soadm())
-if (!ctx.isBotGroupAdmins)
-return ctx.reply(ctx.mess.botadm())
+if (!ctx.isGroup) return ctx.reply(ctx.mess.sogrupo())
+if (!ctx.isGroupAdmins) return ctx.reply(ctx.mess.soadm())
+if (!ctx.isBotGroupAdmins) return ctx.reply(ctx.mess.botadm())
+
 const membros = listaJids(ctx)
+const texto = String(ctx.q || '').trim()
+const contexto = { ...ctx.canalInfo(membros), mentionedJid: membros }
+
 if (ctx.command === 'marcar') {
-const extra = String(ctx.q || '').trim()
-const texto = `${extra ? `${extra}\n\n` : ''}${membros.map(j => `@${j.split('@')[0]}`).join('\n')}`
+const msg = `${texto ? `${texto}\n\n` : ''}${membros.map(j => `@${j.split('@')[0]}`).join('\n')}`
+return ctx.tokito.sendMessage(ctx.from, {
+text: msg,
+mentions: membros,
+contextInfo: contexto
+}, { quoted: ctx.selo })
+}
+
+const quoted = quotedMessage(ctx.info)
+
+if (!quoted && texto) {
 return ctx.tokito.sendMessage(ctx.from, {
 text: texto,
 mentions: membros,
-contextInfo: ctx.canalInfo(membros)
+contextInfo: contexto
 }, { quoted: ctx.selo })
 }
-const mid = modulos.mediaAtual(ctx)
-const caption = String(ctx.q || '').trim()
-const base = {
+
+if (quoted) {
+const aberto = desenrolar(quoted)
+const poll = aberto?.pollCreationMessageV3 || aberto?.pollCreationMessageV2 || aberto?.pollCreationMessage
+
+if (poll) {
+const titulo = poll.name || 'Enquete'
+const opcoes = (poll.options || []).map(o => o?.optionName || o?.name).filter(Boolean)
+const aviso = await ctx.tokito.sendMessage(ctx.from, {
+text: texto || '🧊',
 mentions: membros,
-contextInfo: ctx.canalInfo(membros)
-}
-if (mid.image) {
-const b = await ctx.getFileBuffer(mid.image, 'image')
-return ctx.tokito.sendMessage(ctx.from, {
-image: b,
-caption: caption || mid.image.caption || '',
-...base
+contextInfo: contexto
 }, { quoted: ctx.selo })
-}
-if (mid.video) {
-const b = await ctx.getFileBuffer(mid.video, 'video')
-return ctx.tokito.sendMessage(ctx.from, {
-video: b,
-caption: caption || mid.video.caption || '',
-mimetype: mid.video.mimetype || 'video/mp4',
-...base
-}, { quoted: ctx.selo })
-}
-if (mid.audio) {
-const b = await ctx.getFileBuffer(mid.audio, 'audio')
-return ctx.tokito.sendMessage(ctx.from, {
-audio: b,
-mimetype: mid.audio.mimetype || 'audio/ogg; codecs=opus',
-ptt: Boolean(mid.audio.ptt),
-...base
-}, { quoted: ctx.selo })
-}
-if (mid.document) {
-const b = await ctx.getFileBuffer(mid.document, 'document')
-return ctx.tokito.sendMessage(ctx.from, {
-document: b,
-mimetype: mid.document.mimetype || 'application/octet-stream',
-fileName: mid.document.fileName || 'arquivo',
-caption: caption || mid.document.caption || '',
-...base
-}, { quoted: ctx.selo })
-}
-if (mid.poll) {
-const valores = (mid.poll.options || []).map(o => o.optionName || o.name).filter(Boolean)
+
 return ctx.tokito.sendMessage(ctx.from, {
 poll: {
-name: caption || mid.poll.name || 'Enquete',
-values: valores,
-selectableCount: Number(mid.poll.selectableOptionsCount || 1)
+name: titulo,
+values: opcoes,
+selectableCount: Number(poll.selectableCount || poll.selectableOptionsCount || 1),
+contextInfo: contexto
 },
-contextInfo: ctx.canalInfo(membros)
+mentions: membros,
+contextInfo: contexto
+}, { quoted: aviso })
+}
+
+editarLegenda(quoted, texto)
+
+return ctx.tokito.sendMessage(ctx.from, {
+forward: {
+key: ctx.info?.key || {},
+message: quoted
+},
+mentions: membros,
+contextInfo: contexto
 }, { quoted: ctx.selo })
 }
-return ctx.tokito.sendMessage(ctx.from, {
-text: caption || ctx.body.replace(/^\S+\s*/, '') || '🧊',
-mentions: membros,
-contextInfo: ctx.canalInfo(membros)
-}, { quoted: ctx.selo })
+
+return ctx.reply(`*ᴜsᴇ ᴏ ᴄᴏᴍᴀɴᴅᴏ ᴅᴇ ᴅᴜᴀs ᴍᴀɴᴇɪʀᴀs 🙇‍♂️*
+
+> *1.* ᴍᴀʀǫᴜᴇ ᴀ ᴍᴇɴsᴀɢᴇᴍ (ғᴏᴛᴏ, ᴠɪᴅᴇᴏ, ᴀᴜᴅɪᴏ, ᴇɴǫᴜᴇᴛᴇ, ᴇᴛᴄ)
+> *2.* ᴏᴜ ᴅɪɢɪᴛᴇ *${ctx.prefix + ctx.command}* sᴇɢᴜɪᴅᴏ ᴅᴀ sᴜᴀ ᴍᴇɴsᴀɢᴇᴍ`)
 }
 }

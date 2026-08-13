@@ -1,33 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.24",
+  "version": "10.0.25",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-12T17:30:05.351Z",
+  "publishedAt": "2026-08-13T00:06:01.491Z",
   "changelog": [
-    "[Correção] 2 arquivos atualizados",
-    "A versão 10.0.24 já está disponível para atualização.",
-    "Aprovacao atualizado",
-    "Global atualizado"
+    "[Correção] Marcacoes atualizado",
+    "A versão 10.0.25 já está disponível para atualização.",
+    "Marcacoes atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "2 arquivos atualizados",
-  "notice": "A versão 10.0.24 já está disponível para atualização.",
+  "title": "Marcacoes atualizado",
+  "notice": "A versão 10.0.25 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/funcoes/aprovacao.js",
-      "sha256": "25e04ba88eb76eba52b25505e234d516bc83f209d61699055f5935d3261d414e",
-      "size": 12004
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/global.js",
-      "sha256": "971f2ee2424a3e92778d12e2405c0cafd39a5f9c08490efa389cb960b58c41ac",
-      "size": 144975
+      "path": "DADOS_TOKITO/plugins/admin/marcacoes.js",
+      "sha256": "d0524adaf591d006fb1e6512b4a9c7dde5ead650f59d4c120c78376ca67f09f4",
+      "size": 4610
     }
   ],
   "releases": [
@@ -480,6 +474,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-12T17:30:05.351Z"
+    },
+    {
+      "version": "10.0.25",
+      "fromVersion": "10.0.24",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Marcacoes atualizado",
+      "notice": "A versão 10.0.25 já está disponível para atualização.",
+      "changelog": [
+        "Marcacoes atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/marcacoes.js",
+          "sha256": "d0524adaf591d006fb1e6512b4a9c7dde5ead650f59d4c120c78376ca67f09f4",
+          "size": 4610
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-13T00:06:01.491Z"
     }
   ]
 }
