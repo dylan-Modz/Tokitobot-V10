@@ -1,27 +1,39 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.32",
+  "version": "10.0.33",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-13T23:31:41.414Z",
+  "publishedAt": "2026-08-13T23:49:51.916Z",
   "changelog": [
-    "[Correção] Menus atualizados",
-    "A versão 10.0.32 já está disponível para atualização.",
+    "[Correção] 3 arquivos atualizados",
+    "A versão 10.0.33 já está disponível para atualização.",
+    "Global atualizado",
+    "Infoplanos atualizado",
     "Menus atualizados"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Menus atualizados",
-  "notice": "A versão 10.0.32 já está disponível para atualização.",
+  "title": "3 arquivos atualizados",
+  "notice": "A versão 10.0.33 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/database/lib/global.js",
+      "sha256": "fd05dc748529354e6e660721751e7900bec35d943d5e9bbb0fe5fe388213a890",
+      "size": 143590
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/aluguel/infoplanos.js",
+      "sha256": "a2cc6baab6414adc65ddfdc51f7c5b0fb35489ad6cac97c50c659ec830fae3b6",
+      "size": 338
+    },
+    {
       "path": "DADOS_TOKITO/database/lib/menus.js",
-      "sha256": "8794b60f77f26d72444579943485e4f06a1049be4ddcd8c2c1fb6a9be2a62354",
-      "size": 48528
+      "sha256": "ddf9559e6832c8bf4e8c7d3d875dba305cf868024b56eaa522a988138ecc903e",
+      "size": 48578
     }
   ],
   "releases": [
@@ -672,6 +684,39 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-13T23:31:41.413Z"
+    },
+    {
+      "version": "10.0.33",
+      "fromVersion": "10.0.32",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "3 arquivos atualizados",
+      "notice": "A versão 10.0.33 já está disponível para atualização.",
+      "changelog": [
+        "Global atualizado",
+        "Infoplanos atualizado",
+        "Menus atualizados"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/database/lib/global.js",
+          "sha256": "fd05dc748529354e6e660721751e7900bec35d943d5e9bbb0fe5fe388213a890",
+          "size": 143590
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/infoplanos.js",
+          "sha256": "a2cc6baab6414adc65ddfdc51f7c5b0fb35489ad6cac97c50c659ec830fae3b6",
+          "size": 338
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/menus.js",
+          "sha256": "ddf9559e6832c8bf4e8c7d3d875dba305cf868024b56eaa522a988138ecc903e",
+          "size": 48578
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-13T23:49:51.916Z"
     }
   ]
 }

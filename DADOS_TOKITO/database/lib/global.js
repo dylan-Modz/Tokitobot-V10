@@ -3287,3 +3287,31 @@ return `- ❌ \`𝙵𝙰𝙻𝙷𝙰 𝙰𝙾 𝙶𝙴𝚁𝙰𝚁 𝙻𝙸𝙽�
 > *『 ⚠️ 𝚂𝚃𝙰𝚃𝚄𝚂 』— Não foi possível hospedar este arquivo agora.*
 > *『 🔄 𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴 』— Aguarde alguns instantes e repita o comando.*`
 }
+
+exports.infoplanos = prefix => {
+return `- 🛒 \`𝙲𝙾𝙽𝙵𝙸𝙶𝚄𝚁𝙰𝚁 𝙿𝙻𝙰𝙽𝙾𝚂\`
+
+『 👀 \`𝚅𝙴𝚁 𝙿𝙻𝙰𝙽𝙾𝚂\` 』
+> ${prefix}plans
+
+『 💸 \`𝙰𝙻𝚃𝙴𝚁𝙰𝚁 𝙿𝚁𝙴𝙲̧𝙾\` 』
+> ${prefix}plans preco 1 10
+
+『 📦 \`𝙰𝙻𝚃𝙴𝚁𝙰𝚁 𝙽𝙾𝙼𝙴\` 』
+> ${prefix}plans nome 1 Plano Semanal
+
+『 ⏳ \`𝙰𝙻𝚃𝙴𝚁𝙰𝚁 𝙳𝙸𝙰𝚂\` 』
+> ${prefix}plans dias 1 7
+
+『 📝 \`𝙰𝙻𝚃𝙴𝚁𝙰𝚁 𝚃𝙴𝚇𝚃𝙾\` 』
+> ${prefix}plans texto 1 Use a Tokito no seu grupo por 7 dias.
+
+『 ➕ \`𝙰𝙳𝙸𝙲𝙸𝙾𝙽𝙰𝚁 𝙿𝙻𝙰𝙽𝙾\` 』
+> ${prefix}plans add Plano Mensal|15|30|Use a Tokito por 30 dias.
+
+『 🗑️ \`𝚁𝙴𝙼𝙾𝚅𝙴𝚁 𝙿𝙻𝙰𝙽𝙾\` 』
+> ${prefix}plans del 1
+
+> *O número representa a posição mostrada no comando ${prefix}plans.*
+> *Todas as alterações são salvas diretamente no planos.json usado pelo sistema de aluguel.*`
+}

@@ -330,7 +330,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}delaluguel
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}lista-aluguel
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}veraluguel
-┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}plans
+┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}infoplanos
+┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}planos
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}lojinha
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}pixaluguel
 ┃࣪ ╎—̳͟͞͞ 🧊̸ ${prefix}pixcodigo
