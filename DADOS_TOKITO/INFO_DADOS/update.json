@@ -1,45 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.44",
+  "version": "10.0.45",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-14T13:47:20.331Z",
+  "publishedAt": "2026-08-14T13:47:49.946Z",
   "changelog": [
-    "[Correção] 4 arquivos atualizados",
-    "A versão 10.0.44 já está disponível para atualização.",
-    "Sistema Aprovacao atualizado",
-    "Global atualizado",
-    "Menus atualizados",
-    "Soli atualizado"
+    "[Correção] Aprovacao atualizado",
+    "A versão 10.0.45 já está disponível para atualização.",
+    "Aprovacao atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "4 arquivos atualizados",
-  "notice": "A versão 10.0.44 já está disponível para atualização.",
+  "title": "Aprovacao atualizado",
+  "notice": "A versão 10.0.45 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/casos/grupo/aprovacao.js",
-      "sha256": "80b4e30613d5e4b9c8d3d85b16b24b85e2acffbea43346e0d73a010b14925beb",
-      "size": 860
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/global.js",
-      "sha256": "6bdeb3d8d2c2bef7116b32dc5b2fdb01a7fd15656b6f9e03d94750f677739182",
-      "size": 150585
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/menus.js",
-      "sha256": "e81999ac4fb29f9f36641165f2fc517b3dca8b4cd00afa0a79fb61cbdd387557",
-      "size": 55885
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/soli.js",
-      "sha256": "53a697f03a82770453d5ab6e332b4a2366f025fbb5e729d8776622e27ed812f1",
-      "size": 1971
+      "path": "DADOS_TOKITO/funcoes/aprovacao.js",
+      "sha256": "dd04c9153c2ed6156faf2618ebf2e6025a112bf6e710e913fbbf18106e49a9dc",
+      "size": 13238
     }
   ],
   "releases": [
@@ -1014,6 +996,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-14T13:47:20.331Z"
+    },
+    {
+      "version": "10.0.45",
+      "fromVersion": "10.0.44",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Aprovacao atualizado",
+      "notice": "A versão 10.0.45 já está disponível para atualização.",
+      "changelog": [
+        "Aprovacao atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/funcoes/aprovacao.js",
+          "sha256": "dd04c9153c2ed6156faf2618ebf2e6025a112bf6e710e913fbbf18106e49a9dc",
+          "size": 13238
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-14T13:47:49.946Z"
     }
   ]
 }

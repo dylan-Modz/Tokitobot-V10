@@ -344,7 +344,65 @@ for (const jid of jids) remover(grupo, jid)
 return jids
 }
 
+
+const decidirQuantidade = async ({ tokito, grupo, quantidade, acao = 'approve' }) => {
+const pedidos = await sincronizar(tokito, grupo)
+const totalAntes = pedidos.length
+const pedidoQtd = Math.max(0, Math.floor(Number(quantidade) || 0))
+const limite = Math.min(pedidoQtd, totalAntes)
+
+if (!limite) {
+return {
+ok: false,
+totalAntes,
+solicitadas: pedidoQtd,
+processadas: 0,
+restantes: totalAntes,
+jids: []
+}
+}
+
+const jids = pedidos
+.slice(0, limite)
+.map(p => p.jid)
+.filter(Boolean)
+
+const tamanhoLote = 50
+
+for (let i = 0; i < jids.length; i += tamanhoLote) {
+const lote = jids.slice(i, i + tamanhoLote)
+
+try {
+await tokito.groupRequestParticipantsUpdate(grupo, lote, acao)
+}
+catch {
+for (const jid of lote) {
+try {
+await tokito.groupRequestParticipantsUpdate(grupo, [jid], acao)
+}
+catch {}
+}
+}
+}
+
+const restantesLista = await sincronizar(tokito, grupo)
+const aindaPendentes = new Set(restantesLista.map(p => p.jid).filter(Boolean))
+const processados = jids.filter(jid => !aindaPendentes.has(jid))
+
+for (const jid of processados)
+remover(grupo, jid)
+
+return {
+ok: processados.length > 0,
+totalAntes,
+solicitadas: pedidoQtd,
+processadas: processados.length,
+restantes: restantesLista.length,
+jids: processados
+}
+}
+
 module.exports = {
 iniciar, estado, ativar, automatico, listar, primeiro, remover, limpar,
-sincronizar, configurar, decidir, decidirTodos
+sincronizar, configurar, decidir, decidirTodos, decidirQuantidade
 }
