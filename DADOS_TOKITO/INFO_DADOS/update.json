@@ -1,20 +1,20 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.50",
+  "version": "10.0.51",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-14T23:52:02.420Z",
+  "publishedAt": "2026-08-14T23:53:04.584Z",
   "changelog": [
     "[Correção] Comando Playvideo atualizado",
-    "A versão 10.0.50 já está disponível para atualização.",
+    "A versão 10.0.51 já está disponível para atualização.",
     "Comando Playvideo atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
   "title": "Comando Playvideo atualizado",
-  "notice": "A versão 10.0.50 já está disponível para atualização.",
+  "notice": "A versão 10.0.51 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -1122,6 +1122,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-14T23:52:02.420Z"
+    },
+    {
+      "version": "10.0.51",
+      "fromVersion": "10.0.50",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Comando Playvideo atualizado",
+      "notice": "A versão 10.0.51 já está disponível para atualização.",
+      "changelog": [
+        "Comando Playvideo atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/casos/downloads/playvideo.js",
+          "sha256": "78f9a80cb8ae252d4dc6b3d9a770d6228d61d810f6d953ebc970fef542085934",
+          "size": 3653
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-14T23:53:04.584Z"
     }
   ]
 }
