@@ -673,6 +673,32 @@ const numClean = txt => String(txt || '').replace(/[()+\-\/\s]/g, '') + '@s.what
 const mrc_ou_numero = qSeguro.length > 6 && !temMention ? numClean(qSeguro) : normalizar(menc_prt || menc_sticker || sender)
 const marc_tds = temMention ? normalizar(menc_jid) : qSeguro.length > 6 && !temMention ? numClean(qSeguro) : normalizar(menc_prt || menc_sticker || sender)
 const menc_prt_nmr = qSeguro.length > 12 && !temMention ? numClean(qSeguro) : normalizar(menc_prt || menc_sticker || sender)
+
+const alvoPorMarcacaoOuNumero = () => {
+const marcado = mentionedList[0] || quotedParticipant || ''
+
+if (marcado)
+return nJid(marcado, [
+ctxMsg?.participantAlt,
+info?.key?.participantAlt,
+info?.key?.senderAlt,
+info?.participantAlt
+])
+
+let numero = String(q || '').replace(/\D/g, '')
+
+if (!numero)
+return ''
+
+if (!numero.startsWith('55') && [10, 11].includes(numero.length))
+numero = `55${numero}`
+
+if (numero.length < 10 || numero.length > 15)
+return ''
+
+return jidNormalizedUser(`${numero}@s.whatsapp.net`)
+}
+
 const destino = async () => {
 const marcado = mentionedList[0] || ''
 const respondido = quotedParticipant || ''
@@ -980,7 +1006,7 @@ isModobn, isBot, SoDono, DonoOficial, groupAdmins, membrosGrupo, adminsNormaliza
 senderNormalizado, botNormalizado, isGroupAdmins, isBotGroupAdmins, vip, isVip,
 isCargo, isChVip, Res_SoDono, ctxMsg, normalizar, quotedParticipant, mentionedList,
 menc_sticker, menc_prt, menc_jid2, qSeguro, temMention, menc_os2, menc_jid,
-sender_ou_n, numClean, mrc_ou_numero, marc_tds, menc_prt_nmr, destino, dataHoraBR,
+sender_ou_n, numClean, mrc_ou_numero, marc_tds, menc_prt_nmr, alvoPorMarcacaoOuNumero, destino, dataHoraBR,
 horaBR, baileysVersion, numeroSender, messageId, whatIsPhone, canalInfo, newsletter,
 isVerificado, SeloMeta, selo, reply, enviarbuton, botaozin, reagir, contextoJogos,
 dylanModz, limpar, achar, itens, NomeDoBot, ownerName, channel, channeldl,
