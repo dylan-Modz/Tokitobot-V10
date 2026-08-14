@@ -677,14 +677,8 @@ const menc_prt_nmr = qSeguro.length > 12 && !temMention ? numClean(qSeguro) : no
 const alvoPorMarcacaoOuNumero = () => {
 const marcado = mentionedList[0] || ''
 
-if (marcado) {
-return nJid(marcado, [
-ctxMsg?.participantAlt,
-info?.key?.participantAlt,
-info?.key?.senderAlt,
-info?.participantAlt
-])
-}
+if (marcado)
+return nJid(marcado)
 
 let numero = String(q || '').replace(/\D/g, '')
 
@@ -703,8 +697,16 @@ ctxMsg?.stanzaId ||
 ctxMsg?.quotedMessage
 )
 
-if (ehResposta && quotedParticipant)
-return nJid(quotedParticipant, [ctxMsg?.participantAlt])
+if (ehResposta) {
+const respondido =
+ctxMsg?.participantAlt ||
+ctxMsg?.participant ||
+quotedParticipant ||
+''
+
+if (respondido)
+return nJid(respondido)
+}
 
 return ''
 }
