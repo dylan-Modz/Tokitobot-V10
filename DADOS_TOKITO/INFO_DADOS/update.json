@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.45",
+  "version": "10.0.46",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-14T13:47:49.946Z",
+  "publishedAt": "2026-08-14T15:55:27.499Z",
   "changelog": [
-    "[Correção] Aprovacao atualizado",
-    "A versão 10.0.45 já está disponível para atualização.",
-    "Aprovacao atualizado"
+    "[Correção] Comando Play atualizado",
+    "A versão 10.0.46 já está disponível para atualização.",
+    "Comando Play atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Aprovacao atualizado",
-  "notice": "A versão 10.0.45 já está disponível para atualização.",
+  "title": "Comando Play atualizado",
+  "notice": "A versão 10.0.46 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/funcoes/aprovacao.js",
-      "sha256": "dd04c9153c2ed6156faf2618ebf2e6025a112bf6e710e913fbbf18106e49a9dc",
-      "size": 13238
+      "path": "DADOS_TOKITO/plugins/casos/downloads/play.js",
+      "sha256": "687b35fb95b0ad71e06c0c3af5cc70904c4911420b3bf357eb3a4a765c3127f2",
+      "size": 5898
     }
   ],
   "releases": [
@@ -1017,6 +1017,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-14T13:47:49.946Z"
+    },
+    {
+      "version": "10.0.46",
+      "fromVersion": "10.0.45",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Comando Play atualizado",
+      "notice": "A versão 10.0.46 já está disponível para atualização.",
+      "changelog": [
+        "Comando Play atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/casos/downloads/play.js",
+          "sha256": "687b35fb95b0ad71e06c0c3af5cc70904c4911420b3bf357eb3a4a765c3127f2",
+          "size": 5898
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-14T15:55:27.498Z"
     }
   ]
 }

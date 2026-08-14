@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const scraper = require('../../../scrapers/downloads/play')
+const axios = require('axios')
 
 module.exports = {
 nome: "play",
@@ -61,9 +61,26 @@ mentionedJid: [sender]
 }
 
 const pesquisa = q.trim()
-const data = await scraper.buscar(pesquisa)
 
-if (!data?.status || !data?.resultado) {
+const buscaApi =
+`${API_URL}/api/youtube-search` +
+`?query=${encodeURIComponent(pesquisa)}` +
+`&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
+
+const response = await axios.get(
+buscaApi,
+{
+timeout: 20000,
+validateStatus: () => true
+}
+)
+
+if (
+response.status !== 200 ||
+!response.data?.status ||
+!Array.isArray(response.data?.resultado) ||
+!response.data.resultado.length
+) {
 await reagir(from, '❌')
 
 return reply(
@@ -71,89 +88,63 @@ return reply(
 )
 }
 
-const res = data.resultado
+const res =
+response.data.resultado.find(
+item =>
+item?.type === 'video' &&
+item?.url
+) ||
+response.data.resultado[0]
+
+if (!res?.url) {
+await reagir(from, '❌')
+
+return reply(
+'*❌ | ɴᴀᴏ ᴇɴᴄᴏɴᴛʀᴇɪ ɴᴇɴʜᴜᴍ ᴀᴜᴅɪᴏ.*'
+)
+}
 
 const title = String(
 res?.title ||
-res?.titulo ||
 'ɴᴀᴏ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ'
 )
 
 const canal = String(
-res?.canal ||
-res?.channel ||
-res?.author ||
-res?.autor ||
+res?.author?.name ||
 'ɴᴀᴏ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ'
 )
 
 const duration = String(
-res?.duration ||
-res?.duracao ||
+res?.timestamp ||
+res?.duration?.timestamp ||
 '0:00'
 )
 
-const views = String(
-res?.views_formatado ||
-res?.views ||
-res?.visualizacoes ||
-'ɴᴀᴏ ɪɴғᴏʀᴍᴀᴅᴏ'
-)
-
-const descricao = String(
-res?.description ||
-res?.descricao ||
-res?.desc ||
-'sᴇᴍ ᴅᴇsᴄʀɪᴄ̧ᴀ̃ᴏ.'
-)
-
-const postado = String(
-res?.uploaded ||
-res?.uploaded_at ||
-res?.uploadDate ||
-res?.upload_date ||
-res?.published ||
-res?.ago ||
-'ɴᴀᴏ ɪɴғᴏʀᴍᴀᴅᴏ'
-)
+const views = Number(
+res?.views || 0
+).toLocaleString('pt-BR')
 
 const thumbnail =
 res?.image ||
 res?.thumbnail ||
-res?.thumb ||
 null
 
 const url = String(
 res?.url ||
-res?.link ||
-pesquisa
+`https://youtube.com/watch?v=${res?.videoId}`
 )
 
-const download =
-typeof res?.download === 'string'
-? res.download
-: res?.download?.url ||
-res?.download?.link ||
-res?.audio ||
-res?.audio_url ||
-res?.download_url ||
-null
-
-const nomeArquivo = String(
-res?.filename || `${title}.mp3`
-)
+const nomeArquivo = `${title}.mp3`
 .replace(/[\\/:*?"<>|]/g, '')
 .slice(0, 100)
 
-if (!download) {
-await reagir(from, '❌')
+const audioApi =
+`${API_URL}/api/youtube-audio` +
+`?q=${encodeURIComponent(url)}` +
+`&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
 
-return reply(
-'*❌ | ᴀ ᴀᴘɪ ɴᴀᴏ ʀᴇᴛᴏʀɴᴏᴜ ᴏ ʟɪɴᴋ ᴅᴏ ᴀᴜᴅɪᴏ.*'
-)
-}
-
-const numeroUsuario = sender.split('@')[0]
+const numeroUsuario =
+sender.split('@')[0]
 
 const texto = `⏤͟͟͞͞𝐌𝐮́𝐬𝐢𝐜𝐚 𝐞𝐧𝐜𝐨𝐧𝐭𝐫𝐚𝐝𝐚! 𖤐⃝🎧
 •
@@ -184,7 +175,8 @@ upload: tokito.waUploadToServer
 }
 )
 
-header = proto.Message.InteractiveMessage.Header.create({
+header =
+proto.Message.InteractiveMessage.Header.create({
 hasMediaAttachment: true,
 imageMessage: media.imageMessage
 })
@@ -193,13 +185,15 @@ imageMessage: media.imageMessage
 const mensagemInterativa = {
 contextInfo,
 
-body: proto.Message.InteractiveMessage.Body.create({
+body:
+proto.Message.InteractiveMessage.Body.create({
 text: `${texto}
 
 > *[🎼]* • *𝙴𝚜𝚌𝚘𝚕𝚑𝚊 𝚌𝚘𝚖𝚘 𝚍𝚎𝚜𝚎𝚓𝚊 𝚋𝚊𝚒𝚡𝚊𝚛*`
 }),
 
-footer: proto.Message.InteractiveMessage.Footer.create({
+footer:
+proto.Message.InteractiveMessage.Footer.create({
 text: ``
 }),
 
@@ -240,7 +234,8 @@ if (header) {
 mensagemInterativa.header = header
 }
 
-const msg = generateWAMessageFromContent(
+const msg =
+generateWAMessageFromContent(
 from,
 {
 interactiveMessage:
@@ -265,6 +260,7 @@ messageId: msg.key.id
 await reagir(from, '✅')
 
 return
+
 } catch (e) {
 console.log(
 '[PLAY BOTÕES]',
@@ -294,6 +290,7 @@ contextInfo
 quoted: selo
 }
 )
+
 } else {
 await tokito.sendMessage(
 from,
@@ -314,7 +311,7 @@ await tokito.sendMessage(
 from,
 {
 audio: {
-url: download
+url: audioApi
 },
 
 mimetype: 'audio/mpeg',
@@ -328,6 +325,7 @@ quoted: selo
 )
 
 await reagir(from, '✅')
+
 } catch (e) {
 console.log(
 '[PLAY ERRO]',
