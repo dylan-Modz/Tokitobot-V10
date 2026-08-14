@@ -300,9 +300,30 @@ if (item.action === 'demote')
 await enviar(tokito, grupo, mess.x9Participante('📉', '𝙰𝙳𝙼𝙸𝙽 𝚁𝙴𝙱𝙰𝙸𝚇𝙰𝙳𝙾', autor, alvo, 'ʀᴇʙᴀɪxᴏᴜ ᴅᴇ ᴀᴅᴍɪɴɪsᴛʀᴀᴅᴏʀ'), [autorJid, alvoJid])
 if (item.action === 'remove') {
 const saiu = jidNormalizedUser(autorJid) === jidNormalizedUser(alvoJid)
-await enviar(tokito, grupo, saiu
-? mess.x9Grupo('🚪', '𝙼𝙴𝙼𝙱𝚁𝙾 𝚂𝙰𝙸𝚄', alvo, 'sᴀɪᴜ ᴅᴏ ɢʀᴜᴘᴏ')
-: mess.x9Participante('🚫', '𝙼𝙴𝙼𝙱𝚁𝙾 𝚁𝙴𝙼𝙾𝚅𝙸𝙳𝙾', autor, alvo, 'ʀᴇᴍᴏᴠᴇᴜ'), [autorJid, alvoJid])
+
+if (saiu) {
+await enviar(
+tokito,
+grupo,
+mess.x9Saiu(alvo),
+[alvoJid]
+)
+
+continue
+}
+
+await enviar(
+tokito,
+grupo,
+mess.x9Participante(
+'🚫',
+'𝙼𝙴𝙼𝙱𝚁𝙾 𝚁𝙴𝙼𝙾𝚅𝙸𝙳𝙾',
+autor,
+alvo,
+'ʀᴇᴍᴏᴠᴇᴜ'
+),
+[autorJid, alvoJid]
+)
 }
 }
 }

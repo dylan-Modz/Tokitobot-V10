@@ -1,33 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.41",
+  "version": "10.0.42",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-14T13:00:58.632Z",
+  "publishedAt": "2026-08-14T13:07:10.895Z",
   "changelog": [
-    "[Correção] 2 arquivos atualizados",
-    "A versão 10.0.41 já está disponível para atualização.",
-    "Atividades atualizado",
-    "Me atualizado"
+    "[Correção] X9 atualizado",
+    "A versão 10.0.42 já está disponível para atualização.",
+    "X9 atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "2 arquivos atualizados",
-  "notice": "A versão 10.0.41 já está disponível para atualização.",
+  "title": "X9 atualizado",
+  "notice": "A versão 10.0.42 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/atividades.js",
-      "sha256": "942417ff7debb18b5e9c81921489b1ad961db67e103f75d01c3d60678c841262",
-      "size": 2953
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/outros/me.js",
-      "sha256": "a8f07eb971ebd432ed5026b69db2fb189b5caba5b96b17cd091592ef4042beeb",
-      "size": 926
+      "path": "DADOS_TOKITO/funcoes/x9.js",
+      "sha256": "d6e9e65fda0c308eacc12d46481793e0e3e11ae43a1574eac2359c526927a99a",
+      "size": 14705
     }
   ],
   "releases": [
@@ -921,6 +915,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-14T13:00:58.631Z"
+    },
+    {
+      "version": "10.0.42",
+      "fromVersion": "10.0.41",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "X9 atualizado",
+      "notice": "A versão 10.0.42 já está disponível para atualização.",
+      "changelog": [
+        "X9 atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/funcoes/x9.js",
+          "sha256": "d6e9e65fda0c308eacc12d46481793e0e3e11ae43a1574eac2359c526927a99a",
+          "size": 14705
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-14T13:07:10.894Z"
     }
   ]
 }
