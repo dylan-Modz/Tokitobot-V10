@@ -15,78 +15,88 @@
  * • Respeite os créditos e o trabalho dos desenvolvedores.
  * • Utilize o projeto com respeito e responsabilidade.
  *
- * ATENÇÃO:
- * A venda, revenda ou comercialização não autorizada deste
- * projeto poderá resultar em medidas legais para proteção
- * dos direitos dos autores, incluindo processo judicial,
- * conforme a legislação aplicável.
- *
  * Author: Dylan Modz
  * API oficial: https://tokito-apis.com.br
- *
- * Modifique como quiser. Apenas respeite as regras.
  * ============================================================
  */
 
 const scraper = require('../../../scrapers/downloads/applemusic')
 
 module.exports = {
-nome: "applemusic",
-comandos: ["applemusic", "am"],
-categoria: "downloads",
+nome: "applemusic", comandos: ["applemusic", "am"], categoria: "downloads",
+
 info: {
-"descricao": "Executa o comando applemusic.",
-"uso": "applemusic",
-"categoria": "downloads"
+descricao: "Executa o comando applemusic.", uso: "applemusic", categoria: "downloads"
 },
+
 async executar(ctx) {
 with (ctx) {
-{
 try {
-if (!q || !q.trim())
-return reply(`*❌ | ᴅɪɢɪᴛᴇ ᴏ ɴᴏᴍᴇ ᴅᴀ ᴍᴜsɪᴄᴀ.*\n\n> ${prefix + command} ᴠᴇᴍ ᴄᴀ`)
+if (!q || !q.trim()) return reply(`*❌ | ᴅɪɢɪᴛᴇ ᴏ ɴᴏᴍᴇ ᴅᴀ ᴍᴜsɪᴄᴀ.*\n\n> ${prefix + command} ᴠᴇᴍ ᴄᴀ`)
+
 await reagir(from, '🍎')
+
 const dados = await scraper.buscar(q.trim())
 const res = dados?.resultado || dados?.result || dados?.data
-if (!res)
-return reply('*❌ | ᴍᴜsɪᴄᴀ ɴᴀᴏ ᴇɴᴄᴏɴᴛʀᴀᴅᴀ.*')
-const titulo = res?.titulo || res?.title || 'Apple Music'
-const artista = res?.artista || res?.artist || 'Desconhecido'
-const album = res?.album || 'Desconhecido'
-const capa = achar(res?.capa, res?.thumbnail, res?.image)
-const link = achar(res?.download_url, res?.downloadUrl, res?.audio, res?.preview)
-if (!link)
-return reply('*❌ | ᴀ ᴀᴘɪ ɴᴀᴏ ʀᴇᴛᴏʀɴᴏᴜ ᴏ ᴀᴜᴅɪᴏ.*')
-const texto = `*🍎 | ᴀᴘᴘʟᴇ ᴍᴜsɪᴄ*\n\n- *🎶 | ᴛɪᴛᴜʟᴏ → ${titulo}*\n- *🎤 | ᴀʀᴛɪsᴛᴀ → ${artista}*\n- *💿 | ᴀʟʙᴜᴍ → ${album}*`
-if (capa)
+
+if (!res) return reply('*❌ | ᴍᴜsɪᴄᴀ ɴᴀᴏ ᴇɴᴄᴏɴᴛʀᴀᴅᴀ.*')
+
+const titulo = String(res?.titulo || 'Apple Music')
+const artista = String(res?.artista || 'Desconhecido')
+const album = String(res?.album || 'Desconhecido')
+const genero = String(res?.genero || 'Não informado')
+const duracao = String(res?.duracao || 'Não informado')
+const lancamento = String(res?.lancamento || 'Não informado')
+const explicit = String(res?.explicit || 'Não')
+const pais = String(res?.pais || 'Não informado')
+const preco = String(res?.preco || 'Não informado')
+const appleLink = String(res?.link || '')
+const capa = res?.capa || null
+
+const audio = typeof res?.audio === 'string'
+? res.audio
+: res?.audio?.url || res?.download || res?.download_url || res?.downloadUrl || null
+
+if (!audio || !/^https?:\/\//i.test(audio)) return reply('*❌ | ᴀ ᴀᴘɪ ɴᴀᴏ ʀᴇᴛᴏʀɴᴏᴜ ᴏ ᴀᴜᴅɪᴏ.*')
+
+const numeroUsuario = sender.split('@')[0]
+const contextInfo = { ...newsletter, mentionedJid: [sender] }
+
+const texto = `⏤͟͟͞͞𝐌𝐮́𝐬𝐢𝐜𝐚 𝐞𝐧𝐜𝐨𝐧𝐭𝐫𝐚𝐝𝐚! 𖤐⃝🍎
+•
+> ╭ ℹ️ 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂̧𝐎̃𝐄𝐒
+> *[✏️]* • *𝚝𝚒́𝚝𝚞𝚕𝚘:* *${titulo}*
+> *[👨‍🎤]* • *ᴀʀᴛɪsᴛᴀ:* ${artista}
+> *[💿]* • *ᴀ́ʟʙᴜᴍ:* ${album}
+> *[🎼]* • *ɢᴇ̂ɴᴇʀᴏ:* ${genero}
+> *[⏱️]* • *ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ:* ${duracao}
+> *[📆]* • *ʟᴀɴᴄ̧ᴀᴍᴇɴᴛᴏ:* ${lancamento}
+> *[🔞]* • *ᴇxᴘʟɪ́ᴄɪᴛᴏ:* ${explicit}
+> *[🌎]* • *ᴘᴀɪ́s:* ${pais}
+> *[💰]* • *ᴘʀᴇᴄ̧ᴏ:* ${preco}
+> *[🔗]* • *ʟɪɴᴋ:* ${appleLink}
+•
+> *[🎼]* • *𝙴𝚗𝚟𝚒𝚊𝚗𝚍𝚘 𝚘 𝚜𝚎𝚞 𝚊́𝚞𝚍𝚒𝚘* _@${numeroUsuario}_`
+
+if (capa) {
 await tokito.sendMessage(from, {
-image: { url: capa },
-caption: texto,
-contextInfo: {
-...newsletter,
-mentionedJid: [sender]
-}
+image: { url: capa }, caption: texto, contextInfo
 }, { quoted: selo })
-else
-await reply(texto)
+} else {
+await tokito.sendMessage(from, { text: texto, contextInfo }, { quoted: selo })
+}
+
 await tokito.sendMessage(from, {
-audio: { url: link },
-mimetype: link.includes('.m4a') ? 'audio/mp4' : 'audio/mpeg',
-fileName: `${limpar(titulo)}.mp3`,
-ptt: false,
-contextInfo: {
-...newsletter,
-mentionedJid: [sender]
-}
+audio: { url: audio }, mimetype: 'audio/mpeg', ptt: false,
+fileName: `${limpar(titulo)}.mp3`, contextInfo
 }, { quoted: selo })
+
 await reagir(from, '✅')
-}
-catch (e) {
+
+} catch (e) {
 console.log('[APPLE MUSIC]', modulos.sanitizarErro(e, [API_KEY_TOKITO]))
-await reagir(from, '❌').catch(() => {
-})
+await reagir(from, '❌').catch(() => {})
 await reply(mess.erroApi(API_URL))
-}
 }
 }
 }
