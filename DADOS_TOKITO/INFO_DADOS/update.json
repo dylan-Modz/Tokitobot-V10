@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.48",
+  "version": "10.0.49",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-14T21:36:58.221Z",
+  "publishedAt": "2026-08-14T22:32:48.764Z",
   "changelog": [
-    "[Correção] Comando Applemusic atualizado",
-    "A versão 10.0.48 já está disponível para atualização.",
-    "Comando Applemusic atualizado"
+    "[Correção] Comando Playvideo atualizado",
+    "A versão 10.0.49 já está disponível para atualização.",
+    "Comando Playvideo atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Comando Applemusic atualizado",
-  "notice": "A versão 10.0.48 já está disponível para atualização.",
+  "title": "Comando Playvideo atualizado",
+  "notice": "A versão 10.0.49 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/casos/downloads/applemusic.js",
-      "sha256": "2c504b63473a22da40a68dedccede576a6a533bec56146a0623020774cd0f467",
-      "size": 3769
+      "path": "DADOS_TOKITO/plugins/casos/downloads/playvideo.js",
+      "sha256": "e15fbb321d6f14858780afd02d402d33fa72f53e6fe15e4172010e2e6e3c22a8",
+      "size": 3366
     }
   ],
   "releases": [
@@ -1080,6 +1080,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-14T21:36:58.221Z"
+    },
+    {
+      "version": "10.0.49",
+      "fromVersion": "10.0.48",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Comando Playvideo atualizado",
+      "notice": "A versão 10.0.49 já está disponível para atualização.",
+      "changelog": [
+        "Comando Playvideo atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/casos/downloads/playvideo.js",
+          "sha256": "e15fbb321d6f14858780afd02d402d33fa72f53e6fe15e4172010e2e6e3c22a8",
+          "size": 3366
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-14T22:32:48.763Z"
     }
   ]
 }
