@@ -275,10 +275,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👤 ${prefix}aprovacao 1/0
 ┃࣪ ╎—̳͟͞͞ 👤 ${prefix}autoaprovacao 1/0
 ┃࣪ ╎—̳͟͞͞ 👤 ${prefix}pedidos
-┃࣪ ╎—̳͟͞͞ 👤 ${prefix}aprovarpedido número
-┃࣪ ╎—̳͟͞͞ 👤 ${prefix}aprovarpedidos
-┃࣪ ╎—̳͟͞͞ 👤 ${prefix}recusarpedido número
-┃࣪ ╎—̳͟͞͞ 👤 ${prefix}recusarpedidos
+┃࣪ ╎—̳͟͞͞ 👤 ${prefix}soli quantidade
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 

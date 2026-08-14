@@ -1,62 +1,37 @@
-/*
- * ============================================================
- *                     TOKITO BOT V10
- * ============================================================
- *
- * Projeto disponibilizado gratuitamente para a comunidade.
- *
- * Você pode modificar, personalizar e utilizar este bot
- * conforme sua preferência, inclusive mantendo o nome Tokito.
- *
- * REGRAS:
- * • É proibida a venda ou revenda deste código-fonte.
- * • Não comercialize versões modificadas deste projeto.
- * • Não reivindique a autoria original do projeto.
- * • Respeite os créditos e o trabalho dos desenvolvedores.
- * • Utilize o projeto com respeito e responsabilidade.
- *
- * ATENÇÃO:
- * A venda, revenda ou comercialização não autorizada deste
- * projeto poderá resultar em medidas legais para proteção
- * dos direitos dos autores, incluindo processo judicial,
- * conforme a legislação aplicável.
- *
- * Author: Dylan Modz
- * API oficial: https://tokito-apis.com.br
- *
- * Modifique como quiser. Apenas respeite as regras.
- * ============================================================
+/* Mantém .aprovacao para ligar/desligar o sistema.
+ * O alias .solicitacao agora pertence ao comando soli.
+ * Dev: Dylan Modz.
  */
-
 module.exports = {
-nome: "aprovacao",
-comandos: ["aprovacao", "solicitacao"],
-categoria: "grupo",
-info: {
-"descricao": "Executa o comando aprovacao.",
-"uso": "aprovacao",
-"categoria": "grupo"
-},
-async executar(ctx) {
-with (ctx) {
-{
-if (!isGroup)
-return reply(mess.sogrupo())
-if (!isGroupAdmins)
-return reply(mess.soadm())
-if (!isBotGroupAdmins)
-return reply(mess.botadm())
-await funcoes.aprovacao.configurar({
-grupo: from,
-dataGp,
-setGp,
-q,
-prefix,
-command,
-reply,
-automatico: false
-})
-}
-}
-}
+  nome: 'aprovacao',
+  comandos: ['aprovacao'],
+  categoria: 'grupo',
+
+  info: {
+    descricao: 'Ativa ou desativa o sistema de aprovação de entrada.',
+    uso: 'aprovacao 1/0',
+    categoria: 'grupo'
+  },
+
+  async executar(ctx) {
+    if (!ctx.isGroup)
+      return ctx.reply(ctx.mess.sogrupo())
+
+    if (!ctx.isGroupAdmins && !ctx.SoDono)
+      return ctx.reply(ctx.mess.soadm())
+
+    if (!ctx.isBotGroupAdmins)
+      return ctx.reply(ctx.mess.botadm())
+
+    return ctx.funcoes.aprovacao.configurar({
+      grupo: ctx.from,
+      dataGp: ctx.dataGp,
+      setGp: ctx.setGp,
+      q: ctx.q,
+      prefix: ctx.prefix,
+      command: ctx.command,
+      reply: ctx.reply,
+      automatico: false
+    })
+  }
 }
