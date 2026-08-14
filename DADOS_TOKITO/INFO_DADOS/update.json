@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.34",
+  "version": "10.0.35",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-13T23:50:09.199Z",
+  "publishedAt": "2026-08-14T03:22:01.824Z",
   "changelog": [
-    "[Correção] Plans atualizado",
-    "A versão 10.0.34 já está disponível para atualização.",
-    "Plans atualizado"
+    "[Correção] Menus atualizados",
+    "A versão 10.0.35 já está disponível para atualização.",
+    "Menus atualizados"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Plans atualizado",
-  "notice": "A versão 10.0.34 já está disponível para atualização.",
+  "title": "Menus atualizados",
+  "notice": "A versão 10.0.35 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/aluguel/plans.js",
-      "sha256": "7fc5c1a588c84edc951e5197b4e976b114f442216f274bce1dd503178add8d63",
-      "size": 6568
+      "path": "DADOS_TOKITO/database/lib/menus.js",
+      "sha256": "63180162d6aa769855450f0fc52eacb81d2e08a126fc46ec3dcd192772fe2dbe",
+      "size": 56012
     }
   ],
   "releases": [
@@ -726,6 +726,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-13T23:50:09.199Z"
+    },
+    {
+      "version": "10.0.35",
+      "fromVersion": "10.0.34",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Menus atualizados",
+      "notice": "A versão 10.0.35 já está disponível para atualização.",
+      "changelog": [
+        "Menus atualizados"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/database/lib/menus.js",
+          "sha256": "63180162d6aa769855450f0fc52eacb81d2e08a126fc46ec3dcd192772fe2dbe",
+          "size": 56012
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-14T03:22:01.823Z"
     }
   ]
 }
