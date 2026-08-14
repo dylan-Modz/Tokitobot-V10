@@ -1,63 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.40",
+  "version": "10.0.41",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-14T12:54:17.118Z",
+  "publishedAt": "2026-08-14T13:00:58.632Z",
   "changelog": [
-    "[Correção] 7 arquivos atualizados",
-    "A versão 10.0.40 já está disponível para atualização.",
-    "Atividade atualizado",
-    "02 Atividades atualizado",
-    "Global atualizado",
+    "[Correção] 2 arquivos atualizados",
+    "A versão 10.0.41 já está disponível para atualização.",
     "Atividades atualizado",
-    "Menus atualizados",
-    "Me atualizado",
-    "Arquivo principal do bot atualizado"
+    "Me atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "7 arquivos atualizados",
-  "notice": "A versão 10.0.40 já está disponível para atualização.",
+  "title": "2 arquivos atualizados",
+  "notice": "A versão 10.0.41 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/_atividade.js",
-      "sha256": "1d8ed7c3a1e66e4e2e27b2f3cc09fd1ae6ec1123dc160f9703f663736888951f",
-      "size": 897
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/eventos/02-atividades.js",
-      "sha256": "f4cc3c1dc87c8fd01d6ebebf9bc8da42be32124021cd3dabb8f4ee295715af0a",
-      "size": 1378
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/global.js",
-      "sha256": "f015afcb8aed06d39c7786c2d018683febd020eacf0dedb2c2df0351cbc13c1e",
-      "size": 148141
-    },
-    {
       "path": "DADOS_TOKITO/plugins/admin/atividades.js",
-      "sha256": "7550445c2bf5833a76a3f3fb049f3dab74fafdda6862836b826a21da0c6996c8",
-      "size": 2394
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/menus.js",
-      "sha256": "b8ed021e2e97c631daa9f3aa32b682dba817b265f895b12ccf9e630bdc2c6855",
-      "size": 56051
+      "sha256": "942417ff7debb18b5e9c81921489b1ad961db67e103f75d01c3d60678c841262",
+      "size": 2953
     },
     {
       "path": "DADOS_TOKITO/plugins/outros/me.js",
-      "sha256": "2bbb6d4d4df5d1762da9f89498cea5d776000aac0d4bd9c29950c037360111d2",
-      "size": 858
-    },
-    {
-      "path": "tokito.js",
-      "sha256": "a3d2169e4d23e31d37f66951ed1723303af08d5e422cc469fd1b45ba9d2d11d9",
-      "size": 43189
+      "sha256": "a8f07eb971ebd432ed5026b69db2fb189b5caba5b96b17cd091592ef4042beeb",
+      "size": 926
     }
   ],
   "releases": [
@@ -924,6 +894,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-14T12:54:17.118Z"
+    },
+    {
+      "version": "10.0.41",
+      "fromVersion": "10.0.40",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "2 arquivos atualizados",
+      "notice": "A versão 10.0.41 já está disponível para atualização.",
+      "changelog": [
+        "Atividades atualizado",
+        "Me atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/atividades.js",
+          "sha256": "942417ff7debb18b5e9c81921489b1ad961db67e103f75d01c3d60678c841262",
+          "size": 2953
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/outros/me.js",
+          "sha256": "a8f07eb971ebd432ed5026b69db2fb189b5caba5b96b17cd091592ef4042beeb",
+          "size": 926
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-14T13:00:58.631Z"
     }
   ]
 }

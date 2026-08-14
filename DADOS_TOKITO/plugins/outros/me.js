@@ -4,6 +4,7 @@ module.exports = {
   nome: 'me',
   comandos: ['me'],
   categoria: 'outros',
+
   info: {
     descricao: 'Mostra somente a sua atividade no grupo.',
     uso: 'me',
@@ -23,17 +24,19 @@ module.exports = {
         ? ctx.dataGp[0].atividades
         : {}
 
-    const item = {
-      j: jid,
-      ...atividade.dados(mapa[jid])
-    }
+    const dados = atividade.dados(mapa[jid])
+    const numero = String(jid || '').split('@')[0] || 'desconhecido'
 
     return ctx.reply(
-      ctx.mess.atividadePainel({
-        titulo: '𝙼𝙸𝙽𝙷𝙰 𝙰𝚃𝙸𝚅𝙸𝙳𝙰𝙳𝙴',
-        emoji: '👤',
-        itens: [item]
-      }),
+      ctx.mess.meAtividade(
+        numero,
+        dados.comandos,
+        dados.audios,
+        dados.figurinhas,
+        dados.documentos,
+        dados.fotos,
+        dados.videos
+      ),
       [jid]
     )
   }

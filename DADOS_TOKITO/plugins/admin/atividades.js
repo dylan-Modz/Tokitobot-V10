@@ -1,9 +1,30 @@
 const atividade = require('../_atividade')
 
+const blocoUsuario = (mess, item) => {
+  const numero = String(item.j || '').split('@')[0] || 'desconhecido'
+
+  const completo = mess.atividade(
+    numero,
+    item.comandos,
+    item.audios,
+    item.figurinhas,
+    item.documentos,
+    item.fotos,
+    item.videos
+  )
+
+  const linhas = String(completo || '')
+    .split('\n')
+    .filter(linha => linha.startsWith('┃࣪'))
+
+  return linhas.join('\n') || completo
+}
+
 module.exports = {
   nome: 'atividades',
   comandos: ['atividades', 'inativos'],
   categoria: 'admin',
+
   info: {
     descricao: 'Mostra as atividades do grupo e os membros inativos.',
     uso: 'atividades | inativos 5',
@@ -27,7 +48,15 @@ module.exports = {
     const atuais = [
       ...new Set(
         (ctx.groupMembers || [])
-          .map(membro => ctx.nJid(membro))
+          .map(membro =>
+            ctx.nJid(
+              membro?.phoneNumber ||
+              membro?.jid ||
+              membro?.id ||
+              membro?.participant ||
+              membro
+            )
+          )
           .filter(Boolean)
       )
     ]
@@ -46,16 +75,17 @@ module.exports = {
 
       for (let i = 0; i < paginas.length; i++) {
         const itens = paginas[i]
+        const conteudo = itens
+          .map(item => blocoUsuario(ctx.mess, item))
+          .filter(Boolean)
+          .join('\n├╾═╼･ﾟ𖤐ﾟ･｡❄️｡･ﾟ𖤐ﾟ･╾═╼┤\n')
 
         await ctx.reply(
-          ctx.mess.atividadePainel({
-            titulo: '𝙰𝚃𝙸𝚅𝙸𝙳𝙰𝙳𝙴𝚂 𝙳𝙾 𝙶𝚁𝚄𝙿𝙾',
-            emoji: '📊',
-            itens,
-            pagina: i + 1,
-            paginas: paginas.length,
-            vazio: 'ɴᴇɴʜᴜᴍᴀ ᴀᴛɪᴠɪᴅᴀᴅᴇ ᴇɴᴄᴏɴᴛʀᴀᴅᴀ.'
-          }),
+          ctx.mess.atividades(
+            conteudo,
+            i + 1,
+            paginas.length
+          ),
           itens.map(v => v.j)
         )
       }
@@ -77,16 +107,18 @@ module.exports = {
 
     for (let i = 0; i < paginas.length; i++) {
       const itens = paginas[i]
+      const conteudo = itens
+        .map(item => blocoUsuario(ctx.mess, item))
+        .filter(Boolean)
+        .join('\n├╾═╼･ﾟ𖤐ﾟ･｡❄️｡･ﾟ𖤐ﾟ･╾═╼┤\n')
 
       await ctx.reply(
-        ctx.mess.atividadePainel({
-          titulo: `𝙸𝙽𝙰𝚃𝙸𝚅𝙾𝚂 • 𝙻𝙸𝙼𝙸𝚃𝙴 ${limite}`,
-          emoji: '💤',
-          itens,
-          pagina: i + 1,
-          paginas: paginas.length,
-          vazio: 'ɴᴇɴʜᴜᴍ ᴍᴇᴍʙʀᴏ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ.'
-        }),
+        ctx.mess.inativos(
+          conteudo,
+          limite,
+          i + 1,
+          paginas.length
+        ),
         itens.map(v => v.j)
       )
     }
