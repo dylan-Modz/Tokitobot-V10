@@ -35,16 +35,18 @@ return `- 🧊 \`𝙰𝙲𝙴𝚂𝚂𝙾 𝙳𝙾 𝙳𝙾𝙽𝙾\`
 }
 
 exports.commandNotFound = ({ prefix, command, nome, porcentagem, tempo }) => {
-return `- ❌ \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\`
-
-> *『 ${prefix}${command || 'desconhecido'} 』— ᴄᴏᴍᴀɴᴅᴏ ɪɴғᴏʀᴍᴀᴅᴏ.*
-> *『 ${nome || 'Nenhum'} 』— ᴄᴏᴍᴀɴᴅᴏ ᴍᴀɪs ᴘᴀʀᴇᴄɪᴅᴏ.*
-> *『 ${porcentagem || '0%'} 』— sᴇᴍᴇʟʜᴀɴᴄ̧ᴀ ᴇɴᴄᴏɴᴛʀᴀᴅᴀ.*
-> *『 ${tempo || '0 ms'} 』— ᴛᴇᴍᴘᴏ ᴅᴀ ʙᴜsᴄᴀ.*
-
-> *ᴜsᴇ ${prefix}menu ᴘᴀʀᴀ ᴠᴇʀ ᴏs ᴄᴏᴍᴀɴᴅᴏs ᴅɪsᴘᴏɴɪ́ᴠᴇɪs.*`
+return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡❌｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾
+├╾═╼･ﾟ𖤐ﾟ･｡⚠️｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ ❌ 𝙲𝙾𝙼𝙰𝙽𝙳𝙾: ${prefix}${command || 'desconhecido'}
+┃࣪ ╎—̳͟͞͞ 🔎 𝙿𝙰𝚁𝙴𝙲𝙸𝙳𝙾: ${nome || 'Nenhum'}
+┃࣪ ╎—̳͟͞͞ 📊 𝚂𝙴𝙼𝙴𝙻𝙷𝙰𝙽𝙲̧𝙰: ${porcentagem || '0%'}
+┃࣪ ╎—̳͟͞͞ ⏱️ 𝚃𝙴𝙼𝙿𝙾: ${tempo || '0 ms'}
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
-
 exports.sogrupo = () => {
 return `- 👥 \`𝙰𝙿𝙴𝙽𝙰𝚂 𝙴𝙼 𝙶𝚁𝚄𝙿𝙾𝚂\`
 
@@ -633,7 +635,11 @@ return `- ${emoji} \`𝚇𝟿 ${titulo}\`
 
 > *『 @${autor} 』— ${descricao} 『 @${alvo} 』. 🙇‍♂️*`
 }
+exports.x9Saiu = numero => {
+return `- 🚪 \`𝚇𝟿 𝙼𝙴𝙼𝙱𝚁𝙾 𝚂𝙰𝙸𝚄\`
 
+> *『 @${numero} 』— sᴀɪᴜ ᴅᴏ ɢʀᴜᴘᴏ. 👋*`
+}
 exports.reiniciarBot = () => {
 return `- 🔄 \`𝚁𝙴𝙸𝙽𝙸𝙲𝙸𝙰𝙽𝙳𝙾\`
 
@@ -3314,4 +3320,101 @@ return `- 🛒 \`𝙲𝙾𝙽𝙵𝙸𝙶𝚄𝚁𝙰𝚁 𝙿𝙻𝙰𝙽𝙾�
 
 > *O número representa a posição mostrada no comando ${prefix}plans.*
 > *Todas as alterações são salvas diretamente no planos.json usado pelo sistema de aluguel.*`
+}
+
+
+exports.atividade = (
+numero,
+comandos,
+audios,
+figurinhas,
+documentos,
+fotos,
+videos
+) => {
+return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡📊｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝙰𝚃𝙸𝚅𝙸𝙳𝙰𝙳𝙴
+├╾═╼･ﾟ𖤐ﾟ･｡🧊｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ 👤 @${numero}
+┃࣪ ╎—̳͟͞͞ ⚙️ 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂: ${comandos}
+┃࣪ ╎—̳͟͞͞ 🎧 𝙰́𝚄𝙳𝙸𝙾𝚂: ${audios}
+┃࣪ ╎—̳͟͞͞ 🧊 𝙵𝙸𝙶𝚄𝚁𝙸𝙽𝙷𝙰𝚂: ${figurinhas}
+┃࣪ ╎—̳͟͞͞ 📄 𝙳𝙾𝙲𝚄𝙼𝙴𝙽𝚃𝙾𝚂: ${documentos}
+┃࣪ ╎—̳͟͞͞ 🖼️ 𝙵𝙾𝚃𝙾𝚂: ${fotos}
+┃࣪ ╎—̳͟͞͞ 🎥 𝚅𝙸́𝙳𝙴𝙾𝚂: ${videos}
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
+}
+
+
+exports.atividades = (
+conteudo,
+pagina = 1,
+paginas = 1
+) => {
+const paginaTexto = paginas > 1
+? `\n├╾═╼･ﾟ𖤐ﾟ･｡📄｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ 📄 𝙿𝙰́𝙶𝙸𝙽𝙰: ${pagina}/${paginas}`
+: ''
+
+return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡📊｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝙰𝚃𝙸𝚅𝙸𝙳𝙰𝙳𝙴𝚂
+├╾═╼･ﾟ𖤐ﾟ･｡🧊｡･ﾟ𖤐ﾟ･╾═╼┤
+${conteudo || '┃࣪ ╎—̳͟͞͞ 💤 ɴᴇɴʜᴜᴍᴀ ᴀᴛɪᴠɪᴅᴀᴅᴇ ᴇɴᴄᴏɴᴛʀᴀᴅᴀ.'}${paginaTexto}
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
+}
+
+
+exports.inativos = (
+conteudo,
+limite,
+pagina = 1,
+paginas = 1
+) => {
+const paginaTexto = paginas > 1
+? `\n├╾═╼･ﾟ𖤐ﾟ･｡📄｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ 📄 𝙿𝙰́𝙶𝙸𝙽𝙰: ${pagina}/${paginas}`
+: ''
+
+return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡💤｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝙼𝙴𝙼𝙱𝚁𝙾𝚂 𝙸𝙽𝙰𝚃𝙸𝚅𝙾𝚂
+├╾═╼･ﾟ𖤐ﾟ･｡🧊｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ 📉 𝙻𝙸𝙼𝙸𝚃𝙴: ${limite}
+├╾═╼･ﾟ𖤐ﾟ･｡❄️｡･ﾟ𖤐ﾟ･╾═╼┤
+${conteudo || '┃࣪ ╎—̳͟͞͞ ✅ ɴᴇɴʜᴜᴍ ᴍᴇᴍʙʀᴏ ɪɴᴀᴛɪᴠᴏ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ.'}${paginaTexto}
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
+}
+
+
+exports.meAtividade = (
+numero,
+comandos,
+audios,
+figurinhas,
+documentos,
+fotos,
+videos
+) => {
+return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡👤｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝙼𝙸𝙽𝙷𝙰 𝙰𝚃𝙸𝚅𝙸𝙳𝙰𝙳𝙴
+├╾═╼･ﾟ𖤐ﾟ･｡🧊｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ 👤 @${numero}
+┃࣪ ╎—̳͟͞͞ ⚙️ 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂: ${comandos}
+┃࣪ ╎—̳͟͞͞ 🎧 𝙰́𝚄𝙳𝙸𝙾𝚂: ${audios}
+┃࣪ ╎—̳͟͞͞ 🧊 𝙵𝙸𝙶𝚄𝚁𝙸𝙽𝙷𝙰𝚂: ${figurinhas}
+┃࣪ ╎—̳͟͞͞ 📄 𝙳𝙾𝙲𝚄𝙼𝙴𝙽𝚃𝙾𝚂: ${documentos}
+┃࣪ ╎—̳͟͞͞ 🖼️ 𝙵𝙾𝚃𝙾𝚂: ${fotos}
+┃࣪ ╎—̳͟͞͞ 🎥 𝚅𝙸́𝙳𝙴𝙾𝚂: ${videos}
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
