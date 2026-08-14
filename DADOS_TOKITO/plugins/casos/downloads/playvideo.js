@@ -39,8 +39,7 @@ if (!q || !q.trim()) return reply(`*❌ | ɪɴsɪʀᴀ ᴏ ɴᴏᴍᴇ ᴏᴜ ʟ
 
 await reagir(from, '🎥')
 
-const pesquisa = q.trim()
-const contextInfo = { ...newsletter, mentionedJid: [sender] }
+const pesquisa = q.trim(), contextInfo = { ...newsletter, mentionedJid: [sender] }
 
 const buscaUrl = `${API_URL}/api/youtube-search?query=${encodeURIComponent(pesquisa)}&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
 
@@ -65,7 +64,9 @@ const titulo = String(res?.title || 'YouTube')
 const canal = String(res?.author?.name || 'Não informado')
 const duracao = String(res?.timestamp || res?.duration?.timestamp || '0:00')
 const views = Number(res?.views || 0).toLocaleString('pt-BR')
+const thumbnail = res?.image || res?.thumbnail || null
 const url = String(res.url)
+const numeroUsuario = sender.split('@')[0]
 
 const videoApi = `${API_URL}/api/youtube-video?q=${encodeURIComponent(url)}&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
 
@@ -73,18 +74,27 @@ const texto = `⏤͟͟͞͞𝐕𝐢́𝐝𝐞𝐨 𝐞𝐧𝐜𝐨𝐧𝐭𝐫�
 •
 > ╭ ℹ️ 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂̧𝐎̃𝐄𝐒
 > *[✏️]* • *𝚝𝚒́𝚝𝚞𝚕𝚘:* *${titulo}*
-> *[👨‍🎤]* • *ᴀᴜᴛᴏʀ:* ${canal}
 > *[⏱️]* • *ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ:* ${duracao}
 > *[👥]* • *ᴠɪᴇᴡs:* ${views}
+> *[👨‍🎤]* • *ᴀᴜᴛᴏʀ:* ${canal}
 > *[🔗]* • *ʟɪɴᴋ:* ${url}
 •
-> *[🎬]* • *𝙴𝚗𝚟𝚒𝚊𝚗𝚍𝚘 𝚘 𝚜𝚎𝚞 𝚟𝚒́𝚍𝚎𝚘* _@${sender.split('@')[0]}_`
+> *[🎬]* • *𝙴𝚗𝚟𝚒𝚊𝚗𝚍𝚘 𝚘 𝚜𝚎𝚞 𝚟𝚒́𝚍𝚎𝚘* _@${numeroUsuario}_`
+
+if (thumbnail) {
+await tokito.sendMessage(from, {
+image: { url: thumbnail }, caption: texto, contextInfo
+}, { quoted: selo })
+} else {
+await tokito.sendMessage(from, {
+text: texto, contextInfo
+}, { quoted: selo })
+}
 
 await tokito.sendMessage(from, {
 video: { url: videoApi },
 mimetype: 'video/mp4',
 fileName: 'video.mp4',
-caption: texto,
 contextInfo
 }, { quoted: selo })
 
