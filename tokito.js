@@ -675,21 +675,20 @@ const marc_tds = temMention ? normalizar(menc_jid) : qSeguro.length > 6 && !temM
 const menc_prt_nmr = qSeguro.length > 12 && !temMention ? numClean(qSeguro) : normalizar(menc_prt || menc_sticker || sender)
 
 const alvoPorMarcacaoOuNumero = () => {
-const marcado = mentionedList[0] || quotedParticipant || ''
+const marcado = mentionedList[0] || ''
 
-if (marcado)
+if (marcado) {
 return nJid(marcado, [
 ctxMsg?.participantAlt,
 info?.key?.participantAlt,
 info?.key?.senderAlt,
 info?.participantAlt
 ])
+}
 
 let numero = String(q || '').replace(/\D/g, '')
 
-if (!numero)
-return ''
-
+if (numero) {
 if (!numero.startsWith('55') && [10, 11].includes(numero.length))
 numero = `55${numero}`
 
@@ -697,6 +696,17 @@ if (numero.length < 10 || numero.length > 15)
 return ''
 
 return jidNormalizedUser(`${numero}@s.whatsapp.net`)
+}
+
+const ehResposta = Boolean(
+ctxMsg?.stanzaId ||
+ctxMsg?.quotedMessage
+)
+
+if (ehResposta && quotedParticipant)
+return nJid(quotedParticipant, [ctxMsg?.participantAlt])
+
+return ''
 }
 
 const destino = async () => {

@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.36",
+  "version": "10.0.37",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-14T11:37:15.179Z",
+  "publishedAt": "2026-08-14T11:42:56.629Z",
   "changelog": [
     "[Correção] Arquivo principal do bot atualizado",
-    "A versão 10.0.36 já está disponível para atualização.",
+    "A versão 10.0.37 já está disponível para atualização.",
     "Arquivo principal do bot atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
   "title": "Arquivo principal do bot atualizado",
-  "notice": "A versão 10.0.36 já está disponível para atualização.",
+  "notice": "A versão 10.0.37 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "tokito.js",
-      "sha256": "b78f9f842286763657705708cfc1dda5b34aa1e3a51e0472570dbdb9201922e5",
-      "size": 43079
+      "sha256": "a132d3286859bac07708e116c1b7178261a3462fe39f9a5d6a977948653eea70",
+      "size": 43233
     }
   ],
   "releases": [
@@ -768,6 +768,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-14T11:37:15.178Z"
+    },
+    {
+      "version": "10.0.37",
+      "fromVersion": "10.0.36",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Arquivo principal do bot atualizado",
+      "notice": "A versão 10.0.37 já está disponível para atualização.",
+      "changelog": [
+        "Arquivo principal do bot atualizado"
+      ],
+      "files": [
+        {
+          "path": "tokito.js",
+          "sha256": "a132d3286859bac07708e116c1b7178261a3462fe39f9a5d6a977948653eea70",
+          "size": 43233
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-14T11:42:56.629Z"
     }
   ]
 }
