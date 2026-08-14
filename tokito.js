@@ -1070,7 +1070,7 @@ if (cfgGlobal.bloqueados.map(v => nJid(v)).includes(senderNormalizado) && !SoDon
 continue
 if (!isGroup && cfgGlobal.antipv === true && !SoDono)
 continue
-if (isGroup && dataGp?.[0]?.funcoes?.bangp === true && !SoDono && isCmd)
+if (isGroup && dataGp?.[0]?.funcoes?.bangp === true && !SoDono)
 continue
 const chatType = isGroup ? 'GRUPO' : 'PRIVADO'
 const groupInfo = isGroup ? `(${groupName || 'SEM NOME'})` : '(Privado)'
