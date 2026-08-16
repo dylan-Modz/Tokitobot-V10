@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.52",
+  "version": "10.0.53",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-16T18:46:04.582Z",
+  "publishedAt": "2026-08-16T19:31:49.008Z",
   "changelog": [
     "[Correção] Index atualizado",
-    "A versão 10.0.52 já está disponível para atualização.",
+    "A versão 10.0.53 já está disponível para atualização.",
     "Index atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
   "title": "Index atualizado",
-  "notice": "A versão 10.0.52 já está disponível para atualização.",
+  "notice": "A versão 10.0.53 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "9a921af251d4eee603d77d585a99fe9000f2821ad6b375db4e77527eaaf6480e",
-      "size": 33439
+      "sha256": "8009f463238ee3cea2277d2fa5d09b6ac10be775b013e33f497d87a2b4f086ae",
+      "size": 36575
     }
   ],
   "releases": [
@@ -1164,6 +1164,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-16T18:46:04.582Z"
+    },
+    {
+      "version": "10.0.53",
+      "fromVersion": "10.0.52",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Index atualizado",
+      "notice": "A versão 10.0.53 já está disponível para atualização.",
+      "changelog": [
+        "Index atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "8009f463238ee3cea2277d2fa5d09b6ac10be775b013e33f497d87a2b4f086ae",
+          "size": 36575
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-16T19:31:49.008Z"
     }
   ]
 }
