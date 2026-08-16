@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="[https://raw.githubusercontent.com/vitincruz68-oss/uploads/main/5945vi.jpeg]([https://raw.githubusercontent.com/vitincruz68-oss/uploads/main/4760kv.jpeg](https://raw.githubusercontent.com/vitincruz68-oss/uploads/main/4760kv.jpeg))" width="100%">
+<img src="https://raw.githubusercontent.com/vitincruz68-oss/uploads/main/4760kv.jpeg" width="100%">
 
 # 🧊 TOKITO BOT V10
 
