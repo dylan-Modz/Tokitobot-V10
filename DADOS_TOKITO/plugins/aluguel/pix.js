@@ -2,13 +2,94 @@
  * ============================================================
  *                     TOKITO BOT V10
  * ============================================================
+ * Author: Dylan Modz
+ * API oficial: https://tokito-apis.com.br
+ * ============================================================
  */
 
 const aluguel = require('../../sistemas/aluguel')
 
+const {
+  proto,
+  generateWAMessageFromContent
+} = require('@whiskeysockets/baileys')
+
+async function enviarCopiarPix(ctx, codigo) {
+  const pix = String(codigo || '').trim()
+  if (!pix) return false
+
+  try {
+    const jid = ctx.from
+
+    const interactiveMessage =
+      proto.Message.InteractiveMessage.create({
+        body: proto.Message.InteractiveMessage.Body.create({
+          text: ''
+        }),
+
+        nativeFlowMessage:
+          proto.Message.InteractiveMessage.NativeFlowMessage.create({
+            messageParamsJson: JSON.stringify({
+              fromMe: false,
+              hasMediaAttachment: false
+            }),
+
+            buttons: [
+              {
+                name: 'cta_copy',
+                buttonParamsJson: JSON.stringify({
+                  display_text: '🧊﹚𝐂𝐎𝐏𝐈𝐀𝐑 𝐏𝐈𝐗﹙🧊',
+                  id: `pix_${Date.now()}`,
+                  copy_code: pix
+                })
+              }
+            ]
+          })
+      })
+
+    const content = {
+      viewOnceMessage: {
+        message: {
+          interactiveMessage
+        }
+      }
+    }
+
+    const msg = generateWAMessageFromContent(
+      jid,
+      content,
+      {
+        userJid: ctx.tokito.user?.id,
+        quoted: ctx.selo
+      }
+    )
+
+    await ctx.tokito.relayMessage(
+      jid,
+      msg.message,
+      {
+        messageId: msg.key.id
+      }
+    )
+
+    return true
+  } catch (e) {
+    console.log(
+      '[COPIAR PIX]',
+      e?.message || e
+    )
+    return false
+  }
+}
+
 module.exports = {
   nome: 'pixalugar',
-  comandos: ['pixalugar', 'pixaluguel'],
+
+  comandos: [
+    'pixalugar',
+    'pixaluguel'
+  ],
+
   categoria: 'aluguel',
 
   info: {
@@ -32,14 +113,10 @@ module.exports = {
       String(ctx.q || '').replace(',', '.')
     )
 
-    if (
-      !Number.isFinite(valor) ||
-      valor <= 0
-    ) {
+    if (!Number.isFinite(valor) || valor <= 0)
       return ctx.reply(
         ctx.mess.aluguelPlanoInvalido()
       )
-    }
 
     try {
       const item = await aluguel.criarPix(
@@ -55,38 +132,24 @@ module.exports = {
       const caption =
         ctx.mess.aluguelPix(item)
 
-      const pixCopiaCola =
-        String(
-          item.pix_copia_e_cola ||
-          item.qr_code ||
-          ''
-        ).trim()
-
-      const qrBase64 =
-        String(
-          item.qr_code_base64 || ''
-        )
-        .replace(
+      if (item.qr_code_base64) {
+        const b64 = String(
+          item.qr_code_base64
+        ).replace(
           /^data:image\/\w+;base64,/,
           ''
         )
 
-      /*
-       * Primeiro envia o QR Code.
-       */
-      if (qrBase64) {
         await ctx.tokito.sendMessage(
           ctx.from,
           {
             image: Buffer.from(
-              qrBase64,
+              b64,
               'base64'
             ),
             caption,
             contextInfo:
-              ctx.canalInfo([
-                ctx.sender
-              ])
+              ctx.canalInfo([ctx.sender])
           },
           {
             quoted: ctx.selo
@@ -94,72 +157,23 @@ module.exports = {
         )
       } else {
         await ctx.reply(
-          caption
+          `${caption}\n\n${item.qr_code || ''}`
         )
       }
 
-      /*
-       * Mostra o Copia e Cola.
-       */
-      if (pixCopiaCola) {
-        /*
-         * Tenta usar o botão da própria base.
-         *
-         * O botão executa pixcodigo e passa
-         * o ID do pagamento.
-         */
-        try {
-          if (
-            typeof ctx.botaozin === 'function'
-          ) {
-            await ctx.botaozin(
-              '💳 PIX copia e cola',
-              [
-                {
-                  texto: '📋 Copiar PIX',
-                  id:
-                    `${ctx.prefix}pixcodigo ${item.id}`
-                }
-              ],
-              [ctx.sender]
-            )
-
-            return true
-          }
-        } catch (erro) {
-          console.log(
-            '[PIX ALUGUEL • BOTÃO]',
-            erro?.message || erro
-          )
-        }
-
-        /*
-         * Fallback caso o sistema de botão
-         * da base esteja indisponível.
-         */
-        return ctx.reply(
-          `💳 *PIX COPIA E COLA*\n\n` +
-          `\`${pixCopiaCola}\`\n\n` +
-          `Copie o código acima e cole no seu aplicativo bancário.`
+      if (item.qr_code) {
+        await enviarCopiarPix(
+          ctx,
+          item.qr_code
         )
       }
 
-      /*
-       * Se a API não retornou o código,
-       * ainda informa o usuário.
-       */
-      return ctx.reply(
-        `⚠️ O QR Code foi gerado, mas o ` +
-        `Pix Copia e Cola não foi retornado ` +
-        `pela API de pagamento.`
-      )
+      return true
 
     } catch (e) {
       if (
-        e.code ===
-          'MP_TOKEN_NAO_CONFIGURADO' ||
-        e.message ===
-          'MP_TOKEN_NAO_CONFIGURADO'
+        e?.code === 'MP_TOKEN_NAO_CONFIGURADO' ||
+        e?.message === 'MP_TOKEN_NAO_CONFIGURADO'
       ) {
         return ctx.reply(
           ctx.mess.tokenMpAusente()
@@ -167,7 +181,7 @@ module.exports = {
       }
 
       if (
-        e.message ===
+        e?.message ===
         'PEDIDO_NAO_ENCONTRADO'
       ) {
         return ctx.reply(
@@ -178,7 +192,7 @@ module.exports = {
       }
 
       if (
-        e.message ===
+        e?.message ===
         'PLANO_NAO_ENCONTRADO'
       ) {
         return ctx.reply(
