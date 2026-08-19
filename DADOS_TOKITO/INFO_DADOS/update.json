@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.59",
+  "version": "10.0.60",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-19T19:13:53.520Z",
+  "publishedAt": "2026-08-19T19:14:30.049Z",
   "changelog": [
-    "[Correção] Index atualizado",
-    "A versão 10.0.59 já está disponível para atualização.",
-    "Index atualizado"
+    "[Correção] Pix atualizado",
+    "A versão 10.0.60 já está disponível para atualização.",
+    "Pix atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Index atualizado",
-  "notice": "A versão 10.0.59 já está disponível para atualização.",
+  "title": "Pix atualizado",
+  "notice": "A versão 10.0.60 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/aluguel/index.js",
-      "sha256": "c0d02fe273545df28d70b52351b4b215a9647945d81c9f8183ca8487cc8e7e7a",
-      "size": 8611
+      "path": "DADOS_TOKITO/plugins/aluguel/pix.js",
+      "sha256": "ebab720927d3479fb5fe60aaf3ad629343fa5e4b44ec5193b2790a788aead8c1",
+      "size": 4072
     }
   ],
   "releases": [
@@ -1323,6 +1323,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-19T19:13:53.519Z"
+    },
+    {
+      "version": "10.0.60",
+      "fromVersion": "10.0.59",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Pix atualizado",
+      "notice": "A versão 10.0.60 já está disponível para atualização.",
+      "changelog": [
+        "Pix atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/pix.js",
+          "sha256": "ebab720927d3479fb5fe60aaf3ad629343fa5e4b44ec5193b2790a788aead8c1",
+          "size": 4072
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-19T19:14:30.049Z"
     }
   ]
 }
