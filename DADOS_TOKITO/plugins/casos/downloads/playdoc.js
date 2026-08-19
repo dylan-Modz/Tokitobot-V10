@@ -101,16 +101,25 @@ res?.duration?.timestamp ||
 '0:00'
 )
 
-const viewsRaw = res?.views
-
-const views = String(
-viewsRaw || '0'
+const viewsRaw = String(
+res?.views || '0'
 )
+
+const views = viewsRaw
 .replace(/[^\d]/g, '')
 
 const viewsFormatadas = views
 ? Number(views).toLocaleString('pt-BR')
 : '0'
+
+const thumbnail =
+res?.image ||
+res?.thumbnail ||
+(
+res?.videoId
+? `https://i.ytimg.com/vi/${res.videoId}/hq720.jpg`
+: null
+)
 
 const url = String(
 res?.url ||
@@ -155,6 +164,24 @@ const texto = `⏤͟͟͞͞𝐌𝐮́𝐬𝐢𝐜𝐚 𝐞𝐧𝐜𝐨𝐧𝐭�
 •
 > *[📄]* • *𝙴𝚗𝚟𝚒𝚊𝚗𝚍𝚘 𝚘 𝚜𝚎𝚞 𝚍𝚘𝚌𝚞𝚖𝚎𝚗𝚝𝚘* _@${numeroUsuario}_`
 
+if (thumbnail) {
+
+await tokito.sendMessage(
+from,
+{
+image: {
+url: thumbnail
+},
+caption: texto,
+contextInfo
+},
+{
+quoted: selo
+}
+)
+
+} else {
+
 await tokito.sendMessage(
 from,
 {
@@ -165,6 +192,8 @@ contextInfo
 quoted: selo
 }
 )
+
+}
 
 await tokito.sendMessage(
 from,

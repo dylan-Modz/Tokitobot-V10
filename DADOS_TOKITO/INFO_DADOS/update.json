@@ -1,39 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.54",
+  "version": "10.0.55",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-19T01:41:37.439Z",
+  "publishedAt": "2026-08-19T01:44:09.840Z",
   "changelog": [
-    "[Correção] 3 arquivos atualizados",
-    "A versão 10.0.54 já está disponível para atualização.",
-    "Comando Play atualizado",
-    "Comando Playdoc atualizado",
-    "Comando Playvideo atualizado"
+    "[Correção] Comando Playdoc atualizado",
+    "A versão 10.0.55 já está disponível para atualização.",
+    "Comando Playdoc atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "3 arquivos atualizados",
-  "notice": "A versão 10.0.54 já está disponível para atualização.",
+  "title": "Comando Playdoc atualizado",
+  "notice": "A versão 10.0.55 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/casos/downloads/play.js",
-      "sha256": "10c7753ced34a54dc974d0e104100ceaf5c6070b08b5fe07c2f1582335368e0a",
-      "size": 9110
-    },
-    {
       "path": "DADOS_TOKITO/plugins/casos/downloads/playdoc.js",
-      "sha256": "3cb5511651b59150ec95a1fb7ed04a53fb45d4f7a7150967f3a9d7723f37919c",
-      "size": 3940
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/casos/downloads/playvideo.js",
-      "sha256": "f1aa59b53475efe2e6cad9c71a12f1da503cffa560354a033d4e0624788fce2e",
-      "size": 5370
+      "sha256": "d1804b16b1c40771aeb5ea03a417f61e638165ac894fb69ccb4bd1b7caa8cc81",
+      "size": 4210
     }
   ],
   "releases": [
@@ -1230,6 +1218,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-19T01:41:37.438Z"
+    },
+    {
+      "version": "10.0.55",
+      "fromVersion": "10.0.54",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Comando Playdoc atualizado",
+      "notice": "A versão 10.0.55 já está disponível para atualização.",
+      "changelog": [
+        "Comando Playdoc atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/casos/downloads/playdoc.js",
+          "sha256": "d1804b16b1c40771aeb5ea03a417f61e638165ac894fb69ccb4bd1b7caa8cc81",
+          "size": 4210
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-19T01:44:09.840Z"
     }
   ]
 }
