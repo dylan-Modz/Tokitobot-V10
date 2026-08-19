@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.57",
+  "version": "10.0.58",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-19T01:46:12.000Z",
+  "publishedAt": "2026-08-19T01:47:30.723Z",
   "changelog": [
     "[Correção] Comando Playdoc atualizado",
-    "A versão 10.0.57 já está disponível para atualização.",
+    "A versão 10.0.58 já está disponível para atualização.",
     "Comando Playdoc atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
   "title": "Comando Playdoc atualizado",
-  "notice": "A versão 10.0.57 já está disponível para atualização.",
+  "notice": "A versão 10.0.58 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/casos/downloads/playdoc.js",
-      "sha256": "63dd9ec0e2497109f882168f035437265911dc24e361810aaf156da6bffee05f",
-      "size": 4212
+      "sha256": "21d62ac15ff446c9efaa9829e8e9bd920dad411a10bdb8b6aabed2616c1a1160",
+      "size": 4509
     }
   ],
   "releases": [
@@ -1281,6 +1281,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-19T01:46:12.000Z"
+    },
+    {
+      "version": "10.0.58",
+      "fromVersion": "10.0.57",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Comando Playdoc atualizado",
+      "notice": "A versão 10.0.58 já está disponível para atualização.",
+      "changelog": [
+        "Comando Playdoc atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/casos/downloads/playdoc.js",
+          "sha256": "21d62ac15ff446c9efaa9829e8e9bd920dad411a10bdb8b6aabed2616c1a1160",
+          "size": 4509
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-19T01:47:30.723Z"
     }
   ]
 }

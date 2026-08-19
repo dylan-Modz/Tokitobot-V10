@@ -14,11 +14,19 @@
  * • Não reivindique a autoria original do projeto.
  * • Respeite os créditos e o trabalho dos desenvolvedores.
  *
+ * ATENÇÃO:
+ * A venda, revenda ou comercialização não autorizada deste
+ * projeto poderá resultar em medidas legais para proteção
+ * dos direitos dos autores, incluindo processo judicial,
+ * conforme a legislação aplicável.
+ *
  * Author: Dylan Modz
  * API oficial: https://tokito-apis.com.br
+ *
+ * Modifique como quiser. Apenas respeite as regras.
  * ============================================================
  */
-  
+
 const axios = require('axios')
 
 module.exports = {
@@ -101,15 +109,17 @@ res?.duration?.timestamp ||
 '0:00'
 )
 
-const viewsRaw = String(
-res?.views || '0'
+const viewsTexto = String(
+res?.views ||
+'0'
 )
 
-const views = viewsRaw
-.replace(/[^\d]/g, '')
+const viewsNumeros =
+viewsTexto.replace(/[^\d]/g, '')
 
-const viewsFormatadas = views
-? Number(views).toLocaleString('pt-BR')
+const views =
+viewsNumeros
+? Number(viewsNumeros).toLocaleString('pt-BR')
 : '0'
 
 const thumbnail =
@@ -123,10 +133,14 @@ res?.videoId
 
 const url = String(
 res?.url ||
-`https://www.youtube.com/watch?v=${res?.videoId}`
+(
+res?.videoId
+? `https://www.youtube.com/watch?v=${res.videoId}`
+: ''
+)
 )
 
-if (!url || url === 'undefined') {
+if (!url) {
 await reagir(from, '❌')
 
 return reply(
@@ -158,7 +172,7 @@ const texto = `⏤͟͟͞͞𝐌𝐮́𝐬𝐢𝐜𝐚 𝐞𝐧𝐜𝐨𝐧𝐭�
 > ╭ ℹ️ 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂̧𝐎̃𝐄𝐒
 > *[✏️]* • *𝚝𝚒́𝚝𝚞𝚕𝚘:* *${titulo}*
 > *[⏱️]* • *ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ:* ${duracao}
-> *[👥]* • *ᴠɪᴇᴡs:* ${viewsFormatadas}
+> *[👥]* • *ᴠɪᴇᴡs:* ${views}
 > *[👨‍🎤]* • *ᴀᴜᴛᴏʀ:* ${canal}
 > *[🔗]* • *ʟɪɴᴋ:* ${url}
 •
