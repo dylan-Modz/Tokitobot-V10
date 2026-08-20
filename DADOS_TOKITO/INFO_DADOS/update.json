@@ -1,75 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.63",
+  "version": "10.0.64",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-20T01:33:29.476Z",
+  "publishedAt": "2026-08-20T01:48:12.545Z",
   "changelog": [
-    "[Correção] 9 arquivos atualizados",
-    "A versão 10.0.63 já está disponível para atualização.",
-    "X4 atualizado",
-    "Evento Reacao atualizado",
-    "Evento X4 atualizado",
-    "Menus atualizados",
-    "Modox4 atualizado",
-    "Reacao atualizado",
-    "Time atualizado",
-    "Notas atualizado",
-    "Xgp atualizado"
+    "[Correção] Time atualizado",
+    "A versão 10.0.64 já está disponível para atualização.",
+    "Time atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "9 arquivos atualizados",
-  "notice": "A versão 10.0.63 já está disponível para atualização.",
+  "title": "Time atualizado",
+  "notice": "A versão 10.0.64 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/freefire/_x4.js",
-      "sha256": "d3a33bf38a8684073e8c49c0e5ea3e92288adc4d7dd7d4b164651227e8a44c20",
-      "size": 1425
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/evento-reacao.js",
-      "sha256": "20b6b651b102914bd01d00492b2f31bf18aa8970a4aa480331ddfed241c8cf3e",
-      "size": 1720
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/evento-x4.js",
-      "sha256": "6b9844feedde43fba081b750f56f07d592c3fe4f443b7334ff78d594b1782898",
-      "size": 2670
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/menus.js",
-      "sha256": "8c202b661377a1c855e52733dd517142ab1ec9e373fa677acad3c02017ad4ab2",
-      "size": 57360
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/modox4.js",
-      "sha256": "1fe6717ec8b978a01017ce7beaf0e23da067da4621af67ded8375d2d97be49f2",
-      "size": 1631
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/reacao.js",
-      "sha256": "6f7256b245f42c18aa3652804dbb68e17a209377b5c2f3dac0a7b49f88a089f2",
-      "size": 4821
-    },
-    {
       "path": "DADOS_TOKITO/plugins/freefire/time.js",
-      "sha256": "912f514ae48499c4b0d3ff9dcc89ec2c16b051ac2ad7669ee1dda8a114501391",
-      "size": 2145
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/notas.js",
-      "sha256": "04d6fe237594da49a0f682258e88cc5e728ee188b6c47ac82eba923fa3a80779",
-      "size": 3715
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/xgp.js",
-      "sha256": "2d2cff13ecfb957f53f6822e60e772d69949569fc5887bb9661d6fb026fe9aae",
-      "size": 1632
+      "sha256": "29e0f8bb4afb904e2f3a436ff3e005140b072227af0b7c12085ab0a5863032d7",
+      "size": 2719
     }
   ],
   "releases": [
@@ -1521,6 +1473,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-20T01:33:29.475Z"
+    },
+    {
+      "version": "10.0.64",
+      "fromVersion": "10.0.63",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Time atualizado",
+      "notice": "A versão 10.0.64 já está disponível para atualização.",
+      "changelog": [
+        "Time atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/time.js",
+          "sha256": "29e0f8bb4afb904e2f3a436ff3e005140b072227af0b7c12085ab0a5863032d7",
+          "size": 2719
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-20T01:48:12.545Z"
     }
   ]
 }
