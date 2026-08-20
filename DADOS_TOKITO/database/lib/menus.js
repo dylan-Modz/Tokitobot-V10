@@ -889,9 +889,34 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}pararsala SESSION_ID
 ┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}statussalas
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
+
+╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡⚔️｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝑀𝑂𝐷𝑂-𝑋4
+├╾═╼･ﾟ𖤐ﾟ･｡🎮｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}modox4 1/0
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}xgp NOME
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}sala NOME
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}time NOME,NOME,NOME,NOME,NOME,NOME
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}nota
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}nota add TEXTO
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}nota del NÚMERO
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
+
+╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡🎭｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝑅𝐸𝐴𝐶̧𝑂̃𝐸𝑆
+├╾═╼･ﾟ𖤐ﾟ･｡✨｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rgreacao 😻 | dylan
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rmreacao dylan
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}listareacao
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
-
 exports.menulogos = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
 return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
