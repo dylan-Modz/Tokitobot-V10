@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.64",
+  "version": "10.0.65",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-20T01:48:12.545Z",
+  "publishedAt": "2026-08-20T02:01:38.598Z",
   "changelog": [
-    "[Correção] Time atualizado",
-    "A versão 10.0.64 já está disponível para atualização.",
-    "Time atualizado"
+    "[Correção] Xgp atualizado",
+    "A versão 10.0.65 já está disponível para atualização.",
+    "Xgp atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Time atualizado",
-  "notice": "A versão 10.0.64 já está disponível para atualização.",
+  "title": "Xgp atualizado",
+  "notice": "A versão 10.0.65 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/freefire/time.js",
-      "sha256": "29e0f8bb4afb904e2f3a436ff3e005140b072227af0b7c12085ab0a5863032d7",
-      "size": 2719
+      "path": "DADOS_TOKITO/plugins/freefire/xgp.js",
+      "sha256": "475355562393aedbdafe6881399e0aef7c42535e59fb3c8078664409c6214a06",
+      "size": 2635
     }
   ],
   "releases": [
@@ -1494,6 +1494,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-20T01:48:12.545Z"
+    },
+    {
+      "version": "10.0.65",
+      "fromVersion": "10.0.64",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Xgp atualizado",
+      "notice": "A versão 10.0.65 já está disponível para atualização.",
+      "changelog": [
+        "Xgp atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/xgp.js",
+          "sha256": "475355562393aedbdafe6881399e0aef7c42535e59fb3c8078664409c6214a06",
+          "size": 2635
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-20T02:01:38.597Z"
     }
   ]
 }
