@@ -7,470 +7,547 @@
 const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
-const {
-  criarPagamentoPix,
-  verificarPix,
-  tokenConfigurado
-} = require('../../src/pix')
+const mess = require('../../database/lib/global.js')
+const { criarPagamentoPix, verificarPix, tokenConfigurado } = require('../../src/pix')
 
 const raiz = path.join(__dirname, '..', '..', 'database', 'aluguel')
 
 const arquivos = {
-  grupos: path.join(raiz, 'aluguel.json'),
-  pedidos: path.join(raiz, 'pedidos.json'),
-  pendencias: path.join(raiz, 'pendencias.json'),
-  planos: path.join(__dirname, '..', '..', 'INFO_DADOS', 'LOGOS', 'planos.json')
+grupos: path.join(raiz, 'aluguel.json'),
+pedidos: path.join(raiz, 'pedidos.json'),
+pendencias: path.join(raiz, 'pendencias.json'),
+planos: path.join(__dirname, '..', '..', 'INFO_DADOS', 'LOGOS', 'planos.json')
 }
 
-for (const p of [
-  arquivos.grupos,
-  arquivos.pedidos,
-  arquivos.pendencias
-]) {
-  fs.mkdirSync(path.dirname(p), { recursive: true })
-
-  if (!fs.existsSync(p))
-    fs.writeFileSync(p, '[]\n')
+for (const p of [arquivos.grupos, arquivos.pedidos, arquivos.pendencias]) {
+fs.mkdirSync(path.dirname(p), { recursive: true })
+if (!fs.existsSync(p)) fs.writeFileSync(p, '[]\n')
 }
 
 const ler = (p, pad = []) => {
-  try {
-    return JSON.parse(fs.readFileSync(p, 'utf8'))
-  } catch {
-    return pad
-  }
+try {
+return JSON.parse(fs.readFileSync(p, 'utf8'))
+} catch {
+return pad
+}
 }
 
 const salvar = (p, d) => {
-  const t = p + '.tmp'
-
-  fs.writeFileSync(
-    t,
-    JSON.stringify(d, null, 2) + '\n'
-  )
-
-  fs.renameSync(t, p)
+const t = p + '.tmp'
+fs.writeFileSync(t, JSON.stringify(d, null, 2) + '\n')
+fs.renameSync(t, p)
 }
 
 const planos = () => {
-  const l = ler(arquivos.planos, [])
-
-  return Array.isArray(l)
-    ? l.filter(p =>
-        p &&
-        Number(p.preco) > 0 &&
-        Number(p.dias) > 0
-      )
-    : []
+const l = ler(arquivos.planos, [])
+return Array.isArray(l) ? l.filter(p => p && Number(p.preco) > 0 && Number(p.dias) > 0) : []
 }
 
 const extrairInvite = link => {
-  const m = String(link || '').match(
-    /chat\.whatsapp\.com\/([A-Za-z0-9_-]{8,})/i
-  )
-
-  return m?.[1] || ''
+const m = String(link || '').match(/chat\.whatsapp\.com\/([A-Za-z0-9_-]{8,})/i)
+return m?.[1] || ''
 }
 
 const ativos = () => {
-  const agora = Date.now()
-  let list = ler(arquivos.grupos, [])
-  let mudou = false
+const agora = Date.now()
+let list = ler(arquivos.grupos, [])
+let mudou = false
 
-  for (const g of list) {
-    if (
-      g.ativo !== false &&
-      g.expiraEm &&
-      new Date(g.expiraEm).getTime() <= agora
-    ) {
-      g.ativo = false
-      g.expiradoEm = new Date().toISOString()
-      mudou = true
-    }
-  }
-
-  if (mudou)
-    salvar(arquivos.grupos, list)
-
-  return list
+for (const g of list) {
+if (g.ativo !== false && g.expiraEm && new Date(g.expiraEm).getTime() <= agora) {
+g.ativo = false
+g.expiradoEm = new Date().toISOString()
+mudou = true
+}
 }
 
-const autorizado = id =>
-  ativos().some(g =>
-    g.id === id &&
-    g.ativo !== false &&
-    (
-      !g.expiraEm ||
-      new Date(g.expiraEm).getTime() > Date.now()
-    )
-  )
+if (mudou) salvar(arquivos.grupos, list)
+return list
+}
+
+const autorizado = id => ativos().some(g =>
+g.id === id &&
+g.ativo !== false &&
+(!g.expiraEm || new Date(g.expiraEm).getTime() > Date.now())
+)
 
 const registrar = (id, plano, comprador, link = '') => {
-  let list = ativos()
-  let g = list.find(x => x.id === id)
+let list = ativos(), g = list.find(x => x.id === id)
+const dias = Number(plano.dias) || 0, agora = Date.now()
 
-  const dias = Number(plano.dias) || 0
-  const agora = Date.now()
+if (g) {
+const base = Math.max(agora, new Date(g.expiraEm || 0).getTime() || 0)
 
-  if (g) {
-    const base = Math.max(
-      agora,
-      new Date(g.expiraEm || 0).getTime() || 0
-    )
+g.expiraEm = new Date(base + dias * 86400000).toISOString()
+g.duracaoDias = Number(g.duracaoDias || 0) + dias
+g.ativo = true
+g.planoNome = plano.nome
+g.linkGrupo = link || g.linkGrupo || ''
+g.ultimoComprador = comprador
+g.ultimaAtualizacao = new Date().toISOString()
+} else {
+g = {
+id,
+ativo: true,
+planoNome: plano.nome,
+duracaoDias: dias,
+inicio: new Date().toISOString(),
+expiraEm: new Date(agora + dias * 86400000).toISOString(),
+linkGrupo: link,
+comprador,
+ultimoComprador: comprador,
+ultimaAtualizacao: new Date().toISOString()
+}
 
-    g.expiraEm = new Date(
-      base + dias * 86400000
-    ).toISOString()
+list.push(g)
+}
 
-    g.duracaoDias = Number(g.duracaoDias || 0) + dias
-    g.ativo = true
-    g.planoNome = plano.nome
-    g.linkGrupo = link || g.linkGrupo || ''
-    g.ultimoComprador = comprador
-    g.ultimaAtualizacao = new Date().toISOString()
-  } else {
-    g = {
-      id,
-      ativo: true,
-      planoNome: plano.nome,
-      duracaoDias: dias,
-      inicio: new Date().toISOString(),
-      expiraEm: new Date(
-        agora + dias * 86400000
-      ).toISOString(),
-      linkGrupo: link,
-      comprador,
-      ultimoComprador: comprador,
-      ultimaAtualizacao: new Date().toISOString()
-    }
-
-    list.push(g)
-  }
-
-  salvar(arquivos.grupos, list)
-
-  return g
+salvar(arquivos.grupos, list)
+return g
 }
 
 const remover = id => {
-  let list = ler(arquivos.grupos, [])
-  const antes = list.length
+let list = ler(arquivos.grupos, [])
+const antes = list.length
 
-  list = list.filter(g => g.id !== id)
+list = list.filter(g => g.id !== id)
+salvar(arquivos.grupos, list)
 
-  salvar(arquivos.grupos, list)
-
-  return antes !== list.length
+return antes !== list.length
 }
 
-const pedidoUsuario = jid =>
-  ler(arquivos.pedidos, [])
-    .find(p =>
-      p.comprador === jid &&
-      p.status === 'pendente'
-    )
+const pedidoUsuario = jid => ler(arquivos.pedidos, []).find(p =>
+p.comprador === jid &&
+p.status === 'pendente'
+)
 
 const salvarPedido = d => {
-  let l = ler(arquivos.pedidos, [])
+let l = ler(arquivos.pedidos, [])
+const i = l.findIndex(p => p.comprador === d.comprador && p.status === 'pendente')
 
-  const i = l.findIndex(p =>
-    p.comprador === d.comprador &&
-    p.status === 'pendente'
-  )
-
-  if (i >= 0) {
-    l[i] = {
-      ...l[i],
-      ...d,
-      atualizadoEm: new Date().toISOString()
-    }
-  } else {
-    l.push({
-      ...d,
-      criadoEm: new Date().toISOString(),
-      atualizadoEm: new Date().toISOString()
-    })
-  }
-
-  salvar(arquivos.pedidos, l)
-
-  return i >= 0
-    ? l[i]
-    : l[l.length - 1]
+if (i >= 0) {
+l[i] = {
+...l[i],
+...d,
+atualizadoEm: new Date().toISOString()
+}
+} else {
+l.push({
+...d,
+criadoEm: new Date().toISOString(),
+atualizadoEm: new Date().toISOString()
+})
 }
 
-/*
- * Extrai o Pix Copia e Cola independentemente
- * do nome utilizado pela função de pagamento.
- */
+salvar(arquivos.pedidos, l)
+return i >= 0 ? l[i] : l[l.length - 1]
+}
+
+const atualizarPedido = (comprador, dados = {}) => {
+let pedidos = ler(arquivos.pedidos, [])
+
+const pedido = pedidos.find(p =>
+p.comprador === comprador &&
+['pendente', 'pago_aguardando_grupo'].includes(p.status)
+)
+
+if (!pedido) return null
+
+Object.assign(pedido, dados, {
+atualizadoEm: new Date().toISOString()
+})
+
+salvar(arquivos.pedidos, pedidos)
+return pedido
+}
+
 const extrairPixCopiaCola = pix => {
-  if (!pix || typeof pix !== 'object')
-    return ''
+if (!pix || typeof pix !== 'object') return ''
 
-  const candidatos = [
-    pix.qr_code,
-    pix.qrCode,
-    pix.pix_code,
-    pix.pixCode,
-    pix.copia_e_cola,
-    pix.copiaECola,
-    pix.copia_cola,
-    pix.copiaCola,
-    pix.code,
-    pix.payload,
-    pix.point_of_initiation_method
-  ]
+const candidatos = [
+pix.qr_code, pix.qrCode, pix.pix_code, pix.pixCode,
+pix.copia_e_cola, pix.copiaECola, pix.copia_cola,
+pix.copiaCola, pix.code, pix.payload, pix.point_of_initiation_method
+]
 
-  for (const valor of candidatos) {
-    const texto = String(valor || '').trim()
+for (const valor of candidatos) {
+const texto = String(valor || '').trim()
+if (texto && (texto.startsWith('000201') || texto.length > 30)) return texto
+}
 
-    if (
-      texto &&
-      (
-        texto.startsWith('000201') ||
-        texto.length > 30
-      )
-    ) {
-      return texto
-    }
-  }
-
-  return ''
+return ''
 }
 
 const criarPix = async (comprador, valor) => {
-  if (!tokenConfigurado()) {
-    const e = new Error('MP_TOKEN_NAO_CONFIGURADO')
-    e.code = 'MP_TOKEN_NAO_CONFIGURADO'
-    throw e
-  }
-
-  const pedido = pedidoUsuario(comprador)
-
-  if (!pedido)
-    throw new Error('PEDIDO_NAO_ENCONTRADO')
-
-  const plano = planos().find(
-    p => Number(p.preco) === Number(valor)
-  )
-
-  if (!plano)
-    throw new Error('PLANO_NAO_ENCONTRADO')
-
-  const idem = crypto.randomUUID()
-
-  const pix = await criarPagamentoPix(
-    Number(plano.preco),
-    `Aluguel ${plano.nome}`,
-    idem
-  )
-
-  /*
-   * QR Code em imagem.
-   */
-  const qrCodeBase64 = String(
-    pix?.qr_code_base64 ||
-    pix?.qrCodeBase64 ||
-    pix?.qr_code_image ||
-    ''
-  )
-
-  /*
-   * Código Pix Copia e Cola.
-   */
-  const qrCode = extrairPixCopiaCola(pix)
-
-  let pend = ler(arquivos.pendencias, [])
-
-    .filter(x =>
-      !(
-        x.comprador === comprador &&
-        x.status === 'pending'
-      )
-    )
-
-  const item = {
-    id: pix.id,
-    status: 'pending',
-    comprador,
-    plano,
-    pedido,
-
-    /*
-     * Compatibilidade com o sistema antigo.
-     */
-    qr_code: qrCode,
-    qr_code_base64: qrCodeBase64,
-
-    /*
-     * Campo explícito para o Copia e Cola.
-     */
-    pix_copia_e_cola: qrCode,
-
-    criadoEm: new Date().toISOString(),
-    expiraConsultaEm: Date.now() + 30 * 60 * 1000
-  }
-
-  pend.push(item)
-
-  salvar(
-    arquivos.pendencias,
-    pend
-  )
-
-  return item
+if (!tokenConfigurado()) {
+const e = new Error('MP_TOKEN_NAO_CONFIGURADO')
+e.code = 'MP_TOKEN_NAO_CONFIGURADO'
+throw e
 }
 
-let socket = null
-let intervalo = null
-let ocupado = false
+const pedido = pedidoUsuario(comprador)
+if (!pedido) throw new Error('PEDIDO_NAO_ENCONTRADO')
+
+const plano = planos().find(p => Number(p.preco) === Number(valor))
+if (!plano) throw new Error('PLANO_NAO_ENCONTRADO')
+
+const idem = crypto.randomUUID()
+const pix = await criarPagamentoPix(Number(plano.preco), `Aluguel ${plano.nome}`, idem)
+
+const qrCodeBase64 = String(
+pix?.qr_code_base64 ||
+pix?.qrCodeBase64 ||
+pix?.qr_code_image ||
+''
+)
+
+const qrCode = extrairPixCopiaCola(pix)
+
+let pend = ler(arquivos.pendencias, []).filter(x =>
+!(x.comprador === comprador && x.status === 'pending')
+)
+
+const item = {
+id: pix.id,
+status: 'pending',
+comprador,
+plano,
+pedido,
+qr_code: qrCode,
+qr_code_base64: qrCodeBase64,
+pix_copia_e_cola: qrCode,
+criadoEm: new Date().toISOString(),
+expiraConsultaEm: Date.now() + 30 * 60 * 1000
+}
+
+pend.push(item)
+salvar(arquivos.pendencias, pend)
+
+return item
+}
+
+/*
+ * ============================================================
+ *                    SISTEMA DE ENTRADA
+ * ============================================================
+ */
+
+let socket = null, intervalo = null, ocupado = false
+
+const normalizarJid = jid => {
+const texto = String(jid || '').trim()
+if (!texto) return ''
+
+const partes = texto.split('@')
+const usuario = String(partes[0] || '').replace(/:\d+$/, '')
+const servidor = partes[1] || ''
+
+return servidor ? `${usuario}@${servidor}` : usuario
+}
+
+const numeroJid = jid => String(normalizarJid(jid))
+.split('@')[0]
+.replace(/\D/g, '')
+
+const mesmoJid = (a, b) => {
+const x = normalizarJid(a), y = normalizarJid(b)
+
+if (x && y && x === y) return true
+
+const nx = numeroJid(x), ny = numeroJid(y)
+return Boolean(nx && ny && nx === ny)
+}
+
+const botEstaNoGrupo = async gid => {
+if (!socket || !gid) return false
+
+try {
+const metadata = await socket.groupMetadata(gid)
+const participantes = Array.isArray(metadata?.participants) ? metadata.participants : []
+
+const bots = [
+socket.user?.id,
+socket.user?.lid
+].filter(Boolean)
+
+return participantes.some(p => {
+const ids = [
+p?.id,
+p?.jid,
+p?.phoneNumber,
+p?.lid
+].filter(Boolean)
+
+return ids.some(id =>
+bots.some(bot => mesmoJid(id, bot))
+)
+})
+} catch {
+return false
+}
+}
+
+const resolverGrupoId = async item => {
+let gid = String(
+item?.grupoId ||
+item?.pedido?.grupoId ||
+''
+).trim()
+
+const inviteCode = String(
+item?.pedido?.inviteCode ||
+extrairInvite(item?.pedido?.linkGrupo || '')
+).trim()
+
+if (!gid && inviteCode && typeof socket?.groupGetInviteInfo === 'function') {
+try {
+const info = await socket.groupGetInviteInfo(inviteCode)
+
+gid = String(
+info?.id ||
+info?.jid ||
+info?.groupJid ||
+''
+).trim()
+
+if (gid) {
+item.grupoId = gid
+
+if (item.pedido) {
+item.pedido.grupoId = gid
+item.pedido.inviteCode = inviteCode
+}
+
+atualizarPedido(item.comprador, {
+grupoId: gid,
+inviteCode
+})
+}
+} catch {}
+}
+
+return gid
+}
+
+const tentarEntrarGrupo = async item => {
+if (!socket || !item) return ''
+
+const inviteCode = String(
+item?.pedido?.inviteCode ||
+extrairInvite(item?.pedido?.linkGrupo || '')
+).trim()
+
+let gid = await resolverGrupoId(item)
+
+/*
+ * Se já entrou no grupo, finaliza sem tentar convite novamente.
+ */
+if (gid && await botEstaNoGrupo(gid)) return gid
+
+/*
+ * Tenta entrar usando o convite.
+ *
+ * Se o grupo exigir aprovação, o WhatsApp poderá deixar
+ * a entrada aguardando o administrador. Nesse caso não
+ * registramos o aluguel ainda.
+ */
+if (inviteCode && typeof socket.groupAcceptInvite === 'function') {
+try {
+const resposta = await socket.groupAcceptInvite(inviteCode)
+
+const recebido = typeof resposta === 'string'
+? resposta
+: resposta?.id || resposta?.jid || resposta?.groupJid || ''
+
+if (recebido) {
+gid = String(recebido)
+item.grupoId = gid
+
+if (item.pedido) item.pedido.grupoId = gid
+
+atualizarPedido(item.comprador, {
+grupoId: gid,
+inviteCode
+})
+}
+} catch (e) {
+item.ultimaTentativaGrupoEm = new Date().toISOString()
+}
+}
+
+/*
+ * Confirma de verdade se o bot virou participante.
+ * Retornar um ID do convite sozinho não ativa o aluguel.
+ */
+gid = gid || await resolverGrupoId(item)
+
+if (gid && await botEstaNoGrupo(gid)) return gid
+
+return ''
+}
+
+const finalizarAluguel = async (item, gid) => {
+if (!item || !gid) return null
+
+/*
+ * Última confirmação antes de começar a contar os dias.
+ */
+if (!await botEstaNoGrupo(gid)) return null
+
+const g = registrar(
+gid,
+item.plano,
+item.comprador,
+item.pedido?.linkGrupo || ''
+)
+
+item.status = 'approved'
+item.grupoId = gid
+item.aprovadoEm = item.pagamentoAprovadoEm || new Date().toISOString()
+item.ativadoEm = new Date().toISOString()
+
+atualizarPedido(item.comprador, {
+status: 'concluido',
+grupoId: gid,
+concluidoEm: new Date().toISOString()
+})
+
+let grupoNome = ''
+
+try {
+const metadata = await socket.groupMetadata(gid)
+grupoNome = metadata?.subject || ''
+} catch {}
+
+/*
+ * A mensagem fica no global.js.
+ * Depois eu vou te passar somente esse export para você colar lá.
+ */
+if (typeof mess.aluguelAtivadoGrupo === 'function') {
+const texto = mess.aluguelAtivadoGrupo({
+grupo: grupoNome,
+grupoId: gid,
+plano: item.plano?.nome || '',
+dias: Number(item.plano?.dias || 0),
+valor: Number(item.plano?.preco || 0),
+expiraEm: g.expiraEm,
+comprador: item.comprador
+})
+
+if (texto) {
+await socket.sendMessage(gid, {
+text: texto
+}).catch(() => {})
+}
+}
+
+return g
+}
+
+/*
+ * ============================================================
+ *                VERIFICAÇÃO AUTOMÁTICA
+ * ============================================================
+ */
 
 const processar = async () => {
-  if (
-    !socket ||
-    ocupado ||
-    !tokenConfigurado()
-  ) return
+if (!socket || ocupado || !tokenConfigurado()) return
 
-  ocupado = true
+ocupado = true
 
-  try {
-    let pend = ler(
-      arquivos.pendencias,
-      []
-    )
+try {
+let pend = ler(arquivos.pendencias, [])
+let mudou = false
 
-    let mudou = false
+for (const item of pend) {
 
-    for (const item of pend) {
-      if (item.status !== 'pending')
-        continue
+/*
+ * ----------------------------------------------------------
+ * PAGAMENTO AINDA PENDENTE
+ * ----------------------------------------------------------
+ */
+if (item.status === 'pending') {
 
-      if (
-        Date.now() >
-        Number(item.expiraConsultaEm || 0)
-      ) {
-        item.status = 'expired'
-        mudou = true
-        continue
-      }
+if (Date.now() > Number(item.expiraConsultaEm || 0)) {
+item.status = 'expired'
+item.expiradoEm = new Date().toISOString()
+mudou = true
+continue
+}
 
-      let st
+let st
 
-      try {
-        st = await verificarPix(item.id)
-      } catch {
-        continue
-      }
+try {
+st = await verificarPix(item.id)
+} catch {
+continue
+}
 
-      if (st.status !== 'approved')
-        continue
+if (st?.status !== 'approved') continue
 
-      let gid = item.pedido?.grupoId || ''
+/*
+ * O dinheiro foi aprovado, mas o aluguel AINDA NÃO começa.
+ */
+item.status = 'approved_waiting_group'
+item.pagamentoAprovadoEm = new Date().toISOString()
+mudou = true
 
-      if (!gid && item.pedido?.inviteCode) {
-        try {
-          gid = await socket.groupAcceptInvite(
-            item.pedido.inviteCode
-          )
-        } catch {}
-      }
+atualizarPedido(item.comprador, {
+status: 'pago_aguardando_grupo',
+pagamentoId: item.id,
+pagamentoAprovadoEm: item.pagamentoAprovadoEm
+})
+}
 
-      if (!gid) {
-        item.status = 'approved_waiting_group'
-        mudou = true
-        continue
-      }
+/*
+ * ----------------------------------------------------------
+ * PAGAMENTO APROVADO / AGUARDANDO ENTRADA
+ * ----------------------------------------------------------
+ */
+if (item.status === 'approved_waiting_group') {
+const gid = await tentarEntrarGrupo(item)
 
-      const g = registrar(
-        gid,
-        item.plano,
-        item.comprador,
-        item.pedido?.linkGrupo || ''
-      )
+if (!gid) {
+item.ultimaVerificacaoGrupoEm = new Date().toISOString()
+mudou = true
+continue
+}
 
-      item.status = 'approved'
-      item.grupoId = gid
-      item.aprovadoEm = new Date().toISOString()
+/*
+ * Só chega aqui quando confirmou que o bot realmente
+ * está dentro do grupo.
+ */
+const resultado = await finalizarAluguel(item, gid)
 
-      mudou = true
+if (resultado) mudou = true
+}
+}
 
-      let pedidos = ler(
-        arquivos.pedidos,
-        []
-      )
+if (mudou) salvar(arquivos.pendencias, pend)
 
-      for (const p of pedidos) {
-        if (
-          p.comprador === item.comprador &&
-          p.status === 'pendente'
-        ) {
-          p.status = 'concluido'
-        }
-      }
-
-      salvar(
-        arquivos.pedidos,
-        pedidos
-      )
-
-      await socket.sendMessage(
-        item.comprador,
-        {
-          text:
-            `✅ Pagamento aprovado.\n\n` +
-            `O aluguel foi ativado até ` +
-            `${new Date(g.expiraEm).toLocaleString(
-              'pt-BR',
-              {
-                timeZone:
-                  'America/Sao_Paulo'
-              }
-            )}.`
-        }
-      ).catch(() => {})
-    }
-
-    if (mudou)
-      salvar(
-        arquivos.pendencias,
-        pend
-      )
-  } finally {
-    ocupado = false
-  }
+} finally {
+ocupado = false
+}
 }
 
 const iniciar = tokito => {
-  socket = tokito
+socket = tokito
 
-  if (!intervalo) {
-    intervalo = setInterval(
-      () => processar().catch(() => {}),
-      10000
-    )
+if (!intervalo) {
+intervalo = setInterval(() => {
+processar().catch(() => {})
+}, 10000)
 
-    intervalo.unref?.()
-  }
+intervalo.unref?.()
+}
 
-  processar().catch(() => {})
+processar().catch(() => {})
 }
 
 module.exports = {
-  arquivos,
-  ler,
-  salvar,
-  planos,
-  extrairInvite,
-  ativos,
-  autorizado,
-  registrar,
-  remover,
-  pedidoUsuario,
-  salvarPedido,
-  criarPix,
-  processar,
-  iniciar,
-  tokenConfigurado,
-  extrairPixCopiaCola
+arquivos, ler, salvar, planos, extrairInvite, ativos, autorizado,
+registrar, remover, pedidoUsuario, salvarPedido, atualizarPedido,
+criarPix, processar, iniciar, tokenConfigurado, extrairPixCopiaCola,
+normalizarJid, mesmoJid, botEstaNoGrupo, resolverGrupoId,
+tentarEntrarGrupo, finalizarAluguel
 }

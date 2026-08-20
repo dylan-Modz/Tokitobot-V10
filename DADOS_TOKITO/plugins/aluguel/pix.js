@@ -10,204 +10,286 @@
 const aluguel = require('../../sistemas/aluguel')
 
 const {
-  proto,
-  generateWAMessageFromContent
+proto,
+prepareWAMessageMedia,
+generateWAMessageFromContent
 } = require('@whiskeysockets/baileys')
 
-async function enviarCopiarPix(ctx, codigo) {
-  const pix = String(codigo || '').trim()
-  if (!pix) return false
+const enviarPixCompleto = async (ctx, item, caption) => {
+const codigoPix = String(
+item.pix_copia_e_cola ||
+item.qr_code ||
+''
+).trim()
 
-  try {
-    const jid = ctx.from
+const b64 = String(
+item.qr_code_base64 ||
+''
+)
+.replace(/^data:image\/\w+;base64,/i, '')
+.trim()
 
-    const interactiveMessage =
-      proto.Message.InteractiveMessage.create({
-        body: proto.Message.InteractiveMessage.Body.create({
-          text: ''
-        }),
+if (!b64)
+return false
 
-        nativeFlowMessage:
-          proto.Message.InteractiveMessage.NativeFlowMessage.create({
-            messageParamsJson: JSON.stringify({
-              fromMe: false,
-              hasMediaAttachment: false
-            }),
+try {
+const media = await prepareWAMessageMedia({
+image: Buffer.from(
+b64,
+'base64'
+)
+}, {
+upload: ctx.tokito.waUploadToServer
+})
 
-            buttons: [
-              {
-                name: 'cta_copy',
-                buttonParamsJson: JSON.stringify({
-                  display_text: '🧊﹚𝐂𝐎𝐏𝐈𝐀𝐑 𝐏𝐈𝐗﹙🧊',
-                  id: `pix_${Date.now()}`,
-                  copy_code: pix
-                })
-              }
-            ]
-          })
-      })
+const interactiveMessage =
+proto.Message.InteractiveMessage.create({
+header:
+proto.Message.InteractiveMessage.Header.create({
+hasMediaAttachment: true,
+imageMessage: media.imageMessage
+}),
 
-    const content = {
-      viewOnceMessage: {
-        message: {
-          interactiveMessage
-        }
-      }
-    }
+body:
+proto.Message.InteractiveMessage.Body.create({
+text: caption
+}),
 
-    const msg = generateWAMessageFromContent(
-      jid,
-      content,
-      {
-        userJid: ctx.tokito.user?.id,
-        quoted: ctx.selo
-      }
-    )
+nativeFlowMessage:
+proto.Message.InteractiveMessage.NativeFlowMessage.create({
+messageParamsJson: JSON.stringify({}),
+buttons: codigoPix ? [
+{
+name: 'cta_copy',
+buttonParamsJson: JSON.stringify({
+display_text: '🧊﹚𝐂𝐎𝐏𝐈𝐀𝐑 𝐏𝐈𝐗﹙🧊',
+id: `pix_${Date.now()}`,
+copy_code: codigoPix
+})
+}
+] : []
+})
+})
 
-    await ctx.tokito.relayMessage(
-      jid,
-      msg.message,
-      {
-        messageId: msg.key.id
-      }
-    )
+const msg = generateWAMessageFromContent(
+ctx.from,
+{
+viewOnceMessage: {
+message: {
+interactiveMessage
+}
+}
+},
+{
+userJid: ctx.tokito.user?.id,
+quoted: ctx.selo
+}
+)
 
-    return true
-  } catch (e) {
-    console.log(
-      '[COPIAR PIX]',
-      e?.message || e
-    )
-    return false
-  }
+await ctx.tokito.relayMessage(
+ctx.from,
+msg.message,
+{
+messageId: msg.key.id
+}
+)
+
+return true
+
+} catch (e) {
+console.log(
+'[PIX COMPLETO]',
+e?.message || e
+)
+
+return false
+}
 }
 
 module.exports = {
-  nome: 'pixalugar',
+nome: 'pixalugar',
+comandos: ['pixalugar', 'pixaluguel'],
+categoria: 'aluguel',
 
-  comandos: [
-    'pixalugar',
-    'pixaluguel'
-  ],
+info: {
+descricao: 'Gera o PIX do plano e inicia verificação automática.',
+uso: 'pixalugar valor',
+categoria: 'aluguel'
+},
 
-  categoria: 'aluguel',
+async executar(ctx) {
+if (!ctx.nescessario.aluguel)
+return ctx.reply(
+ctx.mess.aluguelDesativado()
+)
 
-  info: {
-    descricao: 'Gera o PIX do plano e inicia verificação automática.',
-    uso: 'pixalugar valor',
-    categoria: 'aluguel'
-  },
+if (!aluguel.tokenConfigurado())
+return ctx.reply(
+ctx.mess.tokenMpAusente()
+)
 
-  async executar(ctx) {
-    if (!ctx.nescessario.aluguel)
-      return ctx.reply(
-        ctx.mess.aluguelDesativado()
-      )
+const valor = Number(
+String(ctx.q || '')
+.replace(',', '.')
+)
 
-    if (!aluguel.tokenConfigurado())
-      return ctx.reply(
-        ctx.mess.tokenMpAusente()
-      )
+if (
+!Number.isFinite(valor) ||
+valor <= 0
+)
+return ctx.reply(
+ctx.mess.aluguelPlanoInvalido()
+)
 
-    const valor = Number(
-      String(ctx.q || '').replace(',', '.')
-    )
+/*
+ * Impede outro PIX caso já exista
+ * pagamento aprovado aguardando entrada.
+ */
+const pendencias = aluguel.ler(
+aluguel.arquivos.pendencias,
+[]
+)
 
-    if (!Number.isFinite(valor) || valor <= 0)
-      return ctx.reply(
-        ctx.mess.aluguelPlanoInvalido()
-      )
+const aguardando = pendencias.find(item =>
+item?.comprador === ctx.sender &&
+item?.status === 'approved_waiting_group'
+)
 
-    try {
-      const item = await aluguel.criarPix(
-        ctx.sender,
-        valor
-      )
+if (aguardando) {
+if (
+typeof ctx.mess.aluguelAguardandoGrupo ===
+'function'
+)
+return ctx.reply(
+ctx.mess.aluguelAguardandoGrupo()
+)
 
-      await ctx.reagir(
-        ctx.from,
-        '💵'
-      )
+return ctx.reply(
+'*⏳ | ᴏ ᴘᴀɢᴀᴍᴇɴᴛᴏ ᴊᴀ ғᴏɪ ᴀᴘʀᴏᴠᴀᴅᴏ. ᴀɢᴜᴀʀᴅᴀɴᴅᴏ ᴀ ᴇɴᴛʀᴀᴅᴀ ᴅᴏ ʙᴏᴛ ɴᴏ ɢʀᴜᴘᴏ.*'
+)
+}
 
-      const caption =
-        ctx.mess.aluguelPix(item)
+try {
+const item = await aluguel.criarPix(
+ctx.sender,
+valor
+)
 
-      if (item.qr_code_base64) {
-        const b64 = String(
-          item.qr_code_base64
-        ).replace(
-          /^data:image\/\w+;base64,/,
-          ''
-        )
+await ctx.reagir(
+ctx.from,
+'💵'
+).catch(() => {})
 
-        await ctx.tokito.sendMessage(
-          ctx.from,
-          {
-            image: Buffer.from(
-              b64,
-              'base64'
-            ),
-            caption,
-            contextInfo:
-              ctx.canalInfo([ctx.sender])
-          },
-          {
-            quoted: ctx.selo
-          }
-        )
-      } else {
-        await ctx.reply(
-          `${caption}\n\n${item.qr_code || ''}`
-        )
-      }
+const caption =
+ctx.mess.aluguelPix(item)
 
-      if (item.qr_code) {
-        await enviarCopiarPix(
-          ctx,
-          item.qr_code
-        )
-      }
+const codigoPix = String(
+item.pix_copia_e_cola ||
+item.qr_code ||
+''
+).trim()
 
-      return true
+const qrBase64 = String(
+item.qr_code_base64 ||
+''
+)
+.replace(
+/^data:image\/\w+;base64,/i,
+''
+)
+.trim()
 
-    } catch (e) {
-      if (
-        e?.code === 'MP_TOKEN_NAO_CONFIGURADO' ||
-        e?.message === 'MP_TOKEN_NAO_CONFIGURADO'
-      ) {
-        return ctx.reply(
-          ctx.mess.tokenMpAusente()
-        )
-      }
+/*
+ * ============================================================
+ * QR CODE + TEXTO + BOTÃO NA MESMA MENSAGEM
+ * ============================================================
+ */
 
-      if (
-        e?.message ===
-        'PEDIDO_NAO_ENCONTRADO'
-      ) {
-        return ctx.reply(
-          ctx.mess.aluguelSemPedido(
-            ctx.prefix
-          )
-        )
-      }
+if (qrBase64) {
+const enviado = await enviarPixCompleto(
+ctx,
+item,
+caption
+)
 
-      if (
-        e?.message ===
-        'PLANO_NAO_ENCONTRADO'
-      ) {
-        return ctx.reply(
-          ctx.mess.aluguelPlanoInvalido()
-        )
-      }
+/*
+ * Fallback caso o Native Flow falhe.
+ */
+if (!enviado) {
+await ctx.tokito.sendMessage(
+ctx.from,
+{
+image: Buffer.from(
+qrBase64,
+'base64'
+),
+caption,
+contextInfo:
+ctx.canalInfo([ctx.sender])
+},
+{
+quoted: ctx.selo
+}
+)
 
-      console.log(
-        '[PIX ALUGUEL]',
-        e?.message || e
-      )
+if (codigoPix) {
+await ctx.reply(
+`*💳 | ᴘɪx ᴄᴏᴘɪᴀ ᴇ ᴄᴏʟᴀ:*\n\n\`${codigoPix}\``
+)
+}
+}
+}
 
-      return ctx.reply(
-        ctx.mess.error()
-      )
-    }
-  }
+/*
+ * Caso não exista imagem de QR.
+ */
+else {
+await ctx.reply(
+codigoPix
+? `${caption}\n\n${codigoPix}`
+: caption
+)
+}
+
+return true
+
+} catch (e) {
+if (
+e?.code ===
+'MP_TOKEN_NAO_CONFIGURADO' ||
+e?.message ===
+'MP_TOKEN_NAO_CONFIGURADO'
+)
+return ctx.reply(
+ctx.mess.tokenMpAusente()
+)
+
+if (
+e?.message ===
+'PEDIDO_NAO_ENCONTRADO'
+)
+return ctx.reply(
+ctx.mess.aluguelSemPedido(
+ctx.prefix
+)
+)
+
+if (
+e?.message ===
+'PLANO_NAO_ENCONTRADO'
+)
+return ctx.reply(
+ctx.mess.aluguelPlanoInvalido()
+)
+
+console.log(
+'[PIX ALUGUEL]',
+e?.message || e
+)
+
+return ctx.reply(
+ctx.mess.error()
+)
+}
+}
 }

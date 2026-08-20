@@ -1,27 +1,45 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.61",
+  "version": "10.0.62",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-19T19:22:46.911Z",
+  "publishedAt": "2026-08-20T01:10:29.559Z",
   "changelog": [
-    "[Correção] Pix atualizado",
-    "A versão 10.0.61 já está disponível para atualização.",
-    "Pix atualizado"
+    "[Correção] 4 arquivos atualizados",
+    "A versão 10.0.62 já está disponível para atualização.",
+    "Comprar atualizado",
+    "Global atualizado",
+    "Pix atualizado",
+    "Index atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Pix atualizado",
-  "notice": "A versão 10.0.61 já está disponível para atualização.",
+  "title": "4 arquivos atualizados",
+  "notice": "A versão 10.0.62 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/plugins/aluguel/comprar.js",
+      "sha256": "62595459d9d0c4a0b49a01887cb210d14ab24dde379eacfde373f0bdae26c73d",
+      "size": 4250
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/global.js",
+      "sha256": "6313b7caafdd5372ef73a5fd092ba6df67b1aa82d1d7bcbcd0055794ac9a3c15",
+      "size": 152989
+    },
+    {
       "path": "DADOS_TOKITO/plugins/aluguel/pix.js",
-      "sha256": "7d13b25dc83df32ca7fdcfd443eaee832541d65cc513102b08e0e418afd2583f",
-      "size": 4237
+      "sha256": "f99f5eebbea2b3cec795747ffbc0a0a40fca30918eff646fa15183ef41b1145e",
+      "size": 4483
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/aluguel/index.js",
+      "sha256": "67d86ba66c5889ee414cad7962bb8caaea5ee14ad3e678897dc9ed1559c7469c",
+      "size": 11897
     }
   ],
   "releases": [
@@ -1365,6 +1383,45 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-19T19:22:46.911Z"
+    },
+    {
+      "version": "10.0.62",
+      "fromVersion": "10.0.61",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "4 arquivos atualizados",
+      "notice": "A versão 10.0.62 já está disponível para atualização.",
+      "changelog": [
+        "Comprar atualizado",
+        "Global atualizado",
+        "Pix atualizado",
+        "Index atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/comprar.js",
+          "sha256": "62595459d9d0c4a0b49a01887cb210d14ab24dde379eacfde373f0bdae26c73d",
+          "size": 4250
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/global.js",
+          "sha256": "6313b7caafdd5372ef73a5fd092ba6df67b1aa82d1d7bcbcd0055794ac9a3c15",
+          "size": 152989
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/pix.js",
+          "sha256": "f99f5eebbea2b3cec795747ffbc0a0a40fca30918eff646fa15183ef41b1145e",
+          "size": 4483
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/aluguel/index.js",
+          "sha256": "67d86ba66c5889ee414cad7962bb8caaea5ee14ad3e678897dc9ed1559c7469c",
+          "size": 11897
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-20T01:10:29.559Z"
     }
   ]
 }
