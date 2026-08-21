@@ -32,20 +32,39 @@ module.exports = {
 nome: "criador",
 comandos: ["criador"],
 categoria: "info",
+
 info: {
-"descricao": "Executa o comando criador.",
-"uso": "criador",
-"categoria": "info"
+descricao: "Mostra as informações do desenvolvedor do bot.",
+uso: "criador",
+categoria: "info"
 },
+
 async executar(ctx) {
 with (ctx) {
 {
-const numeroCriador = String(ownerNumber || '').replace(/\D/g, '')
-await reply(`*👑 | ᴄʀɪᴀᴅᴏʀ ᴅᴏ ʙᴏᴛ*
+const texto = `— *✨ ᴄᴏɴᴛᴀᴛᴏ ᴅᴏ ᴅᴇsᴇɴᴠᴏʟᴠᴇᴅᴏʀ*
 
-      *👤 | ɴᴏᴍᴇ:* ${ownerName}
-      *📱 | ɴᴜᴍᴇʀᴏ:* +${numeroCriador}
-      *🔗 | ᴄᴏɴᴛᴀᴛᴏ:* https://wa.me/${numeroCriador}`)
+> *👑 ᴄʀɪᴀᴅᴏʀ:* dylan Modz
+> *📱 ᴄᴏɴᴛᴀᴛᴏ:* https://wa.me/5511975431163
+
+•
+— "ᴀʟɢᴜɴs ᴘʀᴏᴊᴇᴛᴏs ɴᴀsᴄᴇᴍ ᴅᴇ ᴜᴍᴀ ɪᴅᴇɪᴀ.
+ᴏᴜᴛʀᴏs ɴᴀsᴄᴇᴍ ᴅᴀ ᴠᴏɴᴛᴀᴅᴇ ᴅᴇ ғᴀᴢᴇʀ ᴀʟɢᴏ ᴅɪғᴇʀᴇɴᴛᴇ."
+
+•
+- *${NomeDoBot} ғᴏɪ ᴄʀɪᴀᴅᴏ ᴄᴏᴍ ᴏ ᴏʙᴊᴇᴛɪᴠᴏ ᴅᴇ ᴇɴᴛʀᴇɢᴀʀ ᴜᴍᴀ ᴇxᴘᴇʀɪᴇ̂ɴᴄɪᴀ ᴄᴏᴍᴘʟᴇᴛᴀ, ʀᴀ́ᴘɪᴅᴀ ᴇ ᴅɪᴠᴇʀᴛɪᴅᴀ ᴘᴀʀᴀ ᴏs ᴜsᴜᴀ́ʀɪᴏs.*
+
+- *ᴄᴀᴅᴀ ᴄᴏᴍᴀɴᴅᴏ, sɪsᴛᴇᴍᴀ ᴇ ғᴜɴᴄ̧ᴀ̃ᴏ ғᴏɪ ᴘᴇɴsᴀᴅᴏ ᴘᴀʀᴀ ᴅᴇɪxᴀʀ ᴏ ʙᴏᴛ ᴍᴀɪs ᴏʀɢᴀɴɪᴢᴀᴅᴏ, ᴇғɪᴄɪᴇɴᴛᴇ ᴇ ғᴀ́ᴄɪʟ ᴅᴇ ᴜsᴀʀ.*
+
+- *ᴏ ᴘʀᴏᴊᴇᴛᴏ ᴄᴏɴᴛɪɴᴜᴀ ᴇᴠᴏʟᴜɪɴᴅᴏ ᴄᴏᴍ ɴᴏᴠᴀs ғᴜɴᴄ̧ᴏ̃ᴇs, ᴍᴇʟʜᴏʀɪᴀs ᴇ ᴄᴏʀʀᴇᴄ̧ᴏ̃ᴇs ᴘᴀʀᴀ ᴏғᴇʀᴇᴄᴇʀ ᴜᴍᴀ ᴇxᴘᴇʀɪᴇ̂ɴᴄɪᴀ ᴄᴀᴅᴀ ᴠᴇᴢ ᴍᴇʟʜᴏʀ.*
+
+- *sᴇ ᴠᴏᴄᴇ ᴇsᴛᴀ́ ᴜsᴀɴᴅᴏ ${NomeDoBot}, ᴇsᴘᴇʀᴏ ǫᴜᴇ ᴀᴘʀᴏᴠᴇɪᴛᴇ ᴄᴀᴅᴀ ғᴜɴᴄ̧ᴀ̃ᴏ ᴇ ǫᴜᴇ ᴏ ᴘʀᴏᴊᴇᴛᴏ sᴇᴊᴀ ᴜ́ᴛɪʟ ᴘᴀʀᴀ ᴠᴏᴄᴇ. 🥇*
+
+•
+> *${NomeDoBot}*
+> *ᴅᴇsᴇɴᴠᴏʟᴠɪᴅᴏ ᴘᴏʀ dylan Modz 🩵*`
+
+await reply(texto)
 }
 }
 }

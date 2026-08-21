@@ -1,27 +1,51 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.65",
+  "version": "10.0.66",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-20T02:01:38.598Z",
+  "publishedAt": "2026-08-21T14:26:25.466Z",
   "changelog": [
-    "[Correção] Xgp atualizado",
-    "A versão 10.0.65 já está disponível para atualização.",
-    "Xgp atualizado"
+    "[Correção] 5 arquivos atualizados",
+    "A versão 10.0.66 já está disponível para atualização.",
+    "Brincadeira Casal atualizada",
+    "Criador atualizado",
+    "Namoro atualizado",
+    "Brincadeira Rankcasal atualizada",
+    "Perfil atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Xgp atualizado",
-  "notice": "A versão 10.0.65 já está disponível para atualização.",
+  "title": "5 arquivos atualizados",
+  "notice": "A versão 10.0.66 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/freefire/xgp.js",
-      "sha256": "475355562393aedbdafe6881399e0aef7c42535e59fb3c8078664409c6214a06",
-      "size": 2635
+      "path": "DADOS_TOKITO/plugins/brincadeiras/casal.js",
+      "sha256": "62fd5cf6e4807a91be5cdb15593cb8f69864f0cd36a557301c36d93fd2042714",
+      "size": 5465
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/casos/info/criador.js",
+      "sha256": "a9c088ef4686940a6f9116f94f7584e60682418084a2133e1af332b0d80a62dc",
+      "size": 2882
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/social/namoro.js",
+      "sha256": "e8498ac9fc93cc7837fcd626b0489122c6f2183f2a14aa829f61057c74240f20",
+      "size": 8977
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/rankcasal.js",
+      "sha256": "a3e2ea9b36089edcc52035c9f0c8286e9a13483e4f2e165f2b01aecef88b7bae",
+      "size": 4259
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/casos/info/perfil.js",
+      "sha256": "9d4e44716762aba53d477efd87a2c9a0fdf63adf21c68b9c4d7c2a886659335b",
+      "size": 5588
     }
   ],
   "releases": [
@@ -1515,6 +1539,51 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-20T02:01:38.597Z"
+    },
+    {
+      "version": "10.0.66",
+      "fromVersion": "10.0.65",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "5 arquivos atualizados",
+      "notice": "A versão 10.0.66 já está disponível para atualização.",
+      "changelog": [
+        "Brincadeira Casal atualizada",
+        "Criador atualizado",
+        "Namoro atualizado",
+        "Brincadeira Rankcasal atualizada",
+        "Perfil atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/casal.js",
+          "sha256": "62fd5cf6e4807a91be5cdb15593cb8f69864f0cd36a557301c36d93fd2042714",
+          "size": 5465
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/casos/info/criador.js",
+          "sha256": "a9c088ef4686940a6f9116f94f7584e60682418084a2133e1af332b0d80a62dc",
+          "size": 2882
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/social/namoro.js",
+          "sha256": "e8498ac9fc93cc7837fcd626b0489122c6f2183f2a14aa829f61057c74240f20",
+          "size": 8977
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/rankcasal.js",
+          "sha256": "a3e2ea9b36089edcc52035c9f0c8286e9a13483e4f2e165f2b01aecef88b7bae",
+          "size": 4259
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/casos/info/perfil.js",
+          "sha256": "9d4e44716762aba53d477efd87a2c9a0fdf63adf21c68b9c4d7c2a886659335b",
+          "size": 5588
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-21T14:26:25.466Z"
     }
   ]
 }
