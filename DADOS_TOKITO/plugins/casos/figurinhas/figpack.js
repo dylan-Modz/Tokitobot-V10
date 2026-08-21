@@ -67,12 +67,48 @@ m.ephemeralMessage?.message?.imageMessage ||
 null
 }
 
+const imagemMarcada = ctx => {
+const m = ctx.info?.message || ctx.mensagem || {}
+const q = m.extendedTextMessage?.contextInfo?.quotedMessage ||
+m.imageMessage?.contextInfo?.quotedMessage ||
+{}
+return q.imageMessage ||
+q.viewOnceMessageV2?.message?.imageMessage ||
+q.viewOnceMessage?.message?.imageMessage ||
+q.ephemeralMessage?.message?.imageMessage ||
+null
+}
+
+const adicionarImagem = async (ctx, sessao, imagem) => {
+if (!imagem || sessao.arquivos.length >= MAX_FIGURINHAS)
+return false
+
+const original = await ctx.getFileBuffer(imagem, 'image')
+if (!original?.length)
+return false
+
+const webp = await prepararImagem(original)
+const hash = Crypto.createHash('sha256').update(webp).digest('base64url')
+
+if (sessao.hashes.has(hash))
+return false
+
+sessao.hashes.add(hash)
+const arquivo = path.join(
+sessao.pasta,
+`${String(sessao.arquivos.length).padStart(2, '0')}_${hash}.webp`
+)
+fs.writeFileSync(arquivo, webp)
+sessao.arquivos.push(arquivo)
+return true
+}
+
 const enviarStatus = async (ctx, sessao, textoExtra = '') => {
 const texto =
 `- 🧊 \`𝙵𝙸𝙶𝙿𝙰𝙲𝙺 𝙴𝙼 𝙼𝙾𝙽𝚃𝙰𝙶𝙴𝙼\`\n\n` +
 `> *『 𝙿𝙰𝙲𝙺 』— ${sessao.nome}*\n` +
 `> *『 𝙸𝙼𝙰𝙶𝙴𝙽𝚂 』— ${sessao.arquivos.length}/${MAX_FIGURINHAS}*\n` +
-`> *『 𝙼𝙰𝚁𝙲𝙰 』— Channel - Tokito Apis*` +
+`> *『 𝙰𝚂𝚂𝙸𝙽𝙰𝚃𝚄𝚁𝙰 』— Channel - Tokito Apis*` +
 (textoExtra ? `\n\n> *${textoExtra}*` : '')
 return ctx.tokito.sendMessage(
 ctx.from,
@@ -141,11 +177,22 @@ prefix: ctx.prefix,
 timer: null
 }
 sessoes.set(id, sessao)
+
+const inicial = imagemMensagem(ctx) || imagemMarcada(ctx)
+if (inicial) {
+try {
+await adicionarImagem(ctx, sessao, inicial)
+}
+catch (error) {
+console.log('[FIGPACK IMAGEM INICIAL]', error?.message || error)
+}
+}
+
 return ctx.reply(
 `- ✅ \`𝙵𝙸𝙶𝙿𝙰𝙲𝙺 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙾\`\n\n` +
 `> *『 𝙿𝙰𝙲𝙺 』— ${sessao.nome}*\n` +
-`> *『 𝙻𝙸𝙼𝙸𝚃𝙴 』— ${MAX_FIGURINHAS} ɪᴍᴀɢᴇɴs*\n` +
-`> *『 𝙼𝙰𝚁𝙲𝙰 』— Channel - Tokito Apis*\n\n` +
+`> *『 𝙸𝙼𝙰𝙶𝙴𝙽𝚂 』— ${sessao.arquivos.length}/${MAX_FIGURINHAS}*\n` +
+`> *『 𝙰𝚂𝚂𝙸𝙽𝙰𝚃𝚄𝚁𝙰 』— Channel - Tokito Apis*\n\n` +
 `> *ᴀɢᴏʀᴀ ᴇɴᴠɪᴇ sᴜᴀs ɪᴍᴀɢᴇɴs ᴏᴜ ᴀ́ʟʙᴜɴs. ǫᴜᴀɴᴅᴏ ǫᴜɪsᴇʀ ᴄᴏɴᴄʟᴜɪʀ, ᴜsᴇ ${ctx.prefix}figpack gerar.*`
 )
 }
@@ -183,7 +230,7 @@ return ctx.reply(
 `- ✅ \`𝙵𝙸𝙶𝙿𝙰𝙲𝙺 𝙿𝚁𝙾𝙽𝚃𝙾\`\n\n` +
 `> *『 𝙿𝙰𝙲𝙺 』— ${sessao.nome}*\n` +
 `> *『 𝙵𝙸𝙶𝚄𝚁𝙸𝙽𝙷𝙰𝚂 』— ${total}/${MAX_FIGURINHAS}*\n` +
-`> *『 𝙼𝙰𝚁𝙲𝙰 』— Channel - Tokito Apis*`
+`> *『 𝙰𝚂𝚂𝙸𝙽𝙰𝚃𝚄𝚁𝙰 』— Channel - Tokito Apis*`
 )
 }
 catch (error) {
@@ -212,17 +259,8 @@ const imagem = imagemMensagem(ctx)
 if (!imagem)
 return false
 try {
-const original = await ctx.getFileBuffer(imagem, 'image')
-if (!original?.length)
-return true
-const webp = await prepararImagem(original)
-const hash = Crypto.createHash('sha256').update(webp).digest('base64url')
-if (sessao.hashes.has(hash))
-return true
-sessao.hashes.add(hash)
-const arquivo = path.join(sessao.pasta, `${String(sessao.arquivos.length).padStart(2, '0')}_${hash}.webp`)
-fs.writeFileSync(arquivo, webp)
-sessao.arquivos.push(arquivo)
+const adicionou = await adicionarImagem(ctx, sessao, imagem)
+if (adicionou)
 agendarStatus(ctx, id, sessao)
 return true
 }

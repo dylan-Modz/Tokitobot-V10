@@ -1,39 +1,39 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.68",
+  "version": "10.0.69",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-21T20:45:03.825Z",
+  "publishedAt": "2026-08-21T21:00:18.627Z",
   "changelog": [
     "[Correção] 3 arquivos atualizados",
-    "A versão 10.0.68 já está disponível para atualização.",
-    "Packbase atualizado",
+    "A versão 10.0.69 já está disponível para atualização.",
     "Figpack atualizado",
+    "Packbase atualizado",
     "Packfig atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
   "title": "3 arquivos atualizados",
-  "notice": "A versão 10.0.68 já está disponível para atualização.",
+  "notice": "A versão 10.0.69 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/casos/figurinhas/_packbase.js",
-      "sha256": "222424e403758ce44372dd7fc5973164871ba2e1fd1284041e32bfef360a69e0",
-      "size": 10111
+      "path": "DADOS_TOKITO/plugins/casos/figurinhas/figpack.js",
+      "sha256": "58eaa8f21245152cb9adffd9028652e4474013cbcc7d54fc1f8a6a40acd41535",
+      "size": 9138
     },
     {
-      "path": "DADOS_TOKITO/plugins/casos/figurinhas/figpack.js",
-      "sha256": "4e984f13f11ca21c88375607ce8e15b5e935a28472e801b36e34a4abb5f5f516",
-      "size": 8266
+      "path": "DADOS_TOKITO/plugins/casos/figurinhas/_packbase.js",
+      "sha256": "0db650f6a6194402ed0fd103d892f377aee07b5746ac7594011d613414dc8512",
+      "size": 10054
     },
     {
       "path": "DADOS_TOKITO/plugins/casos/figurinhas/packfig.js",
-      "sha256": "7d151598c1f7d92c60dd5a9096e5e46be1f847c5550b92221f070f0a62251f75",
-      "size": 6323
+      "sha256": "8517acaf59352d9e7c636b3c51676038ca645304b939d5aaa4d585e4397f7c77",
+      "size": 6353
     }
   ],
   "releases": [
@@ -1626,6 +1626,39 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-21T20:45:03.825Z"
+    },
+    {
+      "version": "10.0.69",
+      "fromVersion": "10.0.68",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "3 arquivos atualizados",
+      "notice": "A versão 10.0.69 já está disponível para atualização.",
+      "changelog": [
+        "Figpack atualizado",
+        "Packbase atualizado",
+        "Packfig atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/casos/figurinhas/figpack.js",
+          "sha256": "58eaa8f21245152cb9adffd9028652e4474013cbcc7d54fc1f8a6a40acd41535",
+          "size": 9138
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/casos/figurinhas/_packbase.js",
+          "sha256": "0db650f6a6194402ed0fd103d892f377aee07b5746ac7594011d613414dc8512",
+          "size": 10054
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/casos/figurinhas/packfig.js",
+          "sha256": "8517acaf59352d9e7c636b3c51676038ca645304b939d5aaa4d585e4397f7c77",
+          "size": 6353
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-21T21:00:18.627Z"
     }
   ]
 }

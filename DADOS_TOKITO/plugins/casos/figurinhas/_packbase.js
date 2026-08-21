@@ -11,7 +11,7 @@ const MAX_STICKER_BYTES = 1024 * 1024
 const META = {
 packId: 'TOKITO-APIS',
 packname: 'Channel - Tokito Apis',
-author: 'Channel - Tokito Apis',
+author: '',
 categories: ['🧊']
 }
 
@@ -55,7 +55,7 @@ try {
 await executarFFmpeg([
 '-y',
 '-i', entrada,
-'-vf', 'scale=512:512:force_original_aspect_ratio=decrease,pad=512:512:(ow-iw)/2:(oh-ih)/2:color=0x00000000',
+'-vf', 'scale=512:512:force_original_aspect_ratio=increase,crop=512:512',
 '-frames:v', '1',
 '-vcodec', 'libwebp',
 '-lossless', '0',

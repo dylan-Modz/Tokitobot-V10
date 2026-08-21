@@ -159,7 +159,7 @@ await reply(
 `- ⏳ \`𝙲𝚁𝙸𝙰𝙽𝙳𝙾 𝙾 𝙿𝙰𝙲𝙺\`\n\n` +
 `> *『 𝙱𝚄𝚂𝙲𝙰 』— ${pesquisa}*\n` +
 `> *『 𝙻𝙸𝙼𝙸𝚃𝙴 』— ᴀᴛᴇ́ ${MAX_FIGURINHAS} ғɪɢᴜʀɪɴʜᴀs.*\n` +
-`> *『 𝙲𝚁𝙴́𝙳𝙸𝚃𝙾 』— Channel - Tokito Apis*`
+`> *『 𝙰𝚂𝚂𝙸𝙽𝙰𝚃𝚄𝚁𝙰 』— Channel - Tokito Apis*`
 )
 const resultado = await searchPinterest(pesquisa)
 if (!resultado.status || !resultado.pins?.length) {
@@ -205,7 +205,7 @@ await reagir(from, '✅').catch(() => {})
 return reply(
 `- ✅ \`𝙿𝙰𝙲𝙺 𝙲𝚁𝙸𝙰𝙳𝙾\`\n\n` +
 `> *『 𝙵𝙸𝙶𝚄𝚁𝙸𝙽𝙷𝙰𝚂 』— ${total}/${MAX_FIGURINHAS}*\n` +
-`> *『 𝙼𝙰𝚁𝙲𝙰 』— Channel - Tokito Apis*`
+`> *『 𝙰𝚂𝚂𝙸𝙽𝙰𝚃𝚄𝚁𝙰 』— Channel - Tokito Apis*`
 )
 }
 catch (error) {
