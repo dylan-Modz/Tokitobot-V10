@@ -210,6 +210,5 @@ canalInfo([
 quoted: selo
 }
 )
-)
 }
 }
