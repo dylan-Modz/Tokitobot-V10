@@ -265,8 +265,8 @@ canvas#dinoCanvas {
 
     <div class="header">
         <div class="brand">
-            <span class="badge">GAME</span>
-            <span class="title">DINO RUNNER</span>
+            <span class="badge">JOGOS</span>
+            <span class="title">DINO "TokitoBot</span>
         </div>
 
         <div class="user-tag">
@@ -321,7 +321,7 @@ canvas#dinoCanvas {
     </div>
 
     <div class="footer">
-        by Yoshirukkj
+        Tokito Apis
     </div>
 
 </div>
