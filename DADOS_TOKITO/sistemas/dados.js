@@ -43,6 +43,7 @@ const BACKUP_DIR = path.join(STATE_DIR, 'backup-update')
 const CONFIG_FILE = path.join(INFO, 'config-all.json')
 const NESS_FILE = path.join(INFO, 'nescessario.json')
 const UPDATE_FILE = path.join(INFO, 'update.json')
+const STRUCTURE_FILE = path.join(INFO, 'update-structure.json')
 
 const PUBLIC_KEY = Buffer.from('LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQW5OcGdWWU5nL1U0OE1odHVhL04xYmJoYjNORXBOWXRRM05qMFBiRTJxdGM9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo=', 'base64').toString('utf8')
 const SYNC_INTERVAL_MS = 3 * 60 * 60 * 1000
@@ -422,8 +423,51 @@ return 0
 }
 
 function modoUpdate(info = {}) {
-const modo = String(info.mode || info.updateMode || '').trim().toLowerCase()
-return ['clean', 'full', 'complete', 'completo'].includes(modo) ? 'clean' : 'incremental'
+const modo = String(
+info.mode ||
+info.updateMode ||
+info.type ||
+''
+)
+.trim()
+.toLowerCase()
+.normalize('NFD')
+.replace(/[\u0300-\u036f]/g, '')
+
+return [
+'clean',
+'full',
+'complete',
+'completo',
+'atualizacao completa'
+].includes(modo)
+? 'clean'
+: 'incremental'
+}
+
+function migrationInfo(info = localInfo()) {
+const migration = info && typeof info.migration === 'object'
+? info.migration
+: {}
+
+return {
+id: String(migration.id || '').trim(),
+required: migration.required === true,
+marker: String(
+migration.marker || 'DADOS_TOKITO/INFO_DADOS/update-structure.json'
+).trim()
+}
+}
+
+function migrationPending(info = localInfo()) {
+const migration = migrationInfo(info)
+
+if (!migration.required || !migration.id) {
+return false
+}
+
+const marker = readJson(STRUCTURE_FILE, {})
+return String(marker.id || '').trim() !== migration.id
 }
 
 function deveAvisarUpdate(version) {
@@ -1200,13 +1244,19 @@ force: true
 }
 }
 
-async function instalarUpdate(onProgress = () => {}) {
+async function instalarUpdate(onProgress = () => {}, opcoes = {}) {
 const check = await verificarUpdate()
 
 if (!check.ok)
 throw new Error(check.error || 'Não foi possível verificar atualização.')
 
-if (!check.available) {
+const migracaoPendente = migrationPending(check.remote)
+
+const forceClean =
+  opcoes.forceClean === true ||
+  migracaoPendente
+
+if (!check.available && !forceClean) {
 return {
 updated: false,
 version: check.local.version,
@@ -1223,7 +1273,7 @@ if (!online.allowed)
 throw new Error(online.message || 'Licença inválida para atualizar.')
 }
 
-if (check.incremental) {
+if (check.incremental && !forceClean) {
 const totalOperacoes =
 (Array.isArray(check.pendingFiles) ? check.pendingFiles.length : 0) +
 (Array.isArray(check.pendingDelete) ? check.pendingDelete.length : 0)
@@ -1360,7 +1410,8 @@ previousVersion: check.local.version,
 installedVersion: check.remote.version,
 addedByLastUpdate: added,
 lastUpdateMode: 'clean',
-dependenciesInstalled: Boolean(dependencias?.installed)
+dependenciesInstalled: Boolean(dependencias?.installed),
+bridgeMigration: migracaoPendente
 })
 
 return {

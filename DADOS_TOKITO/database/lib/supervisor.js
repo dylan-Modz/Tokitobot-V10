@@ -14,6 +14,7 @@ const ROOT = path.resolve(__dirname, '..', '..', '..')
 const CONNECT = path.join(ROOT, 'DADOS_TOKITO', 'connect.js')
 const DEPS = path.join(ROOT, 'DADOS_TOKITO', 'database', 'lib', 'deps.js')
 const UPDATE = path.join(ROOT, 'DADOS_TOKITO', 'database', 'lib', 'update-cli.js')
+const MIGRATE = path.join(ROOT, 'DADOS_TOKITO', 'database', 'lib', 'update-migrate.js')
 
 const MAX_CRASHES = 3
 const CRASH_WINDOW_MS = 60 * 1000
@@ -85,6 +86,28 @@ const garantirDependencias = () => {
   }
 
   return true
+}
+
+
+const migrarEstruturaAntiga = () => {
+  if (!fs.existsSync(MIGRATE)) {
+    return false
+  }
+
+  const resultado = executarNode(MIGRATE)
+
+  if (resultado.status === 0) {
+    return false
+  }
+
+  if (resultado.status === 20) {
+    garantirDependencias()
+    return true
+  }
+
+  throw new Error(
+    `Migração da estrutura antiga encerrou com código ${resultado.status ?? 'desconhecido'}.`
+  )
 }
 
 const atualizar = () => {
@@ -213,6 +236,7 @@ async function main(args = []) {
   const argsConnect = entrada.filter(v => !['up', 'update'].includes(v.toLowerCase()))
 
   garantirDependencias()
+  migrarEstruturaAntiga()
 
   if (querUpdate) {
     atualizar()
@@ -226,5 +250,6 @@ module.exports = {
   main,
   garantirDependencias,
   atualizar,
+  migrarEstruturaAntiga,
   supervisionar
 }

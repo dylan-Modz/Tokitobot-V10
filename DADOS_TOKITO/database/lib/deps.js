@@ -58,7 +58,6 @@ const faltando = () => {
 
 const instalar = (opcoes = {}) => {
   const force = opcoes.force === true
-
   const ausentes = faltando()
 
   if (!ausentes.length && !force) {
@@ -99,7 +98,6 @@ const instalar = (opcoes = {}) => {
     argumentos,
     {
       cwd: raiz,
-
       stdio: 'inherit',
 
       env: {
@@ -108,6 +106,18 @@ const instalar = (opcoes = {}) => {
       }
     }
   )
+
+  if (run.error) {
+    console.error(
+      '\x1b[41;97;1m ERRO - TOKITO \x1b[0m - Não foi possível iniciar o npm.'
+    )
+
+    return {
+      ok: false,
+      installed: false,
+      missing: ausentes
+    }
+  }
 
   if (run.status !== 0) {
     return {

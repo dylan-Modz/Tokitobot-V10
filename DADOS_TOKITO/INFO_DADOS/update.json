@@ -1,33 +1,50 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.71",
+  "version": "10.0.70",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-31T13:54:11.656Z",
+  "publishedAt": null,
   "changelog": [
-    "[Correção] 2 arquivos atualizados",
-    "A versão 10.0.71 já está disponível para atualização.",
-    "Sistema Cacapalavras atualizado",
-    "Sistema Base atualizado"
+    "Agente IA agora mantém continuidade de pedidos entre mensagens.",
+    "Pedidos de música continuam automaticamente após o usuário informar o nome da música.",
+    "O agente alterna entre texto e áudio conforme o pedido do usuário.",
+    "Menus e interfaces oficiais são enviados pelas funções reais do bot.",
+    "O agente ganhou suporte a alterações do dono, como prefixo, nome do bot e dono principal.",
+    "Respostas do agente ficaram maiores, organizadas e com identidade visual da Tokito.",
+    "Atualização completa substitui a estrutura antiga preservando sessão, configurações e bancos do usuário.",
+    "O dono recebe aviso privado uma única vez quando uma nova versão é publicada.",
+    "npm start up passa a usar o mesmo atualizador oficial do comando .update start.",
+    "Verificação de módulos ficou silenciosa quando está tudo instalado e só avisa quando faltar dependência.",
+    "Adicionada ponte de migração para versões antigas usarem update start com segurança."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "2 arquivos atualizados",
-  "notice": "A versão 10.0.71 já está disponível para atualização.",
-  "required": true,
+  "type": "Atualização completa",
+  "title": "Nova estrutura + Agente IA completo",
+  "notice": "A Tokito recebeu uma atualização completa com nova estrutura interna, Agente IA mais inteligente e novo sistema de atualização.",
+  "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/jogos/sistema-cacapalavras.js",
-      "sha256": "e2f8b348c8a0253c6b2024b87fd6eb8212c282f0f69abe2fae97123d9f9ae121",
-      "size": 6176
+      "path": "DADOS_TOKITO/sistemas/dados.js",
+      "sha256": "f29b285c1e8e5c1361e608eee1017b6d4ac807b81c6c19408ca704e09564905b",
+      "size": 32376
     },
     {
-      "path": "DADOS_TOKITO/plugins/jogos/sistema-base.js",
-      "sha256": "f7604ae3fdf2a01ee1178725e3f92a23239fd2b1ad89d8bebb9ba9ba4191b797",
-      "size": 7972
+      "path": "DADOS_TOKITO/database/lib/supervisor.js",
+      "sha256": "cdcc31d1f2c04a3ca11a2c19d2f5cc502965cd6040a3eedfdf57cf67c5c940aa",
+      "size": 6173
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/update-migrate.js",
+      "sha256": "b5fd4c3232a63a210ff9494612e0fa8055b32ec0a3ff8b77eb82703062ff683d",
+      "size": 1842
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/deps.js",
+      "sha256": "6ac7739b3c16f16064491abcc88c36b8509f0ebe4b137bc7613d72ccc65b4c9f",
+      "size": 3046
     }
   ],
   "releases": [
@@ -1659,8 +1676,8 @@
       "fromVersion": "10.0.69",
       "channel": "stable",
       "type": "Atualização completa",
-      "title": "Nova estrutura + Agente IA completo",
-      "notice": "A Tokito recebeu uma atualização completa com nova estrutura interna, Agente IA mais inteligente e novo sistema de atualização.",
+      "title": "Ponte de migração + estrutura nova",
+      "notice": "A versão 10.0.70 instala uma ponte de compatibilidade antes da migração completa quando necessário.",
       "changelog": [
         "Agente IA agora mantém continuidade de pedidos entre mensagens.",
         "Pedidos de música continuam automaticamente após o usuário informar o nome da música.",
@@ -1671,43 +1688,46 @@
         "Atualização completa substitui a estrutura antiga preservando sessão, configurações e bancos do usuário.",
         "O dono recebe aviso privado uma única vez quando uma nova versão é publicada.",
         "npm start up passa a usar o mesmo atualizador oficial do comando .update start.",
-        "Verificação de módulos ficou silenciosa quando está tudo instalado e só avisa quando faltar dependência."
+        "Verificação de módulos ficou silenciosa quando está tudo instalado e só avisa quando faltar dependência.",
+        "Adicionada ponte de migração para versões antigas usarem update start com segurança."
       ],
-      "files": [],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "f29b285c1e8e5c1361e608eee1017b6d4ac807b81c6c19408ca704e09564905b",
+          "size": 32376
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/supervisor.js",
+          "sha256": "cdcc31d1f2c04a3ca11a2c19d2f5cc502965cd6040a3eedfdf57cf67c5c940aa",
+          "size": 6173
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/update-migrate.js",
+          "sha256": "b5fd4c3232a63a210ff9494612e0fa8055b32ec0a3ff8b77eb82703062ff683d",
+          "size": 1842
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/deps.js",
+          "sha256": "6ac7739b3c16f16064491abcc88c36b8509f0ebe4b137bc7613d72ccc65b4c9f",
+          "size": 3046
+        }
+      ],
       "delete": [],
       "required": false,
       "publishedAt": null,
       "mode": "clean"
-    },
-    {
-      "version": "10.0.71",
-      "fromVersion": "10.0.70",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "2 arquivos atualizados",
-      "notice": "A versão 10.0.71 já está disponível para atualização.",
-      "changelog": [
-        "Sistema Cacapalavras atualizado",
-        "Sistema Base atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-cacapalavras.js",
-          "sha256": "e2f8b348c8a0253c6b2024b87fd6eb8212c282f0f69abe2fae97123d9f9ae121",
-          "size": 6176
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-base.js",
-          "sha256": "f7604ae3fdf2a01ee1178725e3f92a23239fd2b1ad89d8bebb9ba9ba4191b797",
-          "size": 7972
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-31T13:54:11.656Z"
     }
   ],
   "versao": "10.0.70",
   "mode": "clean",
-  "notify": true
+  "notify": true,
+  "migration": {
+    "id": "tokito-v10-clean-structure-20260831",
+    "required": true,
+    "automatic": true,
+    "minimumVersion": "10.0.0",
+    "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json",
+    "note": "Versões antigas recebem primeiro os arquivos da ponte e depois migram para a estrutura completa preservando dados protegidos."
+  }
 }
