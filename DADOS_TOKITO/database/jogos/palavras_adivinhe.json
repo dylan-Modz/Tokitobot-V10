@@ -1,84 +1,2502 @@
 [
-  { "palavra": "amigo", "tema": "geral", "dica": "pessoa parceira" },
-  { "palavra": "aviao", "tema": "transporte", "dica": "voa no céu" },
-  { "palavra": "balde", "tema": "objeto", "dica": "carrega água" },
-  { "palavra": "banco", "tema": "cidade", "dica": "guarda dinheiro" },
-  { "palavra": "blusa", "tema": "roupa", "dica": "veste no corpo" },
-  { "palavra": "bolsa", "tema": "objeto", "dica": "carrega itens" },
-  { "palavra": "caixa", "tema": "objeto", "dica": "guarda coisas" },
-  { "palavra": "carro", "tema": "transporte", "dica": "tem quatro rodas" },
-  { "palavra": "carta", "tema": "objeto", "dica": "mensagem de papel" },
-  { "palavra": "casal", "tema": "geral", "dica": "duas pessoas juntas" },
-  { "palavra": "chave", "tema": "objeto", "dica": "abre fechadura" },
-  { "palavra": "chuva", "tema": "natureza", "dica": "cai do céu" },
-  { "palavra": "cobra", "tema": "animal", "dica": "réptil rastejante" },
-  { "palavra": "corpo", "tema": "geral", "dica": "parte humana" },
-  { "palavra": "corte", "tema": "ação", "dica": "feito com lâmina" },
-  { "palavra": "dente", "tema": "corpo", "dica": "fica na boca" },
-  { "palavra": "doido", "tema": "geral", "dica": "meio maluco" },
-  { "palavra": "drama", "tema": "mídia", "dica": "tipo de história" },
-  { "palavra": "elite", "tema": "geral", "dica": "grupo seleto" },
-  { "palavra": "ferro", "tema": "material", "dica": "metal pesado" },
-  { "palavra": "festa", "tema": "evento", "dica": "momento de comemorar" },
-  { "palavra": "folha", "tema": "natureza", "dica": "fica na árvore" },
-  { "palavra": "forca", "tema": "jogo", "dica": "jogo de adivinhar" },
-  { "palavra": "fruta", "tema": "comida", "dica": "vem da planta" },
-  { "palavra": "fugir", "tema": "ação", "dica": "sair correndo" },
-  { "palavra": "fundo", "tema": "geral", "dica": "parte de trás" },
-  { "palavra": "futem", "tema": "zoeira", "dica": "parece futebol mas não é" },
-  { "palavra": "ganso", "tema": "animal", "dica": "ave branca barulhenta" },
-  { "palavra": "garfo", "tema": "objeto", "dica": "usado pra comer" },
-  { "palavra": "gatos", "tema": "animal", "dica": "felinos domésticos" },
-  { "palavra": "gelar", "tema": "ação", "dica": "deixar frio" },
-  { "palavra": "grito", "tema": "som", "dica": "voz muito alta" },
-  { "palavra": "honra", "tema": "geral", "dica": "valor moral" },
-  { "palavra": "hotel", "tema": "cidade", "dica": "lugar pra dormir viajando" },
-  { "palavra": "humor", "tema": "geral", "dica": "estado emocional" },
-  { "palavra": "isque", "tema": "zoeira", "dica": "quase um objeto de fogo" },
-  { "palavra": "janta", "tema": "comida", "dica": "refeição da noite" },
-  { "palavra": "jogar", "tema": "ação", "dica": "participar de game" },
-  { "palavra": "jovem", "tema": "geral", "dica": "não é velho" },
-  { "palavra": "lapis", "tema": "objeto", "dica": "serve pra escrever" },
-  { "palavra": "laser", "tema": "tecnologia", "dica": "feixe de luz" },
-  { "palavra": "lenda", "tema": "história", "dica": "conto famoso" },
-  { "palavra": "livro", "tema": "objeto", "dica": "tem páginas" },
-  { "palavra": "lugar", "tema": "geral", "dica": "um local" },
-  { "palavra": "luzes", "tema": "objeto", "dica": "iluminam ambiente" },
-  { "palavra": "magia", "tema": "fantasia", "dica": "poder sobrenatural" },
-  { "palavra": "metro", "tema": "transporte", "dica": "anda nos trilhos" },
-  { "palavra": "morte", "tema": "geral", "dica": "fim da vida" },
-  { "palavra": "nuvem", "tema": "natureza", "dica": "fica no céu" },
-  { "palavra": "oculo", "tema": "objeto", "dica": "ajuda a enxergar" },
-  { "palavra": "padre", "tema": "profissão", "dica": "homem da igreja" },
-  { "palavra": "pagar", "tema": "ação", "dica": "dar dinheiro" },
-  { "palavra": "palco", "tema": "evento", "dica": "onde artista se apresenta" },
-  { "palavra": "pedra", "tema": "natureza", "dica": "dura e mineral" },
-  { "palavra": "peixe", "tema": "animal", "dica": "vive na água" },
-  { "palavra": "plano", "tema": "geral", "dica": "organização futura" },
-  { "palavra": "praia", "tema": "natureza", "dica": "tem mar e areia" },
-  { "palavra": "prata", "tema": "material", "dica": "metal valioso" },
-  { "palavra": "preto", "tema": "cor", "dica": "cor escura" },
-  { "palavra": "quase", "tema": "geral", "dica": "por pouco" },
-  { "palavra": "queda", "tema": "ação", "dica": "cair no chão" },
-  { "palavra": "radio", "tema": "objeto", "dica": "toca estação" },
-  { "palavra": "raiva", "tema": "emoção", "dica": "sentimento de irritação" },
-  { "palavra": "reino", "tema": "história", "dica": "terra de rei" },
-  { "palavra": "risco", "tema": "geral", "dica": "perigo possível" },
-  { "palavra": "roupa", "tema": "vestuário", "dica": "você usa no corpo" },
-  { "palavra": "saber", "tema": "geral", "dica": "ter conhecimento" },
-  { "palavra": "sagaz", "tema": "geral", "dica": "muito esperto" },
-  { "palavra": "salto", "tema": "ação", "dica": "pulo" },
-  { "palavra": "sinal", "tema": "cidade", "dica": "fica na rua e muda de cor" },
-  { "palavra": "sonho", "tema": "geral", "dica": "acontece dormindo" },
-  { "palavra": "sorte", "tema": "geral", "dica": "azar ao contrário" },
-  { "palavra": "tarde", "tema": "tempo", "dica": "depois do almoço" },
-  { "palavra": "tecla", "tema": "objeto", "dica": "fica no teclado" },
-  { "palavra": "terra", "tema": "natureza", "dica": "nosso planeta" },
-  { "palavra": "tinta", "tema": "objeto", "dica": "serve pra pintar" },
-  { "palavra": "troca", "tema": "ação", "dica": "substituição" },
-  { "palavra": "vento", "tema": "natureza", "dica": "ar em movimento" },
-  { "palavra": "verde", "tema": "cor", "dica": "cor da mata" },
-  { "palavra": "viola", "tema": "instrumento", "dica": "parece violão" },
-  { "palavra": "viral", "tema": "internet", "dica": "se espalha rápido" },
-  { "palavra": "zebra", "tema": "animal", "dica": "listrada em preto e branco" }
+  {
+    "palavra": "amigo",
+    "tema": "geral",
+    "dica": "pessoa parceira"
+  },
+  {
+    "palavra": "aviao",
+    "tema": "transporte",
+    "dica": "voa no céu"
+  },
+  {
+    "palavra": "balde",
+    "tema": "objeto",
+    "dica": "carrega água"
+  },
+  {
+    "palavra": "banco",
+    "tema": "cidade",
+    "dica": "guarda dinheiro"
+  },
+  {
+    "palavra": "blusa",
+    "tema": "roupa",
+    "dica": "veste no corpo"
+  },
+  {
+    "palavra": "bolsa",
+    "tema": "objeto",
+    "dica": "carrega itens"
+  },
+  {
+    "palavra": "caixa",
+    "tema": "objeto",
+    "dica": "guarda coisas"
+  },
+  {
+    "palavra": "carro",
+    "tema": "transporte",
+    "dica": "tem quatro rodas"
+  },
+  {
+    "palavra": "carta",
+    "tema": "objeto",
+    "dica": "mensagem de papel"
+  },
+  {
+    "palavra": "casal",
+    "tema": "geral",
+    "dica": "duas pessoas juntas"
+  },
+  {
+    "palavra": "chave",
+    "tema": "objeto",
+    "dica": "abre fechadura"
+  },
+  {
+    "palavra": "chuva",
+    "tema": "natureza",
+    "dica": "cai do céu"
+  },
+  {
+    "palavra": "cobra",
+    "tema": "animal",
+    "dica": "réptil rastejante"
+  },
+  {
+    "palavra": "corpo",
+    "tema": "geral",
+    "dica": "parte humana"
+  },
+  {
+    "palavra": "corte",
+    "tema": "ação",
+    "dica": "feito com lâmina"
+  },
+  {
+    "palavra": "dente",
+    "tema": "corpo",
+    "dica": "fica na boca"
+  },
+  {
+    "palavra": "doido",
+    "tema": "geral",
+    "dica": "meio maluco"
+  },
+  {
+    "palavra": "drama",
+    "tema": "mídia",
+    "dica": "tipo de história"
+  },
+  {
+    "palavra": "elite",
+    "tema": "geral",
+    "dica": "grupo seleto"
+  },
+  {
+    "palavra": "ferro",
+    "tema": "material",
+    "dica": "metal pesado"
+  },
+  {
+    "palavra": "festa",
+    "tema": "evento",
+    "dica": "momento de comemorar"
+  },
+  {
+    "palavra": "folha",
+    "tema": "natureza",
+    "dica": "fica na árvore"
+  },
+  {
+    "palavra": "forca",
+    "tema": "jogo",
+    "dica": "jogo de adivinhar"
+  },
+  {
+    "palavra": "fruta",
+    "tema": "comida",
+    "dica": "vem da planta"
+  },
+  {
+    "palavra": "fugir",
+    "tema": "ação",
+    "dica": "sair correndo"
+  },
+  {
+    "palavra": "fundo",
+    "tema": "geral",
+    "dica": "parte de trás"
+  },
+  {
+    "palavra": "futem",
+    "tema": "zoeira",
+    "dica": "parece futebol mas não é"
+  },
+  {
+    "palavra": "ganso",
+    "tema": "animal",
+    "dica": "ave branca barulhenta"
+  },
+  {
+    "palavra": "garfo",
+    "tema": "objeto",
+    "dica": "usado pra comer"
+  },
+  {
+    "palavra": "gatos",
+    "tema": "animal",
+    "dica": "felinos domésticos"
+  },
+  {
+    "palavra": "gelar",
+    "tema": "ação",
+    "dica": "deixar frio"
+  },
+  {
+    "palavra": "grito",
+    "tema": "som",
+    "dica": "voz muito alta"
+  },
+  {
+    "palavra": "honra",
+    "tema": "geral",
+    "dica": "valor moral"
+  },
+  {
+    "palavra": "hotel",
+    "tema": "cidade",
+    "dica": "lugar pra dormir viajando"
+  },
+  {
+    "palavra": "humor",
+    "tema": "geral",
+    "dica": "estado emocional"
+  },
+  {
+    "palavra": "isque",
+    "tema": "zoeira",
+    "dica": "quase um objeto de fogo"
+  },
+  {
+    "palavra": "janta",
+    "tema": "comida",
+    "dica": "refeição da noite"
+  },
+  {
+    "palavra": "jogar",
+    "tema": "ação",
+    "dica": "participar de game"
+  },
+  {
+    "palavra": "jovem",
+    "tema": "geral",
+    "dica": "não é velho"
+  },
+  {
+    "palavra": "lapis",
+    "tema": "objeto",
+    "dica": "serve pra escrever"
+  },
+  {
+    "palavra": "laser",
+    "tema": "tecnologia",
+    "dica": "feixe de luz"
+  },
+  {
+    "palavra": "lenda",
+    "tema": "história",
+    "dica": "conto famoso"
+  },
+  {
+    "palavra": "livro",
+    "tema": "objeto",
+    "dica": "tem páginas"
+  },
+  {
+    "palavra": "lugar",
+    "tema": "geral",
+    "dica": "um local"
+  },
+  {
+    "palavra": "luzes",
+    "tema": "objeto",
+    "dica": "iluminam ambiente"
+  },
+  {
+    "palavra": "magia",
+    "tema": "fantasia",
+    "dica": "poder sobrenatural"
+  },
+  {
+    "palavra": "metro",
+    "tema": "transporte",
+    "dica": "anda nos trilhos"
+  },
+  {
+    "palavra": "morte",
+    "tema": "geral",
+    "dica": "fim da vida"
+  },
+  {
+    "palavra": "nuvem",
+    "tema": "natureza",
+    "dica": "fica no céu"
+  },
+  {
+    "palavra": "oculo",
+    "tema": "objeto",
+    "dica": "ajuda a enxergar"
+  },
+  {
+    "palavra": "padre",
+    "tema": "profissão",
+    "dica": "homem da igreja"
+  },
+  {
+    "palavra": "pagar",
+    "tema": "ação",
+    "dica": "dar dinheiro"
+  },
+  {
+    "palavra": "palco",
+    "tema": "evento",
+    "dica": "onde artista se apresenta"
+  },
+  {
+    "palavra": "pedra",
+    "tema": "natureza",
+    "dica": "dura e mineral"
+  },
+  {
+    "palavra": "peixe",
+    "tema": "animal",
+    "dica": "vive na água"
+  },
+  {
+    "palavra": "plano",
+    "tema": "geral",
+    "dica": "organização futura"
+  },
+  {
+    "palavra": "praia",
+    "tema": "natureza",
+    "dica": "tem mar e areia"
+  },
+  {
+    "palavra": "prata",
+    "tema": "material",
+    "dica": "metal valioso"
+  },
+  {
+    "palavra": "preto",
+    "tema": "cor",
+    "dica": "cor escura"
+  },
+  {
+    "palavra": "quase",
+    "tema": "geral",
+    "dica": "por pouco"
+  },
+  {
+    "palavra": "queda",
+    "tema": "ação",
+    "dica": "cair no chão"
+  },
+  {
+    "palavra": "radio",
+    "tema": "objeto",
+    "dica": "toca estação"
+  },
+  {
+    "palavra": "raiva",
+    "tema": "emoção",
+    "dica": "sentimento de irritação"
+  },
+  {
+    "palavra": "reino",
+    "tema": "história",
+    "dica": "terra de rei"
+  },
+  {
+    "palavra": "risco",
+    "tema": "geral",
+    "dica": "perigo possível"
+  },
+  {
+    "palavra": "roupa",
+    "tema": "vestuário",
+    "dica": "você usa no corpo"
+  },
+  {
+    "palavra": "saber",
+    "tema": "geral",
+    "dica": "ter conhecimento"
+  },
+  {
+    "palavra": "sagaz",
+    "tema": "geral",
+    "dica": "muito esperto"
+  },
+  {
+    "palavra": "salto",
+    "tema": "ação",
+    "dica": "pulo"
+  },
+  {
+    "palavra": "sinal",
+    "tema": "cidade",
+    "dica": "fica na rua e muda de cor"
+  },
+  {
+    "palavra": "sonho",
+    "tema": "geral",
+    "dica": "acontece dormindo"
+  },
+  {
+    "palavra": "sorte",
+    "tema": "geral",
+    "dica": "azar ao contrário"
+  },
+  {
+    "palavra": "tarde",
+    "tema": "tempo",
+    "dica": "depois do almoço"
+  },
+  {
+    "palavra": "tecla",
+    "tema": "objeto",
+    "dica": "fica no teclado"
+  },
+  {
+    "palavra": "terra",
+    "tema": "natureza",
+    "dica": "nosso planeta"
+  },
+  {
+    "palavra": "tinta",
+    "tema": "objeto",
+    "dica": "serve pra pintar"
+  },
+  {
+    "palavra": "troca",
+    "tema": "ação",
+    "dica": "substituição"
+  },
+  {
+    "palavra": "vento",
+    "tema": "natureza",
+    "dica": "ar em movimento"
+  },
+  {
+    "palavra": "verde",
+    "tema": "cor",
+    "dica": "cor da mata"
+  },
+  {
+    "palavra": "viola",
+    "tema": "instrumento",
+    "dica": "parece violão"
+  },
+  {
+    "palavra": "viral",
+    "tema": "internet",
+    "dica": "se espalha rápido"
+  },
+  {
+    "palavra": "zebra",
+    "tema": "animal",
+    "dica": "listrada em preto e branco"
+  },
+  {
+    "palavra": "covid-19",
+    "tema": "doenças",
+    "dica": "foi obrigatório usar máscaras durante a pandemia"
+  },
+  {
+    "palavra": "pinça",
+    "tema": "utensílio",
+    "dica": "utilizado para pegar objetos sem que a mão lhes toque diretamente"
+  },
+  {
+    "palavra": "limão",
+    "tema": "frutas",
+    "dica": "é azeda"
+  },
+  {
+    "palavra": "bahia",
+    "tema": "lugares",
+    "dica": "é um estado brasileiro e uma de suas cidades se chama salvador"
+  },
+  {
+    "palavra": "manga",
+    "tema": "frutas",
+    "dica": "uma fruta que como mito se dizia que se tomar com leite morre 🙃"
+  },
+  {
+    "palavra": "amora",
+    "tema": "frutas",
+    "dica": "mancha os dedos e até mesmo a roupa ao pegar da arvore"
+  },
+  {
+    "palavra": "natal",
+    "tema": "lugares",
+    "dica": "tem o mesmo nome de um feriado do mês de dezembro"
+  },
+  {
+    "palavra": "pizza",
+    "tema": "comida",
+    "dica": "massa com recheio variado"
+  },
+  {
+    "palavra": "piano",
+    "tema": "instrumento musical",
+    "dica": "possui teclas"
+  },
+  {
+    "palavra": "barco",
+    "tema": "meio de transporte",
+    "dica": "navega na água"
+  },
+  {
+    "palavra": "átomo",
+    "tema": "Química",
+    "dica": "A menor unidade de um elemento químico, composta por prótons, nêutrons e elétrons."
+  },
+  {
+    "palavra": "quark",
+    "tema": "Física",
+    "dica": "Partícula subatômica que compõe os prótons e nêutrons."
+  },
+  {
+    "palavra": "fóton",
+    "tema": "Física",
+    "dica": "Partícula elementar de luz."
+  },
+  {
+    "palavra": "ética",
+    "tema": "Filosofia",
+    "dica": "Estudo dos valores e moralidade"
+  },
+  {
+    "palavra": "mente",
+    "tema": "Consciência",
+    "dica": "Sede dos processos mentais"
+  },
+  {
+    "palavra": "freud",
+    "tema": "Subconsciente",
+    "dica": "Psicanalista famoso por suas teorias"
+  },
+  {
+    "palavra": "fatos",
+    "tema": "Curiosidades",
+    "dica": "Informações verdadeiras sobre algo"
+  },
+  {
+    "palavra": "prato",
+    "tema": "objeto",
+    "dica": "palavra de 5 letras; começa com P e termina com O"
+  },
+  {
+    "palavra": "porta",
+    "tema": "objeto",
+    "dica": "palavra de 5 letras; começa com P e termina com A"
+  },
+  {
+    "palavra": "arroz",
+    "tema": "alimento",
+    "dica": "palavra de 5 letras; começa com A e termina com Z"
+  },
+  {
+    "palavra": "carne",
+    "tema": "alimento",
+    "dica": "palavra de 5 letras; começa com C e termina com E"
+  },
+  {
+    "palavra": "torta",
+    "tema": "alimento",
+    "dica": "palavra de 5 letras; começa com T e termina com A"
+  },
+  {
+    "palavra": "leite",
+    "tema": "alimento",
+    "dica": "palavra de 5 letras; começa com L e termina com E"
+  },
+  {
+    "palavra": "tigre",
+    "tema": "animal",
+    "dica": "palavra de 5 letras; começa com T e termina com E"
+  },
+  {
+    "palavra": "polvo",
+    "tema": "animal",
+    "dica": "palavra de 5 letras; começa com P e termina com O"
+  },
+  {
+    "palavra": "cinza",
+    "tema": "cor",
+    "dica": "palavra de 5 letras; começa com C e termina com A"
+  },
+  {
+    "palavra": "japao",
+    "tema": "lugar",
+    "dica": "palavra de 5 letras; começa com J e termina com O"
+  },
+  {
+    "palavra": "mouse",
+    "tema": "tecnologia",
+    "dica": "palavra de 5 letras; começa com M e termina com E"
+  },
+  {
+    "palavra": "gaara",
+    "tema": "anime",
+    "dica": "palavra de 5 letras; começa com G e termina com A"
+  },
+  {
+    "palavra": "muzan",
+    "tema": "anime",
+    "dica": "palavra de 5 letras; começa com M e termina com N"
+  },
+  {
+    "palavra": "eevee",
+    "tema": "pokemon",
+    "dica": "palavra de 5 letras; começa com E e termina com E"
+  },
+  {
+    "palavra": "nariz",
+    "tema": "corpo",
+    "dica": "palavra de 5 letras; começa com N e termina com Z"
+  },
+  {
+    "palavra": "braco",
+    "tema": "corpo",
+    "dica": "palavra de 5 letras; começa com B e termina com O"
+  },
+  {
+    "palavra": "perna",
+    "tema": "corpo",
+    "dica": "palavra de 5 letras; começa com P e termina com A"
+  },
+  {
+    "palavra": "navio",
+    "tema": "transporte",
+    "dica": "palavra de 5 letras; começa com N e termina com O"
+  },
+  {
+    "palavra": "achar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "achas",
+    "tema": "verbos",
+    "dica": "forma do verbo achar; termina em AS"
+  },
+  {
+    "palavra": "acham",
+    "tema": "verbos",
+    "dica": "forma do verbo achar; termina em AM"
+  },
+  {
+    "palavra": "achou",
+    "tema": "verbos",
+    "dica": "forma do verbo achar; indica ação no passado"
+  },
+  {
+    "palavra": "adiar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "adias",
+    "tema": "verbos",
+    "dica": "forma do verbo adiar; termina em AS"
+  },
+  {
+    "palavra": "adiam",
+    "tema": "verbos",
+    "dica": "forma do verbo adiar; termina em AM"
+  },
+  {
+    "palavra": "adiou",
+    "tema": "verbos",
+    "dica": "forma do verbo adiar; indica ação no passado"
+  },
+  {
+    "palavra": "afiar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "afias",
+    "tema": "verbos",
+    "dica": "forma do verbo afiar; termina em AS"
+  },
+  {
+    "palavra": "afiam",
+    "tema": "verbos",
+    "dica": "forma do verbo afiar; termina em AM"
+  },
+  {
+    "palavra": "afiou",
+    "tema": "verbos",
+    "dica": "forma do verbo afiar; indica ação no passado"
+  },
+  {
+    "palavra": "aliar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "alias",
+    "tema": "verbos",
+    "dica": "forma do verbo aliar; termina em AS"
+  },
+  {
+    "palavra": "aliam",
+    "tema": "verbos",
+    "dica": "forma do verbo aliar; termina em AM"
+  },
+  {
+    "palavra": "aliou",
+    "tema": "verbos",
+    "dica": "forma do verbo aliar; indica ação no passado"
+  },
+  {
+    "palavra": "andar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "andas",
+    "tema": "verbos",
+    "dica": "forma do verbo andar; termina em AS"
+  },
+  {
+    "palavra": "andam",
+    "tema": "verbos",
+    "dica": "forma do verbo andar; termina em AM"
+  },
+  {
+    "palavra": "andou",
+    "tema": "verbos",
+    "dica": "forma do verbo andar; indica ação no passado"
+  },
+  {
+    "palavra": "armar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "armas",
+    "tema": "verbos",
+    "dica": "forma do verbo armar; termina em AS"
+  },
+  {
+    "palavra": "armam",
+    "tema": "verbos",
+    "dica": "forma do verbo armar; termina em AM"
+  },
+  {
+    "palavra": "armou",
+    "tema": "verbos",
+    "dica": "forma do verbo armar; indica ação no passado"
+  },
+  {
+    "palavra": "assar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "assas",
+    "tema": "verbos",
+    "dica": "forma do verbo assar; termina em AS"
+  },
+  {
+    "palavra": "assam",
+    "tema": "verbos",
+    "dica": "forma do verbo assar; termina em AM"
+  },
+  {
+    "palavra": "assou",
+    "tema": "verbos",
+    "dica": "forma do verbo assar; indica ação no passado"
+  },
+  {
+    "palavra": "babar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "babas",
+    "tema": "verbos",
+    "dica": "forma do verbo babar; termina em AS"
+  },
+  {
+    "palavra": "babam",
+    "tema": "verbos",
+    "dica": "forma do verbo babar; termina em AM"
+  },
+  {
+    "palavra": "babou",
+    "tema": "verbos",
+    "dica": "forma do verbo babar; indica ação no passado"
+  },
+  {
+    "palavra": "botar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "botas",
+    "tema": "verbos",
+    "dica": "forma do verbo botar; termina em AS"
+  },
+  {
+    "palavra": "botam",
+    "tema": "verbos",
+    "dica": "forma do verbo botar; termina em AM"
+  },
+  {
+    "palavra": "botou",
+    "tema": "verbos",
+    "dica": "forma do verbo botar; indica ação no passado"
+  },
+  {
+    "palavra": "calar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "calas",
+    "tema": "verbos",
+    "dica": "forma do verbo calar; termina em AS"
+  },
+  {
+    "palavra": "calam",
+    "tema": "verbos",
+    "dica": "forma do verbo calar; termina em AM"
+  },
+  {
+    "palavra": "calou",
+    "tema": "verbos",
+    "dica": "forma do verbo calar; indica ação no passado"
+  },
+  {
+    "palavra": "casar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "casas",
+    "tema": "verbos",
+    "dica": "forma do verbo casar; termina em AS"
+  },
+  {
+    "palavra": "casam",
+    "tema": "verbos",
+    "dica": "forma do verbo casar; termina em AM"
+  },
+  {
+    "palavra": "casou",
+    "tema": "verbos",
+    "dica": "forma do verbo casar; indica ação no passado"
+  },
+  {
+    "palavra": "cavar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "cavas",
+    "tema": "verbos",
+    "dica": "forma do verbo cavar; termina em AS"
+  },
+  {
+    "palavra": "cavam",
+    "tema": "verbos",
+    "dica": "forma do verbo cavar; termina em AM"
+  },
+  {
+    "palavra": "cavou",
+    "tema": "verbos",
+    "dica": "forma do verbo cavar; indica ação no passado"
+  },
+  {
+    "palavra": "cegar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "cegas",
+    "tema": "verbos",
+    "dica": "forma do verbo cegar; termina em AS"
+  },
+  {
+    "palavra": "cegam",
+    "tema": "verbos",
+    "dica": "forma do verbo cegar; termina em AM"
+  },
+  {
+    "palavra": "cegou",
+    "tema": "verbos",
+    "dica": "forma do verbo cegar; indica ação no passado"
+  },
+  {
+    "palavra": "cevar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "cevas",
+    "tema": "verbos",
+    "dica": "forma do verbo cevar; termina em AS"
+  },
+  {
+    "palavra": "cevam",
+    "tema": "verbos",
+    "dica": "forma do verbo cevar; termina em AM"
+  },
+  {
+    "palavra": "cevou",
+    "tema": "verbos",
+    "dica": "forma do verbo cevar; indica ação no passado"
+  },
+  {
+    "palavra": "citar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "citas",
+    "tema": "verbos",
+    "dica": "forma do verbo citar; termina em AS"
+  },
+  {
+    "palavra": "citam",
+    "tema": "verbos",
+    "dica": "forma do verbo citar; termina em AM"
+  },
+  {
+    "palavra": "citou",
+    "tema": "verbos",
+    "dica": "forma do verbo citar; indica ação no passado"
+  },
+  {
+    "palavra": "colar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "colas",
+    "tema": "verbos",
+    "dica": "forma do verbo colar; termina em AS"
+  },
+  {
+    "palavra": "colam",
+    "tema": "verbos",
+    "dica": "forma do verbo colar; termina em AM"
+  },
+  {
+    "palavra": "colou",
+    "tema": "verbos",
+    "dica": "forma do verbo colar; indica ação no passado"
+  },
+  {
+    "palavra": "coçar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "coças",
+    "tema": "verbos",
+    "dica": "forma do verbo coçar; termina em AS"
+  },
+  {
+    "palavra": "coçam",
+    "tema": "verbos",
+    "dica": "forma do verbo coçar; termina em AM"
+  },
+  {
+    "palavra": "coçou",
+    "tema": "verbos",
+    "dica": "forma do verbo coçar; indica ação no passado"
+  },
+  {
+    "palavra": "criar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "crias",
+    "tema": "verbos",
+    "dica": "forma do verbo criar; termina em AS"
+  },
+  {
+    "palavra": "criam",
+    "tema": "verbos",
+    "dica": "forma do verbo criar; termina em AM"
+  },
+  {
+    "palavra": "criou",
+    "tema": "verbos",
+    "dica": "forma do verbo criar; indica ação no passado"
+  },
+  {
+    "palavra": "curar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "curas",
+    "tema": "verbos",
+    "dica": "forma do verbo curar; termina em AS"
+  },
+  {
+    "palavra": "curam",
+    "tema": "verbos",
+    "dica": "forma do verbo curar; termina em AM"
+  },
+  {
+    "palavra": "curou",
+    "tema": "verbos",
+    "dica": "forma do verbo curar; indica ação no passado"
+  },
+  {
+    "palavra": "datar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "datas",
+    "tema": "verbos",
+    "dica": "forma do verbo datar; termina em AS"
+  },
+  {
+    "palavra": "datam",
+    "tema": "verbos",
+    "dica": "forma do verbo datar; termina em AM"
+  },
+  {
+    "palavra": "datou",
+    "tema": "verbos",
+    "dica": "forma do verbo datar; indica ação no passado"
+  },
+  {
+    "palavra": "domar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "domas",
+    "tema": "verbos",
+    "dica": "forma do verbo domar; termina em AS"
+  },
+  {
+    "palavra": "domam",
+    "tema": "verbos",
+    "dica": "forma do verbo domar; termina em AM"
+  },
+  {
+    "palavra": "domou",
+    "tema": "verbos",
+    "dica": "forma do verbo domar; indica ação no passado"
+  },
+  {
+    "palavra": "dosar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "dosas",
+    "tema": "verbos",
+    "dica": "forma do verbo dosar; termina em AS"
+  },
+  {
+    "palavra": "dosam",
+    "tema": "verbos",
+    "dica": "forma do verbo dosar; termina em AM"
+  },
+  {
+    "palavra": "dosou",
+    "tema": "verbos",
+    "dica": "forma do verbo dosar; indica ação no passado"
+  },
+  {
+    "palavra": "durar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "duras",
+    "tema": "verbos",
+    "dica": "forma do verbo durar; termina em AS"
+  },
+  {
+    "palavra": "duram",
+    "tema": "verbos",
+    "dica": "forma do verbo durar; termina em AM"
+  },
+  {
+    "palavra": "durou",
+    "tema": "verbos",
+    "dica": "forma do verbo durar; indica ação no passado"
+  },
+  {
+    "palavra": "errar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "erras",
+    "tema": "verbos",
+    "dica": "forma do verbo errar; termina em AS"
+  },
+  {
+    "palavra": "erram",
+    "tema": "verbos",
+    "dica": "forma do verbo errar; termina em AM"
+  },
+  {
+    "palavra": "errou",
+    "tema": "verbos",
+    "dica": "forma do verbo errar; indica ação no passado"
+  },
+  {
+    "palavra": "falar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "falas",
+    "tema": "verbos",
+    "dica": "forma do verbo falar; termina em AS"
+  },
+  {
+    "palavra": "falam",
+    "tema": "verbos",
+    "dica": "forma do verbo falar; termina em AM"
+  },
+  {
+    "palavra": "falou",
+    "tema": "verbos",
+    "dica": "forma do verbo falar; indica ação no passado"
+  },
+  {
+    "palavra": "ficar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "ficas",
+    "tema": "verbos",
+    "dica": "forma do verbo ficar; termina em AS"
+  },
+  {
+    "palavra": "ficam",
+    "tema": "verbos",
+    "dica": "forma do verbo ficar; termina em AM"
+  },
+  {
+    "palavra": "ficou",
+    "tema": "verbos",
+    "dica": "forma do verbo ficar; indica ação no passado"
+  },
+  {
+    "palavra": "filar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "filas",
+    "tema": "verbos",
+    "dica": "forma do verbo filar; termina em AS"
+  },
+  {
+    "palavra": "filam",
+    "tema": "verbos",
+    "dica": "forma do verbo filar; termina em AM"
+  },
+  {
+    "palavra": "filou",
+    "tema": "verbos",
+    "dica": "forma do verbo filar; indica ação no passado"
+  },
+  {
+    "palavra": "fitar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "fitas",
+    "tema": "verbos",
+    "dica": "forma do verbo fitar; termina em AS"
+  },
+  {
+    "palavra": "fitam",
+    "tema": "verbos",
+    "dica": "forma do verbo fitar; termina em AM"
+  },
+  {
+    "palavra": "fitou",
+    "tema": "verbos",
+    "dica": "forma do verbo fitar; indica ação no passado"
+  },
+  {
+    "palavra": "fixar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "fixas",
+    "tema": "verbos",
+    "dica": "forma do verbo fixar; termina em AS"
+  },
+  {
+    "palavra": "fixam",
+    "tema": "verbos",
+    "dica": "forma do verbo fixar; termina em AM"
+  },
+  {
+    "palavra": "fixou",
+    "tema": "verbos",
+    "dica": "forma do verbo fixar; indica ação no passado"
+  },
+  {
+    "palavra": "focar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "focas",
+    "tema": "verbos",
+    "dica": "forma do verbo focar; termina em AS"
+  },
+  {
+    "palavra": "focam",
+    "tema": "verbos",
+    "dica": "forma do verbo focar; termina em AM"
+  },
+  {
+    "palavra": "focou",
+    "tema": "verbos",
+    "dica": "forma do verbo focar; indica ação no passado"
+  },
+  {
+    "palavra": "furar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "furas",
+    "tema": "verbos",
+    "dica": "forma do verbo furar; termina em AS"
+  },
+  {
+    "palavra": "furam",
+    "tema": "verbos",
+    "dica": "forma do verbo furar; termina em AM"
+  },
+  {
+    "palavra": "furou",
+    "tema": "verbos",
+    "dica": "forma do verbo furar; indica ação no passado"
+  },
+  {
+    "palavra": "gelas",
+    "tema": "verbos",
+    "dica": "forma do verbo gelar; termina em AS"
+  },
+  {
+    "palavra": "gelam",
+    "tema": "verbos",
+    "dica": "forma do verbo gelar; termina em AM"
+  },
+  {
+    "palavra": "gelou",
+    "tema": "verbos",
+    "dica": "forma do verbo gelar; indica ação no passado"
+  },
+  {
+    "palavra": "gerar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "geras",
+    "tema": "verbos",
+    "dica": "forma do verbo gerar; termina em AS"
+  },
+  {
+    "palavra": "geram",
+    "tema": "verbos",
+    "dica": "forma do verbo gerar; termina em AM"
+  },
+  {
+    "palavra": "gerou",
+    "tema": "verbos",
+    "dica": "forma do verbo gerar; indica ação no passado"
+  },
+  {
+    "palavra": "girar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "giras",
+    "tema": "verbos",
+    "dica": "forma do verbo girar; termina em AS"
+  },
+  {
+    "palavra": "giram",
+    "tema": "verbos",
+    "dica": "forma do verbo girar; termina em AM"
+  },
+  {
+    "palavra": "girou",
+    "tema": "verbos",
+    "dica": "forma do verbo girar; indica ação no passado"
+  },
+  {
+    "palavra": "jogas",
+    "tema": "verbos",
+    "dica": "forma do verbo jogar; termina em AS"
+  },
+  {
+    "palavra": "jogam",
+    "tema": "verbos",
+    "dica": "forma do verbo jogar; termina em AM"
+  },
+  {
+    "palavra": "jogou",
+    "tema": "verbos",
+    "dica": "forma do verbo jogar; indica ação no passado"
+  },
+  {
+    "palavra": "lavar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "lavas",
+    "tema": "verbos",
+    "dica": "forma do verbo lavar; termina em AS"
+  },
+  {
+    "palavra": "lavam",
+    "tema": "verbos",
+    "dica": "forma do verbo lavar; termina em AM"
+  },
+  {
+    "palavra": "lavou",
+    "tema": "verbos",
+    "dica": "forma do verbo lavar; indica ação no passado"
+  },
+  {
+    "palavra": "levar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "levas",
+    "tema": "verbos",
+    "dica": "forma do verbo levar; termina em AS"
+  },
+  {
+    "palavra": "levam",
+    "tema": "verbos",
+    "dica": "forma do verbo levar; termina em AM"
+  },
+  {
+    "palavra": "levou",
+    "tema": "verbos",
+    "dica": "forma do verbo levar; indica ação no passado"
+  },
+  {
+    "palavra": "ligar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "ligas",
+    "tema": "verbos",
+    "dica": "forma do verbo ligar; termina em AS"
+  },
+  {
+    "palavra": "ligam",
+    "tema": "verbos",
+    "dica": "forma do verbo ligar; termina em AM"
+  },
+  {
+    "palavra": "ligou",
+    "tema": "verbos",
+    "dica": "forma do verbo ligar; indica ação no passado"
+  },
+  {
+    "palavra": "lixar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "lixas",
+    "tema": "verbos",
+    "dica": "forma do verbo lixar; termina em AS"
+  },
+  {
+    "palavra": "lixam",
+    "tema": "verbos",
+    "dica": "forma do verbo lixar; termina em AM"
+  },
+  {
+    "palavra": "lixou",
+    "tema": "verbos",
+    "dica": "forma do verbo lixar; indica ação no passado"
+  },
+  {
+    "palavra": "lotar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "lotas",
+    "tema": "verbos",
+    "dica": "forma do verbo lotar; termina em AS"
+  },
+  {
+    "palavra": "lotam",
+    "tema": "verbos",
+    "dica": "forma do verbo lotar; termina em AM"
+  },
+  {
+    "palavra": "lotou",
+    "tema": "verbos",
+    "dica": "forma do verbo lotar; indica ação no passado"
+  },
+  {
+    "palavra": "lutar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "lutas",
+    "tema": "verbos",
+    "dica": "forma do verbo lutar; termina em AS"
+  },
+  {
+    "palavra": "lutam",
+    "tema": "verbos",
+    "dica": "forma do verbo lutar; termina em AM"
+  },
+  {
+    "palavra": "lutou",
+    "tema": "verbos",
+    "dica": "forma do verbo lutar; indica ação no passado"
+  },
+  {
+    "palavra": "mamar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "mamas",
+    "tema": "verbos",
+    "dica": "forma do verbo mamar; termina em AS"
+  },
+  {
+    "palavra": "mamam",
+    "tema": "verbos",
+    "dica": "forma do verbo mamar; termina em AM"
+  },
+  {
+    "palavra": "mamou",
+    "tema": "verbos",
+    "dica": "forma do verbo mamar; indica ação no passado"
+  },
+  {
+    "palavra": "matar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "matas",
+    "tema": "verbos",
+    "dica": "forma do verbo matar; termina em AS"
+  },
+  {
+    "palavra": "matam",
+    "tema": "verbos",
+    "dica": "forma do verbo matar; termina em AM"
+  },
+  {
+    "palavra": "matou",
+    "tema": "verbos",
+    "dica": "forma do verbo matar; indica ação no passado"
+  },
+  {
+    "palavra": "mimar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "mimas",
+    "tema": "verbos",
+    "dica": "forma do verbo mimar; termina em AS"
+  },
+  {
+    "palavra": "mimam",
+    "tema": "verbos",
+    "dica": "forma do verbo mimar; termina em AM"
+  },
+  {
+    "palavra": "mimou",
+    "tema": "verbos",
+    "dica": "forma do verbo mimar; indica ação no passado"
+  },
+  {
+    "palavra": "mirar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "miras",
+    "tema": "verbos",
+    "dica": "forma do verbo mirar; termina em AS"
+  },
+  {
+    "palavra": "miram",
+    "tema": "verbos",
+    "dica": "forma do verbo mirar; termina em AM"
+  },
+  {
+    "palavra": "mirou",
+    "tema": "verbos",
+    "dica": "forma do verbo mirar; indica ação no passado"
+  },
+  {
+    "palavra": "mofar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "mofas",
+    "tema": "verbos",
+    "dica": "forma do verbo mofar; termina em AS"
+  },
+  {
+    "palavra": "mofam",
+    "tema": "verbos",
+    "dica": "forma do verbo mofar; termina em AM"
+  },
+  {
+    "palavra": "mofou",
+    "tema": "verbos",
+    "dica": "forma do verbo mofar; indica ação no passado"
+  },
+  {
+    "palavra": "morar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "moras",
+    "tema": "verbos",
+    "dica": "forma do verbo morar; termina em AS"
+  },
+  {
+    "palavra": "moram",
+    "tema": "verbos",
+    "dica": "forma do verbo morar; termina em AM"
+  },
+  {
+    "palavra": "morou",
+    "tema": "verbos",
+    "dica": "forma do verbo morar; indica ação no passado"
+  },
+  {
+    "palavra": "mudar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "mudas",
+    "tema": "verbos",
+    "dica": "forma do verbo mudar; termina em AS"
+  },
+  {
+    "palavra": "mudam",
+    "tema": "verbos",
+    "dica": "forma do verbo mudar; termina em AM"
+  },
+  {
+    "palavra": "mudou",
+    "tema": "verbos",
+    "dica": "forma do verbo mudar; indica ação no passado"
+  },
+  {
+    "palavra": "nadar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "nadas",
+    "tema": "verbos",
+    "dica": "forma do verbo nadar; termina em AS"
+  },
+  {
+    "palavra": "nadam",
+    "tema": "verbos",
+    "dica": "forma do verbo nadar; termina em AM"
+  },
+  {
+    "palavra": "nadou",
+    "tema": "verbos",
+    "dica": "forma do verbo nadar; indica ação no passado"
+  },
+  {
+    "palavra": "negar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "negas",
+    "tema": "verbos",
+    "dica": "forma do verbo negar; termina em AS"
+  },
+  {
+    "palavra": "negam",
+    "tema": "verbos",
+    "dica": "forma do verbo negar; termina em AM"
+  },
+  {
+    "palavra": "negou",
+    "tema": "verbos",
+    "dica": "forma do verbo negar; indica ação no passado"
+  },
+  {
+    "palavra": "notar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "notas",
+    "tema": "verbos",
+    "dica": "forma do verbo notar; termina em AS"
+  },
+  {
+    "palavra": "notam",
+    "tema": "verbos",
+    "dica": "forma do verbo notar; termina em AM"
+  },
+  {
+    "palavra": "notou",
+    "tema": "verbos",
+    "dica": "forma do verbo notar; indica ação no passado"
+  },
+  {
+    "palavra": "olhar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "olhas",
+    "tema": "verbos",
+    "dica": "forma do verbo olhar; termina em AS"
+  },
+  {
+    "palavra": "olham",
+    "tema": "verbos",
+    "dica": "forma do verbo olhar; termina em AM"
+  },
+  {
+    "palavra": "olhou",
+    "tema": "verbos",
+    "dica": "forma do verbo olhar; indica ação no passado"
+  },
+  {
+    "palavra": "optar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "optas",
+    "tema": "verbos",
+    "dica": "forma do verbo optar; termina em AS"
+  },
+  {
+    "palavra": "optam",
+    "tema": "verbos",
+    "dica": "forma do verbo optar; termina em AM"
+  },
+  {
+    "palavra": "optou",
+    "tema": "verbos",
+    "dica": "forma do verbo optar; indica ação no passado"
+  },
+  {
+    "palavra": "pagas",
+    "tema": "verbos",
+    "dica": "forma do verbo pagar; termina em AS"
+  },
+  {
+    "palavra": "pagam",
+    "tema": "verbos",
+    "dica": "forma do verbo pagar; termina em AM"
+  },
+  {
+    "palavra": "pagou",
+    "tema": "verbos",
+    "dica": "forma do verbo pagar; indica ação no passado"
+  },
+  {
+    "palavra": "parar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "paras",
+    "tema": "verbos",
+    "dica": "forma do verbo parar; termina em AS"
+  },
+  {
+    "palavra": "param",
+    "tema": "verbos",
+    "dica": "forma do verbo parar; termina em AM"
+  },
+  {
+    "palavra": "parou",
+    "tema": "verbos",
+    "dica": "forma do verbo parar; indica ação no passado"
+  },
+  {
+    "palavra": "pegar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "pegas",
+    "tema": "verbos",
+    "dica": "forma do verbo pegar; termina em AS"
+  },
+  {
+    "palavra": "pegam",
+    "tema": "verbos",
+    "dica": "forma do verbo pegar; termina em AM"
+  },
+  {
+    "palavra": "pegou",
+    "tema": "verbos",
+    "dica": "forma do verbo pegar; indica ação no passado"
+  },
+  {
+    "palavra": "pesar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "pesas",
+    "tema": "verbos",
+    "dica": "forma do verbo pesar; termina em AS"
+  },
+  {
+    "palavra": "pesam",
+    "tema": "verbos",
+    "dica": "forma do verbo pesar; termina em AM"
+  },
+  {
+    "palavra": "pesou",
+    "tema": "verbos",
+    "dica": "forma do verbo pesar; indica ação no passado"
+  },
+  {
+    "palavra": "pifar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "pifas",
+    "tema": "verbos",
+    "dica": "forma do verbo pifar; termina em AS"
+  },
+  {
+    "palavra": "pifam",
+    "tema": "verbos",
+    "dica": "forma do verbo pifar; termina em AM"
+  },
+  {
+    "palavra": "pifou",
+    "tema": "verbos",
+    "dica": "forma do verbo pifar; indica ação no passado"
+  },
+  {
+    "palavra": "podar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "podas",
+    "tema": "verbos",
+    "dica": "forma do verbo podar; termina em AS"
+  },
+  {
+    "palavra": "podam",
+    "tema": "verbos",
+    "dica": "forma do verbo podar; termina em AM"
+  },
+  {
+    "palavra": "podou",
+    "tema": "verbos",
+    "dica": "forma do verbo podar; indica ação no passado"
+  },
+  {
+    "palavra": "posar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "posas",
+    "tema": "verbos",
+    "dica": "forma do verbo posar; termina em AS"
+  },
+  {
+    "palavra": "posam",
+    "tema": "verbos",
+    "dica": "forma do verbo posar; termina em AM"
+  },
+  {
+    "palavra": "posou",
+    "tema": "verbos",
+    "dica": "forma do verbo posar; indica ação no passado"
+  },
+  {
+    "palavra": "pular",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "pulas",
+    "tema": "verbos",
+    "dica": "forma do verbo pular; termina em AS"
+  },
+  {
+    "palavra": "pulam",
+    "tema": "verbos",
+    "dica": "forma do verbo pular; termina em AM"
+  },
+  {
+    "palavra": "pulou",
+    "tema": "verbos",
+    "dica": "forma do verbo pular; indica ação no passado"
+  },
+  {
+    "palavra": "puxar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "puxas",
+    "tema": "verbos",
+    "dica": "forma do verbo puxar; termina em AS"
+  },
+  {
+    "palavra": "puxam",
+    "tema": "verbos",
+    "dica": "forma do verbo puxar; termina em AM"
+  },
+  {
+    "palavra": "puxou",
+    "tema": "verbos",
+    "dica": "forma do verbo puxar; indica ação no passado"
+  },
+  {
+    "palavra": "ralar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "ralas",
+    "tema": "verbos",
+    "dica": "forma do verbo ralar; termina em AS"
+  },
+  {
+    "palavra": "ralam",
+    "tema": "verbos",
+    "dica": "forma do verbo ralar; termina em AM"
+  },
+  {
+    "palavra": "ralou",
+    "tema": "verbos",
+    "dica": "forma do verbo ralar; indica ação no passado"
+  },
+  {
+    "palavra": "rapar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "rapas",
+    "tema": "verbos",
+    "dica": "forma do verbo rapar; termina em AS"
+  },
+  {
+    "palavra": "rapam",
+    "tema": "verbos",
+    "dica": "forma do verbo rapar; termina em AM"
+  },
+  {
+    "palavra": "rapou",
+    "tema": "verbos",
+    "dica": "forma do verbo rapar; indica ação no passado"
+  },
+  {
+    "palavra": "regar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "regas",
+    "tema": "verbos",
+    "dica": "forma do verbo regar; termina em AS"
+  },
+  {
+    "palavra": "regam",
+    "tema": "verbos",
+    "dica": "forma do verbo regar; termina em AM"
+  },
+  {
+    "palavra": "regou",
+    "tema": "verbos",
+    "dica": "forma do verbo regar; indica ação no passado"
+  },
+  {
+    "palavra": "remar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "remas",
+    "tema": "verbos",
+    "dica": "forma do verbo remar; termina em AS"
+  },
+  {
+    "palavra": "remam",
+    "tema": "verbos",
+    "dica": "forma do verbo remar; termina em AM"
+  },
+  {
+    "palavra": "remou",
+    "tema": "verbos",
+    "dica": "forma do verbo remar; indica ação no passado"
+  },
+  {
+    "palavra": "rezar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "rezas",
+    "tema": "verbos",
+    "dica": "forma do verbo rezar; termina em AS"
+  },
+  {
+    "palavra": "rezam",
+    "tema": "verbos",
+    "dica": "forma do verbo rezar; termina em AM"
+  },
+  {
+    "palavra": "rezou",
+    "tema": "verbos",
+    "dica": "forma do verbo rezar; indica ação no passado"
+  },
+  {
+    "palavra": "rifar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "rifas",
+    "tema": "verbos",
+    "dica": "forma do verbo rifar; termina em AS"
+  },
+  {
+    "palavra": "rifam",
+    "tema": "verbos",
+    "dica": "forma do verbo rifar; termina em AM"
+  },
+  {
+    "palavra": "rifou",
+    "tema": "verbos",
+    "dica": "forma do verbo rifar; indica ação no passado"
+  },
+  {
+    "palavra": "rodar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "rodas",
+    "tema": "verbos",
+    "dica": "forma do verbo rodar; termina em AS"
+  },
+  {
+    "palavra": "rodam",
+    "tema": "verbos",
+    "dica": "forma do verbo rodar; termina em AM"
+  },
+  {
+    "palavra": "rodou",
+    "tema": "verbos",
+    "dica": "forma do verbo rodar; indica ação no passado"
+  },
+  {
+    "palavra": "rolar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "rolas",
+    "tema": "verbos",
+    "dica": "forma do verbo rolar; termina em AS"
+  },
+  {
+    "palavra": "rolam",
+    "tema": "verbos",
+    "dica": "forma do verbo rolar; termina em AM"
+  },
+  {
+    "palavra": "rolou",
+    "tema": "verbos",
+    "dica": "forma do verbo rolar; indica ação no passado"
+  },
+  {
+    "palavra": "sacar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "sacas",
+    "tema": "verbos",
+    "dica": "forma do verbo sacar; termina em AS"
+  },
+  {
+    "palavra": "sacam",
+    "tema": "verbos",
+    "dica": "forma do verbo sacar; termina em AM"
+  },
+  {
+    "palavra": "sacou",
+    "tema": "verbos",
+    "dica": "forma do verbo sacar; indica ação no passado"
+  },
+  {
+    "palavra": "safar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "safas",
+    "tema": "verbos",
+    "dica": "forma do verbo safar; termina em AS"
+  },
+  {
+    "palavra": "safam",
+    "tema": "verbos",
+    "dica": "forma do verbo safar; termina em AM"
+  },
+  {
+    "palavra": "safou",
+    "tema": "verbos",
+    "dica": "forma do verbo safar; indica ação no passado"
+  },
+  {
+    "palavra": "sanar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "sanas",
+    "tema": "verbos",
+    "dica": "forma do verbo sanar; termina em AS"
+  },
+  {
+    "palavra": "sanam",
+    "tema": "verbos",
+    "dica": "forma do verbo sanar; termina em AM"
+  },
+  {
+    "palavra": "sanou",
+    "tema": "verbos",
+    "dica": "forma do verbo sanar; indica ação no passado"
+  },
+  {
+    "palavra": "sarar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "saras",
+    "tema": "verbos",
+    "dica": "forma do verbo sarar; termina em AS"
+  },
+  {
+    "palavra": "saram",
+    "tema": "verbos",
+    "dica": "forma do verbo sarar; termina em AM"
+  },
+  {
+    "palavra": "sarou",
+    "tema": "verbos",
+    "dica": "forma do verbo sarar; indica ação no passado"
+  },
+  {
+    "palavra": "secar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "secas",
+    "tema": "verbos",
+    "dica": "forma do verbo secar; termina em AS"
+  },
+  {
+    "palavra": "secam",
+    "tema": "verbos",
+    "dica": "forma do verbo secar; termina em AM"
+  },
+  {
+    "palavra": "secou",
+    "tema": "verbos",
+    "dica": "forma do verbo secar; indica ação no passado"
+  },
+  {
+    "palavra": "segar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "segas",
+    "tema": "verbos",
+    "dica": "forma do verbo segar; termina em AS"
+  },
+  {
+    "palavra": "segam",
+    "tema": "verbos",
+    "dica": "forma do verbo segar; termina em AM"
+  },
+  {
+    "palavra": "segou",
+    "tema": "verbos",
+    "dica": "forma do verbo segar; indica ação no passado"
+  },
+  {
+    "palavra": "selar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "selas",
+    "tema": "verbos",
+    "dica": "forma do verbo selar; termina em AS"
+  },
+  {
+    "palavra": "selam",
+    "tema": "verbos",
+    "dica": "forma do verbo selar; termina em AM"
+  },
+  {
+    "palavra": "selou",
+    "tema": "verbos",
+    "dica": "forma do verbo selar; indica ação no passado"
+  },
+  {
+    "palavra": "solar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "solas",
+    "tema": "verbos",
+    "dica": "forma do verbo solar; termina em AS"
+  },
+  {
+    "palavra": "solam",
+    "tema": "verbos",
+    "dica": "forma do verbo solar; termina em AM"
+  },
+  {
+    "palavra": "solou",
+    "tema": "verbos",
+    "dica": "forma do verbo solar; indica ação no passado"
+  },
+  {
+    "palavra": "somar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "somas",
+    "tema": "verbos",
+    "dica": "forma do verbo somar; termina em AS"
+  },
+  {
+    "palavra": "somam",
+    "tema": "verbos",
+    "dica": "forma do verbo somar; termina em AM"
+  },
+  {
+    "palavra": "somou",
+    "tema": "verbos",
+    "dica": "forma do verbo somar; indica ação no passado"
+  },
+  {
+    "palavra": "sujar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "sujas",
+    "tema": "verbos",
+    "dica": "forma do verbo sujar; termina em AS"
+  },
+  {
+    "palavra": "sujam",
+    "tema": "verbos",
+    "dica": "forma do verbo sujar; termina em AM"
+  },
+  {
+    "palavra": "sujou",
+    "tema": "verbos",
+    "dica": "forma do verbo sujar; indica ação no passado"
+  },
+  {
+    "palavra": "tapar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "tapas",
+    "tema": "verbos",
+    "dica": "forma do verbo tapar; termina em AS"
+  },
+  {
+    "palavra": "tapam",
+    "tema": "verbos",
+    "dica": "forma do verbo tapar; termina em AM"
+  },
+  {
+    "palavra": "tapou",
+    "tema": "verbos",
+    "dica": "forma do verbo tapar; indica ação no passado"
+  },
+  {
+    "palavra": "taxar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "taxas",
+    "tema": "verbos",
+    "dica": "forma do verbo taxar; termina em AS"
+  },
+  {
+    "palavra": "taxam",
+    "tema": "verbos",
+    "dica": "forma do verbo taxar; termina em AM"
+  },
+  {
+    "palavra": "taxou",
+    "tema": "verbos",
+    "dica": "forma do verbo taxar; indica ação no passado"
+  },
+  {
+    "palavra": "tirar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "tiras",
+    "tema": "verbos",
+    "dica": "forma do verbo tirar; termina em AS"
+  },
+  {
+    "palavra": "tiram",
+    "tema": "verbos",
+    "dica": "forma do verbo tirar; termina em AM"
+  },
+  {
+    "palavra": "tirou",
+    "tema": "verbos",
+    "dica": "forma do verbo tirar; indica ação no passado"
+  },
+  {
+    "palavra": "tocar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "tocas",
+    "tema": "verbos",
+    "dica": "forma do verbo tocar; termina em AS"
+  },
+  {
+    "palavra": "tocam",
+    "tema": "verbos",
+    "dica": "forma do verbo tocar; termina em AM"
+  },
+  {
+    "palavra": "tocou",
+    "tema": "verbos",
+    "dica": "forma do verbo tocar; indica ação no passado"
+  },
+  {
+    "palavra": "tomar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "tomas",
+    "tema": "verbos",
+    "dica": "forma do verbo tomar; termina em AS"
+  },
+  {
+    "palavra": "tomam",
+    "tema": "verbos",
+    "dica": "forma do verbo tomar; termina em AM"
+  },
+  {
+    "palavra": "tomou",
+    "tema": "verbos",
+    "dica": "forma do verbo tomar; indica ação no passado"
+  },
+  {
+    "palavra": "topar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "topas",
+    "tema": "verbos",
+    "dica": "forma do verbo topar; termina em AS"
+  },
+  {
+    "palavra": "topam",
+    "tema": "verbos",
+    "dica": "forma do verbo topar; termina em AM"
+  },
+  {
+    "palavra": "topou",
+    "tema": "verbos",
+    "dica": "forma do verbo topar; indica ação no passado"
+  },
+  {
+    "palavra": "untar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "untas",
+    "tema": "verbos",
+    "dica": "forma do verbo untar; termina em AS"
+  },
+  {
+    "palavra": "untam",
+    "tema": "verbos",
+    "dica": "forma do verbo untar; termina em AM"
+  },
+  {
+    "palavra": "untou",
+    "tema": "verbos",
+    "dica": "forma do verbo untar; indica ação no passado"
+  },
+  {
+    "palavra": "vagar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "vagas",
+    "tema": "verbos",
+    "dica": "forma do verbo vagar; termina em AS"
+  },
+  {
+    "palavra": "vagam",
+    "tema": "verbos",
+    "dica": "forma do verbo vagar; termina em AM"
+  },
+  {
+    "palavra": "vagou",
+    "tema": "verbos",
+    "dica": "forma do verbo vagar; indica ação no passado"
+  },
+  {
+    "palavra": "varar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "varas",
+    "tema": "verbos",
+    "dica": "forma do verbo varar; termina em AS"
+  },
+  {
+    "palavra": "varam",
+    "tema": "verbos",
+    "dica": "forma do verbo varar; termina em AM"
+  },
+  {
+    "palavra": "varou",
+    "tema": "verbos",
+    "dica": "forma do verbo varar; indica ação no passado"
+  },
+  {
+    "palavra": "vazar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "vazas",
+    "tema": "verbos",
+    "dica": "forma do verbo vazar; termina em AS"
+  },
+  {
+    "palavra": "vazam",
+    "tema": "verbos",
+    "dica": "forma do verbo vazar; termina em AM"
+  },
+  {
+    "palavra": "vazou",
+    "tema": "verbos",
+    "dica": "forma do verbo vazar; indica ação no passado"
+  },
+  {
+    "palavra": "vedar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "vedas",
+    "tema": "verbos",
+    "dica": "forma do verbo vedar; termina em AS"
+  },
+  {
+    "palavra": "vedam",
+    "tema": "verbos",
+    "dica": "forma do verbo vedar; termina em AM"
+  },
+  {
+    "palavra": "vedou",
+    "tema": "verbos",
+    "dica": "forma do verbo vedar; indica ação no passado"
+  },
+  {
+    "palavra": "velar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "velas",
+    "tema": "verbos",
+    "dica": "forma do verbo velar; termina em AS"
+  },
+  {
+    "palavra": "velam",
+    "tema": "verbos",
+    "dica": "forma do verbo velar; termina em AM"
+  },
+  {
+    "palavra": "velou",
+    "tema": "verbos",
+    "dica": "forma do verbo velar; indica ação no passado"
+  },
+  {
+    "palavra": "vetar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "vetas",
+    "tema": "verbos",
+    "dica": "forma do verbo vetar; termina em AS"
+  },
+  {
+    "palavra": "vetam",
+    "tema": "verbos",
+    "dica": "forma do verbo vetar; termina em AM"
+  },
+  {
+    "palavra": "vetou",
+    "tema": "verbos",
+    "dica": "forma do verbo vetar; indica ação no passado"
+  },
+  {
+    "palavra": "virar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "viras",
+    "tema": "verbos",
+    "dica": "forma do verbo virar; termina em AS"
+  },
+  {
+    "palavra": "viram",
+    "tema": "verbos",
+    "dica": "forma do verbo virar; termina em AM"
+  },
+  {
+    "palavra": "virou",
+    "tema": "verbos",
+    "dica": "forma do verbo virar; indica ação no passado"
+  },
+  {
+    "palavra": "visar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "visas",
+    "tema": "verbos",
+    "dica": "forma do verbo visar; termina em AS"
+  },
+  {
+    "palavra": "visam",
+    "tema": "verbos",
+    "dica": "forma do verbo visar; termina em AM"
+  },
+  {
+    "palavra": "visou",
+    "tema": "verbos",
+    "dica": "forma do verbo visar; indica ação no passado"
+  },
+  {
+    "palavra": "votar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "votas",
+    "tema": "verbos",
+    "dica": "forma do verbo votar; termina em AS"
+  },
+  {
+    "palavra": "votam",
+    "tema": "verbos",
+    "dica": "forma do verbo votar; termina em AM"
+  },
+  {
+    "palavra": "votou",
+    "tema": "verbos",
+    "dica": "forma do verbo votar; indica ação no passado"
+  },
+  {
+    "palavra": "zelar",
+    "tema": "verbos",
+    "dica": "verbo no infinitivo"
+  },
+  {
+    "palavra": "zelas",
+    "tema": "verbos",
+    "dica": "forma do verbo zelar; termina em AS"
+  }
 ]

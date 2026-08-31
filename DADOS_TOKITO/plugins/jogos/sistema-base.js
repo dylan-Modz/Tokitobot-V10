@@ -35,7 +35,7 @@ const funcoesBase = require('../../sistemas/grupos.js')
 
 const TEMPO_RESET = 5 * 60 * 1000
 
-const PASTA_DADOS = path.join(__dirname, 'dados')
+const PASTA_DADOS = path.join(__dirname, '..', '..', 'database', 'jogos')
 
 const PASTA_PARTIDAS = path.join(__dirname, 'partidas')
 

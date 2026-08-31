@@ -1,173 +1,2002 @@
 [
-  { "palavra": "garfo", "tema": "objeto" },
-  { "palavra": "faca", "tema": "objeto" },
-  { "palavra": "prato", "tema": "objeto" },
-  { "palavra": "copo", "tema": "objeto" },
-  { "palavra": "balde", "tema": "objeto" },
-  { "palavra": "caixa", "tema": "objeto" },
-  { "palavra": "chave", "tema": "objeto" },
-  { "palavra": "porta", "tema": "objeto" },
-  { "palavra": "janela", "tema": "objeto" },
-  { "palavra": "mesa", "tema": "objeto" },
-  { "palavra": "cadeira", "tema": "objeto" },
-  { "palavra": "sofa", "tema": "objeto" },
-  { "palavra": "cama", "tema": "objeto" },
-  { "palavra": "lapis", "tema": "objeto" },
-  { "palavra": "caneta", "tema": "objeto" },
-  { "palavra": "borracha", "tema": "objeto" },
-  { "palavra": "caderno", "tema": "objeto" },
-  { "palavra": "livro", "tema": "objeto" },
-  { "palavra": "escova", "tema": "objeto" },
-  { "palavra": "toalha", "tema": "objeto" },
-
-  { "palavra": "arroz", "tema": "alimento" },
-  { "palavra": "feijao", "tema": "alimento" },
-  { "palavra": "macarrao", "tema": "alimento" },
-  { "palavra": "carne", "tema": "alimento" },
-  { "palavra": "frango", "tema": "alimento" },
-  { "palavra": "peixe", "tema": "alimento" },
-  { "palavra": "pizza", "tema": "alimento" },
-  { "palavra": "lasanha", "tema": "alimento" },
-  { "palavra": "salada", "tema": "alimento" },
-  { "palavra": "bolo", "tema": "alimento" },
-  { "palavra": "torta", "tema": "alimento" },
-  { "palavra": "queijo", "tema": "alimento" },
-  { "palavra": "pao", "tema": "alimento" },
-  { "palavra": "leite", "tema": "alimento" },
-  { "palavra": "ovo", "tema": "alimento" },
-  { "palavra": "banana", "tema": "alimento" },
-  { "palavra": "maca", "tema": "alimento" },
-  { "palavra": "uva", "tema": "alimento" },
-  { "palavra": "morango", "tema": "alimento" },
-  { "palavra": "laranja", "tema": "alimento" },
-
-  { "palavra": "gato", "tema": "animal" },
-  { "palavra": "cachorro", "tema": "animal" },
-  { "palavra": "coelho", "tema": "animal" },
-  { "palavra": "cavalo", "tema": "animal" },
-  { "palavra": "vaca", "tema": "animal" },
-  { "palavra": "tigre", "tema": "animal" },
-  { "palavra": "leao", "tema": "animal" },
-  { "palavra": "zebra", "tema": "animal" },
-  { "palavra": "girafa", "tema": "animal" },
-  { "palavra": "elefante", "tema": "animal" },
-  { "palavra": "cobra", "tema": "animal" },
-  { "palavra": "jacare", "tema": "animal" },
-  { "palavra": "pato", "tema": "animal" },
-  { "palavra": "galinha", "tema": "animal" },
-  { "palavra": "ganso", "tema": "animal" },
-  { "palavra": "papagaio", "tema": "animal" },
-  { "palavra": "tubarao", "tema": "animal" },
-  { "palavra": "baleia", "tema": "animal" },
-  { "palavra": "golfinho", "tema": "animal" },
-  { "palavra": "polvo", "tema": "animal" },
-
-  { "palavra": "verde", "tema": "cor" },
-  { "palavra": "azul", "tema": "cor" },
-  { "palavra": "amarelo", "tema": "cor" },
-  { "palavra": "vermelho", "tema": "cor" },
-  { "palavra": "roxo", "tema": "cor" },
-  { "palavra": "rosa", "tema": "cor" },
-  { "palavra": "preto", "tema": "cor" },
-  { "palavra": "branco", "tema": "cor" },
-  { "palavra": "cinza", "tema": "cor" },
-  { "palavra": "laranja", "tema": "cor" },
-
-  { "palavra": "medico", "tema": "profissao" },
-  { "palavra": "professor", "tema": "profissao" },
-  { "palavra": "cozinheiro", "tema": "profissao" },
-  { "palavra": "motorista", "tema": "profissao" },
-  { "palavra": "policial", "tema": "profissao" },
-  { "palavra": "bombeiro", "tema": "profissao" },
-  { "palavra": "dentista", "tema": "profissao" },
-  { "palavra": "programador", "tema": "profissao" },
-  { "palavra": "mecanico", "tema": "profissao" },
-  { "palavra": "pintor", "tema": "profissao" },
-
-  { "palavra": "floresta", "tema": "natureza" },
-  { "palavra": "montanha", "tema": "natureza" },
-  { "palavra": "rio", "tema": "natureza" },
-  { "palavra": "mar", "tema": "natureza" },
-  { "palavra": "oceano", "tema": "natureza" },
-  { "palavra": "praia", "tema": "natureza" },
-  { "palavra": "deserto", "tema": "natureza" },
-  { "palavra": "chuva", "tema": "natureza" },
-  { "palavra": "vento", "tema": "natureza" },
-  { "palavra": "nuvem", "tema": "natureza" },
-  { "palavra": "sol", "tema": "natureza" },
-  { "palavra": "lua", "tema": "natureza" },
-  { "palavra": "estrela", "tema": "natureza" },
-  { "palavra": "terra", "tema": "natureza" },
-  { "palavra": "pedra", "tema": "natureza" },
-
-  { "palavra": "brasil", "tema": "lugar" },
-  { "palavra": "japao", "tema": "lugar" },
-  { "palavra": "cidade", "tema": "lugar" },
-  { "palavra": "bairro", "tema": "lugar" },
-  { "palavra": "escola", "tema": "lugar" },
-  { "palavra": "hospital", "tema": "lugar" },
-  { "palavra": "mercado", "tema": "lugar" },
-  { "palavra": "shopping", "tema": "lugar" },
-  { "palavra": "aeroporto", "tema": "lugar" },
-  { "palavra": "estadio", "tema": "lugar" },
-
-  { "palavra": "celular", "tema": "tecnologia" },
-  { "palavra": "teclado", "tema": "tecnologia" },
-  { "palavra": "mouse", "tema": "tecnologia" },
-  { "palavra": "monitor", "tema": "tecnologia" },
-  { "palavra": "notebook", "tema": "tecnologia" },
-  { "palavra": "internet", "tema": "tecnologia" },
-  { "palavra": "codigo", "tema": "tecnologia" },
-  { "palavra": "site", "tema": "tecnologia" },
-  { "palavra": "api", "tema": "tecnologia" },
-  { "palavra": "servidor", "tema": "tecnologia" },
-
-  { "palavra": "naruto", "tema": "anime" },
-  { "palavra": "sasuke", "tema": "anime" },
-  { "palavra": "itachi", "tema": "anime" },
-  { "palavra": "gaara", "tema": "anime" },
-  { "palavra": "hinata", "tema": "anime" },
-  { "palavra": "nezuko", "tema": "anime" },
-  { "palavra": "tanjiro", "tema": "anime" },
-  { "palavra": "muzan", "tema": "anime" },
-  { "palavra": "tokito", "tema": "anime" },
-  { "palavra": "gojo", "tema": "anime" },
-  { "palavra": "sukuna", "tema": "anime" },
-  { "palavra": "megumi", "tema": "anime" },
-  { "palavra": "yuji", "tema": "anime" },
-  { "palavra": "zenitsu", "tema": "anime" },
-  { "palavra": "inosuke", "tema": "anime" },
-
-  { "palavra": "pikachu", "tema": "pokemon" },
-  { "palavra": "eevee", "tema": "pokemon" },
-  { "palavra": "mewtwo", "tema": "pokemon" },
-  { "palavra": "lucario", "tema": "pokemon" },
-  { "palavra": "greninja", "tema": "pokemon" },
-  { "palavra": "charizard", "tema": "pokemon" },
-  { "palavra": "bulbasaur", "tema": "pokemon" },
-  { "palavra": "squirtle", "tema": "pokemon" },
-  { "palavra": "snorlax", "tema": "pokemon" },
-  { "palavra": "gengar", "tema": "pokemon" },
-
-  { "palavra": "cabeca", "tema": "corpo" },
-  { "palavra": "olho", "tema": "corpo" },
-  { "palavra": "nariz", "tema": "corpo" },
-  { "palavra": "boca", "tema": "corpo" },
-  { "palavra": "orelha", "tema": "corpo" },
-  { "palavra": "braco", "tema": "corpo" },
-  { "palavra": "perna", "tema": "corpo" },
-  { "palavra": "mao", "tema": "corpo" },
-  { "palavra": "pe", "tema": "corpo" },
-  { "palavra": "coracao", "tema": "corpo" },
-
-  { "palavra": "carro", "tema": "transporte" },
-  { "palavra": "moto", "tema": "transporte" },
-  { "palavra": "onibus", "tema": "transporte" },
-  { "palavra": "aviao", "tema": "transporte" },
-  { "palavra": "navio", "tema": "transporte" },
-  { "palavra": "trem", "tema": "transporte" },
-  { "palavra": "bicicleta", "tema": "transporte" },
-  { "palavra": "patins", "tema": "transporte" },
-  { "palavra": "helicoptero", "tema": "transporte" },
-  { "palavra": "caminhao", "tema": "transporte" }
+  {
+    "palavra": "garfo",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "faca",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "prato",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "copo",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "balde",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "caixa",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "chave",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "porta",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "janela",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "mesa",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "cadeira",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "sofa",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "cama",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "lapis",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "caneta",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "borracha",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "caderno",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "livro",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "escova",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "toalha",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "arroz",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "feijao",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "macarrao",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "carne",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "frango",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "peixe",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "pizza",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "lasanha",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "salada",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "bolo",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "torta",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "queijo",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "leite",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "banana",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "maca",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "morango",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "laranja",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "gato",
+    "tema": "animal"
+  },
+  {
+    "palavra": "cachorro",
+    "tema": "animal"
+  },
+  {
+    "palavra": "coelho",
+    "tema": "animal"
+  },
+  {
+    "palavra": "cavalo",
+    "tema": "animal"
+  },
+  {
+    "palavra": "vaca",
+    "tema": "animal"
+  },
+  {
+    "palavra": "tigre",
+    "tema": "animal"
+  },
+  {
+    "palavra": "leao",
+    "tema": "animal"
+  },
+  {
+    "palavra": "zebra",
+    "tema": "animal"
+  },
+  {
+    "palavra": "girafa",
+    "tema": "animal"
+  },
+  {
+    "palavra": "elefante",
+    "tema": "animal"
+  },
+  {
+    "palavra": "cobra",
+    "tema": "animal"
+  },
+  {
+    "palavra": "jacare",
+    "tema": "animal"
+  },
+  {
+    "palavra": "pato",
+    "tema": "animal"
+  },
+  {
+    "palavra": "galinha",
+    "tema": "animal"
+  },
+  {
+    "palavra": "ganso",
+    "tema": "animal"
+  },
+  {
+    "palavra": "papagaio",
+    "tema": "animal"
+  },
+  {
+    "palavra": "tubarao",
+    "tema": "animal"
+  },
+  {
+    "palavra": "baleia",
+    "tema": "animal"
+  },
+  {
+    "palavra": "golfinho",
+    "tema": "animal"
+  },
+  {
+    "palavra": "polvo",
+    "tema": "animal"
+  },
+  {
+    "palavra": "verde",
+    "tema": "cor"
+  },
+  {
+    "palavra": "azul",
+    "tema": "cor"
+  },
+  {
+    "palavra": "amarelo",
+    "tema": "cor"
+  },
+  {
+    "palavra": "vermelho",
+    "tema": "cor"
+  },
+  {
+    "palavra": "roxo",
+    "tema": "cor"
+  },
+  {
+    "palavra": "rosa",
+    "tema": "cor"
+  },
+  {
+    "palavra": "preto",
+    "tema": "cor"
+  },
+  {
+    "palavra": "branco",
+    "tema": "cor"
+  },
+  {
+    "palavra": "cinza",
+    "tema": "cor"
+  },
+  {
+    "palavra": "medico",
+    "tema": "profissao"
+  },
+  {
+    "palavra": "professor",
+    "tema": "profissao"
+  },
+  {
+    "palavra": "cozinheiro",
+    "tema": "profissao"
+  },
+  {
+    "palavra": "motorista",
+    "tema": "profissao"
+  },
+  {
+    "palavra": "policial",
+    "tema": "profissao"
+  },
+  {
+    "palavra": "bombeiro",
+    "tema": "profissao"
+  },
+  {
+    "palavra": "dentista",
+    "tema": "profissao"
+  },
+  {
+    "palavra": "programador",
+    "tema": "profissao"
+  },
+  {
+    "palavra": "mecanico",
+    "tema": "profissao"
+  },
+  {
+    "palavra": "pintor",
+    "tema": "profissao"
+  },
+  {
+    "palavra": "floresta",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "montanha",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "oceano",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "praia",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "deserto",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "chuva",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "vento",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "nuvem",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "estrela",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "terra",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "pedra",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "brasil",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "japao",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "cidade",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "bairro",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "escola",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "hospital",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "mercado",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "shopping",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "aeroporto",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "estadio",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "celular",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "teclado",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "mouse",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "monitor",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "notebook",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "internet",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "codigo",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "site",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "servidor",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "naruto",
+    "tema": "anime"
+  },
+  {
+    "palavra": "sasuke",
+    "tema": "anime"
+  },
+  {
+    "palavra": "itachi",
+    "tema": "anime"
+  },
+  {
+    "palavra": "gaara",
+    "tema": "anime"
+  },
+  {
+    "palavra": "hinata",
+    "tema": "anime"
+  },
+  {
+    "palavra": "nezuko",
+    "tema": "anime"
+  },
+  {
+    "palavra": "tanjiro",
+    "tema": "anime"
+  },
+  {
+    "palavra": "muzan",
+    "tema": "anime"
+  },
+  {
+    "palavra": "tokito",
+    "tema": "anime"
+  },
+  {
+    "palavra": "gojo",
+    "tema": "anime"
+  },
+  {
+    "palavra": "sukuna",
+    "tema": "anime"
+  },
+  {
+    "palavra": "megumi",
+    "tema": "anime"
+  },
+  {
+    "palavra": "yuji",
+    "tema": "anime"
+  },
+  {
+    "palavra": "zenitsu",
+    "tema": "anime"
+  },
+  {
+    "palavra": "inosuke",
+    "tema": "anime"
+  },
+  {
+    "palavra": "pikachu",
+    "tema": "pokemon"
+  },
+  {
+    "palavra": "eevee",
+    "tema": "pokemon"
+  },
+  {
+    "palavra": "mewtwo",
+    "tema": "pokemon"
+  },
+  {
+    "palavra": "lucario",
+    "tema": "pokemon"
+  },
+  {
+    "palavra": "greninja",
+    "tema": "pokemon"
+  },
+  {
+    "palavra": "charizard",
+    "tema": "pokemon"
+  },
+  {
+    "palavra": "bulbasaur",
+    "tema": "pokemon"
+  },
+  {
+    "palavra": "squirtle",
+    "tema": "pokemon"
+  },
+  {
+    "palavra": "snorlax",
+    "tema": "pokemon"
+  },
+  {
+    "palavra": "gengar",
+    "tema": "pokemon"
+  },
+  {
+    "palavra": "cabeca",
+    "tema": "corpo"
+  },
+  {
+    "palavra": "olho",
+    "tema": "corpo"
+  },
+  {
+    "palavra": "nariz",
+    "tema": "corpo"
+  },
+  {
+    "palavra": "boca",
+    "tema": "corpo"
+  },
+  {
+    "palavra": "orelha",
+    "tema": "corpo"
+  },
+  {
+    "palavra": "braco",
+    "tema": "corpo"
+  },
+  {
+    "palavra": "perna",
+    "tema": "corpo"
+  },
+  {
+    "palavra": "coracao",
+    "tema": "corpo"
+  },
+  {
+    "palavra": "carro",
+    "tema": "transporte"
+  },
+  {
+    "palavra": "moto",
+    "tema": "transporte"
+  },
+  {
+    "palavra": "onibus",
+    "tema": "transporte"
+  },
+  {
+    "palavra": "aviao",
+    "tema": "transporte"
+  },
+  {
+    "palavra": "navio",
+    "tema": "transporte"
+  },
+  {
+    "palavra": "trem",
+    "tema": "transporte"
+  },
+  {
+    "palavra": "bicicleta",
+    "tema": "transporte"
+  },
+  {
+    "palavra": "patins",
+    "tema": "transporte"
+  },
+  {
+    "palavra": "helicoptero",
+    "tema": "transporte"
+  },
+  {
+    "palavra": "caminhao",
+    "tema": "transporte"
+  },
+  {
+    "palavra": "eletrônica",
+    "tema": "gênero musical"
+  },
+  {
+    "palavra": "basquete",
+    "tema": "Esporte"
+  },
+  {
+    "palavra": "repórter",
+    "tema": "profissão"
+  },
+  {
+    "palavra": "esfirra",
+    "tema": "comida"
+  },
+  {
+    "palavra": "covid-19",
+    "tema": "doenças"
+  },
+  {
+    "palavra": "pneumonia",
+    "tema": "doenças"
+  },
+  {
+    "palavra": "vingadores",
+    "tema": "cinema"
+  },
+  {
+    "palavra": "pirulito",
+    "tema": "doces"
+  },
+  {
+    "palavra": "dragão",
+    "tema": "lendas e mitologia"
+  },
+  {
+    "palavra": "flores",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "flamingo",
+    "tema": "animal"
+  },
+  {
+    "palavra": "guilhotina",
+    "tema": "instrumento"
+  },
+  {
+    "palavra": "jabuticaba",
+    "tema": "frutas"
+  },
+  {
+    "palavra": "kratos",
+    "tema": "personagem de um Jogo"
+  },
+  {
+    "palavra": "pinça",
+    "tema": "utensílio"
+  },
+  {
+    "palavra": "tucano",
+    "tema": "animal"
+  },
+  {
+    "palavra": "xícara",
+    "tema": "utensílios"
+  },
+  {
+    "palavra": "viajar",
+    "tema": "entretenimento"
+  },
+  {
+    "palavra": "relógio",
+    "tema": "ultidade publica"
+  },
+  {
+    "palavra": "cozinha",
+    "tema": "compartimento de uma residência"
+  },
+  {
+    "palavra": "chocolate",
+    "tema": "doces"
+  },
+  {
+    "palavra": "limão",
+    "tema": "frutas"
+  },
+  {
+    "palavra": "dormir",
+    "tema": "dia a dia"
+  },
+  {
+    "palavra": "formiga",
+    "tema": "insetos"
+  },
+  {
+    "palavra": "adolescência",
+    "tema": "fases da vida"
+  },
+  {
+    "palavra": "russia",
+    "tema": "pais"
+  },
+  {
+    "palavra": "falcão",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "vulcão",
+    "tema": "montanhas"
+  },
+  {
+    "palavra": "megamente",
+    "tema": "filmes"
+  },
+  {
+    "palavra": "chuchu",
+    "tema": "alimento"
+  },
+  {
+    "palavra": "carinho",
+    "tema": "gestos"
+  },
+  {
+    "palavra": "titanic",
+    "tema": "filmes"
+  },
+  {
+    "palavra": "borboleta",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "amazônia",
+    "tema": "lugares"
+  },
+  {
+    "palavra": "sherek",
+    "tema": "filme"
+  },
+  {
+    "palavra": "banheiro",
+    "tema": "compartimento de uma residência"
+  },
+  {
+    "palavra": "bahia",
+    "tema": "lugares"
+  },
+  {
+    "palavra": "salvador",
+    "tema": "lugares"
+  },
+  {
+    "palavra": "manga",
+    "tema": "frutas"
+  },
+  {
+    "palavra": "sophia",
+    "tema": "nome de pessoa"
+  },
+  {
+    "palavra": "barbie",
+    "tema": "brinquedos"
+  },
+  {
+    "palavra": "redbull",
+    "tema": "bebidas"
+  },
+  {
+    "palavra": "goiabada",
+    "tema": "doces"
+  },
+  {
+    "palavra": "tomada",
+    "tema": "dispositivos"
+  },
+  {
+    "palavra": "amora",
+    "tema": "frutas"
+  },
+  {
+    "palavra": "acerola",
+    "tema": "frutas"
+  },
+  {
+    "palavra": "strogonoff",
+    "tema": "comidas"
+  },
+  {
+    "palavra": "natal",
+    "tema": "lugares"
+  },
+  {
+    "palavra": "vaticano",
+    "tema": "paises"
+  },
+  {
+    "palavra": "primavera",
+    "tema": "estação do ano"
+  },
+  {
+    "palavra": "handebol",
+    "tema": "esporte"
+  },
+  {
+    "palavra": "outono",
+    "tema": "estação do ano"
+  },
+  {
+    "palavra": "twitter",
+    "tema": "rede sociais"
+  },
+  {
+    "palavra": "whisky",
+    "tema": "bebida alcoólica"
+  },
+  {
+    "palavra": "cartas",
+    "tema": "jogo"
+  },
+  {
+    "palavra": "batedeira",
+    "tema": "eletro-domestico"
+  },
+  {
+    "palavra": "lan house",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "pastel",
+    "tema": "alimentos"
+  },
+  {
+    "palavra": "sucrilhos",
+    "tema": "alimentos"
+  },
+  {
+    "palavra": "cemitério",
+    "tema": "lugar"
+  },
+  {
+    "palavra": "boné",
+    "tema": "acessório de uso pessoal"
+  },
+  {
+    "palavra": "nestlé",
+    "tema": "doces"
+  },
+  {
+    "palavra": "xadrez",
+    "tema": "jogo"
+  },
+  {
+    "palavra": "balaústre",
+    "tema": "construção"
+  },
+  {
+    "palavra": "ampulheta",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "orycteropus",
+    "tema": "animal"
+  },
+  {
+    "palavra": "aviador",
+    "tema": "profissão"
+  },
+  {
+    "palavra": "chaveiro",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "guitarra",
+    "tema": "instrumento musical"
+  },
+  {
+    "palavra": "futebol",
+    "tema": "esporte"
+  },
+  {
+    "palavra": "computador",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "óculos",
+    "tema": "acessório"
+  },
+  {
+    "palavra": "aranha",
+    "tema": "animal"
+  },
+  {
+    "palavra": "girassol",
+    "tema": "flores"
+  },
+  {
+    "palavra": "nadador",
+    "tema": "profissão"
+  },
+  {
+    "palavra": "bateria",
+    "tema": "instrumento musical"
+  },
+  {
+    "palavra": "astrônomo",
+    "tema": "profissão"
+  },
+  {
+    "palavra": "óleo",
+    "tema": "produto"
+  },
+  {
+    "palavra": "espada",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "violino",
+    "tema": "instrumento musical"
+  },
+  {
+    "palavra": "abelha",
+    "tema": "animal"
+  },
+  {
+    "palavra": "escritor",
+    "tema": "profissão"
+  },
+  {
+    "palavra": "espelho",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "anjo",
+    "tema": "seres mitológicos"
+  },
+  {
+    "palavra": "piano",
+    "tema": "instrumento musical"
+  },
+  {
+    "palavra": "jardineiro",
+    "tema": "profissão"
+  },
+  {
+    "palavra": "abacaxi",
+    "tema": "frutas"
+  },
+  {
+    "palavra": "engenheiro",
+    "tema": "profissão"
+  },
+  {
+    "palavra": "lago",
+    "tema": "geografia"
+  },
+  {
+    "palavra": "telefone",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "caverna",
+    "tema": "geografia"
+  },
+  {
+    "palavra": "hamburguer",
+    "tema": "comida"
+  },
+  {
+    "palavra": "pintura",
+    "tema": "arte"
+  },
+  {
+    "palavra": "costureira",
+    "tema": "profissão"
+  },
+  {
+    "palavra": "barco",
+    "tema": "meio de transporte"
+  },
+  {
+    "palavra": "melancia",
+    "tema": "frutas"
+  },
+  {
+    "palavra": "piloto",
+    "tema": "profissão"
+  },
+  {
+    "palavra": "fotografia",
+    "tema": "arte"
+  },
+  {
+    "palavra": "fotossíntese",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "álcali",
+    "tema": "Química"
+  },
+  {
+    "palavra": "quantum",
+    "tema": "Física"
+  },
+  {
+    "palavra": "onomatopeia",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "mutação",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "oxidação",
+    "tema": "Química"
+  },
+  {
+    "palavra": "relatividade",
+    "tema": "Física"
+  },
+  {
+    "palavra": "metáfora",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "mitocôndria",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "catalisador",
+    "tema": "Química"
+  },
+  {
+    "palavra": "gravidade",
+    "tema": "Física"
+  },
+  {
+    "palavra": "gramática",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "plasma",
+    "tema": "Física"
+  },
+  {
+    "palavra": "enzima",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "sintaxe",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "átomo",
+    "tema": "Química"
+  },
+  {
+    "palavra": "eletricidade",
+    "tema": "Física"
+  },
+  {
+    "palavra": "metonímia",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "genética",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "isótopo",
+    "tema": "Química"
+  },
+  {
+    "palavra": "símile",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "célula",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "elipse",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "evolução",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "óptica",
+    "tema": "Física"
+  },
+  {
+    "palavra": "paradoxo",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "energia",
+    "tema": "Física"
+  },
+  {
+    "palavra": "pleonasmo",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "genoma",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "solução",
+    "tema": "Química"
+  },
+  {
+    "palavra": "aliteração",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "magnetismo",
+    "tema": "Física"
+  },
+  {
+    "palavra": "ambiguidade",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "genótipo",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "aceleração",
+    "tema": "Física"
+  },
+  {
+    "palavra": "hipérbole",
+    "tema": "Linguagem Portuguesa"
+  },
+  {
+    "palavra": "reagente",
+    "tema": "Química"
+  },
+  {
+    "palavra": "ecossistema",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "quark",
+    "tema": "Física"
+  },
+  {
+    "palavra": "sinestesia",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "acidez",
+    "tema": "Química"
+  },
+  {
+    "palavra": "gravitação",
+    "tema": "Física"
+  },
+  {
+    "palavra": "protagonista",
+    "tema": "Literatura"
+  },
+  {
+    "palavra": "domínio",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "ósmose",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "histerese",
+    "tema": "Física"
+  },
+  {
+    "palavra": "hipótese",
+    "tema": "Ciência"
+  },
+  {
+    "palavra": "fóton",
+    "tema": "Física"
+  },
+  {
+    "palavra": "reagentes",
+    "tema": "Química"
+  },
+  {
+    "palavra": "solubilidade",
+    "tema": "Química"
+  },
+  {
+    "palavra": "fusão nuclear",
+    "tema": "Física"
+  },
+  {
+    "palavra": "paronomásia",
+    "tema": "Linguagem"
+  },
+  {
+    "palavra": "bioquímica",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "cinemática",
+    "tema": "Física"
+  },
+  {
+    "palavra": "dêitico",
+    "tema": "Linguística"
+  },
+  {
+    "palavra": "dualidade",
+    "tema": "Física"
+  },
+  {
+    "palavra": "estilística",
+    "tema": "Linguística"
+  },
+  {
+    "palavra": "correlação",
+    "tema": "Estatística"
+  },
+  {
+    "palavra": "proteína",
+    "tema": "Biologia"
+  },
+  {
+    "palavra": "dialética",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "solipsismo",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "inconsciente",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "ética",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "psicanálise",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "empatia",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "absurdo",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "introspecção",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "sofismo",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "nihilismo",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "cognição",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "utilitarismo",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "terapia",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "racionalismo",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "hedonismo",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "neurociência",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "sofrimento",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "psicoterapia",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "psicologia",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "epifania",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "identidade",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "absolutismo",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "cosmologia",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "resiliência",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "empirismo",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "psicopatia",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "existência",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "inteligência",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "sofisma",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "autoestima",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "psicossocial",
+    "tema": "Psicologia"
+  },
+  {
+    "palavra": "metafísica",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "altruísmo",
+    "tema": "Filosofia"
+  },
+  {
+    "palavra": "inovação",
+    "tema": "Empreendedorismo"
+  },
+  {
+    "palavra": "aprendizado",
+    "tema": "Educação"
+  },
+  {
+    "palavra": "ginástica",
+    "tema": "Educação Física"
+  },
+  {
+    "palavra": "homeostase",
+    "tema": "Fisiologia"
+  },
+  {
+    "palavra": "sonho",
+    "tema": "Subconsciente"
+  },
+  {
+    "palavra": "empreendedor",
+    "tema": "Empreendedorismo"
+  },
+  {
+    "palavra": "corrida",
+    "tema": "Educação Física"
+  },
+  {
+    "palavra": "anatomia",
+    "tema": "Fisiologia"
+  },
+  {
+    "palavra": "consciência",
+    "tema": "Consciência"
+  },
+  {
+    "palavra": "hipnose",
+    "tema": "Subconsciente"
+  },
+  {
+    "palavra": "gerente",
+    "tema": "Cargos"
+  },
+  {
+    "palavra": "curiosidade",
+    "tema": "Curiosidades"
+  },
+  {
+    "palavra": "startups",
+    "tema": "Empreendedorismo"
+  },
+  {
+    "palavra": "educação",
+    "tema": "Educação"
+  },
+  {
+    "palavra": "alongamento",
+    "tema": "Educação Física"
+  },
+  {
+    "palavra": "respiração",
+    "tema": "Fisiologia"
+  },
+  {
+    "palavra": "mente",
+    "tema": "Consciência"
+  },
+  {
+    "palavra": "freud",
+    "tema": "Subconsciente"
+  },
+  {
+    "palavra": "presidente",
+    "tema": "Cargos"
+  },
+  {
+    "palavra": "fatos",
+    "tema": "Curiosidades"
+  },
+  {
+    "palavra": "ensino",
+    "tema": "Educação"
+  },
+  {
+    "palavra": "aquecimento",
+    "tema": "Educação Física"
+  },
+  {
+    "palavra": "percepção",
+    "tema": "Consciência"
+  },
+  {
+    "palavra": "curiosidades",
+    "tema": "Curiosidades"
+  },
+  {
+    "palavra": "aprendizagem",
+    "tema": "Educação"
+  },
+  {
+    "palavra": "musculação",
+    "tema": "Educação Física"
+  },
+  {
+    "palavra": "digestão",
+    "tema": "Fisiologia"
+  },
+  {
+    "palavra": "resistência",
+    "tema": "Educação Física"
+  },
+  {
+    "palavra": "diretor",
+    "tema": "Cargos"
+  },
+  {
+    "palavra": "amigo",
+    "tema": "geral"
+  },
+  {
+    "palavra": "banco",
+    "tema": "cidade"
+  },
+  {
+    "palavra": "blusa",
+    "tema": "roupa"
+  },
+  {
+    "palavra": "bolsa",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "carta",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "casal",
+    "tema": "geral"
+  },
+  {
+    "palavra": "corpo",
+    "tema": "geral"
+  },
+  {
+    "palavra": "corte",
+    "tema": "ação"
+  },
+  {
+    "palavra": "dente",
+    "tema": "corpo"
+  },
+  {
+    "palavra": "doido",
+    "tema": "geral"
+  },
+  {
+    "palavra": "drama",
+    "tema": "mídia"
+  },
+  {
+    "palavra": "elite",
+    "tema": "geral"
+  },
+  {
+    "palavra": "ferro",
+    "tema": "material"
+  },
+  {
+    "palavra": "festa",
+    "tema": "evento"
+  },
+  {
+    "palavra": "folha",
+    "tema": "natureza"
+  },
+  {
+    "palavra": "forca",
+    "tema": "jogo"
+  },
+  {
+    "palavra": "fruta",
+    "tema": "comida"
+  },
+  {
+    "palavra": "fugir",
+    "tema": "ação"
+  },
+  {
+    "palavra": "fundo",
+    "tema": "geral"
+  },
+  {
+    "palavra": "futem",
+    "tema": "zoeira"
+  },
+  {
+    "palavra": "gatos",
+    "tema": "animal"
+  },
+  {
+    "palavra": "gelar",
+    "tema": "ação"
+  },
+  {
+    "palavra": "grito",
+    "tema": "som"
+  },
+  {
+    "palavra": "honra",
+    "tema": "geral"
+  },
+  {
+    "palavra": "hotel",
+    "tema": "cidade"
+  },
+  {
+    "palavra": "humor",
+    "tema": "geral"
+  },
+  {
+    "palavra": "isque",
+    "tema": "zoeira"
+  },
+  {
+    "palavra": "janta",
+    "tema": "comida"
+  },
+  {
+    "palavra": "jogar",
+    "tema": "ação"
+  },
+  {
+    "palavra": "jovem",
+    "tema": "geral"
+  },
+  {
+    "palavra": "laser",
+    "tema": "tecnologia"
+  },
+  {
+    "palavra": "lenda",
+    "tema": "história"
+  },
+  {
+    "palavra": "lugar",
+    "tema": "geral"
+  },
+  {
+    "palavra": "luzes",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "magia",
+    "tema": "fantasia"
+  },
+  {
+    "palavra": "metro",
+    "tema": "transporte"
+  },
+  {
+    "palavra": "morte",
+    "tema": "geral"
+  },
+  {
+    "palavra": "oculo",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "padre",
+    "tema": "profissão"
+  },
+  {
+    "palavra": "pagar",
+    "tema": "ação"
+  },
+  {
+    "palavra": "palco",
+    "tema": "evento"
+  },
+  {
+    "palavra": "plano",
+    "tema": "geral"
+  },
+  {
+    "palavra": "prata",
+    "tema": "material"
+  },
+  {
+    "palavra": "quase",
+    "tema": "geral"
+  },
+  {
+    "palavra": "queda",
+    "tema": "ação"
+  },
+  {
+    "palavra": "radio",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "raiva",
+    "tema": "emoção"
+  },
+  {
+    "palavra": "reino",
+    "tema": "história"
+  },
+  {
+    "palavra": "risco",
+    "tema": "geral"
+  },
+  {
+    "palavra": "roupa",
+    "tema": "vestuário"
+  },
+  {
+    "palavra": "saber",
+    "tema": "geral"
+  },
+  {
+    "palavra": "sagaz",
+    "tema": "geral"
+  },
+  {
+    "palavra": "salto",
+    "tema": "ação"
+  },
+  {
+    "palavra": "sinal",
+    "tema": "cidade"
+  },
+  {
+    "palavra": "sorte",
+    "tema": "geral"
+  },
+  {
+    "palavra": "tarde",
+    "tema": "tempo"
+  },
+  {
+    "palavra": "tecla",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "tinta",
+    "tema": "objeto"
+  },
+  {
+    "palavra": "troca",
+    "tema": "ação"
+  },
+  {
+    "palavra": "viola",
+    "tema": "instrumento"
+  },
+  {
+    "palavra": "viral",
+    "tema": "internet"
+  },
+  {
+    "palavra": "achar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "achas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "acham",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "achou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "adiar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "adias",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "adiam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "adiou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "afiar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "afias",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "afiam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "afiou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "aliar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "alias",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "aliam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "aliou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "andar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "andas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "andam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "andou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "armar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "armas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "armam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "armou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "assar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "assas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "assam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "assou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "babar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "babas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "babam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "babou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "botar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "botas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "botam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "botou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "calar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "calas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "calam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "calou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "casar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "casas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "casam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "casou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cavar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cavas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cavam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cavou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cegar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cegas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cegam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cegou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cevar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cevas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cevam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "cevou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "citar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "citas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "citam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "citou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "colar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "colas",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "colam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "colou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "coçar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "coças",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "coçam",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "coçou",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "criar",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "crias",
+    "tema": "verbos"
+  },
+  {
+    "palavra": "criam",
+    "tema": "verbos"
+  }
 ]

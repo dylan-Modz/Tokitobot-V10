@@ -93,14 +93,59 @@ palavras: usadas
 }
 }
 
+function embaralhar(lista = []) {
+const copia = [...lista]
+
+for (let i = copia.length - 1; i > 0; i--) {
+const j = Math.floor(Math.random() * (i + 1))
+const atual = copia[i]
+
+copia[i] = copia[j]
+copia[j] = atual
+}
+
+return copia
+}
+
 function criarGame(grupo) {
-const palavras = base.getList(base.files.palavrasCaca).map(item => ({
+const todas = base.getList(base.files.palavrasCaca).map(item => ({
 palavra: base.onlyLetters(item.palavra),
 tema: item.tema || mess.jogoTemaPadrao()
-})).filter(item => item.palavra.length >= 4 && item.palavra.length <= 12).slice(0, 8)
+})).filter(item => item.palavra.length >= 4 && item.palavra.length <= 12)
+
+if (!todas.length)
+return null
+
+const porTema = todas.reduce((acc, item) => {
+const tema = String(item.tema || mess.jogoTemaPadrao())
+
+if (!acc[tema])
+acc[tema] = []
+
+acc[tema].push(item)
+return acc
+}, {})
+
+const temasValidos = Object.keys(porTema).filter(tema => porTema[tema].length >= 8)
+
+let palavras
+
+if (temasValidos.length) {
+const tema = temasValidos[Math.floor(Math.random() * temasValidos.length)]
+palavras = embaralhar(porTema[tema]).slice(0, 8)
+}
+else {
+palavras = embaralhar(todas).slice(0, 8)
+}
+
 if (!palavras.length)
 return null
+
 const tabuleiro = criarGrade(palavras, 14)
+
+if (!tabuleiro.palavras.length)
+return null
+
 return {
 grupo,
 tamanho: 14,
