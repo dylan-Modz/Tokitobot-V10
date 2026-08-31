@@ -221,13 +221,13 @@ body {
 body {
     display: flex;
     justify-content: center;
-    padding: 4px;
+    padding: 2px;
 }
 
 .panel {
     width: 100%;
     max-width: 480px;
-    padding: 10px;
+    padding: 7px;
     border-radius: 16px;
     background: linear-gradient(145deg, #161b22, #0d1117);
     border: 1px solid rgba(88, 166, 255, 0.25);
@@ -239,11 +239,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 10px;
+    padding: 5px 8px;
     border-radius: 10px;
     background: rgba(22, 27, 34, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .brand {
@@ -321,9 +321,9 @@ canvas#snakeCanvas {
     display: flex;
     justify-content: space-between;
     gap: 8px;
-    padding: 7px 10px;
+    padding: 5px 8px;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 800;
     color: #8b949e;
     background: rgba(13, 17, 23, 0.65);
@@ -335,7 +335,7 @@ canvas#snakeCanvas {
 
 .overlay {
     position: absolute;
-    inset: 32px 0 0 0;
+    inset: 24px 0 0 0;
     background: rgba(13, 17, 23, 0.78);
     display: flex;
     flex-direction: column;
@@ -346,25 +346,25 @@ canvas#snakeCanvas {
 }
 
 .overlay-title {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 900;
     color: #f0f6fc;
     letter-spacing: 1px;
 }
 
 .overlay-sub {
-    font-size: 10px;
+    font-size: 9px;
     color: #7ee787;
     font-weight: 700;
 }
 
 .controls {
     display: grid;
-    grid-template-columns: repeat(3, 56px);
-    grid-template-rows: repeat(2, 46px);
+    grid-template-columns: repeat(4, 52px);
+    grid-template-rows: 36px;
     justify-content: center;
     gap: 5px;
-    margin-top: 9px;
+    margin-top: 6px;
 }
 
 .ctrl {
@@ -372,7 +372,7 @@ canvas#snakeCanvas {
     border-radius: 10px;
     background: #161b22;
     color: #58a6ff;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 900;
     touch-action: manipulation;
 }
@@ -383,35 +383,35 @@ canvas#snakeCanvas {
 }
 
 .up {
-    grid-column: 2;
+    grid-column: 1;
     grid-row: 1;
 }
 
 .left {
-    grid-column: 1;
-    grid-row: 2;
+    grid-column: 2;
+    grid-row: 1;
 }
 
 .down {
-    grid-column: 2;
-    grid-row: 2;
+    grid-column: 3;
+    grid-row: 1;
 }
 
 .right {
-    grid-column: 3;
-    grid-row: 2;
+    grid-column: 4;
+    grid-row: 1;
 }
 
 .controls-hint {
-    margin-top: 7px;
+    margin-top: 4px;
     text-align: center;
-    font-size: 8px;
+    font-size: 7px;
     color: #8b949e;
     letter-spacing: 0.5px;
 }
 
 .footer {
-    padding-top: 6px;
+    padding-top: 3px;
     text-align: center;
     font-size: 7px;
     letter-spacing: 1px;
@@ -456,7 +456,7 @@ canvas#snakeCanvas {
         <canvas
             id="snakeCanvas"
             width="360"
-            height="360"
+            height="180"
         ></canvas>
 
         <div
@@ -519,9 +519,11 @@ canvas#snakeCanvas {
     const highScoreEl =
         document.getElementById("highScore");
 
-    const GRID = 18;
+    const GRID_X = 18;
+    const GRID_Y = 9;
+
     const CELL =
-        canvas.width / GRID;
+        canvas.width / GRID_X;
 
     let snake = [];
     let food = null;
@@ -562,11 +564,11 @@ canvas#snakeCanvas {
         return {
             x:
                 Math.floor(
-                    Math.random() * GRID
+                    Math.random() * GRID_X
                 ),
             y:
                 Math.floor(
-                    Math.random() * GRID
+                    Math.random() * GRID_Y
                 )
         };
     }
@@ -599,10 +601,10 @@ canvas#snakeCanvas {
 
     function reset() {
         snake = [
-            { x: 8, y: 9 },
-            { x: 7, y: 9 },
-            { x: 6, y: 9 },
-            { x: 5, y: 9 }
+            { x: 8, y: 4 },
+            { x: 7, y: 4 },
+            { x: 6, y: 4 },
+            { x: 5, y: 4 }
         ];
 
         direction = {
@@ -720,17 +722,17 @@ canvas#snakeCanvas {
                 (
                     head.x +
                     direction.x +
-                    GRID
+                    GRID_X
                 ) %
-                GRID,
+                GRID_X,
 
             y:
                 (
                     head.y +
                     direction.y +
-                    GRID
+                    GRID_Y
                 ) %
-                GRID
+                GRID_Y
         };
 
         if (
@@ -790,34 +792,43 @@ canvas#snakeCanvas {
 
         for (
             let i = 0;
-            i <= GRID;
+            i <= GRID_X;
             i++
         ) {
-            const pos =
+            const posX =
                 i * CELL;
 
             ctx.beginPath();
             ctx.moveTo(
-                pos,
+                posX,
                 0
             );
 
             ctx.lineTo(
-                pos,
+                posX,
                 canvas.height
             );
 
             ctx.stroke();
+        }
+
+        for (
+            let i = 0;
+            i <= GRID_Y;
+            i++
+        ) {
+            const posY =
+                i * CELL;
 
             ctx.beginPath();
             ctx.moveTo(
                 0,
-                pos
+                posY
             );
 
             ctx.lineTo(
                 canvas.width,
-                pos
+                posY
             );
 
             ctx.stroke();

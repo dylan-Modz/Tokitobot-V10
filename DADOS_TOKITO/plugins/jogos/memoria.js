@@ -221,13 +221,13 @@ body {
 body {
     display: flex;
     justify-content: center;
-    padding: 4px;
+    padding: 2px;
 }
 
 .panel {
     width: 100%;
     max-width: 480px;
-    padding: 10px;
+    padding: 7px;
     border-radius: 16px;
     background: linear-gradient(145deg, #161b22, #0d1117);
     border: 1px solid rgba(88, 166, 255, 0.25);
@@ -239,11 +239,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 10px;
+    padding: 5px 8px;
     border-radius: 10px;
     background: rgba(22, 27, 34, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .brand {
@@ -263,7 +263,7 @@ body {
 }
 
 .title {
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 800;
     color: #58a6ff;
 }
@@ -288,7 +288,7 @@ body {
     align-items: center;
     justify-content: center;
     background: #1f242c;
-    font-size: 11px;
+    font-size: 9px;
 }
 
 .username {
@@ -304,11 +304,11 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 .stat {
-    padding: 7px 5px;
+    padding: 4px 3px;
     border-radius: 9px;
     background: #12161f;
     border: 1px solid rgba(88,166,255,.14);
@@ -317,7 +317,7 @@ body {
 
 .stat-label {
     display: block;
-    font-size: 7px;
+    font-size: 6px;
     color: #8b949e;
     font-weight: 800;
     letter-spacing: .5px;
@@ -325,8 +325,8 @@ body {
 
 .stat-value {
     display: block;
-    margin-top: 2px;
-    font-size: 12px;
+    margin-top: 1px;
+    font-size: 9px;
     color: #58a6ff;
     font-weight: 900;
 }
@@ -335,23 +335,23 @@ body {
     position: relative;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 7px;
-    padding: 8px;
+    gap: 4px;
+    padding: 5px;
     border-radius: 12px;
     background: #12161f;
     border: 1px solid rgba(88,166,255,.2);
 }
 
 .card {
-    aspect-ratio: 1 / 1;
+    height: 40px;
     border: 1px solid rgba(88,166,255,.22);
-    border-radius: 11px;
+    border-radius: 9px;
     background: linear-gradient(145deg, #1b2230, #11161f);
     color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(20px, 7vw, 34px);
+    font-size: 21px;
     font-weight: 900;
     cursor: pointer;
     transform: translateZ(0);
@@ -389,27 +389,27 @@ body {
 }
 
 .overlay-title {
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 900;
     color: #f0f6fc;
     letter-spacing: 1px;
 }
 
 .overlay-sub {
-    font-size: 10px;
+    font-size: 9px;
     color: #d2a8ff;
     font-weight: 700;
 }
 
 .restart {
     width: 100%;
-    margin-top: 8px;
-    min-height: 42px;
+    margin-top: 5px;
+    min-height: 32px;
     border: 1px solid rgba(88,166,255,.24);
     border-radius: 10px;
     background: #161b22;
     color: #58a6ff;
-    font-size: 11px;
+    font-size: 9px;
     font-weight: 900;
     letter-spacing: .5px;
     touch-action: manipulation;
@@ -421,17 +421,17 @@ body {
 }
 
 .controls-hint {
-    margin-top: 7px;
+    margin-top: 4px;
     text-align: center;
-    font-size: 8px;
+    font-size: 7px;
     color: #8b949e;
     letter-spacing: .4px;
 }
 
 .footer {
-    padding-top: 6px;
+    padding-top: 3px;
     text-align: center;
-    font-size: 7px;
+    font-size: 6px;
     letter-spacing: 1px;
     color: #8b949e;
     opacity: 0.5;
