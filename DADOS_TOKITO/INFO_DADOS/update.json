@@ -1,30 +1,35 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.70",
+  "version": "10.0.71",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": null,
+  "publishedAt": "2026-08-31T13:54:11.656Z",
   "changelog": [
-    "Agente IA agora mantém continuidade de pedidos entre mensagens.",
-    "Pedidos de música continuam automaticamente após o usuário informar o nome da música.",
-    "O agente alterna entre texto e áudio conforme o pedido do usuário.",
-    "Menus e interfaces oficiais são enviados pelas funções reais do bot.",
-    "O agente ganhou suporte a alterações do dono, como prefixo, nome do bot e dono principal.",
-    "Respostas do agente ficaram maiores, organizadas e com identidade visual da Tokito.",
-    "Atualização completa substitui a estrutura antiga preservando sessão, configurações e bancos do usuário.",
-    "O dono recebe aviso privado uma única vez quando uma nova versão é publicada.",
-    "npm start up passa a usar o mesmo atualizador oficial do comando .update start.",
-    "Verificação de módulos ficou silenciosa quando está tudo instalado e só avisa quando faltar dependência."
+    "[Correção] 2 arquivos atualizados",
+    "A versão 10.0.71 já está disponível para atualização.",
+    "Sistema Cacapalavras atualizado",
+    "Sistema Base atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Atualização completa",
-  "title": "Nova estrutura + Agente IA completo",
-  "notice": "A Tokito recebeu uma atualização completa com nova estrutura interna, Agente IA mais inteligente e novo sistema de atualização.",
-  "required": false,
+  "type": "Correção",
+  "title": "2 arquivos atualizados",
+  "notice": "A versão 10.0.71 já está disponível para atualização.",
+  "required": true,
   "minimumVersion": "10.0.0",
-  "files": [],
+  "files": [
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-cacapalavras.js",
+      "sha256": "e2f8b348c8a0253c6b2024b87fd6eb8212c282f0f69abe2fae97123d9f9ae121",
+      "size": 6176
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-base.js",
+      "sha256": "f7604ae3fdf2a01ee1178725e3f92a23239fd2b1ad89d8bebb9ba9ba4191b797",
+      "size": 7972
+    }
+  ],
   "releases": [
     {
       "version": "10.0.3",
@@ -1673,6 +1678,33 @@
       "required": false,
       "publishedAt": null,
       "mode": "clean"
+    },
+    {
+      "version": "10.0.71",
+      "fromVersion": "10.0.70",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "2 arquivos atualizados",
+      "notice": "A versão 10.0.71 já está disponível para atualização.",
+      "changelog": [
+        "Sistema Cacapalavras atualizado",
+        "Sistema Base atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-cacapalavras.js",
+          "sha256": "e2f8b348c8a0253c6b2024b87fd6eb8212c282f0f69abe2fae97123d9f9ae121",
+          "size": 6176
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-base.js",
+          "sha256": "f7604ae3fdf2a01ee1178725e3f92a23239fd2b1ad89d8bebb9ba9ba4191b797",
+          "size": 7972
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-31T13:54:11.656Z"
     }
   ],
   "versao": "10.0.70",
