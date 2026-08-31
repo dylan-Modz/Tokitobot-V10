@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.72",
+  "version": "10.0.73",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-31T14:44:58.797Z",
+  "publishedAt": "2026-08-31T15:49:44.137Z",
   "changelog": [
-    "[Correção] Arquivo principal do bot atualizado",
-    "A versão 10.0.72 já está disponível para atualização.",
-    "Arquivo principal do bot atualizado"
+    "[Correção] Bateria atualizado",
+    "A versão 10.0.73 já está disponível para atualização.",
+    "Bateria atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Arquivo principal do bot atualizado",
-  "notice": "A versão 10.0.72 já está disponível para atualização.",
+  "title": "Bateria atualizado",
+  "notice": "A versão 10.0.73 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "tokito.js",
-      "sha256": "5f16f871568937486524406eddb6ba05c1efc5f175bdc87cbcaba9bc63d506f2",
-      "size": 45287
+      "path": "DADOS_TOKITO/plugins/jogos/bateria.js",
+      "sha256": "5549d6bb5ae1a7809a85f3d25fa63a8382b63fe1236d687aeb631751c4935232",
+      "size": 19352
     }
   ],
   "releases": [
@@ -1754,6 +1754,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-31T14:44:58.797Z"
+    },
+    {
+      "version": "10.0.73",
+      "fromVersion": "10.0.72",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Bateria atualizado",
+      "notice": "A versão 10.0.73 já está disponível para atualização.",
+      "changelog": [
+        "Bateria atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/bateria.js",
+          "sha256": "5549d6bb5ae1a7809a85f3d25fa63a8382b63fe1236d687aeb631751c4935232",
+          "size": 19352
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-31T15:49:44.137Z"
     }
   ],
   "versao": "10.0.70",
