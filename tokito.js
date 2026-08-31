@@ -844,7 +844,7 @@ second: '2-digit'
 })
 let baileysVersion = 'desconhecida'
 try {
-const pkgPath = path.join(__dirname, 'node_modules', '@whiskeysockets', 'baileys', 'package.json')
+const pkgPath = path.join(__dirname, 'node_modules', 'baileys', 'package.json')
 baileysVersion = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))?.version || 'desconhecida'
 }
 catch {
