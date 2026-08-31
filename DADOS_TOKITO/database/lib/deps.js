@@ -12,28 +12,43 @@ const packageFile = path.join(raiz, 'package.json')
 
 const lerPackage = () => {
   try {
-    return JSON.parse(fs.readFileSync(packageFile, 'utf8'))
+    return JSON.parse(
+      fs.readFileSync(packageFile, 'utf8')
+    )
   } catch {
-    return { dependencies: {} }
+    return {
+      dependencies: {}
+    }
   }
 }
 
 const armazenamentoCompartilhadoAndroid = () => {
   const cwd = raiz.replace(/\\/g, '/')
 
-  return cwd === '/sdcard' ||
+  return (
+    cwd === '/sdcard' ||
     cwd.startsWith('/sdcard/') ||
     cwd === '/storage/emulated/0' ||
     cwd.startsWith('/storage/emulated/0/')
+  )
 }
 
 const faltando = () => {
   const pkg = lerPackage()
-  const deps = Object.keys(pkg.dependencies || {})
 
-  return deps.filter(nome => {
+  const deps = Object.keys(
+    pkg.dependencies || {}
+  )
+
+  return deps.filter((nome) => {
     try {
-      require.resolve(nome, { paths: [raiz] })
+      require.resolve(
+        nome,
+        {
+          paths: [raiz]
+        }
+      )
+
       return false
     } catch {
       return true
@@ -43,6 +58,7 @@ const faltando = () => {
 
 const instalar = (opcoes = {}) => {
   const force = opcoes.force === true
+
   const ausentes = faltando()
 
   if (!ausentes.length && !force) {
@@ -54,17 +70,28 @@ const instalar = (opcoes = {}) => {
   }
 
   if (ausentes.length) {
-    console.log(`\x1b[43;30;1m AVISO - TOKITO \x1b[0m - Módulos ausentes: ${ausentes.join(', ')}`)
+    console.log(
+      `\x1b[43;30;1m AVISO - TOKITO \x1b[0m - Módulos ausentes: ${ausentes.join(', ')}`
+    )
   }
 
-  console.log('\x1b[41;97;1m INFO - TOKITO \x1b[0m - Instalando as dependências necessárias...')
+  console.log(
+    '\x1b[41;97;1m INFO - TOKITO \x1b[0m - Instalando as dependências necessárias...'
+  )
 
-  const comando = process.platform === 'win32' ? 'npm.cmd' : 'npm'
+  const comando =
+    process.platform === 'win32'
+      ? 'npm.cmd'
+      : 'npm'
+
   const argumentos = [
     'install',
+    '--allow-git=root',
     '--no-audit',
     '--no-fund',
-    ...(armazenamentoCompartilhadoAndroid() ? ['--no-bin-links'] : [])
+    ...(armazenamentoCompartilhadoAndroid()
+      ? ['--no-bin-links']
+      : [])
   ]
 
   const run = spawnSync(
@@ -72,8 +99,13 @@ const instalar = (opcoes = {}) => {
     argumentos,
     {
       cwd: raiz,
+
       stdio: 'inherit',
-      env: process.env
+
+      env: {
+        ...process.env,
+        npm_config_allow_git: 'root'
+      }
     }
   )
 
@@ -95,8 +127,12 @@ const instalar = (opcoes = {}) => {
 }
 
 if (require.main === module) {
-  const deveInstalar = process.argv.includes('--install')
-  const force = process.argv.includes('--force')
+  const deveInstalar =
+    process.argv.includes('--install')
+
+  const force =
+    process.argv.includes('--force')
+
   const ausentes = faltando()
 
   if (!ausentes.length && !force) {
@@ -104,14 +140,22 @@ if (require.main === module) {
   }
 
   if (!deveInstalar) {
-    console.log(ausentes.join('\n'))
+    console.log(
+      ausentes.join('\n')
+    )
+
     process.exit(10)
   }
 
-  const resultado = instalar({ force })
+  const resultado = instalar({
+    force
+  })
 
   if (!resultado.ok) {
-    console.error(`\x1b[41;97;1m ERRO - TOKITO \x1b[0m - Ainda faltam módulos: ${resultado.missing.join(', ')}`)
+    console.error(
+      `\x1b[41;97;1m ERRO - TOKITO \x1b[0m - Ainda faltam módulos: ${resultado.missing.join(', ')}`
+    )
+
     process.exit(1)
   }
 
