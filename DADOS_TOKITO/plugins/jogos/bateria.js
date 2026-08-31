@@ -8,7 +8,9 @@
  */
 
 const crypto = require('crypto')
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
   nome: 'dino',
 
   comandos: [
@@ -768,4 +770,4 @@ if(sprite.complete && sprite.naturalWidth > 0){
       }
     }
   }
-}
+})
