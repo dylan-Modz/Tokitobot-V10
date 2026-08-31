@@ -1,27 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.83",
+  "version": "10.0.84",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-31T17:25:00.932Z",
+  "publishedAt": "2026-08-31T17:40:15.969Z",
   "changelog": [
-    "[Correção] Bateria atualizado",
-    "A versão 10.0.83 já está disponível para atualização.",
-    "Bateria atualizado"
+    "[Correção] 2 arquivos atualizados",
+    "A versão 10.0.84 já está disponível para atualização.",
+    "Cobrinha atualizado",
+    "IA Memoria atualizada"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Bateria atualizado",
-  "notice": "A versão 10.0.83 já está disponível para atualização.",
+  "title": "2 arquivos atualizados",
+  "notice": "A versão 10.0.84 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/jogos/bateria.js",
-      "sha256": "a1c255cdc20c0c0c279ac3c80cd097eff54f5130ea0164681971a3492235f1e5",
-      "size": 21559
+      "path": "DADOS_TOKITO/plugins/jogos/cobrinha.js",
+      "sha256": "084cdcd4e859bfd77b795755abf15494c4d17db4c3d973b46d579d810c71be07",
+      "size": 23506
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/memoria.js",
+      "sha256": "4ea822665c0971a120f74a08a5690458ddf898b9e2eed3baafdde66f3da72f7e",
+      "size": 19795
     }
   ],
   "releases": [
@@ -1985,6 +1991,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-31T17:25:00.932Z"
+    },
+    {
+      "version": "10.0.84",
+      "fromVersion": "10.0.83",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "2 arquivos atualizados",
+      "notice": "A versão 10.0.84 já está disponível para atualização.",
+      "changelog": [
+        "Cobrinha atualizado",
+        "IA Memoria atualizada"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/cobrinha.js",
+          "sha256": "084cdcd4e859bfd77b795755abf15494c4d17db4c3d973b46d579d810c71be07",
+          "size": 23506
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/memoria.js",
+          "sha256": "4ea822665c0971a120f74a08a5690458ddf898b9e2eed3baafdde66f3da72f7e",
+          "size": 19795
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-31T17:40:15.969Z"
     }
   ],
   "versao": "10.0.70",
