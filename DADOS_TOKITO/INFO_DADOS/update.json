@@ -1,35 +1,35 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.70",
+  "version": "10.0.71",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": null,
+  "publishedAt": "2026-08-31T14:44:05.627Z",
   "changelog": [
-    "Agente IA agora mantém continuidade de pedidos entre mensagens.",
-    "Pedidos de música continuam automaticamente após o usuário informar o nome da música.",
-    "O agente alterna entre texto e áudio conforme o pedido do usuário.",
-    "Menus e interfaces oficiais são enviados pelas funções reais do bot.",
-    "O agente ganhou suporte a alterações do dono, como prefixo, nome do bot e dono principal.",
-    "Respostas do agente ficaram maiores, organizadas e com identidade visual da Tokito.",
-    "Atualização completa substitui a estrutura antiga preservando sessão, configurações e bancos do usuário.",
-    "O dono recebe aviso privado uma única vez quando uma nova versão é publicada.",
-    "npm start up passa a usar o mesmo atualizador oficial do comando .update start.",
-    "Verificação de módulos ficou silenciosa quando está tudo instalado e só avisa quando faltar dependência.",
-    "Adicionada ponte de migração para versões antigas usarem update start com segurança."
+    "[Correção] 4 arquivos atualizados",
+    "A versão 10.0.71 já está disponível para atualização.",
+    "Dados atualizado",
+    "Deps atualizado",
+    "Supervisor atualizado",
+    "Update Migrate atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Atualização completa",
-  "title": "Nova estrutura + Agente IA completo",
-  "notice": "A Tokito recebeu uma atualização completa com nova estrutura interna, Agente IA mais inteligente e novo sistema de atualização.",
-  "required": false,
+  "type": "Correção",
+  "title": "4 arquivos atualizados",
+  "notice": "A versão 10.0.71 já está disponível para atualização.",
+  "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/sistemas/dados.js",
       "sha256": "f29b285c1e8e5c1361e608eee1017b6d4ac807b81c6c19408ca704e09564905b",
       "size": 32376
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/deps.js",
+      "sha256": "6ac7739b3c16f16064491abcc88c36b8509f0ebe4b137bc7613d72ccc65b4c9f",
+      "size": 3046
     },
     {
       "path": "DADOS_TOKITO/database/lib/supervisor.js",
@@ -40,11 +40,6 @@
       "path": "DADOS_TOKITO/database/lib/update-migrate.js",
       "sha256": "b5fd4c3232a63a210ff9494612e0fa8055b32ec0a3ff8b77eb82703062ff683d",
       "size": 1842
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/deps.js",
-      "sha256": "6ac7739b3c16f16064491abcc88c36b8509f0ebe4b137bc7613d72ccc65b4c9f",
-      "size": 3046
     }
   ],
   "releases": [
@@ -1717,6 +1712,45 @@
       "required": false,
       "publishedAt": null,
       "mode": "clean"
+    },
+    {
+      "version": "10.0.71",
+      "fromVersion": "10.0.70",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "4 arquivos atualizados",
+      "notice": "A versão 10.0.71 já está disponível para atualização.",
+      "changelog": [
+        "Dados atualizado",
+        "Deps atualizado",
+        "Supervisor atualizado",
+        "Update Migrate atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "f29b285c1e8e5c1361e608eee1017b6d4ac807b81c6c19408ca704e09564905b",
+          "size": 32376
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/deps.js",
+          "sha256": "6ac7739b3c16f16064491abcc88c36b8509f0ebe4b137bc7613d72ccc65b4c9f",
+          "size": 3046
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/supervisor.js",
+          "sha256": "cdcc31d1f2c04a3ca11a2c19d2f5cc502965cd6040a3eedfdf57cf67c5c940aa",
+          "size": 6173
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/update-migrate.js",
+          "sha256": "b5fd4c3232a63a210ff9494612e0fa8055b32ec0a3ff8b77eb82703062ff683d",
+          "size": 1842
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-31T14:44:05.626Z"
     }
   ],
   "versao": "10.0.70",
