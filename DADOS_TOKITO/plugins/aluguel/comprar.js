@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const aluguel = require('../../sistemas/aluguel')
+const aluguel = require('../../sistemas/aluguel/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'alugarbot',
 comandos: ['alugarbot', 'aluguelbot', 'lojinha', 'loja'],
 categoria: 'aluguel',
@@ -91,9 +93,11 @@ return ctx.reply(
 ctx.mess.aluguelAguardandoGrupo()
 )
 
-return ctx.reply(
-'*⏳ | ᴊᴀ ᴇxɪsᴛᴇ ᴜᴍ ᴘᴀɢᴀᴍᴇɴᴛᴏ ᴀᴘʀᴏᴠᴀᴅᴏ ᴀɢᴜᴀʀᴅᴀɴᴅᴏ ᴀ ᴇɴᴛʀᴀᴅᴀ ᴅᴏ ʙᴏᴛ ɴᴏ ɢʀᴜᴘᴏ.*'
-)
+return ctx.reply(ctx.mess.padraoAviso({
+emoji: '⏳',
+titulo: 'PAGAMENTO APROVADO',
+descricao: 'Já existe um pagamento aprovado aguardando a entrada do bot no grupo.'
+}))
 }
 
 /*
@@ -128,9 +132,7 @@ return ctx.reply(
 ctx.mess.aluguelLinkInvalido()
 )
 
-return ctx.reply(
-'*❌ | ɴᴀᴏ ғᴏɪ ᴘᴏssɪᴠᴇʟ ɪᴅᴇɴᴛɪғɪᴄᴀʀ ᴇssᴇ ɢʀᴜᴘᴏ. ᴠᴇʀɪғɪǫᴜᴇ sᴇ ᴏ ʟɪɴᴋ ᴇsᴛᴀ ᴠᴀʟɪᴅᴏ.*'
-)
+return ctx.reply(ctx.mess.aluguelLinkInvalido())
 }
 
 /*
@@ -146,9 +148,7 @@ return ctx.reply(
 ctx.mess.aluguelGrupoNaoIdentificado()
 )
 
-return ctx.reply(
-'*❌ | ɴᴀᴏ ғᴏɪ ᴘᴏssɪᴠᴇʟ ɪᴅᴇɴᴛɪғɪᴄᴀʀ ᴏ ɪᴅ ᴅᴏ ɢʀᴜᴘᴏ.*'
-)
+return ctx.reply(ctx.mess.aluguelGrupoNaoIdentificado())
 }
 
 /*
@@ -185,3 +185,4 @@ ctx.prefix
 )
 }
 }
+)

@@ -46,7 +46,9 @@ lista.push(`${seg}s`)
 return lista.join(' ')
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 comandos: ['afk', 'off', 'ausente', 'on', 'ativo', 'voltei'],
 async executar(ctx) {
 const { command, q, sender, isGroup, dataGp, setGp, reply, mess, prefix } = ctx
@@ -114,3 +116,4 @@ contextInfo: canalInfo([sender])
 })
 }
 }
+)

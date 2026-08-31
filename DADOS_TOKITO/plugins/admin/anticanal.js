@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'anticanal',
 comandos: ['anticanal'],
 categoria: 'admin',
@@ -56,3 +58,4 @@ reply: ctx.reply
 })
 }
 }
+)

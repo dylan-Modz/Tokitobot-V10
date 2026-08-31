@@ -32,7 +32,7 @@
 * Arquivo central de módulos, funções e mensagens da base.
 * Author: dylan Modz.
 */
-const baileys = require('@whiskeysockets/baileys')
+const baileys = require('baileys')
 const { Boom } = require('@hapi/boom')
 const axios = require('axios')
 const fs = require('fs')
@@ -53,9 +53,9 @@ const { performance } = require('perf_hooks')
 const { randomBytes } = require('crypto')
 const { v4: uuidv4 } = require('uuid')
 const { linguagem, mess } = require('./index.js')
-const { menu } = require('./menus.js')
-const { sendVideoAsSticker2, sendImageAsSticker2 } = require('../../funcoes/js/rename2.js')
-const { sendImageAsSticker, sendVideoAsSticker } = require('../../funcoes/js/rename.js')
+const { menu } = require('../../mensagens/menus.js')
+const { sendVideoAsSticker2, sendImageAsSticker2 } = require('../../plugins/figurinhas/sticker2.js')
+const { sendImageAsSticker, sendVideoAsSticker } = require('../../plugins/figurinhas/sticker.js')
 
 let cfonts
 

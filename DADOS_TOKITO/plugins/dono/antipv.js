@@ -34,7 +34,9 @@ const emoji = '🔒'
 const titulo = '𝙰𝙽𝚃𝙸-𝙿𝚅'
 const descricao = 'ɪɢɴᴏʀᴀ ᴛᴏᴅᴀs ᴀs ᴍᴇɴsᴀɢᴇɴs ᴘʀɪᴠᴀᴅᴀs ᴇɴǫᴜᴀɴᴛᴏ ᴇsᴛɪᴠᴇʀ ᴀᴛɪᴠᴏ.'
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'antipv',
 
 comandos: [
@@ -79,3 +81,4 @@ config.antipv
 )
 }
 }
+)

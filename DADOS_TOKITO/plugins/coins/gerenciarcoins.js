@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'addcoins',
 comandos: ['addcoins', 'removecoins', 'tirarcoins'],
 categoria: 'dono',
@@ -56,3 +58,4 @@ r.salvar(ctx)
 return ctx.reply(ctx.mess.coinsGerenciado(alvo, u.coins, rem), [alvo])
 }
 }
+)

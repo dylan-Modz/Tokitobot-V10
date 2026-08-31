@@ -31,7 +31,9 @@
 const fs = require('fs')
 const path = require('path')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'tokenmp',
 comandos: ['tokenmp', 'settokenmp'],
 categoria: 'dono',
@@ -60,3 +62,4 @@ ctx.setting.MP_TOKEN = token
 return ctx.reply(ctx.mess.tokenMpSalvo())
 }
 }
+)

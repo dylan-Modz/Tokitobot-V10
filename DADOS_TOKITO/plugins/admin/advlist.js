@@ -30,7 +30,9 @@
 
 const adv = require('../../sistemas/advertencias')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'advlist',
 comandos: ['advlist', 'listaadv', 'advertencias'],
 categoria: 'admin',
@@ -50,3 +52,4 @@ const lista = adv.listar(dataGp)
 return reply(mess.advLista(lista), lista.map(x => x.jid))
 }
 }
+)

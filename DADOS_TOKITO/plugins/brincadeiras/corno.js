@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const criar = require('./_base')
+const criar = require('./base')
 
-module.exports = criar({
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand(criar({
 comandos: ['corno'],
 emoji: '🐂',
 titulo: '𝙲𝙾𝚁𝙽𝙾',
@@ -38,3 +40,4 @@ nome: 'ᴄᴏʀɴᴏ',
 texto: 'ᴄᴏʀɴᴏ',
 img: 'imgcorno'
 })
+)

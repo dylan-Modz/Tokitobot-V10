@@ -30,7 +30,9 @@
 
 const links = require('../../INFO_DADOS/LOGOS/links_img.json')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'cu',
 comandos: ['cu', 'bozo', 'profundidade', 'medircu', 'cm'],
 categoria: 'brincadeiras',
@@ -62,3 +64,4 @@ contextInfo: canalInfo([alvo])
 }, { quoted: selo })
 }
 }
+)

@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'casal',
 
 comandos: [
@@ -90,9 +92,11 @@ x
 ]
 
 if (membros.length < 2)
-return reply(
-'- ❌ Preciso de pelo menos 2 membros no grupo.'
-)
+return reply(mess.padraoAviso({
+emoji: '💘',
+titulo: 'MEMBROS INSUFICIENTES',
+descricao: 'Preciso de pelo menos 2 membros no grupo.'
+}))
 
 await reagir(
 from,
@@ -283,3 +287,4 @@ API_URL
 }
 }
 }
+)

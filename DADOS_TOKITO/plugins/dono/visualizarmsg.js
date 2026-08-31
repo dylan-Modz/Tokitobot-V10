@@ -34,7 +34,9 @@ const emoji = '👁️'
 const titulo = '𝚅𝙸𝚂𝚄𝙰𝙻𝙸𝚉𝙰𝚁 𝙼𝙴𝙽𝚂𝙰𝙶𝙴𝙽𝚂'
 const descricao = 'ᴍᴀʀᴄᴀ ᴀs ᴍᴇɴsᴀɢᴇɴs ᴄᴏᴍᴏ ʟɪᴅᴀs ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀᴍᴇɴᴛᴇ.'
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'visualizarmsg',
 
 comandos: [
@@ -79,3 +81,4 @@ config.visualizarmsg
 )
 }
 }
+)

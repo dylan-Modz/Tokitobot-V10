@@ -32,7 +32,9 @@
  * Dev: Dylan Modz
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: "admins",
 
 comandos: [
@@ -77,9 +79,11 @@ participante?.admin === "superadmin"
 )
 
 if (!administradores.length) {
-return reply(
-"*❌ | Não encontrei administradores neste grupo.*"
-)
+return reply(mess.padraoAviso({
+emoji: '👑',
+titulo: 'ADMINISTRADORES',
+descricao: 'Não encontrei administradores neste grupo.'
+}))
 }
 
 const mencoes = []
@@ -155,10 +159,12 @@ console.log(
 e?.message || e
 )
 
-return reply(
-"*❌ | Não consegui puxar os administradores do grupo.*"
+return reply(mess.padraoErro({
+titulo: 'ADMINISTRADORES',
+descricao: 'Não consegui obter os administradores deste grupo.'
+}))
+}
+}
+}
+}
 )
-}
-}
-}
-}

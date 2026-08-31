@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'rankpokemon',
 comandos: ['rankpokemon', 'rankpoke'],
 categoria: 'pokemon',
@@ -51,3 +53,4 @@ pokemon: u.pokemon
 return ctx.reply(ctx.mess.pokemonRank(l), l.map(x => x.jid))
 }
 }
+)

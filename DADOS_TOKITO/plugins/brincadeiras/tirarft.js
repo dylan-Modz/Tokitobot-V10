@@ -28,11 +28,14 @@
  * ============================================================
  */
 
-const criar = require('./_acao')
+const criar = require('./acao')
 
-module.exports = criar({
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand(criar({
 comandos: ['tirarft', 'tirarfoto', 'foto', 'fotografar', 'clique', 'selfie'],
 img: 'tirarft',
 emoji: '📸',
 caption: ({ numero, autor }) => `@${autor} tirou uma foto de @${numero}.`
 })
+)

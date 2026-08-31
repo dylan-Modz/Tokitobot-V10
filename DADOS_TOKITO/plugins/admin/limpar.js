@@ -41,7 +41,9 @@ setTimeout(resolve, ms)
 const clear = `🗑️${"\n".repeat(150)}🗑️
 ❲❗❳ *Lɪᴍᴘᴇᴢᴀ ᴅᴇ Cʜᴀᴛ* ✅`
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: "limpar",
 
 comandos: [
@@ -82,7 +84,11 @@ from,
 )
 
 await reply(
-"*ʟɪᴍᴘᴇᴢᴀ ᴅᴇ ᴄʜᴀᴛ 💁‍♂️*"
+mess.padraoAviso({
+emoji: '🗑️',
+titulo: 'LIMPEZA DE CHAT',
+descricao: 'Iniciando a limpeza visual do chat.'
+})
 )
 
 await sleep(
@@ -104,8 +110,13 @@ await sleep(
 }
 
 await reply(
-"*ᴘʀᴏɴᴛᴏ sᴇɴʜᴏʀ, ᴀᴄᴀʙᴇɪ ᴅᴇ ʟɪᴍᴘᴀʀ ᴏ ᴄʜᴀᴛ 🙇‍♂️*"
+mess.padraoSucesso({
+emoji: '🗑️',
+titulo: 'LIMPEZA CONCLUÍDA',
+descricao: 'A limpeza visual do chat foi concluída.'
+})
 )
 }
 }
 }
+)

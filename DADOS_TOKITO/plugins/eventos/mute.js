@@ -29,6 +29,7 @@
  */
 
 module.exports = {
+prioridade: 100,
 nome: 'evento-mute',
 categoria: 'eventos',
 fase: 'pre',

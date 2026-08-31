@@ -28,11 +28,14 @@
  * ============================================================
  */
 
-const criar = require('./_acao')
+const criar = require('./acao')
 
-module.exports = criar({
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand(criar({
 comandos: ['pgpeito', 'peito', 'peitos', 'pegapeito', 'apertarpeito'],
 img: 'pgpeito',
 emoji: '🙈',
 caption: ({ numero, autor }) => `@${autor} brincou com @${numero}.`
 })
+)

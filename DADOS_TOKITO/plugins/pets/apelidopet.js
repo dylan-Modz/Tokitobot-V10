@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'apelidopet',
 comandos: ['apelidopet', 'nomepet'],
 categoria: 'pets',
@@ -54,3 +56,4 @@ r.salvar(ctx)
 return ctx.reply(ctx.mess.petApelido(nome))
 }
 }
+)

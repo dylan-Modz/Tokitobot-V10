@@ -333,7 +333,9 @@ ctx.sender
 }
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'namorar',
 
 comandos: [
@@ -814,3 +816,4 @@ return true
 return false
 }
 }
+)

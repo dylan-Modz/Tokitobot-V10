@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const criar = require('./_base')
+const criar = require('./base')
 
 module.exports = criar({
 'comandos': ['macaco'],

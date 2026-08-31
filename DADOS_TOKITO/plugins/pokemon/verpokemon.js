@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'verpokemon',
 comandos: ['verpokemon', 'verpoke', 'pokemon', 'meupokemon'],
 categoria: 'pokemon',
@@ -61,3 +63,4 @@ catch {
 return ctx.reply(texto, [ctx.sender])
 }
 }
+)

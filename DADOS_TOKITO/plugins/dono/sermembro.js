@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'sermembro',
 comandos: ['sermembro'],
 categoria: 'dono',
@@ -49,3 +51,4 @@ await ctx.tokito.groupParticipantsUpdate(ctx.from, [ctx.sender], 'demote')
 return ctx.reply(ctx.mess.serMembroOk(ctx.sender), [ctx.sender])
 }
 }
+)

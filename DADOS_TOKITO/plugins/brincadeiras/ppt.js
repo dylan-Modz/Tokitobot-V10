@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'ppt',
 comandos: ['ppt'],
 categoria: 'brincadeiras',
@@ -41,10 +43,24 @@ async executar(ctx) {
 const { q, reply, prefix } = ctx
 const u = String(q || '').trim().toLowerCase()
 if (!['pedra', 'papel', 'tesoura'].includes(u))
-return reply(`- ✊ ${prefix}ppt pedra | papel | tesoura`)
+return reply(ctx.mess.padraoUso({
+emoji: '✊',
+titulo: 'PEDRA PAPEL TESOURA',
+uso: `${prefix}ppt pedra | papel | tesoura`,
+descricao: 'Escolha pedra, papel ou tesoura.'
+}))
 const op = ['pedra', 'papel', 'tesoura'][Math.floor(Math.random() * 3)]
 const ganha = (u === 'pedra' && op === 'tesoura') || (u === 'papel' && op === 'pedra') || (u === 'tesoura' && op === 'papel')
 const r = u === op ? 'Empate 🤝' : ganha ? 'Você venceu 🎉' : 'O bot venceu 🤖'
-return reply(`- ✊ Você: *${u}*\n- 🤖 Bot: *${op}*\n\n> ${r}`)
+return reply(ctx.mess.padraoInfo({
+emoji: '✊',
+titulo: 'PEDRA PAPEL TESOURA',
+linhas: [
+{ rotulo: '👤 𝚅𝙾𝙲𝙴̂', valor: u },
+{ rotulo: '🤖 𝙱𝙾𝚃', valor: op },
+{ rotulo: '🏆 𝚁𝙴𝚂𝚄𝙻𝚃𝙰𝙳𝙾', valor: r }
+]
+}))
 }
 }
+)

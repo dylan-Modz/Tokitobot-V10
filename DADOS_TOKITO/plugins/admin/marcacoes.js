@@ -66,7 +66,9 @@ break
 return msg
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'marcar',
 comandos: ['marcar', 'totag', 'cita', 'hidetag', 'citar'],
 categoria: 'admin',
@@ -141,9 +143,13 @@ contextInfo: contexto
 }, { quoted: ctx.selo })
 }
 
-return ctx.reply(`*ᴜsᴇ ᴏ ᴄᴏᴍᴀɴᴅᴏ ᴅᴇ ᴅᴜᴀs ᴍᴀɴᴇɪʀᴀs 🙇‍♂️*
-
-> *1.* ᴍᴀʀǫᴜᴇ ᴀ ᴍᴇɴsᴀɢᴇᴍ (ғᴏᴛᴏ, ᴠɪᴅᴇᴏ, ᴀᴜᴅɪᴏ, ᴇɴǫᴜᴇᴛᴇ, ᴇᴛᴄ)
-> *2.* ᴏᴜ ᴅɪɢɪᴛᴇ *${ctx.prefix + ctx.command}* sᴇɢᴜɪᴅᴏ ᴅᴀ sᴜᴀ ᴍᴇɴsᴀɢᴇᴍ`)
+return ctx.reply(ctx.mess.padraoUso({
+emoji: '📣',
+titulo: 'MARCAÇÕES',
+uso: `${ctx.prefix}${ctx.command} sua mensagem`,
+descricao: 'Responda uma mídia/mensagem para reenviá-la marcando todos ou escreva o texto depois do comando.',
+exemplos: [`${ctx.prefix}${ctx.command} reunião às 20h`]
+}))
 }
 }
+)

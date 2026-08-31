@@ -15,9 +15,11 @@
  * ============================================================
  */
 
-const x4 = require('./_x4')
+const x4 = require('./x4')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'time',
 comandos: ['time', 'lista'],
 categoria: 'freefire',
@@ -33,11 +35,10 @@ if (!ctx.isGroup)
 return ctx.reply(ctx.mess.sogrupo())
 
 if (!x4.ativo(ctx))
-return ctx.reply(
-`- ⚠️ \`𝙼𝙾𝙳𝙾 𝚇𝟺\`
-
-> *ᴀᴛɪᴠᴇ ᴘʀɪᴍᴇɪʀᴏ ᴄᴏᴍ ${ctx.prefix}modox4 1.*`
-)
+return ctx.reply(ctx.mess.padraoAviso({
+titulo: 'MODO X4',
+descricao: `Ative primeiro com ${ctx.prefix}modox4 1.`
+}))
 
 const nomes = String(ctx.q || '')
 .split(',')
@@ -45,11 +46,10 @@ const nomes = String(ctx.q || '')
 .filter(Boolean)
 
 if (nomes.length !== 6)
-return ctx.reply(
-`- ❌ \`𝚃𝙸𝙼𝙴 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\`
-
-> *ɪɴғᴏʀᴍᴇ ᴇxᴀᴛᴀᴍᴇɴᴛᴇ 6 ɴᴏᴍᴇs sᴇᴘᴀʀᴀᴅᴏs ᴘᴏʀ ᴠɪ́ʀɢᴜʟᴀ.*`
-)
+return ctx.reply(ctx.mess.padraoErro({
+titulo: 'TIME INVÁLIDO',
+descricao: 'Informe exatamente 6 nomes separados por vírgula.'
+}))
 
 const a = nomes.slice(0, 3)
 const b = nomes.slice(3, 6)
@@ -81,3 +81,4 @@ const texto = `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ─�
 return ctx.reply(texto)
 }
 }
+)

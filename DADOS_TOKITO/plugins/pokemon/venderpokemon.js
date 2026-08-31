@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'venderpokemon',
 comandos: ['venderpokemon', 'venderpoke'],
 categoria: 'pokemon',
@@ -55,3 +57,4 @@ r.salvar(ctx)
 return ctx.reply(ctx.mess.pokemonVendido(valor, e.coins))
 }
 }
+)

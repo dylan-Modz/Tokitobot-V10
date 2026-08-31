@@ -49,7 +49,9 @@ entrada,
 saida
 ], { maxBuffer: 20 * 1024 * 1024 }, (e, _o, err) => e ? reject(new Error(String(err || e.message))) : resolve()))
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'audio-menu',
 comandos: ['audio-menu', 'fundoaudio'],
 categoria: 'dono',
@@ -78,7 +80,12 @@ g.audioMenu
 }
 const a = modulos.audioAtual(ctx)
 if (!a)
-return ctx.reply('❌ Envie ou responda a um áudio junto do comando.')
+return ctx.reply(ctx.mess.padraoUso({
+emoji: '🎧',
+titulo: 'ÁUDIO DO MENU',
+uso: `${ctx.prefix}${ctx.command}`,
+descricao: 'Envie ou responda a um áudio junto do comando.'
+}))
 const tmp = path.join(os.tmpdir(), `tokito-menu-${Date.now()}-${Math.random().toString(36).slice(2)}`)
 const entrada = `${tmp}.bin`
 const saida = `${tmp}.mp3`
@@ -95,10 +102,18 @@ const arq = path.join(dir, 'menu.mp3')
 fs.copyFileSync(saida, arq)
 g.audioMenuArquivo = path.relative(ctx.__dirname, arq).replace(/\\/g, '/')
 modulos.salvarGlobal(g)
-return ctx.reply('✅ Áudio de fundo dos menus atualizado em MP3.')
+return ctx.reply(ctx.mess.padraoSucesso({
+emoji: '🎧',
+titulo: 'ÁUDIO DO MENU',
+descricao: 'O áudio de fundo dos menus foi atualizado em MP3.'
+}))
 }
 catch (e) {
-return ctx.reply(`❌ Erro ao salvar áudio: ${e.message}`)
+return ctx.reply(ctx.mess.padraoErro({
+titulo: 'ÁUDIO DO MENU',
+descricao: 'Não foi possível salvar o áudio.',
+detalhe: e.message
+}))
 }
 finally {
 for (const f of [entrada, saida])
@@ -111,3 +126,4 @@ catch {
 }
 }
 }
+)

@@ -1,0 +1,223 @@
+/*
+ * ============================================================
+ *                     TOKITO BOT V10
+ * ============================================================
+ *
+ * Projeto disponibilizado gratuitamente para a comunidade.
+ *
+ * Você pode modificar, personalizar e utilizar este bot
+ * conforme sua preferência, inclusive mantendo o nome Tokito.
+ *
+ * REGRAS:
+ * • É proibida a venda ou revenda deste código-fonte.
+ * • Não comercialize versões modificadas deste projeto.
+ * • Não reivindique a autoria original do projeto.
+ * • Respeite os créditos e o trabalho dos desenvolvedores.
+ *
+ * Author: Dylan Modz
+ * API oficial: https://tokito-apis.com.br
+ * ============================================================
+ */
+
+const axios = require('axios')
+
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
+  nome: "playvideo",
+  comandos: [
+    "playvideo",
+    "play-video",
+    "ytvideo",
+    "ytmp4",
+    "play_video"
+  ],
+  categoria: "downloads",
+
+  info: {
+    descricao: "Executa o comando playvideo.",
+    uso: "playvideo",
+    categoria: "downloads"
+  },
+
+  async executar(ctx) {
+    with (ctx) {
+      try {
+        if (!q || !q.trim()) {
+          return reply(mess.downloadUso({ tipo: 'VÍDEO', prefix, command, exemplo: 'vídeo ou link' }))
+        }
+
+        await reagir(from, '🎥')
+
+        const pesquisa = q.trim()
+
+        const contextInfo = {
+          ...newsletter,
+          mentionedJid: [sender]
+        }
+
+        const buscaUrl =
+          `${API_URL}/api/youtube-search` +
+          `?query=${encodeURIComponent(pesquisa)}` +
+          `&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
+
+        const { data } = await axios.get(
+          buscaUrl,
+          {
+            timeout: 20000,
+            validateStatus: () => true
+          }
+        )
+
+        if (
+          !data?.status ||
+          !Array.isArray(data?.resultado) ||
+          !data.resultado.length
+        ) {
+          await reagir(from, '❌')
+
+          return reply(mess.downloadNaoEncontrado('VÍDEO'))
+        }
+
+        const res =
+          data.resultado.find(
+            item =>
+              item?.type === 'video' &&
+              item?.videoId &&
+              item?.url
+          ) ||
+          data.resultado.find(
+            item => item?.type === 'video' && item?.url
+          ) ||
+          data.resultado[0]
+
+        if (!res?.url) {
+          await reagir(from, '❌')
+
+          return reply(mess.downloadSemMidia('LINK DO VÍDEO'))
+        }
+
+        const titulo = String(
+          res?.title ||
+          'YouTube'
+        )
+
+        const canal = String(
+          res?.author?.name ||
+          'Não informado'
+        )
+
+        const duracao = String(
+          res?.timestamp ||
+          res?.duration?.timestamp ||
+          res?.duration ||
+          '0:00'
+        )
+
+        const views = String(
+          res?.views ||
+          '0'
+        )
+          .replace(/\s*views?/gi, '')
+          .trim()
+
+        const thumbnail =
+          res?.image ||
+          res?.thumbnail ||
+          (
+            res?.videoId
+              ? `https://i.ytimg.com/vi/${res.videoId}/hq720.jpg`
+              : null
+          )
+
+        const url = String(
+          res?.url ||
+          `https://www.youtube.com/watch?v=${res?.videoId}`
+        )
+
+        const numeroUsuario =
+          sender.split('@')[0]
+
+        const videoApi =
+          `${API_URL}/api/youtube-video` +
+          `?q=${encodeURIComponent(url)}` +
+          `&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
+
+        const texto = `⏤͟͟͞͞𝐕𝐢́𝐝𝐞𝐨 𝐞𝐧𝐜𝐨𝐧𝐭𝐫𝐚𝐝𝐨! 𖤐⃝🎥
+•
+> ╭ ℹ️ 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂̧𝐎̃𝐄𝐒
+> *[✏️]* • *𝚝𝚒́𝚝𝚞𝚕𝚘:* *${titulo}*
+> *[⏱️]* • *ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ:* ${duracao}
+> *[👥]* • *ᴠɪᴇᴡs:* ${views}
+> *[👨‍🎤]* • *ᴀᴜᴛᴏʀ:* ${canal}
+> *[🔗]* • *ʟɪɴᴋ:* ${url}
+•
+> *[🎬]* • *𝙴𝚗𝚟𝚒𝚊𝚗𝚍𝚘 𝚘 𝚜𝚎𝚞 𝚟𝚒́𝚍𝚎𝚘* _@${numeroUsuario}_`
+
+        if (thumbnail) {
+          await tokito.sendMessage(
+            from,
+            {
+              image: {
+                url: thumbnail
+              },
+
+              caption: texto,
+
+              contextInfo
+            },
+            {
+              quoted: selo
+            }
+          )
+        } else {
+          await tokito.sendMessage(
+            from,
+            {
+              text: texto,
+
+              contextInfo
+            },
+            {
+              quoted: selo
+            }
+          )
+        }
+
+        await tokito.sendMessage(
+          from,
+          {
+            video: {
+              url: videoApi
+            },
+
+            mimetype: 'video/mp4',
+            fileName: 'video.mp4',
+            contextInfo
+          },
+          {
+            quoted: selo
+          }
+        )
+
+        await reagir(from, '✅')
+
+      } catch (e) {
+        console.log(
+          '[PLAY VIDEO ERRO]',
+          modulos.sanitizarErro(
+            e,
+            [API_KEY_TOKITO]
+          )
+        )
+
+        await reagir(from, '❌').catch(() => {})
+
+        await reply(
+          mess.erroApi(API_URL)
+        )
+      }
+    }
+  }
+}
+)

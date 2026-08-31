@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'desmute',
 comandos: ['desmute', 'unmute'],
 categoria: 'admin',
@@ -57,3 +59,4 @@ setGp(dataGp)
 return reply(mess.muteDesativado(alvo), [alvo])
 }
 }
+)

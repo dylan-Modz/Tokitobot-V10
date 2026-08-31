@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'coins',
 comandos: ['coins'],
 categoria: 'coins',
@@ -77,3 +79,4 @@ ctx.mess.erroApi(ctx.API_URL)
 }
 }
 }
+)

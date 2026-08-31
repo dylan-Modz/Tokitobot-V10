@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'mutelist',
 comandos: ['mutelist', 'listamute'],
 categoria: 'admin',
@@ -48,3 +50,4 @@ const lista = Array.isArray(dataGp?.[0]?.silenciados) ? dataGp[0].silenciados : 
 return reply(mess.muteLista(lista), lista.map(x => x.id))
 }
 }
+)

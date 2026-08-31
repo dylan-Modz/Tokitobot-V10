@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'obesidade',
 comandos: ['obesidade'],
 categoria: 'brincadeiras',
@@ -39,10 +41,20 @@ uso: 'obesidade 70/1.75'
 async executar(ctx) {
 const q = String(ctx.q || '').trim()
 if (!q.includes('/'))
-return ctx.reply(`Ex.: *${ctx.prefix}obesidade peso/altura*`)
+return ctx.reply(ctx.mess.padraoUso({
+emoji: '⚖️',
+titulo: 'OBESIDADE',
+uso: `${ctx.prefix}obesidade 70/1.75`,
+descricao: 'Informe peso e altura separados por /.'
+}))
 let [peso, altura] = q.split('/').map(v => Number(String(v || '').trim().replace(',', '.')))
 if (!Number.isFinite(peso) || !Number.isFinite(altura) || peso <= 0 || altura <= 0)
-return ctx.reply(`❌ Use assim: *${ctx.prefix}obesidade 70/1.75*`)
+return ctx.reply(ctx.mess.padraoUso({
+emoji: '⚖️',
+titulo: 'OBESIDADE',
+uso: `${ctx.prefix}obesidade 70/1.75`,
+descricao: 'Informe peso e altura separados por /.'
+}))
 const imc = (peso / (altura ** 2)).toFixed(2)
 let texto
 let emoji
@@ -68,6 +80,14 @@ emoji = '😵'
 }
 await ctx.reagir(ctx.from, emoji).catch(() => {
 })
-return ctx.reply(texto)
+return ctx.reply(ctx.mess.padraoInfo({
+emoji,
+titulo: 'RESULTADO DO IMC',
+linhas: [
+{ rotulo: '⚖️ 𝙸𝙼𝙲', valor: imc },
+{ rotulo: '📌 𝚁𝙴𝚂𝚄𝙻𝚃𝙰𝙳𝙾', valor: texto.replace(/^•\s*/, '').replace(/^Seu índice de massa corporal (é de|é):?\s*\*[^*]+\*\s*→\s*/i, '') }
+]
+}))
 }
 }
+)

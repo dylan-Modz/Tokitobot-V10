@@ -28,8 +28,8 @@
  * ============================================================
  */
 
-const linguagem = require('./menus.js')
-const mess = require('./global.js')
+const linguagem = require('../../mensagens/menus.js')
+const mess = require('../../mensagens/mensagens.js')
 
 module.exports = {
 linguagem,

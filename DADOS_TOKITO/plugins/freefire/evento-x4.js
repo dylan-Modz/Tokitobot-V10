@@ -15,8 +15,8 @@
  * ============================================================
  */
 
-const { proto, generateWAMessageFromContent } = require('@whiskeysockets/baileys')
-const x4 = require('./_x4')
+const { proto, generateWAMessageFromContent } = require('baileys')
+const x4 = require('./x4')
 
 const enviarSala = async (ctx, id, senha) => {
 const msg = generateWAMessageFromContent(ctx.from, {

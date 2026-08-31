@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'modorpg',
 comandos: ['modorpg'],
 categoria: 'rpg',
@@ -51,3 +53,4 @@ ctx.setGp(ctx.dataGp)
 return ctx.reply(ctx.mess.modoAlterado('𝙼𝙾𝙳𝙾 𝚁𝙿𝙶', a === '1'))
 }
 }
+)

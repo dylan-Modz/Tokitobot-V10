@@ -1,4 +1,4 @@
-const atividade = require('../_atividade')
+const atividade = require('../atividade')
 
 const blocoUsuario = (mess, item) => {
   const numero = String(item.j || '').split('@')[0] || 'desconhecido'
@@ -20,7 +20,9 @@ const blocoUsuario = (mess, item) => {
   return linhas.join('\n') || completo
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
   nome: 'atividades',
   comandos: ['atividades', 'inativos'],
   categoria: 'admin',
@@ -124,3 +126,4 @@ module.exports = {
     }
   }
 }
+)

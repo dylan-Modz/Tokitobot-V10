@@ -93,7 +93,9 @@ throw new Error('Não foi possível baixar a mídia.')
 return buffer
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'open',
 comandos: ['open', 'revelar'],
 categoria: 'admin',
@@ -201,10 +203,12 @@ return reply(`- 👁️ \`𝙾𝙿𝙴𝙽\`
 console.log('[OPEN/REVELAR]', error?.stack || error?.message || error)
 await reagir(from, '❌').catch(() => {})
 
-return reply(`- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙾 𝙾𝙿𝙴𝙽\`
-
-> *『 ⚠️ 』— ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴘʀᴏᴄᴇssᴀʀ ᴇssᴀ ᴍɪ́ᴅɪᴀ.*`)
+return reply(mess.padraoErro({
+titulo: 'ERRO NO OPEN',
+descricao: 'Não foi possível processar essa mídia.'
+}))
 }
 }
 }
 }
+)

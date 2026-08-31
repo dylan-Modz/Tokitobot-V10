@@ -28,12 +28,13 @@
  * ============================================================
  */
 
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, delay } = require('@whiskeysockets/baileys')
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, delay } = require('baileys')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario } = require('./database/lib/exports.js')
-const funcoes = require('./funcoes/index.js')
+const funcoes = require('./sistemas/funcoes.js')
 const detector = require('./detector.js')
 const qrcodeTerminal = require('qrcode-terminal')
 const dadosSistema = require('./sistemas/dados.js')
+const placar = require('./database/lib/placar.js')
 
 const CONFIG_FILE = path.join(__dirname, 'INFO_DADOS', 'config-all.json')
 const qrcode = path.join(__dirname, 'database', 'qrcode')
@@ -59,6 +60,7 @@ let API_KEY_TOKITO = ''
 let TOKEN_SALA = ''
 let TOKEN_LIKE_FF = ''
 let iniciando = false, reconectando = false, metodo = null, ultimoQr = null
+let processarMensagemTokito = null
 
 if (!fs.existsSync(qrcode)) fs.mkdirSync(qrcode, { recursive: true })
 if (!fs.existsSync(grupos)) fs.mkdirSync(grupos, { recursive: true })
@@ -185,6 +187,81 @@ serverMessageId: ''
 } : {})
 })
 
+const UPDATE_CHECK_MS = 3 * 60 * 60 * 1000
+
+const textoAvisoUpdate = check => {
+const remoto = check?.remote || {}
+const mudancas = Array.isArray(remoto.changelog)
+? remoto.changelog.slice(0, 8)
+: []
+
+const lista = mudancas.length
+? mudancas.map(item => `> • ${String(item || '').trim()}`).join('\n')
+: '> • Melhorias, correções e novidades da Tokito.'
+
+const obrigatoria = remoto.required === true
+? '\n\n> ⚠️ *Esta atualização foi marcada como importante.*'
+: ''
+
+return `- 🧊 \`𝚃𝙾𝙺𝙸𝚃𝙾 𝚄𝙿𝙳𝙰𝚃𝙴\`
+
+> *Uma nova atualização da Tokito está disponível para você.*
+
+*📦 | SUA VERSÃO:* ${check?.local?.version || '—'}
+*✨ | NOVA VERSÃO:* ${remoto.version || '—'}
+*📌 | ${String(remoto.title || remoto.notice || 'Nova atualização disponível').trim()}*
+
+${lista}${obrigatoria}
+
+> *Para ver os detalhes:* \`${prefix}update info\`
+> *Para atualizar:* \`${prefix}update start\`
+
+_Se preferir pelo terminal, use_ \`npm start up\`.`
+}
+
+const verificarAvisoUpdate = async tokito => {
+try {
+const check = await dadosSistema.verificarUpdate()
+
+if (!check?.ok || !check.available) return false
+if (check.remote?.notify === false) return false
+
+const version = String(check.remote?.version || '').trim()
+if (!version || !dadosSistema.deveAvisarUpdate(version)) return false
+
+const dono = normalizarJid(ownerNumber)
+if (!dono) return false
+
+await tokito.sendMessage(dono, {
+text: textoAvisoUpdate(check),
+mentions: [dono],
+contextInfo: canalInfo([dono])
+})
+
+dadosSistema.registrarAvisoUpdate(version)
+return true
+} catch {
+return false
+}
+}
+
+const iniciarAvisosUpdate = tokito => {
+global.__TOKITO_UPDATE_SOCKET__ = tokito
+
+setTimeout(() => {
+verificarAvisoUpdate(global.__TOKITO_UPDATE_SOCKET__).catch(() => {})
+}, 3500).unref?.()
+
+if (global.__TOKITO_UPDATE_NOTICE_TIMER__) return
+
+global.__TOKITO_UPDATE_NOTICE_TIMER__ = setInterval(() => {
+const socketAtual = global.__TOKITO_UPDATE_SOCKET__
+if (socketAtual) verificarAvisoUpdate(socketAtual).catch(() => {})
+}, UPDATE_CHECK_MS)
+
+global.__TOKITO_UPDATE_NOTICE_TIMER__.unref?.()
+}
+
 async function startPairing(tokito) {
 console.log('')
 const phoneNumber = await question(colors.white('╰━━➤ Digite o número com DDI: '))
@@ -284,14 +361,13 @@ linhaPainel('1', '🤖', 'Nome do bot')
 linhaPainel('2', '👑', 'Nome do dono')
 linhaPainel('3', '📱', 'Número do dono')
 linhaPainel('4', '🧩', 'Prefixo do Bot')
-linhaPainel('5', '🔑', 'Token da API')
-linhaPainel('6', '🎮', 'Token de salas')
-linhaPainel('7', '👍', 'Token de likes')
+linhaPainel('5', '🎮', 'Token de salas')
+linhaPainel('6', '👍', 'Token de likes')
 linhaPainel('0', '🔙', 'Voltar')
 fimPainel()
-console.log(colors.yellow("• Apenas o Token da API é obrigatório para iniciar o bot."))
-console.log(colors.gray("• Os outros dados já possuem padrão e podem ser alterados quando quiser."))
+console.log(colors.gray("• Os dados principais podem ser alterados quando quiser."))
 console.log(colors.gray("• Se não usar Salas ou Likes, digite . nesses campos."))
+console.log(colors.gray("• O acesso Tokito é configurado automaticamente ao iniciar o bot."))
 console.log(colors.gray("• Ao editar qualquer campo, pressione Enter para manter o valor atual."))
 console.log(colors.gray("ᴇsᴄᴏʟʜᴀ ᴏ ǫᴜᴇ ᴅᴇsᴇᴊᴀ ᴇᴅɪᴛᴀʀ"))
 let option = await question(colors.white.bold("╰━━➤ "))
@@ -301,11 +377,99 @@ if (option === '1') await editarCampoBot('NomeDoBot', 'Nome do bot')
 else if (option === '2') await editarCampoBot('ownerName', 'Nome do dono')
 else if (option === '3') await editarCampoBot('ownerNumber', 'Número do dono')
 else if (option === '4') await editarCampoBot('prefix', 'Prefixo')
-else if (option === '5') await editarCampoBot('API_KEY_TOKITO', 'Token da API')
-else if (option === '6') await editarCampoBot('TOKEN_SALA', 'Token de salas', { ponto: true })
-else if (option === '7') await editarCampoBot('TOKEN_LIKE_FF', 'Token de likes', { ponto: true })
+else if (option === '5') await editarCampoBot('TOKEN_SALA', 'Token de salas', { ponto: true })
+else if (option === '6') await editarCampoBot('TOKEN_LIKE_FF', 'Token de likes', { ponto: true })
 else erro('Opção inválida. Escolha uma opção do painel.')
 }
+}
+
+
+const tokenMascarado = token => {
+const valor = String(token || '').trim()
+if (!valor) return 'Não configurado'
+if (valor.length < 14) return `${valor.slice(0, 4)}••••`
+return `${valor.slice(0, 7)}••••••${valor.slice(-5)}`
+}
+
+const detalhesAcesso = acesso => {
+const plano = acesso?.plan || acesso?.license?.plan || null
+const nomePlano = plano?.nome || plano?.name || acesso?.license?.planName || 'Plano ativo'
+const expira = acesso?.license?.planExpiresAt || plano?.expiresAt || plano?.expires_at || null
+
+sucesso('Token confirmado com sucesso.')
+sucesso(`Acesso liberado · ${nomePlano}`)
+if (expira) {
+const data = new Date(expira)
+if (!Number.isNaN(data.getTime())) info(`Validade do plano: ${data.toLocaleString('pt-BR')}`)
+}
+info(`Token salvo: ${tokenMascarado(API_KEY_TOKITO)}`)
+}
+
+async function solicitarToken() {
+console.log('')
+aviso('Não foi possível iniciar o bot porque nenhum Token Tokito válido foi encontrado.')
+console.log(colors.yellow.bold('⚠️  Seu token é pessoal. Não envie, compartilhe ou publique ele.'))
+console.log(colors.gray('Se você ainda não possui um token, crie sua conta e ative um plano em:'))
+console.log(colors.cyan('https://tokito-apis.com.br'))
+console.log('')
+info('Cole seu Token Tokito abaixo para liberar o acesso ao bot.')
+
+while (true) {
+let token = String(await question(colors.white.bold('╰━━➤ ')) || '').trim()
+
+if (!tokenValido(token)) {
+erro('Token inválido. Confira o token copiado no painel Tokito e tente novamente.')
+continue
+}
+
+const config = lerConfigBot()
+config.API_KEY_TOKITO = token
+salvarConfigBot(config)
+
+info('Verificando token e plano no servidor...')
+const acesso = await placar.entrada()
+
+if (acesso.allowed) {
+detalhesAcesso(acesso)
+return acesso
+}
+
+config.API_KEY_TOKITO = ''
+salvarConfigBot(config)
+
+erro(acesso.message || 'O token não possui acesso ativo ao Tokito Bot V10.')
+if (acesso.online === false) {
+aviso('Não foi possível confirmar o acesso no servidor agora. Verifique sua conexão e tente novamente.')
+}
+console.log(colors.gray('Você pode obter ou renovar seu acesso em https://tokito-apis.com.br'))
+}
+}
+
+async function prepararAcesso() {
+recarregarConfigBot()
+
+if (!tokenValido(API_KEY_TOKITO)) {
+return solicitarToken()
+}
+
+info('Verificando acesso ao Tokito Bot V10...')
+const acesso = await placar.entrada()
+
+if (acesso.allowed) {
+if (acesso.online) sucesso(acesso.message || 'Acesso confirmado.')
+else aviso(acesso.message || 'Servidor indisponível. Usando acesso local válido.')
+return acesso
+}
+
+if (acesso.online === true) {
+erro(acesso.message || 'O token salvo não possui um plano ativo.')
+const config = lerConfigBot()
+config.API_KEY_TOKITO = ''
+salvarConfigBot(config)
+return solicitarToken()
+}
+
+return acesso
 }
 
 async function showMenu() {
@@ -323,13 +487,6 @@ let option = await question(colors.white.bold("╰━━➤ "))
 option = option.trim()
 if (option === '1' || option === '2') {
 recarregarConfigBot()
-if (!tokenValido(API_KEY_TOKITO)) {
-console.log('')
-aviso('Antes de conectar, configure o Token da API.')
-console.log(colors.gray('╰━━➤ Entre em 4 Editar bot > 5 Token da API.'))
-console.log(colors.gray('╰━━➤ O restante é opcional e pode ser configurado depois.'))
-return showMenu()
-}
 metodo = option === '1' ? 'codigo' : 'qr'
 sucesso(option === '1' ? 'Conexão por código selecionada.' : 'Conexão por QR-Code selecionada.')
 return metodo
@@ -834,14 +991,12 @@ console.log(banner2?.string || colors.blue('dylan Modz'))
 console.log('')
 
 sucesso(`${NomeDoBot} conectado com sucesso.`)
-info(`WhatsApp: ${tokito.user?.id || 'desconhecido'}`)
-info('Sistema de eventos iniciado.')
-info('Detector Anti-Pay iniciado.')
 
 console.log('')
 
 await tokito.sendPresenceUpdate('available').catch(() => {})
 await tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
+iniciarAvisosUpdate(tokito)
 break
 
 case 'close':
@@ -867,15 +1022,21 @@ break
 
 /*
        * MENSAGENS
+       * Mantido no mesmo fluxo da base original.
        */
-
 if (events['messages.upsert']) {
 const upsert = events['messages.upsert']
-const starttokito = require('../tokito.js')
 
 try {
-await starttokito(tokito, upsert)
-} catch (error) {
+if (!processarMensagemTokito)
+processarMensagemTokito = require('../tokito.js')
+
+if (process.env.TOKITO_DEBUG_RX === '1')
+info(`RX messages.upsert recebido (${upsert?.type || 'sem tipo'})`)
+
+await processarMensagemTokito(tokito, upsert)
+}
+catch (error) {
 erroSistema('Erro no tokito.js', error)
 }
 }
@@ -900,24 +1061,20 @@ process.on('unhandledRejection', error => erroSistema('unhandledRejection detect
 
 async function iniciarTokito() {
 recarregarConfigBot()
-if (!sessaoRegistrada() || !tokenValido(API_KEY_TOKITO) || process.argv.includes('painel')) await showMenu()
-info('Validando acesso do Tokito Bot V10...')
-const acesso = await dadosSistema.validarInicio()
-if (!acesso.allowed) {
-erro(`Acesso não autorizado: ${acesso.message || acesso.code || 'licença inválida'}`)
+const acesso = await prepararAcesso()
+if (!acesso?.allowed) {
+erro(`Não foi possível liberar o acesso: ${acesso?.message || acesso?.code || 'validação indisponível'}`)
 process.exit(24)
 return
 }
-if (acesso.online) sucesso(acesso.message || 'Acesso validado pela Tokito APIs.')
-else aviso(acesso.message || 'Servidor indisponível. Usando licença local válida.')
-dadosSistema.iniciarSincronizacao(resultado => {
+
+if (!sessaoRegistrada() || process.argv.includes('painel')) await showMenu()
+
+placar.ciclo(resultado => {
 if (!resultado?.definitive) return
 erro(`A licença foi recusada pelo servidor: ${resultado.message || resultado.code || 'acesso bloqueado'}`)
 setTimeout(() => process.exit(24), 1200)
 })
-dadosSistema.verificarUpdate().then(check => {
-if (check?.ok && check.available) aviso(`Nova versão disponível: ${check.remote?.version || 'desconhecida'}. Use ${prefix}update check para ver os detalhes.`)
-}).catch(() => {})
 startConnect()
 }
 

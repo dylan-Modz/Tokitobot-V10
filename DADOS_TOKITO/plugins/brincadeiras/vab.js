@@ -33,7 +33,9 @@ const path = require('path')
 
 const banco = JSON.parse(fs.readFileSync(path.join(__dirname, '../../database/brincadeiras/vab.json'), 'utf8'))
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'vab',
 comandos: ['vab'],
 categoria: 'brincadeiras',
@@ -50,7 +52,11 @@ if (!ctx.isModobn)
 return ctx.reply(ctx.mess.onlyGroupFun(ctx.prefix))
 const grupos = banco.filter(x => Array.isArray(x.questions) && x.questions.length)
 if (!grupos.length)
-return ctx.reply('❌ Banco de perguntas vazio.')
+return ctx.reply(ctx.mess.padraoAviso({
+emoji: '🎲',
+titulo: 'BANCO VAZIO',
+descricao: 'O banco de perguntas está vazio.'
+}))
 const g = grupos[Math.floor(Math.random() * grupos.length)]
 const s = g.questions[Math.floor(Math.random() * g.questions.length)]
 await ctx.reagir(ctx.from, '🎭').catch(() => {
@@ -64,3 +70,4 @@ selectableCount: 1
 }, { quoted: ctx.selo })
 }
 }
+)

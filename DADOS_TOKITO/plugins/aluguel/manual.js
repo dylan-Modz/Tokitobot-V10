@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const aluguel = require('../../sistemas/aluguel')
+const aluguel = require('../../sistemas/aluguel/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'rgaluguel',
 comandos: ['rgaluguel'],
 categoria: 'aluguel',
@@ -57,3 +59,4 @@ const g = aluguel.registrar(ctx.from, plano, ctx.sender, '')
 return ctx.reply(ctx.mess.aluguelManualOk(new Date(g.expiraEm).toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })))
 }
 }
+)

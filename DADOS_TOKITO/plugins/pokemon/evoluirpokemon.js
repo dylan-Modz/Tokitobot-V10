@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'evoluirpokemon',
 comandos: ['evoluirpokemon', 'evoluirpoke'],
 categoria: 'pokemon',
@@ -59,3 +61,4 @@ r.salvar(ctx)
 return ctx.reply(ctx.mess.pokemonEvoluiu(ant, r.POKEMON[p.tipo]?.nome || p.tipo))
 }
 }
+)

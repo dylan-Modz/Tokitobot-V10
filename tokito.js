@@ -28,19 +28,63 @@
  * ============================================================
  */
 
+if (require.main === module) {
+  require('./DADOS_TOKITO/database/lib/supervisor.js')
+    .main(process.argv.slice(2))
+    .catch(error => {
+      console.error(`[ ERRO - TOKITO ] - ${error?.message || error}`)
+      process.exit(1)
+    })
+} else {
 const { getContentType, jidNormalizedUser, proto, prepareWAMessageMedia, generateWAMessageFromContent, getFileBuffer, DLT_FL, getGroupAdmins, getMembros, getRandom, fs, path, os, colors, performance, linguagem, mess, axios, setting, nescessario, vip, caminhoVip, arquivo, pasta, fuso, sendVideoAsSticker, sendVideoAsSticker2, sendImageAsSticker2, sendImageAsSticker } = require('./DADOS_TOKITO/database/lib/exports.js')
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
-const funcoes = require('./DADOS_TOKITO/funcoes/index.js')
+const funcoes = require('./DADOS_TOKITO/sistemas/funcoes.js')
 const detector = require('./DADOS_TOKITO/detector.js')
 const plugins = require('./DADOS_TOKITO/plugins/index.js')
+const agenteIA = require('./DADOS_TOKITO/ia')
 const regrasPlugins = require('./DADOS_TOKITO/sistemas/permissoes.js')
 const aluguel = require('./DADOS_TOKITO/sistemas/aluguel/index.js')
 const modulos = require('./DADOS_TOKITO/sistemas/modulos.js')
+const sorteio = require('./DADOS_TOKITO/database/lib/sorteio.js')
 ////////////////////////////////////////////////////////////////////////////////////
-const similar = require('./DADOS_TOKITO/funcoes/js/similar.js')
+const similar = require('./DADOS_TOKITO/sistemas/similar.js')
 
 const comandos = () => [...new Set([...similar.casos(__filename), ...plugins.comandos()])]
+
+// Cache curto para impedir que groupMetadata trave todos os comandos do grupo.
+const cacheMetadataGrupos = new Map()
+const TEMPO_CACHE_METADATA = 60 * 1000
+const TIMEOUT_METADATA = 5000
+
+const metadataSeguro = async (tokito, jid) => {
+const agora = Date.now()
+const salvo = cacheMetadataGrupos.get(jid)
+
+if (salvo && agora - salvo.tempo < TEMPO_CACHE_METADATA)
+return salvo.dados
+
+try {
+const dados = await Promise.race([
+tokito.groupMetadata(jid),
+new Promise((_, reject) =>
+setTimeout(() => reject(new Error('TIMEOUT_GROUP_METADATA')), TIMEOUT_METADATA)
+)
+])
+
+if (dados) {
+cacheMetadataGrupos.set(jid, {
+dados,
+tempo: agora
+})
+}
+
+return dados || salvo?.dados || null
+}
+catch {
+return salvo?.dados || null
+}
+}
 ////////////////////////////////////////////////////////////////////////////////////
 const { modoAtivo: modoJogosAtivo, getAdivinheGame, saveAdivinheGame, removeAdivinheGame, criarAdivinheGame, enviarAdivinhe, getQuizGame, saveQuizGame, removeQuizGame, criarQuizGame, enviarQuiz, getForcaGame, saveForcaGame, removeForcaGame, criarForcaGame, enviarForca, getCacaGame, saveCacaGame, removeCacaGame, criarCacaGame, enviarCaca, getMinesGame, saveMinesGame, removeMinesGame, criarMinesGame, enviarMines, getVelhaGame, saveVelhaGame, removeVelhaGame, criarTabuleiroVelha, getDamaGame, saveDamaGame, removeDamaGame, criarTabuleiroDama, sameJid: mesmoJid, mention: mencionarJogo, enviarTexto: enviarTextoJogos } = funcoes.jogos
 ////////////////////////////////////////////////////////////////////////////////////
@@ -254,6 +298,7 @@ console.error(modulos.sanitizarErro(err?.stack || '', [API_KEY_TOKITO]))
 
 async function starttokito(tokito, upsert) {
 try {
+if (!sorteio.ativo()) return
 aluguel.iniciar(tokito)
 for (const info of upsert?.messages || []) {
 const from = info.key?.remoteJid
@@ -261,6 +306,12 @@ const isGroup = from?.endsWith('@g.us')
 const isStatus = from === 'status@broadcast'
 if (!from)
 continue
+
+// Diagnóstico mínimo no ponto mais cedo possível do handler.
+// Se esta linha aparecer, a Baileys entregou a mensagem ao núcleo.
+if (!isStatus && process.env.TOKITO_DEBUG_RX === '1') {
+console.log(`[RX TOKITO] ${upsert?.type || 'sem-tipo'} | ${from} | ${info?.key?.id || 'sem-id'}`)
+}
 
 if (isStatus) {
 if (modulos.globalCfg().visualizarmsg) {
@@ -275,8 +326,23 @@ continue
 const stub = info?.key?.isViewOnce === true
 if (!info.message && !stub)
 continue
-if (upsert.type === 'append' && !stub)
+// Algumas builds/sessões da Baileys podem entregar mensagem ao vivo como `append`.
+// Não descartamos mais `append` cegamente: só ignoramos históricos realmente antigos.
+if (upsert.type === 'append' && !stub) {
+const tsBruto = Number(
+info?.messageTimestamp?.low ??
+info?.messageTimestamp ??
+0
+)
+
+if (tsBruto > 0) {
+const idadeMs = Date.now() - (tsBruto * 1000)
+
+// Histórico antigo/sincronização: ignora. Mensagem recente: processa normalmente.
+if (idadeMs > 2 * 60 * 1000)
 continue
+}
+}
 const mensagem = info.message?.ephemeralMessage?.message || info.message?.viewOnceMessage?.message || info.message?.viewOnceMessageV2?.message || info.message?.viewOnceMessageV2Extension?.message || info.message || {}
 const type = stub ? 'viewOnceStub' : getContentType(mensagem)
 const content = JSON.stringify(mensagem)
@@ -349,11 +415,8 @@ let q = args.join(' ')
 var budy = type === 'conversation' ? mensagem?.conversation : type === 'extendedTextMessage' ? mensagem?.extendedTextMessage?.text : ''
 var PR_String = Procurar_String.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
 let groupMetadata = ''
-try {
-groupMetadata = isGroup ? await tokito.groupMetadata(from) : ''
-}
-catch {
-groupMetadata = ''
+if (isGroup) {
+groupMetadata = await metadataSeguro(tokito, from) || ''
 }
 const groupName = isGroup ? groupMetadata?.subject || '' : ''
 const groupDesc = isGroup ? groupMetadata?.desc || '' : ''
@@ -1165,6 +1228,10 @@ if (bloqueadoEventoPlugin)
 continue
 if (!isCmd)
 continue
+if (isGroup && dataGp?.[0]?.funcoes?.modoia?.ativo === true && !isGroupAdmins && !SoDono) {
+await agenteIA.responderRestricao(plug(), command, 'administrador', dataGp?.[0]?.funcoes?.modoia?.tipo || 'texto').catch(() => reply('No modo IA, membros conversam comigo normalmente sem usar comandos.'))
+continue
+}
 if (isGroup && dataGp?.[0]?.funcoes?.soadm === true && !isGroupAdmins && !SoDono) {
 await reply(mess.soadmBloqueado())
 continue
@@ -1254,3 +1321,4 @@ console.log(colors.red('❌ erro ao reiniciar :('), modulos.sanitizarErro(erro, 
 }
 
 module.exports = starttokito
+}

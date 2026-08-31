@@ -1,41 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.69",
+  "version": "10.0.70",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-21T21:00:18.627Z",
+  "publishedAt": null,
   "changelog": [
-    "[Correção] 3 arquivos atualizados",
-    "A versão 10.0.69 já está disponível para atualização.",
-    "Figpack atualizado",
-    "Packbase atualizado",
-    "Packfig atualizado"
+    "Agente IA agora mantém continuidade de pedidos entre mensagens.",
+    "Pedidos de música continuam automaticamente após o usuário informar o nome da música.",
+    "O agente alterna entre texto e áudio conforme o pedido do usuário.",
+    "Menus e interfaces oficiais são enviados pelas funções reais do bot.",
+    "O agente ganhou suporte a alterações do dono, como prefixo, nome do bot e dono principal.",
+    "Respostas do agente ficaram maiores, organizadas e com identidade visual da Tokito.",
+    "Atualização completa substitui a estrutura antiga preservando sessão, configurações e bancos do usuário.",
+    "O dono recebe aviso privado uma única vez quando uma nova versão é publicada.",
+    "npm start up passa a usar o mesmo atualizador oficial do comando .update start.",
+    "Verificação de módulos ficou silenciosa quando está tudo instalado e só avisa quando faltar dependência."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "3 arquivos atualizados",
-  "notice": "A versão 10.0.69 já está disponível para atualização.",
-  "required": true,
+  "type": "Atualização completa",
+  "title": "Nova estrutura + Agente IA completo",
+  "notice": "A Tokito recebeu uma atualização completa com nova estrutura interna, Agente IA mais inteligente e novo sistema de atualização.",
+  "required": false,
   "minimumVersion": "10.0.0",
-  "files": [
-    {
-      "path": "DADOS_TOKITO/plugins/casos/figurinhas/figpack.js",
-      "sha256": "58eaa8f21245152cb9adffd9028652e4474013cbcc7d54fc1f8a6a40acd41535",
-      "size": 9138
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/casos/figurinhas/_packbase.js",
-      "sha256": "0db650f6a6194402ed0fd103d892f377aee07b5746ac7594011d613414dc8512",
-      "size": 10054
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/casos/figurinhas/packfig.js",
-      "sha256": "8517acaf59352d9e7c636b3c51676038ca645304b939d5aaa4d585e4397f7c77",
-      "size": 6353
-    }
-  ],
+  "files": [],
   "releases": [
     {
       "version": "10.0.3",
@@ -1659,6 +1648,34 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-21T21:00:18.627Z"
+    },
+    {
+      "version": "10.0.70",
+      "fromVersion": "10.0.69",
+      "channel": "stable",
+      "type": "Atualização completa",
+      "title": "Nova estrutura + Agente IA completo",
+      "notice": "A Tokito recebeu uma atualização completa com nova estrutura interna, Agente IA mais inteligente e novo sistema de atualização.",
+      "changelog": [
+        "Agente IA agora mantém continuidade de pedidos entre mensagens.",
+        "Pedidos de música continuam automaticamente após o usuário informar o nome da música.",
+        "O agente alterna entre texto e áudio conforme o pedido do usuário.",
+        "Menus e interfaces oficiais são enviados pelas funções reais do bot.",
+        "O agente ganhou suporte a alterações do dono, como prefixo, nome do bot e dono principal.",
+        "Respostas do agente ficaram maiores, organizadas e com identidade visual da Tokito.",
+        "Atualização completa substitui a estrutura antiga preservando sessão, configurações e bancos do usuário.",
+        "O dono recebe aviso privado uma única vez quando uma nova versão é publicada.",
+        "npm start up passa a usar o mesmo atualizador oficial do comando .update start.",
+        "Verificação de módulos ficou silenciosa quando está tudo instalado e só avisa quando faltar dependência."
+      ],
+      "files": [],
+      "delete": [],
+      "required": false,
+      "publishedAt": null,
+      "mode": "clean"
     }
-  ]
+  ],
+  "versao": "10.0.70",
+  "mode": "clean",
+  "notify": true
 }

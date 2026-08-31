@@ -30,7 +30,9 @@
 
 const adv = require('../../sistemas/advertencias')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'deladv',
 comandos: ['deladv', 'rmadv', 'limparadv'],
 categoria: 'admin',
@@ -59,3 +61,4 @@ tudo: /\btudo\b/i.test(String(q || ''))
 return reply(r.ok ? mess.advRemovida(alvo, r.quantidade) : mess.advNenhuma(alvo), [alvo])
 }
 }
+)

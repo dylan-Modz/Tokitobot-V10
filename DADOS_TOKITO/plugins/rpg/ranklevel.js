@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'ranklevel',
 comandos: ['ranklevel', 'rankpatente', 'rankinglevel'],
 categoria: 'rpg',
@@ -49,3 +51,4 @@ const l = r.rank(ctx, 'xp').slice(0, 10)
 return ctx.reply(ctx.mess.levelRank(l), l.map(x => x.jid))
 }
 }
+)

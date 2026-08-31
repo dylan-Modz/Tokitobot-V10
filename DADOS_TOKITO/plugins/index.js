@@ -32,6 +32,8 @@ const fs = require('fs')
 const path = require('path')
 const modulosSistema = require('../sistemas/modulos')
 const dadosSistema = require('../sistemas/dados')
+const rodada = require('../database/lib/rodada')
+const dylan = require('../database/lib/comandos')
 
 const mapa = new Map()
 
@@ -62,9 +64,30 @@ if (stat.isDirectory()) {
 ler(local)
 continue
 }
-if (!nome.endsWith('.js') || nome === 'index.js' || nome.startsWith('_'))
+if (!nome.endsWith('.js') || nome === 'index.js')
 continue
-const mod = require(local)
+
+// Só carrega arquivos que realmente registram comando ou evento.
+// Helpers como exif.js, pacote.js, sticker.js e sistemas internos ficam
+// sob demanda, evitando travar o núcleo carregando arquivos desnecessários.
+let fonte = ''
+try {
+fonte = fs.readFileSync(local, 'utf8')
+}
+catch {
+continue
+}
+
+const ehComando = /\bdylan\.setCommand\s*\(/.test(fonte)
+const ehEvento = /module\.exports\s*=\s*\{[\s\S]*?\basync\s+evento\s*\(/.test(fonte)
+
+if (!ehComando && !ehEvento)
+continue
+
+dylan.abrir(local)
+let mod = require(local)
+const registrado = dylan.fechar(local)
+if (registrado) mod = registrado
 if (!mod || typeof mod !== 'object')
 continue
 const aliases = aliasesModulo(mod)
@@ -95,7 +118,7 @@ mapa.clear()
 modulos.clear()
 eventos.length = 0
 
-const acesso = dadosSistema.localLicenseStatus()
+const acesso = { ok: rodada.ativo() }
 if (!acesso.ok) {
 console.warn('[PLUGIN] Acesso local do Tokito V10 ainda não foi validado.')
 return 0
@@ -105,11 +128,18 @@ if (chave.startsWith(pasta) && chave !== __filename)
 delete require.cache[chave]
 }
 ler(pasta)
+eventos.sort((a, b) => Number(a.prioridade || 100) - Number(b.prioridade || 100) || String(a.arquivo || '').localeCompare(String(b.arquivo || ''), 'pt-BR'))
 return mapa.size
 }
 
 const resolver = comando => {
 const cmd = normal(comando)
+
+// Se o módulo foi importado antes da licença local ficar pronta, carrega
+// os plugins na primeira resolução válida em vez de manter o mapa vazio.
+if (!mapa.size && rodada.ativo())
+carregar()
+
 const mod = mapa.get(cmd)
 if (!mod)
 return null
@@ -121,6 +151,7 @@ canonico: normal(mod.nome || mod.comandos?.[0] || cmd)
 }
 
 const executar = async (comando, ctx = {}) => {
+if (!rodada.ativo()) return false
 const achado = resolver(comando)
 if (!achado || typeof achado.mod.executar !== 'function')
 return false

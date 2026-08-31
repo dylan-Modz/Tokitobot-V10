@@ -15,9 +15,11 @@
  * ============================================================
  */
 
-const x4 = require('./_x4')
+const x4 = require('./x4')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'xgp',
 comandos: ['xgp', 'sala'],
 categoria: 'freefire',
@@ -34,11 +36,10 @@ if (!ctx.isGroup)
 return ctx.reply(ctx.mess.sogrupo())
 
 if (!x4.ativo(ctx))
-return ctx.reply(
-`- ⚠️ \`𝙼𝙾𝙳𝙾 𝚇𝟺\`
-
-> *ᴀᴛɪᴠᴇ ᴘʀɪᴍᴇɪʀᴏ ᴄᴏᴍ ${ctx.prefix}modox4 1.*`
-)
+return ctx.reply(ctx.mess.padraoAviso({
+titulo: 'MODO X4',
+descricao: `Ative primeiro com ${ctx.prefix}modox4 1.`
+}))
 
 if (!x4.adm(ctx))
 return ctx.reply(ctx.mess.soadm())
@@ -140,3 +141,4 @@ quoted: ctx.selo
 return true
 }
 }
+)

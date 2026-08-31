@@ -32,7 +32,9 @@
  * Dev: Dylan Modz
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: "linkgrupo",
 
 comandos: [
@@ -81,9 +83,10 @@ const codigo = await tokito
 .groupInviteCode(from)
 
 if (!codigo) {
-return reply(
-"*❌ | Não consegui obter o link deste grupo.*"
-)
+return reply(mess.padraoErro({
+titulo: 'LINK DO GRUPO',
+descricao: 'Não consegui obter o link deste grupo.'
+}))
 }
 
 const link =
@@ -125,10 +128,12 @@ console.log(
 e?.message || e
 )
 
-return reply(
-"*❌ | Não consegui puxar o link do grupo.*"
+return reply(mess.padraoErro({
+titulo: 'LINK DO GRUPO',
+descricao: 'Não consegui obter o link deste grupo.'
+}))
+}
+}
+}
+}
 )
-}
-}
-}
-}

@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'rankcoins',
 comandos: ['rankcoins', 'rankingcoins'],
 categoria: 'coins',
@@ -48,3 +50,4 @@ return ctx.reply(ctx.mess.coinsDesativado(ctx.prefix))
 return ctx.reply(ctx.mess.coinsRank(r.rank(ctx, 'coins').slice(0, 10)), r.rank(ctx, 'coins').slice(0, 10).map(x => x.jid))
 }
 }
+)

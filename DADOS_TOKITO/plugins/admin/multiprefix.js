@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'multiprefix',
 
 comandos: [
@@ -99,9 +101,10 @@ funcoes.multiprefix
 }
 
 if (!funcoes.multiprefix) {
-return ctx.reply(
-`❌ Ative primeiro com *${ctx.prefix}multiprefix 1*.`
-)
+return ctx.reply(ctx.mess.padraoAviso({
+titulo: 'MULTIPREFIX DESATIVADO',
+descricao: `Ative primeiro com ${ctx.prefix}multiprefix 1.`
+}))
 }
 
 const novoPrefixo = String(ctx.q || '')
@@ -109,16 +112,19 @@ const novoPrefixo = String(ctx.q || '')
 .split(/\s+/)[0]
 
 if (!novoPrefixo || novoPrefixo.length > 5) {
-return ctx.reply(
-'❌ Informe um prefixo de 1 a 5 caracteres.'
-)
+return ctx.reply(ctx.mess.padraoErro({
+titulo: 'PREFIXO INVÁLIDO',
+descricao: 'Informe um prefixo de 1 a 5 caracteres.'
+}))
 }
 
 funcoes.prefixGrupo = novoPrefixo
 ctx.setGp(ctx.dataGp)
 
-return ctx.reply(
-`✅ Prefixo deste grupo alterado para *${novoPrefixo}*.`
+return ctx.reply(ctx.mess.padraoSucesso({
+titulo: 'PREFIXO ALTERADO',
+descricao: `O prefixo deste grupo agora é ${novoPrefixo}.`
+}))
+}
+}
 )
-}
-}

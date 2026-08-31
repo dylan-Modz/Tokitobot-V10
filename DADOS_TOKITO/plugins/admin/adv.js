@@ -30,7 +30,9 @@
 
 const adv = require('../../sistemas/advertencias')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'adv',
 comandos: ['adv', 'advertir', 'advertencia'],
 categoria: 'admin',
@@ -77,3 +79,4 @@ contextInfo: canalInfo([alvo, sender])
 }, { quoted: selo })
 }
 }
+)

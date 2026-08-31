@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'quando',
 comandos: ['quando'],
 categoria: 'brincadeiras',
@@ -40,7 +42,12 @@ requisitos: 'Modo Brincadeiras'
 async executar(ctx) {
 const q = String(ctx.q || '').trim()
 if (!q)
-return ctx.reply('Digite a pergunta!')
+return ctx.reply(ctx.mess.padraoUso({
+emoji: '⏳',
+titulo: 'QUANDO',
+uso: `${ctx.prefix}${ctx.command} sua pergunta`,
+descricao: 'Digite uma pergunta para continuar.'
+}))
 const base = ['Hoje', 'Amanhã', 'Nunca', 'dia', 'semana', 'mês', 'ano']
 const plural = ['dias', 'semanas', 'meses', 'anos']
 const tipo = base[Math.floor(Math.random() * base.length)]
@@ -52,6 +59,14 @@ else if (n === 1)
 resposta = `1 ${tipo}`
 else
 resposta = `${n} ${plural[Math.floor(Math.random() * plural.length)]}`
-return ctx.reply(`Pergunta: ${q}\nResposta: ${resposta}`)
+return ctx.reply(ctx.mess.padraoInfo({
+emoji: '⏳',
+titulo: 'QUANDO',
+linhas: [
+{ rotulo: '❓ 𝙿𝙴𝚁𝙶𝚄𝙽𝚃𝙰', valor: q },
+{ rotulo: '🔮 𝚁𝙴𝚂𝙿𝙾𝚂𝚃𝙰', valor: resposta }
+]
+}))
 }
 }
+)

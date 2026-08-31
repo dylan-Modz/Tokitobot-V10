@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'chance',
 comandos: [
 'chance',
@@ -56,7 +58,12 @@ return reply(mess.sogrupo())
 if (!isModobn)
 return reply(mess.onlyGroupFun(prefix))
 if (!q?.trim() && !menc_os2)
-return reply(`- 🎲 Digite uma pergunta.\n> ${prefix}chance de eu ganhar hoje`)
+return reply(mess.padraoUso({
+emoji: '🎲',
+titulo: 'CHANCE',
+uso: `${prefix}chance de eu ganhar hoje`,
+descricao: 'Digite uma pergunta para calcular a chance.'
+}))
 const n = Math.floor(Math.random() * 101)
 const alvo = menc_os2
 const texto = alvo ? `😵‍💫🌟 A chance de *@${alvo.split('@')[0]}* é de *${n}%*.` : `😵‍💫🌟 A chance de _“${q.trim()}”_ é de *${n}%*.`
@@ -66,3 +73,4 @@ contextInfo: canalInfo(alvo ? [sender, alvo] : [sender])
 }, { quoted: selo })
 }
 }
+)

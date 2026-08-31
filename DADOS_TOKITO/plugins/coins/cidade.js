@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
 const garantirCidade = u => u.cidade || (u.cidade = {
 nome: null,
@@ -51,7 +51,9 @@ presoAte: 0,
 ultimoTrabalho: 0
 })
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'registrarcidade',
 comandos: ['registrarcidade', 'cidade', 'perfilcidade', 'cidadeperfil', 'trabalhar', 'depositar', 'sacar', 'banco'],
 categoria: 'coins',
@@ -70,14 +72,22 @@ const u = r.eco(ctx)
 const c = garantirCidade(u)
 if (ctx.command === 'registrarcidade' || (ctx.command === 'cidade' && !c.nome)) {
 if (c.nome && ctx.command === 'registrarcidade')
-return ctx.reply(`🏙️ Você já possui um perfil na cidade como *${c.nome}*.`)
+return ctx.reply(ctx.mess.padraoAviso({
+emoji: '🏙️',
+titulo: 'PERFIL JÁ REGISTRADO',
+descricao: `Você já possui um perfil na cidade como ${c.nome}.`
+}))
 c.nome = String(ctx.q || ctx.pushname || 'Cidadão').trim().slice(0, 30)
 r.salvar(ctx)
 return ctx.reply(ctx.mess.cidadeRegistrada(c.nome))
 }
 if (['perfilcidade', 'cidadeperfil', 'cidade'].includes(ctx.command)) {
 if (!c.nome)
-return ctx.reply(`❌ Você ainda não se registrou na cidade.\nUse *${ctx.prefix}registrarcidade nome*.`)
+return ctx.reply(ctx.mess.padraoAviso({
+emoji: '🏙️',
+titulo: 'PERFIL NÃO REGISTRADO',
+descricao: `Você ainda não se registrou na cidade. Use ${ctx.prefix}registrarcidade nome.`
+}))
 let foto = 'https://raw.githubusercontent.com/dylanModz/uploads/main/midias/imagens/6604x2f6a.jpg'
 try {
 foto = await ctx.tokito.profilePictureUrl(ctx.sender, 'image')
@@ -143,3 +153,4 @@ return ctx.reply(ctx.mess.cidadeBanco(c.saldoBanco, u.coins))
 return ctx.reply(ctx.mess.cidadeBanco(c.saldoBanco, u.coins))
 }
 }
+)

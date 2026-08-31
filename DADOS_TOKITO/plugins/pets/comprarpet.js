@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'comprarpet',
 comandos: ['comprarpet', 'adotarpet'],
 categoria: 'pets',
@@ -72,3 +74,4 @@ r.salvar(ctx)
 return ctx.reply(ctx.mess.petComprado(tipo, p.preco, eu.coins))
 }
 }
+)

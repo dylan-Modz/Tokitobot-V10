@@ -30,7 +30,9 @@
 
 const plugins = require('../index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'info',
 comandos: ['info', 'infocmd'],
 categoria: 'info',
@@ -59,3 +61,4 @@ requisitos: meta.requisitos || ''
 }))
 }
 }
+)

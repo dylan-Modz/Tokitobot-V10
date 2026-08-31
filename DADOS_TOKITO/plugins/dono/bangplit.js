@@ -161,9 +161,11 @@ pendentes.delete(chave)
 const grupos = await carregar(ctx)
 
 if (!grupos.length) {
-return ctx.reply(`- ⚠️ \`𝙱𝙰𝙽𝙶𝙿𝙻𝙸𝚃\`
-
-> *ᴏ ʙᴏᴛ ɴᴀ̃ᴏ ᴇsᴛᴀ́ ᴇᴍ ɴᴇɴʜᴜᴍ ɢʀᴜᴘᴏ.*`)
+return ctx.reply(ctx.mess.padraoAviso({
+emoji: '🧊',
+titulo: 'BANGPLIT',
+descricao: 'O bot não está em nenhum grupo.'
+}))
 }
 
 const s = {
@@ -179,7 +181,9 @@ pendentes.set(chave, s)
 return ctx.reply(render(s))
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+const pluginBangplit = dylan.setCommand({
 nome: 'bangplit',
 comandos: ['bangplit'],
 categoria: 'dono',
@@ -209,9 +213,13 @@ return await iniciar(ctx)
 } catch (error) {
 console.log('[BANGPLIT]', error?.stack || error?.message || error)
 
-return ctx.reply(`- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙾 𝙱𝙰𝙽𝙶𝙿𝙻𝙸𝚃\`
+return ctx.reply(ctx.mess.padraoErro({
+titulo: 'ERRO NO BANGPLIT',
+descricao: 'Não foi possível carregar os grupos agora.'
+}))
+}
+}
+}
+)
 
-> *ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴄᴀʀʀᴇɢᴀʀ ᴏs ɢʀᴜᴘᴏs ᴀɢᴏʀᴀ.*`)
-}
-}
-}
+module.exports = pluginBangplit

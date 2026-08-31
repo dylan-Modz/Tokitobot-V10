@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const aluguel = require('../../sistemas/aluguel')
+const aluguel = require('../../sistemas/aluguel/index')
 
 const moeda = valor => Number(valor || 0).toFixed(2).replace('.', ',')
 
@@ -73,7 +73,9 @@ const opcaoInvalida = ctx => `- ❌ \`𝙾𝙿𝙲̧𝙰̃𝙾 𝙸𝙽𝚅𝙰�
 
 > *Use ${ctx.prefix}infoplanos para ver como editar os planos.*`
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
   nome: 'plans', comandos: ['plans', 'planos'], categoria: 'aluguel',
 
   info: {
@@ -95,53 +97,63 @@ module.exports = {
 
       if (!nome || !Number.isFinite(preco) || preco <= 0 || !Number.isInteger(dias) || dias <= 0) return ctx.reply(opcaoInvalida(ctx))
 
-      if (planos.some(plano => Number(plano.preco) === preco)) return ctx.reply(`- ❌ \`𝚅𝙰𝙻𝙾𝚁 𝙴𝙼 𝚄𝚂𝙾\`
-
-> *ᴊᴀ́ ᴇxɪsᴛᴇ ᴜᴍ ᴘʟᴀɴᴏ ᴄᴏᴍ ᴏ ᴠᴀʟᴏʀ R$ ${moeda(preco)}.*`)
+      if (planos.some(plano => Number(plano.preco) === preco)) return ctx.reply(ctx.mess.padraoAviso({
+titulo: 'VALOR EM USO',
+descricao: `Já existe um plano com o valor R$ ${moeda(preco)}.`
+}))
 
       planos.push({ id: idPlano(planos, dias), nome, preco, dias, descricao })
       salvarPlanos(planos)
 
-      return ctx.reply(`- ✅ \`𝙿𝙻𝙰𝙽𝙾 𝙰𝙳𝙸𝙲𝙸𝙾𝙽𝙰𝙳𝙾\`
-
-> *『 ${nome} 』— R$ ${moeda(preco)} • ${dias} dias.*`)
+      return ctx.reply(ctx.mess.padraoSucesso({
+emoji: '🛒',
+titulo: 'PLANO ADICIONADO',
+descricao: `${nome} — R$ ${moeda(preco)} • ${dias} dias.`
+}))
     }
 
     const numero = partes.shift(), achado = acharPlano(planos, numero)
 
-    if (!achado) return ctx.reply(`- ❌ \`𝙿𝙻𝙰𝙽𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\`
-
-> *Use ${ctx.prefix}plans para ver a numeração dos planos.*
-> *Use ${ctx.prefix}infoplanos para ver como editar.*`)
+    if (!achado) return ctx.reply(ctx.mess.padraoUso({
+emoji: '🛒',
+titulo: 'PLANO INVÁLIDO',
+uso: `${ctx.prefix}plans`,
+exemplos: [`${ctx.prefix}infoplanos`],
+descricao: 'Confira a numeração dos planos e as opções de edição.'
+}))
 
     const { indice, plano } = achado, valor = partes.join(' ').trim()
 
     if (acao === 'preco') {
       const novo = Number(String(valor).replace(',', '.'))
 
-      if (!Number.isFinite(novo) || novo <= 0) return ctx.reply(`- ❌ \`𝙿𝚁𝙴𝙲̧𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\`
+      if (!Number.isFinite(novo) || novo <= 0) return ctx.reply(ctx.mess.padraoErro({
+titulo: 'PREÇO INVÁLIDO',
+descricao: 'Informe um preço válido.'
+}))
 
-> *Informe um preço válido.*`)
-
-      if (planos.some((item, i) => i !== indice && Number(item.preco) === novo)) return ctx.reply(`- ❌ \`𝚅𝙰𝙻𝙾𝚁 𝙴𝙼 𝚄𝚂𝙾\`
-
-> *ᴊᴀ́ ᴇxɪsᴛᴇ ᴏᴜᴛʀᴏ ᴘʟᴀɴᴏ ᴄᴏᴍ ᴏ ᴠᴀʟᴏʀ R$ ${moeda(novo)}.*`)
+      if (planos.some((item, i) => i !== indice && Number(item.preco) === novo)) return ctx.reply(ctx.mess.padraoAviso({
+titulo: 'VALOR EM USO',
+descricao: `Já existe outro plano com o valor R$ ${moeda(novo)}.`
+}))
 
       plano.preco = novo
 
     } else if (acao === 'nome') {
-      if (!valor) return ctx.reply(`- ❌ \`𝙽𝙾𝙼𝙴 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\`
-
-> *Informe o novo nome do plano.*`)
+      if (!valor) return ctx.reply(ctx.mess.padraoErro({
+titulo: 'NOME INVÁLIDO',
+descricao: 'Informe o novo nome do plano.'
+}))
 
       plano.nome = valor.slice(0, 100)
 
     } else if (acao === 'dias') {
       const novo = Number(valor)
 
-      if (!Number.isInteger(novo) || novo <= 0) return ctx.reply(`- ❌ \`𝙳𝙸𝙰𝚂 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\`
-
-> *Informe uma quantidade de dias válida.*`)
+      if (!Number.isInteger(novo) || novo <= 0) return ctx.reply(ctx.mess.padraoErro({
+titulo: 'DIAS INVÁLIDOS',
+descricao: 'Informe uma quantidade de dias válida.'
+}))
 
       plano.dias = novo
 
@@ -152,18 +164,22 @@ module.exports = {
       const removido = planos.splice(indice, 1)[0]
       salvarPlanos(planos)
 
-      return ctx.reply(`- 🗑️ \`𝙿𝙻𝙰𝙽𝙾 𝚁𝙴𝙼𝙾𝚅𝙸𝙳𝙾\`
-
-> *『 ${removido.nome || numero} 』— ʀᴇᴍᴏᴠɪᴅᴏ ᴄᴏᴍ sᴜᴄᴇssᴏ.*`)
+      return ctx.reply(ctx.mess.padraoSucesso({
+emoji: '🗑️',
+titulo: 'PLANO REMOVIDO',
+descricao: `${removido.nome || numero} foi removido com sucesso.`
+}))
 
     } else return ctx.reply(opcaoInvalida(ctx))
 
     salvarPlanos(planos)
 
-    return ctx.reply(`- ✅ \`𝙿𝙻𝙰𝙽𝙾 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙳𝙾\`
-
-> *『 ${plano.nome || `Plano ${numero}`} 』— ᴀʟᴛᴇʀᴀᴄ̧ᴀ̃ᴏ sᴀʟᴠᴀ ɴᴏ planos.json.*
-
-${painel(ctx, planos)}`)
+    return ctx.reply(ctx.mess.padraoSucesso({
+emoji: '🛒',
+titulo: 'PLANO ATUALIZADO',
+descricao: `${plano.nome || `Plano ${numero}`} foi atualizado com sucesso.`,
+detalhe: 'Alteração salva no planos.json.'
+}) + `\n\n${painel(ctx, planos)}`)
   }
 }
+)

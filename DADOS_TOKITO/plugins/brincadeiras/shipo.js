@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'shipo',
 comandos: ['shipo'],
 categoria: 'brincadeiras',
@@ -45,15 +47,28 @@ return reply(mess.sogrupo())
 if (!isModobn)
 return reply(mess.onlyGroupFun(prefix))
 if (!menc_os2)
-return reply(`- 💘 Marque uma pessoa.\n> ${prefix}shipo @usuario`)
+return reply(mess.padraoUso({
+emoji: '💘',
+titulo: 'SHIPO',
+uso: `${prefix}shipo @usuario`,
+descricao: 'Marque uma pessoa para continuar.'
+}))
 const membros = (groupMembers || []).map(x => x.id || x).filter(x => x && x !== menc_os2)
 if (!membros.length)
 return reply(mess.error())
 const par = membros[Math.floor(Math.random() * membros.length)]
 const n = Math.floor(Math.random() * 101)
 return tokito.sendMessage(from, {
-text: `💘 Eu shipo @${menc_os2.split('@')[0]} com @${par.split('@')[0]} em *${n}%*!`,
+text: mess.padraoInfo({
+emoji: '💘',
+titulo: 'SHIPO',
+linhas: [
+{ rotulo: '💞 𝙲𝙰𝚂𝙰𝙻', valor: `@${menc_os2.split('@')[0]} + @${par.split('@')[0]}` },
+{ rotulo: '📊 𝙲𝙾𝙼𝙱𝙸𝙽𝙰𝙲̧𝙰̃𝙾', valor: `${n}%` }
+]
+}),
 contextInfo: canalInfo([menc_os2, par])
 }, { quoted: selo })
 }
 }
+)

@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'dogolpe',
 comandos: ['dogolpe'],
 categoria: 'brincadeiras',
@@ -45,12 +47,25 @@ return reply(mess.sogrupo())
 if (!isModobn)
 return reply(mess.onlyGroupFun(prefix))
 if (!menc_os2)
-return reply(`- 👤 Marque alguém.\n> ${prefix}dogolpe @usuario`)
+return reply(mess.padraoUso({
+emoji: '👤',
+titulo: 'DO GOLPE',
+uso: `${prefix}dogolpe @usuario`,
+descricao: 'Marque alguém para continuar.'
+}))
 const g = ['iludir pessoas', 'ferir sentimentos', 'dar chifre', 'sumir e voltar como se nada tivesse acontecido']
 const x = g[Math.floor(Math.random() * g.length)]
 return tokito.sendMessage(from, {
-text: `😵‍💫 @${menc_os2.split('@')[0]} é especialista em *${x}*.`,
+text: mess.padraoInfo({
+emoji: '😵‍💫',
+titulo: 'DO GOLPE',
+linhas: [
+{ rotulo: '👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾', valor: `@${menc_os2.split('@')[0]}` },
+{ rotulo: '🎭 𝙴𝚂𝙿𝙴𝙲𝙸𝙰𝙻𝙸𝙳𝙰𝙳𝙴', valor: x }
+]
+}),
 contextInfo: canalInfo([menc_os2])
 }, { quoted: selo })
 }
 }
+)

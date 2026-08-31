@@ -28,9 +28,10 @@
  * ============================================================
  */
 
-const ia = require('../../ia')
+const ia = require('../../ia/index')
 
 module.exports = {
+prioridade: 90,
 nome: 'evento-ia',
 categoria: 'eventos',
 async evento(ctx) {

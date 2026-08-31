@@ -46,7 +46,9 @@ descricao: 'ᴛʀᴀɴsᴄʀᴇᴠᴇ ᴀ́ᴜᴅɪᴏs ᴇ ᴘᴛᴛs ᴇɴᴠ�
 }
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'autodl',
 
 comandos: [
@@ -116,3 +118,4 @@ configuracao.descricao
 )
 }
 }
+)

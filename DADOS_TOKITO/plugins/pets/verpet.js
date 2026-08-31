@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'verpet',
 comandos: ['verpet', 'pet', 'meupet'],
 categoria: 'pets',
@@ -66,3 +68,4 @@ catch {
 return ctx.reply(texto, [ctx.sender])
 }
 }
+)

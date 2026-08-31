@@ -7,13 +7,13 @@
  * ============================================================
  */
 
-const aluguel = require('../../sistemas/aluguel')
+const aluguel = require('../../sistemas/aluguel/index')
 
 const {
 proto,
 prepareWAMessageMedia,
 generateWAMessageFromContent
-} = require('@whiskeysockets/baileys')
+} = require('baileys')
 
 const enviarPixCompleto = async (ctx, item, caption) => {
 const codigoPix = String(
@@ -106,7 +106,9 @@ return false
 }
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'pixalugar',
 comandos: ['pixalugar', 'pixaluguel'],
 categoria: 'aluguel',
@@ -164,9 +166,11 @@ return ctx.reply(
 ctx.mess.aluguelAguardandoGrupo()
 )
 
-return ctx.reply(
-'*⏳ | ᴏ ᴘᴀɢᴀᴍᴇɴᴛᴏ ᴊᴀ ғᴏɪ ᴀᴘʀᴏᴠᴀᴅᴏ. ᴀɢᴜᴀʀᴅᴀɴᴅᴏ ᴀ ᴇɴᴛʀᴀᴅᴀ ᴅᴏ ʙᴏᴛ ɴᴏ ɢʀᴜᴘᴏ.*'
-)
+return ctx.reply(ctx.mess.padraoAviso({
+emoji: '⏳',
+titulo: 'PAGAMENTO APROVADO',
+descricao: 'O pagamento já foi aprovado e está aguardando a entrada do bot no grupo.'
+}))
 }
 
 try {
@@ -233,9 +237,13 @@ quoted: ctx.selo
 )
 
 if (codigoPix) {
-await ctx.reply(
-`*💳 | ᴘɪx ᴄᴏᴘɪᴀ ᴇ ᴄᴏʟᴀ:*\n\n\`${codigoPix}\``
-)
+await ctx.reply(ctx.mess.padraoInfo({
+emoji: '💳',
+titulo: 'PIX COPIA E COLA',
+linhas: [
+{ rotulo: '📋 𝙲𝙾́𝙳𝙸𝙶𝙾', valor: `\n\`${codigoPix}\`` }
+]
+}))
 }
 }
 }
@@ -293,3 +301,4 @@ ctx.mess.error()
 }
 }
 }
+)

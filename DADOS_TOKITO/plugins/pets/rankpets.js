@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'rankpets',
 comandos: ['rankpets', 'rankpet'],
 categoria: 'pets',
@@ -51,3 +53,4 @@ pet: u.pet
 return ctx.reply(ctx.mess.petRank(l), l.map(x => x.jid))
 }
 }
+)

@@ -30,7 +30,9 @@
 
 const regras = require('../../sistemas/permissoes')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'unblockcmd',
 comandos: ['unblockcmd'],
 categoria: 'admin',
@@ -54,3 +56,4 @@ return ctx.reply(ctx.mess.blockCmdNao(r.nome))
 return ctx.reply(ctx.mess.blockCmdRemovido(r.nome))
 }
 }
+)

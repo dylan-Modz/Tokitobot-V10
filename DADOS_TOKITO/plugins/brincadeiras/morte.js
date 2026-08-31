@@ -30,7 +30,9 @@
 
 const links = require('../../INFO_DADOS/LOGOS/links_img.json')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'morte',
 comandos: ['morte', 'death', 'morrer', 'preveridade', 'morteidade'],
 categoria: 'brincadeiras',
@@ -48,7 +50,12 @@ if (!isModobn)
 return reply(mess.onlyGroupFun(prefix))
 const nome = String(q || '').trim().split(/\s+/)[0]
 if (!nome)
-return reply(`- 💀 ${prefix}morte nome`)
+return reply(mess.padraoUso({
+emoji: '💀',
+titulo: 'MORTE',
+uso: `${prefix}${ctx.command} nome`,
+descricao: 'Informe um nome para fazer a previsão da brincadeira.'
+}))
 let idade
 try {
 const r = await axios.get(`https://api.agify.io/?name=${encodeURIComponent(nome)}`, { timeout: 15000 })
@@ -59,7 +66,14 @@ catch {
 ;
 if (!idade)
 idade = 40 + Math.floor(Math.random() * 61)
-const caption = `💀 Pessoas com o nome *${nome}* nessa brincadeira chegam a aproximadamente *${idade} anos*.`
+const caption = mess.padraoInfo({
+emoji: '💀',
+titulo: 'PREVISÃO DE IDADE',
+linhas: [
+{ rotulo: '👤 𝙽𝙾𝙼𝙴', valor: nome },
+{ rotulo: '⌛ 𝙸𝙳𝙰𝙳𝙴', valor: `aproximadamente ${idade} anos` }
+]
+})
 const media = String(links.deathcmd || '').trim()
 if (media)
 return tokito.sendMessage(from, {
@@ -71,3 +85,4 @@ contextInfo: canalInfo([sender])
 return reply(caption)
 }
 }
+)

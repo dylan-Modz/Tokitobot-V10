@@ -191,7 +191,9 @@ ativo: chave => ativo(ctx, chave)
 })
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'ativar',
 
 comandos: [
@@ -235,3 +237,4 @@ painel(ctx)
 )
 }
 }
+)

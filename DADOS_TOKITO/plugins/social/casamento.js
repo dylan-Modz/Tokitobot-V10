@@ -71,7 +71,9 @@ return ctx.reply(caption, [de, ctx.sender])
 }
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'casar',
 comandos: [
 'casar',
@@ -186,3 +188,4 @@ return true
 return false
 }
 }
+)

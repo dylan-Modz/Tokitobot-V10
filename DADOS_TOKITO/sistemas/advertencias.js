@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const base = require('../funcoes/base.js')
+const base = require('./grupos.js')
 
 const garantir = dados => {
 if (!Array.isArray(dados) || !dados[0])

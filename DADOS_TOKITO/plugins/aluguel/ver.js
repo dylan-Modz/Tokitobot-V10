@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const aluguel = require('../../sistemas/aluguel')
+const aluguel = require('../../sistemas/aluguel/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'veraluguel',
 comandos: ['veraluguel', 'ver_aluguel'],
 categoria: 'aluguel',
@@ -48,3 +50,4 @@ return ctx.reply(ctx.mess.aluguelNaoTem())
 return ctx.reply(ctx.mess.aluguelVer(g))
 }
 }
+)

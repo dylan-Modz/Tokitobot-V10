@@ -95,7 +95,9 @@ render(s)
 )
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'sairall',
 comandos: ['sairall'],
 categoria: 'dono',
@@ -121,3 +123,4 @@ ctx.mess.onlyOwner()
 return iniciar(ctx)
 }
 }
+)

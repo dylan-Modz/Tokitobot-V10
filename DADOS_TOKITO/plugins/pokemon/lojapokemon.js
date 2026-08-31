@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'lojapokemon',
 comandos: ['lojapokemon', 'lojapoke', 'pokeshop', 'lojararospokemon', 'lojararospoke'],
 categoria: 'pokemon',
@@ -50,3 +52,4 @@ return ctx.reply(ctx.mess.onlyVipUser())
 return ctx.reply(ctx.mess.pokemonShop(itens, ctx.prefix, raro))
 }
 }
+)

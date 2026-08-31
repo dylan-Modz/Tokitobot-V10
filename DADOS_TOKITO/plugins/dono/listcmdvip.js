@@ -30,7 +30,9 @@
 
 const regras = require('../../sistemas/permissoes')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'listcmdvip',
 comandos: ['listcmdvip'],
 categoria: 'dono',
@@ -47,3 +49,4 @@ regras.garantir(ctx.nescessario)
 return ctx.reply(ctx.mess.vipCmdLista(ctx.nescessario.vipcmd))
 }
 }
+)

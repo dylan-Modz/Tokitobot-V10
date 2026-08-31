@@ -28,11 +28,14 @@
  * ============================================================
  */
 
-const criar = require('./_rank')
+const criar = require('./rank')
 
-module.exports = criar({
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand(criar({
 comandos: ['ranknazista', 'ranknazistas'],
 emoji: '⚠️',
 titulo: '𝚁𝙰𝙽𝙺 𝙽𝙰𝚉𝙸𝚂𝚃𝙰',
 img: 'rnknazista'
 })
+)

@@ -30,7 +30,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const getPlugins = () => require('../plugins')
+const getPlugins = () => require('../plugins/index')
 
 const arquivo = path.join(__dirname, '..', 'INFO_DADOS', 'nescessario.json')
 

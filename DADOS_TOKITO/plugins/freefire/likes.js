@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const h = require('./_base')
+const h = require('./base')
 const auto = require('../../sistemas/autolike')
 
 const headers = ctx => ({
@@ -36,7 +36,9 @@ const headers = ctx => ({
 'Content-Type': 'application/json'
 })
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'likes',
 comandos: ['likes', 'autolike'],
 categoria: 'freefire',
@@ -51,16 +53,43 @@ const p = String(ctx.q || '').trim().split(/\s+/)
 if (p[0]?.toLowerCase() === 'del') {
 const uid = String(p[1] || '').replace(/\D/g, '')
 if (!uid)
-return ctx.reply(`Use *${ctx.prefix}autolike del UID*.`)
-return ctx.reply(auto.remover(ctx.sender, uid) ? `✅ Auto Like removido do UID *${uid}*.` : '❌ Esse UID não estava no seu Auto Like.')
+return ctx.reply(ctx.mess.padraoUso({
+emoji: '❤️',
+titulo: 'REMOVER AUTO LIKE',
+uso: `${ctx.prefix}autolike del UID`,
+descricao: 'Informe o UID que deseja remover do Auto Like.'
+}))
+return ctx.reply(
+auto.remover(ctx.sender, uid)
+? ctx.mess.padraoSucesso({
+emoji: '❤️',
+titulo: 'AUTO LIKE REMOVIDO',
+descricao: `O UID ${uid} foi removido do Auto Like.`
+})
+: ctx.mess.padraoAviso({
+emoji: '❤️',
+titulo: 'UID NÃO CADASTRADO',
+descricao: 'Esse UID não estava no seu Auto Like.'
+})
+)
 }
 const uid = String(p[0] || '').replace(/\D/g, '')
 if (!uid)
-return ctx.reply(`Use *${ctx.prefix}autolike UID*.`)
+return ctx.reply(ctx.mess.padraoUso({
+emoji: '❤️',
+titulo: 'AUTO LIKE',
+uso: `${ctx.prefix}autolike UID`,
+descricao: 'Informe o UID que deseja cadastrar no Auto Like.'
+}))
 auto.registrar(ctx.sender, ctx.from, uid)
 auto.processar().catch(() => {
 })
-return ctx.reply(`❤️ Auto Like ativado para *${uid}*.\nO sistema tenta enviar uma vez por dia e não duplica após reiniciar.`)
+return ctx.reply(ctx.mess.padraoSucesso({
+emoji: '❤️',
+titulo: 'AUTO LIKE ATIVADO',
+descricao: `Auto Like ativado para o UID ${uid}.`,
+detalhe: 'O sistema tenta enviar uma vez por dia e não duplica após reiniciar.'
+}))
 }
 const player_id = String(ctx.q || '').trim()
 if (!player_id)
@@ -88,3 +117,4 @@ return ctx.reply(ctx.mess.erroApi(ctx.API_URL))
 }
 }
 }
+)

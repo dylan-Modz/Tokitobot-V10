@@ -30,7 +30,9 @@
 
 const links = require('../../INFO_DADOS/LOGOS/links_img.json')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'rankcasal',
 comandos: ['rankcasalzin', 'rankcasais', 'rankcasal'],
 categoria: 'brincadeiras',
@@ -212,3 +214,4 @@ quoted: selo
 )
 }
 }
+)

@@ -33,7 +33,9 @@ const salvar = ctx => {
 if (typeof ctx.setGp === 'function') ctx.setGp(ctx.dataGp)
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'rgreacao',
 comandos: ['rgreacao', 'registrarreacao', 'rmreacao', 'removerreacao', 'listareacao', 'reacoes'],
 categoria: 'freefire',
@@ -179,3 +181,4 @@ return ctx.reply(
 )
 }
 }
+)

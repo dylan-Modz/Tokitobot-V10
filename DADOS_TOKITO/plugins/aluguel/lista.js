@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const aluguel = require('../../sistemas/aluguel')
+const aluguel = require('../../sistemas/aluguel/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'lista-aluguel',
 comandos: ['lista-aluguel'],
 categoria: 'aluguel',
@@ -46,3 +48,4 @@ return ctx.reply(ctx.mess.onlyOwner())
 return ctx.reply(ctx.mess.aluguelLista(aluguel.ativos()))
 }
 }
+)

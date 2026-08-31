@@ -31,7 +31,9 @@
 const fs = require('fs')
 const path = require('path')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'modoaluguel',
 comandos: ['modoaluguel'],
 categoria: 'aluguel',
@@ -52,3 +54,4 @@ fs.renameSync(t, arq)
 return ctx.reply(ctx.mess.aluguelModo(ctx.nescessario.aluguel))
 }
 }
+)

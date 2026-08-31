@@ -15,9 +15,11 @@
  * ============================================================
  */
 
-const x4 = require('./_x4')
+const x4 = require('./x4')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'modox4',
 comandos: ['modox4', 'modo-x4'],
 categoria: 'freefire',
@@ -43,3 +45,4 @@ await ctx.reagir(ctx.from, f.modox4 ? '✅' : '❌').catch(() => {})
 return ctx.reply(f.modox4 ? ctx.mess.funcaoAtivada(emoji, titulo, descricao) : ctx.mess.funcaoDesativada(emoji, titulo, descricao))
 }
 }
+)

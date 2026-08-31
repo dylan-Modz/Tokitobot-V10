@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'petshop',
 comandos: ['petshop', 'lojapet', 'mercadopet'],
 categoria: 'pets',
@@ -48,3 +50,4 @@ return ctx.reply(ctx.mess.rpgCoinsDesativado(ctx.prefix))
 return ctx.reply(ctx.mess.petShop(r.PETS, ctx.prefix))
 }
 }
+)

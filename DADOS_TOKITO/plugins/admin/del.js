@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { jidNormalizedUser } = require('@whiskeysockets/baileys')
+const { jidNormalizedUser } = require('baileys')
 
 const pegarContexto = info => {
 const m = info?.message || {}
@@ -70,7 +70,9 @@ tokito?.user?.lid
 return ids.includes(autor)
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'del',
 comandos: ['del', 'apagar'],
 categoria: 'admin',
@@ -129,10 +131,12 @@ console.log('[DEL/APAGAR]', error?.stack || error?.message || error)
 
 await reagir(from, '❌').catch(() => {})
 
-return reply(`- ❌ \`𝙴𝚁𝚁𝙾 𝙰𝙾 𝙰𝙿𝙰𝙶𝙰𝚁\`
-
-> *『 ⚠️ 』— ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴀᴘᴀɢᴀʀ ᴇssᴀ ᴍᴇɴsᴀɢᴇᴍ.*`)
+return reply(mess.padraoErro({
+titulo: 'ERRO AO APAGAR',
+descricao: 'Não foi possível apagar essa mensagem.'
+}))
 }
 }
 }
 }
+)

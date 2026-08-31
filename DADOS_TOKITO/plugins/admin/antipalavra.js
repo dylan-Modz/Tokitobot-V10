@@ -30,7 +30,9 @@
 
 const modulos = require('../../sistemas/modulos')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'antipalavra',
 comandos: ['antipalavra', 'addpalavra', 'delpalavra', 'listapalavra'],
 categoria: 'admin',
@@ -83,19 +85,36 @@ f.antipalavra
 )
 }
 if (ctx.command === 'listapalavra')
-return ctx.reply(f.palavrasProibidas.length ? '🚫 *PALAVRAS BLOQUEADAS*\n\n' + f.palavrasProibidas.map((v, i) => `${i + 1}. ${v}`).join('\n') : 'Nenhuma palavra cadastrada.')
+return ctx.reply(ctx.mess.padraoLista({
+emoji: '🚫',
+titulo: 'PALAVRAS BLOQUEADAS',
+itens: f.palavrasProibidas,
+vazio: 'Nenhuma palavra cadastrada neste grupo.'
+}))
 const raw = String(ctx.q || '').trim()
 const n = modulos.norm(raw)
 if (!n)
-return ctx.reply(`Use *${ctx.prefix}${ctx.command} palavra*.`)
+return ctx.reply(ctx.mess.padraoUso({
+emoji: '🚫',
+titulo: 'ANTI PALAVRAS',
+uso: `${ctx.prefix}${ctx.command} palavra`,
+descricao: 'Informe a palavra ou frase que deseja cadastrar ou remover.'
+}))
 if (ctx.command === 'addpalavra') {
 if (!f.palavrasProibidas.some(v => modulos.norm(v) === n))
 f.palavrasProibidas.push(raw)
 ctx.setGp(ctx.dataGp)
-return ctx.reply(`✅ *${raw}* adicionada.`)
+return ctx.reply(ctx.mess.padraoSucesso({
+titulo: 'PALAVRA ADICIONADA',
+descricao: `A palavra ou frase ${raw} foi adicionada ao bloqueio.`
+}))
 }
 f.palavrasProibidas = f.palavrasProibidas.filter(v => modulos.norm(v) !== n)
 ctx.setGp(ctx.dataGp)
-return ctx.reply(`✅ *${raw}* removida.`)
+return ctx.reply(ctx.mess.padraoSucesso({
+titulo: 'PALAVRA REMOVIDA',
+descricao: `A palavra ou frase ${raw} foi removida do bloqueio.`
+}))
 }
 }
+)

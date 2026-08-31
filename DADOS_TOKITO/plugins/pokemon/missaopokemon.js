@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'missaopokemon',
 comandos: ['missaopokemon', 'missaopoke'],
 categoria: 'pokemon',
@@ -62,3 +64,4 @@ r.salvar(ctx)
 return ctx.reply(ctx.mess.pokemonMissao(p, ganho, xp, e.coins))
 }
 }
+)

@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const h = require('./_base')
+const h = require('./base')
 
 const session = ctx => String(ctx.q || '').trim()
 
@@ -37,7 +37,9 @@ NomeDoBot: ctx.NomeDoBot,
 pushname: ctx.pushname || 'Usuário'
 })
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'criarsala',
 comandos: ['criarsala', 'versala', 'jogadoressala', 'expulsarsala', 'iniciarsala', 'pararsala', 'statussalas'],
 categoria: 'freefire',
@@ -229,3 +231,4 @@ return ctx.reply(ctx.mess.erroApi(ctx.API_URL))
 }
 }
 }
+)

@@ -30,7 +30,9 @@
 
 const modulos = require('../../sistemas/modulos')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'blockuser',
 comandos: ['blockuser', 'unblockuser'],
 categoria: 'dono',
@@ -48,17 +50,28 @@ return ctx.reply(ctx.mess.marque())
 const alvo = ctx.normalizar(destino.mencao)
 const bot = ctx.normalizar(ctx.botNumber)
 if (alvo === bot || ctx.numerodono.includes(alvo)) {
-return ctx.reply('❌ Não é possível bloquear o bot ou um dono.')
+return ctx.reply(ctx.mess.padraoAviso({
+titulo: 'BLOQUEIO PROTEGIDO',
+descricao: 'Não é possível bloquear o próprio bot ou um dos donos.'
+}))
 }
 const config = modulos.globalCfg()
 if (ctx.command === 'blockuser') {
 if (!config.bloqueados.includes(alvo))
 config.bloqueados.push(alvo)
 modulos.salvarGlobal(config)
-return ctx.reply(`🚫 @${destino.numero} bloqueado de usar o bot.`, [alvo])
+return ctx.reply(ctx.mess.padraoSucesso({
+emoji: '🚫',
+titulo: 'USUÁRIO BLOQUEADO',
+descricao: `@${destino.numero} foi bloqueado de usar o bot.`
+}), [alvo])
 }
 config.bloqueados = config.bloqueados.filter(item => ctx.normalizar(item) !== alvo)
 modulos.salvarGlobal(config)
-return ctx.reply(`✅ @${destino.numero} desbloqueado.`, [alvo])
+return ctx.reply(ctx.mess.padraoSucesso({
+titulo: 'USUÁRIO DESBLOQUEADO',
+descricao: `@${destino.numero} foi desbloqueado.`
+}), [alvo])
 }
 }
+)

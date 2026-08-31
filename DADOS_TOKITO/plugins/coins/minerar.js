@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'minerar',
 comandos: ['minerar', 'mine'],
 categoria: 'coins',
@@ -58,3 +60,4 @@ r.salvar(ctx)
 return ctx.reply(ctx.mess.coinsMinerado(ctx.sender, ganho, u.coins), [ctx.sender])
 }
 }
+)

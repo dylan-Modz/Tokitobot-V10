@@ -30,7 +30,9 @@
 
 const sistema = require('../../sistemas/dados')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'update',
 comandos: ['update'],
 categoria: 'dono',
@@ -73,6 +75,7 @@ return ctx.reply(ctx.mess.updateInfo({
 instalada: check.local.version || '—',
 disponivel: check.remote.version || '—',
 canal: check.remote.channel || 'stable',
+modo: check.mode || (check.incremental ? 'incremental' : 'clean'),
 disponivelAgora: check.available,
 changelog: Array.isArray(check.remote?.changelog)
 ? check.remote.changelog
@@ -110,7 +113,7 @@ result.filesUpdated || 0,
 result.filesDeleted || 0
 ))
 
-return setTimeout(() => process.exit(0), 1500)
+return setTimeout(() => process.exit(20), 1500)
 } catch (error) {
 console.log('[ UPDATE • TOKITO ]', error.message || error)
 return ctx.reply(ctx.mess.updateError())
@@ -123,7 +126,7 @@ const result = sistema.rollback()
 
 await ctx.reply(ctx.mess.updateRollbackSuccess(result.version))
 
-return setTimeout(() => process.exit(0), 1500)
+return setTimeout(() => process.exit(20), 1500)
 } catch (error) {
 console.log('[ ROLLBACK • TOKITO ]', error.message || error)
 return ctx.reply(ctx.mess.updateRollbackError())
@@ -133,3 +136,4 @@ return ctx.reply(ctx.mess.updateRollbackError())
 return ctx.reply(ctx.mess.updateUsage(ctx.prefix))
 }
 }
+)

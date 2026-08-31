@@ -15,8 +15,8 @@
  * ============================================================
  */
 
-const { proto, generateWAMessageFromContent } = require('@whiskeysockets/baileys')
-const x4 = require('./_x4')
+const { proto, generateWAMessageFromContent } = require('baileys')
+const x4 = require('./x4')
 
 const notas = ctx => {
 const f = x4.garantir(ctx)
@@ -51,7 +51,9 @@ messageParamsJson: JSON.stringify({})
 await ctx.tokito.relayMessage(ctx.from, msg.message, { messageId: msg.key.id })
 }
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'nota',
 comandos: ['nota', 'notax4', 'anotacao', 'anotacoes'],
 categoria: 'freefire',
@@ -63,7 +65,10 @@ categoria: 'freefire'
 },
 async executar(ctx) {
 if (!ctx.isGroup) return ctx.reply(ctx.mess.sogrupo())
-if (!x4.ativo(ctx)) return ctx.reply(`- ⚠️ \`𝙼𝙾𝙳𝙾 𝚇𝟺\`\n\n> *ᴀᴛɪᴠᴇ ᴘʀɪᴍᴇɪʀᴏ ᴄᴏᴍ ${ctx.prefix}modox4 1.*`)
+if (!x4.ativo(ctx)) return ctx.reply(ctx.mess.padraoAviso({
+titulo: 'MODO X4',
+descricao: `Ative primeiro com ${ctx.prefix}modox4 1.`
+}))
 if (!x4.adm(ctx)) return ctx.reply(ctx.mess.soadm())
 
 const lista = notas(ctx)
@@ -73,28 +78,55 @@ const acao = String(acaoRaw || '').toLowerCase()
 
 if (acao === 'add') {
 const texto = resto.join(' ').trim()
-if (!texto) return ctx.reply(`- 📝 \`𝙰𝙳𝙸𝙲𝙸𝙾𝙽𝙰𝚁 𝙽𝙾𝚃𝙰\`\n\n> *ᴜsᴇ ${ctx.prefix}nota add sua anotação.*`)
-if (lista.length >= 20) return ctx.reply('- ⚠️ `𝙻𝙸𝙼𝙸𝚃𝙴`\n\n> *ᴏ ʟɪᴍɪᴛᴇ ᴇ́ 20 ᴀɴᴏᴛᴀᴄ̧ᴏ̃ᴇs.*')
+if (!texto) return ctx.reply(ctx.mess.padraoUso({
+emoji: '📝',
+titulo: 'ADICIONAR NOTA',
+uso: `${ctx.prefix}nota add sua anotação`,
+descricao: 'Digite a anotação que deseja salvar.'
+}))
+if (lista.length >= 20) return ctx.reply(ctx.mess.padraoAviso({
+titulo: 'LIMITE DE NOTAS',
+descricao: 'O limite é de 20 anotações.'
+}))
 lista.push(texto.slice(0, 1000))
 ctx.setGp(ctx.dataGp)
-return ctx.reply(`- ✅ \`𝙽𝙾𝚃𝙰 𝚂𝙰𝙻𝚅𝙰\`\n\n> *『 ${lista.length} 』— ᴀɴᴏᴛᴀᴄ̧ᴀ̃ᴏ sᴀʟᴠᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ.*`)
+return ctx.reply(ctx.mess.padraoSucesso({
+emoji: '📝',
+titulo: 'NOTA SALVA',
+descricao: `Anotação ${lista.length} salva com sucesso.`
+}))
 }
 
 if (['del', 'apagar', 'remover'].includes(acao)) {
 const n = Number(resto[0])
-if (!Number.isInteger(n) || n < 1 || n > lista.length) return ctx.reply('- ❌ `𝙽𝙾𝚃𝙰 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙰`')
+if (!Number.isInteger(n) || n < 1 || n > lista.length) return ctx.reply(ctx.mess.padraoErro({
+titulo: 'NOTA INVÁLIDA',
+descricao: 'Informe o número de uma anotação existente.'
+}))
 lista.splice(n - 1, 1)
 ctx.setGp(ctx.dataGp)
-return ctx.reply('- ✅ `𝙽𝙾𝚃𝙰 𝚁𝙴𝙼𝙾𝚅𝙸𝙳𝙰`')
+return ctx.reply(ctx.mess.padraoSucesso({
+emoji: '📝',
+titulo: 'NOTA REMOVIDA',
+descricao: 'A anotação foi removida com sucesso.'
+}))
 }
 
 if (acao === 'enviar') {
 const n = Number(resto[0])
-if (!Number.isInteger(n) || n < 1 || n > lista.length) return ctx.reply('- ❌ `𝙽𝙾𝚃𝙰 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙰`')
+if (!Number.isInteger(n) || n < 1 || n > lista.length) return ctx.reply(ctx.mess.padraoErro({
+titulo: 'NOTA INVÁLIDA',
+descricao: 'Informe o número de uma anotação existente.'
+}))
 return ctx.reply(lista[n - 1])
 }
 
-if (!lista.length) return ctx.reply(`- 📝 \`𝚂𝙴𝙼 𝙰𝙽𝙾𝚃𝙰𝙲̧𝙾̃𝙴𝚂\`\n\n> *ᴜsᴇ ${ctx.prefix}nota add sua anotação.*`)
+if (!lista.length) return ctx.reply(ctx.mess.padraoAviso({
+emoji: '📝',
+titulo: 'SEM ANOTAÇÕES',
+descricao: `Use ${ctx.prefix}nota add sua anotação para adicionar a primeira.`
+}))
 return seletor(ctx, lista)
 }
 }
+)

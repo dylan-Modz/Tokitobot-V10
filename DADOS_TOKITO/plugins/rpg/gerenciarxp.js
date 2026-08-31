@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const r = require('../../sistemas/rpg')
+const r = require('../../sistemas/rpg/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'addxp',
 comandos: ['addxp', 'addlevel', 'tirarxp', 'removexp', 'tirarlevel'],
 categoria: 'dono',
@@ -58,3 +60,4 @@ r.salvar(ctx)
 return ctx.reply(ctx.mess.levelGerenciado(alvo, u, rem), [alvo])
 }
 }
+)

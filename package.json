@@ -1,14 +1,16 @@
 {
   "name": "TokitoBot-Md",
-  "version": "10.0.0",
+  "version": "10.0.70",
   "description": "Qualquer dúvida chama no WhatsApp: +55 11 97543-1163",
-  "main": "DADOS_TOKITO/connect.js",
+  "main": "tokito.js",
   "scripts": {
-    "start": "sh start.sh"
+    "start": "node tokito.js",
+    "update": "node tokito.js up",
+    "install:bot": "bash DADOS_TOKITO/database/lib/install.sh"
   },
   "keywords": [],
   "author": "dylanModz",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "SEE LICENSE IN DADOS_TOKITO/LICENSE",
   "type": "commonjs",
   "bugs": {
     "url": "https://github.com/dylan-Modz"
@@ -16,16 +18,19 @@
   "homepage": "https://tokito-apis.com.br",
   "dependencies": {
     "@hapi/boom": "^10.0.1",
-    "@whiskeysockets/baileys": "7.0.0-rc14",
     "acrcloud": "^1.4.0",
     "axios": "^1.13.2",
+    "baileys": "github:dylan-Modz/Baileys#main",
     "cfonts": "^3.3.1",
     "cheerio": "^1.1.2",
     "colors": "^1.4.0",
+    "file-type": "^16.5.4",
+    "fluent-ffmpeg": "^2.1.3",
     "form-data": "^4.0.4",
     "linkifyjs": "^4.3.2",
     "node-cache": "^5.1.2",
     "node-fetch": "^2.7.0",
+    "node-webpmux": "^3.2.1",
     "pino": "^10.3.1",
     "qrcode-terminal": "^0.12.0",
     "uuid": "^9.0.1",

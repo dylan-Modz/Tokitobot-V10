@@ -33,7 +33,9 @@ const path = require('path')
 
 const banco = JSON.parse(fs.readFileSync(path.join(__dirname, '../../database/brincadeiras/eununca.json'), 'utf8'))
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'eununca',
 comandos: ['eununca'],
 categoria: 'brincadeiras',
@@ -50,7 +52,11 @@ if (!ctx.isModobn)
 return ctx.reply(ctx.mess.onlyGroupFun(ctx.prefix))
 const pergunta = banco[Math.floor(Math.random() * banco.length)]
 if (!pergunta)
-return ctx.reply('❌ Banco de perguntas vazio.')
+return ctx.reply(ctx.mess.padraoAviso({
+emoji: '🎲',
+titulo: 'BANCO VAZIO',
+descricao: 'O banco de perguntas está vazio.'
+}))
 await ctx.reagir(ctx.from, '🩸').catch(() => {
 })
 return ctx.tokito.sendMessage(ctx.from, {
@@ -62,3 +68,4 @@ selectableCount: 1
 }, { quoted: ctx.selo })
 }
 }
+)

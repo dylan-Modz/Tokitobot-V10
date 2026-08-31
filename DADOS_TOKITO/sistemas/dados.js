@@ -41,6 +41,7 @@ const STATE_DIR = path.join(ROOT, 'DADOS_TOKITO', 'database', 'sistemas')
 const STATE_FILE = path.join(STATE_DIR, 'estado.json')
 const BACKUP_DIR = path.join(STATE_DIR, 'backup-update')
 const CONFIG_FILE = path.join(INFO, 'config-all.json')
+const NESS_FILE = path.join(INFO, 'nescessario.json')
 const UPDATE_FILE = path.join(INFO, 'update.json')
 
 const PUBLIC_KEY = Buffer.from('LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUNvd0JRWURLMlZ3QXlFQW5OcGdWWU5nL1U0OE1odHVhL04xYmJoYjNORXBOWXRRM05qMFBiRTJxdGM9Ci0tLS0tRU5EIFBVQkxJQyBLRVktLS0tLQo=', 'base64').toString('utf8')
@@ -56,8 +57,12 @@ const PROTECTED = [
 'DADOS_TOKITO/database/membros/',
 'DADOS_TOKITO/database/aluguel/',
 'DADOS_TOKITO/database/brincadeiras/',
+'DADOS_TOKITO/database/detector/',
 'DADOS_TOKITO/database/sistemas/',
-'DADOS_TOKITO/funcoes/jogos/partidas/',
+'DADOS_TOKITO/database/jogos/partidas/',
+'DADOS_TOKITO/plugins/jogos/partidas/',
+'DADOS_TOKITO/database/ia/',
+'DADOS_TOKITO/database/midiabv/',
 'DADOS_TOKITO/INFO_DADOS/config-all.json',
 'DADOS_TOKITO/INFO_DADOS/nescessario.json',
 'DADOS_TOKITO/INFO_DADOS/LOGOS/'
@@ -82,6 +87,37 @@ const tmp = `${file}.${process.pid}.tmp`
 fs.writeFileSync(tmp, JSON.stringify(data, null, 2) + '\n')
 fs.renameSync(tmp, file)
 return data
+}
+
+const mesclarPadroes = (padrao, atual) => {
+if (Array.isArray(padrao)) {
+return Array.isArray(atual) ? atual : padrao
+}
+
+if (!padrao || typeof padrao !== 'object') {
+return atual === undefined ? padrao : atual
+}
+
+const base = atual && typeof atual === 'object' && !Array.isArray(atual)
+? atual
+: {}
+
+const saida = { ...padrao }
+
+for (const [chave, valor] of Object.entries(base)) {
+if (
+Object.prototype.hasOwnProperty.call(padrao, chave) &&
+padrao[chave] && typeof padrao[chave] === 'object' && !Array.isArray(padrao[chave]) &&
+valor && typeof valor === 'object' && !Array.isArray(valor)
+) {
+saida[chave] = mesclarPadroes(padrao[chave], valor)
+continue
+}
+
+saida[chave] = valor
+}
+
+return saida
 }
 
 const sha256 = value => crypto.createHash('sha256').update(value).digest('hex')
@@ -258,6 +294,7 @@ return {
 allowed: true,
 online: true,
 license: result.license,
+plan: result.data?.plan || null,
 message: `Licença validada · ${result.data?.plan?.nome || 'Plano ativo'}`
 }
 } catch (error) {
@@ -384,6 +421,27 @@ if (A[i] < B[i]) return -1
 return 0
 }
 
+function modoUpdate(info = {}) {
+const modo = String(info.mode || info.updateMode || '').trim().toLowerCase()
+return ['clean', 'full', 'complete', 'completo'].includes(modo) ? 'clean' : 'incremental'
+}
+
+function deveAvisarUpdate(version) {
+const valor = String(version || '').trim()
+if (!valor) return false
+return String(state().lastNotifiedVersion || '') !== valor
+}
+
+function registrarAvisoUpdate(version) {
+const valor = String(version || '').trim()
+if (!valor) return state()
+
+return saveState({
+lastNotifiedVersion: valor,
+lastNotifiedAt: new Date().toISOString()
+})
+}
+
 function rawUpdateUrl(info = localInfo()) {
 const repo = String(info.repository || '').trim()
 const ref = String(info.ref || 'main').trim()
@@ -485,6 +543,7 @@ throw new Error('O update.json remoto aponta para outro repositório.')
 }
 
 const pending = pendingOperations(remote, local.version)
+const modo = modoUpdate(remote)
 
 return {
 ok: true,
@@ -492,7 +551,8 @@ available: compareVersions(remote.version, local.version) > 0,
 local,
 remote,
 apiFalhou,
-incremental: pending.incremental,
+mode: modo,
+incremental: modo === 'clean' ? false : pending.incremental,
 pendingFiles: pending.operations.filter(item => item.type === 'file'),
 pendingDelete: pending.operations.filter(item => item.type === 'delete'),
 pendingReleases: pending.releases
@@ -606,7 +666,7 @@ const normalizedRel = value => String(value || '')
 function isProtected(rel) {
 const item = normalizedRel(rel)
 
-if (item.startsWith('node_modules/@whiskeysockets/baileys/')) return false
+if (item.startsWith('node_modules/baileys/')) return false
 
 return PROTECTED.some(rule => {
 if (rule.endsWith('/'))
@@ -644,8 +704,12 @@ file,
 '--exclude=./DADOS_TOKITO/database/membros',
 '--exclude=./DADOS_TOKITO/database/aluguel',
 '--exclude=./DADOS_TOKITO/database/brincadeiras',
+'--exclude=./DADOS_TOKITO/database/detector',
 '--exclude=./DADOS_TOKITO/database/sistemas',
-'--exclude=./DADOS_TOKITO/funcoes/jogos/partidas',
+'--exclude=./DADOS_TOKITO/database/jogos/partidas',
+'--exclude=./DADOS_TOKITO/plugins/jogos/partidas',
+'--exclude=./DADOS_TOKITO/database/ia',
+'--exclude=./DADOS_TOKITO/database/midiabv',
 '--exclude=./DADOS_TOKITO/INFO_DADOS/config-all.json',
 '--exclude=./DADOS_TOKITO/INFO_DADOS/nescessario.json',
 '--exclude=./DADOS_TOKITO/INFO_DADOS/LOGOS',
@@ -697,6 +761,83 @@ out.push(normalizedRel(path.relative(base, full)))
 }
 
 return out
+}
+
+function limparEstruturaOficial(dir = ROOT, base = ROOT) {
+if (!fs.existsSync(dir)) return
+
+for (const name of fs.readdirSync(dir)) {
+const full = path.join(dir, name)
+const rel = normalizedRel(path.relative(base, full))
+
+if (!rel || isProtected(rel)) continue
+
+const stat = fs.lstatSync(full)
+
+if (stat.isDirectory()) {
+limparEstruturaOficial(full, base)
+
+if (fs.existsSync(full) && fs.readdirSync(full).length === 0) {
+fs.rmSync(full, { recursive: true, force: true })
+}
+
+continue
+}
+
+fs.rmSync(full, { force: true })
+}
+}
+
+function assinaturaDependencias(root = ROOT) {
+const pkg = readJson(path.join(root, 'package.json'), {})
+
+return sha256(JSON.stringify({
+dependencies: pkg.dependencies || {},
+devDependencies: pkg.devDependencies || {},
+optionalDependencies: pkg.optionalDependencies || {},
+peerDependencies: pkg.peerDependencies || {}
+}))
+}
+
+function instalarDependenciasAusentes(onProgress = () => {}, opcoes = {}) {
+const helper = path.join(ROOT, 'DADOS_TOKITO', 'database', 'lib', 'deps.js')
+if (!fs.existsSync(helper)) return { ok: true, installed: false }
+
+const force = opcoes.force === true
+
+if (!force) {
+const check = spawnSync(process.execPath, [helper], {
+cwd: ROOT,
+encoding: 'utf8',
+stdio: 'pipe'
+})
+
+if (check.status === 0) {
+return { ok: true, installed: false }
+}
+
+if (check.status !== 10) {
+throw new Error(String(check.stderr || check.stdout || 'Falha ao verificar dependências.').trim())
+}
+}
+
+onProgress(force
+? 'Atualizando os módulos necessários para a nova versão...'
+: 'Instalando módulos necessários para a nova versão...')
+
+const args = [helper, '--install']
+if (force) args.push('--force')
+
+const install = spawnSync(process.execPath, args, {
+cwd: ROOT,
+stdio: 'inherit'
+})
+
+if (install.status !== 0) {
+throw new Error('Não foi possível instalar todas as dependências da nova versão.')
+}
+
+return { ok: true, installed: true }
 }
 
 function copyIncoming(srcRoot, remote) {
@@ -1182,6 +1323,34 @@ String(check.remote.version || '')
 throw new Error('A versão do pacote não corresponde ao update.json remoto.')
 }
 
+const dependenciasAntes = assinaturaDependencias(ROOT)
+const configAtual = readJson(CONFIG_FILE, {})
+const necessarioAtual = readJson(NESS_FILE, {})
+const configPadraoNovo = readJson(
+path.join(srcRoot, 'DADOS_TOKITO', 'INFO_DADOS', 'config-all.json'),
+{}
+)
+const necessarioPadraoNovo = readJson(
+path.join(srcRoot, 'DADOS_TOKITO', 'INFO_DADOS', 'nescessario.json'),
+{}
+)
+
+onProgress('Substituindo a estrutura antiga pela nova versão...')
+limparEstruturaOficial()
+added = copyIncoming(srcRoot, check.remote)
+
+// Mantém os dados do usuário e acrescenta somente novos campos padrão da versão.
+writeJson(CONFIG_FILE, mesclarPadroes(configPadraoNovo, configAtual))
+writeJson(NESS_FILE, mesclarPadroes(necessarioPadraoNovo, necessarioAtual))
+
+writeJson(
+UPDATE_FILE,
+check.remote
+)
+
+const dependencias = instalarDependenciasAusentes(onProgress, {
+force: dependenciasAntes !== assinaturaDependencias(ROOT)
+})
 
 saveState({
 lastBackup: backup,
@@ -1189,7 +1358,9 @@ lastBackupType: 'full',
 lastUpdateAt: new Date().toISOString(),
 previousVersion: check.local.version,
 installedVersion: check.remote.version,
-addedByLastUpdate: added
+addedByLastUpdate: added,
+lastUpdateMode: 'clean',
+dependenciesInstalled: Boolean(dependencias?.installed)
 })
 
 return {
@@ -1197,7 +1368,10 @@ updated: true,
 from: check.local.version,
 version: check.remote.version,
 backup,
-remote: check.remote
+remote: check.remote,
+mode: 'clean',
+filesUpdated: added.length,
+filesDeleted: 0
 }
 } catch (error) {
 if (backup && fs.existsSync(backup)) {
@@ -1258,5 +1432,8 @@ instalarUpdate,
 rollback,
 localInfo,
 localLicenseStatus,
-state
+state,
+deveAvisarUpdate,
+registrarAvisoUpdate,
+modoUpdate
 }

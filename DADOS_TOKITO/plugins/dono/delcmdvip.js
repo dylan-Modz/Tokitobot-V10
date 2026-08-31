@@ -30,7 +30,9 @@
 
 const regras = require('../../sistemas/permissoes')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'delcmdvip',
 comandos: ['delcmdvip'],
 categoria: 'dono',
@@ -52,3 +54,4 @@ return ctx.reply(ctx.mess.vipCmdNao(r.nome))
 return ctx.reply(ctx.mess.vipCmdRemovido(r.nome))
 }
 }
+)

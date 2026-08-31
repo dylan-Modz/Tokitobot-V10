@@ -1,4 +1,8 @@
-module.exports = {
+
+
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'infoplanos',
 comandos: ['infoplanos'],
 categoria: 'aluguel',
@@ -19,3 +23,4 @@ return reply(mess.infoplanos(prefix))
 }
 }
 }
+)

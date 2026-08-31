@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 comandos: ['soadm', 'so_adm'],
 async executar(ctx) {
 const { isGroup, isGroupAdmins, isBotGroupAdmins, q, dataGp, setGp, reply, mess, prefix, command, reagir, from } = ctx
@@ -54,3 +56,4 @@ await reagir(from, acao === '1' ? '✅' : '❌')
 return reply(mess.soadmAlterado(acao === '1'))
 }
 }
+)

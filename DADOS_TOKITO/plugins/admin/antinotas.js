@@ -32,7 +32,9 @@ const emoji = '💳'
 const titulo = '𝙰𝙽𝚃𝙸 𝙽𝙾𝚃𝙰𝚂'
 const descricao = 'ʙʟᴏǫᴜᴇɪᴀ ᴍᴇɴsᴀɢᴇɴs ᴇ ɴᴏᴛᴀs ᴅᴇ ᴘᴀɢᴀᴍᴇɴᴛᴏ sᴜsᴘᴇɪᴛᴀs.'
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'antinotas',
 
 comandos: [
@@ -91,3 +93,4 @@ ativado
 )
 }
 }
+)

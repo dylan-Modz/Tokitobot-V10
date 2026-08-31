@@ -7,7 +7,7 @@
 const fs = require('fs')
 const path = require('path')
 const crypto = require('crypto')
-const mess = require('../../database/lib/global.js')
+const mess = require('../../mensagens/mensagens.js')
 const { criarPagamentoPix, verificarPix, tokenConfigurado } = require('../../src/pix')
 
 const raiz = path.join(__dirname, '..', '..', 'database', 'aluguel')
@@ -100,6 +100,70 @@ ultimaAtualizacao: new Date().toISOString()
 }
 
 list.push(g)
+}
+
+salvar(arquivos.grupos, list)
+return g
+}
+
+const savegp = (id, dados = {}) => {
+const grupoId = String(id || '').trim()
+if (!grupoId) return null
+
+let list = ativos()
+let g = list.find(x => x.id === grupoId)
+const agora = new Date().toISOString()
+const expiraAtual = g?.expiraEm ? new Date(g.expiraEm).getTime() : 0
+const aluguelPagoAtivo = Boolean(
+g &&
+g.ativo !== false &&
+expiraAtual > Date.now()
+)
+
+const grupoNome = String(dados.nome || dados.grupoNome || '').trim()
+const linkGrupo = String(dados.link || dados.linkGrupo || '').trim()
+const salvoPor = String(dados.salvoPor || dados.comprador || '').trim()
+const quantidade = Math.max(0, Number(dados.quantidade ?? dados.quantidadeMembros ?? 0) || 0)
+
+if (!g) {
+g = {
+id: grupoId,
+ativo: true,
+planoNome: 'SaveGP',
+duracaoDias: 0,
+inicio: agora,
+expiraEm: null,
+linkGrupo,
+comprador: salvoPor,
+ultimoComprador: salvoPor,
+grupoNome,
+quantidadeMembros: quantidade,
+tipoRegistro: 'savegp',
+salvoEm: agora,
+ultimaAtualizacao: agora
+}
+
+list.push(g)
+} else {
+g.grupoNome = grupoNome || g.grupoNome || ''
+g.quantidadeMembros = quantidade || g.quantidadeMembros || 0
+g.linkGrupo = linkGrupo || g.linkGrupo || ''
+g.salvoPor = salvoPor || g.salvoPor || ''
+g.salvoEm = agora
+g.ultimaAtualizacao = agora
+
+/*
+ * Nunca transforma um aluguel pago e ainda válido em permanente.
+ * Se o registro não estiver com aluguel pago ativo, o SaveGP deixa
+ * o grupo autorizado sem vencimento e elimina a necessidade do rgaluguel.
+ */
+if (!aluguelPagoAtivo) {
+g.ativo = true
+g.planoNome = 'SaveGP'
+g.duracaoDias = 0
+g.expiraEm = null
+g.tipoRegistro = 'savegp'
+}
 }
 
 salvar(arquivos.grupos, list)
@@ -546,7 +610,7 @@ processar().catch(() => {})
 
 module.exports = {
 arquivos, ler, salvar, planos, extrairInvite, ativos, autorizado,
-registrar, remover, pedidoUsuario, salvarPedido, atualizarPedido,
+registrar, savegp, remover, pedidoUsuario, salvarPedido, atualizarPedido,
 criarPix, processar, iniciar, tokenConfigurado, extrairPixCopiaCola,
 normalizarJid, mesmoJid, botEstaNoGrupo, resolverGrupoId,
 tentarEntrarGrupo, finalizarAluguel

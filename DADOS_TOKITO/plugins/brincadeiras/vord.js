@@ -33,7 +33,9 @@ const path = require('path')
 
 const banco = JSON.parse(fs.readFileSync(path.join(__dirname, '../../database/brincadeiras/vord.json'), 'utf8'))
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'vord',
 comandos: ['vord'],
 categoria: 'brincadeiras',
@@ -49,7 +51,12 @@ if (!ctx.isModobn)
 return ctx.reply(ctx.mess.onlyGroupFun(ctx.prefix))
 const escolha = String(ctx.q || '').trim().toLowerCase()
 if (!['verdade', 'desafio'].includes(escolha))
-return ctx.reply('• Escolha *verdade* ou *desafio*')
+return ctx.reply(ctx.mess.padraoUso({
+emoji: '🎲',
+titulo: 'VERDADE OU DESAFIO',
+uso: `${ctx.prefix}${ctx.command} verdade | desafio`,
+descricao: 'Escolha verdade ou desafio para continuar.'
+}))
 const lista = escolha === 'verdade' ? banco.verdades : banco.desafios
 const item = lista[Math.floor(Math.random() * lista.length)]
 await ctx.reagir(ctx.from, escolha === 'verdade' ? '🤔' : '🔥').catch(() => {
@@ -57,3 +64,4 @@ await ctx.reagir(ctx.from, escolha === 'verdade' ? '🤔' : '🔥').catch(() => 
 return ctx.reply(escolha === 'verdade' ? `*⸺͟͞ꪶ𝐄 𝐕𝐄𝐑𝐃𝐀𝐃𝐄 𝐐𝐔𝐄↴*\n\n${item}` : `*⸺͟͞ꪶ𝐃𝐄𝐒𝐀𝐅𝐈𝐎 𝐕𝐎𝐂𝐄↴*\n\n${item}`)
 }
 }
+)

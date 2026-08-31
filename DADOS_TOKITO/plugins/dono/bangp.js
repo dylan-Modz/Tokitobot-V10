@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'bangp',
 comandos: ['bangp', 'unbangp'],
 categoria: 'dono',
@@ -44,6 +46,14 @@ if (!ctx.SoDono)
 return ctx.reply(ctx.mess.onlyOwner())
 ctx.dataGp[0].funcoes.bangp = ctx.command === 'bangp'
 ctx.setGp(ctx.dataGp)
-return ctx.reply(`🧊 Grupo ${ctx.command === 'bangp' ? 'bloqueado para comandos' : 'desbloqueado'}.`)
+return ctx.reply(ctx.mess.padraoStatus({
+emoji: '🧊',
+titulo: 'BANGP',
+ativo: ctx.command === 'bangp',
+descricao: ctx.command === 'bangp'
+? 'Os comandos foram bloqueados neste grupo.'
+: 'Os comandos foram liberados novamente neste grupo.'
+}))
 }
 }
+)

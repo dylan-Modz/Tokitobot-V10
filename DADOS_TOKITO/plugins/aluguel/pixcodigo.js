@@ -28,9 +28,11 @@
  * ============================================================
  */
 
-const aluguel = require('../../sistemas/aluguel')
+const aluguel = require('../../sistemas/aluguel/index')
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'pixcodigo',
 comandos: ['pixcodigo'],
 categoria: 'aluguel',
@@ -47,3 +49,4 @@ return ctx.reply(ctx.mess.aluguelSemPedido(ctx.prefix))
 return ctx.reply(item.qr_code || ctx.mess.error())
 }
 }
+)

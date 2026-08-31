@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'casalgif',
 comandos: ['casalgif'],
 categoria: 'brincadeiras',
@@ -46,7 +48,11 @@ if (!isModobn)
 return reply(mess.onlyGroupFun(prefix))
 const membros = (groupMembers || []).map(x => x.id || x).filter(Boolean)
 if (membros.length < 2)
-return reply('- ❌ Preciso de pelo menos 2 membros.')
+return reply(mess.padraoAviso({
+emoji: '💘',
+titulo: 'MEMBROS INSUFICIENTES',
+descricao: 'Preciso de pelo menos 2 membros no grupo.'
+}))
 await reagir(from, '💘').catch(() => {
 })
 const p1 = membros[Math.floor(Math.random() * membros.length)]
@@ -63,7 +69,14 @@ return await tokito.sendMessage(from, {
 video: { url },
 mimetype: 'video/mp4',
 gifPlayback: true,
-caption: `💘 @${p1.split('@')[0]} + @${p2.split('@')[0]}: *${n}%*`,
+caption: mess.padraoInfo({
+emoji: '💘',
+titulo: 'CASAL',
+linhas: [
+{ rotulo: '💞 𝙲𝙰𝚂𝙰𝙻', valor: `@${p1.split('@')[0]} + @${p2.split('@')[0]}` },
+{ rotulo: '📊 𝙲𝙾𝙼𝙱𝙸𝙽𝙰𝙲̧𝙰̃𝙾', valor: `${n}%` }
+]
+}),
 contextInfo: canalInfo([p1, p2])
 }, { quoted: selo })
 }
@@ -79,3 +92,4 @@ mess.erroApi(API_URL)
 }
 }
 }
+)

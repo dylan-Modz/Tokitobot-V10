@@ -1,4 +1,8 @@
-module.exports = {
+
+
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
   nome: 'soli',
   comandos: ['soli', 'solicitacao', 'solicitacoes'],
   categoria: 'admin',
@@ -86,3 +90,4 @@ module.exports = {
     }
   }
 }
+)

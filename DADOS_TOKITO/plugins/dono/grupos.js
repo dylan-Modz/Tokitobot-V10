@@ -28,7 +28,10 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+const aluguel = require('../../sistemas/aluguel/index')
+
+dylan.setCommand({
 nome: 'entrar',
 comandos: ['entrar', 'sairgp'],
 categoria: 'dono',
@@ -43,18 +46,90 @@ return ctx.reply(ctx.mess.onlyOwner())
 if (ctx.command === 'sairgp') {
 if (!ctx.isGroup)
 return ctx.reply(ctx.mess.sogrupo())
-await ctx.reply('👋 Saindo do grupo...')
+await ctx.reply(ctx.mess.padraoAviso({
+emoji: '👋',
+titulo: 'SAINDO DO GRUPO',
+descricao: 'Estou saindo deste grupo.'
+}))
 return ctx.tokito.groupLeave(ctx.from)
 }
 const m = String(ctx.q || '').match(/chat\.whatsapp\.com\/([A-Za-z0-9_-]+)/i)
 if (!m)
-return ctx.reply(`Use *${ctx.prefix}entrar https://chat.whatsapp.com/SEUCODIGO*.`)
+return ctx.reply(ctx.mess.padraoUso({
+emoji: '🔗',
+titulo: 'ENTRAR NO GRUPO',
+uso: `${ctx.prefix}entrar https://chat.whatsapp.com/SEUCODIGO`,
+descricao: 'Informe um link válido de convite do WhatsApp.'
+}))
 try {
-const jid = await ctx.tokito.groupAcceptInvite(m[1])
-return ctx.reply(`✅ Entrei no grupo: ${jid}`)
+const link = String(ctx.q || '').trim()
+const code = m[1]
+
+let inviteInfo = null
+
+try {
+inviteInfo = await ctx.tokito.groupGetInviteInfo(code)
+} catch {}
+
+const resposta = await ctx.tokito.groupAcceptInvite(code)
+
+let jid = String(
+typeof resposta === 'string'
+? resposta
+: resposta?.id || resposta?.jid || resposta?.groupJid || inviteInfo?.id || inviteInfo?.jid || inviteInfo?.groupJid || ''
+).trim()
+
+let metadata = null
+
+if (jid) {
+try {
+metadata = await ctx.tokito.groupMetadata(jid)
+} catch {}
+}
+
+const nome = String(
+metadata?.subject ||
+inviteInfo?.subject ||
+inviteInfo?.name ||
+'Grupo'
+).trim()
+
+const quantidade = Number(
+metadata?.participants?.length ||
+inviteInfo?.participants?.length ||
+inviteInfo?.size ||
+inviteInfo?.participantCount ||
+inviteInfo?.participantsCount ||
+0
+)
+
+if (!jid) {
+jid = String(inviteInfo?.id || inviteInfo?.jid || inviteInfo?.groupJid || '').trim()
+}
+
+if (jid) {
+aluguel.savegp(jid, {
+nome,
+quantidade,
+link,
+salvoPor: ctx.sender
+})
+}
+
+return ctx.reply(ctx.mess.grupoEntrou({
+nome,
+quantidade,
+link,
+id: jid
+}))
 }
 catch (e) {
-return ctx.reply(`❌ Não consegui entrar no grupo: ${e.message}`)
+return ctx.reply(ctx.mess.padraoErro({
+titulo: 'ERRO AO ENTRAR',
+descricao: 'Não consegui entrar no grupo.',
+detalhe: e?.message || 'Erro desconhecido.'
+}))
 }
 }
 }
+)

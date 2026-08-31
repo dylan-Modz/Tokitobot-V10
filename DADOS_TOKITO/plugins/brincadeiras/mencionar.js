@@ -28,7 +28,9 @@
  * ============================================================
  */
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'mencionar',
 comandos: ['mencionar'],
 categoria: 'brincadeiras',
@@ -40,15 +42,32 @@ requisitos: 'Modo Brincadeiras'
 async executar(ctx) {
 const q = String(ctx.q || '').trim()
 if (!q)
-return ctx.reply(`Você usou o comando de forma incorreta, use: *${ctx.prefix}mencionar corno*`)
+return ctx.reply(ctx.mess.padraoUso({
+emoji: '👤',
+titulo: 'MENCIONAR',
+uso: `${ctx.prefix}mencionar corno`,
+descricao: 'Informe o que deseja sortear entre os membros do grupo.'
+}))
 if (!ctx.isGroup)
-return ctx.reply('Esta brincadeira só funciona em grupos.')
+return ctx.reply(ctx.mess.sogrupo())
 if (!ctx.isModobn)
 return ctx.reply(ctx.mess.onlyGroupFun(ctx.prefix))
 const membros = [...new Set((ctx.groupMembers || []).map(v => ctx.nJid(v)).filter(Boolean))]
 if (!membros.length)
-return ctx.reply('❌ Não encontrei membros no grupo.')
+return ctx.reply(ctx.mess.padraoAviso({
+emoji: '👥',
+titulo: 'SEM MEMBROS',
+descricao: 'Não encontrei membros disponíveis neste grupo.'
+}))
 const alvo = membros[Math.floor(Math.random() * membros.length)]
-return ctx.reply(`Estou mencionando o *${q}* do grupo: *@${alvo.split('@')[0]}*`, [alvo])
+return ctx.reply(ctx.mess.padraoInfo({
+emoji: '👤',
+titulo: 'MEMBRO SORTEADO',
+linhas: [
+{ rotulo: '🎯 𝚂𝙾𝚁𝚃𝙴𝙸𝙾', valor: q },
+{ rotulo: '👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾', valor: `@${alvo.split('@')[0]}` }
+]
+}), [alvo])
 }
 }
+)

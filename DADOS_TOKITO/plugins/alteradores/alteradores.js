@@ -104,7 +104,9 @@ p.on('error', rej)
 p.on('close', c => c === 0 ? res() : rej(new Error(e.trim() || `ffmpeg ${c}`)))
 })
 
-module.exports = {
+const dylan = require('../../database/lib/comandos')
+
+dylan.setCommand({
 nome: 'videolento',
 comandos: Object.keys(mapa),
 categoria: 'alteradores',
@@ -117,7 +119,12 @@ const cfg = mapa[ctx.command]
 const m = modulos.mediaAtual(ctx)
 const src = cfg.tipo === 'video' ? m.video : m.audio
 if (!src)
-return ctx.reply(`❌ Responda a ${cfg.tipo === 'video' ? 'um vídeo' : 'um áudio'}.`)
+return ctx.reply(ctx.mess.padraoUso({
+emoji: cfg.tipo === 'video' ? '🎥' : '🎧',
+titulo: 'MÍDIA NECESSÁRIA',
+uso: `${ctx.prefix}${ctx.command}`,
+descricao: `Responda a ${cfg.tipo === 'video' ? 'um vídeo' : 'um áudio'} para usar este comando.`
+}))
 const tipo = cfg.tipo === 'video' ? 'video' : 'audio'
 const b = await ctx.getFileBuffer(src, tipo)
 const base = path.join(os.tmpdir(), `tokito_${Date.now()}_${Math.random().toString(36).slice(2)}`)
@@ -174,7 +181,11 @@ contextInfo: ctx.canalInfo([ctx.sender])
 }, { quoted: ctx.selo })
 }
 catch (e) {
-return ctx.reply(`❌ Erro no FFmpeg: ${e.message}`)
+return ctx.reply(ctx.mess.padraoErro({
+titulo: 'ERRO NO FFMPEG',
+descricao: 'Não foi possível processar a mídia.',
+detalhe: e.message
+}))
 }
 finally {
 for (const f of [inp, out])
@@ -187,3 +198,4 @@ catch {
 }
 }
 }
+)

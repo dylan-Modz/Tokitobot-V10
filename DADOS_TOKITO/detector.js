@@ -28,9 +28,9 @@
  * ============================================================
  */
 
-const { 'default': makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore } = require('@whiskeysockets/baileys')
+const { 'default': makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore } = require('baileys')
 const { fs, path, pino, NodeCache, Boom, colors } = require('./database/lib/exports.js')
-const antipay = require('./funcoes/antipay.js')
+const antipay = require('./plugins/admin/filtro-antipay.js')
 
 const pasta = path.join(__dirname, 'database', 'detector')
 
@@ -136,7 +136,7 @@ const code = update?.lastDisconnect?.error ? new Boom(update.lastDisconnect.erro
 if (update.connection === 'open') {
 conectado = true
 reconectando = false
-console.log(colors.green(`👁️ Detector Anti-Pay conectado${socket?.user?.id ? `: ${numero(socket.user.id)}` : ''}`))
+// conexão silenciosa do detector
 }
 if (update.connection === 'close') {
 conectado = false
