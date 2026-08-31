@@ -32,71 +32,232 @@ dylan.setCommand({
     with (ctx) {
       try {
         const bateriaHtml = `<!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
-html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#07111d;font-family:Arial,Helvetica,sans-serif}
-body{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at top,#173552,#07111d 58%,#02060a)}
-.game{width:min(100%,620px);padding:16px}
-.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.title{color:#fff;font-size:22px;font-weight:900}.sub{color:#8da7bd;font-size:11px;margin-top:3px}
-.scorebox{padding:8px 12px;border:1px solid rgba(255,255,255,.1);border-radius:12px;background:rgba(255,255,255,.06);text-align:right}
-.scorelabel{color:#7994aa;font-size:9px;letter-spacing:1px}#score{color:#fff;font-size:19px;font-weight:900}
-.display{min-height:62px;margin-bottom:14px;padding:10px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:rgba(0,0,0,.22);display:flex;align-items:center;justify-content:center;text-align:center}
-#status{color:#c7d8e7;font-size:13px}.pads{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.pad{height:92px;border:1px solid rgba(255,255,255,.13);border-radius:18px;background:linear-gradient(145deg,rgba(255,255,255,.11),rgba(255,255,255,.035));box-shadow:inset 0 1px rgba(255,255,255,.12),0 8px 18px rgba(0,0,0,.22);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;touch-action:manipulation;transition:transform .08s,background .08s,box-shadow .08s}
-.pad:active,.pad.active{transform:scale(.94);background:linear-gradient(145deg,rgba(57,169,255,.45),rgba(23,92,151,.25));box-shadow:inset 0 0 24px rgba(96,192,255,.3),0 0 18px rgba(74,174,255,.22)}
-.icon{font-size:25px;margin-bottom:5px}.name{font-size:11px;font-weight:900;letter-spacing:.7px}.key{margin-top:3px;color:#7893aa;font-size:8px}
-.bottom{margin-top:13px;display:flex;gap:9px}button{height:43px;border:0;border-radius:13px;font-weight:900;touch-action:manipulation}
-#challenge{flex:1;background:linear-gradient(135deg,#2196f3,#1565c0);color:#fff}#reset{width:95px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);color:#b8c9d8}
-.combo{margin-top:10px;text-align:center;color:#668096;font-size:10px}#combo{color:#5db8ff;font-weight:bold}
+*{
+  -webkit-tap-highlight-color:transparent;
+  -webkit-user-select:none;
+  user-select:none;
+  box-sizing:border-box;
+}
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  overflow:hidden;
+  background:#ffffff;
+}
+body{
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+  padding:8px;
+}
+canvas{
+  display:block;
+  width:100%;
+  max-width:600px;
+  height:auto;
+  background:#0f1722;
+  border-radius:12px;
+  touch-action:none;
+}
 </style>
 </head>
 <body>
-<div class="game">
-  <div class="top">
-    <div><div class="title">🥁 Bateria Tokito</div><div class="sub">toque nos pads e faça seu ritmo</div></div>
-    <div class="scorebox"><div class="scorelabel">PONTOS</div><div id="score">0</div></div>
-  </div>
-  <div class="display"><div id="status">Toque em qualquer peça para começar 🎵</div></div>
-  <div class="pads">
-    <div class="pad" data-drum="kick" data-key="a"><div class="icon">🥁</div><div class="name">BUMBO</div><div class="key">A</div></div>
-    <div class="pad" data-drum="snare" data-key="s"><div class="icon">🪘</div><div class="name">CAIXA</div><div class="key">S</div></div>
-    <div class="pad" data-drum="hat" data-key="d"><div class="icon">✨</div><div class="name">HI-HAT</div><div class="key">D</div></div>
-    <div class="pad" data-drum="tom" data-key="j"><div class="icon">🔵</div><div class="name">TOM</div><div class="key">J</div></div>
-    <div class="pad" data-drum="clap" data-key="k"><div class="icon">👏</div><div class="name">CLAP</div><div class="key">K</div></div>
-    <div class="pad" data-drum="crash" data-key="l"><div class="icon">💥</div><div class="name">PRATO</div><div class="key">L</div></div>
-  </div>
-  <div class="bottom"><button id="challenge">🎯 DESAFIO</button><button id="reset">LIMPAR</button></div>
-  <div class="combo">COMBO: <span id="combo">0x</span></div>
-</div>
+<canvas id="c" width="600" height="410"></canvas>
 <script>
 (function(){
 'use strict';
-const pads=[...document.querySelectorAll('.pad')];
-const scoreEl=document.getElementById('score');
-const comboEl=document.getElementById('combo');
-const statusEl=document.getElementById('status');
-const challengeButton=document.getElementById('challenge');
-const resetButton=document.getElementById('reset');
-let audioContext=null,score=0,combo=0,sequence=[],playerIndex=0,challengeRunning=false,acceptingInput=true;
-function audio(){if(!audioContext){const A=window.AudioContext||window.webkitAudioContext;if(A)audioContext=new A()}if(audioContext&&audioContext.state==='suspended')audioContext.resume();return audioContext}
-function oscillator(f,d,type,vol,end){const ac=audio();if(!ac)return;const now=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type=type||'sine';o.frequency.setValueAtTime(f,now);if(end)o.frequency.exponentialRampToValueAtTime(end,now+d);g.gain.setValueAtTime(vol,now);g.gain.exponentialRampToValueAtTime(.001,now+d);o.connect(g);g.connect(ac.destination);o.start(now);o.stop(now+d)}
-function noise(d,vol,hp){const ac=audio();if(!ac)return;const size=Math.floor(ac.sampleRate*d),b=ac.createBuffer(1,size,ac.sampleRate),data=b.getChannelData(0);for(let i=0;i<size;i++)data[i]=Math.random()*2-1;const s=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain();s.buffer=b;f.type='highpass';f.frequency.value=hp||1000;g.gain.setValueAtTime(vol,ac.currentTime);g.gain.exponentialRampToValueAtTime(.001,ac.currentTime+d);s.connect(f);f.connect(g);g.connect(ac.destination);s.start()}
-function sound(type){switch(type){case'kick':oscillator(150,.32,'sine',.9,45);break;case'snare':noise(.18,.45,1200);oscillator(180,.10,'triangle',.20,110);break;case'hat':noise(.07,.25,6000);break;case'tom':oscillator(180,.25,'sine',.55,90);break;case'clap':noise(.10,.34,1600);setTimeout(()=>noise(.08,.25,1800),45);break;case'crash':noise(.55,.28,3500);break}}
-function visual(type){const p=document.querySelector('[data-drum="'+type+'"]');if(!p)return;p.classList.add('active');setTimeout(()=>p.classList.remove('active'),120)}
-function hud(){scoreEl.textContent=String(score);comboEl.textContent=String(combo)+'x'}
-function tap(type,player){sound(type);visual(type);if(!player||!acceptingInput)return;if(!challengeRunning){score++;statusEl.textContent='🎵 Continue tocando!';hud();return}if(type===sequence[playerIndex]){playerIndex++;combo++;score+=10+combo;hud();if(playerIndex>=sequence.length){challengeRunning=false;acceptingInput=true;statusEl.textContent='🔥 Perfeito! Sequência completa!';challengeButton.textContent='🎯 NOVO DESAFIO'}}else{combo=0;playerIndex=0;challengeRunning=false;hud();statusEl.textContent='❌ Errou a sequência! Tente novamente.';challengeButton.textContent='🔄 TENTAR NOVAMENTE'}}
-pads.forEach(p=>p.addEventListener('pointerdown',e=>{e.preventDefault();tap(p.dataset.drum,true)},{passive:false}));
-document.addEventListener('keydown',e=>{const key=String(e.key||'').toLowerCase(),p=pads.find(i=>i.dataset.key===key);if(!p)return;e.preventDefault();tap(p.dataset.drum,true)});
-const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-async function showSequence(){acceptingInput=false;playerIndex=0;statusEl.textContent='👀 Observe a sequência...';await sleep(600);for(const type of sequence){tap(type,false);await sleep(420)}await sleep(250);acceptingInput=true;statusEl.textContent='🥁 Agora repita a sequência!'}
-challengeButton.addEventListener('click',async()=>{const drums=['kick','snare','hat','tom','clap','crash'];sequence=[];const difficulty=Math.min(8,3+Math.floor(score/100));for(let i=0;i<difficulty;i++)sequence.push(drums[Math.floor(Math.random()*drums.length)]);challengeRunning=true;combo=0;hud();challengeButton.textContent='🎯 DESAFIO ATIVO';await showSequence()});
-resetButton.addEventListener('click',()=>{score=0;combo=0;sequence=[];playerIndex=0;challengeRunning=false;acceptingInput=true;statusEl.textContent='Toque em qualquer peça para começar 🎵';challengeButton.textContent='🎯 DESAFIO';hud()});
-hud();
+
+var cv = document.getElementById('c');
+var g = cv.getContext('2d');
+var W = 600;
+var H = 410;
+var score = 0;
+var hits = 0;
+var audioContext = null;
+
+var pads = [
+  {name:'BUMBO', key:'A', x:28,  y:132, w:168, h:102, freq:85},
+  {name:'CAIXA', key:'S', x:216, y:132, w:168, h:102, freq:180},
+  {name:'HI-HAT',key:'D', x:404, y:132, w:168, h:102, freq:430},
+  {name:'TOM',   key:'J', x:28,  y:254, w:168, h:102, freq:145},
+  {name:'CLAP',  key:'K', x:216, y:254, w:168, h:102, freq:250},
+  {name:'PRATO', key:'L', x:404, y:254, w:168, h:102, freq:610}
+];
+
+function roundedRect(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.lineTo(x+w-r,y);
+  ctx.quadraticCurveTo(x+w,y,x+w,y+r);
+  ctx.lineTo(x+w,y+h-r);
+  ctx.quadraticCurveTo(x+w,y+h,x+w-r,y+h);
+  ctx.lineTo(x+r,y+h);
+  ctx.quadraticCurveTo(x,y+h,x,y+h-r);
+  ctx.lineTo(x,y+r);
+  ctx.quadraticCurveTo(x,y,x+r,y);
+  ctx.closePath();
+}
+
+function drawPad(p,active){
+  g.fillStyle = active ? '#2196f3' : '#1c2a38';
+  roundedRect(g,p.x,p.y,p.w,p.h,15);
+  g.fill();
+
+  g.strokeStyle = active ? '#8bd3ff' : '#334b61';
+  g.lineWidth = 2;
+  roundedRect(g,p.x,p.y,p.w,p.h,15);
+  g.stroke();
+
+  g.fillStyle = '#ffffff';
+  g.textAlign = 'center';
+  g.font = 'bold 19px Arial';
+  g.fillText(p.name,p.x+p.w/2,p.y+43);
+
+  g.fillStyle = active ? '#ffffff' : '#8fa7bb';
+  g.font = '12px Arial';
+  g.fillText('TECLA '+p.key,p.x+p.w/2,p.y+69);
+}
+
+function render(){
+  g.fillStyle = '#0f1722';
+  g.fillRect(0,0,W,H);
+
+  g.fillStyle = '#ffffff';
+  g.textAlign = 'left';
+  g.font = 'bold 26px Arial';
+  g.fillText('BATERIA TOKITO',28,42);
+
+  g.fillStyle = '#8fa7bb';
+  g.font = '13px Arial';
+  g.fillText('Toque nos pads para testar',28,66);
+
+  g.textAlign = 'right';
+  g.fillStyle = '#74c7ff';
+  g.font = 'bold 16px Arial';
+  g.fillText('PONTOS '+score,572,42);
+
+  g.fillStyle = '#8fa7bb';
+  g.font = '12px Arial';
+  g.fillText('TOQUES '+hits,572,64);
+
+  g.fillStyle = '#142230';
+  roundedRect(g,28,84,544,34,10);
+  g.fill();
+
+  g.fillStyle = '#b9cddd';
+  g.textAlign = 'center';
+  g.font = '13px Arial';
+  g.fillText('Bumbo • Caixa • Hi-Hat • Tom • Clap • Prato',300,106);
+
+  for(var i=0;i<pads.length;i++) drawPad(pads[i],false);
+
+  g.fillStyle = '#71889a';
+  g.font = '11px Arial';
+  g.textAlign = 'center';
+  g.fillText('Se o som nao sair, os pads ainda devem acender normalmente.',300,389);
+}
+
+function getAudio(){
+  try{
+    if(!audioContext){
+      var A = window.AudioContext || window.webkitAudioContext;
+      if(A) audioContext = new A();
+    }
+    if(audioContext && audioContext.state === 'suspended') audioContext.resume();
+    return audioContext;
+  }catch(e){
+    return null;
+  }
+}
+
+function beep(freq){
+  try{
+    var ac = getAudio();
+    if(!ac) return;
+    var now = ac.currentTime;
+    var osc = ac.createOscillator();
+    var gain = ac.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq,now);
+    gain.gain.setValueAtTime(0.22,now);
+    gain.gain.exponentialRampToValueAtTime(0.001,now+0.12);
+    osc.connect(gain);
+    gain.connect(ac.destination);
+    osc.start(now);
+    osc.stop(now+0.12);
+  }catch(e){}
+}
+
+function activate(index){
+  var p = pads[index];
+  if(!p) return;
+
+  hits += 1;
+  score += 5;
+  render();
+  drawPad(p,true);
+  beep(p.freq);
+
+  setTimeout(function(){
+    render();
+  },110);
+}
+
+function pointFromEvent(e){
+  var rect = cv.getBoundingClientRect();
+  var clientX = 0;
+  var clientY = 0;
+
+  if(e.touches && e.touches.length){
+    clientX = e.touches[0].clientX;
+    clientY = e.touches[0].clientY;
+  }else{
+    clientX = e.clientX;
+    clientY = e.clientY;
+  }
+
+  return {
+    x:(clientX-rect.left)*(cv.width/rect.width),
+    y:(clientY-rect.top)*(cv.height/rect.height)
+  };
+}
+
+function press(e){
+  if(e && e.preventDefault) e.preventDefault();
+  var pt = pointFromEvent(e);
+
+  for(var i=0;i<pads.length;i++){
+    var p = pads[i];
+    if(pt.x>=p.x && pt.x<=p.x+p.w && pt.y>=p.y && pt.y<=p.y+p.h){
+      activate(i);
+      return false;
+    }
+  }
+  return false;
+}
+
+cv.addEventListener('touchstart',press,{passive:false});
+cv.addEventListener('mousedown',press,false);
+
+window.addEventListener('keydown',function(e){
+  var key = String(e.key || '').toUpperCase();
+  for(var i=0;i<pads.length;i++){
+    if(pads[i].key === key){
+      if(e.preventDefault) e.preventDefault();
+      activate(i);
+      return;
+    }
+  }
+});
+
+render();
 })();
 </script>
 </body>
