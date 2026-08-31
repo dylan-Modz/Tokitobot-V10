@@ -47,16 +47,20 @@ html,body{
     margin:0;
     padding:0;
     width:100%;
-    min-height:100%;
+    height:100%;
+    min-height:100vh;
     overflow:hidden;
     background:#fff;
 }
 
 body{
+    position:fixed;
+    inset:0;
     display:flex;
     justify-content:center;
     align-items:flex-start;
     padding:10px;
+    touch-action:none;
 }
 
 canvas{
@@ -140,9 +144,6 @@ const CLOUD = {
     h: 14
 };
 
-let night = false;
-let distSinceInvert = 0;
-
 let dino;
 let obstacles;
 let clouds;
@@ -181,8 +182,6 @@ function reset(){
     gameOver = false;
     started = false;
     last = 0;
-    night = false;
-    distSinceInvert = 0;
     spawnTimer = 60;
 }
 
@@ -233,12 +232,31 @@ document.addEventListener('keyup',function(e){
 
 });
 
-document.body.addEventListener('pointerdown',function(e){
+function toqueNaTela(e){
 
-    e.preventDefault();
+    if(e && typeof e.preventDefault === 'function'){
+        e.preventDefault();
+    }
+
     jump();
+}
 
-},{passive:false});
+if(window.PointerEvent){
+
+    document.addEventListener(
+        'pointerdown',
+        toqueNaTela,
+        {passive:false}
+    );
+
+}else{
+
+    document.addEventListener(
+        'touchstart',
+        toqueNaTela,
+        {passive:false}
+    );
+}
 
 function spawnObstacle(){
 
