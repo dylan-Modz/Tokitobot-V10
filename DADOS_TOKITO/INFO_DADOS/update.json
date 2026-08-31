@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.80",
+  "version": "10.0.81",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-31T16:54:13.428Z",
+  "publishedAt": "2026-08-31T17:00:52.210Z",
   "changelog": [
     "[Correção] Bateria atualizado",
-    "A versão 10.0.80 já está disponível para atualização.",
+    "A versão 10.0.81 já está disponível para atualização.",
     "Bateria atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
   "title": "Bateria atualizado",
-  "notice": "A versão 10.0.80 já está disponível para atualização.",
+  "notice": "A versão 10.0.81 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/jogos/bateria.js",
-      "sha256": "1ecf204da1b38e2c323eadfbf0009aa32bda18157ed66bd618817d8c1b5b70d7",
-      "size": 19322
+      "sha256": "9298907d5a7b034be39a9e52877e2ad8f705c65c7fd9216ab042a12c9145210f",
+      "size": 20885
     }
   ],
   "releases": [
@@ -1922,6 +1922,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-31T16:54:13.428Z"
+    },
+    {
+      "version": "10.0.81",
+      "fromVersion": "10.0.80",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Bateria atualizado",
+      "notice": "A versão 10.0.81 já está disponível para atualização.",
+      "changelog": [
+        "Bateria atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/bateria.js",
+          "sha256": "9298907d5a7b034be39a9e52877e2ad8f705c65c7fd9216ab042a12c9145210f",
+          "size": 20885
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-31T17:00:52.208Z"
     }
   ],
   "versao": "10.0.70",
