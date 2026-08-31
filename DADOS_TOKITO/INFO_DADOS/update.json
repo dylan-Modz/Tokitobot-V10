@@ -1,45 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.71",
+  "version": "10.0.72",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-31T14:44:05.627Z",
+  "publishedAt": "2026-08-31T14:44:58.797Z",
   "changelog": [
-    "[Correção] 4 arquivos atualizados",
-    "A versão 10.0.71 já está disponível para atualização.",
-    "Dados atualizado",
-    "Deps atualizado",
-    "Supervisor atualizado",
-    "Update Migrate atualizado"
+    "[Correção] Arquivo principal do bot atualizado",
+    "A versão 10.0.72 já está disponível para atualização.",
+    "Arquivo principal do bot atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "4 arquivos atualizados",
-  "notice": "A versão 10.0.71 já está disponível para atualização.",
+  "title": "Arquivo principal do bot atualizado",
+  "notice": "A versão 10.0.72 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/dados.js",
-      "sha256": "f29b285c1e8e5c1361e608eee1017b6d4ac807b81c6c19408ca704e09564905b",
-      "size": 32376
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/deps.js",
-      "sha256": "6ac7739b3c16f16064491abcc88c36b8509f0ebe4b137bc7613d72ccc65b4c9f",
-      "size": 3046
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/supervisor.js",
-      "sha256": "cdcc31d1f2c04a3ca11a2c19d2f5cc502965cd6040a3eedfdf57cf67c5c940aa",
-      "size": 6173
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/update-migrate.js",
-      "sha256": "b5fd4c3232a63a210ff9494612e0fa8055b32ec0a3ff8b77eb82703062ff683d",
-      "size": 1842
+      "path": "tokito.js",
+      "sha256": "5f16f871568937486524406eddb6ba05c1efc5f175bdc87cbcaba9bc63d506f2",
+      "size": 45287
     }
   ],
   "releases": [
@@ -1751,6 +1733,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-31T14:44:05.626Z"
+    },
+    {
+      "version": "10.0.72",
+      "fromVersion": "10.0.71",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Arquivo principal do bot atualizado",
+      "notice": "A versão 10.0.72 já está disponível para atualização.",
+      "changelog": [
+        "Arquivo principal do bot atualizado"
+      ],
+      "files": [
+        {
+          "path": "tokito.js",
+          "sha256": "5f16f871568937486524406eddb6ba05c1efc5f175bdc87cbcaba9bc63d506f2",
+          "size": 45287
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-08-31T14:44:58.797Z"
     }
   ],
   "versao": "10.0.70",
