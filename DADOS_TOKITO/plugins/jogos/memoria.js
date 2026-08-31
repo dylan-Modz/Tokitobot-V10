@@ -221,13 +221,13 @@ body {
 body {
     display: flex;
     justify-content: center;
-    padding: 2px;
+    padding: 1px;
 }
 
 .panel {
     width: 100%;
     max-width: 480px;
-    padding: 7px;
+    padding: 5px;
     border-radius: 16px;
     background: linear-gradient(145deg, #161b22, #0d1117);
     border: 1px solid rgba(88, 166, 255, 0.25);
@@ -239,11 +239,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 8px;
+    padding: 4px 7px;
     border-radius: 10px;
     background: rgba(22, 27, 34, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .brand {
@@ -257,13 +257,13 @@ body {
     border-radius: 12px;
     background: linear-gradient(135deg, #8957e5, #6e40c9);
     color: #fff;
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 800;
     text-transform: uppercase;
 }
 
 .title {
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 800;
     color: #58a6ff;
 }
@@ -288,11 +288,11 @@ body {
     align-items: center;
     justify-content: center;
     background: #1f242c;
-    font-size: 9px;
+    font-size: 8px;
 }
 
 .username {
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 700;
     color: #c9d1d9;
     overflow: hidden;
@@ -304,11 +304,11 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 6px;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
 
 .stat {
-    padding: 4px 3px;
+    padding: 3px 2px;
     border-radius: 9px;
     background: #12161f;
     border: 1px solid rgba(88,166,255,.14);
@@ -317,7 +317,7 @@ body {
 
 .stat-label {
     display: block;
-    font-size: 6px;
+    font-size: 5px;
     color: #8b949e;
     font-weight: 800;
     letter-spacing: .5px;
@@ -326,7 +326,7 @@ body {
 .stat-value {
     display: block;
     margin-top: 1px;
-    font-size: 9px;
+    font-size: 8px;
     color: #58a6ff;
     font-weight: 900;
 }
@@ -335,23 +335,23 @@ body {
     position: relative;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 4px;
-    padding: 5px;
+    gap: 3px;
+    padding: 4px;
     border-radius: 12px;
     background: #12161f;
     border: 1px solid rgba(88,166,255,.2);
 }
 
 .card {
-    height: 40px;
+    height: 30px;
     border: 1px solid rgba(88,166,255,.22);
-    border-radius: 9px;
+    border-radius: 7px;
     background: linear-gradient(145deg, #1b2230, #11161f);
     color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 21px;
+    font-size: 17px;
     font-weight: 900;
     cursor: pointer;
     transform: translateZ(0);
@@ -389,27 +389,27 @@ body {
 }
 
 .overlay-title {
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 900;
     color: #f0f6fc;
     letter-spacing: 1px;
 }
 
 .overlay-sub {
-    font-size: 9px;
+    font-size: 8px;
     color: #d2a8ff;
     font-weight: 700;
 }
 
 .restart {
     width: 100%;
-    margin-top: 5px;
-    min-height: 32px;
+    margin-top: 3px;
+    min-height: 26px;
     border: 1px solid rgba(88,166,255,.24);
     border-radius: 10px;
     background: #161b22;
     color: #58a6ff;
-    font-size: 9px;
+    font-size: 8px;
     font-weight: 900;
     letter-spacing: .5px;
     touch-action: manipulation;
@@ -421,17 +421,17 @@ body {
 }
 
 .controls-hint {
-    margin-top: 4px;
+    margin-top: 2px;
     text-align: center;
-    font-size: 7px;
+    font-size: 6px;
     color: #8b949e;
     letter-spacing: .4px;
 }
 
 .footer {
-    padding-top: 3px;
+    padding-top: 1px;
     text-align: center;
-    font-size: 6px;
+    font-size: 5px;
     letter-spacing: 1px;
     color: #8b949e;
     opacity: 0.5;
@@ -505,7 +505,7 @@ body {
     </button>
 
     <div class="controls-hint">
-        Encontre os 8 pares usando o menor número de jogadas
+        Encontre os 8 pares
     </div>
 
     <div class="footer">

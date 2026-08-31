@@ -227,7 +227,7 @@ body {
 .panel {
     width: 100%;
     max-width: 480px;
-    padding: 7px;
+    padding: 6px;
     border-radius: 16px;
     background: linear-gradient(145deg, #161b22, #0d1117);
     border: 1px solid rgba(88, 166, 255, 0.25);
@@ -239,11 +239,11 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px 8px;
+    padding: 4px 7px;
     border-radius: 10px;
     background: rgba(22, 27, 34, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    margin-bottom: 5px;
+    margin-bottom: 4px;
 }
 
 .brand {
@@ -321,7 +321,7 @@ canvas#snakeCanvas {
     display: flex;
     justify-content: space-between;
     gap: 8px;
-    padding: 5px 8px;
+    padding: 4px 7px;
     font-family: 'Courier New', Courier, monospace;
     font-size: 9px;
     font-weight: 800;
@@ -358,49 +358,6 @@ canvas#snakeCanvas {
     font-weight: 700;
 }
 
-.controls {
-    display: grid;
-    grid-template-columns: repeat(4, 52px);
-    grid-template-rows: 36px;
-    justify-content: center;
-    gap: 5px;
-    margin-top: 6px;
-}
-
-.ctrl {
-    border: 1px solid rgba(88, 166, 255, .25);
-    border-radius: 10px;
-    background: #161b22;
-    color: #58a6ff;
-    font-size: 16px;
-    font-weight: 900;
-    touch-action: manipulation;
-}
-
-.ctrl:active {
-    background: #1f6feb;
-    color: #fff;
-}
-
-.up {
-    grid-column: 1;
-    grid-row: 1;
-}
-
-.left {
-    grid-column: 2;
-    grid-row: 1;
-}
-
-.down {
-    grid-column: 3;
-    grid-row: 1;
-}
-
-.right {
-    grid-column: 4;
-    grid-row: 1;
-}
 
 .controls-hint {
     margin-top: 4px;
@@ -456,7 +413,7 @@ canvas#snakeCanvas {
         <canvas
             id="snakeCanvas"
             width="360"
-            height="180"
+            height="150"
         ></canvas>
 
         <div
@@ -479,15 +436,8 @@ canvas#snakeCanvas {
         </div>
     </div>
 
-    <div class="controls">
-        <button class="ctrl up" data-dir="up">▲</button>
-        <button class="ctrl left" data-dir="left">◀</button>
-        <button class="ctrl down" data-dir="down">▼</button>
-        <button class="ctrl right" data-dir="right">▶</button>
-    </div>
-
     <div class="controls-hint">
-        Coma as frutas e não bata no próprio corpo
+        Toque no lado que deseja seguir • coma as frutas
     </div>
 
     <div class="footer">
@@ -520,7 +470,7 @@ canvas#snakeCanvas {
         document.getElementById("highScore");
 
     const GRID_X = 18;
-    const GRID_Y = 9;
+    const GRID_Y = 7;
 
     const CELL =
         canvas.width / GRID_X;
@@ -601,10 +551,10 @@ canvas#snakeCanvas {
 
     function reset() {
         snake = [
-            { x: 8, y: 4 },
-            { x: 7, y: 4 },
-            { x: 6, y: 4 },
-            { x: 5, y: 4 }
+            { x: 8, y: 3 },
+            { x: 7, y: 3 },
+            { x: 6, y: 3 },
+            { x: 5, y: 3 }
         ];
 
         direction = {
@@ -955,36 +905,6 @@ canvas#snakeCanvas {
         }
     }
 
-    document
-        .querySelectorAll(
-            ".ctrl"
-        )
-        .forEach(
-            button => {
-                const action =
-                    event => {
-                        event.preventDefault();
-
-                        handleDir(
-                            button.dataset.dir
-                        );
-                    };
-
-                button.addEventListener(
-                    "touchstart",
-                    action,
-                    {
-                        passive: false
-                    }
-                );
-
-                button.addEventListener(
-                    "click",
-                    action
-                );
-            }
-        );
-
     document.addEventListener(
         "keydown",
         event => {
@@ -1014,99 +934,104 @@ canvas#snakeCanvas {
         }
     );
 
-    let touchStartX =
-        null;
+    let lastTouchAt = 0;
 
-    let touchStartY =
-        null;
+    function directionFromPoint(clientX, clientY) {
+        if (!running) {
+            startGame();
+        }
+
+        const rect =
+            canvas.getBoundingClientRect();
+
+        const scaleX =
+            canvas.width / rect.width;
+
+        const scaleY =
+            canvas.height / rect.height;
+
+        const tapX =
+            (clientX - rect.left) *
+            scaleX;
+
+        const tapY =
+            (clientY - rect.top) *
+            scaleY;
+
+        const head =
+            snake[0];
+
+        const headX =
+            head.x * CELL +
+            CELL / 2;
+
+        const headY =
+            head.y * CELL +
+            CELL / 2;
+
+        const dx =
+            tapX - headX;
+
+        const dy =
+            tapY - headY;
+
+        if (
+            Math.abs(dx) >
+            Math.abs(dy)
+        ) {
+            handleDir(
+                dx >= 0
+                    ? "right"
+                    : "left"
+            );
+        } else {
+            handleDir(
+                dy >= 0
+                    ? "down"
+                    : "up"
+            );
+        }
+    }
 
     canvas.addEventListener(
         "touchstart",
         event => {
+            event.preventDefault();
+
             const touch =
                 event.touches[0];
 
-            touchStartX =
-                touch.clientX;
+            lastTouchAt =
+                Date.now();
 
-            touchStartY =
-                touch.clientY;
-
-            if (!running) {
-                startGame();
-            }
+            directionFromPoint(
+                touch.clientX,
+                touch.clientY
+            );
         },
         {
-            passive: true
-        }
-    );
-
-    canvas.addEventListener(
-        "touchend",
-        event => {
-            if (
-                touchStartX === null ||
-                touchStartY === null
-            ) {
-                return;
-            }
-
-            const touch =
-                event.changedTouches[0];
-
-            const dx =
-                touch.clientX -
-                touchStartX;
-
-            const dy =
-                touch.clientY -
-                touchStartY;
-
-            touchStartX =
-                null;
-
-            touchStartY =
-                null;
-
-            if (
-                Math.abs(dx) < 16 &&
-                Math.abs(dy) < 16
-            ) {
-                return;
-            }
-
-            if (
-                Math.abs(dx) >
-                Math.abs(dy)
-            ) {
-                handleDir(
-                    dx > 0
-                        ? "right"
-                        : "left"
-                );
-            } else {
-                handleDir(
-                    dy > 0
-                        ? "down"
-                        : "up"
-                );
-            }
-        },
-        {
-            passive: true
+            passive: false
         }
     );
 
     canvas.addEventListener(
         "click",
-        () => {
-            if (!running) {
-                startGame();
+        event => {
+            if (
+                Date.now() -
+                lastTouchAt <
+                600
+            ) {
+                return;
             }
+
+            directionFromPoint(
+                event.clientX,
+                event.clientY
+            );
         }
     );
-
-    reset();
+reset();
 })();
 </script>
 
