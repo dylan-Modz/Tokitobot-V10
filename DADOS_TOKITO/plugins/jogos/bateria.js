@@ -1,830 +1,1063 @@
-/*
- * ============================================================
- *                     TOKITO BOT V10
- * ============================================================
- * Jogo: Dino
- * Dev: Dylan Modz
- * ============================================================
- */
+"use strict";
 
-const crypto = require('crypto')
-const dylan = require('../../database/lib/comandos')
+const crypto = require("crypto");
+const dylan = require("../../database/lib/comandos");
 
-dylan.setCommand({
-  nome: 'dino',
+const HTML_GAME_PRIMITIVE = "GenAIaeacdsnwHtmlPrimitive";
+const HTML_GAME_TRUSTED_SOURCES = ["nixel.dev"];
 
-  comandos: [
-    'dino',
-    'dinossauro',
-    'trex'
-  ],
+async function getBase64FromUrl(url) {
+    if (!url || typeof url !== "string") return null;
+    if (url.startsWith("data:image")) return url;
 
-  categoria: 'jogos',
+    try {
+        const response = await fetch(url);
 
-  info: {
-    descricao: 'Abre o jogo do dinossauro dentro do WhatsApp.',
-    uso: 'dino',
-    categoria: 'jogos'
-  },
+        if (!response.ok) {
+            return null;
+        }
 
-  async executar(ctx) {
-    with (ctx) {
-      try {
-        const dinoHtml = `<!DOCTYPE html>
-<html>
+        const arrayBuffer = await response.arrayBuffer();
+        const buffer = Buffer.from(arrayBuffer);
+        const contentType =
+            response.headers.get("content-type") ||
+            "image/jpeg";
+
+        return `data:${contentType};base64,${buffer.toString("base64")}`;
+    } catch {
+        return null;
+    }
+}
+
+function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    }[char]));
+}
+
+function buildDinoHtml(data = {}) {
+    const usuario = escapeHtml(
+        data.usuario ||
+        "Jogador"
+    );
+
+    const fotoUser = escapeHtml(
+        data.fotoUser ||
+        ""
+    );
+
+    const fotoVisual = fotoUser
+        ? `<img src="${fotoUser}" class="avatar" alt="">`
+        : `<div class="avatar avatar-fallback">🦖</div>`;
+
+    return `
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+<title>dino game</title>
+
 <style>
-*{
-    box-sizing:border-box;
-    -webkit-tap-highlight-color:transparent;
-    -webkit-user-select:none;
-    user-select:none;
+* {
+    box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-html,body{
-    margin:0;
-    padding:0;
-    width:100%;
-    height:100%;
-    min-height:100vh;
-    overflow:hidden;
-    background:#dff4ff;
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: #0d1117;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    touch-action: manipulation;
 }
 
-body{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:14px;
-    touch-action:none;
-    font-family:Arial,Helvetica,sans-serif;
+body {
+    display: flex;
+    justify-content: center;
+    padding: 4px;
 }
 
-#game{
-    width:94vw;
-    max-width:620px;
-    overflow:hidden;
-    border:3px solid #1687d9;
-    border-radius:20px;
-    background:#f7fcff;
-    box-shadow:0 12px 30px rgba(0,91,160,.18);
-    touch-action:none;
+.panel {
+    width: 100%;
+    max-width: 480px;
+    padding: 10px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, #161b22, #0d1117);
+    border: 1px solid rgba(88, 166, 255, 0.25);
+    position: relative;
+    overflow: hidden;
 }
 
-#top{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    padding:11px 14px;
-    background:#1687d9;
-    color:#fff;
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    border-radius: 10px;
+    background: rgba(22, 27, 34, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 8px;
 }
 
-#title{
-    font-size:15px;
-    font-weight:900;
-    letter-spacing:.4px;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
-#hint{
-    font-size:10px;
-    font-weight:800;
-    opacity:.95;
+.badge {
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2ea043, #238636);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
 }
 
-canvas{
-    display:block;
-    width:100%;
-    height:auto;
-    background:#dff4ff;
-    image-rendering:pixelated;
-    image-rendering:crisp-edges;
-    touch-action:none;
+.title {
+    font-size: 11px;
+    font-weight: 800;
+    color: #58a6ff;
 }
 
-#jumpBtn{
-    display:block;
-    width:100%;
-    min-height:62px;
-    border:0;
-    border-top:2px solid #b9e8ff;
-    background:#eaf9ff;
-    color:#096ba9;
-    font-size:16px;
-    font-weight:900;
-    letter-spacing:.8px;
-    touch-action:manipulation;
+.user-tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    max-width: 160px;
 }
 
-#jumpBtn:active{
-    background:#c9efff;
+.avatar {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #58a6ff;
+}
+
+.avatar-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #1f242c;
+    font-size: 11px;
+}
+
+.username {
+    font-size: 9px;
+    font-weight: 700;
+    color: #c9d1d9;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    background: #12161f;
+    border-radius: 12px;
+    border: 1px solid rgba(88, 166, 255, 0.2);
+    overflow: hidden;
+}
+
+canvas#dinoCanvas {
+    width: 100%;
+    height: 160px;
+    display: block;
+}
+
+.score-board {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 11px;
+    font-weight: bold;
+    color: #8b949e;
+    letter-spacing: 1px;
+    pointer-events: none;
+}
+
+.score-board span {
+    color: #58a6ff;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(13, 17, 23, 0.75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    backdrop-filter: blur(2px);
+    pointer-events: none;
+}
+
+.overlay-title {
+    font-size: 16px;
+    font-weight: 900;
+    color: #f0f6fc;
+    letter-spacing: 1px;
+}
+
+.overlay-sub {
+    font-size: 10px;
+    color: #7ee787;
+    font-weight: 700;
+    animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.98);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1.02);
+    }
+}
+
+.controls-hint {
+    margin-top: 6px;
+    text-align: center;
+    font-size: 8px;
+    color: #8b949e;
+    letter-spacing: 0.5px;
+}
+
+.footer {
+    padding-top: 6px;
+    text-align: center;
+    font-size: 7px;
+    letter-spacing: 1px;
+    color: #8b949e;
+    opacity: 0.5;
 }
 </style>
 </head>
 
 <body>
 
-<div id="game">
-    <div id="top">
-        <span id="title">🦖 DINO RUN</span>
-        <span id="hint">TOQUE PARA PULAR</span>
+<div class="panel">
+
+    <div class="header">
+        <div class="brand">
+            <span class="badge">GAME</span>
+            <span class="title">DINO RUNNER</span>
+        </div>
+
+        <div class="user-tag">
+            ${fotoVisual}
+            <span class="username">${usuario}</span>
+        </div>
     </div>
 
-    <canvas
-        id="c"
-        width="600"
-        height="220"
-        ontouchstart="return window.dinoTap(event)"
-        onclick="return window.dinoTap(event)">
-    </canvas>
+    <div
+        class="game-container"
+        id="gameArea"
+    >
+        <div class="score-board">
+            HI <span id="highScore">00000</span>
+            |
+            <span
+                id="currentScore"
+                style="color:#f0f6fc"
+            >
+                00000
+            </span>
+        </div>
 
-    <button
-        id="jumpBtn"
-        type="button"
-        ontouchstart="return window.dinoTap(event)"
-        onclick="return window.dinoTap(event)">
-        ▲ PULAR
-    </button>
+        <canvas
+            id="dinoCanvas"
+            width="400"
+            height="160"
+        ></canvas>
+
+        <div
+            class="overlay"
+            id="gameOverlay"
+        >
+            <div
+                class="overlay-title"
+                id="overlayTitle"
+            >
+                DINO RUNNER
+            </div>
+
+            <div
+                class="overlay-sub"
+                id="overlaySub"
+            >
+                TOQUE PARA JOGAR ⚡
+            </div>
+        </div>
+    </div>
+
+    <div class="controls-hint">
+        Toque na tela para pular
+    </div>
+
+    <div class="footer">
+        by Yoshirukkj
+    </div>
+
 </div>
 
-<img
-id="sprite"
-style="display:none"
-src="data:image/png;base64,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">
-
 <script>
-(function(){
+(function() {
+    const canvas =
+        document.getElementById("dinoCanvas");
 
-'use strict';
+    const ctx =
+        canvas.getContext("2d");
 
-var cv = document.getElementById('c');
-var ctx = cv.getContext('2d', { alpha:false });
-var sprite = document.getElementById('sprite');
-var scratch = document.createElement('canvas');
-var sxctx = scratch.getContext('2d');
+    const overlay =
+        document.getElementById("gameOverlay");
 
-var W = 600;
-var H = 220;
-var GROUND = 170;
+    const overlayTitle =
+        document.getElementById("overlayTitle");
 
-var TREX = {
-    x:848,
-    y:2,
-    w:44,
-    h:47,
-    wDuck:59,
-    hDuck:25
-};
+    const overlaySub =
+        document.getElementById("overlaySub");
 
-var CACTUS_SMALL = {
-    x:228,
-    y:2,
-    w:17,
-    h:35
-};
+    const scoreEl =
+        document.getElementById("currentScore");
 
-var CACTUS_LARGE = {
-    x:332,
-    y:2,
-    w:25,
-    h:50
-};
+    const highScoreEl =
+        document.getElementById("highScore");
 
-var PTERO = {
-    x:134,
-    y:2,
-    w:46,
-    h:40
-};
+    let highScore = 0;
 
-var dino;
-var obstacles;
-var clouds;
-var speed;
-var score;
-var hi = 0;
-var gameOver;
-var started;
-var last = 0;
-var spawnTimer;
-var groundOffset;
-var lastTouchTime = 0;
-
-function dinoGroundY(){
-    return GROUND - TREX.h;
-}
-
-function reset(){
-
-    dino = {
-        x:42,
-        y:dinoGroundY(),
-        vy:0,
-        onGround:true,
-        runFrame:0,
-        runTimer:0
-    };
-
-    obstacles = [];
-
-    clouds = [
-        {x:110,y:48,s:1},
-        {x:330,y:70,s:.8},
-        {x:520,y:42,s:1.1}
-    ];
-
-    speed = 6;
-    score = 0;
-    gameOver = false;
-    started = false;
-    last = 0;
-    spawnTimer = 70;
-    groundOffset = 0;
-}
-
-function jump(){
-
-    if(gameOver){
-        reset();
-        started = true;
-        dino.vy = -10.8;
-        dino.onGround = false;
-        return;
+    try {
+        highScore =
+            parseInt(
+                localStorage.getItem("dino_hi") ||
+                "0"
+            ) || 0;
+    } catch (e) {
+        highScore = 0;
     }
 
-    started = true;
-
-    if(dino.onGround){
-        dino.vy = -10.8;
-        dino.onGround = false;
-    }
-}
-
-window.dinoTap = function(e){
-
-    if(e){
-        if(typeof e.preventDefault === 'function'){
-            e.preventDefault();
-        }
-
-        if(typeof e.stopPropagation === 'function'){
-            e.stopPropagation();
-        }
-    }
-
-    var now = Date.now();
-    var type = e && e.type ? e.type : '';
-
-    if(type === 'touchstart'){
-        lastTouchTime = now;
-        jump();
-        return false;
-    }
-
-    if(type === 'click' && now - lastTouchTime < 700){
-        return false;
-    }
-
-    jump();
-    return false;
-};
-
-document.addEventListener('keydown', function(e){
-
-    if(e.code === 'Space' || e.code === 'ArrowUp'){
-        e.preventDefault();
-        jump();
-    }
-});
-
-function spawnObstacle(){
-
-    var r = Math.random();
-
-    if(r < .42){
-
-        obstacles.push({
-            type:'small',
-            x:W + 15,
-            w:CACTUS_SMALL.w,
-            h:CACTUS_SMALL.h,
-            y:GROUND - CACTUS_SMALL.h
-        });
-
-    }else if(r < .82){
-
-        obstacles.push({
-            type:'large',
-            x:W + 15,
-            w:CACTUS_LARGE.w,
-            h:CACTUS_LARGE.h,
-            y:GROUND - CACTUS_LARGE.h
-        });
-
-    }else{
-
-        var levels = [
-            GROUND - 47,
-            GROUND - 78,
-            GROUND - 108
-        ];
-
-        obstacles.push({
-            type:'ptero',
-            x:W + 15,
-            w:PTERO.w,
-            h:PTERO.h,
-            y:levels[Math.floor(Math.random()*levels.length)],
-            frame:0,
-            frameTimer:0
-        });
-    }
-}
-
-function hit(a,b){
-
-    return (
-        a.x + 7 < b.x + b.w - 4 &&
-        a.x + a.w - 7 > b.x + 4 &&
-        a.y + 7 < b.y + b.h - 4 &&
-        a.y + a.h - 7 > b.y + 4
-    );
-}
-
-function tintedSprite(
-    srcX,srcY,srcW,srcH,
-    dstX,dstY,dstW,dstH,
-    color
-){
-
-    scratch.width = srcW;
-    scratch.height = srcH;
-
-    sxctx.clearRect(0,0,srcW,srcH);
-
-    sxctx.globalCompositeOperation = 'source-over';
-
-    sxctx.drawImage(
-        sprite,
-        srcX,srcY,srcW,srcH,
-        0,0,srcW,srcH
-    );
-
-    sxctx.globalCompositeOperation = 'source-in';
-    sxctx.fillStyle = color;
-    sxctx.fillRect(0,0,srcW,srcH);
-
-    sxctx.globalCompositeOperation = 'source-over';
-
-    ctx.drawImage(
-        scratch,
-        0,0,srcW,srcH,
-        dstX,dstY,dstW,dstH
-    );
-}
-
-function drawCloud(c){
-
-    ctx.save();
-    ctx.fillStyle = '#ffffff';
-    ctx.globalAlpha = .92;
-
-    var px = c.x;
-    var py = c.y;
-    var s = c.s;
-
-    ctx.beginPath();
-    ctx.arc(px,py,13*s,0,Math.PI*2);
-    ctx.arc(px+17*s,py-6*s,17*s,0,Math.PI*2);
-    ctx.arc(px+36*s,py,13*s,0,Math.PI*2);
-    ctx.fill();
-
-    ctx.restore();
-}
-
-function drawDino(){
-
-    var srcX;
-
-    if(!dino.onGround){
-        srcX = TREX.x;
-    }else{
-        srcX = TREX.x + [88,132][Math.floor(dino.runFrame)%2];
-    }
-
-    tintedSprite(
-        srcX,
-        TREX.y,
-        TREX.w,
-        TREX.h,
-        dino.x,
-        dino.y,
-        TREX.w,
-        TREX.h,
-        '#1687d9'
-    );
-}
-
-function drawObstacle(o){
-
-    if(o.type === 'small'){
-
-        tintedSprite(
-            CACTUS_SMALL.x,
-            CACTUS_SMALL.y,
-            o.w,
-            o.h,
-            o.x,
-            o.y,
-            o.w,
-            o.h,
-            '#21a85b'
-        );
-
-    }else if(o.type === 'large'){
-
-        tintedSprite(
-            CACTUS_LARGE.x,
-            CACTUS_LARGE.y,
-            o.w,
-            o.h,
-            o.x,
-            o.y,
-            o.w,
-            o.h,
-            '#168f4d'
-        );
-
-    }else{
-
-        var frameX =
-            PTERO.x +
-            (Math.floor(o.frame)%2)*PTERO.w;
-
-        tintedSprite(
-            frameX,
-            PTERO.y,
-            o.w,
-            o.h,
-            o.x,
-            o.y,
-            o.w,
-            o.h,
-            '#8b5cf6'
-        );
-    }
-}
-
-function drawBackground(){
-
-    ctx.fillStyle = '#dff4ff';
-    ctx.fillRect(0,0,W,H);
-
-    ctx.fillStyle = '#ffd84f';
-    ctx.beginPath();
-    ctx.arc(525,43,23,0,Math.PI*2);
-    ctx.fill();
-
-    for(var i=0;i<clouds.length;i++){
-        drawCloud(clouds[i]);
-    }
-
-    ctx.fillStyle = '#bceec9';
-    ctx.fillRect(
-        0,
-        GROUND + 2,
-        W,
-        H - GROUND - 2
-    );
-
-    ctx.strokeStyle = '#1687d9';
-    ctx.lineWidth = 3;
-    ctx.setLineDash([7,7]);
-    ctx.lineDashOffset = -groundOffset;
-
-    ctx.beginPath();
-    ctx.moveTo(0,GROUND);
-    ctx.lineTo(W,GROUND);
-    ctx.stroke();
-
-    ctx.setLineDash([]);
-}
-
-function drawScore(){
-
-    ctx.fillStyle = '#096ba9';
-    ctx.font = 'bold 16px monospace';
-    ctx.textAlign = 'right';
-
-    var s = String(Math.floor(score));
-
-    while(s.length < 5){
-        s = '0' + s;
-    }
-
-    var h = String(Math.floor(hi));
-
-    while(h.length < 5){
-        h = '0' + h;
-    }
-
-    ctx.fillText(
-        hi > 0
-            ? 'HI ' + h + '   ' + s
-            : s,
-        W - 15,
-        28
-    );
-
-    ctx.textAlign = 'left';
-}
-
-function drawMessage(){
-
-    ctx.textAlign = 'center';
-
-    if(gameOver){
-
-        ctx.fillStyle = '#e04444';
-        ctx.font = 'bold 22px Arial';
-        ctx.fillText(
-            'GAME OVER',
-            W/2,
-            72
-        );
-
-        ctx.fillStyle = '#096ba9';
-        ctx.font = 'bold 13px Arial';
-        ctx.fillText(
-            'toque para reiniciar',
-            W/2,
-            96
-        );
-
-    }else if(!started){
-
-        ctx.fillStyle = '#096ba9';
-        ctx.font = 'bold 14px Arial';
-        ctx.fillText(
-            'TOQUE PARA COMEÇAR',
-            W/2,
-            82
-        );
-
-        ctx.font = '12px Arial';
-        ctx.fillText(
-            'pule dos obstáculos e faça seu recorde',
-            W/2,
-            104
-        );
-    }
-
-    ctx.textAlign = 'left';
-}
-
-function loop(t){
-
-    if(!last){
-        last = t;
-    }
-
-    var dt = Math.min((t-last)/16.67,2);
-    last = t;
-
-    if(started && !gameOver){
-
-        groundOffset += speed*dt;
-
-        dino.runTimer += dt;
-
-        if(dino.runTimer > 5){
-            dino.runFrame++;
-            dino.runTimer = 0;
-        }
-
-        dino.vy += .62*dt;
-        dino.y += dino.vy*dt;
-
-        if(dino.y >= dinoGroundY()){
-            dino.y = dinoGroundY();
-            dino.vy = 0;
-            dino.onGround = true;
-        }
-
-        for(var c=0;c<clouds.length;c++){
-
-            clouds[c].x -= speed*.12*dt;
-
-            if(clouds[c].x < -70){
-                clouds[c].x = W + Math.random()*90;
-                clouds[c].y = 35 + Math.random()*48;
+    let isRunning = false;
+    let score = 0;
+    let speed = 4;
+    let frameCount = 0;
+
+    highScoreEl.textContent =
+        String(highScore).padStart(5, "0");
+
+    const dino = {
+        x: 30,
+        y: 110,
+        w: 20,
+        h: 24,
+        vy: 0,
+        gravity: 0.6,
+        jumpForce: -9.5,
+        groundY: 110,
+        isJumping: false,
+
+        jump() {
+            if (!this.isJumping) {
+                this.vy = this.jumpForce;
+                this.isJumping = true;
             }
-        }
+        },
 
-        spawnTimer -= dt;
+        update() {
+            this.vy += this.gravity;
+            this.y += this.vy;
 
-        if(spawnTimer <= 0){
+            if (this.y >= this.groundY) {
+                this.y = this.groundY;
+                this.vy = 0;
+                this.isJumping = false;
+            }
+        },
 
-            spawnObstacle();
+        draw() {
+            ctx.fillStyle = "#7ee787";
 
-            spawnTimer =
-                Math.max(38,78-speed*2)
-                + Math.random()*38;
-        }
+            ctx.fillRect(
+                this.x + 4,
+                this.y,
+                12,
+                12
+            );
 
-        for(var j=0;j<obstacles.length;j++){
+            ctx.fillRect(
+                this.x + 12,
+                this.y + 2,
+                4,
+                3
+            );
 
-            obstacles[j].x -= speed*dt;
+            ctx.fillStyle = "#12161f";
 
-            if(obstacles[j].type === 'ptero'){
+            ctx.fillRect(
+                this.x + 12,
+                this.y + 2,
+                2,
+                2
+            );
 
-                obstacles[j].frameTimer += dt;
+            ctx.fillStyle = "#7ee787";
 
-                if(obstacles[j].frameTimer > 12){
-                    obstacles[j].frame++;
-                    obstacles[j].frameTimer = 0;
+            ctx.fillRect(
+                this.x,
+                this.y + 10,
+                16,
+                10
+            );
+
+            ctx.fillRect(
+                this.x - 4,
+                this.y + 10,
+                6,
+                4
+            );
+
+            if (this.isJumping) {
+                ctx.fillRect(
+                    this.x + 2,
+                    this.y + 20,
+                    4,
+                    4
+                );
+
+                ctx.fillRect(
+                    this.x + 10,
+                    this.y + 20,
+                    4,
+                    4
+                );
+            } else {
+                if (
+                    Math.floor(
+                        frameCount / 6
+                    ) % 2 === 0
+                ) {
+                    ctx.fillRect(
+                        this.x + 2,
+                        this.y + 20,
+                        4,
+                        4
+                    );
+
+                    ctx.fillRect(
+                        this.x + 10,
+                        this.y + 18,
+                        4,
+                        4
+                    );
+                } else {
+                    ctx.fillRect(
+                        this.x + 2,
+                        this.y + 18,
+                        4,
+                        4
+                    );
+
+                    ctx.fillRect(
+                        this.x + 10,
+                        this.y + 20,
+                        4,
+                        4
+                    );
                 }
             }
         }
+    };
 
-        obstacles = obstacles.filter(function(o){
-            return o.x > -70;
+    let obstacles = [];
+
+    function spawnObstacle() {
+        const type =
+            Math.random() > 0.35
+                ? "cactus"
+                : "bird";
+
+        if (type === "cactus") {
+            const height =
+                Math.random() > 0.5
+                    ? 24
+                    : 18;
+
+            obstacles.push({
+                x: canvas.width,
+                y: 134 - height,
+                w: 12,
+                h: height,
+                type: "cactus"
+            });
+        } else {
+            const birdY =
+                Math.random() > 0.5
+                    ? 90
+                    : 105;
+
+            obstacles.push({
+                x: canvas.width,
+                y: birdY,
+                w: 16,
+                h: 12,
+                type: "bird"
+            });
+        }
+    }
+
+    let clouds = [
+        {
+            x: 100,
+            y: 30,
+            speed: 0.5
+        },
+        {
+            x: 280,
+            y: 45,
+            speed: 0.3
+        }
+    ];
+
+    function drawScene() {
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        ctx.strokeStyle = "#30363d";
+        ctx.lineWidth = 2;
+
+        ctx.beginPath();
+        ctx.moveTo(0, 134);
+        ctx.lineTo(canvas.width, 134);
+        ctx.stroke();
+
+        ctx.fillStyle = "#21262d";
+
+        clouds.forEach(c => {
+            if (isRunning) {
+                c.x -= c.speed;
+            }
+
+            if (c.x < -30) {
+                c.x = canvas.width + 20;
+            }
+
+            ctx.fillRect(
+                c.x,
+                c.y,
+                24,
+                8
+            );
+
+            ctx.fillRect(
+                c.x + 4,
+                c.y - 4,
+                16,
+                4
+            );
         });
 
-        speed = Math.min(
-            13,
-            speed + .0024*dt
-        );
+        ctx.fillStyle = "#484f58";
 
-        score += dt*.12;
+        for (
+            let i = 0;
+            i < canvas.width;
+            i += 40
+        ) {
+            const dotX =
+                (
+                    i -
+                    (frameCount * speed) % 40 +
+                    canvas.width
+                ) %
+                canvas.width;
 
-        if(score > hi){
-            hi = score;
+            ctx.fillRect(
+                dotX,
+                138,
+                6,
+                2
+            );
+        }
+    }
+
+    function resetGame() {
+        score = 0;
+        speed = 4.5;
+        frameCount = 0;
+        obstacles = [];
+
+        dino.y = dino.groundY;
+        dino.vy = 0;
+        dino.isJumping = false;
+
+        isRunning = true;
+
+        overlay.style.display = "none";
+
+        loop();
+    }
+
+    function gameOver() {
+        isRunning = false;
+
+        if (score > highScore) {
+            highScore = score;
+
+            try {
+                localStorage.setItem(
+                    "dino_hi",
+                    highScore
+                );
+            } catch (e) {
+            }
+
+            highScoreEl.textContent =
+                String(highScore).padStart(
+                    5,
+                    "0"
+                );
         }
 
-        var db = {
-            x:dino.x,
-            y:dino.y,
-            w:TREX.w,
-            h:TREX.h
-        };
+        overlayTitle.textContent =
+            "GAME OVER";
 
-        for(var k=0;k<obstacles.length;k++){
+        overlaySub.textContent =
+            "TOQUE PARA JOGAR DE NOVO 🔄";
 
-            if(hit(db,obstacles[k])){
-                gameOver = true;
-                break;
+        overlay.style.display =
+            "flex";
+    }
+
+    function loop() {
+        if (!isRunning) {
+            return;
+        }
+
+        frameCount++;
+
+        score =
+            Math.floor(
+                frameCount / 4
+            );
+
+        scoreEl.textContent =
+            String(score).padStart(
+                5,
+                "0"
+            );
+
+        if (
+            frameCount % 300 === 0 &&
+            speed < 9
+        ) {
+            speed += 0.4;
+        }
+
+        if (
+            frameCount %
+            Math.max(
+                45,
+                Math.floor(
+                    90 - speed * 4
+                )
+            ) === 0
+        ) {
+            if (Math.random() > 0.3) {
+                spawnObstacle();
             }
         }
-    }
 
-    drawBackground();
+        drawScene();
 
-    for(var z=0;z<obstacles.length;z++){
-        drawObstacle(obstacles[z]);
-    }
+        dino.update();
+        dino.draw();
 
-    drawDino();
-    drawScore();
-    drawMessage();
+        for (
+            let i = obstacles.length - 1;
+            i >= 0;
+            i--
+        ) {
+            const obs =
+                obstacles[i];
 
-    requestAnimationFrame(loop);
-}
+            obs.x -= speed;
 
-function start(){
+            if (obs.type === "cactus") {
+                ctx.fillStyle = "#f85149";
 
-    reset();
-    requestAnimationFrame(loop);
-}
+                ctx.fillRect(
+                    obs.x,
+                    obs.y,
+                    obs.w,
+                    obs.h
+                );
 
-if(sprite.complete && sprite.naturalWidth > 0){
+                ctx.fillRect(
+                    obs.x - 2,
+                    obs.y + 4,
+                    2,
+                    6
+                );
 
-    start();
+                ctx.fillRect(
+                    obs.x + obs.w,
+                    obs.y + 6,
+                    2,
+                    6
+                );
+            } else {
+                ctx.fillStyle = "#e3b341";
 
-}else{
+                ctx.fillRect(
+                    obs.x,
+                    obs.y,
+                    obs.w,
+                    obs.h
+                );
 
-    sprite.onload = start;
+                const wingY =
+                    (
+                        Math.floor(
+                            frameCount / 8
+                        ) % 2 === 0
+                    )
+                        ? obs.y - 4
+                        : obs.y + obs.h;
 
-    sprite.onerror = function(){
+                ctx.fillRect(
+                    obs.x + 4,
+                    wingY,
+                    6,
+                    4
+                );
+            }
 
-        ctx.fillStyle = '#dff4ff';
-        ctx.fillRect(0,0,W,H);
+            if (
+                dino.x < obs.x + obs.w &&
+                dino.x + dino.w > obs.x &&
+                dino.y < obs.y + obs.h &&
+                dino.y + dino.h > obs.y
+            ) {
+                gameOver();
+                return;
+            }
 
-        ctx.fillStyle = '#e04444';
-        ctx.font = 'bold 14px Arial';
-        ctx.textAlign = 'center';
+            if (
+                obs.x + obs.w < 0
+            ) {
+                obstacles.splice(
+                    i,
+                    1
+                );
+            }
+        }
 
-        ctx.fillText(
-            'Erro ao carregar o Dino',
-            W/2,
-            H/2
+        requestAnimationFrame(
+            loop
         );
-    };
-}
+    }
 
+    function handleAction(e) {
+        if (!isRunning) {
+            resetGame();
+        } else {
+            dino.jump();
+        }
+    }
+
+    window.addEventListener(
+        "keydown",
+        e => {
+            if (
+                e.code === "Space" ||
+                e.code === "ArrowUp"
+            ) {
+                handleAction(e);
+            }
+        }
+    );
+
+    window.addEventListener(
+        "touchstart",
+        handleAction,
+        {
+            passive: true
+        }
+    );
+
+    window.addEventListener(
+        "mousedown",
+        handleAction
+    );
+
+    drawScene();
+    dino.draw();
 })();
 </script>
 
 </body>
-</html>`
+</html>
+`;
+}
 
-        const unifiedData = {
-          response_id: crypto.randomUUID(),
-          sections: [
-            {
-              view_model: {
-                primitive: {
-                  __typename: 'GenAIaeacdsnwHtmlPrimitive',
-                  payload: dinoHtml,
-                  trusted_sources: ['zone.api.br']
-                },
-                __typename: 'GenAISingleLayoutViewModel'
-              }
-            }
-          ]
-        }
-
-        const payload = {
-          messageContextInfo: {
-            deviceListMetadata: {},
-            deviceListMetadataVersion: 2,
-            botMetadata: {
-              messageDisclaimerText: '',
-              botResponseId: crypto.randomUUID(),
-              verificationMetadata: {
-                proofs: [
-                  {
-                    version: 1,
-                    useCase: 1,
-                    signature: 'TklYRUwuTWVzc2FnZUJ1aWxkZXJWNC43LVZlcmlmaWNhdGlvblNpZ25hdHVyZS5NZXRhZGF0YeN55YRyad2+ZA==',
-                    certificateChain: [
-                      'TklYRUwuTWVzc2FnZUJ1aWxkZXJWNC43LUNlcnRpZmljYXRlQ2hhaW4uTWV0YWRhdGEOvtJr968bbpKdZreOTwkk9aPN++XPE60RfuzNLkXXc7LE8BOkJOWRpo2oNXaRJ3uCNJ43HY3A+oetnvHSfcxWqmvvTSrBOI5V1NOD6RMsZ/st1XVPUx83AGps1l5jYBOYzqMNy6un2tToJ2Bt9bXRo29tWLZTu8m7TNY/hISwVpVc5tjSet5U7btPN+dMIx2UvykB1jcbWGsdklheeuz8RXSStNXzeaGvsf1lpZ/ugLE4b2BdmlRNKrY6zLE4qFtRYQoS7axOyQX+4QUyN2m9bfm7urQmn+QRSXJwMO7X5kAJJLbkVGJFt9Pm9VXPwQVrK2aaqiXlpusj+7DfDw00OULmYMmZDTqXM0nUVLxj13z0LhMQoQhhNG8utdUn4uKOFceliTZ/xiP+A54GnX9620641bqw3ctfh9NNXPsTEK8hAUD7FDqUhVntHmoEYYEHq8X1tHHZYP49/f2iezTiE8AUaoZo42/jIWQIKohOGNUib2hEqMkW8NsR8vPihvNuqPc0zKZcl6359YFQdjiiW8kCRD/rsDOr9v1eYLFZKYloFyzFqEgj+jcG/V47elOjShJ5CCPwatXwP6HIloVwtgygFsnOFmCg6Ojoivfoz8Nw1qxFwg5OU2cq/1WbWNELKnaFg4eUWCAIJ/3ZIJsEPkgemZxGhE+hdiNn9dkQYBJs1kx2BxdIkJmQ9vJSKkrMz6lTxZM3IJ9mhmKS6zYdU1ppeAao0/ayte997DQParb/AHLN79g0iW1ad0z8ir5jAl0q3a+UZPTSa4YiSqC2PZ/gfxG5wvL2mKmeKowG0RXjmEp5iNxrni+T/HRLZOoH7y0DQ24nMCPg',
-                      'TklYRUwuTWVzc2FnZUJ1aWxkZXJWNC43LUNlcnRpZmljYXRlQ2hhaW4uTWV0YWRhdGHsL0Ccm0ELINFZ2IaBhKaeWnVuh0o6nZLCioCn9xpSADzwIS5VCWO+1eVXT2atJOyf7FYlpB0/JA3Us+aQtekuIkHu/zBXijORZ4ClF4+sF3cSTNg6gY/+6iwLK/zs3bMg+GeJrcI65vXfs95Shxlb2Rd5GRT2/2yBmR6Zkf5QwMJuptUHWtM26WY7/xlkEKGFYDZVqOSylusiOzSALa815zC6dCiHoJNLBEKMlaZZQOk57/+OYoU5zzTaEgLhyvNFHSyAlyLQ3SGFtVHAaJZHSmmSPyJowCOB+92Gkk6SWVMsk6FbU8QJWFtlhzV/W/gZ7WzUlS/AKgN0th9/cq20ToFkW7X9c+rtYavufmuieqFhXgaMD8AGsoN9QC/HzNC9D1nydPfFYEUr9BHVy2nF5gM58Y59r2rT8p5LPARIkUp8g+5DLhyW0tdZFZ1305o4AHCayZnp5rjcU2Xi/c1Qf/djBGakmijlMs4aMzKJYD0c4Q8jdI7sNyd876K2wRD+L6KeD2QB3PtCS4P7BWAl5gh5CJ6ZBrwcaKXZqcSjEwm52MqVCgYZdapAaNYUy/QndttjLOG0wxxwuX1hIhMjPnIKZR1kwnqD5EqlHpilrnojRZvjVGN4zEKmilS8rNstt4HHs/D849W+Q6LRVWiWMs0cT2IugrX+Skxd8En7Gq52UEmuVBrSTpN+UpIu20NsVb9lsvuYh3XO441606tOEY2eKcZJdTtqrOTNqbbTk0zVn1yhbOCvmfctBNDhTwaC5QMi0P9wjU5XI9SBtkdQLizc5oqpoiHeqgb8+aJHVLcbgIJ/KLZKtRWFDfzRNM02Csx4etUUapVd2NA/L0oMs/O5T9sVj9FBJ7q99GWr3PVmxJb36mHZLXC4k1gGN9swE0LtzYsUdT5tUo9ri/hS3W/SM+F1p4Kh4QIgRcG3ciIHGN44bnDh3HDCz0fDnzKYw0bclMxZPctEyJ5gEOPF6OAkjD9dEaRGq/tEPf1k9Aub+v2dEjnfrYWAm4E5Zfhs2Xh0CT0k+SzhgKd0K/46ChJ20G5+blwpIvahvTVS68+aVIX6CwXs4tcVx6FnmVsMOOkIasfaqQLZYbNBkuLoZnQAq4j8yRekrQ=='
-                    ]
-                  }
-                ]
-              }
-            }
-          },
-
-          botForwardedMessage: {
-            message: {
-              richResponseMessage: {
-                messageType: 1,
-                submessages: [
-                  {
-                    messageType: 2,
-                    messageText: 'Dino'
-                  }
-                ],
-                unifiedResponse: {
-                  data: Buffer
-                    .from(JSON.stringify(unifiedData))
-                    .toString('base64')
-                },
-                contextInfo: {
-                  forwardingScore: 1,
-                  isForwarded: true,
-                  forwardedAiBotMessageInfo: {
-                    botJid: '867051314767696@bot'
-                  },
-                  forwardOrigin: 4
-                }
-              }
-            }
-          }
-        }
-
-        const msg = generateWAMessageFromContent(
-          from,
-          payload,
-          {
-            quoted: selo || info,
-            userJid: tokito.user?.id
-          }
-        )
-
-        await tokito.relayMessage(
-          from,
-          msg.message,
-          {
-            messageId: msg.key.id
-          }
-        )
-      }
-      catch (error) {
-        console.log(
-          '[DINO]',
-          error?.stack || error?.message || error
-        )
-
-        return reply(
-          `*❌ | Não foi possível abrir o jogo do Dino.*\n\n> ${error?.message || 'Erro desconhecido'}`
-        )
-      }
+function buildHtmlDinoMessage(
+    html,
+    options = {}
+) {
+    if (
+        typeof html !== "string" ||
+        !html.trim()
+    ) {
+        throw new TypeError(
+            "HTML do Dino inválido."
+        );
     }
-  }
-})
+
+    const unifiedResponse = {
+        response_id:
+            crypto.randomUUID(),
+
+        sections: [
+            {
+                view_model: {
+                    primitive: {
+                        __typename:
+                            HTML_GAME_PRIMITIVE,
+
+                        payload:
+                            html.trim(),
+
+                        trusted_sources: [
+                            ...HTML_GAME_TRUSTED_SOURCES
+                        ]
+                    },
+
+                    __typename:
+                        "GenAISingleLayoutViewModel"
+                }
+            }
+        ]
+    };
+
+    return {
+        botForwardedMessage: {
+            message: {
+                richResponseMessage: {
+                    submessages: [
+                        {
+                            messageType: 2,
+
+                            messageText:
+                                String(
+                                    options.submessageText ||
+                                    "Dino Game!"
+                                )
+                        }
+                    ],
+
+                    messageType: 1,
+
+                    unifiedResponse: {
+                        data:
+                            Buffer.from(
+                                JSON.stringify(
+                                    unifiedResponse
+                                ),
+                                "utf8"
+                            )
+                    },
+
+                    contextInfo: {
+                        mentionedJid: [],
+                        groupMentions: [],
+                        statusAttributions: [],
+                        forwardingScore: 1,
+                        isForwarded: true,
+
+                        forwardedAiBotMessageInfo: {
+                            botJid:
+                                "867051314767696@bot"
+                        },
+
+                        forwardOrigin: 4
+                    }
+                }
+            }
+        }
+    };
+}
+
+async function sendHtmlDino(
+    socket,
+    jid,
+    data = {},
+    options = {}
+) {
+    if (!socket) {
+        throw new Error(
+            "Socket do Baileys não foi fornecido."
+        );
+    }
+
+    if (
+        typeof socket.relayMessage !==
+        "function"
+    ) {
+        throw new TypeError(
+            "socket.relayMessage() não está disponível."
+        );
+    }
+
+    let fotoUser =
+        data.fotoUser ||
+        data.foto ||
+        null;
+
+    if (
+        !fotoUser &&
+        data.sender &&
+        typeof socket.profilePictureUrl ===
+        "function"
+    ) {
+        try {
+            fotoUser =
+                await socket.profilePictureUrl(
+                    data.sender,
+                    "image"
+                );
+        } catch {
+            fotoUser = null;
+        }
+    }
+
+    if (
+        typeof fotoUser === "string" &&
+        fotoUser.startsWith("http")
+    ) {
+        fotoUser =
+            await getBase64FromUrl(
+                fotoUser
+            );
+    }
+
+    const finalData = {
+        ...data,
+        fotoUser
+    };
+
+    const html =
+        buildDinoHtml(
+            finalData
+        );
+
+    const message =
+        buildHtmlDinoMessage(
+            html,
+            options
+        );
+
+    return await socket.relayMessage(
+        jid,
+        message,
+        {}
+    );
+}
+
+dylan.setCommand({
+    nome: "dino",
+
+    comandos: [
+        "dino",
+        "dinossauro",
+        "trex"
+    ],
+
+    categoria: "jogos",
+
+    info: {
+        descricao:
+            "Abre o jogo Dino Runner interativo dentro do WhatsApp.",
+
+        uso:
+            "dino",
+
+        categoria:
+            "jogos"
+    },
+
+    async executar(ctx) {
+        const {
+            tokito,
+            from,
+            sender,
+            pushname,
+            reply
+        } = ctx;
+
+        try {
+            const usuario =
+                String(
+                    pushname ||
+                    sender?.split("@")?.[0] ||
+                    "Jogador"
+                );
+
+            await sendHtmlDino(
+                tokito,
+                from,
+                {
+                    usuario,
+                    sender
+                },
+                {
+                    submessageText:
+                        "Dino Game!"
+                }
+            );
+
+            return true;
+        } catch (error) {
+            console.log(
+                "[DINO]",
+                error?.stack ||
+                error?.message ||
+                error
+            );
+
+            return reply(
+                `*❌ | Não foi possível abrir o Dino.*\n\n> ${
+                    error?.message ||
+                    "Erro desconhecido"
+                }`
+            );
+        }
+    }
+});
