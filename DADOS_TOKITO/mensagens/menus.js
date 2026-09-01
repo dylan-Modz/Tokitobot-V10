@@ -152,6 +152,7 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}toimg
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}togif
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rename nome|autor
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figperfil
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}packfig
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figu 5
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figuemoji 5

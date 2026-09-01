@@ -1,69 +1,39 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.87",
+  "version": "10.0.88",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-01T09:04:36.450Z",
+  "publishedAt": "2026-09-01T09:18:12.397Z",
   "changelog": [
-    "[Correção] 8 arquivos atualizados",
-    "A versão 10.0.87 já está disponível para atualização.",
-    "Abrirgp atualizado",
-    "Fechargp atualizado",
+    "[Correção] 3 arquivos atualizados",
+    "A versão 10.0.88 já está disponível para atualização.",
+    "Figperfil atualizado",
     "Mensagens atualizado",
-    "Menus atualizado",
-    "Update Cli atualizado",
-    "Toimg atualizado",
-    "Arquivo principal do bot atualizado",
-    "Togif atualizado"
+    "Menus atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "8 arquivos atualizados",
-  "notice": "A versão 10.0.87 já está disponível para atualização.",
+  "title": "3 arquivos atualizados",
+  "notice": "A versão 10.0.88 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/abrirgp.js",
-      "sha256": "ca3f73c36912862a21d94ea1426e55a6946b11da6a7a7ef12eae577888ef67c3",
-      "size": 4020
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/fechargp.js",
-      "sha256": "4edaf267b1743f42aa4426a8d20736571beb16797cd4afc5919bc45a8bbe3bef",
-      "size": 3981
+      "path": "DADOS_TOKITO/plugins/figurinhas/figperfil.js",
+      "sha256": "87b9029b2a509da2a7b35629ede272f0d9e55b2d55c0049b5a7d1f69413f23b3",
+      "size": 2772
     },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "3f4e6adaa6f49c99325b201c814f46763beca14c8e43e05a42eb66537a769ab6",
-      "size": 172497
+      "sha256": "05351a4ff03e50244eb3ce982cf6ac0034aaf65faf804b6af7acd2f135da6c82",
+      "size": 173489
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "5617631ab03650db3ef88df3b81690b213b15103f50f6bdc5c81f85a50f57324",
-      "size": 61503
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/update-cli.js",
-      "sha256": "40fc5023fd6f2e13553178796d257630ae3cd3b273b6a81f1460ed31b59bab95",
-      "size": 3926
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/figurinhas/toimg.js",
-      "sha256": "1e71261c534769c26016ef9831e4e024afc402648034fd29f8597ed04ce8695c",
-      "size": 5417
-    },
-    {
-      "path": "tokito.js",
-      "sha256": "97740deaf5125d1e73d5e3260e791d52acd0950fa8d4eac1f3d43e81e254c320",
-      "size": 45668
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/figurinhas/togif.js",
-      "sha256": "67a897dc6e7363783be9b91e479e254943e72b72aafaa1d62b399e1424beb38a",
-      "size": 10678
+      "sha256": "b650f918781b871e183b46daa25b88c0ac72d629524ebccef9150291d7fe4659",
+      "size": 61549
     }
   ],
   "releases": [
@@ -2171,6 +2141,39 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-01T09:04:36.449Z"
+    },
+    {
+      "version": "10.0.88",
+      "fromVersion": "10.0.87",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "3 arquivos atualizados",
+      "notice": "A versão 10.0.88 já está disponível para atualização.",
+      "changelog": [
+        "Figperfil atualizado",
+        "Mensagens atualizado",
+        "Menus atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/figperfil.js",
+          "sha256": "87b9029b2a509da2a7b35629ede272f0d9e55b2d55c0049b5a7d1f69413f23b3",
+          "size": 2772
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "05351a4ff03e50244eb3ce982cf6ac0034aaf65faf804b6af7acd2f135da6c82",
+          "size": 173489
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "b650f918781b871e183b46daa25b88c0ac72d629524ebccef9150291d7fe4659",
+          "size": 61549
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-01T09:18:12.396Z"
     }
   ],
   "versao": "10.0.70",

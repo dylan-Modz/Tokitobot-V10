@@ -3944,3 +3944,28 @@ return `- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙾 𝚃𝙾𝙶𝙸𝙵\`
 > *『 ⚠️ 𝙴𝚁𝚁𝙾 』— Não foi possível converter a figurinha animada.*
 > *『 🔄 𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴 』— Responda a figurinha e execute o comando novamente.*`
 }
+exports.figPerfilGrupo = () => {
+return `- ❌ \`𝙵𝙸𝙶𝙿𝙴𝚁𝙵𝙸𝙻\`
+
+> *『 👥 𝙰𝚅𝙸𝚂𝙾 』— Este comando só pode ser usado em grupos.*`
+}
+
+exports.figPerfilSemFoto = numero => {
+return `- 🖼️ \`𝙵𝙸𝙶𝙿𝙴𝚁𝙵𝙸𝙻\`
+
+> *『 ❌ 𝙵𝙾𝚃𝙾 』— A pessoa @${numero} não possui foto de perfil ou ela está privada.*`
+}
+
+exports.figPerfilGerando = numero => {
+return `- 🖼️ \`𝙵𝙸𝙶𝙿𝙴𝚁𝙵𝙸𝙻\`
+
+> *『 👤 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾 』— @${numero}*
+> *『 ⚙️ 𝚂𝚃𝙰𝚃𝚄𝚂 』— Gerando a figurinha da foto de perfil...*`
+}
+
+exports.figPerfilErro = () => {
+return `- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙾 𝙵𝙸𝙶𝙿𝙴𝚁𝙵𝙸𝙻\`
+
+> *『 ⚠️ 𝙴𝚁𝚁𝙾 』— Não foi possível gerar a figurinha da foto de perfil.*
+> *『 🔄 𝚃𝙴𝙽𝚃𝙴 𝙽𝙾𝚅𝙰𝙼𝙴𝙽𝚃𝙴 』— Marque uma pessoa ou responda a mensagem dela e tente novamente.*`
+}
