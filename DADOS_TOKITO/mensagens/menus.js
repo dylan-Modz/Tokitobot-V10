@@ -33,8 +33,9 @@
 * Author: dylan Modz.
 */
 
-exports.menu = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
-return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, baileysVersion
+) => {
+  return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡🧊｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝙿𝙰𝙸𝙽𝙴𝙻-𝙳𝙰-𝚃𝙾𝙺𝙸𝚃𝙾
@@ -69,6 +70,61 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡🎧｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝐷𝑂𝑊𝑁𝐿𝑂𝐴𝐷𝑆
+├╾═╼･ﾟ𖤐ﾟ･｡📥｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ 🎵 ${prefix}play música
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}play_audio música
+┃࣪ ╎—̳͟͞͞ 🎬 ${prefix}playvideo música
+┃࣪ ╎—̳͟͞͞ 📄 ${prefix}playdoc música
+┃࣪ ╎—̳͟͞͞ 🔎 ${prefix}ytsearch pesquisa
+┃࣪ ╎—̳͟͞͞ 🎵 ${prefix}tiktok link
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}tiktok_audio link
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}tiktok_foto link
+┃࣪ ╎—̳͟͞͞ 📸 ${prefix}instagram link
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}instagram_audio link
+┃࣪ ╎—̳͟͞͞ 📘 ${prefix}facebook link
+┃࣪ ╎—̳͟͞͞ 🐦 ${prefix}twitter link
+┃࣪ ╎—̳͟͞͞ 🎥 ${prefix}kwai link
+┃࣪ ╎—̳͟͞͞ 📌 ${prefix}pinterestvideo link
+┃࣪ ╎—̳͟͞͞ 🎶 ${prefix}deezer música
+┃࣪ ╎—̳͟͞͞ ☁️ ${prefix}soundcloud música
+┃࣪ ╎—̳͟͞͞ 🍎 ${prefix}applemusic link
+┃࣪ ╎—̳͟͞͞ 🎶 ${prefix}spotify link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}mediafire link
+┃࣪ ╎—̳͟͞͞ ☁️ ${prefix}mega link
+┃࣪ ╎—̳͟͞͞ 🐙 ${prefix}gitclone link
+┃࣪ ╎—̳͟͞͞ 📱 ${prefix}aptoide app
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}happymod app
+┃࣪ ╎—̳͟͞͞ 🛍️ ${prefix}playstore app
+┃࣪ ╎—̳͟͞͞ 🎬 ${prefix}capcut link
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
+
+╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡🎚️｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝐴𝐿𝑇𝐸𝑅𝐴𝐷𝑂𝑅𝐸𝑆
+├╾═╼･ﾟ𖤐ﾟ･｡🎧｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ 🐌 ${prefix}videolento
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}videorapido
+┃࣪ ╎—̳͟͞͞ 🔄 ${prefix}videocontrario
+┃࣪ ╎—̳͟͞͞ 🐌 ${prefix}audiolento
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}audiorapido
+┃࣪ ╎—̳͟͞͞ 🚀 ${prefix}speedup
+┃࣪ ╎—̳͟͞͞ 🌙 ${prefix}slowed
+┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}grave
+┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}grave2
+┃࣪ ╎—̳͟͞͞ 🐿️ ${prefix}esquilo
+┃࣪ ╎—̳͟͞͞ 💥 ${prefix}estourar
+┃࣪ ╎—̳͟͞͞ 🎵 ${prefix}bass
+┃࣪ ╎—̳͟͞͞ 🎵 ${prefix}bass2
+┃࣪ ╎—̳͟͞͞ 🗣️ ${prefix}vozmenino
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
+
+╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡🧠｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐼𝑁𝑇𝐸𝐿𝐼𝐺𝐸̂𝑁𝐶𝐼𝐴-𝐴𝑅𝑇𝐼𝐹𝐼𝐶𝐼𝐴𝐿
 ├╾═╼･ﾟ𖤐ﾟ･｡🔮｡･ﾟ𖤐ﾟ･╾═╼┤
@@ -93,8 +149,10 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}bratvid texto
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}take
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}roubar
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}toimg
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}togif
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rename nome|autor
-┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}packfig 
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}packfig
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figu 5
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figuemoji 5
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figuanime 5
@@ -122,7 +180,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}criador
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}idade 23/12/2007
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}totalcmd
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}gerarlink 
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}gerarlink
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
@@ -548,7 +606,10 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🕹️｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}jogodavelha @usuario
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}dama @usuario
+┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}dino
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}forca
+┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}cobrinha 
+┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}memória 
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}cacapalavras
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}adivinhe
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quiz

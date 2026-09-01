@@ -55,10 +55,20 @@ if (!regra.test(hora))
 return reply(mess.fechar(prefix))
 const grupos = ler()
 const atual = grupos[from] || {}
-const ctx = mensagem?.extendedTextMessage?.contextInfo || mensagem?.imageMessage?.contextInfo || mensagem?.videoMessage?.contextInfo || {}
-const marcada = extrair(ctx?.quotedMessage)
+const contexto =
+mensagem?.extendedTextMessage?.contextInfo ||
+mensagem?.imageMessage?.contextInfo ||
+mensagem?.videoMessage?.contextInfo ||
+mensagem?.audioMessage?.contextInfo ||
+mensagem?.stickerMessage?.contextInfo ||
+{}
+
+const marcada = extrair(contexto?.quotedMessage)
+
 const imagem = marcada?.imageMessage
 const video = marcada?.videoMessage
+const audio = marcada?.audioMessage
+const sticker = marcada?.stickerMessage
 let midia = atual.fecharmidia || null
 await reagir(from, '⏳')
 if (video) {
@@ -81,6 +91,46 @@ apagar(midia)
 midia = {
 tipo: 'image',
 arquivo: nome
+}
+}
+else if (audio) {
+const buffer = await getFileBuffer(audio, 'audio')
+const mimetype = audio.mimetype || 'audio/ogg; codecs=opus'
+
+let extensao = '.ogg'
+
+if (mimetype.includes('mpeg'))
+extensao = '.mp3'
+else if (mimetype.includes('mp4'))
+extensao = '.m4a'
+else if (mimetype.includes('opus'))
+extensao = '.opus'
+
+const nome = `${from.split('@')[0]}-f-${Date.now()}-${getRandom(extensao)}`
+const destino = path.join(pasta, nome)
+
+fs.writeFileSync(destino, buffer)
+apagar(midia)
+
+midia = {
+tipo: 'audio',
+arquivo: nome,
+mimetype,
+ptt: audio.ptt === true
+}
+}
+else if (sticker) {
+const buffer = await getFileBuffer(sticker, 'sticker')
+const nome = `${from.split('@')[0]}-f-${Date.now()}-${getRandom('.webp')}`
+const destino = path.join(pasta, nome)
+
+fs.writeFileSync(destino, buffer)
+apagar(midia)
+
+midia = {
+tipo: 'sticker',
+arquivo: nome,
+mimetype: sticker.mimetype || 'image/webp'
 }
 }
 grupos[from] = {

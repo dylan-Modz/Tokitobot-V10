@@ -1,33 +1,69 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.86",
+  "version": "10.0.87",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-08-31T17:55:12.025Z",
+  "publishedAt": "2026-09-01T09:04:36.450Z",
   "changelog": [
-    "[Correção] 2 arquivos atualizados",
-    "A versão 10.0.86 já está disponível para atualização.",
-    "Cobrinha atualizado",
-    "Memoria atualizado"
+    "[Correção] 8 arquivos atualizados",
+    "A versão 10.0.87 já está disponível para atualização.",
+    "Abrirgp atualizado",
+    "Fechargp atualizado",
+    "Mensagens atualizado",
+    "Menus atualizado",
+    "Update Cli atualizado",
+    "Toimg atualizado",
+    "Arquivo principal do bot atualizado",
+    "Togif atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "2 arquivos atualizados",
-  "notice": "A versão 10.0.86 já está disponível para atualização.",
+  "title": "8 arquivos atualizados",
+  "notice": "A versão 10.0.87 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/jogos/cobrinha.js",
-      "sha256": "5689552cf283a08022cd4157d1b35df675a34de9728d5d8728408ca737ff5ad0",
-      "size": 22155
+      "path": "DADOS_TOKITO/plugins/admin/abrirgp.js",
+      "sha256": "ca3f73c36912862a21d94ea1426e55a6946b11da6a7a7ef12eae577888ef67c3",
+      "size": 4020
     },
     {
-      "path": "DADOS_TOKITO/plugins/jogos/memoria.js",
-      "sha256": "4848cc24a26a579acc003253c83ac6bd964346427f78de99ca1c127008bb8674",
-      "size": 19728
+      "path": "DADOS_TOKITO/plugins/admin/fechargp.js",
+      "sha256": "4edaf267b1743f42aa4426a8d20736571beb16797cd4afc5919bc45a8bbe3bef",
+      "size": 3981
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "3f4e6adaa6f49c99325b201c814f46763beca14c8e43e05a42eb66537a769ab6",
+      "size": 172497
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "5617631ab03650db3ef88df3b81690b213b15103f50f6bdc5c81f85a50f57324",
+      "size": 61503
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/update-cli.js",
+      "sha256": "40fc5023fd6f2e13553178796d257630ae3cd3b273b6a81f1460ed31b59bab95",
+      "size": 3926
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/figurinhas/toimg.js",
+      "sha256": "1e71261c534769c26016ef9831e4e024afc402648034fd29f8597ed04ce8695c",
+      "size": 5417
+    },
+    {
+      "path": "tokito.js",
+      "sha256": "97740deaf5125d1e73d5e3260e791d52acd0950fa8d4eac1f3d43e81e254c320",
+      "size": 45668
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/figurinhas/togif.js",
+      "sha256": "67a897dc6e7363783be9b91e479e254943e72b72aafaa1d62b399e1424beb38a",
+      "size": 10678
     }
   ],
   "releases": [
@@ -2072,6 +2108,69 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-08-31T17:55:12.025Z"
+    },
+    {
+      "version": "10.0.87",
+      "fromVersion": "10.0.86",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "8 arquivos atualizados",
+      "notice": "A versão 10.0.87 já está disponível para atualização.",
+      "changelog": [
+        "Abrirgp atualizado",
+        "Fechargp atualizado",
+        "Mensagens atualizado",
+        "Menus atualizado",
+        "Update Cli atualizado",
+        "Toimg atualizado",
+        "Arquivo principal do bot atualizado",
+        "Togif atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/abrirgp.js",
+          "sha256": "ca3f73c36912862a21d94ea1426e55a6946b11da6a7a7ef12eae577888ef67c3",
+          "size": 4020
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/fechargp.js",
+          "sha256": "4edaf267b1743f42aa4426a8d20736571beb16797cd4afc5919bc45a8bbe3bef",
+          "size": 3981
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "3f4e6adaa6f49c99325b201c814f46763beca14c8e43e05a42eb66537a769ab6",
+          "size": 172497
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "5617631ab03650db3ef88df3b81690b213b15103f50f6bdc5c81f85a50f57324",
+          "size": 61503
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/update-cli.js",
+          "sha256": "40fc5023fd6f2e13553178796d257630ae3cd3b273b6a81f1460ed31b59bab95",
+          "size": 3926
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/toimg.js",
+          "sha256": "1e71261c534769c26016ef9831e4e024afc402648034fd29f8597ed04ce8695c",
+          "size": 5417
+        },
+        {
+          "path": "tokito.js",
+          "sha256": "97740deaf5125d1e73d5e3260e791d52acd0950fa8d4eac1f3d43e81e254c320",
+          "size": 45668
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/togif.js",
+          "sha256": "67a897dc6e7363783be9b91e479e254943e72b72aafaa1d62b399e1424beb38a",
+          "size": 10678
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-01T09:04:36.449Z"
     }
   ],
   "versao": "10.0.70",

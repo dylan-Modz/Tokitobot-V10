@@ -158,27 +158,61 @@ const enviar = async (tokito, jid, texto, midia) => {
 try {
 if (midia?.arquivo) {
 const local = path.join(pasta, midia.arquivo)
+
 if (fs.existsSync(local)) {
 const buffer = fs.readFileSync(local)
+
 if (midia.tipo === 'video')
 return await tokito.sendMessage(jid, {
 video: buffer,
-mimetype: 'video/mp4',
+mimetype: midia.mimetype || 'video/mp4',
 gifPlayback: true,
 caption: texto
 })
+
 if (midia.tipo === 'image')
 return await tokito.sendMessage(jid, {
 image: buffer,
 caption: texto
 })
+
+if (midia.tipo === 'audio') {
+await tokito.sendMessage(jid, {
+text: texto
+})
+
+return await tokito.sendMessage(jid, {
+audio: buffer,
+mimetype: midia.mimetype || 'audio/ogg; codecs=opus',
+ptt: midia.ptt === true
+})
+}
+
+if (midia.tipo === 'sticker') {
+await tokito.sendMessage(jid, {
+text: texto
+})
+
+return await tokito.sendMessage(jid, {
+sticker: buffer
+})
 }
 }
-return await tokito.sendMessage(jid, { text: texto })
+}
+
+return await tokito.sendMessage(jid, {
+text: texto
+})
 }
 catch (error) {
-console.log(colors.red(`❌ Erro ao enviar aviso programado para ${jid}:`), modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
-return tokito.sendMessage(jid, { text: texto }).catch(() => null)
+console.log(
+colors.red(`❌ Erro ao enviar aviso programado para ${jid}:`),
+modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes'
+)
+
+return tokito.sendMessage(jid, {
+text: texto
+}).catch(() => null)
 }
 }
 
@@ -844,7 +878,7 @@ second: '2-digit'
 })
 let baileysVersion = 'desconhecida'
 try {
-const pkgPath = path.join(__dirname, 'node_modules', 'baileys', 'package.json')
+const pkgPath = path.join(__dirname, 'node_modules','baileys', 'package.json')
 baileysVersion = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))?.version || 'desconhecida'
 }
 catch {
