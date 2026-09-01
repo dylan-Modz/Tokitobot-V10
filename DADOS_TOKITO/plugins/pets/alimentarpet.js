@@ -1,67 +1,105 @@
-/*
- * ============================================================
- *                     TOKITO BOT V10
- * ============================================================
- *
- * Projeto disponibilizado gratuitamente para a comunidade.
- *
- * Você pode modificar, personalizar e utilizar este bot
- * conforme sua preferência, inclusive mantendo o nome Tokito.
- *
- * REGRAS:
- * • É proibida a venda ou revenda deste código-fonte.
- * • Não comercialize versões modificadas deste projeto.
- * • Não reivindique a autoria original do projeto.
- * • Respeite os créditos e o trabalho dos desenvolvedores.
- * • Utilize o projeto com respeito e responsabilidade.
- *
- * ATENÇÃO:
- * A venda, revenda ou comercialização não autorizada deste
- * projeto poderá resultar em medidas legais para proteção
- * dos direitos dos autores, incluindo processo judicial,
- * conforme a legislação aplicável.
- *
- * Author: Dylan Modz
- * API oficial: https://tokito-apis.com.br
- *
- * Modifique como quiser. Apenas respeite as regras.
- * ============================================================
- */
-
 const r = require('../../sistemas/rpg/index')
-
 const dylan = require('../../database/lib/comandos')
+const { compacto } = require('../../sistemas/rpg/texto')
 
 dylan.setCommand({
-nome: 'alimentarpet',
-comandos: ['alimentarpet', 'darcomidapet'],
-categoria: 'pets',
-info: {
-descricao: 'Alimenta seu Pet.',
-uso: 'alimentarpet',
-requisitos: 'RPG + Coins',
-categoria: 'pets'
-},
-async executar(ctx) {
-if (!ctx.isGroup)
-return ctx.reply(ctx.mess.sogrupo())
-if (!r.ambos(ctx))
-return ctx.reply(ctx.mess.rpgCoinsDesativado(ctx.prefix))
-const p = r.user(ctx).pet
-const e = r.eco(ctx)
-if (!p)
-return ctx.reply(ctx.mess.petNaoTem(ctx.prefix))
-const custo = 150
-if (e.coins < custo)
-return ctx.reply(ctx.mess.coinsSemSaldo(custo, e.coins))
-e.coins -= custo
-p.fome = Math.min(100, Number(p.fome || 0) + 35)
-p.afeto = Number(p.afeto || 0) + 2
-p.xp = Number(p.xp || 0) + 10
-p.nivel = 1 + Math.floor(p.xp / 100)
-p.ultimaComida = Date.now()
-r.salvar(ctx)
-return ctx.reply(ctx.mess.petAlimentado(p, custo))
-}
-}
-)
+  nome: 'alimentarpet',
+  comandos: ['alimentarpet', 'darcomidapet'],
+  categoria: 'pets',
+  info: {
+    descricao: 'Alimenta seu Pet.',
+    uso: 'alimentarpet racao',
+    requisitos: 'RPG + Coins',
+    categoria: 'pets'
+  },
+
+  async executar(ctx) {
+    if (!ctx.isGroup)
+      return ctx.reply(ctx.mess.sogrupo())
+
+    if (!r.ambos(ctx))
+      return ctx.reply(ctx.mess.rpgCoinsDesativado(ctx.prefix))
+
+    const usuario = r.user(ctx)
+    const pet = usuario.pet
+    const economia = r.eco(ctx)
+
+    if (!pet)
+      return ctx.reply(ctx.mess.petNaoTem(ctx.prefix))
+
+    r.normalizarPet(pet)
+
+    if (pet.dormindo) {
+      return ctx.reply(compacto(ctx, '😴', 'Pet dormindo', [
+          { emoji: '🐾', texto: `${pet.apelido || pet.tipo} precisa acordar antes de comer` },
+          { emoji: '📌', texto: `Use ${ctx.prefix}acordarpet` }
+      ]))
+    }
+
+    const id = String(ctx.args?.[0] || '').toLowerCase()
+    const item = r.PET_COMIDAS[id]
+
+    if (id && !item) {
+      return ctx.reply(compacto(ctx, '🍖', 'Comida inválida', [
+          { emoji: '📌', texto: `Use ${ctx.prefix}mercadopet para ver as comidas` }
+      ]))
+    }
+
+    let custo = 0
+    let comida = item
+
+    if (comida && Number(usuario.inventarioPet?.[id] || 0) > 0) {
+      usuario.inventarioPet[id] -= 1
+      if (usuario.inventarioPet[id] <= 0)
+        delete usuario.inventarioPet[id]
+    }
+    else if (comida) {
+      custo = comida.preco
+      if (Number(economia.coins || 0) < custo)
+        return ctx.reply(ctx.mess.coinsSemSaldo(custo, economia.coins))
+
+      economia.coins -= custo
+    }
+    else {
+      custo = pet.fome < 30 ? 220 : 150
+      if (Number(economia.coins || 0) < custo)
+        return ctx.reply(ctx.mess.coinsSemSaldo(custo, economia.coins))
+
+      economia.coins -= custo
+      comida = {
+        nome: 'Ração básica',
+        emoji: '🍖',
+        fome: pet.fome < 30 ? 50 : 35,
+        energia: 5,
+        saude: 3,
+        humor: 8
+      }
+    }
+
+    pet.fome = r.limitar(Number(pet.fome || 0) + Number(comida.fome || 0))
+    pet.energia = r.limitar(Number(pet.energia || 0) + Number(comida.energia || 0))
+    pet.saude = r.limitar(Number(pet.saude || 0) + Number(comida.saude || 0))
+    pet.humor = r.limitar(Number(pet.humor || 0) + Number(comida.humor || 0))
+    pet.afeto = Number(pet.afeto || 0) + 2
+    pet.xp = Number(pet.xp || 0) + 10
+    pet.nivel = 1 + Math.floor(pet.xp / 100)
+    pet.ultimaComida = Date.now()
+    pet.ultimaAtualizacao = Date.now()
+
+    if (!Array.isArray(pet.diario))
+      pet.diario = []
+
+    pet.diario.unshift({
+      texto: `Comeu ${comida.nome}`,
+      em: Date.now()
+    })
+    pet.diario = pet.diario.slice(0, 8)
+
+    r.salvar(ctx)
+    return ctx.reply(ctx.mess.petAlimentado(
+      pet,
+      custo,
+      custo ? `${comida.nome} comprado e usado` : `${comida.nome} usado do inventário`
+    ))
+  }
+})

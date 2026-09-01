@@ -1,68 +1,80 @@
-/*
- * ============================================================
- *                     TOKITO BOT V10
- * ============================================================
- *
- * Projeto disponibilizado gratuitamente para a comunidade.
- *
- * Você pode modificar, personalizar e utilizar este bot
- * conforme sua preferência, inclusive mantendo o nome Tokito.
- *
- * REGRAS:
- * • É proibida a venda ou revenda deste código-fonte.
- * • Não comercialize versões modificadas deste projeto.
- * • Não reivindique a autoria original do projeto.
- * • Respeite os créditos e o trabalho dos desenvolvedores.
- * • Utilize o projeto com respeito e responsabilidade.
- *
- * ATENÇÃO:
- * A venda, revenda ou comercialização não autorizada deste
- * projeto poderá resultar em medidas legais para proteção
- * dos direitos dos autores, incluindo processo judicial,
- * conforme a legislação aplicável.
- *
- * Author: Dylan Modz
- * API oficial: https://tokito-apis.com.br
- *
- * Modifique como quiser. Apenas respeite as regras.
- * ============================================================
- */
-
 const r = require('../../sistemas/rpg/index')
-
 const dylan = require('../../database/lib/comandos')
+const { compacto } = require('../../sistemas/rpg/texto')
 
 dylan.setCommand({
-nome: 'alimentarpokemon',
-comandos: ['alimentarpokemon', 'alimentarpoke'],
-categoria: 'pokemon',
-info: {
-descricao: 'Alimenta seu Pokémon.',
-uso: 'alimentarpokemon berry',
-requisitos: 'RPG + Coins',
-categoria: 'pokemon'
-},
-async executar(ctx) {
-if (!r.ambos(ctx))
-return ctx.reply(ctx.mess.rpgCoinsDesativado(ctx.prefix))
-const p = r.user(ctx).pokemon
-if (!p)
-return ctx.reply(ctx.mess.pokemonNaoTem(ctx.prefix))
-const item = String(ctx.args?.[0] || 'berry').toLowerCase()
-const c = r.POKEMON_COMIDA[item]
-if (!c)
-return ctx.reply(ctx.mess.pokemonComidas(r.POKEMON_COMIDA, ctx.prefix))
-const e = r.eco(ctx)
-if (e.coins < c.preco)
-return ctx.reply(ctx.mess.coinsSemSaldo(c.preco, e.coins))
-e.coins -= c.preco
-p.fome = Math.min(100, Number(p.fome || 0) + c.fome)
-p.xp = Number(p.xp || 0) + 15
-p.afeto = Number(p.afeto || 0) + 2
-p.nivel = 1 + Math.floor(p.xp / 100)
-p.ultimaComida = Date.now()
-r.salvar(ctx)
-return ctx.reply(ctx.mess.pokemonAlimentado(c, p, e.coins))
-}
-}
-)
+  nome: 'alimentarpokemon',
+  comandos: ['alimentarpokemon', 'alimentarpoke'],
+  categoria: 'pokemon',
+  info: {
+    descricao: 'Alimenta seu Pokémon.',
+    uso: 'alimentarpokemon berry',
+    requisitos: 'RPG + Coins',
+    categoria: 'pokemon'
+  },
+
+  async executar(ctx) {
+    if (!ctx.isGroup)
+      return ctx.reply(ctx.mess.sogrupo())
+
+    if (!r.ambos(ctx))
+      return ctx.reply(ctx.mess.rpgCoinsDesativado(ctx.prefix))
+
+    const usuario = r.user(ctx)
+    const pokemon = usuario.pokemon
+
+    if (!pokemon)
+      return ctx.reply(ctx.mess.pokemonNaoTem(ctx.prefix))
+
+    r.normalizarPokemon(pokemon)
+
+    if (pokemon.dormindo) {
+      return ctx.reply(compacto(ctx, '😴', 'Pokémon dormindo', [
+          { emoji: '📌', texto: `Use ${ctx.prefix}acordarpokemon primeiro` }
+      ]))
+    }
+
+    const id = String(ctx.args?.[0] || 'berry').toLowerCase()
+    const comida = r.POKEMON_COMIDA[id]
+
+    if (!comida)
+      return ctx.reply(ctx.mess.pokemonComidas(r.POKEMON_COMIDA, ctx.prefix))
+
+    const economia = r.eco(ctx)
+    let custo = 0
+
+    if (Number(usuario.inventarioPokemon?.[id] || 0) > 0) {
+      usuario.inventarioPokemon[id] -= 1
+      if (usuario.inventarioPokemon[id] <= 0)
+        delete usuario.inventarioPokemon[id]
+    }
+    else {
+      custo = comida.preco
+      if (Number(economia.coins || 0) < custo)
+        return ctx.reply(ctx.mess.coinsSemSaldo(custo, economia.coins))
+
+      economia.coins -= custo
+    }
+
+    pokemon.fome = r.limitar(Number(pokemon.fome || 0) + comida.fome)
+    pokemon.energia = r.limitar(Number(pokemon.energia || 0) + Math.max(5, Math.floor(comida.fome / 4)))
+    pokemon.saude = r.limitar(Number(pokemon.saude || 0) + Math.max(2, Math.floor(comida.fome / 12)))
+    pokemon.xp = Number(pokemon.xp || 0) + 15
+    pokemon.afeto = Number(pokemon.afeto || 0) + 2
+    pokemon.nivel = 1 + Math.floor(pokemon.xp / 100)
+    pokemon.ultimaComida = Date.now()
+
+    if (!Array.isArray(pokemon.diario))
+      pokemon.diario = []
+
+    pokemon.diario.unshift({
+      texto: `Comeu ${comida.nome}`,
+      em: Date.now()
+    })
+    pokemon.diario = pokemon.diario.slice(0, 8)
+
+    r.salvar(ctx)
+
+    return ctx.reply(ctx.mess.pokemonAlimentado(comida, pokemon, economia.coins))
+  }
+})
