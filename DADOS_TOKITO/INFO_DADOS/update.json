@@ -1,87 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.89",
+  "version": "10.0.90",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-01T18:40:54.691Z",
+  "publishedAt": "2026-09-01T18:57:28.565Z",
   "changelog": [
-    "[Melhoria] Tokito V10.0.89: RPG completo, cidade, pets, pokemon e N-Coins",
-    "A versão 10.0.89 já está disponível para atualização.",
-    "Cidade atualizado",
-    "Economia atualizado",
-    "Alimentarpet atualizado",
-    "Avancado atualizado",
-    "Petshop atualizado",
-    "Alimentarpokemon atualizado",
-    "Cuidados atualizado",
-    "Geral atualizado",
-    "Gerenciarlevel atualizado",
-    "Index atualizado",
-    "Texto atualizado"
+    "[Melhoria] Menus atualizado",
+    "A versão 10.0.90 já está disponível para atualização.",
+    "Menus atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Tokito V10.0.89: RPG completo, cidade, pets, pokemon e N-Coins",
-  "notice": "A versão 10.0.89 já está disponível para atualização.",
+  "title": "Menus atualizado",
+  "notice": "A versão 10.0.90 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/coins/cidade.js",
-      "sha256": "b5f561d1b9661540d9dfb810d6ac3ab1842713cfa0afac878088c661b56f61a0",
-      "size": 47779
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/coins/economia.js",
-      "sha256": "15c91501b4071e5945fd44cf5fcf120b01e850a6a015c5431e28cfc55c48c38e",
-      "size": 11082
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/pets/alimentarpet.js",
-      "sha256": "53588ae173387105cb750d1f5a552f91cc5fcd44a4b0aeb81241416480f88f7c",
-      "size": 3039
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/pets/avancado.js",
-      "sha256": "a888ba14b93ced708b09e4edc16cc298e513ed0da3d0156923957016abd64381",
-      "size": 14203
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/pets/petshop.js",
-      "sha256": "08610cdcf233ae55ca52673c3796557231af7930f12b43da75f7e2829d33fa28",
-      "size": 1332
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/pokemon/alimentarpokemon.js",
-      "sha256": "9ca8081efa229c8aa1cfea3969df9344804933fd474e1b1a76b3fbc0771c7bc5",
-      "size": 2405
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/pokemon/cuidados.js",
-      "sha256": "842a439b154241944ac59c2e28e58e5fe1bc211818e6751db8745a10a1a9ac48",
-      "size": 12081
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/pokemon/geral.js",
-      "sha256": "2746eee1223786caaeed29e99db1143d2d4fd4bf8d9d444dcc35ecbd42526847",
-      "size": 2779
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/rpg/gerenciarlevel.js",
-      "sha256": "daaeff4801e348418f04528307abdd96882f79076529588e6f44071ac4dfba8a",
-      "size": 1958
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/rpg/index.js",
-      "sha256": "876b77a2236e31d2198cb499c8d98a1614b7fc7920842756b6bca91ba1102418",
-      "size": 20998
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
-      "sha256": "096732cae5a621a98671b6529e8df1d65e5fda5d50ed79431fb260f479cb22b2",
-      "size": 755
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "b650f918781b871e183b46daa25b88c0ac72d629524ebccef9150291d7fe4659",
+      "size": 61549
     }
   ],
   "releases": [
@@ -2303,6 +2243,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-01T18:40:54.690Z"
+    },
+    {
+      "version": "10.0.90",
+      "fromVersion": "10.0.89",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Menus atualizado",
+      "notice": "A versão 10.0.90 já está disponível para atualização.",
+      "changelog": [
+        "Menus atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "b650f918781b871e183b46daa25b88c0ac72d629524ebccef9150291d7fe4659",
+          "size": 61549
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-01T18:57:28.565Z"
     }
   ],
   "versao": "10.0.70",
