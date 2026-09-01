@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.90",
+  "version": "10.0.91",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-01T18:57:28.565Z",
+  "publishedAt": "2026-09-01T19:27:22.317Z",
   "changelog": [
-    "[Melhoria] Menus atualizado",
-    "A versão 10.0.90 já está disponível para atualização.",
-    "Menus atualizado"
+    "[Melhoria] Padroniza mensagens e adiciona modo parceria",
+    "A versão 10.0.91 já está disponível para atualização.",
+    "Mensagens atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Menus atualizado",
-  "notice": "A versão 10.0.90 já está disponível para atualização.",
+  "title": "Padroniza mensagens e adiciona modo parceria",
+  "notice": "A versão 10.0.91 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "b650f918781b871e183b46daa25b88c0ac72d629524ebccef9150291d7fe4659",
-      "size": 61549
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "9913df9ee09e18eca1e4dd143e9b792e34b91286d94fbbc6a72ac2130be77a85",
+      "size": 174396
     }
   ],
   "releases": [
@@ -2264,6 +2264,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-01T18:57:28.565Z"
+    },
+    {
+      "version": "10.0.91",
+      "fromVersion": "10.0.90",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Padroniza mensagens e adiciona modo parceria",
+      "notice": "A versão 10.0.91 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "9913df9ee09e18eca1e4dd143e9b792e34b91286d94fbbc6a72ac2130be77a85",
+          "size": 174396
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-01T19:27:22.316Z"
     }
   ],
   "versao": "10.0.70",
