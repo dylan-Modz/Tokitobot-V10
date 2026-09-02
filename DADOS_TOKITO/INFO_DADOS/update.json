@@ -1,27 +1,38 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.94",
+  "version": "10.0.95",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-02T00:36:23.273Z",
+  "publishedAt": "2026-09-02T01:09:24.489Z",
   "changelog": [
-    "[Correção] fix: corrige menus truncado da playlist",
-    "A versão 10.0.94 já está disponível para atualização.",
-    "Menus atualizado"
+    "[Novidade] feat: melhora playlist radio e player",
+    "A versão 10.0.95 já está disponível para atualização.",
+    "Mensagens atualizado",
+    "Playlist atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix: corrige menus truncado da playlist",
-  "notice": "A versão 10.0.94 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat: melhora playlist radio e player",
+  "notice": "A versão 10.0.95 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "cd0aa4d9772c6d84701e60c699d5f9dd037c206eea1045ab0fa192152ff9d3da",
-      "size": 61685
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "203caaba4638a80931294136494948a7c45e008875bea70d00f8f9e099865d1b",
+      "size": 205607
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/playlist.js",
+      "sha256": "5c39ca745a840ab5a2ac280d602085a1fd163d43d40dd01f3bc024c92f36c125",
+      "size": 20484
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/playlist.js",
+      "sha256": "13173b9c64a2fe5ff08e4ceff970ffab81fc38379c30bd3b60b9a388f5ff62f5",
+      "size": 37459
     }
   ],
   "releases": [
@@ -2424,6 +2435,38 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-02T00:36:23.273Z"
+    },
+    {
+      "version": "10.0.95",
+      "fromVersion": "10.0.94",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: melhora playlist radio e player",
+      "notice": "A versão 10.0.95 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado",
+        "Playlist atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "203caaba4638a80931294136494948a7c45e008875bea70d00f8f9e099865d1b",
+          "size": 205607
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playlist.js",
+          "sha256": "5c39ca745a840ab5a2ac280d602085a1fd163d43d40dd01f3bc024c92f36c125",
+          "size": 20484
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/playlist.js",
+          "sha256": "13173b9c64a2fe5ff08e4ceff970ffab81fc38379c30bd3b60b9a388f5ff62f5",
+          "size": 37459
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-02T01:09:24.489Z"
     }
   ],
   "versao": "10.0.70",
