@@ -285,6 +285,14 @@ const formatarDuracao = segundos => {
   return `${minutos}:${String(seg).padStart(2, '0')}`
 }
 
+const duracaoTotalFaixas = faixas => (Array.isArray(faixas) ? faixas : [])
+  .reduce((total, faixa) => {
+    const segundos = Number(faixa?.duracaoSegundos || 0)
+    return total + (Number.isFinite(segundos) ? Math.max(0, segundos) : 0)
+  }, 0)
+
+const esperar = ms => new Promise(resolve => setTimeout(resolve, Math.max(0, Number(ms || 0))))
+
 const normalizarFaixa = faixa => {
   const titulo = limparTexto(
     faixa?.titulo ||
@@ -962,6 +970,117 @@ const notificar = async (sessao, texto) => {
   catch {}
 }
 
+const enviarComCapa = async (sessao, capa, legenda) => {
+  if (!sessao?.tokito || !sessao?.chatId || !legenda)
+    return false
+
+  const thumbnail = limparTexto(capa)
+
+  if (thumbnail) {
+    try {
+      await sessao.tokito.sendMessage(
+        sessao.chatId,
+        {
+          image: { url: thumbnail },
+          caption: legenda
+        }
+      )
+
+      return true
+    }
+    catch {}
+  }
+
+  try {
+    await sessao.tokito.sendMessage(
+      sessao.chatId,
+      { text: legenda }
+    )
+
+    return true
+  }
+  catch {
+    return false
+  }
+}
+
+const resumoSessao = sessao => {
+  const trackIndex = sessao?.order?.[sessao.position]
+  const atual = sessao?.tracks?.[trackIndex] || null
+  const nextIndex = sessao?.order?.[sessao.position + 1]
+  const proxima = sessao?.tracks?.[nextIndex] || null
+
+  return {
+    nome: sessao?.nome || 'Playlist',
+    total: Array.isArray(sessao?.tracks) ? sessao.tracks.length : 0,
+    posicao: sessao?.position >= 0 ? sessao.position + 1 : 0,
+    atual: atual ? clonar(atual) : null,
+    proxima: proxima ? clonar(proxima) : null,
+    loop: Boolean(sessao?.loop),
+    aleatorio: Boolean(sessao?.shuffle),
+    global: Boolean(sessao?.sourceGlobal),
+    criadoEm: sessao?.playlistCriadoEm || '',
+    duracaoTotalSegundos: Number(sessao?.totalDurationSeconds || 0),
+    duracaoTotal: formatarDuracao(sessao?.totalDurationSeconds || 0)
+  }
+}
+
+const enviarResumoPlaylist = async sessao => {
+  if (!sessao || sessao.mode !== 'playlist')
+    return false
+
+  const resumo = resumoSessao(sessao)
+  const capa = resumo.atual?.thumbnail || sessao.tracks?.[0]?.thumbnail || ''
+
+  return enviarComCapa(
+    sessao,
+    capa,
+    mensagens.playlistIniciada(resumo)
+  )
+}
+
+const enviarCardFaixa = async (sessao, faixa) => {
+  if (!sessao || !faixa)
+    return false
+
+  const resumo = resumoSessao(sessao)
+
+  return enviarComCapa(
+    sessao,
+    faixa.thumbnail,
+    mensagens.playlistAgoraTocando({
+      ...resumo,
+      atual: clonar(faixa)
+    })
+  )
+}
+
+const notificarFaixaFinalizada = async sessao => {
+  if (!sessao || sessao.currentTrackIndex === null || sessao.currentTrackIndex === undefined)
+    return false
+
+  const faixa = sessao.tracks?.[sessao.currentTrackIndex]
+
+  if (!faixa)
+    return false
+
+  await notificar(
+    sessao,
+    mensagens.playlistFaixaFinalizada({
+      nome: sessao.nome,
+      faixa: clonar(faixa),
+      posicao: sessao.position + 1,
+      total: sessao.tracks.length,
+      proxima: sessao.tracks?.[
+        sessao.order?.[sessao.position + 1] ??
+        (sessao.loop && !sessao.shuffle ? sessao.order?.[0] : undefined)
+      ] || null
+    })
+  )
+
+  return true
+}
+
 const cancelarTimer = sessao => {
   if (sessao?.timer) {
     clearTimeout(sessao.timer)
@@ -1009,6 +1128,8 @@ const tocarAtual = async sessao => {
     const fonte = await fonteFaixa(sessao, faixa, trackIndex)
     cacheFile = fonte.cacheFile
 
+    await enviarCardFaixa(sessao, faixa)
+
     await sessao.tokito.sendMessage(
       sessao.chatId,
       {
@@ -1022,6 +1143,7 @@ const tocarAtual = async sessao => {
     sessao.errosSeguidos = 0
     sessao.currentTrackIndex = trackIndex
     sessao.currentStartedAt = Date.now()
+    sessao.currentElapsedMs = 0
 
     const duracao = Math.max(
       10,
@@ -1085,6 +1207,9 @@ const avancarAutomatico = async chatId => {
   cancelarTimer(sessao)
   sessao.remainingMs = 0
 
+  await notificarFaixaFinalizada(sessao)
+  await esperar(700)
+
   if (sessao.position + 1 < sessao.order.length) {
     sessao.position += 1
     return tocarAtual(sessao)
@@ -1103,12 +1228,17 @@ const avancarAutomatico = async chatId => {
     return tocarAtual(sessao)
   }
 
-  const nome = sessao.nome
+  const resumoFinal = {
+    nome: sessao.nome,
+    total: sessao.tracks.length,
+    duracaoTotal: formatarDuracao(sessao.totalDurationSeconds || duracaoTotalFaixas(sessao.tracks))
+  }
+
   parar(chatId)
 
   await notificar(
     sessao,
-    mensagens.playlistFinalizada(nome)
+    mensagens.playlistFinalizada(resumoFinal)
   )
 
   return true
@@ -1144,11 +1274,14 @@ const iniciar = async ({
     nome: limparTexto(playlist.nome || 'Playlist'),
     playlistId: playlist.id || normalizarNome(playlist.nome),
     sourceGlobal: Boolean(playlist.global),
+    playlistCriadoEm: playlist.criadoEm || '',
+    totalDurationSeconds: duracaoTotalFaixas(faixas),
     tracks: faixas,
     order: [],
     position: 0,
     currentTrackIndex: null,
     currentStartedAt: 0,
+    currentElapsedMs: 0,
     currentDurationMs: 0,
     remainingMs: 0,
     nextAt: 0,
@@ -1170,6 +1303,8 @@ const iniciar = async ({
   resetarOrdem(sessao)
   sessoes.set(chatId, sessao)
 
+  await enviarResumoPlaylist(sessao)
+  await esperar(500)
   await tocarAtual(sessao)
 
   return status(chatId)
@@ -1195,11 +1330,14 @@ const iniciarParty = ({
     nome: 'Party',
     playlistId: '',
     sourceGlobal: false,
+    playlistCriadoEm: '',
+    totalDurationSeconds: 0,
     tracks: [],
     order: [],
     position: -1,
     currentTrackIndex: null,
     currentStartedAt: 0,
+    currentElapsedMs: 0,
     currentDurationMs: 0,
     remainingMs: 0,
     nextAt: 0,
@@ -1237,6 +1375,7 @@ const adicionarParty = async (chatId, faixa) => {
 
   sessao.tracks.push(musica)
   sessao.order.push(indice)
+  sessao.totalDurationSeconds = duracaoTotalFaixas(sessao.tracks)
 
   const deveIniciar =
     sessao.waiting &&
@@ -1278,6 +1417,13 @@ const pausar = chatId => {
   if (!sessao || sessao.paused)
     return false
 
+  if (sessao.currentStartedAt && sessao.currentDurationMs) {
+    sessao.currentElapsedMs = Math.min(
+      sessao.currentDurationMs,
+      Math.max(0, Date.now() - sessao.currentStartedAt)
+    )
+  }
+
   if (sessao.timer) {
     sessao.remainingMs = Math.max(1000, sessao.nextAt - Date.now())
     cancelarTimer(sessao)
@@ -1296,6 +1442,10 @@ const continuar = chatId => {
     return false
 
   sessao.paused = false
+
+  if (sessao.currentDurationMs > 0) {
+    sessao.currentStartedAt = Date.now() - Math.max(0, Number(sessao.currentElapsedMs || 0))
+  }
 
   if (sessao.mode === 'party' && sessao.waiting && sessao.order.length) {
     if (sessao.position < 0)
@@ -1415,10 +1565,24 @@ const status = chatId => {
   const nextIndex = sessao.order[sessao.position + 1]
   const proximaFaixa = sessao.tracks[nextIndex] || null
 
-  let restanteMs = sessao.remainingMs
+  let proximoEnvioMs = sessao.remainingMs
 
   if (sessao.timer && sessao.nextAt)
-    restanteMs = Math.max(0, sessao.nextAt - Date.now())
+    proximoEnvioMs = Math.max(0, sessao.nextAt - Date.now())
+
+  let decorridoMs = Math.max(0, Number(sessao.currentElapsedMs || 0))
+
+  if (!sessao.paused && sessao.currentStartedAt && sessao.currentDurationMs) {
+    decorridoMs = Math.min(
+      sessao.currentDurationMs,
+      Math.max(0, Date.now() - sessao.currentStartedAt)
+    )
+  }
+
+  const duracaoAtualMs = Math.max(0, Number(sessao.currentDurationMs || 0))
+  const restanteFaixaMs = duracaoAtualMs > 0
+    ? Math.max(0, duracaoAtualMs - decorridoMs)
+    : 0
 
   return {
     id: sessao.id,
@@ -1433,7 +1597,14 @@ const status = chatId => {
     esperando: sessao.waiting,
     loop: sessao.loop,
     aleatorio: sessao.shuffle,
-    restanteSegundos: Math.ceil(restanteMs / 1000),
+    decorridoSegundos: Math.floor(decorridoMs / 1000),
+    restanteSegundos: Math.ceil(restanteFaixaMs / 1000),
+    proximoEnvioSegundos: Math.ceil(proximoEnvioMs / 1000),
+    duracaoAtualSegundos: Math.ceil(duracaoAtualMs / 1000),
+    duracaoTotalSegundos: Math.floor(sessao.totalDurationSeconds || duracaoTotalFaixas(sessao.tracks)),
+    duracaoTotal: formatarDuracao(sessao.totalDurationSeconds || duracaoTotalFaixas(sessao.tracks)),
+    criadoEm: sessao.playlistCriadoEm || '',
+    global: Boolean(sessao.sourceGlobal),
     preload: Boolean(sessao.preload)
   }
 }
@@ -1501,6 +1672,7 @@ module.exports = {
   normalizarNome,
   parseDuracao,
   formatarDuracao,
+  duracaoTotalFaixas,
   listar,
   obter,
   criar,

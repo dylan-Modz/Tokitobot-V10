@@ -4340,16 +4340,60 @@ return `- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙾 𝙵𝙸𝙶𝙿𝙴𝚁𝙵𝙸𝙻\`
 // Dev: Dylan Modz
 // ============================================================
 
+const formatarTempoPlaylist = segundos => {
+const total = Math.max(0, Math.floor(Number(segundos || 0)))
+const horas = Math.floor(total / 3600)
+const minutos = Math.floor((total % 3600) / 60)
+const seg = total % 60
+
+if (horas > 0)
+return `${horas}h ${String(minutos).padStart(2, '0')}min`
+
+return `${minutos}:${String(seg).padStart(2, '0')}`
+}
+
+const formatarDataPlaylist = valor => {
+if (!valor)
+return 'não informada'
+
+const data = new Date(valor)
+
+if (Number.isNaN(data.getTime()))
+return 'não informada'
+
+return data.toLocaleDateString('pt-BR')
+}
+
+const duracaoTotalPlaylist = musicas => (Array.isArray(musicas) ? musicas : [])
+.reduce((total, musica) => total + Math.max(0, Number(musica?.duracaoSegundos || 0)), 0)
+
+const barraPlaylist = (decorrido, duracao, tamanho = 14) => {
+const total = Math.max(1, Number(duracao || 0))
+const atual = Math.max(0, Math.min(total, Number(decorrido || 0)))
+const preenchidos = Math.max(0, Math.min(tamanho, Math.round((atual / total) * tamanho)))
+
+return `${'━'.repeat(preenchidos)}●${'─'.repeat(Math.max(0, tamanho - preenchidos))}`
+}
+
 exports.playlistAjuda = prefix => {
 return `- 🎶 \`𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃 / 𝚁𝙰́𝙳𝙸𝙾\`
 
-> ➕ ׄ ( ${prefix}playlist criar academia )
-> 🎵 ׄ ( ${prefix}playlist add academia | vem ca )
-> 📥 ׄ ( ${prefix}playlist importar academia | link-da-playlist )
+> ➕ ׄ ( ${prefix}playlist criar <nome> )
+> 🎵 ׄ ( ${prefix}playlist add <nome> | <música> )
+> ▶️ ׄ ( ${prefix}playlist tocar <nome> )
 > 📋 ׄ ( ${prefix}playlist listar )
-> 👀 ׄ ( ${prefix}playlist ver academia )
-> ▶️ ׄ ( ${prefix}playlist tocar academia )
-> 📻 ׄ ( ${prefix}radio academia )
+> 👀 ׄ ( ${prefix}playlist ver <nome> )
+> 📻 ׄ ( ${prefix}radio <nome> )
+
+> ⚙️ ׄ ( ${prefix}playlist config — ᴄᴏɴᴛʀᴏʟᴇs )
+> ✏️ ׄ ( ${prefix}playlist editar — ɢᴇʀᴇɴᴄɪᴀʀ )
+> 🎉 ׄ ( ${prefix}playlist party — ғɪʟᴀ ᴅᴏ ɢʀᴜᴘᴏ )
+> 🌐 ׄ ( ${prefix}playlist global — ᴘʟᴀʏʟɪsᴛs ɢʟᴏʙᴀɪs )`
+}
+
+exports.playlistConfigAjuda = prefix => {
+return `- ⚙️ \`𝙲𝙾𝙽𝚃𝚁𝙾𝙻𝙴𝚂 𝙳𝙰 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
+
 > ⏸️ ׄ ( ${prefix}playlist pausar )
 > ▶️ ׄ ( ${prefix}playlist continuar )
 > ⏭️ ׄ ( ${prefix}playlist proxima )
@@ -4357,95 +4401,100 @@ return `- 🎶 \`𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃 / 𝚁𝙰́𝙳𝙸𝙾\`
 > 🔁 ׄ ( ${prefix}playlist loop )
 > 🔀 ׄ ( ${prefix}playlist aleatorio )
 > 📊 ׄ ( ${prefix}playlist status )
-> ⏹️ ׄ ( ${prefix}playlist parar )
-> 🗑️ ׄ ( ${prefix}playlist remover academia | 3 )
-> 🧹 ׄ ( ${prefix}playlist limpar academia )
-> ❌ ׄ ( ${prefix}playlist apagar academia )
-> ✏️ ׄ ( ${prefix}playlist renomear academia | treino )
-> 🎉 ׄ ( ${prefix}playlist party iniciar )
-> 🌐 ׄ ( ${prefix}playlist global listar )`
+> ⏹️ ׄ ( ${prefix}playlist parar )`
+}
+
+exports.playlistEditarAjuda = prefix => {
+return `- ✏️ \`𝙶𝙴𝚁𝙴𝙽𝙲𝙸𝙰𝚁 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
+
+> 📥 ׄ ( ${prefix}playlist importar <nome> | <link> )
+> 🗑️ ׄ ( ${prefix}playlist remover <nome> | <número> )
+> 🧹 ׄ ( ${prefix}playlist limpar <nome> )
+> ✏️ ׄ ( ${prefix}playlist renomear <atual> | <novo> )
+> ❌ ׄ ( ${prefix}playlist apagar <nome> )`
 }
 
 exports.playlistRadioUso = prefix => {
 return `- 📻 \`𝚁𝙰́𝙳𝙸𝙾 𝚃𝙾𝙺𝙸𝚃𝙾\`
 
-> 🎶 ׄ ( ᴜsᴇ: ${prefix}radio nome-da-playlist )
-> ⏭️ ׄ ( ᴄᴏɴᴛʀᴏʟᴇ: ${prefix}radio proxima / pausar / continuar / parar. )`
+> 🎶 ׄ ( ᴜsᴇ: ${prefix}radio <nome-da-playlist> )
+> ⚙️ ׄ ( ᴄᴏɴᴛʀᴏʟᴇ ᴄᴏᴍ: ${prefix}playlist config )`
 }
 
-exports.playlistGlobalAjuda = prefix => {
+exports.playlistGlobalAjuda = (prefix, isOwner = false) => {
+const dono = isOwner
+? `\n\n> 👑 ׄ ( ɢᴇʀᴇɴᴄɪᴀᴍᴇɴᴛᴏ ᴅᴏ ᴅᴏɴᴏ )\n> ➕ ׄ ( ${prefix}playlist global criar <nome> )\n> 🎵 ׄ ( ${prefix}playlist global add <nome> | <música> )\n> 📥 ׄ ( ${prefix}playlist global importar <nome> | <link> )\n> ❌ ׄ ( ${prefix}playlist global apagar <nome> )`
+: ''
+
 return `- 🌐 \`𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃𝚂 𝙶𝙻𝙾𝙱𝙰𝙸𝚂\`
 
 > 📋 ׄ ( ${prefix}playlist global listar )
-> 👀 ׄ ( ${prefix}playlist global ver nome )
-> ▶️ ׄ ( ${prefix}playlist global tocar nome )
-> 👑 ׄ ( ᴏs ᴄᴏᴍᴀɴᴅᴏs ᴅᴇ ᴇᴅɪᴄ̧ᴀ̃ᴏ ɢʟᴏʙᴀʟ sᴀ̃ᴏ ᴅᴏ ᴅᴏɴᴏ. )
-> ➕ ׄ ( ${prefix}playlist global criar nome )
-> 🎵 ׄ ( ${prefix}playlist global add nome | música )
-> 📥 ׄ ( ${prefix}playlist global importar nome | link )`
+> 👀 ׄ ( ${prefix}playlist global ver <nome> )
+> ▶️ ׄ ( ${prefix}playlist global tocar <nome> )${dono}`
 }
 
 exports.playlistCriarUso = (prefix, global = false) => {
 const base = global ? `${prefix}playlist global criar` : `${prefix}playlist criar`
 return `- ➕ \`𝙲𝚁𝙸𝙰𝚁 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
 
-> 📌 ׄ ( ᴜsᴇ: ${base} nome-da-playlist )`
+> 📌 ׄ ( ᴜsᴇ: ${base} <nome-da-playlist> )`
 }
 
 exports.playlistAddUso = (prefix, global = false) => {
 const base = global ? `${prefix}playlist global add` : `${prefix}playlist add`
 return `- 🎵 \`𝙰𝙳𝙸𝙲𝙸𝙾𝙽𝙰𝚁 𝙼𝚄́𝚂𝙸𝙲𝙰\`
 
-> 📌 ׄ ( ᴜsᴇ: ${base} nome | música-ou-link )`
+> 📌 ׄ ( ᴜsᴇ: ${base} <playlist> | <música-ou-link> )
+> 💡 ׄ ( ᴇxᴇᴍᴘʟᴏ: ${base} academia | vem ca )`
 }
 
 exports.playlistImportarUso = (prefix, global = false) => {
 const base = global ? `${prefix}playlist global importar` : `${prefix}playlist importar`
 return `- 📥 \`𝙸𝙼𝙿𝙾𝚁𝚃𝙰𝚁 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
 
-> 📌 ׄ ( ᴜsᴇ: ${base} nome | link-da-playlist-do-youtube )`
+> 📌 ׄ ( ᴜsᴇ: ${base} <nome> | <link-da-playlist-do-youtube> )`
 }
 
 exports.playlistVerUso = (prefix, global = false) => {
 const base = global ? `${prefix}playlist global ver` : `${prefix}playlist ver`
 return `- 👀 \`𝚅𝙴𝚁 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
 
-> 📌 ׄ ( ᴜsᴇ: ${base} nome )`
+> 📌 ׄ ( ᴜsᴇ: ${base} <nome> )`
 }
 
 exports.playlistTocarUso = prefix => {
 return `- ▶️ \`𝚃𝙾𝙲𝙰𝚁 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
 
-> 📌 ׄ ( ᴜsᴇ: ${prefix}playlist tocar nome )
-> 🌐 ׄ ( ɢʟᴏʙᴀʟ: ${prefix}playlist tocar global:nome )`
+> 📌 ׄ ( ᴜsᴇ: ${prefix}playlist tocar <nome> )
+> 🌐 ׄ ( ɢʟᴏʙᴀʟ: ${prefix}playlist tocar global:<nome> )`
 }
 
 exports.playlistRemoverUso = (prefix, global = false) => {
 const base = global ? `${prefix}playlist global remover` : `${prefix}playlist remover`
 return `- 🗑️ \`𝚁𝙴𝙼𝙾𝚅𝙴𝚁 𝙼𝚄́𝚂𝙸𝙲𝙰\`
 
-> 📌 ׄ ( ᴜsᴇ: ${base} nome | número-da-música )`
+> 📌 ׄ ( ᴜsᴇ: ${base} <nome> | <número-da-música> )`
 }
 
 exports.playlistLimparUso = (prefix, global = false) => {
 const base = global ? `${prefix}playlist global limpar` : `${prefix}playlist limpar`
 return `- 🧹 \`𝙻𝙸𝙼𝙿𝙰𝚁 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
 
-> 📌 ׄ ( ᴜsᴇ: ${base} nome )`
+> 📌 ׄ ( ᴜsᴇ: ${base} <nome> )`
 }
 
 exports.playlistApagarUso = (prefix, global = false) => {
 const base = global ? `${prefix}playlist global apagar` : `${prefix}playlist apagar`
 return `- ❌ \`𝙰𝙿𝙰𝙶𝙰𝚁 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
 
-> 📌 ׄ ( ᴜsᴇ: ${base} nome )`
+> 📌 ׄ ( ᴜsᴇ: ${base} <nome> )`
 }
 
 exports.playlistRenomearUso = (prefix, global = false) => {
 const base = global ? `${prefix}playlist global renomear` : `${prefix}playlist renomear`
 return `- ✏️ \`𝚁𝙴𝙽𝙾𝙼𝙴𝙰𝚁 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
 
-> 📌 ׄ ( ᴜsᴇ: ${base} nome-atual | novo-nome )`
+> 📌 ׄ ( ᴜsᴇ: ${base} <nome-atual> | <novo-nome> )`
 }
 
 exports.playlistCriada = (item, global = false) => {
@@ -4491,9 +4540,11 @@ return `- 📋 \`𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃𝚂 ${global ? '𝙶𝙻𝙾�
 > 🎶 ׄ ( ɴᴇɴʜᴜᴍᴀ ᴘʟᴀʏʟɪsᴛ ᴇɴᴄᴏɴᴛʀᴀᴅᴀ. )`
 }
 
-const linhas = itens.map((item, indice) =>
-`> 🎵 ׄ ( ${indice + 1}. ${item.nome} — ${Array.isArray(item.musicas) ? item.musicas.length : 0} música(s) )`
-).join('\n')
+const linhas = itens.slice(0, 30).map((item, indice) => {
+const musicas = Array.isArray(item?.musicas) ? item.musicas : []
+const duracao = formatarTempoPlaylist(duracaoTotalPlaylist(musicas))
+return `> 🎵 ׄ ( ${indice + 1}. ${item.nome} — ${musicas.length} música(s) — ${duracao} )`
+}).join('\n')
 
 return `- 📋 \`𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃𝚂 ${global ? '𝙶𝙻𝙾𝙱𝙰𝙸𝚂' : '𝚂𝙰𝙻𝚅𝙰𝚂'}\`
 
@@ -4502,19 +4553,22 @@ ${linhas}`
 
 exports.playlistDetalhes = (item, global = false) => {
 const musicas = Array.isArray(item?.musicas) ? item.musicas : []
-const limite = 30
+const totalSegundos = duracaoTotalPlaylist(musicas)
+const limite = 25
 const linhas = musicas.slice(0, limite).map((musica, indice) =>
-`> 🎵 ׄ ( ${indice + 1}. ${musica.titulo} — ${musica.duracao || '0:00'} )`
+`> ${String(indice + 1).padStart(2, '0')}. 🎵 ${musica.titulo}\n>     ⏱️ ${musica.duracao || '0:00'}${musica.autor ? ` • ${musica.autor}` : ''}`
 ).join('\n')
 const resto = musicas.length > limite
 ? `\n> ➕ ׄ ( +${musicas.length - limite} música(s) não exibida(s). )`
 : ''
 
-return `- 🎶 \`𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
+return `- 🎶 \`𝙼𝙸𝙽𝙷𝙰 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
 
-> 📝 ׄ ( ɴᴏᴍᴇ: ${item?.nome || 'Playlist'} )
+> 📂 ׄ ( ɴᴏᴍᴇ: ${item?.nome || 'Playlist'} )
 > ${global ? '🌐' : '👤'} ׄ ( ᴛɪᴘᴏ: ${global ? 'ɢʟᴏʙᴀʟ' : 'ᴘᴇssᴏᴀʟ'} )
-> 🔢 ׄ ( ᴍᴜ́sɪᴄᴀs: ${musicas.length} )${linhas ? `\n\n${linhas}` : '\n\n> 🎵 ׄ ( ᴘʟᴀʏʟɪsᴛ ᴠᴀᴢɪᴀ. )'}${resto}`
+> 🎵 ׄ ( ᴍᴜ́sɪᴄᴀs: ${musicas.length} )
+> ⏱️ ׄ ( ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ ᴛᴏᴛᴀʟ: ${formatarTempoPlaylist(totalSegundos)} )
+> 📅 ׄ ( ᴄʀɪᴀᴅᴀ ᴇᴍ: ${formatarDataPlaylist(item?.criadoEm)} )${linhas ? `\n\n${linhas}` : '\n\n> 🎵 ׄ ( ᴘʟᴀʏʟɪsᴛ ᴠᴀᴢɪᴀ. )'}${resto}`
 }
 
 exports.playlistFaixaAdicionada = (nome, faixa, total, global = false) => {
@@ -4586,13 +4640,39 @@ return `- 🧹 \`𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃 𝙻𝙸𝙼𝙿𝙰\`
 }
 
 exports.playlistIniciada = status => {
-return `- 📻 \`𝚁𝙰́𝙳𝙸𝙾 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙰\`
+return `- 🎶 \`𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙰\`
 
-> 🎶 ׄ ( ᴘʟᴀʏʟɪsᴛ: ${status?.nome || 'Playlist'} )
-> 🎵 ׄ ( ᴛᴏᴄᴀɴᴅᴏ: ${status?.atual?.titulo || 'Música'} )
-> 🔢 ׄ ( ${status?.posicao || 1}/${status?.total || 0} )
+> 📂 ׄ ( ɴᴏᴍᴇ: ${status?.nome || 'Playlist'} )
+> 🎵 ׄ ( ᴍᴜ́sɪᴄᴀs: ${status?.total || 0} )
+> ⏱️ ׄ ( ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ ᴛᴏᴛᴀʟ: ${status?.duracaoTotal || formatarTempoPlaylist(status?.duracaoTotalSegundos)} )
+> 📅 ׄ ( ᴄʀɪᴀᴅᴀ ᴇᴍ: ${formatarDataPlaylist(status?.criadoEm)} )
+> 🔁 ׄ ( ʟᴏᴏᴘ: ${status?.loop ? 'ᴀᴛɪᴠᴀᴅᴏ' : 'ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
+> 🔀 ׄ ( ᴀʟᴇᴀᴛᴏ́ʀɪᴏ: ${status?.aleatorio ? 'ᴀᴛɪᴠᴀᴅᴏ' : 'ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
+
+> ▶️ ׄ ( ɪɴɪᴄɪᴀɴᴅᴏ ᴀ ᴘʟᴀʏʟɪsᴛ... )`
+}
+
+exports.playlistAgoraTocando = status => {
+return `- 🎧 \`𝙰𝙶𝙾𝚁𝙰 𝚃𝙾𝙲𝙰𝙽𝙳𝙾\`
+
+> 🎵 ׄ ( ${status?.atual?.titulo || 'Música'} )
+> 👤 ׄ ( ${status?.atual?.autor || 'Desconhecido'} )
 > ⏱️ ׄ ( ${status?.atual?.duracao || '0:00'} )
-> ⚡ ׄ ( ᴀ ᴘʀᴏ́xɪᴍᴀ ᴍᴜ́sɪᴄᴀ sᴇʀᴀ́ ᴘʀᴇ́-ᴄᴀʀʀᴇɢᴀᴅᴀ ᴇ ᴇɴᴠɪᴀᴅᴀ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀᴍᴇɴᴛᴇ. )`
+> 📂 ׄ ( ${status?.nome || 'Playlist'} )
+> 🔢 ׄ ( ${status?.posicao || 0}/${status?.total || 0} )
+> 🔁 ׄ ( ʟᴏᴏᴘ: ${status?.loop ? 'ᴀᴛɪᴠᴀᴅᴏ' : 'ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
+> 🔀 ׄ ( ᴀʟᴇᴀᴛᴏ́ʀɪᴏ: ${status?.aleatorio ? 'ᴀᴛɪᴠᴀᴅᴏ' : 'ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
+
+> ⏭️ ׄ ( ᴘʀᴏ́xɪᴍᴀ: ${status?.proxima?.titulo || 'fim da fila'} )`
+}
+
+exports.playlistFaixaFinalizada = dados => {
+return `- ✅ \`𝙼𝚄́𝚂𝙸𝙲𝙰 𝙵𝙸𝙽𝙰𝙻𝙸𝚉𝙰𝙳𝙰\`
+
+> 🎵 ׄ ( ${dados?.faixa?.titulo || 'Música'} )
+> ⏱️ ׄ ( ${dados?.faixa?.duracao || '0:00'} )
+> ✅ ׄ ( ${dados?.posicao || 0}/${dados?.total || 0} ᴄᴏɴᴄʟᴜɪ́ᴅᴀ )
+> ⏭️ ׄ ( ${dados?.proxima?.titulo ? `ᴘʀᴏ́xɪᴍᴀ: ${dados.proxima.titulo}` : 'ғɪᴍ ᴅᴀ ғɪʟᴀ'} )`
 }
 
 exports.playlistSemSessao = () => {
@@ -4611,8 +4691,8 @@ return `- 🔒 \`𝙲𝙾𝙽𝚃𝚁𝙾𝙻𝙴 𝙳𝙰 𝙿𝙻𝙰𝚈𝙻�
 exports.playlistPausada = () => {
 return `- ⏸️ \`𝙵𝙸𝙻𝙰 𝙿𝙰𝚄𝚂𝙰𝙳𝙰\`
 
-> ⏸️ ׄ ( ᴏ ᴇɴᴠɪᴏ ᴀᴜᴛᴏᴍᴀ́ᴛɪᴄᴏ ᴅᴀ ᴘʀᴏ́xɪᴍᴀ ᴍᴜ́sɪᴄᴀ ғᴏɪ ᴘᴀᴜsᴀᴅᴏ. )
-> ℹ️ ׄ ( ᴏ ᴀ́ᴜᴅɪᴏ ǫᴜᴇ ᴊᴀ́ ғᴏɪ ᴇɴᴠɪᴀᴅᴏ ɴᴀ̃ᴏ ᴘᴏᴅᴇ sᴇʀ ᴘᴀᴜsᴀᴅᴏ ᴘᴇʟᴏ ʙᴏᴛ. )`
+> ⏸️ ׄ ( ᴏ ᴛᴇᴍᴘᴏʀɪᴢᴀᴅᴏʀ ᴅᴀ ᴘʀᴏ́xɪᴍᴀ ᴍᴜ́sɪᴄᴀ ғᴏɪ ᴘᴀᴜsᴀᴅᴏ. )
+> ℹ️ ׄ ( ᴏ ᴀ́ᴜᴅɪᴏ ǫᴜᴇ ᴊᴀ́ ғᴏɪ ᴇɴᴠɪᴀᴅᴏ ᴄᴏɴᴛɪɴᴜᴀ ɴᴏ ᴡʜᴀᴛsᴀᴘᴘ. )`
 }
 
 exports.playlistJaPausada = () => {
@@ -4686,28 +4766,34 @@ exports.playlistStatus = status => {
 if (!status)
 return exports.playlistSemSessao()
 
-const restante = status.restanteSegundos > 0
-? `${Math.floor(status.restanteSegundos / 60)}:${String(status.restanteSegundos % 60).padStart(2, '0')}`
-: 'aguardando'
+const decorrido = Math.max(0, Number(status.decorridoSegundos || 0))
+const duracao = Math.max(0, Number(status.duracaoAtualSegundos || status.atual?.duracaoSegundos || 0))
+const restante = Math.max(0, Number(status.restanteSegundos || 0))
+const barra = barraPlaylist(decorrido, duracao)
 
-return `- 📊 \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙰 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
+return `- 🎧 \`𝙿𝙻𝙰𝚈𝙴𝚁 𝙳𝙰 𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃\`
 
-> 📻 ׄ ( ᴍᴏᴅᴏ: ${status.mode === 'party' ? 'ᴘᴀʀᴛʏ' : 'ᴘʟᴀʏʟɪsᴛ'} )
-> 🎶 ׄ ( ${status.nome} )
-> 🎵 ׄ ( ᴀɢᴏʀᴀ: ${status.atual?.titulo || 'aguardando música'} )
-> ⏭️ ׄ ( ᴘʀᴏ́xɪᴍᴀ: ${status.proxima?.titulo || 'nenhuma'} )
+> 🎵 ׄ ( ${status.atual?.titulo || 'aguardando música'} )
+> 👤 ׄ ( ${status.atual?.autor || 'Desconhecido'} )
+> 📂 ׄ ( ${status.nome || 'Playlist'} )
 > 🔢 ׄ ( ${status.posicao}/${status.total} )
-> ⏱️ ׄ ( ᴘʀᴏ́xɪᴍᴏ ᴇɴᴠɪᴏ: ${restante} )
-> ⏸️ ׄ ( ᴘᴀᴜsᴀᴅᴀ: ${status.pausada ? 'sim' : 'não'} )
+> ⏱️ ׄ ( ${formatarTempoPlaylist(decorrido)} / ${status.atual?.duracao || formatarTempoPlaylist(duracao)} )
+> ⏳ ׄ ( ғᴀʟᴛᴀᴍ: ${formatarTempoPlaylist(restante)} )
+> ▶️ ׄ ( ${barra} )
+> ⏭️ ׄ ( ᴘʀᴏ́xɪᴍᴀ: ${status.proxima?.titulo || 'nenhuma'} )
 > 🔁 ׄ ( ʟᴏᴏᴘ: ${status.loop ? 'on' : 'off'} )
 > 🔀 ׄ ( ᴀʟᴇᴀᴛᴏ́ʀɪᴏ: ${status.aleatorio ? 'on' : 'off'} )
 > ⚡ ׄ ( ᴘʀᴇ́-ᴄᴀʀɢᴀ: ${status.preload ? 'ativa' : 'aguardando'} )`
 }
 
-exports.playlistFinalizada = nome => {
+exports.playlistFinalizada = dados => {
+const nome = typeof dados === 'string' ? dados : dados?.nome
+const total = typeof dados === 'object' ? dados?.total : 0
+const duracao = typeof dados === 'object' ? dados?.duracaoTotal : ''
+
 return `- 🏁 \`𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃 𝙵𝙸𝙽𝙰𝙻𝙸𝚉𝙰𝙳𝙰\`
 
-> 🎶 ׄ ( ${nome || 'Playlist'} )
+> 📂 ׄ ( ${nome || 'Playlist'} )${total ? `\n> 🎵 ׄ ( ${total} ᴍᴜ́sɪᴄᴀs ᴛᴏᴄᴀᴅᴀs )` : ''}${duracao ? `\n> ⏱️ ׄ ( ${duracao} )` : ''}
 > ✅ ׄ ( ᴛᴏᴅᴀs ᴀs ᴍᴜ́sɪᴄᴀs ғᴏʀᴀᴍ ᴇɴᴠɪᴀᴅᴀs. )`
 }
 
@@ -4734,20 +4820,19 @@ exports.partyAjuda = prefix => {
 return `- 🎉 \`𝙿𝙻𝙰𝚈𝙻𝙸𝚂𝚃 𝙿𝙰𝚁𝚃𝚈\`
 
 > ▶️ ׄ ( ${prefix}playlist party iniciar )
-> ➕ ׄ ( ${prefix}playlist party add nome-da-música )
+> ➕ ׄ ( ${prefix}playlist party add <música> )
 > 📋 ׄ ( ${prefix}playlist party fila )
 > ⏭️ ׄ ( ${prefix}playlist party proxima )
 > ⏸️ ׄ ( ${prefix}playlist party pausar )
 > ▶️ ׄ ( ${prefix}playlist party continuar )
-> ⏹️ ׄ ( ${prefix}playlist party parar )
-> 👥 ׄ ( ǫᴜᴀʟǫᴜᴇʀ ᴍᴇᴍʙʀᴏ ᴘᴏᴅᴇ ᴀᴅɪᴄɪᴏɴᴀʀ ᴍᴜ́sɪᴄᴀ; ᴄᴏɴᴛʀᴏʟᴇ ᴅᴀ ғɪʟᴀ ғɪᴄᴀ ᴄᴏᴍ ᴄʀɪᴀᴅᴏʀ/ᴀᴅᴍ. )`
+> ⏹️ ׄ ( ${prefix}playlist party parar )`
 }
 
 exports.partyIniciada = prefix => {
 return `- 🎉 \`𝙿𝙰𝚁𝚃𝚈 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙰\`
 
 > 👥 ׄ ( ᴀ ғɪʟᴀ ᴄᴏʟᴀʙᴏʀᴀᴛɪᴠᴀ ᴇsᴛᴀ́ ᴀʙᴇʀᴛᴀ. )
-> ➕ ׄ ( ᴀᴅɪᴄɪᴏɴᴇ: ${prefix}playlist party add nome-da-música )
+> ➕ ׄ ( ᴀᴅɪᴄɪᴏɴᴇ: ${prefix}playlist party add <música> )
 > ▶️ ׄ ( ᴀ ᴘʀɪᴍᴇɪʀᴀ ᴍᴜ́sɪᴄᴀ ᴀᴅɪᴄɪᴏɴᴀᴅᴀ ᴄᴏᴍᴇᴄ̧ᴀ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀᴍᴇɴᴛᴇ. )`
 }
 
@@ -4760,7 +4845,7 @@ return `- 🎉 \`𝙿𝙰𝚁𝚃𝚈 𝙸𝙽𝙰𝚃𝙸𝚅𝙰\`
 exports.partyAddUso = prefix => {
 return `- ➕ \`𝙰𝙳𝙸𝙲𝙸𝙾𝙽𝙰𝚁 𝙽𝙰 𝙿𝙰𝚁𝚃𝚈\`
 
-> 📌 ׄ ( ᴜsᴇ: ${prefix}playlist party add nome-da-música-ou-link )`
+> 📌 ׄ ( ᴜsᴇ: ${prefix}playlist party add <música-ou-link> )`
 }
 
 exports.partyAdicionada = (faixa, total, sender) => {

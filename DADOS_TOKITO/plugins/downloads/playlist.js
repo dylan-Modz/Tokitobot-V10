@@ -45,6 +45,46 @@ const referenciaPlaylist = valor => {
   }
 }
 
+const enviarComCapa = async (ctx, capa, legenda) => {
+  const thumbnail = String(capa || '').trim()
+
+  if (thumbnail) {
+    try {
+      return await ctx.tokito.sendMessage(
+        ctx.from,
+        {
+          image: { url: thumbnail },
+          caption: legenda
+        }
+      )
+    }
+    catch {}
+  }
+
+  return ctx.reply(legenda)
+}
+
+const responderDetalhes = async (ctx, item, global = false) => {
+  const musicas = Array.isArray(item?.musicas) ? item.musicas : []
+  const capa = musicas.find(musica => musica?.thumbnail)?.thumbnail || ''
+  const legenda = ctx.mess.playlistDetalhes(item, global)
+
+  return enviarComCapa(ctx, capa, legenda)
+}
+
+const responderStatus = async ctx => {
+  const atual = playlist.status(ctx.from)
+
+  if (!atual)
+    return ctx.reply(ctx.mess.playlistSemSessao())
+
+  return enviarComCapa(
+    ctx,
+    atual.atual?.thumbnail,
+    ctx.mess.playlistStatus(atual)
+  )
+}
+
 const podeControlar = ctx => playlist.podeControlar(
   ctx.from,
   ctx.sender,
@@ -89,7 +129,7 @@ const tocarSalva = async (ctx, nomeRaw, forcarGlobal = false) => {
   if (!Array.isArray(salva.musicas) || !salva.musicas.length)
     return ctx.reply(ctx.mess.playlistVazia(salva.nome))
 
-  const status = await playlist.iniciar({
+  await playlist.iniciar({
     chatId: ctx.from,
     ownerId: ctx.sender,
     playlist: salva,
@@ -98,7 +138,7 @@ const tocarSalva = async (ctx, nomeRaw, forcarGlobal = false) => {
     apiKey: ctx.API_KEY_TOKITO
   })
 
-  return ctx.reply(ctx.mess.playlistIniciada(status))
+  return true
 }
 
 const executarControle = async (ctx, acao) => {
@@ -170,7 +210,7 @@ const executarControle = async (ctx, acao) => {
   }
 
   if (acao === 'status')
-    return ctx.reply(ctx.mess.playlistStatus(playlist.status(ctx.from)))
+    return responderStatus(ctx)
 
   return false
 }
@@ -269,7 +309,10 @@ const executarGlobal = async (ctx, restante) => {
   const sub = primeiraPalavra(restante)
   const depois = tirarPrimeiraPalavra(restante)
 
-  if (!sub || sub === 'listar' || sub === 'lista') {
+  if (!sub || sub === 'ajuda' || sub === 'help')
+    return ctx.reply(ctx.mess.playlistGlobalAjuda(ctx.prefix, ctx.SoDono))
+
+  if (sub === 'listar' || sub === 'lista') {
     const lista = playlist.listar(ctx.sender, true)
     return ctx.reply(ctx.mess.playlistLista(lista, true))
   }
@@ -283,7 +326,7 @@ const executarGlobal = async (ctx, restante) => {
     if (!item)
       return ctx.reply(ctx.mess.playlistNaoExiste(depois, true))
 
-    return ctx.reply(ctx.mess.playlistDetalhes(item, true))
+    return responderDetalhes(ctx, item, true)
   }
 
   if (sub === 'tocar' || sub === 'play')
@@ -456,7 +499,7 @@ const executarGlobal = async (ctx, restante) => {
     return ctx.reply(ctx.mess.playlistRenomeada(atual, resultado.playlist.nome, true))
   }
 
-  return ctx.reply(ctx.mess.playlistGlobalAjuda(ctx.prefix))
+  return ctx.reply(ctx.mess.playlistGlobalAjuda(ctx.prefix, ctx.SoDono))
 }
 
 dylan.setCommand({
@@ -518,6 +561,20 @@ dylan.setCommand({
 
     if (acao === 'party')
       return executarParty(ctx, restante)
+
+    if ([
+      'config',
+      'controle',
+      'controles'
+    ].includes(acao))
+      return ctx.reply(ctx.mess.playlistConfigAjuda(ctx.prefix))
+
+    if ([
+      'editar',
+      'gerenciar',
+      'manage'
+    ].includes(acao))
+      return ctx.reply(ctx.mess.playlistEditarAjuda(ctx.prefix))
 
     if ([
       'parar',
@@ -650,7 +707,7 @@ dylan.setCommand({
       if (!item)
         return ctx.reply(ctx.mess.playlistNaoExiste(ref.nome, ref.global))
 
-      return ctx.reply(ctx.mess.playlistDetalhes(item, ref.global))
+      return responderDetalhes(ctx, item, ref.global)
     }
 
     if (acao === 'tocar' || acao === 'play')
