@@ -1,86 +1,44 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.92",
+  "version": "10.0.93",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-01T19:45:25.146Z",
+  "publishedAt": "2026-09-02T00:30:24.644Z",
   "changelog": [
-    "[Melhoria] Adiciona modo parceria e manutencao de comandos",
-    "A versão 10.0.92 já está disponível para atualização.",
+    "[Novidade] feat: adiciona sistema de playlist e radio",
+    "A versão 10.0.93 já está disponível para atualização.",
     "Mensagens atualizado",
-    "Filtro Anticanal atualizado",
-    "Filtro Antilink atualizado",
-    "Manutencao atualizado",
-    "Index atualizado",
-    "Gerenciar atualizado",
-    "Modoparceria atualizado",
-    "Parceria atualizado",
-    "Solicitacoes atualizado",
-    "Parcerias atualizado"
+    "Menus atualizado",
+    "Playlist atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Adiciona modo parceria e manutencao de comandos",
-  "notice": "A versão 10.0.92 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat: adiciona sistema de playlist e radio",
+  "notice": "A versão 10.0.93 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "441335cbb0fffe67af0496472d2f96349dcd316bfdb4815eb8d86f7bea7a4dd2",
-      "size": 182779
+      "sha256": "1aa8840fc07cc8ebe6ba17e8f50accdfd375f93bb5d4c814d01cb2793dde6d3f",
+      "size": 201893
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/filtro-anticanal.js",
-      "sha256": "c61e6cff795ad756cc6ff055f21ca9c8563857fa04f6ef69979c8cf1570d0f85",
-      "size": 2874
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "a66d5e49ddbaf97a9558db6df3e903394e46491df0516f7a6bf86a6e0e724d2b",
+      "size": 45056
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/filtro-antilink.js",
-      "sha256": "d4f3ba5db350271339bde26d20a925ea6e2475b11f5d853c05b5395c6d958f36",
-      "size": 5443
+      "path": "DADOS_TOKITO/plugins/downloads/playlist.js",
+      "sha256": "c0b96466a367c44c9467408a77afc7dcb6d037cb5fc6baae3797ba222c23da54",
+      "size": 19281
     },
     {
-      "path": "DADOS_TOKITO/plugins/dono/manutencao.js",
-      "sha256": "e8ec20cfff214b439b638383bdcb5e905d3c4b18d4cbdee64641954dfe4483b9",
-      "size": 2784
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/index.js",
-      "sha256": "a074d9cf2c6492646f07c2087c99e49ad55dfa257d2629c7ee2ba4840868788c",
-      "size": 6702
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/parceria/gerenciar.js",
-      "sha256": "4da9658e274d1d4a1754b858014de35d8577b6d0250fe961c88d45cbeb747534",
-      "size": 7070
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/parceria/modoparceria.js",
-      "sha256": "6055918499d05c31cb633e699fe9d8c2413a7d6f892f0e8f28611f94f7668699",
-      "size": 1392
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/parceria/parceria.js",
-      "sha256": "06f8836fa542387eb7e616c591189deba104b44a9ae17f9df2a7812b3db2acc4",
-      "size": 4727
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/parceria/solicitacoes.js",
-      "sha256": "b3ec9da2dc21ba8b6d6c3303d3c2d15ac0b928741162531c3a0101f083ce5105",
-      "size": 5301
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/manutencao.js",
-      "sha256": "e12612762250af1bcb25f11081310d77ab0f56528da931a8559c97c853223611",
-      "size": 2825
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/parcerias.js",
-      "sha256": "f0e1ec5588d6a81fb695e0d63662348ce08b8daacedc0e6d39c38f0a40f7391c",
-      "size": 14417
+      "path": "DADOS_TOKITO/sistemas/playlist.js",
+      "sha256": "5b71cc86d905e1614ca5dc30d85de95815c55bbe2f16586630274160ac73ff1d",
+      "size": 32568
     }
   ],
   "releases": [
@@ -2424,6 +2382,44 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-01T19:45:25.145Z"
+    },
+    {
+      "version": "10.0.93",
+      "fromVersion": "10.0.92",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: adiciona sistema de playlist e radio",
+      "notice": "A versão 10.0.93 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado",
+        "Menus atualizado",
+        "Playlist atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "1aa8840fc07cc8ebe6ba17e8f50accdfd375f93bb5d4c814d01cb2793dde6d3f",
+          "size": 201893
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "a66d5e49ddbaf97a9558db6df3e903394e46491df0516f7a6bf86a6e0e724d2b",
+          "size": 45056
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playlist.js",
+          "sha256": "c0b96466a367c44c9467408a77afc7dcb6d037cb5fc6baae3797ba222c23da54",
+          "size": 19281
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/playlist.js",
+          "sha256": "5b71cc86d905e1614ca5dc30d85de95815c55bbe2f16586630274160ac73ff1d",
+          "size": 32568
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-02T00:30:24.644Z"
     }
   ],
   "versao": "10.0.70",
