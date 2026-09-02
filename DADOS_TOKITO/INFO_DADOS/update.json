@@ -1,44 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.93",
+  "version": "10.0.94",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-02T00:30:24.644Z",
+  "publishedAt": "2026-09-02T00:36:23.273Z",
   "changelog": [
-    "[Novidade] feat: adiciona sistema de playlist e radio",
-    "A versão 10.0.93 já está disponível para atualização.",
-    "Mensagens atualizado",
-    "Menus atualizado",
-    "Playlist atualizado"
+    "[Correção] fix: corrige menus truncado da playlist",
+    "A versão 10.0.94 já está disponível para atualização.",
+    "Menus atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat: adiciona sistema de playlist e radio",
-  "notice": "A versão 10.0.93 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: corrige menus truncado da playlist",
+  "notice": "A versão 10.0.94 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "1aa8840fc07cc8ebe6ba17e8f50accdfd375f93bb5d4c814d01cb2793dde6d3f",
-      "size": 201893
-    },
-    {
       "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "a66d5e49ddbaf97a9558db6df3e903394e46491df0516f7a6bf86a6e0e724d2b",
-      "size": 45056
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/playlist.js",
-      "sha256": "c0b96466a367c44c9467408a77afc7dcb6d037cb5fc6baae3797ba222c23da54",
-      "size": 19281
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/playlist.js",
-      "sha256": "5b71cc86d905e1614ca5dc30d85de95815c55bbe2f16586630274160ac73ff1d",
-      "size": 32568
+      "sha256": "cd0aa4d9772c6d84701e60c699d5f9dd037c206eea1045ab0fa192152ff9d3da",
+      "size": 61685
     }
   ],
   "releases": [
@@ -2420,6 +2403,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-02T00:30:24.644Z"
+    },
+    {
+      "version": "10.0.94",
+      "fromVersion": "10.0.93",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: corrige menus truncado da playlist",
+      "notice": "A versão 10.0.94 já está disponível para atualização.",
+      "changelog": [
+        "Menus atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "cd0aa4d9772c6d84701e60c699d5f9dd037c206eea1045ab0fa192152ff9d3da",
+          "size": 61685
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-02T00:36:23.273Z"
     }
   ],
   "versao": "10.0.70",
