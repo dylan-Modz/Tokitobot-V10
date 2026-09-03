@@ -1,85 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.97",
+  "version": "10.0.98",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-03T21:20:09.339Z",
+  "publishedAt": "2026-09-03T21:25:39.665Z",
   "changelog": [
-    "[Melhoria] Nova jornada RPG com imagens, guildas e arsenal",
-    "A versão 10.0.97 já está disponível para atualização.",
-    "Adicionadas classes e jornada de aventureiro",
-    "Adicionadas aventuras, história, torre e masmorras",
-    "Adicionados bosses e raids cooperativas",
-    "Adicionados materiais, arsenal, forja e equipamentos",
-    "Adicionadas guildas com membros, níveis, pontos e ranking",
-    "Adicionadas imagens automáticas por links do GitHub",
-    "Perfil atualizado com N-Coins, cidade, pet, Pokémon e jornada",
-    "Comando coins corrigido com fallback seguro",
-    "Modo Free Fire e comandos existentes preservados"
+    "[Melhoria] Corrige carregamento das imagens do RPG",
+    "A versão 10.0.98 já está disponível para atualização.",
+    "Index atualizado",
+    "Links Rpg atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Nova jornada RPG com imagens, guildas e arsenal",
-  "notice": "A versão 10.0.97 já está disponível para atualização.",
+  "title": "Corrige carregamento das imagens do RPG",
+  "notice": "A versão 10.0.98 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/INFO_DADOS/LOGOS/links_rpg.json",
+      "path": "DADOS_TOKITO/sistemas/rpg/index.js",
+      "sha256": "deb6ee39ec5748d4b0e1582d784dc375c4851bcca9334e92b02f2a1898c8a6a4",
+      "size": 28422
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/rpg/links_rpg.json",
       "sha256": "183ed1f44d57d806956c184434493a4ad967c224ac1ac07a7fa5ef08e37a53a2",
       "size": 5433
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/rpg/index.js",
-      "sha256": "49b0642ffbbd69c197a96f217563cfd0110514841dcf9bb8ab4f0bab21c144fa",
-      "size": 28443
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
-      "sha256": "e52cfe03522510a25a58078d4ed5d6349c83a01b187f139b67390000f5db7c8f",
-      "size": 1539
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/rpg/jornada.js",
-      "sha256": "b8d27428000394614e0fa6a7372c52e9f405d4cb29245df50f460bb5530d47c5",
-      "size": 8732
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/rpg/desafios.js",
-      "sha256": "053b44b6019c0398400f0e4875dc1c89afa20c0c72cf1d02176d8a2e6a69831f",
-      "size": 12926
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/rpg/arsenal.js",
-      "sha256": "02c0ad91f6b779efc6f68a52dcceb3b9be3573cbb1f9bf3fe7c3475e0cc90bd6",
-      "size": 5463
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/rpg/guilda.js",
-      "sha256": "93d70dab48830dfd987dcca43cc1e9439b02bffc47b5ec6dfaa4e3c49a7962bc",
-      "size": 7597
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/menus/menurpg.js",
-      "sha256": "a7adac52c5803d213fb9563bf5b250c4d94f3cd0d1cd58e242de8206f9daec49",
-      "size": 4103
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/info/perfil.js",
-      "sha256": "a6646913a31b14b38311e84cda93980c5ec7fa9c447a6f470027c14b3570e348",
-      "size": 7212
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/coins/coins.js",
-      "sha256": "125d414461d9aee7b0620dea90afbcc1ae269a0da3139c246be809c6135b8745",
-      "size": 2518
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "3f6a7b4379ec1e9ec58fb4f96e7c1e2ee67bd68c99b1c963afd555818c4f4e6d",
-      "size": 209807
     }
   ],
   "releases": [
@@ -2683,6 +2631,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-03T21:20:09.339Z"
+    },
+    {
+      "version": "10.0.98",
+      "fromVersion": "10.0.97",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Corrige carregamento das imagens do RPG",
+      "notice": "A versão 10.0.98 já está disponível para atualização.",
+      "changelog": [
+        "Index atualizado",
+        "Links Rpg atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/index.js",
+          "sha256": "deb6ee39ec5748d4b0e1582d784dc375c4851bcca9334e92b02f2a1898c8a6a4",
+          "size": 28422
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/links_rpg.json",
+          "sha256": "183ed1f44d57d806956c184434493a4ad967c224ac1ac07a7fa5ef08e37a53a2",
+          "size": 5433
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-03T21:25:39.664Z"
     }
   ],
   "versao": "10.0.70",
