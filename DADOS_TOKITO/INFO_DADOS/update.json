@@ -1,33 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.99",
+  "version": "10.0.100",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-03T21:45:09.196Z",
+  "publishedAt": "2026-09-03T23:19:24.626Z",
   "changelog": [
-    "[Melhoria] Organiza categorias e emojis do menu RPG",
-    "A versão 10.0.99 já está disponível para atualização.",
-    "Menus atualizado",
-    "Menurpg atualizado"
+    "[Melhoria] Antipv atualizado",
+    "A versão 10.0.100 já está disponível para atualização.",
+    "Antipv atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Organiza categorias e emojis do menu RPG",
-  "notice": "A versão 10.0.99 já está disponível para atualização.",
+  "title": "Antipv atualizado",
+  "notice": "A versão 10.0.100 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "c741c601cd5fdfe0bc09f859c7ad5043fad0bc605ebb5997a5eed4a31e58c96d",
-      "size": 66129
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/menus/menurpg.js",
-      "sha256": "b869de2daa3978fbb9192a56402832f8d5854edbaf49346f5c16517e687cb50c",
-      "size": 861
+      "path": "DADOS_TOKITO/plugins/dono/antipv.js",
+      "sha256": "191e2df18ec7baf79d65e90977909e35347090470b0ee88bfcda6a44c60d8fb9",
+      "size": 2119
     }
   ],
   "releases": [
@@ -2681,6 +2675,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-03T21:45:09.196Z"
+    },
+    {
+      "version": "10.0.100",
+      "fromVersion": "10.0.99",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Antipv atualizado",
+      "notice": "A versão 10.0.100 já está disponível para atualização.",
+      "changelog": [
+        "Antipv atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/dono/antipv.js",
+          "sha256": "191e2df18ec7baf79d65e90977909e35347090470b0ee88bfcda6a44c60d8fb9",
+          "size": 2119
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-03T23:19:24.626Z"
     }
   ],
   "versao": "10.0.70",
