@@ -976,11 +976,15 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡⚔️｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝑀𝑂𝐷𝑂-𝑋4
+├─ ⊹ 𖤐  𝙼𝙾𝙳𝙾-𝙵𝚁𝙴𝙴-𝙵𝙸𝚁𝙴
 ├╾═╼･ﾟ𖤐ﾟ･｡🎮｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}modox4 1/0
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}modofreefire 1/0
+┃࣪ ╎—̳͟͞͞ 📋 ${prefix}sala 1x1 até 6x6
+┃࣪ ╎—̳͟͞͞ ❌ ${prefix}sala cancelar
+┃࣪ ╎—̳͟͞͞ 🔒 f — fechar o grupo
+┃࣪ ╎—̳͟͞͞ 🔓 a — abrir o grupo
+┃࣪ ╎—̳͟͞͞ 📢 m — marcar o grupo
 ┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}xgp NOME
-┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}sala NOME
 ┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}time NOME,NOME,NOME,NOME,NOME,NOME
 ┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}nota
 ┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}nota add TEXTO

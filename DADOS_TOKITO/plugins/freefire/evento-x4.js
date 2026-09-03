@@ -50,6 +50,7 @@ module.exports = {
 nome: 'evento-x4',
 categoria: 'freefire',
 fase: 'normal',
+prioridade: 30,
 async evento(ctx) {
 if (!ctx.isGroup || ctx.info?.key?.fromMe || !x4.ativo(ctx)) return false
 const texto = String(ctx.body || '').trim()

@@ -504,7 +504,8 @@ antiddd: {
 ativo: false,
 listaProibidos: []
 },
-modojogos: false
+modojogos: false,
+modofreefire: false
 },
 listanegra: [],
 ausentes: [],
@@ -593,6 +594,9 @@ groupId: from,
 funcoes: {
 ...padraoGp.funcoes,
 ...funcoesSalvas,
+modofreefire: typeof funcoesSalvas.modofreefire === 'boolean'
+? funcoesSalvas.modofreefire
+: funcoesSalvas.modox4 === true,
 antilink: {
 ...padraoGp.funcoes.antilink,
 ...antilinkSalvo,

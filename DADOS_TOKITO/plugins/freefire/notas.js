@@ -27,7 +27,7 @@ return f.x4notas
 
 const seletor = async (ctx, lista) => {
 const menu = {
-title: '📝 ANOTAÇÕES X4',
+title: '📝 ANOTAÇÕES FREE FIRE',
 sections: [{
 title: 'Escolha uma anotação',
 rows: lista.map((texto, i) => ({
@@ -40,7 +40,7 @@ id: `${ctx.prefix}nota enviar ${i + 1}`
 
 const msg = generateWAMessageFromContent(ctx.from, {
 interactiveMessage: proto.Message.InteractiveMessage.create({
-body: proto.Message.InteractiveMessage.Body.create({ text: '- 📝 `𝙰𝙽𝙾𝚃𝙰𝙲̧𝙾̃𝙴𝚂 𝚇𝟺`' }),
+body: proto.Message.InteractiveMessage.Body.create({ text: '- 📝 `𝙰𝙽𝙾𝚃𝙰𝙲̧𝙾̃𝙴𝚂 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴`' }),
 nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
 buttons: [{ name: 'single_select', buttonParamsJson: JSON.stringify(menu) }],
 messageParamsJson: JSON.stringify({})
@@ -58,7 +58,7 @@ nome: 'nota',
 comandos: ['nota', 'notax4', 'anotacao', 'anotacoes'],
 categoria: 'freefire',
 info: {
-descricao: 'Salva e escolhe anotações rápidas do modo X4.',
+descricao: 'Salva e escolhe anotações rápidas do Modo Free Fire.',
 uso: 'nota add texto | nota del número | nota',
 permissao: 'ADM',
 categoria: 'freefire'
@@ -66,8 +66,8 @@ categoria: 'freefire'
 async executar(ctx) {
 if (!ctx.isGroup) return ctx.reply(ctx.mess.sogrupo())
 if (!x4.ativo(ctx)) return ctx.reply(ctx.mess.padraoAviso({
-titulo: 'MODO X4',
-descricao: `Ative primeiro com ${ctx.prefix}modox4 1.`
+titulo: 'MODO FREE FIRE',
+descricao: `Ative primeiro com ${ctx.prefix}modofreefire 1.`
 }))
 if (!x4.adm(ctx)) return ctx.reply(ctx.mess.soadm())
 

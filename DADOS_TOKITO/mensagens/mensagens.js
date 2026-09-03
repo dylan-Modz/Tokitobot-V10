@@ -810,6 +810,116 @@ return `- ${emoji} \`${titulo}\`
 > 🧊 ׄ ( ɪ️ ғᴜɴᴄ̧ᴀ̃ᴏ: ${descricao} )`
 }
 
+const emojisSlotsFreeFire = [
+'1️⃣',
+'2️⃣',
+'3️⃣',
+'4️⃣',
+'5️⃣',
+'6️⃣'
+]
+
+const jogadoresDaSalaFreeFire = sessao => Array.isArray(sessao?.jogadores)
+? sessao.jogadores
+: []
+
+const nomeSlotFreeFire = jogador => {
+const nome = String(jogador?.nome || '').trim()
+return nome || 'ᴠᴀɢᴏ'
+}
+
+const linhaTimeFreeFire = (jogadores, inicio, quantidade) => {
+const linhas = []
+
+for (let indice = 0; indice < quantidade; indice++) {
+const jogador = jogadores[inicio + indice]
+linhas.push(`> ${emojisSlotsFreeFire[indice]} ׄ ( ${nomeSlotFreeFire(jogador)} )`)
+}
+
+return linhas.join('\n')
+}
+
+const modoSalaFreeFire = sessao => tituloMono(String(sessao?.modo || '1x1'))
+
+exports.modoFreeFireDesligado = prefix => {
+return `- 🎮 \`𝙼𝙾𝙳𝙾 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴\`
+
+> 🔴 ׄ ( ᴏ ᴍᴏᴅᴏ ғʀᴇᴇ ғɪʀᴇ ᴇsᴛᴀ́ ᴅᴇsᴀᴛɪᴠᴀᴅᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )
+> ✅ ׄ ( ᴀᴛɪᴠᴇ ᴄᴏᴍ: ${prefix}modofreefire 1 )`
+}
+
+exports.salaFreeFireUso = prefix => {
+return `- 📋 \`𝙻𝙸𝚂𝚃𝙰 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴\`
+
+> 🎮 ׄ ( ${prefix}sala 1x1 )
+> 🎮 ׄ ( ${prefix}sala 2x2 )
+> 🎮 ׄ ( ${prefix}sala 3x3 )
+> 🎮 ׄ ( ${prefix}sala 4x4 )
+> 🎮 ׄ ( ${prefix}sala 5x5 )
+> 🎮 ׄ ( ${prefix}sala 6x6 )
+
+> 📝 ׄ ( ᴅᴇᴘᴏɪs, ᴏ ʀᴇsᴘᴏɴsᴀ́ᴠᴇʟ ᴇɴᴠɪᴀ ᴀᴘᴇɴᴀs ᴏs ɴᴏᴍᴇs. )`
+}
+
+exports.salaFreeFireLista = (sessao, finalizada = false) => {
+const porTime = Math.max(1, Math.min(6, Number(sessao?.porTime || 1)))
+const jogadores = jogadoresDaSalaFreeFire(sessao)
+const total = porTime * 2
+const preenchidos = Math.min(jogadores.length, total)
+const responsavel = String(sessao?.criador || '').split('@')[0]
+const timeUm = linhaTimeFreeFire(jogadores, 0, porTime)
+const timeDois = linhaTimeFreeFire(jogadores, porTime, porTime)
+const instrucao = finalizada
+? '> ✅ ׄ ( ʟɪsᴛᴀ ғɪɴᴀʟɪᴢᴀᴅᴀ. ᴏ ɢʀᴜᴘᴏ sᴇʀᴀ́ ᴀʙᴇʀᴛᴏ. )'
+: '> ✍️ ׄ ( ᴏ ʀᴇsᴘᴏɴsᴀ́ᴠᴇʟ ᴅᴇᴠᴇ ᴇɴᴠɪᴀʀ ᴀᴘᴇɴᴀs ᴏs ɴᴏᴍᴇs. )'
+
+return `- 📋 \`𝙻𝙸𝚂𝚃𝙰 ${modoSalaFreeFire(sessao)}\`
+
+> 🧊 ׄ ( ᴛɪᴍᴇ 𝟷 )
+${timeUm}
+
+> ⚔️ ׄ ( ᴠᴇʀsᴜs )
+
+> 🔥 ׄ ( ᴛɪᴍᴇ 𝟸 )
+${timeDois}
+
+> 👥 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: ${preenchidos}/${total} )
+> 👑 ׄ ( ʀᴇsᴘᴏɴsᴀ́ᴠᴇʟ: @${responsavel || 'desconhecido'} )
+${instrucao}`
+}
+
+exports.salaFreeFireChamada = sessao => {
+const porTime = Math.max(1, Math.min(6, Number(sessao?.porTime || 1)))
+const jogadores = jogadoresDaSalaFreeFire(sessao)
+const timeUm = linhaTimeFreeFire(jogadores, 0, porTime)
+const timeDois = linhaTimeFreeFire(jogadores, porTime, porTime)
+
+return `- 📢 \`𝙲𝙷𝙰𝙼𝙰𝙳𝙰 ${modoSalaFreeFire(sessao)}\`
+
+> 🧊 ׄ ( ᴛɪᴍᴇ 𝟷 )
+${timeUm}
+
+> ⚔️ ׄ ( ᴠᴇʀsᴜs )
+
+> 🔥 ׄ ( ᴛɪᴍᴇ 𝟸 )
+${timeDois}
+
+> 📢 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs, ᴘʀᴇᴘᴀʀᴇᴍ-sᴇ. )
+> ⚔️ ׄ ( ᴀ ᴘᴀʀᴛɪᴅᴀ ᴠᴀɪ ᴄᴏᴍᴇᴄ̧ᴀʀ. )`
+}
+
+exports.salaFreeFireResponsavel = responsavel => {
+return `- 🔒 \`𝙻𝙸𝚂𝚃𝙰 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳𝙰\`
+
+> 👑 ׄ ( sᴏᴍᴇɴᴛᴇ @${String(responsavel || '').split('@')[0]} ᴘᴏᴅᴇ ᴄᴏɴᴛʀᴏʟᴀʀ ᴇsᴛᴀ ʟɪsᴛᴀ. )`
+}
+
+exports.salaFreeFireCancelada = () => {
+return `- ❌ \`𝙻𝙸𝚂𝚃𝙰 𝙲𝙰𝙽𝙲𝙴𝙻𝙰𝙳𝙰\`
+
+> 🔓 ׄ ( ᴀ ʟɪsᴛᴀ ғᴏɪ ᴇɴᴄᴇʀʀᴀᴅᴀ ᴇ ᴏ ɢʀᴜᴘᴏ ғᴏɪ ᴀʙᴇʀᴛᴏ. )`
+}
+
 exports.funcaoInvalida = (prefix, comando) => {
 return `- ❌ \`𝙾𝙿𝙲̧𝙰̃𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙰\`
 

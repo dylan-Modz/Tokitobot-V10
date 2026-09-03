@@ -21,12 +21,12 @@ const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({
 nome: 'xgp',
-comandos: ['xgp', 'sala'],
+comandos: ['xgp'],
 categoria: 'freefire',
 
 info: {
-descricao: 'Executa o fluxo rápido de XGP/Sala no grupo.',
-uso: 'xgp [novo nome do grupo] | sala [novo nome do grupo]',
+descricao: 'Executa o fluxo rápido de XGP no grupo.',
+uso: 'xgp [novo nome do grupo]',
 permissao: 'ADM',
 categoria: 'freefire'
 },
@@ -37,8 +37,8 @@ return ctx.reply(ctx.mess.sogrupo())
 
 if (!x4.ativo(ctx))
 return ctx.reply(ctx.mess.padraoAviso({
-titulo: 'MODO X4',
-descricao: `Ative primeiro com ${ctx.prefix}modox4 1.`
+titulo: 'MODO FREE FIRE',
+descricao: `Ative primeiro com ${ctx.prefix}modofreefire 1.`
 }))
 
 if (!x4.adm(ctx))
@@ -61,11 +61,7 @@ metadata?.subject ||
 const novoNome = String(
 ctx.q ||
 ''
-).trim() || (
-ctx.command === 'sala'
-? 'SALA'
-: 'XGP'
-)
+).trim() || 'XGP'
 
 /*
  * ============================================================

@@ -51,6 +51,33 @@ __dirname,
 'config-all.json'
 )
 
+const GROUPS = path.join(
+__dirname,
+'..',
+'database',
+'grupos',
+'ATIVAÇÕES-TOKITO'
+)
+
+const modoFreeFireAtivo = chat => {
+if (!String(chat || '').endsWith('@g.us'))
+return true
+
+try {
+const arquivo = path.join(GROUPS, `${chat}.json`)
+const bruto = JSON.parse(fs.readFileSync(arquivo, 'utf8'))
+const grupo = Array.isArray(bruto) ? bruto[0] : bruto
+const funcoes = grupo?.funcoes || {}
+
+if (typeof funcoes.modofreefire === 'boolean')
+return funcoes.modofreefire
+
+return funcoes.modox4 === true
+} catch {
+return false
+}
+}
+
 const ler = () => {
 try {
 const d = JSON.parse(
@@ -388,7 +415,8 @@ false
 for (const e of d) {
 if (
 !e.ativo ||
-e.ultimoSucesso === h
+e.ultimoSucesso === h ||
+!modoFreeFireAtivo(e.chat)
 ) {
 continue
 }
@@ -472,5 +500,6 @@ salvar,
 registrar,
 remover,
 processar,
-hoje
+hoje,
+modoFreeFireAtivo
 }

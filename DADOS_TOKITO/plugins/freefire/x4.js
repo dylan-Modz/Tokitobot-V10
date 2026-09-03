@@ -15,7 +15,17 @@
  * ============================================================
  */
 
-const ativo = ctx => Boolean(ctx.dataGp?.[0]?.funcoes?.modox4)
+const ativo = ctx => {
+const funcoes = ctx.dataGp?.[0]?.funcoes
+
+if (!funcoes || typeof funcoes !== 'object')
+return false
+
+if (typeof funcoes.modofreefire === 'boolean')
+return funcoes.modofreefire
+
+return Boolean(funcoes.modox4)
+}
 
 const membros = ctx => [...new Set(
 (ctx.groupMembers || [])

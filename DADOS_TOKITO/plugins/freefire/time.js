@@ -25,7 +25,7 @@ comandos: ['time', 'lista'],
 categoria: 'freefire',
 
 info: {
-descricao: 'Monta dois times de 3 jogadores para X4.',
+descricao: 'Monta dois times de 3 jogadores no Modo Free Fire.',
 uso: 'time jogador1,jogador2,jogador3,jogador4,jogador5,jogador6',
 categoria: 'freefire'
 },
@@ -36,8 +36,8 @@ return ctx.reply(ctx.mess.sogrupo())
 
 if (!x4.ativo(ctx))
 return ctx.reply(ctx.mess.padraoAviso({
-titulo: 'MODO X4',
-descricao: `Ative primeiro com ${ctx.prefix}modox4 1.`
+titulo: 'MODO FREE FIRE',
+descricao: `Ative primeiro com ${ctx.prefix}modofreefire 1.`
 }))
 
 const nomes = String(ctx.q || '')
@@ -57,7 +57,7 @@ const b = nomes.slice(3, 6)
 const texto = `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡⚔️｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝚃𝙸𝙼𝙴𝚂-𝚇𝟺
+├─ ⊹ 𖤐  𝚃𝙸𝙼𝙴𝚂-𝙵𝚁𝙴𝙴-𝙵𝙸𝚁𝙴
 ├╾═╼･ﾟ𖤐ﾟ･｡🎮｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🧊 𝚃𝙸𝙼𝙴 𝟷
 ┃࣪ ╎—̳͟͞͞ 👤 ${a[0]}
@@ -74,7 +74,7 @@ const texto = `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ─�
 ┃࣪ ╎—̳͟͞͞ 👤 𝙻𝙴𝙾𝙽 • 𝙰𝙻𝙾𝙺 • 𝙺𝙴𝙻𝙻𝚈
 ┃࣪ ╎—̳͟͞͞ 👤 𝙼𝙰𝚇𝙸𝙼 • 𝙼𝙾𝙲𝙾
 ┃࣪ ╎—̳͟͞͞ 🚫 𝙿𝙴𝚃𝚂: 𝙴𝚃 & 𝙳𝚁𝙰𝚀𝚄𝙸𝙽𝙷𝙾
-┃࣪ ╎—̳͟͞͞ 🎮 𝙱𝙾𝙼 𝚇𝟺 𝙰 𝚃𝙾𝙳𝙾𝚂!
+┃࣪ ╎—̳͟͞͞ 🎮 𝙱𝙾𝙼 𝙹𝙾𝙶𝙾 𝙰 𝚃𝙾𝙳𝙾𝚂!
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 

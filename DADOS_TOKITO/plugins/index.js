@@ -46,6 +46,18 @@ const pasta = __dirname
 
 const normal = valor => String(valor || '').trim().toLowerCase()
 
+const modoFreeFireAtivo = ctx => {
+  const funcoes = ctx?.dataGp?.[0]?.funcoes
+
+  if (!funcoes || typeof funcoes !== 'object')
+    return false
+
+  if (typeof funcoes.modofreefire === 'boolean')
+    return funcoes.modofreefire
+
+  return funcoes.modox4 === true
+}
+
 const aliasesModulo = mod => {
   const lista = []
 
@@ -190,6 +202,25 @@ const executar = async (comando, ctx = {}) => {
   if (!achado || typeof achado.mod.executar !== 'function')
     return false
 
+  const categoria = normal(achado.mod.categoria || achado.mod.info?.categoria)
+  const alternadorFreeFire = achado.canonico === 'modofreefire'
+
+  if (
+    ctx.isGroup &&
+    categoria === 'freefire' &&
+    !alternadorFreeFire &&
+    !modoFreeFireAtivo(ctx)
+  ) {
+    const texto = typeof ctx.mess?.modoFreeFireDesligado === 'function'
+      ? ctx.mess.modoFreeFireDesligado(ctx.prefix)
+      : `Ative primeiro com ${ctx.prefix || '.'}modofreefire 1.`
+
+    if (typeof ctx.reply === 'function')
+      await ctx.reply(texto)
+
+    return true
+  }
+
   const manutencaoAtual = manutencao.obter(achado.canonico)
 
   if (manutencaoAtual && !ctx.SoDono) {
@@ -219,6 +250,13 @@ const evento = async (ctx = {}, fase = 'normal') => {
       const faseModulo = String(mod.fase || 'normal').toLowerCase()
 
       if (faseModulo !== String(fase || 'normal').toLowerCase())
+        continue
+
+      if (
+        ctx.isGroup &&
+        normal(mod.categoria || mod.info?.categoria) === 'freefire' &&
+        !modoFreeFireAtivo(ctx)
+      )
         continue
 
       const bloqueou = await mod.evento({
