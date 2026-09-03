@@ -1,6 +1,136 @@
 const pokemonImg = require('../../INFO_DADOS/LOGOS/links_pokemon.json')
 const petsImg = require('../../INFO_DADOS/LOGOS/links_pets.json')
 const levelImg = require('../../INFO_DADOS/LOGOS/links_level.json')
+const rpgImg = require('../../INFO_DADOS/LOGOS/links_rpg.json')
+
+const CLASSES_RPG = {
+  guerreiro: {
+    nome: 'Guerreiro',
+    emoji: '⚔️',
+    poder: 18,
+    defesa: 12,
+    descricao: 'Forte no ataque e resistente em batalhas longas.'
+  },
+  mago: {
+    nome: 'Mago',
+    emoji: '🧙',
+    poder: 22,
+    defesa: 7,
+    descricao: 'Possui o maior poder mágico e golpes críticos.'
+  },
+  arqueiro: {
+    nome: 'Arqueiro',
+    emoji: '🏹',
+    poder: 19,
+    defesa: 9,
+    descricao: 'Ágil, preciso e muito bom em explorações.'
+  },
+  paladino: {
+    nome: 'Paladino',
+    emoji: '🛡️',
+    poder: 16,
+    defesa: 16,
+    descricao: 'Equilibra ataque, defesa e recuperação de vida.'
+  }
+}
+
+const ARMAS_RPG = {
+  espada: {
+    nome: 'Espada de Gelo',
+    emoji: '🗡️',
+    poder: 14,
+    classe: 'guerreiro',
+    custo: { ferro: 8, madeira: 3, cristal: 1 }
+  },
+  machado: {
+    nome: 'Machado do Titã',
+    emoji: '🪓',
+    poder: 18,
+    classe: 'guerreiro',
+    custo: { ferro: 12, madeira: 4, essencia: 2 }
+  },
+  arco: {
+    nome: 'Arco Celestial',
+    emoji: '🏹',
+    poder: 15,
+    classe: 'arqueiro',
+    custo: { madeira: 10, ferro: 3, cristal: 2 }
+  },
+  cajado: {
+    nome: 'Cajado Arcano',
+    emoji: '🪄',
+    poder: 17,
+    classe: 'mago',
+    custo: { madeira: 7, cristal: 5, essencia: 2 }
+  },
+  martelo: {
+    nome: 'Martelo Sagrado',
+    emoji: '🔨',
+    poder: 16,
+    classe: 'paladino',
+    custo: { ferro: 9, cristal: 3, essencia: 3 }
+  }
+}
+
+const BOSSES_RPG = {
+  dragao: {
+    nome: 'Dragão das Chamas',
+    emoji: '🐉',
+    poder: 90,
+    xp: [70, 125],
+    coins: [650, 1400],
+    material: 'cristal'
+  },
+  rei_esqueleto: {
+    nome: 'Rei Esqueleto',
+    emoji: '💀',
+    poder: 110,
+    xp: [85, 145],
+    coins: [800, 1700],
+    material: 'essencia'
+  },
+  gigante: {
+    nome: 'Gigante de Pedra',
+    emoji: '🗿',
+    poder: 130,
+    xp: [95, 165],
+    coins: [950, 2000],
+    material: 'ferro'
+  },
+  yeti: {
+    nome: 'Yeti Congelado',
+    emoji: '❄️',
+    poder: 150,
+    xp: [110, 185],
+    coins: [1100, 2350],
+    material: 'cristal'
+  },
+  kraken: {
+    nome: 'Kraken Abissal',
+    emoji: '🐙',
+    poder: 180,
+    xp: [135, 220],
+    coins: [1400, 2900],
+    material: 'essencia'
+  }
+}
+
+const AVENTURAS_RPG = [
+  { nome: 'Floresta Antiga', emoji: '🌲', texto: 'Você encontrou ruínas escondidas entre as árvores.' },
+  { nome: 'Vale Congelado', emoji: '❄️', texto: 'Uma tempestade revelou um baú coberto de gelo.' },
+  { nome: 'Templo Perdido', emoji: '🏛️', texto: 'Símbolos antigos conduziram você até uma câmara secreta.' },
+  { nome: 'Deserto Carmesim', emoji: '🏜️', texto: 'Você atravessou as dunas e encontrou uma caravana abandonada.' },
+  { nome: 'Pântano Sombrio', emoji: '🌫️', texto: 'Criaturas cercaram o caminho, mas você encontrou recursos raros.' },
+  { nome: 'Montanha Celestial', emoji: '⛰️', texto: 'No topo da montanha havia um cristal brilhante.' }
+]
+
+const CAPITULOS_RPG = [
+  { titulo: 'O chamado', texto: 'Uma luz azul surgiu no céu e escolheu novos aventureiros.' },
+  { titulo: 'A floresta proibida', texto: 'Pegadas desconhecidas levaram o grupo até uma passagem selada.' },
+  { titulo: 'O despertar do rei', texto: 'Um exército de esqueletos voltou a marchar durante a noite.' },
+  { titulo: 'A chave de cristal', texto: 'O artefato capaz de abrir a torre finalmente foi encontrado.' },
+  { titulo: 'A batalha final', texto: 'O caminho até o guardião do reino está aberto.' }
+]
 
 const POKEMON = {
   pikachu: { nome: 'Pikachu', tipo: 'Elétrico', raridade: 'Comum', preco: 3000, evolui: 'raichu', nivel: 12, habilidade: '⚡ chance extra de achar coins' },
@@ -387,6 +517,79 @@ const normalizarPokemon = pokemon => {
   return pokemon
 }
 
+const aventuraPadrao = () => ({
+  classe: null,
+  energia: 100,
+  vida: 100,
+  poderExtra: 0,
+  aventuras: 0,
+  vitorias: 0,
+  derrotas: 0,
+  andarTorre: 0,
+  masmorras: 0,
+  bosses: 0,
+  raids: 0,
+  capitulo: 0,
+  guilda: null,
+  armaEquipada: null,
+  armas: {},
+  materiais: {
+    ferro: 0,
+    madeira: 0,
+    cristal: 0,
+    essencia: 0
+  },
+  ultimaAventura: 0,
+  ultimaTorre: 0,
+  ultimaMasmorra: 0,
+  ultimoBoss: 0,
+  ultimaRaid: 0,
+  ultimoDescanso: 0,
+  ultimaRecuperacao: Date.now()
+})
+
+const normalizarAventura = usuario => {
+  if (!usuario.aventura || typeof usuario.aventura !== 'object')
+    usuario.aventura = aventuraPadrao()
+
+  const aventura = usuario.aventura
+  const padrao = aventuraPadrao()
+
+  for (const [chave, valor] of Object.entries(padrao)) {
+    if (aventura[chave] === undefined) {
+      aventura[chave] = valor && typeof valor === 'object'
+        ? { ...valor }
+        : valor
+    }
+  }
+
+  if (!aventura.armas || typeof aventura.armas !== 'object')
+    aventura.armas = {}
+
+  if (!aventura.materiais || typeof aventura.materiais !== 'object')
+    aventura.materiais = { ...padrao.materiais }
+
+  for (const material of Object.keys(padrao.materiais)) {
+    if (aventura.materiais[material] === undefined)
+      aventura.materiais[material] = 0
+  }
+
+  const agora = Date.now()
+  const ultima = numero(aventura.ultimaRecuperacao) || agora
+  const recuperado = Math.floor((agora - ultima) / (3 * 60 * 1000))
+
+  if (recuperado > 0) {
+    aventura.energia = limitar(numero(aventura.energia) + recuperado, 0, 100)
+    aventura.vida = limitar(numero(aventura.vida) + recuperado, 0, 100)
+    aventura.ultimaRecuperacao = agora
+  }
+
+  aventura.energia = limitar(aventura.energia)
+  aventura.vida = limitar(aventura.vida)
+
+  return aventura
+}
+
 const garantir = ctx => {
   const grupo = ctx.dataGp[0]
 
@@ -399,6 +602,8 @@ const garantir = ctx => {
     grupo.rpg = { usuarios: {} }
   if (!grupo.rpg.usuarios)
     grupo.rpg.usuarios = {}
+  if (!grupo.rpg.guildas || typeof grupo.rpg.guildas !== 'object')
+    grupo.rpg.guildas = {}
 
   return grupo
 }
@@ -458,7 +663,8 @@ const user = (ctx, jid = ctx.sender) => {
       pet: null,
       pokemon: null,
       inventarioPet: {},
-      inventarioPokemon: {}
+      inventarioPokemon: {},
+      aventura: aventuraPadrao()
     }
   }
 
@@ -476,6 +682,8 @@ const user = (ctx, jid = ctx.sender) => {
     normalizarPet(usuario.pet)
   if (usuario.pokemon)
     normalizarPokemon(usuario.pokemon)
+
+  normalizarAventura(usuario)
 
   return usuario
 }
@@ -505,6 +713,76 @@ const imagemPet = tipo => {
 }
 
 const imagemPokemon = tipo => pokemonImg[tipo] || pokemonImg.pikachu || ''
+
+const imagemRpg = (secao, chave = null) => {
+  const origem = rpgImg?.[secao]
+
+  if (Array.isArray(origem) && origem.length)
+    return escolher(origem) || rpgImg.padrao || ''
+
+  if (origem && typeof origem === 'object') {
+    if (chave && origem[chave])
+      return origem[chave]
+
+    const imagens = Object.values(origem).filter(Boolean)
+    if (imagens.length)
+      return escolher(imagens)
+  }
+
+  if (typeof origem === 'string')
+    return origem
+
+  return rpgImg.padrao || ''
+}
+
+const poderAventureiro = usuario => {
+  const aventura = normalizarAventura(usuario)
+  const classe = CLASSES_RPG[aventura.classe] || {}
+  const arma = ARMAS_RPG[aventura.armaEquipada] || {}
+  const nivel = numero(usuario.level) || nivelPorXp(usuario.xp)
+
+  return Math.max(1, Math.floor(
+    numero(classe.poder) +
+    numero(classe.defesa) / 2 +
+    numero(arma.poder) +
+    numero(aventura.poderExtra) +
+    nivel * 4
+  ))
+}
+
+const adicionarMaterial = (usuario, material, quantidade = 1) => {
+  const aventura = normalizarAventura(usuario)
+  const id = String(material || '').toLowerCase()
+
+  if (!Object.prototype.hasOwnProperty.call(aventura.materiais, id))
+    return 0
+
+  aventura.materiais[id] = Math.max(
+    0,
+    numero(aventura.materiais[id]) + numero(quantidade)
+  )
+
+  return aventura.materiais[id]
+}
+
+const guildaDoUsuario = (ctx, usuario) => {
+  const grupo = garantir(ctx)
+  const aventura = normalizarAventura(usuario)
+  const id = String(aventura.guilda || '')
+
+  return id ? grupo.rpg.guildas?.[id] || null : null
+}
+
+const adicionarPontosGuilda = (ctx, usuario, quantidade = 1) => {
+  const guilda = guildaDoUsuario(ctx, usuario)
+
+  if (!guilda)
+    return 0
+
+  guilda.pontos = Math.max(0, numero(guilda.pontos) + numero(quantidade))
+  return guilda.pontos
+}
+
 const temRpg = ctx => Boolean(ctx.dataGp?.[0]?.funcoes?.modorpg)
 const temCoins = ctx => Boolean(ctx.dataGp?.[0]?.funcoes?.modocoins)
 const ambos = ctx => temRpg(ctx) && temCoins(ctx)
@@ -558,6 +836,11 @@ const patrimonioCidade = usuario => {
 }
 
 module.exports = {
+  CLASSES_RPG,
+  ARMAS_RPG,
+  BOSSES_RPG,
+  AVENTURAS_RPG,
+  CAPITULOS_RPG,
   POKEMON,
   POKEMON_COMIDA,
   PETS,
@@ -576,6 +859,7 @@ module.exports = {
   pokemonImg,
   petsImg,
   levelImg,
+  rpgImg,
   garantir,
   eco,
   user,
@@ -593,7 +877,14 @@ module.exports = {
   normalizarCidade,
   normalizarPet,
   normalizarPokemon,
+  normalizarAventura,
+  aventuraPadrao,
   patrimonioCidade,
+  imagemRpg,
+  poderAventureiro,
+  adicionarMaterial,
+  guildaDoUsuario,
+  adicionarPontosGuilda,
   limitar,
   aleatorio,
   escolher,

@@ -29,6 +29,7 @@
  */
 
 const dylan = require('../../database/lib/comandos')
+const r = require('../../sistemas/rpg/index')
 
 dylan.setCommand({
 nome: "perfil",
@@ -208,6 +209,74 @@ Math.floor(
 Math.random() * 10000
 )
 
+const dadosGrupo =
+isGroup && Array.isArray(dataGp)
+? dataGp[0]
+: null
+
+const registroRpg =
+dadosGrupo?.rpg?.usuarios?.[alvo] ||
+null
+
+const registroCoins =
+dadosGrupo?.economia?.usuarios?.[alvo] ||
+null
+
+const aventuraRpg =
+registroRpg?.aventura ||
+null
+
+const petPerfil =
+registroRpg?.pet
+? registroRpg.pet.apelido ||
+r.PETS[registroRpg.pet.tipo]?.nome ||
+registroRpg.pet.tipo
+: 'Nenhum'
+
+const pokemonPerfil =
+registroRpg?.pokemon
+? registroRpg.pokemon.apelido ||
+r.POKEMON[registroRpg.pokemon.tipo]?.nome ||
+registroRpg.pokemon.tipo
+: 'Nenhum'
+
+const classePerfil =
+aventuraRpg?.classe
+? r.CLASSES_RPG[aventuraRpg.classe]?.nome ||
+aventuraRpg.classe
+: 'Nenhuma'
+
+const armaPerfil =
+aventuraRpg?.armaEquipada
+? r.ARMAS_RPG[aventuraRpg.armaEquipada]?.nome ||
+aventuraRpg.armaEquipada
+: 'Nenhuma'
+
+const guildaPerfil =
+aventuraRpg?.guilda
+? dadosGrupo?.rpg?.guildas?.[aventuraRpg.guilda]?.nome ||
+aventuraRpg.guilda
+: 'Nenhuma'
+
+const saldoPerfil =
+registroCoins
+? `${Number(registroCoins.coins || 0).toLocaleString('pt-BR')} N-Coins`
+: 'Nenhum'
+
+const cidadePerfil =
+registroCoins?.cidade?.nome ||
+'Nenhuma'
+
+const nivelPerfil =
+registroRpg
+? `Nível ${Number(registroRpg.level || 1)} • ${registroRpg.patente || 'Bronze I'}`
+: 'Nenhum'
+
+const torrePerfil =
+aventuraRpg
+? `Andar ${Number(aventuraRpg.andarTorre || 0)}`
+: 'Nenhum'
+
 const cardPerfil =
 `${API_URL}/canvas/perfil` +
 `?fundo=${encodeURIComponent(fundoPerfil)}` +
@@ -245,7 +314,16 @@ nivelGado,
 celular,
 nivelPuta,
 gostosura,
-programa
+programa,
+coins: saldoPerfil,
+cidade: cidadePerfil,
+pet: petPerfil,
+pokemon: pokemonPerfil,
+nivelRpg: nivelPerfil,
+classe: classePerfil,
+arma: armaPerfil,
+guilda: guildaPerfil,
+torre: torrePerfil
 })
 
 const botoes = [

@@ -2241,7 +2241,29 @@ return `- ⚙️ \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙰𝚂 𝙵𝚄𝙽𝙲̧𝙾�
 > ⚙️ ׄ ( ᴍᴏᴅᴏ ʙʀɪɴᴄᴀᴅᴇɪʀᴀs: ${status(isModobn)} )`
 }
 
-exports.perfilUsuario = ({ nick, numero, bio, cargo, vip, chat, grupo, nivelGado, celular, nivelPuta, gostosura, programa }) => {
+exports.perfilUsuario = ({
+nick,
+numero,
+bio,
+cargo,
+vip,
+chat,
+grupo,
+nivelGado,
+celular,
+nivelPuta,
+gostosura,
+programa,
+coins = 'Nenhum',
+cidade = 'Nenhuma',
+pet = 'Nenhum',
+pokemon = 'Nenhum',
+nivelRpg = 'Nenhum',
+classe = 'Nenhuma',
+arma = 'Nenhuma',
+guilda = 'Nenhuma',
+torre = 'Nenhum'
+}) => {
 return `- 👤 \`𝙿𝙴𝚁𝙵𝙸𝙻 𝙳𝙾 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\`
 
 > 👤 ׄ ( ɴɪᴄᴋ: ${nick} )
@@ -2256,7 +2278,19 @@ return `- 👤 \`𝙿𝙴𝚁𝙵𝙸𝙻 𝙳𝙾 𝚄𝚂𝚄𝙰́𝚁𝙸�
 > 📱 ׄ ( sᴇᴜ ᴄᴇʟᴜʟᴀʀ: ${celular} )
 > 😈 ׄ ( ɴɪ́ᴠᴇʟ ᴘᴜᴛᴀ: ${nivelPuta}% )
 > 🥵 ׄ ( ɴɪ́ᴠᴇʟ ᴅᴇ ɢᴏsᴛᴏsᴜʀᴀ: ${gostosura}% )
-> 🍼 ׄ ( ᴘʀᴏɢʀᴀᴍᴀ: ʀ$ ${programa} )`
+> 🍼 ׄ ( ᴘʀᴏɢʀᴀᴍᴀ: ʀ$ ${programa} )
+
+- 🎮 \`𝙿𝚁𝙾𝙶𝚁𝙴𝚂𝚂𝙾 𝙳𝙾 𝙹𝙾𝙶𝙰𝙳𝙾𝚁\`
+
+> 🪙 ׄ ( ɴ-ᴄᴏɪɴs: ${coins} )
+> 🌆 ׄ ( ᴄɪᴅᴀᴅᴇ: ${cidade} )
+> 🐾 ׄ ( ᴘᴇᴛ: ${pet} )
+> ⚡ ׄ ( ᴘᴏᴋᴇ́ᴍᴏɴ: ${pokemon} )
+> ⭐ ׄ ( ɴɪ́ᴠᴇʟ: ${nivelRpg} )
+> 🧭 ׄ ( ᴄʟᴀssᴇ: ${classe} )
+> 🗡️ ׄ ( ᴀʀᴍᴀ: ${arma} )
+> 🏰 ׄ ( ɢᴜɪʟᴅᴀ: ${guilda} )
+> 🗼 ׄ ( ᴛᴏʀʀᴇ: ${torre} )`
 }
 
 exports.figuQuantidade = ({ prefix, command }) => {
