@@ -1,38 +1,96 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.95",
+  "version": "10.0.96",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-02T01:09:24.489Z",
+  "publishedAt": "2026-09-03T15:30:01.997Z",
   "changelog": [
-    "[Novidade] feat: melhora playlist radio e player",
-    "A versão 10.0.95 já está disponível para atualização.",
-    "Mensagens atualizado",
-    "Playlist atualizado"
+    "[Melhoria] Modo Free Fire e listas de 1x1 até 6x6",
+    "A versão 10.0.96 já está disponível para atualização.",
+    "Modo X4 renomeado para Modo Free Fire",
+    "Comandos e eventos de Free Fire agora respeitam o modo do grupo",
+    "Nova lista com slots fixos de 1x1 até 6x6",
+    "O grupo fecha durante a montagem e abre na chamada final",
+    "Atalhos a, f e m preservados"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat: melhora playlist radio e player",
-  "notice": "A versão 10.0.95 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "Modo Free Fire e listas de 1x1 até 6x6",
+  "notice": "A versão 10.0.96 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "203caaba4638a80931294136494948a7c45e008875bea70d00f8f9e099865d1b",
-      "size": 205607
+      "sha256": "e85b62f93958f47319b2b26bfea084c38d35f4ab646fb5ba9d1f81adb37b0b4a",
+      "size": 209189
     },
     {
-      "path": "DADOS_TOKITO/plugins/downloads/playlist.js",
-      "sha256": "5c39ca745a840ab5a2ac280d602085a1fd163d43d40dd01f3bc024c92f36c125",
-      "size": 20484
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "7df6923ca940c57d246f0c15316282435d74d0e7b03a505477e961d2968b318f",
+      "size": 61915
     },
     {
-      "path": "DADOS_TOKITO/sistemas/playlist.js",
-      "sha256": "13173b9c64a2fe5ff08e4ceff970ffab81fc38379c30bd3b60b9a388f5ff62f5",
-      "size": 37459
+      "path": "DADOS_TOKITO/plugins/index.js",
+      "sha256": "4d73551d3a76e810c63a3829262fd3ffd78d819971815d9f6c337f0c6c899926",
+      "size": 7672
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/evento-lista.js",
+      "sha256": "7bc9bd30fec2393c63fe5d0ff2f113d3fad733dbc4cb1c47e117383a0ecd31bb",
+      "size": 1575
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/evento-x4.js",
+      "sha256": "c532278f6f68f57193133a57b6f33ef5e09ada73444d13c4525b21412f5e38b8",
+      "size": 2669
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/lista-sala.js",
+      "sha256": "fd4f15421ad221ba3247a34adb8a51f559159ad8c8e5bd9406984dd170bcd587",
+      "size": 3925
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/modox4.js",
+      "sha256": "13307f028d144b20a90ef63180b6b8e494e58082d113372b1cdd555f2d7de7b0",
+      "size": 2349
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/notas.js",
+      "sha256": "ebd5fb33c2fcb7a159b8cc857cc9477c34ea5bd1143680e1b1852cf556ffaac1",
+      "size": 3983
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/sala-lista.js",
+      "sha256": "01c374126460362ac625ea89ad42ef6af86e0755c2b0ec064883bb4b833285ab",
+      "size": 3093
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/time.js",
+      "sha256": "979395269aad62b7a2019f13ecdac218c11068f59b463e753d639364ef4f7128",
+      "size": 2744
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/x4.js",
+      "sha256": "29eee8399ba44e10113e4aaae63e0a9259d998030efdce2dc56ecd67c7211c6a",
+      "size": 1595
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/xgp.js",
+      "sha256": "1f8ee8b3a29f298472f81291e4346514ef6bcc150f47b3c07acde04f9bc57644",
+      "size": 2608
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/autolike.js",
+      "sha256": "6b35d5d247b9e48524ae9c8a7ae5dc03ddad54de14b70039b598fc3182e146d5",
+      "size": 6398
+    },
+    {
+      "path": "tokito.js",
+      "sha256": "2b8986d3ed304cb9f4e167483c6d54fad2f57d4f0e5b7e9dfab198280e02b33d",
+      "size": 45813
     }
   ],
   "releases": [
@@ -2467,6 +2525,96 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-02T01:09:24.489Z"
+    },
+    {
+      "version": "10.0.96",
+      "fromVersion": "10.0.95",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Modo Free Fire e listas de 1x1 até 6x6",
+      "notice": "A versão 10.0.96 já está disponível para atualização.",
+      "changelog": [
+        "Modo X4 renomeado para Modo Free Fire",
+        "Comandos e eventos de Free Fire agora respeitam o modo do grupo",
+        "Nova lista com slots fixos de 1x1 até 6x6",
+        "O grupo fecha durante a montagem e abre na chamada final",
+        "Atalhos a, f e m preservados"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "e85b62f93958f47319b2b26bfea084c38d35f4ab646fb5ba9d1f81adb37b0b4a",
+          "size": 209189
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "7df6923ca940c57d246f0c15316282435d74d0e7b03a505477e961d2968b318f",
+          "size": 61915
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/index.js",
+          "sha256": "4d73551d3a76e810c63a3829262fd3ffd78d819971815d9f6c337f0c6c899926",
+          "size": 7672
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/evento-lista.js",
+          "sha256": "7bc9bd30fec2393c63fe5d0ff2f113d3fad733dbc4cb1c47e117383a0ecd31bb",
+          "size": 1575
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/evento-x4.js",
+          "sha256": "c532278f6f68f57193133a57b6f33ef5e09ada73444d13c4525b21412f5e38b8",
+          "size": 2669
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/lista-sala.js",
+          "sha256": "fd4f15421ad221ba3247a34adb8a51f559159ad8c8e5bd9406984dd170bcd587",
+          "size": 3925
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/modox4.js",
+          "sha256": "13307f028d144b20a90ef63180b6b8e494e58082d113372b1cdd555f2d7de7b0",
+          "size": 2349
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/notas.js",
+          "sha256": "ebd5fb33c2fcb7a159b8cc857cc9477c34ea5bd1143680e1b1852cf556ffaac1",
+          "size": 3983
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/sala-lista.js",
+          "sha256": "01c374126460362ac625ea89ad42ef6af86e0755c2b0ec064883bb4b833285ab",
+          "size": 3093
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/time.js",
+          "sha256": "979395269aad62b7a2019f13ecdac218c11068f59b463e753d639364ef4f7128",
+          "size": 2744
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/x4.js",
+          "sha256": "29eee8399ba44e10113e4aaae63e0a9259d998030efdce2dc56ecd67c7211c6a",
+          "size": 1595
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/xgp.js",
+          "sha256": "1f8ee8b3a29f298472f81291e4346514ef6bcc150f47b3c07acde04f9bc57644",
+          "size": 2608
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/autolike.js",
+          "sha256": "6b35d5d247b9e48524ae9c8a7ae5dc03ddad54de14b70039b598fc3182e146d5",
+          "size": 6398
+        },
+        {
+          "path": "tokito.js",
+          "sha256": "2b8986d3ed304cb9f4e167483c6d54fad2f57d4f0e5b7e9dfab198280e02b33d",
+          "size": 45813
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-03T15:30:01.997Z"
     }
   ],
   "versao": "10.0.70",
