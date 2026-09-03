@@ -1,7 +1,7 @@
 const pokemonImg = require('../../INFO_DADOS/LOGOS/links_pokemon.json')
 const petsImg = require('../../INFO_DADOS/LOGOS/links_pets.json')
 const levelImg = require('../../INFO_DADOS/LOGOS/links_level.json')
-const rpgImg = require('../../INFO_DADOS/LOGOS/links_rpg.json')
+const rpgImg = require('./links_rpg.json')
 
 const CLASSES_RPG = {
   guerreiro: {

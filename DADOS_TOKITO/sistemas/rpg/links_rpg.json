@@ -1,0 +1,63 @@
+{
+  "fonte": "https://github.com/sparklinlabs/superpowers-asset-packs",
+  "licenca": "CC0-1.0",
+  "padrao": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/preview2.png",
+  "classes": {
+    "guerreiro": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/char/warrior2.png",
+    "mago": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/char/Wizard.png",
+    "arqueiro": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/char/bowman.png",
+    "paladino": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/char/paladin.png"
+  },
+  "aventuras": [
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/1.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/2.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/3.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/4.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/5.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/6.png"
+  ],
+  "torres": [
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/10.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/11.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/12.png"
+  ],
+  "masmorras": [
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/1-night.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/2-night.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/3-night.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/4-night.png"
+  ],
+  "bosses": {
+    "dragao": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/monsters/dragon.png",
+    "rei_esqueleto": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/monsters/king%20skeleton.png",
+    "gigante": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/monster/giant.png",
+    "yeti": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/monster/yeti.png",
+    "kraken": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/monster/octopus.png"
+  },
+  "raids": [
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/monsters/dragon.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/monster/giant.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/monsters/king%20skeleton.png"
+  ],
+  "armas": {
+    "espada": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/items/weapon/1.png",
+    "machado": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/items/weapon/3.png",
+    "arco": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/items/weapon/5.png",
+    "cajado": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/items/weapon/8.png",
+    "martelo": "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/items/weapon/10.png"
+  },
+  "guildas": [
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/items/emblem/1.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/items/emblem/2.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/items/emblem/3.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/items/emblem/4.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/items/emblem/5.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/medieval-fantasy/items/emblem/6.png"
+  ],
+  "historias": [
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/13.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/14.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/15.png",
+    "https://raw.githubusercontent.com/sparklinlabs/superpowers-asset-packs/master/rpg-battle-system/backgrounds/16.png"
+  ]
+}
