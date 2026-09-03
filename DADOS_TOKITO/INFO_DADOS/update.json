@@ -1,34 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.98",
+  "version": "10.0.99",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-03T21:31:51.721Z",
+  "publishedAt": "2026-09-03T21:45:09.196Z",
   "changelog": [
-    "[Correção] Corrige o carregamento das imagens do RPG",
-    "Move o arquivo de imagens para uma pasta aceita pelo atualizador",
-    "Evita o erro Cannot find module links_rpg.json",
-    "Atualização incremental sem substituir a estrutura completa",
-    "Bancos e configurações dos usuários permanecem protegidos"
+    "[Melhoria] Organiza categorias e emojis do menu RPG",
+    "A versão 10.0.99 já está disponível para atualização.",
+    "Menus atualizado",
+    "Menurpg atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Corrige carregamento das imagens do RPG",
-  "notice": "A versão 10.0.98 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "Organiza categorias e emojis do menu RPG",
+  "notice": "A versão 10.0.99 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/rpg/index.js",
-      "sha256": "deb6ee39ec5748d4b0e1582d784dc375c4851bcca9334e92b02f2a1898c8a6a4",
-      "size": 28422
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "c741c601cd5fdfe0bc09f859c7ad5043fad0bc605ebb5997a5eed4a31e58c96d",
+      "size": 66129
     },
     {
-      "path": "DADOS_TOKITO/sistemas/rpg/links_rpg.json",
-      "sha256": "183ed1f44d57d806956c184434493a4ad967c224ac1ac07a7fa5ef08e37a53a2",
-      "size": 5433
+      "path": "DADOS_TOKITO/plugins/menus/menurpg.js",
+      "sha256": "b869de2daa3978fbb9192a56402832f8d5854edbaf49346f5c16517e687cb50c",
+      "size": 861
     }
   ],
   "releases": [
@@ -2655,6 +2654,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-03T21:31:51.711Z"
+    },
+    {
+      "version": "10.0.99",
+      "fromVersion": "10.0.98",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Organiza categorias e emojis do menu RPG",
+      "notice": "A versão 10.0.99 já está disponível para atualização.",
+      "changelog": [
+        "Menus atualizado",
+        "Menurpg atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "c741c601cd5fdfe0bc09f859c7ad5043fad0bc605ebb5997a5eed4a31e58c96d",
+          "size": 66129
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menurpg.js",
+          "sha256": "b869de2daa3978fbb9192a56402832f8d5854edbaf49346f5c16517e687cb50c",
+          "size": 861
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-03T21:45:09.196Z"
     }
   ],
   "versao": "10.0.70",
