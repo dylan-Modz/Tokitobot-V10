@@ -4,16 +4,17 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-03T21:25:39.665Z",
+  "publishedAt": "2026-09-03T21:31:51.721Z",
   "changelog": [
-    "[Melhoria] Corrige carregamento das imagens do RPG",
-    "A versão 10.0.98 já está disponível para atualização.",
-    "Index atualizado",
-    "Links Rpg atualizado"
+    "[Correção] Corrige o carregamento das imagens do RPG",
+    "Move o arquivo de imagens para uma pasta aceita pelo atualizador",
+    "Evita o erro Cannot find module links_rpg.json",
+    "Atualização incremental sem substituir a estrutura completa",
+    "Bancos e configurações dos usuários permanecem protegidos"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
+  "type": "Correção",
   "title": "Corrige carregamento das imagens do RPG",
   "notice": "A versão 10.0.98 já está disponível para atualização.",
   "required": true,
@@ -2573,11 +2574,6 @@
       ],
       "files": [
         {
-          "path": "DADOS_TOKITO/INFO_DADOS/LOGOS/links_rpg.json",
-          "sha256": "183ed1f44d57d806956c184434493a4ad967c224ac1ac07a7fa5ef08e37a53a2",
-          "size": 5433
-        },
-        {
           "path": "DADOS_TOKITO/sistemas/rpg/index.js",
           "sha256": "49b0642ffbbd69c197a96f217563cfd0110514841dcf9bb8ab4f0bab21c144fa",
           "size": 28443
@@ -2636,12 +2632,13 @@
       "version": "10.0.98",
       "fromVersion": "10.0.97",
       "channel": "stable",
-      "type": "Melhoria",
+      "type": "Correção",
       "title": "Corrige carregamento das imagens do RPG",
       "notice": "A versão 10.0.98 já está disponível para atualização.",
       "changelog": [
-        "Index atualizado",
-        "Links Rpg atualizado"
+        "Caminho das imagens do RPG corrigido",
+        "Arquivo links_rpg.json movido para o sistema RPG",
+        "Atualização incremental habilitada"
       ],
       "files": [
         {
@@ -2657,11 +2654,11 @@
       ],
       "delete": [],
       "required": true,
-      "publishedAt": "2026-09-03T21:25:39.664Z"
+      "publishedAt": "2026-09-03T21:31:51.711Z"
     }
   ],
   "versao": "10.0.70",
-  "mode": "clean",
+  "mode": "incremental",
   "notify": true,
   "migration": {
     "id": "tokito-v10-clean-structure-20260831",
@@ -2670,5 +2667,6 @@
     "minimumVersion": "10.0.0",
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json",
     "note": "Versões antigas recebem primeiro os arquivos da ponte e depois migram para a estrutura completa preservando dados protegidos."
-  }
+  },
+  "incremental": true
 }
