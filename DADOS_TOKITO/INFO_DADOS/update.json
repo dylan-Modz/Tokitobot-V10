@@ -1,67 +1,51 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.5",
+  "version": "10.1.6",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-08T14:03:11.064Z",
+  "publishedAt": "2026-09-08T14:16:41.154Z",
   "changelog": [
-    "[Novidade] feat: melhora divulgacao com lista selo e marcacao",
-    "A versão 10.1.5 já está disponível para atualização.",
+    "[Novidade] feat: melhora fluxo da divulgacao com selo do bot",
+    "A versão 10.1.6 já está disponível para atualização.",
     "Div atualizado",
     "Menus atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
-  "title": "feat: melhora divulgacao com lista selo e marcacao",
-  "notice": "A versão 10.1.5 já está disponível para atualização.",
+  "title": "feat: melhora fluxo da divulgacao com selo do bot",
+  "notice": "A versão 10.1.6 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/div.js",
-      "sha256": "336ad0a799004e2f0df50498a999130e8741686ba8d62ac70d781bdb2841078e",
-      "size": 4375
+      "sha256": "9195f0658b18b28333f844112bdc97d072d8bfe24a38614edb427a7ca83634e2",
+      "size": 3851
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "55378a458a7f52f4f8385b67f35f41d775c7df093559c0705ad8fdd0b5f450ba",
-      "size": 66960
+      "sha256": "4d701b452ab1a6ad6f152e2466119e133f0755704d6a0747f8205253f7d4b1f3",
+      "size": 66857
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/div.js",
-      "sha256": "269d351faffe891cedd962fd76c1ca32197305fbe40448c5c33cbd9008382235",
-      "size": 14596
+      "sha256": "6fc20958e21829069c30763b8da2622b9a5329379ce4fc7d7e63f6eaee90a45f",
+      "size": 7144
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/eventos/div.js",
+      "sha256": "a1c7bfe57d34dfeff9a96e410631d9f5dc3bb43a187dbfaaaf9aeff2cd67b122",
+      "size": 2997
     },
     {
       "path": "DADOS_TOKITO/sistemas/div.js",
-      "sha256": "674592ff62959e44cb1397fa6bbc480956d845497c046c11dfb5ad09fcd2a750",
-      "size": 12052
+      "sha256": "062f28075bd7f887c8ee16dc15541f54c85b8e3a85cebdecf23341425eb1cadd",
+      "size": 9497
     }
   ],
   "releases": [
-    {
-      "version": "10.0.8",
-      "fromVersion": "10.0.7",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Sistema Antilink atualizado",
-      "notice": "A versão 10.0.8 já está disponível para atualização.",
-      "changelog": [
-        "Sistema Antilink atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/funcoes/antilink.js",
-          "sha256": "ee39b64e4c64dc8289aa141331f9f69b3716c1e426138aa09b8e0bcd46f6b051",
-          "size": 5031
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T07:54:33.805Z"
-    },
     {
       "version": "10.0.9",
       "fromVersion": "10.0.8",
@@ -2857,6 +2841,48 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-08T14:03:11.064Z"
+    },
+    {
+      "version": "10.1.6",
+      "fromVersion": "10.1.5",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: melhora fluxo da divulgacao com selo do bot",
+      "notice": "A versão 10.1.6 já está disponível para atualização.",
+      "changelog": [
+        "Div atualizado",
+        "Menus atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/div.js",
+          "sha256": "9195f0658b18b28333f844112bdc97d072d8bfe24a38614edb427a7ca83634e2",
+          "size": 3851
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "4d701b452ab1a6ad6f152e2466119e133f0755704d6a0747f8205253f7d4b1f3",
+          "size": 66857
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/div.js",
+          "sha256": "6fc20958e21829069c30763b8da2622b9a5329379ce4fc7d7e63f6eaee90a45f",
+          "size": 7144
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/eventos/div.js",
+          "sha256": "a1c7bfe57d34dfeff9a96e410631d9f5dc3bb43a187dbfaaaf9aeff2cd67b122",
+          "size": 2997
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/div.js",
+          "sha256": "062f28075bd7f887c8ee16dc15541f54c85b8e3a85cebdecf23341425eb1cadd",
+          "size": 9497
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-08T14:16:41.153Z"
     }
   ],
   "versao": "10.0.70",
