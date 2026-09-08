@@ -14,10 +14,8 @@
  * API oficial: https://tokito-apis.com.br
  * ============================================================
  */
-
 const { proto, generateWAMessageFromContent } = require('baileys')
 const x4 = require('./x4')
-
 const enviarSala = async (ctx, id, senha) => {
 const msg = generateWAMessageFromContent(ctx.from, {
 viewOnceMessage: {
@@ -45,7 +43,6 @@ messageParamsJson: JSON.stringify({})
 }, { quoted: ctx.selo, userJid: ctx.tokito.user?.id })
 await ctx.tokito.relayMessage(ctx.from, msg.message, { messageId: msg.key.id })
 }
-
 module.exports = {
 nome: 'evento-x4',
 categoria: 'freefire',
@@ -56,12 +53,13 @@ if (!ctx.isGroup || ctx.info?.key?.fromMe || !x4.ativo(ctx)) return false
 const texto = String(ctx.body || '').trim()
 if (!texto) return false
 
-const sala = texto.match(/^(\d{8})\s+(\d{2})$/)
+// IDs antigos tinham 8 dígitos; os novos podem ter 9.
+// Mantém compatibilidade com os dois formatos.
+const sala = texto.match(/^(\d{8,9})\s+(\d{2})$/)
 if (sala) {
 await enviarSala(ctx, sala[1], sala[2])
 return true
 }
-
 if (!['a', 'f', 'm'].includes(texto.toLowerCase())) return false
 if (!x4.adm(ctx)) return false
 if (!ctx.isBotGroupAdmins) {
@@ -80,7 +78,6 @@ await ctx.tokito.groupSettingUpdate(ctx.from, 'announcement')
 await ctx.reagir(ctx.from, '🔒').catch(() => {})
 return true
 }
-
 if (texto.toLowerCase() === 'm') {
 await x4.marcacaoOculta(ctx)
 return true

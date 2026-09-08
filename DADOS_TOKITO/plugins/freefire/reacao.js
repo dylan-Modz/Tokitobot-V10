@@ -14,7 +14,6 @@
  * API oficial: https://tokito-apis.com.br
  * ============================================================
  */
-
 const normalizar = texto => String(texto || '')
 .toLowerCase()
 .normalize('NFD')
@@ -24,9 +23,64 @@ const normalizar = texto => String(texto || '')
 
 const garantir = ctx => {
 if (!ctx.dataGp?.[0]) return null
-if (!ctx.dataGp[0].funcoes || typeof ctx.dataGp[0].funcoes !== 'object') ctx.dataGp[0].funcoes = {}
-if (!Array.isArray(ctx.dataGp[0].funcoes.reacoesNome)) ctx.dataGp[0].funcoes.reacoesNome = []
-return ctx.dataGp[0].funcoes.reacoesNome
+if (!ctx.dataGp[0].funcoes || typeof ctx.dataGp[0].funcoes !== 'object')
+ctx.dataGp[0].funcoes = {}
+
+const existeLista = Array.isArray(ctx.dataGp[0].funcoes.reacoesNome)
+const origem = existeLista ? ctx.dataGp[0].funcoes.reacoesNome : []
+const vistos = new Set()
+const normalizadas = []
+let mudou = !existeLista
+
+// Compatibilidade com registros antigos que possam ter sido salvos
+// sem "chave" ou usando nomes de campos de versões anteriores.
+for (const item of origem) {
+if (!item || typeof item !== 'object') {
+mudou = true
+continue
+}
+
+const nome = String(
+item.nome || item.palavra || item.texto || item.chave || ''
+).trim()
+const emoji = String(item.emoji || item.reacao || '').trim()
+const chave = normalizar(nome)
+
+if (!nome || !emoji || !chave) {
+mudou = true
+continue
+}
+
+// Evita duplicar a mesma palavra/nome normalizado.
+if (vistos.has(chave)) {
+mudou = true
+continue
+}
+
+vistos.add(chave)
+
+const novo = {
+...item,
+nome,
+chave,
+emoji
+}
+
+if (
+String(item.nome || '') !== nome ||
+String(item.chave || '') !== chave ||
+String(item.emoji || '') !== emoji
+) mudou = true
+
+normalizadas.push(novo)
+}
+
+ctx.dataGp[0].funcoes.reacoesNome = normalizadas
+
+if (mudou && typeof ctx.setGp === 'function')
+ctx.setGp(ctx.dataGp)
+
+return normalizadas
 }
 
 const salvar = ctx => {
@@ -46,7 +100,6 @@ uso: 'rgreacao 😻 | dylan',
 permissao: 'ADM',
 categoria: 'freefire'
 },
-
 async executar(ctx) {
 if (!ctx.isGroup)
 return ctx.reply(ctx.mess.sogrupo())
@@ -68,7 +121,6 @@ return ctx.reply(
 
 > *『 0 』— ɴᴇɴʜᴜᴍᴀ ʀᴇᴀᴄ̧ᴀ̃ᴏ ғᴏɪ ʀᴇɢɪsᴛʀᴀᴅᴀ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ.*`
 )
-
 const texto = lista
 .map((item, i) => `> *『 ${i + 1} 』— ${item.emoji} → ${item.nome}*`)
 .join('\n')
@@ -91,8 +143,9 @@ return ctx.reply(
 > *『 𝚄𝚂𝙾 』— ${ctx.prefix}rmreacao dylan*`
 )
 
-const index = lista.findIndex(item => item.chave === chave)
-
+const index = lista.findIndex(item =>
+normalizar(item?.chave || item?.nome || item?.palavra || item?.texto) === chave
+)
 if (index < 0)
 return ctx.reply(
 `- ⚠️ \`𝚁𝙴𝙰𝙲̧𝙰̃𝙾 𝙽𝙰̃𝙾 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰\`
@@ -118,7 +171,6 @@ return ctx.reply(
 `- 🎭 \`𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙰𝚁 𝚁𝙴𝙰𝙲̧𝙰̃𝙾\`
 
 > *『 𝚄𝚂𝙾 』— ${ctx.prefix}rgreacao 😻 | dylan*
-
 > *ǫᴜᴀɴᴅᴏ ᴀʟɢᴜᴇ́ᴍ ғᴀʟᴀʀ "dylan", ᴏ ʙᴏᴛ ᴠᴀɪ ʀᴇᴀɢɪʀ ᴄᴏᴍ 😻.*`
 )
 
@@ -140,11 +192,13 @@ return ctx.reply(
 > *ᴜsᴇ ᴜᴍ ᴇᴍᴏᴊɪ ᴄᴜʀᴛᴏ ᴘᴀʀᴀ ᴀ ʀᴇᴀᴄ̧ᴀ̃ᴏ.*`
 )
 
-const existente = lista.find(item => item.chave === chave)
-
+const existente = lista.find(item =>
+normalizar(item?.chave || item?.nome || item?.palavra || item?.texto) === chave
+)
 if (existente) {
 existente.emoji = emoji
 existente.nome = nome
+existente.chave = chave
 existente.atualizadoEm = new Date().toISOString()
 salvar(ctx)
 
@@ -176,9 +230,7 @@ return ctx.reply(
 `- ✅ \`𝚁𝙴𝙰𝙲̧𝙰̃𝙾 𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙰𝙳𝙰\`
 
 > *『 ${emoji} 』— ${nome}*
-
 > *ᴀɢᴏʀᴀ, ǫᴜᴀɴᴅᴏ ᴀʟɢᴜᴇ́ᴍ ғᴀʟᴀʀ "${nome}", ᴇᴜ ᴠᴏᴜ ʀᴇᴀɢɪʀ ᴄᴏᴍ ${emoji}.*`
 )
 }
-}
-)
+})

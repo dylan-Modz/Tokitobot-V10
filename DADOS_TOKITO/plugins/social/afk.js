@@ -27,7 +27,6 @@
  * Modifique como quiser. Apenas respeite as regras.
  * ============================================================
  */
-
 const tempo = ms => {
 const s = Math.max(0, Math.floor(Number(ms || 0) / 1000))
 const d = Math.floor(s / 86400)
@@ -47,7 +46,6 @@ return lista.join(' ')
 }
 
 const dylan = require('../../database/lib/comandos')
-
 dylan.setCommand({
 comandos: ['afk', 'off', 'ausente', 'on', 'ativo', 'voltei'],
 async executar(ctx) {
@@ -83,37 +81,75 @@ setGp(dataGp)
 return reply(mess.afkVoltou(sender, duracao), [sender])
 },
 async evento(ctx) {
-const { isGroup, dataGp, setGp, sender, isCmd, command, menc_jid2, menc_prt, tokito, from, mess, canalInfo, selo } = ctx
-if (!isGroup || !Array.isArray(dataGp?.[0]?.ausentes) || !dataGp[0].ausentes.length)
-return
+const {
+isGroup,
+dataGp,
+setGp,
+sender,
+isCmd,
+command,
+menc_jid2,
+menc_prt,
+tokito,
+from,
+mess,
+canalInfo,
+selo,
+info
+} = ctx
+
+// Ignora eventos das mensagens enviadas pelo próprio bot.
+// Os avisos de AFK possuem menção e, sem esta proteção,
+// o bot pode reconhecer a própria mensagem e entrar em flood.
+if (!isGroup || info?.key?.fromMe)
+return false
+
+// Os comandos do próprio sistema AFK devem ser tratados apenas
+// por executar(). Isso evita o evento automático disputar com
+// off/afk/on/voltei e remover o status na hora errada.
+const comandosAfk = ['afk', 'off', 'ausente', 'on', 'ativo', 'voltei']
+if (isCmd && comandosAfk.includes(String(command || '').toLowerCase()))
+return false
+
+if (!Array.isArray(dataGp?.[0]?.ausentes) || !dataGp[0].ausentes.length)
+return false
+
 const lista = dataGp[0].ausentes
-const vistos = new Set([...(menc_jid2 || []), ...(menc_prt ? [menc_prt] : [])].filter(Boolean))
+const vistos = new Set([
+...(menc_jid2 || []),
+...(menc_prt ? [menc_prt] : [])
+].filter(Boolean))
+
 for (const jid of [...vistos].slice(0, 3)) {
-if (jid === sender)
+if (!jid || jid === sender)
 continue
+
 const item = lista.find(x => x.id === jid)
 if (!item)
 continue
+
 const duracao = tempo(Date.now() - Number(item.hora || Date.now()))
 await tokito.sendMessage(from, {
 text: mess.afkAviso(jid, item.msg, duracao),
 contextInfo: canalInfo([jid])
-}, { quoted: selo }).catch(() => {
-})
+}, { quoted: selo }).catch(() => {})
 }
+
+// Se a própria pessoa que estava AFK mandar uma mensagem normal,
+// ela volta automaticamente uma única vez.
 const eu = lista.find(x => x.id === sender)
 if (!eu)
-return
-if (isCmd && ['afk', 'off', 'ausente'].includes(String(command || '')))
-return
+return false
+
 const duracao = tempo(Date.now() - Number(eu.hora || Date.now()))
 dataGp[0].ausentes = lista.filter(x => x.id !== sender)
 setGp(dataGp)
+
 await tokito.sendMessage(from, {
 text: mess.afkVoltou(sender, duracao),
 contextInfo: canalInfo([sender])
-}, { quoted: selo }).catch(() => {
+}, { quoted: selo }).catch(() => {})
+
+return true
+}
 })
-}
-}
-)

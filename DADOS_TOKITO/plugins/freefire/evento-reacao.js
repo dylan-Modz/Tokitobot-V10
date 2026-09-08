@@ -14,7 +14,6 @@
  * API oficial: https://tokito-apis.com.br
  * ============================================================
  */
-
 const normalizar = texto => String(texto || '')
 .toLowerCase()
 .normalize('NFD')
@@ -37,7 +36,6 @@ const regex = new RegExp(`(^|[^a-z0-9])${seguro}(?=[^a-z0-9]|$)`, 'i')
 
 return regex.test(base)
 }
-
 module.exports = {
 nome: 'evento-reacao-nome',
 categoria: 'freefire',
@@ -63,12 +61,15 @@ const lista = ctx.dataGp?.[0]?.funcoes?.reacoesNome
 if (!Array.isArray(lista) || !lista.length)
 return false
 
-const regra = lista.find(item =>
-item &&
-item.emoji &&
-item.chave &&
-contemNome(texto, item.chave)
-)
+// Aceita tanto os registros atuais (chave) quanto registros antigos
+// que tenham somente nome/palavra/texto salvo no JSON do grupo.
+const regra = lista.find(item => {
+if (!item || !item.emoji)
+return false
+
+const alvo = item.chave || item.nome || item.palavra || item.texto
+return Boolean(alvo) && contemNome(texto, alvo)
+})
 
 if (!regra)
 return false
