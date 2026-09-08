@@ -1,50 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.1",
+  "version": "10.1.2",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-08T13:03:10.194Z",
+  "publishedAt": "2026-09-08T13:18:10.190Z",
   "changelog": [
-    "[Novidade] feat: adiciona sistema de divulgacao",
-    "A versão 10.1.1 já está disponível para atualização.",
+    "[Correção] fix: corrige divulgacao e adiciona comandos ao menu dono",
+    "A versão 10.1.2 já está disponível para atualização.",
+    "Menus atualizado",
     "Div atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat: adiciona sistema de divulgacao",
-  "notice": "A versão 10.1.1 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: corrige divulgacao e adiciona comandos ao menu dono",
+  "notice": "A versão 10.1.2 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/dono/div.js",
-      "sha256": "967eab3922ed81fa353bb99173a8c10443e3280c40bb002fa1099b2dcd5dfb33",
-      "size": 8033
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "bba5588b8c82cb3a2b8877e437d6323f4dd6e50b0f4b642756a7ed36d52a74bc",
+      "size": 67484
     },
     {
-      "path": "DADOS_TOKITO/sistemas/div.js",
-      "sha256": "2c448982158a4b89acf2143b34ec2fea57a1e203659e328e8a9870f5aa5925d2",
-      "size": 6999
+      "path": "DADOS_TOKITO/plugins/dono/div.js",
+      "sha256": "5466523257a79d194fe55d72a42fa22ccf34b3a5bb7fab18a7e3052830aded8d",
+      "size": 8340
     }
   ],
   "releases": [
-    {
-      "version": "10.0.4",
-      "fromVersion": "10.0.4",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Menu atualizado",
-      "notice": "A versão 10.0.3 já está disponível para atualização.",
-      "changelog": [
-        "Menu atualizado"
-      ],
-      "files": [],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T01:11:02.147Z"
-    },
     {
       "version": "10.0.5",
       "fromVersion": "10.0.5",
@@ -2790,6 +2776,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-08T13:03:10.193Z"
+    },
+    {
+      "version": "10.1.2",
+      "fromVersion": "10.1.1",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: corrige divulgacao e adiciona comandos ao menu dono",
+      "notice": "A versão 10.1.2 já está disponível para atualização.",
+      "changelog": [
+        "Menus atualizado",
+        "Div atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "bba5588b8c82cb3a2b8877e437d6323f4dd6e50b0f4b642756a7ed36d52a74bc",
+          "size": 67484
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/div.js",
+          "sha256": "5466523257a79d194fe55d72a42fa22ccf34b3a5bb7fab18a7e3052830aded8d",
+          "size": 8340
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-08T13:18:10.189Z"
     }
   ],
   "versao": "10.0.70",
