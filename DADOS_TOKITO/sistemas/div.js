@@ -19,8 +19,7 @@ const {
 
 const DB_FILE = path.join(__dirname, '..', 'database', 'div.json')
 
-const MAX_POR_RODADA = 20
-const INTERVALO = 15
+const MAX_POR_RODADA = 100
 const TEMPO_ESPERA = 3 * 60 * 1000
 
 function padrao() {
@@ -93,7 +92,6 @@ const runtime = global.__TOKITO_DIV_V4__ || {
 
 global.__TOKITO_DIV_V4__ = runtime
 
-const dormir = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 function chaveEspera(sender, from) {
   return `${String(sender || '')}|${String(from || '')}`
@@ -420,9 +418,6 @@ async function enviar(tokito, opcoes = {}) {
         fila.length - (runtime.status.enviados + runtime.status.falhas)
       )
 
-      if (i < fila.length - 1 && !runtime.parar) {
-        await dormir(INTERVALO * 1000)
-      }
     }
   }
   finally {
@@ -454,8 +449,6 @@ function obterStatus() {
 module.exports = {
   DB_FILE,
   MAX_POR_RODADA,
-  INTERVALO,
-
   ler,
   salvar,
 

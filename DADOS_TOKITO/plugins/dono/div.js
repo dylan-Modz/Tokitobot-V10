@@ -33,28 +33,58 @@ function somenteDono(ctx) {
 }
 
 function menuGrupos(prefix, grupos, selecionados) {
-  const marcados = new Set(selecionados.map(g => g.id))
+  const marcados = new Set(
+    selecionados.map(g => g.id)
+  )
 
-  return {
-    title: '「 📢 」𝐆𝐑𝐔𝐏𝐎𝐒 𝐃𝐀 𝐃𝐈𝐕𝐔𝐋𝐆𝐀𝐂̧𝐀̃𝐎',
+  const limite = grupos.slice(
+    0,
+    div.MAX_POR_RODADA
+  )
 
-    sections: [
-      {
-        title: '📋 SELECIONAR / REMOVER',
+  const sections = []
 
-        highlight_label: `${selecionados.length} selecionado(s)`,
+  for (let i = 0; i < limite.length; i += 10) {
+    const bloco = limite.slice(i, i + 10)
 
-        rows: grupos.slice(0, 50).map((g, i) => ({
-          title: `${marcados.has(g.id) ? '✅' : '▫️'} ${curto(g.nome)}`,
+    sections.push({
+      title:
+        `📋 GRUPOS ${i + 1}-${i + bloco.length}`,
+
+      highlight_label:
+        `${selecionados.length} selecionado(s)`,
+
+      rows: bloco.map((g, offset) => {
+        const indice = i + offset + 1
+        const ativo = marcados.has(g.id)
+
+        return {
+          title:
+            `${ativo ? '✅' : '▫️'} ${curto(g.nome)}`,
 
           description:
-            `${Number.isFinite(g.participantes) ? `${g.participantes} membros • ` : ''}` +
-            `${marcados.has(g.id) ? 'toque para remover' : 'toque para selecionar'}`,
+            `${
+              Number.isFinite(g.participantes)
+                ? `${g.participantes} membros • `
+                : ''
+            }${
+              ativo
+                ? 'toque para remover'
+                : 'toque para selecionar'
+            }`,
 
-          id: `${prefix}divselect ${i + 1}`
-        }))
-      }
-    ]
+          id:
+            `${prefix}divselect ${indice}`
+        }
+      })
+    })
+  }
+
+  return {
+    title:
+      '「 📢 」𝐆𝐑𝐔𝐏𝐎𝐒 𝐃𝐀 𝐃𝐈𝐕𝐔𝐋𝐆𝐀𝐂̧𝐀̃𝐎',
+
+    sections
   }
 }
 
