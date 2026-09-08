@@ -1,16 +1,15 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.0",
+  "version": "10.1.9",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-08T15:10:48.808Z",
+  "publishedAt": "2026-09-08T15:25:23.686Z",
   "changelog": [
     "[Correção] Sistema de divulgação removido",
-    "A versão 10.1.0 já está disponível para atualização.",
     "Sistema de divulgação removido.",
     "Comandos de divulgação removidos.",
-    "Menu do dono restaurado sem a seção de divulgação."
+    "Menu do dono restaurado."
   ],
   "delete": [
     "DADOS_TOKITO/plugins/dono/div.js",
@@ -21,8 +20,8 @@
   ],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Sistema de divulgação removido",
-  "notice": "A versão 10.1.0 já está disponível para atualização.",
+  "title": "Remoção do sistema de divulgação",
+  "notice": "Nova atualização disponível.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -2870,6 +2869,35 @@
       ],
       "required": true,
       "publishedAt": "2026-09-08T15:10:48.808Z"
+    },
+    {
+      "version": "10.1.9",
+      "fromVersion": "10.1.8",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Remoção do sistema de divulgação",
+      "notice": "Nova atualização disponível.",
+      "changelog": [
+        "Sistema de divulgação removido.",
+        "Comandos de divulgação removidos.",
+        "Menu do dono restaurado."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "c741c601cd5fdfe0bc09f859c7ad5043fad0bc605ebb5997a5eed4a31e58c96d",
+          "size": 66129
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/dono/div.js",
+        "DADOS_TOKITO/plugins/eventos/div.js",
+        "DADOS_TOKITO/sistemas/div.js",
+        "DADOS_TOKITO/mensagens/div.js",
+        "DADOS_TOKITO/database/div.json"
+      ],
+      "required": true,
+      "publishedAt": "2026-09-08T15:25:23.686Z"
     }
   ],
   "versao": "10.0.70",
