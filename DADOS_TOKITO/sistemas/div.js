@@ -26,7 +26,6 @@ function padrao() {
   return {
     texto: '',
     grupos: [],
-    quantidade: 0,
     atualizadoEm: null
   }
 }
@@ -179,7 +178,6 @@ function alternarGrupo(chave) {
   salvar({
     ...state,
     grupos,
-    quantidade: 0,
     texto: ''
   })
 
@@ -197,7 +195,6 @@ function limparSelecao() {
     ...state,
     grupos: [],
     texto: '',
-    quantidade: 0
   })
 }
 
@@ -207,23 +204,6 @@ function definirTexto(texto) {
   return salvar({
     ...state,
     texto: String(texto || '').trim(),
-    quantidade: 0
-  })
-}
-
-function definirQuantidade(valor) {
-  const state = ler()
-  const n = Number(valor)
-
-  const maximo = Math.min(state.grupos.length, MAX_POR_RODADA)
-
-  if (!Number.isInteger(n) || n < 1 || n > maximo) {
-    throw new Error(`Digite um número de 1 até ${maximo}.`)
-  }
-
-  return salvar({
-    ...state,
-    quantidade: n
   })
 }
 
@@ -360,21 +340,15 @@ async function enviar(tokito, opcoes = {}) {
     throw new Error('Nenhum grupo foi selecionado.')
   }
 
-  const quantidade = Number(state.quantidade || 0)
-
-  if (
-    !Number.isInteger(quantidade) ||
-    quantidade < 1 ||
-    quantidade > Math.min(state.grupos.length, MAX_POR_RODADA)
-  ) {
-    throw new Error('Quantidade inválida.')
-  }
-
   /*
-   * Um envio por grupo.
-   * Quantidade = quantidade de destinos selecionados.
+   * Um envio por grupo selecionado.
+   * Máximo de 100 grupos por rodada.
+   * Sem intervalo artificial.
    */
-  const fila = state.grupos.slice(0, quantidade)
+  const fila = state.grupos.slice(
+    0,
+    MAX_POR_RODADA
+  )
 
   runtime.executando = true
   runtime.parar = false
@@ -463,7 +437,6 @@ module.exports = {
   limparSelecao,
 
   definirTexto,
-  definirQuantidade,
 
   seloBot,
   membrosGrupo,

@@ -66,14 +66,14 @@ function pedirTexto(total) {
   )
 }
 
-function textoSalvo(texto, maximo) {
+function textoSalvo(texto, total) {
   return bloco(
     '✅',
     '𝚃𝙴𝚇𝚃𝙾 𝚂𝙰𝙻𝚅𝙾',
     [
       texto,
-      `ᴀɢᴏʀᴀ ᴅɪɢɪᴛᴇ ᴜᴍ ɴᴜ́ᴍᴇʀᴏ ᴅᴇ 1 ᴀᴛᴇ́ ${maximo}.`,
-      'ᴏ ɴᴜ́ᴍᴇʀᴏ ᴇ́ ᴀ ǫᴜᴀɴᴛɪᴅᴀᴅᴇ ᴅᴇ ɢʀᴜᴘᴏs ǫᴜᴇ ᴠᴀ̃ᴏ ʀᴇᴄᴇʙᴇʀ ᴏ ᴇɴᴠɪᴏ.'
+      `ɢʀᴜᴘᴏs sᴇʟᴇᴄɪᴏɴᴀᴅᴏs: ${total}`,
+      'ᴏ ᴇɴᴠɪᴏ ᴠᴀɪ ᴄᴏᴍᴇᴄ̧ᴀʀ ᴀɢᴏʀᴀ.'
     ]
   )
 }
@@ -110,7 +110,6 @@ function status(config, runtime) {
     [
       `ʀᴏᴅᴀɴᴅᴏ: ${runtime.executando ? 'sɪᴍ' : 'ɴᴀ̃ᴏ'}`,
       `ɢʀᴜᴘᴏs: ${config.grupos.length}`,
-      `ǫᴜᴀɴᴛɪᴅᴀᴅᴇ: ${config.quantidade || 'ɴᴀ̃ᴏ ᴅᴇғɪɴɪᴅᴀ'}`,
       `ᴍᴇɴsᴀɢᴇᴍ: ${config.texto ? 'sᴀʟᴠᴀ' : 'ɴᴀ̃ᴏ sᴀʟᴠᴀ'}`,
       `ᴇɴᴠɪᴀᴅᴏs: ${runtime.enviados}`,
       `ғᴀʟʜᴀs: ${runtime.falhas}`,

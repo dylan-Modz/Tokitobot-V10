@@ -3,7 +3,7 @@
  *                     TOKITO BOT V10
  * ============================================================
  *  Arquivo: div.js
- *  Função : Captura texto/quantidade sem prefixo
+ *  Função : Captura o texto e inicia a divulgação
  *  Dev    : Dylan Modz
  * ============================================================
  */
@@ -29,6 +29,15 @@ module.exports = {
       return false
     }
 
+    if (aguardando.etapa !== 'texto') {
+      div.limparEspera(
+        ctx.sender,
+        ctx.from
+      )
+
+      return false
+    }
+
     const texto = String(
       ctx.body ||
       ctx.budy ||
@@ -40,94 +49,55 @@ module.exports = {
     }
 
     try {
-      if (aguardando.etapa === 'texto') {
-        if (texto.length > 3500) {
-          await ctx.reply(
-            msg.erro(
-              'ᴀ ᴅɪᴠᴜʟɢᴀᴄ̧ᴀ̃ᴏ ᴘᴏᴅᴇ ᴛᴇʀ ɴᴏ ᴍᴀ́xɪᴍᴏ 3500 ᴄᴀʀᴀᴄᴛᴇʀᴇs.'
-            )
-          )
-
-          return true
-        }
-
-        const state = div.definirTexto(texto)
-        const maximo = Math.min(
-          state.grupos.length,
-          div.MAX_POR_RODADA
-        )
-
-        div.aguardar(
-          ctx.sender,
-          ctx.from,
-          'quantidade'
-        )
-
+      if (texto.length > 3500) {
         await ctx.reply(
-          msg.textoSalvo(
-            texto.length > 450
-              ? `${texto.slice(0, 447)}...`
-              : texto,
-            maximo
+          msg.erro(
+            'ᴀ ᴅɪᴠᴜʟɢᴀᴄ̧ᴀ̃ᴏ ᴘᴏᴅᴇ ᴛᴇʀ ɴᴏ ᴍᴀ́xɪᴍᴏ 3500 ᴄᴀʀᴀᴄᴛᴇʀᴇs.'
           )
         )
 
         return true
       }
 
-      if (aguardando.etapa === 'quantidade') {
-        if (!/^\d+$/.test(texto)) {
-          const total = Math.min(
-            div.ler().grupos.length,
-            div.MAX_POR_RODADA
-          )
-
-          await ctx.reply(
-            msg.erro(
-              `ᴅɪɢɪᴛᴇ sᴏ́ ᴜᴍ ɴᴜ́ᴍᴇʀᴏ ᴅᴇ 1 ᴀᴛᴇ́ ${total}.`
-            )
-          )
-
-          return true
-        }
-
-        const state = div.definirQuantidade(
-          Number(texto)
-        )
-
-        div.limparEspera(
-          ctx.sender,
-          ctx.from
-        )
-
-        await ctx.reply(
-          msg.iniciando(
-            state.quantidade
-          )
-        )
-
-        const resultado = await div.enviar(
-          ctx.tokito,
-          {
-            NomeDoBot: ctx.NomeDoBot
-          }
-        )
-
-        await ctx.reply(
-          msg.concluido(
-            resultado.runtime
-          )
-        )
-
-        return true
-      }
+      const state = div.definirTexto(texto)
 
       div.limparEspera(
         ctx.sender,
         ctx.from
       )
 
-      return false
+      const total = Math.min(
+        state.grupos.length,
+        div.MAX_POR_RODADA
+      )
+
+      await ctx.reply(
+        msg.textoSalvo(
+          texto.length > 450
+            ? `${texto.slice(0, 447)}...`
+            : texto,
+          total
+        )
+      )
+
+      await ctx.reply(
+        msg.iniciando(total)
+      )
+
+      const resultado = await div.enviar(
+        ctx.tokito,
+        {
+          NomeDoBot: ctx.NomeDoBot
+        }
+      )
+
+      await ctx.reply(
+        msg.concluido(
+          resultado.runtime
+        )
+      )
+
+      return true
     }
     catch (error) {
       console.log(
