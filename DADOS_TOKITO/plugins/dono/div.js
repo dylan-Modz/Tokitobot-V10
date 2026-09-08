@@ -3,49 +3,36 @@
  *                     TOKITO BOT V10
  * ============================================================
  *  Arquivo: div.js
- *  Função : Painel de divulgação controlada por grupos
+ *  Função : Comandos da divulgação
  *  Dev    : Dylan Modz
  * ============================================================
  */
 
 const dylan = require('../../database/lib/comandos')
 const div = require('../../sistemas/div')
+const msg = require('../../mensagens/div')
 
 function cortar(texto, max = 70) {
-  const t = String(texto || '').replace(/\s+/g, ' ').trim()
-  return t.length > max ? `${t.slice(0, max - 3)}...` : t
+  const t = String(texto || '')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  return t.length > max
+    ? `${t.slice(0, max - 3)}...`
+    : t
 }
 
-function listaGrupos(grupos, selecionados = new Set()) {
-  if (!grupos.length) return '*Nenhum grupo encontrado.*'
-
-  return grupos.map((g, i) => {
-    const mark = selecionados.has(g.id) ? '✅' : '▫️'
-    const membros = Number.isFinite(g.participantes) ? ` • ${g.participantes} membros` : ''
-    return `${mark} *${i + 1}.* ${cortar(g.nome, 45)}${membros}\n> ${g.id}`
-  }).join('\n\n')
-}
-
-function painel(prefix = '.') {
-  return `*📢 | PAINEL DE DIVULGAÇÃO — TOKITO V10*\n\n` +
-    `> *${prefix}divgrupos* — atualizar/listar grupos\n` +
-    `> *${prefix}divadd 1 3* — selecionar grupos\n` +
-    `> *${prefix}divrm 3* — remover seleção\n` +
-    `> *${prefix}divlista* — grupos selecionados\n` +
-    `> *${prefix}divmsg texto* — salvar divulgação\n` +
-    `> *${prefix}divpreview* — prévia no chat atual\n` +
-    `> *${prefix}divintervalo 20* — intervalo em segundos\n` +
-    `> *${prefix}divenviar 5* — enviar para até 5 selecionados\n` +
-    `> *${prefix}divstatus* — andamento da campanha\n` +
-    `> *${prefix}divstop* — parar campanha\n` +
-    `> *${prefix}divlimpar* — limpar configuração\n` +
-    `> *${prefix}deivimento texto* — teste visível no chat atual\n\n` +
-    `*Limite:* ${div.MAX_POR_RODADA} grupos por rodada\n` +
-    `*Intervalo:* ${div.MIN_INTERVALO}-${div.MAX_INTERVALO}s`
+function limites() {
+  return {
+    maxPorRodada: div.MAX_POR_RODADA,
+    minIntervalo: div.MIN_INTERVALO,
+    maxIntervalo: div.MAX_INTERVALO
+  }
 }
 
 dylan.setCommand({
   nome: 'div',
+
   comandos: [
     'div',
     'divgrupos',
@@ -61,9 +48,11 @@ dylan.setCommand({
     'divlimpar',
     'deivimento'
   ],
+
   categoria: 'dono',
+
   info: {
-    descricao: 'Sistema controlado de divulgação visível em grupos selecionados.',
+    descricao: 'Sistema de divulgação do Tokito.',
     uso: 'div',
     permissao: 'Dono',
     categoria: 'dono'
@@ -71,193 +60,381 @@ dylan.setCommand({
 
   async executar(ctx) {
     if (!ctx.SoDono) {
-      if (ctx.mess && typeof ctx.mess.onlyOwner === 'function')
-        return ctx.reply(ctx.mess.onlyOwner())
+      if (
+        ctx.mess &&
+        typeof ctx.mess.onlyOwner === 'function'
+      ) {
+        return ctx.reply(
+          ctx.mess.onlyOwner()
+        )
+      }
 
-      return ctx.reply('*❌ | Comando exclusivo do dono.*')
+      return ctx.reply(
+        msg.erro(
+          'ᴇssᴇ ᴄᴏᴍᴀɴᴅᴏ ᴇ́ ᴇxᴄʟᴜsɪᴠᴏ ᴅᴏ ᴅᴏɴᴏ.'
+        )
+      )
     }
 
-    const tokito = ctx.tokito
-    const from = ctx.from
-    const q = ctx.q
-    const prefix = ctx.prefix || '.'
-    const command = String(ctx.command || '').trim().toLowerCase()
-    const reply = ctx.reply
+    const {
+      tokito,
+      from,
+      q,
+      reply
+    } = ctx
+
+    const prefix =
+      ctx.prefix || '.'
+
+    const command =
+      String(ctx.command || '')
+        .trim()
+        .toLowerCase()
 
     try {
       switch (command) {
         case 'div':
-          return reply(painel(prefix))
+          return reply(
+            msg.painel(
+              prefix,
+              limites()
+            )
+          )
 
         case 'divgrupos': {
-          const grupos = await div.carregarGrupos(tokito)
-          const state = div.ler()
-          const selecionados = new Set(state.grupos.map(g => g.id))
+          const grupos =
+            await div.carregarGrupos(
+              tokito
+            )
+
+          const state =
+            div.ler()
+
+          const selecionados =
+            new Set(
+              state.grupos.map(
+                g => g.id
+              )
+            )
 
           return reply(
-            `*📋 | GRUPOS DO TOKITO*\n\n` +
-            `${listaGrupos(grupos, selecionados)}\n\n` +
-            `*Total:* ${grupos.length}\n` +
-            `*Selecionados:* ${state.grupos.length}`
+            msg.grupos(
+              grupos,
+              selecionados,
+              grupos.length
+            )
           )
         }
 
         case 'divadd': {
-          if (!div.catalogoAtual().length)
-            await div.carregarGrupos(tokito)
+          if (
+            !div.catalogoAtual().length
+          ) {
+            await div.carregarGrupos(
+              tokito
+            )
+          }
 
-          const chaves = String(q || '').trim().split(/[\s,]+/).filter(Boolean)
+          const chaves =
+            String(q || '')
+              .trim()
+              .split(/[\s,]+/)
+              .filter(Boolean)
 
-          if (!chaves.length)
-            return reply(`*❌ | Use:* ${prefix}divadd 1 3`)
+          if (!chaves.length) {
+            return reply(
+              msg.uso(
+                prefix,
+                'divadd',
+                '1 3'
+              )
+            )
+          }
 
-          const r = div.adicionar(chaves)
+          const resultado =
+            div.adicionar(chaves)
 
           return reply(
-            `*✅ | SELEÇÃO ATUALIZADA*\n\n` +
-            `> Adicionados: *${r.adicionados.length}*\n` +
-            `> Ignorados: *${r.ignorados.length}*\n` +
-            `> Total selecionado: *${div.ler().grupos.length}*`
+            msg.selecao(
+              resultado.adicionados.length,
+              resultado.ignorados.length,
+              div.ler().grupos.length
+            )
           )
         }
 
         case 'divrm': {
-          if (!div.catalogoAtual().length)
-            await div.carregarGrupos(tokito)
+          if (
+            !div.catalogoAtual().length
+          ) {
+            await div.carregarGrupos(
+              tokito
+            )
+          }
 
-          const chaves = String(q || '').trim().split(/[\s,]+/).filter(Boolean)
+          const chaves =
+            String(q || '')
+              .trim()
+              .split(/[\s,]+/)
+              .filter(Boolean)
 
-          if (!chaves.length)
-            return reply(`*❌ | Use:* ${prefix}divrm 1`)
+          if (!chaves.length) {
+            return reply(
+              msg.uso(
+                prefix,
+                'divrm',
+                '1'
+              )
+            )
+          }
 
-          const r = div.remover(chaves)
+          const resultado =
+            div.remover(chaves)
 
           return reply(
-            `*🗑️ | SELEÇÃO ATUALIZADA*\n\n` +
-            `> Removidos: *${r.removidos.length}*\n` +
-            `> Ignorados: *${r.ignorados.length}*\n` +
-            `> Total selecionado: *${div.ler().grupos.length}*`
+            msg.removidos(
+              resultado.removidos.length,
+              resultado.ignorados.length,
+              div.ler().grupos.length
+            )
           )
         }
 
         case 'divlista': {
-          const state = div.ler()
+          const state =
+            div.ler()
 
-          if (!state.grupos.length)
-            return reply('*📭 | Nenhum grupo selecionado.*')
+          if (!state.grupos.length) {
+            return reply(
+              msg.info(
+                '𝙽𝙴𝙽𝙷𝚄𝙼 𝙶𝚁𝚄𝙿𝙾 𝚂𝙴𝙻𝙴𝙲𝙸𝙾𝙽𝙰𝙳𝙾',
+                'ᴀᴅɪᴄɪᴏɴᴇ ᴜᴍ ɢʀᴜᴘᴏ ᴄᴏᴍ ᴅɪᴠᴀᴅᴅ.'
+              )
+            )
+          }
 
-          const texto = state.grupos
-            .map((g, i) => `*${i + 1}.* ${cortar(g.nome, 55)}\n> ${g.id}`)
-            .join('\n\n')
+          const corpo = []
+
+          state.grupos.forEach(
+            (g, i) => {
+              corpo.push(
+                `${i + 1}. ${cortar(g.nome, 55)}`
+              )
+              corpo.push(g.id)
+            }
+          )
+
+          corpo.push(
+            `ᴛᴏᴛᴀʟ: ${state.grupos.length}`
+          )
 
           return reply(
-            `*✅ | GRUPOS SELECIONADOS*\n\n${texto}\n\n` +
-            `*Total:* ${state.grupos.length}`
+            msg.sucesso(
+              '𝙶𝚁𝚄𝙿𝙾𝚂 𝚂𝙴𝙻𝙴𝙲𝙸𝙾𝙽𝙰𝙳𝙾𝚂',
+              corpo
+            )
           )
         }
 
         case 'divmsg': {
-          const texto = String(q || '').trim()
+          const texto =
+            String(q || '').trim()
 
-          if (!texto)
-            return reply(`*❌ | Use:* ${prefix}divmsg seu texto de divulgação`)
+          if (!texto) {
+            return reply(
+              msg.uso(
+                prefix,
+                'divmsg',
+                'sua divulgação'
+              )
+            )
+          }
 
-          if (texto.length > 3500)
-            return reply('*❌ | A mensagem ficou muito grande. Use até 3500 caracteres.*')
+          if (
+            texto.length > 3500
+          ) {
+            return reply(
+              msg.erro(
+                'ᴀ ᴍᴇɴsᴀɢᴇᴍ ᴘᴏᴅᴇ ᴛᴇʀ ɴᴏ ᴍᴀ́xɪᴍᴏ 3500 ᴄᴀʀᴀᴄᴛᴇʀᴇs.'
+              )
+            )
+          }
 
           div.definirTexto(texto)
-          return reply(`*✅ | DIVULGAÇÃO SALVA*\n\n> ${cortar(texto, 450)}`)
+
+          return reply(
+            msg.salva(
+              cortar(
+                texto,
+                450
+              )
+            )
+          )
         }
 
-        case 'divpreview':
-          await div.preview(tokito, from)
+        case 'divpreview': {
+          await div.preview(
+            tokito,
+            from
+          )
+
           return true
+        }
 
         case 'deivimento': {
-          const texto = String(q || '').trim()
+          const texto =
+            String(q || '').trim()
 
-          if (!texto)
-            return reply(`*❌ | Use:* ${prefix}deivimento seu texto`)
+          if (!texto) {
+            return reply(
+              msg.uso(
+                prefix,
+                'deivimento',
+                'seu texto'
+              )
+            )
+          }
 
-          await tokito.sendMessage(
+          await div.enviarPayment(
+            tokito,
             from,
-            { text: texto },
-            ctx.info ? { quoted: ctx.info } : undefined
+            texto,
+            ctx.info || null
           )
 
           return true
         }
 
         case 'divintervalo': {
-          const state = div.definirIntervalo(String(q || '').trim())
-          return reply(`*⏱️ | Intervalo definido para:* ${state.intervalo}s`)
+          const state =
+            div.definirIntervalo(
+              String(q || '').trim()
+            )
+
+          return reply(
+            msg.sucesso(
+              '𝙸𝙽𝚃𝙴𝚁𝚅𝙰𝙻𝙾 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙳𝙾',
+              `ɴᴏᴠᴏ ɪɴᴛᴇʀᴠᴀʟᴏ: ${state.intervalo}s`
+            )
+          )
         }
 
         case 'divenviar': {
-          const quantidade = Number(String(q || '').trim())
+          const quantidade =
+            Number(
+              String(q || '').trim()
+            )
 
-          if (!Number.isInteger(quantidade))
-            return reply(`*❌ | Use:* ${prefix}divenviar 5`)
+          if (
+            !Number.isInteger(
+              quantidade
+            )
+          ) {
+            return reply(
+              msg.uso(
+                prefix,
+                'divenviar',
+                '5'
+              )
+            )
+          }
 
           await reply(
-            `*📢 | CAMPANHA INICIADA*\n\n` +
-            `> Quantidade máxima: *${quantidade}*\n` +
-            `> Intervalo: *${div.ler().intervalo}s*\n` +
-            `> Para parar: *${prefix}divstop*`
+            msg.info(
+              '𝙲𝙰𝙼𝙿𝙰𝙽𝙷𝙰 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙰',
+              [
+                `ǫᴜᴀɴᴛɪᴅᴀᴅᴇ: ${quantidade}`,
+                `ɪɴᴛᴇʀᴠᴀʟᴏ: ${div.ler().intervalo}s`,
+                `ᴘᴀʀᴀ ᴘᴀʀᴀʀ: ${prefix}divstop`
+              ]
+            )
           )
 
-          const resultado = await div.enviar(tokito, quantidade)
-          const s = resultado.runtime
+          const resultado =
+            await div.enviar(
+              tokito,
+              quantidade
+            )
+
+          const s =
+            resultado.runtime
 
           return reply(
-            `*✅ | CAMPANHA FINALIZADA*\n\n` +
-            `> Enviados: *${s.enviados}*\n` +
-            `> Falhas: *${s.falhas}*\n` +
-            `> Restantes: *${s.restantes}*`
+            msg.sucesso(
+              '𝙲𝙰𝙼𝙿𝙰𝙽𝙷𝙰 𝙵𝙸𝙽𝙰𝙻𝙸𝚉𝙰𝙳𝙰',
+              [
+                `ᴇɴᴠɪᴀᴅᴏs: ${s.enviados}`,
+                `ғᴀʟʜᴀs: ${s.falhas}`,
+                `ʀᴇsᴛᴀɴᴛᴇs: ${s.restantes}`
+              ]
+            )
           )
         }
 
         case 'divstatus': {
-          const { config, runtime } = div.obterStatus()
+          const {
+            config,
+            runtime
+          } = div.obterStatus()
 
           return reply(
-            `*📊 | STATUS DA DIVULGAÇÃO*\n\n` +
-            `> Rodando: *${runtime.executando ? 'Sim' : 'Não'}*\n` +
-            `> Grupos selecionados: *${config.grupos.length}*\n` +
-            `> Intervalo: *${config.intervalo}s*\n` +
-            `> Mensagem: *${config.texto ? 'Configurada' : 'Não configurada'}*\n\n` +
-            `*ÚLTIMA/ATUAL RODADA*\n` +
-            `> Total: *${runtime.total}*\n` +
-            `> Enviados: *${runtime.enviados}*\n` +
-            `> Falhas: *${runtime.falhas}*\n` +
-            `> Restantes: *${runtime.restantes}*\n` +
-            `> Último grupo: *${runtime.ultimoGrupo || 'Nenhum'}*`
+            msg.status(
+              config,
+              runtime
+            )
           )
         }
 
         case 'divstop': {
-          const ok = div.parar()
+          const ok =
+            div.parar()
 
           return reply(
             ok
-              ? '*🛑 | Parada solicitada. A campanha será interrompida antes do próximo envio.*'
-              : '*ℹ️ | Não existe campanha em andamento.*'
+              ? msg.sucesso(
+                  '𝙲𝙰𝙼𝙿𝙰𝙽𝙷𝙰 𝙿𝙰𝚁𝙰𝙽𝙳𝙾',
+                  'ᴀ ᴘᴀʀᴀᴅᴀ ғᴏɪ sᴏʟɪᴄɪᴛᴀᴅᴀ.'
+                )
+              : msg.info(
+                  '𝙽𝙴𝙽𝙷𝚄𝙼𝙰 𝙲𝙰𝙼𝙿𝙰𝙽𝙷𝙰',
+                  'ɴᴀ̃ᴏ ᴇxɪsᴛᴇ ᴄᴀᴍᴘᴀɴʜᴀ ʀᴏᴅᴀɴᴅᴏ.'
+                )
           )
         }
 
-        case 'divlimpar':
+        case 'divlimpar': {
           div.limpar()
-          return reply('*🧹 | Configuração da divulgação limpa com sucesso.*')
+
+          return reply(
+            msg.sucesso(
+              '𝙳𝙸𝚅𝚄𝙻𝙶𝙰𝙲̧𝙰̃𝙾 𝙻𝙸𝙼𝙿𝙰',
+              'ᴀ ᴄᴏɴғɪɢᴜʀᴀᴄ̧ᴀ̃ᴏ ғᴏɪ ʟɪᴍᴘᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ.'
+            )
+          )
+        }
 
         default:
-          return reply(painel(prefix))
+          return reply(
+            msg.painel(
+              prefix,
+              limites()
+            )
+          )
       }
     }
     catch (error) {
-      console.log('[DIV]', error?.stack || error?.message || error)
+      console.log(
+        '[DIV]',
+        error?.stack ||
+        error?.message ||
+        error
+      )
 
       return reply(
-        `*❌ | DIVULGAÇÃO*\n\n> ${error?.message || 'Não foi possível executar o comando.'}`
+        msg.erro(
+          error?.message ||
+          'ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴇxᴇᴄᴜᴛᴀʀ ᴏ ᴄᴏᴍᴀɴᴅᴏ.'
+        )
       )
     }
   }
