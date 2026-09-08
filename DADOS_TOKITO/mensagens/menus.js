@@ -479,11 +479,10 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡📢｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐷𝐼𝑉𝑈𝐿𝐺𝐴𝐶̧𝐴̃𝑂
 ├╾═╼･ﾟ𖤐ﾟ･｡👑｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 📢 ${prefix}div — abrir painel/lista
-┃࣪ ╎—̳͟͞͞ ✏️ ${prefix}divmsg texto — definir divulgação
-┃࣪ ╎—̳͟͞͞ 📊 ${prefix}divstatus — acompanhar envio
-┃࣪ ╎—̳͟͞͞ 🛑 ${prefix}divstop — parar envio
-┃࣪ ╎—̳͟͞͞ 🧪 ${prefix}deivimento texto — testar payment
+┃࣪ ╎—̳͟͞͞ 📢 ${prefix}div — abrir painel
+┃࣪ ╎—̳͟͞͞ 📊 ${prefix}divstatus — acompanhar
+┃࣪ ╎—̳͟͞͞ 🛑 ${prefix}divstop — parar
+┃࣪ ╎—̳͟͞͞ 🧪 ${prefix}deivimento texto — teste
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 

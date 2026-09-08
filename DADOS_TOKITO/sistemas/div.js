@@ -3,7 +3,7 @@
  *                     TOKITO BOT V10
  * ============================================================
  *  Arquivo: div.js
- *  Função : Sistema da divulgação + payment
+ *  Função : Divulgação + payment + fluxo
  *  Dev    : Dylan Modz
  * ============================================================
  */
@@ -17,15 +17,11 @@ const {
   jidNormalizedUser
 } = require('../database/lib/exports.js')
 
-const DB_FILE = path.join(
-  __dirname,
-  '..',
-  'database',
-  'div.json'
-)
+const DB_FILE = path.join(__dirname, '..', 'database', 'div.json')
 
 const MAX_POR_RODADA = 20
-const INTERVALO_PADRAO = 15
+const INTERVALO = 15
+const TEMPO_ESPERA = 3 * 60 * 1000
 
 function padrao() {
   return {
@@ -40,21 +36,11 @@ function garantirBanco() {
   const pasta = path.dirname(DB_FILE)
 
   if (!fs.existsSync(pasta)) {
-    fs.mkdirSync(
-      pasta,
-      { recursive: true }
-    )
+    fs.mkdirSync(pasta, { recursive: true })
   }
 
   if (!fs.existsSync(DB_FILE)) {
-    fs.writeFileSync(
-      DB_FILE,
-      JSON.stringify(
-        padrao(),
-        null,
-        2
-      )
-    )
+    fs.writeFileSync(DB_FILE, JSON.stringify(padrao(), null, 2))
   }
 }
 
@@ -62,21 +48,12 @@ function ler() {
   try {
     garantirBanco()
 
-    const data = JSON.parse(
-      fs.readFileSync(
-        DB_FILE,
-        'utf8'
-      )
-    )
+    const data = JSON.parse(fs.readFileSync(DB_FILE, 'utf8'))
 
     return {
       ...padrao(),
-      ...(data && typeof data === 'object'
-        ? data
-        : {}),
-      grupos: Array.isArray(data?.grupos)
-        ? data.grupos
-        : []
+      ...(data && typeof data === 'object' ? data : {}),
+      grupos: Array.isArray(data?.grupos) ? data.grupos : []
     }
   }
   catch {
@@ -90,251 +67,129 @@ function salvar(next) {
   const data = {
     ...padrao(),
     ...next,
-    grupos: Array.isArray(next?.grupos)
-      ? next.grupos
-      : [],
-    atualizadoEm:
-      new Date().toISOString()
+    grupos: Array.isArray(next?.grupos) ? next.grupos : [],
+    atualizadoEm: new Date().toISOString()
   }
 
-  fs.writeFileSync(
-    DB_FILE,
-    JSON.stringify(
-      data,
-      null,
-      2
-    )
-  )
-
+  fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2))
   return data
 }
 
-const runtime =
-  global.__TOKITO_DIV_V3__ ||
-  {
-    catalogo: [],
-    executando: false,
-    parar: false,
+const runtime = global.__TOKITO_DIV_V4__ || {
+  catalogo: [],
+  esperas: new Map(),
+  executando: false,
+  parar: false,
 
-    status: {
-      total: 0,
-      enviados: 0,
-      falhas: 0,
-      restantes: 0,
-      inicio: null,
-      fim: null,
-      ultimoGrupo: null,
-      ultimoErro: null
-    }
+  status: {
+    total: 0,
+    enviados: 0,
+    falhas: 0,
+    restantes: 0,
+    ultimoGrupo: null,
+    ultimoErro: null
   }
+}
 
-global.__TOKITO_DIV_V3__ =
-  runtime
+global.__TOKITO_DIV_V4__ = runtime
 
-function dormir(ms) {
-  return new Promise(
-    resolve =>
-      setTimeout(
-        resolve,
-        ms
-      )
+const dormir = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+function chaveEspera(sender, from) {
+  return `${String(sender || '')}|${String(from || '')}`
+}
+
+function aguardar(sender, from, etapa) {
+  runtime.esperas.set(
+    chaveEspera(sender, from),
+    {
+      etapa,
+      expiraEm: Date.now() + TEMPO_ESPERA
+    }
   )
 }
 
-function nomeGrupo(g = {}) {
-  return String(
-    g.subject ||
-    g.name ||
-    g.id ||
-    'Grupo'
-  ).trim()
+function espera(sender, from) {
+  const chave = chaveEspera(sender, from)
+  const atual = runtime.esperas.get(chave)
+
+  if (!atual) return null
+
+  if (Date.now() > atual.expiraEm) {
+    runtime.esperas.delete(chave)
+    return null
+  }
+
+  return atual
+}
+
+function limparEspera(sender, from) {
+  runtime.esperas.delete(chaveEspera(sender, from))
 }
 
 async function carregarGrupos(tokito) {
-  if (
-    !tokito ||
-    typeof tokito.groupFetchAllParticipating !==
-      'function'
-  ) {
-    throw new Error(
-      'Não foi possível buscar os grupos nesta conexão.'
-    )
+  if (!tokito || typeof tokito.groupFetchAllParticipating !== 'function') {
+    throw new Error('Não foi possível buscar os grupos.')
   }
 
-  const bruto =
-    await tokito.groupFetchAllParticipating()
+  const bruto = await tokito.groupFetchAllParticipating()
 
-  const grupos =
-    Object.values(bruto || {})
-      .filter(
-        g =>
-          g?.id &&
-          String(g.id)
-            .endsWith('@g.us')
-      )
-      .map(g => ({
-        id: g.id,
-        nome: nomeGrupo(g),
-        participantes:
-          Array.isArray(
-            g.participants
-          )
-            ? g.participants.length
-            : null
-      }))
-      .sort(
-        (a, b) =>
-          a.nome.localeCompare(
-            b.nome,
-            'pt-BR'
-          )
-      )
+  const grupos = Object.values(bruto || {})
+    .filter(g => g?.id && String(g.id).endsWith('@g.us'))
+    .map(g => ({
+      id: g.id,
+      nome: String(g.subject || g.name || g.id || 'Grupo').trim(),
+      participantes: Array.isArray(g.participants) ? g.participants.length : null
+    }))
+    .sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'))
 
-  runtime.catalogo =
-    grupos
-
+  runtime.catalogo = grupos
   return grupos
 }
 
 function catalogoAtual() {
-  return Array.isArray(
-    runtime.catalogo
-  )
-    ? runtime.catalogo
-    : []
+  return Array.isArray(runtime.catalogo) ? runtime.catalogo : []
 }
 
 function localizarGrupo(chave) {
-  const catalogo =
-    catalogoAtual()
-
-  const texto =
-    String(chave || '')
-      .trim()
+  const texto = String(chave || '').trim()
+  const catalogo = catalogoAtual()
 
   if (!texto) return null
 
   if (/^\d+$/.test(texto)) {
-    const idx =
-      Number(texto) - 1
-
-    return (
-      catalogo[idx] ||
-      null
-    )
+    return catalogo[Number(texto) - 1] || null
   }
 
-  return (
-    catalogo.find(
-      g => g.id === texto
-    ) ||
-    null
-  )
+  return catalogo.find(g => g.id === texto) || null
 }
 
 function alternarGrupo(chave) {
   const state = ler()
-
-  const grupo =
-    localizarGrupo(chave)
+  const grupo = localizarGrupo(chave)
 
   if (!grupo) {
-    throw new Error(
-      'Grupo não encontrado na lista.'
-    )
+    throw new Error('Grupo não encontrado.')
   }
 
-  const existe =
-    state.grupos.some(
-      g => g.id === grupo.id
-    )
+  const existe = state.grupos.some(g => g.id === grupo.id)
 
-  const grupos =
-    existe
-      ? state.grupos.filter(
-          g =>
-            g.id !== grupo.id
-        )
-      : [
-          ...state.grupos,
-          grupo
-        ]
-
-  const quantidade =
-    Math.min(
-      Number(
-        state.quantidade || 0
-      ),
-      grupos.length
-    )
+  const grupos = existe
+    ? state.grupos.filter(g => g.id !== grupo.id)
+    : [...state.grupos, grupo]
 
   salvar({
     ...state,
     grupos,
-    quantidade
+    quantidade: 0,
+    texto: ''
   })
 
   return {
     grupo,
-    selecionado: !existe,
+    ativo: !existe,
     total: grupos.length
   }
-}
-
-function definirQuantidade(valor) {
-  const state = ler()
-
-  const n =
-    Number(valor)
-
-  if (
-    !Number.isInteger(n) ||
-    n < 1
-  ) {
-    throw new Error(
-      'Escolha uma quantidade válida.'
-    )
-  }
-
-  if (!state.grupos.length) {
-    throw new Error(
-      'Selecione pelo menos um grupo.'
-    )
-  }
-
-  if (
-    n >
-    state.grupos.length
-  ) {
-    throw new Error(
-      `Você selecionou ${state.grupos.length} grupo(s). Escolha de 1 até ${state.grupos.length}.`
-    )
-  }
-
-  if (
-    n >
-    MAX_POR_RODADA
-  ) {
-    throw new Error(
-      `O máximo por rodada é ${MAX_POR_RODADA} grupos.`
-    )
-  }
-
-  return salvar({
-    ...state,
-    quantidade: n
-  })
-}
-
-function definirTexto(texto) {
-  const state = ler()
-
-  return salvar({
-    ...state,
-    texto:
-      String(texto || '')
-        .trim()
-  })
 }
 
 function limparSelecao() {
@@ -343,359 +198,204 @@ function limparSelecao() {
   return salvar({
     ...state,
     grupos: [],
+    texto: '',
     quantidade: 0
   })
 }
 
-function limparTudo() {
-  if (runtime.executando) {
-    throw new Error(
-      'Pare a divulgação antes de limpar.'
-    )
-  }
+function definirTexto(texto) {
+  const state = ler()
 
-  return salvar(
-    padrao()
-  )
+  return salvar({
+    ...state,
+    texto: String(texto || '').trim(),
+    quantidade: 0
+  })
 }
 
-async function fotoPerfil(
-  tokito,
-  jid
-) {
-  if (
-    !tokito ||
-    !jid ||
-    typeof tokito.profilePictureUrl !==
-      'function'
-  ) {
-    return null
+function definirQuantidade(valor) {
+  const state = ler()
+  const n = Number(valor)
+
+  const maximo = Math.min(state.grupos.length, MAX_POR_RODADA)
+
+  if (!Number.isInteger(n) || n < 1 || n > maximo) {
+    throw new Error(`Digite um número de 1 até ${maximo}.`)
   }
 
-  try {
-    return await tokito.profilePictureUrl(
-      jid,
-      'image'
-    )
-  }
-  catch {
-    return null
-  }
-}
-
-async function seloPayment(
-  tokito,
-  autorJid,
-  nomeAutor,
-  NomeDoBot
-) {
-  const foto =
-    await fotoPerfil(
-      tokito,
-      autorJid
-    )
-
-  const selo = {
-    title:
-      `💳 PAYMENT • ${NomeDoBot || 'TOKITO'}`,
-    body:
-      `${nomeAutor || 'Dylan Modz'} • Divulgação`,
-    mediaType: 1,
-    renderLargerThumbnail:
-      false,
-    showAdAttribution:
-      false
-  }
-
-  if (foto) {
-    selo.thumbnailUrl =
-      foto
-  }
-
-  return selo
+  return salvar({
+    ...state,
+    quantidade: n
+  })
 }
 
 /*
- * ============================================================
- *                    MARCAÇÃO TIPO TOTAG
- * ============================================================
- *
- * O totag da base usa:
- *   contextInfo: { mentionedJid: TDS_GP }
- *
- * Aqui fazemos a mesma coisa dentro do noteMessage do payment.
- * ============================================================
+ * Selo do próprio bot em formato de contato.
+ * Não usa externalAdReply/foto/preview patrocinado.
  */
+function seloBot(tokito, jid, NomeDoBot = 'Tokito Bot V10') {
+  const botJid = jidNormalizedUser(tokito.user?.id || '')
+  const numero = String(botJid || '')
+    .split('@')[0]
+    .split(':')[0]
+    .replace(/\D/g, '')
 
-async function membrosGrupo(
-  tokito,
-  jid
-) {
-  if (
-    !String(jid || '')
-      .endsWith('@g.us')
-  ) {
+  if (!numero) return null
+
+  return {
+    key: {
+      participant: botJid,
+      remoteJid: jid,
+      fromMe: true,
+      id: 'TOKITO-DIV-PAYMENT'
+    },
+
+    message: {
+      contactMessage: {
+        displayName: NomeDoBot,
+
+        vcard:
+          `BEGIN:VCARD\n` +
+          `VERSION:3.0\n` +
+          `N:;${NomeDoBot};;;\n` +
+          `FN:${NomeDoBot}\n` +
+          `item1.TEL;waid=${numero}:${numero}\n` +
+          `item1.X-ABLabel:Bot\n` +
+          `END:VCARD`
+      }
+    }
+  }
+}
+
+async function membrosGrupo(tokito, jid) {
+  if (!String(jid || '').endsWith('@g.us')) {
     return []
   }
 
-  const metadata =
-    await tokito.groupMetadata(
-      jid
-    )
-
-  const bot =
-    jidNormalizedUser(
-      tokito.user?.id || ''
-    )
+  const metadata = await tokito.groupMetadata(jid)
+  const bot = jidNormalizedUser(tokito.user?.id || '')
 
   return [
     ...new Set(
-      (
-        metadata?.participants ||
-        []
-      )
-        .map(
-          p =>
-            p?.id ||
-            p?.jid ||
-            ''
-        )
+      (metadata?.participants || [])
+        .map(p => p?.id || p?.jid || '')
         .filter(Boolean)
         .map(jidNormalizedUser)
-        .filter(
-          jid =>
-            jid &&
-            jid !== bot
-        )
+        .filter(jid => jid && jid !== bot)
     )
   ]
 }
 
-function montarPayment({
-  texto,
-  mencoes = [],
-  selo = null
-} = {}) {
-  const contextInfo = {}
-
-  if (
-    Array.isArray(mencoes) &&
-    mencoes.length
-  ) {
-    contextInfo.mentionedJid =
-      mencoes
-  }
-
-  if (
-    selo &&
-    typeof selo === 'object'
-  ) {
-    contextInfo.externalAdReply =
-      selo
-  }
-
+/*
+ * Mesmo princípio do totag:
+ * contextInfo.mentionedJid recebe os membros do grupo.
+ */
+function montarPayment(texto, mencoes = []) {
   return proto.Message.fromObject({
     requestPaymentMessage: {
-      currencyCodeIso4217:
-        'BRL',
-
-      amount1000:
-        0,
+      currencyCodeIso4217: 'BRL',
+      amount1000: 0,
 
       noteMessage: {
         extendedTextMessage: {
-          text:
-            String(
-              texto || ''
-            ).trim(),
+          text: String(texto || '').trim(),
 
-          contextInfo
+          contextInfo: {
+            mentionedJid: Array.isArray(mencoes) ? mencoes : []
+          }
         }
       }
     }
   })
 }
 
-async function enviarPayment(
-  tokito,
-  jid,
-  texto,
-  opcoes = {}
-) {
-  const mensagemTexto =
-    String(texto || '')
-      .trim()
+async function enviarPayment(tokito, jid, texto, opcoes = {}) {
+  const corpo = String(texto || '').trim()
 
-  if (!mensagemTexto) {
-    throw new Error(
-      'A mensagem da divulgação está vazia.'
-    )
+  if (!corpo) {
+    throw new Error('A divulgação está vazia.')
   }
 
-  if (
-    !tokito ||
-    typeof tokito.relayMessage !==
-      'function'
-  ) {
-    throw new Error(
-      'relayMessage não está disponível.'
-    )
-  }
+  const mencoes = opcoes.marcarTodos === false
+    ? []
+    : await membrosGrupo(tokito, jid)
 
-  const mencoes =
-    opcoes.marcarTodos !== false
-      ? await membrosGrupo(
-          tokito,
-          jid
-        )
-      : []
-
-  const selo =
-    await seloPayment(
-      tokito,
-      opcoes.autorJid,
-      opcoes.nomeAutor,
-      opcoes.NomeDoBot
-    )
-
-  const conteudo =
-    montarPayment({
-      texto: mensagemTexto,
-      mencoes,
-      selo
-    })
-
-  const mensagem =
-    generateWAMessageFromContent(
-      jid,
-      conteudo,
-      {
-        userJid:
-          tokito.user?.id,
-
-        ...(opcoes.quoted
-          ? {
-              quoted:
-                opcoes.quoted
-            }
-          : {})
-      }
-    )
-
-  await tokito.relayMessage(
+  const quoted = seloBot(
+    tokito,
     jid,
-    mensagem.message,
+    opcoes.NomeDoBot || 'Tokito Bot V10'
+  )
+
+  const gerada = generateWAMessageFromContent(
+    jid,
+    montarPayment(corpo, mencoes),
     {
-      messageId:
-        mensagem.key.id
+      userJid: tokito.user?.id,
+      ...(quoted ? { quoted } : {})
     }
   )
 
+  await tokito.relayMessage(
+    jid,
+    gerada.message,
+    { messageId: gerada.key.id }
+  )
+
   return {
-    mensagem,
+    mensagem: gerada,
     mencoes
   }
 }
 
-async function enviar(
-  tokito,
-  opcoes = {}
-) {
+async function enviar(tokito, opcoes = {}) {
   if (runtime.executando) {
-    throw new Error(
-      'Já existe uma divulgação em andamento.'
-    )
+    throw new Error('Já existe um envio em andamento.')
   }
 
   const state = ler()
 
   if (!state.texto) {
-    throw new Error(
-      'Defina a mensagem primeiro com divmsg.'
-    )
+    throw new Error('A divulgação ainda não foi informada.')
   }
 
   if (!state.grupos.length) {
-    throw new Error(
-      'Selecione pelo menos um grupo.'
-    )
+    throw new Error('Nenhum grupo foi selecionado.')
   }
 
-  const quantidade =
-    Number(
-      state.quantidade || 0
-    )
+  const quantidade = Number(state.quantidade || 0)
 
   if (
-    !Number.isInteger(
-      quantidade
-    ) ||
-    quantidade < 1
+    !Number.isInteger(quantidade) ||
+    quantidade < 1 ||
+    quantidade > Math.min(state.grupos.length, MAX_POR_RODADA)
   ) {
-    throw new Error(
-      'Escolha a quantidade no painel antes de enviar.'
-    )
+    throw new Error('Quantidade inválida.')
   }
 
-  const fila =
-    state.grupos.slice(
-      0,
-      Math.min(
-        quantidade,
-        MAX_POR_RODADA
-      )
-    )
+  /*
+   * Um envio por grupo.
+   * Quantidade = quantidade de destinos selecionados.
+   */
+  const fila = state.grupos.slice(0, quantidade)
 
-  runtime.executando =
-    true
-
-  runtime.parar =
-    false
+  runtime.executando = true
+  runtime.parar = false
 
   runtime.status = {
-    total:
-      fila.length,
-
-    enviados:
-      0,
-
-    falhas:
-      0,
-
-    restantes:
-      fila.length,
-
-    inicio:
-      new Date()
-        .toISOString(),
-
-    fim:
-      null,
-
-    ultimoGrupo:
-      null,
-
-    ultimoErro:
-      null
+    total: fila.length,
+    enviados: 0,
+    falhas: 0,
+    restantes: fila.length,
+    ultimoGrupo: null,
+    ultimoErro: null
   }
 
   try {
-    for (
-      let i = 0;
-      i < fila.length;
-      i++
-    ) {
-      if (
-        runtime.parar
-      ) {
-        break
-      }
+    for (let i = 0; i < fila.length; i++) {
+      if (runtime.parar) break
 
-      const grupo =
-        fila[i]
-
-      runtime.status.ultimoGrupo =
-        grupo.nome
+      const grupo = fila[i]
+      runtime.status.ultimoGrupo = grupo.nome
 
       try {
         await enviarPayment(
@@ -704,12 +404,7 @@ async function enviar(
           state.texto,
           {
             marcarTodos: true,
-            autorJid:
-              opcoes.autorJid,
-            nomeAutor:
-              opcoes.nomeAutor,
-            NomeDoBot:
-              opcoes.NomeDoBot
+            NomeDoBot: opcoes.NomeDoBot
           }
         )
 
@@ -717,70 +412,41 @@ async function enviar(
       }
       catch (error) {
         runtime.status.falhas++
-
-        runtime.status.ultimoErro =
-          String(
-            error?.message ||
-            error
-          )
+        runtime.status.ultimoErro = String(error?.message || error)
       }
 
-      runtime.status.restantes =
-        Math.max(
-          0,
-          fila.length -
-          (
-            runtime.status.enviados +
-            runtime.status.falhas
-          )
-        )
+      runtime.status.restantes = Math.max(
+        0,
+        fila.length - (runtime.status.enviados + runtime.status.falhas)
+      )
 
-      if (
-        i <
-          fila.length - 1 &&
-        !runtime.parar
-      ) {
-        await dormir(
-          INTERVALO_PADRAO *
-          1000
-        )
+      if (i < fila.length - 1 && !runtime.parar) {
+        await dormir(INTERVALO * 1000)
       }
     }
   }
   finally {
-    runtime.executando =
-      false
-
-    runtime.status.fim =
-      new Date()
-        .toISOString()
+    runtime.executando = false
   }
 
   return obterStatus()
 }
 
 function parar() {
-  if (!runtime.executando) {
-    return false
-  }
+  if (!runtime.executando) return false
 
-  runtime.parar =
-    true
-
+  runtime.parar = true
   return true
 }
 
 function obterStatus() {
   return {
-    config:
-      ler(),
+    config: ler(),
 
     runtime: {
       ...runtime.status,
-      executando:
-        runtime.executando,
-      parar:
-        runtime.parar
+      executando: runtime.executando,
+      parar: runtime.parar
     }
   }
 }
@@ -788,24 +454,26 @@ function obterStatus() {
 module.exports = {
   DB_FILE,
   MAX_POR_RODADA,
-  INTERVALO_PADRAO,
+  INTERVALO,
 
   ler,
   salvar,
+
+  aguardar,
+  espera,
+  limparEspera,
 
   carregarGrupos,
   catalogoAtual,
   localizarGrupo,
   alternarGrupo,
-
-  definirQuantidade,
-  definirTexto,
-
   limparSelecao,
-  limparTudo,
 
+  definirTexto,
+  definirQuantidade,
+
+  seloBot,
   membrosGrupo,
-  seloPayment,
   montarPayment,
   enviarPayment,
 
