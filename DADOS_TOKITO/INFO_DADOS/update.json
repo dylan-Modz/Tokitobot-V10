@@ -1,51 +1,40 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.2",
+  "version": "10.1.3",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-08T13:18:10.190Z",
+  "publishedAt": "2026-09-08T13:37:40.367Z",
   "changelog": [
-    "[Correção] fix: corrige divulgacao e adiciona comandos ao menu dono",
-    "A versão 10.1.2 já está disponível para atualização.",
-    "Menus atualizado",
+    "[Correção] fix: adiciona payment e padroniza divulgacao",
+    "A versão 10.1.3 já está disponível para atualização.",
     "Div atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: corrige divulgacao e adiciona comandos ao menu dono",
-  "notice": "A versão 10.1.2 já está disponível para atualização.",
+  "title": "fix: adiciona payment e padroniza divulgacao",
+  "notice": "A versão 10.1.3 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "bba5588b8c82cb3a2b8877e437d6323f4dd6e50b0f4b642756a7ed36d52a74bc",
-      "size": 67484
+      "path": "DADOS_TOKITO/mensagens/div.js",
+      "sha256": "23c0fa0e4dd966c88898a39eb8f65f14471ab99845ef726c6409f6d9befa9e43",
+      "size": 4974
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/div.js",
-      "sha256": "5466523257a79d194fe55d72a42fa22ccf34b3a5bb7fab18a7e3052830aded8d",
-      "size": 8340
+      "sha256": "1354f69eafe34efbc116ed1213333c383129be0f971dda30fb88006feaee6f52",
+      "size": 9592
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/div.js",
+      "sha256": "04a2a96130e414e4957828815d2fa6251c9586102b300bc935cc98f4e431d051",
+      "size": 9462
     }
   ],
   "releases": [
-    {
-      "version": "10.0.5",
-      "fromVersion": "10.0.5",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Comando Playstore atualizado",
-      "notice": "A versão 10.0.5 já está disponível para atualização.",
-      "changelog": [
-        "Comando Playstore atualizado"
-      ],
-      "files": [],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T01:13:17.587Z"
-    },
     {
       "version": "10.0.6",
       "fromVersion": "10.0.6",
@@ -2803,6 +2792,37 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-08T13:18:10.189Z"
+    },
+    {
+      "version": "10.1.3",
+      "fromVersion": "10.1.2",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: adiciona payment e padroniza divulgacao",
+      "notice": "A versão 10.1.3 já está disponível para atualização.",
+      "changelog": [
+        "Div atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/div.js",
+          "sha256": "23c0fa0e4dd966c88898a39eb8f65f14471ab99845ef726c6409f6d9befa9e43",
+          "size": 4974
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/div.js",
+          "sha256": "1354f69eafe34efbc116ed1213333c383129be0f971dda30fb88006feaee6f52",
+          "size": 9592
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/div.js",
+          "sha256": "04a2a96130e414e4957828815d2fa6251c9586102b300bc935cc98f4e431d051",
+          "size": 9462
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-08T13:37:40.367Z"
     }
   ],
   "versao": "10.0.70",
