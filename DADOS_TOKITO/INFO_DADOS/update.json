@@ -1,30 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.101",
+  "version": "10.1.0",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-08T12:12:10.262Z",
+  "publishedAt": "2026-09-08T12:22:41.995Z",
   "changelog": [
-    "[Correção] fix: corrige AFK, ID FF 9 digitos e reacoes",
-    "A versão 10.0.101 já está disponível para atualização.",
-    "Evento Reacao atualizado",
-    "Evento X4 atualizado",
-    "Reacao atualizado",
-    "Afk atualizado"
+    "[Correção] AFK, sala Free Fire e reações corrigidos",
+    "A versão 10.1.0 já está disponível para atualização.",
+    "Corrige flood do sistema AFK/off",
+    "Adiciona suporte a IDs de sala Free Fire com 9 dígitos",
+    "Corrige cadastro e compatibilidade do rgreacao",
+    "Corrige evento de reações automáticas por nome ou palavra"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: corrige AFK, ID FF 9 digitos e reacoes",
-  "notice": "A versão 10.0.101 já está disponível para atualização.",
+  "title": "AFK, sala Free Fire e reações corrigidos",
+  "notice": "A versão 10.1.0 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/freefire/evento-reacao.js",
-      "sha256": "464590509ba94c3953e5f35b94dea27160c01f31c621940d7a57c06583df0504",
-      "size": 1944
+      "path": "DADOS_TOKITO/plugins/social/afk.js",
+      "sha256": "52bcb49112e6562743a3869bb93a8201b419adf4db75a6efaf482d390b674ab7",
+      "size": 4328
     },
     {
       "path": "DADOS_TOKITO/plugins/freefire/evento-x4.js",
@@ -37,9 +37,9 @@
       "size": 6023
     },
     {
-      "path": "DADOS_TOKITO/plugins/social/afk.js",
-      "sha256": "52bcb49112e6562743a3869bb93a8201b419adf4db75a6efaf482d390b674ab7",
-      "size": 4328
+      "path": "DADOS_TOKITO/plugins/freefire/evento-reacao.js",
+      "sha256": "464590509ba94c3953e5f35b94dea27160c01f31c621940d7a57c06583df0504",
+      "size": 1944
     }
   ],
   "releases": [
@@ -2753,6 +2753,45 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-08T12:12:10.261Z"
+    },
+    {
+      "version": "10.1.0",
+      "fromVersion": "10.0.100",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "AFK, sala Free Fire e reações corrigidos",
+      "notice": "A versão 10.1.0 já está disponível para atualização.",
+      "changelog": [
+        "Corrige flood do sistema AFK/off",
+        "Adiciona suporte a IDs de sala Free Fire com 9 dígitos",
+        "Corrige cadastro e compatibilidade do rgreacao",
+        "Corrige evento de reações automáticas por nome ou palavra"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/social/afk.js",
+          "sha256": "52bcb49112e6562743a3869bb93a8201b419adf4db75a6efaf482d390b674ab7",
+          "size": 4328
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/evento-x4.js",
+          "sha256": "bd0a4b0138458f656d9d93115cb84321add2a543795e3dd198d99822d8355ee6",
+          "size": 2771
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/reacao.js",
+          "sha256": "668dc31b8bb32c5fac44b46d29f3163937424919b31ba08f614a1c901f0a1392",
+          "size": 6023
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/evento-reacao.js",
+          "sha256": "464590509ba94c3953e5f35b94dea27160c01f31c621940d7a57c06583df0504",
+          "size": 1944
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-08T12:22:41.995Z"
     }
   ],
   "versao": "10.0.70",
