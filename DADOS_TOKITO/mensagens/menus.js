@@ -479,19 +479,11 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡📢｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐷𝐼𝑉𝑈𝐿𝐺𝐴𝐶̧𝐴̃𝑂
 ├╾═╼･ﾟ𖤐ﾟ･｡👑｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 📢 ${prefix}div — painel de divulgação
-┃࣪ ╎—̳͟͞͞ 📋 ${prefix}divgrupos — listar grupos
-┃࣪ ╎—̳͟͞͞ ✅ ${prefix}divadd 1 3 — selecionar grupos
-┃࣪ ╎—̳͟͞͞ 🗑️ ${prefix}divrm 3 — remover grupo
-┃࣪ ╎—̳͟͞͞ 📑 ${prefix}divlista — selecionados
-┃࣪ ╎—̳͟͞͞ ✏️ ${prefix}divmsg texto — salvar mensagem
-┃࣪ ╎—̳͟͞͞ 👁️ ${prefix}divpreview — visualizar prévia
-┃࣪ ╎—̳͟͞͞ ⏱️ ${prefix}divintervalo 20 — intervalo
-┃࣪ ╎—̳͟͞͞ 🚀 ${prefix}divenviar 5 — iniciar envio
-┃࣪ ╎—̳͟͞͞ 📊 ${prefix}divstatus — ver status
+┃࣪ ╎—̳͟͞͞ 📢 ${prefix}div — abrir painel/lista
+┃࣪ ╎—̳͟͞͞ ✏️ ${prefix}divmsg texto — definir divulgação
+┃࣪ ╎—̳͟͞͞ 📊 ${prefix}divstatus — acompanhar envio
 ┃࣪ ╎—̳͟͞͞ 🛑 ${prefix}divstop — parar envio
-┃࣪ ╎—̳͟͞͞ 🧹 ${prefix}divlimpar — limpar campanha
-┃࣪ ╎—̳͟͞͞ 🧪 ${prefix}deivimento texto — teste no chat
+┃࣪ ╎—̳͟͞͞ 🧪 ${prefix}deivimento texto — testar payment
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
