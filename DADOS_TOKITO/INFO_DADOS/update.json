@@ -1,72 +1,40 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.6",
+  "version": "10.1.7",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-08T14:16:41.154Z",
+  "publishedAt": "2026-09-08T14:42:10.573Z",
   "changelog": [
-    "[Novidade] feat: melhora fluxo da divulgacao com selo do bot",
-    "A versão 10.1.6 já está disponível para atualização.",
-    "Div atualizado",
-    "Menus atualizado"
+    "[Novidade] feat: atualiza divulgacao sem intervalo",
+    "A versão 10.1.7 já está disponível para atualização.",
+    "Div atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
-  "title": "feat: melhora fluxo da divulgacao com selo do bot",
-  "notice": "A versão 10.1.6 já está disponível para atualização.",
+  "title": "feat: atualiza divulgacao sem intervalo",
+  "notice": "A versão 10.1.7 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/div.js",
-      "sha256": "9195f0658b18b28333f844112bdc97d072d8bfe24a38614edb427a7ca83634e2",
-      "size": 3851
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "4d701b452ab1a6ad6f152e2466119e133f0755704d6a0747f8205253f7d4b1f3",
-      "size": 66857
+      "sha256": "1b2ae39847057478bdd31a316d1e69bf5feb99db4c623dbe8434153fc7ecf744",
+      "size": 4018
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/div.js",
-      "sha256": "6fc20958e21829069c30763b8da2622b9a5329379ce4fc7d7e63f6eaee90a45f",
-      "size": 7144
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/eventos/div.js",
-      "sha256": "a1c7bfe57d34dfeff9a96e410631d9f5dc3bb43a187dbfaaaf9aeff2cd67b122",
-      "size": 2997
+      "sha256": "161b012e1b0a745935b35785212c8285a2bc652d076bd13a762294e9cca70ae9",
+      "size": 7566
     },
     {
       "path": "DADOS_TOKITO/sistemas/div.js",
-      "sha256": "062f28075bd7f887c8ee16dc15541f54c85b8e3a85cebdecf23341425eb1cadd",
-      "size": 9497
+      "sha256": "956a0bdd9caacb34ace52055384138d6c3bfd11afa463c1033f36265820f28fb",
+      "size": 9296
     }
   ],
   "releases": [
-    {
-      "version": "10.0.9",
-      "fromVersion": "10.0.8",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Global atualizado",
-      "notice": "A versão 10.0.1 já está disponível para atualização.",
-      "changelog": [
-        "Global atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/database/lib/global.js",
-          "sha256": "43203195cf351214279be872adf3ed35cc6121c511a70baabc920d07a72ae8df",
-          "size": 142902
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T08:09:35.363Z"
-    },
     {
       "version": "10.0.10",
       "fromVersion": "10.0.9",
@@ -2883,6 +2851,37 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-08T14:16:41.153Z"
+    },
+    {
+      "version": "10.1.7",
+      "fromVersion": "10.1.6",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: atualiza divulgacao sem intervalo",
+      "notice": "A versão 10.1.7 já está disponível para atualização.",
+      "changelog": [
+        "Div atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/div.js",
+          "sha256": "1b2ae39847057478bdd31a316d1e69bf5feb99db4c623dbe8434153fc7ecf744",
+          "size": 4018
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/div.js",
+          "sha256": "161b012e1b0a745935b35785212c8285a2bc652d076bd13a762294e9cca70ae9",
+          "size": 7566
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/div.js",
+          "sha256": "956a0bdd9caacb34ace52055384138d6c3bfd11afa463c1033f36265820f28fb",
+          "size": 9296
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-08T14:42:10.573Z"
     }
   ],
   "versao": "10.0.70",
