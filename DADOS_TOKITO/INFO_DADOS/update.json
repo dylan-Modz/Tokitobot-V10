@@ -1,27 +1,45 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.0.100",
+  "version": "10.0.101",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-03T23:19:24.626Z",
+  "publishedAt": "2026-09-08T12:12:10.262Z",
   "changelog": [
-    "[Melhoria] Antipv atualizado",
-    "A versão 10.0.100 já está disponível para atualização.",
-    "Antipv atualizado"
+    "[Correção] fix: corrige AFK, ID FF 9 digitos e reacoes",
+    "A versão 10.0.101 já está disponível para atualização.",
+    "Evento Reacao atualizado",
+    "Evento X4 atualizado",
+    "Reacao atualizado",
+    "Afk atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Antipv atualizado",
-  "notice": "A versão 10.0.100 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: corrige AFK, ID FF 9 digitos e reacoes",
+  "notice": "A versão 10.0.101 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/dono/antipv.js",
-      "sha256": "191e2df18ec7baf79d65e90977909e35347090470b0ee88bfcda6a44c60d8fb9",
-      "size": 2119
+      "path": "DADOS_TOKITO/plugins/freefire/evento-reacao.js",
+      "sha256": "464590509ba94c3953e5f35b94dea27160c01f31c621940d7a57c06583df0504",
+      "size": 1944
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/evento-x4.js",
+      "sha256": "bd0a4b0138458f656d9d93115cb84321add2a543795e3dd198d99822d8355ee6",
+      "size": 2771
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/reacao.js",
+      "sha256": "668dc31b8bb32c5fac44b46d29f3163937424919b31ba08f614a1c901f0a1392",
+      "size": 6023
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/social/afk.js",
+      "sha256": "52bcb49112e6562743a3869bb93a8201b419adf4db75a6efaf482d390b674ab7",
+      "size": 4328
     }
   ],
   "releases": [
@@ -2696,6 +2714,45 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-03T23:19:24.626Z"
+    },
+    {
+      "version": "10.0.101",
+      "fromVersion": "10.0.100",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: corrige AFK, ID FF 9 digitos e reacoes",
+      "notice": "A versão 10.0.101 já está disponível para atualização.",
+      "changelog": [
+        "Evento Reacao atualizado",
+        "Evento X4 atualizado",
+        "Reacao atualizado",
+        "Afk atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/evento-reacao.js",
+          "sha256": "464590509ba94c3953e5f35b94dea27160c01f31c621940d7a57c06583df0504",
+          "size": 1944
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/evento-x4.js",
+          "sha256": "bd0a4b0138458f656d9d93115cb84321add2a543795e3dd198d99822d8355ee6",
+          "size": 2771
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/reacao.js",
+          "sha256": "668dc31b8bb32c5fac44b46d29f3163937424919b31ba08f614a1c901f0a1392",
+          "size": 6023
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/social/afk.js",
+          "sha256": "52bcb49112e6562743a3869bb93a8201b419adf4db75a6efaf482d390b674ab7",
+          "size": 4328
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-08T12:12:10.261Z"
     }
   ],
   "versao": "10.0.70",
