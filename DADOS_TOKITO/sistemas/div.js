@@ -10,10 +10,15 @@
 
 const fs = require('fs')
 const path = require('path')
+/*
+ * Usa a Baileys oficial/modificada da própria Tokito.
+ * O exports.js central carrega:
+ *   baileys -> github:dylan-Modz/Baileys#main
+ */
 const {
   proto,
   generateWAMessageFromContent
-} = require('@whiskeysockets/baileys')
+} = require('../database/lib/exports.js')
 
 const DB_FILE = path.join(__dirname, '..', 'database', 'div.json')
 
