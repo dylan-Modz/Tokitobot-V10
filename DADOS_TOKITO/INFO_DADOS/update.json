@@ -1,45 +1,46 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.4",
+  "version": "10.1.5",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-08T13:43:39.779Z",
+  "publishedAt": "2026-09-08T14:03:11.064Z",
   "changelog": [
-    "[Correção] fix: usa Baileys do projeto no sistema de divulgacao",
-    "A versão 10.1.4 já está disponível para atualização.",
-    "Div atualizado"
+    "[Novidade] feat: melhora divulgacao com lista selo e marcacao",
+    "A versão 10.1.5 já está disponível para atualização.",
+    "Div atualizado",
+    "Menus atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix: usa Baileys do projeto no sistema de divulgacao",
-  "notice": "A versão 10.1.4 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat: melhora divulgacao com lista selo e marcacao",
+  "notice": "A versão 10.1.5 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/mensagens/div.js",
+      "sha256": "336ad0a799004e2f0df50498a999130e8741686ba8d62ac70d781bdb2841078e",
+      "size": 4375
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "55378a458a7f52f4f8385b67f35f41d775c7df093559c0705ad8fdd0b5f450ba",
+      "size": 66960
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/div.js",
+      "sha256": "269d351faffe891cedd962fd76c1ca32197305fbe40448c5c33cbd9008382235",
+      "size": 14596
+    },
+    {
       "path": "DADOS_TOKITO/sistemas/div.js",
-      "sha256": "b46be7a5a719a95aab637e28ca0d52bcd662f782e0a6ef419c0638edcc911091",
-      "size": 9608
+      "sha256": "674592ff62959e44cb1397fa6bbc480956d845497c046c11dfb5ad09fcd2a750",
+      "size": 12052
     }
   ],
   "releases": [
-    {
-      "version": "10.0.7",
-      "fromVersion": "10.0.7",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Menu atualizado",
-      "notice": "A versão 10.0.7 já está disponível para atualização.",
-      "changelog": [
-        "Menu atualizado"
-      ],
-      "files": [],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T06:57:03.393Z"
-    },
     {
       "version": "10.0.8",
       "fromVersion": "10.0.7",
@@ -2819,6 +2820,43 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-08T13:43:39.779Z"
+    },
+    {
+      "version": "10.1.5",
+      "fromVersion": "10.1.4",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: melhora divulgacao com lista selo e marcacao",
+      "notice": "A versão 10.1.5 já está disponível para atualização.",
+      "changelog": [
+        "Div atualizado",
+        "Menus atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/div.js",
+          "sha256": "336ad0a799004e2f0df50498a999130e8741686ba8d62ac70d781bdb2841078e",
+          "size": 4375
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "55378a458a7f52f4f8385b67f35f41d775c7df093559c0705ad8fdd0b5f450ba",
+          "size": 66960
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/div.js",
+          "sha256": "269d351faffe891cedd962fd76c1ca32197305fbe40448c5c33cbd9008382235",
+          "size": 14596
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/div.js",
+          "sha256": "674592ff62959e44cb1397fa6bbc480956d845497c046c11dfb5ad09fcd2a750",
+          "size": 12052
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-08T14:03:11.064Z"
     }
   ],
   "versao": "10.0.70",
