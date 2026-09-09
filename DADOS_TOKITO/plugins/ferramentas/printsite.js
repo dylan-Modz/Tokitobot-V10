@@ -8,6 +8,7 @@
  * ============================================================
  */
 
+const axios = require('axios')
 const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({
@@ -26,13 +27,13 @@ dylan.setCommand({
       q,
       prefix,
       command,
-      axios,
       API_URL,
       API_KEY_TOKITO,
       tokito,
       from,
       sender,
       selo,
+      info,
       canalInfo,
       reagir,
       reply
@@ -54,48 +55,74 @@ dylan.setCommand({
         API_URL || 'https://tokito-apis.com.br'
       ).replace(/\/+$/, '')
 
-      const { data } = await axios.get(
+      const resposta = await axios.get(
         `${base}/api/print-site`,
         {
           params: {
             url: site,
             apikey: API_KEY_TOKITO
           },
-          timeout: 90000,
+
+          responseType: 'arraybuffer',
+          timeout: 120000,
+          maxRedirects: 10,
+
           headers: {
-            Accept: 'application/json'
+            Accept: 'image/png,image/jpeg,image/webp,image/*,*/*'
           },
+
           validateStatus: () => true
         }
       )
 
-      const arquivo =
-        data?.arquivo ||
-        data?.resultado?.arquivo ||
-        data?.result?.arquivo ||
-        data?.url ||
-        data?.resultado?.url
+      const contentType = String(
+        resposta.headers?.['content-type'] || ''
+      ).toLowerCase()
+
+      const imagem = Buffer.from(
+        resposta.data || []
+      )
 
       if (
-        !arquivo ||
-        !/^https?:\/\//i.test(String(arquivo))
+        resposta.status !== 200 ||
+        !contentType.includes('image') ||
+        imagem.length < 1000
       ) {
-        const detalhe =
-          data?.erro ||
-          data?.error ||
-          data?.message ||
-          data?.mensagem ||
-          'A API não retornou o arquivo da imagem.'
+        let detalhe =
+          `HTTP ${resposta.status || 'desconhecido'}`
 
-        throw new Error(String(detalhe))
+        try {
+          const texto = imagem.toString('utf8').trim()
+
+          if (texto) {
+            try {
+              const json = JSON.parse(texto)
+
+              detalhe =
+                json?.resultado ||
+                json?.erro ||
+                json?.error ||
+                json?.message ||
+                texto
+            }
+            catch {
+              detalhe = texto
+            }
+          }
+        }
+        catch {}
+
+        throw new Error(
+          String(detalhe).slice(0, 500)
+        )
       }
+
+      const quoted = selo || info || undefined
 
       await tokito.sendMessage(
         from,
         {
-          image: {
-            url: String(arquivo)
-          },
+          image: imagem,
 
           caption:
             `- 🧊 \`𝙿𝚁𝙸𝙽𝚃 𝙳𝙾 𝚂𝙸𝚃𝙴\`\n\n` +
@@ -105,9 +132,11 @@ dylan.setCommand({
           contextInfo:
             typeof canalInfo === 'function'
               ? canalInfo([sender])
-              : { mentionedJid: [sender].filter(Boolean) }
+              : {
+                  mentionedJid: [sender].filter(Boolean)
+                }
         },
-        selo ? { quoted: selo } : {}
+        quoted ? { quoted } : {}
       )
 
       await reagir(from, '✅').catch(() => {})
