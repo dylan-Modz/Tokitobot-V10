@@ -1,51 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.11",
+  "version": "10.1.12",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-09T00:37:41.915Z",
+  "publishedAt": "2026-09-09T00:51:38.658Z",
   "changelog": [
-    "[Correção] fix: corrige printsite para resposta binaria",
-    "A versão 10.1.11 já está disponível para atualização.",
+    "[Correção] Printsite atualizado",
+    "A versão 10.1.12 já está disponível para atualização.",
     "Printsite atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: corrige printsite para resposta binaria",
-  "notice": "A versão 10.1.11 já está disponível para atualização.",
+  "title": "Printsite atualizado",
+  "notice": "A versão 10.1.12 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/ferramentas/printsite.js",
-      "sha256": "9309461a2beee33f4453810cefbd54aa1813be8aeed17b20b6ddac9b3d90e6e1",
-      "size": 3956
+      "sha256": "673c43cbe59b9e18adcec971b934f1e42ba76a3bac530791cd23ad58afc2e7f2",
+      "size": 3305
     }
   ],
   "releases": [
-    {
-      "version": "10.0.13",
-      "fromVersion": "10.0.12",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Conexão do bot atualizada",
-      "notice": "A versão 10.0.13 já está disponível para atualização.",
-      "changelog": [
-        "Conexão do bot atualizada"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "03e2561a5e797d62a76b66f1ca0f850f79bd99819f3a905f395be03463ef124d",
-          "size": 299439
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T08:30:48.930Z"
-    },
     {
       "version": "10.0.14",
       "fromVersion": "10.0.13",
@@ -2876,6 +2855,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-09T00:37:41.914Z"
+    },
+    {
+      "version": "10.1.12",
+      "fromVersion": "10.1.11",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Printsite atualizado",
+      "notice": "A versão 10.1.12 já está disponível para atualização.",
+      "changelog": [
+        "Printsite atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/ferramentas/printsite.js",
+          "sha256": "673c43cbe59b9e18adcec971b934f1e42ba76a3bac530791cd23ad58afc2e7f2",
+          "size": 3305
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-09T00:51:38.658Z"
     }
   ],
   "versao": "10.0.70",

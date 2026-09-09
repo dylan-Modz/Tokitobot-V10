@@ -8,7 +8,6 @@
  * ============================================================
  */
 
-const axios = require('axios')
 const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({
@@ -48,6 +47,13 @@ dylan.setCommand({
       )
     }
 
+    if (!API_KEY_TOKITO) {
+      return reply(
+        `- ❌ \`𝙿𝚁𝙸𝙽𝚃 𝙳𝙾 𝚂𝙸𝚃𝙴\`\n\n` +
+        `> *『 🔑 𝙴𝚁𝚁𝙾 』— ᴛᴏᴋᴇɴ ᴅᴀ ᴛᴏᴋɪᴛᴏ ᴀᴘɪs ɴᴀ̃ᴏ ᴄᴏɴғɪɢᴜʀᴀᴅᴏ.*`
+      )
+    }
+
     await reagir(from, '⏳').catch(() => {})
 
     try {
@@ -55,74 +61,26 @@ dylan.setCommand({
         API_URL || 'https://tokito-apis.com.br'
       ).replace(/\/+$/, '')
 
-      const resposta = await axios.get(
-        `${base}/api/print-site`,
-        {
-          params: {
-            url: site,
-            apikey: API_KEY_TOKITO
-          },
-
-          responseType: 'arraybuffer',
-          timeout: 120000,
-          maxRedirects: 10,
-
-          headers: {
-            Accept: 'image/png,image/jpeg,image/webp,image/*,*/*'
-          },
-
-          validateStatus: () => true
-        }
-      )
-
-      const contentType = String(
-        resposta.headers?.['content-type'] || ''
-      ).toLowerCase()
-
-      const imagem = Buffer.from(
-        resposta.data || []
-      )
-
-      if (
-        resposta.status !== 200 ||
-        !contentType.includes('image') ||
-        imagem.length < 1000
-      ) {
-        let detalhe =
-          `HTTP ${resposta.status || 'desconhecido'}`
-
-        try {
-          const texto = imagem.toString('utf8').trim()
-
-          if (texto) {
-            try {
-              const json = JSON.parse(texto)
-
-              detalhe =
-                json?.resultado ||
-                json?.erro ||
-                json?.error ||
-                json?.message ||
-                texto
-            }
-            catch {
-              detalhe = texto
-            }
-          }
-        }
-        catch {}
-
-        throw new Error(
-          String(detalhe).slice(0, 500)
-        )
-      }
+      /*
+       * A rota /api/print-site retorna a imagem diretamente:
+       *
+       * return res.status(200).send(imagem)
+       *
+       * Por isso o Baileys pode usar a própria URL da rota.
+       */
+      const apiUrl =
+        `${base}/api/print-site` +
+        `?url=${encodeURIComponent(site)}` +
+        `&apikey=${encodeURIComponent(String(API_KEY_TOKITO))}`
 
       const quoted = selo || info || undefined
 
       await tokito.sendMessage(
         from,
         {
-          image: imagem,
+          image: {
+            url: apiUrl
+          },
 
           caption:
             `- 🧊 \`𝙿𝚁𝙸𝙽𝚃 𝙳𝙾 𝚂𝙸𝚃𝙴\`\n\n` +
@@ -136,10 +94,16 @@ dylan.setCommand({
                   mentionedJid: [sender].filter(Boolean)
                 }
         },
-        quoted ? { quoted } : {}
+
+        quoted
+          ? {
+              quoted
+            }
+          : {}
       )
 
       await reagir(from, '✅').catch(() => {})
+
       return true
     }
     catch (error) {
