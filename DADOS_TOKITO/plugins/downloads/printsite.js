@@ -28,8 +28,7 @@
  * ============================================================
  */
 
-const api = require('../../scrapers/downloads/pesquisas')
-const { texto, urlValida } = require('./_novas_rotas')
+const { urlValida } = require('./_novas_rotas')
 const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({
@@ -46,9 +45,9 @@ dylan.setCommand({
   async executar(ctx) {
     with (ctx) {
       try {
-        const site = String(q || '').trim()
+        let site = String(q || '').trim()
 
-        if (!site || !urlValida(site)) {
+        if (!site) {
           return reply(
             mess.downloadUso({
               tipo: 'LINK DO SITE',
@@ -59,28 +58,46 @@ dylan.setCommand({
           )
         }
 
+        if (!/^https?:\/\//i.test(site)) {
+          site = `https://${site}`
+        }
+
+        try {
+          site = new URL(site).toString()
+        } catch {
+          return reply(
+            mess.downloadUso({
+              tipo: 'LINK DO SITE',
+              prefix,
+              command,
+              exemplo: 'https://tokito-apis.com.br'
+            })
+          )
+        }
+
+        if (!API_KEY_TOKITO) {
+          await reagir(from, '❌').catch(() => {})
+          return reply('❌ | API_KEY_TOKITO não configurada.')
+        }
+
         await reagir(from, '📸')
         await reply(mess.wait())
 
-        const dados = await api.printSite(site)
-        const arquivo = dados?.arquivo
+        const base = String(API_URL || 'https://tokito-apis.com.br').replace(/\/+$/, '')
 
-        if (!arquivo || !urlValida(arquivo)) {
-          await reagir(from, '❌').catch(() => {})
-          return reply(mess.downloadNaoEncontrado('PRINT'))
-        }
+        const apiUrl =
+          `${base}/api/print-site?url=${encodeURIComponent(site)}&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
 
         await tokito.sendMessage(
           from,
           {
             image: {
-              url: arquivo
+              url: apiUrl
             },
             caption:
               `*📸 | PRINT DO SITE*\n\n` +
               `> 🌐 Site: ${site}\n` +
-              `> 📄 Tipo: ${texto(dados?.tipo, 'image/png')}\n` +
-              `> 📦 Tamanho: ${Number(dados?.tamanho || 0).toLocaleString('pt-BR')} bytes`,
+              `> ✅ Status: print gerado com sucesso`,
             contextInfo: {
               ...newsletter,
               mentionedJid: [sender]
