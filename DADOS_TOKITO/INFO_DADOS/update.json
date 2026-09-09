@@ -1,57 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.10",
+  "version": "10.1.11",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-09T00:22:41.995Z",
+  "publishedAt": "2026-09-09T00:37:41.915Z",
   "changelog": [
-    "[Correção] fix: corrige printsite e detector de sala com ID de 9 digitos",
-    "A versão 10.1.10 já está disponível para atualização.",
-    "Printsite atualizado",
-    "Evento Sala Id atualizado"
+    "[Correção] fix: corrige printsite para resposta binaria",
+    "A versão 10.1.11 já está disponível para atualização.",
+    "Printsite atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: corrige printsite e detector de sala com ID de 9 digitos",
-  "notice": "A versão 10.1.10 já está disponível para atualização.",
+  "title": "fix: corrige printsite para resposta binaria",
+  "notice": "A versão 10.1.11 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/ferramentas/printsite.js",
-      "sha256": "8e1778731b2b7cf75e6fbabe333585abf2b209efde430396bc2c006b4a21da11",
-      "size": 3362
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/evento-sala-id.js",
-      "sha256": "d4370f035806b1faf03bdcd14dae9907bc6e35de266f22bdcf02631f931fb2b0",
-      "size": 3736
+      "sha256": "9309461a2beee33f4453810cefbd54aa1813be8aeed17b20b6ddac9b3d90e6e1",
+      "size": 3956
     }
   ],
   "releases": [
-    {
-      "version": "10.0.12",
-      "fromVersion": "10.0.11",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Arquivo principal do bot atualizado",
-      "notice": "A versão 10.0.12 já está disponível para atualização.",
-      "changelog": [
-        "Arquivo principal do bot atualizado"
-      ],
-      "files": [
-        {
-          "path": "tokito.js",
-          "sha256": "9386c5d03d55ddd92c95b7df4d5299f868366fcbb713938474a86a8acccdfe4b",
-          "size": 429849
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T08:28:36.150Z"
-    },
     {
       "version": "10.0.13",
       "fromVersion": "10.0.12",
@@ -2882,6 +2855,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-09T00:22:41.993Z"
+    },
+    {
+      "version": "10.1.11",
+      "fromVersion": "10.1.10",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: corrige printsite para resposta binaria",
+      "notice": "A versão 10.1.11 já está disponível para atualização.",
+      "changelog": [
+        "Printsite atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/ferramentas/printsite.js",
+          "sha256": "9309461a2beee33f4453810cefbd54aa1813be8aeed17b20b6ddac9b3d90e6e1",
+          "size": 3956
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-09T00:37:41.914Z"
     }
   ],
   "versao": "10.0.70",
