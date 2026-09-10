@@ -5020,3 +5020,80 @@ return `- 📭 \`𝙵𝙸𝙻𝙰 𝙿𝙰𝚁𝚃𝚈 𝚅𝙰𝚉𝙸𝙰\`
 
 > 🎉 ׄ ( ɴᴀ̃ᴏ ᴛᴇᴍ ᴏᴜᴛʀᴀ ᴍᴜ́sɪᴄᴀ ᴀɢᴜᴀʀᴅᴀɴᴅᴏ. )`
 }
+
+/* TOKITO_SHAZAM_MENSAGENS_V1 */
+
+exports.shazamUso = prefix => {
+return `- 🎧 \`𝚂𝙷𝙰𝚉𝙰𝙼\`
+
+> 🎵 ׄ ( ʀᴇsᴘᴏɴᴅᴀ ᴜᴍ ᴀ́ᴜᴅɪᴏ, ᴠᴏᴢ ᴏᴜ ᴠɪ́ᴅᴇᴏ ᴄᴏᴍ ${prefix}shazam. )
+> 🔎 ׄ ( ᴇᴜ ᴠᴏᴜ ᴛᴇɴᴛᴀʀ ᴅᴇsᴄᴏʙʀɪʀ ǫᴜᴀʟ ᴇ́ ᴀ ᴍᴜ́sɪᴄᴀ. )`
+}
+
+exports.shazamAnalisando = () => {
+return `- 🔎 \`𝚂𝙷𝙰𝚉𝙰𝙼\`
+
+> 🎧 ׄ ( ᴀɴᴀʟɪsᴀɴᴅᴏ ᴀ ᴍɪ́ᴅɪᴀ ᴇ ᴘʀᴏᴄᴜʀᴀɴᴅᴏ ᴀ ᴍᴜ́sɪᴄᴀ... )`
+}
+
+exports.shazamSemConfig = () => {
+return `- ⚙️ \`𝚂𝙷𝙰𝚉𝙰𝙼 𝙽𝙰̃𝙾 𝙲𝙾𝙽𝙵𝙸𝙶𝚄𝚁𝙰𝙳𝙾\`
+
+> 🔑 ׄ ( ᴀs ᴄʀᴇᴅᴇɴᴄɪᴀɪs ᴅᴏ ᴀᴄʀᴄʟᴏᴜᴅ ᴀɪɴᴅᴀ ɴᴀ̃ᴏ ғᴏʀᴀᴍ ᴄᴏɴғɪɢᴜʀᴀᴅᴀs. )
+> 📁 ׄ ( ᴄᴏɴғɪɢᴜʀᴇ ᴏ ᴀʀǫᴜɪᴠᴏ DADOS_TOKITO/INFO_DADOS/acrcloud.json. )`
+}
+
+exports.shazamMidiaGrande = () => {
+return `- 📦 \`𝙼𝙸́𝙳𝙸𝙰 𝙼𝚄𝙸𝚃𝙾 𝙶𝚁𝙰𝙽𝙳𝙴\`
+
+> 🎧 ׄ ( ᴜsᴇ ᴜᴍ ᴛʀᴇᴄʜᴏ ᴅᴇ ᴀ́ᴜᴅɪᴏ ᴏᴜ ᴠɪ́ᴅᴇᴏ ᴍᴇɴᴏʀ ǫᴜᴇ 5 MB ᴘᴀʀᴀ ᴏ ʀᴇᴄᴏɴʜᴇᴄɪᴍᴇɴᴛᴏ. )`
+}
+
+exports.shazamNaoEncontrada = () => {
+return `- ❌ \`𝙼𝚄́𝚂𝙸𝙲𝙰 𝙽𝙰̃𝙾 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰\`
+
+> 🔎 ׄ ( ɴᴀ̃ᴏ ᴄᴏɴsᴇɢᴜɪ ɪᴅᴇɴᴛɪғɪᴄᴀʀ ᴇssᴀ ᴍᴜ́sɪᴄᴀ. )
+> 🎧 ׄ ( ᴛᴇɴᴛᴇ ᴜᴍ ᴛʀᴇᴄʜᴏ ᴍᴀɪs ʟɪᴍᴘᴏ, ᴄᴏᴍ ᴍᴇɴᴏs ʀᴜɪ́ᴅᴏ. )`
+}
+
+exports.shazamResultado = (dados = {}, prefix = '.') => {
+const titulo = dados.titulo || 'Música desconhecida'
+const artista = dados.artista || 'Desconhecido'
+const album = dados.album || 'Não informado'
+const data = dados.data || 'Não informada'
+const genero = dados.genero || 'Não informado'
+const duracao = dados.duracao || 'Não informada'
+const score = dados.score || 'Não informado'
+
+const links = []
+
+if (dados.youtube)
+links.push(`> ▶️ ׄ ( YouTube: https://www.youtube.com/watch?v=${dados.youtube} )`)
+
+if (dados.spotify)
+links.push(`> 🟢 ׄ ( Spotify: https://open.spotify.com/track/${dados.spotify} )`)
+
+if (dados.deezer)
+links.push(`> 🎶 ׄ ( Deezer: https://www.deezer.com/track/${dados.deezer} )`)
+
+return `- 🎧 \`𝙼𝚄́𝚂𝙸𝙲𝙰 𝙸𝙳𝙴𝙽𝚃𝙸𝙵𝙸𝙲𝙰𝙳𝙰\`
+
+> 🎵 ׄ ( ${titulo} )
+> 👨‍🎤 ׄ ( ${artista} )
+> 💿 ׄ ( ${album} )
+> 📅 ׄ ( ${data} )
+> 🎼 ׄ ( ${genero} )
+> ⏱️ ׄ ( ${duracao} )
+> 📊 ׄ ( ᴄᴏɴғɪᴀɴᴄ̧ᴀ: ${score} )
+${links.length ? '\n' + links.join('\n') : ''}
+
+> 🎧 ׄ ( ᴘᴀʀᴀ ʙᴀɪxᴀʀ: ${prefix}play ${titulo} ${artista} )`
+}
+
+exports.shazamErro = detalhe => {
+return `- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙾 𝚂𝙷𝙰𝚉𝙰𝙼\`
+
+> ⚠️ ׄ ( ${detalhe || 'Não foi possível identificar a música.'} )`
+}
+
+/* FIM_TOKITO_SHAZAM_MENSAGENS_V1 */
