@@ -1,29 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.13",
+  "version": "10.1.14",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-09T00:52:02.054Z",
+  "publishedAt": "2026-09-10T22:35:17.567Z",
   "changelog": [
-    "[Correção] Printsite atualizado",
-    "A versão 10.1.13 já está disponível para atualização.",
-    "Printsite atualizado"
+    "[Correção] Printsite duplicado removido",
+    "A versão 10.1.14 já está disponível para atualização.",
+    "Printsite duplicado removido.",
+    "Pasta ferramentas removida.",
+    "O comando Printsite permanece apenas na categoria downloads."
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/ferramentas"
+  ],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Printsite atualizado",
-  "notice": "A versão 10.1.13 já está disponível para atualização.",
+  "title": "Printsite duplicado removido",
+  "notice": "A versão 10.1.14 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
-  "files": [
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/printsite.js",
-      "sha256": "10ec2a9b0574addcf44d27575367ccc3efc609dfd58673858c56a37a80a9bcab",
-      "size": 3362
-    }
-  ],
+  "files": [],
   "releases": [
     {
       "version": "10.0.15",
@@ -2876,6 +2874,25 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-09T00:52:02.052Z"
+    },
+    {
+      "version": "10.1.14",
+      "fromVersion": "10.1.13",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Printsite duplicado removido",
+      "notice": "A versão 10.1.14 já está disponível para atualização.",
+      "changelog": [
+        "Printsite duplicado removido.",
+        "Pasta ferramentas removida.",
+        "O comando Printsite permanece apenas na categoria downloads."
+      ],
+      "files": [],
+      "delete": [
+        "DADOS_TOKITO/plugins/ferramentas"
+      ],
+      "required": true,
+      "publishedAt": "2026-09-10T22:35:17.567Z"
     }
   ],
   "versao": "10.0.70",
