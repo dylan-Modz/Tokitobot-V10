@@ -8,20 +8,22 @@
  * ============================================================
  */
 
+const dylan = require('../../database/lib/comandos')
+
 const nomeSeguro = valor => String(valor || 'musica')
   .replace(/[\\/:*?"<>|]/g, '')
   .replace(/\s+/g, ' ')
   .trim()
   .slice(0, 100) || 'musica'
 
-module.exports = {
+dylan.setCommand({
   nome: 'shazam',
   comandos: ['shazam'],
   categoria: 'downloads',
 
   info: {
     descricao: 'Identifica uma música através de um áudio e tenta enviar o MP3.',
-    uso: 'shazam (marcar áudio)',
+    uso: 'shazam (responder áudio)',
     categoria: 'downloads'
   },
 
@@ -49,7 +51,11 @@ module.exports = {
         }
 
         if (error?.code === 'SHAZAM_LIMITE') {
-          return reply(mess.shazamErro('Limite temporário do identificador. Tente novamente em instantes.'))
+          return reply(
+            mess.shazamErro(
+              'Limite temporário do identificador. Tente novamente em instantes.'
+            )
+          )
         }
 
         console.log(
@@ -65,7 +71,7 @@ module.exports = {
         return reply(mess.shazamNaoEncontrada())
       }
 
-      const texto = mess.shazamResultado(musica)
+      const texto = mess.shazamResultado(musica, prefix)
       const contexto = typeof canalInfo === 'function'
         ? canalInfo([sender])
         : { mentionedJid: [sender] }
@@ -126,7 +132,11 @@ module.exports = {
             modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes'
           )
 
-          await reply(mess.shazamErro('A música foi reconhecida, mas não consegui enviar o áudio.'))
+          await reply(
+            mess.shazamErro(
+              'A música foi reconhecida, mas não consegui enviar o áudio.'
+            )
+          )
         }
       }
 
@@ -134,4 +144,4 @@ module.exports = {
       return true
     }
   }
-}
+})
