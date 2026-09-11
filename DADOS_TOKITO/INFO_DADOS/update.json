@@ -1,29 +1,29 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.16",
+  "version": "10.1.17",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-11T16:11:16.267Z",
+  "publishedAt": "2026-09-11T16:42:00.000Z",
   "changelog": [
-    "[Correção] Comando Shazam corrigido",
-    "O Shazam agora é registrado corretamente pelo sistema de plugins.",
-    "Plugin ajustado para o padrão dylan.setCommand.",
-    "O comando shazam agora é reconhecido pelo Tokito V10."
+    "[Correção] Integração completa do Shazam",
+    "Mensagens do Shazam incluídas na atualização.",
+    "Menu do Shazam incluído na atualização.",
+    "Módulo de reconhecimento musical sincronizado.",
+    "Comando Shazam mantido no padrão atual de plugins."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Comando Shazam corrigido",
-  "notice": "A versão 10.1.16 já está disponível para atualização.",
+  "title": "Integração completa do Shazam",
+  "notice": "A versão 10.1.17 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/shazam.js",
-      "sha256": "11629bec77630332c0837ad946f7c5446fd38447fc59ee2c7481de7b41f17092",
-      "size": 3629
-    }
+    "DADOS_TOKITO/plugins/downloads/shazam.js",
+    "DADOS_TOKITO/sistemas/modulos.js",
+    "DADOS_TOKITO/mensagens/mensagens.js",
+    "DADOS_TOKITO/mensagens/menus.js"
   ],
   "releases": [
     {
@@ -2941,6 +2941,29 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-11T16:11:16.267Z"
+    },
+    {
+      "version": "10.1.17",
+      "fromVersion": "10.1.16",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Integração completa do Shazam",
+      "notice": "A versão 10.1.17 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens do Shazam incluídas no updater.",
+        "Menu de downloads sincronizado com o comando Shazam.",
+        "Módulo de reconhecimento musical incluído na atualização.",
+        "Comando Shazam sincronizado com a estrutura atual do Tokito V10."
+      ],
+      "files": [
+        "DADOS_TOKITO/plugins/downloads/shazam.js",
+        "DADOS_TOKITO/sistemas/modulos.js",
+        "DADOS_TOKITO/mensagens/mensagens.js",
+        "DADOS_TOKITO/mensagens/menus.js"
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-11T16:42:00.000Z"
     }
   ],
   "versao": "10.0.70",
