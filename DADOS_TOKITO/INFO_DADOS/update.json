@@ -1,26 +1,29 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.15",
+  "version": "10.1.16",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-11T15:54:05.741Z",
+  "publishedAt": "2026-09-11T16:11:16.267Z",
   "changelog": [
-    "[Novo] Comando Shazam adicionado",
-    "Reconhecimento de músicas respondendo a um áudio.",
-    "Exibe título, artista, álbum e links quando disponíveis.",
-    "Tenta enviar a música em MP3 após o reconhecimento."
+    "[Correção] Comando Shazam corrigido",
+    "O Shazam agora é registrado corretamente pelo sistema de plugins.",
+    "Plugin ajustado para o padrão dylan.setCommand.",
+    "O comando shazam agora é reconhecido pelo Tokito V10."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "Comando Shazam adicionado",
-  "notice": "A versão 10.1.15 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "Comando Shazam corrigido",
+  "notice": "A versão 10.1.16 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
-    "DADOS_TOKITO/plugins/downloads/shazam.js",
-    "DADOS_TOKITO/sistemas/modulos.js"
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/shazam.js",
+      "sha256": "11629bec77630332c0837ad946f7c5446fd38447fc59ee2c7481de7b41f17092",
+      "size": 3629
+    }
   ],
   "releases": [
     {
@@ -2914,6 +2917,30 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-11T15:54:05.741Z"
+    },
+    {
+      "version": "10.1.16",
+      "fromVersion": "10.1.15",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Comando Shazam corrigido",
+      "notice": "A versão 10.1.16 já está disponível para atualização.",
+      "changelog": [
+        "Comando Shazam corrigido.",
+        "Registro do comando ajustado para o sistema atual de plugins.",
+        "Plugin convertido para dylan.setCommand.",
+        "O comando shazam agora é carregado corretamente."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/shazam.js",
+          "sha256": "11629bec77630332c0837ad946f7c5446fd38447fc59ee2c7481de7b41f17092",
+          "size": 3629
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-11T16:11:16.267Z"
     }
   ],
   "versao": "10.0.70",
