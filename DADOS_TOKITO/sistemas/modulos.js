@@ -316,61 +316,194 @@ const transcrever = async (ctx, audio = null) => {
   }
 }
 
-
-// ============================================================
-// SHAZAM / IDENTIFICAÇÃO DE MÚSICA
-// ============================================================
+/* ============================================================
+ * SHAZAM — reconhecimento por áudio ou vídeo
+ * Dev: Dylan Modz
+ * ============================================================ */
 
 const SHAZAM_ENDPOINT = 'https://songfinder.dev/api/music/recognize'
 const SHAZAM_MAX_BYTES = 10 * 1024 * 1024
+const SHAZAM_DOWNLOAD_TIMEOUT = 45000
+const SHAZAM_RECOGNIZE_TIMEOUT = 65000
+const SHAZAM_AUDIO_TIMEOUT = 40000
 
-const extensaoAudio = mime => {
-  const tipo = String(mime || '').toLowerCase()
+const erroShazam = (codigo, mensagem) => {
+  const erro = new Error(mensagem)
+  erro.code = codigo
+  return erro
+}
 
-  if (tipo.includes('mpeg')) return 'mp3'
-  if (tipo.includes('mp4') || tipo.includes('m4a')) return 'm4a'
-  if (tipo.includes('wav')) return 'wav'
-  if (tipo.includes('webm')) return 'webm'
-  if (tipo.includes('aac')) return 'aac'
-  if (tipo.includes('flac')) return 'flac'
+const comTimeoutShazam = (promessa, tempo, codigo, mensagem) => {
+  let timer = null
+
+  const limite = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(erroShazam(codigo, mensagem)), tempo)
+  })
+
+  return Promise.race([promessa, limite])
+    .finally(() => {
+      if (timer) clearTimeout(timer)
+    })
+}
+
+const numeroSeguroShazam = valor => {
+  if (valor == null) return 0
+  if (typeof valor === 'number') return Number.isFinite(valor) ? valor : 0
+  if (typeof valor === 'bigint') return Number(valor)
+
+  try {
+    if (typeof valor?.toNumber === 'function') {
+      const numero = valor.toNumber()
+      return Number.isFinite(numero) ? numero : 0
+    }
+
+    const numero = Number(valor?.toString?.() ?? valor)
+    return Number.isFinite(numero) ? numero : 0
+  } catch {
+    return 0
+  }
+}
+
+const extensaoShazam = (mime = '', tipo = 'audio') => {
+  const valor = String(mime || '').toLowerCase()
+
+  if (tipo === 'video') {
+    if (valor.includes('webm')) return 'webm'
+    if (valor.includes('quicktime')) return 'mov'
+    if (valor.includes('x-matroska')) return 'mkv'
+    return 'mp4'
+  }
+
+  if (valor.includes('mpeg')) return 'mp3'
+  if (valor.includes('mp4') || valor.includes('m4a')) return 'm4a'
+  if (valor.includes('wav')) return 'wav'
+  if (valor.includes('webm')) return 'webm'
+  if (valor.includes('flac')) return 'flac'
   return 'ogg'
 }
 
-const identificarMusica = async (ctx, audio = null) => {
-  const audioFinal = audio || audioAtual(ctx)
+const selecionarMidiaShazam = (ctx, alvo = null) => {
+  if (alvo?.midia) {
+    return {
+      tipo: alvo.tipo === 'video' ? 'video' : 'audio',
+      midia: alvo.midia
+    }
+  }
 
-  if (!audioFinal) {
-    const erro = new Error('Áudio não encontrado para identificação.')
-    erro.code = 'SHAZAM_SEM_AUDIO'
-    throw erro
+  if (alvo && typeof alvo === 'object') {
+    const mime = String(alvo?.mimetype || '').toLowerCase()
+
+    if (mime.startsWith('video/')) return { tipo: 'video', midia: alvo }
+    if (mime.startsWith('audio/')) return { tipo: 'audio', midia: alvo }
+  }
+
+  const midias = mediaAtual(ctx)
+
+  if (midias.audio) return { tipo: 'audio', midia: midias.audio }
+  if (midias.video) return { tipo: 'video', midia: midias.video }
+
+  return null
+}
+
+const extrairYoutubeIdShazam = valor => {
+  const texto = String(valor || '').trim()
+  if (!texto) return null
+  if (/^[A-Za-z0-9_-]{11}$/.test(texto)) return texto
+
+  const match = texto.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|shorts\/|embed\/))([A-Za-z0-9_-]{11})/i)
+  return match?.[1] || null
+}
+
+const extrairSpotifyIdShazam = valor => {
+  const texto = String(valor || '').trim()
+  if (!texto) return null
+  if (/^[A-Za-z0-9]{20,30}$/.test(texto)) return texto
+  return texto.match(/open\.spotify\.com\/track\/([A-Za-z0-9]+)/i)?.[1] || null
+}
+
+const extrairDeezerIdShazam = valor => {
+  const texto = String(valor || '').trim()
+  if (!texto) return null
+  if (/^\d+$/.test(texto)) return texto
+  return texto.match(/deezer\.com\/(?:[a-z]{2}\/)?track\/(\d+)/i)?.[1] || null
+}
+
+const formatarDuracaoShazam = valor => {
+  if (valor == null || valor === '') return null
+
+  if (typeof valor === 'string' && valor.includes(':')) return valor
+
+  const numero = Number(valor)
+  if (!Number.isFinite(numero) || numero <= 0) return String(valor)
+
+  const segundos = numero > 10000 ? Math.round(numero / 1000) : Math.round(numero)
+  const min = Math.floor(segundos / 60)
+  const seg = segundos % 60
+  return `${min}:${String(seg).padStart(2, '0')}`
+}
+
+const identificarMusica = async (ctx, alvo = null) => {
+  const selecionada = selecionarMidiaShazam(ctx, alvo)
+
+  if (!selecionada?.midia) {
+    throw erroShazam(
+      'SHAZAM_SEM_MIDIA',
+      'Responda um áudio, mensagem de voz ou vídeo com música.'
+    )
   }
 
   if (typeof ctx?.getFileBuffer !== 'function') {
-    throw new Error('getFileBuffer não está disponível no contexto.')
+    throw erroShazam('SHAZAM_DOWNLOAD', 'getFileBuffer não está disponível no contexto.')
   }
 
-  const buffer = await ctx.getFileBuffer(audioFinal, 'audio')
+  const { tipo, midia } = selecionada
+  const tamanhoDeclarado = numeroSeguroShazam(midia?.fileLength)
+
+  if (tamanhoDeclarado > SHAZAM_MAX_BYTES) {
+    throw erroShazam(
+      'SHAZAM_ARQUIVO_GRANDE',
+      'A mídia ultrapassa o limite de 10 MB.'
+    )
+  }
+
+  let buffer
+
+  try {
+    buffer = await comTimeoutShazam(
+      Promise.resolve(ctx.getFileBuffer(midia, tipo)),
+      SHAZAM_DOWNLOAD_TIMEOUT,
+      'SHAZAM_TIMEOUT_DOWNLOAD',
+      'A mídia demorou demais para baixar do WhatsApp.'
+    )
+  } catch (erro) {
+    if (erro?.code) throw erro
+    throw erroShazam(
+      'SHAZAM_DOWNLOAD',
+      erro?.message || 'Não foi possível baixar a mídia.'
+    )
+  }
 
   if (!Buffer.isBuffer(buffer) || !buffer.length) {
-    const erro = new Error('Não foi possível baixar o áudio para identificação.')
-    erro.code = 'SHAZAM_SEM_AUDIO'
-    throw erro
+    throw erroShazam('SHAZAM_DOWNLOAD', 'Não foi possível baixar a mídia.')
   }
 
   if (buffer.length > SHAZAM_MAX_BYTES) {
-    const erro = new Error('O áudio ultrapassa o limite de 10 MB do identificador.')
-    erro.code = 'SHAZAM_ARQUIVO_GRANDE'
-    throw erro
+    throw erroShazam(
+      'SHAZAM_ARQUIVO_GRANDE',
+      'A mídia ultrapassa o limite de 10 MB.'
+    )
   }
 
-  const mime = String(audioFinal?.mimetype || 'audio/ogg').split(';')[0].trim() || 'audio/ogg'
-  const ext = extensaoAudio(mime)
+  const mimeOriginal = String(
+    midia?.mimetype || (tipo === 'video' ? 'video/mp4' : 'audio/ogg')
+  )
+  const mime = mimeOriginal.split(';')[0].trim() || (tipo === 'video' ? 'video/mp4' : 'audio/ogg')
+  const ext = extensaoShazam(mimeOriginal, tipo)
   const form = new FormData()
 
   form.append('file', buffer, {
     filename: `tokito_shazam_${Date.now()}.${ext}`,
-    contentType: mime,
-    knownLength: buffer.length
+    contentType: mime
   })
   form.append('source', 'cli')
 
@@ -383,74 +516,151 @@ const identificarMusica = async (ctx, audio = null) => {
         'X-SongFinder-Client': 'cli',
         Accept: 'application/json'
       },
-      timeout: 120000,
+      timeout: SHAZAM_RECOGNIZE_TIMEOUT,
       maxBodyLength: SHAZAM_MAX_BYTES + (1024 * 1024),
       maxContentLength: SHAZAM_MAX_BYTES + (1024 * 1024),
       validateStatus: () => true
     })
-  }
-  catch (erro) {
-    const falha = new Error(erro?.message || 'Falha ao acessar o serviço de identificação.')
-    falha.code = 'SHAZAM_SERVICO'
-    falha.cause = erro
-    throw falha
-  }
+  } catch (erro) {
+    const timeout = erro?.code === 'ECONNABORTED' || /timeout/i.test(String(erro?.message || ''))
 
-  if (resposta.status === 429) {
-    const erro = new Error('Limite temporário do identificador atingido.')
-    erro.code = 'SHAZAM_LIMITE'
-    erro.response = resposta
-    throw erro
+    throw erroShazam(
+      timeout ? 'SHAZAM_TIMEOUT_RECONHECER' : 'SHAZAM_SERVICO',
+      timeout
+        ? 'O reconhecimento demorou demais para responder.'
+        : (erro?.message || 'Falha ao consultar o identificador de músicas.')
+    )
   }
 
   const payload = resposta?.data || {}
 
-  if (resposta.status < 200 || resposta.status >= 300 || Number(payload?.code ?? 0) !== 0) {
-    const erro = new Error(
-      payload?.message ||
-      payload?.error ||
-      `Falha no identificador de música. HTTP ${resposta.status}`
-    )
-    erro.code = resposta.status === 403 ? 'SHAZAM_BLOQUEADO' : 'SHAZAM_SERVICO'
-    erro.response = resposta
-    throw erro
+  if (resposta.status === 429) {
+    throw erroShazam('SHAZAM_LIMITE', 'Limite temporário do identificador atingido.')
   }
 
-  const musica = payload?.data || {}
+  if (resposta.status === 413) {
+    throw erroShazam('SHAZAM_ARQUIVO_GRANDE', 'A mídia ultrapassa o limite aceito.')
+  }
 
-  if (!musica?.matched || (!musica?.title && !musica?.artist)) {
+  if (resposta.status < 200 || resposta.status >= 300) {
+    throw erroShazam(
+      'SHAZAM_SERVICO',
+      payload?.message || payload?.error || `SongFinder respondeu HTTP ${resposta.status}.`
+    )
+  }
+
+  const musica = payload?.data || payload?.result || payload?.resultado || {}
+  const titulo = String(musica?.title || musica?.titulo || '').trim()
+  const artista = String(musica?.artist || musica?.artista || '').trim()
+
+  if (!titulo && !artista) {
     return {
       matched: false,
       raw: musica
     }
   }
 
-  const titulo = String(musica.title || 'Não informado').trim()
-  const artista = String(musica.artist || 'Não informado').trim()
-  const busca = `${titulo} ${artista}`.replace(/\s+/g, ' ').trim()
-  const baseApi = String(ctx?.API_URL || 'https://tokito-apis.com.br').replace(/\/+$/, '')
-  const apiKey = String(ctx?.API_KEY_TOKITO || '').trim()
-
-  const audioUrl = apiKey && busca
-    ? `${baseApi}/api/youtube-audio?q=${encodeURIComponent(busca)}&apikey=${encodeURIComponent(apiKey)}`
-    : null
+  const spotifyUrl = musica?.spotifyUrl || musica?.spotify_url || musica?.spotify || null
+  const youtubeUrl = musica?.youtubeUrl || musica?.youtube_url || musica?.youtube || null
+  const deezerUrl = musica?.deezerUrl || musica?.deezer_url || musica?.deezer || null
+  const lancamento = musica?.releaseDate || musica?.release_date || musica?.date || musica?.data || null
+  const genero = musica?.genre || musica?.genero || (Array.isArray(musica?.genres) ? musica.genres[0] : null)
+  const duracao = formatarDuracaoShazam(
+    musica?.durationText ?? musica?.duration ?? musica?.duracao ?? null
+  )
+  const busca = [titulo, artista].filter(Boolean).join(' - ')
 
   return {
     matched: true,
-    titulo,
-    artista,
-    album: musica.album || null,
-    lancamento: musica.releaseDate || null,
-    gravadora: musica.label || null,
-    capa: musica.artworkUrl || null,
-    link: musica.songLink || null,
-    spotify: musica.spotifyUrl || null,
-    appleMusic: musica.appleMusicUrl || null,
-    score: musica.score ?? null,
-    engine: musica.engine || null,
+    titulo: titulo || 'Não informado',
+    artista: artista || 'Não informado',
+    album: musica?.album || null,
+
+    // Campos compatíveis com mensagens.js atual.
+    data: lancamento,
+    genero: genero || null,
+    duracao,
+    youtube: extrairYoutubeIdShazam(youtubeUrl),
+    spotify: extrairSpotifyIdShazam(spotifyUrl),
+    deezer: extrairDeezerIdShazam(deezerUrl),
+
+    // Campos completos do SongFinder.
+    lancamento,
+    gravadora: musica?.label || musica?.gravadora || null,
+    capa: musica?.artworkUrl || musica?.artwork_url || musica?.cover || musica?.capa || null,
+    link: musica?.songLink || musica?.song_link || musica?.link || null,
+    spotifyUrl,
+    appleMusic: musica?.appleMusicUrl || musica?.apple_music_url || null,
+    youtubeUrl,
+    deezerUrl,
+    score: musica?.score ?? musica?.confidence ?? null,
+    engine: musica?.engine || null,
     busca,
-    audioUrl,
+    tipoMidia: tipo,
     raw: musica
+  }
+}
+
+const buscarAudioShazam = async (ctx, musica = {}) => {
+  const busca = String(
+    musica?.busca || [musica?.titulo, musica?.artista].filter(Boolean).join(' - ')
+  ).trim()
+
+  const apiKey = String(ctx?.API_KEY_TOKITO || '').trim()
+  const baseApi = String(ctx?.API_URL || 'https://tokito-apis.com.br').replace(/\/+$/, '')
+
+  if (!apiKey || !busca) return null
+
+  let resposta
+
+  try {
+    resposta = await axios.get(`${baseApi}/api/youtube-play`, {
+      params: {
+        query: busca,
+        apikey: apiKey
+      },
+      timeout: SHAZAM_AUDIO_TIMEOUT,
+      maxBodyLength: 1024 * 1024,
+      maxContentLength: 1024 * 1024,
+      validateStatus: () => true
+    })
+  } catch (erro) {
+    throw erroShazam(
+      'SHAZAM_AUDIO',
+      /timeout/i.test(String(erro?.message || ''))
+        ? 'A busca do MP3 demorou demais.'
+        : (erro?.message || 'Falha ao buscar o MP3.')
+    )
+  }
+
+  const data = resposta?.data || {}
+  const resultado = data?.resultado || data?.result || data?.data || {}
+  const url = String(
+    resultado?.download ||
+    resultado?.downloadUrl ||
+    resultado?.download_url ||
+    resultado?.audio ||
+    data?.download ||
+    data?.url ||
+    ''
+  ).trim()
+
+  if (
+    resposta.status < 200 ||
+    resposta.status >= 300 ||
+    data?.status === false ||
+    !/^https?:\/\//i.test(url)
+  ) {
+    throw erroShazam(
+      'SHAZAM_AUDIO',
+      data?.message || data?.mensagem || data?.error || 'A API não retornou um MP3 válido.'
+    )
+  }
+
+  return {
+    url,
+    titulo: resultado?.title || resultado?.titulo || musica?.titulo || 'musica',
+    artista: resultado?.author?.name || resultado?.artist || musica?.artista || ''
   }
 }
 
@@ -588,6 +798,7 @@ module.exports = {
   uploadCatbox,
   transcrever,
   identificarMusica,
+  buscarAudioShazam,
   siteApi,
   sanitizarErro,
   marcarErroApi,
