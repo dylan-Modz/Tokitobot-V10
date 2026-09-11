@@ -1,57 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.22",
+  "version": "10.1.23",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-11T18:37:46.250Z",
+  "publishedAt": "2026-09-11T18:38:47.930Z",
   "changelog": [
     "[Correção] Package atualizado",
-    "A versão 10.1.22 já está disponível para atualização.",
+    "A versão 10.1.23 já está disponível para atualização.",
     "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
   "title": "Package atualizado",
-  "notice": "A versão 10.1.22 já está disponível para atualização.",
+  "notice": "A versão 10.1.23 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "package.json",
-      "sha256": "3a7cdbf783f624f91d59e269a697c272c9c8003995f9d729b3e1ae67711e0e49",
-      "size": 1128
+      "sha256": "eba9d15be9557e7a6b40a2766c23f6e32fb87a6dc63e9f043c433b6511bef72d",
+      "size": 1154
     }
   ],
   "releases": [
-    {
-      "version": "10.0.24",
-      "fromVersion": "10.0.23",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "2 arquivos atualizados",
-      "notice": "A versão 10.0.24 já está disponível para atualização.",
-      "changelog": [
-        "Aprovacao atualizado",
-        "Global atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/funcoes/aprovacao.js",
-          "sha256": "25e04ba88eb76eba52b25505e234d516bc83f209d61699055f5935d3261d414e",
-          "size": 12004
-        },
-        {
-          "path": "DADOS_TOKITO/database/lib/global.js",
-          "sha256": "971f2ee2424a3e92778d12e2405c0cafd39a5f9c08490efa389cb960b58c41ac",
-          "size": 144975
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T17:30:05.351Z"
-    },
     {
       "version": "10.0.25",
       "fromVersion": "10.0.24",
@@ -2885,6 +2858,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-11T18:37:46.249Z"
+    },
+    {
+      "version": "10.1.23",
+      "fromVersion": "10.1.22",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Package atualizado",
+      "notice": "A versão 10.1.23 já está disponível para atualização.",
+      "changelog": [
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "eba9d15be9557e7a6b40a2766c23f6e32fb87a6dc63e9f043c433b6511bef72d",
+          "size": 1154
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-11T18:38:47.930Z"
     }
   ],
   "versao": "10.0.70",
