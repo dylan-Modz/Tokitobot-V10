@@ -1,10 +1,10 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.19",
+  "version": "10.1.20",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-11T18:32:52.640Z",
+  "publishedAt": "2026-09-11T18:33:04.306Z",
   "changelog": [
     "[Correção] 2 arquivos atualizados",
     "A versão 10.1.19 já está disponível para atualização.",
@@ -31,27 +31,6 @@
     }
   ],
   "releases": [
-    {
-      "version": "10.0.21",
-      "fromVersion": "10.0.20",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Update atualizado",
-      "notice": "A versão 10.0.21 já está disponível para atualização.",
-      "changelog": [
-        "Update atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/dono/update.js",
-          "sha256": "39a33e59da7db245904c33d3b17946d23af70b18967ed8c5838b619d5f693710",
-          "size": 3673
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T14:07:11.236Z"
-    },
     {
       "version": "10.0.22",
       "fromVersion": "10.0.21",
@@ -2897,6 +2876,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-11T18:32:52.640Z"
+    },
+    {
+      "version": "10.1.20",
+      "fromVersion": "10.1.19",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "2 arquivos atualizados",
+      "notice": "A versão 10.1.19 já está disponível para atualização.",
+      "changelog": [
+        "Package atualizado",
+        "Shazam atualizado"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "78e81579f4db8865785fe6af185f3e33aa0d9e52bba351a3b2d7d8e85d6f42b1",
+          "size": 1183
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/shazam.js",
+          "sha256": "8a0dfd3e4f78009601937cd2ef263286b62c415ab522b4c1cf60bd3a1a523c67",
+          "size": 19017
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-11T18:33:04.305Z"
     }
   ],
   "versao": "10.0.70",
