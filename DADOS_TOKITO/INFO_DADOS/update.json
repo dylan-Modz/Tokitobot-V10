@@ -1,29 +1,25 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.23",
+  "version": "10.1.24",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-11T18:38:47.930Z",
+  "publishedAt": "2026-09-11T18:48:11.785Z",
   "changelog": [
-    "[Correção] Package atualizado",
-    "A versão 10.1.23 já está disponível para atualização.",
-    "Package atualizado"
+    "Comando Shazam removido devido a problemas de funcionamento e instabilidade.",
+    "Arquivos relacionados ao Shazam foram removidos do Tokito V10."
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/downloads/shazam.js",
+    "DADOS_TOKITO/sistemas/shazam.js"
+  ],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Package atualizado",
-  "notice": "A versão 10.1.23 já está disponível para atualização.",
+  "title": "Remoção do Shazam",
+  "notice": "A versão 10.1.24 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
-  "files": [
-    {
-      "path": "package.json",
-      "sha256": "eba9d15be9557e7a6b40a2766c23f6e32fb87a6dc63e9f043c433b6511bef72d",
-      "size": 1154
-    }
-  ],
+  "files": [],
   "releases": [
     {
       "version": "10.0.25",
@@ -2879,6 +2875,25 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-11T18:38:47.930Z"
+    },
+    {
+      "version": "10.1.24",
+      "fromVersion": "10.1.23",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Remoção do Shazam",
+      "notice": "A versão 10.1.24 já está disponível para atualização.",
+      "changelog": [
+        "Comando Shazam removido devido a problemas de funcionamento e instabilidade.",
+        "Arquivos relacionados ao Shazam foram removidos do Tokito V10."
+      ],
+      "files": [],
+      "delete": [
+        "DADOS_TOKITO/plugins/downloads/shazam.js",
+        "DADOS_TOKITO/sistemas/shazam.js"
+      ],
+      "required": true,
+      "publishedAt": "2026-09-11T18:48:11.785Z"
     }
   ],
   "versao": "10.0.70",
@@ -2892,5 +2907,6 @@
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json",
     "note": "Versões antigas recebem primeiro os arquivos da ponte e depois migram para a estrutura completa preservando dados protegidos."
   },
-  "incremental": true
+  "incremental": true,
+  "fromVersion": "10.1.23"
 }
