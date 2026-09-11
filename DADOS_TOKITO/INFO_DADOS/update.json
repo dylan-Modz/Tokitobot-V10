@@ -1,136 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.17",
+  "version": "10.1.18",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-11T16:42:00.000Z",
+  "publishedAt": "2026-09-11T17:58:11.885Z",
   "changelog": [
-    "[Correção] Integração completa do Shazam",
-    "Mensagens do Shazam incluídas na atualização.",
-    "Menu do Shazam incluído na atualização.",
-    "Módulo de reconhecimento musical sincronizado.",
-    "Comando Shazam mantido no padrão atual de plugins."
+    "[Correção] 2 arquivos atualizados",
+    "A versão 10.1.18 já está disponível para atualização.",
+    "Modulos atualizado",
+    "Shazam atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Integração completa do Shazam",
-  "notice": "A versão 10.1.17 já está disponível para atualização.",
+  "title": "2 arquivos atualizados",
+  "notice": "A versão 10.1.18 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
-    "DADOS_TOKITO/plugins/downloads/shazam.js",
-    "DADOS_TOKITO/sistemas/modulos.js",
-    "DADOS_TOKITO/mensagens/mensagens.js",
-    "DADOS_TOKITO/mensagens/menus.js"
+    {
+      "path": "DADOS_TOKITO/sistemas/modulos.js",
+      "sha256": "f8f23de02f57515b09aecf78cac9b9516b5a206bf7deea631957dfefff85628a",
+      "size": 22630
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/shazam.js",
+      "sha256": "47fe64bb04b7893dd08fa7cf311b12bc8912939d679f9444e949482c96d271f8",
+      "size": 5136
+    }
   ],
   "releases": [
-    {
-      "version": "10.0.15",
-      "fromVersion": "10.0.14",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Global atualizado",
-      "notice": "A versão 10.0.0 já está disponível para atualização.",
-      "changelog": [
-        "Global atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/database/lib/global.js",
-          "sha256": "7937548fd58028317404c192021aac4666f833b345e37a911b0d7e34e47c2afc",
-          "size": 143521
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T09:16:49.137Z"
-    },
-    {
-      "version": "10.0.16",
-      "fromVersion": "10.0.15",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Aprovacao atualizado",
-      "notice": "A versão 10.0.16 já está disponível para atualização.",
-      "changelog": [
-        "Aprovacao atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/funcoes/aprovacao.js",
-          "sha256": "422c68a1f8aa897876eb1fe8dd276d24d668276842b941a9458bbda0af7c0587",
-          "size": 9814
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T09:18:17.305Z"
-    },
-    {
-      "version": "10.0.17",
-      "fromVersion": "10.0.16",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Package atualizado",
-      "notice": "A versão 10.0.17 já está disponível para atualização.",
-      "changelog": [
-        "Package atualizado"
-      ],
-      "files": [
-        {
-          "path": "package.json",
-          "sha256": "7030a61e7543b6ec2b628ec635f4636f21f5fd31f6efdf076db2e37bbecdf7c6",
-          "size": 959
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T11:20:46.559Z"
-    },
-    {
-      "version": "10.0.18",
-      "fromVersion": "10.0.17",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Arquivo principal do bot atualizado",
-      "notice": "A versão 10.0.18 já está disponível para atualização.",
-      "changelog": [
-        "Arquivo principal do bot atualizado"
-      ],
-      "files": [
-        {
-          "path": "tokito.js",
-          "sha256": "2b5ef45271bce752b3de7e842a69f6b0259dc9720eb833e7ef0a40d47a031b55",
-          "size": 42542
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T14:03:47.760Z"
-    },
-    {
-      "version": "10.0.19",
-      "fromVersion": "10.0.18",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Conexão do bot atualizada",
-      "notice": "A versão 10.0.19 já está disponível para atualização.",
-      "changelog": [
-        "Conexão do bot atualizada"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "748c3666396b437088ba027ed56fbe1bd76c8afa6aabcb608eb341e91525ebd1",
-          "size": 28540
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T14:06:37.677Z"
-    },
     {
       "version": "10.0.20",
       "fromVersion": "10.0.19",
@@ -2964,6 +2864,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-11T16:42:00.000Z"
+    },
+    {
+      "version": "10.1.18",
+      "fromVersion": "10.1.17",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "2 arquivos atualizados",
+      "notice": "A versão 10.1.18 já está disponível para atualização.",
+      "changelog": [
+        "Modulos atualizado",
+        "Shazam atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/modulos.js",
+          "sha256": "f8f23de02f57515b09aecf78cac9b9516b5a206bf7deea631957dfefff85628a",
+          "size": 22630
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/shazam.js",
+          "sha256": "47fe64bb04b7893dd08fa7cf311b12bc8912939d679f9444e949482c96d271f8",
+          "size": 5136
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-11T17:58:11.884Z"
     }
   ],
   "versao": "10.0.70",
