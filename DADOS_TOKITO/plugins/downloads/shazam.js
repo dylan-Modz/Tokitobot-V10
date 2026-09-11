@@ -45,11 +45,11 @@ module.exports = {
         await reagir(from, '❌').catch(() => {})
 
         if (error?.code === 'SHAZAM_ARQUIVO_GRANDE') {
-          return reply(mess.shazamArquivoGrande())
+          return reply(mess.shazamMidiaGrande())
         }
 
         if (error?.code === 'SHAZAM_LIMITE') {
-          return reply(mess.shazamLimite())
+          return reply(mess.shazamErro('Limite temporário do identificador. Tente novamente em instantes.'))
         }
 
         console.log(
@@ -126,7 +126,7 @@ module.exports = {
             modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes'
           )
 
-          await reply(mess.shazamAudioIndisponivel())
+          await reply(mess.shazamErro('A música foi reconhecida, mas não consegui enviar o áudio.'))
         }
       }
 
