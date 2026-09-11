@@ -1,57 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.18",
+  "version": "10.1.19",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-11T17:58:11.885Z",
+  "publishedAt": "2026-09-11T18:32:52.640Z",
   "changelog": [
     "[Correção] 2 arquivos atualizados",
-    "A versão 10.1.18 já está disponível para atualização.",
-    "Modulos atualizado",
+    "A versão 10.1.19 já está disponível para atualização.",
+    "Package atualizado",
     "Shazam atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
   "title": "2 arquivos atualizados",
-  "notice": "A versão 10.1.18 já está disponível para atualização.",
+  "notice": "A versão 10.1.19 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/modulos.js",
-      "sha256": "f8f23de02f57515b09aecf78cac9b9516b5a206bf7deea631957dfefff85628a",
-      "size": 22630
+      "path": "package.json",
+      "sha256": "78e81579f4db8865785fe6af185f3e33aa0d9e52bba351a3b2d7d8e85d6f42b1",
+      "size": 1183
     },
     {
       "path": "DADOS_TOKITO/plugins/downloads/shazam.js",
-      "sha256": "47fe64bb04b7893dd08fa7cf311b12bc8912939d679f9444e949482c96d271f8",
-      "size": 5136
+      "sha256": "8a0dfd3e4f78009601937cd2ef263286b62c415ab522b4c1cf60bd3a1a523c67",
+      "size": 19017
     }
   ],
   "releases": [
-    {
-      "version": "10.0.20",
-      "fromVersion": "10.0.19",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Dados atualizado",
-      "notice": "A versão 10.0.20 já está disponível para atualização.",
-      "changelog": [
-        "Dados atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/dados.js",
-          "sha256": "8a515217ed45bce488ddf80f10e33e1a7cd8caf668865f7ca3703db7c948b129",
-          "size": 26736
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-12T14:06:52.410Z"
-    },
     {
       "version": "10.0.21",
       "fromVersion": "10.0.20",
@@ -2891,6 +2870,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-11T17:58:11.884Z"
+    },
+    {
+      "version": "10.1.19",
+      "fromVersion": "10.1.18",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "2 arquivos atualizados",
+      "notice": "A versão 10.1.19 já está disponível para atualização.",
+      "changelog": [
+        "Package atualizado",
+        "Shazam atualizado"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "78e81579f4db8865785fe6af185f3e33aa0d9e52bba351a3b2d7d8e85d6f42b1",
+          "size": 1183
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/shazam.js",
+          "sha256": "8a0dfd3e4f78009601937cd2ef263286b62c415ab522b4c1cf60bd3a1a523c67",
+          "size": 19017
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-11T18:32:52.640Z"
     }
   ],
   "versao": "10.0.70",
