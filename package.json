@@ -18,7 +18,6 @@
   "homepage": "https://tokito-apis.com.br",
   "dependencies": {
     "@hapi/boom": "^10.0.1",
-    "ultra-acrcloud": "github:Lm-Only/ultra-acrcloud",
     "axios": "^1.13.2",
     "baileys": "github:dylan-Modz/Baileys#main",
     "cfonts": "^3.3.1",
