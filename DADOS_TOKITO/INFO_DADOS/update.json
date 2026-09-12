@@ -1,63 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.26",
+  "version": "10.1.27",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-12T18:34:26.004Z",
+  "publishedAt": "2026-09-12T18:43:37.655Z",
   "changelog": [
-    "[Novidade] Capcut atualizado",
-    "A versão 10.1.26 já está disponível para atualização.",
-    "Capcut atualizado"
+    "[Melhoria] Tokito Bot V10.1.27 - adiciona RPG de Magia",
+    "A versão 10.1.27 já está disponível para atualização.",
+    "Arcano atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "Capcut atualizado",
-  "notice": "A versão 10.1.26 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "Tokito Bot V10.1.27 - adiciona RPG de Magia",
+  "notice": "A versão 10.1.27 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/downloads/capcut.js",
-      "sha256": "cdd4918617a3b03953cdf5a2892eba98ad3f64006fea60ccb1935f33d5e0796a",
-      "size": 2809
+      "path": "DADOS_TOKITO/sistemas/rpg/arcano.js",
+      "sha256": "f4e6abb5645e4382177cf543e8b05a9884bd00d052fdd52da85a18e4324ab88c",
+      "size": 15768
     }
   ],
   "releases": [
-    {
-      "version": "10.0.28",
-      "fromVersion": "10.0.27",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "3 arquivos atualizados",
-      "notice": "A versão 10.0.28 já está disponível para atualização.",
-      "changelog": [
-        "Jogo Akinator atualizado",
-        "Global atualizado",
-        "Menus atualizados"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/casos/jogos/akinator.js",
-          "sha256": "bbaa36a30b7eed6553deda99669b14fd967aacb0032e10c8d9b0cc02af2e2813",
-          "size": 12695
-        },
-        {
-          "path": "DADOS_TOKITO/database/lib/global.js",
-          "sha256": "7b115615b268845a06150d76926ac4c791dbc68e0187a143a134919c83f52201",
-          "size": 142570
-        },
-        {
-          "path": "DADOS_TOKITO/database/lib/menus.js",
-          "sha256": "4643f6d3bd49e450f42d1ad40eb0d48eda7752b7ff8b4ad7f80bf341fed6dfaa",
-          "size": 48391
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-08-13T12:36:08.801Z"
-    },
     {
       "version": "10.0.29",
       "fromVersion": "10.0.28",
@@ -2944,6 +2911,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-09-12T18:34:26.004Z"
+    },
+    {
+      "version": "10.1.27",
+      "fromVersion": "10.1.26",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Tokito Bot V10.1.27 - adiciona RPG de Magia",
+      "notice": "A versão 10.1.27 já está disponível para atualização.",
+      "changelog": [
+        "Arcano atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/arcano.js",
+          "sha256": "f4e6abb5645e4382177cf543e8b05a9884bd00d052fdd52da85a18e4324ab88c",
+          "size": 15768
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-12T18:43:37.655Z"
     }
   ],
   "versao": "10.0.70",
