@@ -1,25 +1,94 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.24",
+  "version": "10.1.25",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-09-11T18:48:11.785Z",
+  "publishedAt": "2026-09-12T18:31:27.327Z",
   "changelog": [
-    "Comando Shazam removido devido a problemas de funcionamento e instabilidade.",
-    "Arquivos relacionados ao Shazam foram removidos do Tokito V10."
+    "Novo RPG de Magia adicionado ao Tokito V10.",
+    "Adicionados 54 novos comandos utilizáveis.",
+    "Sistema de classes, elementos, mana, grimório e feitiços.",
+    "Alquimia, poções, artefatos, familiares e invocações.",
+    "Arena, duelos, batalhas, torre, bosses e masmorras.",
+    "Reinos, portais, aventuras, missões e exploração.",
+    "Guildas mágicas, loja, mercado, leilão e recompensas.",
+    "Imagens do RPG organizadas em links_magia.json."
   ],
-  "delete": [
-    "DADOS_TOKITO/plugins/downloads/shazam.js",
-    "DADOS_TOKITO/sistemas/shazam.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Remoção do Shazam",
-  "notice": "A versão 10.1.24 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "Novo RPG de Magia",
+  "notice": "A versão 10.1.25 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
-  "files": [],
+  "files": [
+    {
+      "path": "DADOS_TOKITO/INFO_DADOS/LOGOS/links_magia.json",
+      "sha256": "b759456a139cda0fe41eb537188f9949be3b0cf746b84bc72fd2cdf0f2e7f51f",
+      "size": 1876
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/magia.js",
+      "sha256": "508b7c65f030900e003615beadc39201cf1bbcc7bfca6f8c4089dfadb7c3dd83",
+      "size": 15804
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/rpg/arcano.js",
+      "sha256": "1d4bd6be287e8d8340be043530512d8d0213709ce11162c53db0370ebe337052",
+      "size": 13100
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/magia/alquimia.js",
+      "sha256": "453a176a2652612f4f429de4455b3ca6e06ec61404d972288c3b0a6dd4f040aa",
+      "size": 3043
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/magia/base.js",
+      "sha256": "87fbc9387be10512732c47e0a1fa1b20c9a90998eac983ac2347fe2e9eb38588",
+      "size": 3858
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/magia/combate.js",
+      "sha256": "e7151b156a89bfaaaacb9fe85b6281e72ce302c8a7abc9789053b71ef7045913",
+      "size": 4269
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/magia/desafios.js",
+      "sha256": "f472d2980a4902d1484d4e7c6918bcede6ab145a8866e4169cc173c16f8cdb60",
+      "size": 6876
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/magia/familiares.js",
+      "sha256": "d0f0b3c503ae1065cb086fead7bcb1a62c9d6423a75529e6db88da807a412dba",
+      "size": 4602
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/magia/grimorio.js",
+      "sha256": "a3c3f7183f89ed3f371adf9f6b6c25ebcc3c72450d8796c5e2d829d80ecca5d7",
+      "size": 6681
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/magia/guilda.js",
+      "sha256": "c34a5daafe0dc3a5fe04d61b0d6b0c099fdba5a6ee044a00e7034c724910e50d",
+      "size": 4676
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/magia/itens.js",
+      "sha256": "21c1749f49ea82b159b52893279603f428b6cc31732b7cb53416243a4ba2bcb3",
+      "size": 3002
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/magia/mercado.js",
+      "sha256": "708087737ea39972deb8f2fd28697f7c59411d11cbf66bf96bed2cbb53243378",
+      "size": 6062
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/magia/recompensas.js",
+      "sha256": "8c342a9387159f86cf12cacd941a7e2bcddd833aaff98823635e3dbc17e8d7e8",
+      "size": 4061
+    }
+  ],
   "releases": [
     {
       "version": "10.0.25",
@@ -2894,6 +2963,94 @@
       ],
       "required": true,
       "publishedAt": "2026-09-11T18:48:11.785Z"
+    },
+    {
+      "version": "10.1.25",
+      "fromVersion": "10.1.24",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "Novo RPG de Magia",
+      "notice": "A versão 10.1.25 já está disponível para atualização.",
+      "changelog": [
+        "Novo RPG de Magia adicionado ao Tokito V10.",
+        "Adicionados 54 novos comandos utilizáveis.",
+        "Sistema de classes, elementos, mana, grimório e feitiços.",
+        "Alquimia, poções, artefatos, familiares e invocações.",
+        "Arena, duelos, batalhas, torre, bosses e masmorras.",
+        "Reinos, portais, aventuras, missões e exploração.",
+        "Guildas mágicas, loja, mercado, leilão e recompensas.",
+        "Imagens do RPG organizadas em links_magia.json."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/LOGOS/links_magia.json",
+          "sha256": "b759456a139cda0fe41eb537188f9949be3b0cf746b84bc72fd2cdf0f2e7f51f",
+          "size": 1876
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/magia.js",
+          "sha256": "508b7c65f030900e003615beadc39201cf1bbcc7bfca6f8c4089dfadb7c3dd83",
+          "size": 15804
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/arcano.js",
+          "sha256": "1d4bd6be287e8d8340be043530512d8d0213709ce11162c53db0370ebe337052",
+          "size": 13100
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/magia/alquimia.js",
+          "sha256": "453a176a2652612f4f429de4455b3ca6e06ec61404d972288c3b0a6dd4f040aa",
+          "size": 3043
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/magia/base.js",
+          "sha256": "87fbc9387be10512732c47e0a1fa1b20c9a90998eac983ac2347fe2e9eb38588",
+          "size": 3858
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/magia/combate.js",
+          "sha256": "e7151b156a89bfaaaacb9fe85b6281e72ce302c8a7abc9789053b71ef7045913",
+          "size": 4269
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/magia/desafios.js",
+          "sha256": "f472d2980a4902d1484d4e7c6918bcede6ab145a8866e4169cc173c16f8cdb60",
+          "size": 6876
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/magia/familiares.js",
+          "sha256": "d0f0b3c503ae1065cb086fead7bcb1a62c9d6423a75529e6db88da807a412dba",
+          "size": 4602
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/magia/grimorio.js",
+          "sha256": "a3c3f7183f89ed3f371adf9f6b6c25ebcc3c72450d8796c5e2d829d80ecca5d7",
+          "size": 6681
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/magia/guilda.js",
+          "sha256": "c34a5daafe0dc3a5fe04d61b0d6b0c099fdba5a6ee044a00e7034c724910e50d",
+          "size": 4676
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/magia/itens.js",
+          "sha256": "21c1749f49ea82b159b52893279603f428b6cc31732b7cb53416243a4ba2bcb3",
+          "size": 3002
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/magia/mercado.js",
+          "sha256": "708087737ea39972deb8f2fd28697f7c59411d11cbf66bf96bed2cbb53243378",
+          "size": 6062
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/magia/recompensas.js",
+          "sha256": "8c342a9387159f86cf12cacd941a7e2bcddd833aaff98823635e3dbc17e8d7e8",
+          "size": 4061
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-09-12T18:31:27.327Z"
     }
   ],
   "versao": "10.0.70",
@@ -2908,5 +3065,5 @@
     "note": "Versões antigas recebem primeiro os arquivos da ponte e depois migram para a estrutura completa preservando dados protegidos."
   },
   "incremental": true,
-  "fromVersion": "10.1.23"
+  "fromVersion": "10.1.24"
 }
