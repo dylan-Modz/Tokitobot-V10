@@ -7,9 +7,83 @@
  * ============================================================
  */
 
+const fs = require('fs')
+const path = require('path')
+
 const r = require('./index')
 const mess = require('../../mensagens/magia')
-const imagens = require('../../INFO_DADOS/LOGOS/links_magia.json')
+
+const IMAGENS_FILE = path.join(
+  __dirname,
+  '../../INFO_DADOS/LOGOS/links_magia.json'
+)
+
+const IMAGENS_PADRAO = {
+  "_fonte": "OpenGameArt",
+  "_licenca": "CC0 / domínio público equivalente",
+  "_nota": "Links públicos usados somente nos comandos visuais do RPG de Magia.",
+  "_fontes": {
+    "mago": "https://opengameart.org/content/wizard-0",
+    "feiticos": "https://opengameart.org/content/magic-spell-icons",
+    "cidade": "https://opengameart.org/content/mage-city-arcanos",
+    "alquimia": "https://opengameart.org/content/potions-3",
+    "masmorra": "https://opengameart.org/content/rpg-dungeon-package",
+    "boss": "https://opengameart.org/content/demon-portrait",
+    "bau": "https://opengameart.org/content/treasure-chests-32x32-and-16x16",
+    "cristais": "https://opengameart.org/content/gem-icons-0"
+  },
+  "menu": "https://opengameart.org/sites/default/files/magic.png",
+  "mago": "https://opengameart.org/sites/default/files/magic.png",
+  "grimorio": "https://opengameart.org/sites/default/files/magicicons_0.png",
+  "feiticos": "https://opengameart.org/sites/default/files/magicicons_0.png",
+  "cristais": "https://opengameart.org/sites/default/files/crystal_blue_pink.png",
+  "alquimia": "https://opengameart.org/sites/default/files/blue-potion.png",
+  "familiar": "https://opengameart.org/sites/default/files/magic.png",
+  "arena": "https://opengameart.org/sites/default/files/demon_portrait_full_-_dark_purple.png",
+  "torre": "https://opengameart.org/sites/default/files/magecity_1.png",
+  "boss": "https://opengameart.org/sites/default/files/demon_portrait_full_-_dark_purple.png",
+  "masmorra": "https://opengameart.org/sites/default/files/Dungeon%20Tiles%202_0.png",
+  "reino": "https://opengameart.org/sites/default/files/magecity_1.png",
+  "guilda": "https://opengameart.org/sites/default/files/magecity_1.png",
+  "loja": "https://opengameart.org/sites/default/files/magecity_1.png",
+  "bau": "https://opengameart.org/sites/default/files/chests_32x32.png"
+}
+
+const carregarImagens = () => {
+  try {
+    fs.mkdirSync(path.dirname(IMAGENS_FILE), { recursive: true })
+
+    let atual = {}
+
+    if (fs.existsSync(IMAGENS_FILE)) {
+      try {
+        atual = JSON.parse(fs.readFileSync(IMAGENS_FILE, 'utf8'))
+      } catch {}
+    }
+
+    const final = {
+      ...IMAGENS_PADRAO,
+      ...atual,
+      _fontes: {
+        ...(IMAGENS_PADRAO._fontes || {}),
+        ...(atual._fontes || {})
+      }
+    }
+
+    if (!fs.existsSync(IMAGENS_FILE)) {
+      fs.writeFileSync(
+        IMAGENS_FILE,
+        JSON.stringify(final, null, 2) + '\n'
+      )
+    }
+
+    return final
+  } catch {
+    return { ...IMAGENS_PADRAO }
+  }
+}
+
+const imagens = carregarImagens()
 
 const CLASSES = {
   arcano: { nome: 'Arcano', poder: 8, mana: 20, descricao: 'equilíbrio entre poder e mana' },
