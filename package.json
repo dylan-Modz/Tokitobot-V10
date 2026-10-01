@@ -8,7 +8,7 @@
     "update": "node tokito.js up",
     "install:bot": "bash DADOS_TOKITO/database/lib/install.sh"
   },
-  "keywords": [],
+  "keywords": ["bot", "whatsapp", "web"],
   "author": "dylanModz",
   "license": "SEE LICENSE IN DADOS_TOKITO/LICENSE",
   "type": "commonjs",
