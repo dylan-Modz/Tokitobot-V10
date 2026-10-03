@@ -189,7 +189,7 @@ serverMessageId: ''
 } : {})
 })
 
-const UPDATE_CHECK_MS = 3 * 60 * 60 * 1000
+const UPDATE_CHECK_MS = 5 * 60 * 1000
 
 const textoAvisoUpdate = check => {
 const remoto = check?.remote || {}
