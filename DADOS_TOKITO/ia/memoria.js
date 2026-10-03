@@ -263,7 +263,8 @@ const podeInteragir = ctx => {
   if (texto.startsWith(String(ctx.prefix || '.'))) return false
 
   const pergunta = /\?|\b(?:quem|qual|quais|como|porque|por que|pq|onde|quando|algu[eé]m|ser[aá]|vale a pena|o que|oque)\b/i.test(texto)
-  const chance = pergunta ? 1 : 0.18
+  // Perguntas chamam mais atenção, mas a IA não precisa se meter em toda conversa.
+  const chance = pergunta ? 0.4 : 0.12
 
   if (Math.random() > chance) return false
 
