@@ -502,14 +502,28 @@ return `https://raw.githubusercontent.com/${repo}/${ref}/DADOS_TOKITO/INFO_DADOS
 
 async function verificarUpdate() {
 const local = localInfo()
-let remote = null
+let apiRemote = null
+let rawRemote = null
 let apiFalhou = false
+let rawFalhou = false
+let rawStatus = 0
 
-try {
-const response = await axios.get(
+const [apiResultado, rawResultado] = await Promise.allSettled([
+axios.get(
 `${apiBase()}/api/bot/v10/update?t=${Date.now()}`,
 {
-timeout: Math.min(REQUEST_TIMEOUT, 10000),
+timeout: Math.min(REQUEST_TIMEOUT, 8000),
+validateStatus: () => true,
+headers: {
+'User-Agent': `TokitoBot-V10/${local.version || '10.0.0'}`,
+'Cache-Control': 'no-cache'
+}
+}
+),
+axios.get(
+`${rawUpdateUrl(local)}?t=${Date.now()}`,
+{
+timeout: Math.min(REQUEST_TIMEOUT, 8000),
 validateStatus: () => true,
 headers: {
 'User-Agent': `TokitoBot-V10/${local.version || '10.0.0'}`,
@@ -517,6 +531,10 @@ headers: {
 }
 }
 )
+])
+
+if (apiResultado.status === 'fulfilled') {
+const response = apiResultado.value
 
 if (
 response.status === 200 &&
@@ -525,58 +543,66 @@ typeof response.data === 'object' &&
 response.data.update &&
 typeof response.data.update === 'object'
 ) {
-remote = response.data.update
+apiRemote = response.data.update
 } else {
 apiFalhou = true
 }
-} catch {
+} else {
 apiFalhou = true
 }
 
-if (!remote) {
-try {
-const response = await axios.get(
-`${rawUpdateUrl(local)}?t=${Date.now()}`,
-{
-timeout: REQUEST_TIMEOUT,
-validateStatus: () => true,
-headers: {
-'User-Agent': `TokitoBot-V10/${local.version || '10.0.0'}`,
-'Cache-Control': 'no-cache'
-}
-}
-)
+if (rawResultado.status === 'fulfilled') {
+const response = rawResultado.value
+rawStatus = Number(response.status || 0)
 
-if (response.status === 404) {
+if (
+response.status === 200 &&
+response.data &&
+typeof response.data === 'object'
+) {
+rawRemote = response.data
+} else {
+rawFalhou = true
+}
+} else {
+rawFalhou = true
+}
+
+if (!apiRemote && !rawRemote) {
+if (rawStatus === 404) {
 return {
 ok: false,
 available: false,
 local,
 remote: null,
 reason: 'not_published',
+apiFalhou,
+rawFalhou,
 error: 'Atualização ainda não publicada.'
 }
 }
 
-if (
-response.status !== 200 ||
-!response.data ||
-typeof response.data !== 'object'
-) {
-throw new Error(`Servidor de atualização indisponível (${response.status}).`)
-}
-
-remote = response.data
-} catch (error) {
 return {
 ok: false,
 available: false,
 local,
 remote: null,
 apiFalhou,
-error: error.message
+rawFalhou,
+error: 'Não foi possível consultar a atualização pela API nem pelo GitHub.'
 }
 }
+
+let remote = apiRemote || rawRemote
+let fonte = apiRemote ? 'api' : 'github'
+
+if (
+apiRemote &&
+rawRemote &&
+compareVersions(rawRemote.version, apiRemote.version) > 0
+) {
+remote = rawRemote
+fonte = 'github'
 }
 
 try {
@@ -596,6 +622,8 @@ available: compareVersions(remote.version, local.version) > 0,
 local,
 remote,
 apiFalhou,
+rawFalhou,
+fonte,
 mode: modo,
 incremental: modo === 'clean' ? false : pending.incremental,
 pendingFiles: pending.operations.filter(item => item.type === 'file'),
@@ -609,6 +637,7 @@ available: false,
 local,
 remote: null,
 apiFalhou,
+rawFalhou,
 error: error.message
 }
 }
