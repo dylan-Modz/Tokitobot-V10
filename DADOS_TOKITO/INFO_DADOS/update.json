@@ -1,45 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.34",
+  "version": "10.1.35",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-03T14:44:24.957Z",
+  "publishedAt": "2026-10-03T14:45:53.554Z",
   "changelog": [
-    "[Correção] fix: usa GitHub como fonte imediata de atualização",
-    "A versão 10.1.34 já está disponível para atualização.",
-    "Conexão do bot atualizada",
-    "IA Index atualizada",
-    "IA Memoria atualizada",
-    "Dados atualizado"
+    "[Melhoria] chore: atualiza versão para 10.1.37",
+    "A versão 10.1.35 já está disponível para atualização.",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix: usa GitHub como fonte imediata de atualização",
-  "notice": "A versão 10.1.34 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "chore: atualiza versão para 10.1.37",
+  "notice": "A versão 10.1.35 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "10464271c59020c86a70e704d5c01083d6c7a61809b2bca7242fcf289158eab9",
-      "size": 34588
-    },
-    {
-      "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "64155e314606d32a3bd0d58dd6ab13b81ce0b181f2797f4d8919fe1ece2e63e1",
-      "size": 48488
-    },
-    {
-      "path": "DADOS_TOKITO/ia/memoria.js",
-      "sha256": "0145dea2d68605a31637a060052492be400ea2d881b595ccc4fa842a071530e3",
-      "size": 6456
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/dados.js",
-      "sha256": "3b4d8c7885f7a5788c0a55f359081e1cb45d394314d7cd7893d5a53242c752d0",
-      "size": 32995
+      "path": "package.json",
+      "sha256": "67a8fb308048b88337bca99a93af2a611ffab948543403974735c8cee728acab",
+      "size": 1154
     }
   ],
   "releases": [
@@ -137,6 +119,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-03T14:44:24.957Z"
+    },
+    {
+      "version": "10.1.35",
+      "fromVersion": "10.1.34",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "chore: atualiza versão para 10.1.37",
+      "notice": "A versão 10.1.35 já está disponível para atualização.",
+      "changelog": [
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "67a8fb308048b88337bca99a93af2a611ffab948543403974735c8cee728acab",
+          "size": 1154
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-03T14:45:53.554Z"
     }
   ],
   "versao": "10.1.32",
