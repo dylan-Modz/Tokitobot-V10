@@ -137,10 +137,7 @@ estado.semNome = Math.min(3, estado.semNome + 1)
 }
 
 if (nome && nome !== 'amigo') {
-const seguro = nome.replace(/[.*+?^$()|[\]\\{}]/g, '\\const aplicarUsuarioAudio = (ctx, texto) => {
-const resposta = String(texto || '').trim() || 'Tô aqui', nome = nomeUsuarioAudio(ctx)
-return resposta.replace(/<USUARIO>/gi, nome)
-}')
+const seguro = nome.replace(/[.*+?^$()|[\]\\{}]/g, caractere => '\\' + caractere)
 let vezes = 0
 saida = saida.replace(new RegExp(seguro, 'giu'), trecho => {
 vezes++
