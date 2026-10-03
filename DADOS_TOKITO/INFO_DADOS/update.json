@@ -1,59 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.37",
+  "version": "10.1.38",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-03T14:47:00.000Z",
+  "publishedAt": "2026-10-03T14:48:54.110Z",
   "changelog": [
-    "[Atualização] Modo IA mais humano e avisos de update mais rápidos",
-    "A versão 10.1.37 já está disponível para atualização.",
-    "Modo IA com personalidade mais humana, divertida e natural nas conversas.",
-    "Áudios usam o nome da pessoa com bem menos frequência e nunca repetem o nome várias vezes na mesma resposta.",
-    "Histórias e narrações em áudio podem se desenvolver por cerca de 45 a 75 segundos quando o pedido pede mais conteúdo.",
-    "Waveform real voltou para as mensagens de voz da IA.",
-    "Pedidos pontuais de resposta em áudio ou texto valem só para aquela resposta; o padrão do grupo continua no modoia.",
-    "Modo espontâneo ficou menos intrometido nas conversas do grupo.",
-    "Avisos de atualização passam a ser verificados a cada 5 minutos em vez de 3 horas.",
-    "O verificador compara Tokito APIs e GitHub e usa a versão mais nova, evitando atraso quando a rota da API ainda estiver em cache."
+    "[Correção] fix: corrige normalização do nome no áudio da IA",
+    "A versão 10.1.38 já está disponível para atualização.",
+    "IA Index atualizada"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Modo IA mais humano e avisos de update mais rápidos",
-  "notice": "A versão 10.1.37 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: corrige normalização do nome no áudio da IA",
+  "notice": "A versão 10.1.38 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/ia/memoria.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/dados.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "package.json",
-      "sha256": "",
-      "size": 0
+      "sha256": "5ab16c6670f9f0325d024434b8b0e33e738b0e44a453f52f13a8b54a459b8e86",
+      "size": 48333
     }
   ],
   "releases": [
@@ -225,6 +193,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-03T14:47:00.000Z"
+    },
+    {
+      "version": "10.1.38",
+      "fromVersion": "10.1.37",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: corrige normalização do nome no áudio da IA",
+      "notice": "A versão 10.1.38 já está disponível para atualização.",
+      "changelog": [
+        "IA Index atualizada"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "5ab16c6670f9f0325d024434b8b0e33e738b0e44a453f52f13a8b54a459b8e86",
+          "size": 48333
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-03T14:48:54.109Z"
     }
   ],
   "versao": "10.1.37",
