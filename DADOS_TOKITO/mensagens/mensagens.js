@@ -5143,3 +5143,97 @@ return `- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙾 𝚂𝙷𝙰𝚉𝙰𝙼\`
 }
 
 /* FIM_TOKITO_SHAZAM_MENSAGENS_V1 */
+
+
+exports.marcacaoGeral = ({ mensagem = '', total = 0, membros = [] } = {}) => {
+const lista = membros.length
+? membros.map(numero => `> 📣 ׄ ( @${numero} )`).join('\n')
+: '> 📣 ׄ ( ɴᴇɴʜᴜᴍ ᴍᴇᴍʙʀᴏ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ. )'
+
+return `- 📣 \`𝙼𝙰𝚁𝙲𝙰𝙲̧𝙰̃𝙾 𝙶𝙴𝚁𝙰𝙻\`
+
+> 👥 ׄ ( ${total} — ᴍᴇᴍʙʀᴏs ᴍᴀʀᴄᴀᴅᴏs. )${mensagem ? `\n> 📝 ׄ ( ${mensagem} — ᴍᴇɴsᴀɢᴇᴍ ᴅᴀ ᴍᴀʀᴄᴀᴄ̧ᴀ̃ᴏ. )` : ''}
+
+- 👤 \`𝙼𝙴𝙼𝙱𝚁𝙾𝚂\`
+
+${lista}`
+}
+
+exports.marcacaoCompacta = ({ mensagem = '', total = 0, membros = [] } = {}) => {
+const linhas = []
+
+for (let i = 0; i < membros.length; i += 3) {
+linhas.push(
+`> 👥 ׄ ( ${membros.slice(i, i + 3).map(numero => `@${numero}`).join(' • ')} )`
+)
+}
+
+return `- 📢 \`𝙼𝙰𝚁𝙲𝙰𝙲̧𝙰̃𝙾 𝙲𝙾𝙻𝙴𝚃𝙸𝚅𝙰\`
+
+> 👥 ׄ ( ${total} — ᴍᴇᴍʙʀᴏs ᴍᴀʀᴄᴀᴅᴏs. )${mensagem ? `\n> 📝 ׄ ( ${mensagem} — ᴍᴇɴsᴀɢᴇᴍ ᴅᴀ ᴍᴀʀᴄᴀᴄ̧ᴀ̃ᴏ. )` : ''}
+
+- 👤 \`𝙼𝙴𝙼𝙱𝚁𝙾𝚂\`
+
+${linhas.length ? linhas.join('\n') : '> 👥 ׄ ( ɴᴇɴʜᴜᴍ ᴍᴇᴍʙʀᴏ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ. )'}`
+}
+
+exports.marcacaoWhatsapp = ({ mensagem = '', total = 0, membros = [] } = {}) => {
+const lista = membros.length
+? membros.map(numero => `> 🔗 ׄ ( https://wa.me/${numero} )`).join('\n')
+: '> 🔗 ׄ ( ɴᴇɴʜᴜᴍ ɴᴜ́ᴍᴇʀᴏ ᴅɪsᴘᴏɴɪ́ᴠᴇʟ. )'
+
+return `- 🟢 \`𝙻𝙸𝚂𝚃𝙰 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿\`
+
+> 👥 ׄ ( ${total} — ᴄᴏɴᴛᴀᴛᴏs ᴇɴᴄᴏɴᴛʀᴀᴅᴏs. )${mensagem ? `\n> 📝 ׄ ( ${mensagem} — ᴍᴇɴsᴀɢᴇᴍ ᴅᴀ ʟɪsᴛᴀ. )` : ''}
+
+- 🔗 \`𝙲𝙾𝙽𝚃𝙰𝚃𝙾𝚂\`
+
+${lista}`
+}
+
+exports.climaUso = prefix => {
+return `- 🌦️ \`𝙲𝙻𝙸𝙼𝙰\`
+
+> 📌 ׄ ( ᴜsᴏ: ${prefix}clima cidade )
+> 💡 ׄ ( ᴇxᴇᴍᴘʟᴏ: ${prefix}clima São Paulo )`
+}
+
+exports.climaNaoEncontrado = cidade => {
+return `- 🔎 \`𝙲𝙸𝙳𝙰𝙳𝙴 𝙽𝙰̃𝙾 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰\`
+
+> 📍 ׄ ( ${cidade} — ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴇɴᴄᴏɴᴛʀᴀʀ ᴇssᴀ ʟᴏᴄᴀʟɪᴅᴀᴅᴇ. 🙇‍♂️ )`
+}
+
+exports.climaErro = () => {
+return `- ❌ \`𝙲𝙻𝙸𝙼𝙰 𝙸𝙽𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻\`
+
+> ❌ ׄ ( ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴄᴏɴsᴜʟᴛᴀʀ ᴏ ᴄʟɪᴍᴀ ᴀɢᴏʀᴀ. ᴛᴇɴᴛᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ ᴇᴍ ɪɴsᴛᴀɴᴛᴇs. 🙇‍♂️ )`
+}
+
+exports.climaResultado = ({
+local = 'Local desconhecido',
+temperatura = '—',
+sensacao = '—',
+maxima = '—',
+minima = '—',
+condicao = 'Indisponível',
+umidade = '—',
+chuva = '—',
+vento = '—',
+nascer = '—',
+por = '—'
+} = {}) => {
+return `- 🌦️ \`𝙲𝙻𝙸𝙼𝙰\`
+
+> 📍 ׄ ( ʟᴏᴄᴀʟ: ${local} )
+> 🌡️ ׄ ( ᴛᴇᴍᴘᴇʀᴀᴛᴜʀᴀ: ${temperatura}°C )
+> 🤒 ׄ ( sᴇɴsᴀᴄ̧ᴀ̃ᴏ: ${sensacao}°C )
+> 🔺 ׄ ( ᴍᴀ́xɪᴍᴀ: ${maxima}°C )
+> 🔻 ׄ ( ᴍɪ́ɴɪᴍᴀ: ${minima}°C )
+> ☁️ ׄ ( ᴄᴏɴᴅɪᴄ̧ᴀ̃ᴏ: ${condicao} )
+> 💧 ׄ ( ᴜᴍɪᴅᴀᴅᴇ: ${umidade}% )
+> 🌧️ ׄ ( ᴄʜᴀɴᴄᴇ ᴅᴇ ᴄʜᴜᴠᴀ: ${chuva}% )
+> 💨 ׄ ( ᴠᴇɴᴛᴏ: ${vento} km/h )
+> 🌅 ׄ ( ɴᴀsᴄᴇʀ ᴅᴏ sᴏʟ: ${nascer} )
+> 🌇 ׄ ( ᴘᴏ̂ʀ ᴅᴏ sᴏʟ: ${por} )`
+}

@@ -182,6 +182,7 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}ping
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}criador
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}idade 23/12/2007
+┃࣪ ╎—̳͟͞͞ 🌦️ ${prefix}clima cidade
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}totalcmd
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}gerarlink
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
@@ -217,6 +218,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}limpar
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}linkgp 
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcar mensagem
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcar2 mensagem
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcarwa mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}hidetag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}totag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}cita mensagem

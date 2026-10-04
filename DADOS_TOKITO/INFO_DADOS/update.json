@@ -1,27 +1,51 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.38",
+  "version": "10.1.39",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-03T14:48:54.110Z",
+  "publishedAt": "2026-10-04T14:20:00.000Z",
   "changelog": [
-    "[Correção] fix: corrige normalização do nome no áudio da IA",
-    "A versão 10.1.38 já está disponível para atualização.",
-    "IA Index atualizada"
+    "[Atualização] Novos comandos de marcação e clima",
+    "A versão 10.1.39 já está disponível para atualização.",
+    "Comando marcar redesenhado no padrão visual do mensagens.js.",
+    "Novo marcar2 com menções compactas em blocos.",
+    "Novo marcarwa com links wa.me dos participantes do grupo.",
+    "Novo comando clima/tempo com temperatura, sensação, condição, umidade, chuva, vento e previsão diária.",
+    "Menus atualizados com os novos comandos."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix: corrige normalização do nome no áudio da IA",
-  "notice": "A versão 10.1.38 já está disponível para atualização.",
+  "type": "Atualização",
+  "title": "Novos comandos de marcação e clima",
+  "notice": "A versão 10.1.39 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "5ab16c6670f9f0325d024434b8b0e33e738b0e44a453f52f13a8b54a459b8e86",
-      "size": 48333
+      "path": "DADOS_TOKITO/plugins/admin/marcacoes.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/info/clima.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "package.json",
+      "sha256": "",
+      "size": 0
     }
   ],
   "releases": [
@@ -214,11 +238,56 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-03T14:48:54.109Z"
+    },
+    {
+      "version": "10.1.39",
+      "fromVersion": "10.1.38",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Novos comandos de marcação e clima",
+      "notice": "A versão 10.1.39 já está disponível para atualização.",
+      "changelog": [
+        "Comando marcar redesenhado no padrão visual do mensagens.js.",
+        "Novo marcar2 com menções compactas em blocos.",
+        "Novo marcarwa com links wa.me dos participantes do grupo.",
+        "Novo comando clima/tempo com temperatura, sensação, condição, umidade, chuva, vento e previsão diária.",
+        "Menus atualizados com os novos comandos."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/marcacoes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/info/clima.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-04T14:20:00.000Z"
     }
   ],
-  "versao": "10.1.37",
+  "versao": "10.1.39",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.33"
+  "fromVersion": "10.1.38"
 }

@@ -30,6 +30,41 @@
 
 const listaJids = ctx => [...new Set((ctx.groupMembers || []).map(m => ctx.nJid(m)).filter(Boolean))]
 
+const numeroJid = jid => String(jid || '')
+.split('@')[0]
+.split(':')[0]
+.replace(/\D/g, '')
+
+const numeroWhatsApp = async (ctx, jid) => {
+let destino = String(jid || '')
+
+if (
+destino.endsWith('@lid') &&
+typeof ctx.tokito.signalRepository?.lidMapping?.getPNForLID === 'function'
+) {
+const pn = await ctx.tokito.signalRepository.lidMapping
+.getPNForLID(destino)
+.catch(() => null)
+
+if (pn) destino = String(pn)
+}
+
+return numeroJid(destino)
+}
+
+const numerosWhatsApp = async (ctx, membros) => {
+const numeros = await Promise.all(
+membros.map(jid => numeroWhatsApp(ctx, jid))
+)
+
+return [...new Set(numeros.filter(Boolean))]
+}
+
+const limparMensagem = texto => String(texto || '')
+.replace(/\s+/g, ' ')
+.trim()
+.slice(0, 1200)
+
 const quotedMessage = info => {
 const m = info?.message || {}
 return m?.extendedTextMessage?.contextInfo?.quotedMessage ||
@@ -70,11 +105,11 @@ const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({
 nome: 'marcar',
-comandos: ['marcar', 'totag', 'cita', 'hidetag', 'citar'],
+comandos: ['marcar', 'marcar2', 'marcarwa', 'totag', 'cita', 'hidetag', 'citar'],
 categoria: 'admin',
 info: {
 descricao: 'Marca todos os membros do grupo.',
-uso: 'marcar mensagem | hidetag mensagem',
+uso: 'marcar mensagem | marcar2 mensagem | marcarwa mensagem | hidetag mensagem',
 permissao: 'ADM'
 },
 
@@ -88,11 +123,43 @@ const texto = String(ctx.q || '').trim()
 const contexto = { ...ctx.canalInfo(membros), mentionedJid: membros }
 
 if (ctx.command === 'marcar') {
-const msg = `${texto ? `${texto}\n\n` : ''}${membros.map(j => `@${j.split('@')[0]}`).join('\n')}`
+const numeros = membros.map(numeroJid).filter(Boolean)
+
 return ctx.tokito.sendMessage(ctx.from, {
-text: msg,
+text: ctx.mess.marcacaoGeral({
+mensagem: limparMensagem(texto),
+total: numeros.length,
+membros: numeros
+}),
 mentions: membros,
 contextInfo: contexto
+}, { quoted: ctx.selo })
+}
+
+if (ctx.command === 'marcar2') {
+const numeros = membros.map(numeroJid).filter(Boolean)
+
+return ctx.tokito.sendMessage(ctx.from, {
+text: ctx.mess.marcacaoCompacta({
+mensagem: limparMensagem(texto),
+total: numeros.length,
+membros: numeros
+}),
+mentions: membros,
+contextInfo: contexto
+}, { quoted: ctx.selo })
+}
+
+if (ctx.command === 'marcarwa') {
+const numeros = await numerosWhatsApp(ctx, membros)
+
+return ctx.tokito.sendMessage(ctx.from, {
+text: ctx.mess.marcacaoWhatsapp({
+mensagem: limparMensagem(texto),
+total: numeros.length,
+membros: numeros
+}),
+contextInfo: ctx.canalInfo([])
 }, { quoted: ctx.selo })
 }
 
