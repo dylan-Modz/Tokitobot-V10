@@ -220,6 +220,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcar mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcar2 mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcarwa mensagem
+┃࣪ ╎—̳͟͞͞ 💤 ${prefix}autoinativo 1/0/3d
+┃࣪ ╎—̳͟͞͞ 💤 ${prefix}inativos
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}hidetag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}totag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}cita mensagem

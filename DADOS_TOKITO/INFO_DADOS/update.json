@@ -1,34 +1,40 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.39",
+  "version": "10.1.40",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-04T14:20:00.000Z",
+  "publishedAt": "2026-10-04T15:25:00.000Z",
   "changelog": [
-    "[Atualização] Novos comandos de marcação e clima",
-    "A versão 10.1.39 já está disponível para atualização.",
-    "Comando marcar redesenhado no padrão visual do mensagens.js.",
-    "Novo marcar2 com menções compactas em blocos.",
-    "Novo marcarwa com links wa.me dos participantes do grupo.",
-    "Novo comando clima/tempo com temperatura, sensação, condição, umidade, chuva, vento e previsão diária.",
-    "Menus atualizados com os novos comandos."
+    "[Atualização] Sistema Auto Inativo",
+    "A versão 10.1.40 já está disponível para atualização.",
+    "Novo sistema Auto Inativo para remover automaticamente membros sem atividade no grupo.",
+    "Comando autoinativo permite ativar, desativar e configurar o limite em horas ou dias.",
+    "Comando inativos mostra os membros e o tempo desde a última mensagem.",
+    "Administradores, donos e o próprio bot ficam protegidos da remoção automática.",
+    "Ao ativar o sistema, todos os membros recebem uma nova contagem para evitar remoções imediatas.",
+    "O sistema verifica os grupos automaticamente a cada 30 minutos e avisa no grupo quando alguém é removido por inatividade."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Atualização",
-  "title": "Novos comandos de marcação e clima",
-  "notice": "A versão 10.1.39 já está disponível para atualização.",
+  "title": "Sistema Auto Inativo",
+  "notice": "A versão 10.1.40 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/marcacoes.js",
+      "path": "DADOS_TOKITO/plugins/admin/autoinativo.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/info/clima.js",
+      "path": "DADOS_TOKITO/sistemas/autoinativo.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
       "sha256": "",
       "size": 0
     },
@@ -283,11 +289,62 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-04T14:20:00.000Z"
+    },
+    {
+      "version": "10.1.40",
+      "fromVersion": "10.1.39",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Sistema Auto Inativo",
+      "notice": "A versão 10.1.40 já está disponível para atualização.",
+      "changelog": [
+        "Novo sistema Auto Inativo para remover automaticamente membros sem atividade no grupo.",
+        "Comando autoinativo permite ativar, desativar e configurar o limite em horas ou dias.",
+        "Comando inativos mostra os membros e o tempo desde a última mensagem.",
+        "Administradores, donos e o próprio bot ficam protegidos da remoção automática.",
+        "Ao ativar o sistema, todos os membros recebem uma nova contagem para evitar remoções imediatas.",
+        "O sistema verifica os grupos automaticamente a cada 30 minutos e avisa no grupo quando alguém é removido por inatividade."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/autoinativo.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/autoinativo.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-04T15:25:00.000Z"
     }
   ],
-  "versao": "10.1.39",
+  "versao": "10.1.40",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.38"
+  "fromVersion": "10.1.39"
 }

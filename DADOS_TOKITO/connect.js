@@ -34,6 +34,7 @@ const funcoes = require('./sistemas/funcoes.js')
 const detector = require('./detector.js')
 const qrcodeTerminal = require('qrcode-terminal')
 const dadosSistema = require('./sistemas/dados.js')
+const autoInativo = require('./sistemas/autoinativo.js')
 const placar = require('./database/lib/placar.js')
 const runtimeSub = require('./sub/runtime.js')
 const sistemaSub = runtimeSub.isSubBot ? null : require('./sub/index.js')
@@ -1019,6 +1020,14 @@ global.mostrarQrTokito = false
 
 await tokito.sendPresenceUpdate('available').catch(() => {})
 await tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
+
+autoInativo.iniciar(tokito, {
+groupsDir: grupos,
+owners: [
+ownerNumber,
+...Array.from({ length: 6 }, (_, i) => nescessario?.[`numero_dono${i + 1}`])
+].filter(Boolean)
+})
 
 if (runtimeSub.isSubBot) {
   sucesso(`Sub Bot ${runtimeSub.id} conectado com sucesso.`)

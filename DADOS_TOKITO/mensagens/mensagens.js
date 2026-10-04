@@ -5237,3 +5237,57 @@ return `- 🌦️ \`𝙲𝙻𝙸𝙼𝙰\`
 > 🌅 ׄ ( ɴᴀsᴄᴇʀ ᴅᴏ sᴏʟ: ${nascer} )
 > 🌇 ׄ ( ᴘᴏ̂ʀ ᴅᴏ sᴏʟ: ${por} )`
 }
+
+
+exports.autoInativoUso = prefix => {
+return `- 💤 \`𝙰𝚄𝚃𝙾 𝙸𝙽𝙰𝚃𝙸𝚅𝙾\`
+
+> ✅ ׄ ( ᴀᴛɪᴠᴀʀ: ${prefix}autoinativo 1 )
+> ❌ ׄ ( ᴅᴇsᴀᴛɪᴠᴀʀ: ${prefix}autoinativo 0 )
+> ⏱️ ׄ ( ᴛᴇᴍᴘᴏ: ${prefix}autoinativo 3d )
+> 👥 ׄ ( ᴠᴇʀ ɪɴᴀᴛɪᴠᴏs: ${prefix}inativos )
+
+> 💤 ׄ ( ᴏ ᴛᴇᴍᴘᴏ ᴘᴏᴅᴇ sᴇʀ ɪɴғᴏʀᴍᴀᴅᴏ ᴇᴍ ʜᴏʀᴀs ᴏᴜ ᴅɪᴀs, ᴇɴᴛʀᴇ 1 ʜᴏʀᴀ ᴇ 30 ᴅɪᴀs. )`
+}
+
+exports.autoInativoStatus = (ativo, tempo, prefix) => {
+return `- 💤 \`𝙰𝚄𝚃𝙾 𝙸𝙽𝙰𝚃𝙸𝚅𝙾\`
+
+> 📌 ׄ ( sᴛᴀᴛᴜs: ${ativo ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
+> ⏱️ ׄ ( ʟɪᴍɪᴛᴇ: ${tempo} )
+> 👑 ׄ ( ᴀᴅᴍɪɴs, ᴅᴏɴᴏs ᴇ ᴏ ʙᴏᴛ ɴᴀ̃ᴏ sᴀ̃ᴏ ʀᴇᴍᴏᴠɪᴅᴏs. )
+${ativo ? `> 👥 ׄ ( ᴍᴇᴍʙʀᴏs ǫᴜᴇ ғɪᴄᴀʀᴇᴍ ${tempo} sᴇᴍ ᴇɴᴠɪᴀʀ ᴍᴇɴsᴀɢᴇɴs ᴘᴏᴅᴇʀᴀ̃ᴏ sᴇʀ ʀᴇᴍᴏᴠɪᴅᴏs. )` : `> 💡 ׄ ( ᴜsᴇ ${prefix}autoinativo 1 ᴘᴀʀᴀ ᴀᴛɪᴠᴀʀ. )`}`
+}
+
+exports.autoInativoDesativado = prefix => {
+return `- 💤 \`𝙰𝚄𝚃𝙾 𝙸𝙽𝙰𝚃𝙸𝚅𝙾 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝙳𝙾\`
+
+> ❌ ׄ ( ᴏ sɪsᴛᴇᴍᴀ ɴᴀ̃ᴏ ᴇsᴛᴀ́ ᴀᴛɪᴠᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )
+> 💡 ׄ ( ᴜsᴇ ${prefix}autoinativo 3d ᴘᴀʀᴀ ᴀᴛɪᴠᴀʀ ᴄᴏᴍ 3 ᴅɪᴀs. )`
+}
+
+exports.autoInativoRemovido = (numero, limite, ausente) => {
+return `- 💤 \`𝙼𝙴𝙼𝙱𝚁𝙾 𝙸𝙽𝙰𝚃𝙸𝚅𝙾\`
+
+> 👤 ׄ ( @${numero} — ғᴏɪ ʀᴇᴍᴏᴠɪᴅᴏ ᴅᴏ ɢʀᴜᴘᴏ. )
+> ⏱️ ׄ ( ${ausente} — ᴛᴇᴍᴘᴏ sᴇᴍ ᴇɴᴠɪᴀʀ ᴍᴇɴsᴀɢᴇɴs. )
+> 💤 ׄ ( ʟɪᴍɪᴛᴇ ᴅᴏ ɢʀᴜᴘᴏ: ${limite}. )
+> 📌 ׄ ( ᴍᴏᴛɪᴠᴏ: ɪɴᴀᴛɪᴠɪᴅᴀᴅᴇ. )`
+}
+
+exports.autoInativoLista = (itens = [], limite = '3 dias', total = 0) => {
+const linhas = itens.length
+? itens.map(item => `> 👤 ׄ ( @${item.numero} — ${item.tempo} sᴇᴍ ᴍᴇɴsᴀɢᴇᴍ. )`).join('\n')
+: '> ✅ ׄ ( ɴᴇɴʜᴜᴍ ᴍᴇᴍʙʀᴏ ᴘᴀʀᴀ ᴍᴏsᴛʀᴀʀ. )'
+
+const restante = total > itens.length
+? `\n> ➕ ׄ ( +${total - itens.length} ᴍᴇᴍʙʀᴏ(s) ɴᴀ̃ᴏ ᴍᴏsᴛʀᴀᴅᴏ(s). )`
+: ''
+
+return `- 💤 \`𝙼𝙴𝙼𝙱𝚁𝙾𝚂 𝙸𝙽𝙰𝚃𝙸𝚅𝙾𝚂\`
+
+> ⏱️ ׄ ( ʀᴇᴍᴏᴄ̧ᴀ̃ᴏ ᴀᴜᴛᴏᴍᴀ́ᴛɪᴄᴀ: ${limite}. )
+> 👥 ׄ ( ${total} — ᴍᴇᴍʙʀᴏ(s) ᴀɴᴀʟɪsᴀᴅᴏ(s). )
+
+${linhas}${restante}`
+}
