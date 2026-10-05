@@ -3,7 +3,7 @@
  * Author: Dylan Modz
  */
 
-const sorteioGrupo = require('../../sistemas/sorteio-grupo')
+const sorteioGrupo = require('../../sistemas/sorteios')
 
 module.exports = {
 prioridade: 15,
