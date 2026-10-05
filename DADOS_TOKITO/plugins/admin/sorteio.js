@@ -4,7 +4,7 @@
  */
 
 const dylan = require('../../database/lib/comandos')
-const sorteioGrupo = require('../../sistemas/sorteio-grupo')
+const sorteioGrupo = require('../../sistemas/sorteios')
 
 const contexto = ctx =>
 ctx.mensagem?.extendedTextMessage?.contextInfo ||
