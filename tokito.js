@@ -577,6 +577,16 @@ legendabv3: `「🧊」 #numero#
 legendasaiu3: `「🧊」 #numero#
 
 *ᴀᴛᴇ́ ᴍᴀɪꜱ! ᴏ ɢʀᴜᴘᴏ #nomegrupo# ꜰɪᴄᴀ ᴄᴏᴍ #membros# ᴍᴇᴍʙʀᴏꜱ.*`
+},
+{
+bemvindo4: false,
+stickerbv: null,
+stickersaiu: null
+},
+{
+bemvindo5: false,
+audiobv: null,
+audiosaiu: null
 }
 ]
 }

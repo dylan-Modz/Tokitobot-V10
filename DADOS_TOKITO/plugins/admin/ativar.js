@@ -34,6 +34,8 @@ const itens = [
 ['__bemvindo1', 'Bem-vindo 1'],
 ['__bemvindo2', 'Bem-vindo 2'],
 ['__bemvindo3', 'Bem-vindo 3'],
+['__bemvindo4', 'Bem-vindo 4'],
+['__bemvindo5', 'Bem-vindo 5'],
 ['aprovacao', 'Aprovação de entrada'],
 ['autoaprovacao', 'Auto Aprovação'],
 ['soadm', 'Só ADM'],
@@ -91,8 +93,16 @@ if (chave === '__bemvindo2') {
 return Boolean(ctx.dataGp?.[0]?.wellcome?.[1]?.bemvindo2)
 }
 
-if (chave === '__bemvindo3') {
-return Boolean(ctx.dataGp?.[0]?.wellcome?.[2]?.bemvindo3)
+if (chave.startsWith('__bemvindo')) {
+const numero = Number(chave.replace('__bemvindo', ''))
+const indice = numero - 1
+
+if (!Number.isInteger(numero) || numero < 1)
+return false
+
+return Boolean(
+ctx.dataGp?.[0]?.wellcome?.[indice]?.[`bemvindo${numero}`]
+)
 }
 
 if (chave === '__modobn') {

@@ -4039,10 +4039,10 @@ return `• \`Não foi possível concluir a solicitação\` ⚠️
 
 exports.ativarPainel = ({ itens = [], ativo = () => false } = {}) => {
 const secoes = [
-['✨', '𝙼𝙸́𝙳𝙸𝙰𝚂', 0, 5],
-['🔗', '𝙻𝙸𝙽𝙺𝚂', 6, 9],
-['👥', '𝚂𝙴𝙶𝚄𝚁𝙰𝙽𝙲̧𝙰', 10, 16],
-['⚡', '𝙰𝚄𝚃𝙾𝙼𝙰𝙲̧𝙰̃𝙾', 17, itens.length - 1]
+['✨', '𝙼𝙸́𝙳𝙸𝙰𝚂', 0, 7],
+['🔗', '𝙻𝙸𝙽𝙺𝚂', 8, 11],
+['👥', '𝚂𝙴𝙶𝚄𝚁𝙰𝙽𝙲̧𝙰', 12, 18],
+['⚡', '𝙰𝚄𝚃𝙾𝙼𝙰𝙲̧𝙰̃𝙾', 19, itens.length - 1]
 ]
 
 const item = i => {
@@ -5323,4 +5323,56 @@ return `- 🧠 \`𝚂𝙸𝙼𝙸𝙷\`
 > ❌ ׄ ( ᴅᴇsᴀᴛɪᴠᴀʀ: ${prefix}simih 0 )
 
 > 📝 ׄ ( ᴏ sɪᴍɪʜ ᴀᴘʀᴇɴᴅᴇ ǫᴜᴀɴᴅᴏ ᴀʟɢᴜᴇ́ᴍ ʀᴇsᴘᴏɴᴅᴇ ᴜᴍᴀ ᴍᴇɴsᴀɢᴇᴍ ᴄᴜʀᴛᴀ ᴅᴇ ᴀᴛᴇ́ 25 ᴄᴀʀᴀᴄᴛᴇʀᴇs. )`
+}
+
+
+exports.bemvindoMidiaUso = (tipo, momento, prefix, comando) => {
+const figurinha = tipo === 'sticker'
+const nome = figurinha ? '𝙵𝙸𝙶𝚄𝚁𝙸𝙽𝙷𝙰' : '𝙰́𝚄𝙳𝙸𝙾'
+const emoji = figurinha ? '🖼️' : '🎙️'
+const midia = figurinha ? 'uma figurinha' : 'um áudio'
+
+return `- ${emoji} \`${nome} 𝙳𝙴 ${momento === 'entrada' ? '𝙴𝙽𝚃𝚁𝙰𝙳𝙰' : '𝚂𝙰𝙸́𝙳𝙰'}\`
+
+> 📌 ׄ ( ʀᴇsᴘᴏɴᴅᴀ ${midia} ᴄᴏᴍ ${prefix}${comando}. )
+> 🗑️ ׄ ( ʀᴇᴍᴏᴠᴇʀ: ${prefix}${comando} 0 )
+> 🧊 ׄ ( ᴇsᴛᴀ ᴍɪ́ᴅɪᴀ ᴘᴇʀᴛᴇɴᴄᴇ ᴀᴏ ʙᴇᴍ-ᴠɪɴᴅᴏ ${figurinha ? '4' : '5'}. )`
+}
+
+exports.bemvindoMidiaSalva = (tipo, momento) => {
+const figurinha = tipo === 'sticker'
+const nome = figurinha ? '𝙵𝙸𝙶𝚄𝚁𝙸𝙽𝙷𝙰' : '𝙰́𝚄𝙳𝙸𝙾'
+const emoji = figurinha ? '🖼️' : '🎙️'
+
+return `- ${emoji} \`${nome} 𝙳𝙴 ${momento === 'entrada' ? '𝙴𝙽𝚃𝚁𝙰𝙳𝙰' : '𝚂𝙰𝙸́𝙳𝙰'}\`
+
+> ✅ ׄ ( ᴍɪ́ᴅɪᴀ sᴀʟᴠᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ. )
+> 👋 ׄ ( sᴇʀᴀ́ ᴇɴᴠɪᴀᴅᴀ ɴᴀ ${momento} ǫᴜᴀɴᴅᴏ ᴏ ᴍᴏᴅᴏ ᴇsᴛɪᴠᴇʀ ᴀᴛɪᴠᴏ. )
+> 🧊 ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ ${figurinha ? '4' : '5'}. )`
+}
+
+exports.bemvindoMidiaRemovida = (tipo, momento) => {
+const figurinha = tipo === 'sticker'
+const nome = figurinha ? '𝙵𝙸𝙶𝚄𝚁𝙸𝙽𝙷𝙰' : '𝙰́𝚄𝙳𝙸𝙾'
+const emoji = figurinha ? '🖼️' : '🎙️'
+
+return `- ${emoji} \`${nome} 𝚁𝙴𝙼𝙾𝚅𝙸𝙳𝙾\`
+
+> 🗑️ ׄ ( ᴀ ᴍɪ́ᴅɪᴀ ᴅᴇ ${momento} ғᴏɪ ʀᴇᴍᴏᴠɪᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ. )
+> 🧊 ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ ${figurinha ? '4' : '5'}. )`
+}
+
+exports.infoBemVindos = prefix => {
+return `- 👋 \`𝙱𝙴𝙼-𝚅𝙸𝙽𝙳𝙾𝚂\`
+
+> 🖼️ ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ 1 — ɪᴍᴀɢᴇᴍ/ᴠɪ́ᴅᴇᴏ ᴄᴏᴍ ʟᴇɢᴇɴᴅᴀ ᴘᴇʀsᴏɴᴀʟɪᴢᴀᴅᴀ. )
+> 🎨 ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ 2 — ᴄᴀʀᴅ ɢᴇʀᴀᴅᴏ ᴘᴇʟᴀ ᴀᴘɪ. )
+> 💬 ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ 3 — ᴍᴇɴsᴀɢᴇᴍ ᴅᴇ ᴛᴇxᴛᴏ. )
+> 🖼️ ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ 4 — ғɪɢᴜʀɪɴʜᴀ ᴅᴇ ᴇɴᴛʀᴀᴅᴀ/saɪ́ᴅᴀ. )
+> 🎙️ ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ 5 — áᴜᴅɪᴏ ᴅᴇ ᴇɴᴛʀᴀᴅᴀ/saɪ́ᴅᴀ. )
+
+> 🏷️ ׄ ( ʟᴇɢᴇɴᴅᴀs: ${prefix}legendabv, ${prefix}legendabv2 ᴇ ${prefix}legendabv3. )
+> 🖼️ ׄ ( ғɪɢᴜʀɪɴʜᴀ: ${prefix}stickerbv / ${prefix}stickersaiu. )
+> 🎙️ ׄ ( áᴜᴅɪᴏ: ${prefix}audiobv / ${prefix}audiosaiu. )
+> ⚙️ ׄ ( ᴜsᴇ ${prefix}ativar ᴘᴀʀᴀ ᴠᴇʀ ᴏ sᴛᴀᴛᴜs ᴅᴏs ᴍᴏᴅᴏs. )`
 }

@@ -257,12 +257,18 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo2
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo3
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}bemvindo4
+┃࣪ ╎—̳͟͞͞ 🎙️ ${prefix}bemvindo5
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendabv texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendasaiu texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendabv2 texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendasaiu2 texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendabv3 texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendasaiu3 texto
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}stickerbv
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}stickersaiu
+┃࣪ ╎—̳͟͞͞ 🎙️ ${prefix}audiobv
+┃࣪ ╎—̳͟͞͞ 🎙️ ${prefix}audiosaiu
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}fundobv
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}fundosaiu
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}delfundos

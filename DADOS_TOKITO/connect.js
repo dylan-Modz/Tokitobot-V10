@@ -970,6 +970,44 @@ contextInfo: canalInfo([participante])
 }).catch(() => {})
 }
 
+/*
+             * BEM-VINDO 4
+             */
+
+if (wellcome?.[3]?.bemvindo4) {
+const config = wellcome[3]
+const midia = entrou ? config.stickerbv : config.stickersaiu
+const nomeArquivo = path.basename(String(midia?.arquivo || ''))
+const arquivoMidia = nomeArquivo ? path.join(runtimeSub.mediaDir, nomeArquivo) : ''
+
+if (arquivoMidia && fs.existsSync(arquivoMidia)) {
+await tokito.sendMessage(update.id, {
+sticker: fs.readFileSync(arquivoMidia),
+contextInfo: canalInfo([participante])
+}).catch(() => {})
+}
+}
+
+/*
+             * BEM-VINDO 5
+             */
+
+if (wellcome?.[4]?.bemvindo5) {
+const config = wellcome[4]
+const midia = entrou ? config.audiobv : config.audiosaiu
+const nomeArquivo = path.basename(String(midia?.arquivo || ''))
+const arquivoMidia = nomeArquivo ? path.join(runtimeSub.mediaDir, nomeArquivo) : ''
+
+if (arquivoMidia && fs.existsSync(arquivoMidia)) {
+await tokito.sendMessage(update.id, {
+audio: fs.readFileSync(arquivoMidia),
+mimetype: String(midia?.mimetype || 'audio/ogg; codecs=opus'),
+ptt: midia?.ptt === true,
+contextInfo: canalInfo([participante])
+}).catch(() => {})
+}
+}
+
 await delay(400)
 }
 } catch (error) {

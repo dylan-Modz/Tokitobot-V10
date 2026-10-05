@@ -1,31 +1,70 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.45",
+  "version": "10.1.46",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-05T17:12:00.000Z",
+  "publishedAt": "2026-10-05T17:48:00.000Z",
   "changelog": [
-    "[Correção] Ajustes nas mensagens do Simih",
-    "A versão 10.1.45 já está disponível para atualização.",
-    "Respostas automáticas do Simih agora são enviadas como texto simples, sem associação ao canal do bot.",
-    "Informação sobre o arquivo simih.json foi removida da mensagem de status do Simih."
+    "[Atualização] Bem-vindo 4 e 5",
+    "A versão 10.1.46 já está disponível para atualização.",
+    "Novo Bem-vindo 4 dedicado a figurinha personalizada de entrada e saída.",
+    "Novo Bem-vindo 5 dedicado a áudio personalizado de entrada e saída.",
+    "Comandos stickerbv e stickersaiu salvam ou removem as figurinhas do Bem-vindo 4.",
+    "Comandos audiobv e audiosaiu salvam ou removem os áudios do Bem-vindo 5.",
+    "As mídias ficam separadas na pasta midiabv e continuam preservadas nas atualizações.",
+    "Bem-vindo 4 e 5 foram adicionados ao painel ativar, ao menu ADM e ao infobemvindos."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Ajustes nas mensagens do Simih",
-  "notice": "A versão 10.1.45 já está disponível para atualização.",
+  "type": "Atualização",
+  "title": "Bem-vindo 4 e 5",
+  "notice": "A versão 10.1.46 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/eventos/simih.js",
+      "path": "DADOS_TOKITO/plugins/admin/bemvindo4.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/bemvindo5.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/midiabv.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/infobemvindos.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "tokito.js",
       "sha256": "",
       "size": 0
     },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "",
       "size": 0
     },
@@ -496,11 +535,82 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-05T17:12:00.000Z"
+    },
+    {
+      "version": "10.1.46",
+      "fromVersion": "10.1.45",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Bem-vindo 4 e 5",
+      "notice": "A versão 10.1.46 já está disponível para atualização.",
+      "changelog": [
+        "Novo Bem-vindo 4 dedicado a figurinha personalizada de entrada e saída.",
+        "Novo Bem-vindo 5 dedicado a áudio personalizado de entrada e saída.",
+        "Comandos stickerbv e stickersaiu salvam ou removem as figurinhas do Bem-vindo 4.",
+        "Comandos audiobv e audiosaiu salvam ou removem os áudios do Bem-vindo 5.",
+        "As mídias ficam separadas na pasta midiabv e continuam preservadas nas atualizações.",
+        "Bem-vindo 4 e 5 foram adicionados ao painel ativar, ao menu ADM e ao infobemvindos."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/bemvindo4.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/bemvindo5.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/midiabv.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/infobemvindos.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "tokito.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-05T17:48:00.000Z"
     }
   ],
-  "versao": "10.1.45",
+  "versao": "10.1.46",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.44"
+  "fromVersion": "10.1.45"
 }
