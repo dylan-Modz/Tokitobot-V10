@@ -222,6 +222,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcarwa mensagem
 ┃࣪ ╎—̳͟͞͞ 💤 ${prefix}autoinativo 1/0/3d
 ┃࣪ ╎—̳͟͞͞ 💤 ${prefix}inativos
+┃࣪ ╎—̳͟͞͞ 🧠 ${prefix}simih 1/0
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}hidetag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}totag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}cita mensagem

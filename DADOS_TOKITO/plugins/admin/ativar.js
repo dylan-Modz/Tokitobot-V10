@@ -68,6 +68,7 @@ const itens = [
 ['modorpg', 'Modo RPG'],
 ['modocoins', 'Modo Coins'],
 ['__modoia', 'Modo IA'],
+['simih', 'Simih'],
 ['x9', 'X9']
 ]
 
