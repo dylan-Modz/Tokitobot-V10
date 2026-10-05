@@ -38,6 +38,7 @@ const autoInativo = require('./sistemas/autoinativo.js')
 const donoSistema = require('./sistemas/dono.js')
 const antiNuke = require('./sistemas/nuke.js')
 const sorteioGrupo = require('./sistemas/sorteios.js')
+const promocoes = require('./sistemas/promocoes.js')
 const placar = require('./database/lib/placar.js')
 const runtimeSub = require('./sub/runtime.js')
 const sistemaSub = runtimeSub.isSubBot ? null : require('./sub/index.js')
@@ -1177,6 +1178,8 @@ global.mostrarQrTokito = false
 
 await tokito.sendPresenceUpdate('available').catch(() => {})
 await tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
+
+promocoes.iniciar(tokito)
 
 autoInativo.iniciar(tokito, {
 groupsDir: grupos,
