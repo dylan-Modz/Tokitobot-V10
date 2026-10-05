@@ -225,10 +225,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}autoinativo 1/0/3d
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}inativos
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}simih 1/0
-┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}hidetag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}totag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}cita mensagem
-┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}citar mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}status
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
@@ -285,7 +283,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🚫｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antifake 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antiddd 1/0
-┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antirroubo 1/0
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antiroubo 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antinuke 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antinotas 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antipalavra 1/0
