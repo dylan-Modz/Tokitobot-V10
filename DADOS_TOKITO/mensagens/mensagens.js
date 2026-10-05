@@ -4011,22 +4011,19 @@ return `- 🏦 \`𝙱𝙰𝙽𝙲𝙾 𝙳𝙴 𝙽-𝙲𝙾𝙸𝙽𝚂\`
 > 🏦 ׄ ( ᴜsᴇ ${prefix}menucoins ᴘᴀʀᴀ ᴠᴇʀ ᴏ sɪsᴛᴇᴍᴀ. )`
 }
 
-exports.erroApi = (site = 'https://tokito-apis.com.br') => {
-let link = 'https://tokito-apis.com.br'
+exports.erroApi = () => {
+return `• \`O que devo fazer?\` 🤔
 
-try {
-link = new URL(String(site || link)).origin
-}
-catch {
-}
+-> Há três métodos que podem resolver o problema. Mas um deles vai da sua sorte.
 
-return `- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙰 𝙰𝙿𝙸\`
+1 - \`Criar uma conta secundária\`
+> Se você usa a API em outro bot além do Tokito, esse é um meio bem mais controlado.
 
-> 🔑 ׄ ( ᴠᴇʀɪғɪǫᴜᴇ sᴇ sᴜᴀ ᴋᴇʏ ᴇsᴛᴀ́ ᴀᴛɪᴠᴀ. )
-> 👤 ׄ ( ᴄᴏɴғɪʀᴀ sᴇ sᴜᴀ ᴄᴏɴᴛᴀ ᴇsᴛᴀ́ ᴀᴛɪᴠᴀ ᴇ sᴇᴍ ʙʟᴏǫᴜᴇɪᴏs. )
-> 🌐 ׄ ( sɪᴛᴇ: ${link} )
+2 - \`Contratar outro plano com a opção "Tokito" ativa\`
+> Válido para todos os casos, basta refazer a sessão de planos.
 
-> ❌ ׄ ( ᴀᴄᴇssᴇ ᴏ sɪᴛᴇ ᴀᴄɪᴍᴀ ᴇ ᴠᴇʀɪғɪǫᴜᴇ sᴜᴀ ᴄᴏɴᴛᴀ ᴇ ᴀ sᴜᴀ ᴋᴇʏ. sᴇ ᴇsᴛɪᴠᴇʀ ᴛᴜᴅᴏ ɴᴏʀᴍᴀʟ, ᴛᴇɴᴛᴇ ᴏ ᴄᴏᴍᴀɴᴅᴏ ɴᴏᴠᴀᴍᴇɴᴛᴇ. )`
+3 - \`Trocar uma ideia com o suporte da API\`
+> Vai da sorte, geralmente a gente resolve manualmente e ninguém sai perdendo.`
 }
 
 exports.ativarPainel = ({ itens = [], ativo = () => false } = {}) => {

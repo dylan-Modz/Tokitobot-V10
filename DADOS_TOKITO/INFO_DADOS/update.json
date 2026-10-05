@@ -1,36 +1,24 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.41",
+  "version": "10.1.42",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-05T14:29:00.000Z",
+  "publishedAt": "2026-10-05T16:42:00.000Z",
   "changelog": [
-    "[Correção] Comando Likes atualizado",
-    "A versão 10.1.41 já está disponível para atualização.",
-    "Comando likes atualizado para aceitar o novo retorno da rota de Likes.",
-    "Resultado de likes passa a mostrar nick, UID, likes antes, enviados, depois e cota.",
-    "Fonte de envio e comprovantes foram removidos do resultado do WhatsApp.",
-    "Auto Like também passa a aceitar o novo formato da resposta da API sem perder compatibilidade com o formato antigo."
+    "[Melhoria] Novo aviso de erro da API",
+    "A versão 10.1.42 já está disponível para atualização.",
+    "Mensagem de erro geral da API redesenhada com orientações mais claras para o usuário.",
+    "Novo aviso explica três alternativas: conta secundária, outro plano com Tokito ativo ou contato com o suporte da API."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Correção do comando Likes",
-  "notice": "A versão 10.1.41 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "Novo aviso de erro da API",
+  "notice": "A versão 10.1.42 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/likes.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/autolike.js",
-      "sha256": "",
-      "size": 0
-    },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
       "sha256": "",
@@ -367,11 +355,38 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-05T14:29:00.000Z"
+    },
+    {
+      "version": "10.1.42",
+      "fromVersion": "10.1.41",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Novo aviso de erro da API",
+      "notice": "A versão 10.1.42 já está disponível para atualização.",
+      "changelog": [
+        "Mensagem de erro geral da API redesenhada com orientações mais claras para o usuário.",
+        "Novo aviso explica três alternativas: conta secundária, outro plano com Tokito ativo ou contato com o suporte da API."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-05T16:42:00.000Z"
     }
   ],
-  "versao": "10.1.41",
+  "versao": "10.1.42",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.40"
+  "fromVersion": "10.1.41"
 }
