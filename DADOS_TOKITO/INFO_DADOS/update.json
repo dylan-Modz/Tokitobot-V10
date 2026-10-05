@@ -1,80 +1,47 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.51",
+  "version": "10.1.52",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-05T22:40:05.954Z",
+  "publishedAt": "2026-10-05T23:02:13.813Z",
   "changelog": [
-    "[Atualização] Status, promover2 e Anti-Flood Sticker",
-    "A versão 10.1.51 já está disponível para atualização.",
-    "Comando status agora mostra Bem-vindo 4, Bem-vindo 5, Simih, Anti-Nuke e Anti-Flood Sticker.",
-    "Painel ativar recebeu Anti-Nuke e Anti-Flood Sticker.",
-    "Novo promover2 agenda promoção temporária com horário de promoção e rebaixamento, mantendo a programação após reinício.",
-    "Novo antifloodsticker remove membros que enviarem 5 figurinhas em até 10 segundos.",
-    "Menus tiveram todos os comandos padronizados com o emoji da própria categoria, incluindo Downloads, Bem-vindos, Antis, ADM e demais seções.",
-    "Corrigida a linha do Anti-Nuke que estava grudada ao Anti-Roubo no menu."
+    "[Atualização] Ativar interativo",
+    "A versão 10.1.52 já está disponível para atualização.",
+    "Comando ativar foi trocado por um menu list interativo com seções e status de cada função.",
+    "Cada item do ativar agora alterna diretamente entre ativado e desativado ao tocar na lista.",
+    "Após alterar uma função, o painel é enviado novamente já com o status atualizado.",
+    "O fluxo antigo que esperava o administrador digitar um número foi removido.",
+    "Comando Anti-Roubo corrigido para antiroubo, com um R só no nome público e no arquivo.",
+    "Menu ADM mantém apenas totag e cita entre os aliases equivalentes solicitados."
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/admin/antirroubo.js"
+  ],
   "archiveSha256": "",
   "type": "Atualização",
-  "title": "Status, promover2 e Anti-Flood Sticker",
-  "notice": "A versão 10.1.51 já está disponível para atualização.",
+  "title": "Ativar interativo",
+  "notice": "A versão 10.1.52 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
-    {
-      "path": "DADOS_TOKITO/sistemas/promocoes.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/promover2.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/floodsticker.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/antifloodsticker.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/funcoes.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "",
-      "size": 0
-    },
     {
       "path": "DADOS_TOKITO/plugins/admin/ativar.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/status.js",
+      "path": "DADOS_TOKITO/plugins/eventos/pendentes.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "path": "DADOS_TOKITO/plugins/admin/antiroubo.js",
       "sha256": "",
       "size": 0
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "tokito.js",
       "sha256": "",
       "size": 0
     },
@@ -994,11 +961,59 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-05T22:40:05.954Z"
+    },
+    {
+      "version": "10.1.52",
+      "fromVersion": "10.1.51",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Ativar interativo",
+      "notice": "A versão 10.1.52 já está disponível para atualização.",
+      "changelog": [
+        "Comando ativar foi trocado por um menu list interativo com seções e status de cada função.",
+        "Cada item do ativar agora alterna diretamente entre ativado e desativado ao tocar na lista.",
+        "Após alterar uma função, o painel é enviado novamente já com o status atualizado.",
+        "O fluxo antigo que esperava o administrador digitar um número foi removido.",
+        "Comando Anti-Roubo corrigido para antiroubo, com um R só no nome público e no arquivo.",
+        "Menu ADM mantém apenas totag e cita entre os aliases equivalentes solicitados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/eventos/pendentes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antiroubo.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/admin/antirroubo.js"
+      ],
+      "required": true,
+      "publishedAt": "2026-10-05T23:02:13.813Z"
     }
   ],
-  "versao": "10.1.51",
+  "versao": "10.1.52",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.50"
+  "fromVersion": "10.1.51"
 }
