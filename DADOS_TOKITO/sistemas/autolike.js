@@ -245,10 +245,16 @@ timeout:
 }
 )
 
+const sucesso =
+data?.sucesso === true ||
+data?.success === true
+
 if (
-!data?.success ||
-data?.status !==
-'SUCESSO_LIKES'
+!sucesso ||
+(
+data?.status &&
+data.status !== 'SUCESSO_LIKES'
+)
 ) {
 return false
 }
@@ -265,51 +271,63 @@ const limite =
 data?.data?.limite ||
 {}
 
+const cota =
+data?.cota ||
+{}
+
 const pedido =
 data?.data?.pedido ||
 {}
 
 const uid =
+data.uid ||
 conta.uid ||
 data.player_id ||
 e.uid
 
 const nick =
+data.nick ||
 conta.nickname ||
 data.nickname ||
 'Não encontrado'
 
 const antes = Number(
+data.likes_antes ??
 likes.antes ??
 data.likes_before ??
 0
 )
 
 const adicionados = Number(
+data.likes_enviados ??
 likes.adicionados ??
 data.likes_added ??
 0
 )
 
 const depois = Number(
+data.likes_depois ??
 likes.depois ??
 data.likes_end ??
 0
 )
 
 const limiteDiario = Number(
+cota.limite ??
 limite.diario ??
 data.daily_limit ??
 0
 )
 
 const usadosHoje = Number(
+cota.usadas ??
 limite.usados_hoje ??
 data.used_today ??
 0
 )
 
 const restantes = Number(
+cota.restam ??
 limite.restantes ??
 data.remaining_today ??
 0

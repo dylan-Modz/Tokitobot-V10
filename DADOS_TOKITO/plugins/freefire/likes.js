@@ -99,15 +99,33 @@ const { data } = await ctx.axios.post(`${ctx.API_URL}/api/v1/likes`, { player_id
 headers: headers(ctx),
 timeout: 90000
 })
-if (!data?.success)
+
+const sucesso = data?.sucesso === true || data?.success === true
+
+if (!sucesso)
 return ctx.reply(ctx.mess.ffErro(h.retornoErro(data)))
+
+const conta = data?.data?.conta || {}
+const likes = data?.data?.likes || {}
+const limite = data?.data?.limite || {}
+const cota = data?.cota || {}
+
+const resultado = {
+uid: String(data?.uid || conta?.uid || data?.player_id || player_id),
+nick: data?.nick || conta?.nickname || data?.nickname || 'N/A',
+antes: Number(data?.likes_antes ?? likes?.antes ?? data?.likes_before ?? 0),
+enviados: Number(data?.likes_enviados ?? likes?.adicionados ?? data?.likes_added ?? 0),
+depois: Number(data?.likes_depois ?? likes?.depois ?? data?.likes_end ?? 0),
+cotaLimite: Number(cota?.limite ?? limite?.diario ?? data?.daily_limit ?? 0),
+cotaUsadas: Number(cota?.usadas ?? limite?.usados_hoje ?? data?.used_today ?? 0),
+cotaRestam: Number(cota?.restam ?? limite?.restantes ?? data?.remaining_today ?? 0)
+}
+
 await ctx.reagir(ctx.from, '✅')
-return ctx.reply(ctx.mess.ffLikesSucesso({
-NomeDoBot: ctx.NomeDoBot,
-pushname: ctx.pushname || 'Usuário',
-player_id,
-data
-}), [ctx.sender])
+
+return ctx.reply(
+ctx.mess.ffLikesSucesso(resultado)
+)
 }
 catch (error) {
 console.log('[FREE FIRE LIKES]', ctx.modulos.sanitizarErro(error, [ctx.API_KEY_TOKITO]))

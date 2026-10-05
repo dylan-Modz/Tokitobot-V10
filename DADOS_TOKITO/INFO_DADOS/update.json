@@ -1,50 +1,38 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.40",
+  "version": "10.1.41",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-04T15:25:00.000Z",
+  "publishedAt": "2026-10-05T14:29:00.000Z",
   "changelog": [
-    "[Atualização] Sistema Auto Inativo",
-    "A versão 10.1.40 já está disponível para atualização.",
-    "Novo sistema Auto Inativo para remover automaticamente membros sem atividade no grupo.",
-    "Comando autoinativo permite ativar, desativar e configurar o limite em horas ou dias.",
-    "Comando inativos mostra os membros e o tempo desde a última mensagem.",
-    "Administradores, donos e o próprio bot ficam protegidos da remoção automática.",
-    "Ao ativar o sistema, todos os membros recebem uma nova contagem para evitar remoções imediatas.",
-    "O sistema verifica os grupos automaticamente a cada 30 minutos e avisa no grupo quando alguém é removido por inatividade."
+    "[Correção] Comando Likes atualizado",
+    "A versão 10.1.41 já está disponível para atualização.",
+    "Comando likes atualizado para aceitar o novo retorno da rota de Likes.",
+    "Resultado de likes passa a mostrar nick, UID, likes antes, enviados, depois e cota.",
+    "Fonte de envio e comprovantes foram removidos do resultado do WhatsApp.",
+    "Auto Like também passa a aceitar o novo formato da resposta da API sem perder compatibilidade com o formato antigo."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Sistema Auto Inativo",
-  "notice": "A versão 10.1.40 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "Correção do comando Likes",
+  "notice": "A versão 10.1.41 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/autoinativo.js",
+      "path": "DADOS_TOKITO/plugins/freefire/likes.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/sistemas/autoinativo.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/connect.js",
+      "path": "DADOS_TOKITO/sistemas/autolike.js",
       "sha256": "",
       "size": 0
     },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "",
       "size": 0
     },
@@ -340,11 +328,50 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-04T15:25:00.000Z"
+    },
+    {
+      "version": "10.1.41",
+      "fromVersion": "10.1.40",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Correção do comando Likes",
+      "notice": "A versão 10.1.41 já está disponível para atualização.",
+      "changelog": [
+        "Comando likes atualizado para aceitar o novo retorno da rota de Likes.",
+        "Resultado de likes passa a mostrar nick, UID, likes antes, enviados, depois e cota.",
+        "Fonte de envio e comprovantes foram removidos do resultado do WhatsApp.",
+        "Auto Like também passa a aceitar o novo formato da resposta da API sem perder compatibilidade com o formato antigo."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/likes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/autolike.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-05T14:29:00.000Z"
     }
   ],
-  "versao": "10.1.40",
+  "versao": "10.1.41",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.39"
+  "fromVersion": "10.1.40"
 }

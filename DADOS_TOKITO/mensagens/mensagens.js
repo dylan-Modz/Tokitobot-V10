@@ -3875,23 +3875,29 @@ return `- ❤️ \`𝙻𝙸𝙺𝙴𝚂 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴\`
 > 💡 ׄ ( ᴇxᴇᴍᴘʟᴏ: ${prefix}likes 32793023 )`
 }
 
-exports.ffLikesSucesso = ({ NomeDoBot, pushname, player_id, data }) => {
-const c = data?.data?.conta
-const l = data?.data?.likes
+exports.ffLikesSucesso = ({
+uid = 'N/A',
+nick = 'N/A',
+antes = 0,
+enviados = 0,
+depois = 0,
+cotaLimite = 0,
+cotaUsadas = 0,
+cotaRestam = 0
+} = {}) => {
 return `- ❤️ \`𝙻𝙸𝙺𝙴𝚂 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴\`
 
-> 🤖 ׄ ( ʙᴏᴛ: ${NomeDoBot} )
-> 👤 ׄ ( ᴜsᴜᴀ́ʀɪᴏ: ${pushname} )
-> 🏷️ ׄ ( ɴɪᴄᴋ: ${c?.nickname || 'N/A'} )
-> 🆔 ׄ ( ᴜɪᴅ: ${c?.uid || player_id} )
-> 🌎 ׄ ( ʀᴇɢɪᴀ̃ᴏ: ${c?.region || 'N/A'} )
-> 📊 ׄ ( ʟᴇᴠᴇʟ: ${c?.level || 'N/A'} )
+> 🏷️ ׄ ( ɴɪᴄᴋ: ${nick} )
+> 🆔 ׄ ( ᴜɪᴅ: ${uid} )
 
-> ❤️ ׄ ( ᴀɴᴛᴇs: ${l?.antes || 0} )
-> ➕ ׄ ( ᴀᴅɪᴄɪᴏɴᴀᴅᴏs: ${l?.adicionados || 0} )
-> 📈 ׄ ( ᴅᴇᴘᴏɪs: ${l?.depois || 0} )
+> ❤️ ׄ ( ᴀɴᴛᴇs: ${antes} )
+> ➕ ׄ ( ᴇɴᴠɪᴀᴅᴏs: ${enviados} )
+> 📈 ׄ ( ᴅᴇᴘᴏɪs: ${depois} )
 
-> ❤️ ׄ ( ✅ ${data?.message || 'Likes enviados com sucesso!'} )`
+> 📊 ׄ ( ᴄᴏᴛᴀ: ${cotaUsadas}/${cotaLimite} )
+> 📥 ׄ ( ʀᴇsᴛᴀᴍ: ${cotaRestam} )
+
+> ❤️ ׄ ( ✅ ʟɪᴋᴇs ᴇɴᴠɪᴀᴅᴏs ᴄᴏᴍ sᴜᴄᴇssᴏ! )`
 }
 
 exports.ffCotaLikes = ({ NomeDoBot, pushname, data, reset, expira }) => {
