@@ -4011,19 +4011,30 @@ return `- 🏦 \`𝙱𝙰𝙽𝙲𝙾 𝙳𝙴 𝙽-𝙲𝙾𝙸𝙽𝚂\`
 > 🏦 ׄ ( ᴜsᴇ ${prefix}menucoins ᴘᴀʀᴀ ᴠᴇʀ ᴏ sɪsᴛᴇᴍᴀ. )`
 }
 
-exports.erroApi = () => {
-return `• \`O que devo fazer?\` 🤔
+exports.erroApi = (site = 'https://tokito-apis.com.br') => {
+let link = 'https://tokito-apis.com.br'
 
--> Há três métodos que podem resolver o problema. Mas um deles vai da sua sorte.
+try {
+link = new URL(String(site || link)).origin
+}
+catch {
+}
 
-1 - \`Criar uma conta secundária\`
-> Se você usa a API em outro bot além do Tokito, esse é um meio bem mais controlado.
+return `• \`Não foi possível concluir a solicitação\` ⚠️
 
-2 - \`Contratar outro plano com a opção "Tokito" ativa\`
-> Válido para todos os casos, basta refazer a sessão de planos.
+-> O comando não conseguiu completar a consulta na API. Antes de tentar de novo, vale conferir alguns pontos.
 
-3 - \`Trocar uma ideia com o suporte da API\`
-> Vai da sorte, geralmente a gente resolve manualmente e ninguém sai perdendo.`
+1 - \`Confira sua conta e seu plano\`
+> Acesse o painel e veja se sua conta está ativa e se o plano ainda libera o recurso que você tentou usar.
+
+2 - \`Revise a chave configurada no bot\`
+> Verifique se a chave está correta, ativa e vinculada à mesma conta que possui o plano.
+
+3 - \`Se continuar, chame o suporte\`
+> Se estiver tudo certo no painel e o erro continuar, o suporte pode verificar o motivo e orientar o próximo passo.
+
+• \`Site da API\` 🌐
+> ${link}`
 }
 
 exports.ativarPainel = ({ itens = [], ativo = () => false } = {}) => {
