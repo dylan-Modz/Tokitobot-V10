@@ -3,83 +3,79 @@
  *                     TOKITO BOT V10
  * ============================================================
  *
- * Projeto disponibilizado gratuitamente para a comunidade.
- *
- * Você pode modificar, personalizar e utilizar este bot
- * conforme sua preferência, inclusive mantendo o nome Tokito.
- *
- * REGRAS:
- * • É proibida a venda ou revenda deste código-fonte.
- * • Não comercialize versões modificadas deste projeto.
- * • Não reivindique a autoria original do projeto.
- * • Respeite os créditos e o trabalho dos desenvolvedores.
- * • Utilize o projeto com respeito e responsabilidade.
- *
- * ATENÇÃO:
- * A venda, revenda ou comercialização não autorizada deste
- * projeto poderá resultar em medidas legais para proteção
- * dos direitos dos autores, incluindo processo judicial,
- * conforme a legislação aplicável.
- *
  * Author: Dylan Modz
  * API oficial: https://tokito-apis.com.br
- *
- * Modifique como quiser. Apenas respeite as regras.
  * ============================================================
  */
 
-const modulos = require('../../sistemas/modulos')
+const { proto, generateWAMessageFromContent } = require('baileys')
+const dylan = require('../../database/lib/comandos')
 
 const itens = [
-['__bemvindo1', 'Bem-vindo 1'],
-['__bemvindo2', 'Bem-vindo 2'],
-['__bemvindo3', 'Bem-vindo 3'],
-['__bemvindo4', 'Bem-vindo 4'],
-['__bemvindo5', 'Bem-vindo 5'],
-['aprovacao', 'Aprovação de entrada'],
-['autoaprovacao', 'Auto Aprovação'],
-['soadm', 'Só ADM'],
-['__antilinkeasy', 'Anti Link Easy'],
-['__antilinkmedium', 'Anti Link Medium'],
-['__antilinkhard', 'Anti Link Hard'],
-['antifake', 'Anti Fake'],
-['__antiddd', 'Anti DDD'],
-['antirroubo', 'Anti Roubo'],
-['antinuke', 'Anti-Nuke'],
-['antinotas', 'Anti Notas'],
-['antipalavra', 'Anti Palavras'],
-['antipay', 'Anti Pagamento'],
-['antibot', 'Anti Bot'],
-['antivideo', 'Anti Vídeo'],
-['antifoto', 'Anti Foto'],
-['antivisu', 'Anti Visualização Única'],
-['antisticker', 'Anti Sticker'],
-['antifloodsticker', 'Anti Flood Sticker'],
-['anticontato', 'Anti Contato'],
-['antilocalizacao', 'Anti Localização'],
-['antidocumento', 'Anti Documento'],
-['antiaudio', 'Anti Áudio'],
-['antispam', 'Anti Spam'],
-['antistatus', 'Anti Status'],
-['antimarcacao', 'Anti Marcação'],
-['anticanal', 'Anti Canal'],
-['autodl', 'Auto Download'],
-['autosticker', 'Auto Sticker'],
-['autortext', 'Auto Transcrição'],
-['multiprefix', 'Multi-prefix'],
-['modojogos', 'Modo Jogos'],
-['__modobn', 'Modo Brincadeiras'],
-['modorpg', 'Modo RPG'],
-['modocoins', 'Modo Coins'],
-['__modoia', 'Modo IA'],
-['simih', 'Simih'],
-['x9', 'X9']
+['__bemvindo1', 'Bem-vindo 1', 'bemvindos'],
+['__bemvindo2', 'Bem-vindo 2', 'bemvindos'],
+['__bemvindo3', 'Bem-vindo 3', 'bemvindos'],
+['__bemvindo4', 'Bem-vindo 4', 'bemvindos'],
+['__bemvindo5', 'Bem-vindo 5', 'bemvindos'],
+
+['aprovacao', 'Aprovação de entrada', 'entrada'],
+['autoaprovacao', 'Auto Aprovação', 'entrada'],
+['soadm', 'Só ADM', 'entrada'],
+
+['__antilinkeasy', 'Anti Link Easy', 'links'],
+['__antilinkmedium', 'Anti Link Medium', 'links'],
+['__antilinkhard', 'Anti Link Hard', 'links'],
+
+['antifake', 'Anti Fake', 'seguranca'],
+['__antiddd', 'Anti DDD', 'seguranca'],
+['antirroubo', 'Anti Roubo', 'seguranca'],
+['antinuke', 'Anti-Nuke', 'seguranca'],
+['antinotas', 'Anti Notas', 'seguranca'],
+['antipalavra', 'Anti Palavras', 'seguranca'],
+['antipay', 'Anti Pagamento', 'seguranca'],
+['antibot', 'Anti Bot', 'seguranca'],
+['antispam', 'Anti Spam', 'seguranca'],
+['antistatus', 'Anti Status', 'seguranca'],
+['antimarcacao', 'Anti Marcação', 'seguranca'],
+['anticanal', 'Anti Canal', 'seguranca'],
+['x9', 'X9', 'seguranca'],
+
+['antivideo', 'Anti Vídeo', 'midias'],
+['antifoto', 'Anti Foto', 'midias'],
+['antivisu', 'Anti Visualização Única', 'midias'],
+['antisticker', 'Anti Sticker', 'midias'],
+['antifloodsticker', 'Anti Flood Sticker', 'midias'],
+['anticontato', 'Anti Contato', 'midias'],
+['antilocalizacao', 'Anti Localização', 'midias'],
+['antidocumento', 'Anti Documento', 'midias'],
+['antiaudio', 'Anti Áudio', 'midias'],
+
+['autodl', 'Auto Download', 'automacao'],
+['autosticker', 'Auto Sticker', 'automacao'],
+['autortext', 'Auto Transcrição', 'automacao'],
+['multiprefix', 'Multi-prefix', 'automacao'],
+
+['modojogos', 'Modo Jogos', 'modos'],
+['__modobn', 'Modo Brincadeiras', 'modos'],
+['modorpg', 'Modo RPG', 'modos'],
+['modocoins', 'Modo Coins', 'modos'],
+['__modoia', 'Modo IA', 'modos'],
+['simih', 'Simih', 'modos']
+]
+
+const secoes = [
+['bemvindos', '🌸 Bem-vindos'],
+['entrada', '👥 Entrada e grupo'],
+['links', '🔗 Anti Link'],
+['seguranca', '🛡️ Segurança'],
+['midias', '📁 Mídias'],
+['automacao', '🤖 Automação'],
+['modos', '🎮 Modos']
 ]
 
 const funcoes = ctx => {
-if (!ctx.dataGp?.[0]?.funcoes || typeof ctx.dataGp[0].funcoes !== 'object') {
+if (!ctx.dataGp?.[0]?.funcoes || typeof ctx.dataGp[0].funcoes !== 'object')
 ctx.dataGp[0].funcoes = {}
-}
 
 return ctx.dataGp[0].funcoes
 }
@@ -87,37 +83,23 @@ return ctx.dataGp[0].funcoes
 const ativo = (ctx, chave) => {
 const f = ctx.dataGp?.[0]?.funcoes || {}
 
-if (chave === '__bemvindo1') {
-return Boolean(ctx.dataGp?.[0]?.wellcome?.[0]?.bemvindo1)
-}
-
-if (chave === '__bemvindo2') {
-return Boolean(ctx.dataGp?.[0]?.wellcome?.[1]?.bemvindo2)
-}
-
 if (chave.startsWith('__bemvindo')) {
 const numero = Number(chave.replace('__bemvindo', ''))
 const indice = numero - 1
-
-if (!Number.isInteger(numero) || numero < 1)
-return false
 
 return Boolean(
 ctx.dataGp?.[0]?.wellcome?.[indice]?.[`bemvindo${numero}`]
 )
 }
 
-if (chave === '__modobn') {
+if (chave === '__modobn')
 return ctx.dataGp?.[0]?.jogos === true
-}
 
-if (chave === '__modoia') {
+if (chave === '__modoia')
 return Boolean(f.modoia?.ativo)
-}
 
-if (chave === '__antiddd') {
+if (chave === '__antiddd')
 return Boolean(f.antiddd?.ativo)
-}
 
 if (chave.startsWith('__antilink')) {
 const nivel = chave.replace('__antilink', '')
@@ -131,16 +113,18 @@ const trocar = (ctx, chave) => {
 const f = funcoes(ctx)
 
 if (chave.startsWith('__bemvindo')) {
-const indice = Number(chave.replace('__bemvindo', '')) - 1
-const item = ctx.dataGp?.[0]?.wellcome?.[indice]
+const numero = Number(chave.replace('__bemvindo', ''))
+const indice = numero - 1
 
-if (!item) {
-return false
-}
+if (!Array.isArray(ctx.dataGp[0].wellcome))
+ctx.dataGp[0].wellcome = []
 
-const campo = `bemvindo${indice + 1}`
-item[campo] = !Boolean(item[campo])
-return item[campo]
+if (!ctx.dataGp[0].wellcome[indice] || typeof ctx.dataGp[0].wellcome[indice] !== 'object')
+ctx.dataGp[0].wellcome[indice] = {}
+
+const campo = `bemvindo${numero}`
+ctx.dataGp[0].wellcome[indice][campo] = !Boolean(ctx.dataGp[0].wellcome[indice][campo])
+return ctx.dataGp[0].wellcome[indice][campo]
 }
 
 if (chave === '__modobn') {
@@ -149,24 +133,16 @@ return ctx.dataGp[0].jogos
 }
 
 if (chave === '__modoia') {
-if (!f.modoia || typeof f.modoia !== 'object') {
-f.modoia = {
-ativo: false,
-tipo: 'texto'
-}
-}
+if (!f.modoia || typeof f.modoia !== 'object')
+f.modoia = { ativo: false, tipo: 'texto' }
 
 f.modoia.ativo = !Boolean(f.modoia.ativo)
 return f.modoia.ativo
 }
 
 if (chave === '__antiddd') {
-if (!f.antiddd || typeof f.antiddd !== 'object') {
-f.antiddd = {
-ativo: false,
-listaProibidos: []
-}
-}
+if (!f.antiddd || typeof f.antiddd !== 'object')
+f.antiddd = { ativo: false, listaProibidos: [] }
 
 f.antiddd.ativo = !Boolean(f.antiddd.ativo)
 return f.antiddd.ativo
@@ -175,48 +151,127 @@ return f.antiddd.ativo
 if (chave.startsWith('__antilink')) {
 const nivel = chave.replace('__antilink', '')
 
-if (!f.antilink || typeof f.antilink !== 'object') {
-f.antilink = {
-ativo: false,
-nivel: null
-}
-}
+if (!f.antilink || typeof f.antilink !== 'object')
+f.antilink = { ativo: false, nivel: null }
 
-const mesmo = f.antilink.ativo === true && f.antilink.nivel === nivel
+const mesmo =
+f.antilink.ativo === true &&
+f.antilink.nivel === nivel
+
 f.antilink.ativo = !mesmo
 f.antilink.nivel = mesmo ? null : nivel
+
 return f.antilink.ativo
 }
 
 f[chave] = !Boolean(f[chave])
 
-if (chave === 'multiprefix' && f[chave] && !f.prefixGrupo) {
+if (chave === 'multiprefix' && f[chave] && !f.prefixGrupo)
 f.prefixGrupo = ctx.prefix
-}
 
 return f[chave]
 }
 
-const painel = ctx => {
-return ctx.mess.ativarPainel({
-itens,
-ativo: chave => ativo(ctx, chave)
+const linhas = ctx => {
+return secoes
+.map(([id, titulo]) => {
+const rows = itens
+.filter(item => item[2] === id)
+.map(([chave, nome], indice) => {
+const ligado = ativo(ctx, chave)
+
+return {
+title: `${ligado ? '🟢' : '🔴'} ${nome}`,
+description: ligado
+? 'Ativado • toque para desativar.'
+: 'Desativado • toque para ativar.',
+id: `${ctx.prefix}ativar ${chave}`
+}
 })
+
+return rows.length
+? { title: titulo, rows }
+: null
+})
+.filter(Boolean)
 }
 
-const dylan = require('../../database/lib/comandos')
+const painel = async (ctx, alteracao = '') => {
+const total = itens.length
+const ativas = itens.filter(([chave]) => ativo(ctx, chave)).length
+
+const texto =
+`- ⚙️ \`𝙰𝚃𝙸𝚅𝙰𝚁 𝚂𝙸𝚂𝚃𝙴𝙼𝙰𝚂\`
+
+> 🟢 ׄ ( ${ativas} — ᴀᴛɪᴠᴀᴅᴏs. )
+> 🔴 ׄ ( ${total - ativas} — ᴅᴇsᴀᴛɪᴠᴀᴅᴏs. )
+${alteracao ? `\n> ⚙️ ׄ ( ${alteracao} )\n` : ''}
+> 📋 ׄ ( ᴛᴏǫᴜᴇ ᴇᴍ ᴜᴍᴀ ғᴜɴᴄ̧ᴀ̃ᴏ ᴘᴀʀᴀ ᴀᴛɪᴠᴀʀ ᴏᴜ ᴅᴇsᴀᴛɪᴠᴀʀ. )`
+
+const lista = {
+title: '⚙️ Ativar sistemas',
+sections: linhas(ctx)
+}
+
+try {
+const msg = generateWAMessageFromContent(ctx.from, {
+viewOnceMessage: {
+message: {
+interactiveMessage: proto.Message.InteractiveMessage.create({
+body: proto.Message.InteractiveMessage.Body.create({
+text: texto
+}),
+footer: proto.Message.InteractiveMessage.Footer.create({
+text: 'Selecione uma função abaixo'
+}),
+nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+buttons: [{
+name: 'single_select',
+buttonParamsJson: JSON.stringify(lista)
+}],
+messageParamsJson: JSON.stringify({})
+})
+})
+}
+}
+}, {
+quoted: ctx.selo,
+userJid: ctx.tokito.user?.id
+})
+
+await ctx.tokito.relayMessage(
+ctx.from,
+msg.message,
+{ messageId: msg.key.id }
+)
+
+return true
+}
+catch (error) {
+console.log(
+'[ATIVAR LIST]',
+error?.message || error
+)
+
+const fallback = itens
+.map(([chave, nome], i) =>
+`> ${ativo(ctx, chave) ? '🟢' : '🔴'} ׄ ( ${i + 1} — ${nome}. )`
+)
+.join('\n')
+
+return ctx.reply(
+`${texto}\n\n${fallback}`
+)
+}
+}
 
 dylan.setCommand({
 nome: 'ativar',
-
-comandos: [
-'ativar'
-],
-
+comandos: ['ativar'],
 categoria: 'admin',
 
 info: {
-descricao: 'Painel numerado para ativar/desativar sistemas do grupo.',
+descricao: 'Abre a lista interativa para ativar ou desativar sistemas do grupo.',
 uso: 'ativar',
 permissao: 'ADM'
 },
@@ -227,27 +282,35 @@ trocar,
 painel,
 
 async executar(ctx) {
-if (!ctx.isGroup) {
-return ctx.reply(
-ctx.mess.sogrupo()
+if (!ctx.isGroup)
+return ctx.reply(ctx.mess.sogrupo())
+
+if (!ctx.isGroupAdmins && !ctx.SoDono)
+return ctx.reply(ctx.mess.soadm())
+
+const escolha = String(ctx.q || '').trim()
+
+if (!escolha)
+return painel(ctx)
+
+const item = itens.find(([chave]) => chave === escolha)
+
+if (!item)
+return painel(ctx)
+
+const [chave, nome] = item
+const estado = trocar(ctx, chave)
+
+ctx.setGp(ctx.dataGp)
+
+await ctx.reagir(
+ctx.from,
+estado ? '✅' : '❌'
+).catch(() => {})
+
+return painel(
+ctx,
+`${nome} — ${estado ? 'ATIVADO ✅' : 'DESATIVADO ❌'}`
 )
 }
-
-if (!ctx.isGroupAdmins && !ctx.SoDono) {
-return ctx.reply(
-ctx.mess.soadm()
-)
-}
-
-const chave = `${ctx.from}|${ctx.sender}`
-
-modulos.pendentesAtivar.set(chave, {
-expira: Date.now() + 120000
 })
-
-return ctx.reply(
-painel(ctx)
-)
-}
-}
-)
