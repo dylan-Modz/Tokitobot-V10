@@ -1,75 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.47",
+  "version": "10.1.48",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-05T18:58:00.000Z",
+  "publishedAt": "2026-10-05T21:54:00.802Z",
   "changelog": [
-    "[Atualização] Novos recursos do Menu Dono",
-    "A versão 10.1.47 já está disponível para atualização.",
-    "Novo AntiCall para rejeitar chamadas e bloquear automaticamente quem ligar para o bot.",
-    "Novos comandos fotobot e clonar para alterar a foto de perfil do Tokito.",
-    "Novo VIP de grupo com addvipgp, delvipgp e vipgplist; membros do grupo VIP passam a contar como VIP nos comandos.",
-    "Novo gerenciador global com listagp e linkdogp.",
-    "Novo envmsg para o dono enviar uma mensagem para um número ou grupo específico.",
-    "Novo transmitir para enviar texto ou mídia para todos os grupos do bot com intervalo entre os envios.",
-    "Novo AutoBan global com autobang, delautobang e autobanglist; usuários cadastrados são bloqueados do bot e removidos de grupos quando possível.",
-    "Novo sistema de agenda do dono com agendar, agenda e delagenda.",
-    "Novo reinício diário programado com setrestart e checkrestart.",
-    "Novo fundoping para personalizar o fundo do comando ping.",
-    "Novo comando add/adicionar para administradores adicionarem um membro ao grupo apenas informando o número."
+    "[Atualização] Administração avançada e sorteios",
+    "A versão 10.1.48 já está disponível para atualização.",
+    "Novo Anti-Nuke simples para detectar ações administrativas em massa e rebaixar automaticamente o ADM responsável.",
+    "Novos comandos fotogp, descgp, nomegp e novolink para gerenciamento do grupo.",
+    "Novo sorteio por reação com horário automático através de sorteio e infosorteio.",
+    "Novo sorteionumero para escolher um número aleatório entre 0 e o limite informado.",
+    "Novos criartabela e tabelagp para manter uma tabela fixa por grupo.",
+    "Novo grupo-all para programar fechamento e abertura do grupo em um único comando.",
+    "Novos roleta e roleta2; a segunda versão protege administradores."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Atualização",
-  "title": "Novos recursos do Menu Dono",
-  "notice": "A versão 10.1.47 já está disponível para atualização.",
+  "title": "Administração avançada e sorteios",
+  "notice": "A versão 10.1.48 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/dono.js",
+      "path": "DADOS_TOKITO/sistemas/antinuke.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/dono/anticall.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/perfilbot.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/vipgp.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/autobang.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/agenda.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/fundoping.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/gruposglobais.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/add.js",
+      "path": "DADOS_TOKITO/plugins/admin/antinuke.js",
       "sha256": "",
       "size": 0
     },
@@ -79,12 +40,37 @@
       "size": 0
     },
     {
-      "path": "tokito.js",
+      "path": "DADOS_TOKITO/plugins/admin/gerenciargrupo-extra.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/info/ping.js",
+      "path": "DADOS_TOKITO/plugins/admin/tabelagp.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/grupo-all.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/roleta.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/sorteio-grupo.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/sorteio.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/eventos/sorteio-grupo.js",
       "sha256": "",
       "size": 0
     },
@@ -727,11 +713,93 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-05T18:58:00.000Z"
+    },
+    {
+      "version": "10.1.48",
+      "fromVersion": "10.1.47",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Administração avançada e sorteios",
+      "notice": "A versão 10.1.48 já está disponível para atualização.",
+      "changelog": [
+        "Novo Anti-Nuke simples para detectar ações administrativas em massa e rebaixar automaticamente o ADM responsável.",
+        "Novos comandos fotogp, descgp, nomegp e novolink para gerenciamento do grupo.",
+        "Novo sorteio por reação com horário automático através de sorteio e infosorteio.",
+        "Novo sorteionumero para escolher um número aleatório entre 0 e o limite informado.",
+        "Novos criartabela e tabelagp para manter uma tabela fixa por grupo.",
+        "Novo grupo-all para programar fechamento e abertura do grupo em um único comando.",
+        "Novos roleta e roleta2; a segunda versão protege administradores."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/antinuke.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antinuke.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/gerenciargrupo-extra.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/tabelagp.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/grupo-all.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/roleta.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/sorteio-grupo.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/sorteio.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/eventos/sorteio-grupo.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-05T21:54:00.802Z"
     }
   ],
-  "versao": "10.1.47",
+  "versao": "10.1.48",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.46"
+  "fromVersion": "10.1.47"
 }
