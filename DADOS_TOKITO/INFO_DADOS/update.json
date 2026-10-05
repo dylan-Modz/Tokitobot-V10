@@ -1,79 +1,28 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.49",
+  "version": "10.1.50",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-05T21:58:59.131Z",
+  "publishedAt": "2026-10-05T22:19:31.336Z",
   "changelog": [
-    "[Correção] Nomes de arquivos simplificados",
-    "A versão 10.1.49 já está disponível para atualização.",
-    "Arquivos novos da versão 10.1.48 foram renomeados para nomes curtos e simples.",
-    "Removidos nomes com hífen e sufixos longos como gerenciargrupo-extra e sorteio-grupo.",
-    "O sistema interno do Anti-Nuke agora usa nuke.js, evitando dois arquivos chamados antinuke.js.",
-    "Os nomes antigos são removidos automaticamente durante a atualização."
+    "[Atualização] Banner Business do bot",
+    "A versão 10.1.50 já está disponível para atualização.",
+    "Novo comando fotobanner para alterar o banner do perfil Business do bot respondendo uma imagem.",
+    "O comando verifica primeiro se a conta conectada possui perfil do WhatsApp Business e avisa quando não possuir.",
+    "Compatibilidade com updateBusinessCoverPhoto e com o updateCoverPhoto já existente na biblioteca.",
+    "Menu do dono atualizado mantendo o emoji padrão da categoria Configurações nos comandos de perfil."
   ],
-  "delete": [
-    "DADOS_TOKITO/sistemas/antinuke.js",
-    "DADOS_TOKITO/plugins/admin/gerenciargrupo-extra.js",
-    "DADOS_TOKITO/plugins/admin/grupo-all.js",
-    "DADOS_TOKITO/sistemas/sorteio-grupo.js",
-    "DADOS_TOKITO/plugins/eventos/sorteio-grupo.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Nomes de arquivos simplificados",
-  "notice": "A versão 10.1.49 já está disponível para atualização.",
+  "type": "Atualização",
+  "title": "Banner Business do bot",
+  "notice": "A versão 10.1.50 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/nuke.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/antinuke.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/grupoadm.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/tabelagp.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/grupoall.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/brincadeiras/roleta.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/sorteios.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/sorteio.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/eventos/sorteioevento.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/connect.js",
+      "path": "DADOS_TOKITO/plugins/dono/fotobanner.js",
       "sha256": "",
       "size": 0
     },
@@ -883,11 +832,45 @@
       ],
       "required": true,
       "publishedAt": "2026-10-05T21:58:59.131Z"
+    },
+    {
+      "version": "10.1.50",
+      "fromVersion": "10.1.49",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Banner Business do bot",
+      "notice": "A versão 10.1.50 já está disponível para atualização.",
+      "changelog": [
+        "Novo comando fotobanner para alterar o banner do perfil Business do bot respondendo uma imagem.",
+        "O comando verifica primeiro se a conta conectada possui perfil do WhatsApp Business e avisa quando não possuir.",
+        "Compatibilidade com updateBusinessCoverPhoto e com o updateCoverPhoto já existente na biblioteca.",
+        "Menu do dono atualizado mantendo o emoji padrão da categoria Configurações nos comandos de perfil."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/dono/fotobanner.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-05T22:19:31.336Z"
     }
   ],
-  "versao": "10.1.49",
+  "versao": "10.1.50",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.48"
+  "fromVersion": "10.1.49"
 }
