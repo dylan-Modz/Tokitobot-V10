@@ -55,16 +55,16 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ├╾═╼･ﾟ𖤐ﾟ･｡📚｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝑂𝑈𝑇𝑅𝑂𝑆-𝑀𝐸𝑁𝑈𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡🧊｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}menudown — músicas, vídeos e arquivos
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}menujogos — jogos e desafios
-┃࣪ ╎—̳͟͞͞ 🥀 ${prefix}menubn — brincadeiras e rankings
-┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}menurpg — jornada, guildas, pets e Pokémon
-┃࣪ ╎—̳͟͞͞ 💰 ${prefix}menucoins — N-Coins e economia
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}menuff — recursos de Free Fire
-┃࣪ ╎—̳͟͞͞ 🎨 ${prefix}menulogos — logos e efeitos de texto
-┃࣪ ╎—̳͟͞͞ 🎚️ ${prefix}menualt — efeitos de áudio e vídeo
-┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}menuadm — administração do grupo
-┃࣪ ╎—̳͟͞͞ 👑 ${prefix}menudono — configurações do dono
+┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menudown — músicas, vídeos e arquivos
+┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menujogos — jogos e desafios
+┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menubn — brincadeiras e rankings
+┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menurpg — jornada, guildas, pets e Pokémon
+┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menucoins — N-Coins e economia
+┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menuff — recursos de Free Fire
+┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menulogos — logos e efeitos de texto
+┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menualt — efeitos de áudio e vídeo
+┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menuadm — administração do grupo
+┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menudono — configurações do dono
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -73,33 +73,33 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ├╾═╼･ﾟ𖤐ﾟ･｡🎧｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐷𝑂𝑊𝑁𝐿𝑂𝐴𝐷𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡📥｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🎵 ${prefix}play música
-┃࣪ ╎—̳͟͞͞ 📻 ${prefix}playlist — playlists e rádio
-┃࣪ ╎—̳͟͞͞ 🎶 ${prefix}shazam — reconhecer música
-┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}play_audio música
-┃࣪ ╎—̳͟͞͞ 🎬 ${prefix}playvideo música
-┃࣪ ╎—̳͟͞͞ 📄 ${prefix}playdoc música
-┃࣪ ╎—̳͟͞͞ 🔎 ${prefix}ytsearch pesquisa
-┃࣪ ╎—̳͟͞͞ 🎵 ${prefix}tiktok link
-┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}tiktok_audio link
-┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}tiktok_foto link
-┃࣪ ╎—̳͟͞͞ 📸 ${prefix}instagram link
-┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}instagram_audio link
-┃࣪ ╎—̳͟͞͞ 📘 ${prefix}facebook link
-┃࣪ ╎—̳͟͞͞ 🐦 ${prefix}twitter link
-┃࣪ ╎—̳͟͞͞ 🎥 ${prefix}kwai link
-┃࣪ ╎—̳͟͞͞ 📌 ${prefix}pinterestvideo link
-┃࣪ ╎—̳͟͞͞ 🎶 ${prefix}deezer música
-┃࣪ ╎—̳͟͞͞ ☁️ ${prefix}soundcloud música
-┃࣪ ╎—̳͟͞͞ 🍎 ${prefix}applemusic link
-┃࣪ ╎—̳͟͞͞ 🎶 ${prefix}spotify link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}play música
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}playlist — playlists e rádio
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}shazam — reconhecer música
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}play_audio música
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}playvideo música
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}playdoc música
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}ytsearch pesquisa
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}tiktok link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}tiktok_audio link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}tiktok_foto link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}instagram link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}instagram_audio link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}facebook link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}twitter link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}kwai link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}pinterestvideo link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}deezer música
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}soundcloud música
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}applemusic link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}spotify link
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}mediafire link
-┃࣪ ╎—̳͟͞͞ ☁️ ${prefix}mega link
-┃࣪ ╎—̳͟͞͞ 🐙 ${prefix}gitclone link
-┃࣪ ╎—̳͟͞͞ 📱 ${prefix}aptoide app
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}happymod app
-┃࣪ ╎—̳͟͞͞ 🛍️ ${prefix}playstore app
-┃࣪ ╎—̳͟͞͞ 🎬 ${prefix}capcut link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}mega link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}gitclone link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}aptoide app
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}happymod app
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}playstore app
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}capcut link
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -108,20 +108,20 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ├╾═╼･ﾟ𖤐ﾟ･｡🎚️｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐴𝐿𝑇𝐸𝑅𝐴𝐷𝑂𝑅𝐸𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡🎧｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🐌 ${prefix}videolento
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}videorapido
-┃࣪ ╎—̳͟͞͞ 🔄 ${prefix}videocontrario
-┃࣪ ╎—̳͟͞͞ 🐌 ${prefix}audiolento
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}audiorapido
-┃࣪ ╎—̳͟͞͞ 🚀 ${prefix}speedup
-┃࣪ ╎—̳͟͞͞ 🌙 ${prefix}slowed
-┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}grave
-┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}grave2
-┃࣪ ╎—̳͟͞͞ 🐿️ ${prefix}esquilo
-┃࣪ ╎—̳͟͞͞ 💥 ${prefix}estourar
-┃࣪ ╎—̳͟͞͞ 🎵 ${prefix}bass
-┃࣪ ╎—̳͟͞͞ 🎵 ${prefix}bass2
-┃࣪ ╎—̳͟͞͞ 🗣️ ${prefix}vozmenino
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}videolento
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}videorapido
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}videocontrario
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}audiolento
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}audiorapido
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}speedup
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}slowed
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}grave
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}grave2
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}esquilo
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}estourar
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}bass
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}bass2
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}vozmenino
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -182,7 +182,7 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}ping
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}criador
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}idade 23/12/2007
-┃࣪ ╎—̳͟͞͞ 🌦️ ${prefix}clima cidade
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}clima cidade
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}totalcmd
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}gerarlink
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
@@ -211,7 +211,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}grupo a/f
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}fechargp 22:00
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}abrirgp 07:00
-┃࣪ ╎—̳͟͞͞ ➕ ${prefix}add 5511999999999
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}add 5511999999999
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}ban @usuario
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}promover @usuario
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}promover2 @usuario 18:00/22:00
@@ -222,9 +222,9 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcar mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcar2 mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcarwa mensagem
-┃࣪ ╎—̳͟͞͞ 💤 ${prefix}autoinativo 1/0/3d
-┃࣪ ╎—̳͟͞͞ 💤 ${prefix}inativos
-┃࣪ ╎—̳͟͞͞ 🧠 ${prefix}simih 1/0
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}autoinativo 1/0/3d
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}inativos
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}simih 1/0
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}hidetag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}totag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}cita mensagem
@@ -259,18 +259,18 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo2
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo3
-┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}bemvindo4
-┃࣪ ╎—̳͟͞͞ 🎙️ ${prefix}bemvindo5
+┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo4
+┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo5
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendabv texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendasaiu texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendabv2 texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendasaiu2 texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendabv3 texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendasaiu3 texto
-┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}stickerbv
-┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}stickersaiu
-┃࣪ ╎—̳͟͞͞ 🎙️ ${prefix}audiobv
-┃࣪ ╎—̳͟͞͞ 🎙️ ${prefix}audiosaiu
+┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}stickerbv
+┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}stickersaiu
+┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}audiobv
+┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}audiosaiu
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}fundobv
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}fundosaiu
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}delfundos
@@ -337,7 +337,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├─ ⊹ 𖤐  𝐴𝑇𝐼𝑉𝐼𝐷𝐴𝐷𝐸𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡👥｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 👥 ${prefix}atividades
-┃࣪ ╎—̳͟͞͞ 👤 ${prefix}me
+┃࣪ ╎—̳͟͞͞ 👥 ${prefix}me
 ┃࣪ ╎—̳͟͞͞ 👥 ${prefix}inativos 0
 ┃࣪ ╎—̳͟͞͞ 👥 ${prefix}inativos 5
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
@@ -406,12 +406,12 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fotobanner
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}clonar @usuario
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fundoping
-┃࣪ ╎—̳͟͞͞ 📵 ${prefix}anticall 1/0
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}anticall 1/0
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}botoes 1/0
-┃࣪ ╎—̳͟͞͞ 🔄 ${prefix}setrestart 04:00
-┃࣪ ╎—̳͟͞͞ 🔄 ${prefix}checkrestart
-┃࣪ ╎—̳͟͞͞ ⏰ ${prefix}agendar data | texto
-┃࣪ ╎—̳͟͞͞ ⏰ ${prefix}agenda
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setrestart 04:00
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}checkrestart
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}agendar data | texto
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}agenda
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}reiniciar
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
@@ -450,7 +450,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡💰｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 💰 ${prefix}modoaluguel 1/0
 ┃࣪ ╎—̳͟͞͞ 💰 ${prefix}rgaluguel dias horas
-┃࣪ ╎—̳͟͞͞ 💾 ${prefix}savegp
+┃࣪ ╎—̳͟͞͞ 💰 ${prefix}savegp
 ┃࣪ ╎—̳͟͞͞ 💰 ${prefix}delaluguel
 ┃࣪ ╎—̳͟͞͞ 💰 ${prefix}lista-aluguel
 ┃࣪ ╎—̳͟͞͞ 💰 ${prefix}veraluguel
@@ -467,12 +467,12 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🤖｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝑆𝑌𝑆𝑇𝐸𝑀-𝑆𝑈𝐵-𝐵𝑂𝑇
 ├╾═╼･ﾟ𖤐ﾟ･｡🔐｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}sub
+┃࣪ ╎—̳͟͞͞ 🔐 ${prefix}sub
 ┃࣪ ╎—̳͟͞͞ 🔐 ${prefix}code
-┃࣪ ╎—̳͟͞͞ 👤 ${prefix}meu
-┃࣪ ╎—̳͟͞͞ 📋 ${prefix}subs
-┃࣪ ╎—̳͟͞͞ 🔄 ${prefix}restartsub
-┃࣪ ╎—̳͟͞͞ 🗑️ ${prefix}delsub
+┃࣪ ╎—̳͟͞͞ 🔐 ${prefix}meu
+┃࣪ ╎—̳͟͞͞ 🔐 ${prefix}subs
+┃࣪ ╎—̳͟͞͞ 🔐 ${prefix}restartsub
+┃࣪ ╎—̳͟͞͞ 🔐 ${prefix}delsub
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -487,10 +487,10 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👥 ${prefix}bangplit
 ┃࣪ ╎—̳͟͞͞ 👥 ${prefix}bangp
 ┃࣪ ╎—̳͟͞͞ 👥 ${prefix}unbangp
-┃࣪ ╎—̳͟͞͞ 📋 ${prefix}listagp
-┃࣪ ╎—̳͟͞͞ 🔗 ${prefix}linkdogp ID
-┃࣪ ╎—̳͟͞͞ ✉️ ${prefix}envmsg número|texto
-┃࣪ ╎—̳͟͞͞ 📢 ${prefix}transmitir texto
+┃࣪ ╎—̳͟͞͞ 👥 ${prefix}listagp
+┃࣪ ╎—̳͟͞͞ 👥 ${prefix}linkdogp ID
+┃࣪ ╎—̳͟͞͞ 👥 ${prefix}envmsg número|texto
+┃࣪ ╎—̳͟͞͞ 👥 ${prefix}transmitir texto
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -512,11 +512,11 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}blockuser @usuario
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}unblockuser @usuario
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antipv 1/0
-┃࣪ ╎—̳͟͞͞ 🔒 ${prefix}antipv2 1/0
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antipv2 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}visualizarmsg 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}autobang número
-┃࣪ ╎—̳͟͞͞ ✅ ${prefix}delautobang número
-┃࣪ ╎—̳͟͞͞ 📋 ${prefix}autobanglist
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}delautobang número
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}autobanglist
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -528,9 +528,9 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}addvip @usuario/dias
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}delvip @usuario
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}viplist
-┃࣪ ╎—̳͟͞͞ 💎 ${prefix}addvipgp 30
-┃࣪ ╎—̳͟͞͞ 💎 ${prefix}delvipgp
-┃࣪ ╎—̳͟͞͞ 💎 ${prefix}vipgplist
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}addvipgp 30
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}delvipgp
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}vipgplist
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}limparvip
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}addcmdvip comando
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}delcmdvip comando
@@ -561,8 +561,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├─ ⊹ 𖤐  𝑌𝑂𝑈𝑇𝑈𝐵𝐸
 ├╾═╼･ﾟ𖤐ﾟ･｡🎧｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}play música
-┃࣪ ╎—̳͟͞͞ 📻 ${prefix}playlist — playlists e rádio
-┃࣪ ╎—̳͟͞͞ 🎶 ${prefix}shazam — reconhecer música
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}playlist — playlists e rádio
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}shazam — reconhecer música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}play_audio música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}playvideo música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}playdoc música
@@ -597,12 +597,12 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🎧｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}deezer música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}soundcloud música
-┃࣪ ╎—̳͟͞͞ 🔎 ${prefix}soundcloudsearch música
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}soundcloudsearch música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}sound_audio música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}applemusic link
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}apple_audio link
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}spotify link
-┃࣪ ╎—̳͟͞͞ 🔎 ${prefix}spotifysearch música
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}spotifysearch música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}spotify_audio link
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
@@ -627,12 +627,12 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🔎｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝑃𝐸𝑆𝑄𝑈𝐼𝑆𝐴𝑆-𝐴𝑃𝐼
 ├╾═╼･ﾟ𖤐ﾟ･｡🌐｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 📚 ${prefix}wikipedia pesquisa
-┃࣪ ╎—̳͟͞͞ 🍎 ${prefix}appstore app
-┃࣪ ╎—̳͟͞͞ 🎼 ${prefix}lyrics música
-┃࣪ ╎—̳͟͞͞ 🎌 ${prefix}anime pesquisa
-┃࣪ ╎—̳͟͞͞ 📖 ${prefix}manga pesquisa
-┃࣪ ╎—̳͟͞͞ 📸 ${prefix}printsite link
+┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}wikipedia pesquisa
+┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}appstore app
+┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}lyrics música
+┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}anime pesquisa
+┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}manga pesquisa
+┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}printsite link
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
@@ -727,7 +727,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🎲 ${prefix}chance pergunta
 ┃࣪ ╎—̳͟͞͞ 🎲 ${prefix}quando pergunta
 ┃࣪ ╎—̳͟͞͞ 🎲 ${prefix}mencionar corno
-┃࣪ ╎—̳͟͞͞ 💞 ${prefix}metadinha
+┃࣪ ╎—̳͟͞͞ 🎲 ${prefix}metadinha
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -880,13 +880,13 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🗺️｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐽𝑂𝑅𝑁𝐴𝐷𝐴
 ├╾═╼･ﾟ𖤐ﾟ･｡🧭｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}jornada
+┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}jornada
 ┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}classe
-┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}classe guerreiro/mago/arqueiro/paladino
-┃࣪ ╎—̳͟͞͞ 🌲 ${prefix}aventura
-┃࣪ ╎—̳͟͞͞ 🔎 ${prefix}explorar
-┃࣪ ╎—̳͟͞͞ 🏕️ ${prefix}descansarheroi
-┃࣪ ╎—̳͟͞͞ 📖 ${prefix}historia
+┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}classe guerreiro/mago/arqueiro/paladino
+┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}aventura
+┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}explorar
+┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}descansarheroi
+┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}historia
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -895,10 +895,10 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡⚔️｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐷𝐸𝑆𝐴𝐹𝐼𝑂𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡🐉｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🗼 ${prefix}torre
-┃࣪ ╎—̳͟͞͞ 🕯️ ${prefix}masmorra
+┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}torre
+┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}masmorra
 ┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}boss
-┃࣪ ╎—̳͟͞͞ 🤝 ${prefix}raid @usuario
+┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}raid @usuario
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -907,8 +907,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡⚒️｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐴𝑅𝑆𝐸𝑁𝐴𝐿
 ├╾═╼･ﾟ𖤐ﾟ･｡🗡️｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}arsenal
-┃࣪ ╎—̳͟͞͞ ⚒️ ${prefix}forjar
+┃࣪ ╎—̳͟͞͞ 🗡️ ${prefix}arsenal
+┃࣪ ╎—̳͟͞͞ 🗡️ ${prefix}forjar
 ┃࣪ ╎—̳͟͞͞ 🗡️ ${prefix}equipar espada
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
@@ -918,11 +918,11 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🏰｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐺𝑈𝐼𝐿𝐷𝐴𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡🛡️｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🏰 ${prefix}guilda
-┃࣪ ╎—̳͟͞͞ 👑 ${prefix}criarguilda Nome
-┃࣪ ╎—̳͟͞͞ 🤝 ${prefix}entrarguilda id
-┃࣪ ╎—̳͟͞͞ 🚪 ${prefix}sairguilda
-┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankguilda
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}guilda
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}criarguilda Nome
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}entrarguilda id
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}sairguilda
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}rankguilda
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -932,15 +932,15 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├─ ⊹ 𖤐  𝐿𝐸𝑉𝐸𝐿
 ├╾═╼･ﾟ𖤐ﾟ･｡⭐｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}level
-┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}ranklevel
-┃࣪ ╎—̳͟͞͞ 📊 ${prefix}rank
-┃࣪ ╎—̳͟͞͞ ⚙️ ${prefix}modorpg 1/0
-┃࣪ ╎—̳͟͞͞ ✨ ${prefix}addxp @usuario 100
-┃࣪ ╎—̳͟͞͞ ➖ ${prefix}tirarxp @usuario 100
-┃࣪ ╎—̳͟͞͞ ⬆️ ${prefix}addlevel @usuario 1
-┃࣪ ╎—̳͟͞͞ ⬇️ ${prefix}tirarlevel @usuario 1
-┃࣪ ╎—̳͟͞͞ 🔒 ${prefix}blocklevel @usuario
-┃࣪ ╎—̳͟͞͞ 🔓 ${prefix}unblocklevel @usuario
+┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}ranklevel
+┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}rank
+┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}modorpg 1/0
+┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}addxp @usuario 100
+┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}tirarxp @usuario 100
+┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}addlevel @usuario 1
+┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}tirarlevel @usuario 1
+┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}blocklevel @usuario
+┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}unblocklevel @usuario
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -949,29 +949,29 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🐾｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝑃𝐸𝑇𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡🐶｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🛍️ ${prefix}petshop
-┃࣪ ╎—̳͟͞͞ 💎 ${prefix}lojararos
-┃࣪ ╎—̳͟͞͞ 🐾 ${prefix}mercadopet
-┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarpet
-┃࣪ ╎—̳͟͞͞ 👀 ${prefix}verpet
-┃࣪ ╎—̳͟͞͞ 🍖 ${prefix}alimentarpet
-┃࣪ ╎—̳͟͞͞ 🦴 ${prefix}comprarcomida racao
-┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}carinhopet
-┃࣪ ╎—̳͟͞͞ 🛁 ${prefix}banhopet
-┃࣪ ╎—̳͟͞͞ 🦮 ${prefix}passearpet
-┃࣪ ╎—̳͟͞͞ 😴 ${prefix}dormirpet
-┃࣪ ╎—̳͟͞͞ ☀️ ${prefix}acordarpet
-┃࣪ ╎—̳͟͞͞ 🏷️ ${prefix}apelidopet nome
-┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}petmissao
-┃࣪ ╎—̳͟͞͞ 🏠 ${prefix}petconstruir
-┃࣪ ╎—̳͟͞͞ 👑 ${prefix}petrealeza
-┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}petbatalha @usuario
-┃࣪ ╎—̳͟͞͞ ✨ ${prefix}evoluirpet
-┃࣪ ╎—̳͟͞͞ 🎉 ${prefix}eventopet
-┃࣪ ╎—̳͟͞͞ 🎁 ${prefix}doarpet @usuario
-┃࣪ ╎—̳͟͞͞ 📖 ${prefix}diariopet
-┃࣪ ╎—̳͟͞͞ 💰 ${prefix}venderpet
-┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankpets
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}petshop
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}lojararos
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}mercadopet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}comprarpet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}verpet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}alimentarpet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}comprarcomida racao
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}carinhopet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}banhopet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}passearpet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}dormirpet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}acordarpet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}apelidopet nome
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}petmissao
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}petconstruir
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}petrealeza
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}petbatalha @usuario
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}evoluirpet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}eventopet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}doarpet @usuario
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}diariopet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}venderpet
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}rankpets
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -980,27 +980,27 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡⚡｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝑃𝑂𝐾𝐸́𝑀𝑂𝑁
 ├╾═╼･ﾟ𖤐ﾟ･｡🔴｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🛍️ ${prefix}lojapokemon
-┃࣪ ╎—̳͟͞͞ 🐾 ${prefix}mercadopokemon
-┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarpokemon
-┃࣪ ╎—̳͟͞͞ 👀 ${prefix}verpokemon
-┃࣪ ╎—̳͟͞͞ 🍓 ${prefix}alimentarpokemon
-┃࣪ ╎—̳͟͞͞ 🫐 ${prefix}comprarcomidapokemon berry
-┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}inventariopokemon
-┃࣪ ╎—̳͟͞͞ 🏷️ ${prefix}apelidopokemon nome
-┃࣪ ╎—̳͟͞͞ 🛁 ${prefix}banhopokemon
-┃࣪ ╎—̳͟͞͞ 🚶 ${prefix}passearpokemon
-┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}carinhopokemon
-┃࣪ ╎—̳͟͞͞ 😴 ${prefix}dormirpokemon
-┃࣪ ╎—̳͟͞͞ ☀️ ${prefix}acordarpokemon
-┃࣪ ╎—̳͟͞͞ 🎉 ${prefix}eventopokemon
-┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}batalhapokemon @usuario
-┃࣪ ╎—̳͟͞͞ 👑 ${prefix}pokerealeza
-┃࣪ ╎—̳͟͞͞ ✨ ${prefix}evoluirpokemon
-┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}missaopokemon
-┃࣪ ╎—̳͟͞͞ 📖 ${prefix}diariopokemon
-┃࣪ ╎—̳͟͞͞ 💰 ${prefix}venderpokemon
-┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}lojapokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}mercadopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}comprarpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}verpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}alimentarpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}comprarcomidapokemon berry
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}inventariopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}apelidopokemon nome
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}banhopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}passearpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}carinhopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}dormirpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}acordarpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}eventopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}batalhapokemon @usuario
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}pokerealeza
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}evoluirpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}missaopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}diariopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}venderpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}rankpokemon
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
@@ -1107,16 +1107,16 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├─ ⊹ 𖤐  𝙼𝙾𝙳𝙾-𝙵𝚁𝙴𝙴-𝙵𝙸𝚁𝙴
 ├╾═╼･ﾟ𖤐ﾟ･｡🎮｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}modofreefire 1/0
-┃࣪ ╎—̳͟͞͞ 📋 ${prefix}sala 1x1 até 6x6
-┃࣪ ╎—̳͟͞͞ ❌ ${prefix}sala cancelar
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}sala 1x1 até 6x6
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}sala cancelar
 ┃࣪ ╎—̳͟͞͞ 🔒 f — fechar o grupo
 ┃࣪ ╎—̳͟͞͞ 🔓 a — abrir o grupo
 ┃࣪ ╎—̳͟͞͞ 📢 m — marcar o grupo
-┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}xgp NOME
-┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}time NOME,NOME,NOME,NOME,NOME,NOME
-┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}nota
-┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}nota add TEXTO
-┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}nota del NÚMERO
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}xgp NOME
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}time NOME,NOME,NOME,NOME,NOME,NOME
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}nota
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}nota add TEXTO
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}nota del NÚMERO
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -1125,9 +1125,9 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🎭｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝑅𝐸𝐴𝐶̧𝑂̃𝐸𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡✨｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rgreacao 😻 | dylan
-┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rmreacao dylan
-┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}listareacao
+┃࣪ ╎—̳͟͞͞ ✨ ${prefix}rgreacao 😻 | dylan
+┃࣪ ╎—̳͟͞͞ ✨ ${prefix}rmreacao dylan
+┃࣪ ╎—̳͟͞͞ ✨ ${prefix}listareacao
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
