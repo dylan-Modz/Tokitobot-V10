@@ -36,6 +36,7 @@ const qrcodeTerminal = require('qrcode-terminal')
 const dadosSistema = require('./sistemas/dados.js')
 const autoInativo = require('./sistemas/autoinativo.js')
 const donoSistema = require('./sistemas/dono.js')
+const antiNuke = require('./sistemas/antinuke.js')
 const placar = require('./database/lib/placar.js')
 const runtimeSub = require('./sub/runtime.js')
 const sistemaSub = runtimeSub.isSubBot ? null : require('./sub/index.js')
@@ -717,6 +718,75 @@ listaProibidos: []
 const dddsProibidos = Array.isArray(antiDDD.listaProibidos)
 ? antiDDD.listaProibidos.map(v => collectNumbers(v).slice(0, 2)).filter(v => /^\d{2}$/.test(v))
 : []
+
+/*
+           * ANTI-NUKE
+           */
+
+if (
+funcoesGp.antinuke &&
+botAdmin &&
+['remove', 'promote', 'demote'].includes(update.action)
+) {
+const autorRaw =
+update.author ||
+update.authorPn ||
+update.authorLid ||
+update.actor ||
+update.initiator ||
+''
+
+const autor = resolverJid(autorRaw)
+
+const alvos = (Array.isArray(update.participants) ? update.participants : [])
+.map(resolverJid)
+.filter(Boolean)
+
+const protegidosNuke = [
+botJid,
+donoGrupo,
+...donosBotJids
+].filter(Boolean)
+
+const membrosAdmins = new Set(
+membros
+.filter(membro => ['admin', 'superadmin'].includes(membro?.admin))
+.map(resolverJid)
+.filter(Boolean)
+)
+
+const resultadoNuke = antiNuke.registrar({
+grupo: update.id,
+autor,
+acao: update.action,
+alvos,
+admins: membrosAdmins,
+protegidos: protegidosNuke
+})
+
+if (resultadoNuke.disparou && autor) {
+await tokito.groupParticipantsUpdate(
+update.id,
+[autor],
+'demote'
+).catch(() => {})
+
+await tokito.sendMessage(update.id, {
+text: mess.padraoAviso({
+emoji: '🛡️',
+titulo: 'ANTI-NUKE',
+descricao:
+`@${numeroDoJid(autor)} realizou várias ações administrativas em pouco tempo e foi rebaixado automaticamente para proteger o grupo.`
+}),
+contextInfo: canalInfo([autor])
+}).catch(() => {})
+
+antiNuke.bloquearTemporariamente(
+update.id,
+autor
+)
+}
+}
 
 /*
            * ANTIROUBO
