@@ -285,7 +285,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🚫｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antifake 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antiddd 1/0
-┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antirroubo 1/0\n┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}antinuke 1/0
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antirroubo 1/0
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antinuke 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antinotas 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antipalavra 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}addpalavra palavra
