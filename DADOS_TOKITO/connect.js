@@ -35,6 +35,7 @@ const detector = require('./detector.js')
 const qrcodeTerminal = require('qrcode-terminal')
 const dadosSistema = require('./sistemas/dados.js')
 const autoInativo = require('./sistemas/autoinativo.js')
+const donoSistema = require('./sistemas/dono.js')
 const placar = require('./database/lib/placar.js')
 const runtimeSub = require('./sub/runtime.js')
 const sistemaSub = runtimeSub.isSubBot ? null : require('./sub/index.js')
@@ -596,6 +597,24 @@ if (!state.creds.registered && metodo === 'qr') info('Aguardando geração do QR
 tokito.ev.process(async events => {
 
 /*
+       * ANTI CALL
+       */
+
+if (events['call'] && !runtimeSub.isSubBot) {
+await donoSistema.processarChamadas(
+tokito,
+events['call'],
+[
+ownerNumber,
+...Array.from(
+{ length: 6 },
+(_, i) => nescessario?.[`numero_dono${i + 1}`]
+)
+].filter(Boolean)
+).catch(() => {})
+}
+
+/*
        * EVENTO DE GRUPO
        */
 
@@ -795,6 +814,35 @@ contextInfo: canalInfo([participante])
 
 await delay(700)
 await tokito.groupParticipantsUpdate(update.id, [participante], 'remove').catch(() => {})
+continue
+}
+
+/*
+             * AUTOBAN GLOBAL
+             */
+
+if (
+update.action === 'add' &&
+botAdmin &&
+!protegido &&
+donoSistema.autobanTem(participante)
+) {
+await tokito.sendMessage(update.id, {
+text: mess.padraoAviso({
+emoji: '🚫',
+titulo: 'AUTOBAN GLOBAL',
+descricao: `@${numero} está na lista global de bloqueio e será removido.`
+}),
+contextInfo: canalInfo([participante])
+}).catch(() => {})
+
+await delay(700)
+await tokito.groupParticipantsUpdate(
+update.id,
+[participante],
+'remove'
+).catch(() => {})
+
 continue
 }
 
@@ -1071,6 +1119,7 @@ if (runtimeSub.isSubBot) {
   sucesso(`Sub Bot ${runtimeSub.id} conectado com sucesso.`)
   process.send?.({ type: 'online', number: runtimeSub.id })
 } else {
+  donoSistema.iniciar(tokito)
   console.log(banner3?.string || colors.cyan('\nTOKITO | V10\n'))
   console.log(banner2?.string || colors.blue('dylan Modz'))
   console.log('')

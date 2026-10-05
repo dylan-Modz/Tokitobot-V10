@@ -1,50 +1,75 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.46",
+  "version": "10.1.47",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-05T17:48:00.000Z",
+  "publishedAt": "2026-10-05T18:58:00.000Z",
   "changelog": [
-    "[Atualização] Bem-vindo 4 e 5",
-    "A versão 10.1.46 já está disponível para atualização.",
-    "Novo Bem-vindo 4 dedicado a figurinha personalizada de entrada e saída.",
-    "Novo Bem-vindo 5 dedicado a áudio personalizado de entrada e saída.",
-    "Comandos stickerbv e stickersaiu salvam ou removem as figurinhas do Bem-vindo 4.",
-    "Comandos audiobv e audiosaiu salvam ou removem os áudios do Bem-vindo 5.",
-    "As mídias ficam separadas na pasta midiabv e continuam preservadas nas atualizações.",
-    "Bem-vindo 4 e 5 foram adicionados ao painel ativar, ao menu ADM e ao infobemvindos."
+    "[Atualização] Novos recursos do Menu Dono",
+    "A versão 10.1.47 já está disponível para atualização.",
+    "Novo AntiCall para rejeitar chamadas e bloquear automaticamente quem ligar para o bot.",
+    "Novos comandos fotobot e clonar para alterar a foto de perfil do Tokito.",
+    "Novo VIP de grupo com addvipgp, delvipgp e vipgplist; membros do grupo VIP passam a contar como VIP nos comandos.",
+    "Novo gerenciador global com listagp e linkdogp.",
+    "Novo envmsg para o dono enviar uma mensagem para um número ou grupo específico.",
+    "Novo transmitir para enviar texto ou mídia para todos os grupos do bot com intervalo entre os envios.",
+    "Novo AutoBan global com autobang, delautobang e autobanglist; usuários cadastrados são bloqueados do bot e removidos de grupos quando possível.",
+    "Novo sistema de agenda do dono com agendar, agenda e delagenda.",
+    "Novo reinício diário programado com setrestart e checkrestart.",
+    "Novo fundoping para personalizar o fundo do comando ping.",
+    "Novo comando add/adicionar para administradores adicionarem um membro ao grupo apenas informando o número."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Atualização",
-  "title": "Bem-vindo 4 e 5",
-  "notice": "A versão 10.1.46 já está disponível para atualização.",
+  "title": "Novos recursos do Menu Dono",
+  "notice": "A versão 10.1.47 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/bemvindo4.js",
+      "path": "DADOS_TOKITO/sistemas/dono.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/bemvindo5.js",
+      "path": "DADOS_TOKITO/plugins/dono/anticall.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/midiabv.js",
+      "path": "DADOS_TOKITO/plugins/dono/perfilbot.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/infobemvindos.js",
+      "path": "DADOS_TOKITO/plugins/dono/vipgp.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+      "path": "DADOS_TOKITO/plugins/dono/autobang.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/agenda.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/fundoping.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/gruposglobais.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/add.js",
       "sha256": "",
       "size": 0
     },
@@ -59,7 +84,7 @@
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "path": "DADOS_TOKITO/plugins/info/ping.js",
       "sha256": "",
       "size": 0
     },
@@ -606,11 +631,107 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-05T17:48:00.000Z"
+    },
+    {
+      "version": "10.1.47",
+      "fromVersion": "10.1.46",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Novos recursos do Menu Dono",
+      "notice": "A versão 10.1.47 já está disponível para atualização.",
+      "changelog": [
+        "Novo AntiCall para rejeitar chamadas e bloquear automaticamente quem ligar para o bot.",
+        "Novos comandos fotobot e clonar para alterar a foto de perfil do Tokito.",
+        "Novo VIP de grupo com addvipgp, delvipgp e vipgplist; membros do grupo VIP passam a contar como VIP nos comandos.",
+        "Novo gerenciador global com listagp e linkdogp.",
+        "Novo envmsg para o dono enviar uma mensagem para um número ou grupo específico.",
+        "Novo transmitir para enviar texto ou mídia para todos os grupos do bot com intervalo entre os envios.",
+        "Novo AutoBan global com autobang, delautobang e autobanglist; usuários cadastrados são bloqueados do bot e removidos de grupos quando possível.",
+        "Novo sistema de agenda do dono com agendar, agenda e delagenda.",
+        "Novo reinício diário programado com setrestart e checkrestart.",
+        "Novo fundoping para personalizar o fundo do comando ping.",
+        "Novo comando add/adicionar para administradores adicionarem um membro ao grupo apenas informando o número."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/dono.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/anticall.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/perfilbot.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/vipgp.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/autobang.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/agenda.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/fundoping.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/gruposglobais.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/add.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "tokito.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/info/ping.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-05T18:58:00.000Z"
     }
   ],
-  "versao": "10.1.46",
+  "versao": "10.1.47",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.45"
+  "fromVersion": "10.1.46"
 }

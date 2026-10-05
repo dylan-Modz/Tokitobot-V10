@@ -47,6 +47,7 @@ const agenteIA = require('./DADOS_TOKITO/ia')
 const regrasPlugins = require('./DADOS_TOKITO/sistemas/permissoes.js')
 const aluguel = require('./DADOS_TOKITO/sistemas/aluguel/index.js')
 const modulos = require('./DADOS_TOKITO/sistemas/modulos.js')
+const donoSistema = require('./DADOS_TOKITO/sistemas/dono.js')
 const sorteio = require('./DADOS_TOKITO/database/lib/sorteio.js')
 ////////////////////////////////////////////////////////////////////////////////////
 const similar = require('./DADOS_TOKITO/sistemas/similar.js')
@@ -769,7 +770,7 @@ vipAlterado = true
 }
 if (vipAlterado)
 fs.writeFileSync(caminhoVip, JSON.stringify(vip, null, 2))
-const isVip = vip.map(i => nJid(i?.id)).includes(senderNormalizado) || SoDono
+const isVip = vip.map(i => nJid(i?.id)).includes(senderNormalizado) || (isGroup && donoSistema.vipGrupoAtivo(from)) || SoDono
 const isCargo = SoDono ? 'Mestre' : isGroupAdmins ? 'Administrador' : isVip ? 'VIP' : 'Membro'
 const isChVip = isVip ? 'ꜱɪᴍ ✅' : 'ɴᴀᴏ ❌'
 const Res_SoDono = mess.onlyOwner()
@@ -1196,6 +1197,26 @@ q = ''
 }
 // ===== TRAVAS GLOBAIS =====
 const cfgGlobal = modulos.globalCfg()
+
+if (
+!SoDono &&
+donoSistema.autobanTem(senderNormalizado)
+) {
+if (
+isGroup &&
+isBotGroupAdmins &&
+senderNormalizado?.endsWith('@s.whatsapp.net')
+) {
+await tokito.groupParticipantsUpdate(
+from,
+[senderNormalizado],
+'remove'
+).catch(() => {})
+}
+
+continue
+}
+
 if (cfgGlobal.bloqueados.map(v => nJid(v)).includes(senderNormalizado) && !SoDono)
 continue
 const subPvLiberado = !runtimeSub.isSubBot && ((isCmd && ['sub', 'code', 'meu'].includes(String(command || ''))) || (() => { try { return require('./DADOS_TOKITO/sub/cadastro').temPendente(from, sender) } catch { return false } })())

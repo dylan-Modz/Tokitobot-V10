@@ -211,6 +211,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}grupo a/f
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}fechargp 22:00
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}abrirgp 07:00
+┃࣪ ╎—̳͟͞͞ ➕ ${prefix}add 5511999999999
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}ban @usuario
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}promover @usuario
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}rebaixar @usuario
@@ -399,7 +400,15 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setchannel link
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setprefix !
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fotomenu
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}fotobot
+┃࣪ ╎—̳͟͞͞ 👤 ${prefix}clonar @usuario
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}fundoping
+┃࣪ ╎—̳͟͞͞ 📵 ${prefix}anticall 1/0
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}botoes 1/0
+┃࣪ ╎—̳͟͞͞ 🔄 ${prefix}setrestart 04:00
+┃࣪ ╎—̳͟͞͞ 🔄 ${prefix}checkrestart
+┃࣪ ╎—̳͟͞͞ ⏰ ${prefix}agendar data | texto
+┃࣪ ╎—̳͟͞͞ ⏰ ${prefix}agenda
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}reiniciar
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
@@ -475,6 +484,10 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👥 ${prefix}bangplit
 ┃࣪ ╎—̳͟͞͞ 👥 ${prefix}bangp
 ┃࣪ ╎—̳͟͞͞ 👥 ${prefix}unbangp
+┃࣪ ╎—̳͟͞͞ 📋 ${prefix}listagp
+┃࣪ ╎—̳͟͞͞ 🔗 ${prefix}linkdogp ID
+┃࣪ ╎—̳͟͞͞ ✉️ ${prefix}envmsg número|texto
+┃࣪ ╎—̳͟͞͞ 📢 ${prefix}transmitir texto
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -498,6 +511,9 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antipv 1/0
 ┃࣪ ╎—̳͟͞͞ 🔒 ${prefix}antipv2 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}visualizarmsg 1/0
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}autobang número
+┃࣪ ╎—̳͟͞͞ ✅ ${prefix}delautobang número
+┃࣪ ╎—̳͟͞͞ 📋 ${prefix}autobanglist
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -509,6 +525,9 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}addvip @usuario/dias
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}delvip @usuario
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}viplist
+┃࣪ ╎—̳͟͞͞ 💎 ${prefix}addvipgp 30
+┃࣪ ╎—̳͟͞͞ 💎 ${prefix}delvipgp
+┃࣪ ╎—̳͟͞͞ 💎 ${prefix}vipgplist
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}limparvip
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}addcmdvip comando
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}delcmdvip comando

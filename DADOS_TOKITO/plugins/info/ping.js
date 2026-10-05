@@ -29,6 +29,7 @@
  */
 
 const dylan = require('../../database/lib/comandos')
+const donoSistema = require('../../sistemas/dono')
 
 dylan.setCommand({
 nome: "ping",
@@ -82,7 +83,7 @@ totalGrupos,
 totalCmd,
 tempoOnline
 })
-const fundoPing = 'https://raw.githubusercontent.com/dylanModz/uploadsgg/main/midias/imagens/922e987a70d.jpg'
+const fundoPing = donoSistema.config().pingFundo || 'https://raw.githubusercontent.com/dylanModz/uploadsgg/main/midias/imagens/922e987a70d.jpg'
 const botJid = jidNormalizedUser(tokito.user?.id || '')
 const avatar = await tokito.profilePictureUrl(botJid, 'image').catch(() => fundoPing)
 const cardPing = `${API_URL}/canvas/ping2?ping=${encodeURIComponent(`${speedConverted} s`)}&latency=${encodeURIComponent(`${latency} ms`)}&uptime=${encodeURIComponent(tempoOnline)}&memory=${encodeURIComponent(`${ramUsada} GB / ${ramTotal} GB`)}&cpu=${encodeURIComponent(`${cpu}%`)}&platform=${encodeURIComponent(sistema)}&node=${encodeURIComponent(nodejs)}&commands=${encodeURIComponent(totalCmd)}&avatar=${encodeURIComponent(avatar)}&fundo=${encodeURIComponent(fundoPing)}&color=${encodeURIComponent('#1e90ff')}&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
