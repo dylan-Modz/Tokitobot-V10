@@ -1,33 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.42",
+  "version": "10.1.43",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-05T16:42:00.000Z",
+  "publishedAt": "2026-10-05T16:44:32.915Z",
   "changelog": [
-    "[Melhoria] Novo aviso de erro da API",
-    "A versão 10.1.42 já está disponível para atualização.",
-    "Mensagem de erro geral da API redesenhada com orientações mais claras para o usuário.",
-    "Novo aviso explica três alternativas: conta secundária, outro plano com Tokito ativo ou contato com o suporte da API."
+    "[Correção] fix: revisa mensagem de erro da API",
+    "A versão 10.1.43 já está disponível para atualização.",
+    "Mensagens atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Novo aviso de erro da API",
-  "notice": "A versão 10.1.42 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: revisa mensagem de erro da API",
+  "notice": "A versão 10.1.43 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "package.json",
-      "sha256": "",
-      "size": 0
+      "sha256": "5ed939a7fa8ca5c3c099da9cda2104764610ad4390d4eee32e670f45d0aa91fb",
+      "size": 220596
     }
   ],
   "releases": [
@@ -382,6 +376,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-05T16:42:00.000Z"
+    },
+    {
+      "version": "10.1.43",
+      "fromVersion": "10.1.42",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: revisa mensagem de erro da API",
+      "notice": "A versão 10.1.43 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "5ed939a7fa8ca5c3c099da9cda2104764610ad4390d4eee32e670f45d0aa91fb",
+          "size": 220596
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-05T16:44:32.915Z"
     }
   ],
   "versao": "10.1.42",
