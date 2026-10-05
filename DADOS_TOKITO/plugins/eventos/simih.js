@@ -68,8 +68,14 @@ textoAtual
 if (!resposta)
 return false
 
-await ctx.reply(
-resposta
+await ctx.tokito.sendMessage(
+ctx.from,
+{
+text: resposta
+},
+{
+quoted: ctx.info
+}
 )
 
 return true

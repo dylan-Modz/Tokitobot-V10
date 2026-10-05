@@ -1,55 +1,31 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.44",
+  "version": "10.1.45",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-05T16:58:00.000Z",
+  "publishedAt": "2026-10-05T17:12:00.000Z",
   "changelog": [
-    "[Atualização] Novo sistema Simih",
-    "A versão 10.1.44 já está disponível para atualização.",
-    "Novo sistema Simih com aprendizado automático pelas conversas do grupo.",
-    "Quando alguém responde uma mensagem curta, o Simih aprende a resposta e salva a relação na memória.",
-    "Frases curtas já aprendidas recebem uma resposta aleatória entre as opções salvas.",
-    "Memória global persistente em DADOS_TOKITO/database/sistemas/simih.json, compartilhada entre os grupos.",
-    "Comando simih 1/0 adicionado para administradores, com status e contagem da memória.",
-    "Simih também foi incluído no painel ativar e no menu de administração."
+    "[Correção] Ajustes nas mensagens do Simih",
+    "A versão 10.1.45 já está disponível para atualização.",
+    "Respostas automáticas do Simih agora são enviadas como texto simples, sem associação ao canal do bot.",
+    "Informação sobre o arquivo simih.json foi removida da mensagem de status do Simih."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Novo sistema Simih",
-  "notice": "A versão 10.1.44 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "Ajustes nas mensagens do Simih",
+  "notice": "A versão 10.1.45 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
-    {
-      "path": "DADOS_TOKITO/sistemas/simih.js",
-      "sha256": "",
-      "size": 0
-    },
     {
       "path": "DADOS_TOKITO/plugins/eventos/simih.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/simih.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "",
       "size": 0
     },
@@ -488,11 +464,43 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-05T16:58:00.000Z"
+    },
+    {
+      "version": "10.1.45",
+      "fromVersion": "10.1.44",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Ajustes nas mensagens do Simih",
+      "notice": "A versão 10.1.45 já está disponível para atualização.",
+      "changelog": [
+        "Respostas automáticas do Simih agora são enviadas como texto simples, sem associação ao canal do bot.",
+        "Informação sobre o arquivo simih.json foi removida da mensagem de status do Simih."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/eventos/simih.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-05T17:12:00.000Z"
     }
   ],
-  "versao": "10.1.44",
+  "versao": "10.1.45",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.43"
+  "fromVersion": "10.1.44"
 }
