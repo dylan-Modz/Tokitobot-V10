@@ -214,6 +214,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ ➕ ${prefix}add 5511999999999
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}ban @usuario
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}promover @usuario
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}promover2 @usuario 18:00/22:00
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}rebaixar @usuario
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}apagar 
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}limpar
@@ -299,6 +300,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antifoto 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antivisu 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antisticker 1/0
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antifloodsticker 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}anticontato 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antilocalizacao 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antidocumento 1/0
