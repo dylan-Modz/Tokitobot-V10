@@ -1,33 +1,80 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.50",
+  "version": "10.1.51",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-05T22:19:31.336Z",
+  "publishedAt": "2026-10-05T22:40:05.954Z",
   "changelog": [
-    "[Atualização] Banner Business do bot",
-    "A versão 10.1.50 já está disponível para atualização.",
-    "Novo comando fotobanner para alterar o banner do perfil Business do bot respondendo uma imagem.",
-    "O comando verifica primeiro se a conta conectada possui perfil do WhatsApp Business e avisa quando não possuir.",
-    "Compatibilidade com updateBusinessCoverPhoto e com o updateCoverPhoto já existente na biblioteca.",
-    "Menu do dono atualizado mantendo o emoji padrão da categoria Configurações nos comandos de perfil."
+    "[Atualização] Status, promover2 e Anti-Flood Sticker",
+    "A versão 10.1.51 já está disponível para atualização.",
+    "Comando status agora mostra Bem-vindo 4, Bem-vindo 5, Simih, Anti-Nuke e Anti-Flood Sticker.",
+    "Painel ativar recebeu Anti-Nuke e Anti-Flood Sticker.",
+    "Novo promover2 agenda promoção temporária com horário de promoção e rebaixamento, mantendo a programação após reinício.",
+    "Novo antifloodsticker remove membros que enviarem 5 figurinhas em até 10 segundos.",
+    "Menus tiveram todos os comandos padronizados com o emoji da própria categoria, incluindo Downloads, Bem-vindos, Antis, ADM e demais seções.",
+    "Corrigida a linha do Anti-Nuke que estava grudada ao Anti-Roubo no menu."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Atualização",
-  "title": "Banner Business do bot",
-  "notice": "A versão 10.1.50 já está disponível para atualização.",
+  "title": "Status, promover2 e Anti-Flood Sticker",
+  "notice": "A versão 10.1.51 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/dono/fotobanner.js",
+      "path": "DADOS_TOKITO/sistemas/promocoes.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/promover2.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/floodsticker.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/antifloodsticker.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/funcoes.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/status.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
       "sha256": "",
       "size": 0
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "tokito.js",
       "sha256": "",
       "size": 0
     },
@@ -866,11 +913,92 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-05T22:19:31.336Z"
+    },
+    {
+      "version": "10.1.51",
+      "fromVersion": "10.1.50",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Status, promover2 e Anti-Flood Sticker",
+      "notice": "A versão 10.1.51 já está disponível para atualização.",
+      "changelog": [
+        "Comando status agora mostra Bem-vindo 4, Bem-vindo 5, Simih, Anti-Nuke e Anti-Flood Sticker.",
+        "Painel ativar recebeu Anti-Nuke e Anti-Flood Sticker.",
+        "Novo promover2 agenda promoção temporária com horário de promoção e rebaixamento, mantendo a programação após reinício.",
+        "Novo antifloodsticker remove membros que enviarem 5 figurinhas em até 10 segundos.",
+        "Menus tiveram todos os comandos padronizados com o emoji da própria categoria, incluindo Downloads, Bem-vindos, Antis, ADM e demais seções.",
+        "Corrigida a linha do Anti-Nuke que estava grudada ao Anti-Roubo no menu."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/promocoes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/promover2.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/floodsticker.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antifloodsticker.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/funcoes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/status.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "tokito.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-05T22:40:05.954Z"
     }
   ],
-  "versao": "10.1.50",
+  "versao": "10.1.51",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.49"
+  "fromVersion": "10.1.50"
 }
