@@ -29,7 +29,6 @@
  */
 
 const modulos = require('../../sistemas/modulos')
-const ativar = require('../admin/ativar')
 const sairall = require('../dono/sairall')
 
 module.exports = {
@@ -40,46 +39,6 @@ fase: 'pre',
 
 async evento(ctx) {
 const chave = `${ctx.from}|${ctx.sender}`, txt = String(ctx.body || '').trim()
-
-const p = modulos.pendentesAtivar.get(chave)
-
-if (p) {
-if (p.expira < Date.now()) {
-modulos.pendentesAtivar.delete(chave)
-}
-
-else if (/^\d+$/.test(txt) && !ctx.isCmd) {
-const n = Number(txt)
-
-if (n === 0) {
-modulos.pendentesAtivar.delete(chave)
-await ctx.reply(ctx.mess.ativarCancelado())
-return true
-}
-
-const item = ativar.itens[n - 1]
-
-if (item) {
-const [sistema, nome] = item
-
-ativar.trocar(ctx, sistema)
-ctx.setGp(ctx.dataGp)
-
-p.expira = Date.now() + 120000
-modulos.pendentesAtivar.set(chave, p)
-
-await ctx.reply(
-ctx.mess.ativarAlterado(
-nome,
-ativar.ativo(ctx, sistema),
-ativar.painel(ctx)
-)
-)
-
-return true
-}
-}
-}
 
 const s = modulos.pendentesSairall.get(chave)
 
