@@ -400,9 +400,10 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setchannel link
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setprefix !
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fotomenu
-┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}fotobot
-┃࣪ ╎—̳͟͞͞ 👤 ${prefix}clonar @usuario
-┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}fundoping
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fotobot
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fotobanner
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}clonar @usuario
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fundoping
 ┃࣪ ╎—̳͟͞͞ 📵 ${prefix}anticall 1/0
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}botoes 1/0
 ┃࣪ ╎—̳͟͞͞ 🔄 ${prefix}setrestart 04:00
