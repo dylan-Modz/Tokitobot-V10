@@ -43,6 +43,7 @@ const antilocalizacao = require('../plugins/admin/filtro-antilocalizacao.js')
 const antidocumento = require('../plugins/admin/filtro-antidocumento.js')
 const antiaudio = require('../plugins/admin/filtro-antiaudio.js')
 const antispam = require('../plugins/admin/filtro-antispam.js')
+const antifloodsticker = require('../plugins/admin/floodsticker.js')
 const antistatus = require('../plugins/admin/filtro-antistatus.js')
 const antimarcacao = require('../plugins/admin/filtro-antimarcacao.js')
 const anticanal = require('../plugins/admin/filtro-anticanal.js')
@@ -127,6 +128,8 @@ if (await rodar(antivisu, 'Envio de mídia de visualização única'))
 return true
 if (await rodar(antisticker, 'Envio de figurinha bloqueada'))
 return true
+if (await rodar(antifloodsticker, 'Flood de figurinhas', false))
+return true
 if (await rodar(antipay, 'Envio de mensagem de pagamento bloqueada'))
 return true
 if (await rodar(antilink, 'Envio de link bloqueado'))
@@ -174,6 +177,7 @@ antilocalizacao,
 antidocumento,
 antiaudio,
 antispam,
+antifloodsticker,
 antistatus,
 antimarcacao,
 anticanal,
