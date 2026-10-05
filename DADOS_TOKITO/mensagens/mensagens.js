@@ -2160,7 +2160,7 @@ ${lista}
 > 📊 ׄ ( ᴛᴏᴛᴀʟ: ${total} )`
 }
 
-exports.statusFuncoes = (NomeDoBot, groupName, funcoes, isWelkom, isModobn, isWelkom2 = false, isWelkom3 = false) => {
+exports.statusFuncoes = (NomeDoBot, groupName, funcoes, isWelkom, isModobn, isWelkom2 = false, isWelkom3 = false, isWelkom4 = false, isWelkom5 = false) => {
 const status = valor => valor === true ? '𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ✅' : '𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ❌'
 const nivelAntilink = {
 easy: 'Fácil',
@@ -2189,12 +2189,17 @@ funcoes?.antimarcacao,
 funcoes?.antifake,
 funcoes?.antiddd?.ativo,
 funcoes?.antirroubo,
+funcoes?.antinuke,
+funcoes?.antifloodsticker,
+funcoes?.simih,
 funcoes?.soadm,
 funcoes?.modojogos,
 isModobn,
 isWelkom,
 isWelkom2,
-isWelkom3
+isWelkom3,
+isWelkom4,
+isWelkom5
 ]
 const totalAtivas = estados.filter(valor => valor === true).length
 return `- ⚙️ \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙰𝚂 𝙵𝚄𝙽𝙲̧𝙾̃𝙴𝚂\`
@@ -2220,6 +2225,7 @@ return `- ⚙️ \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙰𝚂 𝙵𝚄𝙽𝙲̧𝙾�
 > ⚙️ ׄ ( ᴀɴᴛɪ-ғᴀᴋᴇ: ${status(funcoes?.antifake)} )
 > ⚙️ ׄ ( ᴀɴᴛɪ-ᴅᴅᴅ: ${status(funcoes?.antiddd?.ativo)} )
 > ⚙️ ׄ ( ᴀɴᴛɪʀʀᴏᴜʙᴏ: ${status(funcoes?.antirroubo)} )
+> ⚙️ ׄ ( ᴀɴᴛɪ-ɴᴜᴋᴇ: ${status(funcoes?.antinuke)} )
 
 - 📁 \`𝙼𝙸́𝙳𝙸𝙰𝚂\`
 
@@ -2227,6 +2233,7 @@ return `- ⚙️ \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙰𝚂 𝙵𝚄𝙽𝙲̧𝙾�
 > ⚙️ ׄ ( ᴀɴᴛɪғᴏᴛᴏ: ${status(funcoes?.antifoto)} )
 > ⚙️ ׄ ( ᴀɴᴛɪᴠɪsᴜ: ${status(funcoes?.antivisu)} )
 > ⚙️ ׄ ( ᴀɴᴛɪғɪɢᴜʀɪɴʜᴀ: ${status(funcoes?.antisticker)} )
+> ⚙️ ׄ ( ᴀɴᴛɪ-ғʟᴏᴏᴅ sᴛɪᴄᴋᴇʀ: ${status(funcoes?.antifloodsticker)} )
 > ⚙️ ׄ ( ᴀɴᴛɪᴄᴏɴᴛᴀᴛᴏ: ${status(funcoes?.anticontato)} )
 > ⚙️ ׄ ( ᴀɴᴛɪʟᴏᴄᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ: ${status(funcoes?.antilocalizacao)} )
 > ⚙️ ׄ ( ᴀɴᴛɪᴅᴏᴄᴜᴍᴇɴᴛᴏ: ${status(funcoes?.antidocumento)} )
@@ -2237,6 +2244,9 @@ return `- ⚙️ \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙰𝚂 𝙵𝚄𝙽𝙲̧𝙾�
 > ⚙️ ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ 1: ${status(isWelkom)} )
 > ⚙️ ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ 2: ${status(isWelkom2)} )
 > ⚙️ ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ 3: ${status(isWelkom3)} )
+> ⚙️ ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ 4: ${status(isWelkom4)} )
+> ⚙️ ׄ ( ʙᴇᴍ-ᴠɪɴᴅᴏ 5: ${status(isWelkom5)} )
+> ⚙️ ׄ ( sɪᴍɪʜ: ${status(funcoes?.simih)} )
 > ⚙️ ׄ ( ᴍᴏᴅᴏ ᴊᴏɢᴏs: ${status(funcoes?.modojogos)} )
 > ⚙️ ׄ ( ᴍᴏᴅᴏ ʙʀɪɴᴄᴀᴅᴇɪʀᴀs: ${status(isModobn)} )`
 }
