@@ -1,31 +1,34 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.48",
+  "version": "10.1.49",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-05T21:54:00.802Z",
+  "publishedAt": "2026-10-05T21:58:59.131Z",
   "changelog": [
-    "[Atualização] Administração avançada e sorteios",
-    "A versão 10.1.48 já está disponível para atualização.",
-    "Novo Anti-Nuke simples para detectar ações administrativas em massa e rebaixar automaticamente o ADM responsável.",
-    "Novos comandos fotogp, descgp, nomegp e novolink para gerenciamento do grupo.",
-    "Novo sorteio por reação com horário automático através de sorteio e infosorteio.",
-    "Novo sorteionumero para escolher um número aleatório entre 0 e o limite informado.",
-    "Novos criartabela e tabelagp para manter uma tabela fixa por grupo.",
-    "Novo grupo-all para programar fechamento e abertura do grupo em um único comando.",
-    "Novos roleta e roleta2; a segunda versão protege administradores."
+    "[Correção] Nomes de arquivos simplificados",
+    "A versão 10.1.49 já está disponível para atualização.",
+    "Arquivos novos da versão 10.1.48 foram renomeados para nomes curtos e simples.",
+    "Removidos nomes com hífen e sufixos longos como gerenciargrupo-extra e sorteio-grupo.",
+    "O sistema interno do Anti-Nuke agora usa nuke.js, evitando dois arquivos chamados antinuke.js.",
+    "Os nomes antigos são removidos automaticamente durante a atualização."
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/sistemas/antinuke.js",
+    "DADOS_TOKITO/plugins/admin/gerenciargrupo-extra.js",
+    "DADOS_TOKITO/plugins/admin/grupo-all.js",
+    "DADOS_TOKITO/sistemas/sorteio-grupo.js",
+    "DADOS_TOKITO/plugins/eventos/sorteio-grupo.js"
+  ],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Administração avançada e sorteios",
-  "notice": "A versão 10.1.48 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "Nomes de arquivos simplificados",
+  "notice": "A versão 10.1.49 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/antinuke.js",
+      "path": "DADOS_TOKITO/sistemas/nuke.js",
       "sha256": "",
       "size": 0
     },
@@ -35,12 +38,7 @@
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/gerenciargrupo-extra.js",
+      "path": "DADOS_TOKITO/plugins/admin/grupoadm.js",
       "sha256": "",
       "size": 0
     },
@@ -50,7 +48,7 @@
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/grupo-all.js",
+      "path": "DADOS_TOKITO/plugins/admin/grupoall.js",
       "sha256": "",
       "size": 0
     },
@@ -60,7 +58,7 @@
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/sistemas/sorteio-grupo.js",
+      "path": "DADOS_TOKITO/sistemas/sorteios.js",
       "sha256": "",
       "size": 0
     },
@@ -70,7 +68,12 @@
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/eventos/sorteio-grupo.js",
+      "path": "DADOS_TOKITO/plugins/eventos/sorteioevento.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
       "sha256": "",
       "size": 0
     },
@@ -795,11 +798,96 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-05T21:54:00.802Z"
+    },
+    {
+      "version": "10.1.49",
+      "fromVersion": "10.1.48",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Nomes de arquivos simplificados",
+      "notice": "A versão 10.1.49 já está disponível para atualização.",
+      "changelog": [
+        "Arquivos novos da versão 10.1.48 foram renomeados para nomes curtos e simples.",
+        "Removidos nomes com hífen e sufixos longos como gerenciargrupo-extra e sorteio-grupo.",
+        "O sistema interno do Anti-Nuke agora usa nuke.js, evitando dois arquivos chamados antinuke.js.",
+        "Os nomes antigos são removidos automaticamente durante a atualização."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/nuke.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antinuke.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/grupoadm.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/tabelagp.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/grupoall.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/roleta.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/sorteios.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/sorteio.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/eventos/sorteioevento.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/sistemas/antinuke.js",
+        "DADOS_TOKITO/plugins/admin/gerenciargrupo-extra.js",
+        "DADOS_TOKITO/plugins/admin/grupo-all.js",
+        "DADOS_TOKITO/sistemas/sorteio-grupo.js",
+        "DADOS_TOKITO/plugins/eventos/sorteio-grupo.js"
+      ],
+      "required": true,
+      "publishedAt": "2026-10-05T21:58:59.131Z"
     }
   ],
-  "versao": "10.1.48",
+  "versao": "10.1.49",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.47"
+  "fromVersion": "10.1.48"
 }
