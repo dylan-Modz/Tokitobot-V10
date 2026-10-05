@@ -45,7 +45,9 @@ with (ctx) {
 if (!isGroup)
 return reply(mess.sogrupo())
 const funcoesGp = dataGp?.[0]?.funcoes || {}
-await reply(mess.statusFuncoes(NomeDoBot, groupName, funcoesGp, isWelkom, isModobn, isWelkom2, isWelkom3))
+const isWelkom4 = Boolean(dataGp?.[0]?.wellcome?.[3]?.bemvindo4)
+const isWelkom5 = Boolean(dataGp?.[0]?.wellcome?.[4]?.bemvindo5)
+await reply(mess.statusFuncoes(NomeDoBot, groupName, funcoesGp, isWelkom, isModobn, isWelkom2, isWelkom3, isWelkom4, isWelkom5))
 }
 }
 }
