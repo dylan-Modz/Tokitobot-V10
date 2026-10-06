@@ -1,47 +1,45 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.52",
+  "version": "10.1.53",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-05T23:02:13.813Z",
+  "publishedAt": "2026-10-06T12:21:34.436Z",
   "changelog": [
-    "[Atualização] Ativar interativo",
-    "A versão 10.1.52 já está disponível para atualização.",
-    "Comando ativar foi trocado por um menu list interativo com seções e status de cada função.",
-    "Cada item do ativar agora alterna diretamente entre ativado e desativado ao tocar na lista.",
-    "Após alterar uma função, o painel é enviado novamente já com o status atualizado.",
-    "O fluxo antigo que esperava o administrador digitar um número foi removido.",
-    "Comando Anti-Roubo corrigido para antiroubo, com um R só no nome público e no arquivo.",
-    "Menu ADM mantém apenas totag e cita entre os aliases equivalentes solicitados."
+    "[Correção] Menus mais rápidos",
+    "A versão 10.1.53 já está disponível para atualização.",
+    "Menus agora reutilizam a mesma mídia já preparada em cache, evitando novo upload ao WhatsApp em cada comando.",
+    "Menu, Menu ADM e Menu Dono não aguardam mais a reação antes de iniciar o envio.",
+    "Envio dos menus sem botões também passou a reutilizar a mídia em cache, sem leitura/upload repetido.",
+    "Cache de metadata dos grupos agora usa o último dado imediatamente e atualiza em segundo plano quando estiver antigo.",
+    "Metadata dos grupos é aquecida na conexão para reduzir o tempo do primeiro comando após reiniciar o bot.",
+    "A mídia do menu é preparada uma vez durante a conexão para que os próximos menus sejam enviados sem esse custo."
   ],
-  "delete": [
-    "DADOS_TOKITO/plugins/admin/antirroubo.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Ativar interativo",
-  "notice": "A versão 10.1.52 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "Menus mais rápidos",
+  "notice": "A versão 10.1.53 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+      "path": "DADOS_TOKITO/sistemas/modulos.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/eventos/pendentes.js",
+      "path": "DADOS_TOKITO/plugins/menus/menu.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/antiroubo.js",
+      "path": "DADOS_TOKITO/connect.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "path": "tokito.js",
       "sha256": "",
       "size": 0
     },
@@ -1009,11 +1007,57 @@
       ],
       "required": true,
       "publishedAt": "2026-10-05T23:02:13.813Z"
+    },
+    {
+      "version": "10.1.53",
+      "fromVersion": "10.1.52",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Menus mais rápidos",
+      "notice": "A versão 10.1.53 já está disponível para atualização.",
+      "changelog": [
+        "Menus agora reutilizam a mesma mídia já preparada em cache, evitando novo upload ao WhatsApp em cada comando.",
+        "Menu, Menu ADM e Menu Dono não aguardam mais a reação antes de iniciar o envio.",
+        "Envio dos menus sem botões também passou a reutilizar a mídia em cache, sem leitura/upload repetido.",
+        "Cache de metadata dos grupos agora usa o último dado imediatamente e atualiza em segundo plano quando estiver antigo.",
+        "Metadata dos grupos é aquecida na conexão para reduzir o tempo do primeiro comando após reiniciar o bot.",
+        "A mídia do menu é preparada uma vez durante a conexão para que os próximos menus sejam enviados sem esse custo."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/modulos.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menu.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "tokito.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-06T12:21:34.436Z"
     }
   ],
-  "versao": "10.1.52",
+  "versao": "10.1.53",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.51"
+  "fromVersion": "10.1.52"
 }
