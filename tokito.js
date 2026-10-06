@@ -54,37 +54,65 @@ const similar = require('./DADOS_TOKITO/sistemas/similar.js')
 
 const comandos = () => [...new Set([...similar.casos(__filename), ...plugins.comandos()])]
 
-// Cache curto para impedir que groupMetadata trave todos os comandos do grupo.
-const cacheMetadataGrupos = new Map()
-const TEMPO_CACHE_METADATA = 60 * 1000
-const TIMEOUT_METADATA = 5000
+// Metadata em cache: nunca segura um comando quando já existe dado salvo.
+const cacheMetadataGrupos = global.__TOKITO_METADATA_CACHE__ ||= new Map()
+const atualizandoMetadataGrupos = global.__TOKITO_METADATA_REFRESH__ ||= new Set()
+const TEMPO_CACHE_METADATA = 10 * 60 * 1000
+const TIMEOUT_METADATA_INICIAL = 1200
+
+const atualizarMetadataFundo = (tokito, jid) => {
+if (!jid || atualizandoMetadataGrupos.has(jid))
+return
+
+atualizandoMetadataGrupos.add(jid)
+
+Promise.resolve()
+.then(() => tokito.groupMetadata(jid))
+.then(dados => {
+if (dados) {
+cacheMetadataGrupos.set(jid, {
+dados,
+tempo: Date.now()
+})
+}
+})
+.catch(() => {})
+.finally(() => {
+atualizandoMetadataGrupos.delete(jid)
+})
+}
 
 const metadataSeguro = async (tokito, jid) => {
 const agora = Date.now()
 const salvo = cacheMetadataGrupos.get(jid)
 
-if (salvo && agora - salvo.tempo < TEMPO_CACHE_METADATA)
+if (salvo?.dados) {
+if (agora - Number(salvo.tempo || 0) >= TEMPO_CACHE_METADATA)
+atualizarMetadataFundo(tokito, jid)
+
 return salvo.dados
+}
 
 try {
 const dados = await Promise.race([
 tokito.groupMetadata(jid),
 new Promise((_, reject) =>
-setTimeout(() => reject(new Error('TIMEOUT_GROUP_METADATA')), TIMEOUT_METADATA)
+setTimeout(() => reject(new Error('TIMEOUT_GROUP_METADATA')), TIMEOUT_METADATA_INICIAL)
 )
 ])
 
 if (dados) {
 cacheMetadataGrupos.set(jid, {
 dados,
-tempo: agora
+tempo: Date.now()
 })
 }
 
-return dados || salvo?.dados || null
+return dados || null
 }
 catch {
-return salvo?.dados || null
+atualizarMetadataFundo(tokito, jid)
+return null
 }
 }
 ////////////////////////////////////////////////////////////////////////////////////
@@ -1018,7 +1046,7 @@ key: info.key
 })
 }
 const dylanModz = async (texto, emoji = '🧊', botoes = []) => {
-await reagir(from, emoji)
+reagir(from, emoji).catch(() => {})
 const caminhoVideo = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
 const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
 const contextInfo = canalInfo([sender])
@@ -1047,18 +1075,15 @@ contextInfo
 else {
 try {
 let header
-if (fs.existsSync(caminhoVideo)) {
-const media = await prepareWAMessageMedia({
-video: fs.readFileSync(caminhoVideo),
-gifPlayback: true
-}, { upload: tokito.waUploadToServer })
+const media = await modulos.midiaMenu(tokito)
+
+if (media?.videoMessage) {
 header = proto.Message.InteractiveMessage.Header.create({
 hasMediaAttachment: true,
 videoMessage: media.videoMessage
 })
 }
-else if (fs.existsSync(caminhoImagem)) {
-const media = await prepareWAMessageMedia({ image: fs.readFileSync(caminhoImagem) }, { upload: tokito.waUploadToServer })
+else if (media?.imageMessage) {
 header = proto.Message.InteractiveMessage.Header.create({
 hasMediaAttachment: true,
 imageMessage: media.imageMessage
