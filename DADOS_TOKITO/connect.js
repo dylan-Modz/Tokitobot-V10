@@ -31,6 +31,7 @@
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, delay } = require('baileys')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
+const modulos = require('./sistemas/modulos.js')
 const detector = require('./detector.js')
 const qrcodeTerminal = require('qrcode-terminal')
 const dadosSistema = require('./sistemas/dados.js')
@@ -1178,6 +1179,33 @@ global.mostrarQrTokito = false
 
 await tokito.sendPresenceUpdate('available').catch(() => {})
 await tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
+await modulos.midiaMenu(tokito).catch(() => null)
+
+if (typeof tokito.groupFetchAllParticipating === 'function') {
+const aquecerGrupos = Promise.resolve()
+.then(() => tokito.groupFetchAllParticipating())
+.then(lista => {
+const cache = global.__TOKITO_METADATA_CACHE__ ||= new Map()
+const agora = Date.now()
+
+for (const [jid, dados] of Object.entries(lista || {})) {
+if (dados) {
+cache.set(jid, {
+dados,
+tempo: agora
+})
+}
+}
+
+return true
+})
+.catch(() => false)
+
+await Promise.race([
+aquecerGrupos,
+delay(2500)
+]).catch(() => {})
+}
 
 promocoes.iniciar(tokito)
 
