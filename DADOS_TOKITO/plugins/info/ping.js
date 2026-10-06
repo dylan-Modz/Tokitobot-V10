@@ -29,7 +29,6 @@
  */
 
 const dylan = require('../../database/lib/comandos')
-const donoSistema = require('../../sistemas/dono')
 
 dylan.setCommand({
 nome: "ping",
@@ -83,40 +82,28 @@ totalGrupos,
 totalCmd,
 tempoOnline
 })
-const fundoPing = donoSistema.config().pingFundo || 'https://raw.githubusercontent.com/dylanModz/uploadsgg/main/midias/imagens/922e987a70d.jpg'
-const botJid = jidNormalizedUser(tokito.user?.id || '')
-const avatar = await tokito.profilePictureUrl(botJid, 'image').catch(() => fundoPing)
-const cardPing = `${API_URL}/canvas/ping2?ping=${encodeURIComponent(`${speedConverted} s`)}&latency=${encodeURIComponent(`${latency} ms`)}&uptime=${encodeURIComponent(tempoOnline)}&memory=${encodeURIComponent(`${ramUsada} GB / ${ramTotal} GB`)}&cpu=${encodeURIComponent(`${cpu}%`)}&platform=${encodeURIComponent(sistema)}&node=${encodeURIComponent(nodejs)}&commands=${encodeURIComponent(totalCmd)}&avatar=${encodeURIComponent(avatar)}&fundo=${encodeURIComponent(fundoPing)}&color=${encodeURIComponent('#1e90ff')}&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
 const botoes = [
 {
 texto: mess.botaoMenu(),
 id: `${prefix}menu`
 }
 ]
+
 if (!isBotoes) {
 await tokito.sendMessage(from, {
-image: { url: cardPing },
-caption: texto,
+text: texto,
 mentions: [sender],
 contextInfo: canalInfo([sender])
 }, { quoted: selo })
 return
 }
-const media = await prepareWAMessageMedia({
-image: { url: cardPing }
-}, {
-upload: tokito.waUploadToServer
-})
+
 const msg = generateWAMessageFromContent(from, {
 interactiveMessage: proto.Message.InteractiveMessage.create({
 contextInfo: {
 ...canalInfo([sender]),
 mentionedJid: [sender]
 },
-header: proto.Message.InteractiveMessage.Header.create({
-hasMediaAttachment: true,
-imageMessage: media.imageMessage
-}),
 body: proto.Message.InteractiveMessage.Body.create({
 text: texto
 }),
@@ -131,6 +118,7 @@ buttons: enviarbuton(botoes)
 quoted: selo,
 userJid: tokito.user.id
 })
+
 await tokito.relayMessage(from, msg.message, {
 messageId: msg.key.id
 })
