@@ -1,45 +1,28 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.53",
+  "version": "10.1.54",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-06T12:21:34.436Z",
+  "publishedAt": "2026-10-06T14:25:02.041Z",
   "changelog": [
-    "[Correção] Menus mais rápidos",
-    "A versão 10.1.53 já está disponível para atualização.",
-    "Menus agora reutilizam a mesma mídia já preparada em cache, evitando novo upload ao WhatsApp em cada comando.",
-    "Menu, Menu ADM e Menu Dono não aguardam mais a reação antes de iniciar o envio.",
-    "Envio dos menus sem botões também passou a reutilizar a mídia em cache, sem leitura/upload repetido.",
-    "Cache de metadata dos grupos agora usa o último dado imediatamente e atualiza em segundo plano quando estiver antigo.",
-    "Metadata dos grupos é aquecida na conexão para reduzir o tempo do primeiro comando após reiniciar o bot.",
-    "A mídia do menu é preparada uma vez durante a conexão para que os próximos menus sejam enviados sem esse custo."
+    "[Melhoria] Ping sem card",
+    "A versão 10.1.54 já está disponível para atualização.",
+    "Comando ping não gera mais card pela rota canvas/ping2.",
+    "Ping agora responde diretamente em texto, mantendo as informações de velocidade, latência, sistema, RAM, CPU, Node.js, grupos, comandos e uptime.",
+    "Quando os botões estiverem ativos, o botão de Menu continua disponível sem mídia no cabeçalho.",
+    "Comando perfil não foi alterado e continua usando o card atual."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Menus mais rápidos",
-  "notice": "A versão 10.1.53 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "Ping sem card",
+  "notice": "A versão 10.1.54 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/modulos.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/menus/menu.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "tokito.js",
+      "path": "DADOS_TOKITO/plugins/info/ping.js",
       "sha256": "",
       "size": 0
     },
@@ -1053,11 +1036,40 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-06T12:21:34.436Z"
+    },
+    {
+      "version": "10.1.54",
+      "fromVersion": "10.1.53",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Ping sem card",
+      "notice": "A versão 10.1.54 já está disponível para atualização.",
+      "changelog": [
+        "Comando ping não gera mais card pela rota canvas/ping2.",
+        "Ping agora responde diretamente em texto, mantendo as informações de velocidade, latência, sistema, RAM, CPU, Node.js, grupos, comandos e uptime.",
+        "Quando os botões estiverem ativos, o botão de Menu continua disponível sem mídia no cabeçalho.",
+        "Comando perfil não foi alterado e continua usando o card atual."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/info/ping.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-06T14:25:02.041Z"
     }
   ],
-  "versao": "10.1.53",
+  "versao": "10.1.54",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.52"
+  "fromVersion": "10.1.53"
 }
