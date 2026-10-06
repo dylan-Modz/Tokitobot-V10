@@ -761,85 +761,6 @@ const alvoHash = jid => crypto
   .digest('hex')
   .slice(0, 16)
 
-
-const cacheMidiaMenu = global.__TOKITO_MENU_MEDIA_CACHE__ ||= {
-chave: '',
-media: null,
-promise: null
-}
-
-const midiaMenu = async tokito => {
-if (!tokito?.waUploadToServer)
-return null
-
-const { prepareWAMessageMedia } = require('baileys')
-const raiz = path.join(__dirname, '..')
-const video = path.join(raiz, 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
-const imagem = path.join(raiz, 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
-
-const arquivo = fs.existsSync(video)
-? video
-: fs.existsSync(imagem)
-? imagem
-: ''
-
-if (!arquivo)
-return null
-
-let stat
-
-try {
-stat = fs.statSync(arquivo)
-}
-catch {
-return null
-}
-
-const chave = `${arquivo}:${Number(stat.mtimeMs || 0)}:${Number(stat.size || 0)}`
-
-if (cacheMidiaMenu.chave === chave && cacheMidiaMenu.media)
-return cacheMidiaMenu.media
-
-if (cacheMidiaMenu.chave === chave && cacheMidiaMenu.promise)
-return cacheMidiaMenu.promise
-
-cacheMidiaMenu.chave = chave
-
-cacheMidiaMenu.promise = (async () => {
-const buffer = await fs.promises.readFile(arquivo)
-
-const media = arquivo === video
-? await prepareWAMessageMedia({
-video: buffer,
-gifPlayback: true
-}, {
-upload: tokito.waUploadToServer
-})
-: await prepareWAMessageMedia({
-image: buffer
-}, {
-upload: tokito.waUploadToServer
-})
-
-cacheMidiaMenu.media = media
-cacheMidiaMenu.promise = null
-
-return media
-})().catch(error => {
-cacheMidiaMenu.media = null
-cacheMidiaMenu.promise = null
-throw error
-})
-
-return cacheMidiaMenu.promise
-}
-
-const limparMidiaMenu = () => {
-cacheMidiaMenu.chave = ''
-cacheMidiaMenu.media = null
-cacheMidiaMenu.promise = null
-}
-
 const garantirFuncoes = ctx => {
   if (!ctx.dataGp?.[0]) return {}
 
@@ -885,7 +806,5 @@ module.exports = {
   ehErroApi,
   responderErroApi,
   alvoHash,
-  garantirFuncoes,
-  midiaMenu,
-  limparMidiaMenu
+  garantirFuncoes
 }
