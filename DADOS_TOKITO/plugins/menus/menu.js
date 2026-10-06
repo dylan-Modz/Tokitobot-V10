@@ -45,21 +45,10 @@ with (ctx) {
 try {
 if (!isBotoes)
 return dylanModz(linguagem.menu(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, baileysVersion))
-await reagir(from, '🧊')
+reagir(from, '🧊').catch(() => {})
 const caminhoVideo = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
 const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
-let menuMedia
-if (fs.existsSync(caminhoVideo)) {
-menuMedia = await prepareWAMessageMedia({
-video: { url: caminhoVideo },
-mimetype: 'video/mp4',
-gifPlayback: true,
-seconds: 8
-}, { upload: tokito.waUploadToServer })
-}
-else {
-menuMedia = await prepareWAMessageMedia({ image: { url: caminhoImagem } }, { upload: tokito.waUploadToServer })
-}
+let menuMedia = await modulos.midiaMenu(tokito)
 const listaMenus = {
 title: '🧊⃞ ᴍᴇɴᴜ-ʟɪsᴛᴀs ⃞🧊',
 sections: [
