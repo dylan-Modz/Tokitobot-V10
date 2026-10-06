@@ -1052,25 +1052,58 @@ const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS'
 const contextInfo = canalInfo([sender])
 let resultado
 if (!isBotoes || !botoes.length) {
-if (fs.existsSync(caminhoVideo))
-resultado = await tokito.sendMessage(from, {
-video: fs.readFileSync(caminhoVideo),
-mimetype: 'video/mp4',
-gifPlayback: true,
+try {
+const media = await modulos.midiaMenu(tokito)
+
+if (media?.videoMessage) {
+const msg = generateWAMessageFromContent(from, {
+videoMessage: proto.Message.VideoMessage.create({
+...media.videoMessage,
 caption: texto,
 contextInfo
-}, { quoted: selo })
-else if (fs.existsSync(caminhoImagem))
-resultado = await tokito.sendMessage(from, {
-image: fs.readFileSync(caminhoImagem),
+})
+}, {
+quoted: selo,
+userJid: tokito.user.id
+})
+
+resultado = await tokito.relayMessage(
+from,
+msg.message,
+{ messageId: msg.key.id }
+)
+}
+else if (media?.imageMessage) {
+const msg = generateWAMessageFromContent(from, {
+imageMessage: proto.Message.ImageMessage.create({
+...media.imageMessage,
 caption: texto,
 contextInfo
-}, { quoted: selo })
-else
+})
+}, {
+quoted: selo,
+userJid: tokito.user.id
+})
+
+resultado = await tokito.relayMessage(
+from,
+msg.message,
+{ messageId: msg.key.id }
+)
+}
+else {
 resultado = await tokito.sendMessage(from, {
 text: texto,
 contextInfo
 }, { quoted: selo })
+}
+}
+catch {
+resultado = await tokito.sendMessage(from, {
+text: texto,
+contextInfo
+}, { quoted: selo })
+}
 }
 else {
 try {
@@ -1105,21 +1138,6 @@ resultado = await tokito.relayMessage(from, msg.message, { messageId: msg.key.id
 }
 catch (e) {
 console.log('[BOTÕES MENU]', modulos.sanitizarErro(e, [API_KEY_TOKITO]) || 'Erro sem detalhes')
-if (fs.existsSync(caminhoVideo))
-resultado = await tokito.sendMessage(from, {
-video: fs.readFileSync(caminhoVideo),
-mimetype: 'video/mp4',
-gifPlayback: true,
-caption: texto,
-contextInfo
-}, { quoted: selo })
-else if (fs.existsSync(caminhoImagem))
-resultado = await tokito.sendMessage(from, {
-image: fs.readFileSync(caminhoImagem),
-caption: texto,
-contextInfo
-}, { quoted: selo })
-else
 resultado = await tokito.sendMessage(from, {
 text: texto,
 contextInfo
