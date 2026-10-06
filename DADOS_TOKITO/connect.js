@@ -1182,7 +1182,7 @@ await tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
 await modulos.midiaMenu(tokito).catch(() => null)
 
 if (typeof tokito.groupFetchAllParticipating === 'function') {
-Promise.resolve()
+const aquecerGrupos = Promise.resolve()
 .then(() => tokito.groupFetchAllParticipating())
 .then(lista => {
 const cache = global.__TOKITO_METADATA_CACHE__ ||= new Map()
@@ -1196,8 +1196,15 @@ tempo: agora
 })
 }
 }
+
+return true
 })
-.catch(() => {})
+.catch(() => false)
+
+await Promise.race([
+aquecerGrupos,
+delay(2500)
+]).catch(() => {})
 }
 
 promocoes.iniciar(tokito)
