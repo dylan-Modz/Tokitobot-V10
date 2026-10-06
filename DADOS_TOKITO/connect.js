@@ -1179,6 +1179,25 @@ global.mostrarQrTokito = false
 await tokito.sendPresenceUpdate('available').catch(() => {})
 await tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
 
+if (typeof tokito.groupFetchAllParticipating === 'function') {
+Promise.resolve()
+.then(() => tokito.groupFetchAllParticipating())
+.then(lista => {
+const cache = global.__TOKITO_METADATA_CACHE__ ||= new Map()
+const agora = Date.now()
+
+for (const [jid, dados] of Object.entries(lista || {})) {
+if (dados) {
+cache.set(jid, {
+dados,
+tempo: agora
+})
+}
+}
+})
+.catch(() => {})
+}
+
 promocoes.iniciar(tokito)
 
 autoInativo.iniciar(tokito, {
