@@ -1,42 +1,1962 @@
 [
-{"pergunta":"Qual é a capital da França?","resposta":"Paris","opcoes":["Paris","Londres","Roma"]},
-{"pergunta":"Qual é o maior planeta do sistema solar?","resposta":"Júpiter","opcoes":["Terra","Marte","Júpiter"]},
-{"pergunta":"Quem escreveu 'Dom Quixote'?","resposta":"Miguel de Cervantes","opcoes":["Miguel de Cervantes","William Shakespeare","Mark Twain"]},
-{"pergunta":"Qual é a língua oficial do Brasil?","resposta":"Português","opcoes":["Português","Espanhol","Inglês"]},
-{"pergunta":"Qual é o elemento químico representado pelo símbolo 'O'?","resposta":"Oxigênio","opcoes":["Oxigênio","Ouro","Osmio"]},
-{"pergunta":"Em que ano foi a Revolução Francesa?","resposta":"1789","opcoes":["1789","1776","1804"]},
-{"pergunta":"Qual é a moeda oficial dos Estados Unidos?","resposta":"Dólar","opcoes":["Dólar","Euro","Yen"]},
-{"pergunta":"Qual é o maior oceano do mundo?","resposta":"Oceano Pacífico","opcoes":["Oceano Pacífico","Oceano Atlântico","Oceano Índico"]},
-{"pergunta":"Quem pintou a Mona Lisa?","resposta":"Leonardo da Vinci","opcoes":["Leonardo da Vinci","Vincent van Gogh","Pablo Picasso"]},
-{"pergunta":"Qual é a capital de Moçambique?","resposta":"Maputo","opcoes":["Maputo","Beira","Nampula"]},
-{"pergunta":"Qual é o maior rio de Moçambique?","resposta":"Rio Zambeze","opcoes":["Rio Zambeze","Rio Limpopo","Rio Save"]},
-{"pergunta":"Qual é o animal símbolo nacional de Moçambique?","resposta":"Elefante","opcoes":["Elefante","Leão","Águia"]},
-{"pergunta":"Qual é a moeda oficial de Moçambique?","resposta":"Metical","opcoes":["Metical","Dólar","Euro"]},
-{"pergunta":"Qual é o maior parque nacional de Moçambique?","resposta":"Parque Nacional de Gorongosa","opcoes":["Parque Nacional de Gorongosa","Parque Nacional do Limpopo","Parque Nacional de Bazaruto"]},
-{"pergunta":"Qual é a língua oficial de Moçambique?","resposta":"Português","opcoes":["Português","Chichewa","Shona"]},
-{"pergunta":"Em que ano Moçambique conquistou a independência de Portugal?","resposta":"1975","opcoes":["1975","1960","1980"]},
-{"pergunta":"Qual é o ponto mais alto de Moçambique?","resposta":"Mount Binga","opcoes":["Mount Binga","Mount Bonga","Mount Nhalanha"]},
-{"pergunta":"Qual é o famoso festival de música realizado em Moçambique?","resposta":"Festival de Música da Ilha de Moçambique","opcoes":["Festival de Música da Ilha de Moçambique","Festival de Música de Maputo","Festival de Música do Zambeze"]},
-{"pergunta":"Qual é o prato tradicional feito de milho em Moçambique?","resposta":"Xima","opcoes":["Xima","Cachupa","Feijoada"]},
-{"pergunta":"Qual é o principal recurso mineral de Moçambique?","resposta":"Carvão","opcoes":["Carvão","Ouro","Diamantes"]},
-{"pergunta":"Qual é o nome do famoso arquipélago ao largo da costa de Moçambique?","resposta":"Arquipélago de Bazaruto","opcoes":["Arquipélago de Bazaruto","Arquipélago de Quirimbas","Arquipélago de São Tomé"]},
-{"pergunta":"Qual é o famoso evento cultural realizado em Maputo?","resposta":"Festival Azul","opcoes":["Festival Azul","Festival da Independência","Festival de Verão"]},
-{"pergunta":"Qual é a capital de Portugal?","resposta":"Lisboa","opcoes":["Lisboa","Porto","Coimbra"]},
-{"pergunta":"Qual é a capital da Espanha?","resposta":"Madri","opcoes":["Madri","Barcelona","Sevilha"]},
-{"pergunta":"Qual é o maior deserto do mundo?","resposta":"Saara","opcoes":["Saara","Gobi","Kalahari"]},
-{"pergunta":"Qual é a capital da Itália?","resposta":"Roma","opcoes":["Roma","Milão","Nápoles"]},
-{"pergunta":"Qual é o maior lago da África?","resposta":"Lago Vitória","opcoes":["Lago Vitória","Lago Tanganyika","Lago Malawi"]},
-{"pergunta":"Qual é o nome da famosa torre localizada em Paris?","resposta":"Torre Eiffel","opcoes":["Torre Eiffel","Torre de Pisa","Torre de Londres"]},
-{"pergunta":"Qual é a capital da Alemanha?","resposta":"Berlim","opcoes":["Berlim","Munique","Frankfurt"]},
-{"pergunta":"Qual é a língua oficial da China?","resposta":"Mandarim","opcoes":["Mandarim","Cantonês","Japonês"]},
-{"pergunta":"Qual é a cidade conhecida como a 'Cidade das Luzes'?","resposta":"Paris","opcoes":["Paris","Nova York","Tóquio"]},
-{"pergunta":"Qual é o maior vulcão ativo do mundo?","resposta":"Mauna Loa","opcoes":["Mauna Loa","Kilauea","Etna"]},
-{"pergunta":"Qual é a famosa construção localizada no Egito?","resposta":"Pirâmides de Gizé","opcoes":["Pirâmides de Gizé","Coliseu","Muralha da China"]},
-{"pergunta":"Qual é o nome do oceano que banha a costa leste dos Estados Unidos?","resposta":"Oceano Atlântico","opcoes":["Oceano Atlântico","Oceano Pacífico","Oceano Índico"]},
-{"pergunta":"Qual é o país com o maior número de ilhas?","resposta":"Suécia","opcoes":["Suécia","Noruega","Canadá"]},
-{"pergunta":"Qual é a cidade que abriga a sede das Nações Unidas?","resposta":"Nova York","opcoes":["Nova York","Genebra","Viena"]},
-{"pergunta":"Qual é o menor país do mundo?","resposta":"Vaticano","opcoes":["Vaticano","Mônaco","San Marino"]},
-{"pergunta":"Qual é a principal religião praticada na Índia?","resposta":"Hinduísmo","opcoes":["Hinduísmo","Budismo","Islamismo"]},
-{"pergunta":"Qual é o país famoso por suas tulipas e moinhos de vento?","resposta":"Países Baixos","opcoes":["Países Baixos","Alemanha","França"]},
-{"pergunta":"Qual é a montanha mais alta do mundo?","resposta":"Everest","opcoes":["Everest","K2","Kangchenjunga"]}
+  {
+    "pergunta": "Qual é a capital da França?",
+    "resposta": "Paris",
+    "opcoes": [
+      "Paris",
+      "Londres",
+      "Roma"
+    ]
+  },
+  {
+    "pergunta": "Qual é o maior planeta do sistema solar?",
+    "resposta": "Júpiter",
+    "opcoes": [
+      "Terra",
+      "Marte",
+      "Júpiter"
+    ]
+  },
+  {
+    "pergunta": "Quem escreveu 'Dom Quixote'?",
+    "resposta": "Miguel de Cervantes",
+    "opcoes": [
+      "Miguel de Cervantes",
+      "William Shakespeare",
+      "Mark Twain"
+    ]
+  },
+  {
+    "pergunta": "Qual é a língua oficial do Brasil?",
+    "resposta": "Português",
+    "opcoes": [
+      "Português",
+      "Espanhol",
+      "Inglês"
+    ]
+  },
+  {
+    "pergunta": "Qual é o elemento químico representado pelo símbolo 'O'?",
+    "resposta": "Oxigênio",
+    "opcoes": [
+      "Oxigênio",
+      "Ouro",
+      "Osmio"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi a Revolução Francesa?",
+    "resposta": "1789",
+    "opcoes": [
+      "1789",
+      "1776",
+      "1804"
+    ]
+  },
+  {
+    "pergunta": "Qual é a moeda oficial dos Estados Unidos?",
+    "resposta": "Dólar",
+    "opcoes": [
+      "Dólar",
+      "Euro",
+      "Yen"
+    ]
+  },
+  {
+    "pergunta": "Qual é o maior oceano do mundo?",
+    "resposta": "Oceano Pacífico",
+    "opcoes": [
+      "Oceano Pacífico",
+      "Oceano Atlântico",
+      "Oceano Índico"
+    ]
+  },
+  {
+    "pergunta": "Quem pintou a Mona Lisa?",
+    "resposta": "Leonardo da Vinci",
+    "opcoes": [
+      "Leonardo da Vinci",
+      "Vincent van Gogh",
+      "Pablo Picasso"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Moçambique?",
+    "resposta": "Maputo",
+    "opcoes": [
+      "Maputo",
+      "Beira",
+      "Nampula"
+    ]
+  },
+  {
+    "pergunta": "Qual é o maior rio de Moçambique?",
+    "resposta": "Rio Zambeze",
+    "opcoes": [
+      "Rio Zambeze",
+      "Rio Limpopo",
+      "Rio Save"
+    ]
+  },
+  {
+    "pergunta": "Qual é o animal símbolo nacional de Moçambique?",
+    "resposta": "Elefante",
+    "opcoes": [
+      "Elefante",
+      "Leão",
+      "Águia"
+    ]
+  },
+  {
+    "pergunta": "Qual é a moeda oficial de Moçambique?",
+    "resposta": "Metical",
+    "opcoes": [
+      "Metical",
+      "Dólar",
+      "Euro"
+    ]
+  },
+  {
+    "pergunta": "Qual é o maior parque nacional de Moçambique?",
+    "resposta": "Parque Nacional de Gorongosa",
+    "opcoes": [
+      "Parque Nacional de Gorongosa",
+      "Parque Nacional do Limpopo",
+      "Parque Nacional de Bazaruto"
+    ]
+  },
+  {
+    "pergunta": "Qual é a língua oficial de Moçambique?",
+    "resposta": "Português",
+    "opcoes": [
+      "Português",
+      "Chichewa",
+      "Shona"
+    ]
+  },
+  {
+    "pergunta": "Em que ano Moçambique conquistou a independência de Portugal?",
+    "resposta": "1975",
+    "opcoes": [
+      "1975",
+      "1960",
+      "1980"
+    ]
+  },
+  {
+    "pergunta": "Qual é o ponto mais alto de Moçambique?",
+    "resposta": "Mount Binga",
+    "opcoes": [
+      "Mount Binga",
+      "Mount Bonga",
+      "Mount Nhalanha"
+    ]
+  },
+  {
+    "pergunta": "Qual é o famoso festival de música realizado em Moçambique?",
+    "resposta": "Festival de Música da Ilha de Moçambique",
+    "opcoes": [
+      "Festival de Música da Ilha de Moçambique",
+      "Festival de Música de Maputo",
+      "Festival de Música do Zambeze"
+    ]
+  },
+  {
+    "pergunta": "Qual é o prato tradicional feito de milho em Moçambique?",
+    "resposta": "Xima",
+    "opcoes": [
+      "Xima",
+      "Cachupa",
+      "Feijoada"
+    ]
+  },
+  {
+    "pergunta": "Qual é o principal recurso mineral de Moçambique?",
+    "resposta": "Carvão",
+    "opcoes": [
+      "Carvão",
+      "Ouro",
+      "Diamantes"
+    ]
+  },
+  {
+    "pergunta": "Qual é o nome do famoso arquipélago ao largo da costa de Moçambique?",
+    "resposta": "Arquipélago de Bazaruto",
+    "opcoes": [
+      "Arquipélago de Bazaruto",
+      "Arquipélago de Quirimbas",
+      "Arquipélago de São Tomé"
+    ]
+  },
+  {
+    "pergunta": "Qual é o famoso evento cultural realizado em Maputo?",
+    "resposta": "Festival Azul",
+    "opcoes": [
+      "Festival Azul",
+      "Festival da Independência",
+      "Festival de Verão"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Portugal?",
+    "resposta": "Lisboa",
+    "opcoes": [
+      "Lisboa",
+      "Porto",
+      "Coimbra"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital da Espanha?",
+    "resposta": "Madri",
+    "opcoes": [
+      "Madri",
+      "Barcelona",
+      "Sevilha"
+    ]
+  },
+  {
+    "pergunta": "Qual é o maior deserto do mundo?",
+    "resposta": "Saara",
+    "opcoes": [
+      "Saara",
+      "Gobi",
+      "Kalahari"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital da Itália?",
+    "resposta": "Roma",
+    "opcoes": [
+      "Roma",
+      "Milão",
+      "Nápoles"
+    ]
+  },
+  {
+    "pergunta": "Qual é o maior lago da África?",
+    "resposta": "Lago Vitória",
+    "opcoes": [
+      "Lago Vitória",
+      "Lago Tanganyika",
+      "Lago Malawi"
+    ]
+  },
+  {
+    "pergunta": "Qual é o nome da famosa torre localizada em Paris?",
+    "resposta": "Torre Eiffel",
+    "opcoes": [
+      "Torre Eiffel",
+      "Torre de Pisa",
+      "Torre de Londres"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital da Alemanha?",
+    "resposta": "Berlim",
+    "opcoes": [
+      "Berlim",
+      "Munique",
+      "Frankfurt"
+    ]
+  },
+  {
+    "pergunta": "Qual é a língua oficial da China?",
+    "resposta": "Mandarim",
+    "opcoes": [
+      "Mandarim",
+      "Cantonês",
+      "Japonês"
+    ]
+  },
+  {
+    "pergunta": "Qual é a cidade conhecida como a 'Cidade das Luzes'?",
+    "resposta": "Paris",
+    "opcoes": [
+      "Paris",
+      "Nova York",
+      "Tóquio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o maior vulcão ativo do mundo?",
+    "resposta": "Mauna Loa",
+    "opcoes": [
+      "Mauna Loa",
+      "Kilauea",
+      "Etna"
+    ]
+  },
+  {
+    "pergunta": "Qual é a famosa construção localizada no Egito?",
+    "resposta": "Pirâmides de Gizé",
+    "opcoes": [
+      "Pirâmides de Gizé",
+      "Coliseu",
+      "Muralha da China"
+    ]
+  },
+  {
+    "pergunta": "Qual é o nome do oceano que banha a costa leste dos Estados Unidos?",
+    "resposta": "Oceano Atlântico",
+    "opcoes": [
+      "Oceano Atlântico",
+      "Oceano Pacífico",
+      "Oceano Índico"
+    ]
+  },
+  {
+    "pergunta": "Qual é o país com o maior número de ilhas?",
+    "resposta": "Suécia",
+    "opcoes": [
+      "Suécia",
+      "Noruega",
+      "Canadá"
+    ]
+  },
+  {
+    "pergunta": "Qual é a cidade que abriga a sede das Nações Unidas?",
+    "resposta": "Nova York",
+    "opcoes": [
+      "Nova York",
+      "Genebra",
+      "Viena"
+    ]
+  },
+  {
+    "pergunta": "Qual é o menor país do mundo?",
+    "resposta": "Vaticano",
+    "opcoes": [
+      "Vaticano",
+      "Mônaco",
+      "San Marino"
+    ]
+  },
+  {
+    "pergunta": "Qual é a principal religião praticada na Índia?",
+    "resposta": "Hinduísmo",
+    "opcoes": [
+      "Hinduísmo",
+      "Budismo",
+      "Islamismo"
+    ]
+  },
+  {
+    "pergunta": "Qual é o país famoso por suas tulipas e moinhos de vento?",
+    "resposta": "Países Baixos",
+    "opcoes": [
+      "Países Baixos",
+      "Alemanha",
+      "França"
+    ]
+  },
+  {
+    "pergunta": "Qual é a montanha mais alta do mundo?",
+    "resposta": "Everest",
+    "opcoes": [
+      "Everest",
+      "K2",
+      "Kangchenjunga"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo H?",
+    "resposta": "Hidrogênio",
+    "opcoes": [
+      "Hidrogênio",
+      "Hélio",
+      "Oxigênio",
+      "Argônio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Hidrogênio?",
+    "resposta": "H",
+    "opcoes": [
+      "H",
+      "Be",
+      "Mg",
+      "Ca"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo He?",
+    "resposta": "Hélio",
+    "opcoes": [
+      "Hélio",
+      "Lítio",
+      "Flúor",
+      "Potássio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Hélio?",
+    "resposta": "He",
+    "opcoes": [
+      "He",
+      "B",
+      "Al",
+      "Sc"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Li?",
+    "resposta": "Lítio",
+    "opcoes": [
+      "Lítio",
+      "Berílio",
+      "Neônio",
+      "Cálcio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Lítio?",
+    "resposta": "Li",
+    "opcoes": [
+      "Li",
+      "C",
+      "Si",
+      "Ti"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Be?",
+    "resposta": "Berílio",
+    "opcoes": [
+      "Berílio",
+      "Boro",
+      "Sódio",
+      "Escândio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Berílio?",
+    "resposta": "Be",
+    "opcoes": [
+      "Be",
+      "N",
+      "P",
+      "V"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo B?",
+    "resposta": "Boro",
+    "opcoes": [
+      "Boro",
+      "Carbono",
+      "Magnésio",
+      "Titânio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Boro?",
+    "resposta": "B",
+    "opcoes": [
+      "B",
+      "O",
+      "S",
+      "Cr"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo C?",
+    "resposta": "Carbono",
+    "opcoes": [
+      "Carbono",
+      "Nitrogênio",
+      "Alumínio",
+      "Vanádio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Carbono?",
+    "resposta": "C",
+    "opcoes": [
+      "C",
+      "F",
+      "Cl",
+      "Mn"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo N?",
+    "resposta": "Nitrogênio",
+    "opcoes": [
+      "Nitrogênio",
+      "Oxigênio",
+      "Silício",
+      "Cromo"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Nitrogênio?",
+    "resposta": "N",
+    "opcoes": [
+      "N",
+      "Ne",
+      "Ar",
+      "Fe"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo O?",
+    "resposta": "Oxigênio",
+    "opcoes": [
+      "Oxigênio",
+      "Flúor",
+      "Fósforo",
+      "Manganês"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Oxigênio?",
+    "resposta": "O",
+    "opcoes": [
+      "O",
+      "Na",
+      "K",
+      "Co"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo F?",
+    "resposta": "Flúor",
+    "opcoes": [
+      "Flúor",
+      "Neônio",
+      "Enxofre",
+      "Ferro"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Flúor?",
+    "resposta": "F",
+    "opcoes": [
+      "F",
+      "Mg",
+      "Ca",
+      "Ni"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Ne?",
+    "resposta": "Neônio",
+    "opcoes": [
+      "Neônio",
+      "Sódio",
+      "Cloro",
+      "Cobalto"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Neônio?",
+    "resposta": "Ne",
+    "opcoes": [
+      "Ne",
+      "Al",
+      "Sc",
+      "Cu"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Na?",
+    "resposta": "Sódio",
+    "opcoes": [
+      "Sódio",
+      "Magnésio",
+      "Argônio",
+      "Níquel"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Sódio?",
+    "resposta": "Na",
+    "opcoes": [
+      "Na",
+      "Si",
+      "Ti",
+      "Zn"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Mg?",
+    "resposta": "Magnésio",
+    "opcoes": [
+      "Magnésio",
+      "Alumínio",
+      "Potássio",
+      "Cobre"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Magnésio?",
+    "resposta": "Mg",
+    "opcoes": [
+      "Mg",
+      "P",
+      "V",
+      "Ga"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Al?",
+    "resposta": "Alumínio",
+    "opcoes": [
+      "Alumínio",
+      "Silício",
+      "Cálcio",
+      "Zinco"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Alumínio?",
+    "resposta": "Al",
+    "opcoes": [
+      "Al",
+      "S",
+      "Cr",
+      "Ge"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Si?",
+    "resposta": "Silício",
+    "opcoes": [
+      "Silício",
+      "Fósforo",
+      "Escândio",
+      "Gálio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Silício?",
+    "resposta": "Si",
+    "opcoes": [
+      "Si",
+      "Cl",
+      "Mn",
+      "As"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo P?",
+    "resposta": "Fósforo",
+    "opcoes": [
+      "Fósforo",
+      "Enxofre",
+      "Titânio",
+      "Germânio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Fósforo?",
+    "resposta": "P",
+    "opcoes": [
+      "P",
+      "Ar",
+      "Fe",
+      "Se"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo S?",
+    "resposta": "Enxofre",
+    "opcoes": [
+      "Enxofre",
+      "Cloro",
+      "Vanádio",
+      "Arsênio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Enxofre?",
+    "resposta": "S",
+    "opcoes": [
+      "S",
+      "K",
+      "Co",
+      "Br"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Cl?",
+    "resposta": "Cloro",
+    "opcoes": [
+      "Cloro",
+      "Argônio",
+      "Cromo",
+      "Selênio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Cloro?",
+    "resposta": "Cl",
+    "opcoes": [
+      "Cl",
+      "Ca",
+      "Ni",
+      "Kr"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Ar?",
+    "resposta": "Argônio",
+    "opcoes": [
+      "Argônio",
+      "Potássio",
+      "Manganês",
+      "Bromo"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Argônio?",
+    "resposta": "Ar",
+    "opcoes": [
+      "Ar",
+      "Sc",
+      "Cu",
+      "Rb"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo K?",
+    "resposta": "Potássio",
+    "opcoes": [
+      "Potássio",
+      "Cálcio",
+      "Ferro",
+      "Criptônio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Potássio?",
+    "resposta": "K",
+    "opcoes": [
+      "K",
+      "Ti",
+      "Zn",
+      "Sr"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Ca?",
+    "resposta": "Cálcio",
+    "opcoes": [
+      "Cálcio",
+      "Escândio",
+      "Cobalto",
+      "Rubídio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Cálcio?",
+    "resposta": "Ca",
+    "opcoes": [
+      "Ca",
+      "V",
+      "Ga",
+      "Y"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Sc?",
+    "resposta": "Escândio",
+    "opcoes": [
+      "Escândio",
+      "Titânio",
+      "Níquel",
+      "Estrôncio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Escândio?",
+    "resposta": "Sc",
+    "opcoes": [
+      "Sc",
+      "Cr",
+      "Ge",
+      "Zr"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Ti?",
+    "resposta": "Titânio",
+    "opcoes": [
+      "Titânio",
+      "Vanádio",
+      "Cobre",
+      "Ítrio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Titânio?",
+    "resposta": "Ti",
+    "opcoes": [
+      "Ti",
+      "Mn",
+      "As",
+      "Nb"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo V?",
+    "resposta": "Vanádio",
+    "opcoes": [
+      "Vanádio",
+      "Cromo",
+      "Zinco",
+      "Zircônio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Vanádio?",
+    "resposta": "V",
+    "opcoes": [
+      "V",
+      "Fe",
+      "Se",
+      "Mo"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Cr?",
+    "resposta": "Cromo",
+    "opcoes": [
+      "Cromo",
+      "Manganês",
+      "Gálio",
+      "Nióbio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Cromo?",
+    "resposta": "Cr",
+    "opcoes": [
+      "Cr",
+      "Co",
+      "Br",
+      "Tc"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Mn?",
+    "resposta": "Manganês",
+    "opcoes": [
+      "Manganês",
+      "Ferro",
+      "Germânio",
+      "Molibdênio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Manganês?",
+    "resposta": "Mn",
+    "opcoes": [
+      "Mn",
+      "Ni",
+      "Kr",
+      "Ru"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Fe?",
+    "resposta": "Ferro",
+    "opcoes": [
+      "Ferro",
+      "Cobalto",
+      "Arsênio",
+      "Tecnécio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Ferro?",
+    "resposta": "Fe",
+    "opcoes": [
+      "Fe",
+      "Cu",
+      "Rb",
+      "Rh"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Co?",
+    "resposta": "Cobalto",
+    "opcoes": [
+      "Cobalto",
+      "Níquel",
+      "Selênio",
+      "Rutênio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Cobalto?",
+    "resposta": "Co",
+    "opcoes": [
+      "Co",
+      "Zn",
+      "Sr",
+      "Pd"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Ni?",
+    "resposta": "Níquel",
+    "opcoes": [
+      "Níquel",
+      "Cobre",
+      "Bromo",
+      "Ródio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Níquel?",
+    "resposta": "Ni",
+    "opcoes": [
+      "Ni",
+      "Ga",
+      "Y",
+      "Ag"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Cu?",
+    "resposta": "Cobre",
+    "opcoes": [
+      "Cobre",
+      "Zinco",
+      "Criptônio",
+      "Paládio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Cobre?",
+    "resposta": "Cu",
+    "opcoes": [
+      "Cu",
+      "Ge",
+      "Zr",
+      "Cd"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Zn?",
+    "resposta": "Zinco",
+    "opcoes": [
+      "Zinco",
+      "Gálio",
+      "Rubídio",
+      "Prata"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Zinco?",
+    "resposta": "Zn",
+    "opcoes": [
+      "Zn",
+      "As",
+      "Nb",
+      "In"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Ga?",
+    "resposta": "Gálio",
+    "opcoes": [
+      "Gálio",
+      "Germânio",
+      "Estrôncio",
+      "Cádmio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Gálio?",
+    "resposta": "Ga",
+    "opcoes": [
+      "Ga",
+      "Se",
+      "Mo",
+      "Sn"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Ge?",
+    "resposta": "Germânio",
+    "opcoes": [
+      "Germânio",
+      "Arsênio",
+      "Ítrio",
+      "Índio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Germânio?",
+    "resposta": "Ge",
+    "opcoes": [
+      "Ge",
+      "Br",
+      "Tc",
+      "H"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo As?",
+    "resposta": "Arsênio",
+    "opcoes": [
+      "Arsênio",
+      "Selênio",
+      "Zircônio",
+      "Estanho"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Arsênio?",
+    "resposta": "As",
+    "opcoes": [
+      "As",
+      "Kr",
+      "Ru",
+      "He"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Se?",
+    "resposta": "Selênio",
+    "opcoes": [
+      "Selênio",
+      "Bromo",
+      "Nióbio",
+      "Hidrogênio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Selênio?",
+    "resposta": "Se",
+    "opcoes": [
+      "Se",
+      "Rb",
+      "Rh",
+      "Li"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Br?",
+    "resposta": "Bromo",
+    "opcoes": [
+      "Bromo",
+      "Criptônio",
+      "Molibdênio",
+      "Hélio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Bromo?",
+    "resposta": "Br",
+    "opcoes": [
+      "Br",
+      "Sr",
+      "Pd",
+      "Be"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Kr?",
+    "resposta": "Criptônio",
+    "opcoes": [
+      "Criptônio",
+      "Rubídio",
+      "Tecnécio",
+      "Lítio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Criptônio?",
+    "resposta": "Kr",
+    "opcoes": [
+      "Kr",
+      "Y",
+      "Ag",
+      "B"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Rb?",
+    "resposta": "Rubídio",
+    "opcoes": [
+      "Rubídio",
+      "Estrôncio",
+      "Rutênio",
+      "Berílio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Rubídio?",
+    "resposta": "Rb",
+    "opcoes": [
+      "Rb",
+      "Zr",
+      "Cd",
+      "C"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Sr?",
+    "resposta": "Estrôncio",
+    "opcoes": [
+      "Estrôncio",
+      "Ítrio",
+      "Ródio",
+      "Boro"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Estrôncio?",
+    "resposta": "Sr",
+    "opcoes": [
+      "Sr",
+      "Nb",
+      "In",
+      "N"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Y?",
+    "resposta": "Ítrio",
+    "opcoes": [
+      "Ítrio",
+      "Zircônio",
+      "Paládio",
+      "Carbono"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Ítrio?",
+    "resposta": "Y",
+    "opcoes": [
+      "Y",
+      "Mo",
+      "Sn",
+      "O"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Zr?",
+    "resposta": "Zircônio",
+    "opcoes": [
+      "Zircônio",
+      "Nióbio",
+      "Prata",
+      "Nitrogênio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Zircônio?",
+    "resposta": "Zr",
+    "opcoes": [
+      "Zr",
+      "Tc",
+      "H",
+      "F"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Nb?",
+    "resposta": "Nióbio",
+    "opcoes": [
+      "Nióbio",
+      "Molibdênio",
+      "Cádmio",
+      "Oxigênio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Nióbio?",
+    "resposta": "Nb",
+    "opcoes": [
+      "Nb",
+      "Ru",
+      "He",
+      "Ne"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Mo?",
+    "resposta": "Molibdênio",
+    "opcoes": [
+      "Molibdênio",
+      "Tecnécio",
+      "Índio",
+      "Flúor"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Molibdênio?",
+    "resposta": "Mo",
+    "opcoes": [
+      "Mo",
+      "Rh",
+      "Li",
+      "Na"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Tc?",
+    "resposta": "Tecnécio",
+    "opcoes": [
+      "Tecnécio",
+      "Rutênio",
+      "Estanho",
+      "Neônio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Tecnécio?",
+    "resposta": "Tc",
+    "opcoes": [
+      "Tc",
+      "Pd",
+      "Be",
+      "Mg"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Ru?",
+    "resposta": "Rutênio",
+    "opcoes": [
+      "Rutênio",
+      "Ródio",
+      "Hidrogênio",
+      "Sódio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Rutênio?",
+    "resposta": "Ru",
+    "opcoes": [
+      "Ru",
+      "Ag",
+      "B",
+      "Al"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Rh?",
+    "resposta": "Ródio",
+    "opcoes": [
+      "Ródio",
+      "Paládio",
+      "Hélio",
+      "Magnésio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Ródio?",
+    "resposta": "Rh",
+    "opcoes": [
+      "Rh",
+      "Cd",
+      "C",
+      "Si"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Pd?",
+    "resposta": "Paládio",
+    "opcoes": [
+      "Paládio",
+      "Prata",
+      "Lítio",
+      "Alumínio"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Paládio?",
+    "resposta": "Pd",
+    "opcoes": [
+      "Pd",
+      "In",
+      "N",
+      "P"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Ag?",
+    "resposta": "Prata",
+    "opcoes": [
+      "Prata",
+      "Cádmio",
+      "Berílio",
+      "Silício"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Prata?",
+    "resposta": "Ag",
+    "opcoes": [
+      "Ag",
+      "Sn",
+      "O",
+      "S"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Cd?",
+    "resposta": "Cádmio",
+    "opcoes": [
+      "Cádmio",
+      "Índio",
+      "Boro",
+      "Fósforo"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Cádmio?",
+    "resposta": "Cd",
+    "opcoes": [
+      "Cd",
+      "H",
+      "F",
+      "Cl"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo In?",
+    "resposta": "Índio",
+    "opcoes": [
+      "Índio",
+      "Estanho",
+      "Carbono",
+      "Enxofre"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Índio?",
+    "resposta": "In",
+    "opcoes": [
+      "In",
+      "He",
+      "Ne",
+      "Ar"
+    ]
+  },
+  {
+    "pergunta": "Qual elemento químico possui o símbolo Sn?",
+    "resposta": "Estanho",
+    "opcoes": [
+      "Estanho",
+      "Hidrogênio",
+      "Nitrogênio",
+      "Cloro"
+    ]
+  },
+  {
+    "pergunta": "Qual é o símbolo químico do elemento Estanho?",
+    "resposta": "Sn",
+    "opcoes": [
+      "Sn",
+      "Li",
+      "Na",
+      "K"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Brasil?",
+    "resposta": "Brasília",
+    "opcoes": [
+      "Brasília",
+      "Buenos Aires",
+      "Assunção",
+      "Londres"
+    ]
+  },
+  {
+    "pergunta": "Brasília é a capital de qual país?",
+    "resposta": "Brasil",
+    "opcoes": [
+      "Brasil",
+      "Peru",
+      "México",
+      "Espanha"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Argentina?",
+    "resposta": "Buenos Aires",
+    "opcoes": [
+      "Buenos Aires",
+      "Santiago",
+      "Quito",
+      "Paris"
+    ]
+  },
+  {
+    "pergunta": "Buenos Aires é a capital de qual país?",
+    "resposta": "Argentina",
+    "opcoes": [
+      "Argentina",
+      "Colômbia",
+      "Canadá",
+      "Portugal"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Chile?",
+    "resposta": "Santiago",
+    "opcoes": [
+      "Santiago",
+      "Lima",
+      "Cidade do México",
+      "Berlim"
+    ]
+  },
+  {
+    "pergunta": "Santiago é a capital de qual país?",
+    "resposta": "Chile",
+    "opcoes": [
+      "Chile",
+      "Venezuela",
+      "Estados Unidos",
+      "Irlanda"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Peru?",
+    "resposta": "Lima",
+    "opcoes": [
+      "Lima",
+      "Bogotá",
+      "Ottawa",
+      "Roma"
+    ]
+  },
+  {
+    "pergunta": "Lima é a capital de qual país?",
+    "resposta": "Peru",
+    "opcoes": [
+      "Peru",
+      "Uruguai",
+      "Cuba",
+      "Noruega"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Colômbia?",
+    "resposta": "Bogotá",
+    "opcoes": [
+      "Bogotá",
+      "Caracas",
+      "Washington, D.C.",
+      "Madri"
+    ]
+  },
+  {
+    "pergunta": "Bogotá é a capital de qual país?",
+    "resposta": "Colômbia",
+    "opcoes": [
+      "Colômbia",
+      "Paraguai",
+      "Reino Unido",
+      "Suécia"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Venezuela?",
+    "resposta": "Caracas",
+    "opcoes": [
+      "Caracas",
+      "Montevidéu",
+      "Havana",
+      "Lisboa"
+    ]
+  },
+  {
+    "pergunta": "Caracas é a capital de qual país?",
+    "resposta": "Venezuela",
+    "opcoes": [
+      "Venezuela",
+      "Equador",
+      "França",
+      "Finlândia"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Uruguai?",
+    "resposta": "Montevidéu",
+    "opcoes": [
+      "Montevidéu",
+      "Assunção",
+      "Londres",
+      "Dublin"
+    ]
+  },
+  {
+    "pergunta": "Montevidéu é a capital de qual país?",
+    "resposta": "Uruguai",
+    "opcoes": [
+      "Uruguai",
+      "México",
+      "Alemanha",
+      "Dinamarca"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Paraguai?",
+    "resposta": "Assunção",
+    "opcoes": [
+      "Assunção",
+      "Quito",
+      "Paris",
+      "Oslo"
+    ]
+  },
+  {
+    "pergunta": "Assunção é a capital de qual país?",
+    "resposta": "Paraguai",
+    "opcoes": [
+      "Paraguai",
+      "Canadá",
+      "Itália",
+      "Bélgica"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Equador?",
+    "resposta": "Quito",
+    "opcoes": [
+      "Quito",
+      "Cidade do México",
+      "Berlim",
+      "Estocolmo"
+    ]
+  },
+  {
+    "pergunta": "Quito é a capital de qual país?",
+    "resposta": "Equador",
+    "opcoes": [
+      "Equador",
+      "Estados Unidos",
+      "Espanha",
+      "Suíça"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de México?",
+    "resposta": "Cidade do México",
+    "opcoes": [
+      "Cidade do México",
+      "Ottawa",
+      "Roma",
+      "Helsinque"
+    ]
+  },
+  {
+    "pergunta": "Cidade do México é a capital de qual país?",
+    "resposta": "México",
+    "opcoes": [
+      "México",
+      "Cuba",
+      "Portugal",
+      "Áustria"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Canadá?",
+    "resposta": "Ottawa",
+    "opcoes": [
+      "Ottawa",
+      "Washington, D.C.",
+      "Madri",
+      "Copenhague"
+    ]
+  },
+  {
+    "pergunta": "Ottawa é a capital de qual país?",
+    "resposta": "Canadá",
+    "opcoes": [
+      "Canadá",
+      "Reino Unido",
+      "Irlanda",
+      "Polônia"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Estados Unidos?",
+    "resposta": "Washington, D.C.",
+    "opcoes": [
+      "Washington, D.C.",
+      "Havana",
+      "Lisboa",
+      "Bruxelas"
+    ]
+  },
+  {
+    "pergunta": "Washington, D.C. é a capital de qual país?",
+    "resposta": "Estados Unidos",
+    "opcoes": [
+      "Estados Unidos",
+      "França",
+      "Noruega",
+      "Grécia"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Cuba?",
+    "resposta": "Havana",
+    "opcoes": [
+      "Havana",
+      "Londres",
+      "Dublin",
+      "Berna"
+    ]
+  },
+  {
+    "pergunta": "Havana é a capital de qual país?",
+    "resposta": "Cuba",
+    "opcoes": [
+      "Cuba",
+      "Alemanha",
+      "Suécia",
+      "Japão"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Reino Unido?",
+    "resposta": "Londres",
+    "opcoes": [
+      "Londres",
+      "Paris",
+      "Oslo",
+      "Viena"
+    ]
+  },
+  {
+    "pergunta": "Londres é a capital de qual país?",
+    "resposta": "Reino Unido",
+    "opcoes": [
+      "Reino Unido",
+      "Itália",
+      "Finlândia",
+      "Brasil"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de França?",
+    "resposta": "Paris",
+    "opcoes": [
+      "Paris",
+      "Berlim",
+      "Estocolmo",
+      "Varsóvia"
+    ]
+  },
+  {
+    "pergunta": "Paris é a capital de qual país?",
+    "resposta": "França",
+    "opcoes": [
+      "França",
+      "Espanha",
+      "Dinamarca",
+      "Argentina"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Alemanha?",
+    "resposta": "Berlim",
+    "opcoes": [
+      "Berlim",
+      "Roma",
+      "Helsinque",
+      "Atenas"
+    ]
+  },
+  {
+    "pergunta": "Berlim é a capital de qual país?",
+    "resposta": "Alemanha",
+    "opcoes": [
+      "Alemanha",
+      "Portugal",
+      "Bélgica",
+      "Chile"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Itália?",
+    "resposta": "Roma",
+    "opcoes": [
+      "Roma",
+      "Madri",
+      "Copenhague",
+      "Tóquio"
+    ]
+  },
+  {
+    "pergunta": "Roma é a capital de qual país?",
+    "resposta": "Itália",
+    "opcoes": [
+      "Itália",
+      "Irlanda",
+      "Suíça",
+      "Peru"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Espanha?",
+    "resposta": "Madri",
+    "opcoes": [
+      "Madri",
+      "Lisboa",
+      "Bruxelas",
+      "Brasília"
+    ]
+  },
+  {
+    "pergunta": "Madri é a capital de qual país?",
+    "resposta": "Espanha",
+    "opcoes": [
+      "Espanha",
+      "Noruega",
+      "Áustria",
+      "Colômbia"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Portugal?",
+    "resposta": "Lisboa",
+    "opcoes": [
+      "Lisboa",
+      "Dublin",
+      "Berna",
+      "Buenos Aires"
+    ]
+  },
+  {
+    "pergunta": "Lisboa é a capital de qual país?",
+    "resposta": "Portugal",
+    "opcoes": [
+      "Portugal",
+      "Suécia",
+      "Polônia",
+      "Venezuela"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Irlanda?",
+    "resposta": "Dublin",
+    "opcoes": [
+      "Dublin",
+      "Oslo",
+      "Viena",
+      "Santiago"
+    ]
+  },
+  {
+    "pergunta": "Dublin é a capital de qual país?",
+    "resposta": "Irlanda",
+    "opcoes": [
+      "Irlanda",
+      "Finlândia",
+      "Grécia",
+      "Uruguai"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Noruega?",
+    "resposta": "Oslo",
+    "opcoes": [
+      "Oslo",
+      "Estocolmo",
+      "Varsóvia",
+      "Lima"
+    ]
+  },
+  {
+    "pergunta": "Oslo é a capital de qual país?",
+    "resposta": "Noruega",
+    "opcoes": [
+      "Noruega",
+      "Dinamarca",
+      "Japão",
+      "Paraguai"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Suécia?",
+    "resposta": "Estocolmo",
+    "opcoes": [
+      "Estocolmo",
+      "Helsinque",
+      "Atenas",
+      "Bogotá"
+    ]
+  },
+  {
+    "pergunta": "Estocolmo é a capital de qual país?",
+    "resposta": "Suécia",
+    "opcoes": [
+      "Suécia",
+      "Bélgica",
+      "Brasil",
+      "Equador"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Finlândia?",
+    "resposta": "Helsinque",
+    "opcoes": [
+      "Helsinque",
+      "Copenhague",
+      "Tóquio",
+      "Caracas"
+    ]
+  },
+  {
+    "pergunta": "Helsinque é a capital de qual país?",
+    "resposta": "Finlândia",
+    "opcoes": [
+      "Finlândia",
+      "Suíça",
+      "Argentina",
+      "México"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Dinamarca?",
+    "resposta": "Copenhague",
+    "opcoes": [
+      "Copenhague",
+      "Bruxelas",
+      "Brasília",
+      "Montevidéu"
+    ]
+  },
+  {
+    "pergunta": "Copenhague é a capital de qual país?",
+    "resposta": "Dinamarca",
+    "opcoes": [
+      "Dinamarca",
+      "Áustria",
+      "Chile",
+      "Canadá"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Bélgica?",
+    "resposta": "Bruxelas",
+    "opcoes": [
+      "Bruxelas",
+      "Berna",
+      "Buenos Aires",
+      "Assunção"
+    ]
+  },
+  {
+    "pergunta": "Bruxelas é a capital de qual país?",
+    "resposta": "Bélgica",
+    "opcoes": [
+      "Bélgica",
+      "Polônia",
+      "Peru",
+      "Estados Unidos"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Suíça?",
+    "resposta": "Berna",
+    "opcoes": [
+      "Berna",
+      "Viena",
+      "Santiago",
+      "Quito"
+    ]
+  },
+  {
+    "pergunta": "Berna é a capital de qual país?",
+    "resposta": "Suíça",
+    "opcoes": [
+      "Suíça",
+      "Grécia",
+      "Colômbia",
+      "Cuba"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Áustria?",
+    "resposta": "Viena",
+    "opcoes": [
+      "Viena",
+      "Varsóvia",
+      "Lima",
+      "Cidade do México"
+    ]
+  },
+  {
+    "pergunta": "Viena é a capital de qual país?",
+    "resposta": "Áustria",
+    "opcoes": [
+      "Áustria",
+      "Japão",
+      "Venezuela",
+      "Reino Unido"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Polônia?",
+    "resposta": "Varsóvia",
+    "opcoes": [
+      "Varsóvia",
+      "Atenas",
+      "Bogotá",
+      "Ottawa"
+    ]
+  },
+  {
+    "pergunta": "Varsóvia é a capital de qual país?",
+    "resposta": "Polônia",
+    "opcoes": [
+      "Polônia",
+      "Brasil",
+      "Uruguai",
+      "França"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Grécia?",
+    "resposta": "Atenas",
+    "opcoes": [
+      "Atenas",
+      "Tóquio",
+      "Caracas",
+      "Washington, D.C."
+    ]
+  },
+  {
+    "pergunta": "Atenas é a capital de qual país?",
+    "resposta": "Grécia",
+    "opcoes": [
+      "Grécia",
+      "Argentina",
+      "Paraguai",
+      "Alemanha"
+    ]
+  },
+  {
+    "pergunta": "Qual é a capital de Japão?",
+    "resposta": "Tóquio",
+    "opcoes": [
+      "Tóquio",
+      "Brasília",
+      "Montevidéu",
+      "Havana"
+    ]
+  },
+  {
+    "pergunta": "Tóquio é a capital de qual país?",
+    "resposta": "Japão",
+    "opcoes": [
+      "Japão",
+      "Chile",
+      "Equador",
+      "Itália"
+    ]
+  }
 ]
