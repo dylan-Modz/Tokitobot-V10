@@ -1,27 +1,28 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.56",
+  "version": "10.1.57",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T03:39:15.726Z",
+  "publishedAt": "2026-10-07T03:46:28.596Z",
   "changelog": [
-    "[Correção] Registro dos novos quizzes",
-    "A versão 10.1.56 já está disponível para atualização.",
-    "Corrige o registro dos novos quizzes no carregador de plugins.",
-    "quizpokemon, quizcalculadora, quiztrivia, quizgeografia e quizfilme agora são carregados corretamente.",
-    "Na 10.1.55 apenas quizfilme ficava registrado por causa de múltiplos setCommand no mesmo arquivo."
+    "[Correção] Quizzes com capa",
+    "A versão 10.1.57 já está disponível para atualização.",
+    "Corrige falhas ao iniciar Quiz Calculadora e Quiz Geografia quando a imagem fixa não consegue ser carregada.",
+    "Trivia e Filmes recebem a mesma proteção para evitar o mesmo problema.",
+    "Se a capa falhar, o quiz continua normalmente em texto em vez de retornar erro.",
+    "A partida agora só é salva depois que a pergunta é enviada com sucesso, evitando quiz fantasma bloqueando uma nova rodada."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Correção dos novos quizzes",
-  "notice": "A versão 10.1.56 já está disponível para atualização.",
+  "title": "Correção das capas dos quizzes",
+  "notice": "A versão 10.1.57 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/jogos/quizzes.js",
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js",
       "sha256": "",
       "size": 0
     },
@@ -1166,11 +1167,40 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T03:39:15.726Z"
+    },
+    {
+      "version": "10.1.57",
+      "fromVersion": "10.1.56",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Correção das capas dos quizzes",
+      "notice": "A versão 10.1.57 já está disponível para atualização.",
+      "changelog": [
+        "Corrige falhas ao iniciar Quiz Calculadora e Quiz Geografia quando a imagem fixa não consegue ser carregada.",
+        "Trivia e Filmes recebem a mesma proteção para evitar o mesmo problema.",
+        "Se a capa falhar, o quiz continua normalmente em texto em vez de retornar erro.",
+        "A partida agora só é salva depois que a pergunta é enviada com sucesso, evitando quiz fantasma bloqueando uma nova rodada."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T03:46:28.596Z"
     }
   ],
-  "versao": "10.1.56",
+  "versao": "10.1.57",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.55"
+  "fromVersion": "10.1.56"
 }
