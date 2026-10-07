@@ -1,28 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.73",
+  "version": "10.1.74",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T23:20:23.139Z",
+  "publishedAt": "2026-10-07T23:24:05.154Z",
   "changelog": [
-    "Confirma a remoção definitiva do comando Shazam e dos arquivos de reconhecimento de músicas.",
-    "Remove da atualização atual as entradas de exclusão do Shazam e do ACRCloud que já haviam sido aplicadas.",
-    "Preserva no histórico as instruções de exclusão para instalações antigas do Tokito.",
-    "Atualiza a versão oficial do Tokito Bot V10 para 10.1.73."
+    "[Melhoria] Arquivo principal do bot atualizado",
+    "A versão 10.1.74 já está disponível para atualização.",
+    "Arquivo principal do bot atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Remoção",
-  "title": "Remoção definitiva do Shazam",
-  "notice": "A versão 10.1.73 confirma a remoção completa do Shazam e limpa as exclusões repetidas da atualização atual.",
+  "type": "Melhoria",
+  "title": "Arquivo principal do bot atualizado",
+  "notice": "A versão 10.1.74 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "",
-      "size": 0
+      "path": "tokito.js",
+      "sha256": "33c1c26fbf61c3a966fa85f15928db9a1c56a32bdc0e2b79f340c1f549daefb6",
+      "size": 52366
     }
   ],
   "releases": [
@@ -1927,6 +1926,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T23:20:23.139Z"
+    },
+    {
+      "version": "10.1.74",
+      "fromVersion": "10.1.73",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Arquivo principal do bot atualizado",
+      "notice": "A versão 10.1.74 já está disponível para atualização.",
+      "changelog": [
+        "Arquivo principal do bot atualizado"
+      ],
+      "files": [
+        {
+          "path": "tokito.js",
+          "sha256": "33c1c26fbf61c3a966fa85f15928db9a1c56a32bdc0e2b79f340c1f549daefb6",
+          "size": 52366
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T23:24:05.154Z"
     }
   ],
   "versao": "10.1.73",
