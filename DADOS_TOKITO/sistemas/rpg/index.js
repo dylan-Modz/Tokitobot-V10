@@ -132,25 +132,48 @@ const CAPITULOS_RPG = [
   { titulo: 'A batalha final', texto: 'O caminho até o guardião do reino está aberto.' }
 ]
 
-const POKEMON = {
-  pikachu: { nome: 'Pikachu', tipo: 'Elétrico', raridade: 'Comum', preco: 3000, evolui: 'raichu', nivel: 12, habilidade: '⚡ chance extra de achar coins' },
-  bulbasaur: { nome: 'Bulbasaur', tipo: 'Planta', raridade: 'Comum', preco: 2500, evolui: 'venusaur', nivel: 16, habilidade: '🌿 recupera fome com mais facilidade' },
-  squirtle: { nome: 'Squirtle', tipo: 'Água', raridade: 'Comum', preco: 2500, evolui: 'blastoise', nivel: 16, habilidade: '💧 missões mais estáveis' },
-  charmander: { nome: 'Charmander', tipo: 'Fogo', raridade: 'Comum', preco: 2800, evolui: 'charizard', nivel: 16, habilidade: '🔥 ganha mais XP' },
-  eevee: { nome: 'Eevee', tipo: 'Normal', raridade: 'Comum', preco: 4500, evolui: 'umbreon', nivel: 18, habilidade: '🌙 afinidade sobe mais rápido' },
-  charizard: { nome: 'Charizard', tipo: 'Fogo/Voador', raridade: 'Raro', preco: 22000, habilidade: '🔥 bônus alto em batalha' },
-  snorlax: { nome: 'Snorlax', tipo: 'Normal', raridade: 'Raro', preco: 21000, habilidade: '😴 resiste mais tempo sem comida' },
-  lucario: { nome: 'Lucario', tipo: 'Lutador/Aço', raridade: 'Raro', preco: 28000, habilidade: '🥊 bônus em batalha e missão' },
-  gengar: { nome: 'Gengar', tipo: 'Fantasma', raridade: 'Raro', preco: 30000, habilidade: '👻 assusta rivais em eventos' },
-  greninja: { nome: 'Greninja', tipo: 'Água/Sombrio', raridade: 'Raro', preco: 32000, habilidade: '🌊 missões furtivas mais lucrativas' },
-  mewtwo: { nome: 'Mewtwo', tipo: 'Psíquico', raridade: 'Lendário', preco: 50000, habilidade: '🧠 altíssimo poder' },
-  dragonite: { nome: 'Dragonite', tipo: 'Dragão/Voador', raridade: 'Lendário', preco: 42000, habilidade: '🐉 mais coins em missões' },
-  umbreon: { nome: 'Umbreon', tipo: 'Sombrio', raridade: 'Evoluído', preco: 15000, habilidade: '🌑 afinidade e defesa elevadas' },
-  blastoise: { nome: 'Blastoise', tipo: 'Água', raridade: 'Evoluído', preco: 14000, habilidade: '💦 muito resistente' },
-  venusaur: { nome: 'Venusaur', tipo: 'Planta/Veneno', raridade: 'Evoluído', preco: 14000, habilidade: '🍃 equilíbrio em fome e XP' },
-  raichu: { nome: 'Raichu', tipo: 'Elétrico', raridade: 'Evoluído', preco: 15000, habilidade: '⚡ bônus em eventos' }
+const POKEMON_DB = require('../../database/jogos/pokemon.json')
+
+const chavePokemon = valor => String(valor || '')
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '')
+  .toLowerCase()
+  .replace(/[^a-z0-9]/g, '')
+
+const habilidadePokemon = p => {
+  const tipo = Array.isArray(p.tipos) ? p.tipos[0] : 'Normal'
+  const mapa = {
+    Fogo: '🔥 bônus ofensivo em batalhas',
+    Água: '💧 equilíbrio entre missão e batalha',
+    Planta: '🌿 recuperação e resistência',
+    Elétrico: '⚡ velocidade e chance crítica',
+    Psíquico: '🧠 poder especial elevado',
+    Fantasma: '👻 vantagem contra rivais psíquicos',
+    Lutador: '🥊 força física em combate',
+    Dragão: '🐉 grande poder em batalhas',
+    Sombrio: '🌑 bônus contra Psíquico e Fantasma'
+  }
+  return mapa[tipo] || '✨ bônus de acordo com tipo, nível e stats'
 }
 
+const POKEMON = Object.fromEntries(POKEMON_DB.map(p => {
+  const evo = POKEMON_DB.find(x => Number(x.id) === Number(p.evoluiId))
+  const item = {
+    id: Number(p.id),
+    nome: p.name,
+    tipo: (Array.isArray(p.tipos) && p.tipos.length ? p.tipos : ['Normal']).join('/'),
+    tipos: Array.isArray(p.tipos) ? p.tipos : ['Normal'],
+    raridade: p.raridade || 'Comum',
+    preco: Number(p.preco || 3000),
+    habilidade: habilidadePokemon(p),
+    stats: p.stats || {}
+  }
+  if (evo) {
+    item.evolui = chavePokemon(evo.name)
+    item.nivel = Number(p.nivelEvolucao || 16)
+  }
+  return [chavePokemon(p.name), item]
+}))
 const POKEMON_COMIDA = {
   berry: { nome: 'Berry', emoji: '🍓', preco: 250, fome: 25 },
   superberry: { nome: 'Super Berry', emoji: '🫐', preco: 500, fome: 45 },
@@ -712,7 +735,14 @@ const imagemPet = tipo => {
   return petsImg.evoluidos?.[chave] || petsImg.raros?.[chave] || petsImg.comuns?.[chave] || ''
 }
 
-const imagemPokemon = tipo => pokemonImg[tipo] || pokemonImg.pikachu || ''
+const imagemPokemon = tipo => {
+  const chave = chavePokemon(tipo)
+  const item = POKEMON[chave]
+  const id = Number(item?.id || (/^\\d+$/.test(String(tipo || '')) ? tipo : 0))
+  if (id)
+    return 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + id + '.png'
+  return pokemonImg[chave] || pokemonImg.pikachu || ''
+}
 
 const imagemRpg = (secao, chave = null) => {
   const origem = rpgImg?.[secao]
