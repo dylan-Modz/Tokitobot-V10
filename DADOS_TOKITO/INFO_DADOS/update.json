@@ -1,37 +1,24 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.72",
+  "version": "10.1.73",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T17:50:00.000Z",
+  "publishedAt": "2026-10-07T23:20:23.139Z",
   "changelog": [
-    "Finaliza a remoção do Shazam do Tokito.",
-    "Remove uma referência residual do antigo ACRCloud que havia ficado dentro do upload temporário.",
-    "Remove a segunda entrada do Shazam que ainda aparecia no menu de downloads.",
-    "Mantém o sistema de upload temporário funcionando normalmente após a remoção."
+    "Confirma a remoção definitiva do comando Shazam e dos arquivos de reconhecimento de músicas.",
+    "Remove da atualização atual as entradas de exclusão do Shazam e do ACRCloud que já haviam sido aplicadas.",
+    "Preserva no histórico as instruções de exclusão para instalações antigas do Tokito.",
+    "Atualiza a versão oficial do Tokito Bot V10 para 10.1.73."
   ],
-  "delete": [
-    "DADOS_TOKITO/plugins/downloads/shazam.js",
-    "DADOS_TOKITO/INFO_DADOS/acrcloud.json"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Limpeza final da remoção do Shazam",
-  "notice": "A versão 10.1.72 finaliza a remoção do Shazam e corrige referências residuais.",
+  "type": "Remoção",
+  "title": "Remoção definitiva do Shazam",
+  "notice": "A versão 10.1.73 confirma a remoção completa do Shazam e limpa as exclusões repetidas da atualização atual.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
-    {
-      "path": "DADOS_TOKITO/sistemas/modulos.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "",
-      "size": 0
-    },
     {
       "path": "package.json",
       "sha256": "",
@@ -1916,11 +1903,35 @@
       ],
       "required": true,
       "publishedAt": "2026-10-07T17:50:00.000Z"
+    },
+    {
+      "version": "10.1.73",
+      "fromVersion": "10.1.72",
+      "channel": "stable",
+      "type": "Remoção",
+      "title": "Remoção definitiva do Shazam",
+      "notice": "A versão 10.1.73 confirma a remoção completa do Shazam e limpa as exclusões repetidas da atualização atual.",
+      "changelog": [
+        "Confirma a remoção definitiva do comando Shazam e dos arquivos de reconhecimento de músicas.",
+        "Remove da atualização atual as entradas de exclusão do Shazam e do ACRCloud que já haviam sido aplicadas.",
+        "Preserva no histórico as instruções de exclusão para instalações antigas do Tokito.",
+        "Atualiza a versão oficial do Tokito Bot V10 para 10.1.73."
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T23:20:23.139Z"
     }
   ],
-  "versao": "10.1.72",
+  "versao": "10.1.73",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.71"
+  "fromVersion": "10.1.72"
 }
