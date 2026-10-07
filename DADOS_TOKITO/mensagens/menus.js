@@ -984,27 +984,27 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡⚡｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝑃𝑂𝐾𝐸́𝑀𝑂𝑁-𝐵𝐴́𝑆𝐼𝐶𝑂
 ├╾═╼･ﾟ𖤐ﾟ･｡🔴｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}lojapokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}mercadopokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}comprarpokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}verpokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}alimentarpokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}comprarcomidapokemon berry
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}inventariopokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}apelidopokemon nome
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}banhopokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}passearpokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}carinhopokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}dormirpokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}acordarpokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}eventopokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}batalhapokemon @usuario
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}pokerealeza
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}evoluirpokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}missaopokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}diariopokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}venderpokemon ID
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}rankpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}lojapokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}mercadopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}comprarpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}verpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}alimentarpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}comprarcomidapokemon berry
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}inventariopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}apelidopokemon nome
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}banhopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}passearpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}carinhopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}dormirpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}acordarpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}eventopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}batalhapokemon @usuario
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}pokerealeza
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}evoluirpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}missaopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}diariopokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}venderpokemon ID
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}rankpokemon
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -1013,16 +1013,16 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡📕｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐶𝐴𝑃𝑇𝑈𝑅𝐴-𝐸-𝐶𝑂𝐿𝐸𝐶̧𝐴̃𝑂
 ├╾═╼･ﾟ𖤐ﾟ･｡🔴｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 📕 \${prefix}pokedex
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}capturar pokeball
-┃࣪ ╎—̳͟͞͞ 🎒 \${prefix}pokebolas
-┃࣪ ╎—̳͟͞͞ 🛒 \${prefix}comprarbola pokeball 5
-┃࣪ ╎—̳͟͞͞ 🗃️ \${prefix}colecaopokemon
-┃࣪ ╎—̳͟͞͞ 👥 \${prefix}equipokemon
-┃࣪ ╎—̳͟͞͞ 👑 \${prefix}principalpokemon ID
-┃࣪ ╎—̳͟͞͞ 🕊️ \${prefix}soltarpokemon ID
-┃࣪ ╎—̳͟͞͞ ⭐ \${prefix}favoritarpokemon ID
-┃࣪ ╎—̳͟͞͞ ℹ️ \${prefix}infopokemon nome/ID
+┃࣪ ╎—̳͟͞͞ 📕 ${prefix}pokedex
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}capturar pokeball
+┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}pokebolas
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarbola pokeball 5
+┃࣪ ╎—̳͟͞͞ 🗃️ ${prefix}colecaopokemon
+┃࣪ ╎—̳͟͞͞ 👥 ${prefix}equipokemon
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}principalpokemon ID
+┃࣪ ╎—̳͟͞͞ 🕊️ ${prefix}soltarpokemon ID
+┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}favoritarpokemon ID
+┃࣪ ╎—̳͟͞͞ ℹ️ ${prefix}infopokemon nome/ID
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -1031,16 +1031,16 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡⚔️｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐵𝐴𝑇𝐴𝐿𝐻𝐴-𝐸-𝐸𝑉𝑂𝐿𝑈𝐶̧𝐴̃𝑂
 ├╾═╼･ﾟ𖤐ﾟ･｡🔴｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 📊 \${prefix}statuspokemon
-┃࣪ ╎—̳͟͞͞ 💥 \${prefix}golpes
-┃࣪ ╎—̳͟͞͞ 📚 \${prefix}aprendergolpe nome
-┃࣪ ╎—̳͟͞͞ 💿 \${prefix}usartm tmfogo
-┃࣪ ╎—̳͟͞͞ 🏥 \${prefix}curarpokemon
-┃࣪ ╎—̳͟͞͞ ✨ \${prefix}revivepokemon
-┃࣪ ╎—̳͟͞͞ 💎 \${prefix}megaevoluirpokemon
-┃࣪ ╎—̳͟͞͞ 🔴 \${prefix}dynamaxpokemon
-┃࣪ ╎—̳͟͞͞ 🔮 \${prefix}terastalpokemon
-┃࣪ ╎—̳͟͞͞ 🧬 \${prefix}tipospokemon
+┃࣪ ╎—̳͟͞͞ 📊 ${prefix}statuspokemon
+┃࣪ ╎—̳͟͞͞ 💥 ${prefix}golpes
+┃࣪ ╎—̳͟͞͞ 📚 ${prefix}aprendergolpe nome
+┃࣪ ╎—̳͟͞͞ 💿 ${prefix}usartm tmfogo
+┃࣪ ╎—̳͟͞͞ 🏥 ${prefix}curarpokemon
+┃࣪ ╎—̳͟͞͞ ✨ ${prefix}revivepokemon
+┃࣪ ╎—̳͟͞͞ 💎 ${prefix}megaevoluirpokemon
+┃࣪ ╎—̳͟͞͞ 🔴 ${prefix}dynamaxpokemon
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}terastalpokemon
+┃࣪ ╎—̳͟͞͞ 🧬 ${prefix}tipospokemon
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -1049,16 +1049,16 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🗺️｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝑀𝐴𝑃𝐴-𝐸-𝑃𝑅𝑂𝐺𝑅𝐸𝑆𝑆𝑂
 ├╾═╼･ﾟ𖤐ﾟ･｡🔴｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🗺️ \${prefix}mapapokemon
-┃࣪ ╎—̳͟͞͞ ✈️ \${prefix}viajarpokemon kanto/johto
-┃࣪ ╎—̳͟͞͞ 🌲 \${prefix}explorarpokemon
-┃࣪ ╎—̳͟͞͞ 🦒 \${prefix}safaripokemon
-┃࣪ ╎—̳͟͞͞ 🎣 \${prefix}pescarpokemon
-┃࣪ ╎—̳͟͞͞ 🧭 \${prefix}expedicaopokemon
-┃࣪ ╎—̳͟͞͞ 🏟️ \${prefix}ginasiopokemon
-┃࣪ ╎—̳͟͞͞ 🏅 \${prefix}insignias
-┃࣪ ╎—̳͟͞͞ 🏛️ \${prefix}elitefour
-┃࣪ ╎—̳͟͞͞ 👑 \${prefix}campeaopokemon
+┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}mapapokemon
+┃࣪ ╎—̳͟͞͞ ✈️ ${prefix}viajarpokemon kanto/johto
+┃࣪ ╎—̳͟͞͞ 🌲 ${prefix}explorarpokemon
+┃࣪ ╎—̳͟͞͞ 🦒 ${prefix}safaripokemon
+┃࣪ ╎—̳͟͞͞ 🎣 ${prefix}pescarpokemon
+┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}expedicaopokemon
+┃࣪ ╎—̳͟͞͞ 🏟️ ${prefix}ginasiopokemon
+┃࣪ ╎—̳͟͞͞ 🏅 ${prefix}insignias
+┃࣪ ╎—̳͟͞͞ 🏛️ ${prefix}elitefour
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}campeaopokemon
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -1067,16 +1067,16 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🎒｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐼𝑇𝐸𝑁𝑆-𝐸-𝐸𝐶𝑂𝑁𝑂𝑀𝐼𝐴
 ├╾═╼･ﾟ𖤐ﾟ･｡🔴｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🏪 \${prefix}pokemart
-┃࣪ ╎—̳͟͞͞ 🎒 \${prefix}mochilapokemon
-┃࣪ ╎—̳͟͞͞ 🥚 \${prefix}ovopokemon
-┃࣪ ╎—̳͟͞͞ 🔥 \${prefix}chocadeira
-┃࣪ ╎—̳͟͞͞ 🥚 \${prefix}breedingpokemon ID1 ID2
-┃࣪ ╎—̳͟͞͞ 🪔 \${prefix}incensopokemon
-┃࣪ ╎—̳͟͞͞ 🧲 \${prefix}lurepokemon
-┃࣪ ╎—̳͟͞͞ 🔄 \${prefix}trocapokemon @usuario ID ID
-┃࣪ ╎—̳͟͞͞ 🔨 \${prefix}leilaopokemon ID valor
-┃࣪ ╎—̳͟͞͞ 💰 \${prefix}lancepokemon valor
+┃࣪ ╎—̳͟͞͞ 🏪 ${prefix}pokemart
+┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}mochilapokemon
+┃࣪ ╎—̳͟͞͞ 🥚 ${prefix}ovopokemon
+┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}chocadeira
+┃࣪ ╎—̳͟͞͞ 🥚 ${prefix}breedingpokemon ID1 ID2
+┃࣪ ╎—̳͟͞͞ 🪔 ${prefix}incensopokemon
+┃࣪ ╎—̳͟͞͞ 🧲 ${prefix}lurepokemon
+┃࣪ ╎—̳͟͞͞ 🔄 ${prefix}trocapokemon @usuario ID ID
+┃࣪ ╎—̳͟͞͞ 🔨 ${prefix}leilaopokemon ID valor
+┃࣪ ╎—̳͟͞͞ 💰 ${prefix}lancepokemon valor
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -1085,12 +1085,12 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🏆｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐸𝑉𝐸𝑁𝑇𝑂𝑆-𝐸-𝐶𝑂𝑁𝑄𝑈𝐼𝑆𝑇𝐴𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡🔴｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🐉 \${prefix}raidpokemon
-┃࣪ ╎—̳͟͞͞ ✨ \${prefix}lendariopokemon
-┃࣪ ╎—̳͟͞͞ 🎁 \${prefix}dailypokemon
-┃࣪ ╎—̳͟͞͞ 🔥 \${prefix}streakpokemon
-┃࣪ ╎—̳͟͞͞ 🏆 \${prefix}conquistapokemon
-┃࣪ ╎—̳͟͞͞ 🎖️ \${prefix}titulopokemon
+┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}raidpokemon
+┃࣪ ╎—̳͟͞͞ ✨ ${prefix}lendariopokemon
+┃࣪ ╎—̳͟͞͞ 🎁 ${prefix}dailypokemon
+┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}streakpokemon
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}conquistapokemon
+┃࣪ ╎—̳͟͞͞ 🎖️ ${prefix}titulopokemon
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
