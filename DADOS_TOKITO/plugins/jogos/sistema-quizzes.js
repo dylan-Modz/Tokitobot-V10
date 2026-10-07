@@ -6,10 +6,10 @@ const timers = global.__TOKITO_QUIZZES_TIMERS__ ||= new Map()
 
 const tipos = {
   pokemon: { titulo: '𝚀𝚄𝙸𝚉 𝙿𝙾𝙺𝙴́𝙼𝙾𝙽', emoji: '🎮', arquivo: base.files.pokemon },
-  calculadora: { titulo: '𝚀𝚄𝙸𝚉 𝙲𝙰𝙻𝙲𝚄𝙻𝙰𝙳𝙾𝚁𝙰', emoji: '🧮', imagem: 'https://res.cloudinary.com/dymrriabc/image/upload/v1732113670/%40Otaku.mp4/file_ni8ccp.jpg' },
-  trivia: { titulo: '𝚀𝚄𝙸𝚉 𝚃𝚁𝙸𝚅𝙸𝙰', emoji: '🧠', arquivo: base.files.trivia, imagem: 'https://res.cloudinary.com/dymrriabc/image/upload/v1732114578/%40Otaku.mp4/file_ikcidr.jpg' },
-  geografia: { titulo: '𝚀𝚄𝙸𝚉 𝙶𝙴𝙾𝙶𝚁𝙰𝙵𝙸𝙰', emoji: '🌎', arquivo: base.files.geografia, imagem: 'https://res.cloudinary.com/dymrriabc/image/upload/v1732115023/%40Otaku.mp4/file_fpghee.jpg' },
-  filme: { titulo: '𝚀𝚄𝙸𝚉 𝙵𝙸𝙻𝙼𝙴', emoji: '🎬', arquivo: base.files.filmes, imagem: 'https://lucasmod.sirv.com/IMG-20240721-WA0027.jpg' }
+  calculadora: { titulo: '𝚀𝚄𝙸𝚉 𝙲𝙰𝙻𝙲𝚄𝙻𝙰𝙳𝙾𝚁𝙰', emoji: '🧮', imagem: 'https://img.gamepix.com/games/math-quiz-game/cover/math-quiz-game.png?ar=16%3A10&w=1200' },
+  trivia: { titulo: '𝚀𝚄𝙸𝚉 𝚃𝚁𝙸𝚅𝙸𝙰', emoji: '🧠', arquivo: base.files.trivia, imagem: 'https://quiz-questions.uk/wp-content/uploads/2023/07/general-knowledge-quiz-1024x698.png' },
+  geografia: { titulo: '𝚀𝚄𝙸𝚉 𝙶𝙴𝙾𝙶𝚁𝙰𝙵𝙸𝙰', emoji: '🌎', arquivo: base.files.geografia, imagem: 'https://webp-konwerter.incdn.pl/eyJmIjoiaHR0cHM6Ly9pbmZvci13ZWItc3RhdGljLWR6aWVubmlrLmluY2RuLnBsL2R6aWVubmlrL2RvY3VtZW50cy9GT0IwMDAwMDAwMDAwMDA3NTQ0NTgzL2ZpbGVzL3F1aXotZ2VvZ3JhZmljem55LXBhbnN0d28tcG8ta3N6dGFsY2llLTM5MDg0Njg0LnBuZyIsInciOjM4NDB9' },
+  filme: { titulo: '𝚀𝚄𝙸𝚉 𝙵𝙸𝙻𝙼𝙴', emoji: '🎬', arquivo: base.files.filmes, imagem: 'https://townsquare.media/site/782/files/2024/08/attachment-Movie-Quote-Quiz-feature.jpg' }
 }
 
 const shuffle = lista => [...lista].sort(() => Math.random() - 0.5)
