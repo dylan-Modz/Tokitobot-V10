@@ -130,16 +130,43 @@ function agendar(ctx, game) {
   timers.set(game.grupo, timer)
 }
 
+async function enviarPergunta(ctx, game) {
+  const texto = textoPergunta(game)
+
+  if (!game.imagem)
+    return base.sendText(ctx, texto)
+
+  try {
+    return await base.sendImage(ctx, game.imagem, texto)
+  }
+  catch (error) {
+    if (game.tipo === 'pokemon')
+      throw error
+
+    console.log(`[QUIZ ${game.tipo.toUpperCase()}] Falha na capa; enviando somente texto:`, error?.message || error)
+    return base.sendText(ctx, texto)
+  }
+}
+
 async function iniciar(ctx, tipo) {
   const existente = getGame(ctx.from)
   if (existente) return { ok: false, motivo: 'andamento', game: existente }
+
   const game = criarGame(ctx.from, tipo)
   if (!game) return { ok: false, motivo: 'vazio' }
-  saveGame(game)
-  agendar(ctx, game)
+
   await base.reactMsg(ctx, game.emoji)
-  await base.sendImage(ctx, game.imagem, textoPergunta(game))
-  return { ok: true, game }
+
+  try {
+    await enviarPergunta(ctx, game)
+    saveGame(game)
+    agendar(ctx, game)
+    return { ok: true, game }
+  }
+  catch (error) {
+    removeGame(ctx.from)
+    throw error
+  }
 }
 
 function interpretar(game, texto) {
