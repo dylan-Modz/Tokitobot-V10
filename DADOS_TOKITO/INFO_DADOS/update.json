@@ -1,10 +1,10 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.74",
+  "version": "10.1.75",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T23:24:05.154Z",
+  "publishedAt": "2026-10-07T23:24:14.060Z",
   "changelog": [
     "[Melhoria] Arquivo principal do bot atualizado",
     "A versão 10.1.74 já está disponível para atualização.",
@@ -1947,6 +1947,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T23:24:05.154Z"
+    },
+    {
+      "version": "10.1.75",
+      "fromVersion": "10.1.74",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Arquivo principal do bot atualizado",
+      "notice": "A versão 10.1.74 já está disponível para atualização.",
+      "changelog": [
+        "Arquivo principal do bot atualizado"
+      ],
+      "files": [
+        {
+          "path": "tokito.js",
+          "sha256": "33c1c26fbf61c3a966fa85f15928db9a1c56a32bdc0e2b79f340c1f549daefb6",
+          "size": 52366
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T23:24:14.060Z"
     }
   ],
   "versao": "10.1.73",
