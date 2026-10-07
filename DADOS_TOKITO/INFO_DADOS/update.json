@@ -1,28 +1,73 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.54",
+  "version": "10.1.55",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-06T14:25:02.041Z",
+  "publishedAt": "2026-10-07T01:06:21.573Z",
   "changelog": [
-    "[Melhoria] Ping sem card",
-    "A versão 10.1.54 já está disponível para atualização.",
-    "Comando ping não gera mais card pela rota canvas/ping2.",
-    "Ping agora responde diretamente em texto, mantendo as informações de velocidade, latência, sistema, RAM, CPU, Node.js, grupos, comandos e uptime.",
-    "Quando os botões estiverem ativos, o botão de Menu continua disponível sem mídia no cabeçalho.",
-    "Comando perfil não foi alterado e continua usando o card atual."
+    "[Atualização] Novos quizzes",
+    "A versão 10.1.55 já está disponível para atualização.",
+    "Adiciona os novos comandos quizpokemon, quizcalculadora, quiztrivia, quizgeografia e quizfilme.",
+    "Quiz Pokémon usa 14 Pokémon com imagens e alternativas aleatórias.",
+    "Quiz Calculadora gera contas de multiplicação e divisão com resultado inteiro.",
+    "Trivia recebe 40 perguntas, Geografia 24 perguntas e Filmes 29 perguntas em arquivos JSON separados.",
+    "Todos os novos quizzes usam 4 alternativas e aceitam resposta por número, letra ou texto.",
+    "Cada rodada dura 30 segundos; resposta errada recebe reação e não encerra a partida.",
+    "O primeiro usuário que acertar vence e o bot mostra o tempo da resposta.",
+    "As imagens originais usadas nesses modos foram mantidas e o design foi adaptado ao padrão atual do Tokito.",
+    "Os novos quizzes foram adicionados ao Menu Jogos."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Ping sem card",
-  "notice": "A versão 10.1.54 já está disponível para atualização.",
+  "type": "Atualização",
+  "title": "Novos quizzes",
+  "notice": "A versão 10.1.55 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/info/ping.js",
+      "path": "DADOS_TOKITO/plugins/jogos/quizzes.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-base.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/database/jogos/pokemon.json",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/database/jogos/trivia.json",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/database/jogos/geografia.json",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/database/jogos/filmes.json",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "",
       "size": 0
     },
@@ -1065,11 +1110,85 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-06T14:25:02.041Z"
+    },
+    {
+      "version": "10.1.55",
+      "fromVersion": "10.1.54",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Novos quizzes",
+      "notice": "A versão 10.1.55 já está disponível para atualização.",
+      "changelog": [
+        "Adiciona os novos comandos quizpokemon, quizcalculadora, quiztrivia, quizgeografia e quizfilme.",
+        "Quiz Pokémon usa 14 Pokémon com imagens e alternativas aleatórias.",
+        "Quiz Calculadora gera contas de multiplicação e divisão com resultado inteiro.",
+        "Trivia recebe 40 perguntas, Geografia 24 perguntas e Filmes 29 perguntas em arquivos JSON separados.",
+        "Todos os novos quizzes usam 4 alternativas e aceitam resposta por número, letra ou texto.",
+        "Cada rodada dura 30 segundos; resposta errada recebe reação e não encerra a partida.",
+        "O primeiro usuário que acertar vence e o bot mostra o tempo da resposta.",
+        "As imagens originais usadas nesses modos foram mantidas e o design foi adaptado ao padrão atual do Tokito.",
+        "Os novos quizzes foram adicionados ao Menu Jogos."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/quizzes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-base.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/database/jogos/pokemon.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/database/jogos/trivia.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/database/jogos/geografia.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/database/jogos/filmes.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T01:06:21.573Z"
     }
   ],
-  "versao": "10.1.54",
+  "versao": "10.1.55",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.53"
+  "fromVersion": "10.1.54"
 }
