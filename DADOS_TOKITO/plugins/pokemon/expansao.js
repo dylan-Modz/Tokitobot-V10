@@ -44,7 +44,7 @@ async function mostrarInfo(ctx, sp, inst) {
 }
 
 dylan.setCommand({
-  nome: 'pokemonrpg',
+  nome: 'pokedex',
   comandos,
   categoria: 'pokemon',
   info: {
