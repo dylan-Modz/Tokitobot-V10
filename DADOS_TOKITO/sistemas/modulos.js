@@ -7,6 +7,7 @@ const FormData = require('form-data')
 const crypto = require('crypto')
 const os = require('os')
 const { spawn } = require('child_process')
+const ACRCloud = require('acrcloud')
 
 const BASE = path.join(__dirname, '..', 'database', 'sistemas')
 
@@ -179,6 +180,21 @@ const uploadTemp = async (buffer, ext = 'bin') => {
   if (!Buffer.isBuffer(buffer) || !buffer.length) throw new Error('Arquivo vazio para upload.')
 
   const extensao = extensaoSegura(ext)
+  const reconhecidaAcr =
+    await reconhecerAcrCloudShazam(
+      buffer
+    )
+
+  if (reconhecidaAcr) {
+    return await enriquecerYoutubeShazam(
+      ctx,
+      {
+        ...reconhecidaAcr,
+        tipoMidia: tipo
+      }
+    )
+  }
+
   const form = new FormData()
 
   form.append('file', buffer, {
@@ -329,6 +345,13 @@ const SHAZAM_MAX_BYTES = 10 * 1024 * 1024
 const SHAZAM_DOWNLOAD_TIMEOUT = 45000
 const SHAZAM_RECOGNIZE_TIMEOUT = 120000
 const SHAZAM_AUDIO_TIMEOUT = 40000
+const SHAZAM_ACR_TIMEOUT = 60000
+const SHAZAM_ACR_CONFIG = path.join(
+  __dirname,
+  '..',
+  'INFO_DADOS',
+  'acrcloud.json'
+)
 
 const erroShazam = (codigo, mensagem) => {
   const erro = new Error(mensagem)
@@ -406,6 +429,293 @@ const selecionarMidiaShazam = (ctx, alvo = null) => {
   if (midias.video) return { tipo: 'video', midia: midias.video }
 
   return null
+}
+
+
+const configAcrCloudShazam = () => {
+  let arquivo = {}
+
+  try {
+    if (fs.existsSync(SHAZAM_ACR_CONFIG)) {
+      arquivo = JSON.parse(
+        fs.readFileSync(
+          SHAZAM_ACR_CONFIG,
+          'utf8'
+        )
+      )
+    }
+  }
+  catch {}
+
+  const host = String(
+    process.env.ACRCLOUD_HOST ||
+    arquivo?.host ||
+    ''
+  )
+    .trim()
+    .replace(/^https?:\/\//i, '')
+    .replace(/\/+$/, '')
+
+  const accessKey = String(
+    process.env.ACRCLOUD_ACCESS_KEY ||
+    arquivo?.access_key ||
+    arquivo?.accessKey ||
+    ''
+  ).trim()
+
+  const accessSecret = String(
+    process.env.ACRCLOUD_ACCESS_SECRET ||
+    arquivo?.access_secret ||
+    arquivo?.accessSecret ||
+    ''
+  ).trim()
+
+  if (!host || !accessKey || !accessSecret)
+    return null
+
+  return {
+    host,
+    access_key: accessKey,
+    access_secret: accessSecret
+  }
+}
+
+const reconhecerAcrCloudShazam = async buffer => {
+  const config = configAcrCloudShazam()
+
+  if (!config)
+    return null
+
+  try {
+    const cliente = new ACRCloud(config)
+
+    const resposta = await comTimeoutShazam(
+      Promise.resolve(
+        cliente.identify(buffer)
+      ),
+      SHAZAM_ACR_TIMEOUT,
+      'SHAZAM_TIMEOUT_ACR',
+      'O ACRCloud demorou demais para responder.'
+    )
+
+    const musica =
+      resposta?.metadata?.music?.[0] ||
+      null
+
+    if (!musica)
+      return null
+
+    const artista = String(
+      musica?.artists?.[0]?.name ||
+      ''
+    ).trim()
+
+    const titulo = String(
+      musica?.title ||
+      ''
+    ).trim()
+
+    if (!titulo && !artista)
+      return null
+
+    const genero =
+      Array.isArray(musica?.genres)
+        ? (
+          musica.genres[0]?.name ||
+          musica.genres[0] ||
+          null
+        )
+        : (
+          musica?.genre ||
+          null
+        )
+
+    return {
+      matched: true,
+      titulo:
+        titulo ||
+        'Não informado',
+      artista:
+        artista ||
+        'Não informado',
+      album:
+        musica?.album?.name ||
+        null,
+      rotulo:
+        musica?.label ||
+        null,
+      gravadora:
+        musica?.label ||
+        null,
+      score:
+        musica?.score ??
+        null,
+      data:
+        musica?.release_date ||
+        null,
+      lancamento:
+        musica?.release_date ||
+        null,
+      genero,
+      duracao:
+        formatarDuracaoShazam(
+          musica?.duration_ms ||
+          musica?.duration ||
+          null
+        ),
+      busca:
+        [artista, titulo]
+          .filter(Boolean)
+          .join(' '),
+      engine: 'acrcloud',
+      raw: musica
+    }
+  }
+  catch (erro) {
+    console.log(
+      '[SHAZAM ACRCLOUD]',
+      sanitizarErro(
+        erro,
+        [
+          config.access_key,
+          config.access_secret
+        ]
+      )
+    )
+
+    return null
+  }
+}
+
+const enriquecerYoutubeShazam = async (ctx, musica = {}) => {
+  const pesquisa = String(
+    musica?.busca ||
+    [
+      musica?.artista,
+      musica?.titulo
+    ]
+      .filter(Boolean)
+      .join(' ')
+  ).trim()
+
+  if (!pesquisa)
+    return musica
+
+  const apiKey = String(
+    ctx?.API_KEY_TOKITO ||
+    ''
+  ).trim()
+
+  const baseApi = String(
+    ctx?.API_URL ||
+    'https://tokito-apis.com.br'
+  )
+    .replace(/\/+$/, '')
+
+  if (!apiKey)
+    return musica
+
+  try {
+    const resposta = await axios.get(
+      baseApi + '/api/youtube-play',
+      {
+        params: {
+          query: pesquisa,
+          q: pesquisa,
+          apikey: apiKey
+        },
+        timeout: SHAZAM_AUDIO_TIMEOUT,
+        validateStatus: () => true
+      }
+    )
+
+    const data =
+      resposta?.data ||
+      {}
+
+    const resultado =
+      data?.resultado ||
+      data?.result ||
+      data?.data ||
+      {}
+
+    if (
+      resposta.status < 200 ||
+      resposta.status >= 300 ||
+      data?.status === false ||
+      !resultado ||
+      typeof resultado !== 'object'
+    ) {
+      return musica
+    }
+
+    const canal =
+      resultado?.canal ||
+      resultado?.author?.name ||
+      resultado?.author ||
+      musica?.artista ||
+      null
+
+    const tituloYT =
+      resultado?.title ||
+      resultado?.titulo ||
+      musica?.titulo ||
+      null
+
+    const thumbnail =
+      resultado?.thumbnail ||
+      resultado?.image ||
+      musica?.capa ||
+      null
+
+    const url =
+      resultado?.url ||
+      resultado?.link ||
+      null
+
+    const duracao =
+      resultado?.duration ||
+      resultado?.timestamp ||
+      musica?.duracao ||
+      null
+
+    const views =
+      resultado?.views ??
+      musica?.views ??
+      null
+
+    return {
+      ...musica,
+      tituloYT,
+      canal,
+      capa:
+        thumbnail ||
+        musica?.capa ||
+        null,
+      thumbYT:
+        thumbnail ||
+        null,
+      linkYT:
+        url,
+      youtubeUrl:
+        url,
+      duracaoYT:
+        duracao,
+      duracao:
+        musica?.duracao ||
+        duracao,
+      viewsYT:
+        views,
+      views,
+      infoYT:
+        resultado,
+      busca:
+        pesquisa
+    }
+  }
+  catch {
+    return musica
+  }
 }
 
 const extrairYoutubeIdShazam = valor => {
@@ -721,7 +1031,7 @@ const identificarMusica = async (ctx, alvo = null) => {
   )
   const busca = [titulo, artista].filter(Boolean).join(' - ')
 
-  return {
+  const resultadoSongFinder = {
     matched: true,
     titulo: titulo || 'Não informado',
     artista: artista || 'Não informado',
@@ -750,6 +1060,11 @@ const identificarMusica = async (ctx, alvo = null) => {
     tipoMidia: tipo,
     raw: musica
   }
+
+  return await enriquecerYoutubeShazam(
+    ctx,
+    resultadoSongFinder
+  )
 }
 
 const buscarAudioShazam = async (ctx, musica = {}) => {

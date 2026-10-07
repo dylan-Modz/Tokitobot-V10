@@ -1,28 +1,35 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.69",
+  "version": "10.1.70",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T17:05:00.000Z",
+  "publishedAt": "2026-10-07T17:25:00.000Z",
   "changelog": [
-    "Corrige o reconhecimento do Shazam quando a mídia respondida é um vídeo.",
-    "Vídeos agora têm o áudio extraído com FFmpeg antes de serem enviados ao identificador.",
-    "O Shazam passa a validar corretamente o campo code retornado pelo SongFinder.",
-    "Erros do serviço e limite temporário deixam de aparecer como Música não encontrada.",
-    "Timeout do reconhecimento foi ajustado para 120 segundos, seguindo o cliente oficial do SongFinder.",
-    "Áudios continuam sendo enviados diretamente ao reconhecedor sem conversão desnecessária."
+    "Shazam passa a usar a mesma estrutura do Akame Bot, com ACRCloud como motor principal de reconhecimento.",
+    "A mídia é baixada pelo Tokito e o ACRCloud retorna artista, título, álbum e gravadora.",
+    "Depois do reconhecimento, artista + título são pesquisados na rota youtube-play para completar capa, duração, canal, views e link.",
+    "Áudios e vídeos são suportados; vídeos têm o áudio extraído antes do reconhecimento.",
+    "SongFinder foi mantido como fallback caso o ACRCloud esteja sem configuração ou não reconheça a faixa.",
+    "Adiciona acrcloud.json sem credenciais hardcoded para configuração segura do reconhecimento.",
+    "Também aceita ACRCLOUD_HOST, ACRCLOUD_ACCESS_KEY e ACRCLOUD_ACCESS_SECRET pelo ambiente.",
+    "O card do Shazam continua com os botões Áudio e Vídeo usando play_audio e play_video."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Correção do reconhecimento do Shazam",
-  "notice": "A versão 10.1.69 corrige o Shazam para reconhecer corretamente áudio e vídeo e tratar os retornos do identificador.",
+  "type": "Atualização",
+  "title": "Shazam com estrutura do Akame Bot",
+  "notice": "A versão 10.1.70 refaz o motor do Shazam com ACRCloud como reconhecimento principal e busca complementar no YouTube.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/sistemas/modulos.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/INFO_DADOS/acrcloud.json",
       "sha256": "",
       "size": 0
     },
@@ -1791,11 +1798,49 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T17:05:00.000Z"
+    },
+    {
+      "version": "10.1.70",
+      "fromVersion": "10.1.69",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Shazam com estrutura do Akame Bot",
+      "notice": "A versão 10.1.70 refaz o motor do Shazam com ACRCloud como reconhecimento principal e busca complementar no YouTube.",
+      "changelog": [
+        "Shazam passa a usar a mesma estrutura do Akame Bot, com ACRCloud como motor principal de reconhecimento.",
+        "A mídia é baixada pelo Tokito e o ACRCloud retorna artista, título, álbum e gravadora.",
+        "Depois do reconhecimento, artista + título são pesquisados na rota youtube-play para completar capa, duração, canal, views e link.",
+        "Áudios e vídeos são suportados; vídeos têm o áudio extraído antes do reconhecimento.",
+        "SongFinder foi mantido como fallback caso o ACRCloud esteja sem configuração ou não reconheça a faixa.",
+        "Adiciona acrcloud.json sem credenciais hardcoded para configuração segura do reconhecimento.",
+        "Também aceita ACRCLOUD_HOST, ACRCLOUD_ACCESS_KEY e ACRCLOUD_ACCESS_SECRET pelo ambiente.",
+        "O card do Shazam continua com os botões Áudio e Vídeo usando play_audio e play_video."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/modulos.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/acrcloud.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T17:25:00.000Z"
     }
   ],
-  "versao": "10.1.69",
+  "versao": "10.1.70",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.68"
+  "fromVersion": "10.1.69"
 }
