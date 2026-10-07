@@ -35,7 +35,11 @@ function removeGame(grupo) {
 }
 
 function quatroOpcoes(item, lista) {
-  const opcoes = Array.isArray(item.opcoes) ? [...item.opcoes] : []
+  const opcoes = []
+  for (const valor of (Array.isArray(item.opcoes) ? item.opcoes : [])) {
+    if (valor !== undefined && valor !== null && !opcoes.some(x => norm(x) === norm(valor)))
+      opcoes.push(valor)
+  }
   const pool = lista.map(x => x.resposta).filter(Boolean)
   for (const valor of shuffle(pool)) {
     if (opcoes.length >= 4) break
