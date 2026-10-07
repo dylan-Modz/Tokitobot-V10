@@ -177,21 +177,6 @@ const uploadTemp = async (buffer, ext = 'bin') => {
   if (!Buffer.isBuffer(buffer) || !buffer.length) throw new Error('Arquivo vazio para upload.')
 
   const extensao = extensaoSegura(ext)
-  const reconhecidaAcr =
-    await reconhecerAcrCloudShazam(
-      buffer
-    )
-
-  if (reconhecidaAcr) {
-    return await enriquecerYoutubeShazam(
-      ctx,
-      {
-        ...reconhecidaAcr,
-        tipoMidia: tipo
-      }
-    )
-  }
-
   const form = new FormData()
 
   form.append('file', buffer, {
