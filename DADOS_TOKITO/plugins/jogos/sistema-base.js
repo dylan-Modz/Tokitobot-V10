@@ -60,10 +60,17 @@ filmes: path.join(PASTA_DADOS, 'filmes.json'),
 palavrasAdivinhe: path.join(PASTA_DADOS, 'palavras_adivinhe.json'),
 palavrasCaca: path.join(PASTA_DADOS, 'palavras_caca.json'),
 palavrasForca: path.join(PASTA_DADOS, 'palavras.json'),
-perguntasQuiz: path.join(PASTA_DADOS, 'perguntas_quiz.json')
+perguntasQuiz: path.join(PASTA_DADOS, 'perguntas_quiz.json'),
+doulingo: path.join(PASTA_PARTIDAS, 'doulingo.json'),
+anagrama: path.join(PASTA_PARTIDAS, 'anagrama.json'),
+quizanimais: path.join(PASTA_PARTIDAS, 'quizanimais.json'),
+velha2: path.join(PASTA_PARTIDAS, 'jogodavelha2.json'),
+doulingoBanco: path.join(PASTA_DADOS, 'doulingo.json'),
+anagramaBanco: path.join(PASTA_DADOS, 'anagrama.json'),
+quizanimaisBanco: path.join(PASTA_DADOS, 'quizanimais.json')
 }
 
-for (const file of [files.adivinhe, files.quiz, files.forca, files.caca, files.mines, files.velha, files.dama, files.quizzes]) {
+for (const file of [files.adivinhe, files.quiz, files.forca, files.caca, files.mines, files.velha, files.dama, files.quizzes, files.doulingo, files.anagrama, files.quizanimais, files.velha2]) {
 if (!fs.existsSync(file))
 fs.writeFileSync(file, '[]\n')
 }
@@ -259,7 +266,7 @@ return grupo ? funcoesBase.config(grupo).modojogos === true : false
 }
 
 function limparInativos() {
-for (const file of [files.adivinhe, files.quiz, files.forca, files.caca, files.mines, files.velha, files.dama]) {
+for (const file of [files.adivinhe, files.quiz, files.forca, files.caca, files.mines, files.velha, files.dama, files.doulingo, files.anagrama, files.quizanimais, files.velha2]) {
 const atual = getList(file)
 const filtrado = atual.filter(game => now() - (game.atualizadoEm || game.iniciadoEm || now()) < TEMPO_RESET)
 if (filtrado.length !== atual.length)

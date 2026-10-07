@@ -32,7 +32,7 @@ const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({
 nome: "resetvelha",
-comandos: ["resetvelha", "resetarvelha", "resetavelha", "resetarv", "resetav", "rv"],
+comandos: ["resetvelha", "resetarvelha", "resetavelha", "resetarv", "resetav"],
 categoria: "jogos",
 info: {
 "descricao": "Executa o comando resetvelha.",

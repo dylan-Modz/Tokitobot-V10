@@ -36,13 +36,21 @@ const forca = require('./sistema-forca.js')
 const cacapalavras = require('./sistema-cacapalavras.js')
 const mines = require('./sistema-mines.js')
 const jogodavelha = require('./sistema-jogodavelha.js')
+const jogodavelha2 = require('./sistema-jogodavelha2.js')
+const doulingo = require('./sistema-doulingo.js')
+const anagrama = require('./sistema-anagrama.js')
+const quizanimais = require('./sistema-quizanimais.js')
 const dama = require('./sistema-dama.js')
 
 async function verificar(ctx) {
 base.limparInativos()
 if (ctx.isCmd || !ctx.isGroup || !base.modoAtivo(ctx.from, ctx.dataGp))
 return false
-return await quizzes.auto(ctx) ||
+return await jogodavelha2.auto(ctx) ||
+await doulingo.auto(ctx) ||
+await anagrama.auto(ctx) ||
+await quizanimais.auto(ctx) ||
+await quizzes.auto(ctx) ||
 await quiz.auto(ctx) ||
 await forca.auto(ctx) ||
 await adivinhe.auto(ctx) ||

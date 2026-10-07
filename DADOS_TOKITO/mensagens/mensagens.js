@@ -5416,3 +5416,61 @@ return `- 🎉 \`𝙿𝙾𝙺𝙴́𝙼𝙾𝙽 𝙲𝙰𝙿𝚃𝚄𝚁𝙰𝙳
 }
 
 /* FIM_TOKITO_POKEMON_CAPTURA_ANIMADA */
+
+/* TOKITO_JOGOS_NOVOS_10_1_67 */
+exports.infoJogos = prefix => [
+'- 🎮 *𝙸𝙽𝙵𝙾 𝙹𝙾𝙶𝙾𝚂*',
+'',
+'> ♻️ ׄ ( ᴘᴀʀᴀ ʀᴇsᴇᴛᴀʀ ᴜᴍ ᴊᴏɢᴏ, ᴜsᴇ: ' + prefix + 'rv + ᴏ ɴᴏᴍᴇ ᴅᴏ ᴊᴏɢᴏ. )',
+'',
+'> ❌ ׄ ( ᴊᴏɢᴏ ᴅᴀ ᴠᴇʟʜᴀ: ' + prefix + 'rv velha )',
+'> ♟️ ׄ ( ᴅᴀᴍᴀ: ' + prefix + 'rv dama )',
+'> 🪢 ׄ ( ғᴏʀᴄᴀ: ' + prefix + 'rv forca )',
+'> 🔎 ׄ ( ᴄᴀᴄ̧ᴀ-ᴘᴀʟᴀᴠʀᴀs: ' + prefix + 'rv caca )',
+'> 🎯 ׄ ( ᴀᴅɪᴠɪɴʜᴇ: ' + prefix + 'rv adivinhe )',
+'> ❓ ׄ ( ǫᴜɪᴢ: ' + prefix + 'rv quiz )',
+'> 💣 ׄ ( ᴄᴀᴍᴘᴏ ᴍɪɴᴀᴅᴏ: ' + prefix + 'rv mines )',
+'',
+'> 📌 ׄ ( ᴇxᴇᴍᴘʟᴏ: sᴇ ᴀ ғᴏʀᴄᴀ ᴛʀᴀᴠᴀʀ, ᴜsᴇ ' + prefix + 'rv forca. )',
+'> ⚠️ ׄ ( ᴏ ʀᴇsᴇᴛ ᴇɴᴄᴇʀʀᴀ ᴀ ᴘᴀʀᴛɪᴅᴀ ᴀᴛᴜᴀʟ ᴅᴏ ɢʀᴜᴘᴏ. )'
+].join('\n')
+
+exports.jogoResetUso = prefix => '- ♻️ *𝚁𝙴𝚂𝙴𝚃𝙰𝚁 𝙹𝙾𝙶𝙾*\n\n> 🎮 ׄ ( ᴜsᴇ: ' + prefix + 'rv velha/dama/forca/caca/adivinhe/quiz/mines )'
+exports.jogoResetOk = nome => '- ✅ *𝙹𝙾𝙶𝙾 𝚁𝙴𝚂𝙴𝚃𝙰𝙳𝙾*\n\n> 🎮 ׄ ( ' + nome + ' ғᴏɪ ᴇɴᴄᴇʀʀᴀᴅᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )'
+exports.jogoResetVazio = nome => '- ⚠️ *𝚂𝙴𝙼 𝙿𝙰𝚁𝚃𝙸𝙳𝙰*\n\n> 🎮 ׄ ( ɴᴀ̃ᴏ ʜᴀ́ ᴘᴀʀᴛɪᴅᴀ ᴅᴇ ' + nome + ' ᴇᴍ ᴀɴᴅᴀᴍᴇɴᴛᴏ. )'
+
+exports.jogoDoulingo = game => [
+'- 🟩 *𝙳𝙾𝚄𝙻𝙸𝙽𝙶𝙾 𝚀𝚄𝙸𝚉*',
+'',
+'> 🇺🇸 ׄ ( ǫᴜᴀʟ ᴇ́ ᴀ ᴛʀᴀᴅᴜᴄ̧ᴀ̃ᴏ ᴅᴇ: "' + game.question + '"? )',
+'',
+'> 1️⃣ ׄ ( ' + game.options[0] + ' )',
+'> 2️⃣ ׄ ( ' + game.options[1] + ' )',
+'> 3️⃣ ׄ ( ' + game.options[2] + ' )',
+'',
+'> 💬 ׄ ( ʀᴇsᴘᴏɴᴅᴀ ᴄᴏᴍ 1, 2 ᴏᴜ 3. )'
+].join('\n')
+exports.jogoDoulingoAcertou = (jid, resposta, mention) => '- ✅ *𝚁𝙴𝚂𝙿𝙾𝚂𝚃𝙰 𝙲𝙴𝚁𝚃𝙰*\n\n> 👤 ׄ ( ' + mention(jid) + ' ᴀᴄᴇʀᴛᴏᴜ. )\n> 🇧🇷 ׄ ( ʀᴇsᴘᴏsᴛᴀ: ' + resposta + ' )'
+exports.jogoDoulingoErrou = () => '- ❌ *𝚁𝙴𝚂𝙿𝙾𝚂𝚃𝙰 𝙴𝚁𝚁𝙰𝙳𝙰*\n\n> 🟩 ׄ ( ᴛᴇɴᴛᴇ ᴏᴜᴛʀᴀ ᴏᴘᴄ̧ᴀ̃ᴏ. )'
+
+exports.jogoAnagrama = game => [
+'- 🔤 *𝙰𝙽𝙰𝙶𝚁𝙰𝙼𝙰*',
+'',
+'> 🔀 ׄ ( ᴘᴀʟᴀᴠʀᴀ: ' + game.embaralhada + ' )',
+'> 💡 ׄ ( ᴅɪᴄᴀ: ' + game.dica + ' )',
+'',
+'> 💬 ׄ ( ᴅɪɢɪᴛᴇ ᴀ ᴘᴀʟᴀᴠʀᴀ ᴄᴏʀʀᴇᴛᴀ ɴᴏ ᴄʜᴀᴛ. )'
+].join('\n')
+exports.jogoAnagramaAcertou = (jid, resposta, mention) => '- 🏆 *𝙰𝙽𝙰𝙶𝚁𝙰𝙼𝙰 𝙲𝙾𝙽𝙲𝙻𝚄𝙸́𝙳𝙾*\n\n> 👤 ׄ ( ' + mention(jid) + ' ᴀᴄᴇʀᴛᴏᴜ. )\n> 🔤 ׄ ( ᴘᴀʟᴀᴠʀᴀ: ' + resposta + ' )'
+exports.jogoAnagramaRevelado = resposta => '- 👀 *𝙰𝙽𝙰𝙶𝚁𝙰𝙼𝙰 𝚁𝙴𝚅𝙴𝙻𝙰𝙳𝙾*\n\n> 🔤 ׄ ( ᴀ ᴘᴀʟᴀᴠʀᴀ ᴇʀᴀ: ' + resposta + ' )'
+
+exports.jogoQuizAnimais = () => '- 🐾 *𝚀𝚄𝙸𝚉 𝙰𝙽𝙸𝙼𝙰𝙸𝚂*\n\n> 🖼️ ׄ ( ᴅᴇsᴄᴜʙʀᴀ ǫᴜᴀʟ ᴀɴɪᴍᴀʟ ᴀᴘᴀʀᴇᴄᴇ ɴᴀ ɪᴍᴀɢᴇᴍ. )\n> 💬 ׄ ( ᴅɪɢɪᴛᴇ ᴏ ɴᴏᴍᴇ ᴅᴏ ᴀɴɪᴍᴀʟ ɴᴏ ᴄʜᴀᴛ. )'
+exports.jogoQuizAnimaisAcertou = (jid, animal, mention) => '- 🏆 *𝙰𝙽𝙸𝙼𝙰𝙻 𝙳𝙴𝚂𝙲𝙾𝙱𝙴𝚁𝚃𝙾*\n\n> 👤 ׄ ( ' + mention(jid) + ' ᴀᴄᴇʀᴛᴏᴜ. )\n> 🐾 ׄ ( ᴀɴɪᴍᴀʟ: ' + animal + ' )'
+exports.jogoQuizAnimaisRevelado = animal => '- 👀 *𝚀𝚄𝙸𝚉 𝚁𝙴𝚅𝙴𝙻𝙰𝙳𝙾*\n\n> 🐾 ׄ ( ᴏ ᴀɴɪᴍᴀʟ ᴇʀᴀ: ' + animal + ' )'
+
+exports.jogoVelhaBotIniciada = bot => '- 🤖 *𝙹𝙾𝙶𝙾 𝙳𝙰 𝚅𝙴𝙻𝙷𝙰 2*\n\n> ❌ ׄ ( ᴠᴄ ᴊᴏɢᴀ ᴄᴏᴍ X. )\n> ⭕ ׄ ( ᴀᴅᴠᴇʀsᴀ́ʀɪᴏ: ' + bot + ' )\n> 🎯 ׄ ( ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴄᴀsᴀ ᴅᴇ 1 ᴀ 9. )'
+exports.jogoVelhaBotJogou = casa => '- 🤖 *𝙹𝙾𝙶𝙰𝙳𝙰 𝙳𝙾 𝙱𝙾𝚃*\n\n> ⭕ ׄ ( ᴏ ᴛᴏᴋɪᴛᴏ ᴊᴏɢᴏᴜ ɴᴀ ᴄᴀsᴀ ' + casa + '. )\n> ❌ ׄ ( ᴀɢᴏʀᴀ ᴇ́ ᴀ sᴜᴀ ᴠᴇᴢ. )'
+exports.jogoVelhaBotVitoria = () => '- 🤖 *𝙵𝙸𝙼 𝙳𝙴 𝙹𝙾𝙶𝙾*\n\n> ⭕ ׄ ( ᴏ ᴛᴏᴋɪᴛᴏ ᴠᴇɴᴄᴇᴜ ᴀ ᴘᴀʀᴛɪᴅᴀ. )'
+exports.jogoVelhaBotDerrota = () => '- 🏆 *𝙵𝙸𝙼 𝙳𝙴 𝙹𝙾𝙶𝙾*\n\n> ❌ ׄ ( ᴠᴄ ᴠᴇɴᴄᴇᴜ ᴏ ᴛᴏᴋɪᴛᴏ! )'
+exports.jogoVelhaBotEmpate = () => '- 🤝 *𝙵𝙸𝙼 𝙳𝙴 𝙹𝙾𝙶𝙾*\n\n> 🎮 ׄ ( ᴀ ᴘᴀʀᴛɪᴅᴀ ᴛᴇʀᴍɪɴᴏᴜ ᴇᴍ ᴇᴍᴘᴀᴛᴇ. )'
+/* FIM_TOKITO_JOGOS_NOVOS_10_1_67 */

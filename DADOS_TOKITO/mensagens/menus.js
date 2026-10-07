@@ -635,71 +635,52 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 }
 
 exports.menujogos = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
-return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡🎮｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝙼𝙴𝙽𝚄-𝙹𝙾𝙶𝙾𝚂
-├╾═╼･ﾟ𖤐ﾟ･｡🕹️｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🤖 𝙱𝙾𝚃: ${NomeDoBot}
-┃࣪ ╎—̳͟͞͞ 👑 𝙲𝚁𝙸𝙰𝙳𝙾𝚁: ${ownerName}
-┃࣪ ╎—̳͟͞͞ 👤 𝚄𝚂𝚄Á𝚁𝙸𝙾: @${sender.split('@')[0]}
-┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
-┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
-┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
-┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ${baileysVersion}
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
-
-╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡🎮｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝐽𝑂𝐺𝑂𝑆
-├╾═╼･ﾟ𖤐ﾟ･｡🕹️｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}jogodavelha @usuario
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}dama @usuario
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}dino
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}forca
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}cobrinha 
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}memória 
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}cacapalavras
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}adivinhe
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quiz
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quizpokemon
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quizcalculadora
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quiztrivia
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quizgeografia
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quizfilme
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}Akinator 
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}mines
-┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}ppt pedra/papel/tesoura
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
-
-╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡🎲｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝐽𝑂𝐺𝑂𝑆-𝐵𝑁
-├╾═╼･ﾟ𖤐ﾟ･｡🔥｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}vab
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}eununca
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}vord verdade/desafio
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
-
-╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡♻️｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝑅𝐸𝑆𝐸𝑇𝐴𝑅-𝐽𝑂𝐺𝑂𝑆
-├╾═╼･ﾟ𖤐ﾟ･｡🎮｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}resetvelha
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}resetdama
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}resetforca
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}resetcaca
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}resetadivinhe
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}resetquiz
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}resetmines
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
+return [
+'╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡',
+'┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓',
+'├╾═╼･ﾟ𖤐ﾟ･｡🎮｡･ﾟ𖤐ﾟ･╾═╼┤',
+'├─ ⊹ 𖤐  𝙼𝙴𝙽𝚄-𝙹𝙾𝙶𝙾𝚂',
+'├╾═╼･ﾟ𖤐ﾟ･｡🕹️｡･ﾟ𖤐ﾟ･╾═╼┤',
+'┃࣪ ╎—̳͟͞͞ 🤖 𝙱𝙾𝚃: ' + NomeDoBot,
+'┃࣪ ╎—̳͟͞͞ 👑 𝙲𝚁𝙸𝙰𝙳𝙾𝚁: ' + ownerName,
+'┃࣪ ╎—̳͟͞͞ 👤 𝚄𝚂𝚄Á𝚁𝙸𝙾: @' + sender.split('@')[0],
+'┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ' + isCargo,
+'┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ' + isChVip,
+'┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ' + hora,
+'┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ' + baileysVersion,
+'┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛',
+'╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡',
+'',
+'╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡',
+'┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓',
+'├╾═╼･ﾟ𖤐ﾟ･｡🎮｡･ﾟ𖤐ﾟ･╾═╼┤',
+'├─ ⊹ 𖤐  𝐽𝑂𝐺𝑂𝑆',
+'├╾═╼･ﾟ𖤐ﾟ･｡🕹️｡･ﾟ𖤐ﾟ･╾═╼┤',
+'┃࣪ ╎—̳͟͞͞ 🕹️ ' + prefix + 'jogodavelha @usuario',
+'┃࣪ ╎—̳͟͞͞ 🤖 ' + prefix + 'jogodavelha2',
+'┃࣪ ╎—̳͟͞͞ ♟️ ' + prefix + 'dama @usuario',
+'┃࣪ ╎—̳͟͞͞ 🦖 ' + prefix + 'dino',
+'┃࣪ ╎—̳͟͞͞ 🪢 ' + prefix + 'forca',
+'┃࣪ ╎—̳͟͞͞ 🐍 ' + prefix + 'cobrinha',
+'┃࣪ ╎—̳͟͞͞ 🧠 ' + prefix + 'memória',
+'┃࣪ ╎—̳͟͞͞ 🔎 ' + prefix + 'cacapalavras',
+'┃࣪ ╎—̳͟͞͞ 🎯 ' + prefix + 'adivinhe',
+'┃࣪ ╎—̳͟͞͞ ❓ ' + prefix + 'quiz',
+'┃࣪ ╎—̳͟͞͞ 🟩 ' + prefix + 'doulingo',
+'┃࣪ ╎—̳͟͞͞ 🔤 ' + prefix + 'anagrama',
+'┃࣪ ╎—̳͟͞͞ 🐾 ' + prefix + 'quizanimais',
+'┃࣪ ╎—̳͟͞͞ ⚡ ' + prefix + 'quizpokemon',
+'┃࣪ ╎—̳͟͞͞ 🧮 ' + prefix + 'quizcalculadora',
+'┃࣪ ╎—̳͟͞͞ 🧩 ' + prefix + 'quiztrivia',
+'┃࣪ ╎—̳͟͞͞ 🌎 ' + prefix + 'quizgeografia',
+'┃࣪ ╎—̳͟͞͞ 🎬 ' + prefix + 'quizfilme',
+'┃࣪ ╎—̳͟͞͞ 🧞 ' + prefix + 'Akinator',
+'┃࣪ ╎—̳͟͞͞ 💣 ' + prefix + 'mines',
+'┃࣪ ╎—̳͟͞͞ ✊ ' + prefix + 'ppt pedra/papel/tesoura',
+'┃࣪ ╎—̳͟͞͞ ℹ️ ' + prefix + 'infojogos',
+'┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛',
+'╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡'
+].join('\n')
 }
 
 exports.menubn = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion, isModobn) => {

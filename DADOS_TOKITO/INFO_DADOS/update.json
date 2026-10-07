@@ -1,24 +1,26 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.66",
+  "version": "10.1.67",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
   "publishedAt": "2026-10-07T15:00:00.000Z",
   "changelog": [
-    "[Atualização] Captura Pokémon animada e Menu RPG renovado",
-    "A versão 10.1.66 já está disponível para atualização.",
-    "Comando capturar recebe animação em GIF antes do resultado usando o vídeo de captura informado.",
-    "Quando a captura falha, o bot envia a animação de falha com o resultado no padrão visual do mensagens.js.",
-    "Quando a captura dá certo, o Pokémon capturado continua sendo exibido com imagem e mensagem padronizada.",
-    "A captura mantém o Acessar canal e bloqueia tentativas simultâneas no mesmo grupo durante a animação.",
-    "Menu RPG/Pokémon troca os emojis 🔴 genéricos por emojis relacionados a cada comando e seção."
+    "Adiciona Doulingo com 70 perguntas em JSON, capa e alternativas interativas.",
+    "Adiciona Anagrama com banco JSON de palavras, dicas, resposta automática e opção para revelar a palavra.",
+    "Adiciona Quiz Animais com 27 animais, imagens e resposta automática pelo nome.",
+    "Adiciona jogodavelha2 para jogar contra o próprio Tokito usando o mesmo card e tabuleiro do Jogo da Velha normal.",
+    "Cria o comando infojogos explicando de forma simples como resetar cada partida.",
+    "O comando rv agora centraliza os resets: velha, dama, forca, caca, adivinhe, quiz e mines.",
+    "Remove do Menu Jogos o bloco duplicado Jogos-BN e o bloco antigo com vários comandos de reset.",
+    "Menu Jogos recebe os novos jogos e emojis relacionados a cada opção.",
+    "O aviso automático de nova versão foi redesenhado com versão atual, nova versão, resumo das mudanças e comandos de atualização."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Atualização",
-  "title": "Captura Pokémon animada e Menu RPG renovado",
-  "notice": "A versão 10.1.66 já está disponível para atualização.",
+  "title": "Novos jogos e Menu Jogos reorganizado",
+  "notice": "A versão 10.1.67 chegou com novos jogos, reset centralizado e um Menu Jogos mais organizado.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -1589,11 +1591,155 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T15:00:00.000Z"
+    },
+    {
+      "version": "10.1.67",
+      "fromVersion": "10.1.66",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Novos jogos e Menu Jogos reorganizado",
+      "notice": "A versão 10.1.67 chegou com novos jogos, reset centralizado e um Menu Jogos mais organizado.",
+      "changelog": [
+        "Adiciona Doulingo com 70 perguntas em JSON, capa e alternativas interativas.",
+        "Adiciona Anagrama com banco JSON de palavras, dicas, resposta automática e opção para revelar a palavra.",
+        "Adiciona Quiz Animais com 27 animais, imagens e resposta automática pelo nome.",
+        "Adiciona jogodavelha2 para jogar contra o próprio Tokito usando o mesmo card e tabuleiro do Jogo da Velha normal.",
+        "Cria o comando infojogos explicando de forma simples como resetar cada partida.",
+        "O comando rv agora centraliza os resets: velha, dama, forca, caca, adivinhe, quiz e mines.",
+        "Remove do Menu Jogos o bloco duplicado Jogos-BN e o bloco antigo com vários comandos de reset.",
+        "Menu Jogos recebe os novos jogos e emojis relacionados a cada opção.",
+        "O aviso automático de nova versão foi redesenhado com versão atual, nova versão, resumo das mudanças e comandos de atualização."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-doulingo.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/doulingo.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-anagrama.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/anagrama.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/revelaranagrama.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-quizanimais.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/quizanimais.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/revelarquiz.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-jogodavelha2.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/jogodavelha2.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/infojogos.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/rv.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/database/jogos/doulingo.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/database/jogos/anagrama.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/database/jogos/quizanimais.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-base.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/jogodavelha.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-jogodavelha.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/resetvelha.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T17:05:00.000Z"
     }
   ],
-  "versao": "10.1.66",
+  "versao": "10.1.67",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.65"
+  "fromVersion": "10.1.66"
 }

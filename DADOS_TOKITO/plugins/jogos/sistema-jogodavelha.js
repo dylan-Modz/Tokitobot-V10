@@ -74,7 +74,7 @@ id: `${ctx.prefix}menujogos`
 : [
 {
 texto: mess.botaoCancelar(),
-id: `${ctx.prefix}resetvelha`
+id: `${ctx.prefix}rv velha`
 },
 {
 texto: mess.botaoMenuJogos(),

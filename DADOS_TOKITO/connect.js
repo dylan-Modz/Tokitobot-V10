@@ -199,32 +199,29 @@ const UPDATE_CHECK_MS = 5 * 60 * 1000
 
 const textoAvisoUpdate = check => {
 const remoto = check?.remote || {}
-const mudancas = Array.isArray(remoto.changelog)
-? remoto.changelog.slice(0, 8)
-: []
-
+const mudancas = Array.isArray(remoto.changelog) ? remoto.changelog.slice(0, 10) : []
 const lista = mudancas.length
-? mudancas.map(item => `> • ${String(item || '').trim()}`).join('\n')
-: '> • Melhorias, correções e novidades da Tokito.'
-
+? mudancas.map((item, index) => '> ' + (index + 1) + '. ׄ ( ' + String(item || '').trim() + ' )').join('\n')
+: '> • ׄ ( Melhorias, correções e novidades do Tokito. )'
 const obrigatoria = remoto.required === true
-? '\n\n> ⚠️ *Esta atualização foi marcada como importante.*'
+? '\n\n> ⚠️ ׄ ( ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ɪᴍᴘᴏʀᴛᴀɴᴛᴇ — ʀᴇᴄᴏᴍᴇɴᴅᴀᴅᴏ ᴀᴛᴜᴀʟɪᴢᴀʀ. )'
 : ''
-
-return `- 🧊 \`𝚃𝙾𝙺𝙸𝚃𝙾 𝚄𝙿𝙳𝙰𝚃𝙴\`
-
-> *Uma nova atualização da Tokito está disponível para você.*
-
-*📦 | SUA VERSÃO:* ${check?.local?.version || '—'}
-*✨ | NOVA VERSÃO:* ${remoto.version || '—'}
-*📌 | ${String(remoto.title || remoto.notice || 'Nova atualização disponível').trim()}*
-
-${lista}${obrigatoria}
-
-> *Para ver os detalhes:* \`${prefix}update info\`
-> *Para atualizar:* \`${prefix}update start\`
-
-_Se preferir pelo terminal, use_ \`npm start up\`.`
+return [
+'- 🚀 *𝙽𝙾𝚅𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻*',
+'',
+'> 🤖 ׄ ( ᴛᴏᴋɪᴛᴏ ʙᴏᴛ ᴠ10 )',
+'> 📦 ׄ ( sᴜᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (check?.local?.version || '—') + ' )',
+'> ✨ ׄ ( ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (remoto.version || '—') + ' )',
+'> 📌 ׄ ( ' + String(remoto.title || remoto.notice || 'Nova atualização disponível').trim() + ' )',
+'',
+'- 📝 *𝙾 𝚀𝚄𝙴 𝙼𝚄𝙳𝙾𝚄*',
+'',
+lista + obrigatoria,
+'',
+'> 🔎 ׄ ( ᴅᴇᴛᴀʟʜᴇs: ' + prefix + 'update info )',
+'> ⬆️ ׄ ( ᴀᴛᴜᴀʟɪᴢᴀʀ: ' + prefix + 'update start )',
+'> 💻 ׄ ( ᴛᴇʀᴍɪɴᴀʟ: npm start up )'
+].join('\n')
 }
 
 const verificarAvisoUpdate = async tokito => {

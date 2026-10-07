@@ -1,0 +1,10 @@
+const dylan=require('../../database/lib/comandos')
+const normal=require('./sistema-jogodavelha.js')
+const bot=require('./sistema-jogodavelha2.js')
+dylan.setCommand({nome:'jogodavelha2',comandos:['jogodavelha2','jv2','velha2'],categoria:'jogos',info:{descricao:'Jogo da velha contra o próprio Tokito.',uso:'jogodavelha2',categoria:'jogos'},async executar(ctx){
+if(!ctx.isGroup)return ctx.reply(ctx.mess.sogrupo())
+if(!ctx.modoJogosAtivo(ctx.from,ctx.dataGp))return ctx.reply(ctx.mess.modoJogosDesativado(ctx.prefix))
+if(normal.getGame(ctx.from)||bot.getGame(ctx.from))return ctx.reply(ctx.mess.velhaEmAndamento())
+await ctx.reagir(ctx.from,'🤖').catch(()=>{})
+if(!await bot.iniciar(ctx))return ctx.reply('Não foi possível iniciar o Jogo da Velha contra o Tokito.')
+}})

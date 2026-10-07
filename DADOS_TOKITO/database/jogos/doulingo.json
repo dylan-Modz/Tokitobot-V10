@@ -1,0 +1,352 @@
+[
+  {
+    "id": "1",
+    "ingles": "hello",
+    "resposta_certa": "Oi"
+  },
+  {
+    "id": "2",
+    "ingles": "goodbye",
+    "resposta_certa": "Adeus"
+  },
+  {
+    "id": "3",
+    "ingles": "please",
+    "resposta_certa": "Por favor"
+  },
+  {
+    "id": "4",
+    "ingles": "thank you",
+    "resposta_certa": "Obrigado"
+  },
+  {
+    "id": "5",
+    "ingles": "sorry",
+    "resposta_certa": "Desculpe"
+  },
+  {
+    "id": "6",
+    "ingles": "good morning",
+    "resposta_certa": "Bom dia"
+  },
+  {
+    "id": "7",
+    "ingles": "good night",
+    "resposta_certa": "Boa noite"
+  },
+  {
+    "id": "8",
+    "ingles": "how are you",
+    "resposta_certa": "Tudo bem"
+  },
+  {
+    "id": "9",
+    "ingles": "yes",
+    "resposta_certa": "Sim"
+  },
+  {
+    "id": "10",
+    "ingles": "no",
+    "resposta_certa": "Não"
+  },
+  {
+    "id": "11",
+    "ingles": "welcome",
+    "resposta_certa": "Bem-vindo"
+  },
+  {
+    "id": "12",
+    "ingles": "excuse me",
+    "resposta_certa": "Com licença"
+  },
+  {
+    "id": "13",
+    "ingles": "see you later",
+    "resposta_certa": "Até logo"
+  },
+  {
+    "id": "14",
+    "ingles": "what time is it",
+    "resposta_certa": "Que horas são"
+  },
+  {
+    "id": "15",
+    "ingles": "how much",
+    "resposta_certa": "Quanto custa"
+  },
+  {
+    "id": "16",
+    "ingles": "I don't understand",
+    "resposta_certa": "Eu não entendo"
+  },
+  {
+    "id": "17",
+    "ingles": "where is the bathroom",
+    "resposta_certa": "Onde fica o banheiro"
+  },
+  {
+    "id": "18",
+    "ingles": "can you help me",
+    "resposta_certa": "Você pode me ajudar"
+  },
+  {
+    "id": "19",
+    "ingles": "I need a doctor",
+    "resposta_certa": "Preciso de um médico"
+  },
+  {
+    "id": "20",
+    "ingles": "how are you doing",
+    "resposta_certa": "Como você está"
+  },
+  {
+    "id": "21",
+    "ingles": "what is your name",
+    "resposta_certa": "Qual é o seu nome"
+  },
+  {
+    "id": "22",
+    "ingles": "my name is",
+    "resposta_certa": "Meu nome é"
+  },
+  {
+    "id": "23",
+    "ingles": "goodbye for now",
+    "resposta_certa": "Adeus por enquanto"
+  },
+  {
+    "id": "24",
+    "ingles": "good luck",
+    "resposta_certa": "Boa sorte"
+  },
+  {
+    "id": "25",
+    "ingles": "please speak slowly",
+    "resposta_certa": "Por favor, fale devagar"
+  },
+  {
+    "id": "26",
+    "ingles": "I am lost",
+    "resposta_certa": "Estou perdido"
+  },
+  {
+    "id": "27",
+    "ingles": "can you repeat that",
+    "resposta_certa": "Você pode repetir isso"
+  },
+  {
+    "id": "28",
+    "ingles": "where can I buy tickets",
+    "resposta_certa": "Onde posso comprar ingressos"
+  },
+  {
+    "id": "29",
+    "ingles": "I would like to order",
+    "resposta_certa": "Eu gostaria de fazer um pedido"
+  },
+  {
+    "id": "30",
+    "ingles": "how do I get to",
+    "resposta_certa": "Como eu chego a"
+  },
+  {
+    "id": "31",
+    "ingles": "I am looking for",
+    "resposta_certa": "Estou procurando"
+  },
+  {
+    "id": "32",
+    "ingles": "what is the weather like",
+    "resposta_certa": "Como está o tempo"
+  },
+  {
+    "id": "33",
+    "ingles": "I am here on vacation",
+    "resposta_certa": "Estou aqui de férias"
+  },
+  {
+    "id": "34",
+    "ingles": "I am a tourist",
+    "resposta_certa": "Sou um turista"
+  },
+  {
+    "id": "35",
+    "ingles": "where is the nearest hotel",
+    "resposta_certa": "Onde fica o hotel mais próximo"
+  },
+  {
+    "id": "36",
+    "ingles": "I would like some water",
+    "resposta_certa": "Eu gostaria de um pouco de água"
+  },
+  {
+    "id": "37",
+    "ingles": "what is your phone number",
+    "resposta_certa": "Qual é o seu número de telefone"
+  },
+  {
+    "id": "38",
+    "ingles": "do you speak English",
+    "resposta_certa": "Você fala inglês"
+  },
+  {
+    "id": "39",
+    "ingles": "I don't speak Portuguese well",
+    "resposta_certa": "Eu não falo português bem"
+  },
+  {
+    "id": "40",
+    "ingles": "where can I find a taxi",
+    "resposta_certa": "Onde posso encontrar um táxi"
+  },
+  {
+    "id": "41",
+    "ingles": "how far is it",
+    "resposta_certa": "Quanto tempo leva"
+  },
+  {
+    "id": "42",
+    "ingles": "I need help",
+    "resposta_certa": "Eu preciso de ajuda"
+  },
+  {
+    "id": "43",
+    "ingles": "I am allergic to",
+    "resposta_certa": "Sou alérgico a"
+  },
+  {
+    "id": "44",
+    "ingles": "can you recommend a restaurant",
+    "resposta_certa": "Você pode recomendar um restaurante"
+  },
+  {
+    "id": "45",
+    "ingles": "I am in a hurry",
+    "resposta_certa": "Estou com pressa"
+  },
+  {
+    "id": "46",
+    "ingles": "how much does it cost",
+    "resposta_certa": "Quanto custa"
+  },
+  {
+    "id": "47",
+    "ingles": "where is the nearest ATM",
+    "resposta_certa": "Onde fica o caixa eletrônico mais próximo"
+  },
+  {
+    "id": "48",
+    "ingles": "I need to make a phone call",
+    "resposta_certa": "Preciso fazer uma ligação"
+  },
+  {
+    "id": "49",
+    "ingles": "is there Wi-Fi here",
+    "resposta_certa": "Tem Wi-Fi aqui"
+  },
+  {
+    "id": "50",
+    "ingles": "I need a reservation",
+    "resposta_certa": "Preciso de uma reserva"
+  },
+  {
+    "id": "51",
+    "ingles": "do you have a menu in English",
+    "resposta_certa": "Você tem um menu em inglês"
+  },
+  {
+    "id": "52",
+    "ingles": "I am a student",
+    "resposta_certa": "Sou estudante"
+  },
+  {
+    "id": "53",
+    "ingles": "can I try it on",
+    "resposta_certa": "Posso experimentar"
+  },
+  {
+    "id": "54",
+    "ingles": "I need to go to the airport",
+    "resposta_certa": "Preciso ir para o aeroporto"
+  },
+  {
+    "id": "55",
+    "ingles": "I have a reservation",
+    "resposta_certa": "Eu tenho uma reserva"
+  },
+  {
+    "id": "56",
+    "ingles": "where can I get a taxi",
+    "resposta_certa": "Onde posso pegar um táxi"
+  },
+  {
+    "id": "57",
+    "ingles": "I need directions",
+    "resposta_certa": "Preciso de direções"
+  },
+  {
+    "id": "58",
+    "ingles": "I am here for business",
+    "resposta_certa": "Estou aqui a negócios"
+  },
+  {
+    "id": "59",
+    "ingles": "can you show me on the map",
+    "resposta_certa": "Você pode me mostrar no mapa"
+  },
+  {
+    "id": "60",
+    "ingles": "where can I buy a SIM card",
+    "resposta_certa": "Onde posso comprar um chip"
+  },
+  {
+    "id": "61",
+    "ingles": "I need a doctor",
+    "resposta_certa": "Preciso de um médico"
+  },
+  {
+    "id": "62",
+    "ingles": "can you call a taxi for me",
+    "resposta_certa": "Você pode chamar um táxi para mim"
+  },
+  {
+    "id": "63",
+    "ingles": "how do I get to the city center",
+    "resposta_certa": "Como eu chego ao centro da cidade"
+  },
+  {
+    "id": "64",
+    "ingles": "where is the nearest hospital",
+    "resposta_certa": "Onde fica o hospital mais próximo"
+  },
+  {
+    "id": "65",
+    "ingles": "I need an appointment",
+    "resposta_certa": "Preciso de uma consulta"
+  },
+  {
+    "id": "66",
+    "ingles": "is there a pharmacy nearby",
+    "resposta_certa": "Tem uma farmácia perto daqui"
+  },
+  {
+    "id": "67",
+    "ingles": "I would like to book a tour",
+    "resposta_certa": "Gostaria de reservar um tour"
+  },
+  {
+    "id": "68",
+    "ingles": "can you recommend a good place to eat",
+    "resposta_certa": "Você pode recomendar um bom lugar para comer"
+  },
+  {
+    "id": "69",
+    "ingles": "how do I use public transportation",
+    "resposta_certa": "Como eu uso o transporte público"
+  },
+  {
+    "id": "70",
+    "ingles": "where is the nearest bank",
+    "resposta_certa": "Onde fica o banco mais próximo"
+  }
+]

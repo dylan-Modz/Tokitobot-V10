@@ -29,6 +29,7 @@
  */
 
 const dylan = require('../../database/lib/comandos')
+const velha2 = require('./sistema-jogodavelha2.js')
 
 dylan.setCommand({
 nome: "jogodavelha",
@@ -48,7 +49,8 @@ return reply(mess.sogrupo())
 if (!modoJogosAtivo(from, dataGp))
 return reply(mess.modoJogosDesativado(prefix))
 const jogoExiste = getVelhaGame(from)
-if (jogoExiste)
+const jogoBotExiste = velha2.getGame(from)
+if (jogoExiste || jogoBotExiste)
 return reply(mess.velhaEmAndamento())
 if (!menc_os2)
 return reply(mess.jogoMarquePessoa(prefix, command))

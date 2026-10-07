@@ -1,0 +1,386 @@
+[
+  {
+    "original": "PARADOXO",
+    "dica": "CANAL"
+  },
+  {
+    "original": "PAULO",
+    "dica": "DONO"
+  },
+  {
+    "original": "CAMISETA",
+    "dica": "ROUPA"
+  },
+  {
+    "original": "CARRO",
+    "dica": "VEÍCULO"
+  },
+  {
+    "original": "EDIFÍCIO",
+    "dica": "MORADIA"
+  },
+  {
+    "original": "SOFÁ",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "ESCADA",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "AKAME",
+    "dica": "PERSONAGEM"
+  },
+  {
+    "original": "NAGATORO",
+    "dica": "PERSONAGEM"
+  },
+  {
+    "original": "SASUKE",
+    "dica": "PERSONAGEM"
+  },
+  {
+    "original": "CIMENTO",
+    "dica": "CONSTRUÇÕES"
+  },
+  {
+    "original": "BANANA",
+    "dica": "COMIDA"
+  },
+  {
+    "original": "NETFLIX",
+    "dica": "APLICATIVO"
+  },
+  {
+    "original": "SPOTIFY",
+    "dica": "APLICATIVO"
+  },
+  {
+    "original": "DISNEY",
+    "dica": "APLICATIVO"
+  },
+  {
+    "original": "FACEBOOK",
+    "dica": "APLICATIVO"
+  },
+  {
+    "original": "MINECRAFT",
+    "dica": "JOGO"
+  },
+  {
+    "original": "COD",
+    "dica": "JOGO"
+  },
+  {
+    "original": "PUBG",
+    "dica": "JOGO"
+  },
+  {
+    "original": "FREEFIRE",
+    "dica": "JOGO"
+  },
+  {
+    "original": "HELICÓPTERO",
+    "dica": "CÉU"
+  },
+  {
+    "original": "AVIÃO",
+    "dica": "CÉU"
+  },
+  {
+    "original": "AEROPORTO",
+    "dica": "AVIÃO"
+  },
+  {
+    "original": "ANTÁRTICA",
+    "dica": "CONTINENTE"
+  },
+  {
+    "original": "INTERESTELAR",
+    "dica": "FILME"
+  },
+  {
+    "original": "AVENGERS",
+    "dica": "FILME"
+  },
+  {
+    "original": "TRANSFORMERS",
+    "dica": "ROBÔ"
+  },
+  {
+    "original": "JÚPITER",
+    "dica": "PLANETA"
+  },
+  {
+    "original": "BARBIE",
+    "dica": "FILME"
+  },
+  {
+    "original": "OPPENHEIMER",
+    "dica": "FILME"
+  },
+  {
+    "original": "FNAF",
+    "dica": "JOGO"
+  },
+  {
+    "original": "YOUTUBE",
+    "dica": "APLICATIVO"
+  },
+  {
+    "original": "PORTUGAL",
+    "dica": "PAÍS"
+  },
+  {
+    "original": "MÉXICO",
+    "dica": "PAÍS"
+  },
+  {
+    "original": "CAMARÃO",
+    "dica": "COMIDA"
+  },
+  {
+    "original": "HIDRANTE",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "FOGUETE",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "SKATE",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "MACACO",
+    "dica": "ANIMAL"
+  },
+  {
+    "original": "LASANHA",
+    "dica": "COMIDA"
+  },
+  {
+    "original": "PASTEL",
+    "dica": "COMIDA"
+  },
+  {
+    "original": "COXINHA",
+    "dica": "COMIDA"
+  },
+  {
+    "original": "BICICLETA",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "CAVALO",
+    "dica": "ANIMAL"
+  },
+  {
+    "original": "LEVI",
+    "dica": "PERSONAGEM"
+  },
+  {
+    "original": "KAMAITACHI",
+    "dica": "CANTOR"
+  },
+  {
+    "original": "LUBA",
+    "dica": "YOUTUBER"
+  },
+  {
+    "original": "GRÊMIO",
+    "dica": "TIME"
+  },
+  {
+    "original": "SATURNO",
+    "dica": "PLANETA"
+  },
+  {
+    "original": "MIKASA",
+    "dica": "PERSONAGEM"
+  },
+  {
+    "original": "LEÃO",
+    "dica": "ANIMAL"
+  },
+  {
+    "original": "SAKURA",
+    "dica": "PERSONAGEM"
+  },
+  {
+    "original": "HADES",
+    "dica": "MITOLOGIA"
+  },
+  {
+    "original": "CORRIDA",
+    "dica": "ESPORTE"
+  },
+  {
+    "original": "ODIN",
+    "dica": "MITOLOGIA NÓRDICA"
+  },
+  {
+    "original": "MEDUSA",
+    "dica": "MITOLOGIA GREGA"
+  },
+  {
+    "original": "AFRODITE",
+    "dica": "AMOR"
+  },
+  {
+    "original": "SALOMÃO",
+    "dica": "REI"
+  },
+  {
+    "original": "HONDA",
+    "dica": "MARCA DE MOTO"
+  },
+  {
+    "original": "CHEVROLET",
+    "dica": "MARCA DE CARRO"
+  },
+  {
+    "original": "MERCEDES",
+    "dica": "MARCA DE CARRO"
+  },
+  {
+    "original": "FERRARI",
+    "dica": "MARCA DE CARRO"
+  },
+  {
+    "original": "FORD",
+    "dica": "MARCA DE CARRO"
+  },
+  {
+    "original": "GUATEMALA",
+    "dica": "PAÍS"
+  },
+  {
+    "original": "CEREJA",
+    "dica": "FRUTA"
+  },
+  {
+    "original": "VENEZUELA",
+    "dica": "PAÍS"
+  },
+  {
+    "original": "HISTÓRIA",
+    "dica": "MATÉRIA"
+  },
+  {
+    "original": "INSTAGRAM",
+    "dica": "APLICATIVO"
+  },
+  {
+    "original": "WHATSAPP",
+    "dica": "APLICATIVO"
+  },
+  {
+    "original": "CELULAR",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "NOTEBOOK",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "COMPUTADOR",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "LANTERNA",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "CACHORRO",
+    "dica": "ANIMAL"
+  },
+  {
+    "original": "DESENTUPIDOR",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "TOMATE",
+    "dica": "ALIMENTO"
+  },
+  {
+    "original": "SAXOFONE",
+    "dica": "INSTRUMENTO MUSICAL"
+  },
+  {
+    "original": "CAZAQUISTÃO",
+    "dica": "PAÍS"
+  },
+  {
+    "original": "CROÁCIA",
+    "dica": "PAÍS"
+  },
+  {
+    "original": "HUNGRIA",
+    "dica": "PAÍS"
+  },
+  {
+    "original": "CORÉIA",
+    "dica": "PAÍS"
+  },
+  {
+    "original": "UCRÂNIA",
+    "dica": "PAÍS"
+  },
+  {
+    "original": "BRASIL",
+    "dica": "PAÍS"
+  },
+  {
+    "original": "DINAMARCA",
+    "dica": "PAÍS"
+  },
+  {
+    "original": "MEGAFONE",
+    "dica": "OBJETO"
+  },
+  {
+    "original": "CINTURA",
+    "dica": "CORPO HUMANO"
+  },
+  {
+    "original": "ABDÔMEN",
+    "dica": "CORPO HUMANO"
+  },
+  {
+    "original": "RAPOSA",
+    "dica": "ANIMAL"
+  },
+  {
+    "original": "DRAGÃO",
+    "dica": "ANIMAL"
+  },
+  {
+    "original": "GIRAFA",
+    "dica": "ANIMAL"
+  },
+  {
+    "original": "PARALELEPÍPEDO",
+    "dica": "GEOMETRIA"
+  },
+  {
+    "original": "PARALELOGRAMO",
+    "dica": "GEOMETRIA"
+  },
+  {
+    "original": "RINOCERONTE",
+    "dica": "ANIMAL"
+  },
+  {
+    "original": "HIPOPÓTAMO",
+    "dica": "ANIMAL"
+  },
+  {
+    "original": "TANGERINA",
+    "dica": "ALIMENTO"
+  },
+  {
+    "original": "MELANCIA",
+    "dica": "ALIMENTO"
+  }
+]
