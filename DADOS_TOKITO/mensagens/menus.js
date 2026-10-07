@@ -666,6 +666,11 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}cacapalavras
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}adivinhe
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quiz
+┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quizpokemon
+┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quizcalculadora
+┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quiztrivia
+┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quizgeografia
+┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}quizfilme
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}Akinator 
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}mines
 ┃࣪ ╎—̳͟͞͞ 🕹️ ${prefix}ppt pedra/papel/tesoura
