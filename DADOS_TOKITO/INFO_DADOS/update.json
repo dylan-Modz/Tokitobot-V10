@@ -1,25 +1,26 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.70",
+  "version": "10.1.71",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T17:25:00.000Z",
+  "publishedAt": "2026-10-07T17:40:00.000Z",
   "changelog": [
-    "Shazam passa a usar a mesma estrutura do Akame Bot, com ACRCloud como motor principal de reconhecimento.",
-    "A mídia é baixada pelo Tokito e o ACRCloud retorna artista, título, álbum e gravadora.",
-    "Depois do reconhecimento, artista + título são pesquisados na rota youtube-play para completar capa, duração, canal, views e link.",
-    "Áudios e vídeos são suportados; vídeos têm o áudio extraído antes do reconhecimento.",
-    "SongFinder foi mantido como fallback caso o ACRCloud esteja sem configuração ou não reconheça a faixa.",
-    "Adiciona acrcloud.json sem credenciais hardcoded para configuração segura do reconhecimento.",
-    "Também aceita ACRCLOUD_HOST, ACRCLOUD_ACCESS_KEY e ACRCLOUD_ACCESS_SECRET pelo ambiente.",
-    "O card do Shazam continua com os botões Áudio e Vídeo usando play_audio e play_video."
+    "Remove completamente o comando Shazam do Tokito Bot.",
+    "Remove o módulo plugins/downloads/shazam.js.",
+    "Remove o motor de reconhecimento por SongFinder e ACRCloud do sistema modular.",
+    "Remove o arquivo de configuração INFO_DADOS/acrcloud.json.",
+    "Remove a dependência acrcloud do package.json.",
+    "Remove as mensagens específicas do Shazam e a opção Shazam do menu de downloads."
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/downloads/shazam.js",
+    "DADOS_TOKITO/INFO_DADOS/acrcloud.json"
+  ],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Shazam com estrutura do Akame Bot",
-  "notice": "A versão 10.1.70 refaz o motor do Shazam com ACRCloud como reconhecimento principal e busca complementar no YouTube.",
+  "type": "Remoção",
+  "title": "Remoção do Shazam",
+  "notice": "A versão 10.1.71 remove completamente o sistema Shazam do Tokito.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -29,7 +30,12 @@
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/INFO_DADOS/acrcloud.json",
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
       "sha256": "",
       "size": 0
     },
@@ -1836,11 +1842,55 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T17:25:00.000Z"
+    },
+    {
+      "version": "10.1.71",
+      "fromVersion": "10.1.70",
+      "channel": "stable",
+      "type": "Remoção",
+      "title": "Remoção do Shazam",
+      "notice": "A versão 10.1.71 remove completamente o sistema Shazam do Tokito.",
+      "changelog": [
+        "Remove completamente o comando Shazam do Tokito Bot.",
+        "Remove o módulo plugins/downloads/shazam.js.",
+        "Remove o motor de reconhecimento por SongFinder e ACRCloud do sistema modular.",
+        "Remove o arquivo de configuração INFO_DADOS/acrcloud.json.",
+        "Remove a dependência acrcloud do package.json.",
+        "Remove as mensagens específicas do Shazam e a opção Shazam do menu de downloads."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/modulos.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/downloads/shazam.js",
+        "DADOS_TOKITO/INFO_DADOS/acrcloud.json"
+      ],
+      "required": true,
+      "publishedAt": "2026-10-07T17:40:00.000Z"
     }
   ],
-  "versao": "10.1.70",
+  "versao": "10.1.71",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.69"
+  "fromVersion": "10.1.70"
 }
