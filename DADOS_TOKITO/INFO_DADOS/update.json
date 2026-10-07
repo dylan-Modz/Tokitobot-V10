@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.75",
+  "version": "10.1.76",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T23:33:12.150Z",
+  "publishedAt": "2026-10-07T23:37:05.371Z",
   "changelog": [
-    "[Melhoria] Arquivo principal do bot atualizado",
-    "A versão 10.1.75 já está disponível para atualização.",
-    "Arquivo principal do bot atualizado"
+    "[Melhoria] Detector atualizado",
+    "A versão 10.1.76 já está disponível para atualização.",
+    "Detector atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Arquivo principal do bot atualizado",
-  "notice": "A versão 10.1.75 já está disponível para atualização.",
+  "title": "Detector atualizado",
+  "notice": "A versão 10.1.76 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "tokito.js",
-      "sha256": "33c1c26fbf61c3a966fa85f15928db9a1c56a32bdc0e2b79f340c1f549daefb6",
-      "size": 52366
+      "path": "DADOS_TOKITO/detector.js",
+      "sha256": "e77d06f09294cb89ff3d16807e1568cc59ef6d437faeac297e1c92a407290225",
+      "size": 5100
     }
   ],
   "releases": [
@@ -1988,6 +1988,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T23:33:12.150Z"
+    },
+    {
+      "version": "10.1.76",
+      "fromVersion": "10.1.75",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Detector atualizado",
+      "notice": "A versão 10.1.76 já está disponível para atualização.",
+      "changelog": [
+        "Detector atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/detector.js",
+          "sha256": "e77d06f09294cb89ff3d16807e1568cc59ef6d437faeac297e1c92a407290225",
+          "size": 5100
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T23:37:05.371Z"
     }
   ],
   "versao": "10.1.73",
