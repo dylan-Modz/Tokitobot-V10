@@ -79,7 +79,7 @@ function criarGame(grupo, tipo) {
     const item = lista[Math.floor(Math.random() * lista.length)]
     pergunta = 'Qual é o nome desse Pokémon?'
     resposta = item.name
-    imagem = item.photo
+    imagem = item.photo || ('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + item.id + '.png')
     opcoes = shuffle([item.name, ...shuffle(lista.filter(x => x.id !== item.id).map(x => x.name)).slice(0, 3)])
   } else {
     const lista = base.getList(cfg.arquivo)
