@@ -15,10 +15,10 @@
       "velocidade": 45
     },
     "from": null,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 2,
     "nivelEvolucao": 16
   },
@@ -38,10 +38,10 @@
       "velocidade": 60
     },
     "from": 1,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 3,
     "nivelEvolucao": 16
   },
@@ -61,10 +61,10 @@
       "velocidade": 80
     },
     "from": 2,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 4,
@@ -81,10 +81,10 @@
       "velocidade": 65
     },
     "from": null,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 5,
     "nivelEvolucao": 16
   },
@@ -103,10 +103,10 @@
       "velocidade": 80
     },
     "from": 4,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 6,
     "nivelEvolucao": 16
   },
@@ -126,10 +126,10 @@
       "velocidade": 100
     },
     "from": 5,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 7,
@@ -146,10 +146,10 @@
       "velocidade": 43
     },
     "from": null,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 8,
     "nivelEvolucao": 16
   },
@@ -168,10 +168,10 @@
       "velocidade": 58
     },
     "from": 7,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 9,
     "nivelEvolucao": 16
   },
@@ -190,10 +190,10 @@
       "velocidade": 78
     },
     "from": 8,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 10,
@@ -210,10 +210,10 @@
       "velocidade": 45
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 11,
     "nivelEvolucao": 16
   },
@@ -232,10 +232,10 @@
       "velocidade": 30
     },
     "from": 10,
-    "capture": 4,
+    "capture": 120,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 12,
     "nivelEvolucao": 16
   },
@@ -255,10 +255,10 @@
       "velocidade": 70
     },
     "from": 11,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 13,
@@ -276,10 +276,10 @@
       "velocidade": 50
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 14,
     "nivelEvolucao": 16
   },
@@ -299,10 +299,10 @@
       "velocidade": 35
     },
     "from": 13,
-    "capture": 4,
+    "capture": 120,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 15,
     "nivelEvolucao": 16
   },
@@ -322,10 +322,10 @@
       "velocidade": 75
     },
     "from": 14,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 16,
@@ -343,10 +343,10 @@
       "velocidade": 56
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 17,
     "nivelEvolucao": 16
   },
@@ -366,10 +366,10 @@
       "velocidade": 71
     },
     "from": 16,
-    "capture": 4,
+    "capture": 120,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 18,
     "nivelEvolucao": 16
   },
@@ -389,10 +389,10 @@
       "velocidade": 101
     },
     "from": 17,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 19,
@@ -409,10 +409,10 @@
       "velocidade": 72
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 20,
     "nivelEvolucao": 16
   },
@@ -431,10 +431,10 @@
       "velocidade": 97
     },
     "from": 19,
-    "capture": 4,
+    "capture": 127,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 21,
@@ -452,10 +452,10 @@
       "velocidade": 70
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 22,
     "nivelEvolucao": 16
   },
@@ -475,10 +475,10 @@
       "velocidade": 100
     },
     "from": 21,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 23,
@@ -495,10 +495,10 @@
       "velocidade": 55
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 24,
     "nivelEvolucao": 16
   },
@@ -517,10 +517,10 @@
       "velocidade": 80
     },
     "from": 23,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 25,
@@ -537,10 +537,10 @@
       "velocidade": 90
     },
     "from": 172,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 26,
     "nivelEvolucao": 16
   },
@@ -559,10 +559,10 @@
       "velocidade": 110
     },
     "from": 25,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 27,
@@ -579,10 +579,10 @@
       "velocidade": 40
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 28,
     "nivelEvolucao": 16
   },
@@ -601,10 +601,10 @@
       "velocidade": 65
     },
     "from": 27,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 29,
@@ -621,10 +621,10 @@
       "velocidade": 41
     },
     "from": null,
-    "capture": 8,
+    "capture": 235,
     "baby": false,
-    "raridade": "Raro",
-    "preco": 22000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 30,
     "nivelEvolucao": 16
   },
@@ -643,10 +643,10 @@
       "velocidade": 56
     },
     "from": 29,
-    "capture": 8,
+    "capture": 120,
     "baby": false,
-    "raridade": "Raro",
-    "preco": 22000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 31,
     "nivelEvolucao": 16
   },
@@ -666,7 +666,7 @@
       "velocidade": 76
     },
     "from": 30,
-    "capture": 8,
+    "capture": 45,
     "baby": false,
     "raridade": "Raro",
     "preco": 22000
@@ -686,10 +686,10 @@
       "velocidade": 50
     },
     "from": null,
-    "capture": 45,
+    "capture": 235,
     "baby": false,
-    "raridade": "Raro",
-    "preco": 22000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 33,
     "nivelEvolucao": 16
   },
@@ -708,10 +708,10 @@
       "velocidade": 65
     },
     "from": 32,
-    "capture": 45,
+    "capture": 120,
     "baby": false,
-    "raridade": "Raro",
-    "preco": 22000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 34,
     "nivelEvolucao": 16
   },
@@ -751,10 +751,10 @@
       "velocidade": 35
     },
     "from": 173,
-    "capture": 6,
+    "capture": 150,
     "baby": false,
-    "raridade": "Raro",
-    "preco": 22000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 36,
     "nivelEvolucao": 16
   },
@@ -773,7 +773,7 @@
       "velocidade": 60
     },
     "from": 35,
-    "capture": 6,
+    "capture": 25,
     "baby": false,
     "raridade": "Raro",
     "preco": 22000
@@ -793,10 +793,10 @@
       "velocidade": 65
     },
     "from": null,
-    "capture": 6,
+    "capture": 190,
     "baby": false,
-    "raridade": "Raro",
-    "preco": 22000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 38,
     "nivelEvolucao": 16
   },
@@ -815,10 +815,10 @@
       "velocidade": 100
     },
     "from": 37,
-    "capture": 6,
+    "capture": 75,
     "baby": false,
-    "raridade": "Raro",
-    "preco": 22000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 39,
@@ -836,10 +836,10 @@
       "velocidade": 20
     },
     "from": 174,
-    "capture": 6,
+    "capture": 170,
     "baby": false,
-    "raridade": "Raro",
-    "preco": 22000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 40,
     "nivelEvolucao": 16
   },
@@ -859,10 +859,10 @@
       "velocidade": 45
     },
     "from": 39,
-    "capture": 6,
+    "capture": 50,
     "baby": false,
-    "raridade": "Raro",
-    "preco": 22000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 41,
@@ -880,10 +880,10 @@
       "velocidade": 55
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 42,
     "nivelEvolucao": 16
   },
@@ -903,10 +903,10 @@
       "velocidade": 90
     },
     "from": 41,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 169,
     "nivelEvolucao": 16
   },
@@ -926,10 +926,10 @@
       "velocidade": 30
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 44,
     "nivelEvolucao": 16
   },
@@ -949,10 +949,10 @@
       "velocidade": 40
     },
     "from": 43,
-    "capture": 4,
+    "capture": 120,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 45,
     "nivelEvolucao": 16
   },
@@ -972,10 +972,10 @@
       "velocidade": 50
     },
     "from": 44,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 46,
@@ -993,10 +993,10 @@
       "velocidade": 25
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 47,
     "nivelEvolucao": 16
   },
@@ -1016,10 +1016,10 @@
       "velocidade": 30
     },
     "from": 46,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 48,
@@ -1037,10 +1037,10 @@
       "velocidade": 45
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 49,
     "nivelEvolucao": 16
   },
@@ -1060,10 +1060,10 @@
       "velocidade": 90
     },
     "from": 48,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 50,
@@ -1080,10 +1080,10 @@
       "velocidade": 95
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 51,
     "nivelEvolucao": 16
   },
@@ -1102,10 +1102,10 @@
       "velocidade": 120
     },
     "from": 50,
-    "capture": 4,
+    "capture": 50,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 52,
@@ -1122,10 +1122,10 @@
       "velocidade": 90
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 53,
     "nivelEvolucao": 16
   },
@@ -1144,10 +1144,10 @@
       "velocidade": 115
     },
     "from": 52,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 54,
@@ -1164,10 +1164,10 @@
       "velocidade": 55
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 55,
     "nivelEvolucao": 16
   },
@@ -1186,10 +1186,10 @@
       "velocidade": 85
     },
     "from": 54,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 56,
@@ -1206,10 +1206,10 @@
       "velocidade": 70
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 57,
     "nivelEvolucao": 16
   },
@@ -1228,10 +1228,10 @@
       "velocidade": 95
     },
     "from": 56,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 58,
@@ -1248,10 +1248,10 @@
       "velocidade": 60
     },
     "from": null,
-    "capture": 2,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 59,
     "nivelEvolucao": 16
   },
@@ -1270,10 +1270,10 @@
       "velocidade": 95
     },
     "from": 58,
-    "capture": 2,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 60,
@@ -1290,10 +1290,10 @@
       "velocidade": 90
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 61,
     "nivelEvolucao": 16
   },
@@ -1312,10 +1312,10 @@
       "velocidade": 90
     },
     "from": 60,
-    "capture": 4,
+    "capture": 120,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 62,
     "nivelEvolucao": 16
   },
@@ -1335,10 +1335,10 @@
       "velocidade": 70
     },
     "from": 61,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 63,
@@ -1355,10 +1355,10 @@
       "velocidade": 90
     },
     "from": null,
-    "capture": 2,
+    "capture": 200,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 64,
     "nivelEvolucao": 16
   },
@@ -1377,10 +1377,10 @@
       "velocidade": 105
     },
     "from": 63,
-    "capture": 2,
+    "capture": 100,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 65,
     "nivelEvolucao": 16
   },
@@ -1399,10 +1399,10 @@
       "velocidade": 120
     },
     "from": 64,
-    "capture": 2,
+    "capture": 50,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 66,
@@ -1419,10 +1419,10 @@
       "velocidade": 35
     },
     "from": null,
-    "capture": 2,
+    "capture": 180,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 67,
     "nivelEvolucao": 16
   },
@@ -1441,10 +1441,10 @@
       "velocidade": 45
     },
     "from": 66,
-    "capture": 2,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 68,
     "nivelEvolucao": 16
   },
@@ -1463,10 +1463,10 @@
       "velocidade": 55
     },
     "from": 67,
-    "capture": 2,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 69,
@@ -1484,10 +1484,10 @@
       "velocidade": 40
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 70,
     "nivelEvolucao": 16
   },
@@ -1507,10 +1507,10 @@
       "velocidade": 55
     },
     "from": 69,
-    "capture": 4,
+    "capture": 120,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 71,
     "nivelEvolucao": 16
   },
@@ -1530,10 +1530,10 @@
       "velocidade": 70
     },
     "from": 70,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 72,
@@ -1551,10 +1551,10 @@
       "velocidade": 70
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 73,
     "nivelEvolucao": 16
   },
@@ -1574,10 +1574,10 @@
       "velocidade": 100
     },
     "from": 72,
-    "capture": 4,
+    "capture": 60,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 74,
@@ -1595,10 +1595,10 @@
       "velocidade": 20
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 75,
     "nivelEvolucao": 16
   },
@@ -1618,10 +1618,10 @@
       "velocidade": 35
     },
     "from": 74,
-    "capture": 4,
+    "capture": 120,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 76,
     "nivelEvolucao": 16
   },
@@ -1641,10 +1641,10 @@
       "velocidade": 45
     },
     "from": 75,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 77,
@@ -1661,10 +1661,10 @@
       "velocidade": 90
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 78,
     "nivelEvolucao": 16
   },
@@ -1683,10 +1683,10 @@
       "velocidade": 105
     },
     "from": 77,
-    "capture": 4,
+    "capture": 60,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 79,
@@ -1704,10 +1704,10 @@
       "velocidade": 15
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 80,
     "nivelEvolucao": 16
   },
@@ -1727,10 +1727,10 @@
       "velocidade": 30
     },
     "from": 79,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 81,
@@ -1748,10 +1748,10 @@
       "velocidade": 45
     },
     "from": null,
-    "capture": -1,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 82,
     "nivelEvolucao": 16
   },
@@ -1771,10 +1771,10 @@
       "velocidade": 70
     },
     "from": 81,
-    "capture": -1,
+    "capture": 60,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 83,
@@ -1792,10 +1792,10 @@
       "velocidade": 60
     },
     "from": null,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 84,
@@ -1813,10 +1813,10 @@
       "velocidade": 75
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 85,
     "nivelEvolucao": 16
   },
@@ -1836,10 +1836,10 @@
       "velocidade": 110
     },
     "from": 84,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 86,
@@ -1856,10 +1856,10 @@
       "velocidade": 45
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 87,
     "nivelEvolucao": 16
   },
@@ -1879,10 +1879,10 @@
       "velocidade": 70
     },
     "from": 86,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 88,
@@ -1899,10 +1899,10 @@
       "velocidade": 25
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 89,
     "nivelEvolucao": 16
   },
@@ -1921,10 +1921,10 @@
       "velocidade": 50
     },
     "from": 88,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 90,
@@ -1941,10 +1941,10 @@
       "velocidade": 40
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 91,
     "nivelEvolucao": 16
   },
@@ -1964,10 +1964,10 @@
       "velocidade": 70
     },
     "from": 90,
-    "capture": 4,
+    "capture": 60,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 92,
@@ -1985,10 +1985,10 @@
       "velocidade": 80
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 93,
     "nivelEvolucao": 16
   },
@@ -2008,10 +2008,10 @@
       "velocidade": 95
     },
     "from": 92,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 94,
     "nivelEvolucao": 16
   },
@@ -2031,10 +2031,10 @@
       "velocidade": 110
     },
     "from": 93,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 95,
@@ -2052,10 +2052,10 @@
       "velocidade": 70
     },
     "from": null,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 96,
@@ -2072,10 +2072,10 @@
       "velocidade": 42
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 97,
     "nivelEvolucao": 16
   },
@@ -2094,10 +2094,10 @@
       "velocidade": 67
     },
     "from": 96,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 98,
@@ -2114,10 +2114,10 @@
       "velocidade": 50
     },
     "from": null,
-    "capture": 4,
+    "capture": 225,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 99,
     "nivelEvolucao": 16
   },
@@ -2136,10 +2136,10 @@
       "velocidade": 75
     },
     "from": 98,
-    "capture": 4,
+    "capture": 60,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 100,
@@ -2156,10 +2156,10 @@
       "velocidade": 100
     },
     "from": null,
-    "capture": -1,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 101,
     "nivelEvolucao": 16
   },
@@ -2178,10 +2178,10 @@
       "velocidade": 150
     },
     "from": 100,
-    "capture": -1,
+    "capture": 60,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 102,
@@ -2199,10 +2199,10 @@
       "velocidade": 40
     },
     "from": null,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 103,
     "nivelEvolucao": 16
   },
@@ -2222,10 +2222,10 @@
       "velocidade": 55
     },
     "from": 102,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 104,
@@ -2242,10 +2242,10 @@
       "velocidade": 35
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 105,
     "nivelEvolucao": 16
   },
@@ -2264,10 +2264,10 @@
       "velocidade": 45
     },
     "from": 104,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 106,
@@ -2324,10 +2324,10 @@
       "velocidade": 30
     },
     "from": null,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 109,
@@ -2344,10 +2344,10 @@
       "velocidade": 35
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 110,
     "nivelEvolucao": 16
   },
@@ -2366,10 +2366,10 @@
       "velocidade": 60
     },
     "from": 109,
-    "capture": 4,
+    "capture": 60,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 111,
@@ -2387,10 +2387,10 @@
       "velocidade": 25
     },
     "from": null,
-    "capture": 4,
+    "capture": 120,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 112,
     "nivelEvolucao": 16
   },
@@ -2410,10 +2410,10 @@
       "velocidade": 40
     },
     "from": 111,
-    "capture": 4,
+    "capture": 60,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 113,
@@ -2430,7 +2430,7 @@
       "velocidade": 50
     },
     "from": 440,
-    "capture": 8,
+    "capture": 30,
     "baby": false,
     "raridade": "Raro",
     "preco": 22000
@@ -2450,10 +2450,10 @@
       "velocidade": 60
     },
     "from": null,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 115,
@@ -2470,7 +2470,7 @@
       "velocidade": 90
     },
     "from": null,
-    "capture": 8,
+    "capture": 45,
     "baby": false,
     "raridade": "Raro",
     "preco": 22000
@@ -2490,10 +2490,10 @@
       "velocidade": 60
     },
     "from": null,
-    "capture": 4,
+    "capture": 225,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 117,
     "nivelEvolucao": 16
   },
@@ -2512,10 +2512,10 @@
       "velocidade": 85
     },
     "from": 116,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 118,
@@ -2532,10 +2532,10 @@
       "velocidade": 63
     },
     "from": null,
-    "capture": 4,
+    "capture": 225,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 119,
     "nivelEvolucao": 16
   },
@@ -2554,10 +2554,10 @@
       "velocidade": 68
     },
     "from": 118,
-    "capture": 4,
+    "capture": 60,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 120,
@@ -2574,10 +2574,10 @@
       "velocidade": 85
     },
     "from": null,
-    "capture": -1,
+    "capture": 225,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 121,
     "nivelEvolucao": 16
   },
@@ -2597,10 +2597,10 @@
       "velocidade": 115
     },
     "from": 120,
-    "capture": -1,
+    "capture": 60,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 122,
@@ -2618,10 +2618,10 @@
       "velocidade": 90
     },
     "from": 439,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 123,
@@ -2639,10 +2639,10 @@
       "velocidade": 105
     },
     "from": null,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 124,
@@ -2660,7 +2660,7 @@
       "velocidade": 95
     },
     "from": 238,
-    "capture": 8,
+    "capture": 45,
     "baby": false,
     "raridade": "Raro",
     "preco": 22000
@@ -2680,10 +2680,10 @@
       "velocidade": 105
     },
     "from": 239,
-    "capture": 2,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 126,
@@ -2700,10 +2700,10 @@
       "velocidade": 93
     },
     "from": 240,
-    "capture": 2,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 127,
@@ -2720,10 +2720,10 @@
       "velocidade": 85
     },
     "from": null,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 128,
@@ -2760,10 +2760,10 @@
       "velocidade": 80
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 130,
     "nivelEvolucao": 20
   },
@@ -2783,10 +2783,10 @@
       "velocidade": 81
     },
     "from": 129,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 131,
@@ -2804,10 +2804,10 @@
       "velocidade": 60
     },
     "from": null,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 132,
@@ -2824,10 +2824,10 @@
       "velocidade": 48
     },
     "from": null,
-    "capture": -1,
+    "capture": 35,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 133,
@@ -2844,10 +2844,10 @@
       "velocidade": 55
     },
     "from": null,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 134,
     "nivelEvolucao": 20
   },
@@ -2866,10 +2866,10 @@
       "velocidade": 65
     },
     "from": 133,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 135,
@@ -2886,10 +2886,10 @@
       "velocidade": 130
     },
     "from": 133,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 136,
@@ -2906,10 +2906,10 @@
       "velocidade": 65
     },
     "from": 133,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 137,
@@ -2926,10 +2926,10 @@
       "velocidade": 40
     },
     "from": null,
-    "capture": -1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 138,
@@ -2947,10 +2947,10 @@
       "velocidade": 35
     },
     "from": null,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 139,
     "nivelEvolucao": 16
   },
@@ -2970,10 +2970,10 @@
       "velocidade": 55
     },
     "from": 138,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 140,
@@ -2991,10 +2991,10 @@
       "velocidade": 55
     },
     "from": null,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 141,
     "nivelEvolucao": 16
   },
@@ -3014,10 +3014,10 @@
       "velocidade": 80
     },
     "from": 140,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 142,
@@ -3035,10 +3035,10 @@
       "velocidade": 130
     },
     "from": null,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 143,
@@ -3055,10 +3055,10 @@
       "velocidade": 30
     },
     "from": 446,
-    "capture": 1,
+    "capture": 25,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 144,
@@ -3076,7 +3076,7 @@
       "velocidade": 85
     },
     "from": null,
-    "capture": -1,
+    "capture": 3,
     "baby": false,
     "raridade": "Lendário",
     "preco": 50000
@@ -3097,7 +3097,7 @@
       "velocidade": 100
     },
     "from": null,
-    "capture": -1,
+    "capture": 3,
     "baby": false,
     "raridade": "Lendário",
     "preco": 50000
@@ -3118,7 +3118,7 @@
       "velocidade": 90
     },
     "from": null,
-    "capture": -1,
+    "capture": 3,
     "baby": false,
     "raridade": "Lendário",
     "preco": 50000
@@ -3138,10 +3138,10 @@
       "velocidade": 50
     },
     "from": null,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 148,
     "nivelEvolucao": 16
   },
@@ -3160,10 +3160,10 @@
       "velocidade": 70
     },
     "from": 147,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 149,
     "nivelEvolucao": 16
   },
@@ -3183,10 +3183,10 @@
       "velocidade": 80
     },
     "from": 148,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 150,
@@ -3203,7 +3203,7 @@
       "velocidade": 130
     },
     "from": null,
-    "capture": -1,
+    "capture": 3,
     "baby": false,
     "raridade": "Lendário",
     "preco": 50000
@@ -3223,10 +3223,10 @@
       "velocidade": 100
     },
     "from": null,
-    "capture": -1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 152,
@@ -3243,10 +3243,10 @@
       "velocidade": 45
     },
     "from": null,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 153,
     "nivelEvolucao": 16
   },
@@ -3265,10 +3265,10 @@
       "velocidade": 60
     },
     "from": 152,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 154,
     "nivelEvolucao": 16
   },
@@ -3287,10 +3287,10 @@
       "velocidade": 80
     },
     "from": 153,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 155,
@@ -3307,10 +3307,10 @@
       "velocidade": 65
     },
     "from": null,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 156,
     "nivelEvolucao": 16
   },
@@ -3329,10 +3329,10 @@
       "velocidade": 80
     },
     "from": 155,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 157,
     "nivelEvolucao": 16
   },
@@ -3351,10 +3351,10 @@
       "velocidade": 100
     },
     "from": 156,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 158,
@@ -3371,10 +3371,10 @@
       "velocidade": 43
     },
     "from": null,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 159,
     "nivelEvolucao": 16
   },
@@ -3393,10 +3393,10 @@
       "velocidade": 58
     },
     "from": 158,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Raro",
+    "preco": 22000,
     "evoluiId": 160,
     "nivelEvolucao": 16
   },
@@ -3415,10 +3415,10 @@
       "velocidade": 78
     },
     "from": 159,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 161,
@@ -3435,10 +3435,10 @@
       "velocidade": 20
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 162,
     "nivelEvolucao": 16
   },
@@ -3457,10 +3457,10 @@
       "velocidade": 90
     },
     "from": 161,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 163,
@@ -3478,10 +3478,10 @@
       "velocidade": 50
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 164,
     "nivelEvolucao": 16
   },
@@ -3501,10 +3501,10 @@
       "velocidade": 70
     },
     "from": 163,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 165,
@@ -3522,10 +3522,10 @@
       "velocidade": 55
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 166,
     "nivelEvolucao": 16
   },
@@ -3545,10 +3545,10 @@
       "velocidade": 85
     },
     "from": 165,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 167,
@@ -3566,10 +3566,10 @@
       "velocidade": 30
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 168,
     "nivelEvolucao": 16
   },
@@ -3589,10 +3589,10 @@
       "velocidade": 40
     },
     "from": 167,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 169,
@@ -3610,10 +3610,10 @@
       "velocidade": 130
     },
     "from": 42,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 170,
@@ -3631,10 +3631,10 @@
       "velocidade": 67
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 171,
     "nivelEvolucao": 16
   },
@@ -3654,10 +3654,10 @@
       "velocidade": 67
     },
     "from": 170,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 172,
@@ -3674,10 +3674,10 @@
       "velocidade": 60
     },
     "from": null,
-    "capture": 4,
-    "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "capture": 190,
+    "baby": true,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 25,
     "nivelEvolucao": 16
   },
@@ -3696,10 +3696,10 @@
       "velocidade": 15
     },
     "from": null,
-    "capture": 6,
-    "baby": false,
-    "raridade": "Raro",
-    "preco": 22000,
+    "capture": 150,
+    "baby": true,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 35,
     "nivelEvolucao": 16
   },
@@ -3719,10 +3719,10 @@
       "velocidade": 15
     },
     "from": null,
-    "capture": 6,
-    "baby": false,
-    "raridade": "Raro",
-    "preco": 22000,
+    "capture": 170,
+    "baby": true,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 39,
     "nivelEvolucao": 16
   },
@@ -3741,10 +3741,10 @@
       "velocidade": 20
     },
     "from": null,
-    "capture": 1,
-    "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "capture": 190,
+    "baby": true,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 176,
     "nivelEvolucao": 16
   },
@@ -3764,10 +3764,10 @@
       "velocidade": 40
     },
     "from": 175,
-    "capture": 1,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 177,
@@ -3785,10 +3785,10 @@
       "velocidade": 70
     },
     "from": null,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 178,
     "nivelEvolucao": 16
   },
@@ -3808,10 +3808,10 @@
       "velocidade": 95
     },
     "from": 177,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 179,
@@ -3828,10 +3828,10 @@
       "velocidade": 35
     },
     "from": null,
-    "capture": 4,
+    "capture": 235,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 180,
     "nivelEvolucao": 16
   },
@@ -3850,10 +3850,10 @@
       "velocidade": 45
     },
     "from": 179,
-    "capture": 4,
+    "capture": 120,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 181,
     "nivelEvolucao": 16
   },
@@ -3872,10 +3872,10 @@
       "velocidade": 55
     },
     "from": 180,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 182,
@@ -3892,10 +3892,10 @@
       "velocidade": 50
     },
     "from": 44,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 183,
@@ -3913,10 +3913,10 @@
       "velocidade": 40
     },
     "from": 298,
-    "capture": 4,
+    "capture": 190,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 184,
     "nivelEvolucao": 16
   },
@@ -3936,10 +3936,10 @@
       "velocidade": 50
     },
     "from": 183,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 185,
@@ -3956,10 +3956,10 @@
       "velocidade": 30
     },
     "from": 438,
-    "capture": 4,
+    "capture": 65,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 186,
@@ -3976,10 +3976,10 @@
       "velocidade": 70
     },
     "from": 61,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 187,
@@ -3997,10 +3997,10 @@
       "velocidade": 50
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 188,
     "nivelEvolucao": 16
   },
@@ -4020,10 +4020,10 @@
       "velocidade": 80
     },
     "from": 187,
-    "capture": 4,
+    "capture": 120,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Evoluído",
+    "preco": 12000,
     "evoluiId": 189,
     "nivelEvolucao": 16
   },
@@ -4043,10 +4043,10 @@
       "velocidade": 110
     },
     "from": 188,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 190,
@@ -4063,10 +4063,10 @@
       "velocidade": 85
     },
     "from": null,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 191,
@@ -4083,10 +4083,10 @@
       "velocidade": 30
     },
     "from": null,
-    "capture": 4,
+    "capture": 235,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 192,
     "nivelEvolucao": 16
   },
@@ -4105,10 +4105,10 @@
       "velocidade": 30
     },
     "from": 191,
-    "capture": 4,
+    "capture": 120,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 193,
@@ -4126,10 +4126,10 @@
       "velocidade": 95
     },
     "from": null,
-    "capture": 4,
+    "capture": 75,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Comum",
+    "preco": 3000
   },
   {
     "id": 194,
@@ -4147,10 +4147,10 @@
       "velocidade": 15
     },
     "from": null,
-    "capture": 4,
+    "capture": 255,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000,
+    "raridade": "Comum",
+    "preco": 3000,
     "evoluiId": 195,
     "nivelEvolucao": 16
   },
@@ -4170,10 +4170,10 @@
       "velocidade": 35
     },
     "from": 194,
-    "capture": 4,
+    "capture": 90,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 196,
@@ -4190,10 +4190,10 @@
       "velocidade": 110
     },
     "from": 133,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 197,
@@ -4210,10 +4210,10 @@
       "velocidade": 65
     },
     "from": 133,
-    "capture": 1,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 198,
@@ -4231,10 +4231,10 @@
       "velocidade": 91
     },
     "from": null,
-    "capture": 4,
+    "capture": 30,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   },
   {
     "id": 199,
@@ -4252,10 +4252,10 @@
       "velocidade": 30
     },
     "from": 79,
-    "capture": 4,
+    "capture": 70,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Evoluído",
+    "preco": 12000
   },
   {
     "id": 200,
@@ -4272,9 +4272,9 @@
       "velocidade": 85
     },
     "from": null,
-    "capture": 4,
+    "capture": 45,
     "baby": false,
-    "raridade": "Lendário",
-    "preco": 50000
+    "raridade": "Raro",
+    "preco": 22000
   }
 ]
