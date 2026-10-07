@@ -1,16 +1,4280 @@
 [
-  {"id":1,"name":"Blastoise","photo":"https://telegra.ph/file/7c3e371411eec7be6009a.jpg"},
-  {"id":2,"name":"Primeape","photo":"https://telegra.ph/file/e51d4daec91753bd8c9a8.jpg"},
-  {"id":3,"name":"Pikachu","photo":"https://telegra.ph/file/0088d7036586d07d749db.jpg"},
-  {"id":4,"name":"Cherubi","photo":"https://telegra.ph/file/14935357c724aa031a363.jpg"},
-  {"id":5,"name":"Magikarp","photo":"https://telegra.ph/file/f0f7d12a9c9c3427cbfb1.jpg"},
-  {"id":6,"name":"Clefairy","photo":"https://telegra.ph/file/11060f05b7acf3c7152a0.jpg"},
-  {"id":7,"name":"Electrode","photo":"https://telegra.ph/file/41b57675d3d4f6b3d8a18.jpg"},
-  {"id":8,"name":"Eevee","photo":"https://telegra.ph/file/97aeb0b998d0f9a079ecf.jpg"},
-  {"id":9,"name":"Mudkip","photo":"https://telegra.ph/file/2db0743e69a6e9d117620.jpg"},
-  {"id":10,"name":"Sunflora","photo":"https://telegra.ph/file/54af2dc94c45e045b4e14.jpg"},
-  {"id":11,"name":"Dragonite","photo":"https://telegra.ph/file/b21f8f19a74d586e4bc17.jpg"},
-  {"id":12,"name":"Exeggutor","photo":"https://telegra.ph/file/85e84ffe1e7c999044c6b.jpg"},
-  {"id":13,"name":"Raichu","photo":"https://telegra.ph/file/c810960a2cf0e2ff79727.jpg"},
-  {"id":14,"name":"Slowking","photo":"https://telegra.ph/file/0894f6782d5e6f4c82800.jpg"}
+  {
+    "id": 1,
+    "name": "Bulbasaur",
+    "tipos": [
+      "Planta",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 45,
+      "ataque": 49,
+      "defesa": 49,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 65,
+      "velocidade": 45
+    },
+    "from": null,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 2,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 2,
+    "name": "Ivysaur",
+    "tipos": [
+      "Planta",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 62,
+      "defesa": 63,
+      "ataqueEspecial": 80,
+      "defesaEspecial": 80,
+      "velocidade": 60
+    },
+    "from": 1,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 3,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 3,
+    "name": "Venusaur",
+    "tipos": [
+      "Planta",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 80,
+      "ataque": 82,
+      "defesa": 83,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 100,
+      "velocidade": 80
+    },
+    "from": 2,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 4,
+    "name": "Charmander",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 39,
+      "ataque": 52,
+      "defesa": 43,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 50,
+      "velocidade": 65
+    },
+    "from": null,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 5,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 5,
+    "name": "Charmeleon",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 58,
+      "ataque": 64,
+      "defesa": 58,
+      "ataqueEspecial": 80,
+      "defesaEspecial": 65,
+      "velocidade": 80
+    },
+    "from": 4,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 6,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 6,
+    "name": "Charizard",
+    "tipos": [
+      "Fogo",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 78,
+      "ataque": 84,
+      "defesa": 78,
+      "ataqueEspecial": 109,
+      "defesaEspecial": 85,
+      "velocidade": 100
+    },
+    "from": 5,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 7,
+    "name": "Squirtle",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 44,
+      "ataque": 48,
+      "defesa": 65,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 64,
+      "velocidade": 43
+    },
+    "from": null,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 8,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 8,
+    "name": "Wartortle",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 59,
+      "ataque": 63,
+      "defesa": 80,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 80,
+      "velocidade": 58
+    },
+    "from": 7,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 9,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 9,
+    "name": "Blastoise",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 79,
+      "ataque": 83,
+      "defesa": 100,
+      "ataqueEspecial": 85,
+      "defesaEspecial": 105,
+      "velocidade": 78
+    },
+    "from": 8,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 10,
+    "name": "Caterpie",
+    "tipos": [
+      "Inseto"
+    ],
+    "stats": {
+      "hp": 45,
+      "ataque": 30,
+      "defesa": 35,
+      "ataqueEspecial": 20,
+      "defesaEspecial": 20,
+      "velocidade": 45
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 11,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 11,
+    "name": "Metapod",
+    "tipos": [
+      "Inseto"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 20,
+      "defesa": 55,
+      "ataqueEspecial": 25,
+      "defesaEspecial": 25,
+      "velocidade": 30
+    },
+    "from": 10,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 12,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 12,
+    "name": "Butterfree",
+    "tipos": [
+      "Inseto",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 45,
+      "defesa": 50,
+      "ataqueEspecial": 90,
+      "defesaEspecial": 80,
+      "velocidade": 70
+    },
+    "from": 11,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 13,
+    "name": "Weedle",
+    "tipos": [
+      "Inseto",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 35,
+      "defesa": 30,
+      "ataqueEspecial": 20,
+      "defesaEspecial": 20,
+      "velocidade": 50
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 14,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 14,
+    "name": "Kakuna",
+    "tipos": [
+      "Inseto",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 45,
+      "ataque": 25,
+      "defesa": 50,
+      "ataqueEspecial": 25,
+      "defesaEspecial": 25,
+      "velocidade": 35
+    },
+    "from": 13,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 15,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 15,
+    "name": "Beedrill",
+    "tipos": [
+      "Inseto",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 90,
+      "defesa": 40,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 80,
+      "velocidade": 75
+    },
+    "from": 14,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 16,
+    "name": "Pidgey",
+    "tipos": [
+      "Normal",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 45,
+      "defesa": 40,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 35,
+      "velocidade": 56
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 17,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 17,
+    "name": "Pidgeotto",
+    "tipos": [
+      "Normal",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 63,
+      "ataque": 60,
+      "defesa": 55,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 50,
+      "velocidade": 71
+    },
+    "from": 16,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 18,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 18,
+    "name": "Pidgeot",
+    "tipos": [
+      "Normal",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 83,
+      "ataque": 80,
+      "defesa": 75,
+      "ataqueEspecial": 70,
+      "defesaEspecial": 70,
+      "velocidade": 101
+    },
+    "from": 17,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 19,
+    "name": "Rattata",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 30,
+      "ataque": 56,
+      "defesa": 35,
+      "ataqueEspecial": 25,
+      "defesaEspecial": 35,
+      "velocidade": 72
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 20,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 20,
+    "name": "Raticate",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 81,
+      "defesa": 60,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 70,
+      "velocidade": 97
+    },
+    "from": 19,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 21,
+    "name": "Spearow",
+    "tipos": [
+      "Normal",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 60,
+      "defesa": 30,
+      "ataqueEspecial": 31,
+      "defesaEspecial": 31,
+      "velocidade": 70
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 22,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 22,
+    "name": "Fearow",
+    "tipos": [
+      "Normal",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 90,
+      "defesa": 65,
+      "ataqueEspecial": 61,
+      "defesaEspecial": 61,
+      "velocidade": 100
+    },
+    "from": 21,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 23,
+    "name": "Ekans",
+    "tipos": [
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 35,
+      "ataque": 60,
+      "defesa": 44,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 54,
+      "velocidade": 55
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 24,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 24,
+    "name": "Arbok",
+    "tipos": [
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 95,
+      "defesa": 69,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 79,
+      "velocidade": 80
+    },
+    "from": 23,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 25,
+    "name": "Pikachu",
+    "tipos": [
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 35,
+      "ataque": 55,
+      "defesa": 40,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 50,
+      "velocidade": 90
+    },
+    "from": 172,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 26,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 26,
+    "name": "Raichu",
+    "tipos": [
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 90,
+      "defesa": 55,
+      "ataqueEspecial": 90,
+      "defesaEspecial": 80,
+      "velocidade": 110
+    },
+    "from": 25,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 27,
+    "name": "Sandshrew",
+    "tipos": [
+      "Terra"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 75,
+      "defesa": 85,
+      "ataqueEspecial": 20,
+      "defesaEspecial": 30,
+      "velocidade": 40
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 28,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 28,
+    "name": "Sandslash",
+    "tipos": [
+      "Terra"
+    ],
+    "stats": {
+      "hp": 75,
+      "ataque": 100,
+      "defesa": 110,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 55,
+      "velocidade": 65
+    },
+    "from": 27,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 29,
+    "name": "Nidoran♀",
+    "tipos": [
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 47,
+      "defesa": 52,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 40,
+      "velocidade": 41
+    },
+    "from": null,
+    "capture": 8,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000,
+    "evoluiId": 30,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 30,
+    "name": "Nidorina",
+    "tipos": [
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 70,
+      "ataque": 62,
+      "defesa": 67,
+      "ataqueEspecial": 55,
+      "defesaEspecial": 55,
+      "velocidade": 56
+    },
+    "from": 29,
+    "capture": 8,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000,
+    "evoluiId": 31,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 31,
+    "name": "Nidoqueen",
+    "tipos": [
+      "Veneno",
+      "Terra"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 92,
+      "defesa": 87,
+      "ataqueEspecial": 75,
+      "defesaEspecial": 85,
+      "velocidade": 76
+    },
+    "from": 30,
+    "capture": 8,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000
+  },
+  {
+    "id": 32,
+    "name": "Nidoran♂",
+    "tipos": [
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 46,
+      "ataque": 57,
+      "defesa": 40,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 40,
+      "velocidade": 50
+    },
+    "from": null,
+    "capture": 45,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000,
+    "evoluiId": 33,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 33,
+    "name": "Nidorino",
+    "tipos": [
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 61,
+      "ataque": 72,
+      "defesa": 57,
+      "ataqueEspecial": 55,
+      "defesaEspecial": 55,
+      "velocidade": 65
+    },
+    "from": 32,
+    "capture": 45,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000,
+    "evoluiId": 34,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 34,
+    "name": "Nidoking",
+    "tipos": [
+      "Veneno",
+      "Terra"
+    ],
+    "stats": {
+      "hp": 81,
+      "ataque": 102,
+      "defesa": 77,
+      "ataqueEspecial": 85,
+      "defesaEspecial": 75,
+      "velocidade": 85
+    },
+    "from": 33,
+    "capture": 45,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000
+  },
+  {
+    "id": 35,
+    "name": "Clefairy",
+    "tipos": [
+      "Fada"
+    ],
+    "stats": {
+      "hp": 70,
+      "ataque": 45,
+      "defesa": 48,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 65,
+      "velocidade": 35
+    },
+    "from": 173,
+    "capture": 6,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000,
+    "evoluiId": 36,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 36,
+    "name": "Clefable",
+    "tipos": [
+      "Fada"
+    ],
+    "stats": {
+      "hp": 95,
+      "ataque": 70,
+      "defesa": 73,
+      "ataqueEspecial": 95,
+      "defesaEspecial": 90,
+      "velocidade": 60
+    },
+    "from": 35,
+    "capture": 6,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000
+  },
+  {
+    "id": 37,
+    "name": "Vulpix",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 38,
+      "ataque": 41,
+      "defesa": 40,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 65,
+      "velocidade": 65
+    },
+    "from": null,
+    "capture": 6,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000,
+    "evoluiId": 38,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 38,
+    "name": "Ninetales",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 73,
+      "ataque": 76,
+      "defesa": 75,
+      "ataqueEspecial": 81,
+      "defesaEspecial": 100,
+      "velocidade": 100
+    },
+    "from": 37,
+    "capture": 6,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000
+  },
+  {
+    "id": 39,
+    "name": "Jigglypuff",
+    "tipos": [
+      "Normal",
+      "Fada"
+    ],
+    "stats": {
+      "hp": 115,
+      "ataque": 45,
+      "defesa": 20,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 25,
+      "velocidade": 20
+    },
+    "from": 174,
+    "capture": 6,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000,
+    "evoluiId": 40,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 40,
+    "name": "Wigglytuff",
+    "tipos": [
+      "Normal",
+      "Fada"
+    ],
+    "stats": {
+      "hp": 140,
+      "ataque": 70,
+      "defesa": 45,
+      "ataqueEspecial": 85,
+      "defesaEspecial": 50,
+      "velocidade": 45
+    },
+    "from": 39,
+    "capture": 6,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000
+  },
+  {
+    "id": 41,
+    "name": "Zubat",
+    "tipos": [
+      "Veneno",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 45,
+      "defesa": 35,
+      "ataqueEspecial": 30,
+      "defesaEspecial": 40,
+      "velocidade": 55
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 42,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 42,
+    "name": "Golbat",
+    "tipos": [
+      "Veneno",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 75,
+      "ataque": 80,
+      "defesa": 70,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 75,
+      "velocidade": 90
+    },
+    "from": 41,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 169,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 43,
+    "name": "Oddish",
+    "tipos": [
+      "Planta",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 45,
+      "ataque": 50,
+      "defesa": 55,
+      "ataqueEspecial": 75,
+      "defesaEspecial": 65,
+      "velocidade": 30
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 44,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 44,
+    "name": "Gloom",
+    "tipos": [
+      "Planta",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 65,
+      "defesa": 70,
+      "ataqueEspecial": 85,
+      "defesaEspecial": 75,
+      "velocidade": 40
+    },
+    "from": 43,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 45,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 45,
+    "name": "Vileplume",
+    "tipos": [
+      "Planta",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 75,
+      "ataque": 80,
+      "defesa": 85,
+      "ataqueEspecial": 110,
+      "defesaEspecial": 90,
+      "velocidade": 50
+    },
+    "from": 44,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 46,
+    "name": "Paras",
+    "tipos": [
+      "Inseto",
+      "Planta"
+    ],
+    "stats": {
+      "hp": 35,
+      "ataque": 70,
+      "defesa": 55,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 55,
+      "velocidade": 25
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 47,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 47,
+    "name": "Parasect",
+    "tipos": [
+      "Inseto",
+      "Planta"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 95,
+      "defesa": 80,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 80,
+      "velocidade": 30
+    },
+    "from": 46,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 48,
+    "name": "Venonat",
+    "tipos": [
+      "Inseto",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 55,
+      "defesa": 50,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 55,
+      "velocidade": 45
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 49,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 49,
+    "name": "Venomoth",
+    "tipos": [
+      "Inseto",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 70,
+      "ataque": 65,
+      "defesa": 60,
+      "ataqueEspecial": 90,
+      "defesaEspecial": 75,
+      "velocidade": 90
+    },
+    "from": 48,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 50,
+    "name": "Diglett",
+    "tipos": [
+      "Terra"
+    ],
+    "stats": {
+      "hp": 10,
+      "ataque": 55,
+      "defesa": 25,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 45,
+      "velocidade": 95
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 51,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 51,
+    "name": "Dugtrio",
+    "tipos": [
+      "Terra"
+    ],
+    "stats": {
+      "hp": 35,
+      "ataque": 100,
+      "defesa": 50,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 70,
+      "velocidade": 120
+    },
+    "from": 50,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 52,
+    "name": "Meowth",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 45,
+      "defesa": 35,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 40,
+      "velocidade": 90
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 53,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 53,
+    "name": "Persian",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 70,
+      "defesa": 60,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 65,
+      "velocidade": 115
+    },
+    "from": 52,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 54,
+    "name": "Psyduck",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 52,
+      "defesa": 48,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 50,
+      "velocidade": 55
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 55,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 55,
+    "name": "Golduck",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 80,
+      "ataque": 82,
+      "defesa": 78,
+      "ataqueEspecial": 95,
+      "defesaEspecial": 80,
+      "velocidade": 85
+    },
+    "from": 54,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 56,
+    "name": "Mankey",
+    "tipos": [
+      "Lutador"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 80,
+      "defesa": 35,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 45,
+      "velocidade": 70
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 57,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 57,
+    "name": "Primeape",
+    "tipos": [
+      "Lutador"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 105,
+      "defesa": 60,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 70,
+      "velocidade": 95
+    },
+    "from": 56,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 58,
+    "name": "Growlithe",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 70,
+      "defesa": 45,
+      "ataqueEspecial": 70,
+      "defesaEspecial": 50,
+      "velocidade": 60
+    },
+    "from": null,
+    "capture": 2,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 59,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 59,
+    "name": "Arcanine",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 110,
+      "defesa": 80,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 80,
+      "velocidade": 95
+    },
+    "from": 58,
+    "capture": 2,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 60,
+    "name": "Poliwag",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 50,
+      "defesa": 40,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 40,
+      "velocidade": 90
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 61,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 61,
+    "name": "Poliwhirl",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 65,
+      "defesa": 65,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 50,
+      "velocidade": 90
+    },
+    "from": 60,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 62,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 62,
+    "name": "Poliwrath",
+    "tipos": [
+      "Água",
+      "Lutador"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 95,
+      "defesa": 95,
+      "ataqueEspecial": 70,
+      "defesaEspecial": 90,
+      "velocidade": 70
+    },
+    "from": 61,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 63,
+    "name": "Abra",
+    "tipos": [
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 25,
+      "ataque": 20,
+      "defesa": 15,
+      "ataqueEspecial": 105,
+      "defesaEspecial": 55,
+      "velocidade": 90
+    },
+    "from": null,
+    "capture": 2,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 64,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 64,
+    "name": "Kadabra",
+    "tipos": [
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 35,
+      "defesa": 30,
+      "ataqueEspecial": 120,
+      "defesaEspecial": 70,
+      "velocidade": 105
+    },
+    "from": 63,
+    "capture": 2,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 65,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 65,
+    "name": "Alakazam",
+    "tipos": [
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 50,
+      "defesa": 45,
+      "ataqueEspecial": 135,
+      "defesaEspecial": 95,
+      "velocidade": 120
+    },
+    "from": 64,
+    "capture": 2,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 66,
+    "name": "Machop",
+    "tipos": [
+      "Lutador"
+    ],
+    "stats": {
+      "hp": 70,
+      "ataque": 80,
+      "defesa": 50,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 35,
+      "velocidade": 35
+    },
+    "from": null,
+    "capture": 2,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 67,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 67,
+    "name": "Machoke",
+    "tipos": [
+      "Lutador"
+    ],
+    "stats": {
+      "hp": 80,
+      "ataque": 100,
+      "defesa": 70,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 60,
+      "velocidade": 45
+    },
+    "from": 66,
+    "capture": 2,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 68,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 68,
+    "name": "Machamp",
+    "tipos": [
+      "Lutador"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 130,
+      "defesa": 80,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 85,
+      "velocidade": 55
+    },
+    "from": 67,
+    "capture": 2,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 69,
+    "name": "Bellsprout",
+    "tipos": [
+      "Planta",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 75,
+      "defesa": 35,
+      "ataqueEspecial": 70,
+      "defesaEspecial": 30,
+      "velocidade": 40
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 70,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 70,
+    "name": "Weepinbell",
+    "tipos": [
+      "Planta",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 90,
+      "defesa": 50,
+      "ataqueEspecial": 85,
+      "defesaEspecial": 45,
+      "velocidade": 55
+    },
+    "from": 69,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 71,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 71,
+    "name": "Victreebel",
+    "tipos": [
+      "Planta",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 80,
+      "ataque": 105,
+      "defesa": 65,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 70,
+      "velocidade": 70
+    },
+    "from": 70,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 72,
+    "name": "Tentacool",
+    "tipos": [
+      "Água",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 40,
+      "defesa": 35,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 100,
+      "velocidade": 70
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 73,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 73,
+    "name": "Tentacruel",
+    "tipos": [
+      "Água",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 80,
+      "ataque": 70,
+      "defesa": 65,
+      "ataqueEspecial": 80,
+      "defesaEspecial": 120,
+      "velocidade": 100
+    },
+    "from": 72,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 74,
+    "name": "Geodude",
+    "tipos": [
+      "Pedra",
+      "Terra"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 80,
+      "defesa": 100,
+      "ataqueEspecial": 30,
+      "defesaEspecial": 30,
+      "velocidade": 20
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 75,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 75,
+    "name": "Graveler",
+    "tipos": [
+      "Pedra",
+      "Terra"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 95,
+      "defesa": 115,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 45,
+      "velocidade": 35
+    },
+    "from": 74,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 76,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 76,
+    "name": "Golem",
+    "tipos": [
+      "Pedra",
+      "Terra"
+    ],
+    "stats": {
+      "hp": 80,
+      "ataque": 120,
+      "defesa": 130,
+      "ataqueEspecial": 55,
+      "defesaEspecial": 65,
+      "velocidade": 45
+    },
+    "from": 75,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 77,
+    "name": "Ponyta",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 85,
+      "defesa": 55,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 65,
+      "velocidade": 90
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 78,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 78,
+    "name": "Rapidash",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 100,
+      "defesa": 70,
+      "ataqueEspecial": 80,
+      "defesaEspecial": 80,
+      "velocidade": 105
+    },
+    "from": 77,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 79,
+    "name": "Slowpoke",
+    "tipos": [
+      "Água",
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 65,
+      "defesa": 65,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 40,
+      "velocidade": 15
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 80,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 80,
+    "name": "Slowbro",
+    "tipos": [
+      "Água",
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 95,
+      "ataque": 75,
+      "defesa": 110,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 80,
+      "velocidade": 30
+    },
+    "from": 79,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 81,
+    "name": "Magnemite",
+    "tipos": [
+      "Elétrico",
+      "Aço"
+    ],
+    "stats": {
+      "hp": 25,
+      "ataque": 35,
+      "defesa": 70,
+      "ataqueEspecial": 95,
+      "defesaEspecial": 55,
+      "velocidade": 45
+    },
+    "from": null,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 82,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 82,
+    "name": "Magneton",
+    "tipos": [
+      "Elétrico",
+      "Aço"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 60,
+      "defesa": 95,
+      "ataqueEspecial": 120,
+      "defesaEspecial": 70,
+      "velocidade": 70
+    },
+    "from": 81,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 83,
+    "name": "Farfetch'd",
+    "tipos": [
+      "Normal",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 52,
+      "ataque": 90,
+      "defesa": 55,
+      "ataqueEspecial": 58,
+      "defesaEspecial": 62,
+      "velocidade": 60
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 84,
+    "name": "Doduo",
+    "tipos": [
+      "Normal",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 35,
+      "ataque": 85,
+      "defesa": 45,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 35,
+      "velocidade": 75
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 85,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 85,
+    "name": "Dodrio",
+    "tipos": [
+      "Normal",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 110,
+      "defesa": 70,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 60,
+      "velocidade": 110
+    },
+    "from": 84,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 86,
+    "name": "Seel",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 45,
+      "defesa": 55,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 70,
+      "velocidade": 45
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 87,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 87,
+    "name": "Dewgong",
+    "tipos": [
+      "Água",
+      "Gelo"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 70,
+      "defesa": 80,
+      "ataqueEspecial": 70,
+      "defesaEspecial": 95,
+      "velocidade": 70
+    },
+    "from": 86,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 88,
+    "name": "Grimer",
+    "tipos": [
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 80,
+      "ataque": 80,
+      "defesa": 50,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 50,
+      "velocidade": 25
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 89,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 89,
+    "name": "Muk",
+    "tipos": [
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 105,
+      "ataque": 105,
+      "defesa": 75,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 100,
+      "velocidade": 50
+    },
+    "from": 88,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 90,
+    "name": "Shellder",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 30,
+      "ataque": 65,
+      "defesa": 100,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 25,
+      "velocidade": 40
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 91,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 91,
+    "name": "Cloyster",
+    "tipos": [
+      "Água",
+      "Gelo"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 95,
+      "defesa": 180,
+      "ataqueEspecial": 85,
+      "defesaEspecial": 45,
+      "velocidade": 70
+    },
+    "from": 90,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 92,
+    "name": "Gastly",
+    "tipos": [
+      "Fantasma",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 30,
+      "ataque": 35,
+      "defesa": 30,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 35,
+      "velocidade": 80
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 93,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 93,
+    "name": "Haunter",
+    "tipos": [
+      "Fantasma",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 45,
+      "ataque": 50,
+      "defesa": 45,
+      "ataqueEspecial": 115,
+      "defesaEspecial": 55,
+      "velocidade": 95
+    },
+    "from": 92,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 94,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 94,
+    "name": "Gengar",
+    "tipos": [
+      "Fantasma",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 65,
+      "defesa": 60,
+      "ataqueEspecial": 130,
+      "defesaEspecial": 75,
+      "velocidade": 110
+    },
+    "from": 93,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 95,
+    "name": "Onix",
+    "tipos": [
+      "Pedra",
+      "Terra"
+    ],
+    "stats": {
+      "hp": 35,
+      "ataque": 45,
+      "defesa": 160,
+      "ataqueEspecial": 30,
+      "defesaEspecial": 45,
+      "velocidade": 70
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 96,
+    "name": "Drowzee",
+    "tipos": [
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 48,
+      "defesa": 45,
+      "ataqueEspecial": 43,
+      "defesaEspecial": 90,
+      "velocidade": 42
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 97,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 97,
+    "name": "Hypno",
+    "tipos": [
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 85,
+      "ataque": 73,
+      "defesa": 70,
+      "ataqueEspecial": 73,
+      "defesaEspecial": 115,
+      "velocidade": 67
+    },
+    "from": 96,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 98,
+    "name": "Krabby",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 30,
+      "ataque": 105,
+      "defesa": 90,
+      "ataqueEspecial": 25,
+      "defesaEspecial": 25,
+      "velocidade": 50
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 99,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 99,
+    "name": "Kingler",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 130,
+      "defesa": 115,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 50,
+      "velocidade": 75
+    },
+    "from": 98,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 100,
+    "name": "Voltorb",
+    "tipos": [
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 30,
+      "defesa": 50,
+      "ataqueEspecial": 55,
+      "defesaEspecial": 55,
+      "velocidade": 100
+    },
+    "from": null,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 101,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 101,
+    "name": "Electrode",
+    "tipos": [
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 50,
+      "defesa": 70,
+      "ataqueEspecial": 80,
+      "defesaEspecial": 80,
+      "velocidade": 150
+    },
+    "from": 100,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 102,
+    "name": "Exeggcute",
+    "tipos": [
+      "Planta",
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 40,
+      "defesa": 80,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 45,
+      "velocidade": 40
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 103,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 103,
+    "name": "Exeggutor",
+    "tipos": [
+      "Planta",
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 95,
+      "ataque": 95,
+      "defesa": 85,
+      "ataqueEspecial": 125,
+      "defesaEspecial": 75,
+      "velocidade": 55
+    },
+    "from": 102,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 104,
+    "name": "Cubone",
+    "tipos": [
+      "Terra"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 50,
+      "defesa": 95,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 50,
+      "velocidade": 35
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 105,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 105,
+    "name": "Marowak",
+    "tipos": [
+      "Terra"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 80,
+      "defesa": 110,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 80,
+      "velocidade": 45
+    },
+    "from": 104,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 106,
+    "name": "Hitmonlee",
+    "tipos": [
+      "Lutador"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 120,
+      "defesa": 53,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 110,
+      "velocidade": 87
+    },
+    "from": 236,
+    "capture": 45,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000
+  },
+  {
+    "id": 107,
+    "name": "Hitmonchan",
+    "tipos": [
+      "Lutador"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 105,
+      "defesa": 79,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 110,
+      "velocidade": 76
+    },
+    "from": 236,
+    "capture": 45,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000
+  },
+  {
+    "id": 108,
+    "name": "Lickitung",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 55,
+      "defesa": 75,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 75,
+      "velocidade": 30
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 109,
+    "name": "Koffing",
+    "tipos": [
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 65,
+      "defesa": 95,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 45,
+      "velocidade": 35
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 110,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 110,
+    "name": "Weezing",
+    "tipos": [
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 90,
+      "defesa": 120,
+      "ataqueEspecial": 85,
+      "defesaEspecial": 70,
+      "velocidade": 60
+    },
+    "from": 109,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 111,
+    "name": "Rhyhorn",
+    "tipos": [
+      "Terra",
+      "Pedra"
+    ],
+    "stats": {
+      "hp": 80,
+      "ataque": 85,
+      "defesa": 95,
+      "ataqueEspecial": 30,
+      "defesaEspecial": 30,
+      "velocidade": 25
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 112,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 112,
+    "name": "Rhydon",
+    "tipos": [
+      "Terra",
+      "Pedra"
+    ],
+    "stats": {
+      "hp": 105,
+      "ataque": 130,
+      "defesa": 120,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 45,
+      "velocidade": 40
+    },
+    "from": 111,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 113,
+    "name": "Chansey",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 250,
+      "ataque": 5,
+      "defesa": 5,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 105,
+      "velocidade": 50
+    },
+    "from": 440,
+    "capture": 8,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000
+  },
+  {
+    "id": 114,
+    "name": "Tangela",
+    "tipos": [
+      "Planta"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 55,
+      "defesa": 115,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 40,
+      "velocidade": 60
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 115,
+    "name": "Kangaskhan",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 105,
+      "ataque": 95,
+      "defesa": 80,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 80,
+      "velocidade": 90
+    },
+    "from": null,
+    "capture": 8,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000
+  },
+  {
+    "id": 116,
+    "name": "Horsea",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 30,
+      "ataque": 40,
+      "defesa": 70,
+      "ataqueEspecial": 70,
+      "defesaEspecial": 25,
+      "velocidade": 60
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 117,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 117,
+    "name": "Seadra",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 65,
+      "defesa": 95,
+      "ataqueEspecial": 95,
+      "defesaEspecial": 45,
+      "velocidade": 85
+    },
+    "from": 116,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 118,
+    "name": "Goldeen",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 45,
+      "ataque": 67,
+      "defesa": 60,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 50,
+      "velocidade": 63
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 119,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 119,
+    "name": "Seaking",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 80,
+      "ataque": 92,
+      "defesa": 65,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 80,
+      "velocidade": 68
+    },
+    "from": 118,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 120,
+    "name": "Staryu",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 30,
+      "ataque": 45,
+      "defesa": 55,
+      "ataqueEspecial": 70,
+      "defesaEspecial": 55,
+      "velocidade": 85
+    },
+    "from": null,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 121,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 121,
+    "name": "Starmie",
+    "tipos": [
+      "Água",
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 75,
+      "defesa": 85,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 85,
+      "velocidade": 115
+    },
+    "from": 120,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 122,
+    "name": "Mr. Mime",
+    "tipos": [
+      "Psíquico",
+      "Fada"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 45,
+      "defesa": 65,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 120,
+      "velocidade": 90
+    },
+    "from": 439,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 123,
+    "name": "Scyther",
+    "tipos": [
+      "Inseto",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 70,
+      "ataque": 110,
+      "defesa": 80,
+      "ataqueEspecial": 55,
+      "defesaEspecial": 80,
+      "velocidade": 105
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 124,
+    "name": "Jynx",
+    "tipos": [
+      "Gelo",
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 50,
+      "defesa": 35,
+      "ataqueEspecial": 115,
+      "defesaEspecial": 95,
+      "velocidade": 95
+    },
+    "from": 238,
+    "capture": 8,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000
+  },
+  {
+    "id": 125,
+    "name": "Electabuzz",
+    "tipos": [
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 83,
+      "defesa": 57,
+      "ataqueEspecial": 95,
+      "defesaEspecial": 85,
+      "velocidade": 105
+    },
+    "from": 239,
+    "capture": 2,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 126,
+    "name": "Magmar",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 95,
+      "defesa": 57,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 85,
+      "velocidade": 93
+    },
+    "from": 240,
+    "capture": 2,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 127,
+    "name": "Pinsir",
+    "tipos": [
+      "Inseto"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 125,
+      "defesa": 100,
+      "ataqueEspecial": 55,
+      "defesaEspecial": 70,
+      "velocidade": 85
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 128,
+    "name": "Tauros",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 75,
+      "ataque": 100,
+      "defesa": 95,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 70,
+      "velocidade": 110
+    },
+    "from": null,
+    "capture": 45,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000
+  },
+  {
+    "id": 129,
+    "name": "Magikarp",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 20,
+      "ataque": 10,
+      "defesa": 55,
+      "ataqueEspecial": 15,
+      "defesaEspecial": 20,
+      "velocidade": 80
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 130,
+    "nivelEvolucao": 20
+  },
+  {
+    "id": 130,
+    "name": "Gyarados",
+    "tipos": [
+      "Água",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 95,
+      "ataque": 125,
+      "defesa": 79,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 100,
+      "velocidade": 81
+    },
+    "from": 129,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 131,
+    "name": "Lapras",
+    "tipos": [
+      "Água",
+      "Gelo"
+    ],
+    "stats": {
+      "hp": 130,
+      "ataque": 85,
+      "defesa": 80,
+      "ataqueEspecial": 85,
+      "defesaEspecial": 95,
+      "velocidade": 60
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 132,
+    "name": "Ditto",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 48,
+      "ataque": 48,
+      "defesa": 48,
+      "ataqueEspecial": 48,
+      "defesaEspecial": 48,
+      "velocidade": 48
+    },
+    "from": null,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 133,
+    "name": "Eevee",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 55,
+      "defesa": 50,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 65,
+      "velocidade": 55
+    },
+    "from": null,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 134,
+    "nivelEvolucao": 20
+  },
+  {
+    "id": 134,
+    "name": "Vaporeon",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 130,
+      "ataque": 65,
+      "defesa": 60,
+      "ataqueEspecial": 110,
+      "defesaEspecial": 95,
+      "velocidade": 65
+    },
+    "from": 133,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 135,
+    "name": "Jolteon",
+    "tipos": [
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 65,
+      "defesa": 60,
+      "ataqueEspecial": 110,
+      "defesaEspecial": 95,
+      "velocidade": 130
+    },
+    "from": 133,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 136,
+    "name": "Flareon",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 130,
+      "defesa": 60,
+      "ataqueEspecial": 95,
+      "defesaEspecial": 110,
+      "velocidade": 65
+    },
+    "from": 133,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 137,
+    "name": "Porygon",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 60,
+      "defesa": 70,
+      "ataqueEspecial": 85,
+      "defesaEspecial": 75,
+      "velocidade": 40
+    },
+    "from": null,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 138,
+    "name": "Omanyte",
+    "tipos": [
+      "Pedra",
+      "Água"
+    ],
+    "stats": {
+      "hp": 35,
+      "ataque": 40,
+      "defesa": 100,
+      "ataqueEspecial": 90,
+      "defesaEspecial": 55,
+      "velocidade": 35
+    },
+    "from": null,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 139,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 139,
+    "name": "Omastar",
+    "tipos": [
+      "Pedra",
+      "Água"
+    ],
+    "stats": {
+      "hp": 70,
+      "ataque": 60,
+      "defesa": 125,
+      "ataqueEspecial": 115,
+      "defesaEspecial": 70,
+      "velocidade": 55
+    },
+    "from": 138,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 140,
+    "name": "Kabuto",
+    "tipos": [
+      "Pedra",
+      "Água"
+    ],
+    "stats": {
+      "hp": 30,
+      "ataque": 80,
+      "defesa": 90,
+      "ataqueEspecial": 55,
+      "defesaEspecial": 45,
+      "velocidade": 55
+    },
+    "from": null,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 141,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 141,
+    "name": "Kabutops",
+    "tipos": [
+      "Pedra",
+      "Água"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 115,
+      "defesa": 105,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 70,
+      "velocidade": 80
+    },
+    "from": 140,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 142,
+    "name": "Aerodactyl",
+    "tipos": [
+      "Pedra",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 80,
+      "ataque": 105,
+      "defesa": 65,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 75,
+      "velocidade": 130
+    },
+    "from": null,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 143,
+    "name": "Snorlax",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 160,
+      "ataque": 110,
+      "defesa": 65,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 110,
+      "velocidade": 30
+    },
+    "from": 446,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 144,
+    "name": "Articuno",
+    "tipos": [
+      "Gelo",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 85,
+      "defesa": 100,
+      "ataqueEspecial": 95,
+      "defesaEspecial": 125,
+      "velocidade": 85
+    },
+    "from": null,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 145,
+    "name": "Zapdos",
+    "tipos": [
+      "Elétrico",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 90,
+      "defesa": 85,
+      "ataqueEspecial": 125,
+      "defesaEspecial": 90,
+      "velocidade": 100
+    },
+    "from": null,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 146,
+    "name": "Moltres",
+    "tipos": [
+      "Fogo",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 100,
+      "defesa": 90,
+      "ataqueEspecial": 125,
+      "defesaEspecial": 85,
+      "velocidade": 90
+    },
+    "from": null,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 147,
+    "name": "Dratini",
+    "tipos": [
+      "Dragão"
+    ],
+    "stats": {
+      "hp": 41,
+      "ataque": 64,
+      "defesa": 45,
+      "ataqueEspecial": 50,
+      "defesaEspecial": 50,
+      "velocidade": 50
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 148,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 148,
+    "name": "Dragonair",
+    "tipos": [
+      "Dragão"
+    ],
+    "stats": {
+      "hp": 61,
+      "ataque": 84,
+      "defesa": 65,
+      "ataqueEspecial": 70,
+      "defesaEspecial": 70,
+      "velocidade": 70
+    },
+    "from": 147,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 149,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 149,
+    "name": "Dragonite",
+    "tipos": [
+      "Dragão",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 91,
+      "ataque": 134,
+      "defesa": 95,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 100,
+      "velocidade": 80
+    },
+    "from": 148,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 150,
+    "name": "Mewtwo",
+    "tipos": [
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 106,
+      "ataque": 110,
+      "defesa": 90,
+      "ataqueEspecial": 154,
+      "defesaEspecial": 90,
+      "velocidade": 130
+    },
+    "from": null,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 151,
+    "name": "Mew",
+    "tipos": [
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 100,
+      "ataque": 100,
+      "defesa": 100,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 100,
+      "velocidade": 100
+    },
+    "from": null,
+    "capture": -1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 152,
+    "name": "Chikorita",
+    "tipos": [
+      "Planta"
+    ],
+    "stats": {
+      "hp": 45,
+      "ataque": 49,
+      "defesa": 65,
+      "ataqueEspecial": 49,
+      "defesaEspecial": 65,
+      "velocidade": 45
+    },
+    "from": null,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 153,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 153,
+    "name": "Bayleef",
+    "tipos": [
+      "Planta"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 62,
+      "defesa": 80,
+      "ataqueEspecial": 63,
+      "defesaEspecial": 80,
+      "velocidade": 60
+    },
+    "from": 152,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 154,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 154,
+    "name": "Meganium",
+    "tipos": [
+      "Planta"
+    ],
+    "stats": {
+      "hp": 80,
+      "ataque": 82,
+      "defesa": 100,
+      "ataqueEspecial": 83,
+      "defesaEspecial": 100,
+      "velocidade": 80
+    },
+    "from": 153,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 155,
+    "name": "Cyndaquil",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 39,
+      "ataque": 52,
+      "defesa": 43,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 50,
+      "velocidade": 65
+    },
+    "from": null,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 156,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 156,
+    "name": "Quilava",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 58,
+      "ataque": 64,
+      "defesa": 58,
+      "ataqueEspecial": 80,
+      "defesaEspecial": 65,
+      "velocidade": 80
+    },
+    "from": 155,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 157,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 157,
+    "name": "Typhlosion",
+    "tipos": [
+      "Fogo"
+    ],
+    "stats": {
+      "hp": 78,
+      "ataque": 84,
+      "defesa": 78,
+      "ataqueEspecial": 109,
+      "defesaEspecial": 85,
+      "velocidade": 100
+    },
+    "from": 156,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 158,
+    "name": "Totodile",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 65,
+      "defesa": 64,
+      "ataqueEspecial": 44,
+      "defesaEspecial": 48,
+      "velocidade": 43
+    },
+    "from": null,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 159,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 159,
+    "name": "Croconaw",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 80,
+      "defesa": 80,
+      "ataqueEspecial": 59,
+      "defesaEspecial": 63,
+      "velocidade": 58
+    },
+    "from": 158,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 160,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 160,
+    "name": "Feraligatr",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 85,
+      "ataque": 105,
+      "defesa": 100,
+      "ataqueEspecial": 79,
+      "defesaEspecial": 83,
+      "velocidade": 78
+    },
+    "from": 159,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 161,
+    "name": "Sentret",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 35,
+      "ataque": 46,
+      "defesa": 34,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 45,
+      "velocidade": 20
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 162,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 162,
+    "name": "Furret",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 85,
+      "ataque": 76,
+      "defesa": 64,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 55,
+      "velocidade": 90
+    },
+    "from": 161,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 163,
+    "name": "Hoothoot",
+    "tipos": [
+      "Normal",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 30,
+      "defesa": 30,
+      "ataqueEspecial": 36,
+      "defesaEspecial": 56,
+      "velocidade": 50
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 164,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 164,
+    "name": "Noctowl",
+    "tipos": [
+      "Normal",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 100,
+      "ataque": 50,
+      "defesa": 50,
+      "ataqueEspecial": 86,
+      "defesaEspecial": 96,
+      "velocidade": 70
+    },
+    "from": 163,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 165,
+    "name": "Ledyba",
+    "tipos": [
+      "Inseto",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 20,
+      "defesa": 30,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 80,
+      "velocidade": 55
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 166,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 166,
+    "name": "Ledian",
+    "tipos": [
+      "Inseto",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 35,
+      "defesa": 50,
+      "ataqueEspecial": 55,
+      "defesaEspecial": 110,
+      "velocidade": 85
+    },
+    "from": 165,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 167,
+    "name": "Spinarak",
+    "tipos": [
+      "Inseto",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 60,
+      "defesa": 40,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 40,
+      "velocidade": 30
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 168,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 168,
+    "name": "Ariados",
+    "tipos": [
+      "Inseto",
+      "Veneno"
+    ],
+    "stats": {
+      "hp": 70,
+      "ataque": 90,
+      "defesa": 70,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 70,
+      "velocidade": 40
+    },
+    "from": 167,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 169,
+    "name": "Crobat",
+    "tipos": [
+      "Veneno",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 85,
+      "ataque": 90,
+      "defesa": 80,
+      "ataqueEspecial": 70,
+      "defesaEspecial": 80,
+      "velocidade": 130
+    },
+    "from": 42,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 170,
+    "name": "Chinchou",
+    "tipos": [
+      "Água",
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 75,
+      "ataque": 38,
+      "defesa": 38,
+      "ataqueEspecial": 56,
+      "defesaEspecial": 56,
+      "velocidade": 67
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 171,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 171,
+    "name": "Lanturn",
+    "tipos": [
+      "Água",
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 125,
+      "ataque": 58,
+      "defesa": 58,
+      "ataqueEspecial": 76,
+      "defesaEspecial": 76,
+      "velocidade": 67
+    },
+    "from": 170,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 172,
+    "name": "Pichu",
+    "tipos": [
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 20,
+      "ataque": 40,
+      "defesa": 15,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 35,
+      "velocidade": 60
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 25,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 173,
+    "name": "Cleffa",
+    "tipos": [
+      "Fada"
+    ],
+    "stats": {
+      "hp": 50,
+      "ataque": 25,
+      "defesa": 28,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 55,
+      "velocidade": 15
+    },
+    "from": null,
+    "capture": 6,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000,
+    "evoluiId": 35,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 174,
+    "name": "Igglybuff",
+    "tipos": [
+      "Normal",
+      "Fada"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 30,
+      "defesa": 15,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 20,
+      "velocidade": 15
+    },
+    "from": null,
+    "capture": 6,
+    "baby": false,
+    "raridade": "Raro",
+    "preco": 22000,
+    "evoluiId": 39,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 175,
+    "name": "Togepi",
+    "tipos": [
+      "Fada"
+    ],
+    "stats": {
+      "hp": 35,
+      "ataque": 20,
+      "defesa": 65,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 65,
+      "velocidade": 20
+    },
+    "from": null,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 176,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 176,
+    "name": "Togetic",
+    "tipos": [
+      "Fada",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 40,
+      "defesa": 85,
+      "ataqueEspecial": 80,
+      "defesaEspecial": 105,
+      "velocidade": 40
+    },
+    "from": 175,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 177,
+    "name": "Natu",
+    "tipos": [
+      "Psíquico",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 40,
+      "ataque": 50,
+      "defesa": 45,
+      "ataqueEspecial": 70,
+      "defesaEspecial": 45,
+      "velocidade": 70
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 178,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 178,
+    "name": "Xatu",
+    "tipos": [
+      "Psíquico",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 75,
+      "defesa": 70,
+      "ataqueEspecial": 95,
+      "defesaEspecial": 70,
+      "velocidade": 95
+    },
+    "from": 177,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 179,
+    "name": "Mareep",
+    "tipos": [
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 40,
+      "defesa": 40,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 45,
+      "velocidade": 35
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 180,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 180,
+    "name": "Flaaffy",
+    "tipos": [
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 70,
+      "ataque": 55,
+      "defesa": 55,
+      "ataqueEspecial": 80,
+      "defesaEspecial": 60,
+      "velocidade": 45
+    },
+    "from": 179,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 181,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 181,
+    "name": "Ampharos",
+    "tipos": [
+      "Elétrico"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 75,
+      "defesa": 85,
+      "ataqueEspecial": 115,
+      "defesaEspecial": 90,
+      "velocidade": 55
+    },
+    "from": 180,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 182,
+    "name": "Bellossom",
+    "tipos": [
+      "Planta"
+    ],
+    "stats": {
+      "hp": 75,
+      "ataque": 80,
+      "defesa": 95,
+      "ataqueEspecial": 90,
+      "defesaEspecial": 100,
+      "velocidade": 50
+    },
+    "from": 44,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 183,
+    "name": "Marill",
+    "tipos": [
+      "Água",
+      "Fada"
+    ],
+    "stats": {
+      "hp": 70,
+      "ataque": 20,
+      "defesa": 50,
+      "ataqueEspecial": 20,
+      "defesaEspecial": 50,
+      "velocidade": 40
+    },
+    "from": 298,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 184,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 184,
+    "name": "Azumarill",
+    "tipos": [
+      "Água",
+      "Fada"
+    ],
+    "stats": {
+      "hp": 100,
+      "ataque": 50,
+      "defesa": 80,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 80,
+      "velocidade": 50
+    },
+    "from": 183,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 185,
+    "name": "Sudowoodo",
+    "tipos": [
+      "Pedra"
+    ],
+    "stats": {
+      "hp": 70,
+      "ataque": 100,
+      "defesa": 115,
+      "ataqueEspecial": 30,
+      "defesaEspecial": 65,
+      "velocidade": 30
+    },
+    "from": 438,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 186,
+    "name": "Politoed",
+    "tipos": [
+      "Água"
+    ],
+    "stats": {
+      "hp": 90,
+      "ataque": 75,
+      "defesa": 75,
+      "ataqueEspecial": 90,
+      "defesaEspecial": 100,
+      "velocidade": 70
+    },
+    "from": 61,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 187,
+    "name": "Hoppip",
+    "tipos": [
+      "Planta",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 35,
+      "ataque": 35,
+      "defesa": 40,
+      "ataqueEspecial": 35,
+      "defesaEspecial": 55,
+      "velocidade": 50
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 188,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 188,
+    "name": "Skiploom",
+    "tipos": [
+      "Planta",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 45,
+      "defesa": 50,
+      "ataqueEspecial": 45,
+      "defesaEspecial": 65,
+      "velocidade": 80
+    },
+    "from": 187,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 189,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 189,
+    "name": "Jumpluff",
+    "tipos": [
+      "Planta",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 75,
+      "ataque": 55,
+      "defesa": 70,
+      "ataqueEspecial": 55,
+      "defesaEspecial": 95,
+      "velocidade": 110
+    },
+    "from": 188,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 190,
+    "name": "Aipom",
+    "tipos": [
+      "Normal"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 70,
+      "defesa": 55,
+      "ataqueEspecial": 40,
+      "defesaEspecial": 55,
+      "velocidade": 85
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 191,
+    "name": "Sunkern",
+    "tipos": [
+      "Planta"
+    ],
+    "stats": {
+      "hp": 30,
+      "ataque": 30,
+      "defesa": 30,
+      "ataqueEspecial": 30,
+      "defesaEspecial": 30,
+      "velocidade": 30
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 192,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 192,
+    "name": "Sunflora",
+    "tipos": [
+      "Planta"
+    ],
+    "stats": {
+      "hp": 75,
+      "ataque": 75,
+      "defesa": 55,
+      "ataqueEspecial": 105,
+      "defesaEspecial": 85,
+      "velocidade": 30
+    },
+    "from": 191,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 193,
+    "name": "Yanma",
+    "tipos": [
+      "Inseto",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 65,
+      "defesa": 45,
+      "ataqueEspecial": 75,
+      "defesaEspecial": 45,
+      "velocidade": 95
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 194,
+    "name": "Wooper",
+    "tipos": [
+      "Água",
+      "Terra"
+    ],
+    "stats": {
+      "hp": 55,
+      "ataque": 45,
+      "defesa": 45,
+      "ataqueEspecial": 25,
+      "defesaEspecial": 25,
+      "velocidade": 15
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000,
+    "evoluiId": 195,
+    "nivelEvolucao": 16
+  },
+  {
+    "id": 195,
+    "name": "Quagsire",
+    "tipos": [
+      "Água",
+      "Terra"
+    ],
+    "stats": {
+      "hp": 95,
+      "ataque": 85,
+      "defesa": 85,
+      "ataqueEspecial": 65,
+      "defesaEspecial": 65,
+      "velocidade": 35
+    },
+    "from": 194,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 196,
+    "name": "Espeon",
+    "tipos": [
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 65,
+      "ataque": 65,
+      "defesa": 60,
+      "ataqueEspecial": 130,
+      "defesaEspecial": 95,
+      "velocidade": 110
+    },
+    "from": 133,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 197,
+    "name": "Umbreon",
+    "tipos": [
+      "Sombrio"
+    ],
+    "stats": {
+      "hp": 95,
+      "ataque": 65,
+      "defesa": 110,
+      "ataqueEspecial": 60,
+      "defesaEspecial": 130,
+      "velocidade": 65
+    },
+    "from": 133,
+    "capture": 1,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 198,
+    "name": "Murkrow",
+    "tipos": [
+      "Sombrio",
+      "Voador"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 85,
+      "defesa": 42,
+      "ataqueEspecial": 85,
+      "defesaEspecial": 42,
+      "velocidade": 91
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 199,
+    "name": "Slowking",
+    "tipos": [
+      "Água",
+      "Psíquico"
+    ],
+    "stats": {
+      "hp": 95,
+      "ataque": 75,
+      "defesa": 80,
+      "ataqueEspecial": 100,
+      "defesaEspecial": 110,
+      "velocidade": 30
+    },
+    "from": 79,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  },
+  {
+    "id": 200,
+    "name": "Misdreavus",
+    "tipos": [
+      "Fantasma"
+    ],
+    "stats": {
+      "hp": 60,
+      "ataque": 60,
+      "defesa": 60,
+      "ataqueEspecial": 85,
+      "defesaEspecial": 85,
+      "velocidade": 85
+    },
+    "from": null,
+    "capture": 4,
+    "baby": false,
+    "raridade": "Lendário",
+    "preco": 50000
+  }
 ]
