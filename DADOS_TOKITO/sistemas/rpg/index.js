@@ -738,7 +738,7 @@ const imagemPet = tipo => {
 const imagemPokemon = tipo => {
   const chave = chavePokemon(tipo)
   const item = POKEMON[chave]
-  const id = Number(item?.id || (/^\\d+$/.test(String(tipo || '')) ? tipo : 0))
+  const id = Number(item?.id || (/^\d+$/.test(String(tipo || '')) ? tipo : 0))
   if (id)
     return 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' + id + '.png'
   return pokemonImg[chave] || pokemonImg.pikachu || ''
