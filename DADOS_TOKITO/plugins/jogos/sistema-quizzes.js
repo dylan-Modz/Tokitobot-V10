@@ -144,8 +144,17 @@ async function enviarPergunta(ctx, game) {
     return await base.sendImage(ctx, game.imagem, texto)
   }
   catch (error) {
-    if (game.tipo === 'pokemon')
+    if (game.tipo === 'pokemon') {
+      const id = String(game.imagem || '').match(/\/(\d+)\.png(?:\?|$)/)?.[1]
+      if (id) {
+        const fallback = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/' + id + '.png'
+        try {
+          return await base.sendImage(ctx, fallback, texto)
+        }
+        catch {}
+      }
       throw error
+    }
 
     console.log(`[QUIZ ${game.tipo.toUpperCase()}] Falha na capa; enviando somente texto:`, error?.message || error)
     return base.sendText(ctx, texto)
