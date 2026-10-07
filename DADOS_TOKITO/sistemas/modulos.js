@@ -5,6 +5,8 @@ const path = require('path')
 const axios = require('axios')
 const FormData = require('form-data')
 const crypto = require('crypto')
+const os = require('os')
+const { spawn } = require('child_process')
 
 const BASE = path.join(__dirname, '..', 'database', 'sistemas')
 
@@ -325,7 +327,7 @@ const transcrever = async (ctx, audio = null) => {
 const SHAZAM_ENDPOINT = 'https://songfinder.dev/api/music/recognize'
 const SHAZAM_MAX_BYTES = 10 * 1024 * 1024
 const SHAZAM_DOWNLOAD_TIMEOUT = 45000
-const SHAZAM_RECOGNIZE_TIMEOUT = 65000
+const SHAZAM_RECOGNIZE_TIMEOUT = 120000
 const SHAZAM_AUDIO_TIMEOUT = 40000
 
 const erroShazam = (codigo, mensagem) => {
@@ -443,6 +445,128 @@ const formatarDuracaoShazam = valor => {
   return `${min}:${String(seg).padStart(2, '0')}`
 }
 
+
+const extrairAudioShazam = async (buffer, extensaoEntrada = 'mp4') => {
+  const pasta = await fs.promises.mkdtemp(
+    path.join(os.tmpdir(), 'tokito-shazam-')
+  )
+
+  const ext = String(extensaoEntrada || 'mp4')
+    .replace(/[^a-z0-9]/gi, '') || 'mp4'
+
+  const entrada = path.join(pasta, 'entrada.' + ext)
+  const saida = path.join(pasta, 'audio.mp3')
+
+  try {
+    await fs.promises.writeFile(entrada, buffer)
+
+    await new Promise((resolve, reject) => {
+      const processo = spawn(
+        'ffmpeg',
+        [
+          '-hide_banner',
+          '-loglevel', 'error',
+          '-y',
+          '-i', entrada,
+          '-vn',
+          '-ac', '1',
+          '-ar', '44100',
+          '-b:a', '128k',
+          saida
+        ],
+        {
+          stdio: ['ignore', 'ignore', 'pipe']
+        }
+      )
+
+      let erroTexto = ''
+      let finalizado = false
+
+      const timer = setTimeout(() => {
+        if (finalizado) return
+        finalizado = true
+
+        try {
+          processo.kill('SIGKILL')
+        }
+        catch {}
+
+        reject(
+          erroShazam(
+            'SHAZAM_TIMEOUT_CONVERSAO',
+            'A conversão do vídeo demorou demais.'
+          )
+        )
+      }, 45000)
+
+      processo.stderr.on('data', chunk => {
+        erroTexto += String(chunk || '')
+
+        if (erroTexto.length > 2500)
+          erroTexto = erroTexto.slice(-2500)
+      })
+
+      processo.on('error', erro => {
+        if (finalizado) return
+        finalizado = true
+        clearTimeout(timer)
+
+        reject(
+          erroShazam(
+            'SHAZAM_FFMPEG',
+            erro?.code === 'ENOENT'
+              ? 'FFmpeg não está instalado no servidor.'
+              : (erro?.message || 'Não foi possível extrair o áudio do vídeo.')
+          )
+        )
+      })
+
+      processo.on('close', code => {
+        if (finalizado) return
+        finalizado = true
+        clearTimeout(timer)
+
+        if (code === 0)
+          return resolve()
+
+        reject(
+          erroShazam(
+            'SHAZAM_CONVERSAO',
+            erroTexto.trim() || ('FFmpeg encerrou com código ' + code + '.')
+          )
+        )
+      })
+    })
+
+    const audio = await fs.promises.readFile(saida)
+
+    if (!audio.length) {
+      throw erroShazam(
+        'SHAZAM_CONVERSAO',
+        'O vídeo não possui uma faixa de áudio reconhecível.'
+      )
+    }
+
+    if (audio.length > SHAZAM_MAX_BYTES) {
+      throw erroShazam(
+        'SHAZAM_ARQUIVO_GRANDE',
+        'O áudio extraído ultrapassa o limite de 10 MB.'
+      )
+    }
+
+    return audio
+  }
+  finally {
+    await fs.promises.rm(
+      pasta,
+      {
+        recursive: true,
+        force: true
+      }
+    ).catch(() => {})
+  }
+}
+
 const identificarMusica = async (ctx, alvo = null) => {
   const selecionada = selecionarMidiaShazam(ctx, alvo)
 
@@ -498,8 +622,16 @@ const identificarMusica = async (ctx, alvo = null) => {
   const mimeOriginal = String(
     midia?.mimetype || (tipo === 'video' ? 'video/mp4' : 'audio/ogg')
   )
-  const mime = mimeOriginal.split(';')[0].trim() || (tipo === 'video' ? 'video/mp4' : 'audio/ogg')
-  const ext = extensaoShazam(mimeOriginal, tipo)
+
+  let mime = mimeOriginal.split(';')[0].trim() || (tipo === 'video' ? 'video/mp4' : 'audio/ogg')
+  let ext = extensaoShazam(mimeOriginal, tipo)
+
+  if (tipo === 'video') {
+    buffer = await extrairAudioShazam(buffer, ext)
+    mime = 'audio/mpeg'
+    ext = 'mp3'
+  }
+
   const form = new FormData()
 
   form.append('file', buffer, {
@@ -547,6 +679,24 @@ const identificarMusica = async (ctx, alvo = null) => {
     throw erroShazam(
       'SHAZAM_SERVICO',
       payload?.message || payload?.error || `SongFinder respondeu HTTP ${resposta.status}.`
+    )
+  }
+
+  if (
+    typeof payload?.code === 'number' &&
+    payload.code !== 0
+  ) {
+    const mensagem = String(
+      payload?.message ||
+      'O identificador recusou a solicitação.'
+    )
+
+    const limite =
+      /rate|limit|too many|quota/i.test(mensagem)
+
+    throw erroShazam(
+      limite ? 'SHAZAM_LIMITE' : 'SHAZAM_SERVICO',
+      mensagem
     )
   }
 

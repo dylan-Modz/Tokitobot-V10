@@ -1,35 +1,28 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.68",
+  "version": "10.1.69",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T16:45:00.000Z",
+  "publishedAt": "2026-10-07T17:05:00.000Z",
   "changelog": [
-    "Adiciona o comando Shazam em módulo dentro de plugins/downloads.",
-    "Shazam reconhece músicas respondendo áudio, mensagem de voz ou vídeo.",
-    "O resultado mostra capa, título, artista, álbum, duração, gênero e confiança quando disponíveis.",
-    "Quando os botões estão ativos, o resultado recebe as opções Áudio e Vídeo.",
-    "O botão Áudio reutiliza play_audio e a rota /api/youtube-audio.",
-    "O botão Vídeo reutiliza play_video e a rota /api/youtube-video.",
-    "Quando os botões estão desativados, o Shazam mostra os dois comandos de download em texto.",
-    "A mensagem de mídia grande foi corrigida para o limite real de 10 MB."
+    "Corrige o reconhecimento do Shazam quando a mídia respondida é um vídeo.",
+    "Vídeos agora têm o áudio extraído com FFmpeg antes de serem enviados ao identificador.",
+    "O Shazam passa a validar corretamente o campo code retornado pelo SongFinder.",
+    "Erros do serviço e limite temporário deixam de aparecer como Música não encontrada.",
+    "Timeout do reconhecimento foi ajustado para 120 segundos, seguindo o cliente oficial do SongFinder.",
+    "Áudios continuam sendo enviados diretamente ao reconhecedor sem conversão desnecessária."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Shazam interativo por áudio e vídeo",
-  "notice": "A versão 10.1.68 adiciona o Shazam modular com reconhecimento por áudio/vídeo e botões para baixar a música.",
+  "type": "Correção",
+  "title": "Correção do reconhecimento do Shazam",
+  "notice": "A versão 10.1.69 corrige o Shazam para reconhecer corretamente áudio e vídeo e tratar os retornos do identificador.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/downloads/shazam.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "path": "DADOS_TOKITO/sistemas/modulos.js",
       "sha256": "",
       "size": 0
     },
@@ -1767,11 +1760,42 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T16:45:00.000Z"
+    },
+    {
+      "version": "10.1.69",
+      "fromVersion": "10.1.68",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Correção do reconhecimento do Shazam",
+      "notice": "A versão 10.1.69 corrige o Shazam para reconhecer corretamente áudio e vídeo e tratar os retornos do identificador.",
+      "changelog": [
+        "Corrige o reconhecimento do Shazam quando a mídia respondida é um vídeo.",
+        "Vídeos agora têm o áudio extraído com FFmpeg antes de serem enviados ao identificador.",
+        "O Shazam passa a validar corretamente o campo code retornado pelo SongFinder.",
+        "Erros do serviço e limite temporário deixam de aparecer como Música não encontrada.",
+        "Timeout do reconhecimento foi ajustado para 120 segundos, seguindo o cliente oficial do SongFinder.",
+        "Áudios continuam sendo enviados diretamente ao reconhecedor sem conversão desnecessária."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/modulos.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T17:05:00.000Z"
     }
   ],
-  "versao": "10.1.68",
+  "versao": "10.1.69",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.67"
+  "fromVersion": "10.1.68"
 }
