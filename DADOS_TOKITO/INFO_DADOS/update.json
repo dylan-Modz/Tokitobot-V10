@@ -1,27 +1,48 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.75",
+  "version": "10.1.73",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T23:24:14.060Z",
+  "publishedAt": "2026-10-07T23:28:14.004Z",
   "changelog": [
-    "[Melhoria] Arquivo principal do bot atualizado",
-    "A versão 10.1.74 já está disponível para atualização.",
-    "Arquivo principal do bot atualizado"
+    "Confirma a remoção definitiva do Shazam, do ACRCloud e das referências residuais nos módulos e menus do Tokito.",
+    "Sincroniza o arquivo principal tokito.js, os módulos, os menus, as mensagens e o package.json.",
+    "Mantém a exclusão do Shazam e do ACRCloud no histórico de atualização para limpar instalações anteriores.",
+    "Define a versão 10.1.73 como atualização estável oficial do Tokito Bot V10."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Arquivo principal do bot atualizado",
-  "notice": "A versão 10.1.74 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "Remoção definitiva do Shazam e sincronização dos arquivos",
+  "notice": "A versão 10.1.73 já está disponível para atualização, com a remoção definitiva do Shazam e a sincronização dos arquivos principais do bot.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "package.json",
+      "sha256": "",
+      "size": 0
+    },
+    {
       "path": "tokito.js",
       "sha256": "33c1c26fbf61c3a966fa85f15928db9a1c56a32bdc0e2b79f340c1f549daefb6",
       "size": 52366
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/modulos.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "",
+      "size": 0
     }
   ],
   "releases": [
@@ -1907,67 +1928,45 @@
       "version": "10.1.73",
       "fromVersion": "10.1.72",
       "channel": "stable",
-      "type": "Remoção",
-      "title": "Remoção definitiva do Shazam",
-      "notice": "A versão 10.1.73 confirma a remoção completa do Shazam e limpa as exclusões repetidas da atualização atual.",
+      "type": "Correção",
+      "title": "Remoção definitiva do Shazam e sincronização dos arquivos",
+      "notice": "A versão 10.1.73 já está disponível para atualização, com a remoção definitiva do Shazam e a sincronização dos arquivos principais do bot.",
       "changelog": [
-        "Confirma a remoção definitiva do comando Shazam e dos arquivos de reconhecimento de músicas.",
-        "Remove da atualização atual as entradas de exclusão do Shazam e do ACRCloud que já haviam sido aplicadas.",
-        "Preserva no histórico as instruções de exclusão para instalações antigas do Tokito.",
-        "Atualiza a versão oficial do Tokito Bot V10 para 10.1.73."
+        "Confirma a remoção definitiva do Shazam, do ACRCloud e das referências residuais nos módulos e menus do Tokito.",
+        "Sincroniza o arquivo principal tokito.js, os módulos, os menus, as mensagens e o package.json.",
+        "Mantém a exclusão do Shazam e do ACRCloud no histórico de atualização para limpar instalações anteriores.",
+        "Define a versão 10.1.73 como atualização estável oficial do Tokito Bot V10."
       ],
       "files": [
         {
           "path": "package.json",
           "sha256": "",
           "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T23:20:23.139Z"
-    },
-    {
-      "version": "10.1.74",
-      "fromVersion": "10.1.73",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Arquivo principal do bot atualizado",
-      "notice": "A versão 10.1.74 já está disponível para atualização.",
-      "changelog": [
-        "Arquivo principal do bot atualizado"
-      ],
-      "files": [
+        },
         {
           "path": "tokito.js",
           "sha256": "33c1c26fbf61c3a966fa85f15928db9a1c56a32bdc0e2b79f340c1f549daefb6",
           "size": 52366
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T23:24:05.154Z"
-    },
-    {
-      "version": "10.1.75",
-      "fromVersion": "10.1.74",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Arquivo principal do bot atualizado",
-      "notice": "A versão 10.1.74 já está disponível para atualização.",
-      "changelog": [
-        "Arquivo principal do bot atualizado"
-      ],
-      "files": [
+        },
         {
-          "path": "tokito.js",
-          "sha256": "33c1c26fbf61c3a966fa85f15928db9a1c56a32bdc0e2b79f340c1f549daefb6",
-          "size": 52366
+          "path": "DADOS_TOKITO/sistemas/modulos.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
         }
       ],
       "delete": [],
       "required": true,
-      "publishedAt": "2026-10-07T23:24:14.060Z"
+      "publishedAt": "2026-10-07T23:28:14.004Z"
     }
   ],
   "versao": "10.1.73",
