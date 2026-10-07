@@ -15,7 +15,9 @@
     "Adiciona Pokémon selvagens automáticos no grupo, chance de Shiny, Lure e encontros especiais.",
     "Melhora batalhapokemon com simulação por turnos, golpes, velocidade, crítico e vantagem de tipos.",
     "Loja Pokémon recebe paginação para suportar os 200 Pokémon sem mensagens gigantes.",
-    "Compra, venda e evolução foram integradas ao novo sistema de coleção."
+    "Compra, venda e evolução foram integradas ao novo sistema de coleção.",
+    "Quiz Pokémon tenta uma segunda imagem do próprio repositório de sprites caso a arte principal falhe.",
+    "Mew foi classificado como Mítico na base compartilhada."
   ],
   "delete": [],
   "archiveSha256": "",
@@ -1314,7 +1316,9 @@
         "Adiciona Pokémon selvagens automáticos no grupo, chance de Shiny, Lure e encontros especiais.",
         "Melhora batalhapokemon com simulação por turnos, golpes, velocidade, crítico e vantagem de tipos.",
         "Loja Pokémon recebe paginação para suportar os 200 Pokémon sem mensagens gigantes.",
-        "Compra, venda e evolução foram integradas ao novo sistema de coleção."
+        "Compra, venda e evolução foram integradas ao novo sistema de coleção.",
+        "Quiz Pokémon tenta uma segunda imagem do próprio repositório de sprites caso a arte principal falhe.",
+        "Mew foi classificado como Mítico na base compartilhada."
       ],
       "files": [
         {
