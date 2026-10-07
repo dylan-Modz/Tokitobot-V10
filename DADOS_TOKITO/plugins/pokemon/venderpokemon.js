@@ -1,60 +1,44 @@
-/*
- * ============================================================
- *                     TOKITO BOT V10
- * ============================================================
- *
- * Projeto disponibilizado gratuitamente para a comunidade.
- *
- * Você pode modificar, personalizar e utilizar este bot
- * conforme sua preferência, inclusive mantendo o nome Tokito.
- *
- * REGRAS:
- * • É proibida a venda ou revenda deste código-fonte.
- * • Não comercialize versões modificadas deste projeto.
- * • Não reivindique a autoria original do projeto.
- * • Respeite os créditos e o trabalho dos desenvolvedores.
- * • Utilize o projeto com respeito e responsabilidade.
- *
- * ATENÇÃO:
- * A venda, revenda ou comercialização não autorizada deste
- * projeto poderá resultar em medidas legais para proteção
- * dos direitos dos autores, incluindo processo judicial,
- * conforme a legislação aplicável.
- *
- * Author: Dylan Modz
- * API oficial: https://tokito-apis.com.br
- *
- * Modifique como quiser. Apenas respeite as regras.
- * ============================================================
- */
-
 const r = require('../../sistemas/rpg/index')
-
+const p = require('../../sistemas/rpg/pokemon-core')
 const dylan = require('../../database/lib/comandos')
+const { compacto, dinheiro } = require('../../sistemas/rpg/texto')
 
 dylan.setCommand({
-nome: 'venderpokemon',
-comandos: ['venderpokemon', 'venderpoke'],
-categoria: 'pokemon',
-info: {
-descricao: 'Vende seu Pokémon por 50% do preço.',
-uso: 'venderpokemon',
-requisitos: 'RPG + Coins',
-categoria: 'pokemon'
-},
-async executar(ctx) {
-if (!r.ambos(ctx))
-return ctx.reply(ctx.mess.rpgCoinsDesativado(ctx.prefix))
-const u = r.user(ctx)
-const p = u.pokemon
-if (!p)
-return ctx.reply(ctx.mess.pokemonNaoTem(ctx.prefix))
-const valor = Math.floor((r.POKEMON[p.tipo]?.preco || 1000) / 2)
-const e = r.eco(ctx)
-e.coins += valor
-u.pokemon = null
-r.salvar(ctx)
-return ctx.reply(ctx.mess.pokemonVendido(valor, e.coins))
-}
-}
-)
+  nome: 'venderpokemon',
+  comandos: ['venderpokemon', 'venderpoke'],
+  categoria: 'pokemon',
+  info: {
+    descricao: 'Vende um Pokémon da coleção por 50% do preço.',
+    uso: 'venderpokemon ID',
+    requisitos: 'RPG + Coins',
+    categoria: 'pokemon'
+  },
+  async executar(ctx) {
+    if (!ctx.isGroup) return ctx.reply(ctx.mess.sogrupo())
+    if (!r.ambos(ctx)) return ctx.reply(ctx.mess.rpgCoinsDesativado(ctx.prefix))
+
+    const e = p.estado(ctx)
+    const poke = p.resolverDaColecao(e.st, ctx.args?.[0]) || p.resolverDaColecao(e.st, e.st.principalUid)
+    if (!poke) return ctx.reply(ctx.mess.pokemonNaoTem(ctx.prefix))
+    if (poke.favorito) return ctx.reply(compacto(ctx, '⭐', 'Pokémon favorito', [{ emoji: '📌', texto: 'Desfavorite antes de vender este Pokémon' }]))
+
+    const sp = p.especie(poke.id)
+    const valor = Math.floor(Number(sp?.preco || r.POKEMON[poke.tipo]?.preco || 1000) / 2)
+    const eco = r.eco(ctx)
+    eco.coins = Number(eco.coins || 0) + valor
+
+    e.st.colecao = e.st.colecao.filter(x => x.uid !== poke.uid)
+    e.st.equipe = e.st.equipe.filter(x => x !== poke.uid)
+    if (e.st.principalUid === poke.uid)
+      e.st.principalUid = e.st.colecao[0]?.uid || null
+
+    p.sincronizarLegacy(e.u, e.st)
+    r.salvar(ctx)
+
+    return ctx.reply(compacto(ctx, '💰', 'Pokémon vendido', [
+      { emoji: '🔴', texto: poke.nome },
+      { emoji: '🪙', texto: 'Você recebeu ' + dinheiro(valor) },
+      { emoji: '📦', texto: 'Coleção: ' + e.st.colecao.length + ' Pokémon' }
+    ]))
+  }
+})
