@@ -1,31 +1,2002 @@
 [
-{"pergunta":"Qual filme ganhou o Oscar de Melhor Filme em 1994?","resposta":"Forrest Gump","opcoes":["Forrest Gump","Pulp Fiction","Um Sonho de Liberdade"]},
-{"pergunta":"Quem interpretou o personagem Jack Dawson em 'Titanic'?","resposta":"Leonardo DiCaprio","opcoes":["Leonardo DiCaprio","Brad Pitt","Johnny Depp"]},
-{"pergunta":"Qual é o nome do hobbit interpretado por Elijah Wood na trilogia 'O Senhor dos Anéis'?","resposta":"Frodo","opcoes":["Frodo","Sam","Pippin"]},
-{"pergunta":"Qual é o nome do reino onde se passa o filme 'Frozen'?","resposta":"Arendelle","opcoes":["Arendelle","Westeros","Narnia"]},
-{"pergunta":"Quem dirigiu 'Jurassic Park'?","resposta":"Steven Spielberg","opcoes":["Steven Spielberg","James Cameron","George Lucas"]},
-{"pergunta":"Em qual filme os personagens Neo, Morpheus e Trinity aparecem?","resposta":"Matrix","opcoes":["Matrix","Inception","Blade Runner"]},
-{"pergunta":"Qual é o nome do vilão em 'Os Vingadores: Guerra Infinita'?","resposta":"Thanos","opcoes":["Thanos","Loki","Ultron"]},
-{"pergunta":"Qual filme popularizou a frase 'May the Force be with you'?","resposta":"Star Wars","opcoes":["Star Wars","Star Trek","Blade Runner"]},
-{"pergunta":"Qual atriz interpretou Katniss Everdeen em 'Jogos Vorazes'?","resposta":"Jennifer Lawrence","opcoes":["Jennifer Lawrence","Emma Stone","Scarlett Johansson"]},
-{"pergunta":"Quem dirigiu 'A Origem'?","resposta":"Christopher Nolan","opcoes":["Christopher Nolan","Quentin Tarantino","Martin Scorsese"]},
-{"pergunta":"Qual é o nome do brinquedo cowboy em 'Toy Story'?","resposta":"Woody","opcoes":["Woody","Buzz","Rex"]},
-{"pergunta":"Quem interpretou o Coringa em 'O Cavaleiro das Trevas'?","resposta":"Heath Ledger","opcoes":["Heath Ledger","Joaquin Phoenix","Jared Leto"]},
-{"pergunta":"Qual é o nome do protagonista em 'O Código Da Vinci'?","resposta":"Robert Langdon","opcoes":["Robert Langdon","Indiana Jones","Sherlock Holmes"]},
-{"pergunta":"Quem dirigiu 'Avatar'?","resposta":"James Cameron","opcoes":["James Cameron","Peter Jackson","Steven Spielberg"]},
-{"pergunta":"Qual é o nome do navio em 'Piratas do Caribe'?","resposta":"Perola Negra","opcoes":["Perola Negra","Interceptor","Flying Dutchman"]},
-{"pergunta":"Quem interpretou o papel principal em 'Gladiador'?","resposta":"Russell Crowe","opcoes":["Russell Crowe","Brad Pitt","Tom Cruise"]},
-{"pergunta":"Qual filme popularizou a frase 'I'm the king of the world!'?","resposta":"Titanic","opcoes":["Titanic","The Lion King","Avatar"]},
-{"pergunta":"Qual é o nome do super-herói em 'Homem de Ferro'?","resposta":"Tony Stark","opcoes":["Tony Stark","Steve Rogers","Bruce Wayne"]},
-{"pergunta":"Quem dirigiu 'Clube da Luta'?","resposta":"David Fincher","opcoes":["David Fincher","Christopher Nolan","Quentin Tarantino"]},
-{"pergunta":"Qual é o nome do personagem principal em 'John Wick'?","resposta":"John Wick","opcoes":["John Wick","James Bond","Jason Bourne"]},
-{"pergunta":"Qual é o filme onde o personagem principal é um caçador de recompensas chamado Django?","resposta":"Django Livre","opcoes":["Django Livre","Os Oito Odiados","Kill Bill"]},
-{"pergunta":"Quem protagoniza o filme 'Mad Max: Estrada da Fúria'?","resposta":"Tom Hardy","opcoes":["Tom Hardy","Mel Gibson","Hugh Jackman"]},
-{"pergunta":"Qual filme é baseado em um romance de J.R.R. Tolkien e apresenta uma missão para destruir um anel?","resposta":"O Senhor dos Anéis","opcoes":["O Senhor dos Anéis","Harry Potter","As Crônicas de Nárnia"]},
-{"pergunta":"Qual é o nome do famoso detetive interpretado por Robert Downey Jr. em filmes baseados nas histórias de Arthur Conan Doyle?","resposta":"Sherlock Holmes","opcoes":["Sherlock Holmes","Hercule Poirot","Philip Marlowe"]},
-{"pergunta":"Quem interpretou o papel de Jack Sparrow em 'Piratas do Caribe'?","resposta":"Johnny Depp","opcoes":["Johnny Depp","Orlando Bloom","Geoffrey Rush"]},
-{"pergunta":"Qual é o nome do filme que retrata a vida de um treinador de boxe chamado Rocky Balboa?","resposta":"Rocky","opcoes":["Rocky","Raging Bull","Creed"]},
-{"pergunta":"Qual filme conta a história de um grupo de rebeldes lutando contra um regime tirânico em um mundo distópico?","resposta":"Os Jogos Vorazes","opcoes":["Os Jogos Vorazes","Divergente","Maze Runner"]},
-{"pergunta":"Qual é o nome do filme que apresenta a história de um astronauta preso em Marte?","resposta":"Perdido em Marte","opcoes":["Perdido em Marte","Gravidade","Interstellar"]},
-{"pergunta":"Quem interpretou o papel de Tony Montana em 'Scarface'?","resposta":"Al Pacino","opcoes":["Al Pacino","Robert De Niro","Jack Nicholson"]}
+  {
+    "pergunta": "Quem dirigiu 'Titanic'?",
+    "resposta": "James Cameron",
+    "opcoes": [
+      "James Cameron",
+      "Lana e Lilly Wachowski",
+      "Jon Favreau",
+      "Francis Ford Coppola"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Titanic'?",
+    "resposta": "1997",
+    "opcoes": [
+      "1997",
+      "1996",
+      "1998",
+      "2000"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Jack Dawson em 'Titanic'?",
+    "resposta": "Leonardo DiCaprio",
+    "opcoes": [
+      "Leonardo DiCaprio",
+      "Keanu Reeves",
+      "Robert Downey Jr.",
+      "Marlon Brando"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Leonardo DiCaprio em 'Titanic'?",
+    "resposta": "Jack Dawson",
+    "opcoes": [
+      "Jack Dawson",
+      "Neo",
+      "Tony Stark",
+      "Vito Corleone"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Matrix'?",
+    "resposta": "Lana e Lilly Wachowski",
+    "opcoes": [
+      "Lana e Lilly Wachowski",
+      "Steven Spielberg",
+      "James Cameron",
+      "Martin Scorsese"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Matrix'?",
+    "resposta": "1999",
+    "opcoes": [
+      "1999",
+      "1998",
+      "2000",
+      "2002"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Neo em 'Matrix'?",
+    "resposta": "Keanu Reeves",
+    "opcoes": [
+      "Keanu Reeves",
+      "Sam Neill",
+      "Sam Worthington",
+      "Ray Liotta"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Keanu Reeves em 'Matrix'?",
+    "resposta": "Neo",
+    "opcoes": [
+      "Neo",
+      "Alan Grant",
+      "Jake Sully",
+      "Henry Hill"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Jurassic Park'?",
+    "resposta": "Steven Spielberg",
+    "opcoes": [
+      "Steven Spielberg",
+      "Christopher Nolan",
+      "Chad Stahelski",
+      "Frank Darabont"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Jurassic Park'?",
+    "resposta": "1993",
+    "opcoes": [
+      "1993",
+      "1992",
+      "1994",
+      "1996"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Alan Grant em 'Jurassic Park'?",
+    "resposta": "Sam Neill",
+    "opcoes": [
+      "Sam Neill",
+      "Leonardo DiCaprio",
+      "Keanu Reeves",
+      "Tim Robbins"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Sam Neill em 'Jurassic Park'?",
+    "resposta": "Alan Grant",
+    "opcoes": [
+      "Alan Grant",
+      "Dom Cobb",
+      "John Wick",
+      "Andy Dufresne"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'A Origem'?",
+    "resposta": "Christopher Nolan",
+    "opcoes": [
+      "Christopher Nolan",
+      "Ridley Scott",
+      "John G. Avildsen",
+      "Steven Spielberg"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'A Origem'?",
+    "resposta": "2010",
+    "opcoes": [
+      "2010",
+      "2009",
+      "2011",
+      "2013"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Dom Cobb em 'A Origem'?",
+    "resposta": "Leonardo DiCaprio",
+    "opcoes": [
+      "Leonardo DiCaprio",
+      "Russell Crowe",
+      "Sylvester Stallone",
+      "Tom Hanks"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Leonardo DiCaprio em 'A Origem'?",
+    "resposta": "Dom Cobb",
+    "opcoes": [
+      "Dom Cobb",
+      "Maximus",
+      "Rocky Balboa",
+      "John Miller"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Gladiador'?",
+    "resposta": "Ridley Scott",
+    "opcoes": [
+      "Ridley Scott",
+      "Robert Zemeckis",
+      "Brian De Palma",
+      "Christopher Nolan"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Gladiador'?",
+    "resposta": "2000",
+    "opcoes": [
+      "2000",
+      "1999",
+      "2001",
+      "2003"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Maximus em 'Gladiador'?",
+    "resposta": "Russell Crowe",
+    "opcoes": [
+      "Russell Crowe",
+      "Tom Hanks",
+      "Al Pacino",
+      "Matthew McConaughey"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Russell Crowe em 'Gladiador'?",
+    "resposta": "Maximus",
+    "opcoes": [
+      "Maximus",
+      "Forrest Gump",
+      "Tony Montana",
+      "Joseph Cooper"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Forrest Gump'?",
+    "resposta": "Robert Zemeckis",
+    "opcoes": [
+      "Robert Zemeckis",
+      "Christopher Nolan",
+      "Quentin Tarantino",
+      "Ridley Scott"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Forrest Gump'?",
+    "resposta": "1994",
+    "opcoes": [
+      "1994",
+      "1993",
+      "1995",
+      "1997"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Forrest Gump em 'Forrest Gump'?",
+    "resposta": "Tom Hanks",
+    "opcoes": [
+      "Tom Hanks",
+      "Christian Bale",
+      "John Travolta",
+      "Matt Damon"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Tom Hanks em 'Forrest Gump'?",
+    "resposta": "Forrest Gump",
+    "opcoes": [
+      "Forrest Gump",
+      "Bruce Wayne",
+      "Vincent Vega",
+      "Mark Watney"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'O Cavaleiro das Trevas'?",
+    "resposta": "Christopher Nolan",
+    "opcoes": [
+      "Christopher Nolan",
+      "Jon Favreau",
+      "Francis Ford Coppola",
+      "George Miller"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'O Cavaleiro das Trevas'?",
+    "resposta": "2008",
+    "opcoes": [
+      "2008",
+      "2007",
+      "2009",
+      "2011"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Bruce Wayne em 'O Cavaleiro das Trevas'?",
+    "resposta": "Christian Bale",
+    "opcoes": [
+      "Christian Bale",
+      "Robert Downey Jr.",
+      "Marlon Brando",
+      "Tom Hardy"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Christian Bale em 'O Cavaleiro das Trevas'?",
+    "resposta": "Bruce Wayne",
+    "opcoes": [
+      "Bruce Wayne",
+      "Tony Stark",
+      "Vito Corleone",
+      "Max Rockatansky"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Homem de Ferro'?",
+    "resposta": "Jon Favreau",
+    "opcoes": [
+      "Jon Favreau",
+      "James Cameron",
+      "Martin Scorsese",
+      "Gore Verbinski"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Homem de Ferro'?",
+    "resposta": "2008",
+    "opcoes": [
+      "2008",
+      "2007",
+      "2009",
+      "2011"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Tony Stark em 'Homem de Ferro'?",
+    "resposta": "Robert Downey Jr.",
+    "opcoes": [
+      "Robert Downey Jr.",
+      "Sam Worthington",
+      "Ray Liotta",
+      "Johnny Depp"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Robert Downey Jr. em 'Homem de Ferro'?",
+    "resposta": "Tony Stark",
+    "opcoes": [
+      "Tony Stark",
+      "Jake Sully",
+      "Henry Hill",
+      "Jack Sparrow"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Avatar'?",
+    "resposta": "James Cameron",
+    "opcoes": [
+      "James Cameron",
+      "Chad Stahelski",
+      "Frank Darabont",
+      "Chris Columbus"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Avatar'?",
+    "resposta": "2009",
+    "opcoes": [
+      "2009",
+      "2008",
+      "2010",
+      "2012"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Jake Sully em 'Avatar'?",
+    "resposta": "Sam Worthington",
+    "opcoes": [
+      "Sam Worthington",
+      "Keanu Reeves",
+      "Tim Robbins",
+      "Daniel Radcliffe"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Sam Worthington em 'Avatar'?",
+    "resposta": "Jake Sully",
+    "opcoes": [
+      "Jake Sully",
+      "John Wick",
+      "Andy Dufresne",
+      "Harry Potter"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'John Wick'?",
+    "resposta": "Chad Stahelski",
+    "opcoes": [
+      "Chad Stahelski",
+      "John G. Avildsen",
+      "Steven Spielberg",
+      "Peter Jackson"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'John Wick'?",
+    "resposta": "2014",
+    "opcoes": [
+      "2014",
+      "2013",
+      "2015",
+      "2017"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta John Wick em 'John Wick'?",
+    "resposta": "Keanu Reeves",
+    "opcoes": [
+      "Keanu Reeves",
+      "Sylvester Stallone",
+      "Tom Hanks",
+      "Elijah Wood"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Keanu Reeves em 'John Wick'?",
+    "resposta": "John Wick",
+    "opcoes": [
+      "John Wick",
+      "Rocky Balboa",
+      "John Miller",
+      "Frodo Baggins"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Rocky'?",
+    "resposta": "John G. Avildsen",
+    "opcoes": [
+      "John G. Avildsen",
+      "Brian De Palma",
+      "Christopher Nolan",
+      "Peter Jackson"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Rocky'?",
+    "resposta": "1976",
+    "opcoes": [
+      "1976",
+      "1975",
+      "1977",
+      "1979"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Rocky Balboa em 'Rocky'?",
+    "resposta": "Sylvester Stallone",
+    "opcoes": [
+      "Sylvester Stallone",
+      "Al Pacino",
+      "Matthew McConaughey",
+      "Elijah Wood"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Sylvester Stallone em 'Rocky'?",
+    "resposta": "Rocky Balboa",
+    "opcoes": [
+      "Rocky Balboa",
+      "Tony Montana",
+      "Joseph Cooper",
+      "Frodo Baggins"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Scarface'?",
+    "resposta": "Brian De Palma",
+    "opcoes": [
+      "Brian De Palma",
+      "Quentin Tarantino",
+      "Ridley Scott",
+      "George Lucas"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Scarface'?",
+    "resposta": "1983",
+    "opcoes": [
+      "1983",
+      "1982",
+      "1984",
+      "1986"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Tony Montana em 'Scarface'?",
+    "resposta": "Al Pacino",
+    "opcoes": [
+      "Al Pacino",
+      "John Travolta",
+      "Matt Damon",
+      "Mark Hamill"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Al Pacino em 'Scarface'?",
+    "resposta": "Tony Montana",
+    "opcoes": [
+      "Tony Montana",
+      "Vincent Vega",
+      "Mark Watney",
+      "Luke Skywalker"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Pulp Fiction'?",
+    "resposta": "Quentin Tarantino",
+    "opcoes": [
+      "Quentin Tarantino",
+      "Francis Ford Coppola",
+      "George Miller",
+      "Irvin Kershner"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Pulp Fiction'?",
+    "resposta": "1994",
+    "opcoes": [
+      "1994",
+      "1993",
+      "1995",
+      "1997"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Vincent Vega em 'Pulp Fiction'?",
+    "resposta": "John Travolta",
+    "opcoes": [
+      "John Travolta",
+      "Marlon Brando",
+      "Tom Hardy",
+      "Mark Hamill"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por John Travolta em 'Pulp Fiction'?",
+    "resposta": "Vincent Vega",
+    "opcoes": [
+      "Vincent Vega",
+      "Vito Corleone",
+      "Max Rockatansky",
+      "Luke Skywalker"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'O Poderoso Chefão'?",
+    "resposta": "Francis Ford Coppola",
+    "opcoes": [
+      "Francis Ford Coppola",
+      "Martin Scorsese",
+      "Gore Verbinski",
+      "Robert Zemeckis"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'O Poderoso Chefão'?",
+    "resposta": "1972",
+    "opcoes": [
+      "1972",
+      "1971",
+      "1973",
+      "1975"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Vito Corleone em 'O Poderoso Chefão'?",
+    "resposta": "Marlon Brando",
+    "opcoes": [
+      "Marlon Brando",
+      "Ray Liotta",
+      "Johnny Depp",
+      "Michael J. Fox"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Marlon Brando em 'O Poderoso Chefão'?",
+    "resposta": "Vito Corleone",
+    "opcoes": [
+      "Vito Corleone",
+      "Henry Hill",
+      "Jack Sparrow",
+      "Marty McFly"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Os Bons Companheiros'?",
+    "resposta": "Martin Scorsese",
+    "opcoes": [
+      "Martin Scorsese",
+      "Frank Darabont",
+      "Chris Columbus",
+      "James Cameron"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Os Bons Companheiros'?",
+    "resposta": "1990",
+    "opcoes": [
+      "1990",
+      "1989",
+      "1991",
+      "1993"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Henry Hill em 'Os Bons Companheiros'?",
+    "resposta": "Ray Liotta",
+    "opcoes": [
+      "Ray Liotta",
+      "Tim Robbins",
+      "Daniel Radcliffe",
+      "Arnold Schwarzenegger"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Ray Liotta em 'Os Bons Companheiros'?",
+    "resposta": "Henry Hill",
+    "opcoes": [
+      "Henry Hill",
+      "Andy Dufresne",
+      "Harry Potter",
+      "T-800"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Um Sonho de Liberdade'?",
+    "resposta": "Frank Darabont",
+    "opcoes": [
+      "Frank Darabont",
+      "Steven Spielberg",
+      "Peter Jackson",
+      "Ridley Scott"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Um Sonho de Liberdade'?",
+    "resposta": "1994",
+    "opcoes": [
+      "1994",
+      "1993",
+      "1995",
+      "1997"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Andy Dufresne em 'Um Sonho de Liberdade'?",
+    "resposta": "Tim Robbins",
+    "opcoes": [
+      "Tim Robbins",
+      "Tom Hanks",
+      "Elijah Wood",
+      "Sigourney Weaver"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Tim Robbins em 'Um Sonho de Liberdade'?",
+    "resposta": "Andy Dufresne",
+    "opcoes": [
+      "Andy Dufresne",
+      "John Miller",
+      "Frodo Baggins",
+      "Ellen Ripley"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'O Resgate do Soldado Ryan'?",
+    "resposta": "Steven Spielberg",
+    "opcoes": [
+      "Steven Spielberg",
+      "Christopher Nolan",
+      "Peter Jackson",
+      "James Cameron"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'O Resgate do Soldado Ryan'?",
+    "resposta": "1998",
+    "opcoes": [
+      "1998",
+      "1997",
+      "1999",
+      "2001"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta John Miller em 'O Resgate do Soldado Ryan'?",
+    "resposta": "Tom Hanks",
+    "opcoes": [
+      "Tom Hanks",
+      "Matthew McConaughey",
+      "Elijah Wood",
+      "Sigourney Weaver"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Tom Hanks em 'O Resgate do Soldado Ryan'?",
+    "resposta": "John Miller",
+    "opcoes": [
+      "John Miller",
+      "Joseph Cooper",
+      "Frodo Baggins",
+      "Ellen Ripley"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Interestelar'?",
+    "resposta": "Christopher Nolan",
+    "opcoes": [
+      "Christopher Nolan",
+      "Ridley Scott",
+      "George Lucas",
+      "John McTiernan"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Interestelar'?",
+    "resposta": "2014",
+    "opcoes": [
+      "2014",
+      "2013",
+      "2015",
+      "2017"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Joseph Cooper em 'Interestelar'?",
+    "resposta": "Matthew McConaughey",
+    "opcoes": [
+      "Matthew McConaughey",
+      "Matt Damon",
+      "Mark Hamill",
+      "Bruce Willis"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Matthew McConaughey em 'Interestelar'?",
+    "resposta": "Joseph Cooper",
+    "opcoes": [
+      "Joseph Cooper",
+      "Mark Watney",
+      "Luke Skywalker",
+      "John McClane"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Perdido em Marte'?",
+    "resposta": "Ridley Scott",
+    "opcoes": [
+      "Ridley Scott",
+      "George Miller",
+      "Irvin Kershner",
+      "Jonathan Demme"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Perdido em Marte'?",
+    "resposta": "2015",
+    "opcoes": [
+      "2015",
+      "2014",
+      "2016",
+      "2018"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Mark Watney em 'Perdido em Marte'?",
+    "resposta": "Matt Damon",
+    "opcoes": [
+      "Matt Damon",
+      "Tom Hardy",
+      "Mark Hamill",
+      "Jodie Foster"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Matt Damon em 'Perdido em Marte'?",
+    "resposta": "Mark Watney",
+    "opcoes": [
+      "Mark Watney",
+      "Max Rockatansky",
+      "Luke Skywalker",
+      "Clarice Starling"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Mad Max: Estrada da Fúria'?",
+    "resposta": "George Miller",
+    "opcoes": [
+      "George Miller",
+      "Gore Verbinski",
+      "Robert Zemeckis",
+      "David Fincher"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Mad Max: Estrada da Fúria'?",
+    "resposta": "2015",
+    "opcoes": [
+      "2015",
+      "2014",
+      "2016",
+      "2018"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Max Rockatansky em 'Mad Max: Estrada da Fúria'?",
+    "resposta": "Tom Hardy",
+    "opcoes": [
+      "Tom Hardy",
+      "Johnny Depp",
+      "Michael J. Fox",
+      "Brad Pitt"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Tom Hardy em 'Mad Max: Estrada da Fúria'?",
+    "resposta": "Max Rockatansky",
+    "opcoes": [
+      "Max Rockatansky",
+      "Jack Sparrow",
+      "Marty McFly",
+      "David Mills"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Piratas do Caribe: A Maldição do Pérola Negra'?",
+    "resposta": "Gore Verbinski",
+    "opcoes": [
+      "Gore Verbinski",
+      "Chris Columbus",
+      "James Cameron",
+      "M. Night Shyamalan"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Piratas do Caribe: A Maldição do Pérola Negra'?",
+    "resposta": "2003",
+    "opcoes": [
+      "2003",
+      "2002",
+      "2004",
+      "2006"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Jack Sparrow em 'Piratas do Caribe: A Maldição do Pérola Negra'?",
+    "resposta": "Johnny Depp",
+    "opcoes": [
+      "Johnny Depp",
+      "Daniel Radcliffe",
+      "Arnold Schwarzenegger",
+      "Bruce Willis"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Johnny Depp em 'Piratas do Caribe: A Maldição do Pérola Negra'?",
+    "resposta": "Jack Sparrow",
+    "opcoes": [
+      "Jack Sparrow",
+      "Harry Potter",
+      "T-800",
+      "Malcolm Crowe"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Harry Potter e a Pedra Filosofal'?",
+    "resposta": "Chris Columbus",
+    "opcoes": [
+      "Chris Columbus",
+      "Peter Jackson",
+      "Ridley Scott",
+      "Christopher Nolan"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Harry Potter e a Pedra Filosofal'?",
+    "resposta": "2001",
+    "opcoes": [
+      "2001",
+      "2000",
+      "2002",
+      "2004"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Harry Potter em 'Harry Potter e a Pedra Filosofal'?",
+    "resposta": "Daniel Radcliffe",
+    "opcoes": [
+      "Daniel Radcliffe",
+      "Elijah Wood",
+      "Sigourney Weaver",
+      "Guy Pearce"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Daniel Radcliffe em 'Harry Potter e a Pedra Filosofal'?",
+    "resposta": "Harry Potter",
+    "opcoes": [
+      "Harry Potter",
+      "Frodo Baggins",
+      "Ellen Ripley",
+      "Leonard Shelby"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'O Senhor dos Anéis: A Sociedade do Anel'?",
+    "resposta": "Peter Jackson",
+    "opcoes": [
+      "Peter Jackson",
+      "Peter Jackson",
+      "James Cameron",
+      "Martin Scorsese"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'O Senhor dos Anéis: A Sociedade do Anel'?",
+    "resposta": "2001",
+    "opcoes": [
+      "2001",
+      "2000",
+      "2002",
+      "2004"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Frodo Baggins em 'O Senhor dos Anéis: A Sociedade do Anel'?",
+    "resposta": "Elijah Wood",
+    "opcoes": [
+      "Elijah Wood",
+      "Elijah Wood",
+      "Sigourney Weaver",
+      "Leonardo DiCaprio"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Elijah Wood em 'O Senhor dos Anéis: A Sociedade do Anel'?",
+    "resposta": "Frodo Baggins",
+    "opcoes": [
+      "Frodo Baggins",
+      "Frodo Baggins",
+      "Ellen Ripley",
+      "Billy Costigan"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'O Senhor dos Anéis: O Retorno do Rei'?",
+    "resposta": "Peter Jackson",
+    "opcoes": [
+      "Peter Jackson",
+      "George Lucas",
+      "John McTiernan",
+      "Joel e Ethan Coen"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'O Senhor dos Anéis: O Retorno do Rei'?",
+    "resposta": "2003",
+    "opcoes": [
+      "2003",
+      "2002",
+      "2004",
+      "2006"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Frodo Baggins em 'O Senhor dos Anéis: O Retorno do Rei'?",
+    "resposta": "Elijah Wood",
+    "opcoes": [
+      "Elijah Wood",
+      "Mark Hamill",
+      "Bruce Willis",
+      "Josh Brolin"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Elijah Wood em 'O Senhor dos Anéis: O Retorno do Rei'?",
+    "resposta": "Frodo Baggins",
+    "opcoes": [
+      "Frodo Baggins",
+      "Luke Skywalker",
+      "John McClane",
+      "Llewelyn Moss"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Star Wars: Uma Nova Esperança'?",
+    "resposta": "George Lucas",
+    "opcoes": [
+      "George Lucas",
+      "Irvin Kershner",
+      "Jonathan Demme",
+      "Paul Thomas Anderson"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Star Wars: Uma Nova Esperança'?",
+    "resposta": "1977",
+    "opcoes": [
+      "1977",
+      "1976",
+      "1978",
+      "1980"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Luke Skywalker em 'Star Wars: Uma Nova Esperança'?",
+    "resposta": "Mark Hamill",
+    "opcoes": [
+      "Mark Hamill",
+      "Mark Hamill",
+      "Jodie Foster",
+      "Daniel Day-Lewis"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Mark Hamill em 'Star Wars: Uma Nova Esperança'?",
+    "resposta": "Luke Skywalker",
+    "opcoes": [
+      "Luke Skywalker",
+      "Luke Skywalker",
+      "Clarice Starling",
+      "Daniel Plainview"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Star Wars: O Império Contra-Ataca'?",
+    "resposta": "Irvin Kershner",
+    "opcoes": [
+      "Irvin Kershner",
+      "Robert Zemeckis",
+      "David Fincher",
+      "Quentin Tarantino"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Star Wars: O Império Contra-Ataca'?",
+    "resposta": "1980",
+    "opcoes": [
+      "1980",
+      "1979",
+      "1981",
+      "1983"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Luke Skywalker em 'Star Wars: O Império Contra-Ataca'?",
+    "resposta": "Mark Hamill",
+    "opcoes": [
+      "Mark Hamill",
+      "Michael J. Fox",
+      "Brad Pitt",
+      "Jamie Foxx"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Mark Hamill em 'Star Wars: O Império Contra-Ataca'?",
+    "resposta": "Luke Skywalker",
+    "opcoes": [
+      "Luke Skywalker",
+      "Marty McFly",
+      "David Mills",
+      "Django Freeman"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'De Volta para o Futuro'?",
+    "resposta": "Robert Zemeckis",
+    "opcoes": [
+      "Robert Zemeckis",
+      "James Cameron",
+      "M. Night Shyamalan",
+      "Martin Scorsese"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'De Volta para o Futuro'?",
+    "resposta": "1985",
+    "opcoes": [
+      "1985",
+      "1984",
+      "1986",
+      "1988"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Marty McFly em 'De Volta para o Futuro'?",
+    "resposta": "Michael J. Fox",
+    "opcoes": [
+      "Michael J. Fox",
+      "Arnold Schwarzenegger",
+      "Bruce Willis",
+      "Leonardo DiCaprio"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Michael J. Fox em 'De Volta para o Futuro'?",
+    "resposta": "Marty McFly",
+    "opcoes": [
+      "Marty McFly",
+      "T-800",
+      "Malcolm Crowe",
+      "Jordan Belfort"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'O Exterminador do Futuro 2'?",
+    "resposta": "James Cameron",
+    "opcoes": [
+      "James Cameron",
+      "Ridley Scott",
+      "Christopher Nolan",
+      "Damien Chazelle"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'O Exterminador do Futuro 2'?",
+    "resposta": "1991",
+    "opcoes": [
+      "1991",
+      "1990",
+      "1992",
+      "1994"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta T-800 em 'O Exterminador do Futuro 2'?",
+    "resposta": "Arnold Schwarzenegger",
+    "opcoes": [
+      "Arnold Schwarzenegger",
+      "Sigourney Weaver",
+      "Guy Pearce",
+      "Miles Teller"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Arnold Schwarzenegger em 'O Exterminador do Futuro 2'?",
+    "resposta": "T-800",
+    "opcoes": [
+      "T-800",
+      "Ellen Ripley",
+      "Leonard Shelby",
+      "Andrew Neiman"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Alien, o Oitavo Passageiro'?",
+    "resposta": "Ridley Scott",
+    "opcoes": [
+      "Ridley Scott",
+      "James Cameron",
+      "Martin Scorsese",
+      "Damien Chazelle"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Alien, o Oitavo Passageiro'?",
+    "resposta": "1979",
+    "opcoes": [
+      "1979",
+      "1978",
+      "1980",
+      "1982"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Ellen Ripley em 'Alien, o Oitavo Passageiro'?",
+    "resposta": "Sigourney Weaver",
+    "opcoes": [
+      "Sigourney Weaver",
+      "Sigourney Weaver",
+      "Leonardo DiCaprio",
+      "Ryan Gosling"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Sigourney Weaver em 'Alien, o Oitavo Passageiro'?",
+    "resposta": "Ellen Ripley",
+    "opcoes": [
+      "Ellen Ripley",
+      "Ellen Ripley",
+      "Billy Costigan",
+      "Sebastian Wilder"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Aliens: O Resgate'?",
+    "resposta": "James Cameron",
+    "opcoes": [
+      "James Cameron",
+      "John McTiernan",
+      "Joel e Ethan Coen",
+      "Todd Phillips"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Aliens: O Resgate'?",
+    "resposta": "1986",
+    "opcoes": [
+      "1986",
+      "1985",
+      "1987",
+      "1989"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Ellen Ripley em 'Aliens: O Resgate'?",
+    "resposta": "Sigourney Weaver",
+    "opcoes": [
+      "Sigourney Weaver",
+      "Bruce Willis",
+      "Josh Brolin",
+      "Joaquin Phoenix"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Sigourney Weaver em 'Aliens: O Resgate'?",
+    "resposta": "Ellen Ripley",
+    "opcoes": [
+      "Ellen Ripley",
+      "John McClane",
+      "Llewelyn Moss",
+      "Arthur Fleck"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Duro de Matar'?",
+    "resposta": "John McTiernan",
+    "opcoes": [
+      "John McTiernan",
+      "Jonathan Demme",
+      "Paul Thomas Anderson",
+      "Bong Joon-ho"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Duro de Matar'?",
+    "resposta": "1988",
+    "opcoes": [
+      "1988",
+      "1987",
+      "1989",
+      "1991"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta John McClane em 'Duro de Matar'?",
+    "resposta": "Bruce Willis",
+    "opcoes": [
+      "Bruce Willis",
+      "Jodie Foster",
+      "Daniel Day-Lewis",
+      "Song Kang-ho"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Bruce Willis em 'Duro de Matar'?",
+    "resposta": "John McClane",
+    "opcoes": [
+      "John McClane",
+      "Clarice Starling",
+      "Daniel Plainview",
+      "Kim Ki-taek"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'O Silêncio dos Inocentes'?",
+    "resposta": "Jonathan Demme",
+    "opcoes": [
+      "Jonathan Demme",
+      "David Fincher",
+      "Quentin Tarantino",
+      "Christopher Nolan"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'O Silêncio dos Inocentes'?",
+    "resposta": "1991",
+    "opcoes": [
+      "1991",
+      "1990",
+      "1992",
+      "1994"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Clarice Starling em 'O Silêncio dos Inocentes'?",
+    "resposta": "Jodie Foster",
+    "opcoes": [
+      "Jodie Foster",
+      "Brad Pitt",
+      "Jamie Foxx",
+      "Cillian Murphy"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Jodie Foster em 'O Silêncio dos Inocentes'?",
+    "resposta": "Clarice Starling",
+    "opcoes": [
+      "Clarice Starling",
+      "David Mills",
+      "Django Freeman",
+      "J. Robert Oppenheimer"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Seven: Os Sete Crimes Capitais'?",
+    "resposta": "David Fincher",
+    "opcoes": [
+      "David Fincher",
+      "M. Night Shyamalan",
+      "Martin Scorsese",
+      "Denis Villeneuve"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Seven: Os Sete Crimes Capitais'?",
+    "resposta": "1995",
+    "opcoes": [
+      "1995",
+      "1994",
+      "1996",
+      "1998"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta David Mills em 'Seven: Os Sete Crimes Capitais'?",
+    "resposta": "Brad Pitt",
+    "opcoes": [
+      "Brad Pitt",
+      "Bruce Willis",
+      "Leonardo DiCaprio",
+      "Timothée Chalamet"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Brad Pitt em 'Seven: Os Sete Crimes Capitais'?",
+    "resposta": "David Mills",
+    "opcoes": [
+      "David Mills",
+      "Malcolm Crowe",
+      "Jordan Belfort",
+      "Paul Atreides"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'O Sexto Sentido'?",
+    "resposta": "M. Night Shyamalan",
+    "opcoes": [
+      "M. Night Shyamalan",
+      "Christopher Nolan",
+      "Damien Chazelle",
+      "Denis Villeneuve"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'O Sexto Sentido'?",
+    "resposta": "1999",
+    "opcoes": [
+      "1999",
+      "1998",
+      "2000",
+      "2002"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Malcolm Crowe em 'O Sexto Sentido'?",
+    "resposta": "Bruce Willis",
+    "opcoes": [
+      "Bruce Willis",
+      "Guy Pearce",
+      "Miles Teller",
+      "Ryan Gosling"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Bruce Willis em 'O Sexto Sentido'?",
+    "resposta": "Malcolm Crowe",
+    "opcoes": [
+      "Malcolm Crowe",
+      "Leonard Shelby",
+      "Andrew Neiman",
+      "K"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Amnésia'?",
+    "resposta": "Christopher Nolan",
+    "opcoes": [
+      "Christopher Nolan",
+      "Martin Scorsese",
+      "Damien Chazelle",
+      "Alejandro González Iñárritu"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Amnésia'?",
+    "resposta": "2000",
+    "opcoes": [
+      "2000",
+      "1999",
+      "2001",
+      "2003"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Leonard Shelby em 'Amnésia'?",
+    "resposta": "Guy Pearce",
+    "opcoes": [
+      "Guy Pearce",
+      "Leonardo DiCaprio",
+      "Ryan Gosling",
+      "Leonardo DiCaprio"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Guy Pearce em 'Amnésia'?",
+    "resposta": "Leonard Shelby",
+    "opcoes": [
+      "Leonard Shelby",
+      "Billy Costigan",
+      "Sebastian Wilder",
+      "Hugh Glass"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Os Infiltrados'?",
+    "resposta": "Martin Scorsese",
+    "opcoes": [
+      "Martin Scorsese",
+      "Joel e Ethan Coen",
+      "Todd Phillips",
+      "Robert Zemeckis"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Os Infiltrados'?",
+    "resposta": "2006",
+    "opcoes": [
+      "2006",
+      "2005",
+      "2007",
+      "2009"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Billy Costigan em 'Os Infiltrados'?",
+    "resposta": "Leonardo DiCaprio",
+    "opcoes": [
+      "Leonardo DiCaprio",
+      "Josh Brolin",
+      "Joaquin Phoenix",
+      "Tom Hanks"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Leonardo DiCaprio em 'Os Infiltrados'?",
+    "resposta": "Billy Costigan",
+    "opcoes": [
+      "Billy Costigan",
+      "Llewelyn Moss",
+      "Arthur Fleck",
+      "Chuck Noland"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Onde os Fracos Não Têm Vez'?",
+    "resposta": "Joel e Ethan Coen",
+    "opcoes": [
+      "Joel e Ethan Coen",
+      "Paul Thomas Anderson",
+      "Bong Joon-ho",
+      "David Fincher"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Onde os Fracos Não Têm Vez'?",
+    "resposta": "2007",
+    "opcoes": [
+      "2007",
+      "2006",
+      "2008",
+      "2010"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Llewelyn Moss em 'Onde os Fracos Não Têm Vez'?",
+    "resposta": "Josh Brolin",
+    "opcoes": [
+      "Josh Brolin",
+      "Daniel Day-Lewis",
+      "Song Kang-ho",
+      "Brad Pitt"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Josh Brolin em 'Onde os Fracos Não Têm Vez'?",
+    "resposta": "Llewelyn Moss",
+    "opcoes": [
+      "Llewelyn Moss",
+      "Daniel Plainview",
+      "Kim Ki-taek",
+      "Tyler Durden"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Sangue Negro'?",
+    "resposta": "Paul Thomas Anderson",
+    "opcoes": [
+      "Paul Thomas Anderson",
+      "Quentin Tarantino",
+      "Christopher Nolan",
+      "James Cameron"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Sangue Negro'?",
+    "resposta": "2007",
+    "opcoes": [
+      "2007",
+      "2006",
+      "2008",
+      "2010"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Daniel Plainview em 'Sangue Negro'?",
+    "resposta": "Daniel Day-Lewis",
+    "opcoes": [
+      "Daniel Day-Lewis",
+      "Jamie Foxx",
+      "Cillian Murphy",
+      "Leonardo DiCaprio"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Daniel Day-Lewis em 'Sangue Negro'?",
+    "resposta": "Daniel Plainview",
+    "opcoes": [
+      "Daniel Plainview",
+      "Django Freeman",
+      "J. Robert Oppenheimer",
+      "Jack Dawson"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Django Livre'?",
+    "resposta": "Quentin Tarantino",
+    "opcoes": [
+      "Quentin Tarantino",
+      "Martin Scorsese",
+      "Denis Villeneuve",
+      "Lana e Lilly Wachowski"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Django Livre'?",
+    "resposta": "2012",
+    "opcoes": [
+      "2012",
+      "2011",
+      "2013",
+      "2015"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Django Freeman em 'Django Livre'?",
+    "resposta": "Jamie Foxx",
+    "opcoes": [
+      "Jamie Foxx",
+      "Leonardo DiCaprio",
+      "Timothée Chalamet",
+      "Keanu Reeves"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Jamie Foxx em 'Django Livre'?",
+    "resposta": "Django Freeman",
+    "opcoes": [
+      "Django Freeman",
+      "Jordan Belfort",
+      "Paul Atreides",
+      "Neo"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'O Lobo de Wall Street'?",
+    "resposta": "Martin Scorsese",
+    "opcoes": [
+      "Martin Scorsese",
+      "Damien Chazelle",
+      "Denis Villeneuve",
+      "Steven Spielberg"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'O Lobo de Wall Street'?",
+    "resposta": "2013",
+    "opcoes": [
+      "2013",
+      "2012",
+      "2014",
+      "2016"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Jordan Belfort em 'O Lobo de Wall Street'?",
+    "resposta": "Leonardo DiCaprio",
+    "opcoes": [
+      "Leonardo DiCaprio",
+      "Miles Teller",
+      "Ryan Gosling",
+      "Sam Neill"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Leonardo DiCaprio em 'O Lobo de Wall Street'?",
+    "resposta": "Jordan Belfort",
+    "opcoes": [
+      "Jordan Belfort",
+      "Andrew Neiman",
+      "K",
+      "Alan Grant"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Whiplash'?",
+    "resposta": "Damien Chazelle",
+    "opcoes": [
+      "Damien Chazelle",
+      "Damien Chazelle",
+      "Alejandro González Iñárritu",
+      "Christopher Nolan"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Whiplash'?",
+    "resposta": "2014",
+    "opcoes": [
+      "2014",
+      "2013",
+      "2015",
+      "2017"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Andrew Neiman em 'Whiplash'?",
+    "resposta": "Miles Teller",
+    "opcoes": [
+      "Miles Teller",
+      "Ryan Gosling",
+      "Leonardo DiCaprio",
+      "Leonardo DiCaprio"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Miles Teller em 'Whiplash'?",
+    "resposta": "Andrew Neiman",
+    "opcoes": [
+      "Andrew Neiman",
+      "Sebastian Wilder",
+      "Hugh Glass",
+      "Dom Cobb"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'La La Land'?",
+    "resposta": "Damien Chazelle",
+    "opcoes": [
+      "Damien Chazelle",
+      "Todd Phillips",
+      "Robert Zemeckis",
+      "Ridley Scott"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'La La Land'?",
+    "resposta": "2016",
+    "opcoes": [
+      "2016",
+      "2015",
+      "2017",
+      "2019"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Sebastian Wilder em 'La La Land'?",
+    "resposta": "Ryan Gosling",
+    "opcoes": [
+      "Ryan Gosling",
+      "Joaquin Phoenix",
+      "Tom Hanks",
+      "Russell Crowe"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Ryan Gosling em 'La La Land'?",
+    "resposta": "Sebastian Wilder",
+    "opcoes": [
+      "Sebastian Wilder",
+      "Arthur Fleck",
+      "Chuck Noland",
+      "Maximus"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Coringa'?",
+    "resposta": "Todd Phillips",
+    "opcoes": [
+      "Todd Phillips",
+      "Bong Joon-ho",
+      "David Fincher",
+      "Robert Zemeckis"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Coringa'?",
+    "resposta": "2019",
+    "opcoes": [
+      "2019",
+      "2018",
+      "2020",
+      "2022"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Arthur Fleck em 'Coringa'?",
+    "resposta": "Joaquin Phoenix",
+    "opcoes": [
+      "Joaquin Phoenix",
+      "Song Kang-ho",
+      "Brad Pitt",
+      "Tom Hanks"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Joaquin Phoenix em 'Coringa'?",
+    "resposta": "Arthur Fleck",
+    "opcoes": [
+      "Arthur Fleck",
+      "Kim Ki-taek",
+      "Tyler Durden",
+      "Forrest Gump"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Parasita'?",
+    "resposta": "Bong Joon-ho",
+    "opcoes": [
+      "Bong Joon-ho",
+      "Christopher Nolan",
+      "James Cameron",
+      "Christopher Nolan"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Parasita'?",
+    "resposta": "2019",
+    "opcoes": [
+      "2019",
+      "2018",
+      "2020",
+      "2022"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Kim Ki-taek em 'Parasita'?",
+    "resposta": "Song Kang-ho",
+    "opcoes": [
+      "Song Kang-ho",
+      "Cillian Murphy",
+      "Leonardo DiCaprio",
+      "Christian Bale"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Song Kang-ho em 'Parasita'?",
+    "resposta": "Kim Ki-taek",
+    "opcoes": [
+      "Kim Ki-taek",
+      "J. Robert Oppenheimer",
+      "Jack Dawson",
+      "Bruce Wayne"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Oppenheimer'?",
+    "resposta": "Christopher Nolan",
+    "opcoes": [
+      "Christopher Nolan",
+      "Denis Villeneuve",
+      "Lana e Lilly Wachowski",
+      "Jon Favreau"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Oppenheimer'?",
+    "resposta": "2023",
+    "opcoes": [
+      "2023",
+      "2022",
+      "2024",
+      "2026"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta J. Robert Oppenheimer em 'Oppenheimer'?",
+    "resposta": "Cillian Murphy",
+    "opcoes": [
+      "Cillian Murphy",
+      "Timothée Chalamet",
+      "Keanu Reeves",
+      "Robert Downey Jr."
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Cillian Murphy em 'Oppenheimer'?",
+    "resposta": "J. Robert Oppenheimer",
+    "opcoes": [
+      "J. Robert Oppenheimer",
+      "Paul Atreides",
+      "Neo",
+      "Tony Stark"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Duna'?",
+    "resposta": "Denis Villeneuve",
+    "opcoes": [
+      "Denis Villeneuve",
+      "Denis Villeneuve",
+      "Steven Spielberg",
+      "James Cameron"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Duna'?",
+    "resposta": "2021",
+    "opcoes": [
+      "2021",
+      "2020",
+      "2022",
+      "2024"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Paul Atreides em 'Duna'?",
+    "resposta": "Timothée Chalamet",
+    "opcoes": [
+      "Timothée Chalamet",
+      "Ryan Gosling",
+      "Sam Neill",
+      "Sam Worthington"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Timothée Chalamet em 'Duna'?",
+    "resposta": "Paul Atreides",
+    "opcoes": [
+      "Paul Atreides",
+      "K",
+      "Alan Grant",
+      "Jake Sully"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Blade Runner 2049'?",
+    "resposta": "Denis Villeneuve",
+    "opcoes": [
+      "Denis Villeneuve",
+      "Alejandro González Iñárritu",
+      "Christopher Nolan",
+      "Chad Stahelski"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Blade Runner 2049'?",
+    "resposta": "2017",
+    "opcoes": [
+      "2017",
+      "2016",
+      "2018",
+      "2020"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta K em 'Blade Runner 2049'?",
+    "resposta": "Ryan Gosling",
+    "opcoes": [
+      "Ryan Gosling",
+      "Leonardo DiCaprio",
+      "Leonardo DiCaprio",
+      "Keanu Reeves"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Ryan Gosling em 'Blade Runner 2049'?",
+    "resposta": "K",
+    "opcoes": [
+      "K",
+      "Hugh Glass",
+      "Dom Cobb",
+      "John Wick"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'O Regresso'?",
+    "resposta": "Alejandro González Iñárritu",
+    "opcoes": [
+      "Alejandro González Iñárritu",
+      "Robert Zemeckis",
+      "Ridley Scott",
+      "John G. Avildsen"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'O Regresso'?",
+    "resposta": "2015",
+    "opcoes": [
+      "2015",
+      "2014",
+      "2016",
+      "2018"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Hugh Glass em 'O Regresso'?",
+    "resposta": "Leonardo DiCaprio",
+    "opcoes": [
+      "Leonardo DiCaprio",
+      "Tom Hanks",
+      "Russell Crowe",
+      "Sylvester Stallone"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Leonardo DiCaprio em 'O Regresso'?",
+    "resposta": "Hugh Glass",
+    "opcoes": [
+      "Hugh Glass",
+      "Chuck Noland",
+      "Maximus",
+      "Rocky Balboa"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Náufrago'?",
+    "resposta": "Robert Zemeckis",
+    "opcoes": [
+      "Robert Zemeckis",
+      "David Fincher",
+      "Robert Zemeckis",
+      "Brian De Palma"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Náufrago'?",
+    "resposta": "2000",
+    "opcoes": [
+      "2000",
+      "1999",
+      "2001",
+      "2003"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Chuck Noland em 'Náufrago'?",
+    "resposta": "Tom Hanks",
+    "opcoes": [
+      "Tom Hanks",
+      "Brad Pitt",
+      "Tom Hanks",
+      "Al Pacino"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Tom Hanks em 'Náufrago'?",
+    "resposta": "Chuck Noland",
+    "opcoes": [
+      "Chuck Noland",
+      "Tyler Durden",
+      "Forrest Gump",
+      "Tony Montana"
+    ]
+  },
+  {
+    "pergunta": "Quem dirigiu 'Clube da Luta'?",
+    "resposta": "David Fincher",
+    "opcoes": [
+      "David Fincher",
+      "James Cameron",
+      "Christopher Nolan",
+      "Quentin Tarantino"
+    ]
+  },
+  {
+    "pergunta": "Em que ano foi lançado 'Clube da Luta'?",
+    "resposta": "1999",
+    "opcoes": [
+      "1999",
+      "1998",
+      "2000",
+      "2002"
+    ]
+  },
+  {
+    "pergunta": "Qual ator interpreta Tyler Durden em 'Clube da Luta'?",
+    "resposta": "Brad Pitt",
+    "opcoes": [
+      "Brad Pitt",
+      "Leonardo DiCaprio",
+      "Christian Bale",
+      "John Travolta"
+    ]
+  },
+  {
+    "pergunta": "Qual personagem é interpretado por Brad Pitt em 'Clube da Luta'?",
+    "resposta": "Tyler Durden",
+    "opcoes": [
+      "Tyler Durden",
+      "Jack Dawson",
+      "Bruce Wayne",
+      "Vincent Vega"
+    ]
+  }
 ]
