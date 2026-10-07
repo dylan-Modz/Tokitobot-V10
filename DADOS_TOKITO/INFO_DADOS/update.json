@@ -6,14 +6,16 @@
   "ref": "main",
   "publishedAt": "2026-10-07T13:51:52.141Z",
   "changelog": [
-    "[Novidade] feat: loja pokemon em carrossel com 4 paginas",
+    "[Novidade] Loja Pokémon em carrossel",
     "A versão 10.1.61 já está disponível para atualização.",
-    "Lojapokemon atualizado"
+    "O comando lojapokemon agora abre 4 cards, um para cada página dos Pokémon comuns.",
+    "Cada card usa a mídia do menu do Tokito e permite escolher o Pokémon pela lista.",
+    "A compra continua usando o comando comprarpokemon."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
-  "title": "feat: loja pokemon em carrossel com 4 paginas",
+  "title": "Loja Pokémon em carrossel",
   "notice": "A versão 10.1.61 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
@@ -22,6 +24,11 @@
       "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
       "sha256": "d1b0ef87614d48414b668a3e439cafd941516327f84f7d9cc7956197cc954f57",
       "size": 6248
+    },
+    {
+      "path": "package.json",
+      "sha256": "",
+      "size": 0
     }
   ],
   "releases": [
@@ -1354,16 +1361,23 @@
       "fromVersion": "10.1.60",
       "channel": "stable",
       "type": "Novidade",
-      "title": "feat: loja pokemon em carrossel com 4 paginas",
+      "title": "Loja Pokémon em carrossel",
       "notice": "A versão 10.1.61 já está disponível para atualização.",
       "changelog": [
-        "Lojapokemon atualizado"
+        "O comando lojapokemon agora abre 4 cards, um para cada página dos Pokémon comuns.",
+        "Cada card usa a mídia do menu do Tokito e permite escolher o Pokémon pela lista.",
+        "A compra continua usando o comando comprarpokemon."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
           "sha256": "d1b0ef87614d48414b668a3e439cafd941516327f84f7d9cc7956197cc954f57",
           "size": 6248
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
         }
       ],
       "delete": [],
@@ -1371,9 +1385,9 @@
       "publishedAt": "2026-10-07T13:51:52.141Z"
     }
   ],
-  "versao": "10.1.60",
+  "versao": "10.1.61",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.59"
+  "fromVersion": "10.1.60"
 }
