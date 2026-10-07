@@ -1,33 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.60",
+  "version": "10.1.61",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T13:08:59.487Z",
+  "publishedAt": "2026-10-07T13:51:52.141Z",
   "changelog": [
-    "[Correção] Prefixo do menu RPG",
-    "A versão 10.1.60 já está disponível para atualização.",
-    "Corrige o menu RPG Pokémon que mostrava ${prefix} literalmente nos comandos novos.",
-    "Os comandos agora exibem o prefixo configurado do grupo normalmente."
+    "[Novidade] feat: loja pokemon em carrossel com 4 paginas",
+    "A versão 10.1.61 já está disponível para atualização.",
+    "Lojapokemon atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Correção do prefixo no menu RPG",
-  "notice": "A versão 10.1.60 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat: loja pokemon em carrossel com 4 paginas",
+  "notice": "A versão 10.1.61 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "package.json",
-      "sha256": "",
-      "size": 0
+      "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
+      "sha256": "d1b0ef87614d48414b668a3e439cafd941516327f84f7d9cc7956197cc954f57",
+      "size": 6248
     }
   ],
   "releases": [
@@ -1354,6 +1348,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T13:08:59.487Z"
+    },
+    {
+      "version": "10.1.61",
+      "fromVersion": "10.1.60",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: loja pokemon em carrossel com 4 paginas",
+      "notice": "A versão 10.1.61 já está disponível para atualização.",
+      "changelog": [
+        "Lojapokemon atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
+          "sha256": "d1b0ef87614d48414b668a3e439cafd941516327f84f7d9cc7956197cc954f57",
+          "size": 6248
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T13:51:52.141Z"
     }
   ],
   "versao": "10.1.60",
