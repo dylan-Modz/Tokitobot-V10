@@ -1,0 +1,16 @@
+[
+  {"id":1,"name":"Blastoise","photo":"https://telegra.ph/file/7c3e371411eec7be6009a.jpg"},
+  {"id":2,"name":"Primeape","photo":"https://telegra.ph/file/e51d4daec91753bd8c9a8.jpg"},
+  {"id":3,"name":"Pikachu","photo":"https://telegra.ph/file/0088d7036586d07d749db.jpg"},
+  {"id":4,"name":"Cherubi","photo":"https://telegra.ph/file/14935357c724aa031a363.jpg"},
+  {"id":5,"name":"Magikarp","photo":"https://telegra.ph/file/f0f7d12a9c9c3427cbfb1.jpg"},
+  {"id":6,"name":"Clefairy","photo":"https://telegra.ph/file/11060f05b7acf3c7152a0.jpg"},
+  {"id":7,"name":"Electrode","photo":"https://telegra.ph/file/41b57675d3d4f6b3d8a18.jpg"},
+  {"id":8,"name":"Eevee","photo":"https://telegra.ph/file/97aeb0b998d0f9a079ecf.jpg"},
+  {"id":9,"name":"Mudkip","photo":"https://telegra.ph/file/2db0743e69a6e9d117620.jpg"},
+  {"id":10,"name":"Sunflora","photo":"https://telegra.ph/file/54af2dc94c45e045b4e14.jpg"},
+  {"id":11,"name":"Dragonite","photo":"https://telegra.ph/file/b21f8f19a74d586e4bc17.jpg"},
+  {"id":12,"name":"Exeggutor","photo":"https://telegra.ph/file/85e84ffe1e7c999044c6b.jpg"},
+  {"id":13,"name":"Raichu","photo":"https://telegra.ph/file/c810960a2cf0e2ff79727.jpg"},
+  {"id":14,"name":"Slowking","photo":"https://telegra.ph/file/0894f6782d5e6f4c82800.jpg"}
+]
