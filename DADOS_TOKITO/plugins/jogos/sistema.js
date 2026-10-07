@@ -31,6 +31,7 @@
 const base = require('./sistema-base.js')
 const adivinhe = require('./sistema-adivinhe.js')
 const quiz = require('./sistema-quiz.js')
+const quizzes = require('./sistema-quizzes.js')
 const forca = require('./sistema-forca.js')
 const cacapalavras = require('./sistema-cacapalavras.js')
 const mines = require('./sistema-mines.js')
@@ -41,7 +42,8 @@ async function verificar(ctx) {
 base.limparInativos()
 if (ctx.isCmd || !ctx.isGroup || !base.modoAtivo(ctx.from, ctx.dataGp))
 return false
-return await quiz.auto(ctx) ||
+return await quizzes.auto(ctx) ||
+await quiz.auto(ctx) ||
 await forca.auto(ctx) ||
 await adivinhe.auto(ctx) ||
 await cacapalavras.auto(ctx) ||
@@ -68,6 +70,8 @@ saveQuizGame: quiz.saveGame,
 removeQuizGame: quiz.removeGame,
 criarQuizGame: quiz.criarGame,
 enviarQuiz: quiz.enviar,
+getQuizExtraGame: quizzes.getGame,
+removeQuizExtraGame: quizzes.removeGame,
 getForcaGame: forca.getGame,
 saveForcaGame: forca.saveGame,
 removeForcaGame: forca.removeGame,
