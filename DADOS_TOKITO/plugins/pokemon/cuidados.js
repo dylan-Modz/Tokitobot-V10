@@ -1,4 +1,5 @@
 const r = require('../../sistemas/rpg/index')
+const pokemonCore = require('../../sistemas/rpg/pokemon-core')
 const dylan = require('../../database/lib/comandos')
 const { compacto, dinheiro } = require('../../sistemas/rpg/texto')
 
@@ -219,53 +220,21 @@ dylan.setCommand({
       const jid = await destino(ctx)
       if (!jid)
         return ctx.reply(compacto(ctx, '⚔️', 'Batalha Pokémon', [
-          { emoji: '📌', texto: `${ctx.prefix}batalhapokemon @usuario` }
+          { emoji: '📌', texto: ctx.prefix + 'batalhapokemon @usuario' }
         ]))
 
       if (jid === ctx.normalizar(ctx.sender))
         return ctx.reply(ctx.mess.coinsDoarMesmo())
 
-      const adversario = r.user(ctx, jid)
-      if (!adversario.pokemon)
-        return ctx.reply(compacto(ctx, '⚔️', 'Adversário sem Pokémon', [
-          { emoji: '👤', texto: `@${jid.split('@')[0]} não possui Pokémon` }
-        ]), [jid])
-
       const cd = restante(pokemon.ultimaBatalha, 10 * 60 * 1000)
       if (cd)
         return ctx.reply(ctx.mess.coinsCooldown(cd))
 
-      r.normalizarPokemon(adversario.pokemon)
-      const dadosAlvo = r.POKEMON[adversario.pokemon.tipo] || {}
-      const bonusRaridade = dados.raridade === 'Lendário' ? 35 : dados.raridade === 'Raro' ? 20 : dados.raridade === 'Evoluído' ? 15 : 0
-      const bonusAlvo = dadosAlvo.raridade === 'Lendário' ? 35 : dadosAlvo.raridade === 'Raro' ? 20 : dadosAlvo.raridade === 'Evoluído' ? 15 : 0
-      const meuPoder = Number(pokemon.nivel || 1) * 18 + Number(pokemon.afeto || 0) + bonusRaridade + r.aleatorio(1, 100)
-      const poderAlvo = Number(adversario.pokemon.nivel || 1) * 18 + Number(adversario.pokemon.afeto || 0) + bonusAlvo + r.aleatorio(1, 100)
-      const venceu = meuPoder >= poderAlvo
-      const ganho = venceu ? r.aleatorio(300, 950) : 0
-      const xp = venceu ? 65 : 25
-
-      pokemon.xp = Number(pokemon.xp || 0) + xp
-      pokemon.nivel = 1 + Math.floor(pokemon.xp / 100)
-      pokemon.energia = r.limitar(Number(pokemon.energia || 0) - 18)
-      pokemon.saude = r.limitar(Number(pokemon.saude || 0) - (venceu ? 4 : 10))
       pokemon.ultimaBatalha = agora
-
-      if (venceu) {
-        pokemon.vitorias = Number(pokemon.vitorias || 0) + 1
-        economia.coins = Number(economia.coins || 0) + ganho
-      }
-
-      registrar(pokemon, `${venceu ? 'Venceu' : 'Perdeu'} batalha contra ${nomePokemon(adversario.pokemon)}`)
+      const resultado = await pokemonCore.batalhaTreinadores(ctx, jid)
       r.salvar(ctx)
 
-      return ctx.reply(compacto(ctx, venceu ? '🏆' : '⚔️', 'Batalha Pokémon', [
-        { emoji: '🔴', texto: `${nomePokemon(pokemon)} x ${nomePokemon(adversario.pokemon)}` },
-        { emoji: venceu ? '🏆' : '💥', texto: venceu ? 'Você venceu a batalha' : 'Seu Pokémon perdeu a batalha' },
-        { emoji: '🧠', texto: `+${xp} XP` },
-        { emoji: '💰', texto: `+${dinheiro(ganho)}` },
-        { emoji: '❤️', texto: `Saúde: ${pokemon.saude}%` }
-      ]), [jid])
+      return ctx.reply(resultado.texto, [ctx.sender, jid])
     }
 
     if (['realezapokemon', 'pokerealeza'].includes(comando)) {
