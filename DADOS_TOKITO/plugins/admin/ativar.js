@@ -8,8 +8,41 @@
  * ============================================================
  */
 
-const { proto, generateWAMessageFromContent } = require('baileys')
+const fs = require('fs')
+const path = require('path')
+const { proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('baileys')
 const dylan = require('../../database/lib/comandos')
+
+const mediaMenu = async ctx => {
+const video = path.join(__dirname, '..', '..', 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
+const image = path.join(__dirname, '..', '..', 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
+
+if (fs.existsSync(video)) {
+const media = await prepareWAMessageMedia({
+video: fs.readFileSync(video),
+gifPlayback: true,
+mimetype: 'video/mp4'
+}, { upload: ctx.tokito.waUploadToServer })
+
+return proto.Message.InteractiveMessage.Header.create({
+hasMediaAttachment: true,
+videoMessage: media.videoMessage
+})
+}
+
+if (fs.existsSync(image)) {
+const media = await prepareWAMessageMedia({
+image: fs.readFileSync(image)
+}, { upload: ctx.tokito.waUploadToServer })
+
+return proto.Message.InteractiveMessage.Header.create({
+hasMediaAttachment: true,
+imageMessage: media.imageMessage
+})
+}
+
+return null
+}
 
 const itens = [
 ['__bemvindo1', 'Bem-vindo 1', 'bemvindos'],
@@ -200,29 +233,29 @@ const painel = async (ctx, alteracao = '') => {
 const total = itens.length
 const ativas = itens.filter(([chave]) => ativo(ctx, chave)).length
 
+const adminNome = String(ctx.pushname || 'Administrador').trim() || 'Administrador'
 const texto =
 `- ⚙️ \`𝙰𝚃𝙸𝚅𝙰𝚁 𝚂𝙸𝚂𝚃𝙴𝙼𝙰𝚂\`
 
-> 🟢 ׄ ( ${ativas} — ᴀᴛɪᴠᴀᴅᴏs. )
-> 🔴 ׄ ( ${total - ativas} — ᴅᴇsᴀᴛɪᴠᴀᴅᴏs. )
+> 👤 ׄ ( ᴀᴅᴍ: ${adminNome} )
+> 🟢 ׄ ( ᴀᴛɪᴠᴀᴅᴏs: ${ativas} )
+> 🔴 ׄ ( ᴅᴇsᴀᴛɪᴠᴀᴅᴏs: ${total - ativas} )
 ${alteracao ? `\n> ⚙️ ׄ ( ${alteracao} )\n` : ''}
-> 📋 ׄ ( ᴛᴏǫᴜᴇ ᴇᴍ ᴜᴍᴀ ғᴜɴᴄ̧ᴀ̃ᴏ ᴘᴀʀᴀ ᴀᴛɪᴠᴀʀ ᴏᴜ ᴅᴇsᴀᴛɪᴠᴀʀ. )`
+> 📋 ׄ ( ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ғᴜɴᴄ̧ᴀ̃ᴏ ɴᴀ ʟɪsᴛᴀ ᴀʙᴀɪxᴏ. )`
 
 const lista = {
-title: '⚙️ Ativar sistemas',
+title: '⚙️﹚𝐀𝐓𝐈𝐕𝐀𝐑 𝐒𝐈𝐒𝐓𝐄𝐌𝐀𝐒﹙⚙️',
 sections: linhas(ctx)
 }
 
 try {
-const msg = generateWAMessageFromContent(ctx.from, {
-viewOnceMessage: {
-message: {
-interactiveMessage: proto.Message.InteractiveMessage.create({
+const header = await mediaMenu(ctx)
+const interactiveData = {
 body: proto.Message.InteractiveMessage.Body.create({
 text: texto
 }),
 footer: proto.Message.InteractiveMessage.Footer.create({
-text: 'Selecione uma função abaixo'
+text: 'ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ғᴜɴᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'
 }),
 nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
 buttons: [{
@@ -231,7 +264,15 @@ buttonParamsJson: JSON.stringify(lista)
 }],
 messageParamsJson: JSON.stringify({})
 })
-})
+}
+
+if (header)
+interactiveData.header = header
+
+const msg = generateWAMessageFromContent(ctx.from, {
+viewOnceMessage: {
+message: {
+interactiveMessage: proto.Message.InteractiveMessage.create(interactiveData)
 }
 }
 }, {

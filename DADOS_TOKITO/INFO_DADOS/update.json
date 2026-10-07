@@ -1,29 +1,34 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.61",
+  "version": "10.1.62",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T13:51:52.141Z",
+  "publishedAt": "2026-10-07T14:00:00.000Z",
   "changelog": [
-    "[Novidade] Loja Pokémon em carrossel",
-    "A versão 10.1.61 já está disponível para atualização.",
-    "O comando lojapokemon agora abre 4 cards, um para cada página dos Pokémon comuns.",
-    "Cada card usa a mídia do menu do Tokito e permite escolher o Pokémon pela lista.",
-    "A compra continua usando o comando comprarpokemon."
+    "[Atualização] Loja Pokémon e painel Ativar",
+    "A versão 10.1.62 já está disponível para atualização.",
+    "Loja Pokémon recebe cards mais limpos com treinador, saldo, quantidade disponível e página.",
+    "Pokémon ficam somente dentro do Menu List e recebem emojis de acordo com o tipo.",
+    "Comando ativar recebe a mídia do menu e passa a usar um único card interativo com todas as ativações na lista."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "Loja Pokémon em carrossel",
-  "notice": "A versão 10.1.61 já está disponível para atualização.",
+  "type": "Atualização",
+  "title": "Loja Pokémon e painel Ativar interativos",
+  "notice": "A versão 10.1.62 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
-      "sha256": "d1b0ef87614d48414b668a3e439cafd941516327f84f7d9cc7956197cc954f57",
-      "size": 6248
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+      "sha256": "",
+      "size": 0
     },
     {
       "path": "package.json",
@@ -1383,11 +1388,44 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T13:51:52.141Z"
+    },
+    {
+      "version": "10.1.62",
+      "fromVersion": "10.1.61",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Loja Pokémon e painel Ativar interativos",
+      "notice": "A versão 10.1.62 já está disponível para atualização.",
+      "changelog": [
+        "Loja Pokémon recebe cards mais limpos com treinador, saldo, quantidade disponível e página.",
+        "Pokémon ficam somente dentro do Menu List e recebem emojis de acordo com o tipo.",
+        "Comando ativar recebe a mídia do menu e passa a usar um único card interativo com todas as ativações na lista."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T14:00:00.000Z"
     }
   ],
-  "versao": "10.1.61",
+  "versao": "10.1.62",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.60"
+  "fromVersion": "10.1.61"
 }

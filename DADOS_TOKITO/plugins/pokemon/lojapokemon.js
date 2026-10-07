@@ -41,6 +41,37 @@ const listaPokemon = raro => Object.entries(r.POKEMON)
   .filter(([, x]) => raro ? x.raridade !== 'Comum' : x.raridade === 'Comum')
   .sort((a, b) => Number(a[1].id || 0) - Number(b[1].id || 0))
 
+const emojiTipo = pokemon => {
+  const tipo = String(
+    Array.isArray(pokemon?.tipos) && pokemon.tipos.length
+      ? pokemon.tipos[0]
+      : String(pokemon?.tipo || '').split('/')[0]
+  ).trim()
+
+  const mapa = {
+    Fogo: '🔥',
+    Água: '💧',
+    Planta: '🌿',
+    Elétrico: '⚡',
+    Gelo: '❄️',
+    Lutador: '🥊',
+    Veneno: '☠️',
+    Terra: '🌎',
+    Voador: '🪽',
+    Psíquico: '🔮',
+    Inseto: '🐛',
+    Pedra: '🪨',
+    Fantasma: '👻',
+    Dragão: '🐉',
+    Sombrio: '🌑',
+    Aço: '⚙️',
+    Fada: '🧚',
+    Normal: '⭐'
+  }
+
+  return mapa[tipo] || '✨'
+}
+
 const textoPagina = (ctx, todos, pagina, raro = false) => {
   const porPagina = 15
   const totalPaginas = Math.max(1, Math.ceil(todos.length / porPagina))
@@ -81,34 +112,44 @@ const enviarCarrossel = async ctx => {
   const porPagina = 15
   const totalPaginas = Math.ceil(todos.length / porPagina)
   const header = await mediaMenu(ctx)
+  const economia = r.eco(ctx)
+  const treinador = String(ctx.pushname || 'Treinador').trim() || 'Treinador'
+  const saldo = Number(economia.coins || 0).toLocaleString('pt-BR')
 
   const mkCard = (itens, pagina) => {
-    const rows = itens.map(([id, x]) => ({
-      title: `🔴 #${x.id} ${x.nome} • ${dinheiro(x.preco)}`,
-      description: `${x.tipo} • ${x.raridade} • comprar este Pokémon`,
-      id: `${ctx.prefix}comprarpokemon ${id}`
-    }))
+    const rows = itens.map(([id, x]) => {
+      const emoji = emojiTipo(x)
 
-    const lista = itens.map(([, x]) =>
-      `> 🔴 #${x.id} • ${x.nome} • ${x.tipo} • ${dinheiro(x.preco)}`
-    ).join('\n')
+      return {
+        title: `${emoji} #${x.id} ${x.nome}`,
+        description: `${x.tipo} • ${x.raridade} • ${dinheiro(x.preco)}`,
+        id: `${ctx.prefix}comprarpokemon ${id}`
+      }
+    })
 
     const card = {
       header: { hasMediaAttachment: Boolean(header) },
       headerType: 'IMAGE',
       body: {
-        text: `- 🔴 ` + String.fromCharCode(96) + `𝙻𝙾𝙹𝙰 𝙿𝙾𝙺𝙴́𝙼𝙾𝙽 • 𝙿𝙰́𝙶𝙸𝙽𝙰 ${pagina}` + String.fromCharCode(96) + `\n\n${lista}\n\n> 📄 ׄ ( Página ${pagina}/${totalPaginas}. )`
+        text: `- 🛒 \`𝙻𝙾𝙹𝙰 𝙿𝙾𝙺𝙴́𝙼𝙾𝙽\`
+
+> 👤 ׄ ( ᴛʀᴇɪɴᴀᴅᴏʀ: ${treinador} )
+> 💰 ׄ ( sᴀʟᴅᴏ: ${saldo} ɴ-ᴄᴏɪɴs )
+> 🎒 ׄ ( ᴅɪsᴘᴏɴɪ́ᴠᴇɪs: ${todos.length} ᴘᴏᴋᴇ́ᴍᴏɴ )
+> 📄 ׄ ( ᴘᴀ́ɢɪɴᴀ: ${pagina}/${totalPaginas} )
+
+> 🛍️ ׄ ( ᴇsᴄᴏʟʜᴀ ᴜᴍ ᴘᴏᴋᴇ́ᴍᴏɴ ɴᴀ ʟɪsᴛᴀ ᴀʙᴀɪxᴏ. )`
       },
       footer: {
-        text: 'ᴇsᴄᴏʟʜᴀ ᴜᴍ ᴘᴏᴋᴇᴍᴏɴ ᴀʙᴀɪxᴏ'
+        text: 'ᴇsᴄᴏʟʜᴀ ᴜᴍ ᴘᴏᴋᴇ́ᴍᴏɴ ᴀʙᴀɪxᴏ'
       },
       nativeFlowMessage: {
         buttons: [{
           name: 'single_select',
           buttonParamsJson: JSON.stringify({
-            title: `🔴 Escolher Pokémon • Página ${pagina}`,
+            title: '🛒﹚𝐕𝐄𝐑 𝐏𝐎𝐊𝐄́𝐌𝐎𝐍﹙🛒',
             sections: [{
-              title: `🔴 Loja Pokémon • Página ${pagina}`,
+              title: `📄 Página ${pagina}/${totalPaginas}`,
               rows
             }]
           })
