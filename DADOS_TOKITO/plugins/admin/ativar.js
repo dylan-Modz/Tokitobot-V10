@@ -10,7 +10,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('baileys')
+const { proto, prepareWAMessageMedia } = require('baileys')
 const dylan = require('../../database/lib/comandos')
 
 const mediaMenu = async ctx => {
@@ -95,6 +95,52 @@ const itens = [
 ['__modoia', 'Modo IA', 'modos'],
 ['simih', 'Simih', 'modos']
 ]
+
+const emojiFuncao = {
+'__bemvindo1': '👋',
+'__bemvindo2': '🌸',
+'__bemvindo3': '🎉',
+'__bemvindo4': '🖼️',
+'__bemvindo5': '🎙️',
+'aprovacao': '📥',
+'autoaprovacao': '✅',
+'soadm': '👑',
+'__antilinkeasy': '🔗',
+'__antilinkmedium': '🔗',
+'__antilinkhard': '🔗',
+'antifake': '🕵️',
+'__antiddd': '📞',
+'antirroubo': '🛡️',
+'antinuke': '💥',
+'antinotas': '📝',
+'antipalavra': '💬',
+'antipay': '💳',
+'antibot': '🤖',
+'antispam': '🚫',
+'antistatus': '📢',
+'antimarcacao': '📣',
+'anticanal': '📺',
+'x9': '👀',
+'antivideo': '🎥',
+'antifoto': '🖼️',
+'antivisu': '👁️',
+'antisticker': '🧩',
+'antifloodsticker': '🌊',
+'anticontato': '📇',
+'antilocalizacao': '📍',
+'antidocumento': '📄',
+'antiaudio': '🎙️',
+'autodl': '📥',
+'autosticker': '🧩',
+'autortext': '📝',
+'multiprefix': '🔣',
+'modojogos': '🎮',
+'__modobn': '🎭',
+'modorpg': '⚔️',
+'modocoins': '🪙',
+'__modoia': '🧠',
+'simih': '💬'
+}
 
 const secoes = [
 ['bemvindos', '🌸 Bem-vindos'],
@@ -210,14 +256,15 @@ return secoes
 .map(([id, titulo]) => {
 const rows = itens
 .filter(item => item[2] === id)
-.map(([chave, nome], indice) => {
+.map(([chave, nome]) => {
 const ligado = ativo(ctx, chave)
+const emoji = emojiFuncao[chave] || '⚙️'
 
 return {
-title: `${ligado ? '🟢' : '🔴'} ${nome}`,
+title: `${emoji} ${nome}`,
 description: ligado
-? 'Ativado • toque para desativar.'
-: 'Desativado • toque para ativar.',
+? '𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ✅ • toque para desativar.'
+: '𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ❌ • toque para ativar.',
 id: `${ctx.prefix}ativar ${chave}`
 }
 })
@@ -232,14 +279,16 @@ return rows.length
 const painel = async (ctx, alteracao = '') => {
 const total = itens.length
 const ativas = itens.filter(([chave]) => ativo(ctx, chave)).length
-
 const adminNome = String(ctx.pushname || 'Administrador').trim() || 'Administrador'
+const grupoNome = String(ctx.groupName || 'Grupo').trim() || 'Grupo'
+
 const texto =
 `- ⚙️ \`𝙰𝚃𝙸𝚅𝙰𝚁 𝚂𝙸𝚂𝚃𝙴𝙼𝙰𝚂\`
 
 > 👤 ׄ ( ᴀᴅᴍ: ${adminNome} )
-> 🟢 ׄ ( ᴀᴛɪᴠᴀᴅᴏs: ${ativas} )
-> 🔴 ׄ ( ᴅᴇsᴀᴛɪᴠᴀᴅᴏs: ${total - ativas} )
+> 👥 ׄ ( ɢʀᴜᴘᴏ: ${grupoNome} )
+> ✅ ׄ ( ᴀᴛɪᴠᴀᴅᴏs: ${ativas} )
+> ❌ ׄ ( ᴅᴇsᴀᴛɪᴠᴀᴅᴏs: ${total - ativas} )
 ${alteracao ? `\n> ⚙️ ׄ ( ${alteracao} )\n` : ''}
 > 📋 ׄ ( ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ғᴜɴᴄ̧ᴀ̃ᴏ ɴᴀ ʟɪsᴛᴀ ᴀʙᴀɪxᴏ. )`
 
@@ -250,54 +299,68 @@ sections: linhas(ctx)
 
 try {
 const header = await mediaMenu(ctx)
-const interactiveData = {
-body: proto.Message.InteractiveMessage.Body.create({
-text: texto
-}),
-footer: proto.Message.InteractiveMessage.Footer.create({
+
+const card = {
+header: { hasMediaAttachment: Boolean(header) },
+headerType: 'IMAGE',
+body: { text: texto },
+footer: {
 text: 'ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ғᴜɴᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'
-}),
-nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+},
+nativeFlowMessage: {
 buttons: [{
 name: 'single_select',
 buttonParamsJson: JSON.stringify(lista)
-}],
-messageParamsJson: JSON.stringify({})
-})
-}
-
-if (header)
-interactiveData.header = header
-
-const msg = generateWAMessageFromContent(ctx.from, {
-viewOnceMessage: {
-message: {
-interactiveMessage: proto.Message.InteractiveMessage.create(interactiveData)
+}]
 }
 }
-}, {
-quoted: ctx.selo,
-userJid: ctx.tokito.user?.id
-})
 
-await ctx.tokito.relayMessage(
-ctx.from,
-msg.message,
-{ messageId: msg.key.id }
-)
+if (header?.videoMessage) {
+card.header = {
+hasMediaAttachment: true,
+videoMessage: header.videoMessage
+}
+card.headerType = 'VIDEO'
+}
+else if (header?.imageMessage) {
+card.header = {
+hasMediaAttachment: true,
+imageMessage: header.imageMessage
+}
+card.headerType = 'IMAGE'
+}
+
+await ctx.tokito.relayMessage(ctx.from, {
+interactiveMessage: {
+contextInfo: {
+quotedMessage: ctx.selo?.message,
+...(ctx.selo?.key?.participant ? { participant: ctx.selo.key.participant } : {}),
+...(ctx.selo?.key?.id ? { stanzaId: ctx.selo.key.id } : {}),
+...(ctx.selo?.key?.remoteJid ? { remoteJid: ctx.selo.key.remoteJid } : {}),
+mentionedJid: ctx.sender ? [ctx.sender] : []
+},
+body: {
+text: '*⚙️⃞ ᴀᴛɪᴠᴀʀ sɪsᴛᴇᴍᴀs ⃞⚙️*'
+},
+carouselMessage: {
+cards: [card]
+}
+}
+}, {})
 
 return true
 }
 catch (error) {
 console.log(
-'[ATIVAR LIST]',
+'[ATIVAR CARROSSEL]',
 error?.message || error
 )
 
 const fallback = itens
-.map(([chave, nome], i) =>
-`> ${ativo(ctx, chave) ? '🟢' : '🔴'} ׄ ( ${i + 1} — ${nome}. )`
-)
+.map(([chave, nome]) => {
+const emoji = emojiFuncao[chave] || '⚙️'
+return `> ${emoji} ׄ ( ${nome}: ${ativo(ctx, chave) ? '𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ✅' : '𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ❌'} )`
+})
 .join('\n')
 
 return ctx.reply(
@@ -312,7 +375,7 @@ comandos: ['ativar'],
 categoria: 'admin',
 
 info: {
-descricao: 'Abre a lista interativa para ativar ou desativar sistemas do grupo.',
+descricao: 'Abre o carrossel interativo para ativar ou desativar sistemas do grupo.',
 uso: 'ativar',
 permissao: 'ADM'
 },

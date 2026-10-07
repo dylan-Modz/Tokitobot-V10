@@ -147,7 +147,7 @@ const enviarCarrossel = async ctx => {
         buttons: [{
           name: 'single_select',
           buttonParamsJson: JSON.stringify({
-            title: '🛒﹚𝐕𝐄𝐑 𝐏𝐎𝐊𝐄́𝐌𝐎𝐍﹙🛒',
+            title: '⚡﹚𝐕𝐄𝐑 𝐏𝐎𝐊𝐄́𝐌𝐎𝐍﹙⚡',
             sections: [{
               title: `📄 Página ${pagina}/${totalPaginas}`,
               rows
@@ -192,7 +192,7 @@ const enviarCarrossel = async ctx => {
         mentionedJid: ctx.sender ? [ctx.sender] : []
       },
       body: {
-        text: '*🔴⃞ ʟᴏᴊᴀ ᴘᴏᴋᴇᴍᴏɴ ⃞🔴*'
+        text: '*⚡⃞ ʟᴏᴊᴀ ᴘᴏᴋᴇᴍᴏɴ ⃞⚡*'
       },
       carouselMessage: { cards }
     }

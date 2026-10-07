@@ -1,32 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.62",
+  "version": "10.1.63",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T14:00:00.000Z",
+  "publishedAt": "2026-10-07T14:20:00.000Z",
   "changelog": [
-    "[Atualização] Loja Pokémon e painel Ativar",
-    "A versão 10.1.62 já está disponível para atualização.",
-    "Loja Pokémon recebe cards mais limpos com treinador, saldo, quantidade disponível e página.",
-    "Pokémon ficam somente dentro do Menu List e recebem emojis de acordo com o tipo.",
-    "Comando ativar recebe a mídia do menu e passa a usar um único card interativo com todas as ativações na lista."
+    "[Correção] Ativar em carrossel e novos emojis",
+    "A versão 10.1.63 já está disponível para atualização.",
+    "O comando ativar agora usa carouselMessage com apenas um card, igual ao padrão da Loja Pokémon.",
+    "Cada função do ativar recebe um emoji próprio de acordo com sua finalidade.",
+    "Os estados seguem o padrão do comando status: 𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ✅ e 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ❌.",
+    "A Loja Pokémon recebe emoji temático no título e no botão."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Loja Pokémon e painel Ativar interativos",
-  "notice": "A versão 10.1.62 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "Ativar em carrossel e novos emojis",
+  "notice": "A versão 10.1.63 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
+      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+      "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
       "sha256": "",
       "size": 0
     },
@@ -1421,11 +1422,45 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T14:00:00.000Z"
+    },
+    {
+      "version": "10.1.63",
+      "fromVersion": "10.1.62",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Ativar em carrossel e novos emojis",
+      "notice": "A versão 10.1.63 já está disponível para atualização.",
+      "changelog": [
+        "O comando ativar agora usa carouselMessage com apenas um card, igual ao padrão da Loja Pokémon.",
+        "Cada função do ativar recebe um emoji próprio de acordo com sua finalidade.",
+        "Os estados seguem o padrão do comando status: 𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ✅ e 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ❌.",
+        "A Loja Pokémon recebe emoji temático no título e no botão."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T14:20:00.000Z"
     }
   ],
-  "versao": "10.1.62",
+  "versao": "10.1.63",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.61"
+  "fromVersion": "10.1.62"
 }
