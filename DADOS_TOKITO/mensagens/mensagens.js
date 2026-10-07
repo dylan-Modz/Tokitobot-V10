@@ -5116,7 +5116,7 @@ return `- ⚙️ \`𝚂𝙷𝙰𝚉𝙰𝙼 𝙽𝙰̃𝙾 𝙲𝙾𝙽𝙵𝙸�
 exports.shazamMidiaGrande = () => {
 return `- 📦 \`𝙼𝙸́𝙳𝙸𝙰 𝙼𝚄𝙸𝚃𝙾 𝙶𝚁𝙰𝙽𝙳𝙴\`
 
-> 🎧 ׄ ( ᴜsᴇ ᴜᴍ ᴛʀᴇᴄʜᴏ ᴅᴇ ᴀ́ᴜᴅɪᴏ ᴏᴜ ᴠɪ́ᴅᴇᴏ ᴍᴇɴᴏʀ ǫᴜᴇ 5 MB ᴘᴀʀᴀ ᴏ ʀᴇᴄᴏɴʜᴇᴄɪᴍᴇɴᴛᴏ. )`
+> 🎧 ׄ ( ᴜsᴇ ᴜᴍ ᴛʀᴇᴄʜᴏ ᴅᴇ ᴀ́ᴜᴅɪᴏ ᴏᴜ ᴠɪ́ᴅᴇᴏ ᴍᴇɴᴏʀ ǫᴜᴇ 10 MB ᴘᴀʀᴀ ᴏ ʀᴇᴄᴏɴʜᴇᴄɪᴍᴇɴᴛᴏ. )`
 }
 
 exports.shazamNaoEncontrada = () => {
@@ -5126,7 +5126,7 @@ return `- ❌ \`𝙼𝚄́𝚂𝙸𝙲𝙰 𝙽𝙰̃𝙾 𝙴𝙽𝙲𝙾𝙽�
 > 🎧 ׄ ( ᴛᴇɴᴛᴇ ᴜᴍ ᴛʀᴇᴄʜᴏ ᴍᴀɪs ʟɪᴍᴘᴏ, ᴄᴏᴍ ᴍᴇɴᴏs ʀᴜɪ́ᴅᴏ. )`
 }
 
-exports.shazamResultado = (dados = {}, prefix = '.') => {
+exports.shazamResultado = (dados = {}, prefix = '.', interativo = false) => {
 const titulo = dados.titulo || 'Música desconhecida'
 const artista = dados.artista || 'Desconhecido'
 const album = dados.album || 'Não informado'
@@ -5157,7 +5157,7 @@ return `- 🎧 \`𝙼𝚄́𝚂𝙸𝙲𝙰 𝙸𝙳𝙴𝙽𝚃𝙸𝙵𝙸𝙲
 > 📊 ׄ ( ᴄᴏɴғɪᴀɴᴄ̧ᴀ: ${score} )
 ${links.length ? '\n' + links.join('\n') : ''}
 
-> 🎧 ׄ ( ᴘᴀʀᴀ ʙᴀɪxᴀʀ: ${prefix}play ${titulo} ${artista} )`
+${interativo ? '> 🎛️ ׄ ( ᴇsᴄᴏʟʜᴀ ᴀ́ᴜᴅɪᴏ ᴏᴜ ᴠɪ́ᴅᴇᴏ ɴᴏs ʙᴏᴛᴏ̃ᴇs ᴀʙᴀɪxᴏ. )' : `> 🎧 ׄ ( ᴘᴀʀᴀ ʙᴀɪxᴀʀ: ${prefix}play ${titulo} ${artista} )`}`
 }
 
 exports.shazamErro = detalhe => {
