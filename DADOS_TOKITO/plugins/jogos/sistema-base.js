@@ -52,13 +52,18 @@ caca: path.join(PASTA_PARTIDAS, 'cacapalavras.json'),
 mines: path.join(PASTA_PARTIDAS, 'mines.json'),
 velha: path.join(PASTA_PARTIDAS, 'jogodavelha.json'),
 dama: path.join(PASTA_PARTIDAS, 'dama.json'),
+quizzes: path.join(PASTA_PARTIDAS, 'quizzes.json'),
+pokemon: path.join(PASTA_DADOS, 'pokemon.json'),
+trivia: path.join(PASTA_DADOS, 'trivia.json'),
+geografia: path.join(PASTA_DADOS, 'geografia.json'),
+filmes: path.join(PASTA_DADOS, 'filmes.json'),
 palavrasAdivinhe: path.join(PASTA_DADOS, 'palavras_adivinhe.json'),
 palavrasCaca: path.join(PASTA_DADOS, 'palavras_caca.json'),
 palavrasForca: path.join(PASTA_DADOS, 'palavras.json'),
 perguntasQuiz: path.join(PASTA_DADOS, 'perguntas_quiz.json')
 }
 
-for (const file of [files.adivinhe, files.quiz, files.forca, files.caca, files.mines, files.velha, files.dama]) {
+for (const file of [files.adivinhe, files.quiz, files.forca, files.caca, files.mines, files.velha, files.dama, files.quizzes]) {
 if (!fs.existsSync(file))
 fs.writeFileSync(file, '[]\n')
 }
