@@ -1,23 +1,22 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.57",
+  "version": "10.1.58",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T03:46:28.596Z",
+  "publishedAt": "2026-10-07T03:59:32.111Z",
   "changelog": [
-    "[Correção] Quizzes com capa",
-    "A versão 10.1.57 já está disponível para atualização.",
-    "Corrige falhas ao iniciar Quiz Calculadora e Quiz Geografia quando a imagem fixa não consegue ser carregada.",
-    "Trivia e Filmes recebem a mesma proteção para evitar o mesmo problema.",
-    "Se a capa falhar, o quiz continua normalmente em texto em vez de retornar erro.",
-    "A partida agora só é salva depois que a pergunta é enviada com sucesso, evitando quiz fantasma bloqueando uma nova rodada."
+    "[Correção] Novas capas dos quizzes",
+    "A versão 10.1.58 já está disponível para atualização.",
+    "Troca as capas quebradas dos quizzes Calculadora, Trivia, Geografia e Filmes por novas imagens funcionais.",
+    "Quiz Pokémon não foi alterado.",
+    "Mantida a proteção que envia o quiz em texto caso uma capa externa falhe no futuro."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Correção das capas dos quizzes",
-  "notice": "A versão 10.1.57 já está disponível para atualização.",
+  "title": "Novas capas dos quizzes",
+  "notice": "A versão 10.1.58 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -1196,11 +1195,39 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T03:46:28.596Z"
+    },
+    {
+      "version": "10.1.58",
+      "fromVersion": "10.1.57",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Novas capas dos quizzes",
+      "notice": "A versão 10.1.58 já está disponível para atualização.",
+      "changelog": [
+        "Troca as capas quebradas dos quizzes Calculadora, Trivia, Geografia e Filmes por novas imagens funcionais.",
+        "Quiz Pokémon não foi alterado.",
+        "Mantida a proteção que envia o quiz em texto caso uma capa externa falhe no futuro."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T03:59:32.111Z"
     }
   ],
-  "versao": "10.1.57",
+  "versao": "10.1.58",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.56"
+  "fromVersion": "10.1.57"
 }
