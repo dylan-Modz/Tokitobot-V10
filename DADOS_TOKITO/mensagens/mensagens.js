@@ -5386,3 +5386,33 @@ return `- 👋 \`𝙱𝙴𝙼-𝚅𝙸𝙽𝙳𝙾𝚂\`
 > 🎙️ ׄ ( áᴜᴅɪᴏ: ${prefix}audiobv / ${prefix}audiosaiu. )
 > ⚙️ ׄ ( ᴜsᴇ ${prefix}ativar ᴘᴀʀᴀ ᴠᴇʀ ᴏ sᴛᴀᴛᴜs ᴅᴏs ᴍᴏᴅᴏs. )`
 }
+
+
+/* TOKITO_POKEMON_CAPTURA_ANIMADA */
+
+exports.pokemonCapturando = ({ pokemon = 'Pokémon', bola = 'Poké Ball', bolaEmoji = '🎯' } = {}) => {
+return `- 🎯 \`𝙲𝙰𝙿𝚃𝚄𝚁𝙰𝙽𝙳𝙾 𝙿𝙾𝙺𝙴́𝙼𝙾𝙽\`
+
+> ${bolaEmoji} ׄ ( ᴘᴏᴋᴇ́ ʙᴀʟʟ: ${bola} )
+> ⚡ ׄ ( ᴘᴏᴋᴇ́ᴍᴏɴ: ${pokemon} )
+> ⏳ ׄ ( ᴀɢᴜᴀʀᴅᴇ ᴏ ʀᴇsᴜʟᴛᴀᴅᴏ ᴅᴀ ᴄᴀᴘᴛᴜʀᴀ... )`
+}
+
+exports.pokemonCapturaFalhou = ({ pokemon = 'Pokémon', bola = 'Poké Ball', bolaEmoji = '🎯', resistencia = 0 } = {}) => {
+return `- ❌ \`𝙲𝙰𝙿𝚃𝚄𝚁𝙰 𝙵𝙰𝙻𝙷𝙾𝚄\`
+
+> ${bolaEmoji} ׄ ( ᴘᴏᴋᴇ́ ʙᴀʟʟ: ${bola} )
+> 🏃 ׄ ( ${pokemon} ᴇsᴄᴀᴘᴏᴜ ᴅᴀ ʙᴏʟᴀ, ᴍᴀs ᴄᴏɴᴛɪɴᴜᴀ ᴘᴏʀ ᴘᴇʀᴛᴏ. )
+> ❤️ ׄ ( ʀᴇsɪsᴛᴇ̂ɴᴄɪᴀ: ${resistencia}% )`
+}
+
+exports.pokemonCapturado = ({ pokemon = 'Pokémon', nivel = 1, id = '—', shiny = false } = {}) => {
+return `- 🎉 \`𝙿𝙾𝙺𝙴́𝙼𝙾𝙽 𝙲𝙰𝙿𝚃𝚄𝚁𝙰𝙳𝙾\`
+
+> ${shiny ? '✨' : '⚡'} ׄ ( ᴘᴏᴋᴇ́ᴍᴏɴ: ${pokemon}${shiny ? ' SHINY' : ''} )
+> ⭐ ׄ ( ɴɪ́ᴠᴇʟ: ${nivel} )
+> 🆔 ׄ ( ɪᴅ: ${id} )
+> 📕 ׄ ( ᴀᴅɪᴄɪᴏɴᴀᴅᴏ ᴀ̀ ᴄᴏʟᴇᴄ̧ᴀ̃ᴏ ᴇ ᴀ̀ ᴘᴏᴋᴇ́ᴅᴇx. )`
+}
+
+/* FIM_TOKITO_POKEMON_CAPTURA_ANIMADA */

@@ -1,60 +1,39 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.65",
+  "version": "10.1.66",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T14:40:00.000Z",
+  "publishedAt": "2026-10-07T15:00:00.000Z",
   "changelog": [
-    "[Correção] Canal no RPG e remoção do restart automático",
-    "A versão 10.1.65 já está disponível para atualização.",
-    "Remove os comandos setrestart e checkrestart e desativa o reinício automático diário do sistema do dono.",
-    "Menu Dono não exibe mais os comandos de reinício programado.",
-    "Cards e imagens compartilhadas do RPG passam a carregar o contexto do canal do Tokito.",
-    "Jornada, Arsenal, Guilda e Desafios recebem o Acessar canal através do helper compartilhado.",
-    "Cards de Coins e Cidade recebem o contexto do canal.",
-    "Mensagens com imagem do RPG de Magia reforçam o mesmo contexto do canal e as menções."
+    "[Atualização] Captura Pokémon animada e Menu RPG renovado",
+    "A versão 10.1.66 já está disponível para atualização.",
+    "Comando capturar recebe animação em GIF antes do resultado usando o vídeo de captura informado.",
+    "Quando a captura falha, o bot envia a animação de falha com o resultado no padrão visual do mensagens.js.",
+    "Quando a captura dá certo, o Pokémon capturado continua sendo exibido com imagem e mensagem padronizada.",
+    "A captura mantém o Acessar canal e bloqueia tentativas simultâneas no mesmo grupo durante a animação.",
+    "Menu RPG/Pokémon troca os emojis 🔴 genéricos por emojis relacionados a cada comando e seção."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Canal no RPG e remoção do restart automático",
-  "notice": "A versão 10.1.65 já está disponível para atualização.",
+  "type": "Atualização",
+  "title": "Captura Pokémon animada e Menu RPG renovado",
+  "notice": "A versão 10.1.66 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/dono/agenda.js",
+      "path": "DADOS_TOKITO/plugins/pokemon/expansao.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/sistemas/dono.js",
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
       "sha256": "",
       "size": 0
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/coins/coins.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/coins/cidade.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/rpg/arcano.js",
       "sha256": "",
       "size": 0
     },
@@ -1570,11 +1549,51 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T14:40:00.000Z"
+    },
+    {
+      "version": "10.1.66",
+      "fromVersion": "10.1.65",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Captura Pokémon animada e Menu RPG renovado",
+      "notice": "A versão 10.1.66 já está disponível para atualização.",
+      "changelog": [
+        "Comando capturar recebe animação em GIF antes do resultado usando o vídeo de captura informado.",
+        "Quando a captura falha, o bot envia a animação de falha com o resultado no padrão visual do mensagens.js.",
+        "Quando a captura dá certo, o Pokémon capturado continua sendo exibido com imagem e mensagem padronizada.",
+        "A captura mantém o Acessar canal e bloqueia tentativas simultâneas no mesmo grupo durante a animação.",
+        "Menu RPG/Pokémon troca os emojis 🔴 genéricos por emojis relacionados a cada comando e seção."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/expansao.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T15:00:00.000Z"
     }
   ],
-  "versao": "10.1.65",
+  "versao": "10.1.66",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.64"
+  "fromVersion": "10.1.65"
 }

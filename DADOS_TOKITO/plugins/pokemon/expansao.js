@@ -2,6 +2,33 @@ const r = require('../../sistemas/rpg/index')
 const p = require('../../sistemas/rpg/pokemon-core')
 const dylan = require('../../database/lib/comandos')
 
+const CAPTURA_GIF = 'https://raw.githubusercontent.com/Yoshirukkj/Download-/main/rb27ir.mp4'
+const FALHA_GIF = 'https://raw.githubusercontent.com/Yoshirukkj/Download-/main/u8c7gt.mp4'
+const capturasEmAndamento = new Set()
+const esperar = ms => new Promise(resolve => setTimeout(resolve, ms))
+
+const enviarAnimacaoCaptura = async (ctx, url, caption) => {
+  const mencoes = [ctx.sender].filter(Boolean)
+  const contextInfo = typeof ctx.canalInfo === 'function'
+    ? ctx.canalInfo(mencoes)
+    : { mentionedJid: mencoes }
+
+  try {
+    return await ctx.tokito.sendMessage(ctx.from, {
+      video: { url },
+      gifPlayback: true,
+      mimetype: 'video/mp4',
+      caption,
+      mentions: mencoes,
+      contextInfo
+    }, { quoted: ctx.selo })
+  }
+  catch (error) {
+    console.log('[POKEMON CAPTURA GIF]', error?.message || error)
+    return ctx.reply(caption, mencoes)
+  }
+}
+
 const comandos = [
   'pokedex','capturar','pokebolas','comprarbola','colecaopokemon','equipokemon','principalpokemon','soltarpokemon','favoritarpokemon','infopokemon',
   'statuspokemon','golpes','aprendergolpe','usartm','curarpokemon','revivepokemon','megaevoluirpokemon','dynamaxpokemon','terastalpokemon','tipospokemon',
@@ -81,34 +108,79 @@ dylan.setCommand({
     }
 
     if (cmd === 'capturar') {
+      const chaveCaptura = String(ctx.from || '')
+      if (capturasEmAndamento.has(chaveCaptura))
+        return erroUso(ctx, 'Já existe uma tentativa de captura em andamento neste grupo.')
+
       const m = p.mundo(ctx)
       const wild = p.limparSelvagem(ctx)
       if (!wild) return erroUso(ctx, 'Não há Pokémon selvagem no grupo agora.')
+
       const bola = p.norm(ctx.args && ctx.args[0] || 'pokeball')
       if (!p.BOLAS[bola]) return erroUso(ctx, 'Bola inválida: pokeball, greatball, ultraball, masterball ou safariball.')
       if (Number(eu.st.bolas[bola] || 0) <= 0) return erroUso(ctx, 'Você não possui ' + p.BOLAS[bola].nome + '.')
-      eu.st.bolas[bola]--
-      const sp = p.especie(wild.id)
-      const chance = p.chanceCaptura(sp, bola, wild.hp)
-      const pegou = Math.random() <= chance
-      if (!pegou) {
-        wild.hp = p.clamp(wild.hp - p.sorte(8, 22), 10, 100)
+
+      capturasEmAndamento.add(chaveCaptura)
+
+      try {
+        eu.st.bolas[bola]--
+
+        const sp = p.especie(wild.id)
+        const chance = p.chanceCaptura(sp, bola, wild.hp)
+        const pegou = Math.random() <= chance
+
+        await enviarAnimacaoCaptura(
+          ctx,
+          CAPTURA_GIF,
+          ctx.mess.pokemonCapturando({
+            pokemon: wild.nome,
+            bola: p.BOLAS[bola].nome,
+            bolaEmoji: p.BOLAS[bola].emoji
+          })
+        )
+
+        await esperar(2500)
+
+        if (!pegou) {
+          wild.hp = p.clamp(wild.hp - p.sorte(8, 22), 10, 100)
+          salvar(ctx)
+
+          return enviarAnimacaoCaptura(
+            ctx,
+            FALHA_GIF,
+            ctx.mess.pokemonCapturaFalhou({
+              pokemon: wild.nome,
+              bola: p.BOLAS[bola].nome,
+              bolaEmoji: p.BOLAS[bola].emoji,
+              resistencia: wild.hp
+            })
+          )
+        }
+
+        const inst = p.adicionar(ctx, sp, {
+          shiny: wild.shiny,
+          nivel: wild.nivel,
+          origem: wild.origem
+        })
+
+        m.selvagem = null
         salvar(ctx)
-        return ctx.reply(p.compacto(ctx, '💥', 'Captura falhou', [
-          { emoji: p.BOLAS[bola].emoji, texto: p.BOLAS[bola].nome + ' foi usada' },
-          { emoji: '🏃', texto: wild.nome + ' escapou da bola, mas continua por perto' },
-          { emoji: '❤️', texto: 'Resistência: ' + wild.hp + '%' }
-        ]))
+
+        return p.enviarComImagem(
+          ctx,
+          p.imagem(sp),
+          ctx.mess.pokemonCapturado({
+            pokemon: sp.name,
+            nivel: inst.nivel,
+            id: inst.uid.slice(0, 8),
+            shiny: wild.shiny
+          }),
+          [ctx.sender]
+        )
       }
-      const inst = p.adicionar(ctx, sp, { shiny: wild.shiny, nivel: wild.nivel, origem: wild.origem })
-      m.selvagem = null
-      salvar(ctx)
-      return p.enviarComImagem(ctx, p.imagem(sp), p.compacto(ctx, '🎉', 'Pokémon capturado', [
-        { emoji: wild.shiny ? '✨' : '🔴', texto: sp.name + (wild.shiny ? ' SHINY' : '') },
-        { emoji: '⭐', texto: 'Nível: ' + inst.nivel },
-        { emoji: '🆔', texto: 'ID: ' + inst.uid.slice(0, 8) },
-        { emoji: '📕', texto: 'Adicionado à coleção e à Pokédex' }
-      ]))
+      finally {
+        capturasEmAndamento.delete(chaveCaptura)
+      }
     }
 
     if (cmd === 'pokebolas') {
