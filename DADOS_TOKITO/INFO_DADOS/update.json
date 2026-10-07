@@ -1,31 +1,23 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.63",
+  "version": "10.1.64",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T14:20:00.000Z",
+  "publishedAt": "2026-10-07T14:25:00.000Z",
   "changelog": [
-    "[Correção] Ativar em carrossel e novos emojis",
-    "A versão 10.1.63 já está disponível para atualização.",
-    "O comando ativar agora usa carouselMessage com apenas um card, igual ao padrão da Loja Pokémon.",
-    "Cada função do ativar recebe um emoji próprio de acordo com sua finalidade.",
-    "Os estados seguem o padrão do comando status: 𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ✅ e 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ❌.",
-    "A Loja Pokémon recebe emoji temático no título e no botão."
+    "[Correção] Ajuste visual da Loja Pokémon",
+    "A versão 10.1.64 já está disponível para atualização.",
+    "Troca o ícone genérico do título interno da Loja Pokémon pelo ícone temático ⚡."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Ativar em carrossel e novos emojis",
-  "notice": "A versão 10.1.63 já está disponível para atualização.",
+  "title": "Ajuste visual da Loja Pokémon",
+  "notice": "A versão 10.1.64 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
-    {
-      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-      "sha256": "",
-      "size": 0
-    },
     {
       "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
       "sha256": "",
@@ -1456,11 +1448,37 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T14:20:00.000Z"
+    },
+    {
+      "version": "10.1.64",
+      "fromVersion": "10.1.63",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Ajuste visual da Loja Pokémon",
+      "notice": "A versão 10.1.64 já está disponível para atualização.",
+      "changelog": [
+        "Troca o ícone genérico do título interno da Loja Pokémon pelo ícone temático ⚡."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T14:25:00.000Z"
     }
   ],
-  "versao": "10.1.63",
+  "versao": "10.1.64",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.62"
+  "fromVersion": "10.1.63"
 }

@@ -131,7 +131,7 @@ const enviarCarrossel = async ctx => {
       header: { hasMediaAttachment: Boolean(header) },
       headerType: 'IMAGE',
       body: {
-        text: `- 🛒 \`𝙻𝙾𝙹𝙰 𝙿𝙾𝙺𝙴́𝙼𝙾𝙽\`
+        text: `- ⚡ \`𝙻𝙾𝙹𝙰 𝙿𝙾𝙺𝙴́𝙼𝙾𝙽\`
 
 > 👤 ׄ ( ᴛʀᴇɪɴᴀᴅᴏʀ: ${treinador} )
 > 💰 ׄ ( sᴀʟᴅᴏ: ${saldo} ɴ-ᴄᴏɪɴs )
