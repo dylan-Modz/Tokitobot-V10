@@ -1,27 +1,102 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.58",
+  "version": "10.1.59",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-07T03:59:32.111Z",
+  "publishedAt": "2026-10-07T13:01:47.374Z",
   "changelog": [
-    "[Correção] Novas capas dos quizzes",
-    "A versão 10.1.58 já está disponível para atualização.",
-    "Troca as capas quebradas dos quizzes Calculadora, Trivia, Geografia e Filmes por novas imagens funcionais.",
-    "Quiz Pokémon não foi alterado.",
-    "Mantida a proteção que envia o quiz em texto caso uma capa externa falhe no futuro."
+    "[Atualização] RPG Pokémon expandido",
+    "A versão 10.1.59 já está disponível para atualização.",
+    "Expande Quiz Trivia, Quiz Geografia e Quiz Filmes para 200 perguntas cada.",
+    "Quiz Pokémon passa a usar uma base compartilhada de 200 Pokémon e artes oficiais hospedadas no GitHub/PokéAPI, sem salvar um link em cada registro.",
+    "RPG Pokémon passa a usar a mesma base dos 200 Pokémon, incluindo tipos, stats, raridade e evolução.",
+    "Adiciona 46 comandos novos para Pokédex, captura, Pokébolas, coleção, equipe, golpes, cura, transformações, mapa, Safari, pesca, ginásios, Elite Four, PokéMart, ovos, breeding, trocas, leilão, raids, daily, conquistas e títulos.",
+    "Adiciona Pokémon selvagens automáticos no grupo, chance de Shiny, Lure e encontros especiais.",
+    "Melhora batalhapokemon com simulação por turnos, golpes, velocidade, crítico e vantagem de tipos.",
+    "Loja Pokémon recebe paginação para suportar os 200 Pokémon sem mensagens gigantes.",
+    "Compra, venda e evolução foram integradas ao novo sistema de coleção."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Novas capas dos quizzes",
-  "notice": "A versão 10.1.58 já está disponível para atualização.",
+  "type": "Atualização",
+  "title": "RPG Pokémon expandido",
+  "notice": "A versão 10.1.59 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/database/jogos/pokemon.json",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/database/jogos/trivia.json",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/database/jogos/geografia.json",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/database/jogos/filmes.json",
+      "sha256": "",
+      "size": 0
+    },
+    {
       "path": "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/rpg/index.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/rpg/pokemon-core.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/pokemon/expansao.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/eventos/pokemon-selvagem.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/pokemon/cuidados.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/pokemon/comprarpokemon.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/pokemon/venderpokemon.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/pokemon/evoluirpokemon.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "",
       "size": 0
     },
@@ -1223,11 +1298,114 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-07T03:59:32.111Z"
+    },
+    {
+      "version": "10.1.59",
+      "fromVersion": "10.1.58",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "RPG Pokémon expandido",
+      "notice": "A versão 10.1.59 já está disponível para atualização.",
+      "changelog": [
+        "Expande Quiz Trivia, Quiz Geografia e Quiz Filmes para 200 perguntas cada.",
+        "Quiz Pokémon passa a usar uma base compartilhada de 200 Pokémon e artes oficiais hospedadas no GitHub/PokéAPI, sem salvar um link em cada registro.",
+        "RPG Pokémon passa a usar a mesma base dos 200 Pokémon, incluindo tipos, stats, raridade e evolução.",
+        "Adiciona 46 comandos novos para Pokédex, captura, Pokébolas, coleção, equipe, golpes, cura, transformações, mapa, Safari, pesca, ginásios, Elite Four, PokéMart, ovos, breeding, trocas, leilão, raids, daily, conquistas e títulos.",
+        "Adiciona Pokémon selvagens automáticos no grupo, chance de Shiny, Lure e encontros especiais.",
+        "Melhora batalhapokemon com simulação por turnos, golpes, velocidade, crítico e vantagem de tipos.",
+        "Loja Pokémon recebe paginação para suportar os 200 Pokémon sem mensagens gigantes.",
+        "Compra, venda e evolução foram integradas ao novo sistema de coleção."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/database/jogos/pokemon.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/database/jogos/trivia.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/database/jogos/geografia.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/database/jogos/filmes.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/index.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/pokemon-core.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/expansao.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/eventos/pokemon-selvagem.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/cuidados.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/comprarpokemon.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/venderpokemon.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/evoluirpokemon.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-07T13:01:47.374Z"
     }
   ],
-  "versao": "10.1.58",
+  "versao": "10.1.59",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.57"
+  "fromVersion": "10.1.58"
 }
