@@ -37,19 +37,24 @@ const compacto = (_ctx, emoji = '🧊', titulo = 'Tokito RPG', linhas = []) => {
 
 const enviarComImagem = async (ctx, imagem, legenda, mencoes = []) => {
   const url = String(imagem || '').trim()
+  const listaMencoes = (Array.isArray(mencoes) ? mencoes : [mencoes]).filter(Boolean)
+  const contextInfo = typeof ctx.canalInfo === 'function'
+    ? ctx.canalInfo(listaMencoes)
+    : { mentionedJid: listaMencoes }
 
   if (!url)
-    return ctx.reply(legenda, mencoes)
+    return ctx.reply(legenda, listaMencoes)
 
   try {
     return await ctx.tokito.sendMessage(ctx.from, {
       image: { url },
       caption: legenda,
-      mentions: mencoes
+      mentions: listaMencoes,
+      contextInfo
     }, { quoted: ctx.selo })
   }
   catch {
-    return ctx.reply(legenda, mencoes)
+    return ctx.reply(legenda, listaMencoes)
   }
 }
 

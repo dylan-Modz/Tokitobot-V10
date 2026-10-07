@@ -23,12 +23,6 @@ anticall: false,
 autoban: [],
 vipGrupos: [],
 agendamentos: [],
-restart: {
-ativo: false,
-hora: null,
-ultimaExecucao: null,
-destino: null
-},
 pingFundo: ''
 }
 
@@ -87,9 +81,12 @@ const atual = dados && typeof dados === 'object'
 ? dados
 : {}
 
+const atualSemRestart = { ...atual }
+delete atualSemRestart.restart
+
 return {
 ...PADRAO,
-...atual,
+...atualSemRestart,
 anticall: atual.anticall === true,
 autoban: [...new Set(
 (Array.isArray(atual.autoban) ? atual.autoban : [])
@@ -108,12 +105,6 @@ item &&
 Number.isFinite(Number(item.quando))
 )
 : [],
-restart: {
-...PADRAO.restart,
-...(atual.restart && typeof atual.restart === 'object'
-? atual.restart
-: {})
-},
 pingFundo: String(atual.pingFundo || '')
 }
 }
@@ -407,97 +398,6 @@ item
 }
 }
 
-const setRestart = ({
-ativo,
-hora = null,
-destino = null
-} = {}) => {
-const dados = config()
-
-dados.restart = {
-...dados.restart,
-ativo: ativo === true,
-hora: ativo === true ? String(hora || '') : null,
-destino: destino ? normalizarJid(destino) : dados.restart.destino
-}
-
-if (!dados.restart.ativo)
-dados.restart.ultimaExecucao = null
-
-salvar(dados)
-
-return dados.restart
-}
-
-const partesBrasil = data => {
-const partes =
-new Intl.DateTimeFormat(
-'pt-BR',
-{
-timeZone: 'America/Fortaleza',
-year: 'numeric',
-month: '2-digit',
-day: '2-digit',
-hour: '2-digit',
-minute: '2-digit',
-hourCycle: 'h23'
-}
-)
-.formatToParts(data)
-
-const mapa = {}
-
-for (const parte of partes)
-mapa[parte.type] = parte.value
-
-return {
-ano: Number(mapa.year),
-mes: Number(mapa.month),
-dia: Number(mapa.day),
-hora: Number(mapa.hour),
-minuto: Number(mapa.minute)
-}
-}
-
-const chaveDiaBrasil = data => {
-const p = partesBrasil(data)
-return `${p.ano}-${String(p.mes).padStart(2, '0')}-${String(p.dia).padStart(2, '0')}`
-}
-
-const proximoRestart = () => {
-const dados = config()
-
-if (
-!dados.restart?.ativo ||
-!/^([01]\d|2[0-3]):[0-5]\d$/.test(
-String(dados.restart.hora || '')
-)
-) {
-return null
-}
-
-const agora = new Date()
-const p = partesBrasil(agora)
-const [h, m] = dados.restart.hora
-.split(':')
-.map(Number)
-
-let alvo = Date.UTC(
-p.ano,
-p.mes - 1,
-p.dia,
-h + 3,
-m,
-0,
-0
-)
-
-if (alvo <= agora.getTime())
-alvo += 86400000
-
-return alvo
-}
-
 const processarAgendas = async tokito => {
 const dados = config()
 const agora = Date.now()
@@ -533,52 +433,6 @@ if (mudou)
 salvar(dados)
 }
 
-const processarRestart = async tokito => {
-const dados = config()
-const restart = dados.restart || {}
-
-if (
-!restart.ativo ||
-!/^([01]\d|2[0-3]):[0-5]\d$/.test(
-String(restart.hora || '')
-)
-) {
-return
-}
-
-const agora = new Date()
-const p = partesBrasil(agora)
-const horaAtual =
-`${String(p.hora).padStart(2, '0')}:${String(p.minuto).padStart(2, '0')}`
-
-if (horaAtual !== restart.hora)
-return
-
-const hoje = chaveDiaBrasil(agora)
-
-if (restart.ultimaExecucao === hoje)
-return
-
-dados.restart.ultimaExecucao = hoje
-salvar(dados)
-
-if (restart.destino) {
-await tokito.sendMessage(
-restart.destino,
-{
-text: `- 🔄 \`𝚁𝙴𝙸𝙽𝙸́𝙲𝙸𝙾 𝙿𝚁𝙾𝙶𝚁𝙰𝙼𝙰𝙳𝙾\`
-
-> ⏰ ׄ ( ʜᴏʀᴀ́ʀɪᴏ: ${restart.hora} )
-> 🔄 ׄ ( ʀᴇɪɴɪᴄɪᴀɴᴅᴏ ᴏ ʙᴏᴛ. )`
-}
-).catch(() => {})
-}
-
-setTimeout(() => {
-process.exit(20)
-}, 1200).unref?.()
-}
-
 const iniciar = tokito => {
 global.__TOKITO_DONO_SOCKET__ = tokito
 
@@ -595,7 +449,6 @@ if (!socket)
 return
 
 await processarAgendas(socket)
-await processarRestart(socket)
 },
 30000
 )
@@ -711,8 +564,6 @@ listarVipGrupos,
 adicionarAgenda,
 listarAgendas,
 removerAgenda,
-setRestart,
-proximoRestart,
 iniciar,
 processarChamadas
 }

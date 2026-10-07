@@ -1,5 +1,5 @@
 /*
- * Tokito Bot V10 - Agenda e reinício programado
+ * Tokito Bot V10 - Agenda do dono
  * Author: Dylan Modz
  */
 
@@ -73,112 +73,17 @@ nome: 'agenda',
 comandos: [
 'agendar',
 'agenda',
-'delagenda',
-'setrestart',
-'checkrestart'
+'delagenda'
 ],
 categoria: 'dono',
 info: {
-descricao: 'Agenda lembretes e reinícios automáticos.',
+descricao: 'Agenda lembretes do dono.',
 uso: 'agendar 25/10/2026 20:00 | descrição',
 permissao: 'Dono'
 },
 async executar(ctx) {
 if (!ctx.SoDono)
 return ctx.reply(ctx.mess.onlyOwner())
-
-if (ctx.command === 'setrestart') {
-const valor =
-String(ctx.q || '').trim()
-
-if (
-['0', 'off', 'desativar'].includes(
-valor.toLowerCase()
-)
-) {
-donoSistema.setRestart({
-ativo: false,
-destino: ctx.sender
-})
-
-return ctx.reply(
-ctx.mess.padraoSucesso({
-emoji: '🔄',
-titulo: 'REINÍCIO PROGRAMADO',
-descricao: 'O reinício automático foi desativado.'
-})
-)
-}
-
-if (
-!/^([01]\d|2[0-3]):[0-5]\d$/.test(
-valor
-)
-) {
-return ctx.reply(
-ctx.mess.padraoUso({
-emoji: '🔄',
-titulo: 'REINÍCIO PROGRAMADO',
-uso: `${ctx.prefix}setrestart 04:00`,
-exemplos: [
-`${ctx.prefix}setrestart 0`
-],
-descricao: 'Informe um horário no formato HH:MM.'
-})
-)
-}
-
-donoSistema.setRestart({
-ativo: true,
-hora: valor,
-destino: ctx.sender
-})
-
-return ctx.reply(
-ctx.mess.padraoSucesso({
-emoji: '🔄',
-titulo: 'REINÍCIO PROGRAMADO',
-descricao: `O bot será reiniciado diariamente às ${valor}.`
-})
-)
-}
-
-if (ctx.command === 'checkrestart') {
-const cfg =
-donoSistema.config().restart
-
-if (!cfg?.ativo) {
-return ctx.reply(
-ctx.mess.padraoAviso({
-emoji: '🔄',
-titulo: 'REINÍCIO PROGRAMADO',
-descricao: 'Nenhum reinício automático está ativo.'
-})
-)
-}
-
-const proximo =
-donoSistema.proximoRestart()
-
-return ctx.reply(
-ctx.mess.padraoInfo({
-emoji: '🔄',
-titulo: 'REINÍCIO PROGRAMADO',
-linhas: [
-{
-rotulo: '⏰ 𝙷𝙾𝚁𝙰́𝚁𝙸𝙾',
-valor: cfg.hora
-},
-{
-rotulo: '📅 𝙿𝚁𝙾́𝚇𝙸𝙼𝙾',
-valor: proximo
-? formatarData(proximo)
-: '—'
-}
-]
-})
-)
-}
 
 if (ctx.command === 'delagenda') {
 const ref =

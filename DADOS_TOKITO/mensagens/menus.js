@@ -407,8 +407,6 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fundoping
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}anticall 1/0
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}botoes 1/0
-┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setrestart 04:00
-┃࣪ ╎—̳͟͞͞ 👑 ${prefix}checkrestart
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}agendar data | texto
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}agenda
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}reiniciar

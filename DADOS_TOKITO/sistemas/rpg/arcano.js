@@ -386,21 +386,27 @@ const guarda = async (ctx, exigirInicio = true) => {
 
 const enviarImagem = async (ctx, nomeImagem, caption, mentions = [ctx.sender]) => {
   const url = imagens[nomeImagem]
+  const listaMencoes = (Array.isArray(mentions) ? mentions : [mentions]).filter(Boolean)
   const contextInfo = typeof ctx.canalInfo === 'function'
-    ? ctx.canalInfo(mentions.filter(Boolean))
-    : { mentionedJid: mentions.filter(Boolean) }
+    ? ctx.canalInfo(listaMencoes)
+    : { mentionedJid: listaMencoes }
 
   if (url) {
     try {
       return await ctx.tokito.sendMessage(
         ctx.from,
-        { image: { url }, caption, contextInfo },
+        {
+          image: { url },
+          caption,
+          mentions: listaMencoes,
+          contextInfo
+        },
         { quoted: ctx.selo }
       )
     } catch {}
   }
 
-  return ctx.reply(caption)
+  return ctx.reply(caption, listaMencoes)
 }
 
 const consumirMana = (m, custo) => {

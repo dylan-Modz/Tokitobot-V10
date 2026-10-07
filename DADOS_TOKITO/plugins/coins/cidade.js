@@ -167,7 +167,8 @@ dylan.setCommand({
         return await ctx.tokito.sendMessage(ctx.from, {
           image: { url },
           caption,
-          mentions: mencoes
+          mentions: mencoes,
+          contextInfo: ctx.canalInfo(mencoes)
         }, { quoted: ctx.selo })
       }
       catch {
