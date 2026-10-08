@@ -11,7 +11,7 @@ const { proto } = require('baileys')
 const runtimeSub = require('../sub/runtime.js')
 // Monitor complementar integrado neste arquivo, sem criar modulos extras.
 const floodPagamento = (() => {
-const antiPay = require('../plugins/admin/filtro-antipay.js')
+const antiPay = require('../plugins/admin/antipay.js')
 const mess = require('../mensagens/mensagens.js')
 const JANELA_MS = 15000
 const COOLDOWN_MS = 60000
