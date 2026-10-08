@@ -128,6 +128,12 @@ const verificar = async (tokito, info, origem = 'principal') => {
   contagem[origemReal]++
   fontes.set(grupo, contagem)
   atualizarDiagnostico(grupo, 'observadas', 'mensagem-recebida')
+  const tipos = Object.keys(base.desenrolar(info?.message) || {})
+    .filter(nome => /^[a-zA-Z][a-zA-Z0-9]{0,45}$/.test(nome))
+    .slice(0, 3)
+  const dadosAtuais = diagnosticos.get(grupo)
+  if (dadosAtuais) dadosAtuais.ultimaEstrutura = tipos.join(',') ||
+    (info?.messageStubType != null ? 'stub-' + String(info.messageStubType) : 'sem-conteudo')
   const msgId = String(chave?.id || '')
   const autor = normal(chave?.participantAlt || chave?.senderAlt ||
     chave?.participant || info?.participant || info?.participantAlt || '')
