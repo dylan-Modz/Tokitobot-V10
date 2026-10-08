@@ -1,29 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.101",
+  "version": "10.1.102",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:44:09.709Z",
+  "publishedAt": "2026-10-08T18:05:28.719Z",
   "changelog": [
-    "Numeração pública restaurada para Tokito V10.1.78, mantendo os recursos e correções já existentes.",
-    "Anti-Invisível simplificado: use !antiinvisivel 1 para ativar e !antiinvisivel 0 para desativar.",
-    "Anti-Pay consolidado em antipay.js, sem comandos ou arquivos duplicados.",
-    "Proteção contra pagamentos citados indevidamente atribuídos a quem apenas respondeu.",
-    "Atualizador preparado para migração de versões antigas e aviso automático ao dono."
+    "[Correção] fix: render exact integrity error and newline correctly",
+    "A versão 10.1.102 já está disponível para atualização.",
+    "Update atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Manutenção",
-  "title": "Tokito Bot V10.1.78 — Numeração restaurada",
-  "notice": "Tokito Bot V10.1.78 disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: render exact integrity error and newline correctly",
+  "notice": "A versão 10.1.102 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/dados.js",
-      "sha256": "294fd483004b2cea443fafe69f720cd22623c37cf3202391b9eb336488bef796",
-      "size": 34049
+      "path": "DADOS_TOKITO/plugins/dono/update.js",
+      "sha256": "13269704de2462500d2397bd69218560e96105287e73a4e6d6a50e64bdef2ba6",
+      "size": 4515
     }
   ],
   "releases": [
@@ -2836,6 +2834,27 @@
       "required": true,
       "publishedAt": "2026-10-08T17:42:58.617Z",
       "publicVersion": "10.1.78"
+    },
+    {
+      "version": "10.1.102",
+      "fromVersion": "10.1.101",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: render exact integrity error and newline correctly",
+      "notice": "A versão 10.1.102 já está disponível para atualização.",
+      "changelog": [
+        "Update atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/dono/update.js",
+          "sha256": "13269704de2462500d2397bd69218560e96105287e73a4e6d6a50e64bdef2ba6",
+          "size": 4515
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T18:05:28.719Z"
     }
   ],
   "mode": "incremental",
