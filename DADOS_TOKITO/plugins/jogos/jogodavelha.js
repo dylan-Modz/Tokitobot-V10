@@ -29,7 +29,7 @@
  */
 
 const dylan = require('../../database/lib/comandos')
-const velha2 = require('./sistema-jogodavelha2.js')
+const velha2 = require('./jogodavelha2.js')
 
 dylan.setCommand({
 nome: "jogodavelha",

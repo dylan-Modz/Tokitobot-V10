@@ -2011,9 +2011,93 @@
       "publishedAt": "2026-10-07T23:37:05.371Z"
     }
   ],
-  "versao": "10.1.73",
+  "versao": "10.1.77",
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.72"
+  "fromVersion": "10.1.76",
+  "updates": [
+    {
+      "version": "10.1.77",
+      "fromVersion": "10.1.76",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Melhorias nos jogos",
+      "notice": "A versão 10.1.77 já está disponível para atualização.",
+      "changelog": [
+        "Também foram feitas melhorias internas em alguns dos jogos do Tokito, deixando os sistemas mais organizados e preparados para receber novas funções e ajustes."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/doulingo.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/anagrama.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/quizanimais.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/jogodavelha2.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/quizzes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/revelaranagrama.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/revelarquiz.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/rv.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/infojogos.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/jogodavelha.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/jogos/sistema-doulingo.js",
+        "DADOS_TOKITO/plugins/jogos/sistema-anagrama.js",
+        "DADOS_TOKITO/plugins/jogos/sistema-quizanimais.js",
+        "DADOS_TOKITO/plugins/jogos/sistema-jogodavelha2.js",
+        "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js"
+      ],
+      "required": true,
+      "publishedAt": "2026-10-08T12:00:00.000Z"
+    }
+  ]
 }

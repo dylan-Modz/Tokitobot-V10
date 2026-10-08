@@ -31,78 +31,93 @@
 const base = require('./sistema-base.js')
 const adivinhe = require('./sistema-adivinhe.js')
 const quiz = require('./sistema-quiz.js')
-const quizzes = require('./sistema-quizzes.js')
+const quizzes = require('./quizzes.js')
 const forca = require('./sistema-forca.js')
 const cacapalavras = require('./sistema-cacapalavras.js')
 const mines = require('./sistema-mines.js')
 const jogodavelha = require('./sistema-jogodavelha.js')
-const jogodavelha2 = require('./sistema-jogodavelha2.js')
-const doulingo = require('./sistema-doulingo.js')
-const anagrama = require('./sistema-anagrama.js')
-const quizanimais = require('./sistema-quizanimais.js')
+const jogodavelha2 = require('./jogodavelha2.js')
+const doulingo = require('./doulingo.js')
+const anagrama = require('./anagrama.js')
+const quizanimais = require('./quizanimais.js')
 const dama = require('./sistema-dama.js')
 
 async function verificar(ctx) {
-base.limparInativos()
-if (ctx.isCmd || !ctx.isGroup || !base.modoAtivo(ctx.from, ctx.dataGp))
-return false
-return await jogodavelha2.auto(ctx) ||
-await doulingo.auto(ctx) ||
-await anagrama.auto(ctx) ||
-await quizanimais.auto(ctx) ||
-await quizzes.auto(ctx) ||
-await quiz.auto(ctx) ||
-await forca.auto(ctx) ||
-await adivinhe.auto(ctx) ||
-await cacapalavras.auto(ctx) ||
-await mines.auto(ctx) ||
-await jogodavelha.auto(ctx) ||
-await dama.auto(ctx)
+  base.limparInativos()
+
+  if (
+    ctx.isCmd ||
+    !ctx.isGroup ||
+    !base.modoAtivo(ctx.from, ctx.dataGp)
+  )
+    return false
+
+  return await jogodavelha2.auto(ctx) ||
+    await doulingo.auto(ctx) ||
+    await anagrama.auto(ctx) ||
+    await quizanimais.auto(ctx) ||
+    await quizzes.auto(ctx) ||
+    await quiz.auto(ctx) ||
+    await forca.auto(ctx) ||
+    await adivinhe.auto(ctx) ||
+    await cacapalavras.auto(ctx) ||
+    await mines.auto(ctx) ||
+    await jogodavelha.auto(ctx) ||
+    await dama.auto(ctx)
 }
 
 module.exports = {
-modoAtivo: base.modoAtivo,
-limparInativos: base.limparInativos,
-verificar,
-onlyLetters: base.onlyLetters,
-mention: base.mention,
-sameJid: base.sameJid,
-enviarTexto: base.sendText,
-getAdivinheGame: adivinhe.getGame,
-saveAdivinheGame: adivinhe.saveGame,
-removeAdivinheGame: adivinhe.removeGame,
-criarAdivinheGame: adivinhe.criarGame,
-enviarAdivinhe: adivinhe.enviar,
-getQuizGame: quiz.getGame,
-saveQuizGame: quiz.saveGame,
-removeQuizGame: quiz.removeGame,
-criarQuizGame: quiz.criarGame,
-enviarQuiz: quiz.enviar,
-getQuizExtraGame: quizzes.getGame,
-removeQuizExtraGame: quizzes.removeGame,
-getForcaGame: forca.getGame,
-saveForcaGame: forca.saveGame,
-removeForcaGame: forca.removeGame,
-criarForcaGame: forca.criarGame,
-enviarForca: forca.enviar,
-getCacaGame: cacapalavras.getGame,
-saveCacaGame: cacapalavras.saveGame,
-removeCacaGame: cacapalavras.removeGame,
-criarCacaGame: cacapalavras.criarGame,
-enviarCaca: cacapalavras.enviar,
-getMinesGame: mines.getGame,
-saveMinesGame: mines.saveGame,
-removeMinesGame: mines.removeGame,
-criarMinesGame: mines.criarGame,
-enviarMines: mines.enviar,
-getVelhaGame: jogodavelha.getGame,
-saveVelhaGame: jogodavelha.saveGame,
-removeVelhaGame: jogodavelha.removeGame,
-criarTabuleiroVelha: jogodavelha.criarTabuleiro,
-enviarVelha: jogodavelha.enviar,
-getDamaGame: dama.getGame,
-saveDamaGame: dama.saveGame,
-removeDamaGame: dama.removeGame,
-criarTabuleiroDama: dama.criarTabuleiro,
-enviarDama: dama.enviar
+  modoAtivo: base.modoAtivo,
+  limparInativos: base.limparInativos,
+  verificar,
+
+  onlyLetters: base.onlyLetters,
+  mention: base.mention,
+  sameJid: base.sameJid,
+  enviarTexto: base.sendText,
+
+  getAdivinheGame: adivinhe.getGame,
+  saveAdivinheGame: adivinhe.saveGame,
+  removeAdivinheGame: adivinhe.removeGame,
+  criarAdivinheGame: adivinhe.criarGame,
+  enviarAdivinhe: adivinhe.enviar,
+
+  getQuizGame: quiz.getGame,
+  saveQuizGame: quiz.saveGame,
+  removeQuizGame: quiz.removeGame,
+  criarQuizGame: quiz.criarGame,
+  enviarQuiz: quiz.enviar,
+
+  getQuizExtraGame: quizzes.getGame,
+  removeQuizExtraGame: quizzes.removeGame,
+
+  getForcaGame: forca.getGame,
+  saveForcaGame: forca.saveGame,
+  removeForcaGame: forca.removeGame,
+  criarForcaGame: forca.criarGame,
+  enviarForca: forca.enviar,
+
+  getCacaGame: cacapalavras.getGame,
+  saveCacaGame: cacapalavras.saveGame,
+  removeCacaGame: cacapalavras.removeGame,
+  criarCacaGame: cacapalavras.criarGame,
+  enviarCaca: cacapalavras.enviar,
+
+  getMinesGame: mines.getGame,
+  saveMinesGame: mines.saveGame,
+  removeMinesGame: mines.removeGame,
+  criarMinesGame: mines.criarGame,
+  enviarMines: mines.enviar,
+
+  getVelhaGame: jogodavelha.getGame,
+  saveVelhaGame: jogodavelha.saveGame,
+  removeVelhaGame: jogodavelha.removeGame,
+  criarTabuleiroVelha: jogodavelha.criarTabuleiro,
+  enviarVelha: jogodavelha.enviar,
+
+  getDamaGame: dama.getGame,
+  saveDamaGame: dama.saveGame,
+  removeDamaGame: dama.removeGame,
+  criarTabuleiroDama: dama.criarTabuleiro,
+  enviarDama: dama.enviar
 }
