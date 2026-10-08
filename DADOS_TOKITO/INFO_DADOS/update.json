@@ -4,21 +4,30 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T16:02:28.912Z",
+  "publishedAt": "2026-10-08T16:03:21.350Z",
   "changelog": [
-    "[Melhoria] release: Tokito V10.1.85 align Anti-Invisivel message formatting",
-    "A versão 10.1.85 já está disponível para atualização.",
-    "Antiinvisivel atualizado",
-    "Package atualizado"
+    "Padroniza os textos do Anti-Invisível no visual original do mensagens.js.",
+    "Mensagens de ativação, desativação, status, ajuda e detecção passam a usar o mesmo design dos demais comandos.",
+    "Nenhuma alteração na conexão secundária do Anti-Pay."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "release: Tokito V10.1.85 align Anti-Invisivel message formatting",
+  "type": "Correção",
+  "title": "Mensagens do Anti-Invisível no padrão Tokito",
   "notice": "A versão 10.1.85 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
+    {
+      "path": "package.json",
+      "sha256": "e78deea209bdc333669402d7644e1c3e351e8d303c0a806cb6a078fbda30e258",
+      "size": 1164
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "aff5cc46d98ed15c81f3e2e41befe993d98218246adfdf047d6b592e786b6a3f",
+      "size": 230956
+    },
     {
       "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
       "sha256": "e754c28501054adc9b5cf09718b23ae630a1567b4246e7be26a04314b9436d25",
@@ -28,11 +37,6 @@
       "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
       "sha256": "80f8ff0b94deda8b9626f61f2efe21a53ba5eff6b276e17309d5a7ff697d85f4",
       "size": 7220
-    },
-    {
-      "path": "package.json",
-      "sha256": "e78deea209bdc333669402d7644e1c3e351e8d303c0a806cb6a078fbda30e258",
-      "size": 1164
     }
   ],
   "releases": [
@@ -2366,14 +2370,25 @@
       "version": "10.1.85",
       "fromVersion": "10.1.84",
       "channel": "stable",
-      "type": "Melhoria",
-      "title": "release: Tokito V10.1.85 align Anti-Invisivel message formatting",
+      "type": "Correção",
+      "title": "Mensagens do Anti-Invisível no padrão Tokito",
       "notice": "A versão 10.1.85 já está disponível para atualização.",
       "changelog": [
-        "Antiinvisivel atualizado",
-        "Package atualizado"
+        "Padroniza os textos do Anti-Invisível no visual original do mensagens.js.",
+        "Mensagens de ativação, desativação, status, ajuda e detecção passam a usar o mesmo design dos demais comandos.",
+        "Nenhuma alteração na conexão secundária do Anti-Pay."
       ],
       "files": [
+        {
+          "path": "package.json",
+          "sha256": "e78deea209bdc333669402d7644e1c3e351e8d303c0a806cb6a078fbda30e258",
+          "size": 1164
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "aff5cc46d98ed15c81f3e2e41befe993d98218246adfdf047d6b592e786b6a3f",
+          "size": 230956
+        },
         {
           "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
           "sha256": "e754c28501054adc9b5cf09718b23ae630a1567b4246e7be26a04314b9436d25",
@@ -2383,16 +2398,11 @@
           "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
           "sha256": "80f8ff0b94deda8b9626f61f2efe21a53ba5eff6b276e17309d5a7ff697d85f4",
           "size": 7220
-        },
-        {
-          "path": "package.json",
-          "sha256": "e78deea209bdc333669402d7644e1c3e351e8d303c0a806cb6a078fbda30e258",
-          "size": 1164
         }
       ],
       "delete": [],
       "required": true,
-      "publishedAt": "2026-10-08T16:02:28.912Z"
+      "publishedAt": "2026-10-08T16:03:21.350Z"
     }
   ],
   "mode": "incremental",
