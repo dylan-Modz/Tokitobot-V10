@@ -1,29 +1,25 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.82",
+  "version": "10.1.83",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T15:35:28.946Z",
+  "publishedAt": "2026-10-08T15:36:21.637Z",
   "changelog": [
-    "[Novidade] feat: pin security-aware Baileys build and publish invisible-message protection",
-    "A versão 10.1.82 já está disponível para atualização.",
-    "Deps atualizado",
-    "Package atualizado"
+    "Anti-Invisível integrado à biblioteca e à conexão principal.",
+    "Comando !antiinvisivel 1/0/status/alerta/remover adicionado ao menu ADM.",
+    "Alertas de rajadas suspeitas e remoção opcional em situações excepcionais.",
+    "O detector Anti-Pay continua conectado e funcionando separadamente.",
+    "Verificação automática da versão de Baileys ao iniciar."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat: pin security-aware Baileys build and publish invisible-message protection",
-  "notice": "A versão 10.1.82 já está disponível para atualização.",
+  "type": "Segurança",
+  "title": "Novo Anti-Invisível",
+  "notice": "A versão 10.1.83 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
-    {
-      "path": "DADOS_TOKITO/database/lib/deps.js",
-      "sha256": "d4eeee36d2e1624377375206eb9074613d4e78b52e11651fd4114f058117320f",
-      "size": 3618
-    },
     {
       "path": "package.json",
       "sha256": "6c5782bc06f313672da3228138972e03bb9dd8fc691d9c3802f5ce321dd58103",
@@ -2310,6 +2306,31 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T15:35:28.945Z"
+    },
+    {
+      "version": "10.1.83",
+      "fromVersion": "10.1.82",
+      "channel": "stable",
+      "type": "Segurança",
+      "title": "Novo Anti-Invisível",
+      "notice": "A versão 10.1.83 já está disponível para atualização.",
+      "changelog": [
+        "Anti-Invisível integrado à biblioteca e à conexão principal.",
+        "Comando !antiinvisivel 1/0/status/alerta/remover adicionado ao menu ADM.",
+        "Alertas de rajadas suspeitas e remoção opcional em situações excepcionais.",
+        "O detector Anti-Pay continua conectado e funcionando separadamente.",
+        "Verificação automática da versão de Baileys ao iniciar."
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "6c5782bc06f313672da3228138972e03bb9dd8fc691d9c3802f5ce321dd58103",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T15:36:21.637Z"
     }
   ],
   "mode": "incremental",
