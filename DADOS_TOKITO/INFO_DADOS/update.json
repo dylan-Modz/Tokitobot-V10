@@ -1,33 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.91",
+  "version": "10.1.92",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:00:58.821Z",
+  "publishedAt": "2026-10-08T17:02:29.032Z",
   "changelog": [
-    "[Correção] fix: forward original group events from member detector and never punish quoted payments",
-    "A versão 10.1.91 já está disponível para atualização.",
-    "Detector atualizado",
-    "Filtro Antipay atualizado"
+    "[Melhoria] safety: never classify short replies quoting payment as attacker floods",
+    "A versão 10.1.92 já está disponível para atualização.",
+    "Antiinvisivel atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix: forward original group events from member detector and never punish quoted payments",
-  "notice": "A versão 10.1.91 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "safety: never classify short replies quoting payment as attacker floods",
+  "notice": "A versão 10.1.92 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/detector.js",
-      "sha256": "cf64465e72f80c3ea48858d78991a26fb2b5f71225a3338580bb02a6dab3c14f",
-      "size": 6229
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
-      "sha256": "c13ef7329c1c0157126edb21770ce724ec71a34e3bfda415ab9bbcd3014f9c8a",
-      "size": 7840
+      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+      "sha256": "9f2f0f2a6fcea855b6233e5c62937ccd0c73e25525d5a64a13c41b7578991b1c",
+      "size": 16711
     }
   ],
   "releases": [
@@ -2544,6 +2538,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T17:00:58.821Z"
+    },
+    {
+      "version": "10.1.92",
+      "fromVersion": "10.1.91",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "safety: never classify short replies quoting payment as attacker floods",
+      "notice": "A versão 10.1.92 já está disponível para atualização.",
+      "changelog": [
+        "Antiinvisivel atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+          "sha256": "9f2f0f2a6fcea855b6233e5c62937ccd0c73e25525d5a64a13c41b7578991b1c",
+          "size": 16711
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T17:02:29.032Z"
     }
   ],
   "mode": "incremental",
