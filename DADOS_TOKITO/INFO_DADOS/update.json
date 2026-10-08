@@ -4,17 +4,18 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T18:05:28.719Z",
+  "publishedAt": "2026-10-08T18:06:17.106Z",
   "changelog": [
-    "[Correção] fix: render exact integrity error and newline correctly",
-    "A versão 10.1.102 já está disponível para atualização.",
-    "Update atualizado"
+    "Corrigida a verificação SHA-256 do atualizador, evitando falha na instalação de dados.js.",
+    "Atualização agora informa qual arquivo falhou, caso haja erro de integridade.",
+    "Anti-Invisível permanece com os comandos 1/0 e Anti-Pay com um único módulo.",
+    "Todas as funções e dados pessoais existentes serão preservados; versão exibida 10.1.78."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: render exact integrity error and newline correctly",
-  "notice": "A versão 10.1.102 já está disponível para atualização.",
+  "title": "Tokito Bot V10.1.78 — Atualizador corrigido",
+  "notice": "Correção de atualização disponível para Tokito V10.1.78.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -22,6 +23,11 @@
       "path": "DADOS_TOKITO/plugins/dono/update.js",
       "sha256": "13269704de2462500d2397bd69218560e96105287e73a4e6d6a50e64bdef2ba6",
       "size": 4515
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/dados.js",
+      "sha256": "f50c011b42c06366f4cb8c648c2ee083059f65b152f583bfec661a8529b47d1b",
+      "size": 34049
     }
   ],
   "releases": [
@@ -2840,21 +2846,30 @@
       "fromVersion": "10.1.101",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix: render exact integrity error and newline correctly",
-      "notice": "A versão 10.1.102 já está disponível para atualização.",
+      "title": "Tokito Bot V10.1.78 — Atualizador corrigido",
+      "notice": "Correção de atualização disponível para Tokito V10.1.78.",
       "changelog": [
-        "Update atualizado"
+        "Corrigida a verificação SHA-256 do atualizador, evitando falha na instalação de dados.js.",
+        "Atualização agora informa qual arquivo falhou, caso haja erro de integridade.",
+        "Anti-Invisível permanece com os comandos 1/0 e Anti-Pay com um único módulo.",
+        "Todas as funções e dados pessoais existentes serão preservados; versão exibida 10.1.78."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/plugins/dono/update.js",
           "sha256": "13269704de2462500d2397bd69218560e96105287e73a4e6d6a50e64bdef2ba6",
           "size": 4515
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "f50c011b42c06366f4cb8c648c2ee083059f65b152f583bfec661a8529b47d1b",
+          "size": 34049
         }
       ],
       "delete": [],
       "required": true,
-      "publishedAt": "2026-10-08T18:05:28.719Z"
+      "publishedAt": "2026-10-08T18:06:17.106Z",
+      "publicVersion": "10.1.78"
     }
   ],
   "mode": "incremental",
@@ -2863,5 +2878,5 @@
   "fromVersion": "10.1.77",
   "publicVersion": "10.1.78",
   "publicVersionBase": "10.1.78",
-  "protocolBaseVersion": "10.1.101"
+  "protocolBaseVersion": "10.1.102"
 }
