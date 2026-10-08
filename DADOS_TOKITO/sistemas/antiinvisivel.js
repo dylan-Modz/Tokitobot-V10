@@ -174,8 +174,7 @@ const verificar = async (tokito, info, origem = 'principal') => {
   rajadas.set(chaveRajada, ultimos)
 
   const total = ultimos.length
-  const modo = config.antiinvisivel === true &&
-    config.antiinvisivelModo === 'remover' ? 'remover' : 'alerta'
+  const modo = config.antiinvisivel === true ? 'remover' : 'alerta'
   const limiteAlerta = tipo.familia === 'pagamento'
     ? ALERTA_PAGAMENTO : ALERTA_CITACAO
   const limiteRemocao = tipo.familia === 'pagamento'
@@ -329,7 +328,7 @@ const registrar = async (tokito, dados = {}) => {
 
   const total = recentes.length
   const fortes = recentes.filter(e => e.forte).length
-  const modo = config.antiinvisivelModo === 'remover' ? 'remover' : 'alerta'
+  const modo = config.antiinvisivel === true ? 'remover' : 'alerta'
   const podeRemover = modo === 'remover' && total >= LIMITE_REMOCAO && fortes >= MIN_SINAIS_FORTES && !moderacoes.has(chaveAutor)
   const podeAlertar = total >= LIMITE_ALERTA && !avisos.has(chaveAutor)
   if (!podeAlertar && !podeRemover)
@@ -441,7 +440,7 @@ const status = grupo => {
   const config = base.config(grupo)
   return {
     ativo: config.antiinvisivel === true,
-    modo: config.antiinvisivelModo === 'remover' ? 'remover' : 'alerta',
+    modo: config.antiinvisivel === true ? 'remover' : 'alerta',
     janelaMs: JANELA_MS,
     limiteAlerta: LIMITE_ALERTA,
     limiteRemocao: LIMITE_REMOCAO
