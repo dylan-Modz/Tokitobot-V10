@@ -1055,56 +1055,7 @@ return `- ❌ \`𝙳𝙴𝚃𝙴𝙲𝚃𝙾𝚁 𝙰𝙽𝚃𝙸-𝙿𝙰𝚈\`
 > ❌ ׄ ( ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴄᴏɴᴇᴄᴛᴀʀ ᴏ ᴅᴇᴛᴇᴄᴛᴏʀ ᴀɢᴏʀᴀ. ᴛᴇɴᴛᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ. 🙇‍♂️ )`
 }
 
-// Mensagens do Anti-Invisível no mesmo padrão visual dos demais antis.
-exports.antiInvisivelUso = (prefix, comando) => {
-return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻\`
-
-> ✅ ׄ ( ᴀᴛɪᴠᴀʀ: ${prefix}${comando} 1 )
-> ❌ ׄ ( ᴅᴇsᴀᴛɪᴠᴀʀ: ${prefix}${comando} 0 )
-> 📌 ׄ ( ᴠᴇʀ sᴛᴀᴛᴜs: ${prefix}${comando} status )
-> 🔎 ׄ ( ᴅɪᴀɢɴᴏ́sᴛɪᴄᴏ: ${prefix}${comando} diagnostico )
-> 🔔 ׄ ( ᴍᴏᴅᴏ ᴀʟᴇʀᴛᴀ: ${prefix}${comando} alerta )
-> 🚫 ׄ ( ᴍᴏᴅᴏ ʀᴇᴍᴏᴠᴇʀ: ${prefix}${comando} remover )
-> 🧊 ׄ ( ᴍᴏɴɪᴛᴏʀᴀ ᴍᴇɴsᴀɢᴇɴs ɪɴᴠɪsɪ́ᴠᴇɪs ᴇ ʀᴀᴊᴀᴅᴀs ᴄᴏᴍ ᴘᴀɢᴀᴍᴇɴᴛᴏ ᴄɪᴛᴀᴅᴏ. )`
-}
-
-exports.antiInvisivelStatus = ({ ativo = false, modo = 'alerta', janelaMs = 15000, limiteAlerta = 4, limiteRemocao = 10 } = {}) => {
-return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻\`
-
-> 📌 ׄ ( sᴛᴀᴛᴜs: ${ativo ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
-> ⚙️ ׄ ( ᴍᴏᴅᴏ: ${modo === 'remover' ? 'ʀᴇᴍᴏᴠᴇʀ' : 'ᴀʟᴇʀᴛᴀ'} )
-> ⏱️ ׄ ( ᴊᴀɴᴇʟᴀ: ${janelaMs / 1000} sᴇɢᴜɴᴅᴏs )
-> 🔔 ׄ ( ᴀʟᴇʀᴛᴀ: ${limiteAlerta} ғᴀʟʜᴀs ᴅᴇ ᴅᴇsᴄʀɪᴘᴛᴏɢʀᴀғɪᴀ )
-> 💳 ׄ ( ғʟᴏᴏᴅ ᴄᴏᴍ ᴘᴀɢᴀᴍᴇɴᴛᴏ ᴄɪᴛᴀᴅᴏ: 3 ᴍᴇɴsᴀɢᴇɴs ᴇᴍ 15s )
-> 🚫 ׄ ( ʀᴇᴍᴏᴄ̧ᴀ̃ᴏ: ${limiteRemocao} ᴏᴄᴏʀʀᴇ̂ɴᴄɪᴀs ᴇ sɪɴᴀɪs ᴀᴅɪᴄɪᴏɴᴀɪs )
-> 🧊 ׄ ( ғᴀʟʜᴀ ɪsᴏʟᴀᴅᴀ ɴᴀ̃ᴏ ɢᴇʀᴀ ᴘᴜɴɪᴄ̧ᴀ̃ᴏ. )`
-}
-
-exports.antiInvisivelAlterado = (ativo, modo = 'alerta') => {
-return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻\`
-
-> 📌 ׄ ( sᴛᴀᴛᴜs: ${ativo ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
-> ⚙️ ׄ ( ᴍᴏᴅᴏ: ${modo === 'remover' ? 'ʀᴇᴍᴏᴠᴇʀ' : 'ᴀʟᴇʀᴛᴀ'} )
-> 🧊 ׄ ( ${ativo ? 'ᴏ ɢʀᴜᴘᴏ ᴇsᴛᴀ́ sᴇɴᴅᴏ ᴍᴏɴɪᴛᴏʀᴀᴅᴏ.' : 'ᴀ ᴘʀᴏᴛᴇᴄ̧ᴀ̃ᴏ ғᴏɪ ᴅᴇsᴀᴛɪᴠᴀᴅᴀ.'} )`
-}
-
-exports.antiInvisivelDiagnostico = (config = {}, dados = {}, detector = {}) => {
-return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻 𝙳𝙸𝙰𝙶𝙽𝙾́𝚂𝚃𝙸𝙲𝙾\`
-
-> 📌 ׄ ( sᴛᴀᴛᴜs: ${config.ativo ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
-> 👁️ ׄ ( ᴅᴇᴛᴇᴄᴛᴏʀ: ${detector.conectado ? '🟢 ᴄᴏɴᴇᴄᴛᴀᴅᴏ' : '🔴 ᴅᴇsᴄᴏɴᴇᴄᴛᴀᴅᴏ'} )
-> 🔐 ׄ ( ᴄʀɪᴘᴛᴏɢʀᴀғᴀᴅᴀs ɴᴀ ᴀᴜxɪʟɪᴀʀ: ${detector.telemetria?.criptografadas || 0} )
-> 📩 ׄ ( ᴇᴠᴇɴᴛᴏs ɴᴀ ᴀᴜxɪʟɪᴀʀ: ${detector.telemetria?.recebidas || 0} )
-> 📩 ׄ ( ᴘʀɪɴᴄɪᴘᴀʟ: ${dados.fontes?.principal || 0} )
-> 📩 ׄ ( ᴀᴜxɪʟɪᴀʀ: ${dados.fontes?.auxiliar || 0} )
-> 🔍 ׄ ( sᴜsᴘᴇɪᴛᴀs: ${dados.candidatas || 0} )
-> 📦 ׄ ( ᴜ́ʟᴛɪᴍᴀ ᴇsᴛʀᴜᴛᴜʀᴀ: ${dados.ultimaEstrutura || 'nenhuma'} )
-> ⚠️ ׄ ( sᴇᴍ ᴀᴜᴛᴏʀ: ${dados.semAutor || 0} )
-> 📝 ׄ ( ғᴏʀᴀ ᴅᴏ ᴘᴀᴅʀᴀ̃ᴏ: ${dados.foraPadrao || 0} )
-> 🛡️ ׄ ( ᴀʟᴇʀᴛᴀs: ${dados.alertas || 0} )
-> 🧊 ׄ ( ᴄᴏɴᴛᴀᴅᴏʀᴇs ʀᴇɪɴɪᴄɪᴀᴍ ᴄᴏᴍ ᴏ ʙᴏᴛ. )`
-}
-
+// Mensagens de ocorrencia do Anti-Invisivel no padrao Tokito.
 exports.antiInvisivelFloodPagamento = (numero, total, tipo = 'pagamento', modo = 'alerta', acao = 'registrado') => {
 const tipos = {
   pagamento: 'ᴘᴀɢᴀᴍᴇɴᴛᴏ ᴄɪᴛᴀᴅᴏ',
