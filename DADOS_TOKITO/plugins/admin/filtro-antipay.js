@@ -59,6 +59,14 @@ return true
 return false
 }
 
+// Apenas estruturas de pagamento da mensagem original sofrem a acao
+// imediata. Citacoes de pagamento sao avaliadas pelo monitor de rajadas.
+const detectarDireto = mensagem => {
+  const msg = base.desenrolar(mensagem)
+  if (!msg || typeof msg !== 'object') return false
+  return Object.keys(msg).some(chave => chaves.has(chave))
+}
+
 const configurar = ctx => toggle({
 ...ctx,
 campo: 'antipay',
@@ -254,7 +262,7 @@ return true
 
 const verificar = async (ctx) => {
 const { tokito, info, from, sender, original, isGroup, isGroupAdmins, isBotGroupAdmins, config, newsletter, selo } = ctx
-if (!isGroup || !config?.antipay || isGroupAdmins || !detectar(original))
+if (!isGroup || !config?.antipay || isGroupAdmins || !detectarDireto(original))
 return false
 if (!isBotGroupAdmins || info.key?.fromMe)
 return false
@@ -273,7 +281,7 @@ selo
 
 const externo = async ({ tokito, info }) => {
 const from = String(info?.key?.remoteJid || '')
-if (!tokito || !from.endsWith('@g.us') || info?.key?.fromMe || !detectar(info?.message))
+if (!tokito || !from.endsWith('@g.us') || info?.key?.fromMe || !detectarDireto(info?.message))
 return false
 if (!base.config(from)?.antipay)
 return false
@@ -306,6 +314,7 @@ module.exports = {
 configurar,
 verificar,
 detectar,
+detectarDireto,
 editarEApagar,
 externo,
 executar
