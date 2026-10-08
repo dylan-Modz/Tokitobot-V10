@@ -4,17 +4,19 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:42:58.617Z",
+  "publishedAt": "2026-10-08T17:44:09.709Z",
   "changelog": [
-    "[Correção] fix: decouple public Tokito release numbering from monotonic updater protocol",
-    "A versão 10.1.101 já está disponível para atualização.",
-    "Dados atualizado"
+    "Numeração pública restaurada para Tokito V10.1.78, mantendo os recursos e correções já existentes.",
+    "Anti-Invisível simplificado: use !antiinvisivel 1 para ativar e !antiinvisivel 0 para desativar.",
+    "Anti-Pay consolidado em antipay.js, sem comandos ou arquivos duplicados.",
+    "Proteção contra pagamentos citados indevidamente atribuídos a quem apenas respondeu.",
+    "Atualizador preparado para migração de versões antigas e aviso automático ao dono."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix: decouple public Tokito release numbering from monotonic updater protocol",
-  "notice": "A versão 10.1.101 já está disponível para atualização.",
+  "type": "Manutenção",
+  "title": "Tokito Bot V10.1.78 — Numeração restaurada",
+  "notice": "Tokito Bot V10.1.78 disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -2814,10 +2816,14 @@
       "fromVersion": "10.1.100",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix: decouple public Tokito release numbering from monotonic updater protocol",
-      "notice": "A versão 10.1.101 já está disponível para atualização.",
+      "title": "Tokito Bot V10.1.78 — Numeração restaurada",
+      "notice": "Tokito Bot V10.1.78 disponível para atualização.",
       "changelog": [
-        "Dados atualizado"
+        "Numeração pública restaurada para Tokito V10.1.78, mantendo os recursos e correções já existentes.",
+        "Anti-Invisível simplificado: use !antiinvisivel 1 para ativar e !antiinvisivel 0 para desativar.",
+        "Anti-Pay consolidado em antipay.js, sem comandos ou arquivos duplicados.",
+        "Proteção contra pagamentos citados indevidamente atribuídos a quem apenas respondeu.",
+        "Atualizador preparado para migração de versões antigas e aviso automático ao dono."
       ],
       "files": [
         {
@@ -2828,11 +2834,15 @@
       ],
       "delete": [],
       "required": true,
-      "publishedAt": "2026-10-08T17:42:58.617Z"
+      "publishedAt": "2026-10-08T17:42:58.617Z",
+      "publicVersion": "10.1.78"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.77"
+  "fromVersion": "10.1.77",
+  "publicVersion": "10.1.78",
+  "publicVersionBase": "10.1.78",
+  "protocolBaseVersion": "10.1.101"
 }
