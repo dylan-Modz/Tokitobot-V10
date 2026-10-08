@@ -1,33 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.86",
+  "version": "10.1.87",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T16:26:28.898Z",
+  "publishedAt": "2026-10-08T16:27:58.443Z",
   "changelog": [
-    "[Novidade] style: add flood-payment alert in existing Tokito message format",
-    "A versão 10.1.86 já está disponível para atualização.",
-    "Mensagens atualizado",
-    "Floodpagamento atualizado"
+    "[Novidade] feat: process quoted-payment reply floods in main anti-invisible monitor",
+    "A versão 10.1.87 já está disponível para atualização.",
+    "Antiinvisivel atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
-  "title": "style: add flood-payment alert in existing Tokito message format",
-  "notice": "A versão 10.1.86 já está disponível para atualização.",
+  "title": "feat: process quoted-payment reply floods in main anti-invisible monitor",
+  "notice": "A versão 10.1.87 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "ea91933f9aa92c358b67399853f526acba3635fe22144c313f7ac6cb5e518dd0",
-      "size": 232380
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/floodpagamento.js",
-      "sha256": "f90f5d5327903afb8a8e9fa9411f61a2521a61a2f05164599ca249ba10f1a8db",
-      "size": 6672
+      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+      "sha256": "8648943a5caaf0140680caeca83e15c7771f6b3c1a5e85ddc4982decb10c2a64",
+      "size": 7607
     }
   ],
   "releases": [
@@ -2421,6 +2415,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T16:26:28.896Z"
+    },
+    {
+      "version": "10.1.87",
+      "fromVersion": "10.1.86",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: process quoted-payment reply floods in main anti-invisible monitor",
+      "notice": "A versão 10.1.87 já está disponível para atualização.",
+      "changelog": [
+        "Antiinvisivel atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+          "sha256": "8648943a5caaf0140680caeca83e15c7771f6b3c1a5e85ddc4982decb10c2a64",
+          "size": 7607
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T16:27:58.443Z"
     }
   ],
   "mode": "incremental",
