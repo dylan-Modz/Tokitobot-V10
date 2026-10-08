@@ -143,21 +143,12 @@ const registrar = async (tokito, dados = {}) => {
 
   if (podeAlertar || removido) {
     avisos.set(chaveAutor, agora)
-    const acao = removido
-      ? 'Remocao automatica executada (modo remover).'
-      : podeRemover && !botAdmin
-        ? 'Sem permissao de administrador para aplicar a acao.'
-        : 'Ocorrencia registrada; nenhuma punicao por falha isolada.'
+    const acao = removido ? 'removido'
+      : podeRemover && !botAdmin ? 'semPermissao' : 'registrado'
     await tokito.sendMessage(grupo, {
-      text: `🛡️ *TOKITO — ANTI-INVISÍVEL*
-
-⚠️ Foram observadas ${total} falhas de descriptografia em 15 segundos.
-👤 Usuário: @${numero}
-🔍 Sinais adicionais: ${fortes}
-⚙️ Modo: ${modo}
-🛡️ Ação: ${acao}
-
-Uma falha de descriptografia não comprova ataque.`,
+      text: require('../mensagens/mensagens.js').antiInvisivelOcorrencia(
+        numero, total, fortes, modo, acao
+      ),
       ...(alvo ? { mentions: [alvo] } : {})
     }).catch(() => {})
   }
