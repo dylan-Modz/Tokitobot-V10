@@ -29,29 +29,11 @@ dylan.setCommand({
 
     if (acao === 'status') {
       const config = monitor.status(ctx.from)
-      return ctx.reply(
-        `🛡️ *ANTI-INVISÍVEL*
-Status: ${config.ativo ? 'Ativado' : 'Desativado'}
-Modo: ${config.modo}
-Janela: 15 segundos
-Alerta: 4 ocorrências distintas
-Remoção: 10 ocorrências e sinais adicionais
-
-Uma falha isolada não causa punição.`
-      )
+      return ctx.reply(ctx.mess.antiInvisivelStatus(config))
     }
 
     if (!['1', '0', 'alerta', 'remover'].includes(acao))
-      return ctx.reply(
-        `🛡️ *ANTI-INVISÍVEL*
-${ctx.prefix}antiinvisivel 1 — Ativar
-${ctx.prefix}antiinvisivel 0 — Desativar
-${ctx.prefix}antiinvisivel status — Verificar
-${ctx.prefix}antiinvisivel alerta — Apenas alertar
-${ctx.prefix}antiinvisivel remover — Permitir remoção após rajada excepcional
-
-O modo remover também monitora administradores, mas não o dono do grupo.`
-      )
+      return ctx.reply(ctx.mess.antiInvisivelUso(ctx.prefix, ctx.command))
 
     if (acao !== '0' && !ctx.isBotGroupAdmins)
       return ctx.reply(ctx.mess.botadm())
@@ -73,12 +55,7 @@ O modo remover também monitora administradores, mas não o dono do grupo.`
     const ativo = funcoes.antiinvisivel === true
     await ctx.reagir(ctx.from, ativo ? '✅' : '❌').catch(() => {})
     return ctx.reply(
-      `🛡️ *ANTI-INVISÍVEL*
-Proteção: ${ativo ? 'Ativada' : 'Desativada'}
-Modo: ${funcoes.antiinvisivelModo || 'alerta'}
-${ativo
-  ? 'O bot vai monitorar rajadas de falhas de descriptografia neste grupo.'
-  : 'O monitoramento foi desativado neste grupo.'}`
+      ctx.mess.antiInvisivelAlterado(ativo, funcoes.antiinvisivelModo || 'alerta')
     )
   }
 })
