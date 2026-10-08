@@ -1055,6 +1055,54 @@ return `- ❌ \`𝙳𝙴𝚃𝙴𝙲𝚃𝙾𝚁 𝙰𝙽𝚃𝙸-𝙿𝙰𝚈\`
 > ❌ ׄ ( ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴄᴏɴᴇᴄᴛᴀʀ ᴏ ᴅᴇᴛᴇᴄᴛᴏʀ ᴀɢᴏʀᴀ. ᴛᴇɴᴛᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ. 🙇‍♂️ )`
 }
 
+// Mensagens do Anti-Invisível no mesmo padrão visual dos demais antis.
+exports.antiInvisivelUso = (prefix, comando) => {
+return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻\`
+
+> ✅ ׄ ( ᴀᴛɪᴠᴀʀ: ${prefix}${comando} 1 )
+> ❌ ׄ ( ᴅᴇsᴀᴛɪᴠᴀʀ: ${prefix}${comando} 0 )
+> 📌 ׄ ( ᴠᴇʀ sᴛᴀᴛᴜs: ${prefix}${comando} status )
+> 🔔 ׄ ( ᴍᴏᴅᴏ ᴀʟᴇʀᴛᴀ: ${prefix}${comando} alerta )
+> 🚫 ׄ ( ᴍᴏᴅᴏ ʀᴇᴍᴏᴠᴇʀ: ${prefix}${comando} remover )
+> 🧊 ׄ ( ᴍᴏɴɪᴛᴏʀᴀ ʀᴀᴊᴀᴅᴀs ᴅᴇ ᴍᴇɴsᴀɢᴇɴs ɴᴀ̃ᴏ ᴅᴇsᴄʀɪᴘᴛᴏɢʀᴀғᴀᴅᴀs. )`
+}
+
+exports.antiInvisivelStatus = ({ ativo = false, modo = 'alerta', janelaMs = 15000, limiteAlerta = 4, limiteRemocao = 10 } = {}) => {
+return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻\`
+
+> 📌 ׄ ( sᴛᴀᴛᴜs: ${ativo ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
+> ⚙️ ׄ ( ᴍᴏᴅᴏ: ${modo === 'remover' ? 'ʀᴇᴍᴏᴠᴇʀ' : 'ᴀʟᴇʀᴛᴀ'} )
+> ⏱️ ׄ ( ᴊᴀɴᴇʟᴀ: ${janelaMs / 1000} sᴇɢᴜɴᴅᴏs )
+> 🔔 ׄ ( ᴀʟᴇʀᴛᴀ: ${limiteAlerta} ᴏᴄᴏʀʀᴇ̂ɴᴄɪᴀs )
+> 🚫 ׄ ( ʀᴇᴍᴏᴄ̧ᴀ̃ᴏ: ${limiteRemocao} ᴏᴄᴏʀʀᴇ̂ɴᴄɪᴀs ᴇ sɪɴᴀɪs ᴀᴅɪᴄɪᴏɴᴀɪs )
+> 🧊 ׄ ( ғᴀʟʜᴀ ɪsᴏʟᴀᴅᴀ ɴᴀ̃ᴏ ɢᴇʀᴀ ᴘᴜɴɪᴄ̧ᴀ̃ᴏ. )`
+}
+
+exports.antiInvisivelAlterado = (ativo, modo = 'alerta') => {
+return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻\`
+
+> 📌 ׄ ( sᴛᴀᴛᴜs: ${ativo ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
+> ⚙️ ׄ ( ᴍᴏᴅᴏ: ${modo === 'remover' ? 'ʀᴇᴍᴏᴠᴇʀ' : 'ᴀʟᴇʀᴛᴀ'} )
+> 🧊 ׄ ( ${ativo ? 'ᴏ ɢʀᴜᴘᴏ ᴇsᴛᴀ́ sᴇɴᴅᴏ ᴍᴏɴɪᴛᴏʀᴀᴅᴏ.' : 'ᴀ ᴘʀᴏᴛᴇᴄ̧ᴀ̃ᴏ ғᴏɪ ᴅᴇsᴀᴛɪᴠᴀᴅᴀ.'} )`
+}
+
+exports.antiInvisivelOcorrencia = (numero, total, fortes, modo, acao) => {
+const acoes = {
+  removido: 'ᴜsᴜᴀ́ʀɪᴏ ʀᴇᴍᴏᴠɪᴅᴏ ᴅᴏ ɢʀᴜᴘᴏ.',
+  semPermissao: 'ʙᴏᴛ sᴇᴍ ᴘᴇʀᴍɪssᴀ̃ᴏ ᴘᴀʀᴀ ʀᴇᴍᴏᴠᴇʀ.',
+  registrado: 'ᴏᴄᴏʀʀᴇ̂ɴᴄɪᴀ ʀᴇɢɪsᴛʀᴀᴅᴀ ᴘᴀʀᴀ ᴠᴇʀɪғɪᴄᴀᴄ̧ᴀ̃ᴏ.'
+}
+return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻 𝙰𝙲𝙸𝙾𝙽𝙰𝙳𝙾\`
+
+> ⚠️ ׄ ( ʀᴀᴊᴀᴅᴀ sᴜsᴘᴇɪᴛᴀ ᴅᴇ ᴍᴇɴsᴀɢᴇɴs ᴅᴇᴛᴇᴄᴛᴀᴅᴀ. )
+> 👤 ׄ ( ᴜsᴜᴀ́ʀɪᴏ: @${numero} )
+> 📨 ׄ ( ᴏᴄᴏʀʀᴇ̂ɴᴄɪᴀs: ${total} ᴇᴍ 15 sᴇɢᴜɴᴅᴏs )
+> 🔎 ׄ ( sɪɴᴀɪs ᴀᴅɪᴄɪᴏɴᴀɪs: ${fortes} )
+> ⚙️ ׄ ( ᴍᴏᴅᴏ: ${modo === 'remover' ? 'ʀᴇᴍᴏᴠᴇʀ' : 'ᴀʟᴇʀᴛᴀ'} )
+> 🛡️ ׄ ( ᴀᴄ̧ᴀ̃ᴏ: ${acoes[acao] || acoes.registrado} )
+> 🧊 ׄ ( ғᴀʟʜᴀ ᴅᴇ ᴅᴇsᴄʀɪᴘᴛᴏɢʀᴀғɪᴀ ɴᴀ̃ᴏ ᴄᴏᴍᴘʀᴏᴠᴀ ᴀᴛᴀǫᴜᴇ. )`
+}
+
 exports.antiPayTextoEditado = () => {
 return 'ᴀᴀᴀ ᴇᴜ ᴛᴇɴᴛᴇɪ ᴍᴀɴᴅᴀʀ ᴍᴇɴsᴀɢᴇᴍ ᴅᴇ ᴘᴀɢᴀᴍᴇɴᴛᴏ ᴍᴀs ᴇᴜ ᴛᴏᴍᴇɪ ʙᴀɴ'
 }
