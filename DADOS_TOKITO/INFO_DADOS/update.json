@@ -1,33 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.81",
+  "version": "10.1.82",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T15:32:28.820Z",
+  "publishedAt": "2026-10-08T15:35:28.946Z",
   "changelog": [
-    "[Correção] fix: deduplicate moderation attempts and preserve strong cryptography signals",
-    "A versão 10.1.81 já está disponível para atualização.",
-    "Ativar atualizado",
-    "Antiinvisivel atualizado"
+    "[Novidade] feat: pin security-aware Baileys build and publish invisible-message protection",
+    "A versão 10.1.82 já está disponível para atualização.",
+    "Deps atualizado",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix: deduplicate moderation attempts and preserve strong cryptography signals",
-  "notice": "A versão 10.1.81 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat: pin security-aware Baileys build and publish invisible-message protection",
+  "notice": "A versão 10.1.82 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-      "sha256": "d8db34940e7d2578228ddefc42457b9b5e0c75ffe4ed9b068c44555ded3df3bd",
-      "size": 10468
+      "path": "DADOS_TOKITO/database/lib/deps.js",
+      "sha256": "d4eeee36d2e1624377375206eb9074613d4e78b52e11651fd4114f058117320f",
+      "size": 3618
     },
     {
-      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-      "sha256": "b0242cf340fe4d676aee9c6e77d9d6c155ad6bc62706ab3c180e39774bfd9b3d",
-      "size": 7524
+      "path": "package.json",
+      "sha256": "6c5782bc06f313672da3228138972e03bb9dd8fc691d9c3802f5ce321dd58103",
+      "size": 1164
     }
   ],
   "releases": [
@@ -2283,6 +2283,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T15:32:28.820Z"
+    },
+    {
+      "version": "10.1.82",
+      "fromVersion": "10.1.81",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: pin security-aware Baileys build and publish invisible-message protection",
+      "notice": "A versão 10.1.82 já está disponível para atualização.",
+      "changelog": [
+        "Deps atualizado",
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/database/lib/deps.js",
+          "sha256": "d4eeee36d2e1624377375206eb9074613d4e78b52e11651fd4114f058117320f",
+          "size": 3618
+        },
+        {
+          "path": "package.json",
+          "sha256": "6c5782bc06f313672da3228138972e03bb9dd8fc691d9c3802f5ce321dd58103",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T15:35:28.945Z"
     }
   ],
   "mode": "incremental",
