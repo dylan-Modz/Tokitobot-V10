@@ -1,39 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.80",
+  "version": "10.1.81",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T15:30:59.154Z",
+  "publishedAt": "2026-10-08T15:32:28.820Z",
   "changelog": [
-    "[Novidade] feat: add Anti-Invisivel to security menus",
-    "A versão 10.1.80 já está disponível para atualização.",
-    "Conexão do bot atualizada",
-    "Menus atualizado",
+    "[Correção] fix: deduplicate moderation attempts and preserve strong cryptography signals",
+    "A versão 10.1.81 já está disponível para atualização.",
+    "Ativar atualizado",
     "Antiinvisivel atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat: add Anti-Invisivel to security menus",
-  "notice": "A versão 10.1.80 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: deduplicate moderation attempts and preserve strong cryptography signals",
+  "notice": "A versão 10.1.81 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "67c9206d9bd445500601a8001dd8474147e380641a1a122296b963c6ddcc1c2b",
-      "size": 39628
+      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+      "sha256": "d8db34940e7d2578228ddefc42457b9b5e0c75ffe4ed9b068c44555ded3df3bd",
+      "size": 10468
     },
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "2203c5c8a5797a32f4c1d09441c9954a038a36bc6f8832feed6f3ad6ec008fd5",
-      "size": 72711
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
-      "sha256": "cb46f9fc3a15bdbf099a6a587e652a95d2b000385be66faede775b6bbf587e74",
-      "size": 2575
+      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+      "sha256": "b0242cf340fe4d676aee9c6e77d9d6c155ad6bc62706ab3c180e39774bfd9b3d",
+      "size": 7524
     }
   ],
   "releases": [
@@ -2262,6 +2256,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T15:30:59.153Z"
+    },
+    {
+      "version": "10.1.81",
+      "fromVersion": "10.1.80",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: deduplicate moderation attempts and preserve strong cryptography signals",
+      "notice": "A versão 10.1.81 já está disponível para atualização.",
+      "changelog": [
+        "Ativar atualizado",
+        "Antiinvisivel atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+          "sha256": "d8db34940e7d2578228ddefc42457b9b5e0c75ffe4ed9b068c44555ded3df3bd",
+          "size": 10468
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+          "sha256": "b0242cf340fe4d676aee9c6e77d9d6c155ad6bc62706ab3c180e39774bfd9b3d",
+          "size": 7524
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T15:32:28.820Z"
     }
   ],
   "mode": "incremental",
