@@ -11,7 +11,7 @@ dylan.setCommand({
   categoria: 'grupo',
   info: {
     descricao: 'Monitora falhas de descriptografia e rajadas com pagamentos citados.',
-    uso: 'antiinvisivel 1/0/status/alerta/remover',
+    uso: 'antiinvisivel 1/0/status/diagnostico/alerta/remover',
     permissao: 'ADM'
   },
   async executar(ctx) {
@@ -30,6 +30,15 @@ dylan.setCommand({
     if (acao === 'status') {
       const config = monitor.status(ctx.from)
       return ctx.reply(ctx.mess.antiInvisivelStatus(config))
+    }
+
+    if (['diagnostico', 'diag'].includes(acao)) {
+      const detector = require('../../detector.js').status()
+      return ctx.reply(ctx.mess.antiInvisivelDiagnostico(
+        monitor.status(ctx.from),
+        monitor.diagnostico(ctx.from),
+        detector
+      ))
     }
 
     if (!['1', '0', 'alerta', 'remover'].includes(acao))
