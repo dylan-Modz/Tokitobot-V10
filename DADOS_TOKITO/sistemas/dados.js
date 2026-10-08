@@ -1248,6 +1248,7 @@ lastDeletedFiles: operations
 return {
 updated: true,
 from: check.local.version,
+previousPublicVersion: check.local.publicVersion || check.local.version,
 version: check.remote.version,
 backup,
 remote: check.remote,
@@ -1447,6 +1448,7 @@ bridgeMigration: migracaoPendente
 return {
 updated: true,
 from: check.local.version,
+previousPublicVersion: check.local.publicVersion || check.local.version,
 version: check.remote.version,
 backup,
 remote: check.remote,
