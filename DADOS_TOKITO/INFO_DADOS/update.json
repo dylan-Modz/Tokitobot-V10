@@ -1,27 +1,39 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.79",
+  "version": "10.1.80",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T15:29:28.541Z",
+  "publishedAt": "2026-10-08T15:30:59.154Z",
   "changelog": [
-    "[Novidade] feat: add group invisible-message burst monitor with explicit moderation mode",
-    "A versão 10.1.79 já está disponível para atualização.",
+    "[Novidade] feat: add Anti-Invisivel to security menus",
+    "A versão 10.1.80 já está disponível para atualização.",
+    "Conexão do bot atualizada",
+    "Menus atualizado",
     "Antiinvisivel atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
-  "title": "feat: add group invisible-message burst monitor with explicit moderation mode",
-  "notice": "A versão 10.1.79 já está disponível para atualização.",
+  "title": "feat: add Anti-Invisivel to security menus",
+  "notice": "A versão 10.1.80 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-      "sha256": "4594af96b543326cd15a02529d5f24a360f9624aec00e6fc2ed9e62bdcf543e8",
-      "size": 7076
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "67c9206d9bd445500601a8001dd8474147e380641a1a122296b963c6ddcc1c2b",
+      "size": 39628
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "2203c5c8a5797a32f4c1d09441c9954a038a36bc6f8832feed6f3ad6ec008fd5",
+      "size": 72711
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+      "sha256": "cb46f9fc3a15bdbf099a6a587e652a95d2b000385be66faede775b6bbf587e74",
+      "size": 2575
     }
   ],
   "releases": [
@@ -2217,6 +2229,39 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T15:29:28.541Z"
+    },
+    {
+      "version": "10.1.80",
+      "fromVersion": "10.1.79",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: add Anti-Invisivel to security menus",
+      "notice": "A versão 10.1.80 já está disponível para atualização.",
+      "changelog": [
+        "Conexão do bot atualizada",
+        "Menus atualizado",
+        "Antiinvisivel atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "67c9206d9bd445500601a8001dd8474147e380641a1a122296b963c6ddcc1c2b",
+          "size": 39628
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "2203c5c8a5797a32f4c1d09441c9954a038a36bc6f8832feed6f3ad6ec008fd5",
+          "size": 72711
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+          "sha256": "cb46f9fc3a15bdbf099a6a587e652a95d2b000385be66faede775b6bbf587e74",
+          "size": 2575
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T15:30:59.153Z"
     }
   ],
   "mode": "incremental",
