@@ -1093,6 +1093,8 @@ return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻 𝙳
 
 > 📌 ׄ ( sᴛᴀᴛᴜs: ${config.ativo ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
 > 👁️ ׄ ( ᴅᴇᴛᴇᴄᴛᴏʀ: ${detector.conectado ? '🟢 ᴄᴏɴᴇᴄᴛᴀᴅᴏ' : '🔴 ᴅᴇsᴄᴏɴᴇᴄᴛᴀᴅᴏ'} )
+> 🔐 ׄ ( ᴄʀɪᴘᴛᴏɢʀᴀғᴀᴅᴀs ɴᴀ ᴀᴜxɪʟɪᴀʀ: ${detector.telemetria?.criptografadas || 0} )
+> 📩 ׄ ( ᴇᴠᴇɴᴛᴏs ɴᴀ ᴀᴜxɪʟɪᴀʀ: ${detector.telemetria?.recebidas || 0} )
 > 📩 ׄ ( ᴘʀɪɴᴄɪᴘᴀʟ: ${dados.fontes?.principal || 0} )
 > 📩 ׄ ( ᴀᴜxɪʟɪᴀʀ: ${dados.fontes?.auxiliar || 0} )
 > 🔍 ׄ ( sᴜsᴘᴇɪᴛᴀs: ${dados.candidatas || 0} )
