@@ -31,6 +31,7 @@
 const { 'default': makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore } = require('baileys')
 const { fs, path, pino, NodeCache, Boom, colors } = require('./database/lib/exports.js')
 const antipay = require('./plugins/admin/filtro-antipay.js')
+const antiInvisivel = require('./sistemas/antiinvisivel.js')
 
 const pasta = path.join(__dirname, 'database', 'detector')
 
@@ -52,6 +53,8 @@ let reconectando = false
 
 let conectado = false
 
+const telemetria = { recebidas: 0, encaminhadas: 0, semConteudo: 0, criptografadas: 0, erros: 0 }
+
 if (!fs.existsSync(pasta))
 fs.mkdirSync(pasta, { recursive: true })
 
@@ -61,32 +64,33 @@ const status = () => ({
 conectado,
 registrado: Boolean(estado?.creds?.registered),
 numero: numero(socket?.user?.id || estado?.creds?.me?.id || ''),
+telemetria: { ...telemetria },
 pasta
 })
 
 const capturar = async (upsert) => {
-if (!principal || !upsert?.messages?.length)
-return
+if (!principal || !Array.isArray(upsert?.messages)) return
 for (const info of upsert.messages) {
-try {
-const from = info?.key?.remoteJid || ''
-if (!from.endsWith('@g.us'))
-continue
-if (info?.key?.fromMe)
-continue
-if (!info?.message)
-continue
-if (!antipay.detectar(info.message))
-continue
-await antipay.externo({
-tokito: principal,
-info,
-detector: socket
-})
-}
-catch (error) {
-console.log(colors.red('[DETECTOR ANTI-PAY]'), error?.message || error)
-}
+  try {
+    const from = String(info?.key?.remoteJid || '')
+    if (!from.endsWith('@g.us') || info?.key?.fromMe) continue
+    telemetria.recebidas++
+    if (!info?.message) telemetria.semConteudo++
+
+    // A conta auxiliar pode receber mensagens que o ADM nao recebe.
+    // Passa o evento ORIGINAL com key/participant; nunca usa o autor citado.
+    // O modulo possui travas por ID para eventos tambem vistos pela principal.
+    await antiInvisivel.receber(principal, { messages: [info], type: upsert.type }, 'auxiliar')
+    telemetria.encaminhadas++
+
+    // O Anti-Pay imediato so aceita pagamento direto enviado pelo autor atual,
+    // nunca um pagamento presente no contexto de resposta ou citacao.
+    if (!info?.message || !antipay.detectarDireto(info.message)) continue
+    await antipay.externo({ tokito: principal, info, detector: socket })
+  } catch (error) {
+    telemetria.erros++
+    console.log(colors.red('[DETECTOR ANTI-PAY]'), error?.message || error)
+  }
 }
 }
 
@@ -124,6 +128,14 @@ downloadHistory: false,
 emitOwnEvents: false,
 shouldSyncHistoryMessage: () => false,
 getMessage: async () => ({ conversation: 'Tokito Detector' })
+})
+socket.ev.on('tokito.security.ciphertext', dados => {
+  telemetria.criptografadas++
+  if (!principal) return
+  Promise.resolve(antiInvisivel.registrar(principal, dados, 'auxiliar')).catch(error => {
+    telemetria.erros++
+    console.log(colors.red('[DETECTOR SEGURANÇA]'), error?.message || error)
+  })
 })
 socket.ev.process(async (events) => {
 if (events['messages.upsert'])
