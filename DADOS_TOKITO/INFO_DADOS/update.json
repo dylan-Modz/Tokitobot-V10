@@ -1,51 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.100",
+  "version": "10.1.101",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:41:29.945Z",
+  "publishedAt": "2026-10-08T17:42:58.617Z",
   "changelog": [
-    "[Correção] fix: preserve user-facing version across incremental and full updates",
-    "A versão 10.1.100 já está disponível para atualização.",
-    "Conexão do bot atualizada",
-    "Update Cli atualizado",
-    "Update atualizado",
-    "Dados atualizado",
-    "Package atualizado"
+    "[Correção] fix: decouple public Tokito release numbering from monotonic updater protocol",
+    "A versão 10.1.101 já está disponível para atualização.",
+    "Dados atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: preserve user-facing version across incremental and full updates",
-  "notice": "A versão 10.1.100 já está disponível para atualização.",
+  "title": "fix: decouple public Tokito release numbering from monotonic updater protocol",
+  "notice": "A versão 10.1.101 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "57af0c5e45b983088c7bf8d7dc46f6f9ac13b950ad1034e9b3cb3c6c0b4c8b59",
-      "size": 39683
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/update-cli.js",
-      "sha256": "03f6b4ef7250e02e32c75773e8dffe40f3bd635773b22e35fae026a28950e93e",
-      "size": 4088
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/update.js",
-      "sha256": "a18be4620fb06a2c57ebc7ffe417f7eba7c21a772f83552c145096803e9e13bf",
-      "size": 4016
-    },
-    {
       "path": "DADOS_TOKITO/sistemas/dados.js",
-      "sha256": "bb45c94dcee16ccc8373bb0255bcc741a321c9a17eae2ab7bf363e409d59be7e",
-      "size": 33141
-    },
-    {
-      "path": "package.json",
-      "sha256": "aef81103ce7dee686c639dadc64d78edffe7bebce498e6daadab732156fd91ac",
-      "size": 1164
+      "sha256": "294fd483004b2cea443fafe69f720cd22623c37cf3202391b9eb336488bef796",
+      "size": 34049
     }
   ],
   "releases": [
@@ -2832,6 +2808,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T17:41:29.945Z"
+    },
+    {
+      "version": "10.1.101",
+      "fromVersion": "10.1.100",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: decouple public Tokito release numbering from monotonic updater protocol",
+      "notice": "A versão 10.1.101 já está disponível para atualização.",
+      "changelog": [
+        "Dados atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "294fd483004b2cea443fafe69f720cd22623c37cf3202391b9eb336488bef796",
+          "size": 34049
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T17:42:58.617Z"
     }
   ],
   "mode": "incremental",
