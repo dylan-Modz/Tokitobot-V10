@@ -208,8 +208,11 @@ return true
 }
 
 const executar = async ({ tokito, info, from, participante, newsletter = {}, selo = null }) => {
-if (!tokito || !info?.key?.id || !from || !participante)
+if (!tokito || !info?.key?.id || !from || !participante || info.key?.fromMe)
 return false
+// Nunca puna a pessoa apenas porque respondeu/citou um pagamento anterior.
+// A prova deve ser a propria mensagem nova, nao quotedMessage ou contexto.
+if (!detectarDireto(info.message)) return false
 if (trava(from, info.key.id))
 return true
 let fechado = false
