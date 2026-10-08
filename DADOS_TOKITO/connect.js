@@ -38,6 +38,7 @@ const dadosSistema = require('./sistemas/dados.js')
 const autoInativo = require('./sistemas/autoinativo.js')
 const donoSistema = require('./sistemas/dono.js')
 const antiNuke = require('./sistemas/nuke.js')
+const antiInvisivel = require('./sistemas/antiinvisivel.js')
 const sorteioGrupo = require('./sistemas/sorteios.js')
 const promocoes = require('./sistemas/promocoes.js')
 const placar = require('./database/lib/placar.js')
@@ -582,6 +583,13 @@ shouldSyncHistoryMessage: () => false,
 getMessage: async (key) => undefined })
 
 global.tokito = tokito
+
+// Observa os sinais da biblioteca principal. Nao cria mensagens artificiais.
+tokito.ev.on('tokito.security.ciphertext', dados => {
+  Promise.resolve(antiInvisivel.registrar(tokito, dados)).catch(error => {
+    erroSistema('Anti-Invisivel', error)
+  })
+})
 
 if (!runtimeSub.isSubBot) detector.iniciar(tokito).catch(error => {
 erroSistema('Erro ao iniciar detector Anti-Pay', error)
@@ -1275,6 +1283,9 @@ if (events['messages.upsert']) {
 const upsert = events['messages.upsert']
 
 try {
+await antiInvisivel.receber(tokito, upsert).catch(error => {
+  erroSistema('Monitoramento Anti-Invisivel', error)
+})
 if (!processarMensagemTokito)
 processarMensagemTokito = require('../tokito.js')
 
