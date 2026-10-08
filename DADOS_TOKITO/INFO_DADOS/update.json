@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.96",
+  "version": "10.1.97",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:08:28.513Z",
+  "publishedAt": "2026-10-08T17:32:28.558Z",
   "changelog": [
-    "[Melhoria] release: Tokito V10.1.96 Anti-Invisivel event attribution and safety diagnostics",
-    "A versão 10.1.96 já está disponível para atualização.",
-    "Package atualizado"
+    "[Melhoria] refactor: unify Anti-Pay protection and command in antipay.js",
+    "A versão 10.1.97 já está disponível para atualização.",
+    "Antipay atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "release: Tokito V10.1.96 Anti-Invisivel event attribution and safety diagnostics",
-  "notice": "A versão 10.1.96 já está disponível para atualização.",
+  "title": "refactor: unify Anti-Pay protection and command in antipay.js",
+  "notice": "A versão 10.1.97 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "142311e88190666d495d0a542942f3b39b18860a5a10ab8df4cb0cd875858fad",
-      "size": 1164
+      "path": "DADOS_TOKITO/plugins/admin/antipay.js",
+      "sha256": "888327728e733897634a500aa533624eb0a92a1bb0e396699d2f8571ecf339a0",
+      "size": 8549
     }
   ],
   "releases": [
@@ -2661,6 +2661,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T17:08:28.512Z"
+    },
+    {
+      "version": "10.1.97",
+      "fromVersion": "10.1.96",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "refactor: unify Anti-Pay protection and command in antipay.js",
+      "notice": "A versão 10.1.97 já está disponível para atualização.",
+      "changelog": [
+        "Antipay atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antipay.js",
+          "sha256": "888327728e733897634a500aa533624eb0a92a1bb0e396699d2f8571ecf339a0",
+          "size": 8549
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T17:32:28.558Z"
     }
   ],
   "mode": "incremental",
