@@ -68,12 +68,12 @@ const totalPendentes =
 (Array.isArray(check.pendingDelete) ? check.pendingDelete.length : 0)
 
 if (check.available && check.incremental && !totalPendentes) {
-return ctx.reply(ctx.mess.updateEmptyFiles(check.remote?.version))
+return ctx.reply(ctx.mess.updateEmptyFiles(check.remote?.publicVersion || check.remote?.version))
 }
 
 return ctx.reply(ctx.mess.updateInfo({
-instalada: check.local.version || '—',
-disponivel: check.remote.version || '—',
+instalada: check.local.publicVersion || check.local.version || '—',
+disponivel: check.remote.publicVersion || check.remote.version || '—',
 canal: check.remote.channel || 'stable',
 modo: check.mode || (check.incremental ? 'incremental' : 'clean'),
 disponivelAgora: check.available,
@@ -100,15 +100,15 @@ texto => console.log(`[ UPDATE • TOKITO ] ${texto}`)
 
 if (!result.updated) {
 if (result.reason === 'empty_update') {
-return ctx.reply(ctx.mess.updateEmptyFiles(result.remote?.version))
+return ctx.reply(ctx.mess.updateEmptyFiles(result.remote?.publicVersion || result.remote?.version))
 }
 
-return ctx.reply(ctx.mess.updateAlreadyLatest(result.version))
+return ctx.reply(ctx.mess.updateAlreadyLatest(result.remote?.publicVersion || result.version))
 }
 
 await ctx.reply(ctx.mess.updateSuccess(
-result.from,
-result.version,
+result.previousPublicVersion || result.from,
+result.remote?.publicVersion || result.version,
 result.filesUpdated || 0,
 result.filesDeleted || 0
 ))
