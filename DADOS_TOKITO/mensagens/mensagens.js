@@ -1086,6 +1086,28 @@ return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻\`
 > 🧊 ׄ ( ${ativo ? 'ᴏ ɢʀᴜᴘᴏ ᴇsᴛᴀ́ sᴇɴᴅᴏ ᴍᴏɴɪᴛᴏʀᴀᴅᴏ.' : 'ᴀ ᴘʀᴏᴛᴇᴄ̧ᴀ̃ᴏ ғᴏɪ ᴅᴇsᴀᴛɪᴠᴀᴅᴀ.'} )`
 }
 
+exports.antiInvisivelFloodPagamento = (numero, total, tipo = 'pagamento', modo = 'alerta', acao = 'registrado') => {
+const tipos = {
+  pagamento: 'ᴘᴀɢᴀᴍᴇɴᴛᴏ ᴄɪᴛᴀᴅᴏ',
+  citacao: 'ᴍᴇɴsᴀɢᴇᴍ ᴄɪᴛᴀᴅᴀ ᴄᴏᴍ ʟɪɴᴋ'
+}
+const acoes = {
+  registrado: 'ᴇɴᴠɪᴏs ʀᴇɢɪsᴛʀᴀᴅᴏs. ɴᴇɴʜᴜᴍ ᴜsᴜᴀ́ʀɪᴏ ʀᴇᴍᴏᴠɪᴅᴏ.',
+  removido: 'ʀᴀᴊᴀᴅᴀ ᴅᴇᴛᴇᴄᴛᴀᴅᴀ. ᴜsᴜᴀ́ʀɪᴏ ʀᴇᴍᴏᴠɪᴅᴏ.',
+  protegido: 'ᴏ ᴀᴜᴛᴏʀ ᴇ́ ᴘʀᴏᴛᴇɢɪᴅᴏ. ɴᴇɴʜᴜᴍᴀ ʀᴇᴍᴏᴄ̧ᴀ̃ᴏ.',
+  semPermissao: 'ᴏ ʙᴏᴛ ɴᴀ̃ᴏ ᴘᴏssᴜɪ ᴘᴇʀᴍɪssᴀ̃ᴏ ᴘᴀʀᴀ ʀᴇᴍᴏᴠᴇʀ.',
+  falha: 'ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴄᴏɴᴄʟᴜɪʀ ᴀ ʀᴇᴍᴏᴄ̧ᴀ̃ᴏ.'
+}
+return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻 𝙰𝙲𝙸𝙾𝙽𝙰𝙳𝙾\`
+
+> ⚠️ ׄ ( ʀᴀᴊᴀᴅᴀ ᴅᴇ ᴍᴇɴsᴀɢᴇɴs ʀᴇᴘᴇᴛɪᴅᴀs ᴅᴇᴛᴇᴄᴛᴀᴅᴀ. )
+> 👤 ׄ ( ᴜsᴜᴀ́ʀɪᴏ: @${numero} )
+> 💳 ׄ ( ᴛɪᴘᴏ: ${tipos[tipo] || tipos.citacao} )
+> 📨 ׄ ( ᴏᴄᴏʀʀᴇ̂ɴᴄɪᴀs: ${total} ᴇᴍ 15 sᴇɢᴜɴᴅᴏs )
+> ⚙️ ׄ ( ᴍᴏᴅᴏ: ${modo === 'remover' ? 'ʀᴇᴍᴏᴠᴇʀ' : 'ᴀʟᴇʀᴛᴀ'} )
+> 🛡️ ׄ ( ᴀᴄ̧ᴀ̃ᴏ: ${acoes[acao] || acoes.registrado} )`
+}
+
 exports.antiInvisivelOcorrencia = (numero, total, fortes, modo, acao) => {
 const acoes = {
   removido: 'ᴜsᴜᴀ́ʀɪᴏ ʀᴇᴍᴏᴠɪᴅᴏ ᴅᴏ ɢʀᴜᴘᴏ.',
