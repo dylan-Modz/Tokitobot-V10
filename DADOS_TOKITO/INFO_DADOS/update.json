@@ -1,111 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.78",
+  "version": "10.1.79",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T13:00:00.000Z",
+  "publishedAt": "2026-10-08T15:29:28.541Z",
   "changelog": [
-    "[Melhoria] Melhorias nos jogos",
-    "A versão 10.1.78 já está disponível para atualização.",
-    "Melhorias nos jogos do Tokito.",
-    "Os jogos novos agora também podem ser resetados pelo comando rv.",
-    "Novo cancelarjogo para encerrar automaticamente a partida em andamento no grupo."
+    "[Novidade] feat: add group invisible-message burst monitor with explicit moderation mode",
+    "A versão 10.1.79 já está disponível para atualização.",
+    "Antiinvisivel atualizado"
   ],
-  "delete": [
-    "DADOS_TOKITO/plugins/jogos/sistema-base.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Melhorias nos jogos",
-  "notice": "A versão 10.1.78 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat: add group invisible-message burst monitor with explicit moderation mode",
+  "notice": "A versão 10.1.79 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/jogos/ignis.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/anagrama.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/doulingo.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/quizanimais.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/jogodavelha2.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/quizzes.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/rv.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/sistema.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/sistema-adivinhe.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/sistema-cacapalavras.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/sistema-dama.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/sistema-forca.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/sistema-jogodavelha.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/sistema-mines.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/sistema-quiz.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "package.json",
-      "sha256": "",
-      "size": 0
+      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+      "sha256": "4594af96b543326cd15a02529d5f24a360f9624aec00e6fc2ed9e62bdcf543e8",
+      "size": 7076
     }
   ],
   "releases": [
@@ -2280,6 +2196,27 @@
       ],
       "required": true,
       "publishedAt": "2026-10-08T13:00:00.000Z"
+    },
+    {
+      "version": "10.1.79",
+      "fromVersion": "10.1.78",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: add group invisible-message burst monitor with explicit moderation mode",
+      "notice": "A versão 10.1.79 já está disponível para atualização.",
+      "changelog": [
+        "Antiinvisivel atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+          "sha256": "4594af96b543326cd15a02529d5f24a360f9624aec00e6fc2ed9e62bdcf543e8",
+          "size": 7076
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T15:29:28.541Z"
     }
   ],
   "mode": "incremental",
