@@ -1,27 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.92",
+  "version": "10.1.93",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:02:29.032Z",
+  "publishedAt": "2026-10-08T17:04:00.052Z",
   "changelog": [
-    "[Melhoria] safety: never classify short replies quoting payment as attacker floods",
-    "A versão 10.1.92 já está disponível para atualização.",
+    "[Novidade] feat: expose primary/auxiliary anti-invisible receipt diagnostics via admin command",
+    "A versão 10.1.93 já está disponível para atualização.",
+    "Mensagens atualizado",
     "Antiinvisivel atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "safety: never classify short replies quoting payment as attacker floods",
-  "notice": "A versão 10.1.92 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat: expose primary/auxiliary anti-invisible receipt diagnostics via admin command",
+  "notice": "A versão 10.1.93 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-      "sha256": "9f2f0f2a6fcea855b6233e5c62937ccd0c73e25525d5a64a13c41b7578991b1c",
-      "size": 16711
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "3039873ca246be21dfd8d625ca777fdab3da4f0411ab5419e9563f5941c53a70",
+      "size": 233655
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+      "sha256": "a20b48d2eb0a2e86aae73e54186573fabf887f39c974d277bd58474be4ab814e",
+      "size": 2131
     }
   ],
   "releases": [
@@ -2559,6 +2565,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T17:02:29.032Z"
+    },
+    {
+      "version": "10.1.93",
+      "fromVersion": "10.1.92",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: expose primary/auxiliary anti-invisible receipt diagnostics via admin command",
+      "notice": "A versão 10.1.93 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado",
+        "Antiinvisivel atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "3039873ca246be21dfd8d625ca777fdab3da4f0411ab5419e9563f5941c53a70",
+          "size": 233655
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+          "sha256": "a20b48d2eb0a2e86aae73e54186573fabf887f39c974d277bd58474be4ab814e",
+          "size": 2131
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T17:04:00.048Z"
     }
   ],
   "mode": "incremental",
