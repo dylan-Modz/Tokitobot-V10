@@ -25,6 +25,7 @@ const rajadas = new Map()
 const avisos = new Map()
 const moderacoes = new Map()
 const diagnosticos = new Map()
+const fontes = new Map()
 const normal = value => base.normalizar(value)
 const ids = membro => [
   membro?.id, membro?.jid, membro?.lid, membro?.phoneNumber,
@@ -52,7 +53,8 @@ const diagnostico = grupo => ({
   observadas: 0, candidatas: 0, alertas: 0, removidas: 0,
   semAutor: 0, desativadas: 0, foraPadrao: 0, duplicadas: 0,
   ultimaRazao: 'nenhuma', ultimaRecepcao: 0,
-  ...(diagnosticos.get(String(grupo || '')) || {})
+  ...(diagnosticos.get(String(grupo || '')) || {}),
+  fontes: fontes.get(String(grupo || '')) || { principal: 0, auxiliar: 0 }
 })
 
 const limpar = agora => {
@@ -113,12 +115,16 @@ const classificar = mensagem => {
   }
 }
 
-const verificar = async (tokito, info) => {
+const verificar = async (tokito, info, origem = 'principal') => {
   const chave = info?.key
   const grupo = String(chave?.remoteJid || '')
   if (!tokito || !grupo.endsWith('@g.us') || chave?.fromMe)
     return { verificado: false, motivo: 'fora-do-grupo' }
 
+  const origemReal = origem === 'auxiliar' ? 'auxiliar' : 'principal'
+  const contagem = fontes.get(grupo) || { principal: 0, auxiliar: 0 }
+  contagem[origemReal]++
+  fontes.set(grupo, contagem)
   atualizarDiagnostico(grupo, 'observadas', 'mensagem-recebida')
   const msgId = String(chave?.id || '')
   const autor = normal(chave?.participantAlt || chave?.senderAlt ||
@@ -404,7 +410,7 @@ const receber = async (tokito, upsert, origem = 'principal') => {
     // Analisa tambem mensagens decifradas que repetem pagamentos citados.
     // O monitor usa a conexao principal e nunca cria mensagens artificiais.
     try {
-      await floodPagamento.verificar(tokito, item)
+      await floodPagamento.verificar(tokito, item, origem)
     } catch (erro) {
       console.warn('[ANTI-INVISIVEL FLOOD] Falha no monitoramento:', erro?.message || erro)
     }
