@@ -1,27 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.90",
+  "version": "10.1.91",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T16:41:29.041Z",
+  "publishedAt": "2026-10-08T17:00:58.821Z",
   "changelog": [
-    "[Correção] fix: catch payment quote flood even when WhatsApp strips citation context; add telemetry",
-    "A versão 10.1.90 já está disponível para atualização.",
-    "Floodpagamento atualizado"
+    "[Correção] fix: forward original group events from member detector and never punish quoted payments",
+    "A versão 10.1.91 já está disponível para atualização.",
+    "Detector atualizado",
+    "Filtro Antipay atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: catch payment quote flood even when WhatsApp strips citation context; add telemetry",
-  "notice": "A versão 10.1.90 já está disponível para atualização.",
+  "title": "fix: forward original group events from member detector and never punish quoted payments",
+  "notice": "A versão 10.1.91 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/floodpagamento.js",
-      "sha256": "675601cb62d4ffec5e31ef73b926ae4bbbb9a3fb272ce11e2558ffb1022ecd70",
-      "size": 8810
+      "path": "DADOS_TOKITO/detector.js",
+      "sha256": "cf64465e72f80c3ea48858d78991a26fb2b5f71225a3338580bb02a6dab3c14f",
+      "size": 6229
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
+      "sha256": "c13ef7329c1c0157126edb21770ce724ec71a34e3bfda415ab9bbcd3014f9c8a",
+      "size": 7840
     }
   ],
   "releases": [
@@ -2511,6 +2517,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T16:41:29.041Z"
+    },
+    {
+      "version": "10.1.91",
+      "fromVersion": "10.1.90",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: forward original group events from member detector and never punish quoted payments",
+      "notice": "A versão 10.1.91 já está disponível para atualização.",
+      "changelog": [
+        "Detector atualizado",
+        "Filtro Antipay atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/detector.js",
+          "sha256": "cf64465e72f80c3ea48858d78991a26fb2b5f71225a3338580bb02a6dab3c14f",
+          "size": 6229
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
+          "sha256": "c13ef7329c1c0157126edb21770ce724ec71a34e3bfda415ab9bbcd3014f9c8a",
+          "size": 7840
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T17:00:58.821Z"
     }
   ],
   "mode": "incremental",
