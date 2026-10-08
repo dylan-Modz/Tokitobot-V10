@@ -1,27 +1,39 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.87",
+  "version": "10.1.88",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T16:27:58.443Z",
+  "publishedAt": "2026-10-08T16:29:29.059Z",
   "changelog": [
-    "[Novidade] feat: process quoted-payment reply floods in main anti-invisible monitor",
-    "A versão 10.1.87 já está disponível para atualização.",
-    "Antiinvisivel atualizado"
+    "[Melhoria] docs: describe payment-quote flood protection in Tokito commands",
+    "A versão 10.1.88 já está disponível para atualização.",
+    "Mensagens atualizado",
+    "Antiinvisivel atualizado",
+    "Filtro Antipay atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat: process quoted-payment reply floods in main anti-invisible monitor",
-  "notice": "A versão 10.1.87 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "docs: describe payment-quote flood protection in Tokito commands",
+  "notice": "A versão 10.1.88 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-      "sha256": "8648943a5caaf0140680caeca83e15c7771f6b3c1a5e85ddc4982decb10c2a64",
-      "size": 7607
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "bf486975e11fe9999bc1924e350f2647c77aab962d72823db72200aab3117cf8",
+      "size": 232547
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+      "sha256": "d9af297dcbac387c63a306739cf190424a1694fd5b78886bb1d2124627c4fdcb",
+      "size": 1844
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
+      "sha256": "28abf3899366389341777c16bb0f264bdaf84341e17b0d0109d2506dda6cc3e0",
+      "size": 7620
     }
   ],
   "releases": [
@@ -2436,6 +2448,39 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T16:27:58.443Z"
+    },
+    {
+      "version": "10.1.88",
+      "fromVersion": "10.1.87",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "docs: describe payment-quote flood protection in Tokito commands",
+      "notice": "A versão 10.1.88 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado",
+        "Antiinvisivel atualizado",
+        "Filtro Antipay atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "bf486975e11fe9999bc1924e350f2647c77aab962d72823db72200aab3117cf8",
+          "size": 232547
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+          "sha256": "d9af297dcbac387c63a306739cf190424a1694fd5b78886bb1d2124627c4fdcb",
+          "size": 1844
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
+          "sha256": "28abf3899366389341777c16bb0f264bdaf84341e17b0d0109d2506dda6cc3e0",
+          "size": 7620
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T16:29:29.059Z"
     }
   ],
   "mode": "incremental",
