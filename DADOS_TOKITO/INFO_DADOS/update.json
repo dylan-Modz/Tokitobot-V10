@@ -1,27 +1,56 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.97",
+  "version": "10.1.98",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:32:28.558Z",
+  "publishedAt": "2026-10-08T17:34:00.470Z",
   "changelog": [
-    "[Melhoria] refactor: unify Anti-Pay protection and command in antipay.js",
-    "A versão 10.1.97 já está disponível para atualização.",
-    "Antipay atualizado"
+    "[Melhoria] style: remove unused Anti-Invisivel mode/status diagnostic menus",
+    "A versão 10.1.98 já está disponível para atualização.",
+    "Detector atualizado",
+    "Mensagens atualizado",
+    "Antiinvisivel atualizado",
+    "Floodpagamento atualizado",
+    "Funcoes atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "refactor: unify Anti-Pay protection and command in antipay.js",
-  "notice": "A versão 10.1.97 já está disponível para atualização.",
+  "title": "style: remove unused Anti-Invisivel mode/status diagnostic menus",
+  "notice": "A versão 10.1.98 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/antipay.js",
-      "sha256": "888327728e733897634a500aa533624eb0a92a1bb0e396699d2f8571ecf339a0",
-      "size": 8549
+      "path": "DADOS_TOKITO/detector.js",
+      "sha256": "ce407e801de1ef23f4cc857a9cb30e460dee1e7fe4ac0e2e92e0b168588c9b61",
+      "size": 6222
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "3cda10f7c78b680f3ea3d25f1da138cf86ed3d61070e10e9b887c4d7627e6a24",
+      "size": 230542
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+      "sha256": "d522e91b0854ad8d5b6fd960c31cf82a598bfdfea3ec3c2b6524c8c9efa0104f",
+      "size": 1404
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+      "sha256": "236964b15de4c6f0ee5e759790ed314efa6bd737534bff533f1aa553a18dd45c",
+      "size": 17057
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/floodpagamento.js",
+      "sha256": "e7332cdc3e8becbd00b329d16812b702868a1150df196befc9b7e4924b154fb9",
+      "size": 8803
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/funcoes.js",
+      "sha256": "3d9fb3b9ae1811452a8f12d178d345a44da3a00dfec04da6c3f163708960f416",
+      "size": 5947
     }
   ],
   "releases": [
@@ -2682,6 +2711,56 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T17:32:28.558Z"
+    },
+    {
+      "version": "10.1.98",
+      "fromVersion": "10.1.97",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "style: remove unused Anti-Invisivel mode/status diagnostic menus",
+      "notice": "A versão 10.1.98 já está disponível para atualização.",
+      "changelog": [
+        "Detector atualizado",
+        "Mensagens atualizado",
+        "Antiinvisivel atualizado",
+        "Floodpagamento atualizado",
+        "Funcoes atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/detector.js",
+          "sha256": "ce407e801de1ef23f4cc857a9cb30e460dee1e7fe4ac0e2e92e0b168588c9b61",
+          "size": 6222
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "3cda10f7c78b680f3ea3d25f1da138cf86ed3d61070e10e9b887c4d7627e6a24",
+          "size": 230542
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+          "sha256": "d522e91b0854ad8d5b6fd960c31cf82a598bfdfea3ec3c2b6524c8c9efa0104f",
+          "size": 1404
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+          "sha256": "236964b15de4c6f0ee5e759790ed314efa6bd737534bff533f1aa553a18dd45c",
+          "size": 17057
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/floodpagamento.js",
+          "sha256": "e7332cdc3e8becbd00b329d16812b702868a1150df196befc9b7e4924b154fb9",
+          "size": 8803
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/funcoes.js",
+          "sha256": "3d9fb3b9ae1811452a8f12d178d345a44da3a00dfec04da6c3f163708960f416",
+          "size": 5947
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T17:34:00.470Z"
     }
   ],
   "mode": "incremental",
