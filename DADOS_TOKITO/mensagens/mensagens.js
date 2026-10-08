@@ -5356,7 +5356,7 @@ exports.infoJogos = prefix => [
 '> ⚠️ ׄ ( ᴏ ʀᴇsᴇᴛ ᴇɴᴄᴇʀʀᴀ ᴀ ᴘᴀʀᴛɪᴅᴀ ᴀᴛᴜᴀʟ ᴅᴏ ɢʀᴜᴘᴏ. )'
 ].join('\n')
 
-exports.jogoResetUso = prefix => '- ♻️ *𝚁𝙴𝚂𝙴𝚃𝙰𝚁 𝙹𝙾𝙶𝙾*\n\n> 🎮 ׄ ( ᴜsᴇ: ' + prefix + 'rv velha/dama/forca/caca/adivinhe/quiz/mines )'
+exports.jogoResetUso = prefix => '- ♻️ *𝚁𝙴𝚂𝙴𝚃𝙰𝚁 𝙹𝙾𝙶𝙾*\\n\\n> 🎮 ׄ ( ᴜsᴇ: ' + prefix + 'rv + ᴏ ɴᴏᴍᴇ ᴅᴏ ᴊᴏɢᴏ. )\\n> ❌ ׄ ( ᴏᴜ ᴜsᴇ: ' + prefix + 'cancelarjogo ᴘᴀʀᴀ ᴇɴᴄᴇʀʀᴀʀ ᴀ ᴘᴀʀᴛɪᴅᴀ ᴀᴛᴜᴀʟ. )'
 exports.jogoResetOk = nome => '- ✅ *𝙹𝙾𝙶𝙾 𝚁𝙴𝚂𝙴𝚃𝙰𝙳𝙾*\n\n> 🎮 ׄ ( ' + nome + ' ғᴏɪ ᴇɴᴄᴇʀʀᴀᴅᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )'
 exports.jogoResetVazio = nome => '- ⚠️ *𝚂𝙴𝙼 𝙿𝙰𝚁𝚃𝙸𝙳𝙰*\n\n> 🎮 ׄ ( ɴᴀ̃ᴏ ʜᴀ́ ᴘᴀʀᴛɪᴅᴀ ᴅᴇ ' + nome + ' ᴇᴍ ᴀɴᴅᴀᴍᴇɴᴛᴏ. )'
 

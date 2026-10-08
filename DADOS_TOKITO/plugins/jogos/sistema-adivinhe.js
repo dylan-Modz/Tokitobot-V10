@@ -29,7 +29,7 @@
  */
 
 const mess = require('../../mensagens/mensagens.js')
-const base = require('./sistema-base.js')
+const base = require('./ignis.js')
 
 const arquivo = base.files.adivinhe
 

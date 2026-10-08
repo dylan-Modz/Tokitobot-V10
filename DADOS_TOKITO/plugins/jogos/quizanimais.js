@@ -1,5 +1,5 @@
 const dylan = require('../../database/lib/comandos')
-const base = require('./sistema-base.js')
+const base = require('./ignis.js')
 const mess = require('../../mensagens/mensagens.js')
 
 const arquivo = base.files.quizanimais

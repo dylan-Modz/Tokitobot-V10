@@ -1,5 +1,5 @@
 const dylan = require('../../database/lib/comandos')
-const base = require('./sistema-base.js')
+const base = require('./ignis.js')
 const visual = require('./sistema-jogodavelha.js')
 const mess = require('../../mensagens/mensagens.js')
 

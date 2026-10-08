@@ -1,5 +1,5 @@
 const dylan = require('../../database/lib/comandos')
-const base = require('./sistema-base.js')
+const base = require('./ignis.js')
 const mess = require('../../mensagens/mensagens.js')
 
 const CAPA = 'https://telegra.ph/file/8b3a18c452ce92dd2f996.jpg'

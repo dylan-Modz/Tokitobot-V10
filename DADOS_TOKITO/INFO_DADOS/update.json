@@ -1,36 +1,39 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.77",
+  "version": "10.1.78",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T12:00:00.000Z",
+  "publishedAt": "2026-10-08T13:00:00.000Z",
   "changelog": [
     "[Melhoria] Melhorias nos jogos",
-    "A versão 10.1.77 já está disponível para atualização.",
-    "Também foram feitas melhorias internas em alguns dos jogos do Tokito, deixando os sistemas mais organizados e preparados para receber novas funções e ajustes."
+    "A versão 10.1.78 já está disponível para atualização.",
+    "Melhorias nos jogos do Tokito.",
+    "Os jogos novos agora também podem ser resetados pelo comando rv.",
+    "Novo cancelarjogo para encerrar automaticamente a partida em andamento no grupo."
   ],
   "delete": [
-    "DADOS_TOKITO/plugins/jogos/sistema-doulingo.js",
-    "DADOS_TOKITO/plugins/jogos/sistema-anagrama.js",
-    "DADOS_TOKITO/plugins/jogos/sistema-quizanimais.js",
-    "DADOS_TOKITO/plugins/jogos/sistema-jogodavelha2.js",
-    "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js"
+    "DADOS_TOKITO/plugins/jogos/sistema-base.js"
   ],
   "archiveSha256": "",
   "type": "Melhoria",
   "title": "Melhorias nos jogos",
-  "notice": "A versão 10.1.77 já está disponível para atualização.",
+  "notice": "A versão 10.1.78 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/jogos/doulingo.js",
+      "path": "DADOS_TOKITO/plugins/jogos/ignis.js",
       "sha256": "",
       "size": 0
     },
     {
       "path": "DADOS_TOKITO/plugins/jogos/anagrama.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/doulingo.js",
       "sha256": "",
       "size": 0
     },
@@ -50,32 +53,52 @@
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/jogos/revelaranagrama.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/revelarquiz.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
       "path": "DADOS_TOKITO/plugins/jogos/rv.js",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/jogos/infojogos.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/jogos/jogodavelha.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
       "path": "DADOS_TOKITO/plugins/jogos/sistema.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-adivinhe.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-cacapalavras.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-dama.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-forca.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-jogodavelha.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-mines.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-quiz.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
       "sha256": "",
       "size": 0
     },
@@ -2152,10 +2175,115 @@
       ],
       "required": true,
       "publishedAt": "2026-10-08T12:00:00.000Z"
+    },
+    {
+      "version": "10.1.78",
+      "fromVersion": "10.1.77",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Melhorias nos jogos",
+      "notice": "A versão 10.1.78 já está disponível para atualização.",
+      "changelog": [
+        "Melhorias nos jogos do Tokito.",
+        "Os jogos novos agora também podem ser resetados pelo comando rv.",
+        "Novo cancelarjogo para encerrar automaticamente a partida em andamento no grupo."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/ignis.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/anagrama.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/doulingo.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/quizanimais.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/jogodavelha2.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/quizzes.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/rv.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-adivinhe.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-cacapalavras.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-dama.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-forca.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-jogodavelha.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-mines.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/sistema-quiz.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/jogos/sistema-base.js"
+      ],
+      "required": true,
+      "publishedAt": "2026-10-08T13:00:00.000Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.76"
+  "fromVersion": "10.1.77"
 }

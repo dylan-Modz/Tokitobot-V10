@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const base = require('./sistema-base.js')
+const base = require('./ignis.js')
 const adivinhe = require('./sistema-adivinhe.js')
 const quiz = require('./sistema-quiz.js')
 const quizzes = require('./quizzes.js')
