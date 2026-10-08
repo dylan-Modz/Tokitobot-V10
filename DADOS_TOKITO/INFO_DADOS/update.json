@@ -1,33 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.93",
+  "version": "10.1.94",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:04:00.052Z",
+  "publishedAt": "2026-10-08T17:05:29.120Z",
   "changelog": [
-    "[Novidade] feat: expose primary/auxiliary anti-invisible receipt diagnostics via admin command",
-    "A versão 10.1.93 já está disponível para atualização.",
+    "[Melhoria] release: publish Anti-Invisivel receiver bridge and quote safety checks",
+    "A versão 10.1.94 já está disponível para atualização.",
     "Mensagens atualizado",
-    "Antiinvisivel atualizado"
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat: expose primary/auxiliary anti-invisible receipt diagnostics via admin command",
-  "notice": "A versão 10.1.93 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "release: publish Anti-Invisivel receiver bridge and quote safety checks",
+  "notice": "A versão 10.1.94 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "3039873ca246be21dfd8d625ca777fdab3da4f0411ab5419e9563f5941c53a70",
-      "size": 233655
+      "sha256": "2691ccdd360beee6c4f4341cf63d6657f56e81e554a40d29004099c9f0ae1507",
+      "size": 233873
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
-      "sha256": "a20b48d2eb0a2e86aae73e54186573fabf887f39c974d277bd58474be4ab814e",
-      "size": 2131
+      "path": "package.json",
+      "sha256": "2dbca8fcb2be5ccc3d14322f293f12ce1eb1cecab257252baa7eb9bea2efbd26",
+      "size": 1164
     }
   ],
   "releases": [
@@ -2592,6 +2592,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T17:04:00.048Z"
+    },
+    {
+      "version": "10.1.94",
+      "fromVersion": "10.1.93",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "release: publish Anti-Invisivel receiver bridge and quote safety checks",
+      "notice": "A versão 10.1.94 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado",
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "2691ccdd360beee6c4f4341cf63d6657f56e81e554a40d29004099c9f0ae1507",
+          "size": 233873
+        },
+        {
+          "path": "package.json",
+          "sha256": "2dbca8fcb2be5ccc3d14322f293f12ce1eb1cecab257252baa7eb9bea2efbd26",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T17:05:29.119Z"
     }
   ],
   "mode": "incremental",
