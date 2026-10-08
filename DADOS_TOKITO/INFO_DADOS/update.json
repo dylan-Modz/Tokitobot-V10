@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.89",
+  "version": "10.1.90",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T16:30:58.533Z",
+  "publishedAt": "2026-10-08T16:41:29.041Z",
   "changelog": [
-    "[Melhoria] release: align Tokito version with quoted-payment flood protection",
-    "A versão 10.1.89 já está disponível para atualização.",
-    "Package atualizado"
+    "[Correção] fix: catch payment quote flood even when WhatsApp strips citation context; add telemetry",
+    "A versão 10.1.90 já está disponível para atualização.",
+    "Floodpagamento atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "release: align Tokito version with quoted-payment flood protection",
-  "notice": "A versão 10.1.89 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: catch payment quote flood even when WhatsApp strips citation context; add telemetry",
+  "notice": "A versão 10.1.90 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "ac508644899f2b786d522111e8a91da3c56c80d215b08ee6076e8e5c695e4109",
-      "size": 1164
+      "path": "DADOS_TOKITO/sistemas/floodpagamento.js",
+      "sha256": "675601cb62d4ffec5e31ef73b926ae4bbbb9a3fb272ce11e2558ffb1022ecd70",
+      "size": 8810
     }
   ],
   "releases": [
@@ -2490,6 +2490,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T16:30:58.533Z"
+    },
+    {
+      "version": "10.1.90",
+      "fromVersion": "10.1.89",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: catch payment quote flood even when WhatsApp strips citation context; add telemetry",
+      "notice": "A versão 10.1.90 já está disponível para atualização.",
+      "changelog": [
+        "Floodpagamento atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/floodpagamento.js",
+          "sha256": "675601cb62d4ffec5e31ef73b926ae4bbbb9a3fb272ce11e2558ffb1022ecd70",
+          "size": 8810
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T16:41:29.041Z"
     }
   ],
   "mode": "incremental",
