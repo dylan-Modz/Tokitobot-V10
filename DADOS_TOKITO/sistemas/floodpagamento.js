@@ -4,7 +4,7 @@
  * Monitora a conexao principal sem fabricar mensagens ou pagamentos.
  */
 const base = require('./grupos.js')
-const antiPay = require('../plugins/admin/filtro-antipay.js')
+const antiPay = require('../plugins/admin/antipay.js')
 const runtimeSub = require('../sub/runtime.js')
 const mess = require('../mensagens/mensagens.js')
 
