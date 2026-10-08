@@ -1,37 +1,51 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.99",
+  "version": "10.1.100",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:39:59.015Z",
+  "publishedAt": "2026-10-08T17:41:29.945Z",
   "changelog": [
-    "[Novidade] feat: Anti-Invisivel 1 enables monitored moderation with no separate mode",
-    "A versão 10.1.99 já está disponível para atualização.",
-    "Antiinvisivel atualizado",
-    "Filtro Antipay removido",
-    "Floodpagamento removido"
+    "[Correção] fix: preserve user-facing version across incremental and full updates",
+    "A versão 10.1.100 já está disponível para atualização.",
+    "Conexão do bot atualizada",
+    "Update Cli atualizado",
+    "Update atualizado",
+    "Dados atualizado",
+    "Package atualizado"
   ],
-  "delete": [
-    "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
-    "DADOS_TOKITO/sistemas/floodpagamento.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat: Anti-Invisivel 1 enables monitored moderation with no separate mode",
-  "notice": "A versão 10.1.99 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: preserve user-facing version across incremental and full updates",
+  "notice": "A versão 10.1.100 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
-      "sha256": "5a9f90667c5f7f7392f1f0d8df00be9baf330ee3895ece7cd6794ccf9af1dd4e",
-      "size": 1172
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "57af0c5e45b983088c7bf8d7dc46f6f9ac13b950ad1034e9b3cb3c6c0b4c8b59",
+      "size": 39683
     },
     {
-      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-      "sha256": "e6c85c5f1c74a219f60f8dc02f0de696b57e93798067de30faed636d18e5970f",
-      "size": 16993
+      "path": "DADOS_TOKITO/database/lib/update-cli.js",
+      "sha256": "03f6b4ef7250e02e32c75773e8dffe40f3bd635773b22e35fae026a28950e93e",
+      "size": 4088
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/update.js",
+      "sha256": "a18be4620fb06a2c57ebc7ffe417f7eba7c21a772f83552c145096803e9e13bf",
+      "size": 4016
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/dados.js",
+      "sha256": "bb45c94dcee16ccc8373bb0255bcc741a321c9a17eae2ab7bf363e409d59be7e",
+      "size": 33141
+    },
+    {
+      "path": "package.json",
+      "sha256": "aef81103ce7dee686c639dadc64d78edffe7bebce498e6daadab732156fd91ac",
+      "size": 1164
     }
   ],
   "releases": [
@@ -2773,6 +2787,51 @@
       ],
       "required": true,
       "publishedAt": "2026-10-08T17:39:59.015Z"
+    },
+    {
+      "version": "10.1.100",
+      "fromVersion": "10.1.99",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: preserve user-facing version across incremental and full updates",
+      "notice": "A versão 10.1.100 já está disponível para atualização.",
+      "changelog": [
+        "Conexão do bot atualizada",
+        "Update Cli atualizado",
+        "Update atualizado",
+        "Dados atualizado",
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "57af0c5e45b983088c7bf8d7dc46f6f9ac13b950ad1034e9b3cb3c6c0b4c8b59",
+          "size": 39683
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/update-cli.js",
+          "sha256": "03f6b4ef7250e02e32c75773e8dffe40f3bd635773b22e35fae026a28950e93e",
+          "size": 4088
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/update.js",
+          "sha256": "a18be4620fb06a2c57ebc7ffe417f7eba7c21a772f83552c145096803e9e13bf",
+          "size": 4016
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "bb45c94dcee16ccc8373bb0255bcc741a321c9a17eae2ab7bf363e409d59be7e",
+          "size": 33141
+        },
+        {
+          "path": "package.json",
+          "sha256": "aef81103ce7dee686c639dadc64d78edffe7bebce498e6daadab732156fd91ac",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T17:41:29.945Z"
     }
   ],
   "mode": "incremental",
