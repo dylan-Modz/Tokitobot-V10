@@ -1062,6 +1062,7 @@ return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻\`
 > ✅ ׄ ( ᴀᴛɪᴠᴀʀ: ${prefix}${comando} 1 )
 > ❌ ׄ ( ᴅᴇsᴀᴛɪᴠᴀʀ: ${prefix}${comando} 0 )
 > 📌 ׄ ( ᴠᴇʀ sᴛᴀᴛᴜs: ${prefix}${comando} status )
+> 🔎 ׄ ( ᴅɪᴀɢɴᴏ́sᴛɪᴄᴏ: ${prefix}${comando} diagnostico )
 > 🔔 ׄ ( ᴍᴏᴅᴏ ᴀʟᴇʀᴛᴀ: ${prefix}${comando} alerta )
 > 🚫 ׄ ( ᴍᴏᴅᴏ ʀᴇᴍᴏᴠᴇʀ: ${prefix}${comando} remover )
 > 🧊 ׄ ( ᴍᴏɴɪᴛᴏʀᴀ ᴍᴇɴsᴀɢᴇɴs ɪɴᴠɪsɪ́ᴠᴇɪs ᴇ ʀᴀᴊᴀᴅᴀs ᴄᴏᴍ ᴘᴀɢᴀᴍᴇɴᴛᴏ ᴄɪᴛᴀᴅᴏ. )`
@@ -1087,10 +1088,25 @@ return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻\`
 > 🧊 ׄ ( ${ativo ? 'ᴏ ɢʀᴜᴘᴏ ᴇsᴛᴀ́ sᴇɴᴅᴏ ᴍᴏɴɪᴛᴏʀᴀᴅᴏ.' : 'ᴀ ᴘʀᴏᴛᴇᴄ̧ᴀ̃ᴏ ғᴏɪ ᴅᴇsᴀᴛɪᴠᴀᴅᴀ.'} )`
 }
 
+exports.antiInvisivelDiagnostico = (config = {}, dados = {}, detector = {}) => {
+return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻 𝙳𝙸𝙰𝙶𝙽𝙾́𝚂𝚃𝙸𝙲𝙾\`
+
+> 📌 ׄ ( sᴛᴀᴛᴜs: ${config.ativo ? '🟢 ᴀᴛɪᴠᴀᴅᴏ' : '🔴 ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'} )
+> 👁️ ׄ ( ᴅᴇᴛᴇᴄᴛᴏʀ: ${detector.conectado ? '🟢 ᴄᴏɴᴇᴄᴛᴀᴅᴏ' : '🔴 ᴅᴇsᴄᴏɴᴇᴄᴛᴀᴅᴏ'} )
+> 📩 ׄ ( ᴘʀɪɴᴄɪᴘᴀʟ: ${dados.fontes?.principal || 0} )
+> 📩 ׄ ( ᴀᴜxɪʟɪᴀʀ: ${dados.fontes?.auxiliar || 0} )
+> 🔍 ׄ ( sᴜsᴘᴇɪᴛᴀs: ${dados.candidatas || 0} )
+> ⚠️ ׄ ( sᴇᴍ ᴀᴜᴛᴏʀ: ${dados.semAutor || 0} )
+> 📝 ׄ ( ғᴏʀᴀ ᴅᴏ ᴘᴀᴅʀᴀ̃ᴏ: ${dados.foraPadrao || 0} )
+> 🛡️ ׄ ( ᴀʟᴇʀᴛᴀs: ${dados.alertas || 0} )
+> 🧊 ׄ ( ᴄᴏɴᴛᴀᴅᴏʀᴇs ʀᴇɪɴɪᴄɪᴀᴍ ᴄᴏᴍ ᴏ ʙᴏᴛ. )`
+}
+
 exports.antiInvisivelFloodPagamento = (numero, total, tipo = 'pagamento', modo = 'alerta', acao = 'registrado') => {
 const tipos = {
   pagamento: 'ᴘᴀɢᴀᴍᴇɴᴛᴏ ᴄɪᴛᴀᴅᴏ',
-  citacao: 'ᴍᴇɴsᴀɢᴇᴍ ᴄɪᴛᴀᴅᴀ ᴄᴏᴍ ʟɪɴᴋ'
+  citacao: 'ᴍᴇɴsᴀɢᴇᴍ ᴄɪᴛᴀᴅᴀ ᴄᴏᴍ ʟɪɴᴋ',
+  divulgacao: 'ᴍᴇɴsᴀɢᴇᴍ ʀᴇᴘᴇᴛɪᴅᴀ ᴄᴏᴍ ʟɪɴᴋ'
 }
 const acoes = {
   registrado: 'ᴇɴᴠɪᴏs ʀᴇɢɪsᴛʀᴀᴅᴏs. ɴᴇɴʜᴜᴍ ᴜsᴜᴀ́ʀɪᴏ ʀᴇᴍᴏᴠɪᴅᴏ.',
