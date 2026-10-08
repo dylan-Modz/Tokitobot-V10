@@ -1,33 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.95",
+  "version": "10.1.96",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:06:58.986Z",
+  "publishedAt": "2026-10-08T17:08:28.513Z",
   "changelog": [
-    "[Melhoria] style: show last received message structure in anti-invisible diagnostics",
-    "A versão 10.1.95 já está disponível para atualização.",
-    "Mensagens atualizado",
-    "Antiinvisivel atualizado"
+    "[Melhoria] release: Tokito V10.1.96 Anti-Invisivel event attribution and safety diagnostics",
+    "A versão 10.1.96 já está disponível para atualização.",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "style: show last received message structure in anti-invisible diagnostics",
-  "notice": "A versão 10.1.95 já está disponível para atualização.",
+  "title": "release: Tokito V10.1.96 Anti-Invisivel event attribution and safety diagnostics",
+  "notice": "A versão 10.1.96 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "2e7454f5811cab8a484bd6f94b639af20f8f6b27b5bc5c190a2e6ed770be1819",
-      "size": 233969
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-      "sha256": "f603a821750f0ccab2b7d016ce44ce9ef3be8d3e5ab670ff56e89c65e23c5a66",
-      "size": 17064
+      "path": "package.json",
+      "sha256": "142311e88190666d495d0a542942f3b39b18860a5a10ab8df4cb0cd875858fad",
+      "size": 1164
     }
   ],
   "releases": [
@@ -2646,6 +2640,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T17:06:58.986Z"
+    },
+    {
+      "version": "10.1.96",
+      "fromVersion": "10.1.95",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "release: Tokito V10.1.96 Anti-Invisivel event attribution and safety diagnostics",
+      "notice": "A versão 10.1.96 já está disponível para atualização.",
+      "changelog": [
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "142311e88190666d495d0a542942f3b39b18860a5a10ab8df4cb0cd875858fad",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T17:08:28.512Z"
     }
   ],
   "mode": "incremental",
