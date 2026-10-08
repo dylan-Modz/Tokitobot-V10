@@ -1,70 +1,43 @@
 /*
  * Tokito Bot V10 - Anti-Invisivel
- * Author: Dylan Modz
+ * Autor: Dylan Modz
  */
 const dylan = require('../../database/lib/comandos')
-const monitor = require('../../sistemas/antiinvisivel.js')
+const toggle = require('../../sistemas/toggle.js')
 
 dylan.setCommand({
   nome: 'antiinvisivel',
   comandos: ['antiinvisivel'],
   categoria: 'grupo',
   info: {
-    descricao: 'Monitora falhas de descriptografia e rajadas com pagamentos citados.',
-    uso: 'antiinvisivel 1/0/status/diagnostico/alerta/remover',
+    descricao: 'Ativa ou desativa a protecao contra rajadas invisiveis.',
+    uso: 'antiinvisivel 1/0',
     permissao: 'ADM'
   },
   async executar(ctx) {
-    if (!ctx.isGroup)
-      return ctx.reply(ctx.mess.sogrupo())
+    if (!ctx.isGroup) return ctx.reply(ctx.mess.sogrupo())
+    if (!ctx.isGroupAdmins && !ctx.SoDono) return ctx.reply(ctx.mess.soadm())
+    if (!ctx.isBotGroupAdmins) return ctx.reply(ctx.mess.botadm())
 
-    if (!ctx.isGroupAdmins && !ctx.SoDono)
-      return ctx.reply(ctx.mess.soadm())
-
-    const acao = String(ctx.q || '').trim().toLowerCase()
-    const funcoes = ctx.dataGp?.[0]?.funcoes || {}
-    if (!ctx.dataGp?.[0])
-      return ctx.reply('Os dados deste grupo ainda nao estao disponiveis.')
-    ctx.dataGp[0].funcoes = funcoes
-
-    if (acao === 'status') {
-      const config = monitor.status(ctx.from)
-      return ctx.reply(ctx.mess.antiInvisivelStatus(config))
+    const acao = String(ctx.q || '').trim()
+    if (acao === '1' && ctx.dataGp?.[0]) {
+      ctx.dataGp[0].funcoes ||= {}
+      // Uma unica ativacao: modera apenas rajadas repetidas com remetente identificado.
+      ctx.dataGp[0].funcoes.antiinvisivelModo = 'remover'
     }
 
-    if (['diagnostico', 'diag'].includes(acao)) {
-      const detector = require('../../detector.js').status()
-      return ctx.reply(ctx.mess.antiInvisivelDiagnostico(
-        monitor.status(ctx.from),
-        monitor.diagnostico(ctx.from),
-        detector
-      ))
-    }
-
-    if (!['1', '0', 'alerta', 'remover'].includes(acao))
-      return ctx.reply(ctx.mess.antiInvisivelUso(ctx.prefix, ctx.command))
-
-    if (acao !== '0' && !ctx.isBotGroupAdmins)
-      return ctx.reply(ctx.mess.botadm())
-
-    if (acao === '1') {
-      funcoes.antiinvisivel = true
-      if (!['alerta', 'remover'].includes(funcoes.antiinvisivelModo))
-        funcoes.antiinvisivelModo = 'alerta'
-    }
-    else if (acao === '0') {
-      funcoes.antiinvisivel = false
-    }
-    else {
-      funcoes.antiinvisivel = true
-      funcoes.antiinvisivelModo = acao
-    }
-
-    ctx.setGp(ctx.dataGp)
-    const ativo = funcoes.antiinvisivel === true
-    await ctx.reagir(ctx.from, ativo ? '✅' : '❌').catch(() => {})
-    return ctx.reply(
-      ctx.mess.antiInvisivelAlterado(ativo, funcoes.antiinvisivelModo || 'alerta')
-    )
+    return toggle({
+      grupo: ctx.from,
+      dataGp: ctx.dataGp,
+      setGp: ctx.setGp,
+      campo: 'antiinvisivel',
+      q: acao,
+      prefix: ctx.prefix,
+      command: ctx.command,
+      reply: ctx.reply,
+      emoji: '🛡️',
+      titulo: '𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻',
+      descricao: 'ᴍᴏɴɪᴛᴏʀᴀ ᴇ ʙʟᴏǫᴜᴇɪᴀ ʀᴀᴊᴀᴅᴀs ʀᴇᴘᴇᴛɪᴅᴀs ᴄᴏᴍ ᴀᴜᴛᴏʀ ɪᴅᴇɴᴛɪғɪᴄᴀᴅᴏ.'
+    })
   }
 })
