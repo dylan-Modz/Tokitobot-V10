@@ -1,29 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.83",
+  "version": "10.1.84",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T15:36:21.637Z",
+  "publishedAt": "2026-10-08T16:00:58.828Z",
   "changelog": [
-    "Anti-Invisível integrado à biblioteca e à conexão principal.",
-    "Comando !antiinvisivel 1/0/status/alerta/remover adicionado ao menu ADM.",
-    "Alertas de rajadas suspeitas e remoção opcional em situações excepcionais.",
-    "O detector Anti-Pay continua conectado e funcionando separadamente.",
-    "Verificação automática da versão de Baileys ao iniciar."
+    "[Melhoria] style: centralize Anti-Invisivel texts in mensagens.js",
+    "A versão 10.1.84 já está disponível para atualização.",
+    "Mensagens atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Segurança",
-  "title": "Novo Anti-Invisível",
-  "notice": "A versão 10.1.83 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "style: centralize Anti-Invisivel texts in mensagens.js",
+  "notice": "A versão 10.1.84 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "6c5782bc06f313672da3228138972e03bb9dd8fc691d9c3802f5ce321dd58103",
-      "size": 1164
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "aff5cc46d98ed15c81f3e2e41befe993d98218246adfdf047d6b592e786b6a3f",
+      "size": 230956
     }
   ],
   "releases": [
@@ -2331,6 +2329,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T15:36:21.637Z"
+    },
+    {
+      "version": "10.1.84",
+      "fromVersion": "10.1.83",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "style: centralize Anti-Invisivel texts in mensagens.js",
+      "notice": "A versão 10.1.84 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "aff5cc46d98ed15c81f3e2e41befe993d98218246adfdf047d6b592e786b6a3f",
+          "size": 230956
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T16:00:58.828Z"
     }
   ],
   "mode": "incremental",
