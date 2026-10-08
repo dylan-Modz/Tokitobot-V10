@@ -20,12 +20,15 @@ const HISTORICO_MS = 120000
 const historico = new Map()
 const vistos = new Map()
 const avisos = new Map()
+const moderacoes = new Map()
 
 const limpar = agora => {
   for (const [chave, tempo] of vistos)
     if (agora - tempo > HISTORICO_MS) vistos.delete(chave)
   for (const [chave, tempo] of avisos)
     if (agora - tempo > COOLDOWN_MS) avisos.delete(chave)
+  for (const [chave, tempo] of moderacoes)
+    if (agora - tempo > COOLDOWN_MS) moderacoes.delete(chave)
   for (const [chave, eventos] of historico) {
     const recentes = eventos.filter(e => agora - e.tempo <= JANELA_MS)
     if (recentes.length) historico.set(chave, recentes)
@@ -71,8 +74,15 @@ const registrar = async (tokito, dados = {}) => {
   const agora = Date.now()
   limpar(agora)
   const chaveId = `${grupo}:${id}`
-  if (vistos.has(chaveId))
+  if (vistos.has(chaveId)) {
+    if (dados.decryptFail === 'hide') {
+      for (const eventos of historico.values()) {
+        const anterior = eventos.find(e => e.id === id)
+        if (anterior) anterior.forte = true
+      }
+    }
     return { registrado: false, motivo: 'duplicado' }
+  }
   vistos.set(chaveId, agora)
 
   const chaveAutor = `${grupo}|${autor}`
@@ -83,7 +93,7 @@ const registrar = async (tokito, dados = {}) => {
   const total = recentes.length
   const fortes = recentes.filter(e => e.forte).length
   const modo = config.antiinvisivelModo === 'remover' ? 'remover' : 'alerta'
-  const podeRemover = modo === 'remover' && total >= LIMITE_REMOCAO && fortes >= MIN_SINAIS_FORTES
+  const podeRemover = modo === 'remover' && total >= LIMITE_REMOCAO && fortes >= MIN_SINAIS_FORTES && !moderacoes.has(chaveAutor)
   const podeAlertar = total >= LIMITE_ALERTA && !avisos.has(chaveAutor)
   if (!podeAlertar && !podeRemover)
     return { registrado: true, total, fortes }
@@ -119,11 +129,13 @@ const registrar = async (tokito, dados = {}) => {
   let erroRemocao = ''
 
   if (podeRemover && alvo && botAdmin && !protegido) {
+    moderacoes.set(chaveAutor, agora)
     try {
       if (['admin', 'superadmin'].includes(membro.admin))
         await tokito.groupParticipantsUpdate(grupo, [alvo], 'demote')
       await tokito.groupParticipantsUpdate(grupo, [alvo], 'remove')
       removido = true
+      historico.delete(chaveAutor)
     } catch (erro) {
       erroRemocao = String(erro?.message || erro || 'erro de permissao').slice(0, 200)
     }
