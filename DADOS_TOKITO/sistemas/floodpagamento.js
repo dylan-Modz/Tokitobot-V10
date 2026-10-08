@@ -1,7 +1,7 @@
 /*
- * Tokito Bot V10 - Protecao contra rajadas com pagamento citado.
+ * Tokito Bot V10 - Protecao contra rajadas de mensagens.
  * Autor: Dylan Modz
- * Nenhuma mensagem de pagamento artificial e criada.
+ * Monitora a conexao principal sem fabricar mensagens ou pagamentos.
  */
 const base = require('./grupos.js')
 const antiPay = require('../plugins/admin/filtro-antipay.js')
@@ -9,17 +9,17 @@ const runtimeSub = require('../sub/runtime.js')
 const mess = require('../mensagens/mensagens.js')
 
 const JANELA_MS = 15000
+const COOLDOWN_MS = 60000
 const ALERTA_PAGAMENTO = 3
 const REMOCAO_PAGAMENTO = 6
 const ALERTA_CITACAO = 4
-const REMOCAO_CITACAO = 7
-const COOLDOWN_MS = 60000
+const REMOCAO_CITACAO = 8
 
 const vistos = new Map()
 const rajadas = new Map()
 const avisos = new Map()
 const moderacoes = new Map()
-
+const diagnosticos = new Map()
 const normal = value => base.normalizar(value)
 const ids = membro => [
   membro?.id, membro?.jid, membro?.lid, membro?.phoneNumber,
@@ -29,6 +29,26 @@ const igualdade = (a, b) => {
   const x = normal(a), y = normal(b)
   return !!(x && y && x === y)
 }
+
+const atualizarDiagnostico = (grupo, tipo, razao) => {
+  const anterior = diagnosticos.get(grupo) || {
+    observadas: 0, candidatas: 0, alertas: 0, removidas: 0,
+    semAutor: 0, desativadas: 0, foraPadrao: 0, duplicadas: 0,
+    ultimaRazao: '-', ultimaRecepcao: 0
+  }
+  anterior.ultimaRecepcao = Date.now()
+  anterior.ultimaRazao = razao || tipo
+  if (tipo && Object.prototype.hasOwnProperty.call(anterior, tipo))
+    anterior[tipo]++
+  diagnosticos.set(grupo, anterior)
+}
+
+const diagnostico = grupo => ({
+  observadas: 0, candidatas: 0, alertas: 0, removidas: 0,
+  semAutor: 0, desativadas: 0, foraPadrao: 0, duplicadas: 0,
+  ultimaRazao: 'nenhuma', ultimaRecepcao: 0,
+  ...(diagnosticos.get(String(grupo || '')) || {})
+})
 
 const limpar = agora => {
   for (const [id, tempo] of vistos)
@@ -54,27 +74,35 @@ const contextoDaMensagem = mensagem => {
     msg?.contextInfo || null
 }
 
+const assinaturaTexto = texto => String(texto || '')
+  .normalize('NFKC')
+  .replace(/[\u200b-\u200f\u2060\ufeff]/g, '')
+  .replace(/\s+/g, ' ')
+  .trim()
+  .toLowerCase()
+  .slice(0, 450)
+
 const classificar = mensagem => {
   if (!mensagem || typeof mensagem !== 'object') return null
   const contexto = contextoDaMensagem(mensagem)
   const citada = contexto?.quotedMessage
-  const possuiCitacao = Boolean(citada || contexto?.stanzaId)
-  if (!possuiCitacao) return null
+  const temCitacao = Boolean(citada || contexto?.stanzaId)
+  const assinatura = assinaturaTexto(base.texto(mensagem))
+  if (!assinatura) return null
 
-  const texto = base.texto(mensagem).replace(/\s+/g, ' ').trim()
-  if (!texto) return null
-
-  // So considera pagamento quando a estrutura citada realmente o identifica.
   const pagamentoCitado = Boolean(citada && antiPay.detectar(citada))
-  const citacaoComLink = !pagamentoCitado &&
-    texto.length >= 45 &&
-    /(?:https?:\/\/|\bt\.me\/|\bwhatsapp\.com\/)/i.test(texto)
+  const possuiLink = /(?:https?:\/\/|\bwww\.|\bt\.me\/|\bwhatsapp\.com\/)/i.test(assinatura)
 
-  if (!pagamentoCitado && !citacaoComLink) return null
+  // A prévia de um pagamento citado pode não ser incluída no evento recebido.
+  // Nesses casos, uma rajada promocional com link continua sendo analisada.
+  const divulgacao = possuiLink && assinatura.length >= 45
+  if (!pagamentoCitado && !divulgacao) return null
 
+  const tipo = pagamentoCitado ? 'pagamento' : temCitacao ? 'citacao' : 'divulgacao'
   return {
-    tipo: pagamentoCitado ? 'pagamento' : 'citacao',
-    assinatura: texto.toLowerCase().slice(0, 450),
+    tipo,
+    familia: divulgacao ? 'promocao' : 'pagamento',
+    assinatura,
     alerta: pagamentoCitado ? ALERTA_PAGAMENTO : ALERTA_CITACAO,
     remocao: pagamentoCitado ? REMOCAO_PAGAMENTO : REMOCAO_CITACAO
   }
@@ -83,27 +111,44 @@ const classificar = mensagem => {
 const verificar = async (tokito, info) => {
   const chave = info?.key
   const grupo = String(chave?.remoteJid || '')
+  if (!tokito || !grupo.endsWith('@g.us') || chave?.fromMe)
+    return { verificado: false, motivo: 'fora-do-grupo' }
+
+  atualizarDiagnostico(grupo, 'observadas', 'mensagem-recebida')
   const msgId = String(chave?.id || '')
-  const autorBruto = chave?.participantAlt || chave?.senderAlt || chave?.participant || info?.participant || ''
-  const autor = normal(autorBruto)
-  if (!tokito || !grupo.endsWith('@g.us') || !msgId || chave?.fromMe || !autor)
-    return { verificado: false, motivo: 'dados-ausentes' }
+  const autor = normal(chave?.participantAlt || chave?.senderAlt ||
+    chave?.participant || info?.participant || info?.participantAlt || '')
+
+  if (!msgId || !autor) {
+    atualizarDiagnostico(grupo, 'semAutor', 'id-ou-autor-ausente')
+    return { verificado: false, motivo: 'id-ou-autor-ausente' }
+  }
 
   const config = base.config(grupo)
-  if (config.antiinvisivel !== true && config.antipay !== true)
+  if (config.antiinvisivel !== true && config.antipay !== true) {
+    atualizarDiagnostico(grupo, 'desativadas', 'protecao-desativada')
     return { verificado: false, motivo: 'desativado' }
+  }
 
   const tipo = classificar(info.message)
-  if (!tipo) return { verificado: false, motivo: 'fora-do-padrao' }
+  if (!tipo || (tipo.tipo !== 'pagamento' && config.antiinvisivel !== true)) {
+    atualizarDiagnostico(grupo, 'foraPadrao', 'sem-padrao-de-rajada')
+    return { verificado: false, motivo: 'fora-do-padrao' }
+  }
 
+  atualizarDiagnostico(grupo, 'candidatas', tipo.tipo)
   const agora = Date.now()
   limpar(agora)
   const unica = `${grupo}|${msgId}`
-  if (vistos.has(unica)) return { verificado: false, motivo: 'duplicado' }
+  if (vistos.has(unica)) {
+    atualizarDiagnostico(grupo, 'duplicadas', 'id-repetido')
+    return { verificado: false, motivo: 'duplicado' }
+  }
   vistos.set(unica, agora)
 
   const chaveAutor = `${grupo}|${autor}`
-  const chaveRajada = `${chaveAutor}|${tipo.tipo}|${tipo.assinatura}`
+  // Agrupa pelo texto mesmo que a previsualizacao da citacao desapareca.
+  const chaveRajada = `${chaveAutor}|${tipo.familia}|${tipo.assinatura}`
   const ultimos = (rajadas.get(chaveRajada) || [])
     .filter(e => agora - e.tempo <= JANELA_MS)
   ultimos.push({ tempo: agora, id: msgId })
@@ -112,8 +157,12 @@ const verificar = async (tokito, info) => {
   const total = ultimos.length
   const modo = config.antiinvisivel === true &&
     config.antiinvisivelModo === 'remover' ? 'remover' : 'alerta'
-  const podeAlertar = total >= tipo.alerta && !avisos.has(chaveAutor)
-  const podeRemover = modo === 'remover' && total >= tipo.remocao &&
+  const limiteAlerta = tipo.familia === 'pagamento'
+    ? ALERTA_PAGAMENTO : ALERTA_CITACAO
+  const limiteRemocao = tipo.familia === 'pagamento'
+    ? REMOCAO_PAGAMENTO : REMOCAO_CITACAO
+  const podeAlertar = total >= limiteAlerta && !avisos.has(chaveAutor)
+  const podeRemover = modo === 'remover' && total >= limiteRemocao &&
     !moderacoes.has(chaveAutor)
   if (!podeAlertar && !podeRemover)
     return { verificado: true, total, tipo: tipo.tipo }
@@ -121,15 +170,15 @@ const verificar = async (tokito, info) => {
   let removido = false
   let acao = 'registrado'
   let alvo = autor
-
   if (podeRemover) {
-    // Trava a moderacao antes de chamadas externas para evitar expulsao duplicada.
     moderacoes.set(chaveAutor, agora)
     try {
       const meta = await tokito.groupMetadata(grupo)
       const participantes = meta?.participants || []
-      const autorIds = [chave?.participantAlt, chave?.senderAlt, chave?.participant, info?.participant]
-        .map(normal).filter(Boolean)
+      const autorIds = [
+        chave?.participantAlt, chave?.senderAlt, chave?.participant,
+        info?.participant, info?.participantAlt
+      ].map(normal).filter(Boolean)
       const usuario = participantes.find(p => ids(p).some(jid => autorIds.includes(jid)))
       const botIds = [tokito.user?.id, tokito.user?.lid].map(normal).filter(Boolean)
       const bot = participantes.find(p => ids(p).some(jid => botIds.includes(jid)))
@@ -139,10 +188,11 @@ const verificar = async (tokito, info) => {
       const protegido = !usuario || usuario.admin === 'superadmin' ||
         ids(usuario).some(jid => igualdade(jid, dono) || botIds.includes(jid) ||
           donosBot.some(item => igualdade(item, jid)))
-      alvo = ids(usuario).find(jid => jid.endsWith('@s.whatsapp.net')) ||
-        ids(usuario).find(jid => jid.endsWith('@lid')) || autor
+      alvo = usuario
+        ? ids(usuario).find(jid => jid.endsWith('@s.whatsapp.net')) ||
+          ids(usuario).find(jid => jid.endsWith('@lid')) || autor
+        : autor
       const botAdmin = !!bot && ['admin', 'superadmin'].includes(bot.admin)
-
       if (!botAdmin) acao = 'semPermissao'
       else if (protegido) acao = 'protegido'
       else {
@@ -152,23 +202,30 @@ const verificar = async (tokito, info) => {
         removido = true
         acao = 'removido'
         rajadas.delete(chaveRajada)
+        atualizarDiagnostico(grupo, 'removidas', 'removido')
       }
     } catch (erro) {
       acao = 'falha'
-      console.warn('[ANTI-INVISIVEL FLOOD] Moderacao:', erro?.message || erro)
+      console.warn('[ANTI-INVISIVEL] Falha na moderacao:', erro?.message || erro)
     }
   }
 
   if (podeAlertar || removido || acao !== 'registrado') {
     avisos.set(chaveAutor, agora)
+    atualizarDiagnostico(grupo, 'alertas', 'alerta-enviado')
     const numero = base.numero(alvo || autor) || 'desconhecido'
     await tokito.sendMessage(grupo, {
       text: mess.antiInvisivelFloodPagamento(numero, total, tipo.tipo, modo, acao),
       mentions: alvo ? [alvo] : []
-    }).catch(() => {})
+    }).catch(error => {
+      console.warn('[ANTI-INVISIVEL] Aviso nao enviado:', error?.message || error)
+    })
   }
 
   return { verificado: true, total, tipo: tipo.tipo, modo, removido, acao }
 }
 
-module.exports = { verificar, classificar, JANELA_MS, ALERTA_PAGAMENTO, REMOCAO_PAGAMENTO }
+module.exports = {
+  verificar, classificar, diagnostico, JANELA_MS,
+  ALERTA_PAGAMENTO, REMOCAO_PAGAMENTO, ALERTA_CITACAO, REMOCAO_CITACAO
+}
