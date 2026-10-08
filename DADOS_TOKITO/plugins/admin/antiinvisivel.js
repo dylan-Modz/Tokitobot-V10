@@ -10,7 +10,7 @@ dylan.setCommand({
   comandos: ['antiinvisivel'],
   categoria: 'grupo',
   info: {
-    descricao: 'Monitora rajadas de mensagens que falharam na descriptografia.',
+    descricao: 'Monitora falhas de descriptografia e rajadas com pagamentos citados.',
     uso: 'antiinvisivel 1/0/status/alerta/remover',
     permissao: 'ADM'
   },
