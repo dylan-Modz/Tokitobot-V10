@@ -64,10 +64,12 @@ async function main() {
     }
 
     const versaoAtual =
+      check.local?.publicVersion ||
       check.local?.version ||
       'desconhecida'
 
     const novaVersao =
+      check.remote?.publicVersion ||
       check.remote?.version ||
       versaoAtual
 
@@ -127,6 +129,7 @@ async function main() {
     if (!resultado?.updated) {
       sucesso(
         `Nenhuma atualização pendente. Versão atual: ${
+          resultado?.remote?.publicVersion ||
           resultado?.version ||
           versaoAtual
         }.`
@@ -141,7 +144,8 @@ async function main() {
       versaoAtual
 
     const nova =
-      resultado.version ||
+      resultado.remote?.publicVersion ||
+        resultado.version ||
       novaVersao
 
     const arquivos =
