@@ -119,13 +119,13 @@ const motivo = String(error?.message || '').trim()
 console.log('[ UPDATE • TOKITO ]', motivo || error)
 // Mostra apenas falhas técnicas conhecidas, sem expor credenciais ou URLs privadas.
 const seguro = [
-  /^A verificação de integridade falhou em [a-zA-Z0-9_./-]+\\.$/,
-  /^Não foi possível baixar [a-zA-Z0-9_./-]+\\.$/,
+  /^A verificação de integridade falhou em [a-zA-Z0-9_./-]+\.$/,
+  /^Não foi possível baixar [a-zA-Z0-9_./-]+\.$/,
   /^Arquivo protegido ou inválido na atualização: [a-zA-Z0-9_./-]+$/,
-  /^A atualização publicada não possui arquivos para instalar\\.$/
+  /^A atualização publicada não possui arquivos para instalar\.$/
 ].some(regra => regra.test(motivo))
 return ctx.reply(ctx.mess.updateError() +
-  (seguro ? '\\n\\n> 🔎 ׄ ( ' + motivo + ' )' : ''))
+  (seguro ? '\n\n> 🔎 ׄ ( ' + motivo + ' )' : ''))
 }
 }
 
