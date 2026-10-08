@@ -1,56 +1,37 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.98",
+  "version": "10.1.99",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:34:00.470Z",
+  "publishedAt": "2026-10-08T17:39:59.015Z",
   "changelog": [
-    "[Melhoria] style: remove unused Anti-Invisivel mode/status diagnostic menus",
-    "A versão 10.1.98 já está disponível para atualização.",
-    "Detector atualizado",
-    "Mensagens atualizado",
+    "[Novidade] feat: Anti-Invisivel 1 enables monitored moderation with no separate mode",
+    "A versão 10.1.99 já está disponível para atualização.",
     "Antiinvisivel atualizado",
-    "Floodpagamento atualizado",
-    "Funcoes atualizado"
+    "Filtro Antipay removido",
+    "Floodpagamento removido"
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
+    "DADOS_TOKITO/sistemas/floodpagamento.js"
+  ],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "style: remove unused Anti-Invisivel mode/status diagnostic menus",
-  "notice": "A versão 10.1.98 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat: Anti-Invisivel 1 enables monitored moderation with no separate mode",
+  "notice": "A versão 10.1.99 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/detector.js",
-      "sha256": "ce407e801de1ef23f4cc857a9cb30e460dee1e7fe4ac0e2e92e0b168588c9b61",
-      "size": 6222
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "3cda10f7c78b680f3ea3d25f1da138cf86ed3d61070e10e9b887c4d7627e6a24",
-      "size": 230542
-    },
-    {
       "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
-      "sha256": "d522e91b0854ad8d5b6fd960c31cf82a598bfdfea3ec3c2b6524c8c9efa0104f",
-      "size": 1404
+      "sha256": "5a9f90667c5f7f7392f1f0d8df00be9baf330ee3895ece7cd6794ccf9af1dd4e",
+      "size": 1172
     },
     {
       "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-      "sha256": "236964b15de4c6f0ee5e759790ed314efa6bd737534bff533f1aa553a18dd45c",
-      "size": 17057
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/floodpagamento.js",
-      "sha256": "e7332cdc3e8becbd00b329d16812b702868a1150df196befc9b7e4924b154fb9",
-      "size": 8803
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/funcoes.js",
-      "sha256": "3d9fb3b9ae1811452a8f12d178d345a44da3a00dfec04da6c3f163708960f416",
-      "size": 5947
+      "sha256": "e6c85c5f1c74a219f60f8dc02f0de696b57e93798067de30faed636d18e5970f",
+      "size": 16993
     }
   ],
   "releases": [
@@ -2761,6 +2742,37 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T17:34:00.470Z"
+    },
+    {
+      "version": "10.1.99",
+      "fromVersion": "10.1.98",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: Anti-Invisivel 1 enables monitored moderation with no separate mode",
+      "notice": "A versão 10.1.99 já está disponível para atualização.",
+      "changelog": [
+        "Antiinvisivel atualizado",
+        "Filtro Antipay removido",
+        "Floodpagamento removido"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+          "sha256": "5a9f90667c5f7f7392f1f0d8df00be9baf330ee3895ece7cd6794ccf9af1dd4e",
+          "size": 1172
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+          "sha256": "e6c85c5f1c74a219f60f8dc02f0de696b57e93798067de30faed636d18e5970f",
+          "size": 16993
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
+        "DADOS_TOKITO/sistemas/floodpagamento.js"
+      ],
+      "required": true,
+      "publishedAt": "2026-10-08T17:39:59.015Z"
     }
   ],
   "mode": "incremental",
