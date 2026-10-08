@@ -127,7 +127,7 @@ const config = () => readJson(CONFIG_FILE, {})
 // O numero publico acompanha as futuras atualizacoes a partir da versao
 // restaurada, sem perder a sequencia interna usada por instalacoes antigas.
 function versaoPublica(info = {}) {
-  const publica = String(info.publicVersion || '').trim()
+  const publica = String(info.publicVersionBase || info.publicVersion || '').trim()
   const baseInterna = String(info.protocolBaseVersion || '').trim()
   const interna = String(info.version || '').trim()
   if (publica && baseInterna) {
