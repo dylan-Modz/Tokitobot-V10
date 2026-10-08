@@ -1,33 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.94",
+  "version": "10.1.95",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-08T17:05:29.120Z",
+  "publishedAt": "2026-10-08T17:06:58.986Z",
   "changelog": [
-    "[Melhoria] release: publish Anti-Invisivel receiver bridge and quote safety checks",
-    "A versão 10.1.94 já está disponível para atualização.",
+    "[Melhoria] style: show last received message structure in anti-invisible diagnostics",
+    "A versão 10.1.95 já está disponível para atualização.",
     "Mensagens atualizado",
-    "Package atualizado"
+    "Antiinvisivel atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "release: publish Anti-Invisivel receiver bridge and quote safety checks",
-  "notice": "A versão 10.1.94 já está disponível para atualização.",
+  "title": "style: show last received message structure in anti-invisible diagnostics",
+  "notice": "A versão 10.1.95 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "2691ccdd360beee6c4f4341cf63d6657f56e81e554a40d29004099c9f0ae1507",
-      "size": 233873
+      "sha256": "2e7454f5811cab8a484bd6f94b639af20f8f6b27b5bc5c190a2e6ed770be1819",
+      "size": 233969
     },
     {
-      "path": "package.json",
-      "sha256": "2dbca8fcb2be5ccc3d14322f293f12ce1eb1cecab257252baa7eb9bea2efbd26",
-      "size": 1164
+      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+      "sha256": "f603a821750f0ccab2b7d016ce44ce9ef3be8d3e5ab670ff56e89c65e23c5a66",
+      "size": 17064
     }
   ],
   "releases": [
@@ -2619,6 +2619,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-08T17:05:29.119Z"
+    },
+    {
+      "version": "10.1.95",
+      "fromVersion": "10.1.94",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "style: show last received message structure in anti-invisible diagnostics",
+      "notice": "A versão 10.1.95 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado",
+        "Antiinvisivel atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "2e7454f5811cab8a484bd6f94b639af20f8f6b27b5bc5c190a2e6ed770be1819",
+          "size": 233969
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+          "sha256": "f603a821750f0ccab2b7d016ce44ce9ef3be8d3e5ab670ff56e89c65e23c5a66",
+          "size": 17064
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-08T17:06:58.986Z"
     }
   ],
   "mode": "incremental",
