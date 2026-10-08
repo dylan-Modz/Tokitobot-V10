@@ -124,12 +124,32 @@ return saida
 
 const sha256 = value => crypto.createHash('sha256').update(value).digest('hex')
 const config = () => readJson(CONFIG_FILE, {})
-const localInfo = () => readJson(UPDATE_FILE, {
-version: '10.0.0',
-channel: 'stable',
-repository: 'dylan-Modz/Tokitobot-V10',
-ref: 'main'
-})
+// O numero publico acompanha as futuras atualizacoes a partir da versao
+// restaurada, sem perder a sequencia interna usada por instalacoes antigas.
+function versaoPublica(info = {}) {
+  const publica = String(info.publicVersion || '').trim()
+  const baseInterna = String(info.protocolBaseVersion || '').trim()
+  const interna = String(info.version || '').trim()
+  if (publica && baseInterna) {
+    const actual = versionParts(interna)
+    const initial = versionParts(baseInterna)
+    const shown = versionParts(publica)
+    if (actual[0] === initial[0] && actual[1] === initial[1] &&
+        actual[2] >= initial[2]) {
+      return [shown[0], shown[1], shown[2] + actual[2] - initial[2]].join('.')
+    }
+  }
+  return publica || interna || '10.0.0'
+}
+const localInfo = () => {
+  const info = readJson(UPDATE_FILE, {
+    version: '10.0.0',
+    channel: 'stable',
+    repository: 'dylan-Modz/Tokitobot-V10',
+    ref: 'main'
+  })
+  return { ...info, publicVersion: versaoPublica(info) }
+}
 const apiBase = () => String(config().API_URL || 'https://tokito-apis.com.br').replace(/\/+$/, '')
 const apiToken = () => String(config().API_KEY_TOKITO || '').trim()
 const tokenHash = () => sha256(apiToken())
@@ -613,6 +633,7 @@ String(local.repository)
 throw new Error('O update.json remoto aponta para outro repositório.')
 }
 
+remote = { ...remote, publicVersion: versaoPublica(remote) }
 const pending = pendingOperations(remote, local.version)
 const modo = modoUpdate(remote)
 
