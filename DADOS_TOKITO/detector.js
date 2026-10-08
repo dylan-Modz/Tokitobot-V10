@@ -30,7 +30,7 @@
 
 const { 'default': makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore } = require('baileys')
 const { fs, path, pino, NodeCache, Boom, colors } = require('./database/lib/exports.js')
-const antipay = require('./plugins/admin/filtro-antipay.js')
+const antipay = require('./plugins/admin/antipay.js')
 const antiInvisivel = require('./sistemas/antiinvisivel.js')
 
 const pasta = path.join(__dirname, 'database', 'detector')
