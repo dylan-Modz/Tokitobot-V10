@@ -1098,6 +1098,7 @@ return `- 🛡️ \`𝙰𝙽𝚃𝙸-𝙸𝙽𝚅𝙸𝚂𝙸́𝚅𝙴𝙻 𝙳
 > 📩 ׄ ( ᴘʀɪɴᴄɪᴘᴀʟ: ${dados.fontes?.principal || 0} )
 > 📩 ׄ ( ᴀᴜxɪʟɪᴀʀ: ${dados.fontes?.auxiliar || 0} )
 > 🔍 ׄ ( sᴜsᴘᴇɪᴛᴀs: ${dados.candidatas || 0} )
+> 📦 ׄ ( ᴜ́ʟᴛɪᴍᴀ ᴇsᴛʀᴜᴛᴜʀᴀ: ${dados.ultimaEstrutura || 'nenhuma'} )
 > ⚠️ ׄ ( sᴇᴍ ᴀᴜᴛᴏʀ: ${dados.semAutor || 0} )
 > 📝 ׄ ( ғᴏʀᴀ ᴅᴏ ᴘᴀᴅʀᴀ̃ᴏ: ${dados.foraPadrao || 0} )
 > 🛡️ ׄ ( ᴀʟᴇʀᴛᴀs: ${dados.alertas || 0} )
