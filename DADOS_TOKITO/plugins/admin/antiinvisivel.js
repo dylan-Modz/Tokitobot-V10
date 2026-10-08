@@ -20,12 +20,6 @@ dylan.setCommand({
     if (!ctx.isBotGroupAdmins) return ctx.reply(ctx.mess.botadm())
 
     const acao = String(ctx.q || '').trim()
-    if (acao === '1' && ctx.dataGp?.[0]) {
-      ctx.dataGp[0].funcoes ||= {}
-      // Uma unica ativacao: modera apenas rajadas repetidas com remetente identificado.
-      ctx.dataGp[0].funcoes.antiinvisivelModo = 'remover'
-    }
-
     return toggle({
       grupo: ctx.from,
       dataGp: ctx.dataGp,
