@@ -124,22 +124,12 @@ return saida
 
 const sha256 = value => crypto.createHash('sha256').update(value).digest('hex')
 const config = () => readJson(CONFIG_FILE, {})
-// O numero publico acompanha as futuras atualizacoes a partir da versao
-// restaurada, sem perder a sequencia interna usada por instalacoes antigas.
 function versaoPublica(info = {}) {
-  const publica = String(info.publicVersionBase || info.publicVersion || '').trim()
-  const baseInterna = String(info.protocolBaseVersion || '').trim()
-  const interna = String(info.version || '').trim()
-  if (publica && baseInterna) {
-    const actual = versionParts(interna)
-    const initial = versionParts(baseInterna)
-    const shown = versionParts(publica)
-    if (actual[0] === initial[0] && actual[1] === initial[1] &&
-        actual[2] >= initial[2]) {
-      return [shown[0], shown[1], shown[2] + actual[2] - initial[2]].join('.')
-    }
-  }
-  return publica || interna || '10.0.0'
+  return String(
+    info.publicVersion ||
+    info.version ||
+    '10.0.0'
+  ).trim()
 }
 const localInfo = () => {
   const info = readJson(UPDATE_FILE, {

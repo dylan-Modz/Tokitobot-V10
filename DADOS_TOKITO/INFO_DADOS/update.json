@@ -1,33 +1,174 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.102",
+  "version": "10.1.78",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
   "publishedAt": "2026-10-08T18:06:17.106Z",
   "changelog": [
-    "Corrigida a verificação SHA-256 do atualizador, evitando falha na instalação de dados.js.",
-    "Atualização agora informa qual arquivo falhou, caso haja erro de integridade.",
-    "Anti-Invisível permanece com os comandos 1/0 e Anti-Pay com um único módulo.",
-    "Todas as funções e dados pessoais existentes serão preservados; versão exibida 10.1.78."
+    "[Melhoria] Tokito Bot V10.1.78",
+    "A versão 10.1.78 está disponível com as melhorias e correções mais recentes.",
+    "Melhorias e ajustes nos jogos do Tokito.",
+    "Atualizações de segurança e administração integradas à versão 10.1.78.",
+    "Atualizador corrigido para preservar os arquivos e dados existentes.",
+    "Numeração de versões normalizada: após 10.1.99, a próxima versão será 10.2.0."
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/jogos/sistema-base.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
+    "DADOS_TOKITO/sistemas/floodpagamento.js"
+  ],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Tokito Bot V10.1.78 — Atualizador corrigido",
-  "notice": "Correção de atualização disponível para Tokito V10.1.78.",
+  "type": "Melhoria",
+  "title": "Tokito Bot V10.1.78",
+  "notice": "A versão 10.1.78 está disponível com as melhorias e correções mais recentes.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/plugins/jogos/ignis.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/anagrama.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/doulingo.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/quizanimais.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/jogodavelha2.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/quizzes.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/rv.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-adivinhe.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-cacapalavras.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-dama.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-forca.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-jogodavelha.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-mines.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/sistema-quiz.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "package.json",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/deps.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/detector.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/antipay.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/funcoes.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/update-cli.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
       "path": "DADOS_TOKITO/plugins/dono/update.js",
-      "sha256": "13269704de2462500d2397bd69218560e96105287e73a4e6d6a50e64bdef2ba6",
-      "size": 4515
+      "sha256": "",
+      "size": 0
     },
     {
       "path": "DADOS_TOKITO/sistemas/dados.js",
-      "sha256": "f50c011b42c06366f4cb8c648c2ee083059f65b152f583bfec661a8529b47d1b",
-      "size": 34049
+      "sha256": "",
+      "size": 0
     }
   ],
   "releases": [
@@ -2103,12 +2244,13 @@
       "fromVersion": "10.1.77",
       "channel": "stable",
       "type": "Melhoria",
-      "title": "Melhorias nos jogos",
-      "notice": "A versão 10.1.78 já está disponível para atualização.",
+      "title": "Tokito Bot V10.1.78",
+      "notice": "A versão 10.1.78 está disponível com as melhorias e correções mais recentes.",
       "changelog": [
-        "Melhorias nos jogos do Tokito.",
-        "Os jogos novos agora também podem ser resetados pelo comando rv.",
-        "Novo cancelarjogo para encerrar automaticamente a partida em andamento no grupo."
+        "Melhorias e ajustes nos jogos do Tokito.",
+        "Atualizações de segurança e administração integradas à versão 10.1.78.",
+        "Atualizador corrigido para preservar os arquivos e dados existentes.",
+        "Numeração de versões normalizada: após 10.1.99, a próxima versão será 10.2.0."
       ],
       "files": [
         {
@@ -2195,688 +2337,79 @@
           "path": "package.json",
           "sha256": "",
           "size": 0
-        }
-      ],
-      "delete": [
-        "DADOS_TOKITO/plugins/jogos/sistema-base.js"
-      ],
-      "required": true,
-      "publishedAt": "2026-10-08T13:00:00.000Z"
-    },
-    {
-      "version": "10.1.79",
-      "fromVersion": "10.1.78",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "feat: add group invisible-message burst monitor with explicit moderation mode",
-      "notice": "A versão 10.1.79 já está disponível para atualização.",
-      "changelog": [
-        "Antiinvisivel atualizado"
-      ],
-      "files": [
+        },
         {
           "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-          "sha256": "4594af96b543326cd15a02529d5f24a360f9624aec00e6fc2ed9e62bdcf543e8",
-          "size": 7076
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T15:29:28.541Z"
-    },
-    {
-      "version": "10.1.80",
-      "fromVersion": "10.1.79",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "feat: add Anti-Invisivel to security menus",
-      "notice": "A versão 10.1.80 já está disponível para atualização.",
-      "changelog": [
-        "Conexão do bot atualizada",
-        "Menus atualizado",
-        "Antiinvisivel atualizado"
-      ],
-      "files": [
+          "sha256": "",
+          "size": 0
+        },
         {
           "path": "DADOS_TOKITO/connect.js",
-          "sha256": "67c9206d9bd445500601a8001dd8474147e380641a1a122296b963c6ddcc1c2b",
-          "size": 39628
+          "sha256": "",
+          "size": 0
         },
         {
           "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "2203c5c8a5797a32f4c1d09441c9954a038a36bc6f8832feed6f3ad6ec008fd5",
-          "size": 72711
+          "sha256": "",
+          "size": 0
         },
         {
           "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
-          "sha256": "cb46f9fc3a15bdbf099a6a587e652a95d2b000385be66faede775b6bbf587e74",
-          "size": 2575
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T15:30:59.153Z"
-    },
-    {
-      "version": "10.1.81",
-      "fromVersion": "10.1.80",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "fix: deduplicate moderation attempts and preserve strong cryptography signals",
-      "notice": "A versão 10.1.81 já está disponível para atualização.",
-      "changelog": [
-        "Ativar atualizado",
-        "Antiinvisivel atualizado"
-      ],
-      "files": [
+          "sha256": "",
+          "size": 0
+        },
         {
           "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-          "sha256": "d8db34940e7d2578228ddefc42457b9b5e0c75ffe4ed9b068c44555ded3df3bd",
-          "size": 10468
+          "sha256": "",
+          "size": 0
         },
-        {
-          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-          "sha256": "b0242cf340fe4d676aee9c6e77d9d6c155ad6bc62706ab3c180e39774bfd9b3d",
-          "size": 7524
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T15:32:28.820Z"
-    },
-    {
-      "version": "10.1.82",
-      "fromVersion": "10.1.81",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "feat: pin security-aware Baileys build and publish invisible-message protection",
-      "notice": "A versão 10.1.82 já está disponível para atualização.",
-      "changelog": [
-        "Deps atualizado",
-        "Package atualizado"
-      ],
-      "files": [
         {
           "path": "DADOS_TOKITO/database/lib/deps.js",
-          "sha256": "d4eeee36d2e1624377375206eb9074613d4e78b52e11651fd4114f058117320f",
-          "size": 3618
+          "sha256": "",
+          "size": 0
         },
-        {
-          "path": "package.json",
-          "sha256": "6c5782bc06f313672da3228138972e03bb9dd8fc691d9c3802f5ce321dd58103",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T15:35:28.945Z"
-    },
-    {
-      "version": "10.1.83",
-      "fromVersion": "10.1.82",
-      "channel": "stable",
-      "type": "Segurança",
-      "title": "Novo Anti-Invisível",
-      "notice": "A versão 10.1.83 já está disponível para atualização.",
-      "changelog": [
-        "Anti-Invisível integrado à biblioteca e à conexão principal.",
-        "Comando !antiinvisivel 1/0/status/alerta/remover adicionado ao menu ADM.",
-        "Alertas de rajadas suspeitas e remoção opcional em situações excepcionais.",
-        "O detector Anti-Pay continua conectado e funcionando separadamente.",
-        "Verificação automática da versão de Baileys ao iniciar."
-      ],
-      "files": [
-        {
-          "path": "package.json",
-          "sha256": "6c5782bc06f313672da3228138972e03bb9dd8fc691d9c3802f5ce321dd58103",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T15:36:21.637Z"
-    },
-    {
-      "version": "10.1.84",
-      "fromVersion": "10.1.83",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "style: centralize Anti-Invisivel texts in mensagens.js",
-      "notice": "A versão 10.1.84 já está disponível para atualização.",
-      "changelog": [
-        "Mensagens atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "aff5cc46d98ed15c81f3e2e41befe993d98218246adfdf047d6b592e786b6a3f",
-          "size": 230956
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T16:00:58.828Z"
-    },
-    {
-      "version": "10.1.85",
-      "fromVersion": "10.1.84",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Mensagens do Anti-Invisível no padrão Tokito",
-      "notice": "A versão 10.1.85 já está disponível para atualização.",
-      "changelog": [
-        "Padroniza os textos do Anti-Invisível no visual original do mensagens.js.",
-        "Mensagens de ativação, desativação, status, ajuda e detecção passam a usar o mesmo design dos demais comandos.",
-        "Nenhuma alteração na conexão secundária do Anti-Pay."
-      ],
-      "files": [
-        {
-          "path": "package.json",
-          "sha256": "e78deea209bdc333669402d7644e1c3e351e8d303c0a806cb6a078fbda30e258",
-          "size": 1164
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "aff5cc46d98ed15c81f3e2e41befe993d98218246adfdf047d6b592e786b6a3f",
-          "size": 230956
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
-          "sha256": "e754c28501054adc9b5cf09718b23ae630a1567b4246e7be26a04314b9436d25",
-          "size": 1838
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-          "sha256": "80f8ff0b94deda8b9626f61f2efe21a53ba5eff6b276e17309d5a7ff697d85f4",
-          "size": 7220
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T16:03:21.350Z"
-    },
-    {
-      "version": "10.1.86",
-      "fromVersion": "10.1.85",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "style: add flood-payment alert in existing Tokito message format",
-      "notice": "A versão 10.1.86 já está disponível para atualização.",
-      "changelog": [
-        "Mensagens atualizado",
-        "Floodpagamento atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "ea91933f9aa92c358b67399853f526acba3635fe22144c313f7ac6cb5e518dd0",
-          "size": 232380
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/floodpagamento.js",
-          "sha256": "f90f5d5327903afb8a8e9fa9411f61a2521a61a2f05164599ca249ba10f1a8db",
-          "size": 6672
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T16:26:28.896Z"
-    },
-    {
-      "version": "10.1.87",
-      "fromVersion": "10.1.86",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "feat: process quoted-payment reply floods in main anti-invisible monitor",
-      "notice": "A versão 10.1.87 já está disponível para atualização.",
-      "changelog": [
-        "Antiinvisivel atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-          "sha256": "8648943a5caaf0140680caeca83e15c7771f6b3c1a5e85ddc4982decb10c2a64",
-          "size": 7607
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T16:27:58.443Z"
-    },
-    {
-      "version": "10.1.88",
-      "fromVersion": "10.1.87",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "docs: describe payment-quote flood protection in Tokito commands",
-      "notice": "A versão 10.1.88 já está disponível para atualização.",
-      "changelog": [
-        "Mensagens atualizado",
-        "Antiinvisivel atualizado",
-        "Filtro Antipay atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "bf486975e11fe9999bc1924e350f2647c77aab962d72823db72200aab3117cf8",
-          "size": 232547
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
-          "sha256": "d9af297dcbac387c63a306739cf190424a1694fd5b78886bb1d2124627c4fdcb",
-          "size": 1844
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
-          "sha256": "28abf3899366389341777c16bb0f264bdaf84341e17b0d0109d2506dda6cc3e0",
-          "size": 7620
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T16:29:29.059Z"
-    },
-    {
-      "version": "10.1.89",
-      "fromVersion": "10.1.88",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "release: align Tokito version with quoted-payment flood protection",
-      "notice": "A versão 10.1.89 já está disponível para atualização.",
-      "changelog": [
-        "Package atualizado"
-      ],
-      "files": [
-        {
-          "path": "package.json",
-          "sha256": "ac508644899f2b786d522111e8a91da3c56c80d215b08ee6076e8e5c695e4109",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T16:30:58.533Z"
-    },
-    {
-      "version": "10.1.90",
-      "fromVersion": "10.1.89",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "fix: catch payment quote flood even when WhatsApp strips citation context; add telemetry",
-      "notice": "A versão 10.1.90 já está disponível para atualização.",
-      "changelog": [
-        "Floodpagamento atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/floodpagamento.js",
-          "sha256": "675601cb62d4ffec5e31ef73b926ae4bbbb9a3fb272ce11e2558ffb1022ecd70",
-          "size": 8810
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T16:41:29.041Z"
-    },
-    {
-      "version": "10.1.91",
-      "fromVersion": "10.1.90",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "fix: forward original group events from member detector and never punish quoted payments",
-      "notice": "A versão 10.1.91 já está disponível para atualização.",
-      "changelog": [
-        "Detector atualizado",
-        "Filtro Antipay atualizado"
-      ],
-      "files": [
         {
           "path": "DADOS_TOKITO/detector.js",
-          "sha256": "cf64465e72f80c3ea48858d78991a26fb2b5f71225a3338580bb02a6dab3c14f",
-          "size": 6229
+          "sha256": "",
+          "size": 0
         },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
-          "sha256": "c13ef7329c1c0157126edb21770ce724ec71a34e3bfda415ab9bbcd3014f9c8a",
-          "size": 7840
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T17:00:58.821Z"
-    },
-    {
-      "version": "10.1.92",
-      "fromVersion": "10.1.91",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "safety: never classify short replies quoting payment as attacker floods",
-      "notice": "A versão 10.1.92 já está disponível para atualização.",
-      "changelog": [
-        "Antiinvisivel atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-          "sha256": "9f2f0f2a6fcea855b6233e5c62937ccd0c73e25525d5a64a13c41b7578991b1c",
-          "size": 16711
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T17:02:29.032Z"
-    },
-    {
-      "version": "10.1.93",
-      "fromVersion": "10.1.92",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "feat: expose primary/auxiliary anti-invisible receipt diagnostics via admin command",
-      "notice": "A versão 10.1.93 já está disponível para atualização.",
-      "changelog": [
-        "Mensagens atualizado",
-        "Antiinvisivel atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "3039873ca246be21dfd8d625ca777fdab3da4f0411ab5419e9563f5941c53a70",
-          "size": 233655
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
-          "sha256": "a20b48d2eb0a2e86aae73e54186573fabf887f39c974d277bd58474be4ab814e",
-          "size": 2131
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T17:04:00.048Z"
-    },
-    {
-      "version": "10.1.94",
-      "fromVersion": "10.1.93",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "release: publish Anti-Invisivel receiver bridge and quote safety checks",
-      "notice": "A versão 10.1.94 já está disponível para atualização.",
-      "changelog": [
-        "Mensagens atualizado",
-        "Package atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "2691ccdd360beee6c4f4341cf63d6657f56e81e554a40d29004099c9f0ae1507",
-          "size": 233873
-        },
-        {
-          "path": "package.json",
-          "sha256": "2dbca8fcb2be5ccc3d14322f293f12ce1eb1cecab257252baa7eb9bea2efbd26",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T17:05:29.119Z"
-    },
-    {
-      "version": "10.1.95",
-      "fromVersion": "10.1.94",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "style: show last received message structure in anti-invisible diagnostics",
-      "notice": "A versão 10.1.95 já está disponível para atualização.",
-      "changelog": [
-        "Mensagens atualizado",
-        "Antiinvisivel atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "2e7454f5811cab8a484bd6f94b639af20f8f6b27b5bc5c190a2e6ed770be1819",
-          "size": 233969
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-          "sha256": "f603a821750f0ccab2b7d016ce44ce9ef3be8d3e5ab670ff56e89c65e23c5a66",
-          "size": 17064
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T17:06:58.986Z"
-    },
-    {
-      "version": "10.1.96",
-      "fromVersion": "10.1.95",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "release: Tokito V10.1.96 Anti-Invisivel event attribution and safety diagnostics",
-      "notice": "A versão 10.1.96 já está disponível para atualização.",
-      "changelog": [
-        "Package atualizado"
-      ],
-      "files": [
-        {
-          "path": "package.json",
-          "sha256": "142311e88190666d495d0a542942f3b39b18860a5a10ab8df4cb0cd875858fad",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T17:08:28.512Z"
-    },
-    {
-      "version": "10.1.97",
-      "fromVersion": "10.1.96",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "refactor: unify Anti-Pay protection and command in antipay.js",
-      "notice": "A versão 10.1.97 já está disponível para atualização.",
-      "changelog": [
-        "Antipay atualizado"
-      ],
-      "files": [
         {
           "path": "DADOS_TOKITO/plugins/admin/antipay.js",
-          "sha256": "888327728e733897634a500aa533624eb0a92a1bb0e396699d2f8571ecf339a0",
-          "size": 8549
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T17:32:28.558Z"
-    },
-    {
-      "version": "10.1.98",
-      "fromVersion": "10.1.97",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "style: remove unused Anti-Invisivel mode/status diagnostic menus",
-      "notice": "A versão 10.1.98 já está disponível para atualização.",
-      "changelog": [
-        "Detector atualizado",
-        "Mensagens atualizado",
-        "Antiinvisivel atualizado",
-        "Floodpagamento atualizado",
-        "Funcoes atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/detector.js",
-          "sha256": "ce407e801de1ef23f4cc857a9cb30e460dee1e7fe4ac0e2e92e0b168588c9b61",
-          "size": 6222
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "3cda10f7c78b680f3ea3d25f1da138cf86ed3d61070e10e9b887c4d7627e6a24",
-          "size": 230542
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
-          "sha256": "d522e91b0854ad8d5b6fd960c31cf82a598bfdfea3ec3c2b6524c8c9efa0104f",
-          "size": 1404
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-          "sha256": "236964b15de4c6f0ee5e759790ed314efa6bd737534bff533f1aa553a18dd45c",
-          "size": 17057
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/floodpagamento.js",
-          "sha256": "e7332cdc3e8becbd00b329d16812b702868a1150df196befc9b7e4924b154fb9",
-          "size": 8803
+          "sha256": "",
+          "size": 0
         },
         {
           "path": "DADOS_TOKITO/sistemas/funcoes.js",
-          "sha256": "3d9fb3b9ae1811452a8f12d178d345a44da3a00dfec04da6c3f163708960f416",
-          "size": 5947
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T17:34:00.470Z"
-    },
-    {
-      "version": "10.1.99",
-      "fromVersion": "10.1.98",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "feat: Anti-Invisivel 1 enables monitored moderation with no separate mode",
-      "notice": "A versão 10.1.99 já está disponível para atualização.",
-      "changelog": [
-        "Antiinvisivel atualizado",
-        "Filtro Antipay removido",
-        "Floodpagamento removido"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
-          "sha256": "5a9f90667c5f7f7392f1f0d8df00be9baf330ee3895ece7cd6794ccf9af1dd4e",
-          "size": 1172
+          "sha256": "",
+          "size": 0
         },
         {
-          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-          "sha256": "e6c85c5f1c74a219f60f8dc02f0de696b57e93798067de30faed636d18e5970f",
-          "size": 16993
+          "path": "DADOS_TOKITO/database/lib/update-cli.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/update.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "",
+          "size": 0
         }
       ],
       "delete": [
+        "DADOS_TOKITO/plugins/jogos/sistema-base.js",
         "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
         "DADOS_TOKITO/sistemas/floodpagamento.js"
       ],
       "required": true,
-      "publishedAt": "2026-10-08T17:39:59.015Z"
-    },
-    {
-      "version": "10.1.100",
-      "fromVersion": "10.1.99",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "fix: preserve user-facing version across incremental and full updates",
-      "notice": "A versão 10.1.100 já está disponível para atualização.",
-      "changelog": [
-        "Conexão do bot atualizada",
-        "Update Cli atualizado",
-        "Update atualizado",
-        "Dados atualizado",
-        "Package atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "57af0c5e45b983088c7bf8d7dc46f6f9ac13b950ad1034e9b3cb3c6c0b4c8b59",
-          "size": 39683
-        },
-        {
-          "path": "DADOS_TOKITO/database/lib/update-cli.js",
-          "sha256": "03f6b4ef7250e02e32c75773e8dffe40f3bd635773b22e35fae026a28950e93e",
-          "size": 4088
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/dono/update.js",
-          "sha256": "a18be4620fb06a2c57ebc7ffe417f7eba7c21a772f83552c145096803e9e13bf",
-          "size": 4016
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/dados.js",
-          "sha256": "bb45c94dcee16ccc8373bb0255bcc741a321c9a17eae2ab7bf363e409d59be7e",
-          "size": 33141
-        },
-        {
-          "path": "package.json",
-          "sha256": "aef81103ce7dee686c639dadc64d78edffe7bebce498e6daadab732156fd91ac",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T17:41:29.945Z"
-    },
-    {
-      "version": "10.1.101",
-      "fromVersion": "10.1.100",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Tokito Bot V10.1.78 — Numeração restaurada",
-      "notice": "Tokito Bot V10.1.78 disponível para atualização.",
-      "changelog": [
-        "Numeração pública restaurada para Tokito V10.1.78, mantendo os recursos e correções já existentes.",
-        "Anti-Invisível simplificado: use !antiinvisivel 1 para ativar e !antiinvisivel 0 para desativar.",
-        "Anti-Pay consolidado em antipay.js, sem comandos ou arquivos duplicados.",
-        "Proteção contra pagamentos citados indevidamente atribuídos a quem apenas respondeu.",
-        "Atualizador preparado para migração de versões antigas e aviso automático ao dono."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/dados.js",
-          "sha256": "294fd483004b2cea443fafe69f720cd22623c37cf3202391b9eb336488bef796",
-          "size": 34049
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T17:42:58.617Z",
-      "publicVersion": "10.1.78"
-    },
-    {
-      "version": "10.1.102",
-      "fromVersion": "10.1.101",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Tokito Bot V10.1.78 — Atualizador corrigido",
-      "notice": "Correção de atualização disponível para Tokito V10.1.78.",
-      "changelog": [
-        "Corrigida a verificação SHA-256 do atualizador, evitando falha na instalação de dados.js.",
-        "Atualização agora informa qual arquivo falhou, caso haja erro de integridade.",
-        "Anti-Invisível permanece com os comandos 1/0 e Anti-Pay com um único módulo.",
-        "Todas as funções e dados pessoais existentes serão preservados; versão exibida 10.1.78."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/dono/update.js",
-          "sha256": "13269704de2462500d2397bd69218560e96105287e73a4e6d6a50e64bdef2ba6",
-          "size": 4515
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/dados.js",
-          "sha256": "f50c011b42c06366f4cb8c648c2ee083059f65b152f583bfec661a8529b47d1b",
-          "size": 34049
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-08T18:06:17.106Z",
-      "publicVersion": "10.1.78"
+      "publishedAt": "2026-10-08T18:06:17.106Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.77",
-  "publicVersion": "10.1.78",
-  "publicVersionBase": "10.1.78",
-  "protocolBaseVersion": "10.1.102"
+  "fromVersion": "10.1.77"
 }
