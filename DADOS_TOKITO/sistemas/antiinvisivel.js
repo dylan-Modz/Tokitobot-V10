@@ -103,7 +103,9 @@ const classificar = mensagem => {
   // A prévia de um pagamento citado pode não ser incluída no evento recebido.
   // Nesses casos, uma rajada promocional com link continua sendo analisada.
   const divulgacao = possuiLink && assinatura.length >= 45
-  if (!pagamentoCitado && !divulgacao) return null
+  // Responder/selecionar um pagamento com um texto curto nunca configura ataque.
+  // Rajadas deste filtro exigem divulgação repetida no texto enviado agora.
+  if (!divulgacao) return null
 
   const tipo = pagamentoCitado ? 'pagamento' : temCitacao ? 'citacao' : 'divulgacao'
   return {
