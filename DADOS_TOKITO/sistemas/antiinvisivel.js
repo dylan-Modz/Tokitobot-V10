@@ -9,6 +9,7 @@
 const base = require('./grupos.js')
 const { proto } = require('baileys')
 const runtimeSub = require('../sub/runtime.js')
+const floodPagamento = require('./floodpagamento.js')
 
 const JANELA_MS = 15000
 const LIMITE_ALERTA = 4
@@ -176,6 +177,14 @@ const receber = async (tokito, upsert) => {
         decryptFail: null
       })
       continue
+    }
+
+    // Analisa tambem mensagens decifradas que repetem pagamentos citados.
+    // O monitor usa a conexao principal e nunca cria mensagens artificiais.
+    try {
+      await floodPagamento.verificar(tokito, item)
+    } catch (erro) {
+      console.warn('[ANTI-INVISIVEL FLOOD] Falha no monitoramento:', erro?.message || erro)
     }
 
     // Mensagem recuperada com o mesmo ID: descarta a suspeita anterior.
