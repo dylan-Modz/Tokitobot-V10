@@ -130,18 +130,16 @@ return reply(mess.downloadSemMidia('ÁUDIO'))
 
 const numeroUsuario = sender.split('@')[0]
 
-const texto = `⏤͟͟͞͞𝐌𝐮́𝐬𝐢𝐜𝐚 𝐞𝐧𝐜𝐨𝐧𝐭𝐫𝐚𝐝𝐚! 𖤐⃝🎧
-•
-> ╭ ℹ️ 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂̧𝐎̃𝐄𝐒
-> *[✏️]* • *𝚝𝚒́𝚝𝚞𝚕𝚘:* *${titulo}*
-> *[👨‍🎤]* • *ᴀʀᴛɪsᴛᴀ:* ${artista}
-> *[💿]* • *ᴀ́ʟʙᴜᴍ:* ${album}
-> *[⏱️]* • *ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ:* ${duracao}
-> *[🔥]* • *ᴘᴏᴘᴜʟᴀʀɪᴅᴀᴅᴇ:* ${popularidade}
-> *[📆]* • *ʟᴀɴᴄ̧ᴀᴍᴇɴᴛᴏ:* ${lancamento}${releaseAt ? `\n> *[🗓️]* • *ᴅᴀᴛᴀ:* ${releaseAt}` : ''}
-> *[🔗]* • *ʟɪɴᴋ:* ${spotifyLink}
-•
-> *[🎼]* • *𝙴𝚗𝚟𝚒𝚊𝚗𝚍𝚘 𝚘 𝚜𝚎𝚞 𝚊́𝚞𝚍𝚒𝚘* _@${numeroUsuario}_`
+const texto = `• \`𝙼𝚄́𝚂𝙸𝙲𝙰 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰\` 🎧
+> ℹ️ \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂\`
+> ✏️ ᴛɪ́ᴛᴜʟᴏ: ${titulo}
+> 👨‍🎤 ᴀʀᴛɪsᴛᴀ: ${artista}
+> 💿 ᴀ́ʟʙᴜᴍ: ${album}
+> ⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ${duracao}
+> 🔥 ᴘᴏᴘᴜʟᴀʀɪᴅᴀᴅᴇ: ${popularidade}
+> 📆 ʟᴀɴᴄ̧ᴀᴍᴇɴᴛᴏ: ${lancamento}${releaseAt ? ` • ${releaseAt}` : ''}
+> 🔗 ʟɪɴᴋ: ${spotifyLink}
+> 🎼 ᴇɴᴠɪᴀɴᴅᴏ ᴏ sᴇᴜ ᴀ́ᴜᴅɪᴏ para @${numeroUsuario}`
 
 const contextInfo = {
 ...newsletter,
