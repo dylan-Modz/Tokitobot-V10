@@ -140,19 +140,17 @@ return String(numero || '0')
 return valor.toLocaleString('pt-BR')
 }
 
-const texto = `⏤͟͟͞͞𝐌𝐮́𝐬𝐢𝐜𝐚 𝐞𝐧𝐜𝐨𝐧𝐭𝐫𝐚𝐝𝐚! 𖤐⃝☁️
-•
-> ╭ ℹ️ 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂̧𝐎̃𝐄𝐒
-> *[✏️]* • *𝚝𝚒́𝚝𝚞𝚕𝚘:* *${titulo}*
-> *[👨‍🎤]* • *ᴀᴜᴛᴏʀ:* ${artista}
-> *[⏱️]* • *ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ:* ${duracao}
-> *[📆]* • *ᴘᴜʙʟɪᴄᴀᴅᴏ:* ${publicado}
-> *[❤️]* • *ʟɪᴋᴇs:* ${formatarNumero(likes)}
-> *[💬]* • *ᴄᴏᴍᴇɴᴛᴀ́ʀɪᴏs:* ${formatarNumero(comentarios)}
-> *[🎵]* • *ɢᴇ̂ɴᴇʀᴏ:* ${genero}
-> *[🔗]* • *ʟɪɴᴋ:* ${url}
-•
-> *[🎼]* • *𝙴𝚗𝚟𝚒𝚊𝚗𝚍𝚘 𝚘 𝚜𝚎𝚞 𝚊́𝚞𝚍𝚒𝚘* _@${numeroUsuario}_`
+const texto = `• \`𝙼𝚄́𝚂𝙸𝙲𝙰 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰\` ☁️
+> ℹ️ \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂\`
+> ✏️ ᴛɪ́ᴛᴜʟᴏ: ${titulo}
+> 👨‍🎤 ᴀᴜᴛᴏʀ: ${artista}
+> ⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ${duracao}
+> 📆 ᴘᴜʙʟɪᴄᴀᴅᴏ: ${publicado}
+> ❤️ ʟɪᴋᴇs: ${formatarNumero(likes)}
+> 💬 ᴄᴏᴍᴇɴᴛᴀ́ʀɪᴏs: ${formatarNumero(comentarios)}
+> 🎵 ɢᴇ̂ɴᴇʀᴏ: ${genero}
+> 🔗 ʟɪɴᴋ: ${url}
+> 🎼 ᴇɴᴠɪᴀɴᴅᴏ ᴏ sᴇᴜ ᴀ́ᴜᴅɪᴏ para @${numeroUsuario}`
 
 const contextInfo = {
 ...newsletter,
