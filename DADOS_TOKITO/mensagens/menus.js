@@ -59,7 +59,6 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menujogos — jogos e desafios
 ┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menubn — brincadeiras e rankings
 ┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menurpg — jornada, guildas, pets e Pokémon
-┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menucoins — N-Coins e economia
 ┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menuff — recursos de Free Fire
 ┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menulogos — logos e efeitos de texto
 ┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menualt — efeitos de áudio e vídeo
@@ -853,223 +852,161 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
 ┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
 ┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
-┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ${baileysVersion}
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡🗺️｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝐽𝑂𝑅𝑁𝐴𝐷𝐴
-├╾═╼･ﾟ𖤐ﾟ･｡🧭｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝐽𝑂𝑅𝑁𝐴𝐷𝐴 🗺️
 ┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}jornada
-┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}classe
-┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}classe guerreiro/mago/arqueiro/paladino
-┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}aventura
-┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}explorar
-┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}descansarheroi
-┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}historia
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
-
-╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡⚔️｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝐷𝐸𝑆𝐴𝐹𝐼𝑂𝑆
-├╾═╼･ﾟ𖤐ﾟ･｡🐉｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}torre
-┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}masmorra
-┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}boss
-┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}raid @usuario
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
-
-╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡⚒️｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝐴𝑅𝑆𝐸𝑁𝐴𝐿
-├╾═╼･ﾟ𖤐ﾟ･｡🗡️｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🗡️ ${prefix}arsenal
-┃࣪ ╎—̳͟͞͞ 🗡️ ${prefix}forjar
+┃࣪ ╎—̳͟͞͞ 🧙 ${prefix}classe
+┃࣪ ╎—̳͟͞͞ 📖 ${prefix}historia
+┃࣪ ╎—̳͟͞͞ 😴 ${prefix}descansarheroi
+┃࣪ ╎—̳͟͞͞ ⚒️ ${prefix}arsenal
+┃࣪ ╎—̳͟͞͞ 🔨 ${prefix}forjar
 ┃࣪ ╎—̳͟͞͞ 🗡️ ${prefix}equipar espada
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}level
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}ranklevel
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡🏰｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝐺𝑈𝐼𝐿𝐷𝐴𝑆
-├╾═╼･ﾟ𖤐ﾟ･｡🛡️｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝐴𝑉𝐸𝑁𝑇𝑈𝑅𝐴 🧭
+┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}aventura
+┃࣪ ╎—̳͟͞͞ 🌲 ${prefix}explorar
+┃࣪ ╎—̳͟͞͞ 📜 ${prefix}historia
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
+
+╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+├─ ⊹ 𖤐  𝐷𝐸𝑆𝐴𝐹𝐼𝑂𝑆 ⚔️
+┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}torre
+┃࣪ ╎—̳͟͞͞ 🏚️ ${prefix}masmorra
+┃࣪ ╎—̳͟͞͞ 👹 ${prefix}boss
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}raid @usuario
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
+
+╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+├─ ⊹ 𖤐  𝐺𝑈𝐼𝐿𝐷𝐴𝑆 🏰
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}guilda
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}criarguilda Nome
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}entrarguilda id
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}sairguilda
-┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}rankguilda
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankguilda
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡📈｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝐿𝐸𝑉𝐸𝐿
-├╾═╼･ﾟ𖤐ﾟ･｡⭐｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}level
-┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}ranklevel
-┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}rank
-┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}modorpg 1/0
-┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}addxp @usuario 100
-┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}tirarxp @usuario 100
-┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}addlevel @usuario 1
-┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}tirarlevel @usuario 1
-┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}blocklevel @usuario
-┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}unblocklevel @usuario
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+├─ ⊹ 𖤐  𝑀𝐴𝐺𝐼𝐴 🔮
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}magia
+┃࣪ ╎—̳͟͞͞ 👤 ${prefix}magoperfil
+┃࣪ ╎—̳͟͞͞ ✨ ${prefix}despertarmagia
+┃࣪ ╎—̳͟͞͞ 🧙 ${prefix}classemagica
+┃࣪ ╎—̳͟͞͞ 🌪️ ${prefix}elementomagico
+┃࣪ ╎—̳͟͞͞ 💧 ${prefix}manamagica
+┃࣪ ╎—̳͟͞͞ 📖 ${prefix}grimoriomagico
+┃࣪ ╎—̳͟͞͞ ✨ ${prefix}feiticosmagicos
+┃࣪ ╎—̳͟͞͞ 📚 ${prefix}aprendermagia
+┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}conjurarmagia
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}duelomagia
+┃࣪ ╎—̳͟͞͞ 🧪 ${prefix}alquimiamagica
+┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}familiarmagico
+┃࣪ ╎—̳͟͞͞ 🏰 ${prefix}torremagia
+┃࣪ ╎—̳͟͞͞ 👹 ${prefix}bossmagico
+┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}aventuramagica
+┃࣪ ╎—̳͟͞͞ 🌀 ${prefix}portalmagico
+┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}inventariomagico
+┃࣪ ╎—̳͟͞͞ 💎 ${prefix}cristaismagicos
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}lojamagia
+┃࣪ ╎—̳͟͞͞ 🎁 ${prefix}diariomagico
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankmagia
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡🐾｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝑃𝐸𝑇𝑆
-├╾═╼･ﾟ𖤐ﾟ･｡🐶｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}petshop
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}lojararos
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}mercadopet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}comprarpet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}verpet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}alimentarpet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}comprarcomida racao
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}carinhopet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}banhopet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}passearpet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}dormirpet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}acordarpet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}apelidopet nome
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}petmissao
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}petconstruir
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}petrealeza
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}petbatalha @usuario
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}evoluirpet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}eventopet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}doarpet @usuario
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}diariopet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}venderpet
-┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}rankpets
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
-
-╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡⚡｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝑃𝑂𝐾𝐸́𝑀𝑂𝑁-𝐵𝐴́𝑆𝐼𝐶𝑂
-├╾═╼･ﾟ𖤐ﾟ･｡🐾｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝑃𝑂𝐾𝐸́𝑀𝑂𝑁 ⚡
 ┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}lojapokemon
-┃࣪ ╎—̳͟͞͞ 🏪 ${prefix}mercadopokemon
-┃࣪ ╎—̳͟͞͞ 💳 ${prefix}comprarpokemon
 ┃࣪ ╎—̳͟͞͞ 👀 ${prefix}verpokemon
-┃࣪ ╎—̳͟͞͞ 🍖 ${prefix}alimentarpokemon
-┃࣪ ╎—̳͟͞͞ 🍓 ${prefix}comprarcomidapokemon berry
-┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}inventariopokemon
-┃࣪ ╎—̳͟͞͞ 🏷️ ${prefix}apelidopokemon nome
-┃࣪ ╎—̳͟͞͞ 🛁 ${prefix}banhopokemon
-┃࣪ ╎—̳͟͞͞ 🚶 ${prefix}passearpokemon
-┃࣪ ╎—̳͟͞͞ 💖 ${prefix}carinhopokemon
-┃࣪ ╎—̳͟͞͞ 😴 ${prefix}dormirpokemon
-┃࣪ ╎—̳͟͞͞ 🌅 ${prefix}acordarpokemon
-┃࣪ ╎—̳͟͞͞ 🎉 ${prefix}eventopokemon
-┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}batalhapokemon @usuario
-┃࣪ ╎—̳͟͞͞ 👑 ${prefix}pokerealeza
-┃࣪ ╎—̳͟͞͞ 🧬 ${prefix}evoluirpokemon
-┃࣪ ╎—̳͟͞͞ 📜 ${prefix}missaopokemon
-┃࣪ ╎—̳͟͞͞ 📅 ${prefix}diariopokemon
-┃࣪ ╎—̳͟͞͞ 💰 ${prefix}venderpokemon ID
-┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankpokemon
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
-
-╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡📕｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝐶𝐴𝑃𝑇𝑈𝑅𝐴-𝐸-𝐶𝑂𝐿𝐸𝐶̧𝐴̃𝑂
-├╾═╼･ﾟ𖤐ﾟ･｡🎯｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 📕 ${prefix}pokedex
 ┃࣪ ╎—̳͟͞͞ 🎯 ${prefix}capturar pokeball
 ┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}pokebolas
-┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarbola pokeball 5
 ┃࣪ ╎—̳͟͞͞ 🗃️ ${prefix}colecaopokemon
 ┃࣪ ╎—̳͟͞͞ 👥 ${prefix}equipokemon
-┃࣪ ╎—̳͟͞͞ 👑 ${prefix}principalpokemon ID
-┃࣪ ╎—̳͟͞͞ 🕊️ ${prefix}soltarpokemon ID
-┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}favoritarpokemon ID
-┃࣪ ╎—̳͟͞͞ ℹ️ ${prefix}infopokemon nome/ID
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
-
-╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡⚔️｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝐵𝐴𝑇𝐴𝐿𝐻𝐴-𝐸-𝐸𝑉𝑂𝐿𝑈𝐶̧𝐴̃𝑂
-├╾═╼･ﾟ𖤐ﾟ･｡⚔️｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 📊 ${prefix}statuspokemon
-┃࣪ ╎—̳͟͞͞ 💥 ${prefix}golpes
-┃࣪ ╎—̳͟͞͞ 📚 ${prefix}aprendergolpe nome
-┃࣪ ╎—̳͟͞͞ 💿 ${prefix}usartm tmfogo
-┃࣪ ╎—̳͟͞͞ 🏥 ${prefix}curarpokemon
-┃࣪ ╎—̳͟͞͞ ✨ ${prefix}revivepokemon
-┃࣪ ╎—̳͟͞͞ 💎 ${prefix}megaevoluirpokemon
-┃࣪ ╎—̳͟͞͞ 🌀 ${prefix}dynamaxpokemon
-┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}terastalpokemon
-┃࣪ ╎—̳͟͞͞ 🧬 ${prefix}tipospokemon
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
-
-╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡🗺️｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝑀𝐴𝑃𝐴-𝐸-𝑃𝑅𝑂𝐺𝑅𝐸𝑆𝑆𝑂
-├╾═╼･ﾟ𖤐ﾟ･｡🗺️｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}batalhapokemon @usuario
+┃࣪ ╎—̳͟͞͞ 🧬 ${prefix}evoluirpokemon
 ┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}mapapokemon
-┃࣪ ╎—̳͟͞͞ ✈️ ${prefix}viajarpokemon kanto/johto
 ┃࣪ ╎—̳͟͞͞ 🌲 ${prefix}explorarpokemon
-┃࣪ ╎—̳͟͞͞ 🦒 ${prefix}safaripokemon
-┃࣪ ╎—̳͟͞͞ 🎣 ${prefix}pescarpokemon
-┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}expedicaopokemon
 ┃࣪ ╎—̳͟͞͞ 🏟️ ${prefix}ginasiopokemon
-┃࣪ ╎—̳͟͞͞ 🏅 ${prefix}insignias
-┃࣪ ╎—̳͟͞͞ 🏛️ ${prefix}elitefour
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}campeaopokemon
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
-
-╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡🎒｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝐼𝑇𝐸𝑁𝑆-𝐸-𝐸𝐶𝑂𝑁𝑂𝑀𝐼𝐴
-├╾═╼･ﾟ𖤐ﾟ･｡🎒｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🏪 ${prefix}pokemart
-┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}mochilapokemon
 ┃࣪ ╎—̳͟͞͞ 🥚 ${prefix}ovopokemon
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}chocadeira
-┃࣪ ╎—̳͟͞͞ 🥚 ${prefix}breedingpokemon ID1 ID2
-┃࣪ ╎—̳͟͞͞ 🪔 ${prefix}incensopokemon
-┃࣪ ╎—̳͟͞͞ 🧲 ${prefix}lurepokemon
-┃࣪ ╎—̳͟͞͞ 🔄 ${prefix}trocapokemon @usuario ID ID
-┃࣪ ╎—̳͟͞͞ 🔨 ${prefix}leilaopokemon ID valor
-┃࣪ ╎—̳͟͞͞ 💰 ${prefix}lancepokemon valor
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}raidpokemon
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankpokemon
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡🏆｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝐸𝑉𝐸𝑁𝑇𝑂𝑆-𝐸-𝐶𝑂𝑁𝑄𝑈𝐼𝑆𝑇𝐴𝑆
-├╾═╼･ﾟ𖤐ﾟ･｡🏆｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}raidpokemon
-┃࣪ ╎—̳͟͞͞ ✨ ${prefix}lendariopokemon
-┃࣪ ╎—̳͟͞͞ 🎁 ${prefix}dailypokemon
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}streakpokemon
-┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}conquistapokemon
-┃࣪ ╎—̳͟͞͞ 🎖️ ${prefix}titulopokemon
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
+├─ ⊹ 𖤐  𝑃𝐸𝑇𝑆 🐾
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}petshop
+┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}verpet
+┃࣪ ╎—̳͟͞͞ 🍖 ${prefix}alimentarpet
+┃࣪ ╎—̳͟͞͞ 🍚 ${prefix}comprarcomida racao
+┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}carinhopet
+┃࣪ ╎—̳͟͞͞ 🛁 ${prefix}banhopet
+┃࣪ ╎—̳͟͞͞ 🚶 ${prefix}passearpet
+┃࣪ ╎—̳͟͞͞ 😴 ${prefix}dormirpet
+┃࣪ ╎—̳͟͞͞ 🌅 ${prefix}acordarpet
+┃࣪ ╎—̳͟͞͞ 🏷️ ${prefix}apelidopet nome
+┃࣪ ╎—̳͟͞͞ 📅 ${prefix}diariopet
+┃࣪ ╎—̳͟͞͞ 💝 ${prefix}doarpet @usuario
+┃࣪ ╎—̳͟͞͞ 💰 ${prefix}venderpet
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankpets
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
+
+╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+├─ ⊹ 𖤐  𝐶𝐼𝐷𝐴𝐷𝐸 🌆
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}cidade
+┃࣪ ╎—̳͟͞͞ 👤 ${prefix}perfilcidade
+┃࣪ ╎—̳͟͞͞ 💼 ${prefix}empregoscidade
+┃࣪ ╎—̳͟͞͞ 🧰 ${prefix}settrabalho
+┃࣪ ╎—̳͟͞͞ 💼 ${prefix}trabalhar
+┃࣪ ╎—̳͟͞͞ 💵 ${prefix}coletarsalario
+┃࣪ ╎—̳͟͞͞ 🏦 ${prefix}banco
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}depositar valor
+┃࣪ ╎—̳͟͞͞ 📤 ${prefix}sacar valor
+┃࣪ ╎—̳͟͞͞ 💸 ${prefix}pixcidade 500 @usuario
+┃࣪ ╎—̳͟͞͞ 🛍️ ${prefix}lojacidade
+┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}inventariocidade
+┃࣪ ╎—̳͟͞͞ 🍔 ${prefix}mercadocidade
+┃࣪ ╎—̳͟͞͞ 🏠 ${prefix}casascidade
+┃࣪ ╎—̳͟͞͞ 🚗 ${prefix}veiculoscidade
+┃࣪ ╎—̳͟͞͞ 🏢 ${prefix}empresascidade
+┃࣪ ╎—̳͟͞͞ 🥷 ${prefix}assaltarcidade
+┃࣪ ╎—̳͟͞͞ 🏁 ${prefix}corridacidade
+┃࣪ ╎—̳͟͞͞ 🎣 ${prefix}pescacidade
+┃࣪ ╎—̳͟͞͞ 💍 ${prefix}casarcidade
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankcidade
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
+
+╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+├─ ⊹ 𖤐  𝑁-𝐶𝑂𝐼𝑁𝑆 🪙
+┃࣪ ╎—̳͟͞͞ 🪙 ${prefix}coins
+┃࣪ ╎—̳͟͞͞ 💸 ${prefix}doarcoins 100 @usuario
+┃࣪ ╎—̳͟͞͞ 💼 ${prefix}trabalharcoins
+┃࣪ ╎—̳͟͞͞ 🥷 ${prefix}roubarcoins @usuario
+┃࣪ ╎—̳͟͞͞ 🎰 ${prefix}cassino 500
+┃࣪ ╎—̳͟͞͞ 🎲 ${prefix}dadoapostado 4 500
+┃࣪ ╎—̳͟͞͞ 🎰 ${prefix}slot 500
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}lojacoins
+┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}inventariocoins
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankcoins
+╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
+
+╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
+├─ ⊹ 𖤐  𝑀𝐼𝑁𝐸𝑅𝐴𝐶̧𝐴̃𝑂 ⛏️
+┃࣪ ╎—̳͟͞͞ ⛏️ ${prefix}minerar
+┃࣪ ╎—̳͟͞͞ 💎 ${prefix}minerios
+┃࣪ ╎—̳͟͞͞ 💰 ${prefix}venderminerios
+┃࣪ ╎—̳͟͞͞ ⛏️ ${prefix}picareta
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}lojapicareta
+┃࣪ ╎—̳͟͞͞ 🔨 ${prefix}melhorarpicareta
+┃࣪ ╎—̳͟͞͞ 🕳️ ${prefix}minas
+┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}explorarmina
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankmineracao
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
 
