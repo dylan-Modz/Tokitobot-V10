@@ -2313,6 +2313,17 @@ arma = 'Nenhuma',
 guilda = 'Nenhuma',
 torre = 'Nenhum'
 }) => {
+const progresso = [
+  `> 🪙 ׄ ( ɴ-ᴄᴏɪɴs: ${coins || '0 N-Coins'} )`,
+  cidade && cidade !== 'Nenhuma' ? `> 🌆 ׄ ( ᴄɪᴅᴀᴅᴇ: ${cidade} )` : null,
+  pet && pet !== 'Nenhum' ? `> 🐾 ׄ ( ᴘᴇᴛ: ${pet} )` : null,
+  pokemon && pokemon !== 'Nenhum' ? `> ⚡ ׄ ( ᴘᴏᴋᴇ́ᴍᴏɴ: ${pokemon} )` : null,
+  nivelRpg && nivelRpg !== 'Nenhum' ? `> ⭐ ׄ ( ɴɪ́ᴠᴇʟ: ${nivelRpg} )` : null,
+  classe && classe !== 'Nenhuma' ? `> 🧭 ׄ ( ᴄʟᴀssᴇ: ${classe} )` : null,
+  arma && arma !== 'Nenhuma' ? `> 🗡️ ׄ ( ᴀʀᴍᴀ: ${arma} )` : null,
+  guilda && guilda !== 'Nenhuma' ? `> 🏰 ׄ ( ɢᴜɪʟᴅᴀ: ${guilda} )` : null,
+  torre && torre !== 'Nenhum' ? `> 🗼 ׄ ( ᴛᴏʀʀᴇ: ${torre} )` : null
+].filter(Boolean).join('\n')
 return `- 👤 \`𝙿𝙴𝚁𝙵𝙸𝙻 𝙳𝙾 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\`
 
 > 👤 ׄ ( ɴɪᴄᴋ: ${nick} )
@@ -2331,15 +2342,7 @@ return `- 👤 \`𝙿𝙴𝚁𝙵𝙸𝙻 𝙳𝙾 𝚄𝚂𝚄𝙰́𝚁𝙸�
 
 - 🎮 \`𝙿𝚁𝙾𝙶𝚁𝙴𝚂𝚂𝙾 𝙳𝙾 𝙹𝙾𝙶𝙰𝙳𝙾𝚁\`
 
-> 🪙 ׄ ( ɴ-ᴄᴏɪɴs: ${coins} )
-> 🌆 ׄ ( ᴄɪᴅᴀᴅᴇ: ${cidade} )
-> 🐾 ׄ ( ᴘᴇᴛ: ${pet} )
-> ⚡ ׄ ( ᴘᴏᴋᴇ́ᴍᴏɴ: ${pokemon} )
-> ⭐ ׄ ( ɴɪ́ᴠᴇʟ: ${nivelRpg} )
-> 🧭 ׄ ( ᴄʟᴀssᴇ: ${classe} )
-> 🗡️ ׄ ( ᴀʀᴍᴀ: ${arma} )
-> 🏰 ׄ ( ɢᴜɪʟᴅᴀ: ${guilda} )
-> 🗼 ׄ ( ᴛᴏʀʀᴇ: ${torre} )`
+${progresso}`
 }
 
 exports.figuQuantidade = ({ prefix, command }) => {

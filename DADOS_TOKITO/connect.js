@@ -1069,7 +1069,8 @@ if (wellcome?.[1]?.bemvindo2) {
 const config = wellcome[1]
 const texto = legendaBase(entrou ? config.legendabv2 : config.legendasaiu2)
 const avatar = await fotoPerfil(participante)
-const fundo = 'https://raw.githubusercontent.com/dylanModz/uploads/main/midias/imagens/344hs4hph.jpg'
+const fundoPadrao = 'https://raw.githubusercontent.com/dylanModz/uploads/main/midias/imagens/344hs4hph.jpg'
+const fundo = entrou ? (config.fundobv2 || fundoPadrao) : (config.fundosaiu2 || fundoPadrao)
 const titulo = entrou ? 'Bem-vindo(a)!' : 'Saída do Grupo'
 const sub = entrou ? 'É um prazer ter você aqui. Fique à vontade' : 'Sentiremos sua falta, volte sempre!'
 

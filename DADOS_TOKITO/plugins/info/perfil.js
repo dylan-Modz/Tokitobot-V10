@@ -227,55 +227,55 @@ registroRpg?.aventura ||
 null
 
 const petPerfil =
-registroRpg?.pet
+registroRpg?.pet?.tipo
 ? registroRpg.pet.apelido ||
 r.PETS[registroRpg.pet.tipo]?.nome ||
 registroRpg.pet.tipo
-: 'Nenhum'
+: null
 
 const pokemonPerfil =
-registroRpg?.pokemon
+registroRpg?.pokemon?.tipo
 ? registroRpg.pokemon.apelido ||
 r.POKEMON[registroRpg.pokemon.tipo]?.nome ||
 registroRpg.pokemon.tipo
-: 'Nenhum'
+: null
 
 const classePerfil =
 aventuraRpg?.classe
 ? r.CLASSES_RPG[aventuraRpg.classe]?.nome ||
 aventuraRpg.classe
-: 'Nenhuma'
+: null
 
 const armaPerfil =
 aventuraRpg?.armaEquipada
 ? r.ARMAS_RPG[aventuraRpg.armaEquipada]?.nome ||
 aventuraRpg.armaEquipada
-: 'Nenhuma'
+: null
 
 const guildaPerfil =
 aventuraRpg?.guilda
 ? dadosGrupo?.rpg?.guildas?.[aventuraRpg.guilda]?.nome ||
 aventuraRpg.guilda
-: 'Nenhuma'
+: null
 
 const saldoPerfil =
 registroCoins
 ? `${Number(registroCoins.coins || 0).toLocaleString('pt-BR')} N-Coins`
-: 'Nenhum'
+: '0 N-Coins'
 
 const cidadePerfil =
 registroCoins?.cidade?.nome ||
-'Nenhuma'
+null
 
 const nivelPerfil =
 registroRpg
 ? `Nível ${Number(registroRpg.level || 1)} • ${registroRpg.patente || 'Bronze I'}`
-: 'Nenhum'
+: null
 
 const torrePerfil =
-aventuraRpg
+Number(aventuraRpg?.andarTorre || 0) > 0
 ? `Andar ${Number(aventuraRpg.andarTorre || 0)}`
-: 'Nenhum'
+: null
 
 const cardPerfil =
 `${API_URL}/canvas/perfil` +

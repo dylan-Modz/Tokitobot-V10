@@ -1,41 +1,66 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.6",
+  "version": "10.2.7",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-09T17:43:17.907Z",
+  "publishedAt": "2026-10-09T19:50:38.195Z",
   "changelog": [
-    "[Atualização] Tokito Bot V10.2.6",
-    "As 10 categorias internas do Menu RPG agora têm cabeçalhos e rodapés completos no padrão dos outros menus.",
-    "Cada submenu no painel principal ganhou um emoji próprio, no lugar do emoji de gelo.",
-    "Novo comando horariogp mostra a abertura e o fechamento programados do grupo com explicação compacta.",
-    "O comando horariogp foi adicionado ao Menu ADM, sem alterar horários ou dados salvos."
+    "[Atualização] Tokito Bot V10.2.7",
+    "Restaurado o card Canvas original do Ping pela rota /canvas/ping2, usando o fundo escolhido no comando fundoping.",
+    "Bem-vindo 2: agora é possível trocar o fundo do card de entrada usando fundobv2 e do card de saída usando fundosaiu2; ambos aceitam imagem respondida, link ou 0 para restaurar.",
+    "Os comandos fundobv2 e fundosaiu2 foram adicionados ao Menu ADM, sem afetar os fundos existentes do Bem-vindo 1.",
+    "Perfil: a seção Progresso do Jogador apresenta somente registros existentes, mantendo sempre o saldo de N-Coins, inclusive zerado.",
+    "Demais mensagens e o design de Perfil, Ping e menus foram preservados."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Atualização",
-  "title": "Tokito Bot V10.2.6",
-  "notice": "Menu RPG decorado, emojis de categorias e comando horariogp.",
+  "title": "Tokito Bot V10.2.7",
+  "notice": "Card do Ping, personalização do Bem-vindo 2 e progresso dinâmico no perfil.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "path": "DADOS_TOKITO/connect.js",
       "sha256": "",
-      "gitSha": "38c1b47b3353be411c5bfbaf1458bba9681477d4",
+      "gitSha": "b6f418a13b720a146a824e285f88b932f7d38313",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/horariogp.js",
+      "path": "DADOS_TOKITO/plugins/info/perfil.js",
       "sha256": "",
-      "gitSha": "0e919eced251ca8181b47a1cc47f6409273577bb",
+      "gitSha": "c8f8641204373342a1e2d6984828693e921e367a",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "",
+      "gitSha": "bcef24c97419dbb41319355a8bb0b81dab37bef5",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "",
+      "gitSha": "73bd4fa389d1cb87127b06b6b4dd51d533b74452",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/info/ping.js",
+      "sha256": "",
+      "gitSha": "ff1ffc752daf5f9efeedd33ce43de53742448e46",
       "size": 0
     },
     {
       "path": "package.json",
       "sha256": "",
-      "gitSha": "ee2aab524e51897c31a3a594e528d71aca0d1bdf",
+      "gitSha": "3dfc0f5e60cf25273849516fc1b3d6df2b2d3bb3",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/fundobv2.js",
+      "sha256": "",
+      "gitSha": "d79b9579995bc773fc1531b28d35c65b9e6f10e8",
       "size": 0
     }
   ],
@@ -2614,16 +2639,78 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-09T17:43:17.907Z"
+    },
+    {
+      "version": "10.2.7",
+      "fromVersion": "10.2.6",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Card Ping, Bem-vindo 2 e Perfil",
+      "notice": "Card do Ping, personalização do Bem-vindo 2 e progresso dinâmico no perfil.",
+      "changelog": [
+        "Restaurado o card Canvas original do Ping pela rota /canvas/ping2, usando o fundo escolhido no comando fundoping.",
+        "Bem-vindo 2: agora é possível trocar o fundo do card de entrada usando fundobv2 e do card de saída usando fundosaiu2; ambos aceitam imagem respondida, link ou 0 para restaurar.",
+        "Os comandos fundobv2 e fundosaiu2 foram adicionados ao Menu ADM, sem afetar os fundos existentes do Bem-vindo 1.",
+        "Perfil: a seção Progresso do Jogador apresenta somente registros existentes, mantendo sempre o saldo de N-Coins, inclusive zerado.",
+        "Demais mensagens e o design de Perfil, Ping e menus foram preservados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "gitSha": "b6f418a13b720a146a824e285f88b932f7d38313",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/info/perfil.js",
+          "sha256": "",
+          "gitSha": "c8f8641204373342a1e2d6984828693e921e367a",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "gitSha": "bcef24c97419dbb41319355a8bb0b81dab37bef5",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "gitSha": "73bd4fa389d1cb87127b06b6b4dd51d533b74452",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/info/ping.js",
+          "sha256": "",
+          "gitSha": "ff1ffc752daf5f9efeedd33ce43de53742448e46",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "gitSha": "3dfc0f5e60cf25273849516fc1b3d6df2b2d3bb3",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/fundobv2.js",
+          "sha256": "",
+          "gitSha": "d79b9579995bc773fc1531b28d35c65b9e6f10e8",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-09T19:50:38.195Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.5",
+  "fromVersion": "10.2.6",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.6"
+  "publicVersion": "10.2.7"
 }

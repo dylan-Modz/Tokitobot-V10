@@ -269,7 +269,9 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}audiobv
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}audiosaiu
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}fundobv
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}fundobv2
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}fundosaiu
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}fundosaiu2
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}delfundos
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}infobemvindos
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
