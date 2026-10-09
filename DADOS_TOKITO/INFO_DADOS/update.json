@@ -1,66 +1,38 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.7",
+  "version": "10.2.8",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-09T19:50:38.195Z",
+  "publishedAt": "2026-10-09T21:01:56.103Z",
   "changelog": [
-    "[Atualização] Tokito Bot V10.2.7",
-    "Restaurado o card Canvas original do Ping pela rota /canvas/ping2, usando o fundo escolhido no comando fundoping.",
-    "Bem-vindo 2: agora é possível trocar o fundo do card de entrada usando fundobv2 e do card de saída usando fundosaiu2; ambos aceitam imagem respondida, link ou 0 para restaurar.",
-    "Os comandos fundobv2 e fundosaiu2 foram adicionados ao Menu ADM, sem afetar os fundos existentes do Bem-vindo 1.",
-    "Perfil: a seção Progresso do Jogador apresenta somente registros existentes, mantendo sempre o saldo de N-Coins, inclusive zerado.",
-    "Demais mensagens e o design de Perfil, Ping e menus foram preservados."
+    "[Correção] Tokito Bot V10.2.8",
+    "Corrigido o carregamento do comando minerar, afetado pela importação antecipada do arquivo mineracao.js durante a inicialização dos plugins.",
+    "O módulo duplicado mineracao.js foi removido; minerar.js agora concentra a execução da mineração e das ações relacionadas.",
+    "Mantidos inventário de minérios, venda, picaretas, minas, exploração e ranking, sem criar o comando principal mineração.",
+    "Removido o alias mine: a mineração é iniciada somente pelo comando minerar.",
+    "Preservados o tempo de espera da mineração, minérios armazenados, progresso, N-Coins e as demais funções do bot."
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/coins/mineracao.js"
+  ],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Tokito Bot V10.2.7",
-  "notice": "Card do Ping, personalização do Bem-vindo 2 e progresso dinâmico no perfil.",
+  "type": "Correção",
+  "title": "Tokito Bot V10.2.8",
+  "notice": "Corrige /minerar e elimina conflito causado pelo módulo duplicado mineracao.js.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
+      "path": "DADOS_TOKITO/plugins/coins/minerar.js",
       "sha256": "",
-      "gitSha": "b6f418a13b720a146a824e285f88b932f7d38313",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/info/perfil.js",
-      "sha256": "",
-      "gitSha": "c8f8641204373342a1e2d6984828693e921e367a",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "",
-      "gitSha": "bcef24c97419dbb41319355a8bb0b81dab37bef5",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "",
-      "gitSha": "73bd4fa389d1cb87127b06b6b4dd51d533b74452",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/info/ping.js",
-      "sha256": "",
-      "gitSha": "ff1ffc752daf5f9efeedd33ce43de53742448e46",
+      "gitSha": "8d2cf6de43c81e7980d70933d2eeca27065505f4",
       "size": 0
     },
     {
       "path": "package.json",
       "sha256": "",
-      "gitSha": "3dfc0f5e60cf25273849516fc1b3d6df2b2d3bb3",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/fundobv2.js",
-      "sha256": "",
-      "gitSha": "d79b9579995bc773fc1531b28d35c65b9e6f10e8",
+      "gitSha": "c0fcd8b308e71cf0961cf08772e0accc81bfaeea",
       "size": 0
     }
   ],
@@ -2701,16 +2673,50 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-09T19:50:38.195Z"
+    },
+    {
+      "version": "10.2.8",
+      "fromVersion": "10.2.7",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Correção do comando minerar",
+      "notice": "Corrige /minerar e elimina conflito causado pelo módulo duplicado mineracao.js.",
+      "changelog": [
+        "Corrigido o carregamento do comando minerar, afetado pela importação antecipada do arquivo mineracao.js durante a inicialização dos plugins.",
+        "O módulo duplicado mineracao.js foi removido; minerar.js agora concentra a execução da mineração e das ações relacionadas.",
+        "Mantidos inventário de minérios, venda, picaretas, minas, exploração e ranking, sem criar o comando principal mineração.",
+        "Removido o alias mine: a mineração é iniciada somente pelo comando minerar.",
+        "Preservados o tempo de espera da mineração, minérios armazenados, progresso, N-Coins e as demais funções do bot."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/coins/minerar.js",
+          "sha256": "",
+          "gitSha": "8d2cf6de43c81e7980d70933d2eeca27065505f4",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "gitSha": "c0fcd8b308e71cf0961cf08772e0accc81bfaeea",
+          "size": 0
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/coins/mineracao.js"
+      ],
+      "required": true,
+      "publishedAt": "2026-10-09T21:01:56.103Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.6",
+  "fromVersion": "10.2.7",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.7"
+  "publicVersion": "10.2.8"
 }
