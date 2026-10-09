@@ -77,6 +77,7 @@ disponivel: check.remote.publicVersion || check.remote.version || '—',
 canal: check.remote.channel || 'stable',
 modo: check.mode || (check.incremental ? 'incremental' : 'clean'),
 disponivelAgora: check.available,
+reparacao: check.repair === true,
 changelog: Array.isArray(check.remote?.changelog)
 ? check.remote.changelog
 : [],

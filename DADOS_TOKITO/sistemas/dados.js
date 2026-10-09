@@ -123,6 +123,10 @@ return saida
 }
 
 const sha256 = value => crypto.createHash('sha256').update(value).digest('hex')
+const gitBlobSha = buffer => crypto.createHash('sha1')
+.update(`blob ${buffer.length}\0`)
+.update(buffer)
+.digest('hex')
 const config = () => readJson(CONFIG_FILE, {})
 function versaoPublica(info = {}) {
   return String(
@@ -621,7 +625,12 @@ remote = { ...remote, publicVersion: versaoPublica(remote) }
 const pending = pendingOperations(remote, local.version)
 const modo = modoUpdate(remote)
 const migracaoPendente = migrationPending(remote)
-const versaoPendente = compareVersions(remote.version, local.version) > 0
+const comparacao = compareVersions(remote.version, local.version)
+const versaoPendente = comparacao > 0
+// Mesmo quando o número já foi salvo, verifica se os arquivos de fato
+// chegaram. Isso evita o falso "atualizado" após um update incompleto.
+const reparos = comparacao === 0 ? arquivosParaReparar(remote) : []
+const operacoes = versaoPendente ? pending.operations : reparos
 
 if (
 versaoPendente &&
@@ -635,7 +644,8 @@ throw new Error('A versão nova foi anunciada sem arquivos no manifesto oficial.
 
 return {
 ok: true,
-available: versaoPendente || migracaoPendente,
+available: versaoPendente || migracaoPendente || reparos.length > 0,
+repair: !versaoPendente && reparos.length > 0,
 local,
 remote,
 apiFalhou,
@@ -643,8 +653,8 @@ rawFalhou,
 fonte,
 mode: migracaoPendente ? 'clean' : modo,
 incremental: migracaoPendente || modo === 'clean' ? false : pending.incremental,
-pendingFiles: pending.operations.filter(item => item.type === 'file'),
-pendingDelete: pending.operations.filter(item => item.type === 'delete'),
+pendingFiles: operacoes.filter(item => item.type === 'file'),
+pendingDelete: operacoes.filter(item => item.type === 'delete'),
 pendingReleases: pending.releases
 }
 } catch (error) {
@@ -665,6 +675,7 @@ if (typeof item === 'string') {
 return {
 path: String(item || '').trim(),
 sha256: '',
+gitSha: '',
 size: 0
 }
 }
@@ -673,6 +684,7 @@ if (!item || typeof item !== 'object') {
 return {
 path: '',
 sha256: '',
+gitSha: '',
 size: 0
 }
 }
@@ -680,6 +692,7 @@ size: 0
 return {
 path: String(item.path || '').trim(),
 sha256: String(item.sha256 || '').trim().toLowerCase(),
+gitSha: String(item.gitSha || '').trim().toLowerCase(),
 size: Math.max(0, Number(item.size || 0))
 }
 }
@@ -754,6 +767,7 @@ operations.set(file.path, {
 type: 'file',
 path: file.path,
 sha256: file.sha256,
+gitSha: file.gitSha,
 size: file.size,
 version: release.version || remote.version || ''
 })
@@ -765,6 +779,34 @@ incremental,
 releases,
 operations: [...operations.values()]
 }
+}
+
+// Detecta instalação incompleta sem depender somente do número da versão.
+function arquivosParaReparar(remote = {}) {
+const operacoes = []
+for (const raw of Array.isArray(remote.files) ? remote.files : []) {
+const file = normalizeUpdateFile(raw)
+if (!file.path || !/^[a-f0-9]{40}$/.test(file.gitSha)) continue
+const rel = normalizedRel(file.path)
+if (isProtected(rel)) continue
+const target = safeInside(ROOT, rel)
+let confere = false
+try {
+confere = fs.statSync(target).isFile() &&
+gitBlobSha(fs.readFileSync(target)) === file.gitSha
+} catch {}
+if (!confere) {
+operacoes.push({ type: 'file', ...file, path: rel, version: remote.version })
+}
+}
+for (const relRaw of Array.isArray(remote.delete) ? remote.delete : []) {
+const rel = normalizedRel(relRaw)
+if (!rel || isProtected(rel)) continue
+if (fs.existsSync(safeInside(ROOT, rel))) {
+operacoes.push({ type: 'delete', path: rel, version: remote.version })
+}
+}
+return operacoes
 }
 
 const normalizedRel = value => String(value || '')
@@ -1156,6 +1198,12 @@ sha256(buffer) !== String(item.sha256).toLowerCase()
 ) {
 throw new Error(`A verificação de integridade falhou em ${rel}.`)
 }
+if (
+item.gitSha &&
+gitBlobSha(buffer) !== String(item.gitSha).toLowerCase()
+) {
+throw new Error(`A verificação de integridade falhou em ${rel}.`)
+}
 
 const destination = safeInside(temp, rel)
 ensure(path.dirname(destination))
@@ -1221,12 +1269,12 @@ if (
 throw new Error('Destino de atualização inválido.')
 }
 
-const pending = pendingOperations(
-check.remote,
-check.local.version
-)
-
-const operations = pending.operations
+// Usa o mesmo conjunto conferido pelo check, incluindo reparos
+// encontrados com a mesma versão instalada.
+const operations = [
+...(Array.isArray(check.pendingDelete) ? check.pendingDelete : []),
+...(Array.isArray(check.pendingFiles) ? check.pendingFiles : [])
+]
 
 if (!operations.length) {
 const error = new Error('A atualização publicada não possui arquivos para instalar.')

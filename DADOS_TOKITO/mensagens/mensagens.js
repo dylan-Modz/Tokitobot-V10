@@ -4230,6 +4230,7 @@ disponivel,
 canal,
 modo,
 disponivelAgora,
+reparacao = false,
 changelog,
 arquivos,
 removidos,
@@ -4266,7 +4267,7 @@ const instalar = disponivelAgora
 return `- 🧊 \`𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾\`
 
 > 🧊 ׄ ( ${instalada} — ᴠᴇʀsᴀ̃ᴏ ɪɴsᴛᴀʟᴀᴅᴀ. )
-> 🧊 ׄ ( ${disponivel} — ${disponivelAgora ? 'ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ ᴅɪsᴘᴏɴɪ́ᴠᴇʟ.' : 'ᴠᴇʀsᴀ̃ᴏ ᴍᴀɪs ʀᴇᴄᴇɴᴛᴇ.'} )
+> 🧊 ׄ ( ${disponivel} — ${reparacao ? 'ᴀʀǫᴜɪᴠᴏs ᴘᴇɴᴅᴇɴᴛᴇs ᴅᴇ ʀᴇᴘᴀʀᴏ.' : disponivelAgora ? 'ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ ᴅɪsᴘᴏɴɪ́ᴠᴇʟ.' : 'ᴠᴇʀsᴀ̃ᴏ ᴍᴀɪs ʀᴇᴄᴇɴᴛᴇ.'} )
 > 🧊 ׄ ( ${atualizacaoCompleta ? 'COMPLETA' : totalArquivos} — ${atualizacaoCompleta ? 'ɴᴏᴠᴀ ᴇsᴛʀᴜᴛᴜʀᴀ ᴏғɪᴄɪᴀʟ ᴅᴀ ᴛᴏᴋɪᴛᴏ.' : 'ᴀʀǫᴜɪᴠᴏ(s) ᴀʟᴛᴇʀᴀᴅᴏ(s).'} )
 
 - 📝 \`𝙰𝙻𝚃𝙴𝚁𝙰𝙲̧𝙾̃𝙴𝚂\`

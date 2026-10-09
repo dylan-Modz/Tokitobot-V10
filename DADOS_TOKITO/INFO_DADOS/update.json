@@ -1,43 +1,182 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.104",
+  "version": "10.2.5",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-09T17:00:00.000Z",
+  "publishedAt": "2026-10-09T17:16:37.128Z",
   "changelog": [
-    "[Correção] Tokito Bot V10.1.104",
-    "O Menu RPG exibe novamente os comandos existentes de Pokémon, Pets, Magia, Cidade, Level e N-Coins que não estavam listados.",
-    "Mantidas todas as categorias Jornada, Aventura, Desafios, Guildas, Magia, Pokémon, Pets, Cidade, N-Coins e Mineração.",
-    "Histórico técnico consolidado após a recuperação da 10.1.103, sem reanunciar as versões de correção 10.1.80 e 10.1.81.",
-    "Atualizações futuras continuam usando o fluxo incremental depois da recuperação inicial."
+    "[Correção] Tokito Bot V10.2.5",
+    "Atualização de recuperação com os arquivos reais do RPG, Pokémon, mineração, Play, outros downloads e Packfig.",
+    "O pacote inclui os arquivos de código alterados desde a 10.1.78, não apenas o número da versão.",
+    "Nova verificação de integridade identifica arquivos desatualizados ou ausentes mesmo quando a versão local já corresponde à publicada.",
+    "Downloads do atualizador validam o hash dos arquivos antes de aplicar, mantendo backup e rollback.",
+    "O comando update check passa a mostrar arquivos pendentes e também reparos necessários."
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/admin/filtro-antipay.js"
+  ],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Tokito Bot V10.1.104",
-  "notice": "Menu RPG completo e histórico técnico consolidado.",
+  "title": "Tokito Bot V10.2.5",
+  "notice": "A 10.2.5 inclui os arquivos reais e detecta instalações incompletas.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/INFO_DADOS/update-structure.json",
+      "sha256": "",
+      "gitSha": "d38f8f5d7d9974e1348f3436199f3005891c3a2e",
+      "size": 123
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "",
+      "gitSha": "270641a562bbe64df3aef4cafe2139720cc91e36",
+      "size": 39683
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/deps.js",
+      "sha256": "",
+      "gitSha": "001ad17c3d1ec025df726596ebf0c3f00d833770",
+      "size": 3618
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/update-cli.js",
+      "sha256": "",
+      "gitSha": "4d1624b40c44783f4a7d9500acf78d57ee5ae631",
+      "size": 4088
+    },
+    {
+      "path": "DADOS_TOKITO/detector.js",
+      "sha256": "",
+      "gitSha": "c4f35dd7ca3d1378bc3b0e9776e49e16f9bb4f17",
+      "size": 6222
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "",
+      "gitSha": "ff21edf8a4df1fab36cecabfa29fd32372eb7dfa",
+      "size": 0
+    },
+    {
       "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "",
+      "gitSha": "fe0406e2d866503a8f326c0096a6a9dca0e7fd02",
+      "size": 74910
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+      "sha256": "",
+      "gitSha": "148c2fd172f7e4572a41297ae975505980171837",
+      "size": 1172
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/antipay.js",
+      "sha256": "",
+      "gitSha": "9357e041e8a8aa1e9adae013eea636fc2da677bd",
+      "size": 8549
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+      "sha256": "",
+      "gitSha": "7b9d6e102be6d354051e15a87f06bd0460cf6fe6",
+      "size": 10468
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/coins/mineracao.js",
+      "sha256": "",
+      "gitSha": "9cd0c416d74e007d8f8f3e78388b9a3d4b240268",
+      "size": 8385
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/coins/minerar.js",
+      "sha256": "",
+      "gitSha": "9478cb0663c3e13d3bc7d3a842cef0d9f8853788",
+      "size": 5344
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/update.js",
+      "sha256": "",
+      "gitSha": "c754f12d2b13a7d36313b2cf2fc596de1b679510",
       "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
+      "sha256": "",
+      "gitSha": "8a7e9749bbc323bcb11e831cb0d88b0064e70c50",
+      "size": 3562
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/deezer.js",
+      "sha256": "",
+      "gitSha": "38c21b11fdfd7f4ac87e36764de98293393e773d",
+      "size": 3163
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/play.js",
+      "sha256": "",
+      "gitSha": "11b3ec9b1bba388941cee733fc9855a7978b2492",
+      "size": 8887
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
+      "sha256": "",
+      "gitSha": "792d4f1dc910cf6f87c7aa9cdec2120bd2ceb859",
+      "size": 4302
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/playvideo.js",
+      "sha256": "",
+      "gitSha": "7469596199dab7003004cbb1bc5a5016fcd03844",
+      "size": 5152
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/soundcloud.js",
+      "sha256": "",
+      "gitSha": "49c7bb4592e992d2998f36667c3421b0061de8de",
+      "size": 4045
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/spotify.js",
+      "sha256": "",
+      "gitSha": "fef8ed4814fea15fa0ece39992bbe8ec82fd22c1",
+      "size": 3892
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/figurinhas/packfig.js",
+      "sha256": "",
+      "gitSha": "be789cf75d072764c019d5c3c7114c8d6aaca391",
+      "size": 6032
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+      "sha256": "",
+      "gitSha": "3ab1bf84aaeab4e40202ee7b0afb594d81460123",
+      "size": 16993
     },
     {
       "path": "DADOS_TOKITO/sistemas/dados.js",
       "sha256": "",
+      "gitSha": "697e2e33f556b41882ed78f0a8582b1a79f05176",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/INFO_DADOS/update-structure.json",
+      "path": "DADOS_TOKITO/sistemas/funcoes.js",
       "sha256": "",
-      "size": 0
+      "gitSha": "0965aafd6f6f974bfb69d11470248739391f269c",
+      "size": 5947
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
+      "sha256": "",
+      "gitSha": "59b4fa0768ad0320bf62e2623670a388badfc360",
+      "size": 2746
     },
     {
       "path": "package.json",
       "sha256": "",
+      "gitSha": "80aaab594c7b6bda63568cf13f47210b8be89c2e",
       "size": 0
     }
   ],
@@ -2401,15 +2540,194 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-09T17:00:00.000Z"
+    },
+    {
+      "version": "10.2.5",
+      "fromVersion": "10.1.104",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Recuperação e integridade de arquivos",
+      "notice": "A 10.2.5 inclui os arquivos reais e detecta instalações incompletas.",
+      "changelog": [
+        "Atualização de recuperação com os arquivos reais do RPG, Pokémon, mineração, Play, outros downloads e Packfig.",
+        "O pacote inclui os arquivos de código alterados desde a 10.1.78, não apenas o número da versão.",
+        "Nova verificação de integridade identifica arquivos desatualizados ou ausentes mesmo quando a versão local já corresponde à publicada.",
+        "Downloads do atualizador validam o hash dos arquivos antes de aplicar, mantendo backup e rollback.",
+        "O comando update check passa a mostrar arquivos pendentes e também reparos necessários."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/update-structure.json",
+          "sha256": "",
+          "gitSha": "d38f8f5d7d9974e1348f3436199f3005891c3a2e",
+          "size": 123
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "gitSha": "270641a562bbe64df3aef4cafe2139720cc91e36",
+          "size": 39683
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/deps.js",
+          "sha256": "",
+          "gitSha": "001ad17c3d1ec025df726596ebf0c3f00d833770",
+          "size": 3618
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/update-cli.js",
+          "sha256": "",
+          "gitSha": "4d1624b40c44783f4a7d9500acf78d57ee5ae631",
+          "size": 4088
+        },
+        {
+          "path": "DADOS_TOKITO/detector.js",
+          "sha256": "",
+          "gitSha": "c4f35dd7ca3d1378bc3b0e9776e49e16f9bb4f17",
+          "size": 6222
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "gitSha": "ff21edf8a4df1fab36cecabfa29fd32372eb7dfa",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "gitSha": "fe0406e2d866503a8f326c0096a6a9dca0e7fd02",
+          "size": 74910
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
+          "sha256": "",
+          "gitSha": "148c2fd172f7e4572a41297ae975505980171837",
+          "size": 1172
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antipay.js",
+          "sha256": "",
+          "gitSha": "9357e041e8a8aa1e9adae013eea636fc2da677bd",
+          "size": 8549
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+          "sha256": "",
+          "gitSha": "7b9d6e102be6d354051e15a87f06bd0460cf6fe6",
+          "size": 10468
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/coins/mineracao.js",
+          "sha256": "",
+          "gitSha": "9cd0c416d74e007d8f8f3e78388b9a3d4b240268",
+          "size": 8385
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/coins/minerar.js",
+          "sha256": "",
+          "gitSha": "9478cb0663c3e13d3bc7d3a842cef0d9f8853788",
+          "size": 5344
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/update.js",
+          "sha256": "",
+          "gitSha": "c754f12d2b13a7d36313b2cf2fc596de1b679510",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
+          "sha256": "",
+          "gitSha": "8a7e9749bbc323bcb11e831cb0d88b0064e70c50",
+          "size": 3562
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/deezer.js",
+          "sha256": "",
+          "gitSha": "38c21b11fdfd7f4ac87e36764de98293393e773d",
+          "size": 3163
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/play.js",
+          "sha256": "",
+          "gitSha": "11b3ec9b1bba388941cee733fc9855a7978b2492",
+          "size": 8887
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
+          "sha256": "",
+          "gitSha": "792d4f1dc910cf6f87c7aa9cdec2120bd2ceb859",
+          "size": 4302
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playvideo.js",
+          "sha256": "",
+          "gitSha": "7469596199dab7003004cbb1bc5a5016fcd03844",
+          "size": 5152
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/soundcloud.js",
+          "sha256": "",
+          "gitSha": "49c7bb4592e992d2998f36667c3421b0061de8de",
+          "size": 4045
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/spotify.js",
+          "sha256": "",
+          "gitSha": "fef8ed4814fea15fa0ece39992bbe8ec82fd22c1",
+          "size": 3892
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/packfig.js",
+          "sha256": "",
+          "gitSha": "be789cf75d072764c019d5c3c7114c8d6aaca391",
+          "size": 6032
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+          "sha256": "",
+          "gitSha": "3ab1bf84aaeab4e40202ee7b0afb594d81460123",
+          "size": 16993
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "",
+          "gitSha": "697e2e33f556b41882ed78f0a8582b1a79f05176",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/funcoes.js",
+          "sha256": "",
+          "gitSha": "0965aafd6f6f974bfb69d11470248739391f269c",
+          "size": 5947
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
+          "sha256": "",
+          "gitSha": "59b4fa0768ad0320bf62e2623670a388badfc360",
+          "size": 2746
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "gitSha": "80aaab594c7b6bda63568cf13f47210b8be89c2e",
+          "size": 0
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/admin/filtro-antipay.js"
+      ],
+      "required": true,
+      "publishedAt": "2026-10-09T17:16:37.128Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.103",
+  "fromVersion": "10.1.104",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
-  }
+  },
+  "publicVersion": "10.2.5"
 }
