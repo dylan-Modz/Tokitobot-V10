@@ -1,83 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.79",
+  "version": "10.1.80",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-09T15:30:00.000Z",
+  "publishedAt": "2026-10-09T16:33:26.648Z",
   "changelog": [
-    "[Atualização] Tokito Bot V10.1.79",
-    "Menu RPG reorganizado em categorias com Jornada, Aventura, Desafios, Guildas, Magia, Pokémon, Pets, Cidade, N-Coins e Mineração.",
-    "Mineração expandida com inventário de minérios, venda, picaretas, loja, melhorias, minas, exploração e ranking.",
-    "Resultados do RPG receberam o novo padrão visual compacto.",
-    "Play, Spotify, Deezer, SoundCloud, Apple Music, vídeo e documento receberam o novo design de informações.",
-    "Packfig agora mostra apenas o aviso de criação e envia o pacote diretamente ao finalizar."
+    "[Correção] Tokito Bot V10.1.80",
+    "Corrigido o atualizador que podia mostrar 0 arquivos alterados mesmo com uma versão nova disponível.",
+    "Quando a Tokito APIs e o GitHub informarem a mesma versão, o bot agora usa o manifesto com mais arquivos pendentes.",
+    "Se o histórico de releases ainda não tiver a versão nova, o atualizador usa a lista principal de arquivos como fallback.",
+    "O comando update start deixa de tratar uma atualização pendente como se o bot já estivesse na versão mais recente."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Tokito Bot V10.1.79",
-  "notice": "A versão 10.1.79 está disponível com a reorganização do RPG, mineração expandida e novo visual dos downloads.",
+  "type": "Correção",
+  "title": "Tokito Bot V10.1.80",
+  "notice": "A versão 10.1.80 corrige a detecção e instalação de arquivos no atualizador.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/figurinhas/packfig.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/play.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/spotify.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/soundcloud.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/deezer.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/playvideo.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/coins/minerar.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/coins/mineracao.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "path": "DADOS_TOKITO/sistemas/dados.js",
       "sha256": "",
       "size": 0
     },
@@ -2324,51 +2268,6 @@
       "publishedAt": "2026-10-08T18:06:17.106Z"
     },
     {
-      "version": "10.1.80",
-      "fromVersion": "10.1.79",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "style: padroniza resultados do RPG",
-      "notice": "A versão 10.1.80 já está disponível para atualização.",
-      "changelog": [
-        "Applemusic atualizado",
-        "Deezer atualizado",
-        "Playdoc atualizado",
-        "Playvideo atualizado",
-        "Texto atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
-          "sha256": "e5bd379518a27876842028bd402eef0736cba557c9f920d377b148d18b4e6c99",
-          "size": 3562
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/deezer.js",
-          "sha256": "ce1e80a4e44601260d0b41ece9093f27be904e101629e4e80f3d22f389f07c0e",
-          "size": 3163
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
-          "sha256": "65079dc576a760f3c382571e9f67b9d131f03894127e0c1a2d213bb9ae909e53",
-          "size": 4302
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/playvideo.js",
-          "sha256": "fb50b8cb271b16e937d4a8595e165508c48a6841b372ecd9febb657cc8f87997",
-          "size": 5152
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
-          "sha256": "cd4ef618b394d21d62d5f97e20bc4c55a3019d046cfe798cc19c7539be7b77e2",
-          "size": 2746
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-09T15:52:09.105Z"
-    },
-    {
       "version": "10.1.79",
       "fromVersion": "10.1.78",
       "channel": "stable",
@@ -2453,10 +2352,38 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-09T15:30:00.000Z"
+    },
+    {
+      "version": "10.1.80",
+      "fromVersion": "10.1.79",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Correção do sistema de atualização",
+      "notice": "A versão 10.1.80 já está disponível para atualização.",
+      "changelog": [
+        "Corrige o caso em que o update mostrava uma nova versão, mas indicava 0 arquivos alterados.",
+        "Prioriza o manifesto mais completo quando API e GitHub retornam a mesma versão.",
+        "Usa os arquivos principais da atualização quando o histórico remoto ainda não estiver sincronizado."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-09T16:33:26.648Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.78"
+  "fromVersion": "10.1.79"
 }
