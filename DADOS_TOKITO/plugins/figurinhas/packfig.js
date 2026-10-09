@@ -158,10 +158,10 @@ return reply(
 }
 await reagir(from, '📦')
 await reply(
-`- ⏳ \`𝙲𝚁𝙸𝙰𝙽𝙳𝙾 𝙾 𝙿𝙰𝙲𝙺\`\n\n` +
-`> *『 𝙱𝚄𝚂𝙲𝙰 』— ${pesquisa}*\n` +
-`> *『 𝙻𝙸𝙼𝙸𝚃𝙴 』— ᴀᴛᴇ́ ${MAX_FIGURINHAS} ғɪɢᴜʀɪɴʜᴀs.*\n` +
-`> *『 𝙰𝚂𝚂𝙸𝙽𝙰𝚃𝚄𝚁𝙰 』— Channel - Tokito Apis*`
+`• \`𝙲𝚁𝙸𝙰𝙽𝙳𝙾 𝙿𝙰𝙲𝙺\` 📦
+> Buscando imagens para: ${pesquisa}.
+- ғɪɢᴜʀɪɴʜᴀs — ( \`Até ${MAX_FIGURINHAS} 🖼️\` )
+> Aguarde...`
 )
 const resultado = await searchPinterest(pesquisa)
 if (!resultado.status || !resultado.pins?.length) {
@@ -202,13 +202,10 @@ console.log(`[PACKFIG IMAGEM ${i + 1}]`, error?.message || error)
 }
 if (!prontas.length)
 throw new Error('Nenhuma imagem pôde ser convertida em figurinha.')
-const total = await criarStickerPackNativo(ctx, prontas, pesquisa)
+await criarStickerPackNativo(ctx, prontas, pesquisa)
 await reagir(from, '✅').catch(() => {})
-return reply(
-`- ✅ \`𝙿𝙰𝙲𝙺 𝙲𝚁𝙸𝙰𝙳𝙾\`\n\n` +
-`> *『 𝙵𝙸𝙶𝚄𝚁𝙸𝙽𝙷𝙰𝚂 』— ${total}/${MAX_FIGURINHAS}*\n` +
-`> *『 𝙰𝚂𝚂𝙸𝙽𝙰𝚃𝚄𝚁𝙰 』— Channel - Tokito Apis*`
-)
+return
+
 }
 catch (error) {
 console.log('[PACKFIG]', error?.stack || error?.message || error)
