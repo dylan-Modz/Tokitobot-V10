@@ -603,26 +603,11 @@ error: 'Não foi possível consultar a atualização pela API nem pelo GitHub.'
 }
 }
 
-let remote = apiRemote || rawRemote
-let fonte = apiRemote ? 'api' : 'github'
-
-if (apiRemote && rawRemote) {
-const comparacao = compareVersions(rawRemote.version, apiRemote.version)
-
-const pendentesApi = pendingOperations(apiRemote, local.version)
-const pendentesGithub = pendingOperations(rawRemote, local.version)
-
-if (
-comparacao > 0 ||
-(
-comparacao === 0 &&
-pendentesGithub.operations.length > pendentesApi.operations.length
-)
-) {
-remote = rawRemote
-fonte = 'github'
-}
-}
+// O código e o pacote oficial vêm do GitHub. Enquanto o manifesto do
+// repositório estiver acessível, ele é a fonte autoritativa: a API pode
+// anunciar uma versão antes que os arquivos tenham sido publicados.
+let remote = rawRemote || apiRemote
+let fonte = rawRemote ? 'github' : 'api'
 
 try {
 if (
@@ -635,17 +620,29 @@ throw new Error('O update.json remoto aponta para outro repositório.')
 remote = { ...remote, publicVersion: versaoPublica(remote) }
 const pending = pendingOperations(remote, local.version)
 const modo = modoUpdate(remote)
+const migracaoPendente = migrationPending(remote)
+const versaoPendente = compareVersions(remote.version, local.version) > 0
+
+if (
+versaoPendente &&
+!migracaoPendente &&
+modo !== 'clean' &&
+pending.incremental &&
+pending.operations.length === 0
+) {
+throw new Error('A versão nova foi anunciada sem arquivos no manifesto oficial.')
+}
 
 return {
 ok: true,
-available: compareVersions(remote.version, local.version) > 0,
+available: versaoPendente || migracaoPendente,
 local,
 remote,
 apiFalhou,
 rawFalhou,
 fonte,
-mode: modo,
-incremental: modo === 'clean' ? false : pending.incremental,
+mode: migracaoPendente ? 'clean' : modo,
+incremental: migracaoPendente || modo === 'clean' ? false : pending.incremental,
 pendingFiles: pending.operations.filter(item => item.type === 'file'),
 pendingDelete: pending.operations.filter(item => item.type === 'delete'),
 pendingReleases: pending.releases
@@ -704,20 +701,20 @@ files: Array.isArray(remote.files) ? remote.files : [],
 delete: Array.isArray(remote.delete) ? remote.delete : []
 }]
 
-// Algumas rotas da API podem publicar a versão nova antes de atualizar
-// o histórico de releases. Nesse caso, usa o manifesto principal da versão
-// em vez de concluir incorretamente que não existem arquivos pendentes.
+// O histórico pode existir, mas ainda não conter a versão principal.
+// Acrescenta a lista atual como último release, sem ignorar os anteriores.
 if (
-!releases.length &&
 hasFiles &&
-compareVersions(remote.version, localVersion) > 0
+compareVersions(remote.version, localVersion) > 0 &&
+!releases.some(item => compareVersions(item.version, remote.version) === 0)
 ) {
-releases = [{
+releases.push({
 version: remote.version,
 fromVersion: remote.fromVersion,
 files: remote.files,
 delete: Array.isArray(remote.delete) ? remote.delete : []
-}]
+})
+releases.sort((a, b) => compareVersions(a.version, b.version))
 }
 
 const firstRelease = releases[0]
@@ -953,6 +950,8 @@ return { ok: true, installed: true }
 
 function copyIncoming(srcRoot, remote) {
 const added = []
+let copied = 0
+let deleted = 0
 const files = listFiles(srcRoot)
 
 for (const rel of files) {
@@ -967,6 +966,7 @@ added.push(rel)
 
 ensure(path.dirname(target))
 fs.copyFileSync(source, target)
+copied++
 }
 
 for (const relRaw of Array.isArray(remote.delete) ? remote.delete : []) {
@@ -977,11 +977,13 @@ continue
 
 const target = safeInside(ROOT, rel)
 
-if (fs.existsSync(target))
+if (fs.existsSync(target)) {
 fs.rmSync(target, { recursive: true, force: true })
+deleted++
+}
 }
 
-return added
+return { added, copied, deleted }
 }
 
 function restoreBackup(file, added = []) {
@@ -1383,6 +1385,8 @@ path.join(os.tmpdir(), 'tokito-v10-')
 const archive = path.join(temp, 'source.tar.gz')
 let backup = ''
 let added = []
+let copied = 0
+let deleted = 0
 
 try {
 onProgress('Baixando a versão oficial do Tokito...')
@@ -1455,7 +1459,10 @@ path.join(srcRoot, 'DADOS_TOKITO', 'INFO_DADOS', 'nescessario.json'),
 
 onProgress('Substituindo a estrutura antiga pela nova versão...')
 limparEstruturaOficial()
-added = copyIncoming(srcRoot, check.remote)
+const copiados = copyIncoming(srcRoot, check.remote)
+added = copiados.added
+copied = copiados.copied
+deleted = copiados.deleted
 
 // Mantém os dados do usuário e acrescenta somente novos campos padrão da versão.
 writeJson(CONFIG_FILE, mesclarPadroes(configPadraoNovo, configAtual))
@@ -1490,8 +1497,8 @@ version: check.remote.version,
 backup,
 remote: check.remote,
 mode: 'clean',
-filesUpdated: added.length,
-filesDeleted: 0
+filesUpdated: copied,
+filesDeleted: deleted
 }
 } catch (error) {
 if (backup && fs.existsSync(backup)) {

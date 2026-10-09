@@ -1,87 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.81",
+  "version": "10.1.103",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-09T16:30:00.000Z",
+  "publishedAt": "2026-10-09T16:46:17.640Z",
   "changelog": [
-    "[Correção] Tokito Bot V10.1.81",
-    "Corrigida a atualização para instalações que ainda estão na versão 10.1.78.",
-    "O manifesto desta versão inclui de forma cumulativa os arquivos da 10.1.79, 10.1.80 e 10.1.81.",
-    "O comando update start agora consegue baixar os arquivos pendentes em vez de apenas avisar que existe uma versão nova.",
-    "Mantidas as mudanças do RPG, mineração, downloads e Packfig publicadas na 10.1.79."
+    "[Correção] Tokito Bot V10.1.103",
+    "Recuperação da instalação para versões antigas que só recebiam o aviso de atualização, mas não os arquivos.",
+    "Primeira instalação usa a migração completa protegendo configurações, sessões e bancos de dados.",
+    "Corrigida a origem dos manifestos: o GitHub publicado tem prioridade sobre dados ainda não sincronizados na Tokito APIs.",
+    "Corrigidos o fallback de releases e a contagem de arquivos instalados.",
+    "Após a migração, as próximas versões voltam a utilizar atualizações incrementais."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Tokito Bot V10.1.81",
-  "notice": "A versão 10.1.81 corrige a ponte de atualização para instalações que ainda estão na 10.1.78.",
+  "title": "Tokito Bot V10.1.103",
+  "notice": "A versão 10.1.103 recupera instalações que não conseguiam baixar os arquivos da atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/figurinhas/packfig.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/play.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/spotify.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/soundcloud.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/deezer.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/playvideo.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/coins/minerar.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/coins/mineracao.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "",
-      "size": 0
-    },
-    {
       "path": "DADOS_TOKITO/sistemas/dados.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/INFO_DADOS/update-structure.json",
       "sha256": "",
       "size": 0
     },
@@ -2528,10 +2474,50 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-09T16:30:00.000Z"
+    },
+    {
+      "version": "10.1.103",
+      "fromVersion": "10.1.81",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Recuperação do sistema de atualização",
+      "notice": "A versão 10.1.103 recupera instalações que não conseguiam baixar os arquivos da atualização.",
+      "changelog": [
+        "Recuperação da instalação para versões antigas que só recebiam o aviso de atualização, mas não os arquivos.",
+        "Primeira instalação usa a migração completa protegendo configurações, sessões e bancos de dados.",
+        "Corrigida a origem dos manifestos: o GitHub publicado tem prioridade sobre dados ainda não sincronizados na Tokito APIs.",
+        "Corrigidos o fallback de releases e a contagem de arquivos instalados.",
+        "Após a migração, as próximas versões voltam a utilizar atualizações incrementais."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/update-structure.json",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-09T16:46:17.640Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.78"
+  "fromVersion": "10.1.81",
+  "migration": {
+    "id": "tokito-v10-recovery-20261009",
+    "required": true,
+    "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
+  }
 }
