@@ -866,6 +866,16 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🗡️ ${prefix}equipar espada
 ┃࣪ ╎—̳͟͞͞ ⭐ ${prefix}level
 ┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}ranklevel
+┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}patente
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankpatente
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rank
+┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}addlevel
+┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}tirarlevel
+┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}addxp
+┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}tirarxp
+┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}blocklevel
+┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}unblocklevel
+┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}modorpg
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
@@ -916,6 +926,32 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}lojamagia
 ┃࣪ ╎—̳͟͞͞ 🎁 ${prefix}diariomagico
 ┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankmagia
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}equiparmagia
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}melhorarmagia
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}fundirmagia
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}encantarmagia
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}invocarmagia
+┃࣪ ╎—̳͟͞͞ 🧬 ${prefix}evoluirfamiliar
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}bestiamagica
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}capturabestia
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}artefatomagico
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}equiparartefato
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}andarmagia
+┃࣪ ╎—̳͟͞͞ 📜 ${prefix}missaomagia
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}explorarmagia
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}masmorramagica
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}reinomagico
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}guildamagica
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}criarguildamagica
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}entrarguildamagica
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}sairguildamagica
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankguildamagica
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}mercadomagico
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarmagia
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}vendermagia
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}leilaomagico
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}bauarcano
+┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}roletamagica
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
@@ -937,6 +973,57 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🥚 ${prefix}ovopokemon
 ┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}raidpokemon
 ┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankpokemon
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarpokemon
+┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}alimentarpokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}apelidopokemon
+┃࣪ ╎—̳͟͞͞ 📜 ${prefix}missaopokemon
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}venderpokemon
+┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}banhopokemon
+┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}passearpokemon
+┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}carinhopokemon
+┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}dormirpokemon
+┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}acordarpokemon
+┃࣪ ╎—̳͟͞͞ 📜 ${prefix}diariopokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}eventopokemon
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}realezapokemon
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}mercadopokemon
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarcomidapokemon
+┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}inventariopokemon
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}lojararospokemon
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarbola
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}principalpokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}soltarpokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}favoritarpokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}infopokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}statuspokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}golpes
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}aprendergolpe
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}usartm
+┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}curarpokemon
+┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}revivepokemon
+┃࣪ ╎—̳͟͞͞ 🧬 ${prefix}megaevoluirpokemon
+┃࣪ ╎—̳͟͞͞ 🧬 ${prefix}dynamaxpokemon
+┃࣪ ╎—̳͟͞͞ 🧬 ${prefix}terastalpokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}tipospokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}viajarpokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}safaripokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}pescarpokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}expedicaopokemon
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}insignias
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}elitefour
+┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}mochilapokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}chocadeira
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}breedingpokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}incensopokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}lurepokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}trocapokemon
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}leilaopokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}lancepokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}lendariopokemon
+┃࣪ ╎—̳͟͞͞ 📜 ${prefix}dailypokemon
+┃࣪ ╎—̳͟͞͞ 📜 ${prefix}streakpokemon
+┃࣪ ╎—̳͟͞͞ 📜 ${prefix}conquistapokemon
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}titulopokemon
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
@@ -955,6 +1042,15 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 💝 ${prefix}doarpet @usuario
 ┃࣪ ╎—̳͟͞͞ 💰 ${prefix}venderpet
 ┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankpets
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarpet
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}mercadopet
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}lojararos
+┃࣪ ╎—̳͟͞͞ 🐾 ${prefix}petmissao
+┃࣪ ╎—̳͟͞͞ 🐾 ${prefix}petconstruir
+┃࣪ ╎—̳͟͞͞ 🐾 ${prefix}petrealeza
+┃࣪ ╎—̳͟͞͞ 🐾 ${prefix}petbatalha
+┃࣪ ╎—̳͟͞͞ 🧬 ${prefix}evoluirpet
+┃࣪ ╎—̳͟͞͞ 🐾 ${prefix}eventopet
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
@@ -980,6 +1076,30 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🎣 ${prefix}pescacidade
 ┃࣪ ╎—̳͟͞͞ 💍 ${prefix}casarcidade
 ┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankcidade
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}registrarcidade
+┃࣪ ╎—̳͟͞͞ 💸 ${prefix}doarcidade
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}compraritemcidade
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}usaritemcidade
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}restaurantecidade
+┃࣪ ╎—̳͟͞͞ ❤️ ${prefix}descansarcidade
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}hospitalcidade
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarcasa
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}vendercasa
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}alugarcasa
+┃࣪ ╎—̳͟͞͞ 💸 ${prefix}coletaraluguel
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarveiculo
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}venderveiculo
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}abastecercidade
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}oficinacidade
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}repararveiculo
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarempresa
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}venderempresa
+┃࣪ ╎—̳͟͞͞ 💸 ${prefix}lucroempresa
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}fiancacidade
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}apostacidade
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}venderpeixes
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}buscarcidade
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}divorciocidade
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
@@ -994,6 +1114,16 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}lojacoins
 ┃࣪ ╎—̳͟͞͞ 🎒 ${prefix}inventariocoins
 ┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankcoins
+┃࣪ ╎—̳͟͞͞ 🪙 ${prefix}modocoins
+┃࣪ ╎—̳͟͞͞ 💸 ${prefix}apostarcoins
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarcerveja
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarjob
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarbomba
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprararma
+┃࣪ ╎—̳͟͞͞ 🪙 ${prefix}pocao
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarpocao
+┃࣪ ╎—̳͟͞͞ 🪙 ${prefix}escudo
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarescudo
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
@@ -1007,6 +1137,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🕳️ ${prefix}minas
 ┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}explorarmina
 ┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankmineracao
+┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarpicareta
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
 

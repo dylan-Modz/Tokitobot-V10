@@ -1,26 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.103",
+  "version": "10.1.104",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-09T16:46:17.640Z",
+  "publishedAt": "2026-10-09T17:00:00.000Z",
   "changelog": [
-    "[Correção] Tokito Bot V10.1.103",
-    "Recuperação da instalação para versões antigas que só recebiam o aviso de atualização, mas não os arquivos.",
-    "Primeira instalação usa a migração completa protegendo configurações, sessões e bancos de dados.",
-    "Corrigida a origem dos manifestos: o GitHub publicado tem prioridade sobre dados ainda não sincronizados na Tokito APIs.",
-    "Corrigidos o fallback de releases e a contagem de arquivos instalados.",
-    "Após a migração, as próximas versões voltam a utilizar atualizações incrementais."
+    "[Correção] Tokito Bot V10.1.104",
+    "O Menu RPG exibe novamente os comandos existentes de Pokémon, Pets, Magia, Cidade, Level e N-Coins que não estavam listados.",
+    "Mantidas todas as categorias Jornada, Aventura, Desafios, Guildas, Magia, Pokémon, Pets, Cidade, N-Coins e Mineração.",
+    "Histórico técnico consolidado após a recuperação da 10.1.103, sem reanunciar as versões de correção 10.1.80 e 10.1.81.",
+    "Atualizações futuras continuam usando o fluxo incremental depois da recuperação inicial."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Tokito Bot V10.1.103",
-  "notice": "A versão 10.1.103 recupera instalações que não conseguiam baixar os arquivos da atualização.",
+  "title": "Tokito Bot V10.1.104",
+  "notice": "Menu RPG completo e histórico técnico consolidado.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "",
+      "size": 0
+    },
     {
       "path": "DADOS_TOKITO/sistemas/dados.js",
       "sha256": "",
@@ -2360,136 +2364,24 @@
       "publishedAt": "2026-10-09T15:30:00.000Z"
     },
     {
-      "version": "10.1.80",
+      "version": "10.1.104",
       "fromVersion": "10.1.79",
       "channel": "stable",
       "type": "Correção",
-      "title": "Correção do sistema de atualização",
-      "notice": "A versão 10.1.80 já está disponível para atualização.",
+      "title": "Menu RPG completo e histórico consolidado",
+      "notice": "Menu RPG completo e histórico técnico consolidado.",
       "changelog": [
-        "Corrige o caso em que o update mostrava uma nova versão, mas indicava 0 arquivos alterados.",
-        "Prioriza o manifesto mais completo quando API e GitHub retornam a mesma versão.",
-        "Usa os arquivos principais da atualização quando o histórico remoto ainda não estiver sincronizado."
+        "O Menu RPG exibe novamente os comandos existentes de Pokémon, Pets, Magia, Cidade, Level e N-Coins que não estavam listados.",
+        "Mantidas todas as categorias Jornada, Aventura, Desafios, Guildas, Magia, Pokémon, Pets, Cidade, N-Coins e Mineração.",
+        "Histórico técnico consolidado após a recuperação da 10.1.103, sem reanunciar as versões de correção 10.1.80 e 10.1.81.",
+        "Atualizações futuras continuam usando o fluxo incremental depois da recuperação inicial."
       ],
       "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/dados.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-09T16:33:26.648Z"
-    },
-    {
-      "version": "10.1.81",
-      "fromVersion": "10.1.78",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Ponte de atualização para instalações 10.1.78",
-      "notice": "A versão 10.1.81 corrige a instalação das atualizações a partir da 10.1.78.",
-      "changelog": [
-        "Manifesto cumulativo para permitir que instalações 10.1.78 recebam todos os arquivos pendentes.",
-        "Inclui as alterações da 10.1.79 e a correção do atualizador da 10.1.80.",
-        "Evita o estado em que o bot detectava a nova versão, mas mostrava 0 arquivos alterados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/figurinhas/packfig.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/play.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/spotify.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/soundcloud.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/deezer.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/playvideo.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/coins/minerar.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/coins/mineracao.js",
-          "sha256": "",
-          "size": 0
-        },
         {
           "path": "DADOS_TOKITO/mensagens/menus.js",
           "sha256": "",
           "size": 0
         },
-        {
-          "path": "DADOS_TOKITO/sistemas/dados.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-09T16:30:00.000Z"
-    },
-    {
-      "version": "10.1.103",
-      "fromVersion": "10.1.81",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Recuperação do sistema de atualização",
-      "notice": "A versão 10.1.103 recupera instalações que não conseguiam baixar os arquivos da atualização.",
-      "changelog": [
-        "Recuperação da instalação para versões antigas que só recebiam o aviso de atualização, mas não os arquivos.",
-        "Primeira instalação usa a migração completa protegendo configurações, sessões e bancos de dados.",
-        "Corrigida a origem dos manifestos: o GitHub publicado tem prioridade sobre dados ainda não sincronizados na Tokito APIs.",
-        "Corrigidos o fallback de releases e a contagem de arquivos instalados.",
-        "Após a migração, as próximas versões voltam a utilizar atualizações incrementais."
-      ],
-      "files": [
         {
           "path": "DADOS_TOKITO/sistemas/dados.js",
           "sha256": "",
@@ -2508,13 +2400,13 @@
       ],
       "delete": [],
       "required": true,
-      "publishedAt": "2026-10-09T16:46:17.640Z"
+      "publishedAt": "2026-10-09T17:00:00.000Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.81",
+  "fromVersion": "10.1.103",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
