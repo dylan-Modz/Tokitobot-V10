@@ -1,25 +1,85 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.80",
+  "version": "10.1.81",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-09T16:33:26.648Z",
+  "publishedAt": "2026-10-09T16:30:00.000Z",
   "changelog": [
-    "[Correção] Tokito Bot V10.1.80",
-    "Corrigido o atualizador que podia mostrar 0 arquivos alterados mesmo com uma versão nova disponível.",
-    "Quando a Tokito APIs e o GitHub informarem a mesma versão, o bot agora usa o manifesto com mais arquivos pendentes.",
-    "Se o histórico de releases ainda não tiver a versão nova, o atualizador usa a lista principal de arquivos como fallback.",
-    "O comando update start deixa de tratar uma atualização pendente como se o bot já estivesse na versão mais recente."
+    "[Correção] Tokito Bot V10.1.81",
+    "Corrigida a atualização para instalações que ainda estão na versão 10.1.78.",
+    "O manifesto desta versão inclui de forma cumulativa os arquivos da 10.1.79, 10.1.80 e 10.1.81.",
+    "O comando update start agora consegue baixar os arquivos pendentes em vez de apenas avisar que existe uma versão nova.",
+    "Mantidas as mudanças do RPG, mineração, downloads e Packfig publicadas na 10.1.79."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Tokito Bot V10.1.80",
-  "notice": "A versão 10.1.80 corrige a detecção e instalação de arquivos no atualizador.",
+  "title": "Tokito Bot V10.1.81",
+  "notice": "A versão 10.1.81 corrige a ponte de atualização para instalações que ainda estão na 10.1.78.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
+    {
+      "path": "DADOS_TOKITO/plugins/figurinhas/packfig.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/play.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/spotify.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/soundcloud.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/deezer.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/playvideo.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/coins/minerar.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/coins/mineracao.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "",
+      "size": 0
+    },
     {
       "path": "DADOS_TOKITO/sistemas/dados.js",
       "sha256": "",
@@ -2380,10 +2440,98 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-09T16:33:26.648Z"
+    },
+    {
+      "version": "10.1.81",
+      "fromVersion": "10.1.78",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Ponte de atualização para instalações 10.1.78",
+      "notice": "A versão 10.1.81 corrige a instalação das atualizações a partir da 10.1.78.",
+      "changelog": [
+        "Manifesto cumulativo para permitir que instalações 10.1.78 recebam todos os arquivos pendentes.",
+        "Inclui as alterações da 10.1.79 e a correção do atualizador da 10.1.80.",
+        "Evita o estado em que o bot detectava a nova versão, mas mostrava 0 arquivos alterados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/packfig.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/play.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/spotify.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/soundcloud.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/deezer.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playvideo.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/coins/minerar.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/coins/mineracao.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-09T16:30:00.000Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.79"
+  "fromVersion": "10.1.78"
 }
