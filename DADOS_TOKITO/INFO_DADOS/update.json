@@ -1,51 +1,90 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.1.80",
+  "version": "10.1.79",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-09T15:52:09.105Z",
+  "publishedAt": "2026-10-09T15:30:00.000Z",
   "changelog": [
-    "[Melhoria] style: padroniza resultados do RPG",
-    "A versão 10.1.80 já está disponível para atualização.",
-    "Applemusic atualizado",
-    "Deezer atualizado",
-    "Playdoc atualizado",
-    "Playvideo atualizado",
-    "Texto atualizado"
+    "[Atualização] Tokito Bot V10.1.79",
+    "Menu RPG reorganizado em categorias com Jornada, Aventura, Desafios, Guildas, Magia, Pokémon, Pets, Cidade, N-Coins e Mineração.",
+    "Mineração expandida com inventário de minérios, venda, picaretas, loja, melhorias, minas, exploração e ranking.",
+    "Resultados do RPG receberam o novo padrão visual compacto.",
+    "Play, Spotify, Deezer, SoundCloud, Apple Music, vídeo e documento receberam o novo design de informações.",
+    "Packfig agora mostra apenas o aviso de criação e envia o pacote diretamente ao finalizar."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "style: padroniza resultados do RPG",
-  "notice": "A versão 10.1.80 já está disponível para atualização.",
+  "type": "Atualização",
+  "title": "Tokito Bot V10.1.79",
+  "notice": "A versão 10.1.79 está disponível com a reorganização do RPG, mineração expandida e novo visual dos downloads.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
-      "sha256": "e5bd379518a27876842028bd402eef0736cba557c9f920d377b148d18b4e6c99",
-      "size": 3562
+      "path": "DADOS_TOKITO/plugins/figurinhas/packfig.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/play.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/spotify.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/soundcloud.js",
+      "sha256": "",
+      "size": 0
     },
     {
       "path": "DADOS_TOKITO/plugins/downloads/deezer.js",
-      "sha256": "ce1e80a4e44601260d0b41ece9093f27be904e101629e4e80f3d22f389f07c0e",
-      "size": 3163
+      "sha256": "",
+      "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
-      "sha256": "65079dc576a760f3c382571e9f67b9d131f03894127e0c1a2d213bb9ae909e53",
-      "size": 4302
+      "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
+      "sha256": "",
+      "size": 0
     },
     {
       "path": "DADOS_TOKITO/plugins/downloads/playvideo.js",
-      "sha256": "fb50b8cb271b16e937d4a8595e165508c48a6841b372ecd9febb657cc8f87997",
-      "size": 5152
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
+      "sha256": "",
+      "size": 0
     },
     {
       "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
-      "sha256": "cd4ef618b394d21d62d5f97e20bc4c55a3019d046cfe798cc19c7539be7b77e2",
-      "size": 2746
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/coins/minerar.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/coins/mineracao.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "package.json",
+      "sha256": "",
+      "size": 0
     }
   ],
   "releases": [
@@ -2285,45 +2324,6 @@
       "publishedAt": "2026-10-08T18:06:17.106Z"
     },
     {
-      "version": "10.1.79",
-      "fromVersion": "10.1.78",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "style: atualiza design do SoundCloud",
-      "notice": "A versão 10.1.79 já está disponível para atualização.",
-      "changelog": [
-        "Play atualizado",
-        "Soundcloud atualizado",
-        "Spotify atualizado",
-        "Packfig atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/play.js",
-          "sha256": "6368f02b0f57a43dbf0262932cd433824af391348ccbf7e8983e11229186aa53",
-          "size": 8887
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/soundcloud.js",
-          "sha256": "83765e7fa5fda2ff2c1abd49cbbcd1cf6557b5516c1eff0448ad346f60a2ac6a",
-          "size": 4045
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/spotify.js",
-          "sha256": "8c0d9db9a7c7ccfb9c111e200305c113891db4fae68873366785151dbc531630",
-          "size": 3892
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/figurinhas/packfig.js",
-          "sha256": "2bb76a71c06524aae0f7f0647a84c70a9038bb81c76a7512de0f67f46171a178",
-          "size": 6032
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-09T15:50:38.371Z"
-    },
-    {
       "version": "10.1.80",
       "fromVersion": "10.1.79",
       "channel": "stable",
@@ -2367,10 +2367,96 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-09T15:52:09.105Z"
+    },
+    {
+      "version": "10.1.79",
+      "fromVersion": "10.1.78",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "RPG reorganizado, mineração expandida e novo visual dos downloads",
+      "notice": "A versão 10.1.79 já está disponível para atualização.",
+      "changelog": [
+        "[Atualização] Tokito Bot V10.1.79",
+        "Menu RPG reorganizado em categorias com Jornada, Aventura, Desafios, Guildas, Magia, Pokémon, Pets, Cidade, N-Coins e Mineração.",
+        "Mineração expandida com inventário de minérios, venda, picaretas, loja, melhorias, minas, exploração e ranking.",
+        "Resultados do RPG receberam o novo padrão visual compacto.",
+        "Play, Spotify, Deezer, SoundCloud, Apple Music, vídeo e documento receberam o novo design de informações.",
+        "Packfig agora mostra apenas o aviso de criação e envia o pacote diretamente ao finalizar."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/packfig.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/play.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/spotify.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/soundcloud.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/deezer.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playvideo.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/coins/minerar.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/coins/mineracao.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-09T15:30:00.000Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.1.77"
+  "fromVersion": "10.1.78"
 }
