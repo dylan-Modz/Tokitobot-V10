@@ -152,18 +152,16 @@ dylan.setCommand({
         const numeroUsuario =
           sender.split('@')[0]
 
-        const texto = `⏤͟͟͞͞𝐌𝐮́𝐬𝐢𝐜𝐚 𝐞𝐧𝐜𝐨𝐧𝐭𝐫𝐚𝐝𝐚! 𖤐⃝🎧
-•
-> ╭ ℹ️ 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂̧𝐎̃𝐄𝐒
-> *[✏️]* • *𝚝𝚒́𝚝𝚞𝚕𝚘:* *${title}*
-> *[⏱️]* • *ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ:* ${duration}
-> *[👥]* • *ᴠɪᴇᴡs:* ${views}
-> *[👨‍🎤]* • *ᴀᴜᴛᴏʀ:* ${canal}
-> *[🔗]* • *ʟɪɴᴋ:* ${url}
-•`
+        const texto = `• \`𝙼𝚄́𝚂𝙸𝙲𝙰 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰\` 🎧
+> ℹ️ \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂\`
+> ✏️ ᴛɪ́ᴛᴜʟᴏ: ${title}
+> ⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ${duration}
+> 👥 ᴠɪᴇᴡs: ${views}
+> 👨‍🎤 ᴀᴜᴛᴏʀ: ${canal}
+> 🔗 ʟɪɴᴋ: ${url}`
 
         const enviandoAudio =
-          `> *[🎼]* • *𝙴𝚗𝚟𝚒𝚊𝚗𝚍𝚘 𝚘 𝚜𝚎𝚞 𝚊́𝚞𝚍𝚒𝚘* _@${numeroUsuario}_`
+          `> 🎼 ᴇɴᴠɪᴀɴᴅᴏ ᴏ sᴇᴜ ᴀ́ᴜᴅɪᴏ para @${numeroUsuario}`
 
         if (isBotoes) {
           try {
