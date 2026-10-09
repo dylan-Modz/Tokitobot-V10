@@ -606,13 +606,22 @@ error: 'Não foi possível consultar a atualização pela API nem pelo GitHub.'
 let remote = apiRemote || rawRemote
 let fonte = apiRemote ? 'api' : 'github'
 
+if (apiRemote && rawRemote) {
+const comparacao = compareVersions(rawRemote.version, apiRemote.version)
+
+const pendentesApi = pendingOperations(apiRemote, local.version)
+const pendentesGithub = pendingOperations(rawRemote, local.version)
+
 if (
-apiRemote &&
-rawRemote &&
-compareVersions(rawRemote.version, apiRemote.version) > 0
+comparacao > 0 ||
+(
+comparacao === 0 &&
+pendentesGithub.operations.length > pendentesApi.operations.length
+)
 ) {
 remote = rawRemote
 fonte = 'github'
+}
 }
 
 try {
@@ -682,7 +691,7 @@ function pendingOperations(remote = {}, localVersion = '0.0.0') {
 const hasReleases = Array.isArray(remote.releases)
 const hasFiles = Array.isArray(remote.files)
 const incremental = hasReleases || hasFiles
-const releases = hasReleases
+let releases = hasReleases
 ? remote.releases
 .filter(item => item && typeof item === 'object')
 .filter(item => compareVersions(item.version, localVersion) > 0)
@@ -690,9 +699,26 @@ const releases = hasReleases
 .sort((a, b) => compareVersions(a.version, b.version))
 : [{
 version: remote.version,
+fromVersion: remote.fromVersion,
 files: Array.isArray(remote.files) ? remote.files : [],
 delete: Array.isArray(remote.delete) ? remote.delete : []
 }]
+
+// Algumas rotas da API podem publicar a versão nova antes de atualizar
+// o histórico de releases. Nesse caso, usa o manifesto principal da versão
+// em vez de concluir incorretamente que não existem arquivos pendentes.
+if (
+!releases.length &&
+hasFiles &&
+compareVersions(remote.version, localVersion) > 0
+) {
+releases = [{
+version: remote.version,
+fromVersion: remote.fromVersion,
+files: remote.files,
+delete: Array.isArray(remote.delete) ? remote.delete : []
+}]
+}
 
 const firstRelease = releases[0]
 const historyGap = Boolean(
