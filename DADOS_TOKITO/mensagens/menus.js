@@ -54,16 +54,16 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡📚｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝑂𝑈𝑇𝑅𝑂𝑆-𝑀𝐸𝑁𝑈𝑆
-├╾═╼･ﾟ𖤐ﾟ･｡🧊｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menudown — músicas, vídeos e arquivos
-┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menujogos — jogos e desafios
-┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menubn — brincadeiras e rankings
-┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menurpg — jornada, guildas, pets e Pokémon
-┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menuff — recursos de Free Fire
-┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menulogos — logos e efeitos de texto
-┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menualt — efeitos de áudio e vídeo
-┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menuadm — administração do grupo
-┃࣪ ╎—̳͟͞͞ 🧊 ${prefix}menudono — configurações do dono
+├╾═╼･ﾟ𖤐ﾟ･｡📖｡･ﾟ𖤐ﾟ･╾═╼┤
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}menudown — músicas, vídeos e arquivos
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}menujogos — jogos e desafios
+┃࣪ ╎—̳͟͞͞ 🎉 ${prefix}menubn — brincadeiras e rankings
+┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}menurpg — jornada, guildas, pets e Pokémon
+┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}menuff — recursos de Free Fire
+┃࣪ ╎—̳͟͞͞ 🎨 ${prefix}menulogos — logos e efeitos de texto
+┃࣪ ╎—̳͟͞͞ 🎚️ ${prefix}menualt — efeitos de áudio e vídeo
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}menuadm — administração do grupo
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}menudono — configurações do dono
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -209,6 +209,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}grupo a/f
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}fechargp 22:00
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}abrirgp 07:00
+┃࣪ ╎—̳͟͞͞ ⏰ ${prefix}horariogp
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}add 5511999999999
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}ban @usuario
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}promover @usuario
@@ -856,7 +857,10 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-├─ ⊹ 𖤐  𝐽𝑂𝑅𝑁𝐴𝐷𝐴 🗺️
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡🗺️｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝐽𝑂𝑅𝑁𝐴𝐷𝐴
+├╾═╼･ﾟ𖤐ﾟ･｡🧭｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}jornada
 ┃࣪ ╎—̳͟͞͞ 🧙 ${prefix}classe
 ┃࣪ ╎—̳͟͞͞ 📖 ${prefix}historia
@@ -876,34 +880,50 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}blocklevel
 ┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}unblocklevel
 ┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}modorpg
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-├─ ⊹ 𖤐  𝐴𝑉𝐸𝑁𝑇𝑈𝑅𝐴 🧭
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡🧭｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝐴𝑉𝐸𝑁𝑇𝑈𝑅𝐴
+├╾═╼･ﾟ𖤐ﾟ･｡🌲｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🗺️ ${prefix}aventura
 ┃࣪ ╎—̳͟͞͞ 🌲 ${prefix}explorar
 ┃࣪ ╎—̳͟͞͞ 📜 ${prefix}historia
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-├─ ⊹ 𖤐  𝐷𝐸𝑆𝐴𝐹𝐼𝑂𝑆 ⚔️
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡⚔️｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝐷𝐸𝑆𝐴𝐹𝐼𝑂𝑆
+├╾═╼･ﾟ𖤐ﾟ･｡🏆｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🐉 ${prefix}torre
 ┃࣪ ╎—̳͟͞͞ 🏚️ ${prefix}masmorra
 ┃࣪ ╎—̳͟͞͞ 👹 ${prefix}boss
 ┃࣪ ╎—̳͟͞͞ ⚔️ ${prefix}raid @usuario
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-├─ ⊹ 𖤐  𝐺𝑈𝐼𝐿𝐷𝐴𝑆 🏰
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡🏰｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝐺𝑈𝐼𝐿𝐷𝐴𝑆
+├╾═╼･ﾟ𖤐ﾟ･｡🛡️｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}guilda
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}criarguilda Nome
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}entrarguilda id
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}sairguilda
 ┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankguilda
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-├─ ⊹ 𖤐  𝑀𝐴𝐺𝐼𝐴 🔮
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡🔮｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝑀𝐴𝐺𝐼𝐴
+├╾═╼･ﾟ𖤐ﾟ･｡✨｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}magia
 ┃࣪ ╎—̳͟͞͞ 👤 ${prefix}magoperfil
 ┃࣪ ╎—̳͟͞͞ ✨ ${prefix}despertarmagia
@@ -952,10 +972,14 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}leilaomagico
 ┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}bauarcano
 ┃࣪ ╎—̳͟͞͞ 🔮 ${prefix}roletamagica
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-├─ ⊹ 𖤐  𝑃𝑂𝐾𝐸́𝑀𝑂𝑁 ⚡
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡⚡｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝑃𝑂𝐾𝐸́𝑀𝑂𝑁
+├╾═╼･ﾟ𖤐ﾟ･｡🔴｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}lojapokemon
 ┃࣪ ╎—̳͟͞͞ 👀 ${prefix}verpokemon
 ┃࣪ ╎—̳͟͞͞ 📕 ${prefix}pokedex
@@ -1024,10 +1048,14 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 📜 ${prefix}streakpokemon
 ┃࣪ ╎—̳͟͞͞ 📜 ${prefix}conquistapokemon
 ┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}titulopokemon
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-├─ ⊹ 𖤐  𝑃𝐸𝑇𝑆 🐾
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡🐾｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝑃𝐸𝑇𝑆
+├╾═╼･ﾟ𖤐ﾟ･｡❤️｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}petshop
 ┃࣪ ╎—̳͟͞͞ 🐶 ${prefix}verpet
 ┃࣪ ╎—̳͟͞͞ 🍖 ${prefix}alimentarpet
@@ -1051,10 +1079,14 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🐾 ${prefix}petbatalha
 ┃࣪ ╎—̳͟͞͞ 🧬 ${prefix}evoluirpet
 ┃࣪ ╎—̳͟͞͞ 🐾 ${prefix}eventopet
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-├─ ⊹ 𖤐  𝐶𝐼𝐷𝐴𝐷𝐸 🌆
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡🌆｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝐶𝐼𝐷𝐴𝐷𝐸
+├╾═╼･ﾟ𖤐ﾟ･｡🏙️｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}cidade
 ┃࣪ ╎—̳͟͞͞ 👤 ${prefix}perfilcidade
 ┃࣪ ╎—̳͟͞͞ 💼 ${prefix}empregoscidade
@@ -1100,10 +1132,14 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}venderpeixes
 ┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}buscarcidade
 ┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}divorciocidade
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-├─ ⊹ 𖤐  𝑁-𝐶𝑂𝐼𝑁𝑆 🪙
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡🪙｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝑁-𝐶𝑂𝐼𝑁𝑆
+├╾═╼･ﾟ𖤐ﾟ･｡💰｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🪙 ${prefix}coins
 ┃࣪ ╎—̳͟͞͞ 💸 ${prefix}doarcoins 100 @usuario
 ┃࣪ ╎—̳͟͞͞ 💼 ${prefix}trabalharcoins
@@ -1124,10 +1160,14 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarpocao
 ┃࣪ ╎—̳͟͞͞ 🪙 ${prefix}escudo
 ┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarescudo
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-├─ ⊹ 𖤐  𝑀𝐼𝑁𝐸𝑅𝐴𝐶̧𝐴̃𝑂 ⛏️
+┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
+├╾═╼･ﾟ𖤐ﾟ･｡⛏️｡･ﾟ𖤐ﾟ･╾═╼┤
+├─ ⊹ 𖤐  𝑀𝐼𝑁𝐸𝑅𝐴𝐶̧𝐴̃𝑂
+├╾═╼･ﾟ𖤐ﾟ･｡💎｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ ⛏️ ${prefix}minerar
 ┃࣪ ╎—̳͟͞͞ 💎 ${prefix}minerios
 ┃࣪ ╎—̳͟͞͞ 💰 ${prefix}venderminerios
@@ -1138,6 +1178,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🧭 ${prefix}explorarmina
 ┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankmineracao
 ┃࣪ ╎—̳͟͞͞ 🛒 ${prefix}comprarpicareta
+┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
 
