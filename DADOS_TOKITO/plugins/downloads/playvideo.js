@@ -143,16 +143,14 @@ dylan.setCommand({
           `?q=${encodeURIComponent(url)}` +
           `&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
 
-        const texto = `⏤͟͟͞͞𝐕𝐢́𝐝𝐞𝐨 𝐞𝐧𝐜𝐨𝐧𝐭𝐫𝐚𝐝𝐨! 𖤐⃝🎥
-•
-> ╭ ℹ️ 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐂̧𝐎̃𝐄𝐒
-> *[✏️]* • *𝚝𝚒́𝚝𝚞𝚕𝚘:* *${titulo}*
-> *[⏱️]* • *ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ:* ${duracao}
-> *[👥]* • *ᴠɪᴇᴡs:* ${views}
-> *[👨‍🎤]* • *ᴀᴜᴛᴏʀ:* ${canal}
-> *[🔗]* • *ʟɪɴᴋ:* ${url}
-•
-> *[🎬]* • *𝙴𝚗𝚟𝚒𝚊𝚗𝚍𝚘 𝚘 𝚜𝚎𝚞 𝚟𝚒́𝚍𝚎𝚘* _@${numeroUsuario}_`
+        const texto = `• \`𝚅𝙸́𝙳𝙴𝙾 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙾\` 🎥
+> ℹ️ \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂\`
+> ✏️ ᴛɪ́ᴛᴜʟᴏ: ${titulo}
+> ⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ${duracao}
+> 👥 ᴠɪᴇᴡs: ${views}
+> 👨‍🎤 ᴀᴜᴛᴏʀ: ${canal}
+> 🔗 ʟɪɴᴋ: ${url}
+> 🎬 ᴇɴᴠɪᴀɴᴅᴏ ᴏ sᴇᴜ ᴠɪ́ᴅᴇᴏ para @${numeroUsuario}`
 
         if (thumbnail) {
           await tokito.sendMessage(
