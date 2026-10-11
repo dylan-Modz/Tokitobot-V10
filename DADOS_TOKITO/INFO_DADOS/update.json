@@ -6,18 +6,17 @@
   "ref": "main",
   "publishedAt": "2026-10-11T07:51:16.196Z",
   "changelog": [
-    "[Novidade] feat: 10-minute register flow name age city and profile",
-    "A versão 10.2.22 já está disponível para atualização.",
-    "Conexão do bot atualizada",
-    "Mensagens atualizado",
-    "Registrar atualizado",
-    "Registro atualizado"
+    "Registro com prazo de 10 minutos para membros novos se apresentarem, com aviso automático quando o prazo vence.",
+    "Cadastro simplificado em 3 etapas: nome, idade e cidade. Idade e cidade podem ser puladas.",
+    "Os dados de apresentação passam a aparecer no perfil do membro, sem alterar perfis antigos.",
+    "Prazo continua válido após reiniciar o bot; ao vencer, interrompe a tentativa e mantém os comandos bloqueados até concluir o cadastro.",
+    "Não remove membros automaticamente do grupo; nova tentativa disponível com registrar iniciar."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat: 10-minute register flow name age city and profile",
-  "notice": "A versão 10.2.22 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "Apresentação com prazo e cadastro simplificado",
+  "notice": "Registro com 10 minutos para concluir nome, idade e cidade.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -40,6 +39,12 @@
       "path": "DADOS_TOKITO/sistemas/registro.js",
       "sha256": "3c6b075096e1831bb449a4e86167013dff1d575ce808ee6e533dacc04443f814",
       "size": 12953
+    },
+    {
+      "path": "package.json",
+      "gitSha": "922fd0e81e68f68359362944bf9037036e01da1a",
+      "sha256": "",
+      "size": 0
     }
   ],
   "releases": [
@@ -3269,14 +3274,15 @@
       "version": "10.2.22",
       "fromVersion": "10.2.21",
       "channel": "stable",
-      "type": "Novidade",
-      "title": "feat: 10-minute register flow name age city and profile",
-      "notice": "A versão 10.2.22 já está disponível para atualização.",
+      "type": "Melhoria",
+      "title": "Apresentação com prazo e cadastro simplificado",
+      "notice": "Registro com 10 minutos para concluir nome, idade e cidade.",
       "changelog": [
-        "Conexão do bot atualizada",
-        "Mensagens atualizado",
-        "Registrar atualizado",
-        "Registro atualizado"
+        "Registro com prazo de 10 minutos para membros novos se apresentarem, com aviso automático quando o prazo vence.",
+        "Cadastro simplificado em 3 etapas: nome, idade e cidade. Idade e cidade podem ser puladas.",
+        "Os dados de apresentação passam a aparecer no perfil do membro, sem alterar perfis antigos.",
+        "Prazo continua válido após reiniciar o bot; ao vencer, interrompe a tentativa e mantém os comandos bloqueados até concluir o cadastro.",
+        "Não remove membros automaticamente do grupo; nova tentativa disponível com registrar iniciar."
       ],
       "files": [
         {
@@ -3298,6 +3304,12 @@
           "path": "DADOS_TOKITO/sistemas/registro.js",
           "sha256": "3c6b075096e1831bb449a4e86167013dff1d575ce808ee6e533dacc04443f814",
           "size": 12953
+        },
+        {
+          "path": "package.json",
+          "gitSha": "922fd0e81e68f68359362944bf9037036e01da1a",
+          "sha256": "",
+          "size": 0
         }
       ],
       "delete": [],
@@ -3308,11 +3320,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.20",
+  "fromVersion": "10.2.21",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.21"
+  "publicVersion": "10.2.22"
 }
