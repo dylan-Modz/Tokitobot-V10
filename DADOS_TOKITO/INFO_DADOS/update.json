@@ -6,15 +6,16 @@
   "ref": "main",
   "publishedAt": "2026-10-11T07:39:15.188Z",
   "changelog": [
-    "[Melhoria] chore: bump Tokito Bot version to 10.2.20",
-    "A versão 10.2.21 já está disponível para atualização.",
-    "Package atualizado"
+    "[Correção] Menus numéricos: o sairall agora exporta as funções usadas pelo evento de respostas.",
+    "[Correção] Ao abrir sairall, seleções pendentes do bangplit são encerradas para evitar conflitos.",
+    "[Melhoria] O carregador recupera eventos pendentes mesmo em mensagens sem prefixo.",
+    "[Pacote] Atualização incremental do package.json incluída na 10.2.21."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "chore: bump Tokito Bot version to 10.2.20",
-  "notice": "A versão 10.2.21 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "Menus numéricos corrigidos",
+  "notice": "As opções 1, 2, 3... dos painéis de grupos foram corrigidas na 10.2.20; a 10.2.21 sincroniza a versão do pacote.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -3203,11 +3204,12 @@
       "fromVersion": "10.2.19",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix: restore numeric menu handlers for sairall and pending events (10.2.20)",
-      "notice": "A versão 10.2.20 já está disponível para atualização.",
+      "title": "Correção dos menus numéricos",
+      "notice": "Corrigida a seleção de grupos do sairall e o carregamento de respostas sem prefixo.",
       "changelog": [
-        "Sairall atualizado",
-        "Index atualizado"
+        "[Correção] Menus numéricos: o sairall agora exporta as funções usadas pelo evento de respostas.",
+        "[Correção] Ao abrir sairall, seleções pendentes do bangplit são encerradas para evitar conflitos.",
+        "[Melhoria] O carregador recupera eventos pendentes mesmo em mensagens sem prefixo."
       ],
       "files": [
         {
@@ -3230,10 +3232,10 @@
       "fromVersion": "10.2.20",
       "channel": "stable",
       "type": "Melhoria",
-      "title": "chore: bump Tokito Bot version to 10.2.20",
-      "notice": "A versão 10.2.21 já está disponível para atualização.",
+      "title": "Sincronização do pacote da correção",
+      "notice": "Atualiza o package.json para a família V10.2.20 e conclui o pacote de correções dos menus.",
       "changelog": [
-        "Package atualizado"
+        "Sincroniza package.json da correção V10.2.20 e preserva todas as melhorias publicadas."
       ],
       "files": [
         {
@@ -3250,11 +3252,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.18",
+  "fromVersion": "10.2.20",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.19"
+  "publicVersion": "10.2.21"
 }
