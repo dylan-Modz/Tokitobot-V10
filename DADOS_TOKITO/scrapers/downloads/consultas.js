@@ -59,18 +59,6 @@ async function enviar(ctx, texto, imagem) {
   return ctx.reply(texto)
 }
 
-const temas = {
-  fantasia: 'fantasy', fantasy: 'fantasy',
-  acao: 'action', 'ação': 'action', action: 'action',
-  aventura: 'adventure', adventure: 'adventure',
-  terror: 'horror', horror: 'horror',
-  mitologia: 'mythology', mythology: 'mythology',
-  natureza: 'nature', nature: 'nature',
-  historico: 'historical', 'histórico': 'historical',
-  estrategia: 'strategy', 'estratégia': 'strategy',
-  ficcao: 'sci-fi', 'ficção': 'sci-fi', 'sci-fi': 'sci-fi'
-}
-
 async function executar(ctx, tipo) {
   const busca = limpar(ctx.q, '', 150)
   const exemplos = {
@@ -78,7 +66,6 @@ async function executar(ctx, tipo) {
     brasileirao: '',
     wallpaper: 'sukuna',
     noticias: '',
-    username: 'Yoshi fantasia',
     filme: 'interestelar',
     serie: 'breaking bad'
   }
@@ -102,99 +89,51 @@ async function executar(ctx, tipo) {
       mensagem += campo('Status', status, '\n> ✅ Verificado: ' + (r.verificado ? 'Sim' : 'Não') + '\n> 🚫 Banido: ' + (r.banido ? 'Sim' : 'Não'))
       foto = r.avatar?.headshot || r.avatar?.fullBody || r.avatar?.bust
     } else if (tipo === 'brasileirao') {
-      // A imagem vem do Boca Notícias. Todos os números continuam vindo da Tokito APIs.
-      const imagemBrasileirao = 'https://images.boca.com.br/upload/imagens-resizes/ae4a7c11b147effb4792d4a8cf0a5eaa_858x483.png'
       dados = await consultar('/api/brasileirao')
       r = dados?.resultado
-      if (!r || typeof r !== 'object' || Array.isArray(r)) {
+      if (!Array.isArray(r?.tabela) || !r.tabela.length)
         return reportar(ctx, '𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾', 'Classificação indisponível.')
-      }
-      lista = Array.isArray(r.tabela) ? r.tabela : []
-      if (!lista.length) {
-        return reportar(ctx, '𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾', 'Nenhum dado da classificação foi encontrado.')
-      }
-
-      const lider = lista[0]
-      const pontuacao = valor => valor == null || valor === '' ? '—' : numero(valor)
-      const golsSaldo = valor => {
-        if (valor === null || valor === undefined || valor === '') return '—'
-        const n = Number(valor)
-        return Number.isFinite(n) ? (n > 0 ? '+' : '') + String(n) : limpar(valor, '—', 16)
-      }
-      const porcentagem = valor => {
-        if (valor === null || valor === undefined || valor === '') return '—'
-        const texto = limpar(valor, '—', 24)
-        return texto === '—' ? texto : texto.endsWith('%') ? texto : texto + '%'
-      }
-      const detalhesTime = (time, indice) => {
-        const posicao = limpar(time?.posicao, String(indice + 1), 4)
-        const nome = limpar(time?.nome, 'Time', 60)
-        const sigla = limpar(time?.sigla, '', 10)
-        const clube = nome + (sigla ? ' (' + sigla + ')' : '')
-        return [
-          '- ' + posicao.padStart(2, '0') + 'º — ' + String.fromCharCode(96) + clube + String.fromCharCode(96),
-          '> 🏆 ' + pontuacao(time?.pontos) + ' pontos | ⚽ ' + pontuacao(time?.jogos) + ' jogos',
-          '> ✅ ' + pontuacao(time?.vitorias) + ' vitórias | 🤝 ' + pontuacao(time?.empates) + ' empates | ❌ ' + pontuacao(time?.derrotas) + ' derrotas',
-          '> 🥅 Saldo: ' + golsSaldo(time?.saldo_gols) + ' | 📊 Aproveitamento: ' + porcentagem(time?.aproveitamento)
-        ].join('\n')
-      }
-      mensagem = inicio(
-        '𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾 𝚂𝙴́𝚁𝙸𝙴 𝙰', '⚽',
-        '🏆 ' + limpar(r.campeonato, 'Campeonato Brasileiro • Série A', 90)
-      )
-      mensagem += '\n\n- ' + String.fromCharCode(96) + '𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂' + String.fromCharCode(96) + ' 📋'
-      mensagem += '\n> 📅 Temporada: ' + limpar(r.temporada, '—', 30)
-      mensagem += '\n> 🥇 Líder: ' + limpar(lider?.nome, '—', 60) + ' — ' + pontuacao(lider?.pontos) + ' pontos'
-      mensagem += '\n> ⚽ Times participantes: ' + lista.length
-      mensagem += '\n\n- ' + String.fromCharCode(96) + '𝙲𝙻𝙰𝚂𝚂𝙸𝙵𝙸𝙲𝙰𝙲̧𝙰̃𝙾 𝙲𝙾𝙼𝙿𝙻𝙴𝚃𝙰' + String.fromCharCode(96) + ' 📊'
-      mensagem += '\n\n' + lista.map(detalhesTime).join('\n\n')
-
-      const artilheiros = Array.isArray(r.artilheiros) ? r.artilheiros.slice(0, 3) : []
-      if (artilheiros.length) {
-        mensagem += '\n\n- ' + String.fromCharCode(96) + '𝙰𝚁𝚃𝙸𝙻𝙷𝙰𝚁𝙸𝙰' + String.fromCharCode(96) + ' ⚽'
-        mensagem += '\n' + artilheiros.map((j, i) =>
-          '> ' + ['🥇', '🥈', '🥉'][i] + ' ' + limpar(j?.jogador, 'Jogador', 70) +
-          ' — ' + pontuacao(j?.gols) + ' gols'
-        ).join('\n')
-      }
-
-      const jogos = Array.isArray(r.rodada_atual) ? r.rodada_atual.slice(0, 10) : []
-      if (jogos.length) {
-        mensagem += '\n\n- ' + String.fromCharCode(96) + '𝙹𝙾𝙶𝙾𝚂 𝙳𝙰 𝚁𝙾𝙳𝙰𝙳𝙰' + String.fromCharCode(96) + ' 🏟️'
-        mensagem += '\n' + jogos.map(jogo => {
-          const confronto = '> ⚽ ' + limpar(jogo?.mandante, 'Time', 50) +
-            ' x ' + limpar(jogo?.visitante, 'Time', 50)
-          const data = limpar(jogo?.data, '', 35)
-          const hora = limpar(jogo?.hora || jogo?.horario, '', 20)
-          const detalhes = [data ? '📅 ' + data : '', hora ? '⏰ ' + hora : ''].filter(Boolean)
-          return confronto + (detalhes.length ? '\n> ' + detalhes.join(' | ') : '')
-        }).join('\n')
-      }
-      // Como no V9: foto de capa + legenda com toda a tabela no estilo atual.
-      foto = imagemBrasileirao
+      // Capa Boca Notícias + classificação V9 no design V10, numa imagem única.
+      const { gerar } = require('./brasileirao-card')
+      const imagem = await gerar(r)
+      await ctx.tokito.sendMessage(ctx.from, {
+        image: imagem,
+        mimetype: 'image/jpeg',
+        caption: inicio('𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾 𝚂𝙴́𝚁𝙸𝙴 𝙰', '⚽',
+          'Classificação completa, artilharia e jogos no card.'),
+        contextInfo: { ...(ctx.newsletter || {}), mentionedJid: ctx.sender ? [ctx.sender] : [] }
+      }, { quoted: ctx.selo })
+      await reagir(ctx, '✅')
+      return
     } else if (tipo === 'wallpaper') {
-      dados = await consultar('/api/wallpaper-search', { query: busca, limite: 5 })
-      lista = Array.isArray(dados?.resultado) ? dados.resultado.filter(x => link(x?.imagem)).slice(0, 5) : []
-      if (!lista.length) return reportar(ctx, '𝚆𝙰𝙻𝙻𝙿𝙰𝙿𝙴𝚁', 'Nenhuma imagem encontrada.')
-      mensagem = inicio('𝚆𝙰𝙻𝙻𝙿𝙰𝙿𝙴𝚁', '🖼️', 'Imagem encontrada com sucesso.')
-      mensagem += campo('Pesquisa', busca, '\n> 🖼️ Resultado: 1 de ' + lista.length)
-      mensagem += campo('Imagem', 'Disponível ✅', '\n> Wallpaper enviado com sucesso.')
-      // Em caso de falha ao baixar a primeira imagem, tenta as outras.
-      for (const item of lista) {
-        try {
-          if (ctx.tokito && typeof ctx.tokito.sendMessage === 'function') {
-            await ctx.tokito.sendMessage(ctx.from, {
-              image: { url: item.imagem },
-              caption: mensagem,
-              contextInfo: { ...(ctx.newsletter || {}), mentionedJid: ctx.sender ? [ctx.sender] : [] }
-            }, { quoted: ctx.selo })
-            await reagir(ctx, '✅')
-            return
-          }
-        } catch (e) { console.log('[WALLPAPER IMAGEM]', e?.message || String(e)) }
+      dados = await consultar('/api/wallpaper-search', { query: busca, limite: 8 })
+      lista = Array.isArray(dados?.resultado)
+        ? dados.resultado.map(x => ({ imagem: link(x?.imagem || x?.url), titulo: x?.titulo }))
+          .filter(x => x.imagem).slice(0, 8)
+        : []
+      if (!lista.length) return reportar(ctx, '𝚆𝙰𝙻𝙻𝙿𝙰𝙿𝙴𝚁', 'Nenhum wallpaper encontrado.')
+      mensagem = inicio('𝚆𝙰𝙻𝙻𝙿𝙰𝙿𝙴𝚁', '🖼️', 'Resultados da pesquisa em álbum.')
+      mensagem += campo('Pesquisa', busca, '\n> 🖼️ ' + lista.length + ' imagens encontradas.')
+      if (lista.length === 1) {
+        await enviar(ctx, mensagem, lista[0].imagem)
+      } else {
+        const album = await ctx.tokito.sendMessage(ctx.from, {
+          album: { expectedImageCount: lista.length, expectedVideoCount: 0 },
+          contextInfo: { ...(ctx.newsletter || {}), mentionedJid: ctx.sender ? [ctx.sender] : [] }
+        }, { quoted: ctx.selo })
+        if (!album?.key) throw new Error('Não foi possível criar o álbum.')
+        for (let i = 0; i < lista.length; i++) {
+          await ctx.tokito.sendMessage(ctx.from, {
+            image: { url: lista[i].imagem },
+            caption: i === 0 ? mensagem : undefined,
+            albumParentKey: album.key,
+            contextInfo: { ...(ctx.newsletter || {}), mentionedJid: ctx.sender ? [ctx.sender] : [] }
+          })
+          await new Promise(resolve => setTimeout(resolve, 120))
+        }
       }
-      mensagem = inicio('𝚆𝙰𝙻𝙻𝙿𝙰𝙿𝙴𝚁', '🖼️', 'Imagem encontrada, mas o envio da mídia falhou.')
-      mensagem += campo('Imagem', lista[0].imagem)
+      await reagir(ctx, '✅')
+      return
     } else if (tipo === 'noticias') {
       dados = await consultar('/api/noticias', { language: 'pt', country: 'BR' })
       lista = Array.isArray(dados?.resultado) ? dados.resultado.filter(x => x?.titulo).slice(0, 3) : []
@@ -202,18 +141,6 @@ async function executar(ctx, tipo) {
       mensagem = inicio('𝙽𝙾𝚃𝙸́𝙲𝙸𝙰𝚂 𝙳𝙾 𝙳𝙸𝙰', '📰', '🌎 Principais notícias do Brasil.')
       mensagem += lista.map((n, i) => campo('Notícia ' + String(i + 1).padStart(2, '0'), limpar(n.fonte, 'Brasil', 80), '\n> ' + limpar(n.titulo, 'Sem título', 240) + (n.publicado ? '\n> 📅 ' + limpar(n.publicado, '', 50) : '') + (link(n.url) ? '\n> 🔗 ' + link(n.url) : ''))).join('')
       mensagem += campo('Resultado', lista.length + (lista.length === 1 ? ' notícia exibida ✅' : ' notícias exibidas ✅'))
-    } else if (tipo === 'username') {
-      const parts = busca.split(/\s+/)
-      const last = parts.at(-1).toLowerCase()
-      const tema = temas[last] || 'fantasy'
-      const nome = temas[last] && parts.length > 1 ? parts.slice(0, -1).join(' ') : busca
-      dados = await consultar('/api/username-generator', { name: nome, theme: tema, mode: 'instans' })
-      lista = Array.isArray(dados?.resultado) ? dados.resultado.slice(0, 5) : []
-      if (!lista.length) return reportar(ctx, '𝙽𝙸𝙲𝙺𝚂', 'Nenhum nome foi gerado.')
-      mensagem = inicio('𝙽𝙸𝙲𝙺𝚂 𝙶𝙴𝚁𝙰𝙳𝙾𝚂', '✨', 'Seus nomes foram gerados.')
-      mensagem += campo('Nome base', nome, '\n> 🎨 Tema: ' + limpar(temas[last] ? last : 'fantasia', '', 60))
-      mensagem += campo('Sugestões', lista.length + ' nomes', '\n' + lista.map((n, i) => '> ' + String(i + 1).padStart(2, '0') + '. ' + limpar(typeof n === 'string' ? n : n?.username || n?.name || n?.nome, '—', 70)).join('\n'))
-      mensagem += campo('Resultado', lista.length + ' nomes gerados ✅')
     } else if (tipo === 'filme' || tipo === 'serie') {
       dados = await consultar(tipo === 'filme' ? '/api/filme' : '/api/serie', { query: busca, limite: 5 })
       lista = Array.isArray(dados?.resultado) ? dados.resultado : []
@@ -232,28 +159,7 @@ async function executar(ctx, tipo) {
       throw new Error('Tipo de consulta desconhecido: ' + tipo)
     }
 
-    if (tipo === 'brasileirao') {
-      // A imagem vai primeiro. A classificação completa sai em texto separado,
-      // sem risco de extrapolar o limite de legenda do WhatsApp.
-      if (link(foto) && ctx.tokito && typeof ctx.tokito.sendMessage === 'function') {
-        try {
-          await ctx.tokito.sendMessage(ctx.from, {
-            image: { url: foto },
-            caption: inicio('𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾 𝚂𝙴́𝚁𝙸𝙴 𝙰', '⚽',
-              '🏆 Confira a classificação completa na próxima mensagem.'),
-            contextInfo: {
-              ...(ctx.newsletter || {}),
-              mentionedJid: ctx.sender ? [ctx.sender] : []
-            }
-          }, { quoted: ctx.selo })
-        } catch (e) {
-          console.log('[BRASILEIRÃO CAPA]', e?.message || String(e))
-        }
-      }
-      await ctx.reply(mensagem)
-    } else {
-      await enviar(ctx, mensagem, foto)
-    }
+    await enviar(ctx, mensagem, foto)
     await reagir(ctx, '✅')
   } catch (e) {
     console.log('[CONSULTA ' + tipo + ']', e?.message || String(e))

@@ -1,34 +1,51 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.13",
+  "version": "10.2.14",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-11T05:33:30.359Z",
+  "publishedAt": "2026-10-11T05:58:51.323Z",
   "changelog": [
-    "[Correção] Tokito Bot V10.2.13",
-    "Corrige downloads de atualização quando o cache do GitHub Raw entrega uma revisão diferente do arquivo.",
-    "Quando o hash não confere, o atualizador tenta uma URL sem cache e busca o blob imutável do GitHub identificado pelo SHA publicado.",
-    "A validação de SHA continua obrigatória: arquivos não verificados jamais são aplicados.",
-    "Demais comandos, menu e imagem do Brasileirão preservados sem alterações."
+    "[Atualização] Tokito Bot V10.2.14",
+    "Brasileirão com capa do Boca Notícias e tabela completa de até 20 clubes geradas juntas em uma única imagem, sem mensagens separadas.",
+    "Card inclui pontos, jogos, vitórias, empates, derrotas, saldo, aproveitamento, artilheiros e confrontos com data e hora quando disponíveis.",
+    "Novo renderizador de imagens sem dependências nativas, mais compatível com Termux e Android; o supervisor instala o pacote pureimage quando necessário.",
+    "Wallpaper pesquisa até 8 resultados e envia em álbum do WhatsApp, usando albumMessage e albumParentKey como no Pinterest.",
+    "Comando username removido do bot, do menu e da lista de atualização.",
+    "Menu Downloads reorganizado: pesquisas, futebol, Roblox, filmes, séries e álbum; lyrics passa para Música e appstore para Apps.",
+    "Atualizador com verificação de integridade preservado, além dos demais comandos e configurações."
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/info/username.js"
+  ],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Correção de cache na integridade do atualizador",
-  "notice": "Atualizador verifica arquivos por SHA e recupera a versão exata do GitHub em caso de cache antigo.",
+  "type": "Atualização",
+  "title": "Brasileirão em card único, wallpaper em álbum e menu organizado",
+  "notice": "Card do Brasileirão e álbum de wallpapers, com remoção do gerador de nomes.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/dados.js",
-      "gitSha": "8409d3f53db1c132ab49da06a91bc7c32942e53d",
+      "path": "DADOS_TOKITO/scrapers/downloads/brasileirao-card.js",
+      "gitSha": "e769c24e257331cf7e4219851ae7a938f7f1aab2",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
+      "gitSha": "fc261c487ffcd2983953c093e1b67aeefc0df2c6",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "gitSha": "6710afebe13d27717434b9d2d1f11c80a40dea50",
       "sha256": "",
       "size": 0
     },
     {
       "path": "package.json",
-      "gitSha": "207873881d3e290bc1dd0145eb9bd672b4f01fb0",
+      "gitSha": "58052eebafdef6be0a3224dedf1267f1f6d5f565",
       "sha256": "",
       "size": 0
     }
@@ -2912,16 +2929,64 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-11T05:33:30.359Z"
+    },
+    {
+      "version": "10.2.14",
+      "fromVersion": "10.2.13",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Brasileirão em card único, wallpaper em álbum e menu organizado",
+      "notice": "Card do Brasileirão e álbum de wallpapers, com remoção do gerador de nomes.",
+      "changelog": [
+        "Brasileirão com capa do Boca Notícias e tabela completa de até 20 clubes geradas juntas em uma única imagem, sem mensagens separadas.",
+        "Card inclui pontos, jogos, vitórias, empates, derrotas, saldo, aproveitamento, artilheiros e confrontos com data e hora quando disponíveis.",
+        "Novo renderizador de imagens sem dependências nativas, mais compatível com Termux e Android; o supervisor instala o pacote pureimage quando necessário.",
+        "Wallpaper pesquisa até 8 resultados e envia em álbum do WhatsApp, usando albumMessage e albumParentKey como no Pinterest.",
+        "Comando username removido do bot, do menu e da lista de atualização.",
+        "Menu Downloads reorganizado: pesquisas, futebol, Roblox, filmes, séries e álbum; lyrics passa para Música e appstore para Apps.",
+        "Atualizador com verificação de integridade preservado, além dos demais comandos e configurações."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/scrapers/downloads/brasileirao-card.js",
+          "gitSha": "e769c24e257331cf7e4219851ae7a938f7f1aab2",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
+          "gitSha": "fc261c487ffcd2983953c093e1b67aeefc0df2c6",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "6710afebe13d27717434b9d2d1f11c80a40dea50",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "gitSha": "58052eebafdef6be0a3224dedf1267f1f6d5f565",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/info/username.js"
+      ],
+      "required": true,
+      "publishedAt": "2026-10-11T05:58:51.323Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.12",
+  "fromVersion": "10.2.13",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.13"
+  "publicVersion": "10.2.14"
 }

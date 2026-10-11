@@ -602,6 +602,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}spotify link
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}spotifysearch música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}spotify_audio link
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}lyrics música
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -616,6 +617,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}aptoide app
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}happymod app
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}playstore app
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}appstore app
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}capcut link
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
@@ -626,18 +628,16 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├─ ⊹ 𖤐  𝑃𝐸𝑆𝑄𝑈𝐼𝑆𝐴𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡🌐｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}wikipedia pesquisa
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}appstore app
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}lyrics música
+┃࣪ ╎—̳͟͞͞ 📰 ${prefix}noticias
+┃࣪ ╎—̳͟͞͞ ⚽ ${prefix}brasileirao
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}robloxstalker usuário
 ┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}anime pesquisa
 ┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}manga pesquisa
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}printsite link
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}robloxstalker usuário
-┃࣪ ╎—̳͟͞͞ ⚽ ${prefix}brasileirao
-┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}wallpaper pesquisa
-┃࣪ ╎—̳͟͞͞ 📰 ${prefix}noticias
-┃࣪ ╎—̳͟͞͞ ✨ ${prefix}username nome fantasia
 ┃࣪ ╎—̳͟͞͞ 🎬 ${prefix}filme nome
 ┃࣪ ╎—̳͟͞͞ 📺 ${prefix}serie nome
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}wallpaper pesquisa (álbum)
+┃࣪ ╎—̳͟͞͞ 📌 ${prefix}pinterest pesquisa (álbum)
+┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}printsite link
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
