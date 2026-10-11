@@ -30,45 +30,34 @@
 
 const dylan = require('../../database/lib/comandos')
 
+// Contato oficial do desenvolvedor no WhatsApp.
+const nome = 'dylan [00]'
+const numero = '5511977951060'
+const vcard = [
+  'BEGIN:VCARD',
+  'VERSION:3.0',
+  'N:;;;;',
+  `FN:${nome}`,
+  `item1.TEL;waid=${numero}:+55 11 97795-1060`,
+  'item1.X-ABLabel:Celular',
+  'END:VCARD'
+].join('\n')
+
 dylan.setCommand({
-nome: "criador",
-comandos: ["criador"],
-categoria: "info",
-
-info: {
-descricao: "Mostra as informações do desenvolvedor do bot.",
-uso: "criador",
-categoria: "info"
-},
-
-async executar(ctx) {
-with (ctx) {
-{
-const texto = `— *✨ ᴄᴏɴᴛᴀᴛᴏ ᴅᴏ ᴅᴇsᴇɴᴠᴏʟᴠᴇᴅᴏʀ*
-
-> *👑 ᴄʀɪᴀᴅᴏʀ:* dylan Modz
-> *📱 ᴄᴏɴᴛᴀᴛᴏ:* https://wa.me/5511975431163
-
-•
-— "ᴀʟɢᴜɴs ᴘʀᴏᴊᴇᴛᴏs ɴᴀsᴄᴇᴍ ᴅᴇ ᴜᴍᴀ ɪᴅᴇɪᴀ.
-ᴏᴜᴛʀᴏs ɴᴀsᴄᴇᴍ ᴅᴀ ᴠᴏɴᴛᴀᴅᴇ ᴅᴇ ғᴀᴢᴇʀ ᴀʟɢᴏ ᴅɪғᴇʀᴇɴᴛᴇ."
-
-•
-- *${NomeDoBot} ғᴏɪ ᴄʀɪᴀᴅᴏ ᴄᴏᴍ ᴏ ᴏʙᴊᴇᴛɪᴠᴏ ᴅᴇ ᴇɴᴛʀᴇɢᴀʀ ᴜᴍᴀ ᴇxᴘᴇʀɪᴇ̂ɴᴄɪᴀ ᴄᴏᴍᴘʟᴇᴛᴀ, ʀᴀ́ᴘɪᴅᴀ ᴇ ᴅɪᴠᴇʀᴛɪᴅᴀ ᴘᴀʀᴀ ᴏs ᴜsᴜᴀ́ʀɪᴏs.*
-
-- *ᴄᴀᴅᴀ ᴄᴏᴍᴀɴᴅᴏ, sɪsᴛᴇᴍᴀ ᴇ ғᴜɴᴄ̧ᴀ̃ᴏ ғᴏɪ ᴘᴇɴsᴀᴅᴏ ᴘᴀʀᴀ ᴅᴇɪxᴀʀ ᴏ ʙᴏᴛ ᴍᴀɪs ᴏʀɢᴀɴɪᴢᴀᴅᴏ, ᴇғɪᴄɪᴇɴᴛᴇ ᴇ ғᴀ́ᴄɪʟ ᴅᴇ ᴜsᴀʀ.*
-
-- *ᴏ ᴘʀᴏᴊᴇᴛᴏ ᴄᴏɴᴛɪɴᴜᴀ ᴇᴠᴏʟᴜɪɴᴅᴏ ᴄᴏᴍ ɴᴏᴠᴀs ғᴜɴᴄ̧ᴏ̃ᴇs, ᴍᴇʟʜᴏʀɪᴀs ᴇ ᴄᴏʀʀᴇᴄ̧ᴏ̃ᴇs ᴘᴀʀᴀ ᴏғᴇʀᴇᴄᴇʀ ᴜᴍᴀ ᴇxᴘᴇʀɪᴇ̂ɴᴄɪᴀ ᴄᴀᴅᴀ ᴠᴇᴢ ᴍᴇʟʜᴏʀ.*
-
-- *sᴇ ᴠᴏᴄᴇ ᴇsᴛᴀ́ ᴜsᴀɴᴅᴏ ${NomeDoBot}, ᴇsᴘᴇʀᴏ ǫᴜᴇ ᴀᴘʀᴏᴠᴇɪᴛᴇ ᴄᴀᴅᴀ ғᴜɴᴄ̧ᴀ̃ᴏ ᴇ ǫᴜᴇ ᴏ ᴘʀᴏᴊᴇᴛᴏ sᴇᴊᴀ ᴜ́ᴛɪʟ ᴘᴀʀᴀ ᴠᴏᴄᴇ. 🥇*
-
-•
-> *${NomeDoBot}*
-> *ᴅᴇsᴇɴᴠᴏʟᴠɪᴅᴏ ᴘᴏʀ dylan Modz 🩵*`
-
-await reply(texto)
-}
-}
-}
-}
-)
+  nome: 'criador',
+  comandos: ['criador'],
+  categoria: 'info',
+  info: {
+    descricao: 'Compartilha o cartão de contato do desenvolvedor.',
+    uso: 'criador',
+    categoria: 'info'
+  },
+  async executar(ctx) {
+    return ctx.tokito.sendMessage(ctx.from, {
+      contacts: {
+        displayName: nome,
+        contacts: [{ displayName: nome, vcard }]
+      }
+    }, { quoted: ctx.selo })
+  }
+})
