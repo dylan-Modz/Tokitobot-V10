@@ -1,82 +1,34 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.17",
+  "version": "10.2.18",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-11T06:54:31.095Z",
+  "publishedAt": "2026-10-11T07:08:27.915Z",
   "changelog": [
-    "Registro redesenhado: administrador ativa/desativa usando registrar 1 ou registrar 0; removido o comando passaporte.",
-    "Mensagem de entrada com foto real de perfil do novo membro e botão interativo REGISTRAR, inclusive quando os botões gerais estiverem desligados.",
-    "Cadastro sequencial no grupo com nome ou apelido, idade, gênero, orientação sexual e gostos; campos pessoais opcionais podem ser pulados e só aparecem no perfil com autorização explícita.",
-    "Nome digitado substitui o nick exibido no perfil original, mantendo menção, cargo, VIP, bio, Coins, RPG, imagem, botões Ping/Menu e layout anterior.",
-    "Informações autorizadas adicionadas ao bloco normal do perfil, sem criar seção de apresentação ou linha de status de registro.",
-    "Novo cadastro usa os arquivos registro.js e registrar.js; módulos antigos passaporte.js eliminados da árvore, mantendo compatibilidade com dados existentes.",
-    "Bloqueio de comandos até o cadastro continua limitado a novos membros nos grupos com registro ativado; ADM e dono dispensados.",
-    "Botão no grupo respeita prefixo personalizado e o sistema é configurável também pelo painel ativar."
+    "Corrige o FFmpeg dos alteradores de vídeo: a entrada e a saída não usam mais o mesmo arquivo MP4.",
+    "Cada alteração cria uma pasta única em /tmp, processa a mídia, envia o arquivo gerado ao WhatsApp e remove os temporários ao finalizar (inclusive após erros).",
+    "Videolento, videorapido e videocontrario mantêm envio de vídeo MP4 e tentam processar sem faixa de áudio caso a primeira conversão falhe.",
+    "Corrige o fluxo para vídeo não executar FFmpeg duas vezes nem cair na resposta de áudio após gerar o vídeo.",
+    "Alteradores de áudio continuam retornando MP3; registro integrado ao perfil da V10.2.17, menus e outros comandos preservados."
   ],
-  "delete": [
-    "DADOS_TOKITO/sistemas/passaporte.js",
-    "DADOS_TOKITO/plugins/admin/passaporte.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Registro integrado ao perfil original",
-  "notice": "Novo botão REGISTRAR com foto ao entrar e dados incorporados no /perfil, sem comando Passaporte.",
+  "type": "Correção",
+  "title": "Corrigir FFmpeg e limpeza dos temporários",
+  "notice": "Vídeos alterados sem erro de entrada igual à saída e sem salvar arquivos permanentes.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/registro.js",
-      "gitSha": "41311ed09d2a1b726bde31e7ddf9b78d75f4f039",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/registrar.js",
-      "gitSha": "6b7fafd986474cc0ab49016e33e2813afde24e6d",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "95c6ef0c7d9a12852d27b3b95f64786a9ad6bf89",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "tokito.js",
-      "gitSha": "dbb652a564c33762c5b50b88f4b87c49f9945f97",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-      "gitSha": "6f5a82150c63cf8e547a972d4da76078e60ca954",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "gitSha": "24a8bfcc0aaad64ff419e621981827fe7b87f463",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/info/perfil.js",
-      "gitSha": "9c2932e097581a47bfaf6d990ec0e924aad282cd",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "gitSha": "c3b18b8f42ba3c8be1f7fecff7041d80c61cd248",
+      "path": "DADOS_TOKITO/plugins/alteradores/alteradores.js",
+      "gitSha": "38063c02fc1143b385cf82212ef3e2468a291a5f",
       "sha256": "",
       "size": 0
     },
     {
       "path": "package.json",
-      "gitSha": "1f4fb2618cc02f5d4aedcd0f39671f99e6508c05",
+      "gitSha": "40a2657ddbce9669fe4603b47d9ed98a2e06eea0",
       "sha256": "",
       "size": 0
     }
@@ -3192,16 +3144,48 @@
       ],
       "required": true,
       "publishedAt": "2026-10-11T06:54:31.095Z"
+    },
+    {
+      "version": "10.2.18",
+      "fromVersion": "10.2.17",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Corrigir FFmpeg e limpeza dos temporários",
+      "notice": "Vídeos alterados sem erro de entrada igual à saída e sem salvar arquivos permanentes.",
+      "changelog": [
+        "Corrige o FFmpeg dos alteradores de vídeo: a entrada e a saída não usam mais o mesmo arquivo MP4.",
+        "Cada alteração cria uma pasta única em /tmp, processa a mídia, envia o arquivo gerado ao WhatsApp e remove os temporários ao finalizar (inclusive após erros).",
+        "Videolento, videorapido e videocontrario mantêm envio de vídeo MP4 e tentam processar sem faixa de áudio caso a primeira conversão falhe.",
+        "Corrige o fluxo para vídeo não executar FFmpeg duas vezes nem cair na resposta de áudio após gerar o vídeo.",
+        "Alteradores de áudio continuam retornando MP3; registro integrado ao perfil da V10.2.17, menus e outros comandos preservados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/alteradores/alteradores.js",
+          "gitSha": "38063c02fc1143b385cf82212ef3e2468a291a5f",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "gitSha": "40a2657ddbce9669fe4603b47d9ed98a2e06eea0",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-11T07:08:27.915Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.16",
+  "fromVersion": "10.2.17",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.17"
+  "publicVersion": "10.2.18"
 }

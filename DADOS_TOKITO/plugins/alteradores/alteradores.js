@@ -96,12 +96,12 @@ af: 'asetrate=44100*1.25,aresample=44100'
 }
 }
 
-const ff = (args) => new Promise((res, rej) => {
-const p = spawn('ffmpeg', ['-y', '-hide_banner', '-loglevel', 'error', ...args])
-let e = ''
-p.stderr.on('data', d => e += d)
-p.on('error', rej)
-p.on('close', c => c === 0 ? res() : rej(new Error(e.trim() || `ffmpeg ${c}`)))
+const ff = args => new Promise((resolve,reject) => {
+const p=spawn('ffmpeg',['-nostdin','-y','-hide_banner','-loglevel','error',...args])
+let e=''
+p.stderr.on('data',d => {e=(e+String(d)).slice(-5000)})
+p.once('error',reject)
+p.once('close',c=>c===0?resolve():reject(new Error(e.trim()||'ffmpeg '+c)))
 })
 
 const dylan = require('../../database/lib/comandos')
@@ -115,86 +115,56 @@ descricao: 'Altera velocidade, grave, bass e voz usando FFmpeg local.',
 uso: 'videolento respondendo mídia'
 },
 async executar(ctx) {
-const cfg = mapa[ctx.command]
-const m = modulos.mediaAtual(ctx)
-const src = cfg.tipo === 'video' ? m.video : m.audio
-if (!src)
-return ctx.reply(ctx.mess.padraoUso({
-emoji: cfg.tipo === 'video' ? '🎥' : '🎧',
-titulo: 'MÍDIA NECESSÁRIA',
-uso: `${ctx.prefix}${ctx.command}`,
-descricao: `Responda a ${cfg.tipo === 'video' ? 'um vídeo' : 'um áudio'} para usar este comando.`
+const cfg=mapa[ctx.command]
+if(!cfg)return ctx.reply('Efeito desconhecido.')
+const media=modulos.mediaAtual(ctx)
+const tipo=cfg.tipo==='video'?'video':'audio'
+const origem=tipo==='video'?media.video:media.audio
+if(!origem)return ctx.reply(ctx.mess.padraoUso({
+emoji:tipo==='video'?'🎥':'🎧',
+titulo:'MÍDIA NECESSÁRIA',
+uso:ctx.prefix+ctx.command,
+descricao:'Responda a '+(tipo==='video'?'um vídeo':'um áudio')+' para usar este comando.'
 }))
-const tipo = cfg.tipo === 'video' ? 'video' : 'audio'
-const b = await ctx.getFileBuffer(src, tipo)
-const base = path.join(os.tmpdir(), `tokito_${Date.now()}_${Math.random().toString(36).slice(2)}`)
-const inp = base + (cfg.tipo === 'video' ? '.mp4' : '.ogg')
-const out = base + (cfg.tipo === 'video' ? '.mp4' : '.mp3')
-fs.writeFileSync(inp, b)
+let pasta
 try {
-let args = ['-i', inp]
-if (cfg.tipo === 'audio')
-args.push('-af', cfg.af, '-vn', '-codec:a', 'libmp3lame', '-q:a', '3', out)
-else {
-if (cfg.vf)
-args.push('-vf', cfg.vf)
-if (cfg.af)
-args.push('-af', cfg.af)
-args.push('-c:v', 'libx264', '-preset', 'veryfast', '-crf', '28', '-c:a', 'aac', '-movflags', '+faststart', out)
-try {
-await ff(args)
+pasta=fs.mkdtempSync(path.join(os.tmpdir(),'tokito-alterador-'))
+const inp=path.join(pasta,tipo==='video'?'entrada.mp4':'entrada.ogg')
+const out=path.join(pasta,tipo==='video'?'resultado.mp4':'resultado.mp3')
+const buffer=await ctx.getFileBuffer(origem,tipo)
+if(!buffer||!buffer.length)throw new Error('Mídia recebida vazia.')
+fs.writeFileSync(inp,buffer)
+if(tipo==='video'){
+const base=['-i',inp,'-map','0:v:0','-map','0:a:0?',
+...(cfg.vf?['-vf',cfg.vf]:[]),...(cfg.af?['-af',cfg.af]:[]),
+'-c:v','libx264','-preset','veryfast','-crf','28',
+'-pix_fmt','yuv420p','-c:a','aac','-movflags','+faststart',out]
+try{await ff(base)}
+catch(err){
+if(fs.existsSync(out))fs.unlinkSync(out)
+// Fallback para vídeo mudo ou áudio corrompido.
+await ff(['-i',inp,'-map','0:v:0',...(cfg.vf?['-vf',cfg.vf]:[]),
+'-an','-c:v','libx264','-preset','veryfast','-crf','28',
+'-pix_fmt','yuv420p','-movflags','+faststart',out])
 }
-catch {
-args = [
-'-i',
-inp,
-'-vf',
-cfg.vf,
-'-an',
-'-c:v',
-'libx264',
-'-preset',
-'veryfast',
-'-crf',
-'28',
-out
-]
-await ff(args)
+if(!fs.existsSync(out)||fs.statSync(out).size===0)throw new Error('Vídeo não gerado.')
+return await ctx.tokito.sendMessage(ctx.from,{
+video:fs.readFileSync(out),mimetype:'video/mp4',caption:'🧊 '+ctx.command,
+contextInfo:ctx.canalInfo([ctx.sender])
+},{quoted:ctx.selo})
 }
-if (fs.existsSync(out)) {
-const data = fs.readFileSync(out)
-return ctx.tokito.sendMessage(ctx.from, {
-video: data,
-mimetype: 'video/mp4',
-caption: `🧊 ${ctx.command}`,
-contextInfo: ctx.canalInfo([ctx.sender])
-}, { quoted: ctx.selo })
-}
-}
-await ff(args)
-const data = fs.readFileSync(out)
-return ctx.tokito.sendMessage(ctx.from, {
-audio: data,
-mimetype: 'audio/mpeg',
-ptt: false,
-contextInfo: ctx.canalInfo([ctx.sender])
-}, { quoted: ctx.selo })
-}
-catch (e) {
-return ctx.reply(ctx.mess.padraoErro({
-titulo: 'ERRO NO FFMPEG',
-descricao: 'Não foi possível processar a mídia.',
-detalhe: e.message
-}))
-}
-finally {
-for (const f of [inp, out])
-try {
-if (fs.existsSync(f))
-fs.unlinkSync(f)
-}
-catch {
-}
+await ff(['-i',inp,'-vn','-af',cfg.af,'-codec:a','libmp3lame','-q:a','3',out])
+if(!fs.existsSync(out)||fs.statSync(out).size===0)throw new Error('Áudio não gerado.')
+return await ctx.tokito.sendMessage(ctx.from,{
+audio:fs.readFileSync(out),mimetype:'audio/mpeg',ptt:false,
+contextInfo:ctx.canalInfo([ctx.sender])
+},{quoted:ctx.selo})
+}catch(e){
+return ctx.reply(ctx.mess.padraoErro({titulo:'ERRO NO FFMPEG',
+descricao:'Não foi possível processar a mídia.',detalhe:e.message||String(e)}))
+}finally{
+if(pasta)try{fs.rmSync(pasta,{recursive:true,force:true})}
+catch(e){console.log('[FFMPEG LIMPEZA]',e.message||String(e))}
 }
 }
 }

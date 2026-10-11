@@ -1,6 +1,6 @@
 {
   "name": "TokitoBot-Md",
-  "version": "10.2.17",
+  "version": "10.2.18",
   "description": "Qualquer dúvida chama no WhatsApp: +55 11 97543-1163",
   "main": "tokito.js",
   "scripts": {
