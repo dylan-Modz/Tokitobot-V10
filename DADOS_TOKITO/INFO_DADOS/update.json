@@ -1,34 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.19",
+  "version": "10.2.20",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-11T07:18:28.284Z",
+  "publishedAt": "2026-10-11T07:37:45.536Z",
   "changelog": [
-    "Removida a legenda dos vídeos enviados pelos comandos videolento, videorapido e videocontrario; agora o resultado é somente o vídeo alterado, sem texto.",
-    "Mantida a correção FFmpeg da 10.2.18 com entrada e saída separadas, arquivos temporários únicos e limpeza automática após o envio.",
-    "Alteradores de áudio, registro, perfil, menus e demais recursos não foram alterados."
+    "[Correção] fix: restore numeric menu handlers for sairall and pending events (10.2.20)",
+    "A versão 10.2.20 já está disponível para atualização.",
+    "Sairall atualizado",
+    "Index atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Vídeos alterados sem legenda",
-  "notice": "Videolento, videorapido e videocontrario agora retornam só o vídeo modificado, sem texto na mensagem.",
+  "title": "fix: restore numeric menu handlers for sairall and pending events (10.2.20)",
+  "notice": "A versão 10.2.20 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/alteradores/alteradores.js",
-      "gitSha": "dc91eb08603bf38dcf73a8489d17e3b5d1f2a045",
-      "sha256": "",
-      "size": 0
+      "path": "DADOS_TOKITO/plugins/dono/sairall.js",
+      "sha256": "ff96fff17c5f4213089c24ca91d9c22b464d457db15dc80367d5f8d29ea1bd52",
+      "size": 3577
     },
     {
-      "path": "package.json",
-      "gitSha": "60757e502161330409d62234361e2064deafbc5a",
-      "sha256": "",
-      "size": 0
+      "path": "DADOS_TOKITO/plugins/index.js",
+      "sha256": "3321aec3d6bc97c2d7abce72c9b1b94d474b0995178837cfa9b920bd21f4b0f0",
+      "size": 8278
     }
   ],
   "releases": [
@@ -3204,6 +3203,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-11T07:18:28.284Z"
+    },
+    {
+      "version": "10.2.20",
+      "fromVersion": "10.2.19",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: restore numeric menu handlers for sairall and pending events (10.2.20)",
+      "notice": "A versão 10.2.20 já está disponível para atualização.",
+      "changelog": [
+        "Sairall atualizado",
+        "Index atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/dono/sairall.js",
+          "sha256": "ff96fff17c5f4213089c24ca91d9c22b464d457db15dc80367d5f8d29ea1bd52",
+          "size": 3577
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/index.js",
+          "sha256": "3321aec3d6bc97c2d7abce72c9b1b94d474b0995178837cfa9b920bd21f4b0f0",
+          "size": 8278
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-11T07:37:45.534Z"
     }
   ],
   "mode": "incremental",
