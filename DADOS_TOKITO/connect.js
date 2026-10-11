@@ -1213,6 +1213,26 @@ global.mostrarQrTokito = false
 await tokito.sendPresenceUpdate('available').catch(() => {})
 await tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
 await modulos.midiaMenu(tokito).catch(() => null)
+      
+      const configuracaoDoGrupo = jid => {
+        try {
+          const local = path.join(grupos, String(jid) + '.json')
+          const dados = JSON.parse(fs.readFileSync(local, 'utf8'))
+          return (Array.isArray(dados) ? dados[0] : dados)?.funcoes || {}
+        } catch { return {} }
+      }
+      registro.iniciarPrazos(tokito, {
+        sub: runtimeSub.isSubBot ? String(runtimeSub.id || 'sub') : '',
+        prefix: jid => {
+          const f = configuracaoDoGrupo(jid)
+          return f.multiprefix === true && f.prefixGrupo ? String(f.prefixGrupo) : prefix
+        },
+        habilitado: jid => {
+          const f = configuracaoDoGrupo(jid)
+          return f.registrar === true || (f.registrar === undefined && f.passaporte === true)
+        }
+      })
+
 
 if (typeof tokito.groupFetchAllParticipating === 'function') {
 const aquecerGrupos = Promise.resolve()
