@@ -1,35 +1,35 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.11",
+  "version": "10.2.12",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-11T05:21:27.264Z",
+  "publishedAt": "2026-10-11T05:26:57.858Z",
   "changelog": [
-    "[Atualização] Tokito Bot V10.2.11",
-    "Comando brasileirao atualizado para listar toda a classificação disponível, como no Tokito V9, com o design atual do V10.",
-    "Exibe posição, clube, sigla, pontos, jogos, vitórias, empates, derrotas, saldo de gols e aproveitamento de cada time.",
-    "Imagem do Brasileirão agora usa exclusivamente o link da arte do Boca Notícias; classificação permanece na Tokito APIs.",
-    "Resumo do campeonato e líder mantidos; artilharia e jogos da rodada continuam aparecendo quando a API oferece informações.",
-    "Datas e horários dos jogos só aparecem se a API devolver esses campos; outros comandos preservados."
+    "[Correção] Tokito Bot V10.2.12",
+    "Brasileirão envia a imagem original do Boca Notícias em mensagem separada, seguida da classificação completa no design do V10.",
+    "Tabela inclui todos os clubes retornados pela Tokito APIs, com pontos, jogos, vitórias, empates, derrotas, saldo e aproveitamento.",
+    "A separação evita ultrapassar o limite de legenda da imagem no WhatsApp e mantém o texto completo mesmo que a imagem falhe.",
+    "Artilharia e jogos com datas e horários continuam aparecendo quando a API fornece esses dados.",
+    "Outros comandos e menus preservados."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Tokito Bot V10.2.11",
-  "notice": "Brasileirão com tabela completa no design do V10 e nova imagem do Boca Notícias.",
+  "type": "Correção",
+  "title": "Brasileirão completo com imagem separada",
+  "notice": "Brasileirão com imagem do Boca Notícias e tabela completa em texto sem cortes.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
-      "gitSha": "ecff744b37390ee1f5a03982520edf0b443ff2ff",
+      "gitSha": "7393c2e0dacc41d61bb46082f2e82edb280d7a68",
       "sha256": "",
       "size": 0
     },
     {
       "path": "package.json",
-      "gitSha": "b40b1a9bc55b09fc6a3a57d13d6dbcd1d21590fc",
+      "gitSha": "86566ca42046c1933d6f2f8fdd6b5dc2994e0230",
       "sha256": "",
       "size": 0
     }
@@ -2850,16 +2850,48 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-11T05:21:27.264Z"
+    },
+    {
+      "version": "10.2.12",
+      "fromVersion": "10.2.11",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Brasileirão completo com imagem separada",
+      "notice": "Brasileirão com imagem do Boca Notícias e tabela completa em texto sem cortes.",
+      "changelog": [
+        "Brasileirão envia a imagem original do Boca Notícias em mensagem separada, seguida da classificação completa no design do V10.",
+        "Tabela inclui todos os clubes retornados pela Tokito APIs, com pontos, jogos, vitórias, empates, derrotas, saldo e aproveitamento.",
+        "A separação evita ultrapassar o limite de legenda da imagem no WhatsApp e mantém o texto completo mesmo que a imagem falhe.",
+        "Artilharia e jogos com datas e horários continuam aparecendo quando a API fornece esses dados.",
+        "Outros comandos e menus preservados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
+          "gitSha": "7393c2e0dacc41d61bb46082f2e82edb280d7a68",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "gitSha": "86566ca42046c1933d6f2f8fdd6b5dc2994e0230",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-11T05:26:57.858Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.10",
+  "fromVersion": "10.2.11",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.11"
+  "publicVersion": "10.2.12"
 }

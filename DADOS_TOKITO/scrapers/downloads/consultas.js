@@ -232,7 +232,28 @@ async function executar(ctx, tipo) {
       throw new Error('Tipo de consulta desconhecido: ' + tipo)
     }
 
-    await enviar(ctx, mensagem, foto)
+    if (tipo === 'brasileirao') {
+      // A imagem vai primeiro. A classificação completa sai em texto separado,
+      // sem risco de extrapolar o limite de legenda do WhatsApp.
+      if (link(foto) && ctx.tokito && typeof ctx.tokito.sendMessage === 'function') {
+        try {
+          await ctx.tokito.sendMessage(ctx.from, {
+            image: { url: foto },
+            caption: inicio('𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾 𝚂𝙴́𝚁𝙸𝙴 𝙰', '⚽',
+              '🏆 Confira a classificação completa na próxima mensagem.'),
+            contextInfo: {
+              ...(ctx.newsletter || {}),
+              mentionedJid: ctx.sender ? [ctx.sender] : []
+            }
+          }, { quoted: ctx.selo })
+        } catch (e) {
+          console.log('[BRASILEIRÃO CAPA]', e?.message || String(e))
+        }
+      }
+      await ctx.reply(mensagem)
+    } else {
+      await enviar(ctx, mensagem, foto)
+    }
     await reagir(ctx, '✅')
   } catch (e) {
     console.log('[CONSULTA ' + tipo + ']', e?.message || String(e))
