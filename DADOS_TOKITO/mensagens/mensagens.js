@@ -2316,7 +2316,7 @@ torre = 'Nenhum'
 }) => {
 const progresso = [
   `> 🪙 ׄ ( ɴ-ᴄᴏɪɴs: ${coins || '0 N-Coins'} )`,
-  cidade && cidade !== 'Nenhuma' ? `> 🌆 ׄ ( ᴄɪᴅᴀᴅᴇ: ${cidade} )` : null,
+  cidade && cidade !== 'Nenhuma' && !dadosRegistro?.cidade ? `> 🌆 ׄ ( ᴄɪᴅᴀᴅᴇ: ${cidade} )` : null,
   pet && pet !== 'Nenhum' ? `> 🐾 ׄ ( ᴘᴇᴛ: ${pet} )` : null,
   pokemon && pokemon !== 'Nenhum' ? `> ⚡ ׄ ( ᴘᴏᴋᴇ́ᴍᴏɴ: ${pokemon} )` : null,
   nivelRpg && nivelRpg !== 'Nenhum' ? `> ⭐ ׄ ( ɴɪ́ᴠᴇʟ: ${nivelRpg} )` : null,
@@ -2327,6 +2327,7 @@ const progresso = [
 ].filter(Boolean).join('\n')
 const dadosExtras = dadosRegistro && typeof dadosRegistro === 'object' ? [
   dadosRegistro.idade ? '> 🎂 ׄ ( ɪᴅᴀᴅᴇ: ' + dadosRegistro.idade + ' )' : null,
+  dadosRegistro.cidade ? '> 🌆 ׄ ( ᴄɪᴅᴀᴅᴇ: ' + dadosRegistro.cidade + ' )' : null,
   dadosRegistro.genero ? '> 👤 ׄ ( ɢᴇ̂ɴᴇʀᴏ: ' + dadosRegistro.genero + ' )' : null,
   dadosRegistro.sexualidade ? '> 💗 ׄ ( ᴏʀɪᴇɴᴛᴀᴄ̧ᴀ̃ᴏ: ' + dadosRegistro.sexualidade + ' )' : null,
   dadosRegistro.gostos ? '> 🎮 ׄ ( ɢᴏsᴛᴏs: ' + dadosRegistro.gostos + ' )' : null
