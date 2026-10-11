@@ -259,6 +259,10 @@ const executar = async (comando, ctx = {}) => {
 }
 
 const evento = async (ctx = {}, fase = 'normal') => {
+  // Respostas sem prefixo também devem inicializar os eventos pendentes.
+  if (!mapa.size && rodada.ativo())
+    carregar()
+
   for (const mod of eventos) {
     try {
       const faseModulo = String(mod.fase || 'normal').toLowerCase()
