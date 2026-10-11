@@ -1,42 +1,66 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.15",
+  "version": "10.2.16",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-11T06:10:00.000Z",
+  "publishedAt": "2026-10-11T06:25:31.847Z",
   "changelog": [
-    "Brasileirão voltou ao envio nativo do WhatsApp: foto do Boca Notícias como capa e classificação completa na legenda da MESMA mensagem, igual ao comando play.",
-    "Lógica do Brasileirão centralizada em DADOS_TOKITO/plugins/info/brasileirao.js, sem geração de card ou bibliotecas gráficas.",
-    "Tabela apresenta os clubes retornados pela Tokito APIs, com pontos, jogos, vitórias, empates, derrotas, saldo e aproveitamento; inclui artilharia e jogos com horários quando disponíveis.",
-    "brasileirao-card.js removido e dependência pureimage retirada, evitando erros de renderização e instalação no Termux.",
-    "Envio de wallpaper em álbum, menus, comandos restantes e verificação de integridade preservados."
+    "Novo Passaporte Tokito V10 com botão de apresentação enviado quando um novo membro entra em grupo com o sistema ativado.",
+    "Registro em três etapas interativas: apelido, interesses e frase de apresentação, seguido de confirmação para desbloquear comandos.",
+    "Somente novos membros ficam pendentes ao entrar depois da ativação; membros antigos, administradores e dono não perdem acesso.",
+    "Estados e perfis salvos por grupo em database/sistemas/passaporte, preservados nas atualizações e removidos quando um membro sai.",
+    "Comandos passaporte on/off, iniciar, editar, perfil, registros, cancelar e apagar; alternativa apresentar e painel ativar atualizados.",
+    "Bloqueio aplicado antes dos comandos especiais; chats normais continuam liberados. Exclusão do perfil não contorna um registro pendente.",
+    "Sem dependências novas; sistema desativado por padrão e com fallback para texto quando botões não estiverem disponíveis."
   ],
-  "delete": [
-    "DADOS_TOKITO/scrapers/downloads/brasileirao-card.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Brasileirão com imagem e resultado na mesma mensagem",
-  "notice": "Brasileirão volta a enviar capa do Boca Notícias com tabela completa na legenda, sem card e sem texto separado.",
+  "type": "Atualização",
+  "title": "Novo sistema Passaporte Tokito V10",
+  "notice": "Passaporte de apresentação com botão, registro interativo e desbloqueio dos comandos por grupo.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/info/brasileirao.js",
-      "gitSha": "33552c7a6100ae0cf9c872ec2a3f75d8770b40bd",
+      "path": "DADOS_TOKITO/sistemas/passaporte.js",
+      "gitSha": "0043d9a40b8806edefd329d7f532c5e02c2773ee",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
-      "gitSha": "692a88e8ddc6849f2858169c2dc12d9961cdd477",
+      "path": "DADOS_TOKITO/plugins/admin/passaporte.js",
+      "gitSha": "6e4eae5e40da69d4e1733d517b29f6302d2a741a",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "gitSha": "02db747cadd4fc064febaf6cb164d58ec227ae63",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "tokito.js",
+      "gitSha": "1587a5feba04ba3efde492a2a2ce18a35453f0c4",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "gitSha": "cb09fe9097b0b0e25056c509969133733246c566",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+      "gitSha": "36c93aa7fac90ac02f00ab742385771a4b9b69a9",
       "sha256": "",
       "size": 0
     },
     {
       "path": "package.json",
-      "gitSha": "6ee465f91377623d7d0597b390dcabbd1e688eae",
+      "gitSha": "ce6e55ff2685702ec9baed3b0392be64f572660c",
       "sha256": "",
       "size": 0
     }
@@ -3008,16 +3032,80 @@
       ],
       "required": true,
       "publishedAt": "2026-10-11T06:10:00.000Z"
+    },
+    {
+      "version": "10.2.16",
+      "fromVersion": "10.2.15",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Novo sistema Passaporte Tokito V10",
+      "notice": "Passaporte de apresentação com botão, registro interativo e desbloqueio dos comandos por grupo.",
+      "changelog": [
+        "Novo Passaporte Tokito V10 com botão de apresentação enviado quando um novo membro entra em grupo com o sistema ativado.",
+        "Registro em três etapas interativas: apelido, interesses e frase de apresentação, seguido de confirmação para desbloquear comandos.",
+        "Somente novos membros ficam pendentes ao entrar depois da ativação; membros antigos, administradores e dono não perdem acesso.",
+        "Estados e perfis salvos por grupo em database/sistemas/passaporte, preservados nas atualizações e removidos quando um membro sai.",
+        "Comandos passaporte on/off, iniciar, editar, perfil, registros, cancelar e apagar; alternativa apresentar e painel ativar atualizados.",
+        "Bloqueio aplicado antes dos comandos especiais; chats normais continuam liberados. Exclusão do perfil não contorna um registro pendente.",
+        "Sem dependências novas; sistema desativado por padrão e com fallback para texto quando botões não estiverem disponíveis."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/passaporte.js",
+          "gitSha": "0043d9a40b8806edefd329d7f532c5e02c2773ee",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/passaporte.js",
+          "gitSha": "6e4eae5e40da69d4e1733d517b29f6302d2a741a",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "02db747cadd4fc064febaf6cb164d58ec227ae63",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "tokito.js",
+          "gitSha": "1587a5feba04ba3efde492a2a2ce18a35453f0c4",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "cb09fe9097b0b0e25056c509969133733246c566",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+          "gitSha": "36c93aa7fac90ac02f00ab742385771a4b9b69a9",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "gitSha": "ce6e55ff2685702ec9baed3b0392be64f572660c",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-11T06:25:31.847Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.14",
+  "fromVersion": "10.2.15",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.15"
+  "publicVersion": "10.2.16"
 }

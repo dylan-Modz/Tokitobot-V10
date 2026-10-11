@@ -62,6 +62,7 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}menuff — recursos de Free Fire
 ┃࣪ ╎—̳͟͞͞ 🎨 ${prefix}menulogos — logos e efeitos de texto
 ┃࣪ ╎—̳͟͞͞ 🎚️ ${prefix}menualt — efeitos de áudio e vídeo
+┃࣪ ╎—̳͟͞͞ 🪪 ${prefix}passaporte iniciar — apresentação
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}menuadm — administração do grupo
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}menudono — configurações do dono
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
@@ -257,6 +258,10 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo2
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo3
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo4
+┃࣪ ╎—̳͟͞͞ 🪪 ${prefix}passaporte on/off
+┃࣪ ╎—̳͟͞͞ 🪪 ${prefix}passaporte registros
+┃࣪ ╎—̳͟͞͞ 🪪 ${prefix}passaporte perfil
+┃࣪ ╎—̳͟͞͞ 🪪 ${prefix}passaporte editar
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo5
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendabv texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendasaiu texto

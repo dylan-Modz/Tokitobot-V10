@@ -520,6 +520,7 @@ antifake: false,
 antirroubo: false,
 anticanal: false,
 soadm: false,
+passaporte: false,
 modorpg: false,
 modocoins: false,
 multiprefix: false,
@@ -1215,6 +1216,18 @@ apagar, agora, enviar, avisar, processar, iniciar, pathgroupjson, salvarJson, le
 }
 
 return ctx
+}
+// Passaporte: bloqueio ANTES dos comandos especiais e aliases sem prefixo.
+// Quem entra pode conversar normalmente; comandos exigem apresentação quando pendente.
+if (isGroup && dataGp?.[0]?.funcoes?.passaporte === true) {
+  let passaporteBloqueou = false
+  try {
+    const passaporte = require('./DADOS_TOKITO/sistemas/passaporte.js')
+    passaporteBloqueou = await passaporte.interceptar(plug())
+  } catch (error) {
+    console.log('[PASSAPORTE INTERCEPTAR]', modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro')
+  }
+  if (passaporteBloqueou) continue
 }
 // ===== COMANDOS SEM PREFIXO + FIGURINHA REGISTRADA =====
 if (!isCmd) {

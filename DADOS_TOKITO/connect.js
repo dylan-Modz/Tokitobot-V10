@@ -31,6 +31,7 @@
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, delay } = require('baileys')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
+const passaporte = require('./sistemas/passaporte.js')
 const modulos = require('./sistemas/modulos.js')
 const detector = require('./detector.js')
 const qrcodeTerminal = require('qrcode-terminal')
@@ -954,6 +955,32 @@ contextInfo: canalInfo([participante])
 await delay(700)
 await tokito.groupParticipantsUpdate(update.id, [participante], 'remove').catch(() => {})
 continue
+}
+
+/*
+             * PASSAPORTE TOKITO
+             * Independente dos modos de boas-vindas existentes.
+             */
+try {
+  const ingresso = typeof participanteRaw === 'object' ? participanteRaw : participante
+  const dadosPassaporte = {
+    tokito,
+    grupo: update.id,
+    participante: ingresso,
+    membros,
+    prefix: funcoesGp.multiprefix && funcoesGp.prefixGrupo ? String(funcoesGp.prefixGrupo) : prefix,
+    sub: runtimeSub.isSubBot ? String(runtimeSub.id || 'sub') : ''
+  }
+  if (update.action === 'remove') {
+    passaporte.saida(dadosPassaporte)
+  } else if (update.action === 'add' && funcoesGp.passaporte === true && !protegido) {
+    await passaporte.entrada({
+      ...dadosPassaporte,
+      botoes: nescessario?.botoes !== false
+    })
+  }
+} catch (error) {
+  erroSistema('Passaporte Tokito', error)
 }
 
 /*

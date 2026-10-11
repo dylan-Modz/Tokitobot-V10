@@ -54,6 +54,7 @@ const itens = [
 ['aprovacao', 'Aprovação de entrada', 'entrada'],
 ['autoaprovacao', 'Auto Aprovação', 'entrada'],
 ['soadm', 'Só ADM', 'entrada'],
+['passaporte', 'Passaporte Tokito', 'entrada'],
 
 ['__antilinkeasy', 'Anti Link Easy', 'links'],
 ['__antilinkmedium', 'Anti Link Medium', 'links'],
@@ -106,6 +107,7 @@ const emojiFuncao = {
 'aprovacao': '📥',
 'autoaprovacao': '✅',
 'soadm': '👑',
+'passaporte': '🪪',
 '__antilinkeasy': '🔗',
 '__antilinkmedium': '🔗',
 '__antilinkhard': '🔗',
