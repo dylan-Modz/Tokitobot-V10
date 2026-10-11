@@ -63,13 +63,12 @@ async function executar(ctx, tipo) {
   const busca = limpar(ctx.q, '', 150)
   const exemplos = {
     robloxstalker: 'PixelYoshi',
-    brasileirao: '',
     wallpaper: 'sukuna',
     noticias: '',
     filme: 'interestelar',
     serie: 'breaking bad'
   }
-  const requerBusca = !['brasileirao', 'noticias'].includes(tipo)
+  const requerBusca = tipo !== 'noticias'
   if (requerBusca && !busca) {
     return ctx.reply(inicio('𝙲𝙾𝙼𝙰𝙽𝙳𝙾', '📌', 'Uso: ' + (ctx.prefix || '!') + tipo + ' ' + exemplos[tipo]))
   }
@@ -88,23 +87,6 @@ async function executar(ctx, tipo) {
       mensagem += campo('Informações', 'Conta Roblox', '\n> 🆔 ID: ' + limpar(r.userId, '—', 35) + '\n> 👥 Amigos: ' + numero(r.amigos) + '\n> ❤️ Seguidores: ' + numero(r.seguidores) + '\n> 📌 Seguindo: ' + numero(r.seguindo))
       mensagem += campo('Status', status, '\n> ✅ Verificado: ' + (r.verificado ? 'Sim' : 'Não') + '\n> 🚫 Banido: ' + (r.banido ? 'Sim' : 'Não'))
       foto = r.avatar?.headshot || r.avatar?.fullBody || r.avatar?.bust
-    } else if (tipo === 'brasileirao') {
-      dados = await consultar('/api/brasileirao')
-      r = dados?.resultado
-      if (!Array.isArray(r?.tabela) || !r.tabela.length)
-        return reportar(ctx, '𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾', 'Classificação indisponível.')
-      // Capa Boca Notícias + classificação V9 no design V10, numa imagem única.
-      const { gerar } = require('./brasileirao-card')
-      const imagem = await gerar(r)
-      await ctx.tokito.sendMessage(ctx.from, {
-        image: imagem,
-        mimetype: 'image/jpeg',
-        caption: inicio('𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾 𝚂𝙴́𝚁𝙸𝙴 𝙰', '⚽',
-          'Classificação completa, artilharia e jogos no card.'),
-        contextInfo: { ...(ctx.newsletter || {}), mentionedJid: ctx.sender ? [ctx.sender] : [] }
-      }, { quoted: ctx.selo })
-      await reagir(ctx, '✅')
-      return
     } else if (tipo === 'wallpaper') {
       dados = await consultar('/api/wallpaper-search', { query: busca, limite: 8 })
       lista = Array.isArray(dados?.resultado)

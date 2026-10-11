@@ -1,51 +1,42 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.14",
+  "version": "10.2.15",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-11T05:58:51.323Z",
+  "publishedAt": "2026-10-11T06:10:00.000Z",
   "changelog": [
-    "[Atualização] Tokito Bot V10.2.14",
-    "Brasileirão com capa do Boca Notícias e tabela completa de até 20 clubes geradas juntas em uma única imagem, sem mensagens separadas.",
-    "Card inclui pontos, jogos, vitórias, empates, derrotas, saldo, aproveitamento, artilheiros e confrontos com data e hora quando disponíveis.",
-    "Novo renderizador de imagens sem dependências nativas, mais compatível com Termux e Android; o supervisor instala o pacote pureimage quando necessário.",
-    "Wallpaper pesquisa até 8 resultados e envia em álbum do WhatsApp, usando albumMessage e albumParentKey como no Pinterest.",
-    "Comando username removido do bot, do menu e da lista de atualização.",
-    "Menu Downloads reorganizado: pesquisas, futebol, Roblox, filmes, séries e álbum; lyrics passa para Música e appstore para Apps.",
-    "Atualizador com verificação de integridade preservado, além dos demais comandos e configurações."
+    "Brasileirão voltou ao envio nativo do WhatsApp: foto do Boca Notícias como capa e classificação completa na legenda da MESMA mensagem, igual ao comando play.",
+    "Lógica do Brasileirão centralizada em DADOS_TOKITO/plugins/info/brasileirao.js, sem geração de card ou bibliotecas gráficas.",
+    "Tabela apresenta os clubes retornados pela Tokito APIs, com pontos, jogos, vitórias, empates, derrotas, saldo e aproveitamento; inclui artilharia e jogos com horários quando disponíveis.",
+    "brasileirao-card.js removido e dependência pureimage retirada, evitando erros de renderização e instalação no Termux.",
+    "Envio de wallpaper em álbum, menus, comandos restantes e verificação de integridade preservados."
   ],
   "delete": [
-    "DADOS_TOKITO/plugins/info/username.js"
+    "DADOS_TOKITO/scrapers/downloads/brasileirao-card.js"
   ],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Brasileirão em card único, wallpaper em álbum e menu organizado",
-  "notice": "Card do Brasileirão e álbum de wallpapers, com remoção do gerador de nomes.",
+  "type": "Correção",
+  "title": "Brasileirão com imagem e resultado na mesma mensagem",
+  "notice": "Brasileirão volta a enviar capa do Boca Notícias com tabela completa na legenda, sem card e sem texto separado.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/scrapers/downloads/brasileirao-card.js",
-      "gitSha": "e769c24e257331cf7e4219851ae7a938f7f1aab2",
+      "path": "DADOS_TOKITO/plugins/info/brasileirao.js",
+      "gitSha": "33552c7a6100ae0cf9c872ec2a3f75d8770b40bd",
       "sha256": "",
       "size": 0
     },
     {
       "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
-      "gitSha": "fc261c487ffcd2983953c093e1b67aeefc0df2c6",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "gitSha": "6710afebe13d27717434b9d2d1f11c80a40dea50",
+      "gitSha": "692a88e8ddc6849f2858169c2dc12d9961cdd477",
       "sha256": "",
       "size": 0
     },
     {
       "path": "package.json",
-      "gitSha": "58052eebafdef6be0a3224dedf1267f1f6d5f565",
+      "gitSha": "6ee465f91377623d7d0597b390dcabbd1e688eae",
       "sha256": "",
       "size": 0
     }
@@ -2977,16 +2968,56 @@
       ],
       "required": true,
       "publishedAt": "2026-10-11T05:58:51.323Z"
+    },
+    {
+      "version": "10.2.15",
+      "fromVersion": "10.2.14",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Brasileirão com imagem e resultado na mesma mensagem",
+      "notice": "Brasileirão volta a enviar capa do Boca Notícias com tabela completa na legenda, sem card e sem texto separado.",
+      "changelog": [
+        "Brasileirão voltou ao envio nativo do WhatsApp: foto do Boca Notícias como capa e classificação completa na legenda da MESMA mensagem, igual ao comando play.",
+        "Lógica do Brasileirão centralizada em DADOS_TOKITO/plugins/info/brasileirao.js, sem geração de card ou bibliotecas gráficas.",
+        "Tabela apresenta os clubes retornados pela Tokito APIs, com pontos, jogos, vitórias, empates, derrotas, saldo e aproveitamento; inclui artilharia e jogos com horários quando disponíveis.",
+        "brasileirao-card.js removido e dependência pureimage retirada, evitando erros de renderização e instalação no Termux.",
+        "Envio de wallpaper em álbum, menus, comandos restantes e verificação de integridade preservados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/info/brasileirao.js",
+          "gitSha": "33552c7a6100ae0cf9c872ec2a3f75d8770b40bd",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
+          "gitSha": "692a88e8ddc6849f2858169c2dc12d9961cdd477",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "gitSha": "6ee465f91377623d7d0597b390dcabbd1e688eae",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/scrapers/downloads/brasileirao-card.js"
+      ],
+      "required": true,
+      "publishedAt": "2026-10-11T06:10:00.000Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.13",
+  "fromVersion": "10.2.14",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.14"
+  "publicVersion": "10.2.15"
 }
