@@ -85,10 +85,12 @@ expira: Date.now() + 180000,
 confirmar: false
 }
 
-modulos.pendentesSairall.set(
-`${ctx.from}|${ctx.sender}`,
-s
-)
+const chave = `${ctx.from}|${ctx.sender}`
+
+// Um menu por conversa e usuário: evita que outro painel capture o número.
+global.__TOKITO_BANGPLIT__?.delete(chave)
+modulos.pendentesAtivar?.delete(chave)
+modulos.pendentesSairall.set(chave, s)
 
 return ctx.reply(
 render(s)
@@ -97,7 +99,7 @@ render(s)
 
 const dylan = require('../../database/lib/comandos')
 
-dylan.setCommand({
+const pluginSairall = dylan.setCommand({
 nome: 'sairall',
 comandos: ['sairall'],
 categoria: 'dono',
@@ -124,3 +126,5 @@ return iniciar(ctx)
 }
 }
 )
+
+module.exports = pluginSairall
