@@ -1,33 +1,85 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.9",
+  "version": "10.2.10",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-11T03:26:25.561Z",
+  "publishedAt": "2026-10-11T04:17:47.710Z",
   "changelog": [
-    "[Atualização] Tokito Bot V10.2.9",
-    "O comando criador agora envia um cartão de contato nativo do WhatsApp (vCard), substituindo a mensagem de apresentação antiga.",
-    "O cartão usa o nome dylan [00] e o telefone de desenvolvedor terminado em 1060, como solicitado.",
-    "Demais comandos e mensagens mantidos sem alterações."
+    "Sete novos comandos usando a Tokito APIs: robloxstalker, brasileirao, wallpaper, noticias, username, filme e serie.",
+    "Roblox Stalker consulta nome, perfil, avatar, amigos, seguidores, status e verificação.",
+    "Brasileirão mostra a classificação, os artilheiros e os jogos disponíveis na rota.",
+    "Wallpaper envia imagens, com tentativa de outro resultado quando o envio falha.",
+    "Notícias do Brasil e gerador de usernames recebem mensagens no novo padrão visual do Tokito.",
+    "Filme e série mostram pôster e informações que realmente retornam pela API.",
+    "Menu Downloads recebeu os sete comandos e o título PESQUISAS-API foi simplificado para PESQUISAS.",
+    "Adicionados tratamentos de indisponibilidade da API e envio de mídia, sem alterar comandos antigos."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Atualização",
-  "title": "Tokito Bot V10.2.9",
-  "notice": "O comando criador agora envia o cartão de contato nativo do WhatsApp.",
+  "title": "Tokito Bot V10.2.10",
+  "notice": "Sete novos comandos de pesquisa e informações pela Tokito APIs.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/info/criador.js",
-      "gitSha": "77d99320f1bfc7749e6d7cf48fbb8f26f1975358",
+      "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
+      "gitSha": "be2663324e841d01749e17c16e7a64f361d6a7d9",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/info/robloxstalker.js",
+      "gitSha": "39626f1d6c74bad633282f5f51523f5d391c1edc",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/info/brasileirao.js",
+      "gitSha": "160e47f5d0d765a6a33093c8d595e41cb193146b",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/wallpaper.js",
+      "gitSha": "b36944dee2bf4459d7ecce546cd7bca8b1582999",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/info/noticias.js",
+      "gitSha": "97487dc6251c86df7d571da860afd54794325e30",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/info/username.js",
+      "gitSha": "65a38dda80f5a39f66fc967d53db28b55fe375a7",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/filme.js",
+      "gitSha": "2267bcd2e0bef9addb8cba69a153d81c172ca150",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/serie.js",
+      "gitSha": "0142515c6c1c3da821724ba5ecb80e7fae438839",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "gitSha": "b2fa6ca09082a09243ffcdb221a2304b33770ecd",
       "sha256": "",
       "size": 0
     },
     {
       "path": "package.json",
-      "gitSha": "a57501c3dfde51d8ad804f680bae63cfb8b0cb0e",
+      "gitSha": "10bc3d8d42b809ca49930341e3bb881a7a73c663",
       "sha256": "",
       "size": 0
     }
@@ -2733,16 +2785,99 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-11T03:26:25.561Z"
+    },
+    {
+      "version": "10.2.10",
+      "fromVersion": "10.2.9",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Novos comandos de consulta e pesquisa",
+      "notice": "Sete novos comandos de pesquisa e informações pela Tokito APIs.",
+      "changelog": [
+        "Sete novos comandos usando a Tokito APIs: robloxstalker, brasileirao, wallpaper, noticias, username, filme e serie.",
+        "Roblox Stalker consulta nome, perfil, avatar, amigos, seguidores, status e verificação.",
+        "Brasileirão mostra a classificação, os artilheiros e os jogos disponíveis na rota.",
+        "Wallpaper envia imagens, com tentativa de outro resultado quando o envio falha.",
+        "Notícias do Brasil e gerador de usernames recebem mensagens no novo padrão visual do Tokito.",
+        "Filme e série mostram pôster e informações que realmente retornam pela API.",
+        "Menu Downloads recebeu os sete comandos e o título PESQUISAS-API foi simplificado para PESQUISAS.",
+        "Adicionados tratamentos de indisponibilidade da API e envio de mídia, sem alterar comandos antigos."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
+          "gitSha": "be2663324e841d01749e17c16e7a64f361d6a7d9",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/info/robloxstalker.js",
+          "gitSha": "39626f1d6c74bad633282f5f51523f5d391c1edc",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/info/brasileirao.js",
+          "gitSha": "160e47f5d0d765a6a33093c8d595e41cb193146b",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/wallpaper.js",
+          "gitSha": "b36944dee2bf4459d7ecce546cd7bca8b1582999",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/info/noticias.js",
+          "gitSha": "97487dc6251c86df7d571da860afd54794325e30",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/info/username.js",
+          "gitSha": "65a38dda80f5a39f66fc967d53db28b55fe375a7",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/filme.js",
+          "gitSha": "2267bcd2e0bef9addb8cba69a153d81c172ca150",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/serie.js",
+          "gitSha": "0142515c6c1c3da821724ba5ecb80e7fae438839",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "b2fa6ca09082a09243ffcdb221a2304b33770ecd",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "gitSha": "10bc3d8d42b809ca49930341e3bb881a7a73c663",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-11T04:17:47.710Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.8",
+  "fromVersion": "10.2.9",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.9"
+  "publicVersion": "10.2.10"
 }

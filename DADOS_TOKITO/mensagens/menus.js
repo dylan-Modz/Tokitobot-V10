@@ -623,7 +623,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡🔎｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝑃𝐸𝑆𝑄𝑈𝐼𝑆𝐴𝑆-𝐴𝑃𝐼
+├─ ⊹ 𖤐  𝑃𝐸𝑆𝑄𝑈𝐼𝑆𝐴𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡🌐｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}wikipedia pesquisa
 ┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}appstore app
@@ -631,6 +631,13 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}anime pesquisa
 ┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}manga pesquisa
 ┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}printsite link
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}robloxstalker usuário
+┃࣪ ╎—̳͟͞͞ ⚽ ${prefix}brasileirao
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}wallpaper pesquisa
+┃࣪ ╎—̳͟͞͞ 📰 ${prefix}noticias
+┃࣪ ╎—̳͟͞͞ ✨ ${prefix}username nome fantasia
+┃࣪ ╎—̳͟͞͞ 🎬 ${prefix}filme nome
+┃࣪ ╎—̳͟͞͞ 📺 ${prefix}serie nome
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
