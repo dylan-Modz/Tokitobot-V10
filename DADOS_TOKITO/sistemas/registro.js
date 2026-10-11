@@ -92,6 +92,10 @@ async function start(ctx) {
     return reply(ctx,'> ✅ Você já tem dados no perfil. Use '+pfx(ctx)+'perfil.')
   if (!data.pendentes[id] && !admin(ctx))
     return reply(ctx,'> ⚠️ O registro é para membros que acabaram de entrar no grupo.')
+  if (!data.pendentes[id] && admin(ctx)) {
+    const em=agora()
+    data.pendentes[id]={em,expiraEm:em+PRAZO_MS,expirado:false}
+  }
   const p = pendencia(data,id)
   if (p && (p.expirado || Number(p.expiraEm) <= agora())) {
     p.expiraEm = agora() + PRAZO_MS
@@ -213,7 +217,7 @@ function iniciarPrazos(tokito,{sub='',prefix='!',habilitado=()=>true}={}) {
         if (mudou) save(grupo,sub,data)
         for (const id of avisos) {
           await tokito.sendMessage(grupo,{
-            text:avisarExpiracao(id)+'\n> 🔁 Comando: '+prefix+'registrar iniciar',
+            text:avisarExpiracao(id)+'\n> 🔁 Comando: '+(typeof prefix==='function'?prefix(grupo):prefix)+'registrar iniciar',
             mentions:[id]
           }).catch(e=>console.log('[REGISTRO PRAZO]',e?.message||e))
         }
