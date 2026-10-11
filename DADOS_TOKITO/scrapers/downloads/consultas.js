@@ -102,17 +102,76 @@ async function executar(ctx, tipo) {
       mensagem += campo('Status', status, '\n> ✅ Verificado: ' + (r.verificado ? 'Sim' : 'Não') + '\n> 🚫 Banido: ' + (r.banido ? 'Sim' : 'Não'))
       foto = r.avatar?.headshot || r.avatar?.fullBody || r.avatar?.bust
     } else if (tipo === 'brasileirao') {
+      // A imagem vem do Boca Notícias. Todos os números continuam vindo da Tokito APIs.
+      const imagemBrasileirao = 'https://images.boca.com.br/upload/imagens-resizes/ae4a7c11b147effb4792d4a8cf0a5eaa_858x483.png'
       dados = await consultar('/api/brasileirao')
       r = dados?.resultado
-      if (!r || typeof r !== 'object') return reportar(ctx, '𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾', 'Classificação indisponível.')
+      if (!r || typeof r !== 'object' || Array.isArray(r)) {
+        return reportar(ctx, '𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾', 'Classificação indisponível.')
+      }
       lista = Array.isArray(r.tabela) ? r.tabela : []
-      const artilheiros = Array.isArray(r.artilheiros) ? r.artilheiros : []
-      const jogos = Array.isArray(r.rodada_atual) ? r.rodada_atual : []
-      if (!lista.length && !artilheiros.length && !jogos.length) return reportar(ctx, '𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾', 'Os dados estão temporariamente indisponíveis.')
-      mensagem = inicio('𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾', '⚽', '🏆 ' + limpar(r.campeonato, 'Campeonato Brasileiro'))
-      if (lista.length) mensagem += campo('Classificação', 'Top 5', '\n' + lista.slice(0, 5).map(t => '> ' + limpar(t.posicao, '—', 3) + 'º ' + limpar(t.nome, 'Time', 50) + ' — ' + numero(t.pontos) + ' pontos').join('\n'))
-      if (artilheiros.length) mensagem += campo('Artilharia', 'Top 3', '\n' + artilheiros.slice(0, 3).map(t => '> ⚽ ' + limpar(t.jogador, 'Jogador', 50) + ' — ' + numero(t.gols) + ' gols').join('\n'))
-      if (jogos.length) mensagem += campo('Jogos da rodada', 'Agenda', '\n' + jogos.slice(0, 3).map(j => '> ' + limpar(j.mandante, 'Time A', 50) + ' x ' + limpar(j.visitante, 'Time B', 50) + (j.data && j.data !== 'A definir' ? ' • ' + limpar(j.data, '', 25) : '')).join('\n'))
+      if (!lista.length) {
+        return reportar(ctx, '𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾', 'Nenhum dado da classificação foi encontrado.')
+      }
+
+      const lider = lista[0]
+      const pontuacao = valor => valor == null || valor === '' ? '—' : numero(valor)
+      const golsSaldo = valor => {
+        if (valor === null || valor === undefined || valor === '') return '—'
+        const n = Number(valor)
+        return Number.isFinite(n) ? (n > 0 ? '+' : '') + String(n) : limpar(valor, '—', 16)
+      }
+      const porcentagem = valor => {
+        if (valor === null || valor === undefined || valor === '') return '—'
+        const texto = limpar(valor, '—', 24)
+        return texto === '—' ? texto : texto.endsWith('%') ? texto : texto + '%'
+      }
+      const detalhesTime = (time, indice) => {
+        const posicao = limpar(time?.posicao, String(indice + 1), 4)
+        const nome = limpar(time?.nome, 'Time', 60)
+        const sigla = limpar(time?.sigla, '', 10)
+        const clube = nome + (sigla ? ' (' + sigla + ')' : '')
+        return [
+          '- ' + posicao.padStart(2, '0') + 'º — ' + String.fromCharCode(96) + clube + String.fromCharCode(96),
+          '> 🏆 ' + pontuacao(time?.pontos) + ' pontos | ⚽ ' + pontuacao(time?.jogos) + ' jogos',
+          '> ✅ ' + pontuacao(time?.vitorias) + ' vitórias | 🤝 ' + pontuacao(time?.empates) + ' empates | ❌ ' + pontuacao(time?.derrotas) + ' derrotas',
+          '> 🥅 Saldo: ' + golsSaldo(time?.saldo_gols) + ' | 📊 Aproveitamento: ' + porcentagem(time?.aproveitamento)
+        ].join('\n')
+      }
+      mensagem = inicio(
+        '𝙱𝚁𝙰𝚂𝙸𝙻𝙴𝙸𝚁𝙰̃𝙾 𝚂𝙴́𝚁𝙸𝙴 𝙰', '⚽',
+        '🏆 ' + limpar(r.campeonato, 'Campeonato Brasileiro • Série A', 90)
+      )
+      mensagem += '\n\n- ' + String.fromCharCode(96) + '𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂' + String.fromCharCode(96) + ' 📋'
+      mensagem += '\n> 📅 Temporada: ' + limpar(r.temporada, '—', 30)
+      mensagem += '\n> 🥇 Líder: ' + limpar(lider?.nome, '—', 60) + ' — ' + pontuacao(lider?.pontos) + ' pontos'
+      mensagem += '\n> ⚽ Times participantes: ' + lista.length
+      mensagem += '\n\n- ' + String.fromCharCode(96) + '𝙲𝙻𝙰𝚂𝚂𝙸𝙵𝙸𝙲𝙰𝙲̧𝙰̃𝙾 𝙲𝙾𝙼𝙿𝙻𝙴𝚃𝙰' + String.fromCharCode(96) + ' 📊'
+      mensagem += '\n\n' + lista.map(detalhesTime).join('\n\n')
+
+      const artilheiros = Array.isArray(r.artilheiros) ? r.artilheiros.slice(0, 3) : []
+      if (artilheiros.length) {
+        mensagem += '\n\n- ' + String.fromCharCode(96) + '𝙰𝚁𝚃𝙸𝙻𝙷𝙰𝚁𝙸𝙰' + String.fromCharCode(96) + ' ⚽'
+        mensagem += '\n' + artilheiros.map((j, i) =>
+          '> ' + ['🥇', '🥈', '🥉'][i] + ' ' + limpar(j?.jogador, 'Jogador', 70) +
+          ' — ' + pontuacao(j?.gols) + ' gols'
+        ).join('\n')
+      }
+
+      const jogos = Array.isArray(r.rodada_atual) ? r.rodada_atual.slice(0, 10) : []
+      if (jogos.length) {
+        mensagem += '\n\n- ' + String.fromCharCode(96) + '𝙹𝙾𝙶𝙾𝚂 𝙳𝙰 𝚁𝙾𝙳𝙰𝙳𝙰' + String.fromCharCode(96) + ' 🏟️'
+        mensagem += '\n' + jogos.map(jogo => {
+          const confronto = '> ⚽ ' + limpar(jogo?.mandante, 'Time', 50) +
+            ' x ' + limpar(jogo?.visitante, 'Time', 50)
+          const data = limpar(jogo?.data, '', 35)
+          const hora = limpar(jogo?.hora || jogo?.horario, '', 20)
+          const detalhes = [data ? '📅 ' + data : '', hora ? '⏰ ' + hora : ''].filter(Boolean)
+          return confronto + (detalhes.length ? '\n> ' + detalhes.join(' | ') : '')
+        }).join('\n')
+      }
+      // Como no V9: foto de capa + legenda com toda a tabela no estilo atual.
+      foto = imagemBrasileirao
     } else if (tipo === 'wallpaper') {
       dados = await consultar('/api/wallpaper-search', { query: busca, limite: 5 })
       lista = Array.isArray(dados?.resultado) ? dados.resultado.filter(x => link(x?.imagem)).slice(0, 5) : []
