@@ -47,87 +47,186 @@ const admin=ctx=>ctx.SoDono||ctx.isGroupAdmins||ctx?.info?.key?.fromMe===true
 const pfx=ctx=>String(ctx.prefix||'!')
 const mention=v=>'@'+String(v||'').split('@')[0]
 const reply=(ctx,txt)=>ctx.reply(txt,ctx.sender?[ctx.sender]:[])
-const prompt=step=>({
-  nome:TIT+'\n\n> 👤 1/6 — Qual nome você quer usar no perfil?\n> Digite seu nome ou apelido (2 a 32 caracteres).',
-  idade:TIT+'\n\n> 🎂 2/6 — Qual sua idade?\n> Opcional. Digite uma idade válida ou *pular*.',
-  genero:TIT+'\n\n> 👤 3/6 — Qual seu gênero?\n> Opcional. Digite sua resposta ou *pular*.',
-  sexualidade:TIT+'\n\n> 💗 4/6 — Qual sua orientação sexual?\n> Opcional. Digite sua resposta ou *pular*.\n> ⚠️ Respostas enviadas aqui são visíveis no grupo.\n> Só aparecerá no perfil com sua autorização.',
-  gostos:TIT+'\n\n> 🎮 5/6 — O que você gosta de fazer?\n> Exemplo: assistir anime e jogar Free Fire.',
-  publicar:TIT+'\n\n> 🔐 6/6 — Autoriza mostrar idade, gênero e orientação sexual no perfil do grupo?\n> Digite *sim*, *não* ou *pular*.\n> Se não autorizar, esses dados não serão salvos.'
-}[step]||'')
-const next={nome:'idade',idade:'genero',genero:'sexualidade',sexualidade:'gostos',gostos:'publicar'}
-async function start(ctx){
-  const id=self(ctx),data=read(ctx.from,scope(ctx))
-  if(!enabled(ctx))return reply(ctx,'> ⚠️ O registro está desativado neste grupo.')
-  if(!id)return reply(ctx,'> ⚠️ Não consegui identificar seu número.')
-  if(data.perfis[id]&&!data.pendentes[id])return reply(ctx,'> ✅ Você já tem dados no perfil. Use '+pfx(ctx)+'perfil.')
-  if(!data.pendentes[id]&&!admin(ctx))return reply(ctx,'> ⚠️ O registro é para membros que acabaram de entrar no grupo.')
-  data.etapas[id]={fase:'nome',comecouEm:Date.now()}
-  save(ctx.from,scope(ctx),data)
-  return reply(ctx,prompt('nome'))
+const PRAZO_MS = 10 * 60 * 1000
+const PRAZO_MINUTOS = PRAZO_MS / 60000
+const passos = ['nome', 'idade', 'cidade']
+const proxima = { nome:'idade', idade:'cidade' }
+const agora = () => Date.now()
+const tempo = ms => {
+  const segundos = Math.max(0, Math.ceil(ms / 1000))
+  return String(Math.floor(segundos / 60)).padStart(2, '0') + ':' + String(segundos % 60).padStart(2, '0')
 }
-async function answer(ctx){
-  const id=self(ctx),data=read(ctx.from,scope(ctx)),d=data.etapas[id]
-  if(!d||ctx.isCmd)return false
+const pendencia = (data,id) => {
+  const p = data.pendentes[id]
+  if (!p) return null
+  if (!Number.isFinite(Number(p.expiraEm))) {
+    p.expiraEm = agora() + PRAZO_MS
+    p.expirado = false
+  }
+  return p
+}
+const instrucoes = (fase,restante) => {
+  const texto = {
+    nome:'> 👤 1/3 — Qual é seu nome ou apelido?\n> Envie de 2 a 32 caracteres.',
+    idade:'> 🎂 2/3 — Qual é sua idade?\n> Digite sua idade (13 a 120) ou *pular*.',
+    cidade:'> 🌆 3/3 — Em qual cidade você mora?\n> Digite o nome da cidade ou *pular*.'
+  }[fase] || ''
+  return TIT + '\n\n' + texto + '\n\n> ⏳ Tempo restante: *' + tempo(restante) + '*'
+}
+const avisarExpiracao = (id) =>
+  TIT + '\n\n> ⏰ Prazo de ' + PRAZO_MINUTOS + ' minutos encerrado, ' + mention(id) + '.' +
+  '\n> 🔒 Seu cadastro ficou incompleto. Os comandos continuam bloqueados.' +
+  '\n> 🔁 Use o botão REGISTRAR ou o comando de registro para começar novamente.'
+const marcarExpirado = (data,id) => {
+  const p = pendencia(data,id)
+  if (!p || p.expirado || Number(p.expiraEm) > agora()) return false
+  p.expirado = true
+  delete data.etapas[id]
+  return true
+}
+async function start(ctx) {
+  if (!enabled(ctx)) return reply(ctx,'> ⚠️ O registro está desativado neste grupo.')
+  const id=self(ctx),data=read(ctx.from,scope(ctx))
+  if (!id) return reply(ctx,'> ⚠️ Não consegui identificar seu número.')
+  if (data.perfis[id] && !data.pendentes[id])
+    return reply(ctx,'> ✅ Você já tem dados no perfil. Use '+pfx(ctx)+'perfil.')
+  if (!data.pendentes[id] && !admin(ctx))
+    return reply(ctx,'> ⚠️ O registro é para membros que acabaram de entrar no grupo.')
+  const p = pendencia(data,id)
+  if (p && (p.expirado || Number(p.expiraEm) <= agora())) {
+    p.expiraEm = agora() + PRAZO_MS
+    p.expirado = false
+    p.em = agora()
+  }
+  // Reabrir o formulário não prolonga a contagem de uma tentativa ativa.
+  const restante = p ? Number(p.expiraEm) - agora() : PRAZO_MS
+  data.etapas[id] = {fase:'nome',comecouEm:agora()}
+  save(ctx.from,scope(ctx),data)
+  return reply(ctx,instrucoes('nome',restante))
+}
+async function answer(ctx) {
+  const id=self(ctx),data=read(ctx.from,scope(ctx))
+  const d=data.etapas[id],p=pendencia(data,id)
+  if (!d || !p || ctx.isCmd) return false
+  if (marcarExpirado(data,id)) {
+    save(ctx.from,scope(ctx),data)
+    await reply(ctx,avisarExpiracao(id))
+    return true
+  }
+  if (p.expirado) return false
   const v=String(ctx.body||'').replace(/[\x00-\x1f\x7f]/g,' ').replace(/\s+/g,' ').trim()
-  if(!v)return false
-  const f=d.fase
+  if (!v) return false
   const skip=/^(pular|nao informar|não informar|prefiro não dizer|prefiro nao dizer)$/i.test(v)
-  let error=''
-  if(f==='nome'){
-    if(v.length<2||v.length>32)error='Nome de 2 a 32 caracteres.'
+  // Sessões de versões antigas passam a usar a apresentação curta.
+  if (!passos.includes(d.fase)) {
+    d.fase='nome'
+    save(ctx.from,scope(ctx),data)
+    await reply(ctx,instrucoes('nome',Number(p.expiraEm)-agora()))
+    return true
+  }
+  let erro = ''
+  if (d.fase==='nome') {
+    if (v.length<2||v.length>32) erro='Informe um nome de 2 a 32 caracteres.'
     else d.nome=clean(v,32)
-  }else if(f==='idade'){
-    if(skip)d.idade=null
-    else if(!/^\d{1,3}$/.test(v)||Number(v)<13||Number(v)>120)error='Idade de 13 a 120 ou pular.'
+  } else if (d.fase==='idade') {
+    if (skip) d.idade=null
+    else if (!/^\d{1,3}$/.test(v)||Number(v)<13||Number(v)>120)
+      erro='Digite uma idade entre 13 e 120 ou *pular*.'
     else d.idade=String(Number(v))
-  }else if(f==='genero'){
-    if(skip)d.genero=null
-    else if(v.length>40)error='Até 40 caracteres ou pular.'
-    else d.genero=clean(v,40)
-  }else if(f==='sexualidade'){
-    if(skip)d.sexualidade=null
-    else if(v.length>50)error='Até 50 caracteres ou pular.'
-    else d.sexualidade=clean(v,50)
-  }else if(f==='gostos'){
-    if(skip||v.length<2||v.length>130)error='Escreva seus gostos de 2 a 130 caracteres.'
-    else d.gostos=clean(v,130)
-  }else if(f==='publicar'){
-    if(/^(sim|s)$/i.test(v))d.publicar=true
-    else if(/^(nao|não|n|pular)$/i.test(v))d.publicar=false
-    else error='Responda sim, não ou pular.'
-  }else return false
-  if(error){await reply(ctx,'> ⚠️ '+error);return true}
-  if(f==='publicar'){
+  } else if (d.fase==='cidade') {
+    if (skip) d.cidade=null
+    else if (v.length<2||v.length>45) erro='Cidade de 2 a 45 caracteres ou *pular*.'
+    else d.cidade=clean(v,45)
+  }
+  if (erro) {
+    await reply(ctx,'> ⚠️ '+erro+'\n> ⏳ Restam '+tempo(Number(p.expiraEm)-agora())+'.')
+    return true
+  }
+  if (d.fase==='cidade') {
+    // Confere novamente o prazo antes de salvar o perfil.
+    if (marcarExpirado(data,id)) {
+      save(ctx.from,scope(ctx),data)
+      await reply(ctx,avisarExpiracao(id))
+      return true
+    }
     data.perfis[id]={
-      nome:d.nome,gostos:d.gostos,
-      ...(d.publicar?{idade:d.idade||null,genero:d.genero||null,
-        sexualidade:d.sexualidade||null,publicar:true}:{}),
-      criadoEm:Date.now()
+      nome:d.nome,idade:d.idade||null,cidade:d.cidade||null,
+      publicar:true,criadoEm:agora()
     }
     delete data.etapas[id]
     delete data.pendentes[id]
     save(ctx.from,scope(ctx),data)
-    await reply(ctx,TIT+'\n\n> ✅ Pronto, '+d.nome+'! Os comandos estão liberados.\n> 👤 Use '+pfx(ctx)+'perfil para ver seus dados.')
+    await reply(ctx,TIT+'\n\n> ✅ Apresentação concluída, '+d.nome+'!' +
+      '\n> 🔓 Comandos liberados.\n> 👤 Use '+pfx(ctx)+'perfil para ver os dados.')
     return true
   }
-  d.fase=next[f]
+  d.fase=proxima[d.fase]
   save(ctx.from,scope(ctx),data)
-  await reply(ctx,prompt(d.fase))
+  await reply(ctx,instrucoes(d.fase,Number(p.expiraEm)-agora()))
   return true
 }
-async function interceptar(ctx){
-  if(!enabled(ctx))return false
+async function interceptar(ctx) {
+  if (!enabled(ctx)) return false
   const id=self(ctx)
-  if(!id)return false
-  const data=read(ctx.from,scope(ctx))
-  if(data.etapas[id]&&!ctx.isCmd)return answer(ctx)
-  if(ctx.isCmd&&String(ctx.command||'')==='registrar')return false
-  if(!admin(ctx)&&ctx.isCmd&&data.pendentes[id]&&!data.perfis[id]){
-    await reply(ctx,TIT+'\n> 🔒 Use REGISTRAR para liberar os comandos.')
+  if (!id) return false
+  const data=read(ctx.from,scope(ctx)),p=pendencia(data,id)
+  if (p && marcarExpirado(data,id)) {
+    save(ctx.from,scope(ctx),data)
+    await reply(ctx,avisarExpiracao(id))
+    if (!ctx.isCmd || String(ctx.command||'')!=='registrar') return true
+  }
+  if (data.etapas[id] && !ctx.isCmd) return answer(ctx)
+  if (ctx.isCmd && String(ctx.command||'')==='registrar') return false
+  if (!admin(ctx) && ctx.isCmd && p && !data.perfis[id]) {
+    await reply(ctx,TIT+'\n> 🔒 Conclua sua apresentação para usar comandos.'+
+      '\n> ⏳ '+(p.expirado?'Prazo encerrado. Use '+pfx(ctx)+'registrar iniciar para recomeçar.':
+      'Restam '+tempo(Number(p.expiraEm)-agora())+'.'))
     return true
   }
   return false
+}
+let vigia = null
+function iniciarPrazos(tokito,{sub='',prefix='!',habilitado=()=>true}={}) {
+  if (vigia) clearInterval(vigia)
+  // Também limpa um intervalo antigo caso o módulo tenha sido recarregado.
+  if (global.__TOKITO_REGISTRO_TIMER__) clearInterval(global.__TOKITO_REGISTRO_TIMER__)
+  let ativo = false
+  const verificar = async () => {
+    if (ativo) return
+    ativo = true
+    try {
+      const pasta=path.join(DIR,safe(sub)||'principal')
+      if (!fs.existsSync(pasta)) return
+      for (const arq of fs.readdirSync(pasta).filter(v=>v.endsWith('@g.us.json'))) {
+        const grupo=arq.slice(0,-5)
+        if (!habilitado(grupo)) continue
+        const data=read(grupo,sub)
+        let mudou=false
+        const avisos=[]
+        for (const id of Object.keys(data.pendentes)) {
+          if (data.perfis[id]) continue
+          const anterior=JSON.stringify(data.pendentes[id])
+          const venceu=marcarExpirado(data,id)
+          if (venceu) avisos.push(id)
+          if (anterior!==JSON.stringify(data.pendentes[id])) mudou=true
+        }
+        if (mudou) save(grupo,sub,data)
+        for (const id of avisos) {
+          await tokito.sendMessage(grupo,{
+            text:avisarExpiracao(id)+'\n> 🔁 Comando: '+prefix+'registrar iniciar',
+            mentions:[id]
+          }).catch(e=>console.log('[REGISTRO PRAZO]',e?.message||e))
+        }
+      }
+    } catch(e) {
+      console.log('[REGISTRO PRAZO]',e?.message||e)
+    } finally { ativo=false }
+  }
+  vigia=setInterval(()=>{void verificar()},30000)
+  vigia.unref?.()
+  global.__TOKITO_REGISTRO_TIMER__=vigia
+  void verificar()
+  return true
 }
 async function entrada({tokito,grupo,participante,membros=[],prefix='!',sub=''}) {
   const id=resolve(participante,membros)
@@ -136,9 +235,15 @@ async function entrada({tokito,grupo,participante,membros=[],prefix='!',sub=''})
   if(meta&&['admin','superadmin'].includes(meta.admin))return false
   const data=read(grupo,sub)
   if(data.pendentes[id]||data.perfis[id])return false
-  data.pendentes[id]={em:Date.now()}
+  const em=agora()
+  data.pendentes[id]={em,expiraEm:em+PRAZO_MS,expirado:false}
   save(grupo,sub,data)
-  const txt=TIT+'\n\n> 👋 Bem-vindo(a), '+mention(id)+'!\n> 🪪 Seu cadastro está aguardando.\n> 🔒 Para usar comandos, faça seu registro.\n> 💬 Você pode conversar normalmente.\n\n> Toque no botão REGISTRAR.'
+  const txt=TIT+'\n\n> 👋 Bem-vindo(a), '+mention(id)+'!'+
+    '\n> ⏳ Você tem *'+PRAZO_MINUTOS+' minutos* para se apresentar.'+
+    '\n> 👤 Serão só 3 etapas: *nome, idade e cidade*.'+
+    '\n> 🔒 Comandos liberados após concluir.'+
+    '\n> 💬 Idade e cidade podem ser puladas, pois as respostas são visíveis no grupo.'+
+    '\n\n> Toque em REGISTRAR para começar.'
   const fallback='Se o botão não aparecer, digite '+prefix+'registrar iniciar.'
   let foto=null
   try{foto=await tokito.profilePictureUrl(id,'image')}catch{}
@@ -179,12 +284,16 @@ function saida({grupo,participante,membros=[],sub=''}) {
 }
 function perfil(group,alvo,sub='',members=[]) {
   const data=read(group,sub),id=resolve(alvo,members)
-  if(!id)return null
+  if (!id) return null
   const p=data.perfis[id]
-  if(!p)return null
-  return {nome:clean(p.nome||p.apelido,32),gostos:clean(p.gostos||p.interesses,130),
+  if (!p) return null
+  return {
+    nome:clean(p.nome||p.apelido,32),
     idade:p.publicar===true?clean(p.idade,3):null,
+    cidade:p.publicar===true?clean(p.cidade,45):null,
+    gostos:clean(p.gostos||p.interesses,130),
     genero:p.publicar===true?clean(p.genero,40):null,
-    sexualidade:p.publicar===true?clean(p.sexualidade,50):null}
+    sexualidade:p.publicar===true?clean(p.sexualidade,50):null
+  }
 }
-module.exports={enabled,interceptar,entrada,saida,start,perfil,read,save,resolve}
+module.exports={enabled,interceptar,entrada,saida,start,perfil,read,save,resolve,iniciarPrazos,PRAZO_MINUTOS}
