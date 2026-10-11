@@ -1173,35 +1173,62 @@ onProgress(
 `Baixando ${index + 1}/${files.length}: ${rel}`
 )
 
-const response = await axios.get(
-rawRepoFileUrl(repo, ref, rel),
-{
+const valido = buffer => (
+(!item.sha256 || sha256(buffer) === String(item.sha256).toLowerCase()) &&
+(!item.gitSha || gitBlobSha(buffer) === String(item.gitSha).toLowerCase())
+)
+const rawUrl = rawRepoFileUrl(repo, ref, rel)
+const urls = [rawUrl, rawUrl + '?sha=' + encodeURIComponent(item.gitSha || ref)]
+let buffer = null
+
+for (const url of urls) {
+try {
+const response = await axios.get(url, {
 responseType: 'arraybuffer',
 timeout: 45000,
 maxContentLength: 20 * 1024 * 1024,
 validateStatus: () => true,
 headers: {
-'User-Agent': `TokitoBot-V10/${localInfo().version || '10.0.0'}`
+'User-Agent': `TokitoBot-V10/${localInfo().version || '10.0.0'}`,
+'Cache-Control': 'no-cache'
+}
+})
+if (response.status !== 200) continue
+const candidato = Buffer.from(response.data)
+if (valido(candidato)) { buffer = candidato; break }
+} catch (error) {
+onProgress(`Nova tentativa segura para ${rel}...`)
+}
+}
+
+// O Git Blob API devolve bytes de um objeto imutável identificado por SHA.
+// Este caminho só é usado quando o GitHub Raw falhou ou serviu cache antigo.
+if (!buffer && /^[a-f0-9]{40}$/i.test(String(item.gitSha || ''))) {
+try {
+onProgress(`Conferindo a versão exata de ${rel} no GitHub...`)
+const response = await axios.get(
+`https://api.github.com/repos/${repo}/git/blobs/${item.gitSha}`,
+{
+timeout: 45000,
+maxContentLength: 30 * 1024 * 1024,
+validateStatus: () => true,
+headers: {
+'User-Agent': 'TokitoBot-V10',
+'Accept': 'application/vnd.github+json'
 }
 }
 )
-
-if (response.status !== 200) {
-throw new Error(`Não foi possível baixar ${rel}.`)
+if (response.status === 200 && response.data?.encoding === 'base64' &&
+typeof response.data?.content === 'string') {
+const candidato = Buffer.from(response.data.content.replace(/\s/g, ''), 'base64')
+if (candidato.length <= 20 * 1024 * 1024 && valido(candidato)) buffer = candidato
+}
+} catch (error) {
+onProgress(`Blob imutável indisponível para ${rel}.`)
+}
 }
 
-const buffer = Buffer.from(response.data)
-
-if (
-item.sha256 &&
-sha256(buffer) !== String(item.sha256).toLowerCase()
-) {
-throw new Error(`A verificação de integridade falhou em ${rel}.`)
-}
-if (
-item.gitSha &&
-gitBlobSha(buffer) !== String(item.gitSha).toLowerCase()
-) {
+if (!buffer) {
 throw new Error(`A verificação de integridade falhou em ${rel}.`)
 }
 
