@@ -149,7 +149,7 @@ await ff(['-i',inp,'-map','0:v:0',...(cfg.vf?['-vf',cfg.vf]:[]),
 }
 if(!fs.existsSync(out)||fs.statSync(out).size===0)throw new Error('Vídeo não gerado.')
 return await ctx.tokito.sendMessage(ctx.from,{
-video:fs.readFileSync(out),mimetype:'video/mp4',caption:'🧊 '+ctx.command,
+video:fs.readFileSync(out),mimetype:'video/mp4',
 contextInfo:ctx.canalInfo([ctx.sender])
 },{quoted:ctx.selo})
 }

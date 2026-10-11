@@ -1,34 +1,32 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.18",
+  "version": "10.2.19",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-11T07:08:27.915Z",
+  "publishedAt": "2026-10-11T07:18:28.284Z",
   "changelog": [
-    "Corrige o FFmpeg dos alteradores de vídeo: a entrada e a saída não usam mais o mesmo arquivo MP4.",
-    "Cada alteração cria uma pasta única em /tmp, processa a mídia, envia o arquivo gerado ao WhatsApp e remove os temporários ao finalizar (inclusive após erros).",
-    "Videolento, videorapido e videocontrario mantêm envio de vídeo MP4 e tentam processar sem faixa de áudio caso a primeira conversão falhe.",
-    "Corrige o fluxo para vídeo não executar FFmpeg duas vezes nem cair na resposta de áudio após gerar o vídeo.",
-    "Alteradores de áudio continuam retornando MP3; registro integrado ao perfil da V10.2.17, menus e outros comandos preservados."
+    "Removida a legenda dos vídeos enviados pelos comandos videolento, videorapido e videocontrario; agora o resultado é somente o vídeo alterado, sem texto.",
+    "Mantida a correção FFmpeg da 10.2.18 com entrada e saída separadas, arquivos temporários únicos e limpeza automática após o envio.",
+    "Alteradores de áudio, registro, perfil, menus e demais recursos não foram alterados."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Corrigir FFmpeg e limpeza dos temporários",
-  "notice": "Vídeos alterados sem erro de entrada igual à saída e sem salvar arquivos permanentes.",
+  "title": "Vídeos alterados sem legenda",
+  "notice": "Videolento, videorapido e videocontrario agora retornam só o vídeo modificado, sem texto na mensagem.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/alteradores/alteradores.js",
-      "gitSha": "38063c02fc1143b385cf82212ef3e2468a291a5f",
+      "gitSha": "dc91eb08603bf38dcf73a8489d17e3b5d1f2a045",
       "sha256": "",
       "size": 0
     },
     {
       "path": "package.json",
-      "gitSha": "40a2657ddbce9669fe4603b47d9ed98a2e06eea0",
+      "gitSha": "60757e502161330409d62234361e2064deafbc5a",
       "sha256": "",
       "size": 0
     }
@@ -3176,16 +3174,46 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-11T07:08:27.915Z"
+    },
+    {
+      "version": "10.2.19",
+      "fromVersion": "10.2.18",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Vídeos alterados sem legenda",
+      "notice": "Videolento, videorapido e videocontrario agora retornam só o vídeo modificado, sem texto na mensagem.",
+      "changelog": [
+        "Removida a legenda dos vídeos enviados pelos comandos videolento, videorapido e videocontrario; agora o resultado é somente o vídeo alterado, sem texto.",
+        "Mantida a correção FFmpeg da 10.2.18 com entrada e saída separadas, arquivos temporários únicos e limpeza automática após o envio.",
+        "Alteradores de áudio, registro, perfil, menus e demais recursos não foram alterados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/alteradores/alteradores.js",
+          "gitSha": "dc91eb08603bf38dcf73a8489d17e3b5d1f2a045",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "gitSha": "60757e502161330409d62234361e2064deafbc5a",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-11T07:18:28.284Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.17",
+  "fromVersion": "10.2.18",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.18"
+  "publicVersion": "10.2.19"
 }
