@@ -1,66 +1,82 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.16",
+  "version": "10.2.17",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-11T06:25:31.847Z",
+  "publishedAt": "2026-10-11T06:54:31.095Z",
   "changelog": [
-    "Novo Passaporte Tokito V10 com botão de apresentação enviado quando um novo membro entra em grupo com o sistema ativado.",
-    "Registro em três etapas interativas: apelido, interesses e frase de apresentação, seguido de confirmação para desbloquear comandos.",
-    "Somente novos membros ficam pendentes ao entrar depois da ativação; membros antigos, administradores e dono não perdem acesso.",
-    "Estados e perfis salvos por grupo em database/sistemas/passaporte, preservados nas atualizações e removidos quando um membro sai.",
-    "Comandos passaporte on/off, iniciar, editar, perfil, registros, cancelar e apagar; alternativa apresentar e painel ativar atualizados.",
-    "Bloqueio aplicado antes dos comandos especiais; chats normais continuam liberados. Exclusão do perfil não contorna um registro pendente.",
-    "Sem dependências novas; sistema desativado por padrão e com fallback para texto quando botões não estiverem disponíveis."
+    "Registro redesenhado: administrador ativa/desativa usando registrar 1 ou registrar 0; removido o comando passaporte.",
+    "Mensagem de entrada com foto real de perfil do novo membro e botão interativo REGISTRAR, inclusive quando os botões gerais estiverem desligados.",
+    "Cadastro sequencial no grupo com nome ou apelido, idade, gênero, orientação sexual e gostos; campos pessoais opcionais podem ser pulados e só aparecem no perfil com autorização explícita.",
+    "Nome digitado substitui o nick exibido no perfil original, mantendo menção, cargo, VIP, bio, Coins, RPG, imagem, botões Ping/Menu e layout anterior.",
+    "Informações autorizadas adicionadas ao bloco normal do perfil, sem criar seção de apresentação ou linha de status de registro.",
+    "Novo cadastro usa os arquivos registro.js e registrar.js; módulos antigos passaporte.js eliminados da árvore, mantendo compatibilidade com dados existentes.",
+    "Bloqueio de comandos até o cadastro continua limitado a novos membros nos grupos com registro ativado; ADM e dono dispensados.",
+    "Botão no grupo respeita prefixo personalizado e o sistema é configurável também pelo painel ativar."
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/sistemas/passaporte.js",
+    "DADOS_TOKITO/plugins/admin/passaporte.js"
+  ],
   "archiveSha256": "",
   "type": "Atualização",
-  "title": "Novo sistema Passaporte Tokito V10",
-  "notice": "Passaporte de apresentação com botão, registro interativo e desbloqueio dos comandos por grupo.",
+  "title": "Registro integrado ao perfil original",
+  "notice": "Novo botão REGISTRAR com foto ao entrar e dados incorporados no /perfil, sem comando Passaporte.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/passaporte.js",
-      "gitSha": "0043d9a40b8806edefd329d7f532c5e02c2773ee",
+      "path": "DADOS_TOKITO/sistemas/registro.js",
+      "gitSha": "41311ed09d2a1b726bde31e7ddf9b78d75f4f039",
       "sha256": "",
       "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/passaporte.js",
-      "gitSha": "6e4eae5e40da69d4e1733d517b29f6302d2a741a",
+      "path": "DADOS_TOKITO/plugins/admin/registrar.js",
+      "gitSha": "6b7fafd986474cc0ab49016e33e2813afde24e6d",
       "sha256": "",
       "size": 0
     },
     {
       "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "02db747cadd4fc064febaf6cb164d58ec227ae63",
+      "gitSha": "95c6ef0c7d9a12852d27b3b95f64786a9ad6bf89",
       "sha256": "",
       "size": 0
     },
     {
       "path": "tokito.js",
-      "gitSha": "1587a5feba04ba3efde492a2a2ce18a35453f0c4",
-      "sha256": "",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "gitSha": "cb09fe9097b0b0e25056c509969133733246c566",
+      "gitSha": "dbb652a564c33762c5b50b88f4b87c49f9945f97",
       "sha256": "",
       "size": 0
     },
     {
       "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-      "gitSha": "36c93aa7fac90ac02f00ab742385771a4b9b69a9",
+      "gitSha": "6f5a82150c63cf8e547a972d4da76078e60ca954",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "gitSha": "24a8bfcc0aaad64ff419e621981827fe7b87f463",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/info/perfil.js",
+      "gitSha": "9c2932e097581a47bfaf6d990ec0e924aad282cd",
+      "sha256": "",
+      "size": 0
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "gitSha": "c3b18b8f42ba3c8be1f7fecff7041d80c61cd248",
       "sha256": "",
       "size": 0
     },
     {
       "path": "package.json",
-      "gitSha": "ce6e55ff2685702ec9baed3b0392be64f572660c",
+      "gitSha": "1f4fb2618cc02f5d4aedcd0f39671f99e6508c05",
       "sha256": "",
       "size": 0
     }
@@ -3096,16 +3112,96 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-11T06:25:31.847Z"
+    },
+    {
+      "version": "10.2.17",
+      "fromVersion": "10.2.16",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Registro integrado ao perfil original",
+      "notice": "Novo botão REGISTRAR com foto ao entrar e dados incorporados no /perfil, sem comando Passaporte.",
+      "changelog": [
+        "Registro redesenhado: administrador ativa/desativa usando registrar 1 ou registrar 0; removido o comando passaporte.",
+        "Mensagem de entrada com foto real de perfil do novo membro e botão interativo REGISTRAR, inclusive quando os botões gerais estiverem desligados.",
+        "Cadastro sequencial no grupo com nome ou apelido, idade, gênero, orientação sexual e gostos; campos pessoais opcionais podem ser pulados e só aparecem no perfil com autorização explícita.",
+        "Nome digitado substitui o nick exibido no perfil original, mantendo menção, cargo, VIP, bio, Coins, RPG, imagem, botões Ping/Menu e layout anterior.",
+        "Informações autorizadas adicionadas ao bloco normal do perfil, sem criar seção de apresentação ou linha de status de registro.",
+        "Novo cadastro usa os arquivos registro.js e registrar.js; módulos antigos passaporte.js eliminados da árvore, mantendo compatibilidade com dados existentes.",
+        "Bloqueio de comandos até o cadastro continua limitado a novos membros nos grupos com registro ativado; ADM e dono dispensados.",
+        "Botão no grupo respeita prefixo personalizado e o sistema é configurável também pelo painel ativar."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/registro.js",
+          "gitSha": "41311ed09d2a1b726bde31e7ddf9b78d75f4f039",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/registrar.js",
+          "gitSha": "6b7fafd986474cc0ab49016e33e2813afde24e6d",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "95c6ef0c7d9a12852d27b3b95f64786a9ad6bf89",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "tokito.js",
+          "gitSha": "dbb652a564c33762c5b50b88f4b87c49f9945f97",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+          "gitSha": "6f5a82150c63cf8e547a972d4da76078e60ca954",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "24a8bfcc0aaad64ff419e621981827fe7b87f463",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/info/perfil.js",
+          "gitSha": "9c2932e097581a47bfaf6d990ec0e924aad282cd",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "gitSha": "c3b18b8f42ba3c8be1f7fecff7041d80c61cd248",
+          "sha256": "",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "gitSha": "1f4fb2618cc02f5d4aedcd0f39671f99e6508c05",
+          "sha256": "",
+          "size": 0
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/sistemas/passaporte.js",
+        "DADOS_TOKITO/plugins/admin/passaporte.js"
+      ],
+      "required": true,
+      "publishedAt": "2026-10-11T06:54:31.095Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.15",
+  "fromVersion": "10.2.16",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.16"
+  "publicVersion": "10.2.17"
 }

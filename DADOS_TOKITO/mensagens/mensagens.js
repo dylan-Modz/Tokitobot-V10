@@ -2292,6 +2292,7 @@ return `- ⚙️ \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙰𝚂 𝙵𝚄𝙽𝙲̧𝙾�
 
 exports.perfilUsuario = ({
 nick,
+dadosRegistro = null,
 numero,
 bio,
 cargo,
@@ -2324,11 +2325,17 @@ const progresso = [
   guilda && guilda !== 'Nenhuma' ? `> 🏰 ׄ ( ɢᴜɪʟᴅᴀ: ${guilda} )` : null,
   torre && torre !== 'Nenhum' ? `> 🗼 ׄ ( ᴛᴏʀʀᴇ: ${torre} )` : null
 ].filter(Boolean).join('\n')
+const dadosExtras = dadosRegistro && typeof dadosRegistro === 'object' ? [
+  dadosRegistro.idade ? '> 🎂 ׄ ( ɪᴅᴀᴅᴇ: ' + dadosRegistro.idade + ' )' : null,
+  dadosRegistro.genero ? '> 👤 ׄ ( ɢᴇ̂ɴᴇʀᴏ: ' + dadosRegistro.genero + ' )' : null,
+  dadosRegistro.sexualidade ? '> 💗 ׄ ( ᴏʀɪᴇɴᴛᴀᴄ̧ᴀ̃ᴏ: ' + dadosRegistro.sexualidade + ' )' : null,
+  dadosRegistro.gostos ? '> 🎮 ׄ ( ɢᴏsᴛᴏs: ' + dadosRegistro.gostos + ' )' : null
+].filter(Boolean).join('\n') : ''
 return `- 👤 \`𝙿𝙴𝚁𝙵𝙸𝙻 𝙳𝙾 𝚄𝚂𝚄𝙰́𝚁𝙸𝙾\`
 
 > 👤 ׄ ( ɴɪᴄᴋ: ${nick} )
 > 👤 ׄ ( ɴᴜ́ᴍᴇʀᴏ: ${numero} )
-> 👤 ׄ ( ʙɪᴏ: ${bio} )
+${dadosExtras ? dadosExtras + '\n' : ''}> 👤 ׄ ( ʙɪᴏ: ${bio} )
 > 👤 ׄ ( ᴄᴀʀɢᴏ: ${cargo} )
 > 👤 ׄ ( ᴠɪᴘ: ${vip} )
 > 👤 ׄ ( ᴄʜᴀᴛ: ${chat} )

@@ -54,7 +54,7 @@ const itens = [
 ['aprovacao', 'Aprovação de entrada', 'entrada'],
 ['autoaprovacao', 'Auto Aprovação', 'entrada'],
 ['soadm', 'Só ADM', 'entrada'],
-['passaporte', 'Passaporte Tokito', 'entrada'],
+['registrar', 'Registro de novos membros', 'entrada'],
 
 ['__antilinkeasy', 'Anti Link Easy', 'links'],
 ['__antilinkmedium', 'Anti Link Medium', 'links'],
@@ -107,7 +107,7 @@ const emojiFuncao = {
 'aprovacao': '📥',
 'autoaprovacao': '✅',
 'soadm': '👑',
-'passaporte': '🪪',
+'registrar': '🪪',
 '__antilinkeasy': '🔗',
 '__antilinkmedium': '🔗',
 '__antilinkhard': '🔗',
@@ -248,6 +248,7 @@ return f.antilink.ativo
 }
 
 f[chave] = !Boolean(f[chave])
+if (chave === 'registrar') f.passaporte = false
 
 if (chave === 'multiprefix' && f[chave] && !f.prefixGrupo)
 f.prefixGrupo = ctx.prefix

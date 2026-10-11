@@ -30,6 +30,7 @@
 
 const dylan = require('../../database/lib/comandos')
 const r = require('../../sistemas/rpg/index')
+const registro = require('../../sistemas/registro')
 
 dylan.setCommand({
 nome: "perfil",
@@ -69,13 +70,19 @@ m
 )
 : null
 
-const nick =
+const registroPerfil = isGroup
+? registro.perfil(from, alvo, ctx.runtimeSub?.isSubBot ? String(ctx.runtimeSub.id || 'sub') : '', groupMembers)
+: null
+
+const nickOriginal =
 alvo === sender
 ? pushname
 : membro?.notify ||
 membro?.name ||
 membro?.verifiedName ||
 `Usuário ${numero.slice(-4)}`
+
+const nick = registroPerfil?.nome || nickOriginal
 
 const dono =
 numerodono.includes(alvo)
@@ -295,6 +302,7 @@ vipAlvo
 const texto =
 mess.perfilUsuario({
 nick,
+dadosRegistro: registroPerfil,
 numero: `@${numero}`,
 bio,
 cargo,

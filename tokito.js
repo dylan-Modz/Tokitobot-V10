@@ -520,6 +520,7 @@ antifake: false,
 antirroubo: false,
 anticanal: false,
 soadm: false,
+registrar: false,
 passaporte: false,
 modorpg: false,
 modocoins: false,
@@ -640,6 +641,7 @@ groupId: from,
 funcoes: {
 ...padraoGp.funcoes,
 ...funcoesSalvas,
+registrar: typeof funcoesSalvas.registrar === 'boolean' ? funcoesSalvas.registrar : funcoesSalvas.passaporte === true,
 modofreefire: typeof funcoesSalvas.modofreefire === 'boolean'
 ? funcoesSalvas.modofreefire
 : funcoesSalvas.modox4 === true,
@@ -1219,13 +1221,13 @@ return ctx
 }
 // Passaporte: bloqueio ANTES dos comandos especiais e aliases sem prefixo.
 // Quem entra pode conversar normalmente; comandos exigem apresentação quando pendente.
-if (isGroup && dataGp?.[0]?.funcoes?.passaporte === true) {
+if (isGroup && (dataGp?.[0]?.funcoes?.registrar === true || (dataGp?.[0]?.funcoes?.registrar === undefined && dataGp?.[0]?.funcoes?.passaporte === true))) {
   let passaporteBloqueou = false
   try {
-    const passaporte = require('./DADOS_TOKITO/sistemas/passaporte.js')
-    passaporteBloqueou = await passaporte.interceptar(plug())
+    const registro = require('./DADOS_TOKITO/sistemas/registro.js')
+    passaporteBloqueou = await registro.interceptar(plug())
   } catch (error) {
-    console.log('[PASSAPORTE INTERCEPTAR]', modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro')
+    console.log('[REGISTRO INTERCEPTAR]', modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro')
   }
   if (passaporteBloqueou) continue
 }

@@ -31,7 +31,7 @@
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore, delay } = require('baileys')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
-const passaporte = require('./sistemas/passaporte.js')
+const registro = require('./sistemas/registro.js')
 const modulos = require('./sistemas/modulos.js')
 const detector = require('./detector.js')
 const qrcodeTerminal = require('qrcode-terminal')
@@ -972,15 +972,15 @@ try {
     sub: runtimeSub.isSubBot ? String(runtimeSub.id || 'sub') : ''
   }
   if (update.action === 'remove') {
-    passaporte.saida(dadosPassaporte)
-  } else if (update.action === 'add' && funcoesGp.passaporte === true && !protegido) {
-    await passaporte.entrada({
+    registro.saida(dadosPassaporte)
+  } else if (update.action === 'add' && (funcoesGp.registrar === true || (funcoesGp.registrar === undefined && funcoesGp.passaporte === true)) && !protegido) {
+    await registro.entrada({
       ...dadosPassaporte,
-      botoes: nescessario?.botoes !== false
+      // Botão sempre disponível, mesmo com botões comuns desligados.
     })
   }
 } catch (error) {
-  erroSistema('Passaporte Tokito', error)
+  erroSistema('Registro Tokito', error)
 }
 
 /*
