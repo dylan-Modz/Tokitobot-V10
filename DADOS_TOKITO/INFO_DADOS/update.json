@@ -1,33 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.20",
+  "version": "10.2.21",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-11T07:37:45.536Z",
+  "publishedAt": "2026-10-11T07:39:15.188Z",
   "changelog": [
-    "[Correção] fix: restore numeric menu handlers for sairall and pending events (10.2.20)",
-    "A versão 10.2.20 já está disponível para atualização.",
-    "Sairall atualizado",
-    "Index atualizado"
+    "[Melhoria] chore: bump Tokito Bot version to 10.2.20",
+    "A versão 10.2.21 já está disponível para atualização.",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix: restore numeric menu handlers for sairall and pending events (10.2.20)",
-  "notice": "A versão 10.2.20 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "chore: bump Tokito Bot version to 10.2.20",
+  "notice": "A versão 10.2.21 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/dono/sairall.js",
-      "sha256": "ff96fff17c5f4213089c24ca91d9c22b464d457db15dc80367d5f8d29ea1bd52",
-      "size": 3577
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/index.js",
-      "sha256": "3321aec3d6bc97c2d7abce72c9b1b94d474b0995178837cfa9b920bd21f4b0f0",
-      "size": 8278
+      "path": "package.json",
+      "sha256": "ed40632359a9062cac7b5bbbe544e327ab9e19e71e90f142e64b4076a12b47eb",
+      "size": 1164
     }
   ],
   "releases": [
@@ -3230,6 +3224,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-11T07:37:45.534Z"
+    },
+    {
+      "version": "10.2.21",
+      "fromVersion": "10.2.20",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "chore: bump Tokito Bot version to 10.2.20",
+      "notice": "A versão 10.2.21 já está disponível para atualização.",
+      "changelog": [
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "ed40632359a9062cac7b5bbbe544e327ab9e19e71e90f142e64b4076a12b47eb",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-11T07:39:15.187Z"
     }
   ],
   "mode": "incremental",
