@@ -1,36 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.25",
+  "version": "10.2.26",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-12T18:03:22.386Z",
+  "publishedAt": "2026-10-12T18:31:52.971Z",
   "changelog": [
-    "[IA] Personalidade original Tokito integrada aos modos texto, audio e interacao espontanea, sem novos modos.",
-    "[IA] Reconhece o criador Dylan pelo numero oficial configurado e diferencia administradores e membros.",
-    "[IA] Resenha e palavroes ocasionais quando combinam com a conversa; postura respeitosa em assuntos serios.",
-    "[IA] Falas em audio com pontuacao natural, limpeza de emojis, markup e risadas escritas antes do TTS.",
-    "[IA] Interacao espontanea segue a personalidade e respeita a configuracao de resposta em audio ou texto.",
-    "[IA] Prompt reorganizado para priorizar personalidade, contexto e catalogo de comandos reais."
+    "[Novidade] feat: Tokito IA confirms actions before delivering results, spontaneous music requests",
+    "A versão 10.2.26 já está disponível para atualização.",
+    "IA Index atualizada"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Personalidade Tokito integrada ao Modo IA",
-  "notice": "Personalidade natural em texto, audio e participacao espontanea, com reconhecimento do criador e cargos.",
+  "type": "Novidade",
+  "title": "feat: Tokito IA confirms actions before delivering results, spontaneous music requests",
+  "notice": "A versão 10.2.26 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "b8fdd1f9cf2645599148b53b7567901f973417b9aa364e77c934df2ac70c649e",
-      "size": 51385
-    },
-    {
-      "path": "package.json",
-      "gitSha": "b5d9ba007c52a360aa9facac930c30a1d1f6a732",
-      "sha256": "",
-      "size": 0
+      "sha256": "5bd4772d780069e0eb1f766b4210db9457baaa6bab584f994a73b9bd020fd7ea",
+      "size": 54305
     }
   ],
   "releases": [
@@ -3390,6 +3381,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-12T18:03:22.386Z"
+    },
+    {
+      "version": "10.2.26",
+      "fromVersion": "10.2.25",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: Tokito IA confirms actions before delivering results, spontaneous music requests",
+      "notice": "A versão 10.2.26 já está disponível para atualização.",
+      "changelog": [
+        "IA Index atualizada"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "5bd4772d780069e0eb1f766b4210db9457baaa6bab584f994a73b9bd020fd7ea",
+          "size": 54305
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-12T18:31:52.971Z"
     }
   ],
   "mode": "incremental",
