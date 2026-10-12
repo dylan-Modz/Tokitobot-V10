@@ -1,39 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.28",
+  "version": "10.2.29",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-12T18:34:52.946Z",
+  "publishedAt": "2026-10-12T18:49:53.620Z",
   "changelog": [
-    "[Correção urgente] Integridade da IA validada pelo SHA-256 e Git Blob SHA atual.",
-    "[Correção] Histórico incremental 10.2.24 a 10.2.28 ajustado para o arquivo final publicado.",
-    "[Estabilidade] Se GitHub Raw entregar cache antigo, atualizador pode buscar o blob imutavel correto.",
-    "[IA] Nos grupos com interacao espontanea, pedidos diretos de musica podem ser atendidos sem repetir o nome Tokito.",
-    "[IA] Antes de executar um pedido, Tokito envia uma confirmacao na personalidade dele, por texto ou voz, conforme o modo configurado.",
-    "[Musica] Depois da confirmacao, Tokito procura a musica e manda o audio pelo comando real quando disponivel.",
-    "[Seguranca] Checagem de permissoes continua antes da execucao; limite para pedidos repetidos no espontaneo.",
-    "[Voz] Se o TTS da confirmacao falhar, tenta confirmar por texto antes de executar.",
-    "[Compatibilidade] Sem novos modos ou comandos: IA texto, IA audio e espontaneo permanecem iguais nas configuracoes."
+    "[Novidade] feat: remove external AI text route, use local Tokito brain",
+    "A versão 10.2.29 já está disponível para atualização.",
+    "IA Index atualizada",
+    "IA Local atualizada"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "IA espontanea responde primeiro e depois envia resultado",
-  "notice": "Integridade de DADOS_TOKITO/ia/index.js corrigida: download validado pelo hash atual e pelo blob imutavel do GitHub.",
+  "type": "Novidade",
+  "title": "feat: remove external AI text route, use local Tokito brain",
+  "notice": "A versão 10.2.29 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "7683cf2ad0c28681d78b31f643f18e8c7d553347c626b903d9b0f1e85664d8c4",
-      "size": 1164
+      "path": "DADOS_TOKITO/ia/index.js",
+      "sha256": "bcafe2d9634446741e86ffb51d9f955cbb1bf8a59d9eb2b8e1669216d58dd439",
+      "size": 49956
     },
     {
-      "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
-      "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6",
-      "size": 54489
+      "path": "DADOS_TOKITO/ia/local.js",
+      "sha256": "de011d8428659a5c3954ea424fbc8cc6b9a4405b5eebb1355fab9609aadb03e3",
+      "size": 11897
     }
   ],
   "releases": [
@@ -3474,6 +3468,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-12T18:34:52.946Z"
+    },
+    {
+      "version": "10.2.29",
+      "fromVersion": "10.2.28",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: remove external AI text route, use local Tokito brain",
+      "notice": "A versão 10.2.29 já está disponível para atualização.",
+      "changelog": [
+        "IA Index atualizada",
+        "IA Local atualizada"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "bcafe2d9634446741e86ffb51d9f955cbb1bf8a59d9eb2b8e1669216d58dd439",
+          "size": 49956
+        },
+        {
+          "path": "DADOS_TOKITO/ia/local.js",
+          "sha256": "de011d8428659a5c3954ea424fbc8cc6b9a4405b5eebb1355fab9609aadb03e3",
+          "size": 11897
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-12T18:49:53.620Z"
     }
   ],
   "mode": "incremental",
