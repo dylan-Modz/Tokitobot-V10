@@ -1,43 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.30",
+  "version": "10.2.31",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-12T18:49:53.620Z",
+  "publishedAt": "2026-10-12T19:04:10.578Z",
   "changelog": [
-    "IA do Tokito agora conversa usando inteligencia local por regras e memoria basica, sem requisicoes à rota de geracao de texto.",
-    "Gemini TTS mantido para falar as respostas em audio, sem alterar o modoia.",
-    "Reconhecimento de criador Dylan, administradores e membros, com saudacoes, resenha e respostas contextuais simples.",
-    "Pedidos de musica, menus e comandos continuam acionando os plugins reais do bot, com confirmacao antes do resultado.",
-    "Participacao espontanea usa o novo motor local. Assuntos desconhecidos recebem uma resposta honesta, sem respostas inventadas.",
-    "Atualizacao verificada com identificadores Git imutaveis para evitar erro de integridade dos arquivos."
+    "[IA] Restaurada a geração de respostas pela rota /api/tokito-ia, substituindo a inteligência de frases locais.",
+    "[IA] Mantidas a personalidade do Tokito, identificação do criador Dylan e dos administradores, e a participação espontânea.",
+    "[IA Áudio] Rota gemini-tts mantida para geração de voz, sem alterações.",
+    "[Comandos] Pedidos de música e outras funções seguem com confirmação antes de executar o comando real.",
+    "[Atualizador] Atualização incremental validada por SHA-256 e Git Blob SHA dos arquivos efetivamente publicados."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Tokito IA local sem rota de texto",
-  "notice": "IA local em texto e audio, mantendo Gemini TTS e funcoes do bot.",
+  "type": "Correção",
+  "title": "Restaurada a IA generativa do Tokito",
+  "notice": "A IA voltou a usar a rota de respostas /api/tokito-ia; Gemini TTS e modos existentes seguem iguais.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "bcafe2d9634446741e86ffb51d9f955cbb1bf8a59d9eb2b8e1669216d58dd439",
-      "size": 49956,
-      "gitSha": "1d32f1192709e5767b48fc21fc59031c885dc3c5"
-    },
-    {
-      "path": "DADOS_TOKITO/ia/local.js",
-      "sha256": "de011d8428659a5c3954ea424fbc8cc6b9a4405b5eebb1355fab9609aadb03e3",
-      "size": 11897,
-      "gitSha": "5605502869494d5ce9055aba25ddad499c9be2da"
+      "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
+      "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6",
+      "size": 54489
     },
     {
       "path": "package.json",
-      "gitSha": "d5a832cba452c1a1b4d8eaee764f2a8efcf2b4cc",
       "sha256": "",
-      "size": 0
+      "gitSha": "fd3a0fa2724aa459bf52a84573089ec2dbc845a5",
+      "size": 1164
     }
   ],
   "releases": [
@@ -3534,16 +3527,48 @@
       "required": true,
       "publishedAt": "2026-10-12T18:52:16.384Z",
       "notice": "IA local em texto e audio, mantendo Gemini TTS e funcoes do bot."
+    },
+    {
+      "version": "10.2.31",
+      "fromVersion": "10.2.30",
+      "type": "Correção",
+      "title": "Restaurada a IA generativa do Tokito",
+      "channel": "stable",
+      "notice": "A IA voltou a usar a rota de respostas /api/tokito-ia; Gemini TTS e modos existentes seguem iguais.",
+      "changelog": [
+        "[IA] Restaurada a geração de respostas pela rota /api/tokito-ia, substituindo a inteligência de frases locais.",
+        "[IA] Mantidas a personalidade do Tokito, identificação do criador Dylan e dos administradores, e a participação espontânea.",
+        "[IA Áudio] Rota gemini-tts mantida para geração de voz, sem alterações.",
+        "[Comandos] Pedidos de música e outras funções seguem com confirmação antes de executar o comando real.",
+        "[Atualizador] Atualização incremental validada por SHA-256 e Git Blob SHA dos arquivos efetivamente publicados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
+          "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6",
+          "size": 54489
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "gitSha": "fd3a0fa2724aa459bf52a84573089ec2dbc845a5",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-12T19:04:10.578Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.29",
+  "fromVersion": "10.2.30",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.30"
+  "publicVersion": "10.2.31"
 }
