@@ -18,7 +18,7 @@ dylan.setCommand({
       ctx.setGp(ctx.dataGp)
       return ctx.reply('- 🧊 '+String.fromCharCode(96)+'𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙾'+String.fromCharCode(96)+
         '\n\n> '+(a==='1'?'✅ Ativado':'❌ Desativado')+' no grupo.'+
-        (a==='1'?'\n> ⏳ Prazo de 10 minutos para se apresentar.\n> 👤 Etapas: nome, idade e cidade.\n> Membros recebem o botão REGISTRAR ao entrar.':'\n> Comandos sem exigência de cadastro.'))
+        (a==='1'?'\n> ⏳ Prazo de 5 minutos para se apresentar.\n> 👤 Etapas: nome, idade e cidade.\n> Membros recebem o botão REGISTRAR ao entrar.':'\n> Comandos sem exigência de cadastro.'))
     }
     // Somente o botão da mensagem de entrada usa a ação interna iniciar.
     if(a==='iniciar')return registro.start(ctx)
