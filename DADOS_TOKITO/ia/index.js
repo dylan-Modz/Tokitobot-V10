@@ -763,9 +763,8 @@ const montarPrompt = (ctx, pergunta, nivel = 0, opcoes = {}) => {
     if (!conteudo || resto < 35) return
     prompt += '\n' + titulo + '\n' + String(conteudo).slice(0, resto)
   }
-  incluir('CONTEXTO RECENTE DO GRUPO (somente referencia):', contexto)
-  incluir('HISTORICO COM ESTE USUARIO:', historico)
-  incluir('ALVO DA MENSAGEM:', alvo ? String(alvo).split('@')[0].slice(0, 28) : 'nenhum')
+  // Ferramentas oficiais tem prioridade sobre trechos antigos do historico.
+  // Preserva o JSON completo do catalogo para o modelo nao inventar comandos.
   if (catalogo.length) {
     let ferramentas = catalogo.slice()
     while (ferramentas.length && limite - prompt.length < JSON.stringify(ferramentas).length + 34) {
@@ -773,6 +772,9 @@ const montarPrompt = (ctx, pergunta, nivel = 0, opcoes = {}) => {
     }
     if (ferramentas.length) incluir('FERRAMENTAS REAIS:', JSON.stringify(ferramentas))
   }
+  incluir('ALVO DA MENSAGEM:', alvo ? String(alvo).split('@')[0].slice(0, 28) : 'nenhum')
+  incluir('CONTEXTO RECENTE DO GRUPO (somente referencia):', contexto)
+  incluir('HISTORICO COM ESTE USUARIO:', historico)
   return prompt
 }
 
