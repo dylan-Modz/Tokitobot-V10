@@ -1,50 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.22",
+  "version": "10.2.23",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-11T07:51:16.196Z",
+  "publishedAt": "2026-10-12T17:43:52.346Z",
   "changelog": [
-    "Registro com prazo de 10 minutos para membros novos se apresentarem, com aviso automático quando o prazo vence.",
-    "Cadastro simplificado em 3 etapas: nome, idade e cidade. Idade e cidade podem ser puladas.",
-    "Os dados de apresentação passam a aparecer no perfil do membro, sem alterar perfis antigos.",
-    "Prazo continua válido após reiniciar o bot; ao vencer, interrompe a tentativa e mantém os comandos bloqueados até concluir o cadastro.",
-    "Não remove membros automaticamente do grupo; nova tentativa disponível com registrar iniciar."
+    "[Correção] fix: register panel shows 5 minute deadline (10.2.23)",
+    "A versão 10.2.23 já está disponível para atualização.",
+    "Registrar atualizado",
+    "Registro atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Apresentação com prazo e cadastro simplificado",
-  "notice": "Registro com 10 minutos para concluir nome, idade e cidade.",
+  "type": "Correção",
+  "title": "fix: register panel shows 5 minute deadline (10.2.23)",
+  "notice": "A versão 10.2.23 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "8063fedb402bbb953dcaa2577da7bf1c8617efb34773fa44e2355dfdff064e20",
-      "size": 41529
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "90d36f950e3f4e5208ea70ddd7d47988da108e5ffcbf95177cdcfbee3b21a9da",
-      "size": 231773
-    },
-    {
       "path": "DADOS_TOKITO/plugins/admin/registrar.js",
-      "sha256": "186caff0ee755cfd92017cfbd4d09c3f597c63311289f8b57c0a9a64762f6acd",
-      "size": 1544
+      "sha256": "508d4d63705fdecc30899da0e4f90d7c6cb06770d47e8da841d67a0c4391bb2a",
+      "size": 1543
     },
     {
       "path": "DADOS_TOKITO/sistemas/registro.js",
-      "sha256": "3c6b075096e1831bb449a4e86167013dff1d575ce808ee6e533dacc04443f814",
-      "size": 12953
-    },
-    {
-      "path": "package.json",
-      "gitSha": "922fd0e81e68f68359362944bf9037036e01da1a",
-      "sha256": "",
-      "size": 0
+      "sha256": "55afbd53f186466a5f29a8bba6005f2a19406ff86d5f1e4b7aa1f59ec647fc34",
+      "size": 13249
     }
   ],
   "releases": [
@@ -3315,6 +3298,33 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-11T07:51:16.196Z"
+    },
+    {
+      "version": "10.2.23",
+      "fromVersion": "10.2.22",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: register panel shows 5 minute deadline (10.2.23)",
+      "notice": "A versão 10.2.23 já está disponível para atualização.",
+      "changelog": [
+        "Registrar atualizado",
+        "Registro atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/registrar.js",
+          "sha256": "508d4d63705fdecc30899da0e4f90d7c6cb06770d47e8da841d67a0c4391bb2a",
+          "size": 1543
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/registro.js",
+          "sha256": "55afbd53f186466a5f29a8bba6005f2a19406ff86d5f1e4b7aa1f59ec647fc34",
+          "size": 13249
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-12T17:43:52.346Z"
     }
   ],
   "mode": "incremental",
