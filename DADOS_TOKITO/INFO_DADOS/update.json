@@ -6,16 +6,17 @@
   "ref": "main",
   "publishedAt": "2026-10-12T17:43:52.346Z",
   "changelog": [
-    "[Correção] fix: register panel shows 5 minute deadline (10.2.23)",
-    "A versão 10.2.23 já está disponível para atualização.",
-    "Registrar atualizado",
-    "Registro atualizado"
+    "Prazo para se apresentar reduzido de 10 para 5 minutos no registro do Tokito.",
+    "Mensagens do convite e comando registrar mostram o tempo de 5 minutos.",
+    "Cadastros ainda pendentes passam a respeitar 5 minutos desde a entrada; o prazo não reinicia ao tocar no botão.",
+    "Nome, idade e cidade continuam nas mesmas três etapas, sem expulsão automática.",
+    "Modo IA permanece sem alterações nesta versão."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: register panel shows 5 minute deadline (10.2.23)",
-  "notice": "A versão 10.2.23 já está disponível para atualização.",
+  "title": "Registro com prazo de 5 minutos",
+  "notice": "Novo prazo de 5 minutos para o registro de membros, mantendo nome, idade e cidade.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -28,6 +29,12 @@
       "path": "DADOS_TOKITO/sistemas/registro.js",
       "sha256": "55afbd53f186466a5f29a8bba6005f2a19406ff86d5f1e4b7aa1f59ec647fc34",
       "size": 13249
+    },
+    {
+      "path": "package.json",
+      "gitSha": "3539befd390d10401d0b0a3036f2d3e41abcf6a4",
+      "sha256": "",
+      "size": 0
     }
   ],
   "releases": [
@@ -3304,11 +3311,14 @@
       "fromVersion": "10.2.22",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix: register panel shows 5 minute deadline (10.2.23)",
-      "notice": "A versão 10.2.23 já está disponível para atualização.",
+      "title": "Registro com prazo de 5 minutos",
+      "notice": "Novo prazo de 5 minutos para o registro de membros, mantendo nome, idade e cidade.",
       "changelog": [
-        "Registrar atualizado",
-        "Registro atualizado"
+        "Prazo para se apresentar reduzido de 10 para 5 minutos no registro do Tokito.",
+        "Mensagens do convite e comando registrar mostram o tempo de 5 minutos.",
+        "Cadastros ainda pendentes passam a respeitar 5 minutos desde a entrada; o prazo não reinicia ao tocar no botão.",
+        "Nome, idade e cidade continuam nas mesmas três etapas, sem expulsão automática.",
+        "Modo IA permanece sem alterações nesta versão."
       ],
       "files": [
         {
@@ -3320,6 +3330,12 @@
           "path": "DADOS_TOKITO/sistemas/registro.js",
           "sha256": "55afbd53f186466a5f29a8bba6005f2a19406ff86d5f1e4b7aa1f59ec647fc34",
           "size": 13249
+        },
+        {
+          "path": "package.json",
+          "gitSha": "3539befd390d10401d0b0a3036f2d3e41abcf6a4",
+          "sha256": "",
+          "size": 0
         }
       ],
       "delete": [],
@@ -3330,11 +3346,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.21",
+  "fromVersion": "10.2.22",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.22"
+  "publicVersion": "10.2.23"
 }
