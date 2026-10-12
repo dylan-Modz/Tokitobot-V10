@@ -1156,7 +1156,7 @@ const gerarMensagemAcao = async (ctx, pergunta, comando, tipo, sugerida = '') =>
     : pessoa.cargo === 'administrador' ? 'adm' : 'parça'
   const ehMusica = ['play_audio', 'playaudio', 'play', 'ytplay'].includes(String(comando || '').toLowerCase())
   const titulo = cortar(extrairBuscaMusica(pergunta), 65)
-  const resenha = criador && /\\b(?:porra|caralho|merda|desgracado|maluco|doido|kkkk|kkk|zoeira)\\b/i.test(normalizarTexto(pergunta))
+  const resenha = criador && /\b(?:porra|caralho|merda|desgracado|maluco|doido|kkkk|kkk|zoeira)\b/i.test(normalizarTexto(pergunta))
   const opcoes = ehMusica ? [
     'Ah, beleza, ' + nome + '! Vou procurar ' + (titulo ? 'essa música, ' + titulo : 'essa música') + ' aqui. Segura um pouquinho!',
     'Ô, ' + nome + '! Tô indo atrás desse som agora. Calma aí que eu já te mando, porra!',
@@ -1276,13 +1276,19 @@ return responder(ctx, perguntaDado, tipo)
 // Primeiro responde à pessoa. Só depois chama o plugin real.
 const inicio = await gerarMensagemAcao(ctx, pergunta, cmd, tipo, data?.resposta)
 if (inicio) {
+  let confirmou = false
   try {
     await responder(ctx, inicio, tipo)
+    confirmou = true
   } catch (erro) {
-    // Se o TTS estiver fora, mantém a ordem com uma confirmação em texto.
-    if (tipo === 'audio') await enviarTexto(ctx, inicio).catch(() => {})
-    else console.log('[IA CONFIRMACAO]', String(erro?.message || erro))
+    // Se o TTS estiver fora, confirma em texto antes de enviar qualquer resultado.
+    if (tipo === 'audio') {
+      try { await enviarTexto(ctx, inicio); confirmou = true } catch {}
+    }
+    console.log('[IA CONFIRMACAO]', String(erro?.message || erro))
   }
+  // Nunca executa a ação sem antes entregar uma confirmação à pessoa.
+  if (!confirmou) return false
 }
 
 const preservarSaida = categoriaFerramenta === 'menus' || data?.preservarSaida === true
