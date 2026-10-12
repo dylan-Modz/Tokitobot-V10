@@ -6,6 +6,9 @@
   "ref": "main",
   "publishedAt": "2026-10-12T18:34:52.946Z",
   "changelog": [
+    "[Correção urgente] Integridade da IA validada pelo SHA-256 e Git Blob SHA atual.",
+    "[Correção] Histórico incremental 10.2.24 a 10.2.28 ajustado para o arquivo final publicado.",
+    "[Estabilidade] Se GitHub Raw entregar cache antigo, atualizador pode buscar o blob imutavel correto.",
     "[IA] Nos grupos com interacao espontanea, pedidos diretos de musica podem ser atendidos sem repetir o nome Tokito.",
     "[IA] Antes de executar um pedido, Tokito envia uma confirmacao na personalidade dele, por texto ou voz, conforme o modo configurado.",
     "[Musica] Depois da confirmacao, Tokito procura a musica e manda o audio pelo comando real quando disponivel.",
@@ -17,7 +20,7 @@
   "archiveSha256": "",
   "type": "Melhoria",
   "title": "IA espontanea responde primeiro e depois envia resultado",
-  "notice": "Tokito confirma pedidos em texto ou audio antes de executar, inclusive musicas no espontaneo.",
+  "notice": "Integridade de DADOS_TOKITO/ia/index.js corrigida: download validado pelo hash atual e pelo blob imutavel do GitHub.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -25,6 +28,12 @@
       "path": "package.json",
       "sha256": "7683cf2ad0c28681d78b31f643f18e8c7d553347c626b903d9b0f1e85664d8c4",
       "size": 1164
+    },
+    {
+      "path": "DADOS_TOKITO/ia/index.js",
+      "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
+      "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6",
+      "size": 54489
     }
   ],
   "releases": [
@@ -3345,8 +3354,9 @@
       "files": [
         {
           "path": "DADOS_TOKITO/ia/index.js",
-          "sha256": "e173a8b77418e57c6a0e23782ebeb9000264c8e8b079e732c9bbef9f3fd774c4",
-          "size": 51229
+          "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
+          "size": 54489,
+          "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6"
         }
       ],
       "delete": [],
@@ -3371,8 +3381,9 @@
       "files": [
         {
           "path": "DADOS_TOKITO/ia/index.js",
-          "sha256": "b8fdd1f9cf2645599148b53b7567901f973417b9aa364e77c934df2ac70c649e",
-          "size": 51385
+          "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
+          "size": 54489,
+          "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6"
         },
         {
           "path": "package.json",
@@ -3398,8 +3409,9 @@
       "files": [
         {
           "path": "DADOS_TOKITO/ia/index.js",
-          "sha256": "5bd4772d780069e0eb1f766b4210db9457baaa6bab584f994a73b9bd020fd7ea",
-          "size": 54305
+          "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
+          "size": 54489,
+          "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6"
         }
       ],
       "delete": [],
@@ -3420,7 +3432,8 @@
         {
           "path": "DADOS_TOKITO/ia/index.js",
           "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
-          "size": 54489
+          "size": 54489,
+          "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6"
         }
       ],
       "delete": [],
@@ -3433,8 +3446,11 @@
       "channel": "stable",
       "type": "Melhoria",
       "title": "IA espontanea responde primeiro e depois envia resultado",
-      "notice": "Tokito confirma pedidos em texto ou audio antes de executar, inclusive musicas no espontaneo.",
+      "notice": "Integridade de DADOS_TOKITO/ia/index.js corrigida: download validado pelo hash atual e pelo blob imutavel do GitHub.",
       "changelog": [
+        "[Correção urgente] Integridade da IA validada pelo SHA-256 e Git Blob SHA atual.",
+        "[Correção] Histórico incremental 10.2.24 a 10.2.28 ajustado para o arquivo final publicado.",
+        "[Estabilidade] Se GitHub Raw entregar cache antigo, atualizador pode buscar o blob imutavel correto.",
         "[IA] Nos grupos com interacao espontanea, pedidos diretos de musica podem ser atendidos sem repetir o nome Tokito.",
         "[IA] Antes de executar um pedido, Tokito envia uma confirmacao na personalidade dele, por texto ou voz, conforme o modo configurado.",
         "[Musica] Depois da confirmacao, Tokito procura a musica e manda o audio pelo comando real quando disponivel.",
@@ -3447,6 +3463,12 @@
           "path": "package.json",
           "sha256": "7683cf2ad0c28681d78b31f643f18e8c7d553347c626b903d9b0f1e85664d8c4",
           "size": 1164
+        },
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
+          "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6",
+          "size": 54489
         }
       ],
       "delete": [],
