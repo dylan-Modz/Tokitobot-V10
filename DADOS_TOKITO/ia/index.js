@@ -1150,9 +1150,25 @@ return tipo === 'audio'
 }
 
 const gerarMensagemAcao = async (ctx, pergunta, comando, tipo, sugerida = '') => {
-const texto = String(sugerida || '').trim()
-if (!texto || promessaSemAcao(texto)) return ''
-return texto
+  const pessoa = identidadeIA(ctx)
+  const criador = pessoa.cargo === 'criador'
+  const nome = criador ? 'meu criador Dylan'
+    : pessoa.cargo === 'administrador' ? 'adm' : 'parça'
+  const ehMusica = ['play_audio', 'playaudio', 'play', 'ytplay'].includes(String(comando || '').toLowerCase())
+  const titulo = cortar(extrairBuscaMusica(pergunta), 65)
+  const resenha = criador && /\\b(?:porra|caralho|merda|desgracado|maluco|doido|kkkk|kkk|zoeira)\\b/i.test(normalizarTexto(pergunta))
+  const opcoes = ehMusica ? [
+    'Ah, beleza, ' + nome + '! Vou procurar ' + (titulo ? 'essa música, ' + titulo : 'essa música') + ' aqui. Segura um pouquinho!',
+    'Ô, ' + nome + '! Tô indo atrás desse som agora. Calma aí que eu já te mando, porra!',
+    'Pera aí, ' + nome + '! Deixa eu buscar a música primeiro. Se eu encontrar, já solto o áudio aqui!'
+  ] : [
+    'Beleza, ' + nome + '! Vou conferir isso agora e já te mostro o resultado.',
+    'Opa, ' + nome + '! Deixa comigo um instante, vou tentar fazer isso aqui.',
+    'Calma aí, ' + nome + '! Vou resolver esse pedido e já te aviso como ficou.'
+  ]
+  if (resenha && ehMusica) opcoes.push('Porra, Dylan, tu não me dá sossego! Aguarda aí, seu desgraçado, vou procurar essa música!')
+  // A prévia nunca deve afirmar sucesso antes do plugin realmente retornar.
+  return opcoes[Math.floor(Math.random() * opcoes.length)]
 }
 
 const respostaFerramenta = async (ctx, pergunta, resultado, tipo) => {
@@ -1257,8 +1273,17 @@ salvarMemoria(ctx, pergunta, perguntaDado, { action: `aguardando:${cmd}` })
 return responder(ctx, perguntaDado, tipo)
 }
 
+// Primeiro responde à pessoa. Só depois chama o plugin real.
 const inicio = await gerarMensagemAcao(ctx, pergunta, cmd, tipo, data?.resposta)
-if (inicio && tipo === 'texto') await responder(ctx, inicio, 'texto').catch(() => {})
+if (inicio) {
+  try {
+    await responder(ctx, inicio, tipo)
+  } catch (erro) {
+    // Se o TTS estiver fora, mantém a ordem com uma confirmação em texto.
+    if (tipo === 'audio') await enviarTexto(ctx, inicio).catch(() => {})
+    else console.log('[IA CONFIRMACAO]', String(erro?.message || erro))
+  }
+}
 
 const preservarSaida = categoriaFerramenta === 'menus' || data?.preservarSaida === true
 const resultado = await ferramentas.executar(ctx, cmd, args, {
@@ -1326,6 +1351,27 @@ return '✨'
 
 const reagirContextual = async () => true
 
+// No modo espontâneo, pedidos claros de música podem ser atendidos sem
+// exigir que a pessoa repita "Tokito" em toda mensagem.
+const pedidosMusicaEspontaneos = global.__TOKITO_IA_PEDIDOS_MUSICA__ ||= new Map()
+const pedidoMusicaEspontaneo = ctx => {
+  if (ctx.isCmd || ctx.info?.key?.fromMe) return false
+  const texto = normalizarTexto(ctx.body)
+  if (!texto || texto.length > 220) return false
+  if (!/^(?:(?:ei|o|oh|opa|mano|por favor|pfv)[, !]*){0,2}(?:toca|toque|tocar)\s+(?!no\b|na\b|nisso\b)\S/i.test(texto) &&
+      !/^(?:(?:ei|o|oh|opa|mano|por favor|pfv)[, !]*){0,2}(?:manda|mande|envia|envie|bota|coloca|coloque)\b.{0,80}\b(?:musica|som|audio)\b/i.test(texto)) return false
+  const chave = String(ctx.from || '') + '|' + String(ctx.sender || '')
+  const anterior = Number(pedidosMusicaEspontaneos.get(chave) || 0)
+  if (Date.now() - anterior < 20000) return false
+  if (!resolverPlugin(ctx, ['play_audio', 'playaudio', 'play'])) return false
+  pedidosMusicaEspontaneos.set(chave, Date.now())
+  if (pedidosMusicaEspontaneos.size > 2500) {
+    const primeira = pedidosMusicaEspontaneos.keys().next().value
+    if (primeira) pedidosMusicaEspontaneos.delete(primeira)
+  }
+  return true
+}
+
 const evento = async ctx => {
 if (!ctx.isGroup) return false
 
@@ -1342,7 +1388,10 @@ const audioNovo = typeof modulos.audioMensagemAtual === 'function'
 ? modulos.audioMensagemAtual(ctx)
 : modulos.desenrolarMensagem(ctx?.mensagem || {})?.audioMessage || null
 
-if (!chamadaInicial.ativo && !audioNovo) {
+const pediuMusicaSemChamar = !chamadaInicial.ativo && !audioNovo &&
+  cfg.espontaneo !== false && pedidoMusicaEspontaneo(ctx)
+
+if (!chamadaInicial.ativo && !audioNovo && !pediuMusicaSemChamar) {
 if (cfg.espontaneo !== false && memoriaStore.podeInteragir(ctx)) {
 try {
 const assunto = memoriaStore.textoContexto(ctx)
