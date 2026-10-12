@@ -6,15 +6,18 @@
   "ref": "main",
   "publishedAt": "2026-10-12T18:03:22.386Z",
   "changelog": [
-    "[Correção] fix: keep official tools in AI prompts alongside personality",
-    "A versão 10.2.25 já está disponível para atualização.",
-    "IA Index atualizada"
+    "[IA] Personalidade original Tokito integrada aos modos texto, audio e interacao espontanea, sem novos modos.",
+    "[IA] Reconhece o criador Dylan pelo numero oficial configurado e diferencia administradores e membros.",
+    "[IA] Resenha e palavroes ocasionais quando combinam com a conversa; postura respeitosa em assuntos serios.",
+    "[IA] Falas em audio com pontuacao natural, limpeza de emojis, markup e risadas escritas antes do TTS.",
+    "[IA] Interacao espontanea segue a personalidade e respeita a configuracao de resposta em audio ou texto.",
+    "[IA] Prompt reorganizado para priorizar personalidade, contexto e catalogo de comandos reais."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix: keep official tools in AI prompts alongside personality",
-  "notice": "A versão 10.2.25 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "Personalidade Tokito integrada ao Modo IA",
+  "notice": "Personalidade natural em texto, audio e participacao espontanea, com reconhecimento do criador e cargos.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -22,6 +25,12 @@
       "path": "DADOS_TOKITO/ia/index.js",
       "sha256": "b8fdd1f9cf2645599148b53b7567901f973417b9aa364e77c934df2ac70c649e",
       "size": 51385
+    },
+    {
+      "path": "package.json",
+      "gitSha": "b5d9ba007c52a360aa9facac930c30a1d1f6a732",
+      "sha256": "",
+      "size": 0
     }
   ],
   "releases": [
@@ -3354,17 +3363,28 @@
       "version": "10.2.25",
       "fromVersion": "10.2.24",
       "channel": "stable",
-      "type": "Correção",
-      "title": "fix: keep official tools in AI prompts alongside personality",
-      "notice": "A versão 10.2.25 já está disponível para atualização.",
+      "type": "Melhoria",
+      "title": "Personalidade Tokito integrada ao Modo IA",
+      "notice": "Personalidade natural em texto, audio e participacao espontanea, com reconhecimento do criador e cargos.",
       "changelog": [
-        "IA Index atualizada"
+        "[IA] Personalidade original Tokito integrada aos modos texto, audio e interacao espontanea, sem novos modos.",
+        "[IA] Reconhece o criador Dylan pelo numero oficial configurado e diferencia administradores e membros.",
+        "[IA] Resenha e palavroes ocasionais quando combinam com a conversa; postura respeitosa em assuntos serios.",
+        "[IA] Falas em audio com pontuacao natural, limpeza de emojis, markup e risadas escritas antes do TTS.",
+        "[IA] Interacao espontanea segue a personalidade e respeita a configuracao de resposta em audio ou texto.",
+        "[IA] Prompt reorganizado para priorizar personalidade, contexto e catalogo de comandos reais."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/ia/index.js",
           "sha256": "b8fdd1f9cf2645599148b53b7567901f973417b9aa364e77c934df2ac70c649e",
           "size": 51385
+        },
+        {
+          "path": "package.json",
+          "gitSha": "b5d9ba007c52a360aa9facac930c30a1d1f6a732",
+          "sha256": "",
+          "size": 0
         }
       ],
       "delete": [],
@@ -3375,11 +3395,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.22",
+  "fromVersion": "10.2.24",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.23"
+  "publicVersion": "10.2.25"
 }
