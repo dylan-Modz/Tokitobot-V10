@@ -47,7 +47,7 @@ const admin=ctx=>ctx.SoDono||ctx.isGroupAdmins||ctx?.info?.key?.fromMe===true
 const pfx=ctx=>String(ctx.prefix||'!')
 const mention=v=>'@'+String(v||'').split('@')[0]
 const reply=(ctx,txt)=>ctx.reply(txt,ctx.sender?[ctx.sender]:[])
-const PRAZO_MS = 10 * 60 * 1000
+const PRAZO_MS = 5 * 60 * 1000
 const PRAZO_MINUTOS = PRAZO_MS / 60000
 const passos = ['nome', 'idade', 'cidade']
 const proxima = { nome:'idade', idade:'cidade' }
@@ -59,9 +59,14 @@ const tempo = ms => {
 const pendencia = (data,id) => {
   const p = data.pendentes[id]
   if (!p) return null
-  if (!Number.isFinite(Number(p.expiraEm))) {
-    p.expiraEm = agora() + PRAZO_MS
+  const inicio = Number(p.em)
+  const limite = Number.isFinite(inicio) && inicio > 0 ? inicio + PRAZO_MS : 0
+  if (!Number.isFinite(Number(p.expiraEm)) || Number(p.expiraEm) <= 0) {
+    p.expiraEm = limite || agora() + PRAZO_MS
     p.expirado = false
+  } else if (limite && Number(p.expiraEm) > limite) {
+    // Mantém os cadastros pendentes dentro do novo prazo de 5 minutos.
+    p.expiraEm = limite
   }
   return p
 }
