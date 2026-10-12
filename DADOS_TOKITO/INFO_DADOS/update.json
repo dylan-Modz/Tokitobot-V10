@@ -6,15 +6,18 @@
   "ref": "main",
   "publishedAt": "2026-10-12T18:34:52.946Z",
   "changelog": [
-    "[Melhoria] chore: publish Tokito V10.2.28 spontaneous action responses",
-    "A versão 10.2.28 já está disponível para atualização.",
-    "Package atualizado"
+    "[IA] Nos grupos com interacao espontanea, pedidos diretos de musica podem ser atendidos sem repetir o nome Tokito.",
+    "[IA] Antes de executar um pedido, Tokito envia uma confirmacao na personalidade dele, por texto ou voz, conforme o modo configurado.",
+    "[Musica] Depois da confirmacao, Tokito procura a musica e manda o audio pelo comando real quando disponivel.",
+    "[Seguranca] Checagem de permissoes continua antes da execucao; limite para pedidos repetidos no espontaneo.",
+    "[Voz] Se o TTS da confirmacao falhar, tenta confirmar por texto antes de executar.",
+    "[Compatibilidade] Sem novos modos ou comandos: IA texto, IA audio e espontaneo permanecem iguais nas configuracoes."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "chore: publish Tokito V10.2.28 spontaneous action responses",
-  "notice": "A versão 10.2.28 já está disponível para atualização.",
+  "title": "IA espontanea responde primeiro e depois envia resultado",
+  "notice": "Tokito confirma pedidos em texto ou audio antes de executar, inclusive musicas no espontaneo.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
@@ -3429,10 +3432,15 @@
       "fromVersion": "10.2.27",
       "channel": "stable",
       "type": "Melhoria",
-      "title": "chore: publish Tokito V10.2.28 spontaneous action responses",
-      "notice": "A versão 10.2.28 já está disponível para atualização.",
+      "title": "IA espontanea responde primeiro e depois envia resultado",
+      "notice": "Tokito confirma pedidos em texto ou audio antes de executar, inclusive musicas no espontaneo.",
       "changelog": [
-        "Package atualizado"
+        "[IA] Nos grupos com interacao espontanea, pedidos diretos de musica podem ser atendidos sem repetir o nome Tokito.",
+        "[IA] Antes de executar um pedido, Tokito envia uma confirmacao na personalidade dele, por texto ou voz, conforme o modo configurado.",
+        "[Musica] Depois da confirmacao, Tokito procura a musica e manda o audio pelo comando real quando disponivel.",
+        "[Seguranca] Checagem de permissoes continua antes da execucao; limite para pedidos repetidos no espontaneo.",
+        "[Voz] Se o TTS da confirmacao falhar, tenta confirmar por texto antes de executar.",
+        "[Compatibilidade] Sem novos modos ou comandos: IA texto, IA audio e espontaneo permanecem iguais nas configuracoes."
       ],
       "files": [
         {
@@ -3449,11 +3457,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.24",
+  "fromVersion": "10.2.27",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.25"
+  "publicVersion": "10.2.28"
 }
