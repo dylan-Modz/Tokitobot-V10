@@ -1,40 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.23",
+  "version": "10.2.24",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-12T17:43:52.346Z",
+  "publishedAt": "2026-10-12T18:00:22.450Z",
   "changelog": [
-    "Prazo para se apresentar reduzido de 10 para 5 minutos no registro do Tokito.",
-    "Mensagens do convite e comando registrar mostram o tempo de 5 minutos.",
-    "Cadastros ainda pendentes passam a respeitar 5 minutos desde a entrada; o prazo não reinicia ao tocar no botão.",
-    "Nome, idade e cidade continuam nas mesmas três etapas, sem expulsão automática.",
-    "Modo IA permanece sem alterações nesta versão."
+    "[Novidade] feat: Tokito personality integrated into text audio and spontaneous IA",
+    "A versão 10.2.24 já está disponível para atualização.",
+    "IA Index atualizada"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Registro com prazo de 5 minutos",
-  "notice": "Novo prazo de 5 minutos para o registro de membros, mantendo nome, idade e cidade.",
+  "type": "Novidade",
+  "title": "feat: Tokito personality integrated into text audio and spontaneous IA",
+  "notice": "A versão 10.2.24 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/registrar.js",
-      "sha256": "508d4d63705fdecc30899da0e4f90d7c6cb06770d47e8da841d67a0c4391bb2a",
-      "size": 1543
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/registro.js",
-      "sha256": "55afbd53f186466a5f29a8bba6005f2a19406ff86d5f1e4b7aa1f59ec647fc34",
-      "size": 13249
-    },
-    {
-      "path": "package.json",
-      "gitSha": "3539befd390d10401d0b0a3036f2d3e41abcf6a4",
-      "sha256": "",
-      "size": 0
+      "path": "DADOS_TOKITO/ia/index.js",
+      "sha256": "e173a8b77418e57c6a0e23782ebeb9000264c8e8b079e732c9bbef9f3fd774c4",
+      "size": 51229
     }
   ],
   "releases": [
@@ -3341,6 +3328,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-12T17:43:52.346Z"
+    },
+    {
+      "version": "10.2.24",
+      "fromVersion": "10.2.23",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: Tokito personality integrated into text audio and spontaneous IA",
+      "notice": "A versão 10.2.24 já está disponível para atualização.",
+      "changelog": [
+        "IA Index atualizada"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "e173a8b77418e57c6a0e23782ebeb9000264c8e8b079e732c9bbef9f3fd774c4",
+          "size": 51229
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-12T18:00:22.450Z"
     }
   ],
   "mode": "incremental",
