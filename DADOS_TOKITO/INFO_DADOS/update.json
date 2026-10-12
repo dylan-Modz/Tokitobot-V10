@@ -1,27 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.26",
+  "version": "10.2.27",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-12T18:31:52.971Z",
+  "publishedAt": "2026-10-12T18:33:23.232Z",
   "changelog": [
-    "[Novidade] feat: Tokito IA confirms actions before delivering results, spontaneous music requests",
-    "A versão 10.2.26 já está disponível para atualização.",
+    "[Correção] fix: reliable first reply before actions and playful creator speech",
+    "A versão 10.2.27 já está disponível para atualização.",
     "IA Index atualizada"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat: Tokito IA confirms actions before delivering results, spontaneous music requests",
-  "notice": "A versão 10.2.26 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: reliable first reply before actions and playful creator speech",
+  "notice": "A versão 10.2.27 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "5bd4772d780069e0eb1f766b4210db9457baaa6bab584f994a73b9bd020fd7ea",
-      "size": 54305
+      "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
+      "size": 54489
     }
   ],
   "releases": [
@@ -3402,6 +3402,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-12T18:31:52.971Z"
+    },
+    {
+      "version": "10.2.27",
+      "fromVersion": "10.2.26",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: reliable first reply before actions and playful creator speech",
+      "notice": "A versão 10.2.27 já está disponível para atualização.",
+      "changelog": [
+        "IA Index atualizada"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
+          "size": 54489
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-12T18:33:23.231Z"
     }
   ],
   "mode": "incremental",
