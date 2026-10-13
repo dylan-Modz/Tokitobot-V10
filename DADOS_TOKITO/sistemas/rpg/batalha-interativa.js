@@ -10,6 +10,7 @@ const path = require('path')
 const crypto = require('crypto')
 const r = require('./index')
 const p = require('./pokemon-core')
+const imagensEtapas = require('../../INFO_DADOS/LOGOS/links_batalha_pokemon.json')
 
 const ARQUIVO = path.join(__dirname, '../../database/jogos/batalhas-pokemon.json')
 const CONVITE = 60 * 1000
@@ -70,10 +71,20 @@ const imagem = lutador => {
   return 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/' +
     encodeURIComponent(String(lutador.id)) + '.png'
 }
+// Capas temáticas para cinco momentos da batalha, com arte do Pokémon
+// como reserva para links externos que eventualmente saiam do ar.
+const capa = (fase, mon) => ({
+  url: imagensEtapas[fase] || '',
+  reserva: imagem(mon)
+})
+const urlsDaCapa = figura => [...new Set((typeof figura === 'string'
+  ? [figura]
+  : [figura?.url, figura?.reserva]).filter(url => typeof url === 'string' && /^https?:\/\//.test(url)))]
 
 // Mesmo protocolo de botões quick_reply usado pelo comando play.
 async function enviar(ctx, mensagem, botoes = [], figura = '', mencoes = []) {
   const para = chave(ctx)
+  const imagens = urlsDaCapa(figura)
   const citados = [...new Set(mencoes.filter(Boolean))]
   const info = typeof ctx.canalInfo === 'function'
     ? ctx.canalInfo(citados)
@@ -93,20 +104,23 @@ async function enviar(ctx, mensagem, botoes = [], figura = '', mencoes = []) {
         })
       }))
       let header
-      if (figura && typeof ctx.prepareWAMessageMedia === 'function') {
-        try {
-          const media = await ctx.prepareWAMessageMedia(
-            { image: { url: figura } },
-            { upload: ctx.tokito.waUploadToServer }
-          )
-          if (media?.imageMessage) {
-            header = i.Header.create({
-              hasMediaAttachment: true,
-              imageMessage: media.imageMessage
-            })
+      if (typeof ctx.prepareWAMessageMedia === 'function') {
+        for (const url of imagens) {
+          try {
+            const media = await ctx.prepareWAMessageMedia(
+              { image: { url } },
+              { upload: ctx.tokito.waUploadToServer }
+            )
+            if (media?.imageMessage) {
+              header = i.Header.create({
+                hasMediaAttachment: true,
+                imageMessage: media.imageMessage
+              })
+              break
+            }
+          } catch (e) {
+            console.log('[POKEMON IMAGEM]', e.message)
           }
-        } catch (e) {
-          console.log('[POKEMON IMAGEM]', e.message)
         }
       }
       // Primeiro tenta com a imagem; caso o WhatsApp não aceite,
@@ -160,10 +174,10 @@ async function enviar(ctx, mensagem, botoes = [], figura = '', mencoes = []) {
     throw new Error('O WhatsApp não aceitou os botões da batalha Pokémon.')
   }
 
-  if (figura) {
+  for (const url of imagens) {
     try {
       return await ctx.tokito.sendMessage(para, {
-        image: { url: figura }, caption: mensagem,
+        image: { url }, caption: mensagem,
         mentions: citados, contextInfo: info
       }, { quoted: ctx.selo })
     } catch {}
@@ -271,7 +285,7 @@ async function turno(ctx, s) {
     linha,
     '📌 Escolha um dos quatro botões abaixo'
   ])
-  return enviar(ctx, texto, botoesDaVez(ctx, s), imagem(m), marca(s))
+  return enviar(ctx, texto, botoesDaVez(ctx, s), capa('turnos', m), marca(s))
 }
 
 async function desafiar(ctx, alvo) {
@@ -308,7 +322,7 @@ async function desafiar(ctx, alvo) {
   ]), [
     { texto: '✅ Aceitar', id: prefix + 'batalhapokemon aceitar ' + sessao.id },
     { texto: '❌ Recusar', id: prefix + 'batalhapokemon recusar ' + sessao.id }
-  ], imagem(pA), [a, b])
+  ], capa('desafio', pA), [a, b])
   } catch (erro) {
     remover(grupo)
     console.log('[POKEMON DESAFIO]', erro.message)
@@ -334,7 +348,7 @@ async function aceitar(ctx, s) {
     '⚡ O Pokémon mais veloz começa.',
     '🎙️ TOKITO: "EITA PORRA, AGORA VAI! Quem vai cair primeiro, hein?!"',
     '🛡️ Cada jogador escolhe suas ações nos botões; HP e ataques aparecem por rodada.'
-  ]), [], imagem(b), marca(s))
+  ]), [], capa('turnos', b), marca(s))
   return turno(ctx, s)
 }
 
@@ -460,7 +474,7 @@ async function acao(ctx, s, acao) {
   const relato = placa('Batalha Pokémon • Rodada ' + s.rodada, [
     descricao, ...quadro(s), narracao(s, evento)
   ])
-  const foto = imagem(atk)
+  const foto = capa(evento.virada ? 'virada' : ato === 'especial' ? 'golpes' : 'narracao', atk)
   if (evento.derrota || s.jogadas >= MAX_TURNOS) {
     const venceu = evento.derrota ? s.vez : (s.pokemon[0].hp >= s.pokemon[1].hp ? 0 : 1)
     const fim = finalizar(ctx, s, venceu, !evento.derrota)
