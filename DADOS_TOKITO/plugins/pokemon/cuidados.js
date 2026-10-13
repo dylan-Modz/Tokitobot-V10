@@ -40,7 +40,6 @@ dylan.setCommand({
     'acordarpokemon', 'acordarpoke',
     'diariopokemon', 'diariopoke',
     'eventopokemon', 'eventopoke',
-    'batalhapokemon', 'batalhapoke',
     'realezapokemon', 'pokerealeza'
   ],
   categoria: 'pokemon',
@@ -214,27 +213,6 @@ dylan.setCommand({
         { emoji: '🧠', texto: `+${xp} XP` },
         { emoji: '❤️', texto: `Saúde: ${pokemon.saude}%` }
       ]))
-    }
-
-    if (['batalhapokemon', 'batalhapoke'].includes(comando)) {
-      const jid = await destino(ctx)
-      if (!jid)
-        return ctx.reply(compacto(ctx, '⚔️', 'Batalha Pokémon', [
-          { emoji: '📌', texto: ctx.prefix + 'batalhapokemon @usuario' }
-        ]))
-
-      if (jid === ctx.normalizar(ctx.sender))
-        return ctx.reply(ctx.mess.coinsDoarMesmo())
-
-      const cd = restante(pokemon.ultimaBatalha, 10 * 60 * 1000)
-      if (cd)
-        return ctx.reply(ctx.mess.coinsCooldown(cd))
-
-      pokemon.ultimaBatalha = agora
-      const resultado = await pokemonCore.batalhaTreinadores(ctx, jid)
-      r.salvar(ctx)
-
-      return ctx.reply(resultado.texto, [ctx.sender, jid])
     }
 
     if (['realezapokemon', 'pokerealeza'].includes(comando)) {
