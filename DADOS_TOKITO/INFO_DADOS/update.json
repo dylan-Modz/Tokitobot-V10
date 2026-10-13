@@ -1,36 +1,39 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.31",
+  "version": "10.2.32",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-12T19:04:10.578Z",
+  "publishedAt": "2026-10-13T12:05:56.713Z",
   "changelog": [
-    "[IA] Restaurada a geração de respostas pela rota /api/tokito-ia, substituindo a inteligência de frases locais.",
-    "[IA] Mantidas a personalidade do Tokito, identificação do criador Dylan e dos administradores, e a participação espontânea.",
-    "[IA Áudio] Rota gemini-tts mantida para geração de voz, sem alterações.",
-    "[Comandos] Pedidos de música e outras funções seguem com confirmação antes de executar o comando real.",
-    "[Atualizador] Atualização incremental validada por SHA-256 e Git Blob SHA dos arquivos efetivamente publicados."
+    "[Melhoria] refactor: route Pokemon battles through turn-based module",
+    "A versão 10.2.32 já está disponível para atualização.",
+    "Batalhapokemon atualizado",
+    "Cuidados atualizado",
+    "Batalha Interativa atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Restaurada a IA generativa do Tokito",
-  "notice": "A IA voltou a usar a rota de respostas /api/tokito-ia; Gemini TTS e modos existentes seguem iguais.",
+  "type": "Melhoria",
+  "title": "refactor: route Pokemon battles through turn-based module",
+  "notice": "A versão 10.2.32 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
-      "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6",
-      "size": 54489
+      "path": "DADOS_TOKITO/plugins/pokemon/batalhapokemon.js",
+      "sha256": "9ce8d31514f97299f4ea6b030b5d4e179f4d630e6b5655b7091a5e8861afeab0",
+      "size": 474
     },
     {
-      "path": "package.json",
-      "sha256": "",
-      "gitSha": "fd3a0fa2724aa459bf52a84573089ec2dbc845a5",
-      "size": 1164
+      "path": "DADOS_TOKITO/plugins/pokemon/cuidados.js",
+      "sha256": "be8ea673f0d4a49b56872d8eeaf240588b03d53a38dd5c45b92d86915cfa7605",
+      "size": 9485
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
+      "sha256": "afd2e3aa11bbeff7c07f3b5e4f6344f489f334b1696402b48063791d64eda46d",
+      "size": 21209
     }
   ],
   "releases": [
@@ -3559,6 +3562,39 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-12T19:04:10.578Z"
+    },
+    {
+      "version": "10.2.32",
+      "fromVersion": "10.2.31",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "refactor: route Pokemon battles through turn-based module",
+      "notice": "A versão 10.2.32 já está disponível para atualização.",
+      "changelog": [
+        "Batalhapokemon atualizado",
+        "Cuidados atualizado",
+        "Batalha Interativa atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/batalhapokemon.js",
+          "sha256": "9ce8d31514f97299f4ea6b030b5d4e179f4d630e6b5655b7091a5e8861afeab0",
+          "size": 474
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/cuidados.js",
+          "sha256": "be8ea673f0d4a49b56872d8eeaf240588b03d53a38dd5c45b92d86915cfa7605",
+          "size": 9485
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
+          "sha256": "afd2e3aa11bbeff7c07f3b5e4f6344f489f334b1696402b48063791d64eda46d",
+          "size": 21209
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-13T12:05:56.712Z"
     }
   ],
   "mode": "incremental",
