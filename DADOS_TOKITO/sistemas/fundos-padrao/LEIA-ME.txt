@@ -1,0 +1,2 @@
+Pasta de imagens padrao instalaveis pelo atualizador (LOGOS protegida).
+Envie somente fundoerro.png e fundoprefix.png aqui, antes da publicacao da 10.2.40.

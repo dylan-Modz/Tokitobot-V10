@@ -9,6 +9,20 @@ const modulos = require('./modulos')
 const pasta = path.join(__dirname, '..', 'INFO_DADOS', 'LOGOS')
 const nomes = { erro: 'fundoerro', prefixo: 'fundoprefix' }
 const cache = new Map()
+// O atualizador antigo protege LOGOS inteira; os padrões oficiais entram
+// pela pasta sistemas/fundos-padrao e são copiados UMA vez para LOGOS.
+const padroes = path.join(__dirname, 'fundos-padrao')
+const marcador = tipo => path.join(pasta, '.sem-' + (nomes[tipo] || ''))
+const restaurarPadrao = tipo => {
+  if (!nomes[tipo] || fs.existsSync(marcador(tipo))) return
+  const origem = path.join(padroes, nomes[tipo] + '.png')
+  const destino = path.join(pasta, nomes[tipo] + '.png')
+  if (!fs.existsSync(origem) || !fs.statSync(origem).size) return
+  if (opcoes(tipo).some(item => fs.existsSync(item.path))) return
+  fs.mkdirSync(pasta, { recursive: true })
+  fs.copyFileSync(origem, destino)
+  cache.delete(tipo)
+}
 const opcoes = tipo => {
   const base = path.join(pasta, nomes[tipo] || '')
   return [
@@ -17,8 +31,16 @@ const opcoes = tipo => {
     { path: base + '.png', tipo: 'image', gif: false }
   ]
 }
-const atual = tipo => opcoes(tipo).find(x => fs.existsSync(x.path) && fs.statSync(x.path).size > 0)
+const atual = tipo => {
+  if (!nomes[tipo]) return null
+  restaurarPadrao(tipo)
+  return opcoes(tipo).find(x => fs.existsSync(x.path) && fs.statSync(x.path).size > 0) || null
+}
 const limpar = tipo => {
+  if (!nomes[tipo]) return false
+  fs.mkdirSync(pasta, { recursive: true })
+  // Preserva o '0' mesmo após reiniciar: não reinstala a imagem padrão.
+  fs.writeFileSync(marcador(tipo), '0')
   let ok = false
   for (const item of opcoes(tipo)) {
     if (fs.existsSync(item.path)) { fs.unlinkSync(item.path); ok = true }
@@ -57,6 +79,8 @@ async function salvar(ctx, tipo) {
     if (!fs.statSync(saida).size) throw new Error('Mídia inválida.')
     fs.copyFileSync(saida, local)
     for (const item of opcoes(tipo)) if (item.path !== local && fs.existsSync(item.path)) fs.unlinkSync(item.path)
+    // Um novo upload volta a ativar o fundo, caso tenha sido desligado com 0.
+    if (fs.existsSync(marcador(tipo))) fs.unlinkSync(marcador(tipo))
     cache.delete(tipo)
     return gif ? 'GIF' : origem === 'video' ? 'VÍDEO' : 'FOTO'
   } finally {
