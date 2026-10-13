@@ -1,27 +1,51 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.33",
+  "version": "10.2.32",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-13T12:07:25.740Z",
+  "publishedAt": "2026-10-13T12:12:19.323Z",
   "changelog": [
-    "[Correção] fix: bind Pokemon buttons to active turn and allow status recovery",
-    "A versão 10.2.33 já está disponível para atualização.",
-    "Batalha Interativa atualizado"
+    "Novo !batalhapokemon @usuario com convite de 60 segundos e botões Aceitar/Recusar; apenas o desafiado pode responder.",
+    "Batalha Pokémon por turnos de 45 segundos, com 4 botões nativos: Golpe Especial, Ataque, Defender e Poção.",
+    "HP em barras, golpes, acertos, críticos, vantagem de tipos, defesa, cura, chances de virada épica e narração emocionante do Tokito em cada rodada.",
+    "Imagens oficiais dos Pokémon pelo PokeAPI nas mensagens; comando de texto alternativo quando os botões não estiverem disponíveis.",
+    "Estado dos desafios salvo em database/jogos/batalhas-pokemon.json e opção !batalhapokemon status para retomar os botões após reiniciar.",
+    "Preservadas recompensas do RPG: +70 XP ao vencedor, +30 XP ao perdedor, +600 N-Coins; 10 minutos de descanso só após luta concluída.",
+    "Permissões, botões vencidos e cliques de rodada antiga validados; convite recusado ou expirado não causa cooldown.",
+    "Verificação de integridade da release 10.2.32 com SHA-256 e Git Blob SHA dos 4 arquivos atualizados."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix: bind Pokemon buttons to active turn and allow status recovery",
-  "notice": "A versão 10.2.33 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "Batalha Pokémon interativa por turnos",
+  "notice": "Nova batalha com desafio, aceitação, botões, imagens, narração e viradas épicas.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-      "sha256": "4b504cc023afa6502645907e8b733cb798de6ecbd8ba3f485f822a6c543174ec",
-      "size": 21700
+      "gitSha": "751cb4451285ef764fa772fd60f4794f7cf0eca2",
+      "sha256": "6f9dadb94c506917255318d57430e01ba749c4281fc66695a6b18f174ac5abc3",
+      "size": 22046
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/pokemon/batalhapokemon.js",
+      "gitSha": "2c3556643d487b8020df2109391fdbb6a836a0f7",
+      "sha256": "9ce8d31514f97299f4ea6b030b5d4e179f4d630e6b5655b7091a5e8861afeab0",
+      "size": 474
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/pokemon/cuidados.js",
+      "gitSha": "6f6a88fbb7f3d9143dc73365eaef3db6d5876868",
+      "sha256": "be8ea673f0d4a49b56872d8eeaf240588b03d53a38dd5c45b92d86915cfa7605",
+      "size": 9485
+    },
+    {
+      "path": "package.json",
+      "gitSha": "c9b1123a2f684b73ece117f79a76cb41b7dc7712",
+      "sha256": "ac826ece7a4c7f83c21e66c5eb899111d1ee554fc32888d9e48904deadd0a5aa",
+      "size": 1164
     }
   ],
   "releases": [
@@ -3555,65 +3579,58 @@
       "version": "10.2.32",
       "fromVersion": "10.2.31",
       "channel": "stable",
-      "type": "Melhoria",
-      "title": "refactor: route Pokemon battles through turn-based module",
-      "notice": "A versão 10.2.32 já está disponível para atualização.",
+      "type": "Novidade",
+      "title": "Batalha Pokémon interativa por turnos",
+      "notice": "Nova batalha com desafio, aceitação, botões, imagens, narração e viradas épicas.",
       "changelog": [
-        "Batalhapokemon atualizado",
-        "Cuidados atualizado",
-        "Batalha Interativa atualizado"
+        "Novo !batalhapokemon @usuario com convite de 60 segundos e botões Aceitar/Recusar; apenas o desafiado pode responder.",
+        "Batalha Pokémon por turnos de 45 segundos, com 4 botões nativos: Golpe Especial, Ataque, Defender e Poção.",
+        "HP em barras, golpes, acertos, críticos, vantagem de tipos, defesa, cura, chances de virada épica e narração emocionante do Tokito em cada rodada.",
+        "Imagens oficiais dos Pokémon pelo PokeAPI nas mensagens; comando de texto alternativo quando os botões não estiverem disponíveis.",
+        "Estado dos desafios salvo em database/jogos/batalhas-pokemon.json e opção !batalhapokemon status para retomar os botões após reiniciar.",
+        "Preservadas recompensas do RPG: +70 XP ao vencedor, +30 XP ao perdedor, +600 N-Coins; 10 minutos de descanso só após luta concluída.",
+        "Permissões, botões vencidos e cliques de rodada antiga validados; convite recusado ou expirado não causa cooldown.",
+        "Verificação de integridade da release 10.2.32 com SHA-256 e Git Blob SHA dos 4 arquivos atualizados."
       ],
       "files": [
         {
+          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
+          "gitSha": "751cb4451285ef764fa772fd60f4794f7cf0eca2",
+          "sha256": "6f9dadb94c506917255318d57430e01ba749c4281fc66695a6b18f174ac5abc3",
+          "size": 22046
+        },
+        {
           "path": "DADOS_TOKITO/plugins/pokemon/batalhapokemon.js",
+          "gitSha": "2c3556643d487b8020df2109391fdbb6a836a0f7",
           "sha256": "9ce8d31514f97299f4ea6b030b5d4e179f4d630e6b5655b7091a5e8861afeab0",
           "size": 474
         },
         {
           "path": "DADOS_TOKITO/plugins/pokemon/cuidados.js",
+          "gitSha": "6f6a88fbb7f3d9143dc73365eaef3db6d5876868",
           "sha256": "be8ea673f0d4a49b56872d8eeaf240588b03d53a38dd5c45b92d86915cfa7605",
           "size": 9485
         },
         {
-          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-          "sha256": "afd2e3aa11bbeff7c07f3b5e4f6344f489f334b1696402b48063791d64eda46d",
-          "size": 21209
+          "path": "package.json",
+          "gitSha": "c9b1123a2f684b73ece117f79a76cb41b7dc7712",
+          "sha256": "ac826ece7a4c7f83c21e66c5eb899111d1ee554fc32888d9e48904deadd0a5aa",
+          "size": 1164
         }
       ],
       "delete": [],
       "required": true,
-      "publishedAt": "2026-10-13T12:05:56.712Z"
-    },
-    {
-      "version": "10.2.33",
-      "fromVersion": "10.2.32",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "fix: bind Pokemon buttons to active turn and allow status recovery",
-      "notice": "A versão 10.2.33 já está disponível para atualização.",
-      "changelog": [
-        "Batalha Interativa atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-          "sha256": "4b504cc023afa6502645907e8b733cb798de6ecbd8ba3f485f822a6c543174ec",
-          "size": 21700
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-13T12:07:25.740Z"
+      "publishedAt": "2026-10-13T12:12:19.323Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.30",
+  "fromVersion": "10.2.31",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.31"
+  "publicVersion": "10.2.32"
 }

@@ -293,6 +293,8 @@ async function aceitar(ctx, s) {
 function narracao(s, evento) {
   const x = s.pokemon[0], y = s.pokemon[1]
   const perdendo = [x, y].find(m => m.hp <= 20 && m.hp > 0)
+  const treinador = s.nomes?.[s.vez] || 'meu parceiro'
+  if (x.hp <= 35 && y.hp <= 35 && x.hp > 0 && y.hp > 0) return '🎙️ TOKITO: "CARALHO, ' + treinador.toUpperCase() + '! O ' + y.nome.toUpperCase() + ' TÁ COM ' + arred(y.hp) + ' DE VIDA, SEU MALUCO! MAS OLHA TEU ' + x.nome.toUpperCase() + ' TAMBÉM! NÃO VAI FAZER MERDA AGORA, HEIN?!"'
   if (evento.virada) return '🎙️ TOKITO: "NÃO É POSSÍVEL, CARALHO! ' + evento.nome.toUpperCase() + ' TAVA QUASE DE ARRASTA E VIROU ESSA PORRA! QUE LUTA!"'
   if (evento.derrota) return '🎙️ TOKITO: "CARALHOOOO! ' + evento.nome.toUpperCase() + ' ACERTOU O GOLPE FINAL! ACABOU, MEUS PARCEIROS!"'
   if (perdendo) return aleatorio([
