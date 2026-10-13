@@ -1,39 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.32",
+  "version": "10.2.33",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-13T12:05:56.713Z",
+  "publishedAt": "2026-10-13T12:07:25.740Z",
   "changelog": [
-    "[Melhoria] refactor: route Pokemon battles through turn-based module",
-    "A versão 10.2.32 já está disponível para atualização.",
-    "Batalhapokemon atualizado",
-    "Cuidados atualizado",
+    "[Correção] fix: bind Pokemon buttons to active turn and allow status recovery",
+    "A versão 10.2.33 já está disponível para atualização.",
     "Batalha Interativa atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "refactor: route Pokemon battles through turn-based module",
-  "notice": "A versão 10.2.32 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: bind Pokemon buttons to active turn and allow status recovery",
+  "notice": "A versão 10.2.33 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/pokemon/batalhapokemon.js",
-      "sha256": "9ce8d31514f97299f4ea6b030b5d4e179f4d630e6b5655b7091a5e8861afeab0",
-      "size": 474
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/pokemon/cuidados.js",
-      "sha256": "be8ea673f0d4a49b56872d8eeaf240588b03d53a38dd5c45b92d86915cfa7605",
-      "size": 9485
-    },
-    {
       "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-      "sha256": "afd2e3aa11bbeff7c07f3b5e4f6344f489f334b1696402b48063791d64eda46d",
-      "size": 21209
+      "sha256": "4b504cc023afa6502645907e8b733cb798de6ecbd8ba3f485f822a6c543174ec",
+      "size": 21700
     }
   ],
   "releases": [
@@ -3595,6 +3583,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-13T12:05:56.712Z"
+    },
+    {
+      "version": "10.2.33",
+      "fromVersion": "10.2.32",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: bind Pokemon buttons to active turn and allow status recovery",
+      "notice": "A versão 10.2.33 já está disponível para atualização.",
+      "changelog": [
+        "Batalha Interativa atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
+          "sha256": "4b504cc023afa6502645907e8b733cb798de6ecbd8ba3f485f822a6c543174ec",
+          "size": 21700
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-13T12:07:25.740Z"
     }
   ],
   "mode": "incremental",
