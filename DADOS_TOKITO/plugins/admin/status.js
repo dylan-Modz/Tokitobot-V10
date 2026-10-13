@@ -32,7 +32,7 @@ const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({
 nome: "status",
-comandos: ["status", "statusgp", "statusfuncoes"],
+comandos: ["status", "statusfuncoes"],
 categoria: "grupo",
 info: {
 "descricao": "Executa o comando status.",

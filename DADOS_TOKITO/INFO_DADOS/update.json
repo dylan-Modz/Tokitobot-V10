@@ -1,42 +1,44 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.37",
+  "version": "10.2.38",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-13T13:05:57.246Z",
+  "publishedAt": "2026-10-13T19:12:29.216Z",
   "changelog": [
-    "[Pokémon] Barra de vida redesenhada como bateria com contorno, conector lateral, 10 segmentos de carga e indicador verde/amarelo/vermelho; exibe HP real.",
-    "[Pokémon] Batalha usa os golpes aprendidos e armazenados na coleção de cada Pokémon (incluindo golpes obtidos por TM), em vez de escolher o mesmo especial só pelo tipo.",
-    "[Pokémon] Botões no design do play mostram os dois nomes de golpes daquele Pokémon, com emojis associados ao tipo do golpe, além de Defender e Poção.",
-    "[Pokémon] Golpes iniciais adaptados por espécie para 200 Pokémon, com configurações específicas de Pikachu, Sandshrew, Weepinbell, Charizard e outras espécies populares.",
-    "[Compatibilidade] Migração controlada dos golpes genéricos automáticos antigos; não substitui listas personalizadas com ataques aprendidos pelo treinador.",
-    "[RPG] Dano e vantagem de tipo calculados com o tipo real do golpe executado; recompensas, botões interativos e as cinco imagens temáticas permanecem."
+    "[ADM] Novo comando mencstatus para publicar texto, foto, vídeo ou áudio respondido como Status de Grupo.",
+    "[ADM] Adicionados os apelidos statusgp e testestatus ao novo comando; status e statusfuncoes continuam no painel de funções do grupo.",
+    "[ADM] Permissão restrita a administradores do grupo e dono; reconhece mídias citadas, mensagens temporárias e legendas.",
+    "[Baileys] Envio com envelope groupStatusMessageV2 e contextInfo.isGroupStatus, utilizando o protocolo disponível no fork do Tokito.",
+    "[Menu] Comando mencstatus texto/mídia adicionado ao menuadm, na seção GERENCIAR-GRUPO.",
+    "[Segurança] Tratamento de erros e checagem de grupo/permissões antes de tentar publicar o status."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Bateria HP desenhada e golpes individuais Pokémon",
-  "notice": "Bateria de HP desenhada e ataques conforme os golpes aprendidos de cada Pokémon.",
+  "type": "Novidade",
+  "title": "Novo comando Status de Grupo",
+  "notice": "mencstatus, statusgp e testestatus para publicar Status de Grupo por texto, imagem, vídeo ou áudio.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-      "gitSha": "f1173b1df6306d8652cd7ea25c751cfa19d04c08",
-      "sha256": "cf56dfe9b0908bf1b78b50c695510a1e718827c8c90651b3bcc5869b1f72a1c5",
-      "size": 28433
+      "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
+      "gitSha": "6b3febdd2ba110c3c3912f6c35c2f19bf95efc35",
+      "size": 5818
     },
     {
-      "path": "DADOS_TOKITO/sistemas/rpg/pokemon-core.js",
-      "gitSha": "8cdb012d8baaa096b2adfc11e40bfbb18d1bc5e7",
-      "sha256": "0670c5f16bc598f20d03f2303e95c7bbaf1434577153efacc9511c6966eb2add",
-      "size": 20640
+      "path": "DADOS_TOKITO/plugins/admin/status.js",
+      "gitSha": "3b2a6e251e54c928d61865d5eff4d52be9538971",
+      "size": 1732
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "gitSha": "7cf2a3dec8c37a9b857dd9922a50e816bca8f820",
+      "size": 78071
     },
     {
       "path": "package.json",
-      "gitSha": "db0cfd543012ccef57f7f00291e58d33bfc7c531",
-      "sha256": "9ffbd40dfa81abbfb11bc38b60679acadddc498f23ba33fb50e743135c771648",
+      "gitSha": "f2d7fb8c3988f46cc5d70a80ce64a1bf1e945b77",
       "size": 1164
     }
   ],
@@ -3789,16 +3791,57 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-13T13:05:57.246Z"
+    },
+    {
+      "version": "10.2.38",
+      "fromVersion": "10.2.37",
+      "type": "Novidade",
+      "channel": "stable",
+      "title": "Novo comando Status de Grupo",
+      "notice": "mencstatus, statusgp e testestatus para publicar Status de Grupo por texto, imagem, vídeo ou áudio.",
+      "changelog": [
+        "[ADM] Novo comando mencstatus para publicar texto, foto, vídeo ou áudio respondido como Status de Grupo.",
+        "[ADM] Adicionados os apelidos statusgp e testestatus ao novo comando; status e statusfuncoes continuam no painel de funções do grupo.",
+        "[ADM] Permissão restrita a administradores do grupo e dono; reconhece mídias citadas, mensagens temporárias e legendas.",
+        "[Baileys] Envio com envelope groupStatusMessageV2 e contextInfo.isGroupStatus, utilizando o protocolo disponível no fork do Tokito.",
+        "[Menu] Comando mencstatus texto/mídia adicionado ao menuadm, na seção GERENCIAR-GRUPO.",
+        "[Segurança] Tratamento de erros e checagem de grupo/permissões antes de tentar publicar o status."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
+          "gitSha": "6b3febdd2ba110c3c3912f6c35c2f19bf95efc35",
+          "size": 5818
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/status.js",
+          "gitSha": "3b2a6e251e54c928d61865d5eff4d52be9538971",
+          "size": 1732
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "7cf2a3dec8c37a9b857dd9922a50e816bca8f820",
+          "size": 78071
+        },
+        {
+          "path": "package.json",
+          "gitSha": "f2d7fb8c3988f46cc5d70a80ce64a1bf1e945b77",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-13T19:12:29.216Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.36",
+  "fromVersion": "10.2.37",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.37"
+  "publicVersion": "10.2.38"
 }

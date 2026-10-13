@@ -227,6 +227,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}totag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}cita mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}status
+┃࣪ ╎—̳͟͞͞ 📢 ${prefix}mencstatus texto/mídia
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
