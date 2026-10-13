@@ -10,7 +10,7 @@ const path = require('path')
 const crypto = require('crypto')
 const r = require('./index')
 const p = require('./pokemon-core')
-const imagensEtapas = require('../../INFO_DADOS/LOGOS/links_batalha_pokemon.json')
+const imagensEtapas = require('./links_batalha_pokemon.json')
 
 const ARQUIVO = path.join(__dirname, '../../database/jogos/batalhas-pokemon.json')
 const CONVITE = 60 * 1000
@@ -60,8 +60,34 @@ const barra = hp => {
   return (hp > 50 ? '🟩' : hp > 20 ? '🟨' : '🟥').repeat(n) + '▫️'.repeat(10 - n)
 }
 // O mesmo formatador de resultados usado pelos outros comandos Pokémon.
-const placa = (titulo, linhas, emoji = '⚔️') =>
-  p.compacto(null, emoji, titulo, (linhas || []).filter(Boolean))
+// O mesmo padrão visual de ping, perfis e resultados do Tokito:
+ // - ⚔️ `𝙱𝙰𝚃𝙰𝙻𝙷𝙰 ...` com linhas '> ⚔️ ׄ ( ... )'.
+const caps = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+const letrasNegrito = [...'𝐀𝐁𝐂𝐃𝐄𝐅𝐆𝐇𝐈𝐉𝐊𝐋𝐌𝐍𝐎𝐏𝐐𝐑𝐒𝐓𝐔𝐕𝐖𝐗𝐘𝐙']
+const textoBotao = (emoji, palavra) => emoji + '﹚' +
+  [...String(palavra || '').toUpperCase().normalize('NFD')]
+    .map(ch => { const i = caps.indexOf(ch); return i < 0 ? ch : letrasNegrito[i] })
+    .join('') + '﹙' + emoji
+const fonteMini = (valor) => {
+  const abc = 'abcdefghijklmnopqrstuvwxyz'
+  const letras = [...'ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀꜱᴛᴜᴠᴡxʏᴢ']
+  return [...String(valor || '').toLowerCase().normalize('NFD')]
+    .map(ch => { const i = abc.indexOf(ch); return i < 0 ? ch : letras[i] })
+    .join('')
+}
+const placa = (titulo, linhas, emoji = '⚔️') => {
+  const tituloDecorado = (p.compacto(null, '', titulo, []).match(/`([^`]+)`/) || [,''])[1] || String(titulo)
+  const lista = (linhas || []).filter(Boolean).map(bruto => {
+    const linha = String(bruto).trim()
+    const encontrado = /^([^\p{L}\p{N}@]+)\s+(.+)$/u.exec(linha)
+    const icone = encontrado?.[1] || emoji
+    const conteudo = (encontrado?.[2] || linha).trim()
+    const par = /^([^:]{1,27}):\s*(.*)$/s.exec(conteudo)
+    const valor = par ? fonteMini(par[1]) + ': ' + par[2] : conteudo
+    return '> ' + icone + ' ׄ ( ' + valor + ' )'
+  })
+  return '- ' + emoji + ' `' + tituloDecorado + '`' + (lista.length ? '\n\n' + lista.join('\n') : '')
+}
 const secs = fim => Math.max(0, Math.ceil((Number(fim) - Date.now()) / 1000))
 const marca = s => [s.a, s.b]
 const ultimo = ctx => String(ctx.selo?.key?.id || '')
@@ -264,10 +290,10 @@ function botoesDaVez(ctx, s) {
   const prefix = ctx.prefix || '!'
   const base = prefix + 'batalhapokemon '
   return [
-    { texto: '🌩️ ' + ataqueEspecial(m).slice(0, 19), id: base + 'especial ' + s.id + ' ' + s.jogadas },
-    { texto: '⚔️ Ataque', id: base + 'ataque ' + s.id + ' ' + s.jogadas },
-    { texto: '🛡️ Defender', id: base + 'defender ' + s.id + ' ' + s.jogadas },
-    { texto: '🧪 Poção', id: base + 'pocao ' + s.id + ' ' + s.jogadas }
+    { texto: textoBotao('🌩️', ataqueEspecial(m).slice(0, 15)), id: base + 'especial ' + s.id + ' ' + s.jogadas },
+    { texto: textoBotao('⚔️', 'Ataque'), id: base + 'ataque ' + s.id + ' ' + s.jogadas },
+    { texto: textoBotao('🛡️', 'Defender'), id: base + 'defender ' + s.id + ' ' + s.jogadas },
+    { texto: textoBotao('🧪', 'Poção'), id: base + 'pocao ' + s.id + ' ' + s.jogadas }
   ]
 }
 async function turno(ctx, s) {
@@ -320,8 +346,8 @@ async function desafiar(ctx, alvo) {
     '💬 A luta não começa sem a confirmação do desafiado.',
     '📌 Apenas ' + nome(b) + ' pode responder.'
   ]), [
-    { texto: '✅ Aceitar', id: prefix + 'batalhapokemon aceitar ' + sessao.id },
-    { texto: '❌ Recusar', id: prefix + 'batalhapokemon recusar ' + sessao.id }
+    { texto: textoBotao('✅', 'Aceitar'), id: prefix + 'batalhapokemon aceitar ' + sessao.id },
+    { texto: textoBotao('❌', 'Recusar'), id: prefix + 'batalhapokemon recusar ' + sessao.id }
   ], capa('desafio', pA), [a, b])
   } catch (erro) {
     remover(grupo)
@@ -398,17 +424,18 @@ function finalizar(ctx, s, ladoVencedor, porLimite = false) {
   r.eco(ctx, vencedor).coins = Number(r.eco(ctx, vencedor).coins || 0) + 600
   r.salvar(ctx)
   return {
-    texto: p.compacto(ctx, '⚔️', 'Batalha Pokémon', [
-      { emoji: '🔴', texto: s.pokemon[0].nome + ' x ' + s.pokemon[1].nome },
-      { emoji: '🏆', texto: 'Vencedor: ' + a.nome + ' • ' + nome(vencedor) },
-      { emoji: '💔', texto: 'Derrotado: ' + b.nome + ' • ' + nome(perdedor) },
-      { emoji: '❤️', texto: 'HP restante: ' + arred(a.hp) + '/100' },
-      { emoji: '🧠', texto: '+70 XP para o vencedor • +30 XP para o perdedor' },
-      { emoji: '🪙', texto: '+600 N-Coins para o vencedor' },
-      porLimite ? { emoji: '⏳', texto: 'Limite de rodadas: maior HP venceu' } : null,
-      { emoji: '🎙️', texto: 'Tokito: "QUE BATALHA, PORRA! A LUTA FOI INSANA! QUERO VER A REVANCHE!"' },
-      { emoji: '🔒', texto: 'Novo desafio após 10 minutos' }
-    ]),
+    texto: placa('Batalha Pokémon', [
+      '🔴 Pokémon: ' + s.pokemon[0].nome + ' x ' + s.pokemon[1].nome,
+      '🏆 Vencedor: ' + a.nome + ' • ' + nome(vencedor),
+      '💔 Derrotado: ' + b.nome + ' • ' + nome(perdedor),
+      '❤️ HP restante: ' + arred(a.hp) + '/100',
+      '🔋 Vida: ' + barra(a.hp),
+      '🧠 XP: +70 vencedor • +30 perdedor',
+      '🪙 Recompensa: +600 N-Coins para o vencedor',
+      porLimite ? '⏳ Limite de rodadas: maior HP venceu' : null,
+      '🎙️ Tokito: "QUE BATALHA, PORRA! A LUTA FOI INSANA! QUERO VER A REVANCHE!"',
+      '🔒 Descanso: novo desafio após 10 minutos'
+    ], '🏆'),
     figura: imagem(a),
     mencoes: [vencedor, perdedor]
   }
