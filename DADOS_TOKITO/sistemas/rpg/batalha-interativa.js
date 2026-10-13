@@ -71,62 +71,105 @@ const imagem = lutador => {
     encodeURIComponent(String(lutador.id)) + '.png'
 }
 
+// Mesmo protocolo de botões quick_reply usado pelo comando play.
 async function enviar(ctx, mensagem, botoes = [], figura = '', mencoes = []) {
-  const sufixo = botoes.length
-    ? '\n\n' + botoes.map(b => '• ' + b.texto + ': ' + b.id).join('\n')
-    : ''
   const para = chave(ctx)
   const citados = [...new Set(mencoes.filter(Boolean))]
   const info = typeof ctx.canalInfo === 'function'
     ? ctx.canalInfo(citados)
     : { mentionedJid: citados }
 
-  if (ctx.isBotoes !== false && botoes.length &&
-      ctx.proto?.Message?.InteractiveMessage &&
-      typeof ctx.generateWAMessageFromContent === 'function') {
-    try {
-      const i = ctx.proto.Message.InteractiveMessage
-      const dados = {
-        body: i.Body.create({ text: mensagem }),
-        footer: i.Footer.create({ text: '' }),
-        contextInfo: info,
-        nativeFlowMessage: i.NativeFlowMessage.create({
-          buttons: botoes.map(b => ({
-            name: 'quick_reply',
-            buttonParamsJson: JSON.stringify({ display_text: b.texto, id: b.id })
-          }))
+  if (botoes.length) {
+    // Botões da batalha são indispensáveis: não dependem de isBotoes.
+    // Nunca transformar IDs de quick_reply em linhas de texto.
+    const i = ctx.proto?.Message?.InteractiveMessage
+    if (i && typeof ctx.generateWAMessageFromContent === 'function' &&
+        typeof ctx.tokito?.relayMessage === 'function') {
+      const opcoes = botoes.map(b => ({
+        name: 'quick_reply',
+        buttonParamsJson: JSON.stringify({
+          display_text: String(b.texto),
+          id: String(b.id)
         })
-      }
+      }))
+      let header
       if (figura && typeof ctx.prepareWAMessageMedia === 'function') {
         try {
           const media = await ctx.prepareWAMessageMedia(
             { image: { url: figura } },
             { upload: ctx.tokito.waUploadToServer }
           )
-          if (media?.imageMessage) dados.header = i.Header.create({
-            hasMediaAttachment: true, imageMessage: media.imageMessage
-          })
-        } catch {}
+          if (media?.imageMessage) {
+            header = i.Header.create({
+              hasMediaAttachment: true,
+              imageMessage: media.imageMessage
+            })
+          }
+        } catch (e) {
+          console.log('[POKEMON IMAGEM]', e.message)
+        }
       }
-      const msg = ctx.generateWAMessageFromContent(
-        para, { interactiveMessage: i.create(dados) },
-        { quoted: ctx.selo, userJid: ctx.tokito.user?.id }
-      )
-      return await ctx.tokito.relayMessage(para, msg.message, { messageId: msg.key.id })
-    } catch (e) {
-      console.log('[POKEMON BOTÕES]', e.message)
+      // Primeiro tenta com a imagem; caso o WhatsApp não aceite,
+      // reenvia somente o painel com botões, igual ao play.
+      for (const media of (header ? [header, null] : [null])) {
+        try {
+          const dados = {
+            contextInfo: info,
+            body: i.Body.create({ text: mensagem }),
+            footer: i.Footer.create({ text: '' }),
+            nativeFlowMessage: i.NativeFlowMessage.create({ buttons: opcoes })
+          }
+          if (media) dados.header = media
+          const msg = ctx.generateWAMessageFromContent(
+            para,
+            { interactiveMessage: i.create(dados) },
+            { quoted: ctx.selo, userJid: ctx.tokito.user.id }
+          )
+          await ctx.tokito.relayMessage(para, msg.message, { messageId: msg.key.id })
+          return true
+        } catch (e) {
+          console.log('[POKEMON BOTÕES NATIVOS]', e.message)
+        }
+      }
     }
+
+    // Compatibilidade: se o cliente rejeitar NativeFlow, ainda tentamos
+    // botões reais pelo sendMessage, sem mostrar comandos como texto.
+    try {
+      const classic = botoes.length <= 3
+      if (classic) {
+        await ctx.tokito.sendMessage(para, {
+          text: mensagem,
+          footer: '',
+          buttons: botoes.map(b => ({
+            buttonId: String(b.id),
+            buttonText: { displayText: String(b.texto) },
+            type: 1
+          })),
+          headerType: 1,
+          mentions: citados,
+          contextInfo: info
+        }, { quoted: ctx.selo })
+        return true
+      }
+    } catch (e) {
+      console.log('[POKEMON BOTÕES CLÁSSICOS]', e.message)
+    }
+
+    // Não enviamos convite sem botões, nem comandos expostos na legenda.
+    throw new Error('O WhatsApp não aceitou os botões da batalha Pokémon.')
   }
+
   if (figura) {
     try {
       return await ctx.tokito.sendMessage(para, {
-        image: { url: figura }, caption: mensagem + sufixo,
+        image: { url: figura }, caption: mensagem,
         mentions: citados, contextInfo: info
       }, { quoted: ctx.selo })
     } catch {}
   }
   return ctx.tokito.sendMessage(para, {
-    text: mensagem + sufixo, mentions: citados, contextInfo: info
+    text: mensagem, mentions: citados, contextInfo: info
   }, { quoted: ctx.selo })
 }
 
@@ -197,9 +240,9 @@ const dadosTurno = s => {
 function quadro(s) {
   return [
     '🔴 ' + s.pokemon[0].nome + ' • ' + nome(s.a) + ' — *' + arred(s.pokemon[0].hp) + '/100 HP*',
-    barra(s.pokemon[0].hp),
+    '🔋 HP ' + barra(s.pokemon[0].hp),
     '🔵 ' + s.pokemon[1].nome + ' • ' + nome(s.b) + ' — *' + arred(s.pokemon[1].hp) + '/100 HP*',
-    barra(s.pokemon[1].hp)
+    '🔋 HP ' + barra(s.pokemon[1].hp)
   ]
 }
 function botoesDaVez(ctx, s) {
@@ -255,7 +298,8 @@ async function desafiar(ctx, alvo) {
   }
   sessoes.set(grupo, sessao); salvar(); agendar(ctx, sessao)
   const prefix = ctx.prefix || '!'
-  return enviar(ctx, placa('Desafio Pokémon', [
+  try {
+    return await enviar(ctx, placa('Desafio Pokémon', [
     '🎯 ' + nome(a) + ' desafiou ' + nome(b) + '!',
     '🔴 ' + pA.nome + ' vs 🔵 ' + pB.nome,
     '⏳ O adversário tem *60 segundos* para aceitar ou recusar.',
@@ -265,6 +309,11 @@ async function desafiar(ctx, alvo) {
     { texto: '✅ Aceitar', id: prefix + 'batalhapokemon aceitar ' + sessao.id },
     { texto: '❌ Recusar', id: prefix + 'batalhapokemon recusar ' + sessao.id }
   ], imagem(pA), [a, b])
+  } catch (erro) {
+    remover(grupo)
+    console.log('[POKEMON DESAFIO]', erro.message)
+    return ctx.reply('⚠️ Não consegui enviar os botões do desafio Pokémon. Verifique a compatibilidade do WhatsApp.')
+  }
 }
 
 async function aceitar(ctx, s) {

@@ -1,35 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.33",
+  "version": "10.2.34",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-13T12:19:12.451Z",
+  "publishedAt": "2026-10-13T12:30:39.562Z",
   "changelog": [
-    "[Pokémon] Design do comando batalhapokemon padronizado com o mesmo compacto e fonte estilizada dos outros comandos de RPG Pokémon.",
-    "[Pokémon] Resultado final voltou ao painel 'Batalha Pokémon' com Pokémon versus Pokémon, vencedor, derrotado, HP, XP e N-Coins como no resultado tradicional.",
-    "[Pokémon] Desafio, início da batalha, rodadas, narração e recusa agora usam os títulos estilizados do RPG.",
-    "[Botões] Mantidos os botões nativos do tipo play: aceitar, recusar, golpe especial, ataque, defender e poção; rodadas continuam interativas.",
-    "[Integridade] SHA-256 e identificador Git imutável conferidos para os dois arquivos alterados."
+    "[Pokémon] Desafio e turnos passam a enviar quick_reply nativo no mesmo padrão do comando play, independente do botão global.",
+    "[Pokémon] Removidas as linhas visíveis de comandos 'Aceitar: /batalhapokemon ...' e 'Recusar: /batalhapokemon ...' de todos os painéis.",
+    "[Pokémon] Compatibilidade de envio: primeiro tenta botões nativos com arte, depois sem arte; para até 3 botões, tenta o formato de botões clássicos caso o NativeFlow falhe.",
+    "[Pokémon] Caso nenhum formato aceite o desafio, o convite é cancelado em vez de ficar preso sem botões.",
+    "[Pokémon] Barra de vida da batalha agora aparece como '🔋 HP' com blocos verdes, amarelos ou vermelhos.",
+    "[Integridade] Atualização 10.2.34 com SHA-256 e Git blob SHAs conferidos para os arquivos publicados."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Design da batalha Pokémon padronizado",
-  "notice": "Batalhas interativas com o visual e resultado padrão dos demais comandos Pokémon.",
+  "title": "Botões reais na Batalha Pokémon",
+  "notice": "Botões nativos do play em convites e turnos; comandos expostos removidos; barra de HP com bateria.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-      "gitSha": "4b0e020e19efdbe745ca228d79aeaa09a4702a19",
-      "sha256": "5e1a96c9d91e961a9cba90741e8b331d84d33747fc3d90561040180032d45985",
-      "size": 22287
+      "gitSha": "47fc6895dd957ba9a552a04d08740f455ac3fae5",
+      "sha256": "e100022e90c04904d903e1ed7f3ea48e726128cda90ff014df298dec8b21e9d8",
+      "size": 23981
     },
     {
       "path": "package.json",
-      "gitSha": "14f659f24972ae26557271191c93698409cb4f87",
-      "sha256": "63ee4d3dac31156f3fff3c48a37f3b000fd00435e2c1faabf172dbe4e710f737",
+      "gitSha": "92d9d105e7d34e4eb7b4adeb0f49e0fc32406103",
+      "sha256": "0dd8face108091164749627bd9f1646f467b2c0a590bfba19fd6cda78f92bc77",
       "size": 1164
     }
   ],
@@ -3638,16 +3639,49 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-13T12:19:12.451Z"
+    },
+    {
+      "version": "10.2.34",
+      "fromVersion": "10.2.33",
+      "type": "Correção",
+      "channel": "stable",
+      "title": "Botões reais na Batalha Pokémon",
+      "notice": "Botões nativos do play em convites e turnos; comandos expostos removidos; barra de HP com bateria.",
+      "changelog": [
+        "[Pokémon] Desafio e turnos passam a enviar quick_reply nativo no mesmo padrão do comando play, independente do botão global.",
+        "[Pokémon] Removidas as linhas visíveis de comandos 'Aceitar: /batalhapokemon ...' e 'Recusar: /batalhapokemon ...' de todos os painéis.",
+        "[Pokémon] Compatibilidade de envio: primeiro tenta botões nativos com arte, depois sem arte; para até 3 botões, tenta o formato de botões clássicos caso o NativeFlow falhe.",
+        "[Pokémon] Caso nenhum formato aceite o desafio, o convite é cancelado em vez de ficar preso sem botões.",
+        "[Pokémon] Barra de vida da batalha agora aparece como '🔋 HP' com blocos verdes, amarelos ou vermelhos.",
+        "[Integridade] Atualização 10.2.34 com SHA-256 e Git blob SHAs conferidos para os arquivos publicados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
+          "gitSha": "47fc6895dd957ba9a552a04d08740f455ac3fae5",
+          "sha256": "e100022e90c04904d903e1ed7f3ea48e726128cda90ff014df298dec8b21e9d8",
+          "size": 23981
+        },
+        {
+          "path": "package.json",
+          "gitSha": "92d9d105e7d34e4eb7b4adeb0f49e0fc32406103",
+          "sha256": "0dd8face108091164749627bd9f1646f467b2c0a590bfba19fd6cda78f92bc77",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-13T12:30:39.562Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.32",
+  "fromVersion": "10.2.33",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.33"
+  "publicVersion": "10.2.34"
 }
