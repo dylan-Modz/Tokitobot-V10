@@ -58,9 +58,9 @@ const barra = hp => {
   const n = Math.round(limite(hp, 0, 100) / 10)
   return (hp > 50 ? '🟩' : hp > 20 ? '🟨' : '🟥').repeat(n) + '▫️'.repeat(10 - n)
 }
-const placa = (titulo, linhas) =>
-  '• *' + titulo + '* ⚔️\n' +
-  linhas.filter(Boolean).map(x => '> ' + x).join('\n')
+// O mesmo formatador de resultados usado pelos outros comandos Pokémon.
+const placa = (titulo, linhas, emoji = '⚔️') =>
+  p.compacto(null, emoji, titulo, (linhas || []).filter(Boolean))
 const secs = fim => Math.max(0, Math.ceil((Number(fim) - Date.now()) / 1000))
 const marca = s => [s.a, s.b]
 const ultimo = ctx => String(ctx.selo?.key?.id || '')
@@ -88,7 +88,7 @@ async function enviar(ctx, mensagem, botoes = [], figura = '', mencoes = []) {
       const i = ctx.proto.Message.InteractiveMessage
       const dados = {
         body: i.Body.create({ text: mensagem }),
-        footer: i.Footer.create({ text: 'TOKITO • BATALHA POKÉMON' }),
+        footer: i.Footer.create({ text: '' }),
         contextInfo: info,
         nativeFlowMessage: i.NativeFlowMessage.create({
           buttons: botoes.map(b => ({
@@ -219,15 +219,14 @@ async function turno(ctx, s) {
   const st = p.estado(ctx, meu).st
   const pocao = Number(st.itens?.pocao || 0)
   const linha = s.historico?.length ? '📖 Última ação: ' + s.historico[s.historico.length - 1] : ''
-  const texto = placa('RODADA ' + s.rodada + ' • SUA VEZ', [
+  const texto = placa('Batalha Pokémon • Rodada ' + s.rodada, [
     ...quadro(s),
-    '',
-    '🎯 Agora é a vez de *' + nome(meu) + '*!',
+    '🎯 Vez de ' + nome(meu),
     '🌩️ Especial: ' + ataqueEspecial(m) + ' (' + m.especial + '/3)',
-    '🧪 Poções disponíveis: ' + pocao,
-    '⏳ ' + secs(s.fim) + ' segundos para escolher.',
+    '🧪 Poções: ' + pocao,
+    '⏳ Tempo: ' + secs(s.fim) + ' segundos',
     linha,
-    '📌 Se os botões não aparecerem, use os comandos indicados abaixo.'
+    '📌 Escolha um dos quatro botões abaixo'
   ])
   return enviar(ctx, texto, botoesDaVez(ctx, s), imagem(m), marca(s))
 }
@@ -256,7 +255,7 @@ async function desafiar(ctx, alvo) {
   }
   sessoes.set(grupo, sessao); salvar(); agendar(ctx, sessao)
   const prefix = ctx.prefix || '!'
-  return enviar(ctx, placa('DESAFIO POKÉMON', [
+  return enviar(ctx, placa('Desafio Pokémon', [
     '🎯 ' + nome(a) + ' desafiou ' + nome(b) + '!',
     '🔴 ' + pA.nome + ' vs 🔵 ' + pB.nome,
     '⏳ O adversário tem *60 segundos* para aceitar ou recusar.',
@@ -280,7 +279,7 @@ async function aceitar(ctx, s) {
   s.fase = 'luta';s.pokemon = [a,b];s.vez = Number(a.stats?.velocidade || 0) >= Number(b.stats?.velocidade || 0) ? 0 : 1
   s.fim = Date.now() + TURNO
   salvar(); agendar(ctx, s)
-  await enviar(ctx, placa('BATALHA INICIADA', [
+  await enviar(ctx, placa('Batalha Pokémon iniciada', [
     '🔥 ' + nome(s.b) + ' aceitou o desafio de ' + nome(s.a) + '!',
     '🔴 ' + a.nome + ' vs 🔵 ' + b.nome,
     '⚡ O Pokémon mais veloz começa.',
@@ -336,15 +335,16 @@ function finalizar(ctx, s, ladoVencedor, porLimite = false) {
   r.eco(ctx, vencedor).coins = Number(r.eco(ctx, vencedor).coins || 0) + 600
   r.salvar(ctx)
   return {
-    texto: placa('VITÓRIA POKÉMON', [
-      '🏆 ' + nome(vencedor) + ' venceu com ' + a.nome + '!',
-      '💔 ' + b.nome + ' de ' + nome(perdedor) + ' foi derrotado.',
-      '❤️ HP restantes: ' + arred(a.hp) + '/100',
-      '🧠 Vencedor: +70 XP • Perdedor: +30 XP',
-      '🪙 Vencedor: +600 N-Coins',
-      porLimite ? '⏳ Fim do limite de rodadas: maior HP venceu.' : '',
-      '🎙️ TOKITO: "QUE BATALHA, PORRA! A LUTA FOI INSANA! QUERO VER A REVANCHE!"',
-      '🔒 Novo desafio após 10 minutos de descanso.'
+    texto: p.compacto(ctx, '⚔️', 'Batalha Pokémon', [
+      { emoji: '🔴', texto: s.pokemon[0].nome + ' x ' + s.pokemon[1].nome },
+      { emoji: '🏆', texto: 'Vencedor: ' + a.nome + ' • ' + nome(vencedor) },
+      { emoji: '💔', texto: 'Derrotado: ' + b.nome + ' • ' + nome(perdedor) },
+      { emoji: '❤️', texto: 'HP restante: ' + arred(a.hp) + '/100' },
+      { emoji: '🧠', texto: '+70 XP para o vencedor • +30 XP para o perdedor' },
+      { emoji: '🪙', texto: '+600 N-Coins para o vencedor' },
+      porLimite ? { emoji: '⏳', texto: 'Limite de rodadas: maior HP venceu' } : null,
+      { emoji: '🎙️', texto: 'Tokito: "QUE BATALHA, PORRA! A LUTA FOI INSANA! QUERO VER A REVANCHE!"' },
+      { emoji: '🔒', texto: 'Novo desafio após 10 minutos' }
     ]),
     figura: imagem(a),
     mencoes: [vencedor, perdedor]
@@ -408,7 +408,7 @@ async function acao(ctx, s, acao) {
   s.historico.push(descricao.replace(/\*/g, ''))
   if (s.historico.length > 8) s.historico.shift()
   s.jogadas++
-  const relato = placa('RODADA ' + s.rodada + ' • RESULTADO', [
+  const relato = placa('Batalha Pokémon • Rodada ' + s.rodada, [
     descricao, ...quadro(s), narracao(s, evento)
   ])
   const foto = imagem(atk)
@@ -442,7 +442,7 @@ async function executar(ctx) {
       if (quem !== s.b) return ctx.reply('⚠️ Só o adversário pode aceitar ou recusar.')
       if (comando === 'recusar') {
         remover(chave(ctx))
-        return enviar(ctx, placa('DESAFIO RECUSADO', ['❌ ' + nome(s.b) + ' recusou a batalha.', '⏳ Nenhum cooldown foi aplicado.']), [], imagem(s.pokemon[1]), marca(s))
+        return enviar(ctx, placa('Desafio Pokémon recusado', ['❌ ' + nome(s.b) + ' recusou a batalha.', '⏳ Nenhum cooldown foi aplicado.']), [], imagem(s.pokemon[1]), marca(s))
       }
       return aceitar(ctx, s)
     }

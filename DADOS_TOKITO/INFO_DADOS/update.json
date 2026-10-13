@@ -1,50 +1,35 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.32",
+  "version": "10.2.33",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-13T12:12:19.323Z",
+  "publishedAt": "2026-10-13T12:19:12.451Z",
   "changelog": [
-    "Novo !batalhapokemon @usuario com convite de 60 segundos e botões Aceitar/Recusar; apenas o desafiado pode responder.",
-    "Batalha Pokémon por turnos de 45 segundos, com 4 botões nativos: Golpe Especial, Ataque, Defender e Poção.",
-    "HP em barras, golpes, acertos, críticos, vantagem de tipos, defesa, cura, chances de virada épica e narração emocionante do Tokito em cada rodada.",
-    "Imagens oficiais dos Pokémon pelo PokeAPI nas mensagens; comando de texto alternativo quando os botões não estiverem disponíveis.",
-    "Estado dos desafios salvo em database/jogos/batalhas-pokemon.json e opção !batalhapokemon status para retomar os botões após reiniciar.",
-    "Preservadas recompensas do RPG: +70 XP ao vencedor, +30 XP ao perdedor, +600 N-Coins; 10 minutos de descanso só após luta concluída.",
-    "Permissões, botões vencidos e cliques de rodada antiga validados; convite recusado ou expirado não causa cooldown.",
-    "Verificação de integridade da release 10.2.32 com SHA-256 e Git Blob SHA dos 4 arquivos atualizados."
+    "[Pokémon] Design do comando batalhapokemon padronizado com o mesmo compacto e fonte estilizada dos outros comandos de RPG Pokémon.",
+    "[Pokémon] Resultado final voltou ao painel 'Batalha Pokémon' com Pokémon versus Pokémon, vencedor, derrotado, HP, XP e N-Coins como no resultado tradicional.",
+    "[Pokémon] Desafio, início da batalha, rodadas, narração e recusa agora usam os títulos estilizados do RPG.",
+    "[Botões] Mantidos os botões nativos do tipo play: aceitar, recusar, golpe especial, ataque, defender e poção; rodadas continuam interativas.",
+    "[Integridade] SHA-256 e identificador Git imutável conferidos para os dois arquivos alterados."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "Batalha Pokémon interativa por turnos",
-  "notice": "Nova batalha com desafio, aceitação, botões, imagens, narração e viradas épicas.",
+  "type": "Correção",
+  "title": "Design da batalha Pokémon padronizado",
+  "notice": "Batalhas interativas com o visual e resultado padrão dos demais comandos Pokémon.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-      "gitSha": "751cb4451285ef764fa772fd60f4794f7cf0eca2",
-      "sha256": "6f9dadb94c506917255318d57430e01ba749c4281fc66695a6b18f174ac5abc3",
-      "size": 22046
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/pokemon/batalhapokemon.js",
-      "gitSha": "2c3556643d487b8020df2109391fdbb6a836a0f7",
-      "sha256": "9ce8d31514f97299f4ea6b030b5d4e179f4d630e6b5655b7091a5e8861afeab0",
-      "size": 474
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/pokemon/cuidados.js",
-      "gitSha": "6f6a88fbb7f3d9143dc73365eaef3db6d5876868",
-      "sha256": "be8ea673f0d4a49b56872d8eeaf240588b03d53a38dd5c45b92d86915cfa7605",
-      "size": 9485
+      "gitSha": "4b0e020e19efdbe745ca228d79aeaa09a4702a19",
+      "sha256": "5e1a96c9d91e961a9cba90741e8b331d84d33747fc3d90561040180032d45985",
+      "size": 22287
     },
     {
       "path": "package.json",
-      "gitSha": "c9b1123a2f684b73ece117f79a76cb41b7dc7712",
-      "sha256": "ac826ece7a4c7f83c21e66c5eb899111d1ee554fc32888d9e48904deadd0a5aa",
+      "gitSha": "14f659f24972ae26557271191c93698409cb4f87",
+      "sha256": "63ee4d3dac31156f3fff3c48a37f3b000fd00435e2c1faabf172dbe4e710f737",
       "size": 1164
     }
   ],
@@ -3621,16 +3606,48 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-13T12:12:19.323Z"
+    },
+    {
+      "version": "10.2.33",
+      "fromVersion": "10.2.32",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Design da batalha Pokémon padronizado",
+      "notice": "Batalhas interativas com o visual e resultado padrão dos demais comandos Pokémon.",
+      "changelog": [
+        "[Pokémon] Design do comando batalhapokemon padronizado com o mesmo compacto e fonte estilizada dos outros comandos de RPG Pokémon.",
+        "[Pokémon] Resultado final voltou ao painel 'Batalha Pokémon' com Pokémon versus Pokémon, vencedor, derrotado, HP, XP e N-Coins como no resultado tradicional.",
+        "[Pokémon] Desafio, início da batalha, rodadas, narração e recusa agora usam os títulos estilizados do RPG.",
+        "[Botões] Mantidos os botões nativos do tipo play: aceitar, recusar, golpe especial, ataque, defender e poção; rodadas continuam interativas.",
+        "[Integridade] SHA-256 e identificador Git imutável conferidos para os dois arquivos alterados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
+          "gitSha": "4b0e020e19efdbe745ca228d79aeaa09a4702a19",
+          "sha256": "5e1a96c9d91e961a9cba90741e8b331d84d33747fc3d90561040180032d45985",
+          "size": 22287
+        },
+        {
+          "path": "package.json",
+          "gitSha": "14f659f24972ae26557271191c93698409cb4f87",
+          "sha256": "63ee4d3dac31156f3fff3c48a37f3b000fd00435e2c1faabf172dbe4e710f737",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-13T12:19:12.451Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.31",
+  "fromVersion": "10.2.32",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.32"
+  "publicVersion": "10.2.33"
 }
