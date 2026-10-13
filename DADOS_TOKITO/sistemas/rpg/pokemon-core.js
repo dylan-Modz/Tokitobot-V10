@@ -114,10 +114,31 @@ function raridade(p) {
   return p && p.raridade ? p.raridade : (Number(p && p.capture) <= 3 ? 'Lendário' : Number(p && p.capture) <= 45 ? 'Raro' : 'Comum')
 }
 
+// Movimentos iniciais adaptados à espécie, sem remover golpes aprendidos por TM.
+const GOLPES_INICIAIS = {
+  1: ['Investida', 'Chicote de Vinha'],
+  4: ['Investida', 'Brasa'],
+  6: ['Ataque de Asa', 'Lança-Chamas'],
+  7: ['Investida', 'Jato de Água'],
+  25: ['Ataque Rápido', 'Choque do Trovão'],
+  26: ['Ataque Rápido', 'Raio'],
+  27: ['Investida', 'Tapa de Lama'],
+  28: ['Ataque Rápido', 'Escavação'],
+  69: ['Investida', 'Chicote de Vinha'],
+  70: ['Chicote de Vinha', 'Ácido'],
+  71: ['Folha Navalha', 'Ácido']
+}
 function golpesPadrao(p) {
-  const t = tipos(p)[0]
-  const pool = GOLPES[t] || GOLPES.Normal
-  return pool.slice(0, 2)
+  if (!p) return ['Investida', 'Ataque Rápido']
+  const especial = GOLPES_INICIAIS[Number(p.id)]
+  if (especial) return especial.slice()
+  const ts = tipos(p)
+  const principal = GOLPES[ts[0]] || GOLPES.Normal
+  const secundario = GOLPES[ts[1]] || GOLPES.Normal
+  const id = Number(p.id || 0)
+  const comum = secundario[(id + 1) % 2] || GOLPES.Normal[0]
+  const elemental = principal[id % Math.min(principal.length, 2)] || principal[0]
+  return comum === elemental ? [GOLPES.Normal[0], elemental] : [comum, elemental]
 }
 
 function instancia(p, extra) {

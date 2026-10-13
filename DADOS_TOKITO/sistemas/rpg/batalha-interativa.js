@@ -55,9 +55,13 @@ const apelido = (ctx, sessao, lado) => {
   if (dono(ctx, j)) return 'Dylan'
   return sessao.nomes?.[lado] || nome(j)
 }
+// Bateria desenhada com contorno, conector e carga dinâmica (sem depender de imagem).
 const barra = hp => {
-  const n = Math.round(limite(hp, 0, 100) / 10)
-  return (hp > 50 ? '🟩' : hp > 20 ? '🟨' : '🟥').repeat(n) + '▫️'.repeat(10 - n)
+  const vida = limite(hp, 0, 100)
+  const cheia = Math.ceil(vida / 10)
+  const sinal = vida > 50 ? '🟢' : vida > 20 ? '🟡' : '🔴'
+  return '\n  ╭──────────╮\n  │' + '█'.repeat(cheia) + '░'.repeat(10 - cheia) +
+    '│▌\n  ╰──────────╯ ' + sinal
 }
 // O mesmo formatador de resultados usado pelos outros comandos Pokémon.
 // O mesmo padrão visual de ping, perfis e resultados do Tokito:
@@ -79,11 +83,16 @@ const placa = (titulo, linhas, emoji = '⚔️') => {
   const tituloDecorado = (p.compacto(null, '', titulo, []).match(/`([^`]+)`/) || [,''])[1] || String(titulo)
   const lista = (linhas || []).filter(Boolean).map(bruto => {
     const linha = String(bruto).trim()
-    const encontrado = /^([^\p{L}\p{N}@]+)\s+(.+)$/u.exec(linha)
+    const encontrado = /^([^\p{L}\p{N}@]+)\s+(.+)$/su.exec(linha)
     const icone = encontrado?.[1] || emoji
     const conteudo = (encontrado?.[2] || linha).trim()
-    const par = /^([^:]{1,27}):\s*(.*)$/s.exec(conteudo)
+    const par = /^([^:]{1,27}):[ \t]*(.*)$/s.exec(conteudo)
     const valor = par ? fonteMini(par[1]) + ': ' + par[2] : conteudo
+    if (valor.includes('\n')) {
+      const [titulo, ...desenho] = valor.split('\n')
+      return '> ' + icone + ' ׄ ( ' + titulo.trim() + ' )\n' +
+        desenho.map(parte => '> ' + parte).join('\n')
+    }
     return '> ' + icone + ' ׄ ( ' + valor + ' )'
   })
   return '- ' + emoji + ' `' + tituloDecorado + '`' + (lista.length ? '\n\n' + lista.join('\n') : '')
@@ -264,14 +273,46 @@ function lutador(ctx, jid) {
     tipos: p.tipos(sp), stats: mon.stats || {}, nivel: Number(mon.nivel || 1),
     afeto: Number(mon.afeto || 0), shiny: mon.shiny === true,
     forma: mon.forma, formaAte: mon.formaAte,
+    golpes: movimentosDoPokemon(mon, sp),
     hp: 100, defesa: false, especial: 3, curas: 0
   }
 }
-const ataqueEspecial = mon => {
-  const tipo = mon.tipo || 'Normal'
-  const golpes = p.GOLPES[tipo] || p.GOLPES.Normal
-  return golpes?.[golpes.length - 1] || 'Golpe Especial'
+// Golpes são da coleção REAL do treinador (incluindo os aprendidos via TM).
+function movimentosDoPokemon(mon, sp) {
+  const iniciais = p.golpesPadrao(sp)
+  const list = Array.isArray(mon?.golpes) ? mon.golpes.filter(g => typeof g === 'string' && g.trim()) : []
+  const originais = (p.GOLPES[p.tipos(sp)[0]] || p.GOLPES.Normal).slice(0, 2)
+  // Migra somente o antigo conjunto automático; preserva movimentos personalizados.
+  const padraoAntigo = list.length === 2 && list.every((g, i) => g === originais[i])
+  const novos = list.length && !padraoAntigo ? list : iniciais
+  if ((!list.length || padraoAntigo) && mon && Array.isArray(mon.golpes))
+    mon.golpes = novos.slice(0, 4)
+  const escolhidos = [...new Set(novos)].slice(0, 4)
+  return escolhidos.length ? escolhidos : ['Investida', 'Ataque Rápido']
 }
+const ataqueEspecial = mon => {
+  const lista = Array.isArray(mon?.golpes) ? mon.golpes.filter(Boolean) : []
+  return lista[lista.length - 1] || 'Investida'
+}
+const ataqueComum = mon => {
+  const lista = Array.isArray(mon?.golpes) ? mon.golpes.filter(Boolean) : []
+  return lista[0] || 'Investida'
+}
+const tipoDoGolpe = golpe => {
+  const alvo = p.norm(golpe)
+  for (const [tipo, golpes] of Object.entries(p.GOLPES))
+    if (golpes.some(g => p.norm(g) === alvo)) return tipo
+  return 'Normal'
+}
+
+const iconeTipo = {
+  Normal: '⚔️', Fogo: '🔥', Água: '💧', Planta: '🌿', Elétrico: '⚡',
+  Psíquico: '🔮', Fantasma: '👻', Lutador: '🥊', Voador: '🪽',
+  Veneno: '☠️', Terra: '🌎', Pedra: '🪨', Gelo: '❄️',
+  Inseto: '🐛', Dragão: '🐉', Sombrio: '🌑', Aço: '⚙️', Fada: '✨'
+}
+const emojiDoGolpe = golpe => iconeTipo[tipoDoGolpe(golpe)] || '⚔️'
+
 const dadosTurno = s => {
   const lutador = s.pokemon[s.vez]
   const outro = s.pokemon[1 - s.vez]
@@ -280,9 +321,9 @@ const dadosTurno = s => {
 function quadro(s) {
   return [
     '🔴 ' + s.pokemon[0].nome + ' • ' + nome(s.a) + ' — *' + arred(s.pokemon[0].hp) + '/100 HP*',
-    '🔋 HP ' + barra(s.pokemon[0].hp),
+    '🔋 Bateria: ' + barra(s.pokemon[0].hp),
     '🔵 ' + s.pokemon[1].nome + ' • ' + nome(s.b) + ' — *' + arred(s.pokemon[1].hp) + '/100 HP*',
-    '🔋 HP ' + barra(s.pokemon[1].hp)
+    '🔋 Bateria: ' + barra(s.pokemon[1].hp)
   ]
 }
 function botoesDaVez(ctx, s) {
@@ -290,8 +331,8 @@ function botoesDaVez(ctx, s) {
   const prefix = ctx.prefix || '!'
   const base = prefix + 'batalhapokemon '
   return [
-    { texto: textoBotao('🌩️', ataqueEspecial(m).slice(0, 15)), id: base + 'especial ' + s.id + ' ' + s.jogadas },
-    { texto: textoBotao('⚔️', 'Ataque'), id: base + 'ataque ' + s.id + ' ' + s.jogadas },
+    { texto: textoBotao(emojiDoGolpe(ataqueEspecial(m)), ataqueEspecial(m).slice(0, 15)), id: base + 'especial ' + s.id + ' ' + s.jogadas },
+    { texto: textoBotao(emojiDoGolpe(ataqueComum(m)), ataqueComum(m).slice(0, 15)), id: base + 'ataque ' + s.id + ' ' + s.jogadas },
     { texto: textoBotao('🛡️', 'Defender'), id: base + 'defender ' + s.id + ' ' + s.jogadas },
     { texto: textoBotao('🧪', 'Poção'), id: base + 'pocao ' + s.id + ' ' + s.jogadas }
   ]
@@ -305,7 +346,8 @@ async function turno(ctx, s) {
   const texto = placa('Batalha Pokémon • Rodada ' + s.rodada, [
     ...quadro(s),
     '🎯 Vez de ' + nome(meu),
-    '🌩️ Especial: ' + ataqueEspecial(m) + ' (' + m.especial + '/3)',
+    emojiDoGolpe(ataqueEspecial(m)) + ' Golpe especial: ' + ataqueEspecial(m) + ' (' + m.especial + '/3)',
+    emojiDoGolpe(ataqueComum(m)) + ' Golpe comum: ' + ataqueComum(m),
     '🧪 Poções: ' + pocao,
     '⏳ Tempo: ' + secs(s.fim) + ' segundos',
     linha,
@@ -336,6 +378,7 @@ async function desafiar(ctx, alvo) {
     pokemon: [pA, pB], vez: 0, rodada: 1, jogadas: 0,
     historico: [], fim: Date.now() + CONVITE
   }
+  r.salvar(ctx)
   sessoes.set(grupo, sessao); salvar(); agendar(ctx, sessao)
   const prefix = ctx.prefix || '!'
   try {
@@ -429,7 +472,7 @@ function finalizar(ctx, s, ladoVencedor, porLimite = false) {
       '🏆 Vencedor: ' + a.nome + ' • ' + nome(vencedor),
       '💔 Derrotado: ' + b.nome + ' • ' + nome(perdedor),
       '❤️ HP restante: ' + arred(a.hp) + '/100',
-      '🔋 Vida: ' + barra(a.hp),
+      '🔋 Bateria: ' + barra(a.hp),
       '🧠 XP: +70 vencedor • +30 perdedor',
       '🪙 Recompensa: +600 N-Coins para o vencedor',
       porLimite ? '⏳ Limite de rodadas: maior HP venceu' : null,
@@ -469,18 +512,20 @@ async function acao(ctx, s, acao) {
     atk.defesa = true
     descricao = '🛡️ ' + atk.nome + ' se protegeu! Próximo ataque recebido terá dano reduzido.'
   } else {
-    if (ato === 'especial' && atk.especial <= 0) return ctx.reply('⚡ Acabaram os golpes especiais desta luta! Escolha Ataque.')
+    if (ato === 'especial' && atk.especial <= 0) return ctx.reply('⚡ Acabaram os golpes especiais desta luta! Escolha o golpe comum.')
     if (ato === 'especial') atk.especial--
     const sucesso = Math.random() < (ato === 'especial' ? 0.82 : 0.96)
     if (!sucesso) {
-      descricao = '💨 ' + atk.nome + ' tentou ' + (ato === 'especial' ? ataqueEspecial(atk) : 'Ataque') + ', mas ERROU!'
+      descricao = '💨 ' + atk.nome + ' tentou ' + (ato === 'especial' ? ataqueEspecial(atk) : ataqueComum(atk)) + ', mas ERROU!'
       evento.errou = true
     } else {
       const poder = p.poderPokemon(atk)
       const resistencia = p.poderPokemon(def)
       let dano = limite(Math.round(poder * 0.115 - resistencia * 0.035 + sorte(6, 12)), 7, 35)
       if (ato === 'especial') dano = Math.round(dano * 1.45)
-      const vantagem = (p.VANTAGENS[atk.tipo] || []).some(t => def.tipos.includes(t))
+      const golpe = ato === 'especial' ? ataqueEspecial(atk) : ataqueComum(atk)
+      const tipoGolpe = tipoDoGolpe(golpe)
+      const vantagem = (p.VANTAGENS[tipoGolpe] || []).some(t => def.tipos.includes(t))
       if (vantagem) dano = Math.round(dano * 1.5)
       evento.critico = Math.random() < 0.12
       if (evento.critico) dano = Math.round(dano * 1.5)
@@ -490,7 +535,7 @@ async function acao(ctx, s, acao) {
       dano = limite(dano, 2, 62)
       def.hp = Math.max(0, arred(def.hp - dano))
       evento.derrota = def.hp <= 0
-      descricao = '⚡ ' + atk.nome + ' usou *' + (ato === 'especial' ? ataqueEspecial(atk) : 'Ataque') + '* e causou *-' + dano + ' HP*!' +
+      descricao = emojiDoGolpe(golpe) + ' ' + atk.nome + ' usou *' + golpe + '* e causou *-' + dano + ' HP*!' +
         (vantagem ? ' 🔥 Super efetivo!' : '') + (evento.critico ? ' 💥 CRÍTICO!' : '') +
         (evento.virada ? ' 🌪️ VIRADA ÉPICA!' : '')
     }

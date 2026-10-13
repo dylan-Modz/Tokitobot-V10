@@ -1,42 +1,42 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.36",
+  "version": "10.2.37",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-13T12:54:24.872Z",
+  "publishedAt": "2026-10-13T13:05:57.246Z",
   "changelog": [
-    "[Correção] Atualizador não tenta mais instalar arquivos em INFO_DADOS/LOGOS, pasta protegida do Tokito.",
-    "[Correção] Histórico da 10.2.35 revisado: arquivo protegido retirado da fila incremental de instalação.",
-    "[Pokémon] As cinco imagens temáticas continuam disponíveis, com configuração no caminho permitido DADOS_TOKITO/sistemas/rpg/links_batalha_pokemon.json.",
-    "[Design] Resultado, desafio e rodadas no mesmo formato do ping/perfil Pokémon: título estilizado e linhas > emoji ׄ ( texto ).",
-    "[Botões] Estilo visual igual ao play: emojis e letras negritadas (ex.: ✅﹚𝐀𝐂𝐄𝐈𝐓𝐀𝐑﹙✅); os comandos internos não aparecem na mensagem.",
-    "[RPG] Barras de HP, narração, turnos interativos e recompensas preservadas."
+    "[Pokémon] Barra de vida redesenhada como bateria com contorno, conector lateral, 10 segmentos de carga e indicador verde/amarelo/vermelho; exibe HP real.",
+    "[Pokémon] Batalha usa os golpes aprendidos e armazenados na coleção de cada Pokémon (incluindo golpes obtidos por TM), em vez de escolher o mesmo especial só pelo tipo.",
+    "[Pokémon] Botões no design do play mostram os dois nomes de golpes daquele Pokémon, com emojis associados ao tipo do golpe, além de Defender e Poção.",
+    "[Pokémon] Golpes iniciais adaptados por espécie para 200 Pokémon, com configurações específicas de Pikachu, Sandshrew, Weepinbell, Charizard e outras espécies populares.",
+    "[Compatibilidade] Migração controlada dos golpes genéricos automáticos antigos; não substitui listas personalizadas com ataques aprendidos pelo treinador.",
+    "[RPG] Dano e vantagem de tipo calculados com o tipo real do golpe executado; recompensas, botões interativos e as cinco imagens temáticas permanecem."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Corrigido atualizador e visual Pokémon",
-  "notice": "Instalação corrigida: imagens fora da pasta protegida, botões no estilo play e resultados iguais ao ping/RPG.",
+  "type": "Melhoria",
+  "title": "Bateria HP desenhada e golpes individuais Pokémon",
+  "notice": "Bateria de HP desenhada e ataques conforme os golpes aprendidos de cada Pokémon.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-      "gitSha": "6a447ddc404ad300832a39ab05ac2c71a1361230",
-      "sha256": "1e93724ac1046147c4c5454f8f483c97bf4f9645701e3e5fc57c3b34639a8528",
-      "size": 26088
+      "gitSha": "f1173b1df6306d8652cd7ea25c751cfa19d04c08",
+      "sha256": "cf56dfe9b0908bf1b78b50c695510a1e718827c8c90651b3bcc5869b1f72a1c5",
+      "size": 28433
     },
     {
-      "path": "DADOS_TOKITO/sistemas/rpg/links_batalha_pokemon.json",
-      "gitSha": "567612738a67d4928eef8a178aa832cd911e73cf",
-      "sha256": "c9dbea2b9b3d8a2846aa6ea89e5ef47517dc79346d21d7709697c84efcf1e8ce",
-      "size": 497
+      "path": "DADOS_TOKITO/sistemas/rpg/pokemon-core.js",
+      "gitSha": "8cdb012d8baaa096b2adfc11e40bfbb18d1bc5e7",
+      "sha256": "0670c5f16bc598f20d03f2303e95c7bbaf1434577153efacc9511c6966eb2add",
+      "size": 20640
     },
     {
       "path": "package.json",
-      "gitSha": "399cdd09bd5367f3b8c981a2cccc23c95dd01996",
-      "sha256": "39de09618423914271558f04dcd7b1c69d8cb9f815d71045d2cc295c3bf015c2",
+      "gitSha": "db0cfd543012ccef57f7f00291e58d33bfc7c531",
+      "sha256": "9ffbd40dfa81abbfb11bc38b60679acadddc498f23ba33fb50e743135c771648",
       "size": 1164
     }
   ],
@@ -3750,16 +3750,55 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-13T12:54:24.872Z"
+    },
+    {
+      "version": "10.2.37",
+      "fromVersion": "10.2.36",
+      "type": "Melhoria",
+      "channel": "stable",
+      "title": "Bateria HP desenhada e golpes individuais Pokémon",
+      "notice": "Bateria de HP desenhada e ataques conforme os golpes aprendidos de cada Pokémon.",
+      "changelog": [
+        "[Pokémon] Barra de vida redesenhada como bateria com contorno, conector lateral, 10 segmentos de carga e indicador verde/amarelo/vermelho; exibe HP real.",
+        "[Pokémon] Batalha usa os golpes aprendidos e armazenados na coleção de cada Pokémon (incluindo golpes obtidos por TM), em vez de escolher o mesmo especial só pelo tipo.",
+        "[Pokémon] Botões no design do play mostram os dois nomes de golpes daquele Pokémon, com emojis associados ao tipo do golpe, além de Defender e Poção.",
+        "[Pokémon] Golpes iniciais adaptados por espécie para 200 Pokémon, com configurações específicas de Pikachu, Sandshrew, Weepinbell, Charizard e outras espécies populares.",
+        "[Compatibilidade] Migração controlada dos golpes genéricos automáticos antigos; não substitui listas personalizadas com ataques aprendidos pelo treinador.",
+        "[RPG] Dano e vantagem de tipo calculados com o tipo real do golpe executado; recompensas, botões interativos e as cinco imagens temáticas permanecem."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
+          "gitSha": "f1173b1df6306d8652cd7ea25c751cfa19d04c08",
+          "sha256": "cf56dfe9b0908bf1b78b50c695510a1e718827c8c90651b3bcc5869b1f72a1c5",
+          "size": 28433
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/rpg/pokemon-core.js",
+          "gitSha": "8cdb012d8baaa096b2adfc11e40bfbb18d1bc5e7",
+          "sha256": "0670c5f16bc598f20d03f2303e95c7bbaf1434577153efacc9511c6966eb2add",
+          "size": 20640
+        },
+        {
+          "path": "package.json",
+          "gitSha": "db0cfd543012ccef57f7f00291e58d33bfc7c531",
+          "sha256": "9ffbd40dfa81abbfb11bc38b60679acadddc498f23ba33fb50e743135c771648",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-13T13:05:57.246Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.35",
+  "fromVersion": "10.2.36",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.36"
+  "publicVersion": "10.2.37"
 }
