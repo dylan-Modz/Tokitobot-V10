@@ -16,7 +16,7 @@
 
 <p align="center">
 <img title="Autor" src="https://img.shields.io/badge/Autor-Dylan%20Modz-00BFFF?style=for-the-badge&logo=github&logoColor=white">
-<img title="Versão" src="https://img.shields.io/badge/Versão-10.0.70-00BFFF?style=for-the-badge&logo=github&logoColor=white">
+<img title="Versão" src="https://img.shields.io/badge/Versão-10.2.39-00BFFF?style=for-the-badge&logo=github&logoColor=white">
 </p>
 
 <p align="center">
