@@ -207,10 +207,10 @@ function botoesDaVez(ctx, s) {
   const prefix = ctx.prefix || '!'
   const base = prefix + 'batalhapokemon '
   return [
-    { texto: '🌩️ ' + ataqueEspecial(m).slice(0, 19), id: base + 'especial ' + s.id },
-    { texto: '⚔️ Ataque', id: base + 'ataque ' + s.id },
-    { texto: '🛡️ Defender', id: base + 'defender ' + s.id },
-    { texto: '🧪 Poção', id: base + 'pocao ' + s.id }
+    { texto: '🌩️ ' + ataqueEspecial(m).slice(0, 19), id: base + 'especial ' + s.id + ' ' + s.jogadas },
+    { texto: '⚔️ Ataque', id: base + 'ataque ' + s.id + ' ' + s.jogadas },
+    { texto: '🛡️ Defender', id: base + 'defender ' + s.id + ' ' + s.jogadas },
+    { texto: '🧪 Poção', id: base + 'pocao ' + s.id + ' ' + s.jogadas }
   ]
 }
 async function turno(ctx, s) {
@@ -427,7 +427,7 @@ async function acao(ctx, s, acao) {
 async function executar(ctx) {
   if (!ctx.isGroup) return ctx.reply(ctx.mess?.sogrupo?.() || 'Só em grupos.')
   if (!r.ambos(ctx)) return ctx.reply(ctx.mess?.rpgCoinsDesativado?.(ctx.prefix) || 'Ative RPG e Coins primeiro.')
-  const [primeiro = '', codigo = ''] = ctx.args || []
+  const [primeiro = '', codigo = '', turnoBotao = ''] = ctx.args || []
   const comando = String(primeiro).toLowerCase()
   const acoes = ['aceitar','recusar','especial','ataque','defender','pocao','desistir']
   const s = atual(ctx)
@@ -445,15 +445,21 @@ async function executar(ctx) {
       return aceitar(ctx, s)
     }
     if (s.fase !== 'luta') return ctx.reply('⌛ A batalha ainda não começou; aguardem a confirmação.')
+    if (String(s.jogadas) !== String(turnoBotao))
+      return ctx.reply('⌛ Esse botão é de uma rodada antiga! Use os botões da rodada atual.')
     return acao(ctx, s, comando)
   }
   if (comando === 'status') {
     if (!s) return ctx.reply('⚔️ Não há batalha ativa neste grupo. Use ' + (ctx.prefix || '!') + 'batalhapokemon @usuario.')
-    return ctx.reply(placa('BATALHA POKÉMON • STATUS', [
-      ...quadro(s),
-      s.fase === 'convite' ? '⏳ Aguardando ' + nome(s.b) + ' aceitar.' : '🎯 Vez de ' + nome(s.vez === 0 ? s.a : s.b),
+    agendar(ctx, s) // retoma o relógio também depois de reiniciar o bot
+    if (s.fase === 'luta') return turno(ctx, s)
+    return enviar(ctx, placa('BATALHA POKÉMON • STATUS', [
+      ...quadro(s), '⏳ Aguardando ' + nome(s.b) + ' aceitar.',
       '⌛ Tempo restante: ' + secs(s.fim) + 's'
-    ]))
+    ]), [
+      {texto:'✅ Aceitar',id:(ctx.prefix || '!')+'batalhapokemon aceitar '+s.id},
+      {texto:'❌ Recusar',id:(ctx.prefix || '!')+'batalhapokemon recusar '+s.id}
+    ], imagem(s.pokemon[1]), marca(s))
   }
   const destino = await ctx.destino?.().catch(() => null)
   const jid = destino?.mencao || ctx.menc_jid2?.[0] || ctx.quotedParticipant
