@@ -1,27 +1,69 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.40",
+  "version": "10.2.39",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-13T23:40:14.250Z",
+  "publishedAt": "2026-10-13T23:30:58.229Z",
   "changelog": [
-    "[Melhoria] docs: show current Tokito V10.2.39 version badge",
-    "A versão 10.2.40 já está disponível para atualização.",
-    "README atualizado"
+    "[Design] Aviso de Comando Inválido refeito no estilo compacto do Tokito com comando digitado, sugestão, similaridade e tempo.",
+    "[Dono] Adicionados fundoerro e fundoprefix para personalizar com foto, GIF ou vídeo o fundo dos avisos do bot.",
+    "[Dono] fundoerro 0 e fundoprefix 0 removem as mídias e restauram os avisos em texto.",
+    "[Mídia] Novos fundos seguem o fotomenu: mídia da mensagem ou respondida, armazenada localmente em INFO_DADOS/LOGOS, protegida do atualizador.",
+    "[Compatibilidade] GIFs enviados pelo WhatsApp como vídeo preservam animação; arquivos GIF originais também são aceitos mediante FFmpeg.",
+    "[Interação] Avisos com fundo preservam texto, marcação e botão de menu quando habilitado; em falha de mídia, exibem o texto.",
+    "[Menu] fundoerro e fundoprefix adicionados ao menudono, em Configurações.",
+    "[Prefixo] Fundo utilizado para a resposta ao texto 'prefixo' e confirmação do setprefix/prefixo."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "docs: show current Tokito V10.2.39 version badge",
-  "notice": "A versão 10.2.40 já está disponível para atualização.",
+  "title": "Comando inválido compacto e fundos de erro/prefixo",
+  "notice": "Novos fundoerro e fundoprefix com foto, GIF, vídeo e remoção via 0; aviso de comando inválido compacto.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "README.md",
-      "sha256": "cb1b8cb3ee72001eb619f53a290f0dec9bf75429fb3a21fae934fcdad1d7bb4e",
-      "size": 8975
+      "path": "DADOS_TOKITO/sistemas/fundos.js",
+      "gitSha": "0849daebf22831c57543262f4843b866fbf320d5",
+      "sha256": "6be8a9c8a932b4f152615bfbdc719e6a043d9668857221355fc60652b7ca0dc1",
+      "size": 5463
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/fundoerro.js",
+      "gitSha": "e4a1d9f027752225456e7a4f2aa346bf3512e944",
+      "sha256": "996c8a404f7054de2126f5a16184df9de2a3bacefb2dd27265f644216a9dc722",
+      "size": 1845
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "gitSha": "30b889cfc1a500ce0f331870c418b1eaadac20c0",
+      "sha256": "707c9869b5318fde4fad556184949691c0b054ddfbcddc02505d2a657e468b9e",
+      "size": 231518
+    },
+    {
+      "path": "tokito.js",
+      "gitSha": "963ee20c356cb811bcefafb9c06ba7d9b0429f62",
+      "sha256": "045101337b64c1557fc8cbc42b884e18b804136d1a046f00068f4b49315303de",
+      "size": 53268
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "gitSha": "ea010171a54ef8fdbd0e2d0e861bd3915babe056",
+      "sha256": "337bd2e8107b22c8f280e3d735897fb1330c9c9227248f8c3a8fcf2704264b50",
+      "size": 78165
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/prefixo.js",
+      "gitSha": "2ac065175429502502710ef86ff8c16679adf7f7",
+      "sha256": "9b6e51ce2060b0224d773e980765a7aa8bddd78964d64cb4f3e461162d1f3f59",
+      "size": 1902
+    },
+    {
+      "path": "package.json",
+      "gitSha": "46673a7ad058fa06a4950d9b206ced57d4c7d7ea",
+      "sha256": "3abc8befcdced76b652715e6032ae6685b307b554c23536b362ba1d68fe31998",
+      "size": 1164
     }
   ],
   "releases": [
@@ -3879,27 +3921,6 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-13T23:30:58.229Z"
-    },
-    {
-      "version": "10.2.40",
-      "fromVersion": "10.2.39",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "docs: show current Tokito V10.2.39 version badge",
-      "notice": "A versão 10.2.40 já está disponível para atualização.",
-      "changelog": [
-        "README atualizado"
-      ],
-      "files": [
-        {
-          "path": "README.md",
-          "sha256": "cb1b8cb3ee72001eb619f53a290f0dec9bf75429fb3a21fae934fcdad1d7bb4e",
-          "size": 8975
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-13T23:40:14.249Z"
     }
   ],
   "mode": "incremental",
