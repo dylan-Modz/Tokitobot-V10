@@ -35,17 +35,16 @@ return `- 🧊 \`𝙰𝙲𝙴𝚂𝚂𝙾 𝙳𝙾 𝙳𝙾𝙽𝙾\`
 }
 
 exports.commandNotFound = ({ prefix, command, nome, porcentagem, tempo }) => {
-return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
-┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
-├╾═╼･ﾟ𖤐ﾟ･｡❌｡･ﾟ𖤐ﾟ･╾═╼┤
-├─ ⊹ 𖤐  𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾
-├╾═╼･ﾟ𖤐ﾟ･｡⚠️｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ ❌ 𝙲𝙾𝙼𝙰𝙽𝙳𝙾: ${prefix}${command || 'desconhecido'}
-┃࣪ ╎—̳͟͞͞ 🔎 𝙿𝙰𝚁𝙴𝙲𝙸𝙳𝙾: ${nome || 'Nenhum'}
-┃࣪ ╎—̳͟͞͞ 📊 𝚂𝙴𝙼𝙴𝙻𝙷𝙰𝙽𝙲̧𝙰: ${porcentagem || '0%'}
-┃࣪ ╎—̳͟͞͞ ⏱️ 𝚃𝙴𝙼𝙿𝙾: ${tempo || '0 ms'}
-┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
-╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
+const digitado = String(prefix || '!') + String(command || 'desconhecido')
+const achou = nome && nome !== 'Nenhum'
+return `• \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\` ❌
+> O comando informado não foi reconhecido pelo Tokito.
+- Comando — ( \`${digitado} ❌\` )
+> Esse comando não existe.
+- Sugestão — ( \`${achou ? nome : 'Nenhuma'} ${achou ? '✅' : '🔎'}\` )
+> ${achou ? 'Talvez seja esse o comando que você procura.' : 'Não encontramos um comando parecido.'}
+- Similaridade — ( \`${porcentagem || '0%'} 🔎\` )
+- Tempo — ( \`${tempo || '0 ms'} ⏱️\` )`
 }
 exports.sogrupo = () => {
 return `- 👥 \`𝙰𝙿𝙴𝙽𝙰𝚂 𝙴𝙼 𝙶𝚁𝚄𝙿𝙾𝚂\`

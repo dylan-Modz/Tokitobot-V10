@@ -51,6 +51,7 @@ const donoSistema = require('./DADOS_TOKITO/sistemas/dono.js')
 const sorteio = require('./DADOS_TOKITO/database/lib/sorteio.js')
 ////////////////////////////////////////////////////////////////////////////////////
 const similar = require('./DADOS_TOKITO/sistemas/similar.js')
+const fundos = require('./DADOS_TOKITO/sistemas/fundos')
 
 const comandos = () => [...new Set([...similar.casos(__filename), ...plugins.comandos()])]
 
@@ -1390,10 +1391,10 @@ ${colors.cyan('╰──. ݁ ⛧ ₊ ⊹ 🧊 . ݁ ˖ ❆ິ̸ . ݁──╯')}`
 if (budy2 === 'prefixo') {
 if (isBotoff && !SoDono)
 continue
-await botaozin(mess.prefixChanged(prefix), [{
+await fundos.enviar(plug(), 'prefixo', mess.prefixChanged(prefix), [{
 texto: mess.botaoMenu(),
 id: `${prefix}menu`
-}], [sender])
+}])
 continue
 }
 const comandosComerciaisGrupo = new Set(['lojinha', 'loja', 'sub', 'code', 'meu'])
@@ -1509,7 +1510,7 @@ try {
 const inicioSimilar = performance.now()
 const achado = similar(comandos(), command)
 const tempoSimilar = performance.now() - inicioSimilar
-await botaozin(mess.commandNotFound({
+await fundos.enviar(plug(), 'erro', mess.commandNotFound({
 prefix,
 command,
 nome: achado.nome ? `${prefix}${achado.nome}` : 'Nenhum',
@@ -1518,11 +1519,11 @@ tempo: `${tempoSimilar.toFixed(3)} ms`
 }), [{
 texto: mess.botaoMenu(),
 id: `${prefix}menu`
-}], [sender])
+}])
 }
 catch (error) {
 console.log(colors.red('❌ Erro na semelhança:'), modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
-await botaozin(mess.commandNotFound({
+await fundos.enviar(plug(), 'erro', mess.commandNotFound({
 prefix,
 command,
 nome: 'Nenhum',
@@ -1531,7 +1532,7 @@ tempo: '0.000 ms'
 }), [{
 texto: mess.botaoMenu(),
 id: `${prefix}menu`
-}], [sender])
+}])
 }
 continue
 }

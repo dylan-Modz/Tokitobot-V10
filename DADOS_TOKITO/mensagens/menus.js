@@ -405,6 +405,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setchannel link
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setprefix !
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fotomenu
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fundoerro
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fundoprefix
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fotobot
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fotobanner
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}clonar @usuario
