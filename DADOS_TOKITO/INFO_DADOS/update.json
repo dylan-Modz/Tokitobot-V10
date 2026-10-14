@@ -1,27 +1,35 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.43",
+  "version": "10.2.44",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-14T13:10:42.675Z",
+  "publishedAt": "2026-10-14T14:15:00.000Z",
   "changelog": [
-    "[Melhoria] docs: publicar aviso oficial de pausa nas atualizações",
-    "A versão 10.2.43 já está disponível para atualização.",
-    "Avisos atualizado"
+    "[Novo comando] wame retorna link direto wa.me e o telefone de quem executou o comando, com o design de gelo.",
+    "[Foto do usuário] Envia a foto de perfil pública com o link na legenda; caso indisponível, envia o link em texto.",
+    "[Compatibilidade] Reconhece número de usuários com LID quando o WhatsApp permite e evita links feitos com IDs internos.",
+    "[Robustez] Se ocorrer falha ao enviar a foto, o link é enviado por texto. Respeita o prefixo atual."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "docs: publicar aviso oficial de pausa nas atualizações",
-  "notice": "A versão 10.2.43 já está disponível para atualização.",
-  "required": true,
+  "type": "Novidade",
+  "title": "Comando WAME com foto de perfil",
+  "notice": "Novo comando wame: link direto para o WhatsApp do usuário com a foto de perfil pública.",
+  "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/INFO_DADOS/avisos.json",
-      "sha256": "9aa4772dda9413807d52b09736776ed96694921c6ef5a89a8bac475e106e4b38",
-      "size": 795
+      "path": "DADOS_TOKITO/plugins/info/wame.js",
+      "sha256": "",
+      "gitSha": "3b94d2dc6a2199cca6685aba8f743293ea88d409",
+      "size": 4306
+    },
+    {
+      "path": "package.json",
+      "sha256": "",
+      "gitSha": "67d53a614aaaa9527b33632d26fd54880509e512",
+      "size": 1163
     }
   ],
   "releases": [
@@ -4015,16 +4023,47 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-14T13:10:42.675Z"
+    },
+    {
+      "version": "10.2.44",
+      "fromVersion": "10.2.43",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "Comando WAME com foto de perfil",
+      "notice": "Novo comando wame: link direto para o WhatsApp do usuário com a foto de perfil pública.",
+      "changelog": [
+        "[Novo comando] wame retorna link direto wa.me e o telefone de quem executou o comando, com o design de gelo.",
+        "[Foto do usuário] Envia a foto de perfil pública com o link na legenda; caso indisponível, envia o link em texto.",
+        "[Compatibilidade] Reconhece número de usuários com LID quando o WhatsApp permite e evita links feitos com IDs internos.",
+        "[Robustez] Se ocorrer falha ao enviar a foto, o link é enviado por texto. Respeita o prefixo atual."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/info/wame.js",
+          "sha256": "",
+          "gitSha": "3b94d2dc6a2199cca6685aba8f743293ea88d409",
+          "size": 4306
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "gitSha": "67d53a614aaaa9527b33632d26fd54880509e512",
+          "size": 1163
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-14T14:15:00.000Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.41",
+  "fromVersion": "10.2.43",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.42"
+  "publicVersion": "10.2.44"
 }
