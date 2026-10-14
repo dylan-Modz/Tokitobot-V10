@@ -242,6 +242,15 @@ try {
 if (!tokito || typeof tokito.sendMessage !== 'function') return false
 
 const check = await dadosSistema.verificarUpdate()
+global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__ = {
+  at: new Date().toISOString(),
+  ok: check?.ok === true,
+  available: check?.available === true,
+  fonte: String(check?.fonte || ''),
+  local: String(check?.local?.version || ''),
+  remota: String(check?.remote?.version || ''),
+  error: check?.ok ? '' : String(check?.error || 'Falha na consulta.')
+}
 if (!check?.ok) {
 registrarFalhaAvisoUpdate(check?.error || 'Falha ao verificar novas versões.')
 return false
@@ -268,6 +277,7 @@ contextInfo: canalInfo([dono])
 if (!enviada) throw new Error('O WhatsApp não confirmou o envio do aviso.')
 
 dadosSistema.registrarAvisoUpdate(version)
+global.__TOKITO_UPDATE_NOTICE_LAST_SENT__ = { version, at: new Date().toISOString() }
 sucesso('Aviso de atualização ' + version + ' enviado ao privado do dono.')
 return true
 } catch (error) {
@@ -1232,15 +1242,20 @@ break
 case 'open':
 global.startTime = Math.floor(Date.now() / 1000)
 
+// Inicia os monitores imediatamente: nenhum upload ou consulta do WhatsApp
+// pode bloquear o aviso de uma nova versão ao dono.
+iniciarAvisosUpdate(tokito)
+avisosOficiais.iniciar(tokito)
+
 reconectando = false
 metodo = null
 ultimoQr = null
 global.qrTokitoAtual = null
 global.mostrarQrTokito = false
 
-await tokito.sendPresenceUpdate('available').catch(() => {})
-await tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
-await modulos.midiaMenu(tokito).catch(() => null)
+void tokito.sendPresenceUpdate('available').catch(() => {})
+void tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
+void modulos.midiaMenu(tokito).catch(() => null)
       
       const configuracaoDoGrupo = jid => {
         try {
@@ -1309,14 +1324,13 @@ if (runtimeSub.isSubBot) {
   console.log('')
   sucesso(`${NomeDoBot} conectado com sucesso.`)
   console.log('')
-  iniciarAvisosUpdate(tokito)
-  avisosOficiais.iniciar(tokito)
   await sistemaSub?.iniciar(tokito).catch(error => erroSistema('Erro ao iniciar sistema de Sub Bots', error))
 }
 break
 
 case 'close':
 avisosOficiais.pausar(tokito)
+if (global.__TOKITO_UPDATE_SOCKET__ === tokito) global.__TOKITO_UPDATE_SOCKET__ = null
 // Durante o primeiro pareamento do Sub Bot ainda não existe uma sessão registrada.
 // Alguns fechamentos transitórios chegam como 401; eles não devem ser tratados como logout definitivo.
 if (runtimeSub.isSubBot && !state.creds.registered) {

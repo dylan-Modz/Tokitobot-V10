@@ -38,7 +38,7 @@ comandos: ['update'],
 categoria: 'dono',
 info: {
 descricao: 'Verifica, instala ou restaura atualizações oficiais do Tokito V10.',
-uso: 'update check | info | start | rollback',
+uso: 'update check | diag | info | start | rollback',
 permissao: 'Dono'
 },
 
@@ -51,6 +51,41 @@ const acao = String(ctx.args?.[0] || ctx.q || 'check')
 .trim()
 .split(/\s+/)[0]
 .toLowerCase()
+
+if (acao === 'diag' || acao === 'diagnostico') {
+const check = await sistema.verificarUpdate()
+const salvo = sistema.state()
+const automatico = global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__ || {}
+const ultimaFalha = String(global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ || automatico.error || '').trim()
+const telefoneConfigurado = String(ctx.ownerNumber || '').replace(/\D/g, '')
+const ativo = Boolean(global.__TOKITO_UPDATE_NOTICE_TIMER__ && global.__TOKITO_UPDATE_SOCKET__)
+const versaoLocal = check?.local?.version || '—'
+const versaoRemota = check?.remote?.version || 'indisponível'
+const fonte = check?.fonte || 'indisponível'
+const notificada = salvo?.lastNotifiedVersion || 'nenhuma'
+const quando = automatico.at
+  ? new Date(automatico.at).toLocaleString('pt-BR', { timeZone: 'America/Fortaleza' })
+  : 'ainda não executada'
+
+return ctx.reply([
+'- 🧊 \`𝙳𝙸𝙰𝙶𝙽𝙾́𝚂𝚃𝙸𝙲𝙾 𝙳𝙾 𝚄𝙿𝙳𝙰𝚃𝙴\`',
+'',
+'> 🤖 ׄ ( ᴠᴇʀsᴀ̃ᴏ ɪɴsᴛᴀʟᴀᴅᴀ: ' + versaoLocal + ' )',
+'> ✨ ׄ ( ᴠᴇʀsᴀ̃ᴏ ɴᴏ ɢɪᴛʜᴜʙ: ' + versaoRemota + ' )',
+'> 📡 ׄ ( ғᴏɴᴛᴇ: ' + fonte + ' )',
+'> 📥 ׄ ( ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ᴘᴇɴᴅᴇɴᴛᴇ: ' + (check?.available ? 'SIM' : 'NÃO') + ' )',
+'',
+'- 🔔 \`𝙰𝚅𝙸𝚂𝙾 𝙰𝚄𝚃𝙾𝙼𝙰́𝚃𝙸𝙲𝙾\`',
+'',
+'> ⚙️ ׄ ( ᴍᴏɴɪᴛᴏʀ: ' + (ativo ? 'ATIVO' : 'INATIVO') + ' )',
+'> 👤 ׄ ( ᴅᴏɴᴏ ᴄᴏɴғɪɢᴜʀᴀᴅᴏ: ' + (telefoneConfigurado.length >= 11 ? 'SIM' : 'NÃO') + ' )',
+'> 📩 ׄ ( ᴜ́ʟᴛɪᴍᴀ ᴠᴇʀsᴀ̃ᴏ ɴᴏᴛɪғɪᴄᴀᴅᴀ: ' + notificada + ' )',
+'> 🕒 ׄ ( ᴜ́ʟᴛɪᴍᴀ ᴄᴏɴsᴜʟᴛᴀ ᴀᴜᴛᴏᴍᴀ́ᴛɪᴄᴀ: ' + quando + ' )',
+'> ⚠️ ׄ ( ᴜ́ʟᴛɪᴍᴏ ᴇʀʀᴏ: ' + (ultimaFalha || (check?.ok ? 'nenhum' : String(check?.error || 'consulta indisponível'))) + ' )',
+'',
+'> 🔎 ׄ ( Use ' + ctx.prefix + 'update check para verificar novamente. )'
+].join('\n'))
+}
 
 if (acao === 'check' || acao === 'info') {
 const check = await sistema.verificarUpdate()

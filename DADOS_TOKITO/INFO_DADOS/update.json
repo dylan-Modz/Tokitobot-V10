@@ -1,35 +1,42 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.44",
+  "version": "10.2.45",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-14T14:15:00.000Z",
+  "publishedAt": "2026-10-14T14:34:47.309Z",
   "changelog": [
-    "[Novo comando] wame retorna link direto wa.me e o telefone de quem executou o comando, com o design de gelo.",
-    "[Foto do usuário] Envia a foto de perfil pública com o link na legenda; caso indisponível, envia o link em texto.",
-    "[Compatibilidade] Reconhece número de usuários com LID quando o WhatsApp permite e evita links feitos com IDs internos.",
-    "[Robustez] Se ocorrer falha ao enviar a foto, o link é enviado por texto. Respeita o prefixo atual."
+    "[Correção] Verificação automática de atualizações começa assim que o WhatsApp conecta, antes de qualquer carregamento de imagem, perfil ou grupos.",
+    "[Desempenho] Preparação da mídia do menu e ajustes de presença/status não seguram mais o início do monitor automático.",
+    "[Diagnóstico] Novo comando update diag para descobrir a versão detectada, fonte da atualização, status do monitor, último aviso e falhas.",
+    "[Confiabilidade] Ao desconectar, o monitor deixa de usar a sessão antiga do WhatsApp e retoma com a conexão nova.",
+    "[Continuidade] Mantém o comando wame com foto da versão 10.2.44 e os comunicados oficiais."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "Comando WAME com foto de perfil",
-  "notice": "Novo comando wame: link direto para o WhatsApp do usuário com a foto de perfil pública.",
-  "required": false,
+  "type": "Correção",
+  "title": "Avisos automáticos e diagnóstico do Update",
+  "notice": "O monitor de atualizações inicia imediatamente e agora há um diagnóstico com update diag.",
+  "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/info/wame.js",
+      "path": "DADOS_TOKITO/connect.js",
+      "gitSha": "7394cdec42ee587f00d79562c98adf651346f8cc",
       "sha256": "",
-      "gitSha": "3b94d2dc6a2199cca6685aba8f743293ea88d409",
-      "size": 4306
+      "size": 43707
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/update.js",
+      "gitSha": "c9bae5d4d3b182d54e859e5b513ba4f827c228d8",
+      "sha256": "",
+      "size": 6565
     },
     {
       "path": "package.json",
+      "gitSha": "d933bfc35cf88a4e39369fe675035452b9823635",
       "sha256": "",
-      "gitSha": "67d53a614aaaa9527b33632d26fd54880509e512",
-      "size": 1163
+      "size": 1164
     }
   ],
   "releases": [
@@ -4054,16 +4061,54 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-14T14:15:00.000Z"
+    },
+    {
+      "version": "10.2.45",
+      "fromVersion": "10.2.44",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Avisos automáticos e diagnóstico do Update",
+      "notice": "O monitor de atualizações inicia imediatamente e agora há um diagnóstico com update diag.",
+      "changelog": [
+        "[Correção] Verificação automática de atualizações começa assim que o WhatsApp conecta, antes de qualquer carregamento de imagem, perfil ou grupos.",
+        "[Desempenho] Preparação da mídia do menu e ajustes de presença/status não seguram mais o início do monitor automático.",
+        "[Diagnóstico] Novo comando update diag para descobrir a versão detectada, fonte da atualização, status do monitor, último aviso e falhas.",
+        "[Confiabilidade] Ao desconectar, o monitor deixa de usar a sessão antiga do WhatsApp e retoma com a conexão nova.",
+        "[Continuidade] Mantém o comando wame com foto da versão 10.2.44 e os comunicados oficiais."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "7394cdec42ee587f00d79562c98adf651346f8cc",
+          "sha256": "",
+          "size": 43707
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/update.js",
+          "gitSha": "c9bae5d4d3b182d54e859e5b513ba4f827c228d8",
+          "sha256": "",
+          "size": 6565
+        },
+        {
+          "path": "package.json",
+          "gitSha": "d933bfc35cf88a4e39369fe675035452b9823635",
+          "sha256": "",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-14T14:34:47.309Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.43",
+  "fromVersion": "10.2.44",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.44"
+  "publicVersion": "10.2.45"
 }
