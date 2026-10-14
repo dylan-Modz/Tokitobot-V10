@@ -1,46 +1,34 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.40",
+  "version": "10.2.41",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-14T00:52:32.662Z",
+  "publishedAt": "2026-10-14T01:02:19.756Z",
   "changelog": [
-    "[Mídia] Os dois novos fundos azuis (erro de comando e prefixo) foram adicionados como imagens padrão oficiais do Tokito.",
-    "[Atualização] fundoerro.png e fundoprefix.png passam a ser instalados automaticamente nos assets da versão 10.2.40.",
-    "[Personalização] Fundos escolhidos pelo dono em INFO_DADOS/LOGOS continuam com prioridade e são preservados pelo atualizador.",
-    "[Comandos] fundoerro 0 e fundoprefix 0 removem o fundo personalizado e deixam o aviso em texto; enviar nova mídia reativa o fundo.",
-    "[Avisos] Bot passa a anunciar a atualização 10.2.40 pelo verificador de versões e pelo comando update."
+    "[Correção] Verificador automático agora consulta novidades a cada 1 minuto, com checagem rápida após o WhatsApp conectar.",
+    "[Correção] Falhas de consulta ou envio do aviso deixam de ser ocultadas e aparecem no terminal sem mensagens repetitivas.",
+    "[Confiabilidade] Notificação é registrada somente depois de o envio pelo WhatsApp retornar com sucesso; falhas são tentadas novamente.",
+    "[Proteção] Controle impede verificações simultâneas e notificações repetidas da mesma versão.",
+    "[Compatibilidade] O update check, update info e update start continuam funcionando normalmente."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Fundos padrão de erro e prefixo",
-  "notice": "Novos fundos azuis de erro e prefixo instalados automaticamente, sem perder imagens personalizadas.",
+  "type": "Correção",
+  "title": "Avisos automáticos de atualização",
+  "notice": "Notificação mais rápida e confiável, com novas tentativas e avisos de falha no terminal.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/fundos.js",
-      "gitSha": "d91ebc1962262b5085ec5d852ca64c948d65ede9",
+      "path": "DADOS_TOKITO/connect.js",
+      "gitSha": "49bc1ce7c23ffc074e968b9caf83cafd29dabdca",
       "sha256": "",
-      "size": 6105
-    },
-    {
-      "path": "DADOS_TOKITO/assets/fundos/fundoerro.png",
-      "gitSha": "e5dc03abf56bc647f5969b79300138379b330531",
-      "sha256": "0775f7876cdfe43ca5b12bc17c7291dcbd736ba18455a92d568175b21bb60ea8",
-      "size": 2242616
-    },
-    {
-      "path": "DADOS_TOKITO/assets/fundos/fundoprefix.png",
-      "gitSha": "48d8b591e111413cc4e5b5b8a6b4f6acb37a93b7",
-      "sha256": "f4de7a182e9b8302996ff21f7e5387fbb1a58ad0b1fb7baf355a835c5ebd78f1",
-      "size": 2395805
+      "size": 42943
     },
     {
       "path": "package.json",
-      "gitSha": "7323b6f8a2c34619117f1063a82e9404d6d9c32d",
+      "gitSha": "464c727a912f00419e90cf9365ad0fa756d3733b",
       "sha256": "",
       "size": 1164
     }
@@ -3944,16 +3932,48 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-14T00:52:32.662Z"
+    },
+    {
+      "version": "10.2.41",
+      "fromVersion": "10.2.40",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Avisos automáticos de atualização",
+      "notice": "Notificação mais rápida e confiável, com novas tentativas e avisos de falha no terminal.",
+      "changelog": [
+        "[Correção] Verificador automático agora consulta novidades a cada 1 minuto, com checagem rápida após o WhatsApp conectar.",
+        "[Correção] Falhas de consulta ou envio do aviso deixam de ser ocultadas e aparecem no terminal sem mensagens repetitivas.",
+        "[Confiabilidade] Notificação é registrada somente depois de o envio pelo WhatsApp retornar com sucesso; falhas são tentadas novamente.",
+        "[Proteção] Controle impede verificações simultâneas e notificações repetidas da mesma versão.",
+        "[Compatibilidade] O update check, update info e update start continuam funcionando normalmente."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "49bc1ce7c23ffc074e968b9caf83cafd29dabdca",
+          "sha256": "",
+          "size": 42943
+        },
+        {
+          "path": "package.json",
+          "gitSha": "464c727a912f00419e90cf9365ad0fa756d3733b",
+          "sha256": "",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-14T01:02:19.756Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.39",
+  "fromVersion": "10.2.40",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.40"
+  "publicVersion": "10.2.41"
 }

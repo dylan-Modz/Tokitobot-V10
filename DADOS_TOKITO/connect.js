@@ -197,7 +197,7 @@ serverMessageId: ''
 } : {})
 })
 
-const UPDATE_CHECK_MS = 5 * 60 * 1000
+const UPDATE_CHECK_MS = 60 * 1000
 
 const textoAvisoUpdate = check => {
 const remoto = check?.remote || {}
@@ -226,44 +226,71 @@ lista + obrigatoria,
 ].join('\n')
 }
 
+const registrarFalhaAvisoUpdate = mensagem => {
+const motivo = String(mensagem || 'Falha desconhecida.').trim()
+if (global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ === motivo) return
+global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ = motivo
+aviso('Notificação de atualização: ' + motivo)
+}
+
 const verificarAvisoUpdate = async tokito => {
+if (global.__TOKITO_UPDATE_NOTICE_BUSY__) return false
+global.__TOKITO_UPDATE_NOTICE_BUSY__ = true
+
 try {
+if (!tokito || typeof tokito.sendMessage !== 'function') return false
+
 const check = await dadosSistema.verificarUpdate()
+if (!check?.ok) {
+registrarFalhaAvisoUpdate(check?.error || 'Falha ao verificar novas versões.')
+return false
+}
+global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ = ''
 
-if (!check?.ok || !check.available) return false
-if (check.remote?.notify === false) return false
-
+// Atualização de arquivos da versão já instalada (reparo) não é uma versão nova.
+if (!check.available || check.remote?.notify === false) return false
 const version = String(check.remote?.version || '').trim()
-if (!version || !dadosSistema.deveAvisarUpdate(version)) return false
+const installed = String(check.local?.version || '').trim()
+if (!version || version === installed || !dadosSistema.deveAvisarUpdate(version)) return false
 
 const dono = normalizarJid(ownerNumber)
-if (!dono) return false
+if (!dono || !dono.endsWith('@s.whatsapp.net')) {
+registrarFalhaAvisoUpdate('Número do dono inválido ou não configurado em ownerNumber.')
+return false
+}
 
-await tokito.sendMessage(dono, {
+const enviada = await tokito.sendMessage(dono, {
 text: textoAvisoUpdate(check),
 mentions: [dono],
 contextInfo: canalInfo([dono])
 })
+if (!enviada) throw new Error('O WhatsApp não confirmou o envio do aviso.')
 
 dadosSistema.registrarAvisoUpdate(version)
+sucesso('Aviso de atualização ' + version + ' enviado ao privado do dono.')
 return true
-} catch {
+} catch (error) {
+registrarFalhaAvisoUpdate(error?.message || error)
 return false
+} finally {
+global.__TOKITO_UPDATE_NOTICE_BUSY__ = false
 }
 }
 
 const iniciarAvisosUpdate = tokito => {
 global.__TOKITO_UPDATE_SOCKET__ = tokito
 
+// Verificação rápida após conectar; se o envio falhar, o próximo ciclo tenta novamente.
 setTimeout(() => {
-verificarAvisoUpdate(global.__TOKITO_UPDATE_SOCKET__).catch(() => {})
-}, 3500).unref?.()
+const socketAtual = global.__TOKITO_UPDATE_SOCKET__
+if (socketAtual) verificarAvisoUpdate(socketAtual).catch(erro => registrarFalhaAvisoUpdate(erro?.message || erro))
+}, 5000).unref?.()
 
 if (global.__TOKITO_UPDATE_NOTICE_TIMER__) return
 
 global.__TOKITO_UPDATE_NOTICE_TIMER__ = setInterval(() => {
 const socketAtual = global.__TOKITO_UPDATE_SOCKET__
-if (socketAtual) verificarAvisoUpdate(socketAtual).catch(() => {})
+if (socketAtual) verificarAvisoUpdate(socketAtual).catch(erro => registrarFalhaAvisoUpdate(erro?.message || erro))
 }, UPDATE_CHECK_MS)
 
 global.__TOKITO_UPDATE_NOTICE_TIMER__.unref?.()
