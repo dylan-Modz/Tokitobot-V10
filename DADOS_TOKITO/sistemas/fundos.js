@@ -1,5 +1,5 @@
 'use strict'
-// Os fundos seguem o fotomenu: arquivos locais, preservados pelo atualizador.
+// Fundos personalizados ficam em LOGOS; os padrões oficiais ficam nos assets atualizáveis.
 const fs = require('fs')
 const path = require('path')
 const os = require('os')
@@ -17,12 +17,24 @@ const opcoes = tipo => {
     { path: base + '.png', tipo: 'image', gif: false }
   ]
 }
-const atual = tipo => opcoes(tipo).find(x => fs.existsSync(x.path) && fs.statSync(x.path).size > 0)
+const padrao = tipo => path.join(__dirname, '..', 'assets', 'fundos', (nomes[tipo] || '') + '.png')
+const bloqueio = tipo => path.join(pasta, '.' + (nomes[tipo] || '') + '.disabled')
+const existe = item => fs.existsSync(item.path) && fs.statSync(item.path).size > 0
+const atual = tipo => {
+  if (!nomes[tipo]) return null
+  const personalizado = opcoes(tipo).find(existe)
+  if (personalizado) return personalizado
+  if (fs.existsSync(bloqueio(tipo))) return null
+  const base = { path: padrao(tipo), tipo: 'image', gif: false }
+  return existe(base) ? base : null
+}
 const limpar = tipo => {
   let ok = false
   for (const item of opcoes(tipo)) {
     if (fs.existsSync(item.path)) { fs.unlinkSync(item.path); ok = true }
   }
+  fs.mkdirSync(pasta, { recursive: true })
+  fs.writeFileSync(bloqueio(tipo), 'disabled\n')
   cache.delete(tipo)
   return ok
 }
@@ -57,6 +69,7 @@ async function salvar(ctx, tipo) {
     if (!fs.statSync(saida).size) throw new Error('Mídia inválida.')
     fs.copyFileSync(saida, local)
     for (const item of opcoes(tipo)) if (item.path !== local && fs.existsSync(item.path)) fs.unlinkSync(item.path)
+    if (fs.existsSync(bloqueio(tipo))) fs.unlinkSync(bloqueio(tipo))
     cache.delete(tipo)
     return gif ? 'GIF' : origem === 'video' ? 'VÍDEO' : 'FOTO'
   } finally {
