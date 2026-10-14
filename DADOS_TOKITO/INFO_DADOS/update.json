@@ -1,43 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.42",
+  "version": "10.2.43",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-14T12:57:18.924Z",
+  "publishedAt": "2026-10-14T13:10:42.675Z",
   "changelog": [
-    "[Avisos Oficiais] Novo sistema de comunicados do criador, independentes das atualizações do bot.",
-    "[Automação] Cada Tokito consulta avisos.json no GitHub a cada 5 minutos e após conectar, enviando novidades no privado do seu próprio dono.",
-    "[Privacidade] Nenhum número de dono é enviado ao criador: o próprio bot faz a entrega e guarda os IDs já enviados em arquivo local protegido.",
-    "[Confiabilidade] Avisos não se repetem e são tentados novamente após falhas; comunicados inativos, expirados ou antigos são ignorados.",
-    "[Controle] É possível desativar apenas estes comunicados definindo avisosOficiais: false no config-all.json, sem afetar avisos de atualização.",
-    "[Desempenho] Verificação leve, com controle de concorrência, tamanho de resposta limitado e nenhum upload de mídia."
+    "[Melhoria] docs: publicar aviso oficial de pausa nas atualizações",
+    "A versão 10.2.43 já está disponível para atualização.",
+    "Avisos atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "Avisos oficiais do criador",
-  "notice": "Nova função: comunicados de Dylan Modz chegam automaticamente no privado do dono, sem precisar atualizar a cada novo aviso.",
+  "type": "Melhoria",
+  "title": "docs: publicar aviso oficial de pausa nas atualizações",
+  "notice": "A versão 10.2.43 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/avisos.js",
-      "gitSha": "eeb9dbb21cff7b3e78eaf1dd7e2f55228be1249e",
-      "sha256": "",
-      "size": 4854
-    },
-    {
-      "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "ea3b038a1437572dfbb277c5cf504d2f7cf54285",
-      "sha256": "",
-      "size": 43061
-    },
-    {
-      "path": "package.json",
-      "gitSha": "d39f0054eb82c59fe94b2f7953d982b1acbe3a1f",
-      "sha256": "",
-      "size": 1164
+      "path": "DADOS_TOKITO/INFO_DADOS/avisos.json",
+      "sha256": "9aa4772dda9413807d52b09736776ed96694921c6ef5a89a8bac475e106e4b38",
+      "size": 795
     }
   ],
   "releases": [
@@ -4010,6 +3994,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-14T12:57:18.924Z"
+    },
+    {
+      "version": "10.2.43",
+      "fromVersion": "10.2.42",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "docs: publicar aviso oficial de pausa nas atualizações",
+      "notice": "A versão 10.2.43 já está disponível para atualização.",
+      "changelog": [
+        "Avisos atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/avisos.json",
+          "sha256": "9aa4772dda9413807d52b09736776ed96694921c6ef5a89a8bac475e106e4b38",
+          "size": 795
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-14T13:10:42.675Z"
     }
   ],
   "mode": "incremental",
