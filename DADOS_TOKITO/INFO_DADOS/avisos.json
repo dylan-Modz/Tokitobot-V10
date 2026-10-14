@@ -1,5 +1,13 @@
 {
   "bot": "tokito-v10",
   "schema": 1,
-  "avisos": []
+  "avisos": [
+    {
+      "id": "pausa-atualizacoes-2026-10-14",
+      "titulo": "Pausa nas atualizações",
+      "mensagem": "Salve, tropa! Aqui é o Dylan Modz.\n\nPassando pra avisar que irei dar uma pausa nas atualizações do Tokito Bot V10 e da Tokito APIs. Vou ficar um tempo OFF, então, durante esse período, não teremos novas atualizações.\n\nCaso aconteça alguma falha no bot, no site ou qualquer outro problema, vou deixar abaixo os contatos dos responsáveis pelo suporte.\n\n🛠️ SUPORTE\n\nAdrenis\n📱 +55 34 9811-9617\n\nYoshiru\n📱 +55 27 98120-6043\n\nAgradeço a todos que acompanham e apoiam meus projetos. Em breve estarei de volta! 💙",
+      "publicadoEm": "2026-10-14T13:05:00.000Z",
+      "ativo": true
+    }
+  ]
 }
