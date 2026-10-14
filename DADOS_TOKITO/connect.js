@@ -36,6 +36,7 @@ const modulos = require('./sistemas/modulos.js')
 const detector = require('./detector.js')
 const qrcodeTerminal = require('qrcode-terminal')
 const dadosSistema = require('./sistemas/dados.js')
+const avisosOficiais = require('./sistemas/avisos.js')
 const autoInativo = require('./sistemas/autoinativo.js')
 const donoSistema = require('./sistemas/dono.js')
 const antiNuke = require('./sistemas/nuke.js')
@@ -1309,11 +1310,13 @@ if (runtimeSub.isSubBot) {
   sucesso(`${NomeDoBot} conectado com sucesso.`)
   console.log('')
   iniciarAvisosUpdate(tokito)
+  avisosOficiais.iniciar(tokito)
   await sistemaSub?.iniciar(tokito).catch(error => erroSistema('Erro ao iniciar sistema de Sub Bots', error))
 }
 break
 
 case 'close':
+avisosOficiais.pausar(tokito)
 // Durante o primeiro pareamento do Sub Bot ainda não existe uma sessão registrada.
 // Alguns fechamentos transitórios chegam como 401; eles não devem ser tratados como logout definitivo.
 if (runtimeSub.isSubBot && !state.creds.registered) {

@@ -1,34 +1,41 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.41",
+  "version": "10.2.42",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-14T01:02:19.756Z",
+  "publishedAt": "2026-10-14T12:57:18.924Z",
   "changelog": [
-    "[Correção] Verificador automático agora consulta novidades a cada 1 minuto, com checagem rápida após o WhatsApp conectar.",
-    "[Correção] Falhas de consulta ou envio do aviso deixam de ser ocultadas e aparecem no terminal sem mensagens repetitivas.",
-    "[Confiabilidade] Notificação é registrada somente depois de o envio pelo WhatsApp retornar com sucesso; falhas são tentadas novamente.",
-    "[Proteção] Controle impede verificações simultâneas e notificações repetidas da mesma versão.",
-    "[Compatibilidade] O update check, update info e update start continuam funcionando normalmente."
+    "[Avisos Oficiais] Novo sistema de comunicados do criador, independentes das atualizações do bot.",
+    "[Automação] Cada Tokito consulta avisos.json no GitHub a cada 5 minutos e após conectar, enviando novidades no privado do seu próprio dono.",
+    "[Privacidade] Nenhum número de dono é enviado ao criador: o próprio bot faz a entrega e guarda os IDs já enviados em arquivo local protegido.",
+    "[Confiabilidade] Avisos não se repetem e são tentados novamente após falhas; comunicados inativos, expirados ou antigos são ignorados.",
+    "[Controle] É possível desativar apenas estes comunicados definindo avisosOficiais: false no config-all.json, sem afetar avisos de atualização.",
+    "[Desempenho] Verificação leve, com controle de concorrência, tamanho de resposta limitado e nenhum upload de mídia."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Avisos automáticos de atualização",
-  "notice": "Notificação mais rápida e confiável, com novas tentativas e avisos de falha no terminal.",
+  "type": "Novidade",
+  "title": "Avisos oficiais do criador",
+  "notice": "Nova função: comunicados de Dylan Modz chegam automaticamente no privado do dono, sem precisar atualizar a cada novo aviso.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "49bc1ce7c23ffc074e968b9caf83cafd29dabdca",
+      "path": "DADOS_TOKITO/sistemas/avisos.js",
+      "gitSha": "eeb9dbb21cff7b3e78eaf1dd7e2f55228be1249e",
       "sha256": "",
-      "size": 42943
+      "size": 4854
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "gitSha": "ea3b038a1437572dfbb277c5cf504d2f7cf54285",
+      "sha256": "",
+      "size": 43061
     },
     {
       "path": "package.json",
-      "gitSha": "464c727a912f00419e90cf9365ad0fa756d3733b",
+      "gitSha": "d39f0054eb82c59fe94b2f7953d982b1acbe3a1f",
       "sha256": "",
       "size": 1164
     }
@@ -3964,16 +3971,55 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-14T01:02:19.756Z"
+    },
+    {
+      "version": "10.2.42",
+      "fromVersion": "10.2.41",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "Avisos oficiais do criador",
+      "notice": "Nova função: comunicados de Dylan Modz chegam automaticamente no privado do dono, sem precisar atualizar a cada novo aviso.",
+      "changelog": [
+        "[Avisos Oficiais] Novo sistema de comunicados do criador, independentes das atualizações do bot.",
+        "[Automação] Cada Tokito consulta avisos.json no GitHub a cada 5 minutos e após conectar, enviando novidades no privado do seu próprio dono.",
+        "[Privacidade] Nenhum número de dono é enviado ao criador: o próprio bot faz a entrega e guarda os IDs já enviados em arquivo local protegido.",
+        "[Confiabilidade] Avisos não se repetem e são tentados novamente após falhas; comunicados inativos, expirados ou antigos são ignorados.",
+        "[Controle] É possível desativar apenas estes comunicados definindo avisosOficiais: false no config-all.json, sem afetar avisos de atualização.",
+        "[Desempenho] Verificação leve, com controle de concorrência, tamanho de resposta limitado e nenhum upload de mídia."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/avisos.js",
+          "gitSha": "eeb9dbb21cff7b3e78eaf1dd7e2f55228be1249e",
+          "sha256": "",
+          "size": 4854
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "ea3b038a1437572dfbb277c5cf504d2f7cf54285",
+          "sha256": "",
+          "size": 43061
+        },
+        {
+          "path": "package.json",
+          "gitSha": "d39f0054eb82c59fe94b2f7953d982b1acbe3a1f",
+          "sha256": "",
+          "size": 1164
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-14T12:57:18.924Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.40",
+  "fromVersion": "10.2.41",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.41"
+  "publicVersion": "10.2.42"
 }
