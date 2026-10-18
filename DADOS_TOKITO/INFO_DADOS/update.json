@@ -1,141 +1,135 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.47",
+  "version": "10.2.48",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-18T22:37:15.468Z",
+  "publishedAt": "2026-10-18T23:16:54.249Z",
   "changelog": [
-    "[Stone WPP] 16 comandos novos com plugins independentes nas categorias admin e dono.",
-    "[Mensagens] Fixar/desfixar mensagens; estrela; remover estrela; editar e apagar somente para o bot.",
-    "[Canais e chamadas] Reagir a publicações, consultar seguidores e criar links de chamadas.",
-    "[Etiquetas] Etiquetar conversas e mensagens, com opção para remover etiquetas.",
-    "[Grupos] Rejeitar solicitações pelo sistema de aprovação existente e configurar mensagens temporárias.",
-    "[Conta] Definir rótulo de membro e consultar privacidade e quantidade de contatos bloqueados.",
-    "[Segurança] Permissões de dono/administrador e verificações de mensagem citada; comandos existentes preservados.",
-    "[Atualizador] Aviso automático ao dono enviado como texto simples, sem metadados extras de canal; monitor periódico preservado."
+    "[Organização] 16 comandos individuais, organizados diretamente em plugins/admin e plugins/dono, sem arquivo central de recursos.",
+    "[Mensagens] Respostas padronizadas com os modelos do Tokito V10, sem avisos da biblioteca.",
+    "[Apagar para mim] Removida a exigência de timestamp digitado; usa o registro de horário original de mensagens recebidas.",
+    "[Segurança] Preservadas as validações de dono e administradores e o sistema de solicitações existente.",
+    "[Limpeza] Removido DADOS_TOKITO/sistemas/stone-recursos.js sem afetar os módulos principais.",
+    "[Versão] Atualização para 10.2.48 com manifesto incremental dos arquivos alterados."
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/sistemas/stone-recursos.js"
+  ],
   "archiveSha256": "",
-  "type": "Novos comandos",
-  "title": "16 comandos da Stone WPP no Tokito V10",
-  "notice": "A versão 10.2.47 está disponível com 16 recursos oficiais da Stone WPP para mensagens, canais, grupos, etiquetas e conta.",
+  "type": "Correção",
+  "title": "Organização dos 16 comandos e correção do apagarme",
+  "notice": "Tokito Bot V10.2.48 disponível: comandos independentes, mensagens padronizadas e correção do apagarme.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "gitSha": "82dea434af9c101017c7dcbbc3fdbe2310d5b80a",
-      "sha256": "9a6150c82da22cecba435613cd11f074063781be291ddf72dfd4f02e1fe6ed0a",
-      "size": 1166
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/stone-recursos.js",
-      "gitSha": "f84cb5215c4b39ca26e9ae9f9788533cd942eaf9",
-      "sha256": "841771f157070961e0617de8755872d52f67212af16159e650da856878f939d4",
-      "size": 11314
-    },
-    {
       "path": "DADOS_TOKITO/plugins/admin/fixar.js",
-      "gitSha": "6d1ef88a272a0c5e33e1e49a2d4d35870b8bca53",
-      "sha256": "e339cf3f11f1031ace06b3d8b0aea8933a56a4b3c220065180d690e0a4ca9f6a",
-      "size": 1479
+      "gitSha": "7ca6f5846101b2f8f0a70ec6c8c182e053a33762",
+      "sha256": "",
+      "size": 3518
     },
     {
       "path": "DADOS_TOKITO/plugins/admin/desfixar.js",
-      "gitSha": "0bd5974531f60717c402bfac320d89920241c1e8",
-      "sha256": "9746eeb0d0c4ff066ba04600e135e84e5c5f2625c482bfdee97a6ef0048a5c89",
-      "size": 1474
+      "gitSha": "fde78a77867e41c363dc882035a70ac311288fd1",
+      "sha256": "",
+      "size": 3325
     },
     {
       "path": "DADOS_TOKITO/plugins/admin/rejeitarpedido.js",
-      "gitSha": "5aee6093c45a193a63b50c839bd3550130c3c3cb",
-      "sha256": "65a01daf6eef663b7b105545409fa3596f5bf8d2d325509a25aca9925635067e",
-      "size": 1506
+      "gitSha": "b2d96baf0ea5d56db2736e3639a362be4e7cbb9e",
+      "sha256": "",
+      "size": 2843
     },
     {
       "path": "DADOS_TOKITO/plugins/admin/tempmsg.js",
-      "gitSha": "0f0304ae6eff30c63efac3c8f6c1695de62426ef",
-      "sha256": "74920b9398e0cd9db8d2987f4761dc1a53f3027881f4dbda635b16f8060620d4",
-      "size": 1478
+      "gitSha": "68d2c423386f99e20f3aa6e87d342e65a023dd03",
+      "sha256": "",
+      "size": 2753
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/estrela.js",
-      "gitSha": "6cd52bfa3a923719979fa6a2dec90191065bc106",
-      "sha256": "fd760be3cdb84d4a2b0bcc2dad1ce75c805e5fcb02aa63361faa248da50040ea",
-      "size": 1474
+      "gitSha": "308092cdcfa33e918ec1296a0ceff06b67f3a359",
+      "sha256": "",
+      "size": 3254
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/tirarestrela.js",
-      "gitSha": "f7ed6be815878aa6c7dd488f24c36685cd0d210c",
-      "sha256": "b094707543390b0b4cf29caed37131f7a5176e51548afb268f57308027159236",
-      "size": 1488
+      "gitSha": "3de27f3ec4c54e9313908ed1c127550997441cb6",
+      "sha256": "",
+      "size": 3278
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/editarmsg.js",
-      "gitSha": "2639b0da9048731fc3621eb92c8bbed8da2c0860",
-      "sha256": "e9d5a12a919f77a840223df011800dd5ce04f217a0ca735634eac7e777d1ff60",
-      "size": 1496
+      "gitSha": "92a896c0f141ca1fd160e660cf11891cdf288225",
+      "sha256": "",
+      "size": 3531
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/apagarme.js",
-      "gitSha": "38c4cc60a912af7840d29383660628795cf512a4",
-      "sha256": "0a439ba37e005712204190c7a5f2214252b67772584964b64da61f1796d13c36",
-      "size": 1493
+      "gitSha": "73f16dfd6336e6e84188bd99e7e5012f20ea805f",
+      "sha256": "",
+      "size": 4193
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/reacaocanal.js",
-      "gitSha": "7c456ecfb8f8b9728ca01fff5d6c344b7de12c64",
-      "sha256": "b011dc5e5ccc60a2a318dc72bfecceb2b52db56deede320ee8a20e67a7d24e2c",
-      "size": 1486
+      "gitSha": "b0b4cb5aa1eb35a670f0ccb66ff7f5f5fcf3c168",
+      "sha256": "",
+      "size": 3630
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/seguidores.js",
-      "gitSha": "1a6f9a36d6c8795b635e54697090c7a087ad4ef0",
-      "sha256": "db18ceb15dd002a8c27d18feb0103bf72f4ecbdad4b2f57f833630672cad2498",
-      "size": 1482
+      "gitSha": "cf4bb9e0b952ee666fbf5f753921ac0d5e87085c",
+      "sha256": "",
+      "size": 3557
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/linkchamada.js",
-      "gitSha": "66d7d85820fb612d849506a5298da46b50e9360f",
-      "sha256": "0d519e7ea22395c051a4c1fe938f6581cba8a5f30bca427b845f3230d4157226",
-      "size": 1478
+      "gitSha": "bbf0816346854f7bbabdea59cb02f9efa25b98d7",
+      "sha256": "",
+      "size": 2718
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/etiquetachat.js",
-      "gitSha": "f2c7bce8eee707ecb7867b63e4048b1223cd798c",
-      "sha256": "8eba06dae0d92b80e02d3e3df65783e0e8a4373543b5c79228c1eccb6779d26e",
-      "size": 1499
+      "gitSha": "9da0600a6fb3605a8b2c11c550e4cdd84116c519",
+      "sha256": "",
+      "size": 2721
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/etiquetamsg.js",
-      "gitSha": "9a9b60984c06fd2fd1f5b9999381a57a7f1db630",
-      "sha256": "9aded9b99dfe307c069c21355b42738b0dab466a99bf8e5e14e5206a05a340d5",
-      "size": 1498
+      "gitSha": "ff6c15496d6729c76b9db03fb5160815bd91ca9e",
+      "sha256": "",
+      "size": 3706
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/rotulomembro.js",
-      "gitSha": "a810fc3e3258a47771226a06817bdfae9b6faa12",
-      "sha256": "d8621eaf126dcc3680bd40d21e66809a14d1a20a77cb757f75f1d491c02515df",
-      "size": 1488
+      "gitSha": "544d2d2d878824bfaad282518071e05c2067b4e5",
+      "sha256": "",
+      "size": 2492
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/privacidade.js",
-      "gitSha": "2223c6d3eb9b1b5310e3285d4b807877f7e88b8e",
-      "sha256": "984c487a804b3ef975aefdcf23fbd91d1912ff0c2eaa0476c1a72905b001b744",
-      "size": 1475
+      "gitSha": "655a17a91b50fa1103bb45cd08656b7d0ef3c4f6",
+      "sha256": "",
+      "size": 2745
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/bloqueados.js",
-      "gitSha": "a9909c709622432344578dd8d126d93d7a81f588",
-      "sha256": "70f31cdf7650536ab28d216ebd1a70e288e0e0e17bb77bee14266288dc729f14",
-      "size": 1467
+      "gitSha": "f00095190781f4cab2f8f5862825f4973dababb3",
+      "sha256": "",
+      "size": 2453
     },
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "77a808690c0ea0f6c9eabca0699e58add20b961e",
-      "sha256": "3647191554be901616b261b95b7e3c08e38b3932380d74d1e4f23ed8de269d14",
-      "size": 42826
+      "path": "tokito.js",
+      "gitSha": "080ac2a710991571d874e294097bd2ab69d394be",
+      "sha256": "",
+      "size": 54226
+    },
+    {
+      "path": "package.json",
+      "gitSha": "bd6f04724e25da32211badfd7518f8e76887c5d3",
+      "sha256": "",
+      "size": 1166
     }
   ],
   "releases": [
@@ -4637,6 +4631,137 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-18T22:37:15.468Z"
+    },
+    {
+      "version": "10.2.48",
+      "fromVersion": "10.2.47",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Organização dos 16 comandos e correção do apagarme",
+      "notice": "Tokito Bot V10.2.48 disponível: comandos independentes, mensagens padronizadas e correção do apagarme.",
+      "changelog": [
+        "[Organização] 16 comandos individuais, organizados diretamente em plugins/admin e plugins/dono, sem arquivo central de recursos.",
+        "[Mensagens] Respostas padronizadas com os modelos do Tokito V10, sem avisos da biblioteca.",
+        "[Apagar para mim] Removida a exigência de timestamp digitado; usa o registro de horário original de mensagens recebidas.",
+        "[Segurança] Preservadas as validações de dono e administradores e o sistema de solicitações existente.",
+        "[Limpeza] Removido DADOS_TOKITO/sistemas/stone-recursos.js sem afetar os módulos principais.",
+        "[Versão] Atualização para 10.2.48 com manifesto incremental dos arquivos alterados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/fixar.js",
+          "gitSha": "7ca6f5846101b2f8f0a70ec6c8c182e053a33762",
+          "sha256": "",
+          "size": 3518
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/desfixar.js",
+          "gitSha": "fde78a77867e41c363dc882035a70ac311288fd1",
+          "sha256": "",
+          "size": 3325
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/rejeitarpedido.js",
+          "gitSha": "b2d96baf0ea5d56db2736e3639a362be4e7cbb9e",
+          "sha256": "",
+          "size": 2843
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/tempmsg.js",
+          "gitSha": "68d2c423386f99e20f3aa6e87d342e65a023dd03",
+          "sha256": "",
+          "size": 2753
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/estrela.js",
+          "gitSha": "308092cdcfa33e918ec1296a0ceff06b67f3a359",
+          "sha256": "",
+          "size": 3254
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/tirarestrela.js",
+          "gitSha": "3de27f3ec4c54e9313908ed1c127550997441cb6",
+          "sha256": "",
+          "size": 3278
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/editarmsg.js",
+          "gitSha": "92a896c0f141ca1fd160e660cf11891cdf288225",
+          "sha256": "",
+          "size": 3531
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/apagarme.js",
+          "gitSha": "73f16dfd6336e6e84188bd99e7e5012f20ea805f",
+          "sha256": "",
+          "size": 4193
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/reacaocanal.js",
+          "gitSha": "b0b4cb5aa1eb35a670f0ccb66ff7f5f5fcf3c168",
+          "sha256": "",
+          "size": 3630
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/seguidores.js",
+          "gitSha": "cf4bb9e0b952ee666fbf5f753921ac0d5e87085c",
+          "sha256": "",
+          "size": 3557
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/linkchamada.js",
+          "gitSha": "bbf0816346854f7bbabdea59cb02f9efa25b98d7",
+          "sha256": "",
+          "size": 2718
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/etiquetachat.js",
+          "gitSha": "9da0600a6fb3605a8b2c11c550e4cdd84116c519",
+          "sha256": "",
+          "size": 2721
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/etiquetamsg.js",
+          "gitSha": "ff6c15496d6729c76b9db03fb5160815bd91ca9e",
+          "sha256": "",
+          "size": 3706
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/rotulomembro.js",
+          "gitSha": "544d2d2d878824bfaad282518071e05c2067b4e5",
+          "sha256": "",
+          "size": 2492
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/privacidade.js",
+          "gitSha": "655a17a91b50fa1103bb45cd08656b7d0ef3c4f6",
+          "sha256": "",
+          "size": 2745
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/bloqueados.js",
+          "gitSha": "f00095190781f4cab2f8f5862825f4973dababb3",
+          "sha256": "",
+          "size": 2453
+        },
+        {
+          "path": "tokito.js",
+          "gitSha": "080ac2a710991571d874e294097bd2ab69d394be",
+          "sha256": "",
+          "size": 54226
+        },
+        {
+          "path": "package.json",
+          "gitSha": "bd6f04724e25da32211badfd7518f8e76887c5d3",
+          "sha256": "",
+          "size": 1166
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/sistemas/stone-recursos.js"
+      ],
+      "required": false,
+      "publishedAt": "2026-10-18T23:16:54.249Z"
     }
   ],
   "mode": "incremental",

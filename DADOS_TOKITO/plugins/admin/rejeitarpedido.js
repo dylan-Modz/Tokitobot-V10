@@ -28,20 +28,61 @@
  * ============================================================
  */
 
-const dylan = require('../../database/lib/comandos')
-const stone = require('../../sistemas/stone-recursos')
+
+const dylan = require('../../database/lib/comandos');
 
 dylan.setCommand({
-nome: 'rejeitarpedido',
-comandos: ['rejeitarpedido'],
-categoria: 'admin',
-info: {
-descricao: 'Rejeita solicitação de entrada no grupo',
-uso: 'rejeitarpedido [jid]',
-permissao: 'ADM',
-categoria: 'admin'
-},
-async executar(ctx) {
-return stone.executar(ctx, 'rejeitarpedido')
-}
-})
+  nome: 'rejeitarpedido',
+  comandos: ['rejeitarpedido'],
+  categoria: 'admin',
+  info: {
+    descricao: 'Rejeita uma solicitação de entrada pendente.',
+    uso: 'rejeitarpedido [jid]',
+    permissao: 'ADM'
+  },
+
+  async executar(ctx) {
+    if (!ctx.isGroup) return ctx.reply(ctx.mess.sogrupo());
+    if (!ctx.isGroupAdmins && !ctx.SoDono) return ctx.reply(ctx.mess.soadm());
+    if (!ctx.isBotGroupAdmins) return ctx.reply(ctx.mess.botadm());
+
+    try {
+      const aprovacao = ctx.funcoes?.aprovacao;
+      if (typeof aprovacao?.decidir !== 'function') {
+        return ctx.reply(ctx.mess.padraoErro({
+          titulo: 'REJEITAR PEDIDO',
+          descricao: 'O sistema de solicitações está indisponível.'
+        }));
+      }
+
+      const resultado = await aprovacao.decidir({
+        tokito: ctx.tokito,
+        grupo: ctx.from,
+        alvo: String(ctx.q || '').trim(),
+        acao: 'reject'
+      });
+
+      if (resultado?.vazio || resultado?.indisponivel) {
+        return ctx.reply(ctx.mess.padraoAviso({
+          emoji: '📭',
+          titulo: 'SOLICITAÇÕES',
+          descricao: resultado.vazio
+            ? 'Nenhuma solicitação pendente.'
+            : 'Solicitação não encontrada.'
+        }));
+      }
+
+      return ctx.reply(ctx.mess.padraoSucesso({
+        emoji: '✅',
+        titulo: 'PEDIDO REJEITADO',
+        descricao: 'Solicitação rejeitada com sucesso.'
+      }));
+    } catch (error) {
+      console.log('[REJEITAR PEDIDO]', error?.message || error);
+      return ctx.reply(ctx.mess.padraoErro({
+        titulo: 'REJEITAR PEDIDO',
+        descricao: 'Não foi possível rejeitar a solicitação.'
+      }));
+    }
+  }
+});

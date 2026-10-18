@@ -28,20 +28,50 @@
  * ============================================================
  */
 
-const dylan = require('../../database/lib/comandos')
-const stone = require('../../sistemas/stone-recursos')
+
+
+const dylan = require('../../database/lib/comandos');
 
 dylan.setCommand({
-nome: 'rotulomembro',
-comandos: ['rotulomembro'],
-categoria: 'dono',
-info: {
-descricao: 'Altera rótulo da conta no grupo',
-uso: 'rotulomembro texto',
-permissao: 'DONO',
-categoria: 'dono'
-},
-async executar(ctx) {
-return stone.executar(ctx, 'rotulomembro')
-}
-})
+  nome: 'rotulomembro',
+  comandos: ['rotulomembro'],
+  categoria: 'dono',
+  info: {
+    descricao: 'Atualiza o rótulo da conta do bot no grupo.',
+    uso: 'rotulomembro texto',
+    permissao: 'DONO'
+  },
+
+  async executar(ctx) {
+    if (!ctx.SoDono) return ctx.reply(ctx.mess.onlyOwner());
+
+    try {
+      if (!ctx.isGroup) return ctx.reply(ctx.mess.sogrupo());
+      
+      const rotulo = String(ctx.q || '').trim();
+      if (!rotulo || rotulo.length > 30) {
+        return ctx.reply(ctx.mess.padraoUso({
+          emoji: '🪪', titulo: 'RÓTULO DE MEMBRO',
+          uso: ctx.prefix + 'rotulomembro seu texto',
+          descricao: 'Informe até 30 caracteres.'
+        }));
+      }
+      
+      if (typeof ctx.tokito.updateMemberLabel !== 'function') {
+        throw new Error('Método de rótulo indisponível');
+      }
+      
+      await ctx.tokito.updateMemberLabel(ctx.from, rotulo);
+      return ctx.reply(ctx.mess.padraoSucesso({
+        emoji: '🪪', titulo: 'RÓTULO DE MEMBRO',
+        descricao: 'Rótulo atualizado para: ' + rotulo
+      }));
+    } catch (error) {
+      console.log('[ROTULOMEMBRO]', error?.message || error);
+      return ctx.reply(ctx.mess.padraoErro({
+        titulo: 'RÓTULO DE MEMBRO',
+        descricao: 'Não foi possível concluir essa ação.'
+      }));
+    }
+  }
+});
