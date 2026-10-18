@@ -258,6 +258,9 @@ aviso('Notificação de atualização: ' + motivo)
 }
 
 const verificarAvisoUpdate = async tokito => {
+// Os Sub Bots dividem o estado de atualizações com o Tokito principal.
+// Apenas o principal pode marcar uma versão como notificada.
+if (runtimeSub.isSubBot) return false
 if (global.__TOKITO_UPDATE_NOTICE_BUSY__) return false
 global.__TOKITO_UPDATE_NOTICE_BUSY__ = true
 try {
@@ -306,6 +309,7 @@ global.__TOKITO_UPDATE_NOTICE_BUSY__ = false
 }
 
 const iniciarAvisosUpdate = tokito => {
+if (runtimeSub.isSubBot) return
 global.__TOKITO_UPDATE_SOCKET__ = tokito
 // Verificação rápida após conectar; se o envio falhar, o próximo ciclo tenta novamente.
 setTimeout(() => {
@@ -1090,9 +1094,8 @@ info(`${NomeDoBot} está conectando ao WhatsApp...`)
 break
 case 'open':
 global.startTime = Math.floor(Date.now() / 1000)
-// Inicia os monitores imediatamente: nenhum upload ou consulta do WhatsApp
-// pode bloquear o aviso de uma nova versão ao dono.
-iniciarAvisosUpdate(tokito)
+// O aviso de atualização pertence ao bot principal, nunca a um Sub Bot.
+if (!runtimeSub.isSubBot) iniciarAvisosUpdate(tokito)
 avisosOficiais.iniciar(tokito)
 reconectando = false
 metodo = null
