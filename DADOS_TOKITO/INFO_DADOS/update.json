@@ -1,42 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.45",
+  "version": "10.2.46",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-14T14:34:47.309Z",
+  "publishedAt": "2026-10-18T18:55:58.527Z",
   "changelog": [
-    "[Correção] Verificação automática de atualizações começa assim que o WhatsApp conecta, antes de qualquer carregamento de imagem, perfil ou grupos.",
-    "[Desempenho] Preparação da mídia do menu e ajustes de presença/status não seguram mais o início do monitor automático.",
-    "[Diagnóstico] Novo comando update diag para descobrir a versão detectada, fonte da atualização, status do monitor, último aviso e falhas.",
-    "[Confiabilidade] Ao desconectar, o monitor deixa de usar a sessão antiga do WhatsApp e retoma com a conexão nova.",
-    "[Continuidade] Mantém o comando wame com foto da versão 10.2.44 e os comunicados oficiais."
+    "[Melhoria] Avisos: comunica migração do Tokito V10 para Stone WPP às 18h",
+    "A versão 10.2.46 já está disponível para atualização.",
+    "Avisos atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Avisos automáticos e diagnóstico do Update",
-  "notice": "O monitor de atualizações inicia imediatamente e agora há um diagnóstico com update diag.",
+  "type": "Melhoria",
+  "title": "Avisos: comunica migração do Tokito V10 para Stone WPP às 18h",
+  "notice": "A versão 10.2.46 já está disponível para atualização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "7394cdec42ee587f00d79562c98adf651346f8cc",
-      "sha256": "",
-      "size": 43707
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/update.js",
-      "gitSha": "c9bae5d4d3b182d54e859e5b513ba4f827c228d8",
-      "sha256": "",
-      "size": 6565
-    },
-    {
-      "path": "package.json",
-      "gitSha": "d933bfc35cf88a4e39369fe675035452b9823635",
-      "sha256": "",
-      "size": 1164
+      "path": "DADOS_TOKITO/INFO_DADOS/avisos.json",
+      "sha256": "935985690c89b8dbcaf8d39c345ae91468902ac33b7c8f7d01f40f329d6c6b0e",
+      "size": 3721
     }
   ],
   "releases": [
@@ -4099,6 +4084,27 @@
       "delete": [],
       "required": true,
       "publishedAt": "2026-10-14T14:34:47.309Z"
+    },
+    {
+      "version": "10.2.46",
+      "fromVersion": "10.2.45",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Avisos: comunica migração do Tokito V10 para Stone WPP às 18h",
+      "notice": "A versão 10.2.46 já está disponível para atualização.",
+      "changelog": [
+        "Avisos atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/avisos.json",
+          "sha256": "935985690c89b8dbcaf8d39c345ae91468902ac33b7c8f7d01f40f329d6c6b0e",
+          "size": 3721
+        }
+      ],
+      "delete": [],
+      "required": true,
+      "publishedAt": "2026-10-18T18:55:58.526Z"
     }
   ],
   "mode": "incremental",
