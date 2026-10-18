@@ -1052,7 +1052,7 @@ async function sendSnakeGame(
         "function"
     ) {
         throw new TypeError(
-            "Socket do Baileys inválido."
+            "Socket do Stone WPP inválido."
         );
     }
 

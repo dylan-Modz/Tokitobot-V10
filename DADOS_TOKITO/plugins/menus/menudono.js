@@ -44,7 +44,7 @@ with (ctx) {
 {
 if (!SoDono)
 return reply(mess.onlyOwner())
-await dylanModz(linguagem.menudono(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, baileysVersion), '🧊', [
+await dylanModz(linguagem.menudono(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion), '🧊', [
 {
 texto: mess.botaoMenuDownload(),
 id: `${prefix}menudown`

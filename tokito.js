@@ -29,15 +29,16 @@
  */
 
 if (require.main === module) {
-  require('./DADOS_TOKITO/database/lib/supervisor.js')
-    .main(process.argv.slice(2))
-    .catch(error => {
-      console.error(`[ ERRO - TOKITO ] - ${error?.message || error}`)
-      process.exit(1)
-    })
+require('./DADOS_TOKITO/database/lib/supervisor.js')
+.main(process.argv.slice(2))
+.catch(error => {
+console.error(`[ ERRO - TOKITO ] - ${error?.message || error}`)
+process.exit(1)
+})
 } else {
 const runtimeSub = require('./DADOS_TOKITO/sub/runtime.js')
-const { getContentType, jidNormalizedUser, proto, prepareWAMessageMedia, generateWAMessageFromContent, getFileBuffer, DLT_FL, getGroupAdmins, getMembros, getRandom, fs, path, os, colors, performance, linguagem, mess, axios, setting, nescessario, vip, caminhoVip, arquivo, pasta, fuso, sendVideoAsSticker, sendVideoAsSticker2, sendImageAsSticker2, sendImageAsSticker } = require('./DADOS_TOKITO/database/lib/exports.js')
+const { getContentType, jidNormalizedUser, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
+const { getFileBuffer, DLT_FL, getGroupAdmins, getMembros, getRandom, fs, path, os, colors, performance, linguagem, mess, axios, setting, nescessario, vip, caminhoVip, arquivo, pasta, fuso, sendVideoAsSticker, sendVideoAsSticker2, sendImageAsSticker2, sendImageAsSticker, cacheGp, refreshGp } = require('./DADOS_TOKITO/database/lib/exports.js')
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 const funcoes = require('./DADOS_TOKITO/sistemas/funcoes.js')
@@ -56,22 +57,16 @@ const fundos = require('./DADOS_TOKITO/sistemas/fundos')
 const comandos = () => [...new Set([...similar.casos(__filename), ...plugins.comandos()])]
 
 // Metadata em cache: nunca segura um comando quando já existe dado salvo.
-const cacheMetadataGrupos = global.__TOKITO_METADATA_CACHE__ ||= new Map()
-const atualizandoMetadataGrupos = global.__TOKITO_METADATA_REFRESH__ ||= new Set()
-const TEMPO_CACHE_METADATA = 10 * 60 * 1000
-const TIMEOUT_METADATA_INICIAL = 1200
+const tempoCache = 600000, esperaGp = 1200
 
-const atualizarMetadataFundo = (tokito, jid) => {
-if (!jid || atualizandoMetadataGrupos.has(jid))
-return
-
-atualizandoMetadataGrupos.add(jid)
-
+const atualizarGp = (tokito, jid) => {
+if (!jid || refreshGp.has(jid)) return
+refreshGp.add(jid)
 Promise.resolve()
 .then(() => tokito.groupMetadata(jid))
 .then(dados => {
 if (dados) {
-cacheMetadataGrupos.set(jid, {
+cacheGp.set(jid, {
 dados,
 tempo: Date.now()
 })
@@ -79,63 +74,95 @@ tempo: Date.now()
 })
 .catch(() => {})
 .finally(() => {
-atualizandoMetadataGrupos.delete(jid)
+refreshGp.delete(jid)
 })
 }
 
 const metadataSeguro = async (tokito, jid) => {
 const agora = Date.now()
-const salvo = cacheMetadataGrupos.get(jid)
-
+const salvo = cacheGp.get(jid)
 if (salvo?.dados) {
-if (agora - Number(salvo.tempo || 0) >= TEMPO_CACHE_METADATA)
-atualizarMetadataFundo(tokito, jid)
-
+if (agora - Number(salvo.tempo || 0) >= tempoCache) atualizarGp(tokito, jid)
 return salvo.dados
 }
-
 try {
-const dados = await Promise.race([
-tokito.groupMetadata(jid),
-new Promise((_, reject) =>
-setTimeout(() => reject(new Error('TIMEOUT_GROUP_METADATA')), TIMEOUT_METADATA_INICIAL)
-)
-])
-
+const dados = await Promise.race([tokito.groupMetadata(jid), new Promise((_, reject) => setTimeout(() => reject(new Error('TIMEOUT_GROUP_METADATA')), esperaGp))])
 if (dados) {
-cacheMetadataGrupos.set(jid, {
+cacheGp.set(jid, {
 dados,
 tempo: Date.now()
 })
 }
-
 return dados || null
-}
-catch {
-atualizarMetadataFundo(tokito, jid)
+} catch {
+atualizarGp(tokito, jid)
 return null
 }
 }
 ////////////////////////////////////////////////////////////////////////////////////
-const { modoAtivo: modoJogosAtivo, getAdivinheGame, saveAdivinheGame, removeAdivinheGame, criarAdivinheGame, enviarAdivinhe, getQuizGame, saveQuizGame, removeQuizGame, criarQuizGame, enviarQuiz, getForcaGame, saveForcaGame, removeForcaGame, criarForcaGame, enviarForca, getCacaGame, saveCacaGame, removeCacaGame, criarCacaGame, enviarCaca, getMinesGame, saveMinesGame, removeMinesGame, criarMinesGame, enviarMines, getVelhaGame, saveVelhaGame, removeVelhaGame, criarTabuleiroVelha, getDamaGame, saveDamaGame, removeDamaGame, criarTabuleiroDama, sameJid: mesmoJid, mention: mencionarJogo, enviarTexto: enviarTextoJogos } = funcoes.jogos
+const {
+modoAtivo: modoJogosAtivo,
+getAdivinheGame,
+saveAdivinheGame,
+removeAdivinheGame,
+criarAdivinheGame,
+enviarAdivinhe,
+getQuizGame,
+saveQuizGame,
+removeQuizGame,
+criarQuizGame,
+enviarQuiz,
+getForcaGame,
+saveForcaGame,
+removeForcaGame,
+criarForcaGame,
+enviarForca,
+getCacaGame,
+saveCacaGame,
+removeCacaGame,
+criarCacaGame,
+enviarCaca,
+getMinesGame,
+saveMinesGame,
+removeMinesGame,
+criarMinesGame,
+enviarMines,
+getVelhaGame,
+saveVelhaGame,
+removeVelhaGame,
+criarTabuleiroVelha,
+getDamaGame,
+saveDamaGame,
+removeDamaGame,
+criarTabuleiroDama,
+sameJid: mesmoJid,
+mention: mencionarJogo,
+enviarTexto: enviarTextoJogos
+} = funcoes.jogos
 ////////////////////////////////////////////////////////////////////////////////////
-const { NomeDoBot, ownerName, prefix: prefixGlobal, channel, channeldl, ownerNumber, CREDENTIALS_USER, API_URL, API_KEY_TOKITO } = runtimeSub.config()
+const {
+NomeDoBot,
+ownerName,
+prefix: prefixGlobal,
+channel,
+channeldl,
+ownerNumber,
+CREDENTIALS_USER,
+API_URL,
+API_KEY_TOKITO
+} = runtimeSub.isSubBot ? runtimeSub.config() : require('./DADOS_TOKITO/INFO_DADOS/config-all.json')
 ////////////////////////////////////////////////////////////////////////////////////
-if (!fs.existsSync(path.dirname(arquivo)))
-fs.mkdirSync(path.dirname(arquivo), { recursive: true })
+if (!fs.existsSync(path.dirname(arquivo))) fs.mkdirSync(path.dirname(arquivo), { recursive: true })
 
-if (!fs.existsSync(pasta))
-fs.mkdirSync(pasta, { recursive: true })
+if (!fs.existsSync(pasta)) fs.mkdirSync(pasta, { recursive: true })
 
-if (!fs.existsSync(arquivo))
-fs.writeFileSync(arquivo, JSON.stringify({}, null, 2))
+if (!fs.existsSync(arquivo)) fs.writeFileSync(arquivo, JSON.stringify({}, null, 2))
 
 const ler = () => {
 try {
 const dados = JSON.parse(fs.readFileSync(arquivo, 'utf8'))
 return dados && typeof dados === 'object' && !Array.isArray(dados) ? dados : {}
-}
-catch {
+} catch {
 return {}
 }
 }
@@ -146,8 +173,7 @@ const extrair = message => {
 let atual = message || {}
 for (let i = 0; i < 6; i++) {
 const proxima = atual?.ephemeralMessage?.message || atual?.viewOnceMessage?.message || atual?.viewOnceMessageV2?.message || atual?.viewOnceMessageV2Extension?.message || atual
-if (proxima === atual)
-break
+if (proxima === atual) break
 atual = proxima
 }
 return atual
@@ -155,14 +181,10 @@ return atual
 
 const apagar = midia => {
 try {
-if (!midia?.arquivo)
-return
+if (!midia?.arquivo) return
 const local = path.join(pasta, midia.arquivo)
-if (fs.existsSync(local))
-fs.unlinkSync(local)
-}
-catch {
-}
+if (fs.existsSync(local)) fs.unlinkSync(local)
+} catch {}
 }
 
 const agora = () => {
@@ -176,9 +198,7 @@ minute: '2-digit',
 hourCycle: 'h23'
 }).formatToParts(new Date())
 const dados = {}
-for (const parte of partes)
-if (parte.type !== 'literal')
-dados[parte.type] = parte.value
+for (const parte of partes) if (parte.type !== 'literal') dados[parte.type] = parte.value
 return {
 data: `${dados.year}-${dados.month}-${dados.day}`,
 hora: `${dados.hour}:${dados.minute}`
@@ -189,10 +209,8 @@ const enviar = async (tokito, jid, texto, midia) => {
 try {
 if (midia?.arquivo) {
 const local = path.join(pasta, midia.arquivo)
-
 if (fs.existsSync(local)) {
 const buffer = fs.readFileSync(local)
-
 if (midia.tipo === 'video')
 return await tokito.sendMessage(jid, {
 video: buffer,
@@ -200,50 +218,41 @@ mimetype: midia.mimetype || 'video/mp4',
 gifPlayback: true,
 caption: texto
 })
-
 if (midia.tipo === 'image')
 return await tokito.sendMessage(jid, {
 image: buffer,
 caption: texto
 })
-
 if (midia.tipo === 'audio') {
 await tokito.sendMessage(jid, {
 text: texto
 })
-
 return await tokito.sendMessage(jid, {
 audio: buffer,
 mimetype: midia.mimetype || 'audio/ogg; codecs=opus',
 ptt: midia.ptt === true
 })
 }
-
 if (midia.tipo === 'sticker') {
 await tokito.sendMessage(jid, {
 text: texto
 })
-
 return await tokito.sendMessage(jid, {
 sticker: buffer
 })
 }
 }
 }
-
 return await tokito.sendMessage(jid, {
 text: texto
 })
-}
-catch (error) {
-console.log(
-colors.red(`❌ Erro ao enviar aviso programado para ${jid}:`),
-modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes'
-)
-
-return tokito.sendMessage(jid, {
+} catch (error) {
+console.log(colors.red(`❌ Erro ao enviar aviso programado para ${jid}:`), modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
+return tokito
+.sendMessage(jid, {
 text: texto
-}).catch(() => null)
+})
+.catch(() => null)
 }
 }
 
@@ -259,8 +268,7 @@ return enviar(tokito, jid, mess.aberto(grupo.abrir, nome, total), grupo.abrirmid
 
 const processar = async () => {
 const tokito = global.socketGruposProgramadosTokito || global.tokito
-if (!tokito || global.executandoGruposProgramadosTokito)
-return
+if (!tokito || global.executandoGruposProgramadosTokito) return
 global.executandoGruposProgramadosTokito = true
 try {
 const grupos = ler()
@@ -270,13 +278,12 @@ const tarefas = []
 let mudou = false
 for (const jid of Object.keys(grupos)) {
 const grupo = grupos[jid]
-if (!grupo?.ativo)
-continue
+if (!grupo?.ativo) continue
 const fechar = grupo.fechar === horario.hora && grupo.ultimoFechamento !== chave
 const abrir = grupo.abrir === horario.hora && grupo.ultimaAbertura !== chave
-if (!fechar && !abrir)
-continue
-tarefas.push((async () => {
+if (!fechar && !abrir) continue
+tarefas.push(
+(async () => {
 try {
 if (fechar) {
 await tokito.groupSettingUpdate(jid, 'announcement')
@@ -296,21 +303,17 @@ avisar(tokito, jid, grupo, 'abrir').catch(error => {
 console.log(colors.red(`❌ Erro no aviso de abertura ${jid}:`), modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
 })
 }
-}
-catch (error) {
+} catch (error) {
 console.log(colors.red(`❌ Erro no grupo programado ${jid}:`), modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
 }
-})())
+})()
+)
 }
-if (tarefas.length)
-await Promise.allSettled(tarefas)
-if (mudou)
-salvar(grupos)
-}
-catch (error) {
+if (tarefas.length) await Promise.allSettled(tarefas)
+if (mudou) salvar(grupos)
+} catch (error) {
 console.log(colors.red('❌ Erro no sistema de grupos programados:'), modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
-}
-finally {
+} finally {
 global.executandoGruposProgramadosTokito = false
 }
 }
@@ -323,8 +326,7 @@ if (!global.intervaloGruposProgramadosTokito) {
 global.intervaloGruposProgramadosTokito = setInterval(() => {
 const executar = global.processarGruposProgramadosTokito
 if (typeof executar === 'function') {
-executar().catch(() => {
-})
+executar().catch(() => {})
 }
 }, 1000)
 }
@@ -332,14 +334,12 @@ executar().catch(() => {
 const iniciar = tokito => {
 global.socketGruposProgramadosTokito = tokito
 global.processarGruposProgramadosTokito = processar
-processar().catch(() => {
-})
+processar().catch(() => {})
 }
 
 const pastaGrupos = runtimeSub.groupsDir
 
-if (!fs.existsSync(pastaGrupos))
-fs.mkdirSync(pastaGrupos, { recursive: true })
+if (!fs.existsSync(pastaGrupos)) fs.mkdirSync(pastaGrupos, { recursive: true })
 
 const pathgroupjson = jid => path.join(pastaGrupos, `${jid}.json`)
 
@@ -349,8 +349,7 @@ const lerJson = (local, padrao) => {
 try {
 const dados = JSON.parse(fs.readFileSync(local, 'utf8'))
 return Array.isArray(dados) && dados.length ? dados : padrao
-}
-catch {
+} catch {
 salvarJson(local, padrao)
 return padrao
 }
@@ -359,8 +358,8 @@ return padrao
 // Evita o Anti-PV2 responder duas vezes quando a mesma mensagem chega em mais de um upsert.
 const antiPv2EmProcessamento = new Map()
 
-process.on('uncaughtException', function(err) {
-console.error((new Date).toUTCString() + ' uncaughtException:', modulos.sanitizarErro(err, [API_KEY_TOKITO]) || 'Erro sem detalhes')
+process.on('uncaughtException', function (err) {
+console.error(new Date().toUTCString() + ' uncaughtException:', modulos.sanitizarErro(err, [API_KEY_TOKITO]) || 'Erro sem detalhes')
 console.error(modulos.sanitizarErro(err?.stack || '', [API_KEY_TOKITO]))
 })
 
@@ -373,55 +372,46 @@ const from = info.key?.remoteJid
 const isGroup = from?.endsWith('@g.us')
 const isStatus = from === 'status@broadcast'
 const isNewsletter = String(from || '').endsWith('@newsletter')
-if (!from)
-continue
-
+if (!from) continue
 // Diagnóstico mínimo no ponto mais cedo possível do handler.
-// Se esta linha aparecer, a Baileys entregou a mensagem ao núcleo.
+// Se esta linha aparecer, a Stone WPP entregou a mensagem ao núcleo.
 if (!isStatus && process.env.TOKITO_DEBUG_RX === '1') {
 console.log(`[RX TOKITO] ${upsert?.type || 'sem-tipo'} | ${from} | ${info?.key?.id || 'sem-id'}`)
 }
-
 if (isStatus) {
 if (modulos.globalCfg().visualizarmsg) {
 try {
 await tokito.readMessages([info.key])
-}
-catch {
-}
+} catch {}
 }
 continue
 }
 const stub = info?.key?.isViewOnce === true
-if (!info.message && !stub)
-continue
-// Algumas builds/sessões da Baileys podem entregar mensagem ao vivo como `append`.
+if (!info.message && !stub) continue
+// Algumas builds/sessões da Stone WPP podem entregar mensagem ao vivo como `append`.
 // Não descartamos mais `append` cegamente: só ignoramos históricos realmente antigos.
 if (upsert.type === 'append' && !stub) {
-const tsBruto = Number(
-info?.messageTimestamp?.low ??
-info?.messageTimestamp ??
-0
-)
-
+const tsBruto = Number(info?.messageTimestamp?.low ?? info?.messageTimestamp ?? 0)
 if (tsBruto > 0) {
-const idadeMs = Date.now() - (tsBruto * 1000)
-
+const idadeMs = Date.now() - tsBruto * 1000
 // Histórico antigo/sincronização: ignora. Mensagem recente: processa normalmente.
-if (idadeMs > 2 * 60 * 1000)
-continue
+if (idadeMs > 2 * 60 * 1000) continue
 }
 }
-const mensagem = info.message?.ephemeralMessage?.message || info.message?.viewOnceMessage?.message || info.message?.viewOnceMessageV2?.message || info.message?.viewOnceMessageV2Extension?.message || info.message || {}
+const mensagem =
+info.message?.ephemeralMessage?.message ||
+info.message?.viewOnceMessage?.message ||
+info.message?.viewOnceMessageV2?.message ||
+info.message?.viewOnceMessageV2Extension?.message ||
+info.message ||
+{}
 const type = stub ? 'viewOnceStub' : getContentType(mensagem)
 const content = JSON.stringify(mensagem)
 const pushname = info.pushName || 'Usuário'
 if (modulos.globalCfg().visualizarmsg) {
 try {
 await tokito.readMessages([info.key])
-}
-catch {
-}
+} catch {}
 }
 function extrairTexto(message) {
 const paths = [
@@ -447,8 +437,7 @@ if (caminho.includes('paramsJson')) {
 try {
 const resposta = JSON.parse(value)
 return resposta?.id || resposta?.selectedId || resposta?.rowId || ''
-}
-catch {
+} catch {
 return ''
 }
 }
@@ -460,7 +449,10 @@ return ''
 ////////////////////////////////////////////////////////////////////////////////////
 var body = String(extrairTexto(mensagem) || '').trim()
 var Procurar_String = body
-var budy2 = body.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+var budy2 = body
+.toLowerCase()
+.normalize('NFD')
+.replace(/[\u0300-\u036f]/g, '')
 let prefix = runtimeSub.isSubBot ? String(runtimeSub.config().prefix || prefixGlobal) : prefixGlobal
 if (isGroup) {
 try {
@@ -469,102 +461,113 @@ if (fs.existsSync(arqPrefix)) {
 const raw = JSON.parse(fs.readFileSync(arqPrefix, 'utf8'))
 const gp = Array.isArray(raw) ? raw[0] : raw
 const f = gp?.funcoes || {}
-if (f.multiprefix === true && String(f.prefixGrupo || '').trim())
-prefix = String(f.prefixGrupo).trim()
+if (f.multiprefix === true && String(f.prefixGrupo || '').trim()) prefix = String(f.prefixGrupo).trim()
 }
-}
-catch {
-}
+} catch {}
 }
 global.prefix = prefix
 let isCmd = body.startsWith(prefix)
-let args = isCmd ? body.slice(prefix.length).trim().split(/[ \t]+/) : body.split(/[ \t]+/)
-let command = isCmd ? String(args.shift() || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ç/g, 'c') : null
+let args = isCmd
+? body
+  .slice(prefix.length)
+  .trim()
+  .split(/[ \t]+/)
+: body.split(/[ \t]+/)
+let command = isCmd
+? String(args.shift() || '')
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/[\u0300-\u036f]/g, '')
+  .replace(/ç/g, 'c')
+: null
 let q = args.join(' ')
 var budy = type === 'conversation' ? mensagem?.conversation : type === 'extendedTextMessage' ? mensagem?.extendedTextMessage?.text : ''
-var PR_String = Procurar_String.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+var PR_String = Procurar_String.toLowerCase()
+.normalize('NFD')
+.replace(/[\u0300-\u036f]/g, '')
 let groupMetadata = ''
 if (isGroup) {
-groupMetadata = await metadataSeguro(tokito, from) || ''
+groupMetadata = (await metadataSeguro(tokito, from)) || ''
 }
 const groupName = isGroup ? groupMetadata?.subject || '' : ''
 const groupDesc = isGroup ? groupMetadata?.desc || '' : ''
 const groupMembers = isGroup ? groupMetadata?.participants || [] : []
 const dirGroup = isGroup ? pathgroupjson(from) : ''
-const data_IDGP = isGroup ? [
-{
-name: groupName || 'Grupo',
-groupId: from,
-funcoes: {
-aprovacao: false,
-autoaprovacao: false,
-antilink: {
-ativo: false,
-nivel: null
-},
-x9: false,
-antipay: false,
-antibot: false,
-antivideo: false,
-antifoto: false,
-antivisu: false,
-antisticker: false,
-antifloodsticker: false,
-anticontato: false,
-antilocalizacao: false,
-antidocumento: false,
-antiaudio: false,
-antispam: false,
-antistatus: false,
-antimarcacao: false,
-antifake: false,
-antirroubo: false,
-anticanal: false,
-soadm: false,
-registrar: false,
-passaporte: false,
-modorpg: false,
-modocoins: false,
-multiprefix: false,
-prefixGrupo: null,
-autodl: false,
-autosticker: false,
-autortext: false,
-antinotas: false,
-antipalavra: false,
-palavrasProibidas: [],
-bangp: false,
-modoia: {
-ativo: false,
-tipo: 'texto'
-},
-antiddd: {
-ativo: false,
-listaProibidos: []
-},
-modojogos: false,
-modofreefire: false
-},
-listanegra: [],
-ausentes: [],
-advertencias: {},
-silenciados: [],
-atividades: {},
-economia: { usuarios: {} },
-rpg: { usuarios: {} },
-namoro: {
-pedidos: [],
-casais: []
-},
-casamento: {
-pedidos: [],
-casais: []
-},
-jogos: false,
-wellcome: [
-{
-bemvindo1: false,
-legendabv: `「🧊」 #numero#
+const data_IDGP = isGroup
+? [
+  {
+  name: groupName || 'Grupo',
+  groupId: from,
+  funcoes: {
+  aprovacao: false,
+  autoaprovacao: false,
+  antilink: {
+  ativo: false,
+  nivel: null
+  },
+  x9: false,
+  antipay: false,
+  antibot: false,
+  antivideo: false,
+  antifoto: false,
+  antivisu: false,
+  antisticker: false,
+  antifloodsticker: false,
+  anticontato: false,
+  antilocalizacao: false,
+  antidocumento: false,
+  antiaudio: false,
+  antispam: false,
+  antistatus: false,
+  antimarcacao: false,
+  antifake: false,
+  antirroubo: false,
+  anticanal: false,
+  soadm: false,
+  registrar: false,
+  passaporte: false,
+  modorpg: false,
+  modocoins: false,
+  multiprefix: false,
+  prefixGrupo: null,
+  autodl: false,
+  autosticker: false,
+  autortext: false,
+  antinotas: false,
+  antipalavra: false,
+  palavrasProibidas: [],
+  bangp: false,
+  modoia: {
+  ativo: false,
+  tipo: 'texto'
+  },
+  antiddd: {
+  ativo: false,
+  listaProibidos: []
+  },
+  modojogos: false,
+  modofreefire: false
+  },
+  listanegra: [],
+  ausentes: [],
+  advertencias: {},
+  silenciados: [],
+  atividades: {},
+  economia: { usuarios: {} },
+  rpg: { usuarios: {} },
+  namoro: {
+  pedidos: [],
+  casais: []
+  },
+  casamento: {
+  pedidos: [],
+  casais: []
+  },
+  jogos: false,
+  wellcome: [
+  {
+  bemvindo1: false,
+  legendabv: `「🧊」 #numero#
 - *🧊 | ᴜᴍ ɴᴏᴠᴏ ᴍᴇᴍʙʀᴏ ᴇɴᴛʀᴏᴜ ɴᴏ ɢʀᴜᴘᴏ #nomegrupo#…* ↴
 
 *ꜱᴇᴊᴀ ᴍᴜɪᴛᴏ ʙᴇᴍ-ᴠɪɴᴅᴏ(ᴀ), #numero#!* 💙
@@ -574,7 +577,7 @@ legendabv: `「🧊」 #numero#
 *ᴇꜱᴘᴇʀᴀᴍᴏꜱ ǫᴜᴇ ᴠᴏᴄᴇ̂ ꜱᴇ ᴅɪᴠɪʀᴛᴀ, ꜰᴀᴄ̧ᴀ ɴᴏᴠᴀꜱ ᴀᴍɪᴢᴀᴅᴇꜱ ᴇ ᴀᴘʀᴏᴠᴇɪᴛᴇ ʙᴀꜱᴛᴀɴᴛᴇ ꜱᴜᴀ ᴇꜱᴛᴀᴅɪᴀ ᴀǫᴜɪ.* ✨
 
 > *🧊 | ʟᴇɪᴀ ᴀꜱ ʀᴇɢʀᴀꜱ, ʀᴇꜱᴘᴇɪᴛᴇ ᴛᴏᴅᴏꜱ ᴇ ᴜꜱᴇ #prefixo#menu ᴘᴀʀᴀ ᴠᴇʀ ᴏꜱ ᴄᴏᴍᴀɴᴅᴏꜱ.*`,
-legendasaiu: `「🧊」 #numero#
+  legendasaiu: `「🧊」 #numero#
 - *🧊 | ᴜᴍ ᴍᴇᴍʙʀᴏ ꜱᴀɪᴜ ᴅᴏ ɢʀᴜᴘᴏ #nomegrupo#…* ↴
 
 *#numero# ɴᴀ̃ᴏ ꜰᴀᴢ ᴍᴀɪꜱ ᴘᴀʀᴛᴇ ᴅᴏ ɢʀᴜᴘᴏ.*
@@ -582,51 +585,51 @@ legendasaiu: `「🧊」 #numero#
 *ᴀɢᴏʀᴀ ᴏ ɢʀᴜᴘᴏ #nomegrupo# ᴄᴏɴᴛᴀ ᴄᴏᴍ #membros# ᴍᴇᴍʙʀᴏꜱ.*
 
 *ᴀɢʀᴀᴅᴇᴄᴇᴍᴏꜱ ᴘᴇʟᴏ ᴛᴇᴍᴘᴏ ǫᴜᴇ ᴠᴏᴄᴇ̂ ᴘᴀꜱꜱᴏᴜ ᴄᴏɴᴏꜱᴄᴏ ᴇ ᴅᴇꜱᴇᴊᴀᴍᴏꜱ ᴛᴜᴅᴏ ᴅᴇ ʙᴏᴍ ᴘᴀʀᴀ ᴠᴏᴄᴇ̂.* 💙`,
-fundobv: null,
-fundobv_tipo: null,
-fundosaiu: null,
-fundosaiu_tipo: null
-},
-{
-bemvindo2: false,
-legendabv2: `「🧊」 #numero#
+  fundobv: null,
+  fundobv_tipo: null,
+  fundosaiu: null,
+  fundosaiu_tipo: null
+  },
+  {
+  bemvindo2: false,
+  legendabv2: `「🧊」 #numero#
 
 *ꜱᴇᴊᴀ ʙᴇᴍ-ᴠɪɴᴅᴏ(ᴀ) ᴀᴏ ɢʀᴜᴘᴏ #nomegrupo#!*
 
 > *ᴀɢᴏʀᴀ ꜱᴏᴍᴏꜱ #membros# ᴍᴇᴍʙʀᴏꜱ. 💙*`,
-legendasaiu2: `「🧊」 #numero#
+  legendasaiu2: `「🧊」 #numero#
 
 *ᴏ ᴜꜱᴜᴀ́ʀɪᴏ ꜱᴀɪᴜ ᴅᴏ ɢʀᴜᴘᴏ #nomegrupo#.*
 
 > *ᴀɢᴏʀᴀ ꜱᴏᴍᴏꜱ #membros# ᴍᴇᴍʙʀᴏꜱ.*`
-},
-{
-bemvindo3: false,
-legendabv3: `「🧊」 #numero#
+  },
+  {
+  bemvindo3: false,
+  legendabv3: `「🧊」 #numero#
 
 *ʙᴇᴍ-ᴠɪɴᴅᴏ(ᴀ) ᴀᴏ #nomegrupo#!*
 
 > *ᴜꜱᴇ #prefixo#menu ᴘᴀʀᴀ ᴠᴇʀ ᴍᴇᴜꜱ ᴄᴏᴍᴀɴᴅᴏꜱ.*`,
-legendasaiu3: `「🧊」 #numero#
+  legendasaiu3: `「🧊」 #numero#
 
 *ᴀᴛᴇ́ ᴍᴀɪꜱ! ᴏ ɢʀᴜᴘᴏ #nomegrupo# ꜰɪᴄᴀ ᴄᴏᴍ #membros# ᴍᴇᴍʙʀᴏꜱ.*`
-},
-{
-bemvindo4: false,
-stickerbv: null,
-stickersaiu: null
-},
-{
-bemvindo5: false,
-audiobv: null,
-audiosaiu: null
-}
-]
-}
-] : undefined
+  },
+  {
+  bemvindo4: false,
+  stickerbv: null,
+  stickersaiu: null
+  },
+  {
+  bemvindo5: false,
+  audiobv: null,
+  audiosaiu: null
+  }
+  ]
+  }
+  ]
+: undefined
 const normalizarGrupo = dados => {
-if (!isGroup)
-return undefined
+if (!isGroup) return undefined
 const padraoGp = data_IDGP[0]
 const salvoGp = Array.isArray(dados) && dados[0] && typeof dados[0] === 'object' ? dados[0] : {}
 const funcoesSalvas = salvoGp.funcoes && typeof salvoGp.funcoes === 'object' ? salvoGp.funcoes : {}
@@ -643,9 +646,7 @@ funcoes: {
 ...padraoGp.funcoes,
 ...funcoesSalvas,
 registrar: typeof funcoesSalvas.registrar === 'boolean' ? funcoesSalvas.registrar : funcoesSalvas.passaporte === true,
-modofreefire: typeof funcoesSalvas.modofreefire === 'boolean'
-? funcoesSalvas.modofreefire
-: funcoesSalvas.modox4 === true,
+modofreefire: typeof funcoesSalvas.modofreefire === 'boolean' ? funcoesSalvas.modofreefire : funcoesSalvas.modox4 === true,
 antilink: {
 ...padraoGp.funcoes.antilink,
 ...antilinkSalvo,
@@ -662,9 +663,7 @@ antiddd: {
 ...padraoGp.funcoes.antiddd,
 ...antidddSalvo,
 ativo: Boolean(antidddSalvo.ativo),
-listaProibidos: Array.isArray(antidddSalvo.listaProibidos) ? [
-...new Set(antidddSalvo.listaProibidos.map(v => String(v).replace(/\D/g, '').slice(0, 2)).filter(v => /^\d{2}$/.test(v)))
-] : []
+listaProibidos: Array.isArray(antidddSalvo.listaProibidos) ? [...new Set(antidddSalvo.listaProibidos.map(v => String(v).replace(/\D/g, '').slice(0, 2)).filter(v => /^\d{2}$/.test(v)))] : []
 }
 },
 listanegra: Array.isArray(salvoGp.listanegra) ? [...new Set(salvoGp.listanegra.map(v => String(v || '').trim()).filter(Boolean))] : [],
@@ -690,14 +689,11 @@ wellcome: padraoGp.wellcome.map((padrao, indice) => ({
 }
 ]
 }
-if (isGroup && !fs.existsSync(dirGroup))
-salvarJson(dirGroup, data_IDGP)
+if (isGroup && !fs.existsSync(dirGroup)) salvarJson(dirGroup, data_IDGP)
 let dataGp = isGroup ? normalizarGrupo(lerJson(dirGroup, data_IDGP)) : undefined
-if (isGroup)
-salvarJson(dirGroup, dataGp)
+if (isGroup) salvarJson(dirGroup, dataGp)
 const setGp = dados => {
-if (!isGroup)
-return
+if (!isGroup) return
 const final = normalizarGrupo(dados)
 dataGp = final
 salvarJson(dirGroup, final)
@@ -707,10 +703,8 @@ const isWelkom2 = isGroup ? Boolean(dataGp?.[0]?.wellcome?.[1]?.bemvindo2) : und
 const isWelkom3 = isGroup ? Boolean(dataGp?.[0]?.wellcome?.[2]?.bemvindo3) : undefined
 const limpo = valor => {
 let txt = String(valor || '').trim()
-if (!txt)
-return ''
-if (txt.endsWith('@c.us'))
-txt = txt.replace('@c.us', '@s.whatsapp.net')
+if (!txt) return ''
+if (txt.endsWith('@c.us')) txt = txt.replace('@c.us', '@s.whatsapp.net')
 const pos = txt.indexOf('@')
 if (pos < 0) {
 const numero = txt.replace(/\D/g, '')
@@ -727,41 +721,41 @@ bruto = bruto.phoneNumber || bruto.participantAlt || bruto.participantAlt || bru
 }
 const lista = [...extras, bruto].map(limpo).filter(Boolean)
 const numero = lista.find(v => v.endsWith('@s.whatsapp.net'))
-if (numero)
-return jidNormalizedUser(numero)
+if (numero) return jidNormalizedUser(numero)
 const atual = limpo(bruto)
-if (!atual)
-return ''
+if (!atual) return ''
 if (atual.endsWith('@lid') && groupMembers.length) {
 const membro = groupMembers.find(v => {
 const ids = [v?.lid, v?.id, v?.jid, v?.participant].map(limpo)
 return ids.includes(atual)
 })
-const real = [membro?.phoneNumber, membro?.participantAlt, membro?.participantAlt, membro?.jid, membro?.id]
-.map(limpo)
-.find(v => v.endsWith('@s.whatsapp.net'))
-if (real)
-return jidNormalizedUser(real)
+const real = [membro?.phoneNumber, membro?.participantAlt, membro?.participantAlt, membro?.jid, membro?.id].map(limpo).find(v => v.endsWith('@s.whatsapp.net'))
+if (real) return jidNormalizedUser(real)
 }
 return jidNormalizedUser(atual)
 }
-const NumeroDoBot = String(tokito.user?.id || '').split(':')[0].split('@')[0]
+const NumeroDoBot = String(tokito.user?.id || '')
+.split(':')[0]
+.split('@')[0]
 const botNumber = jidNormalizedUser(`${NumeroDoBot}@s.whatsapp.net`)
 let sender = info.key?.fromMe
 ? botNumber
-: nJid(isGroup
-? info?.key?.participantAlt || info?.key?.senderAlt || info?.participantAlt || info?.key?.participant || info?.participant || ''
-: info?.key?.remoteJidAlt || info?.key?.senderAlt || info?.key?.participantAlt || info?.key?.remoteJid || from, [
-info?.key?.participantAlt,
-info?.key?.senderAlt,
-info?.participantAlt,
-info?.key?.remoteJidAlt
-])
+: nJid(
+  isGroup
+  ? info?.key?.participantAlt || info?.key?.senderAlt || info?.participantAlt || info?.key?.participant || info?.participant || ''
+  : info?.key?.remoteJidAlt || info?.key?.senderAlt || info?.key?.participantAlt || info?.key?.remoteJid || from,
+  [info?.key?.participantAlt, info?.key?.senderAlt, info?.participantAlt, info?.key?.remoteJidAlt]
+  )
 const messagesC = PR_String.slice(0).trim().split(/ +/).shift().toLowerCase()
 const argss = body.split(/ +/g)
 const numeroDonoLimpo = String(ownerNumber || '').replace(/\D/g, '')
 const nmrdn = numeroDonoLimpo ? `${numeroDonoLimpo}@s.whatsapp.net` : ''
-const donosExtras = runtimeSub.isSubBot ? [] : [1, 2, 3, 4, 5, 6].map(i => String(nescessario[`numero_dono${i}`] || '').replace(/\D/g, '')).filter(numero => numero.length >= 10).map(numero => `${numero}@s.whatsapp.net`)
+const donosExtras = runtimeSub.isSubBot
+? []
+: [1, 2, 3, 4, 5, 6]
+  .map(i => String(nescessario[`numero_dono${i}`] || '').replace(/\D/g, ''))
+  .filter(numero => numero.length >= 10)
+  .map(numero => `${numero}@s.whatsapp.net`)
 const numerodono = [...new Set([nmrdn, ...donosExtras].filter(Boolean))]
 const isBotoff = nescessario.botoff
 const isBotoes = nescessario.botoes !== false
@@ -778,12 +772,10 @@ const numeroInstanciaSub = runtimeSub.digits(runtimeSub.id)
 // diferente do telefone salvo. Se a conta conectada (ou o id da instância) é o
 // dono cadastrado, ela continua sendo reconhecida como dona do próprio Sub Bot.
 const donoSubPeloSender = Boolean(donoSubRegistrado) && numeroSenderSub === donoSubRegistrado
-const donoSubPelaPropriaConta = info.key?.fromMe === true && Boolean(donoSubRegistrado) && (
-  numeroContaSub === donoSubRegistrado || numeroInstanciaSub === donoSubRegistrado
-)
+const donoSubPelaPropriaConta = info.key?.fromMe === true && Boolean(donoSubRegistrado) && (numeroContaSub === donoSubRegistrado || numeroInstanciaSub === donoSubRegistrado)
 const isSubOwner = runtimeSub.isSubBot && (donoSubPeloSender || donoSubPelaPropriaConta)
 const SoDono = numerodono.includes(sender) || isSubOwner || isBot
-const DonoOficial = runtimeSub.isSubBot ? isSubOwner : (nmrdn ? nmrdn === sender : false)
+const DonoOficial = runtimeSub.isSubBot ? isSubOwner : nmrdn ? nmrdn === sender : false
 const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : []
 const membrosGrupo = isGroup ? getMembros(groupMembers) : []
 const adminsNormalizados = groupAdmins.map(admin => nJid(admin)).filter(Boolean)
@@ -793,16 +785,14 @@ const isBotGroupAdmins = !isGroup || adminsNormalizados.includes(botNormalizado)
 let vipAlterado = false
 for (let i = vip.length - 1; i >= 0; i--) {
 const membroVip = vip[i]
-if (membroVip?.infinito === true || !membroVip?.expiraEm)
-continue
+if (membroVip?.infinito === true || !membroVip?.expiraEm) continue
 const expiracao = new Date(membroVip.expiraEm).getTime()
 if (!Number.isFinite(expiracao) || expiracao <= Date.now()) {
 vip.splice(i, 1)
 vipAlterado = true
 }
 }
-if (vipAlterado)
-fs.writeFileSync(caminhoVip, JSON.stringify(vip, null, 2))
+if (vipAlterado) fs.writeFileSync(caminhoVip, JSON.stringify(vip, null, 2))
 const isVip = vip.map(i => nJid(i?.id)).includes(senderNormalizado) || (isGroup && donoSistema.vipGrupoAtivo(from)) || SoDono
 const isCargo = SoDono ? 'Mestre' : isGroupAdmins ? 'Administrador' : isVip ? 'VIP' : 'Membro'
 const isChVip = isVip ? 'ꜱɪᴍ ✅' : 'ɴᴀᴏ ❌'
@@ -830,99 +820,52 @@ let menc_prt = quotedParticipant || ''
 const menc_jid2 = mentionedList
 const qSeguro = String(q || '')
 const temMention = qSeguro.includes('@')
-const menc_os2 = temMention ? menc_jid2.length > 0 ? menc_jid2[0] : menc_sticker || null : menc_prt || menc_sticker
+const menc_os2 = temMention ? (menc_jid2.length > 0 ? menc_jid2[0] : menc_sticker || null) : menc_prt || menc_sticker
 const menc_jid = normalizar(menc_os2 || sender)
 const sender_ou_n = temMention ? menc_jid2?.[0] || menc_sticker || sender : menc_prt || menc_sticker || sender
 const numClean = txt => String(txt || '').replace(/[()+\-\/\s]/g, '') + '@s.whatsapp.net'
 const mrc_ou_numero = qSeguro.length > 6 && !temMention ? numClean(qSeguro) : normalizar(menc_prt || menc_sticker || sender)
 const marc_tds = temMention ? normalizar(menc_jid) : qSeguro.length > 6 && !temMention ? numClean(qSeguro) : normalizar(menc_prt || menc_sticker || sender)
 const menc_prt_nmr = qSeguro.length > 12 && !temMention ? numClean(qSeguro) : normalizar(menc_prt || menc_sticker || sender)
-
 const alvoPorMarcacaoOuNumero = () => {
 const marcado = mentionedList[0] || ''
-
-if (marcado)
-return nJid(marcado)
-
+if (marcado) return nJid(marcado)
 let numero = String(q || '').replace(/\D/g, '')
-
 if (numero) {
-if (!numero.startsWith('55') && [10, 11].includes(numero.length))
-numero = `55${numero}`
-
-if (numero.length < 10 || numero.length > 15)
-return ''
-
+if (!numero.startsWith('55') && [10, 11].includes(numero.length)) numero = `55${numero}`
+if (numero.length < 10 || numero.length > 15) return ''
 return jidNormalizedUser(`${numero}@s.whatsapp.net`)
 }
-
-const ehResposta = Boolean(
-ctxMsg?.stanzaId ||
-ctxMsg?.quotedMessage
-)
-
+const ehResposta = Boolean(ctxMsg?.stanzaId || ctxMsg?.quotedMessage)
 if (ehResposta) {
-const respondido =
-ctxMsg?.participantAlt ||
-ctxMsg?.participant ||
-quotedParticipant ||
-''
-
-if (respondido)
-return nJid(respondido)
+const respondido = ctxMsg?.participantAlt || ctxMsg?.participant || quotedParticipant || ''
+if (respondido) return nJid(respondido)
 }
-
 return ''
 }
-
 const destino = async () => {
 const marcado = mentionedList[0] || ''
 const respondido = quotedParticipant || ''
 let numero = String(q || '').replace(/\D/g, '')
-if (numero &&
-!numero.startsWith('55') &&
-[10, 11].includes(numero.length)) {
+if (numero && !numero.startsWith('55') && [10, 11].includes(numero.length)) {
 numero = `55${numero}`
 }
-const bruto = marcado ||
-respondido ||
-(numero ? `${numero}@s.whatsapp.net` : '')
-if (!bruto)
-return null
+const bruto = marcado || respondido || (numero ? `${numero}@s.whatsapp.net` : '')
+if (!bruto) return null
 let alvo = nJid(bruto)
 let consulta = alvo
 if (String(consulta).endsWith('@lid')) {
 const membro = isGroup
 ? groupMembers.find(m => {
-const ids = [
-m?.lid,
-m?.id,
-m?.jid,
-m?.participant
-]
-.map(limpo)
-.filter(Boolean)
-return ids.includes(limpo(consulta))
-})
+  const ids = [m?.lid, m?.id, m?.jid, m?.participant].map(limpo).filter(Boolean)
+  return ids.includes(limpo(consulta))
+  })
 : null
-const real = [
-membro?.phoneNumber,
-membro?.participantPn,
-membro?.participantAlt,
-membro?.jid,
-membro?.id
-]
-.map(limpo)
-.find(jid => jid.endsWith('@s.whatsapp.net'))
-if (real)
-consulta = nJid(real)
-if (String(consulta).endsWith('@lid') &&
-typeof tokito.signalRepository?.lidMapping?.getPNForLID === 'function') {
-const pn = await tokito.signalRepository.lidMapping
-.getPNForLID(consulta)
-.catch(() => null)
-if (pn)
-consulta = nJid(pn)
+const real = [membro?.phoneNumber, membro?.participantPn, membro?.participantAlt, membro?.jid, membro?.id].map(limpo).find(jid => jid.endsWith('@s.whatsapp.net'))
+if (real) consulta = nJid(real)
+if (String(consulta).endsWith('@lid') && typeof tokito.signalRepository?.lidMapping?.getPNForLID === 'function') {
+const pn = await tokito.signalRepository.lidMapping.getPNForLID(consulta).catch(() => null)
+if (pn) consulta = nJid(pn)
 }
 }
 const mencao = consulta || alvo
@@ -930,9 +873,7 @@ return {
 alvo,
 consulta,
 mencao,
-numero: String(mencao)
-.split('@')[0]
-.split(':')[0]
+numero: String(mencao).split('@')[0].split(':')[0]
 }
 }
 //////////////////////////====//////////////////////////////////
@@ -943,29 +884,33 @@ hour: '2-digit',
 minute: '2-digit',
 second: '2-digit'
 })
-let baileysVersion = 'desconhecida'
+let stoneVersion = 'desconhecida'
 try {
-const pkgPath = path.join(__dirname, 'node_modules','baileys', 'package.json')
-baileysVersion = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))?.version || 'desconhecida'
+const pkgPath = path.join(__dirname, 'node_modules', '@stone-wpp', 'ofc', 'package.json')
+stoneVersion = JSON.parse(fs.readFileSync(pkgPath, 'utf8'))?.version || 'desconhecida'
+} catch {
+stoneVersion = 'desconhecida'
 }
-catch {
-baileysVersion = 'desconhecida'
-}
-const numeroSender = String(sender || '').split('@')[0].split(':')[0].replace(/\D/g, '')
+const numeroSender = String(sender || '')
+.split('@')[0]
+.split(':')[0]
+.replace(/\D/g, '')
 const messageId = String(info.key?.id || '')
 const whatIsPhone = messageId.substring(0, 2) === '3A' ? 'iPhone 🍎' : messageId.length > 21 ? 'Android 👤' : 'Whatsapp Web 🌐'
 const canalInfo = (mentions = []) => {
 const canal = runtimeSub.isSubBot ? String(runtimeSub.config().channeldl || channeldl || '0@newsletter') : channeldl
 return {
-...(canal && canal !== '0@newsletter' ? {
-isForwarded: true,
-forwardingScore: 1,
-forwardedNewsletterMessageInfo: {
-newsletterJid: canal,
-newsletterName: NomeDoBot,
-serverMessageId: ''
-}
-} : {}),
+...(canal && canal !== '0@newsletter'
+? {
+  isForwarded: true,
+  forwardingScore: 1,
+  forwardedNewsletterMessageInfo: {
+  newsletterJid: canal,
+  newsletterName: NomeDoBot,
+  serverMessageId: ''
+  }
+  }
+: {}),
 mentionedJid: mentions
 }
 }
@@ -997,22 +942,23 @@ isForwarded: true
 }
 let selo = isVerificado ? SeloMeta : info
 const reply = async (text, mentions = []) => {
-if (!text)
-text = ' '
-
-const textoSeguro = modulos.sanitizarErro(
-String(text),
-[API_KEY_TOKITO]
-) || ' '
-
-return tokito.sendMessage(from, {
+if (!text) text = ' '
+const textoSeguro = modulos.sanitizarErro(String(text), [API_KEY_TOKITO]) || ' '
+return tokito.sendMessage(
+from,
+{
 text: textoSeguro,
 contextInfo: canalInfo(mentions)
-}, {
+},
+{
 quoted: selo
-})
 }
-const enviarbuton = botoes => botoes.filter(item => item?.texto && item?.id).map(item => ({
+)
+}
+const enviarbuton = botoes =>
+botoes
+.filter(item => item?.texto && item?.id)
+.map(item => ({
 name: 'quick_reply',
 buttonParamsJson: JSON.stringify({
 display_text: String(item.texto),
@@ -1020,23 +966,25 @@ id: String(item.id)
 })
 }))
 const botaozin = async (texto, botoes = [], mentions = []) => {
-if (!isBotoes || !botoes.length)
-return reply(texto, mentions)
+if (!isBotoes || !botoes.length) return reply(texto, mentions)
 try {
-const msg = generateWAMessageFromContent(from, {
+const msg = generateWAMessageFromContent(
+from,
+{
 interactiveMessage: proto.Message.InteractiveMessage.create({
 contextInfo: canalInfo(mentions),
 body: proto.Message.InteractiveMessage.Body.create({ text: modulos.sanitizarErro(String(texto || ' '), [API_KEY_TOKITO]) }),
 footer: proto.Message.InteractiveMessage.Footer.create({ text: `` }),
 nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: enviarbuton(botoes) })
 })
-}, {
+},
+{
 quoted: selo,
 userJid: tokito.user.id
-})
-return tokito.relayMessage(from, msg.message, { messageId: msg.key.id })
 }
-catch (e) {
+)
+return tokito.relayMessage(from, msg.message, { messageId: msg.key.id })
+} catch (e) {
 console.log('[BOTÕES TEXTO]', modulos.sanitizarErro(e, [API_KEY_TOKITO]) || 'Erro sem detalhes')
 return reply(texto, mentions)
 }
@@ -1058,69 +1006,68 @@ let resultado
 if (!isBotoes || !botoes.length) {
 try {
 const media = await modulos.midiaMenu(tokito)
-
 if (media?.videoMessage) {
-const msg = generateWAMessageFromContent(from, {
+const msg = generateWAMessageFromContent(
+from,
+{
 videoMessage: proto.Message.VideoMessage.create({
 ...media.videoMessage,
 caption: texto,
 contextInfo
 })
-}, {
+},
+{
 quoted: selo,
 userJid: tokito.user.id
-})
-
-resultado = await tokito.relayMessage(
-from,
-msg.message,
-{ messageId: msg.key.id }
-)
 }
-else if (media?.imageMessage) {
-const msg = generateWAMessageFromContent(from, {
+)
+resultado = await tokito.relayMessage(from, msg.message, { messageId: msg.key.id })
+} else if (media?.imageMessage) {
+const msg = generateWAMessageFromContent(
+from,
+{
 imageMessage: proto.Message.ImageMessage.create({
 ...media.imageMessage,
 caption: texto,
 contextInfo
 })
-}, {
+},
+{
 quoted: selo,
 userJid: tokito.user.id
-})
-
-resultado = await tokito.relayMessage(
+}
+)
+resultado = await tokito.relayMessage(from, msg.message, { messageId: msg.key.id })
+} else {
+resultado = await tokito.sendMessage(
 from,
-msg.message,
-{ messageId: msg.key.id }
+{
+text: texto,
+contextInfo
+},
+{ quoted: selo }
 )
 }
-else {
-resultado = await tokito.sendMessage(from, {
+} catch {
+resultado = await tokito.sendMessage(
+from,
+{
 text: texto,
 contextInfo
-}, { quoted: selo })
+},
+{ quoted: selo }
+)
 }
-}
-catch {
-resultado = await tokito.sendMessage(from, {
-text: texto,
-contextInfo
-}, { quoted: selo })
-}
-}
-else {
+} else {
 try {
 let header
 const media = await modulos.midiaMenu(tokito)
-
 if (media?.videoMessage) {
 header = proto.Message.InteractiveMessage.Header.create({
 hasMediaAttachment: true,
 videoMessage: media.videoMessage
 })
-}
-else if (media?.imageMessage) {
+} else if (media?.imageMessage) {
 header = proto.Message.InteractiveMessage.Header.create({
 hasMediaAttachment: true,
 imageMessage: media.imageMessage
@@ -1132,20 +1079,26 @@ body: proto.Message.InteractiveMessage.Body.create({ text: texto }),
 footer: proto.Message.InteractiveMessage.Footer.create({ text: `` }),
 nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: enviarbuton(botoes) })
 }
-if (header)
-dados.header = header
-const msg = generateWAMessageFromContent(from, { interactiveMessage: proto.Message.InteractiveMessage.create(dados) }, {
+if (header) dados.header = header
+const msg = generateWAMessageFromContent(
+from,
+{ interactiveMessage: proto.Message.InteractiveMessage.create(dados) },
+{
 quoted: selo,
 userJid: tokito.user.id
-})
-resultado = await tokito.relayMessage(from, msg.message, { messageId: msg.key.id })
 }
-catch (e) {
+)
+resultado = await tokito.relayMessage(from, msg.message, { messageId: msg.key.id })
+} catch (e) {
 console.log('[BOTÕES MENU]', modulos.sanitizarErro(e, [API_KEY_TOKITO]) || 'Erro sem detalhes')
-resultado = await tokito.sendMessage(from, {
+resultado = await tokito.sendMessage(
+from,
+{
 text: texto,
 contextInfo
-}, { quoted: selo })
+},
+{ quoted: selo }
+)
 }
 }
 try {
@@ -1153,89 +1106,286 @@ const cfgAudio = modulos.globalCfg()
 if (cfgAudio.audioMenu && cfgAudio.audioMenuArquivo) {
 const localAudio = path.isAbsolute(cfgAudio.audioMenuArquivo) ? cfgAudio.audioMenuArquivo : path.join(__dirname, cfgAudio.audioMenuArquivo)
 if (fs.existsSync(localAudio))
-await tokito.sendMessage(from, {
+await tokito.sendMessage(
+from,
+{
 audio: fs.readFileSync(localAudio),
 mimetype: 'audio/mpeg',
 ptt: false,
 contextInfo: canalInfo([sender])
-}, { quoted: selo })
+},
+{ quoted: selo }
+)
 }
-}
-catch (e) {
+} catch (e) {
 console.log('[ÁUDIO MENU]', modulos.sanitizarErro(e, [API_KEY_TOKITO]) || 'Erro sem detalhes')
 }
 return resultado
 }
-const limpar = valor => String(valor || 'arquivo').replace(/[\\/:*?"<>|]/g, '').trim().slice(0, 100) || 'arquivo'
+const limpar = valor =>
+String(valor || 'arquivo')
+.replace(/[\\/:*?"<>|]/g, '')
+.trim()
+.slice(0, 100) || 'arquivo'
 const achar = (...lista) => lista.find(valor => typeof valor === 'string' && /^https?:\/\//i.test(valor)) || null
 const itens = dados => {
 const lista = dados?.resultado || dados?.resultados || dados?.result || dados?.data || dados?.videos || []
-if (Array.isArray(lista))
-return lista
-if (Array.isArray(lista?.videos))
-return lista.videos
-if (Array.isArray(lista?.items))
-return lista.items
+if (Array.isArray(lista)) return lista
+if (Array.isArray(lista?.videos)) return lista.videos
+if (Array.isArray(lista?.items)) return lista.items
 return []
 }
 const contextoJogos = (comandoAtual = command) => ({
-bot: tokito, tokito, info, from, sender, body, q, command: comandoAtual, prefix, isCmd,
-isGroup, isGroupAdmins, isBotGroupAdmins, SoDono, dataGp, setGp,
+bot: tokito,
+tokito,
+info,
+from,
+sender,
+body,
+q,
+command: comandoAtual,
+prefix,
+isCmd,
+isGroup,
+isGroupAdmins,
+isBotGroupAdmins,
+SoDono,
+dataGp,
+setGp,
 mentions: menc_jid2.length ? menc_jid2 : menc_prt ? [menc_prt] : [],
-reply, reagir, selo, newsletter, canalInfo, API_URL, API_KEY_TOKITO,
-channeldl, NomeDoBot, isBotoes
+reply,
+reagir,
+selo,
+newsletter,
+canalInfo,
+API_URL,
+API_KEY_TOKITO,
+channeldl,
+NomeDoBot,
+isBotoes
 })
-
 const plug = (cmd = command) => {
 const ctx = {
-__dirname, __filename, isSubBot: runtimeSub.isSubBot, subId: runtimeSub.id, subOwner: runtimeSub.owner, isSubOwner, runtimeSub, tokito, upsert, info, mensagem, type, content, from, sender,
-body, Procurar_String, budy2, budy, PR_String, q, args, command: cmd, prefix, isCmd,
-isGroup, isStatus, isNewsletter, stub, pushname, groupMetadata, groupName, groupDesc, groupMembers,
-dirGroup, data_IDGP, dataGp, setGp, isWelkom, isWelkom2, isWelkom3, limpo, nJid,
-NumeroDoBot, botNumber, messagesC, argss, nmrdn, numerodono, isBotoff, isBotoes,
-isModobn, isBot, SoDono, DonoOficial, groupAdmins, membrosGrupo, adminsNormalizados,
-senderNormalizado, botNormalizado, isGroupAdmins, isBotGroupAdmins, vip, isVip,
-isCargo, isChVip, Res_SoDono, ctxMsg, normalizar, quotedParticipant, mentionedList,
-menc_sticker, menc_prt, menc_jid2, qSeguro, temMention, menc_os2, menc_jid,
-sender_ou_n, numClean, mrc_ou_numero, marc_tds, menc_prt_nmr, alvoPorMarcacaoOuNumero, destino, dataHoraBR,
-horaBR, baileysVersion, numeroSender, messageId, whatIsPhone, canalInfo, newsletter,
-isVerificado, SeloMeta, selo, reply, enviarbuton, botaozin, reagir, contextoJogos,
-dylanModz, limpar, achar, itens, NomeDoBot, ownerName, channel, channeldl,
-ownerNumber, CREDENTIALS_USER, API_URL, API_KEY_TOKITO, getContentType,
-jidNormalizedUser, proto, prepareWAMessageMedia, generateWAMessageFromContent,
-getFileBuffer, DLT_FL, getGroupAdmins, getMembros, getRandom, fs, path, os, colors,
-performance, linguagem, mess, axios, setting, nescessario, caminhoVip, arquivo,
-pasta, fuso, sendVideoAsSticker, sendVideoAsSticker2, sendImageAsSticker2,
-sendImageAsSticker, funcoes, detector, plugins, regrasPlugins, aluguel, modulos,
-similar, comandos, modoJogosAtivo, getAdivinheGame, saveAdivinheGame,
-removeAdivinheGame, criarAdivinheGame, enviarAdivinhe, getQuizGame, saveQuizGame,
-removeQuizGame, criarQuizGame, enviarQuiz, getForcaGame, saveForcaGame,
-removeForcaGame, criarForcaGame, enviarForca, getCacaGame, saveCacaGame,
-removeCacaGame, criarCacaGame, enviarCaca, getMinesGame, saveMinesGame,
-removeMinesGame, criarMinesGame, enviarMines, getVelhaGame, saveVelhaGame,
-removeVelhaGame, criarTabuleiroVelha, getDamaGame, saveDamaGame, removeDamaGame,
-criarTabuleiroDama, mesmoJid, mencionarJogo, enviarTextoJogos, ler, salvar, extrair,
-apagar, agora, enviar, avisar, processar, iniciar, pathgroupjson, salvarJson, lerJson
+__dirname,
+__filename,
+isSubBot: runtimeSub.isSubBot,
+subId: runtimeSub.id,
+subOwner: runtimeSub.owner,
+isSubOwner,
+runtimeSub,
+tokito,
+upsert,
+info,
+mensagem,
+type,
+content,
+from,
+sender,
+body,
+Procurar_String,
+budy2,
+budy,
+PR_String,
+q,
+args,
+command: cmd,
+prefix,
+isCmd,
+isGroup,
+isStatus,
+isNewsletter,
+stub,
+pushname,
+groupMetadata,
+groupName,
+groupDesc,
+groupMembers,
+dirGroup,
+data_IDGP,
+dataGp,
+setGp,
+isWelkom,
+isWelkom2,
+isWelkom3,
+limpo,
+nJid,
+NumeroDoBot,
+botNumber,
+messagesC,
+argss,
+nmrdn,
+numerodono,
+isBotoff,
+isBotoes,
+isModobn,
+isBot,
+SoDono,
+DonoOficial,
+groupAdmins,
+membrosGrupo,
+adminsNormalizados,
+senderNormalizado,
+botNormalizado,
+isGroupAdmins,
+isBotGroupAdmins,
+vip,
+isVip,
+isCargo,
+isChVip,
+Res_SoDono,
+ctxMsg,
+normalizar,
+quotedParticipant,
+mentionedList,
+menc_sticker,
+menc_prt,
+menc_jid2,
+qSeguro,
+temMention,
+menc_os2,
+menc_jid,
+sender_ou_n,
+numClean,
+mrc_ou_numero,
+marc_tds,
+menc_prt_nmr,
+alvoPorMarcacaoOuNumero,
+destino,
+dataHoraBR,
+horaBR,
+stoneVersion,
+numeroSender,
+messageId,
+whatIsPhone,
+canalInfo,
+newsletter,
+isVerificado,
+SeloMeta,
+selo,
+reply,
+enviarbuton,
+botaozin,
+reagir,
+contextoJogos,
+dylanModz,
+limpar,
+achar,
+itens,
+NomeDoBot,
+ownerName,
+channel,
+channeldl,
+ownerNumber,
+CREDENTIALS_USER,
+API_URL,
+API_KEY_TOKITO,
+getContentType,
+jidNormalizedUser,
+proto,
+prepareWAMessageMedia,
+generateWAMessageFromContent,
+getFileBuffer,
+DLT_FL,
+getGroupAdmins,
+getMembros,
+getRandom,
+fs,
+path,
+os,
+colors,
+performance,
+linguagem,
+mess,
+axios,
+setting,
+nescessario,
+caminhoVip,
+arquivo,
+pasta,
+fuso,
+sendVideoAsSticker,
+sendVideoAsSticker2,
+sendImageAsSticker2,
+sendImageAsSticker,
+funcoes,
+detector,
+plugins,
+regrasPlugins,
+aluguel,
+modulos,
+similar,
+comandos,
+modoJogosAtivo,
+getAdivinheGame,
+saveAdivinheGame,
+removeAdivinheGame,
+criarAdivinheGame,
+enviarAdivinhe,
+getQuizGame,
+saveQuizGame,
+removeQuizGame,
+criarQuizGame,
+enviarQuiz,
+getForcaGame,
+saveForcaGame,
+removeForcaGame,
+criarForcaGame,
+enviarForca,
+getCacaGame,
+saveCacaGame,
+removeCacaGame,
+criarCacaGame,
+enviarCaca,
+getMinesGame,
+saveMinesGame,
+removeMinesGame,
+criarMinesGame,
+enviarMines,
+getVelhaGame,
+saveVelhaGame,
+removeVelhaGame,
+criarTabuleiroVelha,
+getDamaGame,
+saveDamaGame,
+removeDamaGame,
+criarTabuleiroDama,
+mesmoJid,
+mencionarJogo,
+enviarTextoJogos,
+ler,
+salvar,
+extrair,
+apagar,
+agora,
+enviar,
+avisar,
+processar,
+iniciar,
+pathgroupjson,
+salvarJson,
+lerJson
 }
-
 return ctx
 }
 // Passaporte: bloqueio ANTES dos comandos especiais e aliases sem prefixo.
 // Quem entra pode conversar normalmente; comandos exigem apresentação quando pendente.
 if (isGroup && (dataGp?.[0]?.funcoes?.registrar === true || (dataGp?.[0]?.funcoes?.registrar === undefined && dataGp?.[0]?.funcoes?.passaporte === true))) {
-  let passaporteBloqueou = false
-  try {
-    const registro = require('./DADOS_TOKITO/sistemas/registro.js')
-    passaporteBloqueou = await registro.interceptar(plug())
-  } catch (error) {
-    console.log('[REGISTRO INTERCEPTAR]', modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro')
-  }
-  if (passaporteBloqueou) continue
+let passaporteBloqueou = false
+try {
+const registro = require('./DADOS_TOKITO/sistemas/registro.js')
+passaporteBloqueou = await registro.interceptar(plug())
+} catch (error) {
+console.log('[REGISTRO INTERCEPTAR]', modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro')
+}
+if (passaporteBloqueou) continue
 }
 // ===== COMANDOS SEM PREFIXO + FIGURINHA REGISTRADA =====
 if (!isCmd) {
 const mapaSemPrefixo = modulos.noPrefix()
-const partesLivres = String(body || '').trim().split(/\s+/).filter(Boolean)
+const partesLivres = String(body || '')
+.trim()
+.split(/\s+/)
+.filter(Boolean)
 const gatilho = modulos.norm(partesLivres[0] || '')
 const real = mapaSemPrefixo[gatilho]
 if (real && plugins.resolver(real)) {
@@ -1257,85 +1407,66 @@ q = ''
 }
 // ===== TRAVAS GLOBAIS =====
 const cfgGlobal = modulos.globalCfg()
-
-if (
-!SoDono &&
-donoSistema.autobanTem(senderNormalizado)
-) {
-if (
-isGroup &&
-isBotGroupAdmins &&
-senderNormalizado?.endsWith('@s.whatsapp.net')
-) {
-await tokito.groupParticipantsUpdate(
-from,
-[senderNormalizado],
-'remove'
-).catch(() => {})
+if (!SoDono && donoSistema.autobanTem(senderNormalizado)) {
+if (isGroup && isBotGroupAdmins && senderNormalizado?.endsWith('@s.whatsapp.net')) {
+await tokito.groupParticipantsUpdate(from, [senderNormalizado], 'remove').catch(() => {})
 }
-
 continue
 }
-
-if (cfgGlobal.bloqueados.map(v => nJid(v)).includes(senderNormalizado) && !SoDono)
-continue
-const subPvLiberado = !runtimeSub.isSubBot && ((isCmd && ['sub', 'code', 'meu'].includes(String(command || ''))) || (() => { try { return require('./DADOS_TOKITO/sub/cadastro').temPendente(from, sender) } catch { return false } })())
+if (cfgGlobal.bloqueados.map(v => nJid(v)).includes(senderNormalizado) && !SoDono) continue
+const subPvLiberado =
+!runtimeSub.isSubBot &&
+((isCmd && ['sub', 'code', 'meu'].includes(String(command || ''))) ||
+(() => {
+try {
+return require('./DADOS_TOKITO/sub/cadastro').temPendente(from, sender)
+} catch {
+return false
+}
+})())
 /* ===== ANTI-PV 2 ===== */
 if (!isGroup && !isNewsletter && !isStatus && !isBot && cfgGlobal.antipv2 === true && !SoDono && !subPvLiberado) {
-  const alvoAntiPv2 = nJid(sender, [
-    info?.key?.remoteJidAlt,
-    info?.key?.senderAlt,
-    info?.key?.participantAlt,
-    info?.participantAlt,
-    info?.key?.remoteJid,
-    from
-  ])
-  const botAntiPv2 = nJid(botNumber || tokito.user?.id || '')
-  const donoProtegidoAntiPv2 = numerodono.map(item => nJid(item)).filter(Boolean).includes(alvoAntiPv2)
-
-  if (alvoAntiPv2 && alvoAntiPv2.endsWith('@s.whatsapp.net') && alvoAntiPv2 !== botAntiPv2 && !donoProtegidoAntiPv2) {
-    const agoraAntiPv2 = Date.now()
-    const ultimaExecucaoAntiPv2 = Number(antiPv2EmProcessamento.get(alvoAntiPv2) || 0)
-    if (agoraAntiPv2 - ultimaExecucaoAntiPv2 < 30000) continue
-
-    antiPv2EmProcessamento.set(alvoAntiPv2, agoraAntiPv2)
-    setTimeout(() => {
-      if (antiPv2EmProcessamento.get(alvoAntiPv2) === agoraAntiPv2) antiPv2EmProcessamento.delete(alvoAntiPv2)
-    }, 30000).unref?.()
-
-    const numeroAntiPv2 = String(alvoAntiPv2).split('@')[0].split(':')[0].replace(/\D/g, '')
-    const avisoAntiPv2 =
-`- 🔒 \`𝙰𝙽𝚃𝙸 𝙿𝚅\`
+const alvoAntiPv2 = nJid(sender, [info?.key?.remoteJidAlt, info?.key?.senderAlt, info?.key?.participantAlt, info?.participantAlt, info?.key?.remoteJid, from])
+const botAntiPv2 = nJid(botNumber || tokito.user?.id || '')
+const donoProtegidoAntiPv2 = numerodono
+.map(item => nJid(item))
+.filter(Boolean)
+.includes(alvoAntiPv2)
+if (alvoAntiPv2 && alvoAntiPv2.endsWith('@s.whatsapp.net') && alvoAntiPv2 !== botAntiPv2 && !donoProtegidoAntiPv2) {
+const agoraAntiPv2 = Date.now()
+const ultimaExecucaoAntiPv2 = Number(antiPv2EmProcessamento.get(alvoAntiPv2) || 0)
+if (agoraAntiPv2 - ultimaExecucaoAntiPv2 < 30000) continue
+antiPv2EmProcessamento.set(alvoAntiPv2, agoraAntiPv2)
+setTimeout(() => {
+if (antiPv2EmProcessamento.get(alvoAntiPv2) === agoraAntiPv2) antiPv2EmProcessamento.delete(alvoAntiPv2)
+}, 30000).unref?.()
+const numeroAntiPv2 = String(alvoAntiPv2).split('@')[0].split(':')[0].replace(/\D/g, '')
+const avisoAntiPv2 = `- 🔒 \`𝙰𝙽𝚃𝙸 𝙿𝚅\`
 
 > 👤 ׄ ( @${numeroAntiPv2} )
 
 > ⚠️ ׄ ( 𝙾 𝚙𝚛𝚒𝚟𝚊𝚍𝚘 𝚍𝚎𝚜𝚝𝚎 𝚋𝚘𝚝 𝚎́ 𝚙𝚛𝚘𝚝𝚎𝚐𝚒𝚍𝚘. )
 > 🚫 ׄ ( 𝙼𝚎𝚗𝚜𝚊𝚐𝚎𝚗𝚜 𝚙𝚛𝚒𝚟𝚊𝚍𝚊𝚜 𝚗𝚊̃𝚘 𝚜𝚊̃𝚘 𝚙𝚎𝚛𝚖𝚒𝚝𝚒𝚍𝚊𝚜. )
 > 🔐 ׄ ( 𝚂𝚎𝚞 𝚗𝚞́𝚖𝚎𝚛𝚘 𝚜𝚎𝚛𝚊́ 𝚋𝚕𝚘𝚚𝚞𝚎𝚊𝚍𝚘 𝚊𝚞𝚝𝚘𝚖𝚊𝚝𝚒𝚌𝚊𝚖𝚎𝚗𝚝𝚎. )`
-
-    try {
-      await tokito.sendMessage(from, {
-        text: avisoAntiPv2,
-        mentions: [alvoAntiPv2],
-        contextInfo: { ...canalInfo([alvoAntiPv2]), mentionedJid: [alvoAntiPv2] }
-      })
-      if (typeof tokito.updateBlockStatus !== 'function') throw new Error('updateBlockStatus não está disponível na conexão atual.')
-      await tokito.updateBlockStatus(alvoAntiPv2, 'block')
-      console.log(`[ ANTI-PV2 ] Bloqueado: ${numeroAntiPv2}`)
-    } catch (error) {
-      console.log('[ ANTI-PV2 ]', error?.message || error)
-    }
-  } else {
-    console.log('[ ANTI-PV2 ] JID não seguro para bloqueio:', alvoAntiPv2 || sender)
-  }
-  continue
+try {
+await tokito.sendMessage(from, {
+text: avisoAntiPv2,
+mentions: [alvoAntiPv2],
+contextInfo: { ...canalInfo([alvoAntiPv2]), mentionedJid: [alvoAntiPv2] }
+})
+if (typeof tokito.updateBlockStatus !== 'function') throw new Error('updateBlockStatus não está disponível na conexão atual.')
+await tokito.updateBlockStatus(alvoAntiPv2, 'block')
+console.log(`[ ANTI-PV2 ] Bloqueado: ${numeroAntiPv2}`)
+} catch (error) {
+console.log('[ ANTI-PV2 ]', error?.message || error)
 }
-
-if (!isGroup && !isNewsletter && !isStatus && !isBot && cfgGlobal.antipv === true && !SoDono && !subPvLiberado)
+} else {
+console.log('[ ANTI-PV2 ] JID não seguro para bloqueio:', alvoAntiPv2 || sender)
+}
 continue
-if (isGroup && dataGp?.[0]?.funcoes?.bangp === true && !SoDono)
-continue
-
+}
+if (!isGroup && !isNewsletter && !isStatus && !isBot && cfgGlobal.antipv === true && !SoDono && !subPvLiberado) continue
+if (isGroup && dataGp?.[0]?.funcoes?.bangp === true && !SoDono) continue
 let newsletterName = ''
 if (isNewsletter) {
 try {
@@ -1343,40 +1474,55 @@ const nomeEvento = info?.newsletterName || info?.message?.newsletterName || mens
 newsletterName = String(nomeEvento || '').trim()
 if (!newsletterName && typeof tokito.newsletterMetadata === 'function') {
 const metaNewsletter = await tokito.newsletterMetadata('jid', from).catch(() => null)
-newsletterName = String(metaNewsletter?.name || metaNewsletter?.subject || metaNewsletter?.thread_metadata?.name?.text || metaNewsletter?.threadMetadata?.name?.text || metaNewsletter?.metadata?.name || '').trim()
+newsletterName = String(
+metaNewsletter?.name || metaNewsletter?.subject || metaNewsletter?.thread_metadata?.name?.text || metaNewsletter?.threadMetadata?.name?.text || metaNewsletter?.metadata?.name || ''
+).trim()
 }
-} catch { newsletterName = '' }
+} catch {
+newsletterName = ''
+}
 if (!newsletterName && pushname && pushname !== 'Usuário') newsletterName = String(pushname).trim()
 if (!newsletterName) newsletterName = 'CANAL SEM NOME'
 }
-
 const chatType = isNewsletter ? 'CANAL' : isGroup ? 'GRUPO' : 'PRIVADO'
 const groupInfo = isNewsletter ? `(${newsletterName})` : isGroup ? `(${groupName || 'SEM NOME'})` : '(Privado)'
 const msgType = isCmd ? 'COMANDO' : 'MENSAGEM'
 const msgContent = isCmd
 ? `${prefix}${command}${q ? ` ${q}` : ''}`
 : body ||
-(mensagem?.imageMessage ? `[ IMAGEM${mensagem.imageMessage.caption ? `: ${mensagem.imageMessage.caption}` : ''} ]` :
-mensagem?.videoMessage ? `[ VÍDEO${mensagem.videoMessage.caption ? `: ${mensagem.videoMessage.caption}` : ''} ]` :
-mensagem?.audioMessage ? '[ ÁUDIO ]' :
-mensagem?.stickerMessage ? '[ FIGURINHA ]' :
-mensagem?.documentMessage ? `[ DOCUMENTO: ${mensagem.documentMessage.fileName || 'ARQUIVO'} ]` :
-mensagem?.contactMessage ? '[ CONTATO ]' :
-mensagem?.contactsArrayMessage ? '[ CONTATOS ]' :
-mensagem?.locationMessage ? '[ LOCALIZAÇÃO ]' :
-mensagem?.liveLocationMessage ? '[ LOCALIZAÇÃO AO VIVO ]' :
-mensagem?.reactionMessage ? `[ REAÇÃO: ${mensagem.reactionMessage.text || 'SEM EMOJI'} ]` :
-mensagem?.pollCreationMessage ? `[ ENQUETE: ${mensagem.pollCreationMessage.name || 'SEM TÍTULO'} ]` :
-mensagem?.pollCreationMessageV2 ? `[ ENQUETE: ${mensagem.pollCreationMessageV2.name || 'SEM TÍTULO'} ]` :
-mensagem?.pollCreationMessageV3 ? `[ ENQUETE: ${mensagem.pollCreationMessageV3.name || 'SEM TÍTULO'} ]` :
-'[ MENSAGEM SEM TEXTO ]')
+  (mensagem?.imageMessage
+  ? `[ IMAGEM${mensagem.imageMessage.caption ? `: ${mensagem.imageMessage.caption}` : ''} ]`
+  : mensagem?.videoMessage
+    ? `[ VÍDEO${mensagem.videoMessage.caption ? `: ${mensagem.videoMessage.caption}` : ''} ]`
+    : mensagem?.audioMessage
+      ? '[ ÁUDIO ]'
+      : mensagem?.stickerMessage
+        ? '[ FIGURINHA ]'
+        : mensagem?.documentMessage
+          ? `[ DOCUMENTO: ${mensagem.documentMessage.fileName || 'ARQUIVO'} ]`
+          : mensagem?.contactMessage
+            ? '[ CONTATO ]'
+            : mensagem?.contactsArrayMessage
+              ? '[ CONTATOS ]'
+              : mensagem?.locationMessage
+                ? '[ LOCALIZAÇÃO ]'
+                : mensagem?.liveLocationMessage
+                  ? '[ LOCALIZAÇÃO AO VIVO ]'
+                  : mensagem?.reactionMessage
+                    ? `[ REAÇÃO: ${mensagem.reactionMessage.text || 'SEM EMOJI'} ]`
+                    : mensagem?.pollCreationMessage
+                      ? `[ ENQUETE: ${mensagem.pollCreationMessage.name || 'SEM TÍTULO'} ]`
+                      : mensagem?.pollCreationMessageV2
+                        ? `[ ENQUETE: ${mensagem.pollCreationMessageV2.name || 'SEM TÍTULO'} ]`
+                        : mensagem?.pollCreationMessageV3
+                          ? `[ ENQUETE: ${mensagem.pollCreationMessageV3.name || 'SEM TÍTULO'} ]`
+                          : '[ MENSAGEM SEM TEXTO ]')
 const branco = valor => colors.white(String(valor ?? ''))
 if (!isBot || isNewsletter) {
 const cabecalhoLog = isNewsletter ? '📢 MENSAGEM DE CANAL' : isGroup ? '👥 MENSAGEM NO GRUPO' : '👤 MENSAGEM NO PRIVADO'
 const dadosOrigemLog = isNewsletter
 ? `${colors.cyan('| 📢 CANAL:')} ${branco(String(newsletterName || 'CANAL SEM NOME').toUpperCase())}\n${colors.cyan('| 🆔 ID:')} ${branco(from || 'NÃO IDENTIFICADO')}`
 : `${colors.cyan('| 👤 USUÁRIO:')} ${branco(String(pushname || 'SEM NOME').toUpperCase())}\n${colors.cyan('| 📱 NÚMERO:')} ${branco(numeroSender || 'NÃO IDENTIFICADO')}\n${colors.cyan('| 📲 APARELHO:')} ${branco(whatIsPhone || 'DESCONHECIDO')}`
-
 console.log(`${colors.cyan('╭──. ݁ ⛧ ₊ ⊹ . ݁ ˖ ❆ິ̸ . ݁──╮')}
 ${colors.cyan('|')} ${branco(cabecalhoLog)}
 ${colors.cyan('╰──. ݁ ⛧ ₊ ⊹ . ݁ ˖ ❆ິ̸ . ݁──╯')}
@@ -1389,28 +1535,28 @@ ${colors.cyan('| 🕒 HORA:')} ${branco(dataHoraBR)}
 ${colors.cyan('╰──. ݁ ⛧ ₊ ⊹ 🧊 . ݁ ˖ ❆ິ̸ . ݁──╯')}`)
 }
 if (budy2 === 'prefixo') {
-if (isBotoff && !SoDono)
-continue
-await fundos.enviar(plug(), 'prefixo', mess.prefixChanged(prefix), [{
+if (isBotoff && !SoDono) continue
+await fundos.enviar(plug(), 'prefixo', mess.prefixChanged(prefix), [
+{
 texto: mess.botaoMenu(),
 id: `${prefix}menu`
-}])
+}
+])
 continue
 }
 const comandosComerciaisGrupo = new Set(['lojinha', 'loja', 'sub', 'code', 'meu'])
 const liberarComercialGrupo = isCmd && comandosComerciaisGrupo.has(String(command || '').toLowerCase())
 if (!runtimeSub.isSubBot && isGroup && nescessario.aluguel === true && !SoDono && !aluguel.autorizado(from) && !liberarComercialGrupo) {
-if (isCmd)
-await reply(mess.aluguelBloqueado(prefix))
+if (isCmd) await reply(mess.aluguelBloqueado(prefix))
 continue
 }
 const bloqueadoEventoPre = await plugins.evento(plug(), 'pre').catch(error => {
 console.log('[PLUGIN EVENTO PRE]', modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
 return false
 })
-if (bloqueadoEventoPre)
-continue
-const bloqueada = await funcoes.verificar({
+if (bloqueadoEventoPre) continue
+const bloqueada = await funcoes
+.verificar({
 tokito,
 info,
 original: info.message,
@@ -1430,36 +1576,34 @@ dataGp,
 setGp,
 newsletter,
 selo
-}).catch(error => {
+})
+.catch(error => {
 console.log('[FUNÇÕES AUTOMÁTICAS]', modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
 return false
 })
-if (bloqueada)
-continue
+if (bloqueada) continue
 const respondeuJogo = await funcoes.jogos.verificar(contextoJogos()).catch(error => {
 console.log('[JOGOS AUTOMÁTICOS]', modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
 return false
 })
-if (respondeuJogo)
-continue
+if (respondeuJogo) continue
 const bloqueadoEventoPlugin = await plugins.evento(plug()).catch(error => {
 console.log('[PLUGIN EVENTO]', modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
 return false
 })
-if (bloqueadoEventoPlugin)
-continue
-if (!isCmd)
-continue
+if (bloqueadoEventoPlugin) continue
+if (!isCmd) continue
 if (isGroup && dataGp?.[0]?.funcoes?.modoia?.ativo === true && !isGroupAdmins && !SoDono) {
-await agenteIA.responderRestricao(plug(), command, 'administrador', dataGp?.[0]?.funcoes?.modoia?.tipo || 'texto').catch(() => reply('No modo IA, membros conversam comigo normalmente sem usar comandos.'))
+await agenteIA
+.responderRestricao(plug(), command, 'administrador', dataGp?.[0]?.funcoes?.modoia?.tipo || 'texto')
+.catch(() => reply('No modo IA, membros conversam comigo normalmente sem usar comandos.'))
 continue
 }
 if (isGroup && dataGp?.[0]?.funcoes?.soadm === true && !isGroupAdmins && !SoDono) {
 await reply(mess.soadmBloqueado())
 continue
 }
-if (isBotoff && !SoDono)
-continue
+if (isBotoff && !SoDono) continue
 const acessoPlugin = regrasPlugins.verificar({
 cfg: nescessario,
 command,
@@ -1474,70 +1618,65 @@ continue
 }
 ////////////////////////////////////////////////////////////////////////////////////
 let erroPlugin = null
-
 const rodou = await plugins.executar(command, plug()).catch(error => {
 erroPlugin = error
-
-console.log(
-'[PLUGIN]',
-command,
-modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes'
-)
-
+console.log('[PLUGIN]', command, modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
 return false
 })
-
 if (erroPlugin) {
 if (modulos.ehErroApi(erroPlugin, API_URL)) {
-await reply(
-mess.erroApi(modulos.siteApi(API_URL))
-)
+await reply(mess.erroApi(modulos.siteApi(API_URL)))
+} else {
+await reply(mess.error())
 }
-else {
-await reply(
-mess.error()
-)
-}
-
 continue
 }
-
-if (rodou)
-continue
+if (rodou) continue
 const inicio = performance.now()
-
 try {
 const inicioSimilar = performance.now()
 const achado = similar(comandos(), command)
 const tempoSimilar = performance.now() - inicioSimilar
-await fundos.enviar(plug(), 'erro', mess.commandNotFound({
+await fundos.enviar(
+plug(),
+'erro',
+mess.commandNotFound({
 prefix,
 command,
 nome: achado.nome ? `${prefix}${achado.nome}` : 'Nenhum',
 porcentagem: `${Number(achado.porcentagem || 0).toFixed(1)}%`,
 tempo: `${tempoSimilar.toFixed(3)} ms`
-}), [{
+}),
+[
+{
 texto: mess.botaoMenu(),
 id: `${prefix}menu`
-}])
 }
-catch (error) {
+]
+)
+} catch (error) {
 console.log(colors.red('❌ Erro na semelhança:'), modulos.sanitizarErro(error, [API_KEY_TOKITO]) || 'Erro sem detalhes')
-await fundos.enviar(plug(), 'erro', mess.commandNotFound({
+await fundos.enviar(
+plug(),
+'erro',
+mess.commandNotFound({
 prefix,
 command,
 nome: 'Nenhum',
 porcentagem: '0.0%',
 tempo: '0.000 ms'
-}), [{
+}),
+[
+{
 texto: mess.botaoMenu(),
 id: `${prefix}menu`
-}])
+}
+]
+)
 }
 continue
 }
-}
-catch (erro) {
+} catch (erro) {
 console.log(colors.red('❌ erro ao reiniciar :('), modulos.sanitizarErro(erro, [API_KEY_TOKITO]) || 'Erro sem detalhes')
 }
 }

@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { proto, prepareWAMessageMedia, generateWAMessageFromContent, jidNormalizedUser } = require('baileys')
+const { proto, prepareWAMessageMedia, generateWAMessageFromContent, jidNormalizedUser } = require('@stone-wpp/ofc')
 const runtime = require('./runtime')
 const store = require('./store')
 

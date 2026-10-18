@@ -136,7 +136,7 @@ dylan.setCommand({
       }
 
       // O envelope groupStatusMessageV2 identifica um STATUS, não
-      // uma mensagem comum enviada ao chat. A Baileys do Tokito
+      // uma mensagem comum enviada ao chat. A Stone WPP do Tokito
       // já inclui esse envelope no protocolo WhatsApp.
       const msg = ctx.generateWAMessageFromContent(ctx.from, {
         messageContextInfo: { messageSecret: segredo },

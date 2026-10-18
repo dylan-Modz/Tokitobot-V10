@@ -13,7 +13,7 @@ const {
 proto,
 prepareWAMessageMedia,
 generateWAMessageFromContent
-} = require('baileys')
+} = require('@stone-wpp/ofc')
 
 const enviarPixCompleto = async (ctx, item, caption) => {
 const codigoPix = String(

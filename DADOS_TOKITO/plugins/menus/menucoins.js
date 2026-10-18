@@ -41,7 +41,7 @@ categoria: 'menus'
 },
 async executar(ctx) {
 try {
-return await ctx.dylanModz(ctx.linguagem.menucoins(ctx.NomeDoBot, ctx.sender, ctx.isCargo, ctx.isChVip, ctx.horaBR, ctx.prefix, ctx.ownerName, ctx.baileysVersion), '🪙', [{
+return await ctx.dylanModz(ctx.linguagem.menucoins(ctx.NomeDoBot, ctx.sender, ctx.isCargo, ctx.isChVip, ctx.horaBR, ctx.prefix, ctx.ownerName, ctx.stoneVersion), '🪙', [{
 texto: ctx.mess.botaoMenu(),
 id: `${ctx.prefix}menu`
 }])

@@ -1,7 +1,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { proto, prepareWAMessageMedia } = require('baileys')
+const { proto, prepareWAMessageMedia } = require('@stone-wpp/ofc')
 const r = require('../../sistemas/rpg/index')
 const dylan = require('../../database/lib/comandos')
 const { compacto, dinheiro } = require('../../sistemas/rpg/texto')

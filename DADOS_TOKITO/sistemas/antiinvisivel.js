@@ -7,7 +7,7 @@
  * rajada excepcional e validacao das permissoes.
  */
 const base = require('./grupos.js')
-const { proto } = require('baileys')
+const { proto } = require('@stone-wpp/ofc')
 const runtimeSub = require('../sub/runtime.js')
 // Monitor complementar integrado neste arquivo, sem criar modulos extras.
 const floodPagamento = (() => {

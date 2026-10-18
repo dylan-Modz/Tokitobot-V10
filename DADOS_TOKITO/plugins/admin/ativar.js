@@ -10,7 +10,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { proto, prepareWAMessageMedia } = require('baileys')
+const { proto, prepareWAMessageMedia } = require('@stone-wpp/ofc')
 const dylan = require('../../database/lib/comandos')
 
 const mediaMenu = async ctx => {

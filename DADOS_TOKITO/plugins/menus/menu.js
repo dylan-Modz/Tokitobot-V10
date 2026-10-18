@@ -29,6 +29,7 @@
  */
 
 const dylan = require('../../database/lib/comandos')
+const { version } = require('../../../package.json')
 
 dylan.setCommand({
 nome: "menu",
@@ -44,7 +45,7 @@ with (ctx) {
 {
 try {
 if (!isBotoes)
-return dylanModz(linguagem.menu(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, baileysVersion))
+return dylanModz(linguagem.menu(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion))
 reagir(from, '🧊').catch(() => {})
 const caminhoVideo = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
 const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
@@ -159,7 +160,8 @@ text: `❪🧊.ꯧᴍᴇɴᴜ ʟɪsᴛꯧ⸼🧊❫
 ├⊹ 🧊 ᴄᴀʀɢᴏ: ${isCargo}
 ├⊹ 🧊 ᴠɪᴘ: ${isChVip}
 ├⊹ 🧊 ᴅɪsᴘᴏsɪᴛɪᴠᴏ: ${whatIsPhone}
-├⊹ 🧊 ʙᴀɪʟᴇʏs: ${baileysVersion}
+├⊹ 🧊 ᴠᴇʀsᴀ̃ᴏ: ${version}
+├⊹ 🧊 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ${stoneVersion}
 ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛`
 },
 footer: {

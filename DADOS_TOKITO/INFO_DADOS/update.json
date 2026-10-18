@@ -4,22 +4,301 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-18T18:55:58.527Z",
+  "publishedAt": "2026-10-18T21:08:48.767Z",
   "changelog": [
-    "[Melhoria] Avisos: comunica migração do Tokito V10 para Stone WPP às 18h",
-    "A versão 10.2.46 já está disponível para atualização.",
-    "Avisos atualizado"
+    "[Migração] Integração da biblioteca própria Stone WPP 1.0.4 no lugar da Baileys.",
+    "[Organização] tokito.js, connect.js e módulos centrais organizados no estilo compacto.",
+    "[Menus] Exibição automática da versão do bot via package.json em todos os menus de texto e no menu interativo.",
+    "[Compatibilidade] Atualizações de dependências, comandos, plugins e sistemas afetados pela migração.",
+    "[Avisos] Comunicado oficial da migração enviado aos donos das instalações elegíveis."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Avisos: comunica migração do Tokito V10 para Stone WPP às 18h",
-  "notice": "A versão 10.2.46 já está disponível para atualização.",
+  "type": "Atualização",
+  "title": "Stone WPP 1.0.4 e organização do Tokito V10",
+  "notice": "Tokito V10 10.2.46 disponível: migração para Stone WPP 1.0.4, menus com versão e melhorias na organização.",
   "required": true,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/connect.js",
+      "gitSha": "b0fba2ec5fdfaa3e943d72a8b093f7e0eef0f676",
+      "sha256": "d156acd8e285ac894bf4aa088a72d908728fe54f8d19bb50997e1dd91d77c33c",
+      "size": 42735
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/deps.js",
+      "gitSha": "921ae0b677e9b2399afa2ef54a8e2cd75f3c9192",
+      "sha256": "9c06394fa5b82ccd749b895e9b523d02ba4b53e1ff642b9ec8ea44df51d92dcd",
+      "size": 3649
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/exports.js",
+      "gitSha": "6cdc33c13ac55678ae07ee3052dab7ba4bb304f4",
+      "sha256": "128d678f5e6c51f991fc12db12c8b53f386c27e2bffeff8c6b3ae9bddec80d7f",
+      "size": 9381
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/install.sh",
+      "gitSha": "b12743c72063c7a86bcf9bb27d7f2cf929f97aee",
+      "sha256": "3431f250d7c5c56cbdb51e04764fe3c66c2f9f6372da6cc08e2d6b6c87f90f7c",
+      "size": 1306
+    },
+    {
+      "path": "DADOS_TOKITO/detector.js",
+      "gitSha": "39cd629c409684d1db634ba842e5bad1539536d1",
+      "sha256": "9a079ed60f21b74b9c1c1efd813b68b873c182e28dd3013220677e2eb7e8a101",
+      "size": 6138
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "gitSha": "382073f3f82e221d642871b3134aaed7715a4a79",
+      "sha256": "909288007c0aca6e3eba120cd1423ff6bffbccfa8b1acc3e834e33de675cfec5",
+      "size": 231532
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "gitSha": "78bfe8a2a9e948f49cfe45bdaf8e0d5c8cf97e33",
+      "sha256": "9575bd854faf04070d10d4eb45a4d89bce240a78ab0a39d918bc7ff8245cb3d9",
+      "size": 78953
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+      "gitSha": "f70ddfaf03e6c8b758b364d8a5a443b8b1893f8f",
+      "sha256": "1bdca4d38553cc25e217b35e65c7c7212ee34699aa3463c66a133ca31a440b6e",
+      "size": 10599
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/del.js",
+      "gitSha": "d516a933d02cb4a9b64b7f7116b1eff603ef9f9e",
+      "sha256": "d4b0efaa0947682720d57d9f577389544d40fcece1978950f3bca050467fb8cb",
+      "size": 3372
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
+      "gitSha": "05cb132f7e1d36bf3d0956dbc3265183325f4222",
+      "sha256": "ecc29471278f87fe44842a4df64ca9b391a67352ddc12ab57374efd7e09a0a73",
+      "size": 5820
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/aluguel/pix.js",
+      "gitSha": "f51a8df436aefa98c0f6c7d25e31540fce67c046",
+      "sha256": "21b21fb686cbd57eb9117197a970ea2e0ffa5451509345652143c270b09e0a0d",
+      "size": 4607
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/metadinha.js",
+      "gitSha": "68e0030e77ab6e7d0dc835a67613a5284e348502",
+      "sha256": "e4ff991faff36aebcc06e6415396a63d1cd4e46ec959bd819322efcd682a2022",
+      "size": 4829
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/appstore.js",
+      "gitSha": "67cd2bca340a4d64abf66e15deb8df2b4a7b76b2",
+      "sha256": "8e593421d5ba9f1ed61a5dfc64b37857f667c8c04020137a7fab6e4989d47e98",
+      "size": 5301
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/evento-x4.js",
+      "gitSha": "e692f672b341ae68762ef09101ac4f33d8f35748",
+      "sha256": "ebf9c5ecc742f04f20a8abb5f8ae669a0dc1e29d1e62c0c1b54489a02b2fa9fb",
+      "size": 2778
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/notas.js",
+      "gitSha": "19ab5be0bfdbbfe904c09f4f80a37d79d2e0a501",
+      "sha256": "cecee4aac52110d68ee49e7aef416fd7bd2551736d693009339f9cf7ca7a2b54",
+      "size": 3990
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/index.js",
+      "gitSha": "8bcec0be0118f1ee8a4b4f3bc2ec3f5c09719bdb",
+      "sha256": "9f31b19bc7c56745d0b8d260d79167169d3ff243f1d3086c4533ceebcf0077db",
+      "size": 7465
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/info/ping.js",
+      "gitSha": "2dcb4c581b320ce9145fd1e8c377ef1ea6a65565",
+      "sha256": "be6dc5af345ee31a13b87fd2bf0c91ab7fd35421d08dc0ba1b5d2f1f3e632468",
+      "size": 4620
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/akinator.js",
+      "gitSha": "1940a3b440fd2b03282175ad18d4c62ab234df68",
+      "sha256": "574ada997d9eeabd69a12a95956f461896676b09fbb888d6937ad856b9806b41",
+      "size": 12742
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/bateria.js",
+      "gitSha": "8cdeb892d59c78cdd0b21e592ad0fc838c09efcc",
+      "sha256": "83324212d45131a598d0ebb0e5027e194c519b5f69a05d4b97b0a5d7f7909e23",
+      "size": 21561
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/cobrinha.js",
+      "gitSha": "ca09b4a07a11cff36da19fb06341b90c59016770",
+      "sha256": "950d03606c7cc0906b874afc5ccde488a2156a834aaece737d395db7c63c337b",
+      "size": 22157
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/ignis.js",
+      "gitSha": "8dd841cb9b334abf3a76798c971abc7035666cd2",
+      "sha256": "3241a5fd4e2fd850bce973d857c41f001ef1bdcb66a968218cd727af435fcb99",
+      "size": 8770
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/jogos/memoria.js",
+      "gitSha": "b5531ad77b0ed0336167a335375ecbdafba7ad39",
+      "sha256": "1bc2ae34be2882002b2553d20bd9dfedc4754d9d7e9f780adc2b78d65edae680",
+      "size": 19730
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menu.js",
+      "gitSha": "6fbc1c9fafce1afea4345b68f12cc97867a18f9a",
+      "sha256": "e27d5286c6e3e9f72ac64dce76c4f8ae147cca5efc70df5235441562fd6d1abb",
+      "size": 6410
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menuadm.js",
+      "gitSha": "f848dffe70f5363477160ea8be462bc2022ddc46",
+      "sha256": "9dae7a199c232f20e3aad24d849d6b6509f1a5192f7077aae2243a91c81f09c9",
+      "size": 1660
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menualt.js",
+      "gitSha": "bddff91dfed90bb9b14df9a44594c077ab15ba18",
+      "sha256": "817a95d03e882ed5d74eee02954126fceb4040ab26b74c7116483bd1316a925d",
+      "size": 1673
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menubn.js",
+      "gitSha": "edcc80ea517e19b2d3849556a8d8946f4ab8ad8e",
+      "sha256": "b1737746de74510e3a665d4519378d9572c15b9b5e67ea0edbe006243869ba22",
+      "size": 1672
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menucoins.js",
+      "gitSha": "3687f907ab1800bd1fe8356da9a3229a55d40eec",
+      "sha256": "6b7a871c706f966f566f2db8fb0d82b21b9c12cda70b59bc076e12557570fd34",
+      "size": 1712
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menudono.js",
+      "gitSha": "6764226131215815db99f93f61cb71ab7ac1c338",
+      "sha256": "1d22cd5eae8ffdbe2634243ab54581810fe74eab4487d6ded624269f33baf510",
+      "size": 1608
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menudown.js",
+      "gitSha": "ad18622f95678c64f0886eafa3f0d53df0471e3e",
+      "sha256": "9bb39a651ba18b8e78a28454d6e38a7136ce5a94371ee3c13c31facf7c66b6fa",
+      "size": 1658
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menuff.js",
+      "gitSha": "830c6527fa1a9ce99025d232fedd37b30dc04252",
+      "sha256": "f608db8e7f4f6e9d84b88034d27e8944f7c3c1b4f19f0a5ae8e4dd06a9cf91ab",
+      "size": 1707
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menujogos.js",
+      "gitSha": "5728bd6f936d9e8300311c5809d2114b5b41a907",
+      "sha256": "1b0ef47c82be95f964e386cb17eadda0b06aa980891d921892995bcedf256072",
+      "size": 1664
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menulogos.js",
+      "gitSha": "4f2da508f91b078e7c870834659b4a2fff0dd2d9",
+      "sha256": "94ea8ded2bde11cedd092499df2fecf9390f33860493678731e6a1de809eacca",
+      "size": 1659
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menurpg.js",
+      "gitSha": "1c1cb0c7e4bdf4120ed153a1c495f5a9053793c8",
+      "sha256": "b51dd88451f02b830bbfdee1230aaf3a50a299724e650fea12ad4fe8ef208f8c",
+      "size": 859
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/menus/menuzz.js",
+      "gitSha": "855ef5d4c471ce101e58d1993fdad4274b0024b7",
+      "sha256": "f3e2a5ff6a3fb91f02eb98a6807e08b0ddb5346355fe2aa8966215b3ed0764ce",
+      "size": 1636
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
+      "gitSha": "d28dae892ac5218c89518bf49be638627ac872b9",
+      "sha256": "0aade6d352beee319c5fea90c50cd9a6b8198e8f1adb0a82562d9d371c243412",
+      "size": 7143
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+      "gitSha": "0b94e3264c6a2f774573ad2f6e72fc0b377b12a9",
+      "sha256": "14943a3726cf993cde2e919a2fed2fdbe1bf893f413f8bf6dbc2d93586953e73",
+      "size": 17000
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/dados.js",
+      "gitSha": "20a62bef5f96f611bd3c52252f52ffbe21ba5a12",
+      "sha256": "fc5f863b395f2906ce4c6d4480833f4e89697204bc138776c3b0c0b8f46f5e26",
+      "size": 37594
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/funcoes.js",
+      "gitSha": "87d3ce2558f56ec9477bee98a3396969c242d80b",
+      "sha256": "afb8575ca27cbeb453a19fa52ab69bd5cbc6f2583969baa7354835e5e28670f7",
+      "size": 5949
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/fundos.js",
+      "gitSha": "505095321b4bbf997973c88a4acbf74658009629",
+      "sha256": "af3a13262422d207c22b62ff6d7403597844b72e53ce756c7511823b4289ad67",
+      "size": 5609
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/modulos.js",
+      "gitSha": "d98a35ce1d52c55991b8792805545e097392a6ca",
+      "sha256": "294df8571e51eb63823f2aeea32e6079d010799888743acfc02f88004f16dd14",
+      "size": 12718
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/registro.js",
+      "gitSha": "5e4c5598633289e1fc9c4d4e05999afb5ee0de11",
+      "sha256": "e4a567716ab29c0e3159336a69f6630644c7b27794207a7ce7b57f3d40541fde",
+      "size": 13256
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/x9.js",
+      "gitSha": "53b0bcdbc0c4586c341b7b920cf1d16936734066",
+      "sha256": "44fc4d7d81072226f5037669038b64ff7bb812dd12d30e74fc6ed01154e0b324",
+      "size": 14698
+    },
+    {
+      "path": "DADOS_TOKITO/sub/ui.js",
+      "gitSha": "c66a2f605557918505fb651314ef430dbb7fb762",
+      "sha256": "18501a906a41889e01ea5f16f70cda8ad9a5a31791c4cde88e40b4cbf2d6f80d",
+      "size": 15147
+    },
+    {
+      "path": "README.md",
+      "gitSha": "e2ed509e3bdd15acdb3966e026a8090246ebc6f1",
+      "sha256": "becc6dfb91a1ea0f5fe8075f5346554f6ec3795c3eaccecdf87af44de9decce1",
+      "size": 8977
+    },
+    {
+      "path": "package.json",
+      "gitSha": "98f0888182468b770d5923650cba711de14b53a9",
+      "sha256": "c297fb0b1452bb5148909cd0c38038ecc54d860bbc84b5a6f987339f6594ee3c",
+      "size": 1166
+    },
+    {
+      "path": "tokito.js",
+      "gitSha": "a1c403f307b3d3f4ac32ccf960db23655f562620",
+      "sha256": "44fb4914dc395941f7fca80fbb49c71b171664cc0551aaa730e68701cef2200b",
+      "size": 53447
+    },
+    {
       "path": "DADOS_TOKITO/INFO_DADOS/avisos.json",
+      "gitSha": "feb882a403612b835b326e29fa6557a9278cf503",
       "sha256": "935985690c89b8dbcaf8d39c345ae91468902ac33b7c8f7d01f40f329d6c6b0e",
       "size": 3721
     }
@@ -4089,32 +4368,313 @@
       "version": "10.2.46",
       "fromVersion": "10.2.45",
       "channel": "stable",
-      "type": "Melhoria",
-      "title": "Avisos: comunica migração do Tokito V10 para Stone WPP às 18h",
-      "notice": "A versão 10.2.46 já está disponível para atualização.",
+      "type": "Atualização",
+      "title": "Stone WPP 1.0.4 e organização do Tokito V10",
+      "notice": "Tokito V10 10.2.46 disponível: migração para Stone WPP 1.0.4, menus com versão e melhorias na organização.",
       "changelog": [
-        "Avisos atualizado"
+        "[Migração] Integração da biblioteca própria Stone WPP 1.0.4 no lugar da Baileys.",
+        "[Organização] tokito.js, connect.js e módulos centrais organizados no estilo compacto.",
+        "[Menus] Exibição automática da versão do bot via package.json em todos os menus de texto e no menu interativo.",
+        "[Compatibilidade] Atualizações de dependências, comandos, plugins e sistemas afetados pela migração.",
+        "[Avisos] Comunicado oficial da migração enviado aos donos das instalações elegíveis."
       ],
       "files": [
         {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "b0fba2ec5fdfaa3e943d72a8b093f7e0eef0f676",
+          "sha256": "d156acd8e285ac894bf4aa088a72d908728fe54f8d19bb50997e1dd91d77c33c",
+          "size": 42735
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/deps.js",
+          "gitSha": "921ae0b677e9b2399afa2ef54a8e2cd75f3c9192",
+          "sha256": "9c06394fa5b82ccd749b895e9b523d02ba4b53e1ff642b9ec8ea44df51d92dcd",
+          "size": 3649
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/exports.js",
+          "gitSha": "6cdc33c13ac55678ae07ee3052dab7ba4bb304f4",
+          "sha256": "128d678f5e6c51f991fc12db12c8b53f386c27e2bffeff8c6b3ae9bddec80d7f",
+          "size": 9381
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/install.sh",
+          "gitSha": "b12743c72063c7a86bcf9bb27d7f2cf929f97aee",
+          "sha256": "3431f250d7c5c56cbdb51e04764fe3c66c2f9f6372da6cc08e2d6b6c87f90f7c",
+          "size": 1306
+        },
+        {
+          "path": "DADOS_TOKITO/detector.js",
+          "gitSha": "39cd629c409684d1db634ba842e5bad1539536d1",
+          "sha256": "9a079ed60f21b74b9c1c1efd813b68b873c182e28dd3013220677e2eb7e8a101",
+          "size": 6138
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "gitSha": "382073f3f82e221d642871b3134aaed7715a4a79",
+          "sha256": "909288007c0aca6e3eba120cd1423ff6bffbccfa8b1acc3e834e33de675cfec5",
+          "size": 231532
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "78bfe8a2a9e948f49cfe45bdaf8e0d5c8cf97e33",
+          "sha256": "9575bd854faf04070d10d4eb45a4d89bce240a78ab0a39d918bc7ff8245cb3d9",
+          "size": 78953
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
+          "gitSha": "f70ddfaf03e6c8b758b364d8a5a443b8b1893f8f",
+          "sha256": "1bdca4d38553cc25e217b35e65c7c7212ee34699aa3463c66a133ca31a440b6e",
+          "size": 10599
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/del.js",
+          "gitSha": "d516a933d02cb4a9b64b7f7116b1eff603ef9f9e",
+          "sha256": "d4b0efaa0947682720d57d9f577389544d40fcece1978950f3bca050467fb8cb",
+          "size": 3372
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
+          "gitSha": "05cb132f7e1d36bf3d0956dbc3265183325f4222",
+          "sha256": "ecc29471278f87fe44842a4df64ca9b391a67352ddc12ab57374efd7e09a0a73",
+          "size": 5820
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/pix.js",
+          "gitSha": "f51a8df436aefa98c0f6c7d25e31540fce67c046",
+          "sha256": "21b21fb686cbd57eb9117197a970ea2e0ffa5451509345652143c270b09e0a0d",
+          "size": 4607
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/metadinha.js",
+          "gitSha": "68e0030e77ab6e7d0dc835a67613a5284e348502",
+          "sha256": "e4ff991faff36aebcc06e6415396a63d1cd4e46ec959bd819322efcd682a2022",
+          "size": 4829
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/appstore.js",
+          "gitSha": "67cd2bca340a4d64abf66e15deb8df2b4a7b76b2",
+          "sha256": "8e593421d5ba9f1ed61a5dfc64b37857f667c8c04020137a7fab6e4989d47e98",
+          "size": 5301
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/evento-x4.js",
+          "gitSha": "e692f672b341ae68762ef09101ac4f33d8f35748",
+          "sha256": "ebf9c5ecc742f04f20a8abb5f8ae669a0dc1e29d1e62c0c1b54489a02b2fa9fb",
+          "size": 2778
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/notas.js",
+          "gitSha": "19ab5be0bfdbbfe904c09f4f80a37d79d2e0a501",
+          "sha256": "cecee4aac52110d68ee49e7aef416fd7bd2551736d693009339f9cf7ca7a2b54",
+          "size": 3990
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/index.js",
+          "gitSha": "8bcec0be0118f1ee8a4b4f3bc2ec3f5c09719bdb",
+          "sha256": "9f31b19bc7c56745d0b8d260d79167169d3ff243f1d3086c4533ceebcf0077db",
+          "size": 7465
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/info/ping.js",
+          "gitSha": "2dcb4c581b320ce9145fd1e8c377ef1ea6a65565",
+          "sha256": "be6dc5af345ee31a13b87fd2bf0c91ab7fd35421d08dc0ba1b5d2f1f3e632468",
+          "size": 4620
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/akinator.js",
+          "gitSha": "1940a3b440fd2b03282175ad18d4c62ab234df68",
+          "sha256": "574ada997d9eeabd69a12a95956f461896676b09fbb888d6937ad856b9806b41",
+          "size": 12742
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/bateria.js",
+          "gitSha": "8cdeb892d59c78cdd0b21e592ad0fc838c09efcc",
+          "sha256": "83324212d45131a598d0ebb0e5027e194c519b5f69a05d4b97b0a5d7f7909e23",
+          "size": 21561
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/cobrinha.js",
+          "gitSha": "ca09b4a07a11cff36da19fb06341b90c59016770",
+          "sha256": "950d03606c7cc0906b874afc5ccde488a2156a834aaece737d395db7c63c337b",
+          "size": 22157
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/ignis.js",
+          "gitSha": "8dd841cb9b334abf3a76798c971abc7035666cd2",
+          "sha256": "3241a5fd4e2fd850bce973d857c41f001ef1bdcb66a968218cd727af435fcb99",
+          "size": 8770
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/jogos/memoria.js",
+          "gitSha": "b5531ad77b0ed0336167a335375ecbdafba7ad39",
+          "sha256": "1bc2ae34be2882002b2553d20bd9dfedc4754d9d7e9f780adc2b78d65edae680",
+          "size": 19730
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menu.js",
+          "gitSha": "6fbc1c9fafce1afea4345b68f12cc97867a18f9a",
+          "sha256": "e27d5286c6e3e9f72ac64dce76c4f8ae147cca5efc70df5235441562fd6d1abb",
+          "size": 6410
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menuadm.js",
+          "gitSha": "f848dffe70f5363477160ea8be462bc2022ddc46",
+          "sha256": "9dae7a199c232f20e3aad24d849d6b6509f1a5192f7077aae2243a91c81f09c9",
+          "size": 1660
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menualt.js",
+          "gitSha": "bddff91dfed90bb9b14df9a44594c077ab15ba18",
+          "sha256": "817a95d03e882ed5d74eee02954126fceb4040ab26b74c7116483bd1316a925d",
+          "size": 1673
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menubn.js",
+          "gitSha": "edcc80ea517e19b2d3849556a8d8946f4ab8ad8e",
+          "sha256": "b1737746de74510e3a665d4519378d9572c15b9b5e67ea0edbe006243869ba22",
+          "size": 1672
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menucoins.js",
+          "gitSha": "3687f907ab1800bd1fe8356da9a3229a55d40eec",
+          "sha256": "6b7a871c706f966f566f2db8fb0d82b21b9c12cda70b59bc076e12557570fd34",
+          "size": 1712
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menudono.js",
+          "gitSha": "6764226131215815db99f93f61cb71ab7ac1c338",
+          "sha256": "1d22cd5eae8ffdbe2634243ab54581810fe74eab4487d6ded624269f33baf510",
+          "size": 1608
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menudown.js",
+          "gitSha": "ad18622f95678c64f0886eafa3f0d53df0471e3e",
+          "sha256": "9bb39a651ba18b8e78a28454d6e38a7136ce5a94371ee3c13c31facf7c66b6fa",
+          "size": 1658
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menuff.js",
+          "gitSha": "830c6527fa1a9ce99025d232fedd37b30dc04252",
+          "sha256": "f608db8e7f4f6e9d84b88034d27e8944f7c3c1b4f19f0a5ae8e4dd06a9cf91ab",
+          "size": 1707
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menujogos.js",
+          "gitSha": "5728bd6f936d9e8300311c5809d2114b5b41a907",
+          "sha256": "1b0ef47c82be95f964e386cb17eadda0b06aa980891d921892995bcedf256072",
+          "size": 1664
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menulogos.js",
+          "gitSha": "4f2da508f91b078e7c870834659b4a2fff0dd2d9",
+          "sha256": "94ea8ded2bde11cedd092499df2fecf9390f33860493678731e6a1de809eacca",
+          "size": 1659
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menurpg.js",
+          "gitSha": "1c1cb0c7e4bdf4120ed153a1c495f5a9053793c8",
+          "sha256": "b51dd88451f02b830bbfdee1230aaf3a50a299724e650fea12ad4fe8ef208f8c",
+          "size": 859
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/menus/menuzz.js",
+          "gitSha": "855ef5d4c471ce101e58d1993fdad4274b0024b7",
+          "sha256": "f3e2a5ff6a3fb91f02eb98a6807e08b0ddb5346355fe2aa8966215b3ed0764ce",
+          "size": 1636
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
+          "gitSha": "d28dae892ac5218c89518bf49be638627ac872b9",
+          "sha256": "0aade6d352beee319c5fea90c50cd9a6b8198e8f1adb0a82562d9d371c243412",
+          "size": 7143
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
+          "gitSha": "0b94e3264c6a2f774573ad2f6e72fc0b377b12a9",
+          "sha256": "14943a3726cf993cde2e919a2fed2fdbe1bf893f413f8bf6dbc2d93586953e73",
+          "size": 17000
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "gitSha": "20a62bef5f96f611bd3c52252f52ffbe21ba5a12",
+          "sha256": "fc5f863b395f2906ce4c6d4480833f4e89697204bc138776c3b0c0b8f46f5e26",
+          "size": 37594
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/funcoes.js",
+          "gitSha": "87d3ce2558f56ec9477bee98a3396969c242d80b",
+          "sha256": "afb8575ca27cbeb453a19fa52ab69bd5cbc6f2583969baa7354835e5e28670f7",
+          "size": 5949
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/fundos.js",
+          "gitSha": "505095321b4bbf997973c88a4acbf74658009629",
+          "sha256": "af3a13262422d207c22b62ff6d7403597844b72e53ce756c7511823b4289ad67",
+          "size": 5609
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/modulos.js",
+          "gitSha": "d98a35ce1d52c55991b8792805545e097392a6ca",
+          "sha256": "294df8571e51eb63823f2aeea32e6079d010799888743acfc02f88004f16dd14",
+          "size": 12718
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/registro.js",
+          "gitSha": "5e4c5598633289e1fc9c4d4e05999afb5ee0de11",
+          "sha256": "e4a567716ab29c0e3159336a69f6630644c7b27794207a7ce7b57f3d40541fde",
+          "size": 13256
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/x9.js",
+          "gitSha": "53b0bcdbc0c4586c341b7b920cf1d16936734066",
+          "sha256": "44fc4d7d81072226f5037669038b64ff7bb812dd12d30e74fc6ed01154e0b324",
+          "size": 14698
+        },
+        {
+          "path": "DADOS_TOKITO/sub/ui.js",
+          "gitSha": "c66a2f605557918505fb651314ef430dbb7fb762",
+          "sha256": "18501a906a41889e01ea5f16f70cda8ad9a5a31791c4cde88e40b4cbf2d6f80d",
+          "size": 15147
+        },
+        {
+          "path": "README.md",
+          "gitSha": "e2ed509e3bdd15acdb3966e026a8090246ebc6f1",
+          "sha256": "becc6dfb91a1ea0f5fe8075f5346554f6ec3795c3eaccecdf87af44de9decce1",
+          "size": 8977
+        },
+        {
+          "path": "package.json",
+          "gitSha": "98f0888182468b770d5923650cba711de14b53a9",
+          "sha256": "c297fb0b1452bb5148909cd0c38038ecc54d860bbc84b5a6f987339f6594ee3c",
+          "size": 1166
+        },
+        {
+          "path": "tokito.js",
+          "gitSha": "a1c403f307b3d3f4ac32ccf960db23655f562620",
+          "sha256": "44fb4914dc395941f7fca80fbb49c71b171664cc0551aaa730e68701cef2200b",
+          "size": 53447
+        },
+        {
           "path": "DADOS_TOKITO/INFO_DADOS/avisos.json",
+          "gitSha": "feb882a403612b835b326e29fa6557a9278cf503",
           "sha256": "935985690c89b8dbcaf8d39c345ae91468902ac33b7c8f7d01f40f329d6c6b0e",
           "size": 3721
         }
       ],
       "delete": [],
       "required": true,
-      "publishedAt": "2026-10-18T18:55:58.526Z"
+      "publishedAt": "2026-10-18T21:08:48.767Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.44",
+  "fromVersion": "10.2.45",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.45"
+  "publicVersion": "10.2.46"
 }

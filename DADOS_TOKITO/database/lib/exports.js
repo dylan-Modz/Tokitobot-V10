@@ -29,10 +29,12 @@
  */
 
 /*
-* Arquivo central de módulos, funções e mensagens da base.
-* Author: dylan Modz.
-*/
-const baileys = require('baileys')
+ * Arquivo central de módulos, funções e mensagens da base.
+ * Author: dylan Modz.
+ */
+const stone = require('@stone-wpp/ofc')
+const cacheGp = (global.__TOKITO_METADATA_CACHE__ ||= new Map())
+const refreshGp = (global.__TOKITO_METADATA_REFRESH__ ||= new Set())
 const { Boom } = require('@hapi/boom')
 const axios = require('axios')
 const fs = require('fs')
@@ -62,8 +64,7 @@ let cfonts
 
 try {
 cfonts = require('cfonts')
-}
-catch {
+} catch {
 cfonts = { render: texto => ({ string: String(texto) }) }
 }
 
@@ -79,7 +80,32 @@ align: 'center',
 gradient: ['red', 'magenta']
 })
 
-const { default: makeWASocket, downloadContentFromMessage, fetchLatestBaileysVersion, useMultiFileAuthState, makeInMemoryStore, DisconnectReason, relayWAMessage, mentionedJid, processTime, MediaType, Browser, MessageType, Presence, Mimetype, Browsers, delay, getLastMessageInChat, downloadMediaMessage, generateWAMessageFromContent, proto, prepareWAMessageMedia, jidNormalizedUser, getContentType, makeCacheableSignalKeyStore } = baileys
+const {
+default: makeWASocket,
+downloadContentFromMessage,
+fetchLatestStoneWPPVersion,
+useMultiFileAuthState,
+makeInMemoryStore,
+DisconnectReason,
+relayWAMessage,
+mentionedJid,
+processTime,
+MediaType,
+Browser,
+MessageType,
+Presence,
+Mimetype,
+Browsers,
+delay,
+getLastMessageInChat,
+downloadMediaMessage,
+generateWAMessageFromContent,
+proto,
+prepareWAMessageMedia,
+jidNormalizedUser,
+getContentType,
+makeCacheableSignalKeyStore
+} = stone
 //////////////////////////====//////////////////////////////////
 const setting = runtimeSub.config()
 
@@ -96,102 +122,103 @@ const pasta = runtimeSub.mediaDir
 const fuso = 'America/Fortaleza'
 
 function getGroupAdmins(participants = []) {
-return participants.filter(p => p?.admin === 'admin' || p?.admin === 'superadmin').map(p => {
+return participants
+.filter(p => p?.admin === 'admin' || p?.admin === 'superadmin')
+.map(p => {
 let base = p?.phoneNumber || p?.participantPn || p?.jid || p?.id || p?.participant
-if (!base)
-return null
-if (String(base).includes('@lid'))
-base = p?.phoneNumber || p?.participantPn || p?.jid || base
+if (!base) return null
+if (String(base).includes('@lid')) base = p?.phoneNumber || p?.participantPn || p?.jid || base
 return jidNormalizedUser(String(base))
-}).filter(Boolean)
+})
+.filter(Boolean)
 }
 
 function getMembros(participants = []) {
-return participants.filter(p => !p?.admin).map(p => {
+return participants
+.filter(p => !p?.admin)
+.map(p => {
 let base = p?.phoneNumber || p?.participantPn || p?.jid || p?.id || p?.participant
-if (!base)
-return null
-if (String(base).includes('@lid'))
-base = p?.phoneNumber || p?.participantPn || p?.jid || base
+if (!base) return null
+if (String(base).includes('@lid')) base = p?.phoneNumber || p?.participantPn || p?.jid || base
 return jidNormalizedUser(String(base))
-}).filter(Boolean)
+})
+.filter(Boolean)
 }
 
 const getRandom = ext => `${Math.floor(Math.random() * 10000)}${ext}`
 
 function estado(numero = '') {
 let n = String(numero || '').replace(/\D/g, '')
-if (n.startsWith('55') && n.length >= 12)
-n = n.slice(2)
+if (n.startsWith('55') && n.length >= 12) n = n.slice(2)
 const ddd = n.slice(0, 2)
 const estados = {
-'11': 'São Paulo',
-'12': 'São Paulo',
-'13': 'São Paulo',
-'14': 'São Paulo',
-'15': 'São Paulo',
-'16': 'São Paulo',
-'17': 'São Paulo',
-'18': 'São Paulo',
-'19': 'São Paulo',
-'21': 'Rio de Janeiro',
-'22': 'Rio de Janeiro',
-'24': 'Rio de Janeiro',
-'27': 'Espírito Santo',
-'28': 'Espírito Santo',
-'31': 'Minas Gerais',
-'32': 'Minas Gerais',
-'33': 'Minas Gerais',
-'34': 'Minas Gerais',
-'35': 'Minas Gerais',
-'37': 'Minas Gerais',
-'38': 'Minas Gerais',
-'41': 'Paraná',
-'42': 'Paraná',
-'43': 'Paraná',
-'44': 'Paraná',
-'45': 'Paraná',
-'46': 'Paraná',
-'47': 'Santa Catarina',
-'48': 'Santa Catarina',
-'49': 'Santa Catarina',
-'51': 'Rio Grande do Sul',
-'53': 'Rio Grande do Sul',
-'54': 'Rio Grande do Sul',
-'55': 'Rio Grande do Sul',
-'61': 'Distrito Federal',
-'62': 'Goiás',
-'64': 'Goiás',
-'63': 'Tocantins',
-'65': 'Mato Grosso',
-'66': 'Mato Grosso',
-'67': 'Mato Grosso do Sul',
-'68': 'Acre',
-'69': 'Rondônia',
-'71': 'Bahia',
-'73': 'Bahia',
-'74': 'Bahia',
-'75': 'Bahia',
-'77': 'Bahia',
-'79': 'Sergipe',
-'81': 'Pernambuco',
-'87': 'Pernambuco',
-'82': 'Alagoas',
-'83': 'Paraíba',
-'84': 'Rio Grande do Norte',
-'85': 'Ceará',
-'88': 'Ceará',
-'86': 'Piauí',
-'89': 'Piauí',
-'91': 'Pará',
-'93': 'Pará',
-'94': 'Pará',
-'92': 'Amazonas',
-'97': 'Amazonas',
-'95': 'Roraima',
-'96': 'Amapá',
-'98': 'Maranhão',
-'99': 'Maranhão'
+11: 'São Paulo',
+12: 'São Paulo',
+13: 'São Paulo',
+14: 'São Paulo',
+15: 'São Paulo',
+16: 'São Paulo',
+17: 'São Paulo',
+18: 'São Paulo',
+19: 'São Paulo',
+21: 'Rio de Janeiro',
+22: 'Rio de Janeiro',
+24: 'Rio de Janeiro',
+27: 'Espírito Santo',
+28: 'Espírito Santo',
+31: 'Minas Gerais',
+32: 'Minas Gerais',
+33: 'Minas Gerais',
+34: 'Minas Gerais',
+35: 'Minas Gerais',
+37: 'Minas Gerais',
+38: 'Minas Gerais',
+41: 'Paraná',
+42: 'Paraná',
+43: 'Paraná',
+44: 'Paraná',
+45: 'Paraná',
+46: 'Paraná',
+47: 'Santa Catarina',
+48: 'Santa Catarina',
+49: 'Santa Catarina',
+51: 'Rio Grande do Sul',
+53: 'Rio Grande do Sul',
+54: 'Rio Grande do Sul',
+55: 'Rio Grande do Sul',
+61: 'Distrito Federal',
+62: 'Goiás',
+64: 'Goiás',
+63: 'Tocantins',
+65: 'Mato Grosso',
+66: 'Mato Grosso',
+67: 'Mato Grosso do Sul',
+68: 'Acre',
+69: 'Rondônia',
+71: 'Bahia',
+73: 'Bahia',
+74: 'Bahia',
+75: 'Bahia',
+77: 'Bahia',
+79: 'Sergipe',
+81: 'Pernambuco',
+87: 'Pernambuco',
+82: 'Alagoas',
+83: 'Paraíba',
+84: 'Rio Grande do Norte',
+85: 'Ceará',
+88: 'Ceará',
+86: 'Piauí',
+89: 'Piauí',
+91: 'Pará',
+93: 'Pará',
+94: 'Pará',
+92: 'Amazonas',
+97: 'Amazonas',
+95: 'Roraima',
+96: 'Amapá',
+98: 'Maranhão',
+99: 'Maranhão'
 }
 return estados[ddd] || 'Desconhecido'
 }
@@ -239,72 +266,68 @@ return buffer.toString('base64')
 
 function DLT_FL(file) {
 try {
-if (file && fs.existsSync(file))
-fs.unlinkSync(file)
-}
-catch {
-}
+if (file && fs.existsSync(file)) fs.unlinkSync(file)
+} catch {}
 }
 
 const getFileBuffer = async (mediakey, mediaType) => {
 const stream = await downloadContentFromMessage(mediakey, mediaType)
 let buffer = Buffer.from([])
-for await (const chunk of stream)
-buffer = Buffer.concat([buffer, chunk])
+for await (const chunk of stream) buffer = Buffer.concat([buffer, chunk])
 return buffer
 }
 
 function DLT_FL(file) {
 try {
-if (file && fs.existsSync(file))
-fs.unlinkSync(file)
-}
-catch {
-}
+if (file && fs.existsSync(file)) fs.unlinkSync(file)
+} catch {}
 }
 
 function convertBytes(bytes) {
 const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
-if (!bytes)
-return 'n/a'
+if (!bytes) return 'n/a'
 const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)))
 return i === 0 ? `${bytes} ${sizes[i]}` : `${(bytes / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`
 }
 
 function ANT_LTR_MD_EMJ(str) {
-for (let i = 0; i < String(str || '').length; i++)
-if (String(str).charCodeAt(i) > 255)
-return true
+for (let i = 0; i < String(str || '').length; i++) if (String(str).charCodeAt(i) > 255) return true
 return false
 }
 
 function kyun(seconds) {
 const pad = value => (value < 10 ? '0' : '') + value
-const horas = Math.floor(seconds / 3600 % 24)
-const minutos = Math.floor(seconds % 3600 / 60)
+const horas = Math.floor((seconds / 3600) % 24)
+const minutos = Math.floor((seconds % 3600) / 60)
 const segundos = Math.floor(seconds % 60)
 return `${pad(horas)}h ${pad(minutos)}m ${pad(segundos)}s`
 }
 
 const sendPoll = (tokito, id, name = '', values = [], selectableCount = 1) => {
-return tokito.sendMessage(id, {
+return tokito.sendMessage(
+id,
+{
 poll: {
 name,
 values,
 selectableCount
 },
 messageContextInfo: { messageSecret: randomBytes(32) }
-}, {
+},
+{
 id,
 options: { userJid: tokito?.user?.id }
-})
+}
+)
 }
 
 module.exports = {
-...baileys,
+...stone,
+cacheGp,
+refreshGp,
 makeWASocket,
 downloadContentFromMessage,
-fetchLatestBaileysVersion,
+fetchLatestStoneWPPVersion,
 useMultiFileAuthState,
 makeInMemoryStore,
 DisconnectReason,

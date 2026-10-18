@@ -29,7 +29,7 @@
  */
 
 const axios = require('axios')
-const { generateWAMessageFromContent, proto, prepareWAMessageMedia } = require('baileys')
+const { generateWAMessageFromContent, proto, prepareWAMessageMedia } = require('@stone-wpp/ofc')
 
 const dylan = require('../../database/lib/comandos')
 

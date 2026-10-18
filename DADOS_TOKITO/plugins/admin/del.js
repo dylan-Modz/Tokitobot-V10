@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { jidNormalizedUser } = require('baileys')
+const { jidNormalizedUser } = require('@stone-wpp/ofc')
 
 const pegarContexto = info => {
 const m = info?.message || {}

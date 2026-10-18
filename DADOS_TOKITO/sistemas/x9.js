@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { WAMessageStubType, decryptPollVote, getAggregateVotesInPollMessage, getKeyAuthor, jidNormalizedUser } = require('baileys')
+const { WAMessageStubType, decryptPollVote, getAggregateVotesInPollMessage, getKeyAuthor, jidNormalizedUser } = require('@stone-wpp/ofc')
 const base = require('./grupos.js')
 const toggle = require('./toggle.js')
 const mess = require('../mensagens/mensagens.js')

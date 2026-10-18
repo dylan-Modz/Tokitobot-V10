@@ -1327,7 +1327,7 @@ exports.botaoQuiz = (numero, opcao) => {
 return `${numero}️⃣﹚${String(opcao || '').slice(0, 20)}`
 }
 
-exports.ping = ({ NomeDoBot, pushname, speedConverted, latency, sistema, ramUsada, ramTotal, baileysV, cpu, nodejs, totalGrupos, totalCmd, tempoOnline }) => {
+exports.ping = ({ NomeDoBot, pushname, speedConverted, latency, sistema, ramUsada, ramTotal, stoneV, cpu, nodejs, totalGrupos, totalCmd, tempoOnline }) => {
 return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙾 𝙱𝙾𝚃\`
 
 > 🤖 ׄ ( ʙᴏᴛ: ${NomeDoBot} )
@@ -1336,7 +1336,7 @@ return `-  \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙾 𝙱𝙾�
 > 🦾 ׄ ( ʟᴀᴛᴇ̂ɴᴄɪᴀ: ${latency} ᴍs )
 > 🖥️ ׄ ( sɪsᴛᴇᴍᴀ: ${sistema} )
 > 🧠 ׄ ( ᴍᴇᴍᴏ́ʀɪᴀ ʀᴀᴍ: ${ramUsada} ɢʙ / ${ramTotal} ɢʙ )
-> ⚙️ ׄ ( ʙᴀɪʟᴇʏs: ${baileysV} )
+> ⚙️ ׄ ( 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ${stoneV} )
 > 💻 ׄ ( ᴄᴘᴜ: ${cpu}% )
 > 📡 ׄ ( ɴᴏᴅᴇ.ᴊs: ${nodejs} )
 > 👥 ׄ ( ɢʀᴜᴘᴏs ᴀᴛɪᴠᴏs: ${totalGrupos} )

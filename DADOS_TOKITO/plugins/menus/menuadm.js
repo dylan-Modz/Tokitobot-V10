@@ -46,7 +46,7 @@ if (!isGroup)
 return reply(mess.sogrupo())
 if (!isGroupAdmins)
 return reply(mess.soadm())
-await dylanModz(linguagem.menuadm(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, baileysVersion), '🧊', isSubBot ? [] : [
+await dylanModz(linguagem.menuadm(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion), '🧊', isSubBot ? [] : [
 {
 texto: mess.botaoMenuDono(),
 id: `${prefix}menudono`

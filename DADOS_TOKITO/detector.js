@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { 'default': makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion, makeCacheableSignalKeyStore } = require('baileys')
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore } = require('@stone-wpp/ofc')
 const { fs, path, pino, NodeCache, Boom, colors } = require('./database/lib/exports.js')
 const antipay = require('./plugins/admin/antipay.js')
 const antiInvisivel = require('./sistemas/antiinvisivel.js')
@@ -55,10 +55,13 @@ let conectado = false
 
 const telemetria = { recebidas: 0, encaminhadas: 0, semConteudo: 0, criptografadas: 0, erros: 0 }
 
-if (!fs.existsSync(pasta))
-fs.mkdirSync(pasta, { recursive: true })
+if (!fs.existsSync(pasta)) fs.mkdirSync(pasta, { recursive: true })
 
-const numero = jid => String(jid || '').split('@')[0].split(':')[0].replace(/\D/g, '')
+const numero = jid =>
+String(jid || '')
+.split('@')[0]
+.split(':')[0]
+.replace(/\D/g, '')
 
 const status = () => ({
 conectado,
@@ -68,40 +71,36 @@ telemetria: { ...telemetria },
 pasta
 })
 
-const capturar = async (upsert) => {
+const capturar = async upsert => {
 if (!principal || !Array.isArray(upsert?.messages)) return
 for (const info of upsert.messages) {
-  try {
-    const from = String(info?.key?.remoteJid || '')
-    if (!from.endsWith('@g.us') || info?.key?.fromMe) continue
-    telemetria.recebidas++
-    if (!info?.message) telemetria.semConteudo++
-
-    // A conta auxiliar pode receber mensagens que o ADM nao recebe.
-    // Passa o evento ORIGINAL com key/participant; nunca usa o autor citado.
-    // O modulo possui travas por ID para eventos tambem vistos pela principal.
-    await antiInvisivel.receber(principal, { messages: [info], type: upsert.type }, 'auxiliar')
-    telemetria.encaminhadas++
-
-    // O Anti-Pay imediato so aceita pagamento direto enviado pelo autor atual,
-    // nunca um pagamento presente no contexto de resposta ou citacao.
-    if (!info?.message || !antipay.detectarDireto(info.message)) continue
-    await antipay.externo({ tokito: principal, info, detector: socket })
-  } catch (error) {
-    telemetria.erros++
-    console.log(colors.red('[DETECTOR ANTI-PAY]'), error?.message || error)
-  }
+try {
+const from = String(info?.key?.remoteJid || '')
+if (!from.endsWith('@g.us') || info?.key?.fromMe) continue
+telemetria.recebidas++
+if (!info?.message) telemetria.semConteudo++
+// A conta auxiliar pode receber mensagens que o ADM nao recebe.
+// Passa o evento ORIGINAL com key/participant; nunca usa o autor citado.
+// O modulo possui travas por ID para eventos tambem vistos pela principal.
+await antiInvisivel.receber(principal, { messages: [info], type: upsert.type }, 'auxiliar')
+telemetria.encaminhadas++
+// O Anti-Pay imediato so aceita pagamento direto enviado pelo autor atual,
+// nunca um pagamento presente no contexto de resposta ou citacao.
+if (!info?.message || !antipay.detectarDireto(info.message)) continue
+await antipay.externo({ tokito: principal, info, detector: socket })
+} catch (error) {
+telemetria.erros++
+console.log(colors.red('[DETECTOR ANTI-PAY]'), error?.message || error)
+}
 }
 }
 
-const iniciar = async (tokito) => {
-if (tokito)
-principal = tokito
-if (iniciando || socket)
-return socket
+const iniciar = async tokito => {
+if (tokito) principal = tokito
+if (iniciando || socket) return socket
 iniciando = true
 try {
-const { version } = await fetchLatestBaileysVersion()
+const { version } = await fetchLatestStoneWPPVersion()
 const auth = await useMultiFileAuthState(pasta)
 estado = auth.state
 salvar = auth.saveCreds
@@ -130,18 +129,16 @@ shouldSyncHistoryMessage: () => false,
 getMessage: async () => ({ conversation: 'Tokito Detector' })
 })
 socket.ev.on('tokito.security.ciphertext', dados => {
-  telemetria.criptografadas++
-  if (!principal) return
-  Promise.resolve(antiInvisivel.registrar(principal, dados, 'auxiliar')).catch(error => {
-    telemetria.erros++
-    console.log(colors.red('[DETECTOR SEGURANÇA]'), error?.message || error)
-  })
+telemetria.criptografadas++
+if (!principal) return
+Promise.resolve(antiInvisivel.registrar(principal, dados, 'auxiliar')).catch(error => {
+telemetria.erros++
+console.log(colors.red('[DETECTOR SEGURANÇA]'), error?.message || error)
 })
-socket.ev.process(async (events) => {
-if (events['messages.upsert'])
-await capturar(events['messages.upsert'])
-if (events['creds.update'] && salvar)
-await salvar()
+})
+socket.ev.process(async events => {
+if (events['messages.upsert']) await capturar(events['messages.upsert'])
+if (events['creds.update'] && salvar) await salvar()
 if (events['connection.update']) {
 const update = events['connection.update']
 const code = update?.lastDisconnect?.error ? new Boom(update.lastDisconnect.error).output.statusCode : 0
@@ -161,25 +158,21 @@ if (!reconectando) {
 reconectando = true
 setTimeout(() => {
 reconectando = false
-iniciar(principal).catch(() => {
-})
+iniciar(principal).catch(() => {})
 }, 5000)
 }
 }
 }
 })
 return socket
-}
-finally {
+} finally {
 iniciando = false
 }
 }
 
 const parear = async (fone, tokito) => {
-if (tokito)
-principal = tokito
-if (!socket)
-await iniciar(principal)
+if (tokito) principal = tokito
+if (!socket) await iniciar(principal)
 const atual = status()
 if (atual.registrado)
 return {
@@ -189,8 +182,7 @@ numero: atual.numero,
 codigo: ''
 }
 const limpo = String(fone || '').replace(/\D/g, '')
-if (limpo.length < 11 || limpo.length > 15)
-throw new Error('numero')
+if (limpo.length < 11 || limpo.length > 15) throw new Error('numero')
 const codigo = await socket.requestPairingCode(limpo)
 return {
 conectado: false,
@@ -202,12 +194,8 @@ codigo
 
 const sair = async () => {
 try {
-if (socket)
-await socket.logout().catch(() => {
-})
-}
-catch {
-}
+if (socket) await socket.logout().catch(() => {})
+} catch {}
 socket = null
 conectado = false
 estado = null
@@ -218,9 +206,7 @@ recursive: true,
 force: true
 })
 fs.mkdirSync(pasta, { recursive: true })
-}
-catch {
-}
+} catch {}
 return true
 }
 

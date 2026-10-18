@@ -434,7 +434,7 @@ Desenvolvedor principal do TokitoBot-V10.
 
 <img src="https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white">
 
-<img src="https://img.shields.io/badge/Baileys-00BFFF?style=flat-square&logo=whatsapp&logoColor=white">
+<img src="https://img.shields.io/badge/Stone WPP-00BFFF?style=flat-square&logo=whatsapp&logoColor=white">
 
 <img src="https://img.shields.io/badge/Shell-4EAA25?style=flat-square&logo=gnu-bash&logoColor=white">
 

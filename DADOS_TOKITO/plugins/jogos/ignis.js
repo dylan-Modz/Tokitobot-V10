@@ -30,7 +30,7 @@
 
 const fs = require('fs')
 const path = require('path')
-const { proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('baileys')
+const { proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
 const funcoesBase = require('../../sistemas/grupos.js')
 
 const TEMPO_RESET = 5 * 60 * 1000

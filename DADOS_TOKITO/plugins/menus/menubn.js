@@ -43,7 +43,7 @@ async executar(ctx) {
 with (ctx) {
 {
 try {
-await dylanModz(linguagem.menubn(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, baileysVersion, isModobn), '🎭', [
+await dylanModz(linguagem.menubn(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion, isModobn), '🎭', [
 {
 texto: mess.botaoMenu(),
 id: `${prefix}menu`

@@ -32,7 +32,7 @@ if ! command -v npm >/dev/null 2>&1; then
 fi
 
 # Permite dependências instaladas diretamente de repositórios Git,
-# como a Baileys modificada da Tokito.
+# como a Stone WPP modificada da Tokito.
 export npm_config_allow_git="root"
 
 # Verifica silenciosamente se existe alguma dependência faltando.

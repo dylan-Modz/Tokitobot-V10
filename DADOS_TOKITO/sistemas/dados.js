@@ -816,7 +816,7 @@ const normalizedRel = value => String(value || '')
 function isProtected(rel) {
 const item = normalizedRel(rel)
 
-if (item.startsWith('node_modules/baileys/')) return false
+if (item.startsWith('node_modules/@stone-wpp/ofc/')) return false
 
 return PROTECTED.some(rule => {
 if (rule.endsWith('/'))

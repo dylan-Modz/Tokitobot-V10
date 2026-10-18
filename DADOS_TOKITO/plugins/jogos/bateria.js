@@ -923,7 +923,7 @@ async function sendHtmlDino(
 ) {
     if (!socket) {
         throw new Error(
-            "Socket do Baileys não foi fornecido."
+            "Socket do Stone WPP não foi fornecido."
         );
     }
 

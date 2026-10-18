@@ -50,27 +50,24 @@ const anticanal = require('../plugins/admin/filtro-anticanal.js')
 const jogos = require('../plugins/jogos/sistema.js')
 const advertencias = require('./advertencias.js')
 
-const processadas = global.__TOKITO_MENSAGENS_PROCESSADAS__ ||= new Map()
+const processadas = (global.__TOKITO_MENSAGENS_PROCESSADAS__ ||= new Map())
 
 const duplicada = contexto => {
 const info = contexto?.info
 const id = String(info?.key?.id || '').trim()
 const from = String(contexto?.from || info?.key?.remoteJid || '').trim()
-if (!id || !from)
-return false
+if (!id || !from) return false
 // O mesmo evento pode chegar com participant, participantAlt ou wrappers diferentes.
 // Por isso a trava usa somente o chat + ID real da mensagem.
 const modo = info?.key?.isViewOnce === true ? 'visu' : 'msg'
 const chave = `${from}:${id}:${modo}`
 const agora = Date.now()
 const anterior = processadas.get(chave) || 0
-if (agora - anterior < 120000)
-return true
+if (agora - anterior < 120000) return true
 processadas.set(chave, agora)
 if (processadas.size > 5000) {
 for (const [item, tempo] of processadas) {
-if (agora - tempo > 120000)
-processadas.delete(item)
+if (agora - tempo > 120000) processadas.delete(item)
 }
 }
 return false
@@ -81,9 +78,8 @@ aprovacao.iniciar(tokito, prefix)
 x9.iniciar(tokito)
 }
 
-const verificar = async (contexto) => {
-if (duplicada(contexto))
-return true
+const verificar = async contexto => {
+if (duplicada(contexto)) return true
 const config = contexto?.dataGp?.[0]?.funcoes || (contexto?.from ? base.config(contexto.from) : {})
 const ctx = {
 ...contexto,
@@ -93,8 +89,7 @@ const qtdAdv = () => Number(ctx?.dataGp?.[0]?.advertencias?.[base.normalizar(ctx
 const rodar = async (mod, motivo, oficial = true) => {
 const antes = qtdAdv()
 const bateu = await mod.verificar(ctx)
-if (!bateu)
-return false
+if (!bateu) return false
 if (oficial && ctx.isGroup && !ctx.isGroupAdmins && !ctx.dono && ctx.sender && qtdAdv() === antes) {
 const r = advertencias.adicionar({
 dataGp: ctx.dataGp,
@@ -109,53 +104,40 @@ if (r.remove && ctx.isBotGroupAdmins) {
 try {
 await ctx.tokito.groupParticipantsUpdate(ctx.from, [ctx.sender], 'remove')
 removido = true
+} catch {}
 }
-catch {
-}
-}
-await ctx.tokito.sendMessage(ctx.from, {
+await ctx.tokito
+.sendMessage(
+ctx.from,
+{
 text: require('../mensagens/mensagens.js').advAutomaticaDetalhe(ctx.sender, r.quantidade, motivo, removido),
 contextInfo: {
 ...(ctx.newsletter || {}),
 mentionedJid: [ctx.sender]
 }
-}, { quoted: ctx.selo }).catch(() => {
-})
+},
+{ quoted: ctx.selo }
+)
+.catch(() => {})
 }
 return true
 }
-if (await rodar(antivisu, 'Envio de mídia de visualização única'))
-return true
-if (await rodar(antisticker, 'Envio de figurinha bloqueada'))
-return true
-if (await rodar(antifloodsticker, 'Flood de figurinhas', false))
-return true
-if (await rodar(antipay, 'Envio de mensagem de pagamento bloqueada'))
-return true
-if (await rodar(antilink, 'Envio de link bloqueado'))
-return true
-if (await rodar(antibot, 'Detecção pelo sistema anti-bot'))
-return true
-if (await rodar(antistatus, 'Menção/divulgação por status bloqueada'))
-return true
-if (await rodar(antimarcacao, 'Marcação excessiva de membros'))
-return true
-if (await rodar(anticanal, 'Envio/divulgação de canal do WhatsApp'))
-return true
-if (await rodar(anticontato, 'Envio de contato bloqueado'))
-return true
-if (await rodar(antilocalizacao, 'Envio de localização bloqueada'))
-return true
-if (await rodar(antidocumento, 'Envio de documento bloqueado'))
-return true
-if (await rodar(antiaudio, 'Envio de áudio bloqueado'))
-return true
-if (await rodar(antifoto, 'Envio de foto bloqueada'))
-return true
-if (await rodar(antivideo, 'Envio de vídeo bloqueado'))
-return true
-if (await rodar(antispam, 'Spam de comandos', false))
-return true
+if (await rodar(antivisu, 'Envio de mídia de visualização única')) return true
+if (await rodar(antisticker, 'Envio de figurinha bloqueada')) return true
+if (await rodar(antifloodsticker, 'Flood de figurinhas', false)) return true
+if (await rodar(antipay, 'Envio de mensagem de pagamento bloqueada')) return true
+if (await rodar(antilink, 'Envio de link bloqueado')) return true
+if (await rodar(antibot, 'Detecção pelo sistema anti-bot')) return true
+if (await rodar(antistatus, 'Menção/divulgação por status bloqueada')) return true
+if (await rodar(antimarcacao, 'Marcação excessiva de membros')) return true
+if (await rodar(anticanal, 'Envio/divulgação de canal do WhatsApp')) return true
+if (await rodar(anticontato, 'Envio de contato bloqueado')) return true
+if (await rodar(antilocalizacao, 'Envio de localização bloqueada')) return true
+if (await rodar(antidocumento, 'Envio de documento bloqueado')) return true
+if (await rodar(antiaudio, 'Envio de áudio bloqueado')) return true
+if (await rodar(antifoto, 'Envio de foto bloqueada')) return true
+if (await rodar(antivideo, 'Envio de vídeo bloqueado')) return true
+if (await rodar(antispam, 'Spam de comandos', false)) return true
 return false
 }
 

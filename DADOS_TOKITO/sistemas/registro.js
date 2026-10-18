@@ -1,6 +1,6 @@
 /* TOKITO V10 - Registro dos novos membros integrado ao perfil - Dylan Modz */
 const fs=require('fs'), path=require('path')
-const {proto,prepareWAMessageMedia,generateWAMessageFromContent}=require('baileys')
+const {proto,prepareWAMessageMedia,generateWAMessageFromContent}=require('@stone-wpp/ofc')
 const ROOT=path.join(__dirname,'..','database','sistemas')
 const DIR=path.join(ROOT,'registro'), OLD=path.join(ROOT,'passaporte')
 const BT=String.fromCharCode(96)

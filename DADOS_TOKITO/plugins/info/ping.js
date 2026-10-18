@@ -58,7 +58,7 @@ const ramTotal = (os.totalmem() / 1024 / 1024 / 1024).toFixed(2)
 const ramUsada = ((os.totalmem() - os.freemem()) / 1024 / 1024 / 1024).toFixed(2)
 const cpu = Math.min(100, (os.loadavg()[0] / Math.max(os.cpus().length, 1)) * 100).toFixed(1)
 const nodejs = process.version
-const baileysV = baileysVersion
+const stoneV = stoneVersion
 const gruposAtivos = await tokito.groupFetchAllParticipating().catch(() => ({}))
 const totalGrupos = Object.keys(gruposAtivos || {}).length
 const totalCmd = plugins.contar().total
@@ -76,7 +76,7 @@ latency,
 sistema,
 ramUsada,
 ramTotal,
-baileysV,
+stoneV,
 cpu,
 nodejs,
 totalGrupos,

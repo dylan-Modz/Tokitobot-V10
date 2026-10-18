@@ -15,7 +15,7 @@
  * ============================================================
  */
 
-const { proto, generateWAMessageFromContent } = require('baileys')
+const { proto, generateWAMessageFromContent } = require('@stone-wpp/ofc')
 const x4 = require('./x4')
 
 const notas = ctx => {

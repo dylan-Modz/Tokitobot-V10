@@ -52,15 +52,15 @@ const faltando = () => {
   // Reinstala a biblioteca quando a versao local ainda nao possui
   // os sinais de seguranca utilizados pelo Anti-Invisivel.
   const monitor = path.join(raiz, 'DADOS_TOKITO', 'sistemas', 'antiinvisivel.js')
-  const recepcao = path.join(raiz, 'node_modules', 'baileys', 'lib', 'Socket', 'messages-recv.js')
+  const recepcao = path.join(raiz, 'node_modules', '@stone-wpp', 'ofc', 'lib', 'Socket', 'messages-recv.js')
 
-  if (fs.existsSync(monitor) && !ausentes.includes('baileys')) {
+  if (fs.existsSync(monitor) && !ausentes.includes('@stone-wpp/ofc')) {
     try {
       const codigo = fs.readFileSync(recepcao, 'utf8')
       if (!codigo.includes('tokito.security.ciphertext'))
-        ausentes.push('baileys')
+        ausentes.push('@stone-wpp/ofc')
     } catch {
-      ausentes.push('baileys')
+      ausentes.push('@stone-wpp/ofc')
     }
   }
 

@@ -20,7 +20,7 @@ dylan.setCommand({
         ctx.horaBR,
         ctx.prefix,
         ctx.ownerName,
-        ctx.baileysVersion
+        ctx.stoneVersion
       )
 
       return await ctx.dylanModz(

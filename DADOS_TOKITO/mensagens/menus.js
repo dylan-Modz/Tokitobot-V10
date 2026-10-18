@@ -33,7 +33,9 @@
 * Author: dylan Modz.
 */
 
-exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, baileysVersion
+const { version } = require('../../package.json')
+
+exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, stoneVersion
 ) => {
   return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
@@ -46,7 +48,8 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
 ┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
 ┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
-┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ${baileysVersion}
+┃࣪ ╎—̳͟͞͞ 🧊 𝚅𝙴𝚁𝚂𝙰̃𝙾: ${version}
+┃࣪ ╎—̳͟͞͞ 📦 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ${stoneVersion}
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -186,7 +189,7 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
-exports.menuadm = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
+exports.menuadm = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, stoneVersion) => {
 return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡🛡️｡･ﾟ𖤐ﾟ･╾═╼┤
@@ -197,7 +200,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
 ┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
 ┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
-┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ${baileysVersion}
+┃࣪ ╎—̳͟͞͞ 🧊 𝚅𝙴𝚁𝚂𝙰̃𝙾: ${version}
+┃࣪ ╎—̳͟͞͞ 📦 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ${stoneVersion}
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -373,7 +377,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
 
-exports.menudono = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
+exports.menudono = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, stoneVersion) => {
 return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡👑｡･ﾟ𖤐ﾟ･╾═╼┤
@@ -385,7 +389,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
 ┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
 ┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
-┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ${baileysVersion}
+┃࣪ ╎—̳͟͞͞ 🧊 𝚅𝙴𝚁𝚂𝙰̃𝙾: ${version}
+┃࣪ ╎—̳͟͞͞ 📦 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ${stoneVersion}
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -542,7 +547,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
 
-exports.menudown = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
+exports.menudown = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, stoneVersion) => {
 return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡🎧｡･ﾟ𖤐ﾟ･╾═╼┤
@@ -554,7 +559,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
 ┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
 ┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
-┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ${baileysVersion}
+┃࣪ ╎—̳͟͞͞ 🧊 𝚅𝙴𝚁𝚂𝙰̃𝙾: ${version}
+┃࣪ ╎—̳͟͞͞ 📦 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ${stoneVersion}
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -646,7 +652,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
 
-exports.menujogos = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
+exports.menujogos = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, stoneVersion) => {
 return [
 '╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡',
 '┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓',
@@ -659,7 +665,8 @@ return [
 '┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ' + isCargo,
 '┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ' + isChVip,
 '┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ' + hora,
-'┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ' + baileysVersion,
+'┃࣪ ╎—̳͟͞͞ 🧊 𝚅𝙴𝚁𝚂𝙰̃𝙾: ' + version,
+'┃࣪ ╎—̳͟͞͞ 📦 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ' + stoneVersion,
 '┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛',
 '╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡',
 '',
@@ -695,7 +702,7 @@ return [
 ].join('\n')
 }
 
-exports.menubn = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion, isModobn) => {
+exports.menubn = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, stoneVersion, isModobn) => {
 return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡🥀｡･ﾟ𖤐ﾟ･╾═╼┤
@@ -707,7 +714,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
 ┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
 ┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
-┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ${baileysVersion}
+┃࣪ ╎—̳͟͞͞ 🧊 𝚅𝙴𝚁𝚂𝙰̃𝙾: ${version}
+┃࣪ ╎—̳͟͞͞ 📦 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ${stoneVersion}
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -854,7 +862,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
 
-exports.menurpg = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
+exports.menurpg = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, stoneVersion) => {
 return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡⚔️｡･ﾟ𖤐ﾟ･╾═╼┤
@@ -866,6 +874,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
 ┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
 ┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
+┃࣪ ╎—̳͟͞͞ 🧊 𝚅𝙴𝚁𝚂𝙰̃𝙾: ${version}
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -1195,7 +1204,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
 
-exports.menucoins = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
+exports.menucoins = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, stoneVersion) => {
 return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡💰｡･ﾟ𖤐ﾟ･╾═╼┤
@@ -1207,7 +1216,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
 ┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
 ┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
-┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ${baileysVersion}
+┃࣪ ╎—̳͟͞͞ 🧊 𝚅𝙴𝚁𝚂𝙰̃𝙾: ${version}
+┃࣪ ╎—̳͟͞͞ 📦 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ${stoneVersion}
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -1249,7 +1259,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
 
-exports.menuff = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
+exports.menuff = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, stoneVersion) => {
 return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡🔥｡･ﾟ𖤐ﾟ･╾═╼┤
@@ -1261,7 +1271,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
 ┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
 ┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
-┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ${baileysVersion}
+┃࣪ ╎—̳͟͞͞ 🧊 𝚅𝙴𝚁𝚂𝙰̃𝙾: ${version}
+┃࣪ ╎—̳͟͞͞ 📦 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ${stoneVersion}
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -1321,7 +1332,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
-exports.menulogos = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
+exports.menulogos = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, stoneVersion) => {
 return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡🎨｡･ﾟ𖤐ﾟ･╾═╼┤
@@ -1333,7 +1344,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
 ┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
 ┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
-┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ${baileysVersion}
+┃࣪ ╎—̳͟͞͞ 🧊 𝚅𝙴𝚁𝚂𝙰̃𝙾: ${version}
+┃࣪ ╎—̳͟͞͞ 📦 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ${stoneVersion}
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -1380,7 +1392,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
 
-exports.menualt = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, baileysVersion) => {
+exports.menualt = (NomeDoBot, sender, isCargo, isChVip, hora, prefix, ownerName, stoneVersion) => {
 return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡
 ┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓
 ├╾═╼･ﾟ𖤐ﾟ･｡🎚️｡･ﾟ𖤐ﾟ･╾═╼┤
@@ -1392,7 +1404,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
 ┃࣪ ╎—̳͟͞͞ 💎 𝚅𝙸𝙿: ${isChVip}
 ┃࣪ ╎—̳͟͞͞ ⏰ 𝙷𝙾𝚁𝙰: ${hora}
-┃࣪ ╎—̳͟͞͞ 📦 𝙱𝙰𝙸𝙻𝙴𝚈𝚂: ${baileysVersion}
+┃࣪ ╎—̳͟͞͞ 🧊 𝚅𝙴𝚁𝚂𝙰̃𝙾: ${version}
+┃࣪ ╎—̳͟͞͞ 📦 𝚂𝚃𝙾𝙽𝙴-𝚆𝙿𝙿: ${stoneVersion}
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 

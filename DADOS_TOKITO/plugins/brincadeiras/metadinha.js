@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { prepareWAMessageMedia } = require('baileys')
+const { prepareWAMessageMedia } = require('@stone-wpp/ofc')
 const api = require('../../scrapers/downloads/pesquisas')
 const dylan = require('../../database/lib/comandos')
 

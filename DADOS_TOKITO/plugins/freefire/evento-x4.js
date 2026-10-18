@@ -14,7 +14,7 @@
  * API oficial: https://tokito-apis.com.br
  * ============================================================
  */
-const { proto, generateWAMessageFromContent } = require('baileys')
+const { proto, generateWAMessageFromContent } = require('@stone-wpp/ofc')
 const x4 = require('./x4')
 const enviarSala = async (ctx, id, senha) => {
 const msg = generateWAMessageFromContent(ctx.from, {
