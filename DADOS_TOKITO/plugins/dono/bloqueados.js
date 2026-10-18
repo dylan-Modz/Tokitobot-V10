@@ -28,20 +28,49 @@
  * ============================================================
  */
 
-const dylan = require('../../database/lib/comandos')
-const stone = require('../../sistemas/stone-recursos')
+
+
+const dylan = require('../../database/lib/comandos');
 
 dylan.setCommand({
-nome: 'bloqueados',
-comandos: ['bloqueados'],
-categoria: 'dono',
-info: {
-descricao: 'Conta contatos bloqueados',
-uso: 'bloqueados',
-permissao: 'DONO',
-categoria: 'dono'
-},
-async executar(ctx) {
-return stone.executar(ctx, 'bloqueados')
-}
-})
+  nome: 'bloqueados',
+  comandos: ['bloqueados'],
+  categoria: 'dono',
+  info: {
+    descricao: 'Consulta a quantidade de contatos bloqueados.',
+    uso: 'bloqueados',
+    permissao: 'DONO'
+  },
+
+  async executar(ctx) {
+    if (!ctx.SoDono) return ctx.reply(ctx.mess.onlyOwner());
+
+    try {
+      if (String(ctx.q || '').trim()) {
+        return ctx.reply(ctx.mess.padraoUso({
+          emoji: '🚫', titulo: 'CONTATOS BLOQUEADOS',
+          uso: ctx.prefix + 'bloqueados',
+          descricao: 'Consulte a lista de bloqueios da conta.'
+        }));
+      }
+      
+      if (typeof ctx.tokito.fetchBlocklist !== 'function') {
+        throw new Error('Método de bloqueios indisponível');
+      }
+      
+      const lista = await ctx.tokito.fetchBlocklist();
+      const total = Array.isArray(lista) ? lista.filter(Boolean).length : 0;
+      
+      return ctx.reply(ctx.mess.padraoInfo({
+        emoji: '🚫', titulo: 'CONTATOS BLOQUEADOS',
+        linhas: [{ rotulo: '📊 QUANTIDADE', valor: String(total) }]
+      }));
+    } catch (error) {
+      console.log('[BLOQUEADOS]', error?.message || error);
+      return ctx.reply(ctx.mess.padraoErro({
+        titulo: 'CONTATOS BLOQUEADOS',
+        descricao: 'Não foi possível concluir essa ação.'
+      }));
+    }
+  }
+});
