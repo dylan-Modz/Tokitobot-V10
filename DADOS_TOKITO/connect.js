@@ -262,10 +262,10 @@ if (!dono || !dono.endsWith('@s.whatsapp.net')) {
 registrarFalhaAvisoUpdate('Número do dono inválido ou não configurado em ownerNumber.')
 return false
 }
+// Envia aviso direto ao dono sem metadados de canal ou menções,
+// evitando falhas de compatibilidade em mensagens privadas da Stone WPP.
 const enviada = await tokito.sendMessage(dono, {
-text: textoAvisoUpdate(check),
-mentions: [dono],
-contextInfo: canalInfo([dono])
+text: textoAvisoUpdate(check)
 })
 if (!enviada) throw new Error('O WhatsApp não confirmou o envio do aviso.')
 dadosSistema.registrarAvisoUpdate(version)
