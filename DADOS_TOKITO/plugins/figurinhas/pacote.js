@@ -212,7 +212,7 @@ return Buffer.concat([...locais, diretorio, fim])
 }
 
 const prepararTiposStickerPack = async () => {
-const defaults = await import('baileys/lib/Defaults/index.js')
+const defaults = await import('@stone-wpp/ofc/lib/Defaults/index.js')
 defaults.MEDIA_PATH_MAP['sticker-pack'] = '/mms/sticker-pack'
 defaults.MEDIA_PATH_MAP['thumbnail-sticker-pack'] = '/mms/thumbnail-sticker-pack'
 defaults.MEDIA_HKDF_KEY_MAPPING['sticker-pack'] = 'Sticker Pack'
