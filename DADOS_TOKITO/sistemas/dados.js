@@ -129,11 +129,11 @@ const gitBlobSha = buffer => crypto.createHash('sha1')
 .digest('hex')
 const config = () => readJson(CONFIG_FILE, {})
 function versaoPublica(info = {}) {
-  return String(
-    info.publicVersion ||
-    info.version ||
-    '10.0.0'
-  ).trim()
+  const real = String(info.version || '10.0.0').trim()
+  const publica = String(info.publicVersion || '').trim()
+  // Um manifesto antigo não pode esconder a versão real no menu/aviso.
+  if (!/^\d+\.\d+\.\d+$/.test(publica)) return real
+  return compareVersions(publica, real) >= 0 ? publica : real
 }
 const localInfo = () => {
   const info = readJson(UPDATE_FILE, {
@@ -488,7 +488,9 @@ return String(marker.id || '').trim() !== migration.id
 function deveAvisarUpdate(version) {
 const valor = String(version || '').trim()
 if (!valor) return false
-return String(state().lastNotifiedVersion || '') !== valor
+// lastNotifiedVersion foi compartilhado com os Sub Bots nas versões antigas.
+// Um Sub Bot pode ter atualizado esse campo sem avisar o dono principal.
+return String(state().lastNotifiedPrincipalVersion || '') !== valor
 }
 
 function registrarAvisoUpdate(version) {
@@ -496,6 +498,7 @@ const valor = String(version || '').trim()
 if (!valor) return state()
 
 return saveState({
+lastNotifiedPrincipalVersion: valor,
 lastNotifiedVersion: valor,
 lastNotifiedAt: new Date().toISOString()
 })
