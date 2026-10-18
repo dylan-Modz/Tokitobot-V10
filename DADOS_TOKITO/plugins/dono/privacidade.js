@@ -28,20 +28,55 @@
  * ============================================================
  */
 
-const dylan = require('../../database/lib/comandos')
-const stone = require('../../sistemas/stone-recursos')
+
+
+const dylan = require('../../database/lib/comandos');
 
 dylan.setCommand({
-nome: 'privacidade',
-comandos: ['privacidade'],
-categoria: 'dono',
-info: {
-descricao: 'Consulta privacidade da conta',
-uso: 'privacidade',
-permissao: 'DONO',
-categoria: 'dono'
-},
-async executar(ctx) {
-return stone.executar(ctx, 'privacidade')
-}
-})
+  nome: 'privacidade',
+  comandos: ['privacidade'],
+  categoria: 'dono',
+  info: {
+    descricao: 'Consulta as configurações de privacidade do bot.',
+    uso: 'privacidade',
+    permissao: 'DONO'
+  },
+
+  async executar(ctx) {
+    if (!ctx.SoDono) return ctx.reply(ctx.mess.onlyOwner());
+
+    try {
+      if (String(ctx.q || '').trim()) {
+        return ctx.reply(ctx.mess.padraoUso({
+          emoji: '🔒', titulo: 'PRIVACIDADE',
+          uso: ctx.prefix + 'privacidade',
+          descricao: 'Consulta as configurações da conta.'
+        }));
+      }
+      
+      if (typeof ctx.tokito.fetchPrivacySettings !== 'function') {
+        throw new Error('Método de privacidade indisponível');
+      }
+      
+      const dados = await ctx.tokito.fetchPrivacySettings();
+      const campos = ['last', 'online', 'profile', 'status', 'readreceipts', 'groupadd', 'messages', 'calladd'];
+      const linhas = campos
+        .filter(campo => dados?.[campo] != null)
+        .map(campo => ({
+          rotulo: '🔒 ' + campo.toUpperCase(),
+          valor: String(dados[campo]).slice(0, 80)
+        }));
+      
+      return ctx.reply(ctx.mess.padraoInfo({
+        emoji: '🔒', titulo: 'PRIVACIDADE',
+        linhas: linhas.length ? linhas : [{ rotulo: 'ℹ️ INFO', valor: 'Nenhuma configuração retornada.' }]
+      }));
+    } catch (error) {
+      console.log('[PRIVACIDADE]', error?.message || error);
+      return ctx.reply(ctx.mess.padraoErro({
+        titulo: 'PRIVACIDADE',
+        descricao: 'Não foi possível concluir essa ação.'
+      }));
+    }
+  }
+});
