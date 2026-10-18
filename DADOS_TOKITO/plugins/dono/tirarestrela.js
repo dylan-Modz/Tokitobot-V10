@@ -28,20 +28,69 @@
  * ============================================================
  */
 
-const dylan = require('../../database/lib/comandos')
-const stone = require('../../sistemas/stone-recursos')
+
+
+const dylan = require('../../database/lib/comandos');
+
+const obterCitada = ctx => {
+  const contexto = ctx.ctxMsg?.stanzaId ? ctx.ctxMsg : (
+    ctx.mensagem?.extendedTextMessage?.contextInfo ||
+    ctx.mensagem?.imageMessage?.contextInfo ||
+    ctx.mensagem?.videoMessage?.contextInfo ||
+    ctx.mensagem?.audioMessage?.contextInfo ||
+    ctx.mensagem?.documentMessage?.contextInfo ||
+    ctx.mensagem?.stickerMessage?.contextInfo ||
+    {}
+  );
+
+  if (!contexto.stanzaId) return null;
+
+  const participante = contexto.participantAlt || contexto.participant || '';
+  const meusIds = [ctx.tokito?.user?.id, ctx.tokito?.user?.lid]
+    .filter(Boolean)
+    .map(id => ctx.nJid(id));
+  const fromMe = Boolean(participante && meusIds.includes(ctx.nJid(participante)));
+
+  const key = { remoteJid: ctx.from, id: contexto.stanzaId, fromMe };
+  if (ctx.isGroup && participante) key.participant = participante;
+
+  return { key, contexto, fromMe };
+};
 
 dylan.setCommand({
-nome: 'tirarestrela',
-comandos: ['tirarestrela'],
-categoria: 'dono',
-info: {
-descricao: 'Remove estrela da mensagem',
-uso: 'tirarestrela (responder)',
-permissao: 'DONO',
-categoria: 'dono'
-},
-async executar(ctx) {
-return stone.executar(ctx, 'tirarestrela')
-}
-})
+  nome: 'tirarestrela',
+  comandos: ['tirarestrela'],
+  categoria: 'dono',
+  info: {
+    descricao: 'Remove uma estrela da mensagem.',
+    uso: 'tirarestrela (responder)',
+    permissao: 'DONO'
+  },
+
+  async executar(ctx) {
+    if (!ctx.SoDono) return ctx.reply(ctx.mess.onlyOwner());
+
+    try {
+      const citada = obterCitada(ctx);
+      if (!citada) return ctx.reply(ctx.mess.padraoUso({
+        emoji: '⭐', titulo: 'REMOVER ESTRELA',
+        uso: ctx.prefix + 'tirarestrela',
+        descricao: 'Responda à mensagem que deseja retirar dos favoritos.'
+      }));
+      
+      if (typeof ctx.tokito.star !== 'function') throw new Error('Método de estrela indisponível');
+      await ctx.tokito.star(ctx.from, [{ id: citada.key.id, fromMe: citada.key.fromMe }], false);
+      
+      return ctx.reply(ctx.mess.padraoSucesso({
+        emoji: '⭐', titulo: 'ESTRELA REMOVIDA',
+        descricao: 'Mensagem removida dos favoritos da conta do bot.'
+      }));
+    } catch (error) {
+      console.log('[TIRARESTRELA]', error?.message || error);
+      return ctx.reply(ctx.mess.padraoErro({
+        titulo: 'REMOVER ESTRELA',
+        descricao: 'Não foi possível concluir essa ação.'
+      }));
+    }
+  }
+});
