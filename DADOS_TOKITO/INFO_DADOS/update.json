@@ -1,135 +1,51 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.48",
+  "version": "10.2.49",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-18T23:16:54.249Z",
+  "publishedAt": "2026-10-18T23:44:59.858Z",
   "changelog": [
-    "[Organização] 16 comandos individuais, organizados diretamente em plugins/admin e plugins/dono, sem arquivo central de recursos.",
-    "[Mensagens] Respostas padronizadas com os modelos do Tokito V10, sem avisos da biblioteca.",
-    "[Apagar para mim] Removida a exigência de timestamp digitado; usa o registro de horário original de mensagens recebidas.",
-    "[Segurança] Preservadas as validações de dono e administradores e o sistema de solicitações existente.",
-    "[Limpeza] Removido DADOS_TOKITO/sistemas/stone-recursos.js sem afetar os módulos principais.",
-    "[Versão] Atualização para 10.2.48 com manifesto incremental dos arquivos alterados."
+    "[Figurinhas] Corrigida a criação de packs nativos no comando packfig e seus aliases.",
+    "[Compatibilidade] Removida a importação antiga de Baileys no pacote.js; os tipos de upload usam a Stone WPP instalada.",
+    "[Organização] Nenhuma alteração nas funções dos Sub Bots ou em outros comandos.",
+    "[Sub Bot] Protegido o envio de eventos IPC quando o processo pai encerra; filhos órfãos finalizam a própria execução.",
+    "[Sub Bot] Reinício aguarda o encerramento real do processo anterior e evita corrida entre sessões do mesmo número.",
+    "[Conexão] Um conflito de sessão 440 encerra o Sub Bot sem repetir novas conexões em ciclo automático.",
+    "[Avisos] Reconexões da mesma execução não geram repetidamente a mensagem inicial de Sub Bot conectado.",
+    "[Estado] Status de reconectando e conflito registrados para facilitar o diagnóstico."
   ],
-  "delete": [
-    "DADOS_TOKITO/sistemas/stone-recursos.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Organização dos 16 comandos e correção do apagarme",
-  "notice": "Tokito Bot V10.2.48 disponível: comandos independentes, mensagens padronizadas e correção do apagarme.",
+  "title": "Correções de packfig e estabilidade dos Sub Bots",
+  "notice": "Tokito Bot V10.2.49 disponível: packfig compatível com Stone WPP, correções de reconexão, processos e notificações dos Sub Bots.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/fixar.js",
-      "gitSha": "7ca6f5846101b2f8f0a70ec6c8c182e053a33762",
+      "path": "DADOS_TOKITO/plugins/figurinhas/pacote.js",
+      "gitSha": "9f57462f2c78961247f3e0bf9662eab35c343ba9",
       "sha256": "",
-      "size": 3518
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/desfixar.js",
-      "gitSha": "fde78a77867e41c363dc882035a70ac311288fd1",
-      "sha256": "",
-      "size": 3325
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/rejeitarpedido.js",
-      "gitSha": "b2d96baf0ea5d56db2736e3639a362be4e7cbb9e",
-      "sha256": "",
-      "size": 2843
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/tempmsg.js",
-      "gitSha": "68d2c423386f99e20f3aa6e87d342e65a023dd03",
-      "sha256": "",
-      "size": 2753
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/estrela.js",
-      "gitSha": "308092cdcfa33e918ec1296a0ceff06b67f3a359",
-      "sha256": "",
-      "size": 3254
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/tirarestrela.js",
-      "gitSha": "3de27f3ec4c54e9313908ed1c127550997441cb6",
-      "sha256": "",
-      "size": 3278
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/editarmsg.js",
-      "gitSha": "92a896c0f141ca1fd160e660cf11891cdf288225",
-      "sha256": "",
-      "size": 3531
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/apagarme.js",
-      "gitSha": "73f16dfd6336e6e84188bd99e7e5012f20ea805f",
-      "sha256": "",
-      "size": 4193
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/reacaocanal.js",
-      "gitSha": "b0b4cb5aa1eb35a670f0ccb66ff7f5f5fcf3c168",
-      "sha256": "",
-      "size": 3630
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/seguidores.js",
-      "gitSha": "cf4bb9e0b952ee666fbf5f753921ac0d5e87085c",
-      "sha256": "",
-      "size": 3557
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/linkchamada.js",
-      "gitSha": "bbf0816346854f7bbabdea59cb02f9efa25b98d7",
-      "sha256": "",
-      "size": 2718
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/etiquetachat.js",
-      "gitSha": "9da0600a6fb3605a8b2c11c550e4cdd84116c519",
-      "sha256": "",
-      "size": 2721
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/etiquetamsg.js",
-      "gitSha": "ff6c15496d6729c76b9db03fb5160815bd91ca9e",
-      "sha256": "",
-      "size": 3706
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/rotulomembro.js",
-      "gitSha": "544d2d2d878824bfaad282518071e05c2067b4e5",
-      "sha256": "",
-      "size": 2492
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/privacidade.js",
-      "gitSha": "655a17a91b50fa1103bb45cd08656b7d0ef3c4f6",
-      "sha256": "",
-      "size": 2745
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/bloqueados.js",
-      "gitSha": "f00095190781f4cab2f8f5862825f4973dababb3",
-      "sha256": "",
-      "size": 2453
-    },
-    {
-      "path": "tokito.js",
-      "gitSha": "080ac2a710991571d874e294097bd2ab69d394be",
-      "sha256": "",
-      "size": 54226
+      "size": 10027
     },
     {
       "path": "package.json",
-      "gitSha": "bd6f04724e25da32211badfd7518f8e76887c5d3",
+      "gitSha": "0086d8e98d99486d0bdcaff9f7f51501af5a8159",
       "sha256": "",
       "size": 1166
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "gitSha": "f87b1af0b830464f5bb7dbad91ec57458253a33e",
+      "sha256": "",
+      "size": 44484
+    },
+    {
+      "path": "DADOS_TOKITO/sub/manager.js",
+      "gitSha": "ec54a2310643cbf83c012f11270442c89c2f3a45",
+      "sha256": "",
+      "size": 7210
     }
   ],
   "releases": [
@@ -4762,6 +4678,53 @@
       ],
       "required": false,
       "publishedAt": "2026-10-18T23:16:54.249Z"
+    },
+    {
+      "version": "10.2.49",
+      "fromVersion": "10.2.48",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Correções de packfig e estabilidade dos Sub Bots",
+      "notice": "Tokito Bot V10.2.49 disponível: packfig compatível com Stone WPP, correções de reconexão, processos e notificações dos Sub Bots.",
+      "changelog": [
+        "[Figurinhas] Corrigida a criação de packs nativos no comando packfig e seus aliases.",
+        "[Compatibilidade] Removida a importação antiga de Baileys no pacote.js; os tipos de upload usam a Stone WPP instalada.",
+        "[Organização] Nenhuma alteração nas funções dos Sub Bots ou em outros comandos.",
+        "[Sub Bot] Protegido o envio de eventos IPC quando o processo pai encerra; filhos órfãos finalizam a própria execução.",
+        "[Sub Bot] Reinício aguarda o encerramento real do processo anterior e evita corrida entre sessões do mesmo número.",
+        "[Conexão] Um conflito de sessão 440 encerra o Sub Bot sem repetir novas conexões em ciclo automático.",
+        "[Avisos] Reconexões da mesma execução não geram repetidamente a mensagem inicial de Sub Bot conectado.",
+        "[Estado] Status de reconectando e conflito registrados para facilitar o diagnóstico."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/pacote.js",
+          "gitSha": "9f57462f2c78961247f3e0bf9662eab35c343ba9",
+          "sha256": "",
+          "size": 10027
+        },
+        {
+          "path": "package.json",
+          "gitSha": "0086d8e98d99486d0bdcaff9f7f51501af5a8159",
+          "sha256": "",
+          "size": 1166
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "f87b1af0b830464f5bb7dbad91ec57458253a33e",
+          "sha256": "",
+          "size": 44484
+        },
+        {
+          "path": "DADOS_TOKITO/sub/manager.js",
+          "gitSha": "ec54a2310643cbf83c012f11270442c89c2f3a45",
+          "sha256": "",
+          "size": 7210
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-18T23:44:59.858Z"
     }
   ],
   "mode": "incremental",

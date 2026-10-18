@@ -7,6 +7,39 @@ const runtime = require('./runtime')
 const workers = new Map()
 const callbacks = new Map()
 const expectedExit = new Set()
+const stopping = new Map()
+const onlineNotified = new Set()
+
+// Espera o processo sair de verdade antes de permitir outro para o mesmo número.
+const aguardarSaida = child => new Promise((resolve, reject) => {
+  if (child.exitCode !== null || child.signalCode !== null) return resolve()
+
+  let finalizado = false
+  const concluir = erro => {
+    if (finalizado) return
+    finalizado = true
+    clearTimeout(tempoGrace)
+    clearTimeout(tempoLimite)
+    child.removeListener('exit', saiu)
+    child.removeListener('close', saiu)
+    if (erro) reject(erro)
+    else resolve()
+  }
+  const saiu = () => concluir()
+
+  child.once('exit', saiu)
+  child.once('close', saiu)
+
+  const tempoGrace = setTimeout(() => {
+    if (child.exitCode === null && child.signalCode === null) {
+      try { child.kill('SIGKILL') } catch {}
+    }
+  }, 8000)
+
+  const tempoLimite = setTimeout(() => {
+    concluir(new Error('SUB_NAO_ENCERROU'))
+  }, 12000)
+})
 
 const credsRegistered = number => {
   try {
@@ -36,6 +69,8 @@ const start = (number, handlers = {}) => {
     throw new Error('SUB_EXPIRADO')
   }
 
+  if (stopping.has(id)) throw new Error('SUB_ENCERRANDO_AGUARDE')
+
   if (workers.has(id)) {
     callbacks.set(id, handlers)
     return { child: workers.get(id), reused: true, registered: credsRegistered(id) }
@@ -61,7 +96,25 @@ const start = (number, handlers = {}) => {
   store.update(id, { status: 'iniciando', pid: child.pid || null })
 
   child.on('message', message => {
+    if (workers.get(id) !== child || stopping.has(id)) return
     const type = String(message?.type || '')
+
+    if (type === 'reconnecting') {
+      const atual = store.get(id)
+      if (atual && atual.status !== 'conflito') {
+        store.update(id, { status: 'reconectando', pid: child.pid || null })
+      }
+      return
+    }
+
+    if (type === 'conflict') {
+      store.update(id, {
+        status: 'conflito',
+        pid: child.pid || null,
+        lastError: 'Sessão substituída (440). Verifique se o mesmo número está rodando em outra instância.'
+      })
+      return
+    }
 
     if (type === 'pairing-code') {
       store.update(id, { status: 'aguardando_conexao', lastPairingAt: new Date().toISOString() })
@@ -70,12 +123,19 @@ const start = (number, handlers = {}) => {
     }
 
     if (type === 'online') {
+      const primeiraConexao = !onlineNotified.has(id)
+      const atual = store.get(id)
       const updated = store.update(id, {
         status: 'online',
-        connectedAt: new Date().toISOString(),
+        connectedAt: primeiraConexao
+          ? new Date().toISOString()
+          : (atual?.connectedAt || new Date().toISOString()),
         pid: child.pid || null
       })
-      sendCallback(id, 'onOnline', updated)
+      if (primeiraConexao) {
+        onlineNotified.add(id)
+        sendCallback(id, 'onOnline', updated)
+      }
       return
     }
 
@@ -91,14 +151,17 @@ const start = (number, handlers = {}) => {
   })
 
   child.on('exit', (code, signal) => {
+    if (workers.get(id) !== child) return
+
     workers.delete(id)
     callbacks.delete(id)
+    onlineNotified.delete(id)
     const esperado = expectedExit.delete(id)
     const atual = store.get(id)
 
     if (atual && atual.status !== 'expirado' && atual.status !== 'removido') {
       store.update(id, {
-        status: esperado ? 'offline' : 'offline',
+        status: !esperado && atual.status === 'conflito' ? 'conflito' : 'offline',
         pid: null,
         lastExitCode: code ?? null,
         lastExitSignal: signal ?? null,
@@ -108,6 +171,7 @@ const start = (number, handlers = {}) => {
   })
 
   child.on('error', error => {
+    if (workers.get(id) !== child) return
     store.update(id, { status: 'erro', pid: null, lastError: String(error?.message || error) })
     sendCallback(id, 'onError', error)
   })
@@ -117,6 +181,8 @@ const start = (number, handlers = {}) => {
 
 const stop = async number => {
   const id = store.normalize(number)
+  if (stopping.has(id)) return stopping.get(id)
+
   const child = workers.get(id)
   if (!child) {
     const sub = store.get(id)
@@ -124,18 +190,40 @@ const stop = async number => {
     return false
   }
 
-  expectedExit.add(id)
-  workers.delete(id)
-  callbacks.delete(id)
+  const tarefa = (async () => {
+    expectedExit.add(id)
+    const terminou = aguardarSaida(child)
 
-  try { child.kill('SIGTERM') } catch {}
-  store.update(id, { status: 'offline', pid: null })
-  return true
+    try {
+      if (child.exitCode === null && child.signalCode === null) child.kill('SIGTERM')
+    } catch {}
+
+    await terminou
+
+    if (workers.get(id) === child) {
+      workers.delete(id)
+      callbacks.delete(id)
+      onlineNotified.delete(id)
+      expectedExit.delete(id)
+    }
+
+    const atual = store.get(id)
+    if (atual && atual.status !== 'expirado' && atual.status !== 'removido') {
+      store.update(id, { status: 'offline', pid: null })
+    }
+    return true
+  })()
+
+  stopping.set(id, tarefa)
+  try {
+    return await tarefa
+  } finally {
+    stopping.delete(id)
+  }
 }
 
 const restart = async (number, handlers = {}) => {
   await stop(number)
-  await new Promise(resolve => setTimeout(resolve, 700))
   return start(number, handlers)
 }
 
@@ -150,6 +238,7 @@ const restore = async () => {
   let started = 0
   for (const sub of store.active()) {
     if (!credsRegistered(sub.number)) continue
+    if (sub.status === 'conflito') continue
     if (workers.has(sub.number)) continue
     try {
       start(sub.number)

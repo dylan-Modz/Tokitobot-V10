@@ -61,6 +61,31 @@ const correcoesAntirroubo = new Map()
 
 let { NomeDoBot, ownerName, prefix, channel, channeldl, ownerNumber, CREDENTIALS_USER, API_URL, API_KEY_TOKITO, TOKEN_SALA, TOKEN_LIKE_FF } = require('./INFO_DADOS/config-all.json')
 let iniciando = false, reconectando = false, metodo = null, ultimoQr = null, processarMsg = null
+let socketAtual = null
+let primeiraConexaoSub = false
+
+// A mensagem IPC só pode ser enviada enquanto o canal com o bot principal existir.
+const enviarAoPai = mensagem => {
+if (!runtimeSub.isSubBot || !process.connected || typeof process.send !== 'function') return false
+try {
+process.send(mensagem, error => {
+if (error && error.code !== 'ERR_IPC_CHANNEL_CLOSED') {
+erroSistema('Comunicação com bot principal', error)
+}
+})
+return true
+} catch (error) {
+if (error?.code !== 'ERR_IPC_CHANNEL_CLOSED') erroSistema('Comunicação com bot principal', error)
+return false
+}
+}
+
+if (runtimeSub.isSubBot) {
+process.once('disconnect', () => {
+aviso('Bot principal foi encerrado. Finalizando Sub Bot para evitar sessões duplicadas.')
+process.exit(0)
+})
+}
 
 if (!fs.existsSync(qrcode)) fs.mkdirSync(qrcode, { recursive: true })
 if (!fs.existsSync(grupos)) fs.mkdirSync(grupos, { recursive: true })
@@ -300,7 +325,7 @@ const phoneNumber = runtimeSub.isSubBot ? String(process.env.TOKITO_SUB_NUMBER |
 const numerosColetados = collectNumbers(phoneNumber)
 if (!numerosColetados || numerosColetados.length < 11) {
 if (runtimeSub.isSubBot) {
-process.send?.({ type: 'error', message: 'Número do Sub Bot inválido.' })
+enviarAoPai({ type: 'error', message: 'Número do Sub Bot inválido.' })
 return
 }
 erro('Número inválido. Exemplo: 5511999999999')
@@ -326,7 +351,7 @@ await delay(2200)
 }
 if (!code && ultimoErro) throw ultimoErro
 if (runtimeSub.isSubBot) {
-process.send?.({ type: 'pairing-code', code, number: numerosColetados })
+enviarAoPai({ type: 'pairing-code', code, number: numerosColetados })
 return code
 }
 console.log('')
@@ -338,7 +363,7 @@ info('Abra o WhatsApp > Aparelhos conectados > Conectar com número de telefone.
 console.log('')
 return code
 } catch (error) {
-if (runtimeSub.isSubBot) process.send?.({ type: 'error', message: String(error?.message || error) })
+if (runtimeSub.isSubBot) enviarAoPai({ type: 'error', message: String(error?.message || error) })
 erroSistema('Não foi possível gerar o código de conexão', error)
 }
 }
@@ -567,6 +592,13 @@ if (iniciando) return
 iniciando = true
 try {
 info('Iniciando conexão...')
+
+// Encerra explicitamente a instância anterior, sem reaproveitar event handlers obsoletos.
+const anterior = socketAtual
+socketAtual = null
+if (anterior && typeof anterior.end === 'function') {
+try { anterior.end(new Error('Substituindo conexão antiga do Tokito')) } catch {}
+}
 const { version } = await fetchLatestStoneWPPVersion()
 const { state, saveCreds } = await useMultiFileAuthState(qrcode)
 const tokito = makeWASocket({
@@ -593,6 +625,7 @@ emitOwnEvents: true,
 shouldSyncHistoryMessage: () => false,
 getMessage: async key => undefined
 })
+socketAtual = tokito
 global.tokito = tokito
 // Observa os sinais da biblioteca principal. Nao cria mensagens artificiais.
 tokito.ev.on('tokito.security.ciphertext', dados => {
@@ -610,6 +643,7 @@ funcoes.iniciar(tokito, prefix)
 if (!state.creds.registered && metodo === 'codigo') await startPairing(tokito)
 if (!state.creds.registered && metodo === 'qr') info('Aguardando geração do QR-Code...')
 tokito.ev.process(async events => {
+if (socketAtual !== tokito) return
 /*
  * ANTI CALL
  */
@@ -1113,8 +1147,13 @@ groupsDir: grupos,
 owners: [ownerNumber, ...Array.from({ length: 6 }, (_, i) => nescessario?.[`numero_dono${i + 1}`])].filter(Boolean)
 })
 if (runtimeSub.isSubBot) {
+if (!primeiraConexaoSub) {
+primeiraConexaoSub = true
 sucesso(`Sub Bot ${runtimeSub.id} conectado com sucesso.`)
-process.send?.({ type: 'online', number: runtimeSub.id })
+} else {
+info(`Sub Bot ${runtimeSub.id} reconectado.`)
+}
+enviarAoPai({ type: 'online', number: runtimeSub.id })
 } else {
 donoSistema.iniciar(tokito)
 sorteioGrupo.iniciar(tokito)
@@ -1129,6 +1168,16 @@ break
 case 'close':
 avisosOficiais.pausar(tokito)
 if (global.__TOKITO_UPDATE_SOCKET__ === tokito) global.__TOKITO_UPDATE_SOCKET__ = null
+// 440 indica sessão substituída. Repetir conexão aqui só causa tempestade de logins.
+if (runtimeSub.isSubBot && shouldReconnect === 440) {
+erro('Sub Bot desconectado: sessão substituída (440). Verifique se existe outra instância com o mesmo número.')
+enviarAoPai({ type: 'conflict', number: runtimeSub.id })
+setTimeout(() => process.exit(0), 300)
+break
+}
+if (runtimeSub.isSubBot) {
+enviarAoPai({ type: 'reconnecting', number: runtimeSub.id, code: shouldReconnect })
+}
 // Durante o primeiro pareamento do Sub Bot ainda não existe uma sessão registrada.
 // Alguns fechamentos transitórios chegam como 401; eles não devem ser tratados como logout definitivo.
 if (runtimeSub.isSubBot && !state.creds.registered) {
@@ -1145,7 +1194,7 @@ break
 }
 if (shouldReconnect === DisconnectReason.loggedOut || shouldReconnect === 401) {
 erro('Sessão encerrada. Apague a pasta qrcode e conecte novamente.')
-if (runtimeSub.isSubBot) process.send?.({ type: 'logged-out', number: runtimeSub.id })
+if (runtimeSub.isSubBot) enviarAoPai({ type: 'logged-out', number: runtimeSub.id })
 process.exit(0)
 }
 if (!reconectando) {
