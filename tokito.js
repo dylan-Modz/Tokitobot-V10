@@ -373,6 +373,30 @@ const isGroup = from?.endsWith('@g.us')
 const isStatus = from === 'status@broadcast'
 const isNewsletter = String(from || '').endsWith('@newsletter')
 if (!from) continue
+// Registra apenas ID e horário originais, para apagar mensagens só na conta do bot.
+const mensagensRecebidas = (tokito.__tokitoMessageTimestamps ||= new Map());
+const brutoTimestamp = info.messageTimestamp;
+const timestampMensagem = Number(
+  brutoTimestamp?.toNumber?.() ??
+  brutoTimestamp?.low ??
+  brutoTimestamp ??
+  0
+);
+
+if (
+  info.key?.id &&
+  Number.isSafeInteger(timestampMensagem) &&
+  timestampMensagem > 1000000000
+) {
+  const chaveMensagem = from + '|' + info.key.id;
+  mensagensRecebidas.delete(chaveMensagem);
+  mensagensRecebidas.set(chaveMensagem, timestampMensagem);
+
+  // Limita o cache em memória, inclusive em bots com muitos grupos.
+  if (mensagensRecebidas.size > 10000) {
+    mensagensRecebidas.delete(mensagensRecebidas.keys().next().value);
+  }
+}
 // Diagnóstico mínimo no ponto mais cedo possível do handler.
 // Se esta linha aparecer, a Stone WPP entregou a mensagem ao núcleo.
 if (!isStatus && process.env.TOKITO_DEBUG_RX === '1') {
