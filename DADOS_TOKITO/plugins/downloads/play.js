@@ -29,6 +29,7 @@
  */
 
 const axios = require('axios')
+const { sendInteractiveMessage } = require('@stone-wpp/ofc')
 
 const dylan = require('../../database/lib/comandos')
 
@@ -164,6 +165,84 @@ dylan.setCommand({
           `> 🎼 ᴇɴᴠɪᴀɴᴅᴏ ᴏ sᴇᴜ ᴀ́ᴜᴅɪᴏ para @${numeroUsuario}`
 
         if (isBotoes) {
+          // Play2: botoes tradicionais com visual de localizacao e miniatura JPEG.
+          // O selo aqui e somente a mensagem citada; nao adiciona verificacao Meta.
+          try {
+            const urlThumbnail = (
+              res?.videoId
+                ? `https://i.ytimg.com/vi/${res.videoId}/hqdefault.jpg`
+                : thumbnail
+            )
+
+            if (!urlThumbnail) throw new Error('Miniatura nao disponivel')
+
+            const imagem = await axios.get(urlThumbnail, {
+              responseType: 'arraybuffer',
+              timeout: 12000,
+              maxContentLength: 1024 * 1024,
+              maxBodyLength: 1024 * 1024
+            })
+
+            const jpegThumbnail = Buffer.from(imagem.data || [])
+
+            if (
+              jpegThumbnail.length < 4 ||
+              jpegThumbnail.length > 1024 * 1024 ||
+              jpegThumbnail[0] !== 0xff ||
+              jpegThumbnail[1] !== 0xd8
+            ) {
+              throw new Error('A miniatura nao esta em JPEG')
+            }
+
+            const buttons = [
+              {
+                buttonId: `${prefix}play_audio ${url}`,
+                buttonText: { displayText: '🎧﹚𝐀́𝐔𝐃𝐈𝐎﹙🎧' },
+                type: 1
+              },
+              {
+                buttonId: `${prefix}play_video ${url}`,
+                buttonText: { displayText: '🎬﹚𝐕𝐈́𝐃𝐄𝐎﹙🎬' },
+                type: 1
+              },
+              {
+                buttonId: `${prefix}playdoc ${url}`,
+                buttonText: { displayText: '📄﹚𝐃𝐎𝐂𝐔𝐌𝐄𝐍𝐓𝐎﹙📄' },
+                type: 1
+              }
+            ]
+
+            await sendInteractiveMessage(
+              tokito,
+              from,
+              {
+                buttonsMessage: {
+                  contentText: `${texto}\n\n> *[🎼]* • *𝙴𝚜𝚌𝚘𝚕𝚑𝚊 𝚌𝚘𝚖𝚘 𝚍𝚎𝚜𝚎𝚓𝚊 𝚋𝚊𝚒𝚡𝚊𝚛*`,
+                  footerText: '',
+                  headerType: 6,
+                  locationMessage: {
+                    degreesLatitude: 0,
+                    degreesLongitude: 0,
+                    name: title,
+                    address: canal,
+                    jpegThumbnail
+                  },
+                  buttons
+                }
+              },
+              { quoted: selo, mentions: [sender] }
+            )
+
+            await reagir(from, '✅')
+            return
+          } catch (e) {
+            console.log(
+              '[PLAY LOCALIZACAO]',
+              modulos.sanitizarErro(e, [API_KEY_TOKITO])
+            )
+            // Caso a localizacao nao seja aceita, mantem os botoes atuais.
+          }
+
           try {
             let header
 
