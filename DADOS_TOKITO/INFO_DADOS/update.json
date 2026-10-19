@@ -1,47 +1,34 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.50",
+  "version": "10.2.51",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-19T00:00:25.386Z",
+  "publishedAt": "2026-10-19T00:38:35.111Z",
   "changelog": [
-    "[Atualizador] Corrigido aviso concorrente: somente o Tokito principal monitora e notifica novas versões.",
-    "[Sub Bots] Monitor de atualizações desativado nos processos filhos, evitando que marquem a versão como notificada no estado compartilhado.",
-    "[Notificações] Registro exclusivo da última versão notificada ao dono principal, recuperando avisos suprimidos por Sub Bots antigos.",
-    "[Versão] Corrigida a versão pública exibida para acompanhar a versão real; menus e avisos deixam de mostrar 10.2.47 quando a instalação é mais recente.",
-    "[Diagnóstico] Comando update diag exibe a última versão notificada pelo principal.",
-    "[Compatibilidade] Atualização incremental sem remover credenciais ou alterar as funções dos grupos."
+    "[Play] O comando play exibe botões tradicionais no estilo Play2 com cabeçalho de localização e miniatura do vídeo quando !botoes 1 está ativo.",
+    "[Compatibilidade] Preservados os botões Áudio, Vídeo e Documento e os IDs dos respectivos comandos.",
+    "[Configuração] Quando !botoes 0 está ativo, o Play continua enviando o áudio automaticamente, sem botões.",
+    "[Fallback] Se o WhatsApp rejeitar o formato de localização ou não houver JPEG válido, o Play tenta os botões interativos anteriores.",
+    "[Mensagens] Mantido o texto de pesquisa, informações da música e a mensagem citada (selo). Não adiciona selo de verificação Meta."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Correção dos avisos de atualização do Tokito V10",
-  "notice": "Tokito Bot V10.2.50 disponível: notificações apenas pelo bot principal, versão exibida corretamente e diagnóstico de atualizações.",
+  "type": "Melhoria",
+  "title": "Play com botões de localização no padrão Play2",
+  "notice": "Tokito Bot V10.2.51 disponível: o Play usa os botões Play2 quando ativos e mantém download automático quando desativados.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "54a554abb0afbb167757fc998403052233c8e940",
+      "path": "DADOS_TOKITO/plugins/downloads/play.js",
+      "gitSha": "bb664a10262a010e2808e30580c3703e6ccb9174",
       "sha256": "",
-      "size": 44662
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/dados.js",
-      "gitSha": "c24f10a393900e524249115852b6f9f7da7b4daa",
-      "sha256": "",
-      "size": 38007
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/update.js",
-      "gitSha": "479a0ed4364875a9d6a3791f31c3a1ed43ca3ab5",
-      "sha256": "",
-      "size": 6574
+      "size": 11653
     },
     {
       "path": "package.json",
-      "gitSha": "ca783c278f675d5a931b1fc35afd9532f6b7a843",
+      "gitSha": "b5a21c0726978c71470f05fb245b9f22fedacebb",
       "sha256": "",
       "size": 1166
     }
@@ -4768,16 +4755,48 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-19T00:00:25.386Z"
+    },
+    {
+      "version": "10.2.51",
+      "fromVersion": "10.2.50",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Play com botões de localização no padrão Play2",
+      "notice": "Tokito Bot V10.2.51 disponível: o Play usa os botões Play2 quando ativos e mantém download automático quando desativados.",
+      "changelog": [
+        "[Play] O comando play exibe botões tradicionais no estilo Play2 com cabeçalho de localização e miniatura do vídeo quando !botoes 1 está ativo.",
+        "[Compatibilidade] Preservados os botões Áudio, Vídeo e Documento e os IDs dos respectivos comandos.",
+        "[Configuração] Quando !botoes 0 está ativo, o Play continua enviando o áudio automaticamente, sem botões.",
+        "[Fallback] Se o WhatsApp rejeitar o formato de localização ou não houver JPEG válido, o Play tenta os botões interativos anteriores.",
+        "[Mensagens] Mantido o texto de pesquisa, informações da música e a mensagem citada (selo). Não adiciona selo de verificação Meta."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/play.js",
+          "gitSha": "bb664a10262a010e2808e30580c3703e6ccb9174",
+          "sha256": "",
+          "size": 11653
+        },
+        {
+          "path": "package.json",
+          "gitSha": "b5a21c0726978c71470f05fb245b9f22fedacebb",
+          "sha256": "",
+          "size": 1166
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-19T00:38:35.111Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.49",
+  "fromVersion": "10.2.50",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.50"
+  "publicVersion": "10.2.51"
 }
