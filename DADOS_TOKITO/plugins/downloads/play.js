@@ -29,7 +29,93 @@
  */
 
 const axios = require('axios')
+const { spawn } = require('child_process')
 const { sendInteractiveMessage } = require('@stone-wpp/ofc')
+
+// Mesmo tratamento de capa usado no Play2: JPEG quadrado, sem metadados
+// e qualidade 60. Faz a conversao em memoria para nao criar arquivos no bot.
+const executarImagem = (programa, argumentos, imagem) => new Promise((resolve, reject) => {
+  let encerrado = false
+  let total = 0
+  const partes = []
+  let erro = ''
+
+  const filho = spawn(programa, argumentos, {
+    stdio: ['pipe', 'pipe', 'pipe']
+  })
+
+  const finalizar = (falha, resultado) => {
+    if (encerrado) return
+    encerrado = true
+    clearTimeout(limite)
+    if (falha) reject(falha)
+    else resolve(resultado)
+  }
+
+  const limite = setTimeout(() => {
+    filho.kill('SIGKILL')
+    finalizar(new Error('Tempo limite ao converter a capa'))
+  }, 12000)
+
+  filho.on('error', finalizar)
+  filho.stdin.on('error', () => {})
+  filho.stdout.on('data', parte => {
+    total += parte.length
+    if (total > 4 * 1024 * 1024) {
+      filho.kill('SIGKILL')
+      finalizar(new Error('Capa convertida muito grande'))
+      return
+    }
+    partes.push(parte)
+  })
+  filho.stderr.on('data', parte => {
+    if (erro.length < 500) erro += String(parte).slice(0, 500)
+  })
+  filho.on('close', codigo => {
+    if (codigo !== 0) return finalizar(new Error(erro || 'Falha ao converter a capa'))
+    finalizar(null, Buffer.concat(partes))
+  })
+
+  filho.stdin.end(imagem)
+})
+
+const converterCapa = async imagem => {
+  const args = [
+    '-', '-auto-orient',
+    '-resize', '300x300^',
+    '-gravity', 'center',
+    '-extent', '300x300',
+    '-strip', '-quality', '60',
+    'jpeg:-'
+  ]
+
+  let falha
+  for (const executavel of ['magick', 'convert']) {
+    try {
+      const capa = await executarImagem(executavel, args, imagem)
+      if (capa.length > 3 && capa[0] === 0xff && capa[1] === 0xd8) return capa
+    } catch (error) {
+      falha = error
+    }
+  }
+
+  // Hospedagens com ffmpeg mas sem ImageMagick tambem conseguem gerar JPEG.
+  try {
+    const capa = await executarImagem('ffmpeg', [
+      '-hide_banner', '-loglevel', 'error',
+      '-i', 'pipe:0',
+      '-vf', 'scale=300:300:force_original_aspect_ratio=increase,crop=300:300',
+      '-frames:v', '1',
+      '-q:v', '5',
+      '-f', 'image2pipe', '-vcodec', 'mjpeg', 'pipe:1'
+    ], imagem)
+    if (capa.length > 3 && capa[0] === 0xff && capa[1] === 0xd8) return capa
+  } catch (error) {
+    falha = error
+  }
+
+  throw falha || new Error('Nao foi possivel preparar a capa')
+}
 
 const dylan = require('../../database/lib/comandos')
 
@@ -168,31 +254,40 @@ dylan.setCommand({
           // Play2: botoes tradicionais com visual de localizacao e miniatura JPEG.
           // O selo aqui e somente a mensagem citada; nao adiciona verificacao Meta.
           try {
-            const urlThumbnail = (
-              res?.videoId
-                ? `https://i.ytimg.com/vi/${res.videoId}/hqdefault.jpg`
-                : thumbnail
-            )
+            // A capa devolvida pela pesquisa tem prioridade sobre o mapa
+            // e sobre as miniaturas genericas do YouTube.
+            const fontes = [
+              res?.image,
+              res?.thumbnail,
+              res?.thumbnails?.[0]?.url,
+              thumbnail,
+              res?.videoId ? 'https://i.ytimg.com/vi/' + res.videoId + '/hq720.jpg' : null,
+              res?.videoId ? 'https://i.ytimg.com/vi/' + res.videoId + '/hqdefault.jpg' : null
+            ].filter(valor => typeof valor === 'string' && /^https?:\/\//i.test(valor))
 
-            if (!urlThumbnail) throw new Error('Miniatura nao disponivel')
+            let jpegThumbnail = null
+            let erroCapa = null
 
-            const imagem = await axios.get(urlThumbnail, {
-              responseType: 'arraybuffer',
-              timeout: 12000,
-              maxContentLength: 1024 * 1024,
-              maxBodyLength: 1024 * 1024
-            })
+            for (const fonte of [...new Set(fontes)]) {
+              try {
+                const imagem = await axios.get(fonte, {
+                  responseType: 'arraybuffer',
+                  timeout: 12000,
+                  maxContentLength: 8 * 1024 * 1024,
+                  maxBodyLength: 8 * 1024 * 1024
+                })
 
-            const jpegThumbnail = Buffer.from(imagem.data || [])
+                const original = Buffer.from(imagem.data || [])
+                if (!original.length) throw new Error('Imagem vazia')
 
-            if (
-              jpegThumbnail.length < 4 ||
-              jpegThumbnail.length > 1024 * 1024 ||
-              jpegThumbnail[0] !== 0xff ||
-              jpegThumbnail[1] !== 0xd8
-            ) {
-              throw new Error('A miniatura nao esta em JPEG')
+                jpegThumbnail = await converterCapa(original)
+                break
+              } catch (error) {
+                erroCapa = error
+              }
             }
+
+            if (!jpegThumbnail) throw erroCapa || new Error('Capa indisponivel')
 
             const buttons = [
               {
