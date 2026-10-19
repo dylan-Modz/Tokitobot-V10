@@ -62,7 +62,7 @@ const ativo = Boolean(global.__TOKITO_UPDATE_NOTICE_TIMER__ && global.__TOKITO_U
 const versaoLocal = check?.local?.version || '—'
 const versaoRemota = check?.remote?.version || 'indisponível'
 const fonte = check?.fonte || 'indisponível'
-const notificada = salvo?.lastNotifiedVersion || 'nenhuma'
+const notificada = salvo?.lastNotifiedPrincipalVersion || 'nenhuma'
 const quando = automatico.at
   ? new Date(automatico.at).toLocaleString('pt-BR', { timeZone: 'America/Fortaleza' })
   : 'ainda não executada'
