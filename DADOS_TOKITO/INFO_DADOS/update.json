@@ -1,34 +1,34 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.51",
+  "version": "10.2.52",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-19T00:38:35.111Z",
+  "publishedAt": "2026-10-19T00:53:25.964Z",
   "changelog": [
-    "[Play] O comando play exibe botões tradicionais no estilo Play2 com cabeçalho de localização e miniatura do vídeo quando !botoes 1 está ativo.",
-    "[Compatibilidade] Preservados os botões Áudio, Vídeo e Documento e os IDs dos respectivos comandos.",
-    "[Configuração] Quando !botoes 0 está ativo, o Play continua enviando o áudio automaticamente, sem botões.",
-    "[Fallback] Se o WhatsApp rejeitar o formato de localização ou não houver JPEG válido, o Play tenta os botões interativos anteriores.",
-    "[Mensagens] Mantido o texto de pesquisa, informações da música e a mensagem citada (selo). Não adiciona selo de verificação Meta."
+    "[Play] A capa retornada pela pesquisa agora tem prioridade sobre a miniatura generica do YouTube.",
+    "[Play2] Capa convertida para JPEG 300x300 com corte central, remocao de metadados e qualidade 60 (ImageMagick), com alternativa ffmpeg em hospedagens compatíveis.",
+    "[Botões] Mantidos os três botoes Audio, Video e Documento no formato de localizacao quando !botoes 1 estiver ativado.",
+    "[Modo automatico] Com !botoes 0, continua enviando audio normalmente, sem converter capa para botoes.",
+    "[Compatibilidade] Preservados texto, links, selo de mensagem citada, ids e fallback para botoes interativos antigos."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Play com botões de localização no padrão Play2",
-  "notice": "Tokito Bot V10.2.51 disponível: o Play usa os botões Play2 quando ativos e mantém download automático quando desativados.",
+  "type": "Correção",
+  "title": "Capa original e qualidade Play2 no Play normal",
+  "notice": "Tokito Bot V10.2.52 disponível: Play com capa original tratada em JPEG 300x300 qualidade 60 e botões preservados.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/downloads/play.js",
-      "gitSha": "bb664a10262a010e2808e30580c3703e6ccb9174",
+      "gitSha": "f77eecc1e8f2275027d75232703f11598d131ffb",
       "sha256": "",
-      "size": 11653
+      "size": 14605
     },
     {
       "path": "package.json",
-      "gitSha": "b5a21c0726978c71470f05fb245b9f22fedacebb",
+      "gitSha": "e87990ba13737ec93bc47a887d1b819b6c5ffca3",
       "sha256": "",
       "size": 1166
     }
@@ -4787,16 +4787,48 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-19T00:38:35.111Z"
+    },
+    {
+      "version": "10.2.52",
+      "fromVersion": "10.2.51",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Capa original e qualidade Play2 no Play normal",
+      "notice": "Tokito Bot V10.2.52 disponível: Play com capa original tratada em JPEG 300x300 qualidade 60 e botões preservados.",
+      "changelog": [
+        "[Play] A capa retornada pela pesquisa agora tem prioridade sobre a miniatura generica do YouTube.",
+        "[Play2] Capa convertida para JPEG 300x300 com corte central, remocao de metadados e qualidade 60 (ImageMagick), com alternativa ffmpeg em hospedagens compatíveis.",
+        "[Botões] Mantidos os três botoes Audio, Video e Documento no formato de localizacao quando !botoes 1 estiver ativado.",
+        "[Modo automatico] Com !botoes 0, continua enviando audio normalmente, sem converter capa para botoes.",
+        "[Compatibilidade] Preservados texto, links, selo de mensagem citada, ids e fallback para botoes interativos antigos."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/play.js",
+          "gitSha": "f77eecc1e8f2275027d75232703f11598d131ffb",
+          "sha256": "",
+          "size": 14605
+        },
+        {
+          "path": "package.json",
+          "gitSha": "e87990ba13737ec93bc47a887d1b819b6c5ffca3",
+          "sha256": "",
+          "size": 1166
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-19T00:53:25.964Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.50",
+  "fromVersion": "10.2.51",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.51"
+  "publicVersion": "10.2.52"
 }
