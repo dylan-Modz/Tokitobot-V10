@@ -1,34 +1,32 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.53",
+  "version": "10.2.54",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-21T00:02:16.171Z",
+  "publishedAt": "2026-10-21T01:09:55.777Z",
   "changelog": [
-    "[Gerarlink] Arquivos enviados pelo Tokito APIs usando a rota /api/upload.",
-    "[Link direto] Upload temporário substituído pela URL retornada da API.",
-    "[Botão] Novo 📋 Copiar Link nativo, no mesmo estilo dos botões do Play.",
-    "[Compatibilidade] Mantidos !gerarlink e !link, mídias, reações e resposta em texto se o botão falhar."
+    "[Melhoria] chore(release): versão 10.2.54 corrige entrega de links no gerarlink",
+    "A versão 10.2.54 já está disponível para atualização.",
+    "Gerarlink atualizado",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Gerarlink com link direto e botão Copiar Link",
-  "notice": "Tokito Bot V10.2.53 disponível: gerarlink com link direto e botão Copiar Link.",
+  "title": "chore(release): versão 10.2.54 corrige entrega de links no gerarlink",
+  "notice": "A versão 10.2.54 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/util/gerarlink.js",
-      "gitSha": "d7e1d27f36ffbb1efcb88593fee53beee8a5e7f5",
-      "sha256": "",
-      "size": 7837
+      "sha256": "c5bf6657094c0163a30e3fba26188fba6f0542a64cfcb3ad49560959ea27351b",
+      "size": 8211
     },
     {
       "path": "package.json",
-      "gitSha": "a7ec4912c7fb5a7e89406b2f1a041a0e08ef8353",
-      "sha256": "",
+      "sha256": "d3a67b568c1c11ca5c3587e61d9471cdf92e9141a0caad9968832ae00086d08d",
       "size": 1166
     }
   ],
@@ -4849,6 +4847,33 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-21T00:02:16.171Z"
+    },
+    {
+      "version": "10.2.54",
+      "fromVersion": "10.2.53",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "chore(release): versão 10.2.54 corrige entrega de links no gerarlink",
+      "notice": "A versão 10.2.54 já está disponível para atualização.",
+      "changelog": [
+        "Gerarlink atualizado",
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/util/gerarlink.js",
+          "sha256": "c5bf6657094c0163a30e3fba26188fba6f0542a64cfcb3ad49560959ea27351b",
+          "size": 8211
+        },
+        {
+          "path": "package.json",
+          "sha256": "d3a67b568c1c11ca5c3587e61d9471cdf92e9141a0caad9968832ae00086d08d",
+          "size": 1166
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-21T01:09:55.777Z"
     }
   ],
   "mode": "incremental",
