@@ -117,11 +117,20 @@ const uploadTokito = async (buffer, ext, mime, ctx) => {
 
 // Botão nativo de copiar igual ao usado em outros comandos do Tokito.
 // Se não for aceito no dispositivo, envia o link como texto normalmente.
+
 const enviarComBotao = async (ctx, texto, url) => {
-  if (typeof ctx.tokito?.relayMessage !== 'function') return ctx.reply(texto)
+  // O relayMessage pode retornar sucesso sem o WhatsApp exibir o botão.
+  // Por isso, entrega o link real em texto primeiro, sempre.
+  await ctx.reply(texto)
+
+  // O botão é complementar e nunca pode impedir a entrega do link.
+  if (typeof ctx.tokito?.relayMessage !== 'function') return true
+
   try {
     const interativo = proto.Message.InteractiveMessage.create({
-      body: proto.Message.InteractiveMessage.Body.create({ text: texto }),
+      body: proto.Message.InteractiveMessage.Body.create({
+        text: '📋 *COPIAR LINK*\n\n> Toque no botão abaixo para copiar o link gerado.'
+      }),
       footer: proto.Message.InteractiveMessage.Footer.create({ text: '' }),
       nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
         buttons: [{
@@ -152,11 +161,11 @@ const enviarComBotao = async (ctx, texto, url) => {
     await ctx.tokito.relayMessage(ctx.from, mensagem.message, {
       messageId: mensagem.key.id
     })
-    return true
   } catch (erro) {
-    console.log('[GERARLINK BOTAO]', erro?.message || String(erro))
-    return ctx.reply(texto)
+    // O link já foi entregue; falha opcional do botão não muda o sucesso.
+    console.log('[GERARLINK BOTAO OPCIONAL]', erro?.message || String(erro))
   }
+  return true
 }
 
 const dylan = require('../../database/lib/comandos')
@@ -188,13 +197,14 @@ if (b.length > LIMITE_MB * 1024 * 1024) {
 }
 const resultado = await uploadTokito(b, e, d.m.mimetype, ctx)
 
-await ctx.reagir(ctx.from, '✅').catch(() => {})
 const texto = "- 🔗 `𝙻𝙸𝙽𝙺 𝙶𝙴𝚁𝙰𝙳𝙾`\n\n"
   + "> 📁 ׄ ( ᴛɪᴘᴏ: " + d.n + " )\n"
   + "> 🧩 ׄ ( ғᴏʀᴍᴀᴛᴏ: " + resultado.ext.toUpperCase() + " )\n"
   + "> 🔗 ׄ ( ᴜʀʟ: " + resultado.url + " )\n\n"
   + "> ✅ ׄ ( sᴇᴜ ᴀʀǫᴜɪᴠᴏ ғᴏɪ ᴄᴏɴᴠᴇʀᴛɪᴅᴏ ᴇᴍ ʟɪɴᴋ ᴄᴏᴍ sᴜᴄᴇssᴏ! )"
-return enviarComBotao(ctx, texto, resultado.url)
+await enviarComBotao(ctx, texto, resultado.url)
+await ctx.reagir(ctx.from, '✅').catch(() => {})
+return true
 }
 catch (e) {
 await ctx.reagir(ctx.from, '❌').catch(() => {})
