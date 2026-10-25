@@ -32,13 +32,13 @@ const dylan = require('../../database/lib/comandos')
 
 // Contato oficial do desenvolvedor no WhatsApp.
 const nome = 'dylan [00]'
-const numero = '5511977951060'
+const numero = '559185731582'
 const vcard = [
   'BEGIN:VCARD',
   'VERSION:3.0',
   'N:;;;;',
   `FN:${nome}`,
-  `item1.TEL;waid=${numero}:+55 11 97795-1060`,
+  `item1.TEL;waid=${numero}:+${numero}`,
   'item1.X-ABLabel:Celular',
   'END:VCARD'
 ].join('\n')
