@@ -6,28 +6,31 @@
   "ref": "main",
   "publishedAt": "2026-10-27T13:51:34.709Z",
   "changelog": [
-    "[Novidade] feat(likes): novo resultado de envio e aviso de cooldown com histórico (V10.2.59)",
-    "A versão 10.2.59 já está disponível para atualização.",
-    "Likes atualizado",
-    "Package atualizado"
+    "[Likes] Resultado de envio reformulado no design oficial do Tokito Bot V10.",
+    "[Limite] Quando o jogador já recebeu likes, exibe o último envio conhecido, o total registrado pelo bot e quando poderá enviar novamente.",
+    "[Horário] Mostra o tempo restante e a data/hora informados pela API; sem esses campos, usa estimativa identificada ou informa que o prazo não foi fornecido.",
+    "[Correção] Respostas de cooldown não aparecem mais como envio bem-sucedido com zero likes.",
+    "[Histórico] Armazena somente envios bem-sucedidos feitos pelo comando likes; os envios anteriores à atualização não entram no histórico."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat(likes): novo resultado de envio e aviso de cooldown com histórico (V10.2.59)",
-  "notice": "A versão 10.2.59 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "Likes Free Fire: novo design e aviso de envio já realizado",
+  "notice": "Tokito Bot V10.2.59 disponível: novo design dos Likes, quantidade já enviada e horário para enviar novamente!",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/freefire/likes.js",
       "sha256": "5e00960552572d356bf46069e8d5e5f7d13f5d8be40759df2beefe506a0b0653",
-      "size": 12269
+      "size": 12269,
+      "gitSha": "9a859a6b84148b91d77bc15d2024cf5fb2ba4614"
     },
     {
       "path": "package.json",
       "sha256": "c819e980f9e0894671348629b2fdfcb01b62ebeecdcad79961e9f883bf9e1c2b",
-      "size": 1166
+      "size": 1166,
+      "gitSha": "0ed3f5804a0bfebdfcdd05adb858c0d315a0069a"
     }
   ],
   "releases": [
@@ -4891,23 +4894,28 @@
       "version": "10.2.59",
       "fromVersion": "10.2.58",
       "channel": "stable",
-      "type": "Novidade",
-      "title": "feat(likes): novo resultado de envio e aviso de cooldown com histórico (V10.2.59)",
-      "notice": "A versão 10.2.59 já está disponível para atualização.",
+      "type": "Melhoria",
+      "title": "Likes Free Fire: novo design e aviso de envio já realizado",
+      "notice": "Tokito Bot V10.2.59 disponível: novo design dos Likes, quantidade já enviada e horário para enviar novamente!",
       "changelog": [
-        "Likes atualizado",
-        "Package atualizado"
+        "[Likes] Resultado de envio reformulado no design oficial do Tokito Bot V10.",
+        "[Limite] Quando o jogador já recebeu likes, exibe o último envio conhecido, o total registrado pelo bot e quando poderá enviar novamente.",
+        "[Horário] Mostra o tempo restante e a data/hora informados pela API; sem esses campos, usa estimativa identificada ou informa que o prazo não foi fornecido.",
+        "[Correção] Respostas de cooldown não aparecem mais como envio bem-sucedido com zero likes.",
+        "[Histórico] Armazena somente envios bem-sucedidos feitos pelo comando likes; os envios anteriores à atualização não entram no histórico."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/plugins/freefire/likes.js",
           "sha256": "5e00960552572d356bf46069e8d5e5f7d13f5d8be40759df2beefe506a0b0653",
-          "size": 12269
+          "size": 12269,
+          "gitSha": "9a859a6b84148b91d77bc15d2024cf5fb2ba4614"
         },
         {
           "path": "package.json",
           "sha256": "c819e980f9e0894671348629b2fdfcb01b62ebeecdcad79961e9f883bf9e1c2b",
-          "size": 1166
+          "size": 1166,
+          "gitSha": "0ed3f5804a0bfebdfcdd05adb858c0d315a0069a"
         }
       ],
       "delete": [],
@@ -4924,5 +4932,5 @@
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.58"
+  "publicVersion": "10.2.59"
 }
