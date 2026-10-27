@@ -6,22 +6,30 @@
   "ref": "main",
   "publishedAt": "2026-10-27T00:35:01.285Z",
   "changelog": [
-    "[Melhoria] chore: alinhar package.json à versão final do TikTok Search V10.2.58",
-    "A versão 10.2.58 já está disponível para atualização.",
-    "Package atualizado"
+    "[TikTok Search] Comando voltou a funcionar normalmente e envia somente um vídeo por pesquisa.",
+    "[Novo design] Legenda atualizada no padrão Tokito Bot V10, com título, duração, views, curtidas, comentários, compartilhamentos, downloads, autor, música, data e região.",
+    "[Vídeos] Escolha aleatória entre resultados válidos, priorizando vídeo sem marca d'água.",
+    "[Compatibilidade] Integração preservada com Tokito APIs e Stone WPP."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "chore: alinhar package.json à versão final do TikTok Search V10.2.58",
-  "notice": "A versão 10.2.58 já está disponível para atualização.",
+  "title": "TikTok Search renovado: novo design e comando funcionando normalmente",
+  "notice": "Tokito Bot V10.2.58 disponível: TikTok Search com novo design e comando funcionando normalmente!",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/plugins/downloads/tiktoksearch.js",
+      "sha256": "34a69ad76a4323a5413ed295c705090bd06454c18b3f2396ebaa7daaa6e47573",
+      "size": 5321,
+      "gitSha": "b0e236b482cdf5a5e8164492844dff8480fbfd75"
+    },
+    {
       "path": "package.json",
       "sha256": "0b74b2b21ece02b815b442dc54b0263766621a386c6032c3d05380db5ea24649",
-      "size": 1166
+      "size": 1166,
+      "gitSha": "5899940f37c39fcd7d905e29957b3ab822e2666c"
     }
   ],
   "releases": [
@@ -4894,16 +4902,26 @@
       "fromVersion": "10.2.57",
       "channel": "stable",
       "type": "Melhoria",
-      "title": "chore: alinhar package.json à versão final do TikTok Search V10.2.58",
-      "notice": "A versão 10.2.58 já está disponível para atualização.",
+      "title": "TikTok Search renovado: novo design e comando funcionando normalmente",
+      "notice": "Tokito Bot V10.2.58 disponível: TikTok Search com novo design e comando funcionando normalmente!",
       "changelog": [
-        "Package atualizado"
+        "[TikTok Search] Comando voltou a funcionar normalmente e envia somente um vídeo por pesquisa.",
+        "[Novo design] Legenda atualizada no padrão Tokito Bot V10, com título, duração, views, curtidas, comentários, compartilhamentos, downloads, autor, música, data e região.",
+        "[Vídeos] Escolha aleatória entre resultados válidos, priorizando vídeo sem marca d'água.",
+        "[Compatibilidade] Integração preservada com Tokito APIs e Stone WPP."
       ],
       "files": [
         {
+          "path": "DADOS_TOKITO/plugins/downloads/tiktoksearch.js",
+          "sha256": "34a69ad76a4323a5413ed295c705090bd06454c18b3f2396ebaa7daaa6e47573",
+          "size": 5321,
+          "gitSha": "b0e236b482cdf5a5e8164492844dff8480fbfd75"
+        },
+        {
           "path": "package.json",
           "sha256": "0b74b2b21ece02b815b442dc54b0263766621a386c6032c3d05380db5ea24649",
-          "size": 1166
+          "size": 1166,
+          "gitSha": "5899940f37c39fcd7d905e29957b3ab822e2666c"
         }
       ],
       "delete": [],
@@ -4920,5 +4938,5 @@
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.55"
+  "publicVersion": "10.2.58"
 }
