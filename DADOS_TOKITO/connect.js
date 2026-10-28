@@ -252,9 +252,9 @@ lista + obrigatoria,
 }
 
 // Usa os mesmos quick_reply nativos do comando Play e do aviso de comando inválido.
-const enviarAvisoUpdate = async (tokito, dono, texto) => {
+const enviarAvisoUpdate = async (tokito, dono, texto, preferirSimples = false) => {
 const imagem = { url: UPDATE_NOTICE_IMAGE }
-if (nescessario.botoes !== false) {
+if (nescessario.botoes !== false && !preferirSimples) {
 try {
 if (!tokito.user?.id || typeof tokito.waUploadToServer !== 'function' || typeof tokito.relayMessage !== 'function') {
 throw new Error('Botões interativos indisponíveis nesta conexão.')
@@ -329,19 +329,28 @@ global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ = ''
 if (!check.available || check.remote?.notify === false) return false
 const version = String(check.remote?.version || '').trim()
 const installed = String(check.local?.version || '').trim()
-if (!version || version === installed || !dadosSistema.deveAvisarUpdate(version)) return false
+if (!version || version === installed) return false
 const dono = normalizarJid(ownerNumber)
 if (!dono || !dono.endsWith('@s.whatsapp.net')) {
 registrarFalhaAvisoUpdate('Número do dono inválido ou não configurado em ownerNumber.')
 return false
 }
-// Envia aviso direto ao dono sem metadados de canal ou menções,
-// evitando falhas de compatibilidade em mensagens privadas da Stone WPP.
-const enviada = await enviarAvisoUpdate(tokito, dono, textoAvisoUpdate(check))
+if (!dadosSistema.deveAvisarUpdate(version, dono)) return false
+const estadoAviso = dadosSistema.state()
+const reenvio = String(estadoAviso.lastNotifiedPrincipalVersion || '') === version &&
+String(estadoAviso.lastNotifiedPrincipalJid || '') === dono &&
+Number(estadoAviso.lastNotifiedPrincipalAttempts || 0) > 0
+// Primeira tentativa: imagem e quick_reply. Se a mensagem não for exibida,
+// uma segunda tentativa com mídia simples é enviada após cinco minutos.
+const enviada = await enviarAvisoUpdate(tokito, dono, textoAvisoUpdate(check), reenvio)
 if (!enviada) throw new Error('O WhatsApp não confirmou o envio do aviso.')
-dadosSistema.registrarAvisoUpdate(version)
-global.__TOKITO_UPDATE_NOTICE_LAST_SENT__ = { version, at: new Date().toISOString() }
-sucesso('Aviso de atualização ' + version + ' enviado ao privado do dono.')
+const salvo = dadosSistema.registrarAvisoUpdate(version, dono)
+global.__TOKITO_UPDATE_NOTICE_LAST_SENT__ = {
+version, at: new Date().toISOString(),
+attempt: salvo.lastNotifiedPrincipalAttempts || 1,
+method: reenvio ? 'imagem-simples' : 'interativo'
+}
+sucesso('Aviso de atualização ' + version + ' enviado ao privado do dono (tentativa ' + (salvo.lastNotifiedPrincipalAttempts || 1) + ').')
 return true
 } catch (error) {
 registrarFalhaAvisoUpdate(error?.message || error)
