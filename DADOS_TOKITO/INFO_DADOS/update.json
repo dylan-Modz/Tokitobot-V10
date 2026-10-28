@@ -1,95 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.63",
+  "version": "10.2.64",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-28T18:10:25.162Z",
+  "publishedAt": "2026-10-28T18:53:54.708Z",
   "changelog": [
-    "[Notificação] Ao detectar versão nova, envia banner com botões Atualizar, Check e Info ao dono.",
-    "[Confiabilidade] Segunda tentativa automática após cinco minutos usando foto com legenda simples.",
-    "[Segurança] Aviso limitado a duas tentativas por versão e destinatário, sem mensagens em loop.",
-    "[Correção] O aviso de atualização deixa de ser suprimido quando o número do dono muda."
+    "[Correção] fix(likes): preservar erro original retornado pela Tokito APIs",
+    "A versão 10.2.64 já está disponível para atualização.",
+    "Base atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Aviso automático de atualização mais confiável",
-  "notice": "Tokito Bot V10.2.63 disponível: notificação automática com banner e reenvio de segurança.",
+  "title": "fix(likes): preservar erro original retornado pela Tokito APIs",
+  "notice": "A versão 10.2.64 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "",
-      "size": 47437,
-      "gitSha": "b41ef52ecc5dfe69b5ba4d912d45e2328d8d6877"
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/dados.js",
-      "sha256": "",
-      "size": 39419,
-      "gitSha": "da38190ab23a187a174c3c5ac48d213b330e7691"
-    },
-    {
-      "path": "package.json",
-      "sha256": "",
-      "size": 1166,
-      "gitSha": "ec32bf45df25055e600638caa0e8ea9ddb87e5cc"
+      "path": "DADOS_TOKITO/plugins/freefire/base.js",
+      "sha256": "0c6d8a37f9f051f1cf700a8f54dd2b101da731abba0954182323c96c2f7a0f9b",
+      "size": 3517
     }
   ],
   "releases": [
-    {
-      "version": "10.1.40",
-      "fromVersion": "10.1.39",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Sistema Auto Inativo",
-      "notice": "A versão 10.1.40 já está disponível para atualização.",
-      "changelog": [
-        "Novo sistema Auto Inativo para remover automaticamente membros sem atividade no grupo.",
-        "Comando autoinativo permite ativar, desativar e configurar o limite em horas ou dias.",
-        "Comando inativos mostra os membros e o tempo desde a última mensagem.",
-        "Administradores, donos e o próprio bot ficam protegidos da remoção automática.",
-        "Ao ativar o sistema, todos os membros recebem uma nova contagem para evitar remoções imediatas.",
-        "O sistema verifica os grupos automaticamente a cada 30 minutos e avisa no grupo quando alguém é removido por inatividade."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/admin/autoinativo.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/autoinativo.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-04T15:25:00.000Z"
-    },
     {
       "version": "10.1.41",
       "fromVersion": "10.1.40",
@@ -4914,6 +4849,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-28T18:10:25.162Z"
+    },
+    {
+      "version": "10.2.64",
+      "fromVersion": "10.2.63",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(likes): preservar erro original retornado pela Tokito APIs",
+      "notice": "A versão 10.2.64 já está disponível para atualização.",
+      "changelog": [
+        "Base atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/base.js",
+          "sha256": "0c6d8a37f9f051f1cf700a8f54dd2b101da731abba0954182323c96c2f7a0f9b",
+          "size": 3517
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-28T18:53:54.707Z"
     }
   ],
   "mode": "incremental",
