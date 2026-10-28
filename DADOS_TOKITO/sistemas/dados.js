@@ -791,7 +791,7 @@ for (const raw of Array.isArray(remote.files) ? remote.files : []) {
 const file = normalizeUpdateFile(raw)
 if (!file.path || !/^[a-f0-9]{40}$/.test(file.gitSha)) continue
 const rel = normalizedRel(file.path)
-if (isProtected(rel)) continue
+if (isProtected(rel, true)) continue
 const target = safeInside(ROOT, rel)
 let confere = false
 try {
@@ -816,9 +816,11 @@ const normalizedRel = value => String(value || '')
 .replace(/\\/g, '/')
 .replace(/^\.\//, '')
 
-function isProtected(rel) {
+function isProtected(rel, permitirFotoMenu = false) {
 const item = normalizedRel(rel)
 
+// Exceção restrita aos downloads e reparos de arquivo: nunca permitir exclusão.
+if (permitirFotoMenu && item === 'DADOS_TOKITO/INFO_DADOS/LOGOS/fotomenu.png') return false
 if (item.startsWith('node_modules/@stone-wpp/ofc/')) return false
 
 return PROTECTED.some(rule => {
@@ -1168,7 +1170,7 @@ for (let index = 0; index < files.length; index++) {
 const item = files[index]
 const rel = normalizedRel(item.path)
 
-if (!rel || isProtected(rel)) {
+if (!rel || isProtected(rel, true)) {
 throw new Error(`Arquivo protegido ou inválido na atualização: ${rel || item.path}`)
 }
 
@@ -1247,7 +1249,7 @@ const added = []
 for (const item of operations) {
 const rel = normalizedRel(item.path)
 
-if (!rel || isProtected(rel)) {
+if (!rel || isProtected(rel, item.type === 'file')) {
 throw new Error(`Arquivo protegido ou inválido na atualização: ${rel || item.path}`)
 }
 
