@@ -485,20 +485,40 @@ const marker = readJson(STRUCTURE_FILE, {})
 return String(marker.id || '').trim() !== migration.id
 }
 
-function deveAvisarUpdate(version) {
+// O envio aceito pelo WhatsApp não garante que o aviso foi exibido ao dono.
+// Uma nova versão tem até duas tentativas espaçadas, evitando avisos em loop.
+// O registro também depende do destinatário: não suprime o aviso de um novo dono.
+const UPDATE_NOTICE_RETRY_MS = 5 * 60 * 1000
+const UPDATE_NOTICE_MAX_ATTEMPTS = 2
+
+function deveAvisarUpdate(version, ownerJid = '') {
 const valor = String(version || '').trim()
+const destino = String(ownerJid || '').trim()
 if (!valor) return false
-// lastNotifiedVersion foi compartilhado com os Sub Bots nas versões antigas.
-// Um Sub Bot pode ter atualizado esse campo sem avisar o dono principal.
-return String(state().lastNotifiedPrincipalVersion || '') !== valor
+const anterior = state()
+if (String(anterior.lastNotifiedPrincipalVersion || '') !== valor) return true
+if (destino && String(anterior.lastNotifiedPrincipalJid || '') !== destino) return true
+const tentativas = Number(anterior.lastNotifiedPrincipalAttempts || 0)
+// Versões antigas não guardavam o número de tentativas: oferece uma nova chance.
+if (tentativas >= UPDATE_NOTICE_MAX_ATTEMPTS) return false
+const anteriorEm = Date.parse(anterior.lastNotifiedAt || '')
+return !Number.isFinite(anteriorEm) || Date.now() - anteriorEm >= UPDATE_NOTICE_RETRY_MS
 }
 
-function registrarAvisoUpdate(version) {
+function registrarAvisoUpdate(version, ownerJid = '') {
 const valor = String(version || '').trim()
+const destino = String(ownerJid || '').trim()
 if (!valor) return state()
-
+const anterior = state()
+const mesmoAviso = String(anterior.lastNotifiedPrincipalVersion || '') === valor &&
+String(anterior.lastNotifiedPrincipalJid || '') === destino
+const tentativas = mesmoAviso
+? Math.min(UPDATE_NOTICE_MAX_ATTEMPTS, Math.max(0, Number(anterior.lastNotifiedPrincipalAttempts) || 0) + 1)
+: 1
 return saveState({
 lastNotifiedPrincipalVersion: valor,
+lastNotifiedPrincipalJid: destino,
+lastNotifiedPrincipalAttempts: tentativas,
 lastNotifiedVersion: valor,
 lastNotifiedAt: new Date().toISOString()
 })
