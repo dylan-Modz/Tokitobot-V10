@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay } = require('@stone-wpp/ofc')
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
 const registro = require('./sistemas/registro.js')
@@ -224,6 +224,7 @@ mentionedJid: mentions,
 })
 
 const UPDATE_CHECK_MS = 60 * 1000
+const UPDATE_NOTICE_IMAGE = 'https://raw.githubusercontent.com/dylan-Modz/upload/main/midias/imagens/c3i4u.jpg'
 
 const textoAvisoUpdate = check => {
 const remoto = check?.remote || {}
@@ -248,6 +249,50 @@ lista + obrigatoria,
 '> ⬆️ ׄ ( ᴀᴛᴜᴀʟɪᴢᴀʀ: ' + prefix + 'update start )',
 '> 💻 ׄ ( ᴛᴇʀᴍɪɴᴀʟ: npm start up )'
 ].join('\n')
+}
+
+// Usa os mesmos quick_reply nativos do comando Play e do aviso de comando inválido.
+const enviarAvisoUpdate = async (tokito, dono, texto) => {
+const imagem = { url: UPDATE_NOTICE_IMAGE }
+if (nescessario.botoes !== false) {
+try {
+if (!tokito.user?.id || typeof tokito.waUploadToServer !== 'function' || typeof tokito.relayMessage !== 'function') {
+throw new Error('Botões interativos indisponíveis nesta conexão.')
+}
+const midia = await prepareWAMessageMedia({ image: imagem }, { upload: tokito.waUploadToServer })
+if (!midia?.imageMessage) throw new Error('Imagem do aviso indisponível.')
+const interactive = proto.Message.InteractiveMessage
+const botoes = [
+{ texto: '⬆️﹚𝐀𝐓𝐔𝐀𝐋𝐈𝐙𝐀𝐑﹙⬆️', id: `${prefix}update start` },
+{ texto: '🔎﹚𝐂𝐇𝐄𝐂𝐊﹙🔎', id: `${prefix}update check` },
+{ texto: '📋﹚𝐈𝐍𝐅𝐎﹙📋', id: `${prefix}update info` }
+].map(botao => ({
+name: 'quick_reply',
+buttonParamsJson: JSON.stringify({ display_text: botao.texto, id: botao.id })
+}))
+const mensagem = generateWAMessageFromContent(dono, {
+interactiveMessage: interactive.create({
+header: interactive.Header.create({ hasMediaAttachment: true, imageMessage: midia.imageMessage }),
+body: interactive.Body.create({ text: texto }),
+footer: interactive.Footer.create({ text: '' }),
+nativeFlowMessage: interactive.NativeFlowMessage.create({ buttons: botoes })
+})
+}, { userJid: tokito.user.id })
+await tokito.relayMessage(dono, mensagem.message, { messageId: mensagem.key.id })
+return true
+} catch (error) {
+aviso('Aviso interativo de atualização indisponível: ' + (error?.message || error))
+}
+}
+// Sem botões, ou se o WhatsApp recusar o interativo: envia a mesma imagem e legenda.
+try {
+const enviada = await tokito.sendMessage(dono, { image: imagem, caption: texto })
+if (enviada) return true
+} catch (error) {
+aviso('Imagem do aviso de atualização indisponível: ' + (error?.message || error))
+}
+// A ausência da imagem nunca pode impedir a entrega do aviso ao dono.
+return Boolean(await tokito.sendMessage(dono, { text: texto }))
 }
 
 const registrarFalhaAvisoUpdate = mensagem => {
@@ -292,9 +337,7 @@ return false
 }
 // Envia aviso direto ao dono sem metadados de canal ou menções,
 // evitando falhas de compatibilidade em mensagens privadas da Stone WPP.
-const enviada = await tokito.sendMessage(dono, {
-text: textoAvisoUpdate(check)
-})
+const enviada = await enviarAvisoUpdate(tokito, dono, textoAvisoUpdate(check))
 if (!enviada) throw new Error('O WhatsApp não confirmou o envio do aviso.')
 dadosSistema.registrarAvisoUpdate(version)
 global.__TOKITO_UPDATE_NOTICE_LAST_SENT__ = { version, at: new Date().toISOString() }
