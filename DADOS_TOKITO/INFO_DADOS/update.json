@@ -6,15 +6,15 @@
   "ref": "main",
   "publishedAt": "2026-10-28T17:32:50.000Z",
   "changelog": [
-    "[Menu] Imagem principal fotomenu.png substituída pela nova arte enviada pelo criador.",
-    "[Compatibilidade] Mantidos o nome e o caminho da imagem para funcionar nos menus existentes.",
-    "[Atualização] Versão 10.2.60 disponível pelo atualizador incremental, sem alterar outros comandos."
+    "[Correção] O atualizador agora pode reparar apenas fotomenu.png dentro de LOGOS, sem liberar os demais arquivos protegidos.",
+    "[Compatibilidade] A primeira instalação atualiza o sistema; execute update start novamente depois de reiniciar para aplicar a nova foto.",
+    "[Segurança] Bancos de dados, configurações e outros arquivos da pasta LOGOS continuam protegidos."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Atualização",
-  "title": "Nova imagem oficial do menu Tokito Bot V10",
-  "notice": "Tokito Bot V10.2.60 disponível: nova imagem oficial do menu, mantendo o mesmo nome e funcionamento dos comandos!",
+  "title": "Atualizador corrigido e nova foto de menu com reparo seguro",
+  "notice": "Tokito Bot V10.2.60 disponível: correção do atualizador; após reiniciar, execute update start novamente para instalar a nova imagem do menu.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -23,6 +23,12 @@
       "sha256": "5085e82fe47959cdc981f9aed5b028c9e79a89c966cc873c56114b94067ff49d",
       "size": 2104769,
       "gitSha": "9d62b7399c66964c471de9b797ae45e798fc4ef7"
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/dados.js",
+      "sha256": "",
+      "size": 0,
+      "gitSha": "4988b8fd967f5691c2a622ece452a71de2bc5b93"
     },
     {
       "path": "package.json",
@@ -4925,19 +4931,19 @@
       "fromVersion": "10.2.59",
       "channel": "stable",
       "type": "Atualização",
-      "title": "Nova imagem oficial do menu Tokito Bot V10",
-      "notice": "Tokito Bot V10.2.60 disponível: nova imagem oficial do menu, mantendo o mesmo nome e funcionamento dos comandos!",
+      "title": "Atualizador corrigido e nova foto de menu com reparo seguro",
+      "notice": "Tokito Bot V10.2.60 disponível: correção do atualizador; após reiniciar, execute update start novamente para instalar a nova imagem do menu.",
       "changelog": [
-        "[Menu] Imagem principal fotomenu.png substituída pela nova arte enviada pelo criador.",
-        "[Compatibilidade] Mantidos o nome e o caminho da imagem para funcionar nos menus existentes.",
-        "[Atualização] Versão 10.2.60 disponível pelo atualizador incremental, sem alterar outros comandos."
+        "[Correção] O atualizador agora pode reparar apenas fotomenu.png dentro de LOGOS, sem liberar os demais arquivos protegidos.",
+        "[Compatibilidade] A primeira instalação atualiza o sistema; execute update start novamente depois de reiniciar para aplicar a nova foto.",
+        "[Segurança] Bancos de dados, configurações e outros arquivos da pasta LOGOS continuam protegidos."
       ],
       "files": [
         {
-          "path": "DADOS_TOKITO/INFO_DADOS/LOGOS/fotomenu.png",
-          "sha256": "5085e82fe47959cdc981f9aed5b028c9e79a89c966cc873c56114b94067ff49d",
-          "size": 2104769,
-          "gitSha": "9d62b7399c66964c471de9b797ae45e798fc4ef7"
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "",
+          "size": 0,
+          "gitSha": "4988b8fd967f5691c2a622ece452a71de2bc5b93"
         },
         {
           "path": "package.json",
