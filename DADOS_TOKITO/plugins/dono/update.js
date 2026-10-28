@@ -59,6 +59,7 @@ const automatico = global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__ || {}
 const ultimaFalha = String(global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ || automatico.error || '').trim()
 const telefoneConfigurado = String(ctx.ownerNumber || '').replace(/\D/g, '')
 const ativo = Boolean(global.__TOKITO_UPDATE_NOTICE_TIMER__ && global.__TOKITO_UPDATE_SOCKET__)
+const falhaInstalacao = global.__TOKITO_UPDATE_LAST_FAILURE__ || {}
 const versaoLocal = check?.local?.version || '—'
 const versaoRemota = check?.remote?.version || 'indisponível'
 const fonte = check?.fonte || 'indisponível'
@@ -82,6 +83,10 @@ return ctx.reply([
 '> 📩 ׄ ( ᴜ́ʟᴛɪᴍᴀ ᴠᴇʀsᴀ̃ᴏ ɴᴏᴛɪғɪᴄᴀᴅᴀ: ' + notificada + ' )',
 '> 🕒 ׄ ( ᴜ́ʟᴛɪᴍᴀ ᴄᴏɴsᴜʟᴛᴀ ᴀᴜᴛᴏᴍᴀ́ᴛɪᴄᴀ: ' + quando + ' )',
 '> ⚠️ ׄ ( ᴜ́ʟᴛɪᴍᴏ ᴇʀʀᴏ: ' + (ultimaFalha || (check?.ok ? 'nenhum' : String(check?.error || 'consulta indisponível'))) + ' )',
+...(falhaInstalacao.motivo ? [
+'> 🛠️ ׄ ( ᴇʀʀᴏ ɴᴀ ɪɴsᴛᴀʟᴀᴄ̧ᴀ̃ᴏ: ' + falhaInstalacao.motivo + ' )',
+'> 📍 ׄ ( ᴇᴛᴀᴘᴀ: ' + (falhaInstalacao.etapa || 'não informada') + ' )'
+] : []),
 '',
 '> 🔎 ׄ ( Use ' + ctx.prefix + 'update check para verificar novamente. )'
 ].join('\n'))
@@ -128,11 +133,16 @@ prefix: ctx.prefix
 
 if (acao === 'start') {
 await ctx.reply(ctx.mess.updatePreparing())
+let etapaAtual = 'Consultando a versão oficial'
 
 try {
 const result = await sistema.instalarUpdate(
-texto => console.log(`[ UPDATE • TOKITO ] ${texto}`)
+texto => {
+  etapaAtual = String(texto || etapaAtual)
+  console.log(`[ UPDATE • TOKITO ] ${texto}`)
+}
 )
+global.__TOKITO_UPDATE_LAST_FAILURE__ = null
 
 if (!result.updated) {
 if (result.reason === 'empty_update') {
@@ -153,15 +163,36 @@ return setTimeout(() => process.exit(20), 1500)
 } catch (error) {
 const motivo = String(error?.message || '').trim()
 console.log('[ UPDATE • TOKITO ]', motivo || error)
-// Mostra apenas falhas técnicas conhecidas, sem expor credenciais ou URLs privadas.
+// O erro exibido ao dono usa somente motivos técnicos permitidos:
+// nunca devolver tokens, URLs privadas ou dados brutos da hospedagem.
 const seguro = [
   /^A verificação de integridade falhou em [a-zA-Z0-9_./-]+\.$/,
   /^Não foi possível baixar [a-zA-Z0-9_./-]+\.$/,
   /^Arquivo protegido ou inválido na atualização: [a-zA-Z0-9_./-]+$/,
-  /^A atualização publicada não possui arquivos para instalar\.$/
+  /^A atualização publicada não possui arquivos para instalar\.$/,
+  /^Servidor de atualização respondeu HTTP [0-9]{3}\.$/,
+  /^A versão do pacote não corresponde ao update\.json remoto\.$/,
+  /^Não foi possível instalar todas as dependências da nova versão\.$/,
+  /^Não foi possível consultar a atualização pela API nem pelo GitHub\.$/
 ].some(regra => regra.test(motivo))
+const codigo = String(error?.code || '').trim()
+const explicacao = seguro ? motivo
+  : codigo === 'ENOSPC' ? 'A hospedagem está sem espaço livre para o backup ou os arquivos.'
+  : ['EACCES', 'EPERM'].includes(codigo) ? 'A hospedagem bloqueou a escrita dos arquivos.'
+  : ['ETIMEDOUT', 'ECONNRESET', 'ENOTFOUND'].includes(codigo) ? 'Falha na conexão com o servidor de atualização.'
+  : 'Falha técnica não identificada; confira os registros do bot.'
+const etapaSegura = /^((?:Baixando|Preparando|Criando|Aplicando|Conferindo|Substituindo|Atualizando|Instalando) [a-zA-ZÀ-ÿ0-9_./() :•-]+)$/.test(etapaAtual)
+  ? etapaAtual.slice(0, 170)
+  : 'Etapa de atualização indisponível'
+global.__TOKITO_UPDATE_LAST_FAILURE__ = {
+  at: new Date().toISOString(),
+  motivo: explicacao,
+  etapa: etapaSegura
+}
 return ctx.reply(ctx.mess.updateError() +
-  (seguro ? '\n\n> 🔎 ׄ ( ' + motivo + ' )' : ''))
+  '\n\n> 🔎 ׄ ( ' + explicacao + ' )' +
+  '\n> 📍 ׄ ( ' + etapaSegura + ' )' +
+  '\n> 🛠️ ׄ ( Use ' + ctx.prefix + 'update diag para consultar o diagnóstico. )')
 }
 }
 
