@@ -83,7 +83,8 @@ const textoDuracao = segundos => {
   const sec = s % 60
   return [h ? h + 'h' : null, min ? min + 'min' : null, !h && !min || sec ? sec + 's' : null].filter(Boolean).join(' ')
 }
-const tempoEspera = (data, salvo) => {
+// A data e o prazo são provenientes exclusivamente da API; nunca presumir 24h.
+const tempoEspera = data => {
   const horarioAPI = primeiro(data?.libera_em, data?.data?.libera_em, data?.data?.limite?.libera_em,
     data?.proximo_envio?.quando, data?.data?.proximo_envio?.quando)
   const dateAPI = horarioAPI ? new Date(horarioAPI) : null
@@ -91,18 +92,14 @@ const tempoEspera = (data, salvo) => {
   const segundos = primeiro(numero(data?.libera_em_segundos), numero(data?.data?.libera_em_segundos))
   const texto = limpar(primeiro(data?.tempo_restante, data?.data?.tempo_restante))
   const porSegundos = segundos === undefined ? null : new Date(Date.now() + segundos * 1000)
-  const estimada = salvo?.horario ? new Date(new Date(salvo.horario).getTime() + 86400000) : null
-  const validoEstimado = estimada && Number.isFinite(estimada.getTime()) && estimada.getTime() > Date.now()
-  const dataFinal = temDataAPI ? dateAPI : porSegundos || (validoEstimado ? estimada : null)
-  const aproximado = !!(dataFinal && !temDataAPI && !porSegundos)
+  const dataFinal = temDataAPI ? dateAPI : porSegundos
   const restante = texto || (segundos !== undefined ? textoDuracao(segundos) :
     dataFinal ? textoDuracao(Math.max(0, (dataFinal.getTime() - Date.now()) / 1000)) : null)
-  if (!dataFinal) return { restante, data: null, hora: null, aproximado }
+  if (!dataFinal) return { restante, data: null, hora: null }
   return {
     restante,
     data: new Intl.DateTimeFormat('pt-BR', { timeZone:'America/Sao_Paulo',day:'2-digit',month:'2-digit',year:'numeric' }).format(dataFinal),
-    hora: new Intl.DateTimeFormat('pt-BR', { timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit',hour12:false }).format(dataFinal),
-    aproximado
+    hora: new Intl.DateTimeFormat('pt-BR', { timeZone:'America/Sao_Paulo',hour:'2-digit',minute:'2-digit',hour12:false }).format(dataFinal)
   }
 }
 const emEspera = data => {
@@ -114,23 +111,22 @@ const emEspera = data => {
 }
 const avisoEspera = (data, uid) => {
   const salvo = ler()[uid]
-  const t = tempoEspera(data, salvo)
+  const t = tempoEspera(data)
+  const motivo = h.mensagemRetorno(data)
   const nome = limpar(primeiro(data?.nick,data?.nickname,data?.data?.conta?.nickname,salvo?.nick))
   const ultimo = primeiro(numero(data?.ultimo_envio?.likes_enviados),
     numero(data?.data?.ultimo_envio?.likes_enviados),numero(data?.likes_ultimo_envio),numero(salvo?.ultimo))
   const perfil = primeiro(numero(data?.likes_depois),numero(data?.data?.likes?.depois),numero(salvo?.perfil))
   return [
-    '- ❤️ ' + crase + '𝙻𝙸𝙺𝙴𝚂 𝙹𝙰́ 𝙴𝙽𝚅𝙸𝙰𝙳𝙾𝚂' + crase, '',
+    '- ❤️ ' + crase + '𝙻𝙸𝙺𝙴𝚂 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴' + crase, '',
     linha('🏷️','ɴɪᴄᴋ',nome || null),linha('🆔','ᴜɪᴅ',uid),'',
     linha('❤️','ᴜ́ʟᴛɪᴍᴏ ᴇɴᴠɪᴏ',ultimo === undefined ? 'ɴᴀ̃ᴏ ɪɴғᴏʀᴍᴀᴅᴏ' : ultimo + ' ʟɪᴋᴇs'),
     linha('📊','ᴛᴏᴛᴀʟ ᴇɴᴠɪᴀᴅᴏ ᴘᴏʀ ᴇsᴛᴇ ʙᴏᴛ',salvo?.total === undefined ? null : salvo.total + ' ʟɪᴋᴇs'),
     linha('📈','ʟɪᴋᴇs ɴᴏ ᴘᴇʀғɪʟ (ᴜ́ʟᴛɪᴍᴏ ʀᴇɢɪsᴛʀᴏ)',perfil),
-    linha('⚠️','sᴛᴀᴛᴜs','ᴊᴀ́ ʀᴇᴄᴇʙᴇᴜ ʟɪᴋᴇs'),'',
-    linha('⏳','ғᴀʟᴛᴀᴍ',t.restante || 'ɴᴀ̃ᴏ ɪɴғᴏʀᴍᴀᴅᴏ ᴘᴇʟᴀ ᴀᴘɪ'),
+    linha('⚠️','ᴇʀʀᴏ',motivo || h.retornoErro(data)),'',
+    linha('⏳','ғᴀʟᴛᴀᴍ',t.restante),
     linha('📅','ʟɪʙᴇʀᴀ ᴇᴍ',t.data),
-    linha('🕒','ʜᴏʀᴀ́ʀɪᴏ (ʙʀᴀsɪ́ʟɪᴀ)',t.hora),
-    t.aproximado ? '> ℹ️ ׄ ( ᴇsᴛɪᴍᴀᴛɪᴠᴀ ᴅᴇ 24ʜ; ᴄᴏɴғɪʀᴍᴇ ᴄᴏᴍ ᴀ ᴀᴘɪ. )' : null,
-    '', '> 💡 ׄ ( ᴀɢᴜᴀʀᴅᴇ ᴏ ʜᴏʀᴀ́ʀɪᴏ ᴘᴀʀᴀ ᴇɴᴠɪᴀʀ ɴᴏᴠᴀᴍᴇɴᴛᴇ. )'
+    linha('🕒','ʜᴏʀᴀ́ʀɪᴏ',t.hora)
   ].filter(x => x !== null && x !== undefined).join('\n')
 }
 const headers = ctx => ({
@@ -193,8 +189,9 @@ dylan.setCommand({
       const nick = primeiro(data?.nick,conta?.nickname,data?.nickname,'N/A')
       const sucesso = data?.sucesso === true || data?.success === true
 
-      // Cooldown pode trazer sucesso:true e likes_enviados:0.
-      if (emEspera(data)) {
+      // Resposta com libera_em após um envio confirmado não deve virar erro de espera.
+      const adicionadosResposta = numero(primeiro(data?.likes_enviados, data?.data?.likes?.adicionados, data?.likes_added)) ?? 0
+      if (emEspera(data) && !(sucesso && adicionadosResposta > 0)) {
         await ctx.reagir(ctx.from,'⏳')
         return ctx.reply(avisoEspera(data,uid))
       }
@@ -214,7 +211,7 @@ dylan.setCommand({
         }))
       }
       const salvo = salvar(uid,{nick,enviados,depois})
-      const t = tempoEspera(data,salvo)
+      const t = tempoEspera(data)
       const cotaLimite = numero(primeiro(cota?.limite,limite?.diario,data?.daily_limit))
       const cotaUsada = numero(primeiro(cota?.usadas,limite?.usados_hoje,data?.used_today))
       const cotaRestam = numero(primeiro(cota?.restam,limite?.restantes,data?.remaining_today))
@@ -228,8 +225,8 @@ dylan.setCommand({
         '',linha('📊','ᴄᴏᴛᴀ',cotaLimite === null ? null : (cotaUsada ?? 0)+'/'+cotaLimite),
         linha('📥','ʀᴇsᴛᴀᴍ',cotaRestam),'',
         linha('⏳','ᴘʀᴏ́xɪᴍᴏ ᴇɴᴠɪᴏ',t.restante),
-        linha('🕒','ʟɪʙᴇʀᴀ ᴀ̀s (ʙʀᴀsɪ́ʟɪᴀ)',t.data ? t.data+' '+t.hora : null),
-        t.aproximado ? '> ℹ️ ׄ ( ᴇsᴛɪᴍᴀᴛɪᴠᴀ ᴅᴇ 24ʜ. )' : null,
+        linha('📅','ʟɪʙᴇʀᴀ ᴇᴍ',t.data),
+        linha('🕒','ʜᴏʀᴀ́ʀɪᴏ',t.hora),
         '', '> ❤️ ׄ ( ✅ ʟɪᴋᴇs ᴇɴᴠɪᴀᴅᴏs ᴄᴏᴍ sᴜᴄᴇssᴏ! )'
       ].filter(x => x !== null && x !== undefined).join('\n')
       await ctx.reagir(ctx.from,'✅')
