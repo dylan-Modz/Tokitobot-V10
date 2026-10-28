@@ -4,30 +4,38 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-28T21:08:29.726Z",
+  "publishedAt": "2026-10-28T21:08:54.263Z",
   "changelog": [
-    "[Melhoria] chore(release): Tokito Bot V10.2.65 corrigir atualização incremental para versões antigas",
-    "A versão 10.2.65 já está disponível para atualização.",
-    "Update atualizado",
-    "Package atualizado"
+    "[Atualização] Corrigida a falha ao saltar versões antigas que ainda bloqueiam a imagem fotomenu.png.",
+    "[Compatibilidade] Arquivos inexistentes foram removidos dos registros antigos de atualização para evitar falhas de download.",
+    "[Menu] A fotomenu.png oficial pode ser instalada via reparo depois da atualização do sistema, sem desbloquear outras imagens.",
+    "[Diagnóstico] Falhas futuras passam a mostrar causa segura e etapa pelo comando update diag."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "chore(release): Tokito Bot V10.2.65 corrigir atualização incremental para versões antigas",
-  "notice": "A versão 10.2.65 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "Correção de falhas em atualizações antigas e reparo do menu",
+  "notice": "Tokito Bot V10.2.65: correção do failure ao atualizar versões antigas, com reparo seguro da foto do menu.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/dono/update.js",
-      "sha256": "c681f29b9b7f9ef7dbc8ab616fc3bf3e0c60e0034107a7c4f83f7af866a16e5f",
-      "size": 8272
+      "sha256": "",
+      "size": 8272,
+      "gitSha": "e3eadaeccae5f68de22c2b2bafef83e7ece61a0d"
     },
     {
       "path": "package.json",
-      "sha256": "4fa90d8381405278dcc5c02c2bc2b47c38a6dce74989be0fadcd8a2757e2e9f5",
-      "size": 1166
+      "sha256": "",
+      "size": 1166,
+      "gitSha": "0e6fb51b37b788019cc5d0fba8d3d7bf17a5694d"
+    },
+    {
+      "path": "DADOS_TOKITO/INFO_DADOS/LOGOS/fotomenu.png",
+      "sha256": "5085e82fe47959cdc981f9aed5b028c9e79a89c966cc873c56114b94067ff49d",
+      "size": 2104769,
+      "gitSha": "9d62b7399c66964c471de9b797ae45e798fc4ef7"
     }
   ],
   "releases": [
@@ -352,11 +360,6 @@
       ],
       "files": [
         {
-          "path": "DADOS_TOKITO/sistemas/antinuke.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
           "path": "DADOS_TOKITO/plugins/admin/antinuke.js",
           "sha256": "",
           "size": 0
@@ -367,17 +370,7 @@
           "size": 0
         },
         {
-          "path": "DADOS_TOKITO/plugins/admin/gerenciargrupo-extra.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
           "path": "DADOS_TOKITO/plugins/admin/tabelagp.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/grupo-all.js",
           "sha256": "",
           "size": 0
         },
@@ -387,17 +380,7 @@
           "size": 0
         },
         {
-          "path": "DADOS_TOKITO/sistemas/sorteio-grupo.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
           "path": "DADOS_TOKITO/plugins/admin/sorteio.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/eventos/sorteio-grupo.js",
           "sha256": "",
           "size": 0
         },
@@ -764,16 +747,6 @@
           "size": 0
         },
         {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-base.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
           "path": "DADOS_TOKITO/plugins/jogos/sistema.js",
           "sha256": "",
           "size": 0
@@ -856,11 +829,6 @@
       ],
       "files": [
         {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
           "path": "package.json",
           "sha256": "",
           "size": 0
@@ -883,11 +851,6 @@
         "Mantida a proteção que envia o quiz em texto caso uma capa externa falhe no futuro."
       ],
       "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js",
-          "sha256": "",
-          "size": 0
-        },
         {
           "path": "package.json",
           "sha256": "",
@@ -935,11 +898,6 @@
         },
         {
           "path": "DADOS_TOKITO/database/jogos/filmes.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-quizzes.js",
           "sha256": "",
           "size": 0
         },
@@ -1272,17 +1230,7 @@
       ],
       "files": [
         {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-doulingo.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
           "path": "DADOS_TOKITO/plugins/jogos/doulingo.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-anagrama.js",
           "sha256": "",
           "size": 0
         },
@@ -1297,22 +1245,12 @@
           "size": 0
         },
         {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-quizanimais.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
           "path": "DADOS_TOKITO/plugins/jogos/quizanimais.js",
           "sha256": "",
           "size": 0
         },
         {
           "path": "DADOS_TOKITO/plugins/jogos/revelarquiz.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-jogodavelha2.js",
           "sha256": "",
           "size": 0
         },
@@ -1343,11 +1281,6 @@
         },
         {
           "path": "DADOS_TOKITO/database/jogos/quizanimais.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-base.js",
           "sha256": "",
           "size": 0
         },
@@ -1415,11 +1348,6 @@
       ],
       "files": [
         {
-          "path": "DADOS_TOKITO/plugins/downloads/shazam.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
           "path": "DADOS_TOKITO/mensagens/mensagens.js",
           "sha256": "",
           "size": 0
@@ -1485,11 +1413,6 @@
       "files": [
         {
           "path": "DADOS_TOKITO/sistemas/modulos.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/INFO_DADOS/acrcloud.json",
           "sha256": "",
           "size": 0
         },
@@ -2008,11 +1931,6 @@
           "size": 0
         },
         {
-          "path": "DADOS_TOKITO/plugins/coins/mineracao.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
           "path": "DADOS_TOKITO/mensagens/menus.js",
           "sha256": "",
           "size": 0
@@ -2140,12 +2058,6 @@
           "sha256": "",
           "gitSha": "7b9d6e102be6d354051e15a87f06bd0460cf6fe6",
           "size": 10468
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/coins/mineracao.js",
-          "sha256": "",
-          "gitSha": "9cd0c416d74e007d8f8f3e78388b9a3d4b240268",
-          "size": 8385
         },
         {
           "path": "DADOS_TOKITO/plugins/coins/minerar.js",
@@ -2456,12 +2368,6 @@
           "size": 0
         },
         {
-          "path": "DADOS_TOKITO/plugins/info/username.js",
-          "gitSha": "65a38dda80f5a39f66fc967d53db28b55fe375a7",
-          "sha256": "",
-          "size": 0
-        },
-        {
           "path": "DADOS_TOKITO/plugins/downloads/filme.js",
           "gitSha": "2267bcd2e0bef9addb8cba69a153d81c172ca150",
           "sha256": "",
@@ -2603,12 +2509,6 @@
       ],
       "files": [
         {
-          "path": "DADOS_TOKITO/scrapers/downloads/brasileirao-card.js",
-          "gitSha": "e769c24e257331cf7e4219851ae7a938f7f1aab2",
-          "sha256": "",
-          "size": 0
-        },
-        {
           "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
           "gitSha": "fc261c487ffcd2983953c093e1b67aeefc0df2c6",
           "sha256": "",
@@ -2690,18 +2590,6 @@
         "Sem dependências novas; sistema desativado por padrão e com fallback para texto quando botões não estiverem disponíveis."
       ],
       "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/passaporte.js",
-          "gitSha": "0043d9a40b8806edefd329d7f532c5e02c2773ee",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/passaporte.js",
-          "gitSha": "6e4eae5e40da69d4e1733d517b29f6302d2a741a",
-          "sha256": "",
-          "size": 0
-        },
         {
           "path": "DADOS_TOKITO/connect.js",
           "gitSha": "02db747cadd4fc064febaf6cb164d58ec227ae63",
@@ -4093,12 +3981,6 @@
           "size": 1166
         },
         {
-          "path": "DADOS_TOKITO/sistemas/stone-recursos.js",
-          "gitSha": "f84cb5215c4b39ca26e9ae9f9788533cd942eaf9",
-          "sha256": "841771f157070961e0617de8755872d52f67212af16159e650da856878f939d4",
-          "size": 11314
-        },
-        {
           "path": "DADOS_TOKITO/plugins/admin/fixar.js",
           "gitSha": "6d1ef88a272a0c5e33e1e49a2d4d35870b8bca53",
           "sha256": "e339cf3f11f1031ace06b3d8b0aea8933a56a4b3c220065180d690e0a4ca9f6a",
@@ -4725,19 +4607,13 @@
       "channel": "stable",
       "type": "Correção",
       "title": "Correção definitiva da imagem do menu",
-      "notice": "Tokito Bot V10.2.61 disponível: atualização corrigida para instalar a nova fotomenu.png automaticamente.",
+      "notice": "Atualização da base e preparação do reparo seguro da imagem do menu. Em bots antigos, a imagem é aplicada após atualizar o sistema.",
       "changelog": [
-        "[Menu] A nova fotomenu.png agora faz parte dos arquivos obrigatórios deste release e substitui a imagem antiga.",
-        "[Atualizador] Instalação em uma etapa para quem já está na 10.2.60, mantendo o mesmo caminho e nome de imagem.",
-        "[Segurança] Bancos de dados, credenciais, configurações e outras imagens permanecem protegidos."
+        "[Compatibilidade] Bots que ainda usam o atualizador antigo podem instalar a nova versão sem tentar gravar a pasta LOGOS protegida.",
+        "[Menu] A nova fotomenu.png permanece disponível no manifesto para reparo quando o atualizador for compatível.",
+        "[Segurança] Nenhum dado pessoal nem outras imagens da pasta LOGOS são substituídos."
       ],
       "files": [
-        {
-          "path": "DADOS_TOKITO/INFO_DADOS/LOGOS/fotomenu.png",
-          "sha256": "5085e82fe47959cdc981f9aed5b028c9e79a89c966cc873c56114b94067ff49d",
-          "size": 2104769,
-          "gitSha": "9d62b7399c66964c471de9b797ae45e798fc4ef7"
-        },
         {
           "path": "package.json",
           "sha256": "",
@@ -4858,38 +4734,42 @@
       "version": "10.2.65",
       "fromVersion": "10.2.64",
       "channel": "stable",
-      "type": "Melhoria",
-      "title": "chore(release): Tokito Bot V10.2.65 corrigir atualização incremental para versões antigas",
-      "notice": "A versão 10.2.65 já está disponível para atualização.",
+      "type": "Correção",
+      "title": "Correção de falhas em atualizações antigas e reparo do menu",
+      "notice": "Tokito Bot V10.2.65: correção do failure ao atualizar versões antigas, com reparo seguro da foto do menu.",
       "changelog": [
-        "Update atualizado",
-        "Package atualizado"
+        "[Atualização] Corrigida a falha ao saltar versões antigas que ainda bloqueiam a imagem fotomenu.png.",
+        "[Compatibilidade] Arquivos inexistentes foram removidos dos registros antigos de atualização para evitar falhas de download.",
+        "[Menu] A fotomenu.png oficial pode ser instalada via reparo depois da atualização do sistema, sem desbloquear outras imagens.",
+        "[Diagnóstico] Falhas futuras passam a mostrar causa segura e etapa pelo comando update diag."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/plugins/dono/update.js",
-          "sha256": "c681f29b9b7f9ef7dbc8ab616fc3bf3e0c60e0034107a7c4f83f7af866a16e5f",
-          "size": 8272
+          "sha256": "",
+          "size": 8272,
+          "gitSha": "e3eadaeccae5f68de22c2b2bafef83e7ece61a0d"
         },
         {
           "path": "package.json",
-          "sha256": "4fa90d8381405278dcc5c02c2bc2b47c38a6dce74989be0fadcd8a2757e2e9f5",
-          "size": 1166
+          "sha256": "",
+          "size": 1166,
+          "gitSha": "0e6fb51b37b788019cc5d0fba8d3d7bf17a5694d"
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-10-28T21:08:29.726Z"
+      "publishedAt": "2026-10-28T21:08:54.263Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.63",
+  "fromVersion": "10.2.64",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.64"
+  "publicVersion": "10.2.65"
 }
