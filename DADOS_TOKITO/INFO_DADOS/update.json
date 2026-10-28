@@ -1,20 +1,20 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.60",
+  "version": "10.2.61",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-28T17:32:50.000Z",
+  "publishedAt": "2026-10-28T17:46:58.790Z",
   "changelog": [
-    "[Correção] O atualizador agora pode reparar apenas fotomenu.png dentro de LOGOS, sem liberar os demais arquivos protegidos.",
-    "[Compatibilidade] A primeira instalação atualiza o sistema; execute update start novamente depois de reiniciar para aplicar a nova foto.",
-    "[Segurança] Bancos de dados, configurações e outros arquivos da pasta LOGOS continuam protegidos."
+    "[Menu] A nova fotomenu.png agora faz parte dos arquivos obrigatórios deste release e substitui a imagem antiga.",
+    "[Atualizador] Instalação em uma etapa para quem já está na 10.2.60, mantendo o mesmo caminho e nome de imagem.",
+    "[Segurança] Bancos de dados, credenciais, configurações e outras imagens permanecem protegidos."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Atualização",
-  "title": "Atualizador corrigido e nova foto de menu com reparo seguro",
-  "notice": "Tokito Bot V10.2.60 disponível: correção do atualizador; após reiniciar, execute update start novamente para instalar a nova imagem do menu.",
+  "type": "Correção",
+  "title": "Correção definitiva da imagem do menu",
+  "notice": "Tokito Bot V10.2.61 disponível: atualização corrigida para instalar a nova fotomenu.png automaticamente.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -25,16 +25,10 @@
       "gitSha": "9d62b7399c66964c471de9b797ae45e798fc4ef7"
     },
     {
-      "path": "DADOS_TOKITO/sistemas/dados.js",
-      "sha256": "",
-      "size": 38243,
-      "gitSha": "4988b8fd967f5691c2a622ece452a71de2bc5b93"
-    },
-    {
       "path": "package.json",
       "sha256": "",
       "size": 1166,
-      "gitSha": "dc52297719b4354ed2662cd1fe593e9c4e33cf0f"
+      "gitSha": "0ca463104b800a3032fcef217221c123898bc640"
     }
   ],
   "releases": [
@@ -4955,16 +4949,46 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-28T17:32:50.000Z"
+    },
+    {
+      "version": "10.2.61",
+      "fromVersion": "10.2.60",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Correção definitiva da imagem do menu",
+      "notice": "Tokito Bot V10.2.61 disponível: atualização corrigida para instalar a nova fotomenu.png automaticamente.",
+      "changelog": [
+        "[Menu] A nova fotomenu.png agora faz parte dos arquivos obrigatórios deste release e substitui a imagem antiga.",
+        "[Atualizador] Instalação em uma etapa para quem já está na 10.2.60, mantendo o mesmo caminho e nome de imagem.",
+        "[Segurança] Bancos de dados, credenciais, configurações e outras imagens permanecem protegidos."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/LOGOS/fotomenu.png",
+          "sha256": "5085e82fe47959cdc981f9aed5b028c9e79a89c966cc873c56114b94067ff49d",
+          "size": 2104769,
+          "gitSha": "9d62b7399c66964c471de9b797ae45e798fc4ef7"
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 1166,
+          "gitSha": "0ca463104b800a3032fcef217221c123898bc640"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-28T17:46:58.790Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.59",
+  "fromVersion": "10.2.60",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.60"
+  "publicVersion": "10.2.61"
 }
