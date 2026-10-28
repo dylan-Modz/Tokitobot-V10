@@ -1,178 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.62",
+  "version": "10.2.63",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-28T18:04:00.000Z",
+  "publishedAt": "2026-10-28T18:10:25.162Z",
   "changelog": [
-    "[Notificação] Aviso de atualização com imagem exclusiva hospedada no repositório de mídias Tokito.",
-    "[Botões] Atualizar, Check e Info em quick_reply nativo, no estilo Play/aviso de comando inválido da Stone WPP.",
-    "[Compatibilidade] Com botões desativados, envia imagem com legenda; se falhar, mantém o aviso em texto.",
-    "[Segurança] O aviso é enviado apenas ao número do dono e os comandos continuam restritos à autorização existente."
+    "[Correção] fix(notify): reenvio em mídia simples após falha de exibição do aviso",
+    "A versão 10.2.63 já está disponível para atualização.",
+    "Conexão do bot atualizada",
+    "Dados atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Aviso de atualização com banner e botões interativos",
-  "notice": "Tokito Bot V10.2.62 disponível: aviso de atualização agora tem banner exclusivo e botões Atualizar, Check e Info!",
+  "type": "Correção",
+  "title": "fix(notify): reenvio em mídia simples após falha de exibição do aviso",
+  "notice": "A versão 10.2.63 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/connect.js",
-      "sha256": "",
-      "size": 46916,
-      "gitSha": "f813278ebb65be49529ca2501ec077cb90ba9082"
+      "sha256": "91c45849702dec49730e67fa6ec6bb05a42862c3a972085d8fe3f411db405fef",
+      "size": 47437
     },
     {
-      "path": "package.json",
-      "sha256": "",
-      "size": 1166,
-      "gitSha": "fb281d690f219d332f14b3edde68539f47cda9be"
+      "path": "DADOS_TOKITO/sistemas/dados.js",
+      "sha256": "cab53bfc1a97a9bc5abeda298f217e864243c6cbefd4942fb0db9c737edc419d",
+      "size": 39419
     }
   ],
   "releases": [
-    {
-      "version": "10.1.35",
-      "fromVersion": "10.1.34",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "chore: atualiza versão para 10.1.37",
-      "notice": "A versão 10.1.35 já está disponível para atualização.",
-      "changelog": [
-        "Package atualizado"
-      ],
-      "files": [
-        {
-          "path": "package.json",
-          "sha256": "67a8fb308048b88337bca99a93af2a611ffab948543403974735c8cee728acab",
-          "size": 1154
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-03T14:45:53.554Z"
-    },
-    {
-      "version": "10.1.37",
-      "fromVersion": "10.1.33",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Modo IA mais humano e avisos de update mais rápidos",
-      "notice": "A versão 10.1.37 já está disponível para atualização.",
-      "changelog": [
-        "Modo IA com personalidade mais humana, divertida e natural nas conversas.",
-        "Áudios usam o nome da pessoa com bem menos frequência e nunca repetem o nome várias vezes na mesma resposta.",
-        "Histórias e narrações em áudio podem se desenvolver por cerca de 45 a 75 segundos quando o pedido pede mais conteúdo.",
-        "Waveform real voltou para as mensagens de voz da IA.",
-        "Pedidos pontuais de resposta em áudio ou texto valem só para aquela resposta; o padrão do grupo continua no modoia.",
-        "Modo espontâneo ficou menos intrometido nas conversas do grupo.",
-        "Avisos de atualização passam a ser verificados a cada 5 minutos em vez de 3 horas.",
-        "O verificador compara Tokito APIs e GitHub e usa a versão mais nova, evitando atraso quando a rota da API ainda estiver em cache."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/ia/index.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/ia/memoria.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/dados.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-03T14:47:00.000Z"
-    },
-    {
-      "version": "10.1.38",
-      "fromVersion": "10.1.37",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "fix: corrige normalização do nome no áudio da IA",
-      "notice": "A versão 10.1.38 já está disponível para atualização.",
-      "changelog": [
-        "IA Index atualizada"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/ia/index.js",
-          "sha256": "5ab16c6670f9f0325d024434b8b0e33e738b0e44a453f52f13a8b54a459b8e86",
-          "size": 48333
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-03T14:48:54.109Z"
-    },
-    {
-      "version": "10.1.39",
-      "fromVersion": "10.1.38",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Novos comandos de marcação e clima",
-      "notice": "A versão 10.1.39 já está disponível para atualização.",
-      "changelog": [
-        "Comando marcar redesenhado no padrão visual do mensagens.js.",
-        "Novo marcar2 com menções compactas em blocos.",
-        "Novo marcarwa com links wa.me dos participantes do grupo.",
-        "Novo comando clima/tempo com temperatura, sensação, condição, umidade, chuva, vento e previsão diária.",
-        "Menus atualizados com os novos comandos."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/admin/marcacoes.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/info/clima.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-04T14:20:00.000Z"
-    },
     {
       "version": "10.1.40",
       "fromVersion": "10.1.39",
@@ -5011,6 +4869,33 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-28T18:04:00.000Z"
+    },
+    {
+      "version": "10.2.63",
+      "fromVersion": "10.2.62",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(notify): reenvio em mídia simples após falha de exibição do aviso",
+      "notice": "A versão 10.2.63 já está disponível para atualização.",
+      "changelog": [
+        "Conexão do bot atualizada",
+        "Dados atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "91c45849702dec49730e67fa6ec6bb05a42862c3a972085d8fe3f411db405fef",
+          "size": 47437
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "cab53bfc1a97a9bc5abeda298f217e864243c6cbefd4942fb0db9c737edc419d",
+          "size": 39419
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-28T18:10:25.162Z"
     }
   ],
   "mode": "incremental",
