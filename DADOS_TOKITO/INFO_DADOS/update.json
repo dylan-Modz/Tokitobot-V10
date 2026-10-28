@@ -6,22 +6,36 @@
   "ref": "main",
   "publishedAt": "2026-10-28T18:53:54.708Z",
   "changelog": [
-    "[Correção] fix(likes): preservar erro original retornado pela Tokito APIs",
-    "A versão 10.2.64 já está disponível para atualização.",
-    "Base atualizado"
+    "[Likes Free Fire] Mensagens de falha exibem o motivo original da Tokito APIs, inclusive o campo erro.",
+    "[Likes Free Fire] Data e horário da próxima liberação vêm do campo libera_em ou de prazo informado pela API.",
+    "[Precisão] Removida a estimativa local de 24 horas; quando a API não informa data, o bot não inventa.",
+    "[Resultados] Um envio confirmado não é confundido com cooldown apenas por ter próxima liberação."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(likes): preservar erro original retornado pela Tokito APIs",
-  "notice": "A versão 10.2.64 já está disponível para atualização.",
+  "title": "Likes: erros oficiais e horário da API",
+  "notice": "Tokito Bot V10.2.64: o comando likes exibe erro original e data/horário de liberação retornados pela API.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/freefire/base.js",
-      "sha256": "0c6d8a37f9f051f1cf700a8f54dd2b101da731abba0954182323c96c2f7a0f9b",
-      "size": 3517
+      "sha256": "",
+      "size": 3517,
+      "gitSha": "e9efdb419e1b099c84f231ff84fb8b1ecd05d7e6"
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/likes.js",
+      "sha256": "",
+      "size": 11778,
+      "gitSha": "e9c977c6f4ab4b4c3daf85731b6e48429a32e496"
+    },
+    {
+      "path": "package.json",
+      "sha256": "",
+      "size": 1166,
+      "gitSha": "105f6930ea6bae1b3ad8ffcd39ab69b13f307746"
     }
   ],
   "releases": [
@@ -4855,16 +4869,32 @@
       "fromVersion": "10.2.63",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix(likes): preservar erro original retornado pela Tokito APIs",
-      "notice": "A versão 10.2.64 já está disponível para atualização.",
+      "title": "Likes: erros oficiais e horário da API",
+      "notice": "Tokito Bot V10.2.64: o comando likes exibe erro original e data/horário de liberação retornados pela API.",
       "changelog": [
-        "Base atualizado"
+        "[Likes Free Fire] Mensagens de falha exibem o motivo original da Tokito APIs, inclusive o campo erro.",
+        "[Likes Free Fire] Data e horário da próxima liberação vêm do campo libera_em ou de prazo informado pela API.",
+        "[Precisão] Removida a estimativa local de 24 horas; quando a API não informa data, o bot não inventa.",
+        "[Resultados] Um envio confirmado não é confundido com cooldown apenas por ter próxima liberação."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/plugins/freefire/base.js",
-          "sha256": "0c6d8a37f9f051f1cf700a8f54dd2b101da731abba0954182323c96c2f7a0f9b",
-          "size": 3517
+          "sha256": "",
+          "size": 3517,
+          "gitSha": "e9efdb419e1b099c84f231ff84fb8b1ecd05d7e6"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/likes.js",
+          "sha256": "",
+          "size": 11778,
+          "gitSha": "e9c977c6f4ab4b4c3daf85731b6e48429a32e496"
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 1166,
+          "gitSha": "105f6930ea6bae1b3ad8ffcd39ab69b13f307746"
         }
       ],
       "delete": [],
@@ -4875,11 +4905,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.62",
+  "fromVersion": "10.2.63",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.63"
+  "publicVersion": "10.2.64"
 }
