@@ -27,7 +27,7 @@
     {
       "path": "DADOS_TOKITO/sistemas/dados.js",
       "sha256": "",
-      "size": 0,
+      "size": 38243,
       "gitSha": "4988b8fd967f5691c2a622ece452a71de2bc5b93"
     },
     {
@@ -4942,7 +4942,7 @@
         {
           "path": "DADOS_TOKITO/sistemas/dados.js",
           "sha256": "",
-          "size": 0,
+          "size": 38243,
           "gitSha": "4988b8fd967f5691c2a622ece452a71de2bc5b93"
         },
         {
