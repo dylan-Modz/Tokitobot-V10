@@ -52,12 +52,21 @@ const cfg = config()
 return String(cfg.TOKEN_LIKE_FF || process.env.TOKEN_LIKE_FF || ctx.API_KEY_TOKITO || '').trim()
 }
 
-const apiErro = (error, padrao = 'Não foi possível concluir a solicitação.') => {
-const d = error?.response?.data
-return String(d?.mensagem || d?.message || d?.error || d?.msg || error?.message || padrao)
+// Preserva o motivo escrito pela API Tokito (campo "erro" no POST /api/v1/likes).
+// Códigos técnicos em "error" só são mostrados quando a resposta não traz texto.
+const mensagemRetorno = data => {
+const opcoes = [
+data?.erro, data?.mensagem, data?.message, data?.detail, data?.msg, data?.error,
+data?.data?.erro, data?.data?.mensagem, data?.data?.message
+]
+const valor = opcoes.find(item => typeof item === 'string' && item.trim())
+return valor ? valor.trim() : ''
 }
 
-const retornoErro = data => String(data?.mensagem || data?.message || data?.error || data?.msg || 'Não foi possível concluir a solicitação.')
+const retornoErro = data => mensagemRetorno(data) || 'A API não informou o motivo da falha.'
+
+const apiErro = (error, padrao = 'A API não informou o motivo da falha.') =>
+mensagemRetorno(error?.response?.data) || String(error?.message || padrao)
 
 const enviar = async (ctx, texto, botoes = [], mentions = []) => {
 if (ctx.isBotoes && botoes.length)
@@ -115,6 +124,7 @@ tokenSala,
 tokenLikes,
 apiErro,
 retornoErro,
+mensagemRetorno,
 enviar,
 botoesSala,
 dataBR
