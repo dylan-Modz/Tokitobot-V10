@@ -6,28 +6,36 @@
   "ref": "main",
   "publishedAt": "2026-10-28T18:10:25.162Z",
   "changelog": [
-    "[Correção] fix(notify): reenvio em mídia simples após falha de exibição do aviso",
-    "A versão 10.2.63 já está disponível para atualização.",
-    "Conexão do bot atualizada",
-    "Dados atualizado"
+    "[Notificação] Ao detectar versão nova, envia banner com botões Atualizar, Check e Info ao dono.",
+    "[Confiabilidade] Segunda tentativa automática após cinco minutos usando foto com legenda simples.",
+    "[Segurança] Aviso limitado a duas tentativas por versão e destinatário, sem mensagens em loop.",
+    "[Correção] O aviso de atualização deixa de ser suprimido quando o número do dono muda."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(notify): reenvio em mídia simples após falha de exibição do aviso",
-  "notice": "A versão 10.2.63 já está disponível para atualização.",
+  "title": "Aviso automático de atualização mais confiável",
+  "notice": "Tokito Bot V10.2.63 disponível: notificação automática com banner e reenvio de segurança.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/connect.js",
-      "sha256": "91c45849702dec49730e67fa6ec6bb05a42862c3a972085d8fe3f411db405fef",
-      "size": 47437
+      "sha256": "",
+      "size": 47437,
+      "gitSha": "b41ef52ecc5dfe69b5ba4d912d45e2328d8d6877"
     },
     {
       "path": "DADOS_TOKITO/sistemas/dados.js",
-      "sha256": "cab53bfc1a97a9bc5abeda298f217e864243c6cbefd4942fb0db9c737edc419d",
-      "size": 39419
+      "sha256": "",
+      "size": 39419,
+      "gitSha": "da38190ab23a187a174c3c5ac48d213b330e7691"
+    },
+    {
+      "path": "package.json",
+      "sha256": "",
+      "size": 1166,
+      "gitSha": "ec32bf45df25055e600638caa0e8ea9ddb87e5cc"
     }
   ],
   "releases": [
@@ -4875,22 +4883,32 @@
       "fromVersion": "10.2.62",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix(notify): reenvio em mídia simples após falha de exibição do aviso",
-      "notice": "A versão 10.2.63 já está disponível para atualização.",
+      "title": "Aviso automático de atualização mais confiável",
+      "notice": "Tokito Bot V10.2.63 disponível: notificação automática com banner e reenvio de segurança.",
       "changelog": [
-        "Conexão do bot atualizada",
-        "Dados atualizado"
+        "[Notificação] Ao detectar versão nova, envia banner com botões Atualizar, Check e Info ao dono.",
+        "[Confiabilidade] Segunda tentativa automática após cinco minutos usando foto com legenda simples.",
+        "[Segurança] Aviso limitado a duas tentativas por versão e destinatário, sem mensagens em loop.",
+        "[Correção] O aviso de atualização deixa de ser suprimido quando o número do dono muda."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/connect.js",
-          "sha256": "91c45849702dec49730e67fa6ec6bb05a42862c3a972085d8fe3f411db405fef",
-          "size": 47437
+          "sha256": "",
+          "size": 47437,
+          "gitSha": "b41ef52ecc5dfe69b5ba4d912d45e2328d8d6877"
         },
         {
           "path": "DADOS_TOKITO/sistemas/dados.js",
-          "sha256": "cab53bfc1a97a9bc5abeda298f217e864243c6cbefd4942fb0db9c737edc419d",
-          "size": 39419
+          "sha256": "",
+          "size": 39419,
+          "gitSha": "da38190ab23a187a174c3c5ac48d213b330e7691"
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 1166,
+          "gitSha": "ec32bf45df25055e600638caa0e8ea9ddb87e5cc"
         }
       ],
       "delete": [],
@@ -4901,11 +4919,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.61",
+  "fromVersion": "10.2.62",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.62"
+  "publicVersion": "10.2.63"
 }
