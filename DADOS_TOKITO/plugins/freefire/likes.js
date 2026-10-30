@@ -128,87 +128,185 @@ const avisoEspera = (data, uid) => {
     linha('🕒','ʜᴏʀᴀ́ʀɪᴏ',t.hora)
   ].filter(x => x !== null && x !== undefined).join('\n')
 }
-const headers = ctx => ({
-  'x-api-key': h.tokenLikes(ctx),
-  'Content-Type': 'application/json'
-})
+// O mesmo comprovante PNG disponível no histórico da Tokito APIs é enviado
+// como foto; a chave fica apenas nos cabeçalhos HTTP, nunca na legenda/URL.
+const MAX_RECEIPT_BYTES = 6 * 1024 * 1024
+const imagensPng = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])
+
+const formatarNumero = valor => {
+  const numeroSeguro = numero(valor)
+  return numeroSeguro === null ? null : numeroSeguro.toLocaleString('pt-BR')
+}
+const dataPedido = valor => {
+  const raw = String(valor ?? '').trim()
+  const data = /^(\d{4})-(\d{2})-(\d{2})/.exec(raw)
+  // Não estimar horário, data ou fuso se o serviço não os informou.
+  return data ? data[3] + '/' + data[2] + '/' + data[1] : null
+}
+const texto = valor => {
+  if (valor === null || valor === undefined) return null
+  const resultado = String(valor).replace(/\s+/g, ' ').trim()
+  return resultado || null
+}
+const legendaEnvio = ({uid, nick, nivel, regiao, antes, enviados, depois, codigo, situacao, data}) => [
+  '- ❤️ ' + crase + '𝙻𝙸𝙺𝙴𝚂 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴' + crase, '',
+  linha('🏷️', 'ɴɪᴄᴋ', texto(nick)),
+  linha('🆔', 'ᴜɪᴅ', uid),
+  linha('⭐', 'ɴɪ́ᴠᴇʟ', formatarNumero(nivel)),
+  linha('🌎', 'ʀᴇɢɪᴀ̃ᴏ', texto(regiao)),
+  '',
+  '- ❤️ ' + crase + '𝚁𝙴𝚂𝚄𝙻𝚃𝙰𝙳𝙾 𝙳𝙾 𝙴𝙽𝚅𝙸𝙾' + crase, '',
+  linha('❤️', 'ᴀɴᴛᴇs', formatarNumero(antes)),
+  linha('➕', 'ʟɪᴋᴇs ᴇɴᴠɪᴀᴅᴏs', formatarNumero(enviados)),
+  linha('📈', 'ᴅᴇᴘᴏɪs', formatarNumero(depois)),
+  '',
+  '- 🧾 ' + crase + '𝙳𝙰𝙳𝙾𝚂 𝙳𝙾 𝙿𝙴𝙳𝙸𝙳𝙾' + crase, '',
+  linha('📦', 'ᴄᴏ́ᴅɪɢᴏ', texto(codigo)),
+  linha('📌', 'sɪᴛᴜᴀᴄ̧ᴀ̃ᴏ', texto(situacao)),
+  linha('📅', 'ᴅᴀᴛᴀ', dataPedido(data)),
+  '',
+  '> ❤️ ׄ ( ✅ ʟɪᴋᴇs ᴇɴᴠɪᴀᴅᴏs ᴄᴏᴍ sᴜᴄᴇssᴏ! )'
+].filter((item, index, itens) =>
+  item !== null && item !== undefined &&
+  !(item === '' && (index === 0 || itens[index - 1] === ''))
+).join('\n')
+
+// Bloqueia redirecionamentos externos e caminhos que não sejam a imagem real
+// de comprovante; nunca passa o token na URL.
+const urlComprovante = (valor, apiBase) => {
+  if (typeof valor !== 'string' || !valor.trim()) return null
+  const base = new URL(apiBase)
+  const url = new URL(valor, base)
+  if (url.origin !== base.origin || url.protocol !== 'https:' ||
+      url.username || url.password || url.search || url.hash ||
+      !/^\/api\/v1\/likes\/receipts\/[A-Za-z0-9_-]{1,80}\.png$/.test(url.pathname)) {
+    return null
+  }
+  return url.href
+}
 
 dylan.setCommand({
   nome: 'likes',
   comandos: ['likes'],
   categoria: 'freefire',
   info: {
-    descricao: 'Enviar likes manualmente para um UID do Free Fire.',
-    uso: 'likes UID'
+    descricao: 'Enviar Likes Free Fire com comprovante PNG oficial e legenda completa.',
+    uso: 'likes UID',
+    categoria: 'freefire'
   },
   async executar(ctx) {
+    const player_id = String(ctx.q || '').trim()
+    if (!/^\d{5,24}$/.test(player_id)) return ctx.reply(ctx.mess.ffLikesUso(ctx.prefix))
+
+    const token = String(h.tokenLikes(ctx) || '').trim()
+    if (!token || token === 'TOKEN_LIKE_FF' || token === 'TOKEN_API_TOKITO') {
+      return ctx.reply(ctx.mess.ffErro('Configure e ative a chave TOKEN_LIKE_FF no bot.'))
+    }
+
+    const base = String(ctx.API_URL || 'https://tokito-apis.com.br').replace(/\/+$/, '')
+    const headers = {
+      'x-api-key': token,
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+
     try {
-      const player_id = String(ctx.q || '').trim()
-      if (!/^\d{5,24}$/.test(player_id)) return ctx.reply(ctx.mess.ffLikesUso(ctx.prefix))
-      await ctx.reagir(ctx.from,'❤️')
+      await ctx.reagir(ctx.from, '❤️').catch(() => {})
       let data
       try {
-        const resposta = await ctx.axios.post(ctx.API_URL+'/api/v1/likes',{player_id},
-          {headers:headers(ctx),timeout:90000})
+        const resposta = await ctx.axios.post(
+          base + '/api/v1/likes',
+          { player_id, formato: 'pt' },
+          { headers, timeout: 100000 }
+        )
         data = resposta.data
-      } catch (erro) {
-        if (!erro?.response?.data || typeof erro.response.data !== 'object') throw erro
-        data = erro.response.data
+      } catch (error) {
+        if (!error?.response?.data || typeof error.response.data !== 'object') throw error
+        data = error.response.data
       }
+
       const conta = data?.data?.conta || {}
-      const likes = data?.data?.likes || {}
-      const limite = data?.data?.limite || {}
-      const cota = data?.cota || {}
-      const uid = String(primeiro(data?.uid,conta?.uid,data?.player_id,player_id))
-      const nick = primeiro(data?.nick,conta?.nickname,data?.nickname,'N/A')
+      const antigo = data?.data?.likes || {}
+      const uid = String(primeiro(data?.uid, conta?.uid, data?.player_id, player_id))
+      const nick = primeiro(data?.nick, conta?.nickname, data?.nickname)
+      const antes = primeiro(numero(data?.likes_antes), numero(antigo.antes), numero(data?.likes_before))
+      const enviados = primeiro(numero(data?.likes_enviados), numero(antigo.adicionados), numero(data?.likes_added)) ?? 0
+      const depois = primeiro(numero(data?.likes_depois), numero(antigo.depois), numero(data?.likes_end))
       const sucesso = data?.sucesso === true || data?.success === true
 
-      // Resposta com libera_em após um envio confirmado não deve virar erro de espera.
-      const adicionadosResposta = numero(primeiro(data?.likes_enviados, data?.data?.likes?.adicionados, data?.likes_added)) ?? 0
-      if (emEspera(data) && !(sucesso && adicionadosResposta > 0)) {
-        await ctx.reagir(ctx.from,'⏳')
-        return ctx.reply(avisoEspera(data,uid))
-      }
       if (!sucesso) {
-        await ctx.reagir(ctx.from,'❌')
+        if (emEspera(data)) {
+          await ctx.reagir(ctx.from, '⏳').catch(() => {})
+          return ctx.reply(avisoEspera(data, uid))
+        }
+        await ctx.reagir(ctx.from, '❌').catch(() => {})
         return ctx.reply(ctx.mess.ffErro(h.retornoErro(data)))
       }
-      const antes = numero(primeiro(data?.likes_antes,likes?.antes,data?.likes_before)) ?? 0
-      const enviados = numero(primeiro(data?.likes_enviados,likes?.adicionados,data?.likes_added)) ?? 0
-      const depois = numero(primeiro(data?.likes_depois,likes?.depois,data?.likes_end)) ?? 0
+
       if (enviados <= 0) {
-        await ctx.reagir(ctx.from,'⚠️')
+        await ctx.reagir(ctx.from, '⚠️').catch(() => {})
         return ctx.reply(ctx.mess.padraoAviso({
-          emoji:'❤️',titulo:'NENHUM LIKE ENVIADO',
-          descricao:'Nenhum novo like confirmado nesta tentativa.',
-          detalhe:h.retornoErro(data)
+          emoji: '❤️', titulo: 'NENHUM LIKE ENVIADO',
+          descricao: 'Nenhum novo like confirmado nesta tentativa.',
+          detalhe: h.retornoErro(data)
         }))
       }
-      const salvo = salvar(uid,{nick,enviados,depois})
-      const t = tempoEspera(data)
-      const cotaLimite = numero(primeiro(cota?.limite,limite?.diario,data?.daily_limit))
-      const cotaUsada = numero(primeiro(cota?.usadas,limite?.usados_hoje,data?.used_today))
-      const cotaRestam = numero(primeiro(cota?.restam,limite?.restantes,data?.remaining_today))
-      const texto = [
-        '- ❤️ '+crase+'𝙻𝙸𝙺𝙴𝚂 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴'+crase,'',
-        linha('🏷️','ɴɪᴄᴋ',nick),linha('🆔','ᴜɪᴅ',uid),'',
-        linha('❤️','ᴀɴᴛᴇs',antes),
-        linha('➕','ᴇɴᴠɪᴀᴅᴏs ᴀɢᴏʀᴀ',enviados),
-        linha('📈','ᴅᴇᴘᴏɪs',depois),
-        linha('📊','ᴛᴏᴛᴀʟ ᴇɴᴠɪᴀᴅᴏ ᴘᴏʀ ᴇsᴛᴇ ʙᴏᴛ',salvo?.total),
-        '',linha('📊','ᴄᴏᴛᴀ',cotaLimite === null ? null : (cotaUsada ?? 0)+'/'+cotaLimite),
-        linha('📥','ʀᴇsᴛᴀᴍ',cotaRestam),'',
-        linha('⏳','ᴘʀᴏ́xɪᴍᴏ ᴇɴᴠɪᴏ',t.restante),
-        linha('📅','ʟɪʙᴇʀᴀ ᴇᴍ',t.data),
-        linha('🕒','ʜᴏʀᴀ́ʀɪᴏ',t.hora),
-        '', '> ❤️ ׄ ( ✅ ʟɪᴋᴇs ᴇɴᴠɪᴀᴅᴏs ᴄᴏᴍ sᴜᴄᴇssᴏ! )'
-      ].filter(x => x !== null && x !== undefined).join('\n')
-      await ctx.reagir(ctx.from,'✅')
-      return ctx.reply(texto)
+
+      const pedido = data?.envio || {}
+      const codigo = primeiro(data?.codigo, pedido.codigo, data?.orderId)
+      const comprovante = primeiro(data?.comprovante, pedido.comprovante)
+      const legenda = legendaEnvio({
+        uid, nick, nivel: data?.nivel ?? conta?.nivel,
+        regiao: primeiro(data?.regiao, data?.region, 'BR'),
+        antes, enviados, depois, codigo,
+        situacao: primeiro(data?.situacao, 'Concluído'),
+        data: primeiro(data?.data, pedido.criado_em, data?.criado_em)
+      })
+
+      // Guardar somente depois de a API confirmar novos likes. NÃO repetir
+      // POST de envio quando a imagem falhar: poderia duplicar os likes.
+      salvar(uid, { nick, enviados, depois })
+
+      // A rota PNG exige a MESMA chave da API de Likes, inclusive para pedidos
+      // já concluídos no histórico. A imagem viaja como Buffer pelo WhatsApp.
+      try {
+        const destino = urlComprovante(comprovante, base)
+        if (!destino) throw new Error('Endereço do comprovante inválido ou ausente.')
+        const respostaImagem = await ctx.axios.get(destino, {
+          headers: { 'x-api-key': token, Accept: 'image/png' },
+          responseType: 'arraybuffer',
+          timeout: 35000,
+          maxRedirects: 0,
+          maxContentLength: MAX_RECEIPT_BYTES,
+          maxBodyLength: MAX_RECEIPT_BYTES
+        })
+        const png = Buffer.from(respostaImagem.data || [])
+        if (png.length < 8 || png.length > MAX_RECEIPT_BYTES ||
+            !png.subarray(0, 8).equals(imagensPng)) {
+          throw new Error('O comprovante não retornou uma imagem PNG válida.')
+        }
+        await ctx.tokito.sendMessage(ctx.from, {
+          image: png,
+          caption: legenda,
+          mimetype: 'image/png'
+        }, { quoted: ctx.selo || ctx.info })
+        await ctx.reagir(ctx.from, '✅').catch(() => {})
+        return true
+      } catch (error) {
+        // O envio já foi confirmado: informar a falta do PNG sem tratar
+        // como falha nos likes e sem tentar enviar os likes novamente.
+        console.log('[LIKES COMPROVANTE]', String(error?.message || 'Imagem indisponível').slice(0, 160))
+        await ctx.reagir(ctx.from, '⚠️').catch(() => {})
+        return ctx.reply(legenda + '\n\n> 🧾 ׄ ( ⚠️ ᴄᴏᴍᴘʀᴏᴠᴀɴᴛᴇ ᴇᴍ ɪᴍᴀɢᴇᴍ ɪɴᴅɪsᴘᴏɴɪ́ᴠᴇʟ ɴᴇsᴛᴀ ᴛᴇɴᴛᴀᴛɪᴠᴀ. )')
+      }
     } catch (error) {
-      console.log('[FREE FIRE LIKES]',ctx.modulos.sanitizarErro(error,[ctx.API_KEY_TOKITO]))
-      await ctx.reagir(ctx.from,'❌').catch(()=>{})
-      return ctx.reply(ctx.mess.erroApi(ctx.API_URL))
+      if (ctx.modulos?.sanitizarErro) {
+        console.log('[FREE FIRE LIKES]', ctx.modulos.sanitizarErro(error, [token]))
+      } else {
+        console.log('[FREE FIRE LIKES]', String(error?.message || 'Erro ao consultar a API.').slice(0, 160))
+      }
+      await ctx.reagir(ctx.from, '❌').catch(() => {})
+      return ctx.reply(ctx.mess.erroApi(base))
     }
   }
 })
