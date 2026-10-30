@@ -1,33 +1,43 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.72",
+  "version": "10.2.70",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-30T20:10:45.694Z",
+  "publishedAt": "2026-10-30T20:12:16.695Z",
   "changelog": [
-    "[Correção] fix(status): validate Stone nested-media support before posting group stories",
-    "A versão 10.2.72 já está disponível para atualização.",
-    "Conexão do bot atualizada",
-    "Mencstatus atualizado"
+    "[Stone WPP] Corrigido o transporte groupStatusMessageV2: vídeo/imagem usam tipo media com mediatype, áudio usa tipo text sem mediatype.",
+    "[Mídias] O comando mencstatus valida se a Stone corrigida está instalada antes de enviar áudio ou vídeo.",
+    "[Protocolo] Preservados metadados, autoria e upload de mídia citada; a resposta do bot não garante a exibição no WhatsApp.",
+    "[Atualização] Reparo da mesma versão 10.2.70 identificado pelos hashes do connect.js, package.json e mencstatus.js.",
+    "[Dependências] Stone WPP instalada do commit corrigido do GitHub, sem alterar o número da versão do Tokito.",
+    "[Avisos] Monitor passa a notificar sobre correções de arquivos mesmo sem aumento de versão."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(status): validate Stone nested-media support before posting group stories",
-  "notice": "A versão 10.2.72 já está disponível para atualização.",
+  "title": "Reparo do status de grupo (áudio e vídeo)",
+  "notice": "Tokito Bot 10.2.70: correção de mídia de status do grupo. Use update check e update start para instalar o reparo.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/connect.js",
       "sha256": "0d5fd2ea9351efe5e54ae990de075b7443674ac100ec1e3b04cb60b5fab486b2",
-      "size": 46087
+      "size": 46087,
+      "gitSha": "11d8cd5130c76674dfd21be6c932afee78ec2b4c"
+    },
+    {
+      "path": "package.json",
+      "sha256": "3f0558141b02ceda2ab51883391418a1ec8bd6ea48b9831214bf10b0e5ea358d",
+      "size": 1253,
+      "gitSha": "c233150d97560baa83dc7054e55f624defab1a9e"
     },
     {
       "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
       "sha256": "fcaddae872b04261cd80d658e800226730dbe08f2d2db67fe8d6ba648813352a",
-      "size": 9624
+      "size": 9624,
+      "gitSha": "e12e8ad2d5ca4edfaf33fdb710468c2d8e655164"
     }
   ],
   "releases": [
@@ -4546,87 +4556,40 @@
       "fromVersion": "10.2.69",
       "channel": "stable",
       "type": "Correção",
-      "title": "Aviso automático de atualização no WhatsApp",
-      "notice": "Tokito Bot V10.2.70: reparo do envio de áudio e vídeo em status de grupo (instale com update start).",
+      "title": "Reparo do status de grupo (áudio e vídeo)",
+      "notice": "Tokito Bot 10.2.70: correção de mídia de status do grupo. Use update check e update start para instalar o reparo.",
       "changelog": [
-        "[Status de Grupo] Corrigido o preparo e reenvio de mídias respondidas com mediaKey própria, metadados de áudio/vídeo e miniatura original quando disponível.",
-        "[Protocolo] Envio de vídeo identificado como mídia e áudio com tipo adequado no grupo, preservando groupStatusMessageV2.",
-        "[Diagnóstico] Erros agora indicam a etapa da falha (download, preparo, montagem ou envio), sem responder como publicado quando ocorre exceção.",
-        "[Reparo] Mesma versão 10.2.70: update check detecta o arquivo alterado mesmo em instalações que já estejam nesta versão.",
-        "[Segurança] Atualização incremental; configurações, sessões e bancos não são alterados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "32cc19d93e889e0abead3711c1f537ad98f3a994755edb12cfcb4c145068a00e",
-          "size": 45367,
-          "gitSha": "95e6c9b6baee7b47f29736927adefd77db666260"
-        },
-        {
-          "path": "package.json",
-          "sha256": "f6ce2b275ec67d1271c96e1c7e3faaf03ec457164e3fdf18d6e74bbfb17f934d",
-          "size": 1166,
-          "gitSha": "5ca84b27dfc45d7f06425f59ed1cdf0ea35c9aaf"
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
-          "sha256": "2530965029f219c35aec9eca7e2839bcf8d52c1d4ce7b5ca0f1460a366ee7ced",
-          "size": 8546,
-          "gitSha": "99e6998bf031d0f8d9ec96ca4e06fc8a8a4d1bf7"
-        }
-      ],
-      "delete": [],
-      "required": false,
-      "publishedAt": "2026-10-30T20:05:22.196Z",
-      "description": "Reparo de áudio e vídeo sem alteração de versão"
-    },
-    {
-      "version": "10.2.71",
-      "fromVersion": "10.2.70",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "fix(deps): pin corrected Stone WPP group status media transport without bot version bump",
-      "notice": "A versão 10.2.71 já está disponível para atualização.",
-      "changelog": [
-        "Package atualizado"
-      ],
-      "files": [
-        {
-          "path": "package.json",
-          "sha256": "3f0558141b02ceda2ab51883391418a1ec8bd6ea48b9831214bf10b0e5ea358d",
-          "size": 1253
-        }
-      ],
-      "delete": [],
-      "required": false,
-      "publishedAt": "2026-10-30T20:09:15.494Z"
-    },
-    {
-      "version": "10.2.72",
-      "fromVersion": "10.2.71",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "fix(status): validate Stone nested-media support before posting group stories",
-      "notice": "A versão 10.2.72 já está disponível para atualização.",
-      "changelog": [
-        "Conexão do bot atualizada",
-        "Mencstatus atualizado"
+        "[Stone WPP] Corrigido o transporte groupStatusMessageV2: vídeo/imagem usam tipo media com mediatype, áudio usa tipo text sem mediatype.",
+        "[Mídias] O comando mencstatus valida se a Stone corrigida está instalada antes de enviar áudio ou vídeo.",
+        "[Protocolo] Preservados metadados, autoria e upload de mídia citada; a resposta do bot não garante a exibição no WhatsApp.",
+        "[Atualização] Reparo da mesma versão 10.2.70 identificado pelos hashes do connect.js, package.json e mencstatus.js.",
+        "[Dependências] Stone WPP instalada do commit corrigido do GitHub, sem alterar o número da versão do Tokito.",
+        "[Avisos] Monitor passa a notificar sobre correções de arquivos mesmo sem aumento de versão."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/connect.js",
           "sha256": "0d5fd2ea9351efe5e54ae990de075b7443674ac100ec1e3b04cb60b5fab486b2",
-          "size": 46087
+          "size": 46087,
+          "gitSha": "11d8cd5130c76674dfd21be6c932afee78ec2b4c"
+        },
+        {
+          "path": "package.json",
+          "sha256": "3f0558141b02ceda2ab51883391418a1ec8bd6ea48b9831214bf10b0e5ea358d",
+          "size": 1253,
+          "gitSha": "c233150d97560baa83dc7054e55f624defab1a9e"
         },
         {
           "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
           "sha256": "fcaddae872b04261cd80d658e800226730dbe08f2d2db67fe8d6ba648813352a",
-          "size": 9624
+          "size": 9624,
+          "gitSha": "e12e8ad2d5ca4edfaf33fdb710468c2d8e655164"
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-10-30T20:10:45.694Z"
+      "publishedAt": "2026-10-30T20:12:16.695Z",
+      "description": "Reparo de áudio e vídeo sem alteração de versão"
     }
   ],
   "mode": "incremental",
