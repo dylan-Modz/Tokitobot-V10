@@ -4,24 +4,33 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-30T19:22:44.890Z",
+  "publishedAt": "2026-10-30T19:22:44.889Z",
   "changelog": [
-    "[Novidade] feat(likes): comprovante PNG oficial na foto com legenda do envio, sem repetir pedidos",
-    "A versão 10.2.68 já está disponível para atualização.",
-    "Likes atualizado"
+    "[Likes Free Fire] Comando likes UID envia o comprovante PNG oficial como foto do WhatsApp com o resultado na legenda.",
+    "[Resultados] Nick, UID, nível, região, likes antes/enviados/depois, código, situação e data agora vêm do retorno da API em português.",
+    "[Segurança] Comprovante baixado com a chave da API de Likes protegida no cabeçalho; nenhum token ou URL aparece na legenda.",
+    "[Falhas] Falha ao baixar o comprovante não repete o envio de likes e não transforma envio confirmado em erro; histórico preservado.",
+    "[Versão] Atualização incremental dos arquivos alterados de 10.2.67 para 10.2.68."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat(likes): comprovante PNG oficial na foto com legenda do envio, sem repetir pedidos",
-  "notice": "A versão 10.2.68 já está disponível para atualização.",
+  "type": "Atualização",
+  "title": "Likes Free Fire com comprovante PNG no WhatsApp",
+  "notice": "Tokito Bot V10.2.68: likes UID agora envia comprovante em imagem com a legenda do pedido!",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/freefire/likes.js",
       "sha256": "69032ed3534a701cfebfdcab774a02de4984f11e3d5914fcb96068ad956ebf71",
-      "size": 14308
+      "size": 14308,
+      "gitSha": "01db52b3d5031eabda4a6cde9736b0ccf9a9c426"
+    },
+    {
+      "path": "package.json",
+      "sha256": "3387741b81dba473d7ffdcbc257f01907f90b4d36f5d02bc9dd8c7fee8071906",
+      "size": 1166,
+      "gitSha": "e11bcf1f6f6a9aee00183c0d62d57dc157c436e8"
     }
   ],
   "releases": [
@@ -4730,17 +4739,28 @@
       "version": "10.2.68",
       "fromVersion": "10.2.67",
       "channel": "stable",
-      "type": "Novidade",
-      "title": "feat(likes): comprovante PNG oficial na foto com legenda do envio, sem repetir pedidos",
-      "notice": "A versão 10.2.68 já está disponível para atualização.",
+      "type": "Atualização",
+      "title": "Likes Free Fire com comprovante PNG no WhatsApp",
+      "notice": "Tokito Bot V10.2.68: likes UID agora envia comprovante em imagem com a legenda do pedido!",
       "changelog": [
-        "Likes atualizado"
+        "[Likes Free Fire] Comando likes UID envia o comprovante PNG oficial como foto do WhatsApp com o resultado na legenda.",
+        "[Resultados] Nick, UID, nível, região, likes antes/enviados/depois, código, situação e data agora vêm do retorno da API em português.",
+        "[Segurança] Comprovante baixado com a chave da API de Likes protegida no cabeçalho; nenhum token ou URL aparece na legenda.",
+        "[Falhas] Falha ao baixar o comprovante não repete o envio de likes e não transforma envio confirmado em erro; histórico preservado.",
+        "[Versão] Atualização incremental dos arquivos alterados de 10.2.67 para 10.2.68."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/plugins/freefire/likes.js",
           "sha256": "69032ed3534a701cfebfdcab774a02de4984f11e3d5914fcb96068ad956ebf71",
-          "size": 14308
+          "size": 14308,
+          "gitSha": "01db52b3d5031eabda4a6cde9736b0ccf9a9c426"
+        },
+        {
+          "path": "package.json",
+          "sha256": "3387741b81dba473d7ffdcbc257f01907f90b4d36f5d02bc9dd8c7fee8071906",
+          "size": 1166,
+          "gitSha": "e11bcf1f6f6a9aee00183c0d62d57dc157c436e8"
         }
       ],
       "delete": [],
@@ -4751,11 +4771,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.66",
+  "fromVersion": "10.2.67",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.67"
+  "publicVersion": "10.2.68"
 }
