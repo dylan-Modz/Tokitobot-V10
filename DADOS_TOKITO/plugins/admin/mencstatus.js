@@ -16,7 +16,9 @@ const desenrolar = entrada => {
       msg.viewOnceMessage?.message ||
       msg.viewOnceMessageV2?.message ||
       msg.viewOnceMessageV2Extension?.message ||
-      msg.documentWithCaptionMessage?.message
+      msg.documentWithCaptionMessage?.message ||
+      msg.groupStatusMessageV2?.message ||
+      msg.groupStatusMessage?.message
     if (!dentro) break
     msg = dentro
   }
@@ -25,7 +27,7 @@ const desenrolar = entrada => {
 
 const obterCitada = ctx => {
   const msg = ctx.mensagem || ctx.info?.message || {}
-  const info = ctx.ctxMsg ||
+  const info = (ctx.ctxMsg?.quotedMessage ? ctx.ctxMsg : null) ||
     msg.extendedTextMessage?.contextInfo ||
     msg.imageMessage?.contextInfo ||
     msg.videoMessage?.contextInfo ||
@@ -38,8 +40,9 @@ const obterCitada = ctx => {
 const uso = ctx => (
   '- 📢 \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙾 𝙶𝚁𝚄𝙿𝙾\`\n\n' +
   '> 📌 ׄ ( ᴜsᴇ: ' + ctx.prefix + 'mencstatus texto )\n' +
-  '> 🖼️ ׄ ( ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜᴍᴀ ғᴏᴛᴏ ᴏᴜ ᴠɪ́ᴅᴇᴏ ᴇ ᴜsᴇ ᴏ ᴄᴏᴍᴀɴᴅᴏ. )\n' +
-  '> 🎵 ׄ ( ᴛᴀᴍʙᴇ́ᴍ ᴀᴄᴇɪᴛᴀ ᴀ́ᴜᴅɪᴏs ᴇ ᴍᴇɴsᴀɢᴇɴs ᴅᴇ ᴛᴇxᴛᴏ ᴄɪᴛᴀᴅᴀs. )'
+  '> 🎬 ׄ ( ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜᴍ ᴠɪ́ᴅᴇᴏ ᴄᴏᴍ ᴏ ᴄᴏᴍᴀɴᴅᴏ. )\n' +
+  '> 🎵 ׄ ( ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜᴍ ᴀ́ᴜᴅɪᴏ ᴄᴏᴍ ᴏ ᴄᴏᴍᴀɴᴅᴏ. )\n' +
+  '> 🖼️ ׄ ( ғᴏᴛᴏs ᴇ ᴛᴇxᴛᴏs ᴄᴏɴᴛɪɴᴜᴀᴍ ᴅɪsᴘᴏɴɪ́ᴠᴇɪs. )'
 )
 
 const textoDaCitada = msg =>
@@ -47,7 +50,7 @@ const textoDaCitada = msg =>
 
 dylan.setCommand({
   nome: 'mencstatus',
-  comandos: ['mencstatus', 'statusgp', 'testestatus'],
+  comandos: ['mencstatus', 'statusgp', 'statusgrupo', 'testestatus'],
   categoria: 'admin',
   info: {
     descricao: 'Publica texto, foto, vídeo ou áudio como Status de Grupo.',
@@ -64,14 +67,16 @@ dylan.setCommand({
 
     const legenda = String(ctx.q || '').trim().slice(0, 4096)
     const citada = obterCitada(ctx)
-    const midia = citada?.imageMessage
-      ? { tipo: 'image', fonte: citada.imageMessage, chave: 'imageMessage' }
-      : citada?.videoMessage
-        ? { tipo: 'video', fonte: citada.videoMessage, chave: 'videoMessage' }
-        : citada?.audioMessage
-          ? { tipo: 'audio', fonte: citada.audioMessage, chave: 'audioMessage' }
+    // Aceita mensagem respondida, status de grupo citado e mídia com comando na legenda.
+    const origem = citada || desenrolar(ctx.mensagem || ctx.info?.message || {})
+    const midia = origem?.imageMessage
+      ? { tipo: 'image', fonte: origem.imageMessage, chave: 'imageMessage' }
+      : origem?.videoMessage
+        ? { tipo: 'video', fonte: origem.videoMessage, chave: 'videoMessage' }
+        : origem?.audioMessage
+          ? { tipo: 'audio', fonte: origem.audioMessage, chave: 'audioMessage' }
           : null
-    const textoCitado = textoDaCitada(citada)
+    const textoCitado = citada ? textoDaCitada(citada) : null
     const texto = textoCitado
       ? (legenda ? textoCitado + '\n\n' + legenda : textoCitado)
       : legenda
@@ -90,9 +95,16 @@ dylan.setCommand({
       await ctx.reagir(ctx.from, '⏳').catch(() => {})
 
       const segredo = crypto.randomBytes(32)
+      const autorJid = ctx.tokito.user?.lid || ctx.tokito.user?.id
+      const tipoGrupo = ctx.proto?.StatusAttribution?.Type?.GROUP_STATUS ?? 5
       const contexto = {
         isGroupStatus: true,
-        mentionedJid: [ctx.sender]
+        ...(autorJid ? {
+          statusAttributions: [{
+            type: tipoGrupo,
+            groupStatus: { authorJid: autorJid }
+          }]
+        } : {})
       }
       const interna = {
         messageContextInfo: { messageSecret: segredo }
@@ -126,7 +138,10 @@ dylan.setCommand({
                 mimetype: midia.fonte.mimetype || preparada[midia.chave].mimetype || 'audio/ogg; codecs=opus',
                 ptt: midia.fonte.ptt === true
               }
-            : { caption: legenda })
+            : {
+                caption: legenda || midia.fonte.caption || '',
+                ...(midia.fonte.mimetype ? { mimetype: midia.fonte.mimetype } : {})
+              })
         }
       } else {
         interna.extendedTextMessage = {
@@ -143,6 +158,9 @@ dylan.setCommand({
         groupStatusMessageV2: { message: interna }
       }, { userJid: ctx.tokito.user?.id })
 
+      if (!msg.message?.groupStatusMessageV2)
+        throw new Error('O protocolo não gerou groupStatusMessageV2.')
+
       await ctx.tokito.relayMessage(ctx.from, msg.message, {
         messageId: msg.key.id
       })
@@ -150,7 +168,7 @@ dylan.setCommand({
       await ctx.reagir(ctx.from, '✅').catch(() => {})
       return ctx.reply(
         '- ✅ \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙾 𝙶𝚁𝚄𝙿𝙾\`\n\n' +
-        '> 💚 ׄ ( sᴛᴀᴛᴜs ᴅᴏ ɢʀᴜᴘᴏ ᴇɴᴠɪᴀᴅᴏ ᴘᴇʟᴏ ᴛᴏᴋɪᴛᴏ. )'
+        '> 💚 ׄ ( ᴘᴜʙʟɪᴄᴀᴄ̧ᴀ̃ᴏ ᴇɴᴠɪᴀᴅᴀ; ᴄᴏɴғɪʀᴀ ᴏ sᴛᴀᴛᴜs ɴᴏ ɢʀᴜᴘᴏ. )'
       )
     } catch (error) {
       console.log('[TOKITO • STATUS DE GRUPO]', error?.message || error)
