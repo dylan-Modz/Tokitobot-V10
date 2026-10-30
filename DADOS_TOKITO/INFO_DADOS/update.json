@@ -1,45 +1,25 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.70",
+  "version": "10.2.71",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-30T20:12:16.695Z",
+  "publishedAt": "2026-10-30T20:19:45.256Z",
   "changelog": [
-    "[Stone WPP] Corrigido o transporte groupStatusMessageV2: vídeo/imagem usam tipo media com mediatype, áudio usa tipo text sem mediatype.",
-    "[Mídias] O comando mencstatus valida se a Stone corrigida está instalada antes de enviar áudio ou vídeo.",
-    "[Protocolo] Preservados metadados, autoria e upload de mídia citada; a resposta do bot não garante a exibição no WhatsApp.",
-    "[Atualização] Reparo da mesma versão 10.2.70 identificado pelos hashes do connect.js, package.json e mencstatus.js.",
-    "[Dependências] Stone WPP instalada do commit corrigido do GitHub, sem alterar o número da versão do Tokito.",
-    "[Avisos] Monitor passa a notificar sobre correções de arquivos mesmo sem aumento de versão."
+    "[Melhoria] remove(status): retirar comando de status de grupo sem uso",
+    "A versão 10.2.71 já está disponível para atualização.",
+    "Mencstatus removido"
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/admin/mencstatus.js"
+  ],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Reparo do status de grupo (áudio e vídeo)",
-  "notice": "Tokito Bot 10.2.70: correção de mídia de status do grupo. Use update check e update start para instalar o reparo.",
+  "type": "Melhoria",
+  "title": "remove(status): retirar comando de status de grupo sem uso",
+  "notice": "A versão 10.2.71 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
-  "files": [
-    {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "0d5fd2ea9351efe5e54ae990de075b7443674ac100ec1e3b04cb60b5fab486b2",
-      "size": 46087,
-      "gitSha": "11d8cd5130c76674dfd21be6c932afee78ec2b4c"
-    },
-    {
-      "path": "package.json",
-      "sha256": "3f0558141b02ceda2ab51883391418a1ec8bd6ea48b9831214bf10b0e5ea358d",
-      "size": 1253,
-      "gitSha": "c233150d97560baa83dc7054e55f624defab1a9e"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
-      "sha256": "fcaddae872b04261cd80d658e800226730dbe08f2d2db67fe8d6ba648813352a",
-      "size": 9624,
-      "gitSha": "e12e8ad2d5ca4edfaf33fdb710468c2d8e655164"
-    }
-  ],
+  "files": [],
   "releases": [
     {
       "version": "10.1.49",
@@ -4590,6 +4570,23 @@
       "required": false,
       "publishedAt": "2026-10-30T20:12:16.695Z",
       "description": "Reparo de áudio e vídeo sem alteração de versão"
+    },
+    {
+      "version": "10.2.71",
+      "fromVersion": "10.2.70",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "remove(status): retirar comando de status de grupo sem uso",
+      "notice": "A versão 10.2.71 já está disponível para atualização.",
+      "changelog": [
+        "Mencstatus removido"
+      ],
+      "files": [],
+      "delete": [
+        "DADOS_TOKITO/plugins/admin/mencstatus.js"
+      ],
+      "required": false,
+      "publishedAt": "2026-10-30T20:19:45.256Z"
     }
   ],
   "mode": "incremental",
