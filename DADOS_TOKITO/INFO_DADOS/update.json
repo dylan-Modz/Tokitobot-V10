@@ -1,87 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.71",
+  "version": "10.2.72",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-30T20:09:15.494Z",
+  "publishedAt": "2026-10-30T20:10:45.694Z",
   "changelog": [
-    "[Correção] fix(deps): pin corrected Stone WPP group status media transport without bot version bump",
-    "A versão 10.2.71 já está disponível para atualização.",
-    "Package atualizado"
+    "[Correção] fix(status): validate Stone nested-media support before posting group stories",
+    "A versão 10.2.72 já está disponível para atualização.",
+    "Conexão do bot atualizada",
+    "Mencstatus atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(deps): pin corrected Stone WPP group status media transport without bot version bump",
-  "notice": "A versão 10.2.71 já está disponível para atualização.",
+  "title": "fix(status): validate Stone nested-media support before posting group stories",
+  "notice": "A versão 10.2.72 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "3f0558141b02ceda2ab51883391418a1ec8bd6ea48b9831214bf10b0e5ea358d",
-      "size": 1253
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "0d5fd2ea9351efe5e54ae990de075b7443674ac100ec1e3b04cb60b5fab486b2",
+      "size": 46087
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
+      "sha256": "fcaddae872b04261cd80d658e800226730dbe08f2d2db67fe8d6ba648813352a",
+      "size": 9624
     }
   ],
   "releases": [
-    {
-      "version": "10.1.48",
-      "fromVersion": "10.1.47",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Administração avançada e sorteios",
-      "notice": "A versão 10.1.48 já está disponível para atualização.",
-      "changelog": [
-        "Novo Anti-Nuke simples para detectar ações administrativas em massa e rebaixar automaticamente o ADM responsável.",
-        "Novos comandos fotogp, descgp, nomegp e novolink para gerenciamento do grupo.",
-        "Novo sorteio por reação com horário automático através de sorteio e infosorteio.",
-        "Novo sorteionumero para escolher um número aleatório entre 0 e o limite informado.",
-        "Novos criartabela e tabelagp para manter uma tabela fixa por grupo.",
-        "Novo grupo-all para programar fechamento e abertura do grupo em um único comando.",
-        "Novos roleta e roleta2; a segunda versão protege administradores."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/admin/antinuke.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/tabelagp.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/brincadeiras/roleta.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/sorteio.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-05T21:54:00.802Z"
-    },
     {
       "version": "10.1.49",
       "fromVersion": "10.1.48",
@@ -4651,6 +4600,33 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-30T20:09:15.494Z"
+    },
+    {
+      "version": "10.2.72",
+      "fromVersion": "10.2.71",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(status): validate Stone nested-media support before posting group stories",
+      "notice": "A versão 10.2.72 já está disponível para atualização.",
+      "changelog": [
+        "Conexão do bot atualizada",
+        "Mencstatus atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "0d5fd2ea9351efe5e54ae990de075b7443674ac100ec1e3b04cb60b5fab486b2",
+          "size": 46087
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
+          "sha256": "fcaddae872b04261cd80d658e800226730dbe08f2d2db67fe8d6ba648813352a",
+          "size": 9624
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-30T20:10:45.694Z"
     }
   ],
   "mode": "incremental",
