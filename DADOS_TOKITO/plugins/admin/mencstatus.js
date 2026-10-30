@@ -17,6 +17,8 @@ const desenrolar = entrada => {
       msg.viewOnceMessageV2?.message ||
       msg.viewOnceMessageV2Extension?.message ||
       msg.documentWithCaptionMessage?.message ||
+      msg.associatedChildMessage?.message ||
+      msg.editedMessage?.message ||
       msg.groupStatusMessageV2?.message ||
       msg.groupStatusMessage?.message
     if (!dentro) break
@@ -67,8 +69,8 @@ dylan.setCommand({
 
     const legenda = String(ctx.q || '').trim().slice(0, 4096)
     const citada = obterCitada(ctx)
-    // Aceita mensagem respondida, status de grupo citado e mídia com comando na legenda.
-    const origem = citada || desenrolar(ctx.mensagem || ctx.info?.message || {})
+    // Mensagens respondidas têm prioridade, inclusive status de grupo citado.
+    const origem = citada || desenrolar(ctx.info?.message || ctx.mensagem || {})
     const midia = origem?.imageMessage
       ? { tipo: 'image', fonte: origem.imageMessage, chave: 'imageMessage' }
       : origem?.videoMessage
@@ -86,11 +88,14 @@ dylan.setCommand({
     const baileysDisponivel = (
       typeof ctx.generateWAMessageFromContent === 'function' &&
       typeof ctx.tokito?.relayMessage === 'function' &&
-      (!midia || typeof ctx.prepareWAMessageMedia === 'function')
+      (!midia || (typeof ctx.prepareWAMessageMedia === 'function' &&
+        typeof ctx.tokito?.waUploadToServer === 'function' &&
+        typeof ctx.getFileBuffer === 'function'))
     )
     if (!baileysDisponivel)
       return ctx.reply('⚠️ A conexão atual não oferece suporte ao envio de Status de Grupo.')
 
+    let etapa = 'inicialização'
     try {
       await ctx.reagir(ctx.from, '⏳').catch(() => {})
 
@@ -111,37 +116,54 @@ dylan.setCommand({
       }
 
       if (midia) {
+        etapa = 'baixar mídia respondida'
         const buffer = await ctx.getFileBuffer(midia.fonte, midia.tipo)
-        if (!Buffer.isBuffer(buffer) || !buffer.length)
-          throw new Error('O conteúdo da mídia citada não pôde ser lido.')
+        if (!Buffer.isBuffer(buffer) || buffer.length === 0)
+          throw new Error('Mídia citada sem bytes disponíveis.')
 
-        const entrada = midia.tipo === 'audio'
-          ? {
-              audio: buffer,
-              mimetype: midia.fonte.mimetype || 'audio/ogg; codecs=opus',
-              ptt: midia.fonte.ptt === true
-            }
-          : { [midia.tipo]: buffer }
+        etapa = 'preparar e reenviar mídia'
+        const origem = midia.fonte
+        const segundos = Number(origem.seconds || 0)
+        const temSegundos = Number.isFinite(segundos) && segundos > 0
+        const mime = String(origem.mimetype ||
+          (midia.tipo === 'audio' ? 'audio/ogg; codecs=opus' :
+            midia.tipo === 'video' ? 'video/mp4' : 'image/jpeg'))
+        const entrada = {
+          [midia.tipo]: buffer,
+          mimetype: mime,
+          ...(temSegundos ? { seconds: segundos } : {}),
+          ...(midia.tipo === 'audio' ? { ptt: origem.ptt === true } : {}),
+          ...(midia.tipo === 'video' ? {
+            gifPlayback: origem.gifPlayback === true
+          } : {}),
+          ...((midia.tipo === 'video' || midia.tipo === 'image') &&
+            origem.jpegThumbnail ? { jpegThumbnail: origem.jpegThumbnail } : {}),
+          ...((midia.tipo === 'video' || midia.tipo === 'image') &&
+            Number(origem.width) > 0 ? { width: Number(origem.width) } : {}),
+          ...((midia.tipo === 'video' || midia.tipo === 'image') &&
+            Number(origem.height) > 0 ? { height: Number(origem.height) } : {})
+        }
 
-        const preparada = await ctx.prepareWAMessageMedia(
-          entrada,
-          { upload: ctx.tokito.waUploadToServer, logger: ctx.tokito.logger }
-        )
-        if (!preparada?.[midia.chave])
-          throw new Error('Não foi possível preparar a mídia para envio.')
+        // Para publicar em status, a mídia deve ser baixada e enviada com
+        // uma nova mediaKey; reutilizar a URL criptografada do citado não serve.
+        const preparada = await ctx.prepareWAMessageMedia(entrada, {
+          upload: ctx.tokito.waUploadToServer,
+          logger: ctx.tokito.logger
+        })
+        if (!preparada?.[midia.chave]?.mediaKey ||
+            !preparada?.[midia.chave]?.directPath)
+          throw new Error('O WhatsApp não retornou mediaKey/directPath da mídia.')
 
         interna[midia.chave] = {
           ...preparada[midia.chave],
           contextInfo: contexto,
-          ...(midia.tipo === 'audio'
-            ? {
-                mimetype: midia.fonte.mimetype || preparada[midia.chave].mimetype || 'audio/ogg; codecs=opus',
-                ptt: midia.fonte.ptt === true
-              }
-            : {
-                caption: legenda || midia.fonte.caption || '',
-                ...(midia.fonte.mimetype ? { mimetype: midia.fonte.mimetype } : {})
-              })
+          ...(midia.tipo === 'audio' ? {
+            mimetype: mime,
+            ptt: origem.ptt === true
+          } : {
+            mimetype: mime,
+            caption: legenda || origem.caption || ''
+          })
         }
       } else {
         interna.extendedTextMessage = {
@@ -153,6 +175,7 @@ dylan.setCommand({
       // O envelope groupStatusMessageV2 identifica um STATUS, não
       // uma mensagem comum enviada ao chat. A Stone WPP do Tokito
       // já inclui esse envelope no protocolo WhatsApp.
+      etapa = 'montar status de grupo'
       const msg = ctx.generateWAMessageFromContent(ctx.from, {
         messageContextInfo: { messageSecret: segredo },
         groupStatusMessageV2: { message: interna }
@@ -161,8 +184,19 @@ dylan.setCommand({
       if (!msg.message?.groupStatusMessageV2)
         throw new Error('O protocolo não gerou groupStatusMessageV2.')
 
+      etapa = 'enviar status ao WhatsApp'
+      // A Stone identifica o mediatype de mensagens comuns, mas o
+      // groupStatusMessageV2 envolve a mídia em outro nível. Informamos
+      // explicitamente o tipo no stanza do envio ao grupo.
+      const atributos = midia?.tipo === 'audio'
+        ? { type: 'text' }
+        : midia?.tipo
+          ? { type: 'media', mediatype: midia.tipo === 'video' && origem?.videoMessage?.gifPlayback
+            ? 'gif' : midia.tipo }
+          : undefined
       await ctx.tokito.relayMessage(ctx.from, msg.message, {
-        messageId: msg.key.id
+        messageId: msg.key.id,
+        ...(atributos ? { additionalAttributes: atributos } : {})
       })
 
       await ctx.reagir(ctx.from, '✅').catch(() => {})
@@ -171,11 +205,11 @@ dylan.setCommand({
         '> 💚 ׄ ( ᴘᴜʙʟɪᴄᴀᴄ̧ᴀ̃ᴏ ᴇɴᴠɪᴀᴅᴀ; ᴄᴏɴғɪʀᴀ ᴏ sᴛᴀᴛᴜs ɴᴏ ɢʀᴜᴘᴏ. )'
       )
     } catch (error) {
-      console.log('[TOKITO • STATUS DE GRUPO]', error?.message || error)
+      console.log('[TOKITO • STATUS DE GRUPO]', etapa, error?.stack || error?.message || error)
       await ctx.reagir(ctx.from, '❌').catch(() => {})
       return ctx.reply(
         '- ❌ \`𝙵𝙰𝙻𝙷𝙰 𝙽𝙾 𝚂𝚃𝙰𝚃𝚄𝚂\`\n\n' +
-        '> ⚠️ ׄ ( ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴘᴜʙʟɪᴄᴀʀ ᴏ sᴛᴀᴛᴜs ᴅᴏ ɢʀᴜᴘᴏ. )'
+        '> ⚠️ ׄ ( ғᴀʟʜᴀ ᴀᴏ ' + etapa + '. ᴄᴏɴғɪʀᴀ ᴏ ʟᴏɢ ᴅᴏ ʙᴏᴛ. )'
       )
     }
   }
