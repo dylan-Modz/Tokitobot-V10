@@ -33,7 +33,6 @@ const fs = require('fs')
 const path = require('path')
 const runtimeSub = require('../../sub/runtime.js')
 const h = require('./base')
-const auto = require('../../sistemas/autolike')
 const dylan = require('../../database/lib/comandos')
 
 const ARQUIVO = runtimeSub.isSubBot
@@ -136,39 +135,14 @@ const headers = ctx => ({
 
 dylan.setCommand({
   nome: 'likes',
-  comandos: ['likes','autolike'],
+  comandos: ['likes'],
   categoria: 'freefire',
   info: {
-    descricao: 'Likes imediatos e Auto Like diário do Free Fire.',
-    uso: 'likes UID | autolike UID | autolike del UID'
+    descricao: 'Enviar likes manualmente para um UID do Free Fire.',
+    uso: 'likes UID'
   },
   async executar(ctx) {
     try {
-      if (ctx.command === 'autolike') {
-        const p = String(ctx.q || '').trim().split(/\s+/)
-        if (p[0]?.toLowerCase() === 'del') {
-          const uid = String(p[1] || '').replace(/\D/g,'')
-          if (!uid) return ctx.reply(ctx.mess.padraoUso({
-            emoji:'❤️',titulo:'REMOVER AUTO LIKE',uso:ctx.prefix+'autolike del UID',
-            descricao:'Informe o UID que deseja remover do Auto Like.'
-          }))
-          return ctx.reply(auto.remover(ctx.sender,uid)
-            ? ctx.mess.padraoSucesso({emoji:'❤️',titulo:'AUTO LIKE REMOVIDO',descricao:'O UID '+uid+' foi removido do Auto Like.'})
-            : ctx.mess.padraoAviso({emoji:'❤️',titulo:'UID NÃO CADASTRADO',descricao:'Esse UID não estava no seu Auto Like.'}))
-        }
-        const uid = String(p[0] || '').replace(/\D/g,'')
-        if (!uid) return ctx.reply(ctx.mess.padraoUso({
-          emoji:'❤️',titulo:'AUTO LIKE',uso:ctx.prefix+'autolike UID',
-          descricao:'Informe o UID que deseja cadastrar no Auto Like.'
-        }))
-        auto.registrar(ctx.sender,ctx.from,uid)
-        auto.processar().catch(()=>{})
-        return ctx.reply(ctx.mess.padraoSucesso({
-          emoji:'❤️',titulo:'AUTO LIKE ATIVADO',
-          descricao:'Auto Like ativado para o UID '+uid+'.',
-          detalhe:'O sistema tenta enviar uma vez por dia e não duplica após reiniciar.'
-        }))
-      }
       const player_id = String(ctx.q || '').trim()
       if (!/^\d{5,24}$/.test(player_id)) return ctx.reply(ctx.mess.ffLikesUso(ctx.prefix))
       await ctx.reagir(ctx.from,'❤️')
