@@ -224,7 +224,6 @@ mentionedJid: mentions,
 })
 
 const UPDATE_CHECK_MS = 60 * 1000
-const UPDATE_NOTICE_IMAGE = 'https://raw.githubusercontent.com/dylan-Modz/upload/main/midias/imagens/c3i4u.jpg'
 
 const textoAvisoUpdate = check => {
 const remoto = check?.remote || {}
@@ -252,47 +251,13 @@ lista + obrigatoria,
 }
 
 // Usa os mesmos quick_reply nativos do comando Play e do aviso de comando inválido.
-const enviarAvisoUpdate = async (tokito, dono, texto, preferirSimples = false) => {
-const imagem = { url: UPDATE_NOTICE_IMAGE }
-if (nescessario.botoes !== false && !preferirSimples) {
-try {
-if (!tokito.user?.id || typeof tokito.waUploadToServer !== 'function' || typeof tokito.relayMessage !== 'function') {
-throw new Error('Botões interativos indisponíveis nesta conexão.')
-}
-const midia = await prepareWAMessageMedia({ image: imagem }, { upload: tokito.waUploadToServer })
-if (!midia?.imageMessage) throw new Error('Imagem do aviso indisponível.')
-const interactive = proto.Message.InteractiveMessage
-const botoes = [
-{ texto: '⬆️﹚𝐀𝐓𝐔𝐀𝐋𝐈𝐙𝐀𝐑﹙⬆️', id: `${prefix}update start` },
-{ texto: '🔎﹚𝐂𝐇𝐄𝐂𝐊﹙🔎', id: `${prefix}update check` },
-{ texto: '📋﹚𝐈𝐍𝐅𝐎﹙📋', id: `${prefix}update info` }
-].map(botao => ({
-name: 'quick_reply',
-buttonParamsJson: JSON.stringify({ display_text: botao.texto, id: botao.id })
-}))
-const mensagem = generateWAMessageFromContent(dono, {
-interactiveMessage: interactive.create({
-header: interactive.Header.create({ hasMediaAttachment: true, imageMessage: midia.imageMessage }),
-body: interactive.Body.create({ text: texto }),
-footer: interactive.Footer.create({ text: '' }),
-nativeFlowMessage: interactive.NativeFlowMessage.create({ buttons: botoes })
-})
-}, { userJid: tokito.user.id })
-await tokito.relayMessage(dono, mensagem.message, { messageId: mensagem.key.id })
+// O WhatsApp pode aceitar um card interativo sem exibi-lo. O aviso de versão
+// é uma mensagem de texto simples para não depender de mídia ou botões.
+// O monitor registra a tentativa; a entrega real depende do WhatsApp.
+const enviarAvisoUpdate = async (tokito, dono, texto) => {
+const enviada = await tokito.sendMessage(dono, { text: texto })
+if (!enviada) throw new Error('O WhatsApp não aceitou o envio do aviso em texto.')
 return true
-} catch (error) {
-aviso('Aviso interativo de atualização indisponível: ' + (error?.message || error))
-}
-}
-// Sem botões, ou se o WhatsApp recusar o interativo: envia a mesma imagem e legenda.
-try {
-const enviada = await tokito.sendMessage(dono, { image: imagem, caption: texto })
-if (enviada) return true
-} catch (error) {
-aviso('Imagem do aviso de atualização indisponível: ' + (error?.message || error))
-}
-// A ausência da imagem nunca pode impedir a entrega do aviso ao dono.
-return Boolean(await tokito.sendMessage(dono, { text: texto }))
 }
 
 const registrarFalhaAvisoUpdate = mensagem => {
@@ -336,19 +301,14 @@ registrarFalhaAvisoUpdate('Número do dono inválido ou não configurado em owne
 return false
 }
 if (!dadosSistema.deveAvisarUpdate(version, dono)) return false
-const estadoAviso = dadosSistema.state()
-const reenvio = String(estadoAviso.lastNotifiedPrincipalVersion || '') === version &&
-String(estadoAviso.lastNotifiedPrincipalJid || '') === dono &&
-Number(estadoAviso.lastNotifiedPrincipalAttempts || 0) > 0
-// Primeira tentativa: imagem e quick_reply. Se a mensagem não for exibida,
-// uma segunda tentativa com mídia simples é enviada após cinco minutos.
-const enviada = await enviarAvisoUpdate(tokito, dono, textoAvisoUpdate(check), reenvio)
+// Texto simples tem maior compatibilidade do que quick_reply e aviso por imagem.
+const enviada = await enviarAvisoUpdate(tokito, dono, textoAvisoUpdate(check))
 if (!enviada) throw new Error('O WhatsApp não confirmou o envio do aviso.')
 const salvo = dadosSistema.registrarAvisoUpdate(version, dono)
 global.__TOKITO_UPDATE_NOTICE_LAST_SENT__ = {
 version, at: new Date().toISOString(),
 attempt: salvo.lastNotifiedPrincipalAttempts || 1,
-method: reenvio ? 'imagem-simples' : 'interativo'
+method: 'texto'
 }
 sucesso('Aviso de atualização ' + version + ' enviado ao privado do dono (tentativa ' + (salvo.lastNotifiedPrincipalAttempts || 1) + ').')
 return true
