@@ -1,6 +1,6 @@
 {
   "name": "TokitoBot-Md",
-  "version": "10.2.70",
+  "version": "10.2.71",
   "description": "Qualquer dúvida chama no WhatsApp: +55 11 97543-1163",
   "main": "tokito.js",
   "scripts": {
@@ -33,7 +33,7 @@
     "qrcode-terminal": "^0.12.0",
     "uuid": "^9.0.1",
     "yt-search": "^2.13.1",
-    "@stone-wpp/ofc": "git+https://github.com/dylan-Modz/stone-wpp-ofc.git#639d3f894ca858f9c4a39a62c574095ea90a9dc0"
+    "@stone-wpp/ofc": "1.0.4"
   },
   "repository": {
     "type": "git",

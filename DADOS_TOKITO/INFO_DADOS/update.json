@@ -4,22 +4,37 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-30T20:19:45.256Z",
+  "publishedAt": "2026-10-30T20:21:22.868Z",
   "changelog": [
-    "[Melhoria] remove(status): retirar comando de status de grupo sem uso",
-    "A versão 10.2.71 já está disponível para atualização.",
-    "Mencstatus removido"
+    "[Status de Grupo] O comando mencstatus e seus atalhos statusgp, statusgrupo e testestatus foram removidos do Tokito Bot V10.",
+    "[Motivo] Estávamos tentando corrigir um problema na publicação de status de grupo, mas o recurso não ficou confiável. Por isso, decidi retirar o comando e não utilizá-lo mais no bot.",
+    "[Menus] A opção mencstatus foi retirada do menu de administradores; o comando status normal continua disponível.",
+    "[Stone WPP] As alterações experimentais na biblioteca foram revertidas; dependência restaurada para @stone-wpp/ofc 1.0.4.",
+    "[Atualização] Remoção incremental: os arquivos e dados pessoais dos usuários permanecem protegidos."
   ],
   "delete": [
     "DADOS_TOKITO/plugins/admin/mencstatus.js"
   ],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "remove(status): retirar comando de status de grupo sem uso",
-  "notice": "A versão 10.2.71 já está disponível para atualização.",
+  "type": "Remoção",
+  "title": "Remoção do comando Status de Grupo",
+  "notice": "Eu estava tentando resolver um problema no Status de Grupo, mas o recurso não funcionou como esperado. Decidi remover o comando mencstatus e seus atalhos do Tokito Bot, pois não irei mais utilizá-lo.",
   "required": false,
   "minimumVersion": "10.0.0",
-  "files": [],
+  "files": [
+    {
+      "path": "package.json",
+      "gitSha": "ea84857d44a874ac79d8077956eba05495794a18",
+      "size": 1166,
+      "sha256": ""
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "gitSha": "cf3559600d7fb4628c0fb59523a38a9e72696af6",
+      "size": 78838,
+      "sha256": ""
+    }
+  ],
   "releases": [
     {
       "version": "10.1.49",
@@ -4575,28 +4590,45 @@
       "version": "10.2.71",
       "fromVersion": "10.2.70",
       "channel": "stable",
-      "type": "Melhoria",
-      "title": "remove(status): retirar comando de status de grupo sem uso",
-      "notice": "A versão 10.2.71 já está disponível para atualização.",
+      "type": "Remoção",
+      "title": "Remoção do comando Status de Grupo",
+      "notice": "Eu estava tentando resolver um problema no Status de Grupo, mas o recurso não funcionou como esperado. Decidi remover o comando mencstatus e seus atalhos do Tokito Bot, pois não irei mais utilizá-lo.",
       "changelog": [
-        "Mencstatus removido"
+        "[Status de Grupo] O comando mencstatus e seus atalhos statusgp, statusgrupo e testestatus foram removidos do Tokito Bot V10.",
+        "[Motivo] Estávamos tentando corrigir um problema na publicação de status de grupo, mas o recurso não ficou confiável. Por isso, decidi retirar o comando e não utilizá-lo mais no bot.",
+        "[Menus] A opção mencstatus foi retirada do menu de administradores; o comando status normal continua disponível.",
+        "[Stone WPP] As alterações experimentais na biblioteca foram revertidas; dependência restaurada para @stone-wpp/ofc 1.0.4.",
+        "[Atualização] Remoção incremental: os arquivos e dados pessoais dos usuários permanecem protegidos."
       ],
-      "files": [],
+      "files": [
+        {
+          "path": "package.json",
+          "gitSha": "ea84857d44a874ac79d8077956eba05495794a18",
+          "size": 1166,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "cf3559600d7fb4628c0fb59523a38a9e72696af6",
+          "size": 78838,
+          "sha256": ""
+        }
+      ],
       "delete": [
         "DADOS_TOKITO/plugins/admin/mencstatus.js"
       ],
       "required": false,
-      "publishedAt": "2026-10-30T20:19:45.256Z"
+      "publishedAt": "2026-10-30T20:21:22.868Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.69",
+  "fromVersion": "10.2.70",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.70"
+  "publicVersion": "10.2.71"
 }
