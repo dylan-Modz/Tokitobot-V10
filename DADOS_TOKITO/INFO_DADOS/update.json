@@ -4,42 +4,45 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-30T19:10:45.892Z",
+  "publishedAt": "2026-10-30T19:10:45.891Z",
   "changelog": [
-    "[Melhoria] chore(release): Tokito Bot V10.2.67 com comando infoff",
-    "A versão 10.2.67 já está disponível para atualização.",
-    "Menus atualizado",
-    "Infoff atualizado",
-    "Menu atualizado",
-    "Package atualizado"
+    "[Free Fire] Novo comando infoff UID para consultar jogadores usando o token Tokito da conta já configurado.",
+    "[Imagens] Envia o banner completo da conta como foto do WhatsApp, com as informações na legenda e sem link visível.",
+    "[Resultado] Exibe nick, UID, região, nível, likes, ranks, pet e datas disponíveis, sem exibir versão do Free Fire.",
+    "[Menus] infoff UID adicionado ao menu Free Fire e como atalho no menu principal.",
+    "[Segurança] Valida e baixa o PNG temporário; não expõe o token na mensagem."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "chore(release): Tokito Bot V10.2.67 com comando infoff",
-  "notice": "A versão 10.2.67 já está disponível para atualização.",
+  "type": "Atualização",
+  "title": "Novo comando Info FF com banner completo",
+  "notice": "Tokito Bot V10.2.67: use infoff UID para consultar jogador e receber imagem completa do perfil!",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "754344fb7750a14dd232be4404c00c8412f94f4da32a3b24dbeb17146152eaab",
-      "size": 78898
+      "size": 78898,
+      "gitSha": "22740331899f413028cc1082cccdd92d36e84375"
     },
     {
       "path": "DADOS_TOKITO/plugins/freefire/infoff.js",
       "sha256": "ffd5461c4e70dfc168e3b15de2ee5fded8f9075552635423d5537b36c761d741",
-      "size": 6884
+      "size": 6884,
+      "gitSha": "790ca2b2e5e16d9f9222f25252fa931b9b3f27bf"
     },
     {
       "path": "DADOS_TOKITO/plugins/menus/menu.js",
       "sha256": "1cf84292341e5d0020f54d6c4a1f110ad19f565497e3cdaab1721c93da403808",
-      "size": 6621
+      "size": 6621,
+      "gitSha": "9b610456e429e839af62090c4dc56511e284b1c0"
     },
     {
       "path": "package.json",
       "sha256": "1d3797dd3f756e0703180354571075accd3708c51e53ae394a7a1247393654c8",
-      "size": 1166
+      "size": 1166,
+      "gitSha": "c8a5cc0db78b19c96464da737f979e03e84dbe45"
     }
   ],
   "releases": [
@@ -4760,35 +4763,40 @@
       "version": "10.2.67",
       "fromVersion": "10.2.66",
       "channel": "stable",
-      "type": "Melhoria",
-      "title": "chore(release): Tokito Bot V10.2.67 com comando infoff",
-      "notice": "A versão 10.2.67 já está disponível para atualização.",
+      "type": "Atualização",
+      "title": "Novo comando Info FF com banner completo",
+      "notice": "Tokito Bot V10.2.67: use infoff UID para consultar jogador e receber imagem completa do perfil!",
       "changelog": [
-        "Menus atualizado",
-        "Infoff atualizado",
-        "Menu atualizado",
-        "Package atualizado"
+        "[Free Fire] Novo comando infoff UID para consultar jogadores usando o token Tokito da conta já configurado.",
+        "[Imagens] Envia o banner completo da conta como foto do WhatsApp, com as informações na legenda e sem link visível.",
+        "[Resultado] Exibe nick, UID, região, nível, likes, ranks, pet e datas disponíveis, sem exibir versão do Free Fire.",
+        "[Menus] infoff UID adicionado ao menu Free Fire e como atalho no menu principal.",
+        "[Segurança] Valida e baixa o PNG temporário; não expõe o token na mensagem."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/mensagens/menus.js",
           "sha256": "754344fb7750a14dd232be4404c00c8412f94f4da32a3b24dbeb17146152eaab",
-          "size": 78898
+          "size": 78898,
+          "gitSha": "22740331899f413028cc1082cccdd92d36e84375"
         },
         {
           "path": "DADOS_TOKITO/plugins/freefire/infoff.js",
           "sha256": "ffd5461c4e70dfc168e3b15de2ee5fded8f9075552635423d5537b36c761d741",
-          "size": 6884
+          "size": 6884,
+          "gitSha": "790ca2b2e5e16d9f9222f25252fa931b9b3f27bf"
         },
         {
           "path": "DADOS_TOKITO/plugins/menus/menu.js",
           "sha256": "1cf84292341e5d0020f54d6c4a1f110ad19f565497e3cdaab1721c93da403808",
-          "size": 6621
+          "size": 6621,
+          "gitSha": "9b610456e429e839af62090c4dc56511e284b1c0"
         },
         {
           "path": "package.json",
           "sha256": "1d3797dd3f756e0703180354571075accd3708c51e53ae394a7a1247393654c8",
-          "size": 1166
+          "size": 1166,
+          "gitSha": "c8a5cc0db78b19c96464da737f979e03e84dbe45"
         }
       ],
       "delete": [],
@@ -4799,11 +4807,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.65",
+  "fromVersion": "10.2.66",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.66"
+  "publicVersion": "10.2.67"
 }
