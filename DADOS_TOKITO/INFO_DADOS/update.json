@@ -1,37 +1,35 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.69",
+  "version": "10.2.70",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-30T19:53:37.633Z",
+  "publishedAt": "2026-10-30T19:59:42.889Z",
   "changelog": [
-    "[Status de Grupo] mencstatus agora aceita áudio e vídeo respondidos, incluindo mídia citada de groupStatusMessageV2.",
-    "[Protocolo] Publicação enviada em envelope groupStatusMessageV2 com atribuição GROUP_STATUS e JID da conta conectada.",
-    "[Mídia] Mantém formato original e legenda; também aceita vídeo ou foto com comando na legenda.",
-    "[Comandos] Novo alias statusgrupo, além de mencstatus, statusgp e testestatus.",
-    "[Confirmação] Mensagem de envio não é confundida com confirmação de exibição pelo WhatsApp.",
-    "[Versão] Arquivos incrementais da 10.2.68 para a 10.2.69."
+    "[Avisos] Notificações de atualização agora são mensagens de texto normais para evitar cards ou botões invisíveis no WhatsApp.",
+    "[Compatibilidade] Aviso permanece no privado do dono configurado e o monitor continua verificando novas versões automaticamente.",
+    "[Status de Grupo] Mantidas as melhorias experimentais de áudio e vídeo da versão 10.2.69.",
+    "[Atualização] Publicação incremental preservando arquivos e banco de dados do usuário."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Status de Grupo com áudio e vídeo",
-  "notice": "Tokito Bot V10.2.69: melhorias no status de grupo com áudio e vídeo (publicação experimental).",
+  "type": "Correção",
+  "title": "Aviso automático de atualização no WhatsApp",
+  "notice": "Tokito Bot V10.2.70: corrigido aviso de atualizações para envio confiável em texto.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
-      "sha256": "768371d7e2e908be3c6820e1f6c14d2d373abda17f0cdf23ce0a52b631244aff",
-      "size": 6753,
-      "gitSha": "b38ec523744af8c26a5649fd0e4309f5066cb4c4"
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "32cc19d93e889e0abead3711c1f537ad98f3a994755edb12cfcb4c145068a00e",
+      "size": 45367,
+      "gitSha": "95e6c9b6baee7b47f29736927adefd77db666260"
     },
     {
       "path": "package.json",
-      "sha256": "b8435c612f30e75942faa21dae683ca5bff3b76077aade022651c8145977b890",
+      "sha256": "f6ce2b275ec67d1271c96e1c7e3faaf03ec457164e3fdf18d6e74bbfb17f934d",
       "size": 1166,
-      "gitSha": "d76e91f874b895ca18d4a378b0b7bd4d90e0335c"
+      "gitSha": "5ca84b27dfc45d7f06425f59ed1cdf0ea35c9aaf"
     }
   ],
   "releases": [
@@ -4768,16 +4766,47 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-30T19:53:37.633Z"
+    },
+    {
+      "version": "10.2.70",
+      "fromVersion": "10.2.69",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Aviso automático de atualização no WhatsApp",
+      "notice": "Tokito Bot V10.2.70: corrigido aviso de atualizações para envio confiável em texto.",
+      "changelog": [
+        "[Avisos] Notificações de atualização agora são mensagens de texto normais para evitar cards ou botões invisíveis no WhatsApp.",
+        "[Compatibilidade] Aviso permanece no privado do dono configurado e o monitor continua verificando novas versões automaticamente.",
+        "[Status de Grupo] Mantidas as melhorias experimentais de áudio e vídeo da versão 10.2.69.",
+        "[Atualização] Publicação incremental preservando arquivos e banco de dados do usuário."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "32cc19d93e889e0abead3711c1f537ad98f3a994755edb12cfcb4c145068a00e",
+          "size": 45367,
+          "gitSha": "95e6c9b6baee7b47f29736927adefd77db666260"
+        },
+        {
+          "path": "package.json",
+          "sha256": "f6ce2b275ec67d1271c96e1c7e3faaf03ec457164e3fdf18d6e74bbfb17f934d",
+          "size": 1166,
+          "gitSha": "5ca84b27dfc45d7f06425f59ed1cdf0ea35c9aaf"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-30T19:59:42.889Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.68",
+  "fromVersion": "10.2.69",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.69"
+  "publicVersion": "10.2.70"
 }
