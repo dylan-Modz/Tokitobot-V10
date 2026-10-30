@@ -1,71 +1,39 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.65",
+  "version": "10.2.66",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-28T21:08:54.263Z",
+  "publishedAt": "2026-10-30T16:20:01.529Z",
   "changelog": [
-    "[Atualização] Corrigida a falha ao saltar versões antigas que ainda bloqueiam a imagem fotomenu.png.",
-    "[Compatibilidade] Arquivos inexistentes foram removidos dos registros antigos de atualização para evitar falhas de download.",
-    "[Menu] A fotomenu.png oficial pode ser instalada via reparo depois da atualização do sistema, sem desbloquear outras imagens.",
-    "[Diagnóstico] Falhas futuras passam a mostrar causa segura e etapa pelo comando update diag."
+    "[Melhoria] remove(freefire): excluir rotina agendada de auto like (15 minutos)",
+    "A versão 10.2.66 já está disponível para atualização.",
+    "Menus atualizado",
+    "Likes atualizado",
+    "Autolike removido"
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/sistemas/autolike.js"
+  ],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Correção de falhas em atualizações antigas e reparo do menu",
-  "notice": "Tokito Bot V10.2.65: correção do failure ao atualizar versões antigas, com reparo seguro da foto do menu.",
+  "type": "Melhoria",
+  "title": "remove(freefire): excluir rotina agendada de auto like (15 minutos)",
+  "notice": "A versão 10.2.66 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/dono/update.js",
-      "sha256": "",
-      "size": 8272,
-      "gitSha": "e3eadaeccae5f68de22c2b2bafef83e7ece61a0d"
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "3aa99212076cc56ad428ea7df030352e876cae95ecfb3015a6cafa84f76511c4",
+      "size": 78851
     },
     {
-      "path": "package.json",
-      "sha256": "",
-      "size": 1166,
-      "gitSha": "0e6fb51b37b788019cc5d0fba8d3d7bf17a5694d"
-    },
-    {
-      "path": "DADOS_TOKITO/INFO_DADOS/LOGOS/fotomenu.png",
-      "sha256": "5085e82fe47959cdc981f9aed5b028c9e79a89c966cc873c56114b94067ff49d",
-      "size": 2104769,
-      "gitSha": "9d62b7399c66964c471de9b797ae45e798fc4ef7"
+      "path": "DADOS_TOKITO/plugins/freefire/likes.js",
+      "sha256": "d703917da22afcf349737d3d32e0f9c6def5fa8ae79ad1cd54af6534a2a18c66",
+      "size": 10283
     }
   ],
   "releases": [
-    {
-      "version": "10.1.42",
-      "fromVersion": "10.1.41",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Novo aviso de erro da API",
-      "notice": "A versão 10.1.42 já está disponível para atualização.",
-      "changelog": [
-        "Mensagem de erro geral da API redesenhada com orientações mais claras para o usuário.",
-        "Novo aviso explica três alternativas: conta secundária, outro plano com Tokito ativo ou contato com o suporte da API."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-05T16:42:00.000Z"
-    },
     {
       "version": "10.1.43",
       "fromVersion": "10.1.42",
@@ -4760,6 +4728,36 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-28T21:08:54.263Z"
+    },
+    {
+      "version": "10.2.66",
+      "fromVersion": "10.2.65",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "remove(freefire): excluir rotina agendada de auto like (15 minutos)",
+      "notice": "A versão 10.2.66 já está disponível para atualização.",
+      "changelog": [
+        "Menus atualizado",
+        "Likes atualizado",
+        "Autolike removido"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "3aa99212076cc56ad428ea7df030352e876cae95ecfb3015a6cafa84f76511c4",
+          "size": 78851
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/likes.js",
+          "sha256": "d703917da22afcf349737d3d32e0f9c6def5fa8ae79ad1cd54af6534a2a18c66",
+          "size": 10283
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/sistemas/autolike.js"
+      ],
+      "required": false,
+      "publishedAt": "2026-10-30T16:20:01.529Z"
     }
   ],
   "mode": "incremental",
