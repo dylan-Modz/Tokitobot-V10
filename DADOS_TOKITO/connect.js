@@ -227,17 +227,22 @@ const UPDATE_CHECK_MS = 60 * 1000
 
 const textoAvisoUpdate = check => {
 const remoto = check?.remote || {}
+const reparo = check?.repair === true
 const mudancas = Array.isArray(remoto.changelog) ? remoto.changelog.slice(0, 10) : []
 const lista = mudancas.length
 ? mudancas.map((item, index) => '> ' + (index + 1) + '. ׄ ( ' + String(item || '').trim() + ' )').join('\n')
 : '> • ׄ ( Melhorias, correções e novidades do Tokito. )'
 const obrigatoria = remoto.required === true ? '\n\n> ⚠️ ׄ ( ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ɪᴍᴘᴏʀᴛᴀɴᴛᴇ — ʀᴇᴄᴏᴍᴇɴᴅᴀᴅᴏ ᴀᴛᴜᴀʟɪᴢᴀʀ. )' : ''
 return [
-'- 🚀 *𝙽𝙾𝚅𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻*',
+reparo
+  ? '- 🛠️ *𝚁𝙴𝙿𝙰𝚁𝙾 𝙳𝙾 𝚃𝙾𝙺𝙸𝚃𝙾 𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻*'
+  : '- 🚀 *𝙽𝙾𝚅𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻*',
 '',
 '> 🤖 ׄ ( ᴛᴏᴋɪᴛᴏ ʙᴏᴛ ᴠ10 )',
 '> 📦 ׄ ( sᴜᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (check?.local?.publicVersion || check?.local?.version || '—') + ' )',
-'> ✨ ׄ ( ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (remoto.publicVersion || remoto.version || '—') + ' )',
+reparo
+  ? '> 🛠️ ׄ ( ᴄᴏʀʀᴇᴄ̧ᴀ̃ᴏ ᴅᴏs ᴀʀǫᴜɪᴠᴏs ɴᴀ ᴍᴇsᴍᴀ ᴠᴇʀsᴀ̃ᴏ. )'
+  : '> ✨ ׄ ( ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (remoto.publicVersion || remoto.version || '—') + ' )',
 '> 📌 ׄ ( ' + String(remoto.title || remoto.notice || 'Nova atualização disponível').trim() + ' )',
 '',
 '- 📝 *𝙾 𝚀𝚄𝙴 𝙼𝚄𝙳𝙾𝚄*',
@@ -290,27 +295,34 @@ registrarFalhaAvisoUpdate(check?.error || 'Falha ao verificar novas versões.')
 return false
 }
 global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ = ''
-// Atualização de arquivos da versão já instalada (reparo) não é uma versão nova.
+// Arquivos corrigidos na mesma versão também merecem aviso.
+// O fingerprint identifica o reparo específico e evita notificações em loop.
 if (!check.available || check.remote?.notify === false) return false
 const version = String(check.remote?.version || '').trim()
 const installed = String(check.local?.version || '').trim()
-if (!version || version === installed) return false
+const reparo = check.repair === true
+if (!version || (version === installed && !reparo)) return false
+const assinatura = reparo
+  ? (check.pendingFiles || []).map(item => item.gitSha || item.sha256 || '').join(':') +
+    '|' + (check.pendingDelete || []).map(item => item.path || '').join(':')
+  : ''
+const chaveAviso = reparo ? version + '@' + assinatura : version
 const dono = normalizarJid(ownerNumber)
 if (!dono || !dono.endsWith('@s.whatsapp.net')) {
 registrarFalhaAvisoUpdate('Número do dono inválido ou não configurado em ownerNumber.')
 return false
 }
-if (!dadosSistema.deveAvisarUpdate(version, dono)) return false
+if (!dadosSistema.deveAvisarUpdate(chaveAviso, dono)) return false
 // Texto simples tem maior compatibilidade do que quick_reply e aviso por imagem.
 const enviada = await enviarAvisoUpdate(tokito, dono, textoAvisoUpdate(check))
 if (!enviada) throw new Error('O WhatsApp não confirmou o envio do aviso.')
-const salvo = dadosSistema.registrarAvisoUpdate(version, dono)
+const salvo = dadosSistema.registrarAvisoUpdate(chaveAviso, dono)
 global.__TOKITO_UPDATE_NOTICE_LAST_SENT__ = {
-version, at: new Date().toISOString(),
+version, repair: reparo, at: new Date().toISOString(),
 attempt: salvo.lastNotifiedPrincipalAttempts || 1,
 method: 'texto'
 }
-sucesso('Aviso de atualização ' + version + ' enviado ao privado do dono (tentativa ' + (salvo.lastNotifiedPrincipalAttempts || 1) + ').')
+sucesso('Aviso de ' + (reparo ? 'reparo' : 'atualização') + ' ' + version + ' enviado ao privado do dono (tentativa ' + (salvo.lastNotifiedPrincipalAttempts || 1) + ').')
 return true
 } catch (error) {
 registrarFalhaAvisoUpdate(error?.message || error)
