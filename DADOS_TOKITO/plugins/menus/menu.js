@@ -93,8 +93,13 @@ id: `${prefix}menucoins`
 },
 {
 title: '🧊⃞ ᴍᴇɴᴜ ғʀᴇᴇ ғɪʀᴇ ⃞🧊',
-description: 'sᴀʟᴀs ғғ, ʟɪᴋᴇs ɪᴍᴇᴅɪᴀᴛᴏs ᴇ ᴀᴜᴛᴏ ʟɪᴋᴇ.',
+description: 'ᴄᴏɴsᴜʟᴛᴀ ɪɴғᴏ ғғ, ʟɪᴋᴇs ᴍᴀɴᴜᴀɪs ᴇ sᴀʟᴀs.',
 id: `${prefix}menuff`
+},
+{
+title: '🧊⃞ ɪɴғᴏ ғʀᴇᴇ ғɪʀᴇ ⃞🧊',
+description: 'ᴄᴏɴsᴜʟᴛᴇ ᴜᴍ ᴊᴏɢᴀᴅᴏʀ ᴘᴇʟᴏ ɪᴅ ᴄᴏᴍ ʙᴀɴɴᴇʀ ᴇ ᴅᴀᴅᴏs.',
+id: `${prefix}infoff`
 },
 {
 title: '🧊⃞ ᴍᴇɴᴜ ʙʀɪɴᴄᴀᴅᴇɪʀᴀs ⃞🧊',
