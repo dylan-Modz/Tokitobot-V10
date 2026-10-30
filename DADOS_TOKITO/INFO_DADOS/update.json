@@ -1,205 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.70",
+  "version": "10.2.71",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-30T19:59:42.889Z",
+  "publishedAt": "2026-10-30T20:04:45.470Z",
   "changelog": [
-    "[Avisos] Notificações de atualização agora são mensagens de texto normais para evitar cards ou botões invisíveis no WhatsApp.",
-    "[Compatibilidade] Aviso permanece no privado do dono configurado e o monitor continua verificando novas versões automaticamente.",
-    "[Status de Grupo] Mantidas as melhorias experimentais de áudio e vídeo da versão 10.2.69.",
-    "[Atualização] Publicação incremental preservando arquivos e banco de dados do usuário."
+    "[Correção] fix(status): correct media type reference outside preparation scope",
+    "A versão 10.2.71 já está disponível para atualização.",
+    "Mencstatus atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Aviso automático de atualização no WhatsApp",
-  "notice": "Tokito Bot V10.2.70: corrigido aviso de atualizações para envio confiável em texto.",
+  "title": "fix(status): correct media type reference outside preparation scope",
+  "notice": "A versão 10.2.71 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "32cc19d93e889e0abead3711c1f537ad98f3a994755edb12cfcb4c145068a00e",
-      "size": 45367,
-      "gitSha": "95e6c9b6baee7b47f29736927adefd77db666260"
-    },
-    {
-      "path": "package.json",
-      "sha256": "f6ce2b275ec67d1271c96e1c7e3faaf03ec457164e3fdf18d6e74bbfb17f934d",
-      "size": 1166,
-      "gitSha": "5ca84b27dfc45d7f06425f59ed1cdf0ea35c9aaf"
+      "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
+      "sha256": "2530965029f219c35aec9eca7e2839bcf8d52c1d4ce7b5ca0f1460a366ee7ced",
+      "size": 8546
     }
   ],
   "releases": [
-    {
-      "version": "10.1.46",
-      "fromVersion": "10.1.45",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Bem-vindo 4 e 5",
-      "notice": "A versão 10.1.46 já está disponível para atualização.",
-      "changelog": [
-        "Novo Bem-vindo 4 dedicado a figurinha personalizada de entrada e saída.",
-        "Novo Bem-vindo 5 dedicado a áudio personalizado de entrada e saída.",
-        "Comandos stickerbv e stickersaiu salvam ou removem as figurinhas do Bem-vindo 4.",
-        "Comandos audiobv e audiosaiu salvam ou removem os áudios do Bem-vindo 5.",
-        "As mídias ficam separadas na pasta midiabv e continuam preservadas nas atualizações.",
-        "Bem-vindo 4 e 5 foram adicionados ao painel ativar, ao menu ADM e ao infobemvindos."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/admin/bemvindo4.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/bemvindo5.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/midiabv.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/infobemvindos.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "tokito.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-05T17:48:00.000Z"
-    },
-    {
-      "version": "10.1.47",
-      "fromVersion": "10.1.46",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Novos recursos do Menu Dono",
-      "notice": "A versão 10.1.47 já está disponível para atualização.",
-      "changelog": [
-        "Novo AntiCall para rejeitar chamadas e bloquear automaticamente quem ligar para o bot.",
-        "Novos comandos fotobot e clonar para alterar a foto de perfil do Tokito.",
-        "Novo VIP de grupo com addvipgp, delvipgp e vipgplist; membros do grupo VIP passam a contar como VIP nos comandos.",
-        "Novo gerenciador global com listagp e linkdogp.",
-        "Novo envmsg para o dono enviar uma mensagem para um número ou grupo específico.",
-        "Novo transmitir para enviar texto ou mídia para todos os grupos do bot com intervalo entre os envios.",
-        "Novo AutoBan global com autobang, delautobang e autobanglist; usuários cadastrados são bloqueados do bot e removidos de grupos quando possível.",
-        "Novo sistema de agenda do dono com agendar, agenda e delagenda.",
-        "Novo reinício diário programado com setrestart e checkrestart.",
-        "Novo fundoping para personalizar o fundo do comando ping.",
-        "Novo comando add/adicionar para administradores adicionarem um membro ao grupo apenas informando o número."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/dono.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/dono/anticall.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/dono/perfilbot.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/dono/vipgp.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/dono/autobang.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/dono/agenda.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/dono/fundoping.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/dono/gruposglobais.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/add.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "tokito.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/info/ping.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-05T18:58:00.000Z"
-    },
     {
       "version": "10.1.48",
       "fromVersion": "10.1.47",
@@ -4797,6 +4622,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-10-30T19:59:42.889Z"
+    },
+    {
+      "version": "10.2.71",
+      "fromVersion": "10.2.70",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(status): correct media type reference outside preparation scope",
+      "notice": "A versão 10.2.71 já está disponível para atualização.",
+      "changelog": [
+        "Mencstatus atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
+          "sha256": "2530965029f219c35aec9eca7e2839bcf8d52c1d4ce7b5ca0f1460a366ee7ced",
+          "size": 8546
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-30T20:04:45.470Z"
     }
   ],
   "mode": "incremental",
