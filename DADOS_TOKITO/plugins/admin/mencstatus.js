@@ -6,7 +6,22 @@
 'use strict'
 
 const crypto = require('crypto')
+const fs = require('fs')
+const path = require('path')
 const dylan = require('../../database/lib/comandos')
+
+// O envio de mídia em GroupStatus V2 depende de correção interna da Stone.
+// O protocolo antigo gerava um stanza de vídeo sem o mediatype esperado.
+const stoneComStatusMidia = () => {
+  try {
+    const socket = path.join(path.dirname(require.resolve('@stone-wpp/ofc')), 'Socket', 'messages-send.js')
+    const codigo = fs.readFileSync(socket, 'utf8')
+    return codigo.includes('normalizedMediaMessage') &&
+      codigo.includes('isGroupStatusAudio')
+  } catch {
+    return false
+  }
+}
 
 const desenrolar = entrada => {
   let msg = entrada
@@ -84,6 +99,12 @@ dylan.setCommand({
       : legenda
 
     if (!midia && !texto) return ctx.reply(uso(ctx))
+    if (midia && !stoneComStatusMidia())
+      return ctx.reply(
+        '- ⚠️ `𝚂𝚃𝙾𝙽𝙴 𝙳𝙴𝚂𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙳𝙰`\n\n' +
+        '> 📌 ׄ ( ᴏ ᴇɴᴠɪᴏ ᴅᴇ ᴠɪ́ᴅᴇᴏ/ᴀ́ᴜᴅɪᴏ ᴇᴍ sᴛᴀᴛᴜs ᴅᴇ ɢʀᴜᴘᴏ ᴇxɪɢᴇ ᴀ ᴄᴏʀʀᴇᴄ̧ᴀ̃ᴏ ᴅᴀ sᴛᴏɴᴇ. )\n' +
+        '> 🔧 ׄ ( ᴜsᴇ ' + ctx.prefix + 'update start ᴇ ʀᴇɪɴɪᴄɪᴇ ᴏ ʙᴏᴛ. )'
+      )
 
     const baileysDisponivel = (
       typeof ctx.generateWAMessageFromContent === 'function' &&
@@ -104,6 +125,7 @@ dylan.setCommand({
       const tipoGrupo = ctx.proto?.StatusAttribution?.Type?.GROUP_STATUS ?? 5
       const contexto = {
         isGroupStatus: true,
+        featureEligibilities: { canReceiveMultiReact: true },
         ...(autorJid ? {
           statusAttributions: [{
             type: tipoGrupo,
