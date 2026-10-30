@@ -191,7 +191,7 @@ dylan.setCommand({
       const atributos = midia?.tipo === 'audio'
         ? { type: 'text' }
         : midia?.tipo
-          ? { type: 'media', mediatype: midia.tipo === 'video' && origem?.videoMessage?.gifPlayback
+          ? { type: 'media', mediatype: midia.tipo === 'video' && midia.fonte?.gifPlayback
             ? 'gif' : midia.tipo }
           : undefined
       await ctx.tokito.relayMessage(ctx.from, msg.message, {
