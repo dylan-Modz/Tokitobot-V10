@@ -1,60 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.66",
+  "version": "10.2.67",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-30T16:20:01.529Z",
+  "publishedAt": "2026-10-30T16:21:31.703Z",
   "changelog": [
-    "[Melhoria] remove(freefire): excluir rotina agendada de auto like (15 minutos)",
-    "A versão 10.2.66 já está disponível para atualização.",
-    "Menus atualizado",
-    "Likes atualizado",
-    "Autolike removido"
+    "[Melhoria] chore(release): bump Tokito Bot V10 para 10.2.66",
+    "A versão 10.2.67 já está disponível para atualização.",
+    "Package atualizado"
   ],
-  "delete": [
-    "DADOS_TOKITO/sistemas/autolike.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "remove(freefire): excluir rotina agendada de auto like (15 minutos)",
-  "notice": "A versão 10.2.66 já está disponível para atualização.",
+  "title": "chore(release): bump Tokito Bot V10 para 10.2.66",
+  "notice": "A versão 10.2.67 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "3aa99212076cc56ad428ea7df030352e876cae95ecfb3015a6cafa84f76511c4",
-      "size": 78851
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/likes.js",
-      "sha256": "d703917da22afcf349737d3d32e0f9c6def5fa8ae79ad1cd54af6534a2a18c66",
-      "size": 10283
+      "path": "package.json",
+      "sha256": "f2d520401c623fedd4f51664de4d7f0cbd65f7234236bb60a4d3119dec67d1b0",
+      "size": 1166
     }
   ],
   "releases": [
-    {
-      "version": "10.1.43",
-      "fromVersion": "10.1.42",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "fix: revisa mensagem de erro da API",
-      "notice": "A versão 10.1.43 já está disponível para atualização.",
-      "changelog": [
-        "Mensagens atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "5ed939a7fa8ca5c3c099da9cda2104764610ad4390d4eee32e670f45d0aa91fb",
-          "size": 220596
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-05T16:44:32.915Z"
-    },
     {
       "version": "10.1.44",
       "fromVersion": "10.1.43",
@@ -4758,6 +4728,27 @@
       ],
       "required": false,
       "publishedAt": "2026-10-30T16:20:01.529Z"
+    },
+    {
+      "version": "10.2.67",
+      "fromVersion": "10.2.66",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "chore(release): bump Tokito Bot V10 para 10.2.66",
+      "notice": "A versão 10.2.67 já está disponível para atualização.",
+      "changelog": [
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "f2d520401c623fedd4f51664de4d7f0cbd65f7234236bb60a4d3119dec67d1b0",
+          "size": 1166
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-10-30T16:21:31.702Z"
     }
   ],
   "mode": "incremental",
