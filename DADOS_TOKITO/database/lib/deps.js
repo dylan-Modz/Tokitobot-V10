@@ -53,7 +53,7 @@ const faltando = () => {
   // O Tokito fixa a versão da Stone no package.json; o comando update
   // deve instalar exatamente essa versão quando ela mudar.
   const versaoStoneEsperada = String(pkg.dependencies?.['@stone-wpp/ofc'] || '').trim()
-  if (versaoStoneEsperada && /^\\d+\\.\\d+\\.\\d+(?:-[\\w.]+)?$/.test(versaoStoneEsperada) &&
+  if (versaoStoneEsperada && /^\d+\.\d+\.\d+(?:-[\w.]+)?$/.test(versaoStoneEsperada) &&
       !ausentes.includes('@stone-wpp/ofc')) {
     let versaoStoneInstalada = ''
     try {
