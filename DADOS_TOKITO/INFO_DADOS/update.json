@@ -1,64 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.73",
+  "version": "10.2.74",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-04T17:25:15.698Z",
+  "publishedAt": "2026-11-04T17:26:45.756Z",
   "changelog": [
-    "[Correção] fix(tokito): retain short-lived original media metadata before WhatsApp strips quote payloads",
-    "A versão 10.2.73 já está disponível para atualização.",
-    "Conexão do bot atualizada"
+    "[Correção] fix(revelar): recover quoted media from original cache even when WhatsApp sends only message ID",
+    "A versão 10.2.74 já está disponível para atualização.",
+    "Open atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(tokito): retain short-lived original media metadata before WhatsApp strips quote payloads",
-  "notice": "A versão 10.2.73 já está disponível para atualização.",
+  "title": "fix(revelar): recover quoted media from original cache even when WhatsApp sends only message ID",
+  "notice": "A versão 10.2.74 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "20a7b90f55849b261368542453a30b9d3e55675a852ac33e435838770a57227d",
-      "size": 47522
+      "path": "DADOS_TOKITO/plugins/admin/open.js",
+      "sha256": "a43b77e7d3b2bc9fa77f35baa871267866b6df9709adc0545b4f9a459c812aae",
+      "size": 6610
     }
   ],
   "releases": [
-    {
-      "version": "10.1.50",
-      "fromVersion": "10.1.49",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Banner Business do bot",
-      "notice": "A versão 10.1.50 já está disponível para atualização.",
-      "changelog": [
-        "Novo comando fotobanner para alterar o banner do perfil Business do bot respondendo uma imagem.",
-        "O comando verifica primeiro se a conta conectada possui perfil do WhatsApp Business e avisa quando não possuir.",
-        "Compatibilidade com updateBusinessCoverPhoto e com o updateCoverPhoto já existente na biblioteca.",
-        "Menu do dono atualizado mantendo o emoji padrão da categoria Configurações nos comandos de perfil."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/dono/fotobanner.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-05T22:19:31.336Z"
-    },
     {
       "version": "10.1.51",
       "fromVersion": "10.1.50",
@@ -4582,6 +4548,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-04T17:25:15.698Z"
+    },
+    {
+      "version": "10.2.74",
+      "fromVersion": "10.2.73",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(revelar): recover quoted media from original cache even when WhatsApp sends only message ID",
+      "notice": "A versão 10.2.74 já está disponível para atualização.",
+      "changelog": [
+        "Open atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/open.js",
+          "sha256": "a43b77e7d3b2bc9fa77f35baa871267866b6df9709adc0545b4f9a459c812aae",
+          "size": 6610
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-04T17:26:45.755Z"
     }
   ],
   "mode": "incremental",
