@@ -37,6 +37,7 @@ const antibot = require('../plugins/admin/filtro-antibot.js')
 const antivideo = require('../plugins/admin/filtro-antivideo.js')
 const antifoto = require('../plugins/admin/filtro-antifoto.js')
 const antivisu = require('../plugins/admin/filtro-antivisu.js')
+const viewOncex9 = require('../plugins/admin/filtro-viewoncex9.js')
 const antisticker = require('../plugins/admin/filtro-antisticker.js')
 const anticontato = require('../plugins/admin/filtro-anticontato.js')
 const antilocalizacao = require('../plugins/admin/filtro-antilocalizacao.js')
@@ -122,7 +123,8 @@ mentionedJid: [ctx.sender]
 }
 return true
 }
-if (await rodar(antivisu, 'Envio de mídia de visualização única')) return true
+if (await viewOncex9.verificar(ctx)) return true
+if (!config?.viewOncex9 && await rodar(antivisu, 'Envio de mídia de visualização única')) return true
 if (await rodar(antisticker, 'Envio de figurinha bloqueada')) return true
 if (await rodar(antifloodsticker, 'Flood de figurinhas', false)) return true
 if (await rodar(antipay, 'Envio de mensagem de pagamento bloqueada')) return true
@@ -134,9 +136,9 @@ if (await rodar(anticanal, 'Envio/divulgação de canal do WhatsApp')) return tr
 if (await rodar(anticontato, 'Envio de contato bloqueado')) return true
 if (await rodar(antilocalizacao, 'Envio de localização bloqueada')) return true
 if (await rodar(antidocumento, 'Envio de documento bloqueado')) return true
-if (await rodar(antiaudio, 'Envio de áudio bloqueado')) return true
-if (await rodar(antifoto, 'Envio de foto bloqueada')) return true
-if (await rodar(antivideo, 'Envio de vídeo bloqueado')) return true
+if (!config?.viewOncex9 && await rodar(antiaudio, 'Envio de áudio bloqueado')) return true
+if (!config?.viewOncex9 && await rodar(antifoto, 'Envio de foto bloqueada')) return true
+if (!config?.viewOncex9 && await rodar(antivideo, 'Envio de vídeo bloqueado')) return true
 if (await rodar(antispam, 'Spam de comandos', false)) return true
 return false
 }
@@ -153,6 +155,7 @@ antibot,
 antivideo,
 antifoto,
 antivisu,
+viewOncex9,
 antisticker,
 anticontato,
 antilocalizacao,

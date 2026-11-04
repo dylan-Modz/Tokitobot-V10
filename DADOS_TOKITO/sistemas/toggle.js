@@ -39,10 +39,22 @@ if (Array.isArray(dataGp) && dataGp[0] && typeof setGp === 'function') {
 if (!dataGp[0].funcoes || typeof dataGp[0].funcoes !== 'object')
 dataGp[0].funcoes = {}
 dataGp[0].funcoes[campo] = acao === '1'
+if (acao === '1' && campo === 'viewOncex9')
+for (const flag of ['antivisu', 'antifoto', 'antivideo', 'antiaudio']) dataGp[0].funcoes[flag] = false
+if (acao === '1' && ['antivisu', 'antifoto', 'antivideo', 'antiaudio'].includes(campo))
+dataGp[0].funcoes.viewOncex9 = false
 setGp(dataGp)
 }
 else {
-base.alterar(grupo, campo, acao === '1')
+const flags = base.alterar(grupo, campo, acao === '1')
+if (acao === '1' && campo === 'viewOncex9') {
+for (const flag of ['antivisu', 'antifoto', 'antivideo', 'antiaudio']) flags[flag] = false
+const gp = base.lerGrupo(grupo)
+gp[0].funcoes = flags
+base.salvarGrupo(grupo, gp)
+}
+if (acao === '1' && ['antivisu', 'antifoto', 'antivideo', 'antiaudio'].includes(campo))
+base.alterar(grupo, 'viewOncex9', false)
 }
 return reply(acao === '1'
 ? mess.funcaoAtivada(emoji, titulo, descricao)

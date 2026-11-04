@@ -2216,6 +2216,7 @@ funcoes?.antibot,
 funcoes?.antivideo,
 funcoes?.antifoto,
 funcoes?.antivisu,
+funcoes?.viewOncex9,
 funcoes?.antisticker,
 funcoes?.anticontato,
 funcoes?.antilocalizacao,
@@ -2270,6 +2271,7 @@ return `- ⚙️ \`𝚂𝚃𝙰𝚃𝚄𝚂 𝙳𝙰𝚂 𝙵𝚄𝙽𝙲̧𝙾�
 > ⚙️ ׄ ( ᴀɴᴛɪᴠɪ́ᴅᴇᴏ: ${status(funcoes?.antivideo)} )
 > ⚙️ ׄ ( ᴀɴᴛɪғᴏᴛᴏ: ${status(funcoes?.antifoto)} )
 > ⚙️ ׄ ( ᴀɴᴛɪᴠɪsᴜ: ${status(funcoes?.antivisu)} )
+> ⚙️ ׄ ( ᴠɪᴇᴡᴏɴᴄᴇ x𝟿: ${status(funcoes?.viewOncex9)} )
 > ⚙️ ׄ ( ᴀɴᴛɪғɪɢᴜʀɪɴʜᴀ: ${status(funcoes?.antisticker)} )
 > ⚙️ ׄ ( ᴀɴᴛɪ-ғʟᴏᴏᴅ sᴛɪᴄᴋᴇʀ: ${status(funcoes?.antifloodsticker)} )
 > ⚙️ ׄ ( ᴀɴᴛɪᴄᴏɴᴛᴀᴛᴏ: ${status(funcoes?.anticontato)} )

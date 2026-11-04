@@ -78,6 +78,7 @@ const itens = [
 ['antivideo', 'Anti Vídeo', 'midias'],
 ['antifoto', 'Anti Foto', 'midias'],
 ['antivisu', 'Anti Visualização Única', 'midias'],
+['viewOncex9', 'ViewOnce X9 • Somente visualização única', 'midias'],
 ['antisticker', 'Anti Sticker', 'midias'],
 ['antifloodsticker', 'Anti Flood Sticker', 'midias'],
 ['anticontato', 'Anti Contato', 'midias'],
@@ -128,6 +129,7 @@ const emojiFuncao = {
 'antivideo': '🎥',
 'antifoto': '🖼️',
 'antivisu': '👁️',
+'viewOncex9': '🔐',
 'antisticker': '🧩',
 'antifloodsticker': '🌊',
 'anticontato': '📇',
@@ -248,6 +250,9 @@ return f.antilink.ativo
 }
 
 f[chave] = !Boolean(f[chave])
+if (f[chave] && chave === 'viewOncex9')
+for (const flag of ['antivisu', 'antifoto', 'antivideo', 'antiaudio']) f[flag] = false
+if (f[chave] && ['antivisu', 'antifoto', 'antivideo', 'antiaudio'].includes(chave)) f.viewOncex9 = false
 if (chave === 'registrar') f.passaporte = false
 
 if (chave === 'multiprefix' && f[chave] && !f.prefixGrupo)
@@ -408,6 +413,8 @@ if (!item)
 return painel(ctx)
 
 const [chave, nome] = item
+if (chave === 'viewOncex9' && !ctx.isBotGroupAdmins && !ativo(ctx, chave))
+return ctx.reply(ctx.mess.botadm())
 const estado = trocar(ctx, chave)
 
 ctx.setGp(ctx.dataGp)
