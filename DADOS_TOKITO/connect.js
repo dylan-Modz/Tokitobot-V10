@@ -98,7 +98,7 @@ const antiga = cache.get(chave)
 // Um update parcial não deve sobrescrever uma mídia completa já recebida.
 if (!completa && antiga) continue
 cache.delete(chave)
-cache.set(chave, { message: mensagem, at: agora })
+cache.set(chave, { message: mensagem, key: item.key, at: agora })
 if (process.env.TOKITO_DEBUG_REVELAR === '1') {
 console.log('[REVELAR RX]', {
 tipo: conteudo?.imageMessage ? 'image' : conteudo?.audioMessage ? 'audio' : 'video',
