@@ -21,7 +21,8 @@
     {
       "path": "DADOS_TOKITO/connect.js",
       "sha256": "85a56d8dbe685de77c2e5dbf97982b9b28a27f4f8ea21051e7a9203a306818f1",
-      "size": 48730
+      "size": 48730,
+      "gitSha": "46d7dc7c3ee4b22ad3b514ef3f90e87fafc49c6e"
     }
   ],
   "releases": [
@@ -4415,7 +4416,8 @@
         {
           "path": "DADOS_TOKITO/connect.js",
           "sha256": "85a56d8dbe685de77c2e5dbf97982b9b28a27f4f8ea21051e7a9203a306818f1",
-          "size": 48730
+          "size": 48730,
+          "gitSha": "46d7dc7c3ee4b22ad3b514ef3f90e87fafc49c6e"
         }
       ],
       "delete": [],
