@@ -1,189 +1,48 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.83",
+  "version": "10.2.84",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-04T22:26:51.363Z",
+  "publishedAt": "2026-11-04T23:10:18.535Z",
   "changelog": [
-    "[Melhoria] refactor(tokito): organize 15 anti-filters in sistemas/filtros and prepare V10.2.83",
-    "A versão 10.2.83 já está disponível para atualização.",
-    "Viewoncex9 atualizado",
-    "Filtro Antiaudio movido",
-    "Antiaudio atualizado",
-    "Filtro Antibot movido",
-    "Antibot atualizado",
-    "Filtro Anticanal movido",
-    "Anticanal atualizado",
-    "Filtro Anticontato movido",
-    "Anticontato atualizado",
-    "Filtro Antidocumento movido",
-    "Antidocumento atualizado",
-    "Filtro Antifoto movido",
-    "Antifoto atualizado",
-    "Filtro Antilink movido",
-    "Antilink atualizado",
-    "Filtro Antilocalizacao movido",
-    "Antilocalizacao atualizado",
-    "Filtro Antimarcacao movido",
-    "Antimarcacao atualizado",
-    "Filtro Antispam movido",
-    "Antispam atualizado",
-    "Filtro Antistatus movido",
-    "Antistatus atualizado",
-    "Filtro Antisticker movido",
-    "Antisticker atualizado",
-    "Filtro Antivideo movido",
-    "Antivideo atualizado",
-    "Filtro Antivisu movido",
-    "Antivisu atualizado",
-    "Filtro Viewoncex9 movido",
-    "Funcoes atualizado",
-    "Package atualizado"
+    "[Correção] fix(adv): enforce member/admin/owner hierarchy with live group roles and regression tests (V10.2.84)",
+    "A versão 10.2.84 já está disponível para atualização.",
+    "Adv atualizado",
+    "Hierarquia atualizado",
+    "Package atualizado",
+    "Adv.test atualizado"
   ],
-  "delete": [
-    "DADOS_TOKITO/plugins/admin/filtro-antiaudio.js",
-    "DADOS_TOKITO/plugins/admin/filtro-antibot.js",
-    "DADOS_TOKITO/plugins/admin/filtro-anticanal.js",
-    "DADOS_TOKITO/plugins/admin/filtro-anticontato.js",
-    "DADOS_TOKITO/plugins/admin/filtro-antidocumento.js",
-    "DADOS_TOKITO/plugins/admin/filtro-antifoto.js",
-    "DADOS_TOKITO/plugins/admin/filtro-antilink.js",
-    "DADOS_TOKITO/plugins/admin/filtro-antilocalizacao.js",
-    "DADOS_TOKITO/plugins/admin/filtro-antimarcacao.js",
-    "DADOS_TOKITO/plugins/admin/filtro-antispam.js",
-    "DADOS_TOKITO/plugins/admin/filtro-antistatus.js",
-    "DADOS_TOKITO/plugins/admin/filtro-antisticker.js",
-    "DADOS_TOKITO/plugins/admin/filtro-antivideo.js",
-    "DADOS_TOKITO/plugins/admin/filtro-antivisu.js",
-    "DADOS_TOKITO/plugins/admin/filtro-viewoncex9.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "refactor(tokito): organize 15 anti-filters in sistemas/filtros and prepare V10.2.83",
-  "notice": "A versão 10.2.83 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix(adv): enforce member/admin/owner hierarchy with live group roles and regression tests (V10.2.84)",
+  "notice": "A versão 10.2.84 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/viewoncex9.js",
-      "sha256": "85d9605d3df6cfa7ede54caf2972cf8f90133a52ab135d3aa6cfa7d27b1ce1f5",
-      "size": 785
+      "path": "DADOS_TOKITO/plugins/admin/adv.js",
+      "sha256": "b0a2f000a1e7a6b2e1685346a51e7f44cb4b1329abd4051da656ea7620a6ffe0",
+      "size": 3634
     },
     {
-      "path": "DADOS_TOKITO/sistemas/filtros/antiaudio.js",
-      "sha256": "838970bb5cd1f3dcd4bd14aa608aa601b60567fd859460de301653acb436f29e",
-      "size": 1957
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/antibot.js",
-      "sha256": "675e41f6fd57a0dc300fe712e229e8938214cfc8994e10573a73f18553ff7cea",
-      "size": 3182
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/anticanal.js",
-      "sha256": "682841c342ee375f0d7ef6258b3986b150f2ba7611fef259deaecc1b348b9e07",
-      "size": 2826
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/anticontato.js",
-      "sha256": "e28929902c28d19d89c09d1d8384b0b2719665f963d2d3144288beb81fd2a0a4",
-      "size": 2013
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/antidocumento.js",
-      "sha256": "e8ef23d7996909a41b9175eb3728f8217dfd1a5c76d7bd9e27a2d33ffea6f07a",
-      "size": 2016
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/antifoto.js",
-      "sha256": "35d85c7c76988bb2d7b86a79534dda9ab7c52584403ac5a4404feafeddef07be",
-      "size": 2213
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/antilink.js",
-      "sha256": "09b2feab5d6bdec4dd8bde83b6a27e6a17e97b6edf4eeb15069356ed22c61e17",
-      "size": 5419
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/antilocalizacao.js",
-      "sha256": "1746e6e50ecee5738473f5591d54803fc7f7bc4c4663b6fc0a595cd7bb24a83a",
-      "size": 2089
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/antimarcacao.js",
-      "sha256": "385569bc69469195aef5e16859f4ebb9bdfb098f8fbef589fbf66ca22c47542f",
-      "size": 2160
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/antispam.js",
-      "sha256": "04294df545bded9d15c87eaa3368f0ffcd1d8e0b141b51dcc4a65c6f785b6010",
-      "size": 3643
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/antistatus.js",
-      "sha256": "67faf73b966431794bcb8594cb97db1b132737ae5cd2078b0137ac822ee79a4a",
-      "size": 1964
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/antisticker.js",
-      "sha256": "529bb9d5692dc53bbc9717a3d582c4a4e6cbbda94fb89cf62fec201d17872e31",
-      "size": 2504
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/antivideo.js",
-      "sha256": "c9ae132182f9d31a85cc97cda241eb2d6c0ee462585045c985336b154e19b3bd",
-      "size": 2222
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/antivisu.js",
-      "sha256": "c08e57bbbc4e5f7ef4e103fd83199bfef14b8b72bcfc5bb23c2cb9b62fe4063c",
-      "size": 3103
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/filtros/viewoncex9.js",
-      "sha256": "9213bd9dbcf64e5a52d7994756581475f7c16a0e0627bdb80e035b4cc942e302",
-      "size": 2145
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/funcoes.js",
-      "sha256": "b7b4338812aba142d0340bb214fa249a09fb1dfdbd20769c94a1b8997f7f890e",
-      "size": 5960
+      "path": "DADOS_TOKITO/sistemas/hierarquia.js",
+      "sha256": "668ee18c5f603fb22fd14cb6562a48f577a8f2fe802ef08e5fbbdc855289e430",
+      "size": 3304
     },
     {
       "path": "package.json",
-      "sha256": "53c29101888e8134978db27eba1146470927ae3eb52c94155684c6c3169030ee",
-      "size": 1166
+      "sha256": "0681db010fec9a8637fd84534e0bacceff7bd1e64c716e36c071716010de9caa",
+      "size": 1211
+    },
+    {
+      "path": "tests/adv.test.js",
+      "sha256": "2cdced3718cd25a793595e72487a982fb0f826f9e1d4089ddc24276e029a353e",
+      "size": 2853
     }
   ],
   "releases": [
-    {
-      "version": "10.1.60",
-      "fromVersion": "10.1.59",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Correção do prefixo no menu RPG",
-      "notice": "A versão 10.1.60 já está disponível para atualização.",
-      "changelog": [
-        "Corrige o menu RPG Pokémon que mostrava ${prefix} literalmente nos comandos novos.",
-        "Os comandos agora exibem o prefixo configurado do grupo normalmente."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T13:08:59.487Z"
-    },
     {
       "version": "10.1.61",
       "fromVersion": "10.1.60",
@@ -4647,6 +4506,45 @@
       ],
       "required": false,
       "publishedAt": "2026-11-04T22:26:51.362Z"
+    },
+    {
+      "version": "10.2.84",
+      "fromVersion": "10.2.83",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(adv): enforce member/admin/owner hierarchy with live group roles and regression tests (V10.2.84)",
+      "notice": "A versão 10.2.84 já está disponível para atualização.",
+      "changelog": [
+        "Adv atualizado",
+        "Hierarquia atualizado",
+        "Package atualizado",
+        "Adv.test atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/adv.js",
+          "sha256": "b0a2f000a1e7a6b2e1685346a51e7f44cb4b1329abd4051da656ea7620a6ffe0",
+          "size": 3634
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/hierarquia.js",
+          "sha256": "668ee18c5f603fb22fd14cb6562a48f577a8f2fe802ef08e5fbbdc855289e430",
+          "size": 3304
+        },
+        {
+          "path": "package.json",
+          "sha256": "0681db010fec9a8637fd84534e0bacceff7bd1e64c716e36c071716010de9caa",
+          "size": 1211
+        },
+        {
+          "path": "tests/adv.test.js",
+          "sha256": "2cdced3718cd25a793595e72487a982fb0f826f9e1d4089ddc24276e029a353e",
+          "size": 2853
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-04T23:10:18.534Z"
     }
   ],
   "mode": "incremental",
