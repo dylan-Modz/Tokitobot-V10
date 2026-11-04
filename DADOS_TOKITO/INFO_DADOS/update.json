@@ -1,65 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.79",
+  "version": "10.2.80",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-04T19:55:19.444Z",
+  "publishedAt": "2026-11-04T20:08:48.847Z",
   "changelog": [
-    "[Atualizador] Corrigida a verificação de integridade de connect.js: downloads de versões antigas agora possuem identificador imutável do GitHub para recuperação quando o link principal entregar outra revisão.",
-    "[Arquivos] Arquivos recentes da 10.2.73 à 10.2.79 vinculados ao blob correto do GitHub, com SHA-256 e tamanho validados.",
-    "[Revelar] Preservadas as correções de captura e download do comando open/revelar, sem alterar a biblioteca Stone."
+    "[Correção] fix(revelar): enable safe view-once receipt diagnostics without hosting env configuration",
+    "A versão 10.2.80 já está disponível para atualização.",
+    "Conexão do bot atualizada"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Tokito Bot V10.2.79 — reparo de integridade na atualização",
-  "notice": "Reparo do instalador incremental: arquivos verificados pelo hash e pelo identificador exato no GitHub.",
+  "title": "fix(revelar): enable safe view-once receipt diagnostics without hosting env configuration",
+  "notice": "A versão 10.2.80 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/connect.js",
-      "sha256": "3b877f58442bc16df69d7f2c35f7ea0ed557fd9516b23497a5add40879fbe451",
-      "gitSha": "428a096f0a7eb0081c70b0f4ff5189da4553e404",
-      "size": 48485
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/open.js",
-      "sha256": "ca5fa389010603b3586df269cbc89854fe65d6d060e547cd7a7e0a0fff80fccd",
-      "gitSha": "23eab4e377309a9753e6d97ee74349d06c750447",
-      "size": 9819
+      "sha256": "85a56d8dbe685de77c2e5dbf97982b9b28a27f4f8ea21051e7a9203a306818f1",
+      "size": 48730
     }
   ],
   "releases": [
-    {
-      "version": "10.1.56",
-      "fromVersion": "10.1.55",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Correção dos novos quizzes",
-      "notice": "A versão 10.1.56 já está disponível para atualização.",
-      "changelog": [
-        "Corrige o registro dos novos quizzes no carregador de plugins.",
-        "quizpokemon, quizcalculadora, quiztrivia, quizgeografia e quizfilme agora são carregados corretamente.",
-        "Na 10.1.55 apenas quizfilme ficava registrado por causa de múltiplos setCommand no mesmo arquivo."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/quizzes.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T03:39:15.726Z"
-    },
     {
       "version": "10.1.57",
       "fromVersion": "10.1.56",
@@ -4435,6 +4400,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-04T19:55:19.444Z"
+    },
+    {
+      "version": "10.2.80",
+      "fromVersion": "10.2.79",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(revelar): enable safe view-once receipt diagnostics without hosting env configuration",
+      "notice": "A versão 10.2.80 já está disponível para atualização.",
+      "changelog": [
+        "Conexão do bot atualizada"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "85a56d8dbe685de77c2e5dbf97982b9b28a27f4f8ea21051e7a9203a306818f1",
+          "size": 48730
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-04T20:08:48.847Z"
     }
   ],
   "mode": "incremental",
