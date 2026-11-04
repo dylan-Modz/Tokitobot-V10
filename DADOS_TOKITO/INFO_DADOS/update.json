@@ -1,59 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.77",
+  "version": "10.2.78",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-04T19:52:18.602Z",
+  "publishedAt": "2026-11-04T19:53:49.528Z",
   "changelog": [
-    "[Correção] fix(revelar): preserve original media across Stone message updates and add safe reception diagnostics",
-    "A versão 10.2.77 já está disponível para atualização.",
-    "Conexão do bot atualizada"
+    "[Correção] fix(revelar): track download versus resend failures accurately",
+    "A versão 10.2.78 já está disponível para atualização.",
+    "Conexão do bot atualizada",
+    "Open atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(revelar): preserve original media across Stone message updates and add safe reception diagnostics",
-  "notice": "A versão 10.2.77 já está disponível para atualização.",
+  "title": "fix(revelar): track download versus resend failures accurately",
+  "notice": "A versão 10.2.78 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/connect.js",
-      "sha256": "e971ff0a6b27ed7d65a4810546e48458570ccdf0c7b6875e5f4b491905f5c01d",
-      "size": 48268
+      "sha256": "518ad0fc9bc75db66d05971bab2c227d56db871130942cc21fd5406b9d185710",
+      "size": 48283
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/open.js",
+      "sha256": "ca5fa389010603b3586df269cbc89854fe65d6d060e547cd7a7e0a0fff80fccd",
+      "size": 9819
     }
   ],
   "releases": [
-    {
-      "version": "10.1.54",
-      "fromVersion": "10.1.53",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Ping sem card",
-      "notice": "A versão 10.1.54 já está disponível para atualização.",
-      "changelog": [
-        "Comando ping não gera mais card pela rota canvas/ping2.",
-        "Ping agora responde diretamente em texto, mantendo as informações de velocidade, latência, sistema, RAM, CPU, Node.js, grupos, comandos e uptime.",
-        "Quando os botões estiverem ativos, o botão de Menu continua disponível sem mídia no cabeçalho.",
-        "Comando perfil não foi alterado e continua usando o card atual."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/info/ping.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-06T14:25:02.041Z"
-    },
     {
       "version": "10.1.55",
       "fromVersion": "10.1.54",
@@ -4457,6 +4434,33 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-04T19:52:18.601Z"
+    },
+    {
+      "version": "10.2.78",
+      "fromVersion": "10.2.77",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(revelar): track download versus resend failures accurately",
+      "notice": "A versão 10.2.78 já está disponível para atualização.",
+      "changelog": [
+        "Conexão do bot atualizada",
+        "Open atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "518ad0fc9bc75db66d05971bab2c227d56db871130942cc21fd5406b9d185710",
+          "size": 48283
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/open.js",
+          "sha256": "ca5fa389010603b3586df269cbc89854fe65d6d060e547cd7a7e0a0fff80fccd",
+          "size": 9819
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-04T19:53:49.527Z"
     }
   ],
   "mode": "incremental",
