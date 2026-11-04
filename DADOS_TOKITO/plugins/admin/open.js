@@ -117,7 +117,8 @@ await reagir(from, '👁️').catch(() => {})
 
 const contexto = ctxMsg?.quotedMessage ? ctxMsg : pegarContexto(info)
 const marcada = contexto?.quotedMessage || null
-const origem = marcada || (contexto?.stanzaId ? null : info?.message)
+const salvo = contexto?.stanzaId ? obterOriginal(tokito, from, contexto.stanzaId) : null
+const origem = marcada || salvo || (contexto?.stanzaId ? null : info?.message)
 
 if (!origem) {
 await reagir(from, '❌').catch(() => {})
@@ -128,7 +129,6 @@ return reply(`- 👁️ \`𝙾𝙿𝙴𝙽\`
 
 const msg = desenrolar(origem)
 const usandoMarcada = Boolean(marcada)
-const salvo = contexto?.stanzaId ? obterOriginal(tokito, from, contexto.stanzaId) : null
 const mediaSalva = extrairMedia(salvo)
 const midias = []
 const addMedia = valor => {
