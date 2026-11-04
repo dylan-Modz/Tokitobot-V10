@@ -56,20 +56,38 @@ const pegarContexto = entrada => {
   return null
 }
 
-const possuiArquivo = media => Boolean(
-  media?.mediaKey && (media?.url || media?.directPath)
-)
+// A citação de visualização única pode omitir dados presentes no original.
+// O bot só consulta metadados que já recebeu, mantidos brevemente em RAM.
+const obterOriginal = (socket, jid, stanzaId) => {
+if (!jid || !stanzaId) return null
+const chave = jid + '|' + stanzaId
+const item = socket?.__tokitoMidiasOriginais?.get(chave)
+if (!item || Date.now() - item.at > 10 * 60 * 1000) {
+socket?.__tokitoMidiasOriginais?.delete(chave)
+return null
+}
+return desenrolar(item.message)
+}
 
-const bufferMidia = async (ctx, media, tipo) => {
+const extrairMedia = msg => msg?.imageMessage || msg?.videoMessage ||
+  msg?.ptvMessage || msg?.audioMessage || null
+
+const bufferMidia = async (ctx, tipo, midias) => {
 if (typeof ctx.getFileBuffer !== 'function')
 throw new Error('getFileBuffer não está disponível.')
 
+let ultimaFalha = null
+for (const media of midias) {
+try {
 const buffer = await ctx.getFileBuffer(media, tipo)
-
 if (!Buffer.isBuffer(buffer) || !buffer.length)
-throw new Error('Não foi possível baixar a mídia.')
-
-return buffer
+throw new Error('O download retornou um arquivo vazio.')
+return { buffer, media }
+} catch (error) {
+ultimaFalha = error
+}
+}
+throw ultimaFalha || new Error('O WhatsApp não disponibilizou os dados da mídia.')
 }
 
 const dylan = require('../../database/lib/comandos')
@@ -110,15 +128,23 @@ return reply(`- 👁️ \`𝙾𝙿𝙴𝙽\`
 
 const msg = desenrolar(origem)
 const usandoMarcada = Boolean(marcada)
-const media = msg?.imageMessage || msg?.videoMessage || msg?.ptvMessage || msg?.audioMessage
-if (media && !possuiArquivo(media)) {
-  await reagir(from, '🔒').catch(() => {})
-  return reply('A mídia foi recebida sem a chave ou o caminho do arquivo. Não foi possível baixar.')
+const salvo = contexto?.stanzaId ? obterOriginal(tokito, from, contexto.stanzaId) : null
+const mediaSalva = extrairMedia(salvo)
+const midias = []
+const addMedia = valor => {
+if (valor && !midias.includes(valor)) midias.push(valor)
+}
+addMedia(extrairMedia(msg))
+addMedia(mediaSalva)
+// Quando a citação está incompleta, tenta o original antes dela.
+if (midias.length === 2) {
+const citada = midias[0]
+if (!citada.mediaKey || !(citada.directPath || citada.url))
+midias.reverse()
 }
 
-if (msg?.imageMessage) {
-const media = msg.imageMessage
-const buffer = await bufferMidia(ctx, media, 'image')
+if (msg?.imageMessage || salvo?.imageMessage) {
+const { buffer, media } = await bufferMidia(ctx, 'image', midias)
 const caption = usandoMarcada ? String(media.caption || '').trim() : ''
 
 await tokito.sendMessage(from, {
@@ -132,9 +158,8 @@ await reagir(from, '✅')
 return
 }
 
-if (msg?.videoMessage || msg?.ptvMessage) {
-const media = msg.videoMessage || msg.ptvMessage
-const buffer = await bufferMidia(ctx, media, 'video')
+if (msg?.videoMessage || msg?.ptvMessage || salvo?.videoMessage || salvo?.ptvMessage) {
+const { buffer, media } = await bufferMidia(ctx, 'video', midias)
 const caption = usandoMarcada ? String(media.caption || '').trim() : ''
 
 await tokito.sendMessage(from, {
@@ -149,9 +174,8 @@ await reagir(from, '✅')
 return
 }
 
-if (msg?.audioMessage) {
-const media = msg.audioMessage
-const buffer = await bufferMidia(ctx, media, 'audio')
+if (msg?.audioMessage || salvo?.audioMessage) {
+const { buffer, media } = await bufferMidia(ctx, 'audio', midias)
 const mimetype = String(media.mimetype || 'audio/ogg; codecs=opus').trim()
 
 await tokito.sendPresenceUpdate('recording', from).catch(() => {})
@@ -183,7 +207,7 @@ await reagir(from, '❌').catch(() => {})
 
 return reply(mess.padraoErro({
 titulo: 'ERRO NO OPEN',
-descricao: 'Não foi possível baixar ou reenviar a mídia. Confira se o arquivo ainda está disponível.'
+descricao: 'Não consegui baixar essa mídia, mesmo tentando os dados originais recebidos. O WhatsApp pode não ter enviado o arquivo.'
 }))
 }
 }
