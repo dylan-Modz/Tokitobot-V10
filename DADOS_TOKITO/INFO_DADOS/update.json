@@ -1,78 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.75",
+  "version": "10.2.76",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-04T17:52:16.324Z",
+  "publishedAt": "2026-11-04T19:47:48.605Z",
   "changelog": [
-    "[Melhoria] chore(bot): target Stone WPP npm 1.0.6 after public package release",
-    "A versão 10.2.75 já está disponível para atualização.",
-    "Package atualizado"
+    "[Correção] fix(updater): use correct semantic-version matcher for Stone npm dependency",
+    "A versão 10.2.76 já está disponível para atualização.",
+    "Deps atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "chore(bot): target Stone WPP npm 1.0.6 after public package release",
-  "notice": "A versão 10.2.75 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix(updater): use correct semantic-version matcher for Stone npm dependency",
+  "notice": "A versão 10.2.76 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "e2bdaaa93f42c75b85db88cfa0df8b2e7576649d58e26ccc071873f8a3eb19d4",
-      "size": 1166
+      "path": "DADOS_TOKITO/database/lib/deps.js",
+      "sha256": "5efb00ab1ec97a9a33db592280f5eeeb490cfbfdf45e31d5560c48f90e3cfa42",
+      "size": 4432
     }
   ],
   "releases": [
-    {
-      "version": "10.1.52",
-      "fromVersion": "10.1.51",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Ativar interativo",
-      "notice": "A versão 10.1.52 já está disponível para atualização.",
-      "changelog": [
-        "Comando ativar foi trocado por um menu list interativo com seções e status de cada função.",
-        "Cada item do ativar agora alterna diretamente entre ativado e desativado ao tocar na lista.",
-        "Após alterar uma função, o painel é enviado novamente já com o status atualizado.",
-        "O fluxo antigo que esperava o administrador digitar um número foi removido.",
-        "Comando Anti-Roubo corrigido para antiroubo, com um R só no nome público e no arquivo.",
-        "Menu ADM mantém apenas totag e cita entre os aliases equivalentes solicitados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/eventos/pendentes.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/antiroubo.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [
-        "DADOS_TOKITO/plugins/admin/antirroubo.js"
-      ],
-      "required": true,
-      "publishedAt": "2026-10-05T23:02:13.813Z"
-    },
     {
       "version": "10.1.53",
       "fromVersion": "10.1.52",
@@ -4509,6 +4461,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-04T17:52:16.324Z"
+    },
+    {
+      "version": "10.2.76",
+      "fromVersion": "10.2.75",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(updater): use correct semantic-version matcher for Stone npm dependency",
+      "notice": "A versão 10.2.76 já está disponível para atualização.",
+      "changelog": [
+        "Deps atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/database/lib/deps.js",
+          "sha256": "5efb00ab1ec97a9a33db592280f5eeeb490cfbfdf45e31d5560c48f90e3cfa42",
+          "size": 4432
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-04T19:47:48.605Z"
     }
   ],
   "mode": "incremental",
