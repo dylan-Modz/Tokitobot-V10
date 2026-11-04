@@ -1,76 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.76",
+  "version": "10.2.77",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-04T19:47:48.605Z",
+  "publishedAt": "2026-11-04T19:52:18.602Z",
   "changelog": [
-    "[Correção] fix(updater): use correct semantic-version matcher for Stone npm dependency",
-    "A versão 10.2.76 já está disponível para atualização.",
-    "Deps atualizado"
+    "[Correção] fix(revelar): preserve original media across Stone message updates and add safe reception diagnostics",
+    "A versão 10.2.77 já está disponível para atualização.",
+    "Conexão do bot atualizada"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(updater): use correct semantic-version matcher for Stone npm dependency",
-  "notice": "A versão 10.2.76 já está disponível para atualização.",
+  "title": "fix(revelar): preserve original media across Stone message updates and add safe reception diagnostics",
+  "notice": "A versão 10.2.77 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/database/lib/deps.js",
-      "sha256": "5efb00ab1ec97a9a33db592280f5eeeb490cfbfdf45e31d5560c48f90e3cfa42",
-      "size": 4432
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "e971ff0a6b27ed7d65a4810546e48458570ccdf0c7b6875e5f4b491905f5c01d",
+      "size": 48268
     }
   ],
   "releases": [
-    {
-      "version": "10.1.53",
-      "fromVersion": "10.1.52",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Menus mais rápidos",
-      "notice": "A versão 10.1.53 já está disponível para atualização.",
-      "changelog": [
-        "Menus agora reutilizam a mesma mídia já preparada em cache, evitando novo upload ao WhatsApp em cada comando.",
-        "Menu, Menu ADM e Menu Dono não aguardam mais a reação antes de iniciar o envio.",
-        "Envio dos menus sem botões também passou a reutilizar a mídia em cache, sem leitura/upload repetido.",
-        "Cache de metadata dos grupos agora usa o último dado imediatamente e atualiza em segundo plano quando estiver antigo.",
-        "Metadata dos grupos é aquecida na conexão para reduzir o tempo do primeiro comando após reiniciar o bot.",
-        "A mídia do menu é preparada uma vez durante a conexão para que os próximos menus sejam enviados sem esse custo."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/modulos.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/menus/menu.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "tokito.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-06T12:21:34.436Z"
-    },
     {
       "version": "10.1.54",
       "fromVersion": "10.1.53",
@@ -4482,6 +4436,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-04T19:47:48.605Z"
+    },
+    {
+      "version": "10.2.77",
+      "fromVersion": "10.2.76",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(revelar): preserve original media across Stone message updates and add safe reception diagnostics",
+      "notice": "A versão 10.2.77 já está disponível para atualização.",
+      "changelog": [
+        "Conexão do bot atualizada"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "e971ff0a6b27ed7d65a4810546e48458570ccdf0c7b6875e5f4b491905f5c01d",
+          "size": 48268
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-04T19:52:18.601Z"
     }
   ],
   "mode": "incremental",
