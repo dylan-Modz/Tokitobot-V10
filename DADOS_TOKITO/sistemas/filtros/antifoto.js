@@ -28,30 +28,34 @@
  * ============================================================
  */
 
-const base = require('../../sistemas/grupos.js')
-const toggle = require('../../sistemas/toggle.js')
-const punir = require('../../sistemas/punir.js')
+const base = require('../grupos.js')
+const toggle = require('../toggle.js')
+const mess = require('../../mensagens/mensagens.js')
 
 const configurar = ctx => toggle({
 ...ctx,
-campo: 'antidocumento',
-emoji: '📄',
-titulo: '𝙰𝙽𝚃𝙸-𝙳𝙾𝙲𝚄𝙼𝙴𝙽𝚃𝙾',
-descricao: 'ᴀᴘᴀɢᴀ ᴅᴏᴄᴜᴍᴇɴᴛᴏs ᴇɴᴠɪᴀᴅᴏs ɴᴏ ɢʀᴜᴘᴏ ᴇ ʀᴇᴍᴏᴠᴇ ᴏ ᴍᴇᴍʙʀᴏ.'
+campo: 'antifoto',
+emoji: '🖼️',
+titulo: '𝙰𝙽𝚃𝙸-𝙵𝙾𝚃𝙾',
+descricao: 'ᴀᴘᴀɢᴀ ɪᴍᴀɢᴇɴs ᴇɴᴠɪᴀᴅᴀs ᴘᴏʀ ᴍᴇᴍʙʀᴏs ɴᴏ ɢʀᴜᴘᴏ.'
 })
 
 const verificar = async (ctx) => {
-const { mensagem, isGroup, isGroupAdmins, isBotGroupAdmins, config } = ctx
-const msg = base.desenrolar(mensagem)
-if (!isGroup || !config?.antidocumento || isGroupAdmins || !isBotGroupAdmins)
+const { tokito, info, from, sender, mensagem, isGroup, isGroupAdmins, isBotGroupAdmins, config, newsletter, selo } = ctx
+if (!isGroup || !config?.antifoto || isGroupAdmins || !base.desenrolar(mensagem)?.imageMessage)
 return false
-if (!msg?.documentMessage)
+if (!isBotGroupAdmins)
 return false
-return punir(ctx, {
-emoji: '📄',
-titulo: '𝙰𝙽𝚃𝙸-𝙳𝙾𝙲𝚄𝙼𝙴𝙽𝚃𝙾',
-descricao: 'ᴇɴᴠɪᴀʀ ᴅᴏᴄᴜᴍᴇɴᴛᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ'
+await base.apagar(tokito, info)
+await tokito.sendMessage(from, {
+text: mess.antiBloqueio('🖼️', '𝙰𝙽𝚃𝙸-𝙵𝙾𝚃𝙾', base.numero(sender), 'ᴀ ɪᴍᴀɢᴇᴍ ғᴏɪ ᴅᴇᴛᴇᴄᴛᴀᴅᴀ ᴇ ᴀᴘᴀɢᴀᴅᴀ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀᴍᴇɴᴛᴇ.'),
+contextInfo: {
+...newsletter,
+mentionedJid: [sender]
+}
+}, { quoted: selo }).catch(() => {
 })
+return true
 }
 
 module.exports = {

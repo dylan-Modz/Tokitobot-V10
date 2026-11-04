@@ -20,8 +20,8 @@
  * ============================================================
  */
 
-const base = require('../../sistemas/grupos.js')
-const parcerias = require('../../sistemas/parcerias.js')
+const base = require('../grupos.js')
+const parcerias = require('../parcerias.js')
 const mess = require('../../mensagens/mensagens.js')
 
 const regex = /(?:https?:\/\/)?(?:www\.)?(?:chat\.whatsapp\.com\/[^\s]+|whatsapp\.com\/channel\/[^\s]+)/i

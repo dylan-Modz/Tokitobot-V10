@@ -28,8 +28,8 @@
  * ============================================================
  */
 
-const base = require('../../sistemas/grupos.js')
-const toggle = require('../../sistemas/toggle.js')
+const base = require('../grupos.js')
+const toggle = require('../toggle.js')
 const mess = require('../../mensagens/mensagens.js')
 
 const configurar = ctx => toggle({

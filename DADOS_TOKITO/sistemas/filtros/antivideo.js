@@ -28,30 +28,34 @@
  * ============================================================
  */
 
-const base = require('../../sistemas/grupos.js')
-const toggle = require('../../sistemas/toggle.js')
-const punir = require('../../sistemas/punir.js')
+const base = require('../grupos.js')
+const toggle = require('../toggle.js')
+const mess = require('../../mensagens/mensagens.js')
 
 const configurar = ctx => toggle({
 ...ctx,
-campo: 'antilocalizacao',
-emoji: '📍',
-titulo: '𝙰𝙽𝚃𝙸-𝙻𝙾𝙲𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾',
-descricao: 'ᴀᴘᴀɢᴀ ʟᴏᴄᴀʟɪᴢᴀᴄ̧ᴏ̃ᴇs ᴇɴᴠɪᴀᴅᴀs ɴᴏ ɢʀᴜᴘᴏ ᴇ ʀᴇᴍᴏᴠᴇ ᴏ ᴍᴇᴍʙʀᴏ.'
+campo: 'antivideo',
+emoji: '🎥',
+titulo: '𝙰𝙽𝚃𝙸-𝚅𝙸́𝙳𝙴𝙾',
+descricao: 'ᴀᴘᴀɢᴀ ᴠɪ́ᴅᴇᴏs ᴇɴᴠɪᴀᴅᴏs ᴘᴏʀ ᴍᴇᴍʙʀᴏs ɴᴏ ɢʀᴜᴘᴏ.'
 })
 
 const verificar = async (ctx) => {
-const { mensagem, isGroup, isGroupAdmins, isBotGroupAdmins, config } = ctx
-const msg = base.desenrolar(mensagem)
-if (!isGroup || !config?.antilocalizacao || isGroupAdmins || !isBotGroupAdmins)
+const { tokito, info, from, sender, mensagem, isGroup, isGroupAdmins, isBotGroupAdmins, config, newsletter, selo } = ctx
+if (!isGroup || !config?.antivideo || isGroupAdmins || !base.desenrolar(mensagem)?.videoMessage)
 return false
-if (!msg?.locationMessage && !msg?.liveLocationMessage)
+if (!isBotGroupAdmins)
 return false
-return punir(ctx, {
-emoji: '📍',
-titulo: '𝙰𝙽𝚃𝙸-𝙻𝙾𝙲𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾',
-descricao: 'ᴇɴᴠɪᴀʀ ʟᴏᴄᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ'
+await base.apagar(tokito, info)
+await tokito.sendMessage(from, {
+text: mess.antiBloqueio('🎥', '𝙰𝙽𝚃𝙸-𝚅𝙸́𝙳𝙴𝙾', base.numero(sender), 'ᴏ ᴠɪ́ᴅᴇᴏ ғᴏɪ ᴅᴇᴛᴇᴄᴛᴀᴅᴏ ᴇ ᴀᴘᴀɢᴀᴅᴏ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀᴍᴇɴᴛᴇ.'),
+contextInfo: {
+...newsletter,
+mentionedJid: [sender]
+}
+}, { quoted: selo }).catch(() => {
 })
+return true
 }
 
 module.exports = {

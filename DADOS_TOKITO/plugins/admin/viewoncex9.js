@@ -1,6 +1,6 @@
 /* Tokito Bot V10 — comando ViewOnce X9. */
 const dylan = require('../../database/lib/comandos')
-const filtro = require('./filtro-viewoncex9.js')
+const filtro = require('../../sistemas/filtros/viewoncex9.js')
 dylan.setCommand({
 nome: 'viewoncex9',
 comandos: ['viewoncex9', 'vwx9'],

@@ -28,9 +28,9 @@
  * ============================================================
  */
 
-const base = require('../../sistemas/grupos.js')
-const toggle = require('../../sistemas/toggle.js')
-const punir = require('../../sistemas/punir.js')
+const base = require('../grupos.js')
+const toggle = require('../toggle.js')
+const punir = require('../punir.js')
 
 const configurar = ctx => toggle({
 ...ctx,

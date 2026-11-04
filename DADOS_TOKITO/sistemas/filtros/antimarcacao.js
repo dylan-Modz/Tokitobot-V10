@@ -28,34 +28,30 @@
  * ============================================================
  */
 
-const base = require('../../sistemas/grupos.js')
-const toggle = require('../../sistemas/toggle.js')
-const mess = require('../../mensagens/mensagens.js')
+const toggle = require('../toggle.js')
+const punir = require('../punir.js')
 
 const configurar = ctx => toggle({
 ...ctx,
-campo: 'antivideo',
-emoji: '🎥',
-titulo: '𝙰𝙽𝚃𝙸-𝚅𝙸́𝙳𝙴𝙾',
-descricao: 'ᴀᴘᴀɢᴀ ᴠɪ́ᴅᴇᴏs ᴇɴᴠɪᴀᴅᴏs ᴘᴏʀ ᴍᴇᴍʙʀᴏs ɴᴏ ɢʀᴜᴘᴏ.'
+campo: 'antimarcacao',
+emoji: '🏷️',
+titulo: '𝙰𝙽𝚃𝙸-𝙼𝙰𝚁𝙲𝙰𝙲̧𝙰̃𝙾',
+descricao: 'ʀᴇᴍᴏᴠᴇ ᴍᴇᴍʙʀᴏs ǫᴜᴇ ᴍᴀʀᴄᴀʀᴇᴍ ᴘʀᴀᴛɪᴄᴀᴍᴇɴᴛᴇ ᴛᴏᴅᴏ ᴏ ɢʀᴜᴘᴏ.'
 })
 
 const verificar = async (ctx) => {
-const { tokito, info, from, sender, mensagem, isGroup, isGroupAdmins, isBotGroupAdmins, config, newsletter, selo } = ctx
-if (!isGroup || !config?.antivideo || isGroupAdmins || !base.desenrolar(mensagem)?.videoMessage)
+const { isGroup, isGroupAdmins, isBotGroupAdmins, config, menc_jid2, groupMembers } = ctx
+if (!isGroup || !config?.antimarcacao || isGroupAdmins || !isBotGroupAdmins)
 return false
-if (!isBotGroupAdmins)
+const total = Array.isArray(groupMembers) ? groupMembers.length : 0
+const marcados = [...new Set(Array.isArray(menc_jid2) ? menc_jid2.filter(Boolean) : [])]
+if (total < 3 || marcados.length < total - 1)
 return false
-await base.apagar(tokito, info)
-await tokito.sendMessage(from, {
-text: mess.antiBloqueio('🎥', '𝙰𝙽𝚃𝙸-𝚅𝙸́𝙳𝙴𝙾', base.numero(sender), 'ᴏ ᴠɪ́ᴅᴇᴏ ғᴏɪ ᴅᴇᴛᴇᴄᴛᴀᴅᴏ ᴇ ᴀᴘᴀɢᴀᴅᴏ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀᴍᴇɴᴛᴇ.'),
-contextInfo: {
-...newsletter,
-mentionedJid: [sender]
-}
-}, { quoted: selo }).catch(() => {
+return punir(ctx, {
+emoji: '🏷️',
+titulo: '𝙰𝙽𝚃𝙸-𝙼𝙰𝚁𝙲𝙰𝙲̧𝙰̃𝙾',
+descricao: 'ᴍᴀʀᴄᴀʀ ᴘʀᴀᴛɪᴄᴀᴍᴇɴᴛᴇ ᴛᴏᴅᴏs ᴏs ᴍᴇᴍʙʀᴏs'
 })
-return true
 }
 
 module.exports = {

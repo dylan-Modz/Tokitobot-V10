@@ -9,10 +9,10 @@
  * ============================================================
  */
 
-const base = require('../../sistemas/grupos.js')
-const toggle = require('../../sistemas/toggle.js')
-const adv = require('../../sistemas/advertencias.js')
-const parcerias = require('../../sistemas/parcerias.js')
+const base = require('../grupos.js')
+const toggle = require('../toggle.js')
+const adv = require('../advertencias.js')
+const parcerias = require('../parcerias.js')
 const mess = require('../../mensagens/mensagens.js')
 
 const configurar = ctx => toggle({
