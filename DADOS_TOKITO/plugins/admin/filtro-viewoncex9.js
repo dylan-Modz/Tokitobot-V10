@@ -1,6 +1,7 @@
 /* Tokito Bot V10 — ViewOnce X9 (restrição de mídia comum em grupos). */
 const base = require('../../sistemas/grupos.js')
 const toggle = require('../../sistemas/toggle.js')
+const mess = require('../../mensagens/mensagens.js')
 const antivisu = require('./filtro-antivisu.js')
 const avisos = new Map()
 const ESPERA = 60000
@@ -14,7 +15,7 @@ descricao: 'ᴘᴇʀᴍɪᴛᴇ sᴏᴍᴇɴᴛᴇ ғᴏᴛᴏs, ᴠɪ́ᴅᴇ�
 })
 
 const verificar = async ctx => {
-const { tokito, info, from, sender, original, mensagem, isGroup, isBotGroupAdmins, config, newsletter } = ctx
+const { tokito, info, from, sender, original, mensagem, isGroup, isBotGroupAdmins, config, newsletter, selo } = ctx
 if (!isGroup || config?.viewOncex9 !== true || !isBotGroupAdmins || info?.key?.fromMe === true) return false
 const raiz = original || info?.message || mensagem || {}
 const msg = base.desenrolar(raiz)
@@ -26,10 +27,14 @@ const chave = from + '|' + String(sender || info?.key?.participant || '')
 if (agora - (avisos.get(chave) || 0) > ESPERA) {
 avisos.set(chave, agora)
 const autor = sender || info?.key?.participantAlt || info?.key?.participant || ''
-await tokito.sendMessage(from, {
-text: '🔐 *VIEW ONCE X9*\n\nAqui fotos, vídeos e áudios precisam ser enviados em visualização única. A mídia comum foi apagada.',
-contextInfo: { ...(newsletter || {}), ...(autor ? { mentionedJid: [autor] } : {}) }
-}).catch(() => {})
+const aviso = {
+text: mess.antiBloqueio('🔐', '𝚅𝙸𝙴𝚆 𝙾𝙽𝙲𝙴 𝚇𝟿', base.numero(autor), 'ᴀ ᴍɪ́ᴅɪᴀ ᴄᴏᴍᴜᴍ ғᴏɪ ᴅᴇᴛᴇᴄᴛᴀᴅᴀ ᴇ ᴀᴘᴀɢᴀᴅᴀ. ᴇɴᴠɪᴇ ғᴏᴛᴏs, ᴠɪ́ᴅᴇᴏs ᴇ ᴀ́ᴜᴅɪᴏs ᴇᴍ ᴠɪsᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ᴜ́ɴɪᴄᴀ.'),
+contextInfo: { ...(newsletter || {}), mentionedJid: autor ? [autor] : [] }
+}
+if (selo?.message)
+await tokito.sendMessage(from, aviso, { quoted: selo }).catch(() => {})
+else
+await tokito.sendMessage(from, aviso).catch(() => {})
 }
 if (avisos.size > 2500) {
 for (const [id, horario] of avisos)
