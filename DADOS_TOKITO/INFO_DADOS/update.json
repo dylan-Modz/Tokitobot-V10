@@ -6,64 +6,65 @@
   "ref": "main",
   "publishedAt": "2026-11-04T20:40:21.292Z",
   "changelog": [
-    "[Novidade] feat(tokito): add ViewOnce X9 group mode, toggle/status and X9 cache fallback (V10.2.81)",
-    "A versão 10.2.81 já está disponível para atualização.",
-    "Mensagens atualizado",
-    "Ativar atualizado",
-    "Filtro Viewoncex9 atualizado",
-    "Open atualizado",
-    "Viewoncex9 atualizado",
-    "Funcoes atualizado",
-    "Toggle atualizado",
-    "Package atualizado"
+    "ViewOnce X9: permite só fotos, vídeos e áudios de visualização única quando ativado no grupo; apaga mídias comuns.",
+    "Novo comando viewoncex9 1/0, opção no ativar e indicador no status.",
+    "Open/revelar: usa como alternativa o cache de mensagens já recebidas pelo sistema X9, quando disponível."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
-  "title": "feat(tokito): add ViewOnce X9 group mode, toggle/status and X9 cache fallback (V10.2.81)",
-  "notice": "A versão 10.2.81 já está disponível para atualização.",
+  "title": "Tokito Bot V10.2.81 — ViewOnce X9",
+  "notice": "ViewOnce X9 disponível para grupos: comando viewoncex9 1/0, menu ativar e status.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
       "sha256": "28666144c642af064a6f5a7ea53dce64e9237885897cebbde34c6da940bc603a",
-      "size": 231630
+      "size": 231630,
+      "gitSha": "9bbeca66ebc6303086ea7694d9773e77f43d40ea"
     },
     {
       "path": "DADOS_TOKITO/plugins/admin/ativar.js",
       "sha256": "2ac9b37a02e5b3a0c658627f811e5823525407fb330549384e67191f4ab42f7e",
-      "size": 11039
+      "size": 11039,
+      "gitSha": "601b5e595cd4ecbbb2ad81c5de9568c261bae6c7"
     },
     {
       "path": "DADOS_TOKITO/plugins/admin/filtro-viewoncex9.js",
       "sha256": "0ae7f0cece42dcf33831c1be3b937a38f02cca75829edf3bab5dbe484c2320e3",
-      "size": 1820
+      "size": 1820,
+      "gitSha": "f0bcc855913947c21981dab8fc4f3b357fa39ff0"
     },
     {
       "path": "DADOS_TOKITO/plugins/admin/open.js",
       "sha256": "b7ed8f7d69364078694b556f1230910520a9015254300cfeb42f1182921323b4",
-      "size": 10346
+      "size": 10346,
+      "gitSha": "b58a4ba5996c464e1559bca0b679830d04d912cd"
     },
     {
       "path": "DADOS_TOKITO/plugins/admin/viewoncex9.js",
       "sha256": "a33e459c4ee08235a48e2f86b8078c1c7dc112d9ae10f97aa2ee9b6c4fcb48d8",
-      "size": 771
+      "size": 771,
+      "gitSha": "500d24a1d0ea57bc856ef4b5d3bb86db40069516"
     },
     {
       "path": "DADOS_TOKITO/sistemas/funcoes.js",
       "sha256": "3ff9baadfd4c9a2ba435da07fcc95d5171f0a85b0d7526f023a2aa52f9452a57",
-      "size": 6170
+      "size": 6170,
+      "gitSha": "9da3159fde093b6d04a1845693b6456754dae822"
     },
     {
       "path": "DADOS_TOKITO/sistemas/toggle.js",
       "sha256": "d35ccffb892e7ef942c297dae36400a87441e823c3d3196e8a4a65a0f5ef9981",
-      "size": 2580
+      "size": 2580,
+      "gitSha": "f3b4802566c0b6aae37146ca9dfccfed8c9b2933"
     },
     {
       "path": "package.json",
       "sha256": "0b46dd9fa9067601a413c27e2dc38762d5e290de0195856a076969d9ac119b21",
-      "size": 1166
+      "size": 1166,
+      "gitSha": "2d04332a271b7b4e24d79abfddf4d9b5b6a58890"
     }
   ],
   "releases": [
@@ -4446,58 +4447,61 @@
       "fromVersion": "10.2.80",
       "channel": "stable",
       "type": "Novidade",
-      "title": "feat(tokito): add ViewOnce X9 group mode, toggle/status and X9 cache fallback (V10.2.81)",
-      "notice": "A versão 10.2.81 já está disponível para atualização.",
+      "title": "Tokito Bot V10.2.81 — ViewOnce X9",
+      "notice": "ViewOnce X9 disponível para grupos: comando viewoncex9 1/0, menu ativar e status.",
       "changelog": [
-        "Mensagens atualizado",
-        "Ativar atualizado",
-        "Filtro Viewoncex9 atualizado",
-        "Open atualizado",
-        "Viewoncex9 atualizado",
-        "Funcoes atualizado",
-        "Toggle atualizado",
-        "Package atualizado"
+        "ViewOnce X9: permite só fotos, vídeos e áudios de visualização única quando ativado no grupo; apaga mídias comuns.",
+        "Novo comando viewoncex9 1/0, opção no ativar e indicador no status.",
+        "Open/revelar: usa como alternativa o cache de mensagens já recebidas pelo sistema X9, quando disponível."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/mensagens/mensagens.js",
           "sha256": "28666144c642af064a6f5a7ea53dce64e9237885897cebbde34c6da940bc603a",
-          "size": 231630
+          "size": 231630,
+          "gitSha": "9bbeca66ebc6303086ea7694d9773e77f43d40ea"
         },
         {
           "path": "DADOS_TOKITO/plugins/admin/ativar.js",
           "sha256": "2ac9b37a02e5b3a0c658627f811e5823525407fb330549384e67191f4ab42f7e",
-          "size": 11039
+          "size": 11039,
+          "gitSha": "601b5e595cd4ecbbb2ad81c5de9568c261bae6c7"
         },
         {
           "path": "DADOS_TOKITO/plugins/admin/filtro-viewoncex9.js",
           "sha256": "0ae7f0cece42dcf33831c1be3b937a38f02cca75829edf3bab5dbe484c2320e3",
-          "size": 1820
+          "size": 1820,
+          "gitSha": "f0bcc855913947c21981dab8fc4f3b357fa39ff0"
         },
         {
           "path": "DADOS_TOKITO/plugins/admin/open.js",
           "sha256": "b7ed8f7d69364078694b556f1230910520a9015254300cfeb42f1182921323b4",
-          "size": 10346
+          "size": 10346,
+          "gitSha": "b58a4ba5996c464e1559bca0b679830d04d912cd"
         },
         {
           "path": "DADOS_TOKITO/plugins/admin/viewoncex9.js",
           "sha256": "a33e459c4ee08235a48e2f86b8078c1c7dc112d9ae10f97aa2ee9b6c4fcb48d8",
-          "size": 771
+          "size": 771,
+          "gitSha": "500d24a1d0ea57bc856ef4b5d3bb86db40069516"
         },
         {
           "path": "DADOS_TOKITO/sistemas/funcoes.js",
           "sha256": "3ff9baadfd4c9a2ba435da07fcc95d5171f0a85b0d7526f023a2aa52f9452a57",
-          "size": 6170
+          "size": 6170,
+          "gitSha": "9da3159fde093b6d04a1845693b6456754dae822"
         },
         {
           "path": "DADOS_TOKITO/sistemas/toggle.js",
           "sha256": "d35ccffb892e7ef942c297dae36400a87441e823c3d3196e8a4a65a0f5ef9981",
-          "size": 2580
+          "size": 2580,
+          "gitSha": "f3b4802566c0b6aae37146ca9dfccfed8c9b2933"
         },
         {
           "path": "package.json",
           "sha256": "0b46dd9fa9067601a413c27e2dc38762d5e290de0195856a076969d9ac119b21",
-          "size": 1166
+          "size": 1166,
+          "gitSha": "2d04332a271b7b4e24d79abfddf4d9b5b6a58890"
         }
       ],
       "delete": [],
@@ -4514,5 +4518,5 @@
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.72"
+  "publicVersion": "10.2.81"
 }
