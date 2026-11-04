@@ -1,38 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.71",
+  "version": "10.2.72",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-10-30T20:21:22.868Z",
+  "publishedAt": "2026-11-04T17:16:16.409Z",
   "changelog": [
-    "[Status de Grupo] O comando mencstatus e seus atalhos statusgp, statusgrupo e testestatus foram removidos do Tokito Bot V10.",
-    "[Motivo] Estávamos tentando corrigir um problema na publicação de status de grupo, mas o recurso não ficou confiável. Por isso, decidi retirar o comando e não utilizá-lo mais no bot.",
-    "[Menus] A opção mencstatus foi retirada do menu de administradores; o comando status normal continua disponível.",
-    "[Stone WPP] As alterações experimentais na biblioteca foram revertidas; dependência restaurada para @stone-wpp/ofc 1.0.4.",
-    "[Atualização] Remoção incremental: os arquivos e dados pessoais dos usuários permanecem protegidos."
+    "[Correção] fix(tokito): unwrap Stone view-once messages and handle unavailable quoted media",
+    "A versão 10.2.72 já está disponível para atualização.",
+    "Open atualizado"
   ],
-  "delete": [
-    "DADOS_TOKITO/plugins/admin/mencstatus.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Remoção",
-  "title": "Remoção do comando Status de Grupo",
-  "notice": "Eu estava tentando resolver um problema no Status de Grupo, mas o recurso não funcionou como esperado. Decidi remover o comando mencstatus e seus atalhos do Tokito Bot, pois não irei mais utilizá-lo.",
+  "type": "Correção",
+  "title": "fix(tokito): unwrap Stone view-once messages and handle unavailable quoted media",
+  "notice": "A versão 10.2.72 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "gitSha": "ea84857d44a874ac79d8077956eba05495794a18",
-      "size": 1166,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "gitSha": "cf3559600d7fb4628c0fb59523a38a9e72696af6",
-      "size": 78838,
-      "sha256": ""
+      "path": "DADOS_TOKITO/plugins/admin/open.js",
+      "sha256": "1dc73741df9272223ab1165bf7f90e1bb0b998c65253a9792489cf611639739e",
+      "size": 5653
     }
   ],
   "releases": [
@@ -4619,6 +4608,27 @@
       ],
       "required": false,
       "publishedAt": "2026-10-30T20:21:22.868Z"
+    },
+    {
+      "version": "10.2.72",
+      "fromVersion": "10.2.71",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(tokito): unwrap Stone view-once messages and handle unavailable quoted media",
+      "notice": "A versão 10.2.72 já está disponível para atualização.",
+      "changelog": [
+        "Open atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/open.js",
+          "sha256": "1dc73741df9272223ab1165bf7f90e1bb0b998c65253a9792489cf611639739e",
+          "size": 5653
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-04T17:16:16.407Z"
     }
   ],
   "mode": "incremental",
