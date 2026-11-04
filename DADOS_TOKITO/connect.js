@@ -89,8 +89,15 @@ const id = item?.key?.id
 const mensagem = item?.message || item?.update?.message
 if (!jid || !id) continue
 if (!mensagem) {
-if (process.env.TOKITO_DEBUG_REVELAR === '1' && item?.key?.isViewOnce)
-console.log('[REVELAR RX]', { tipoEvento: 'viewOnceStub', temConteudo: false, temChave: false, temCaminho: false })
+if (item?.key?.isViewOnce) {
+console.log('[REVELAR RX]', {
+tipoEvento: item.update ? 'update' : 'upsert',
+tipo: 'viewOnceStub',
+temConteudo: false,
+temChave: false,
+temCaminho: false
+})
+}
 continue
 }
 const conteudo = envolverMidiaOriginal(mensagem)
@@ -104,13 +111,20 @@ const antiga = cache.get(chave)
 if (!completa && antiga) continue
 cache.delete(chave)
 cache.set(chave, { message: mensagem, key: item.key, at: agora })
-if (process.env.TOKITO_DEBUG_REVELAR === '1') {
+// Diagnóstico mínimo de view-once, habilitado automaticamente na hospedagem.
+// Não registra IDs, remetentes, URLs, mediaKey, miniaturas ou conteúdo.
+const viewOnce = Boolean(
+item.key?.isViewOnce || media.viewOnce ||
+mensagem.viewOnceMessage || mensagem.viewOnceMessageV2 ||
+mensagem.viewOnceMessageV2Extension
+)
+if (viewOnce) {
 console.log('[REVELAR RX]', {
 tipo: conteudo?.imageMessage ? 'image' : conteudo?.audioMessage ? 'audio' : 'video',
 temChave: Boolean(media.mediaKey),
 temCaminho: Boolean(media.url || media.directPath),
 tipoEvento: item.update ? 'update' : 'upsert',
-viewOnce: Boolean(item.key?.isViewOnce || media.viewOnce)
+viewOnce: true
 })
 }
 }
