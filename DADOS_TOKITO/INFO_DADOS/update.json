@@ -6,22 +6,29 @@
   "ref": "main",
   "publishedAt": "2026-11-04T19:55:19.444Z",
   "changelog": [
-    "[Correção] fix(revelar): diagnose WhatsApp view-once stubs that arrive with no message payload",
-    "A versão 10.2.79 já está disponível para atualização.",
-    "Conexão do bot atualizada"
+    "[Atualizador] Corrigida a verificação de integridade de connect.js: downloads de versões antigas agora possuem identificador imutável do GitHub para recuperação quando o link principal entregar outra revisão.",
+    "[Arquivos] Arquivos recentes da 10.2.73 à 10.2.79 vinculados ao blob correto do GitHub, com SHA-256 e tamanho validados.",
+    "[Revelar] Preservadas as correções de captura e download do comando open/revelar, sem alterar a biblioteca Stone."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(revelar): diagnose WhatsApp view-once stubs that arrive with no message payload",
-  "notice": "A versão 10.2.79 já está disponível para atualização.",
+  "title": "Tokito Bot V10.2.79 — reparo de integridade na atualização",
+  "notice": "Reparo do instalador incremental: arquivos verificados pelo hash e pelo identificador exato no GitHub.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/connect.js",
       "sha256": "3b877f58442bc16df69d7f2c35f7ea0ed557fd9516b23497a5add40879fbe451",
+      "gitSha": "428a096f0a7eb0081c70b0f4ff5189da4553e404",
       "size": 48485
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/open.js",
+      "sha256": "ca5fa389010603b3586df269cbc89854fe65d6d060e547cd7a7e0a0fff80fccd",
+      "gitSha": "23eab4e377309a9753e6d97ee74349d06c750447",
+      "size": 9819
     }
   ],
   "releases": [
@@ -4274,7 +4281,8 @@
         {
           "path": "DADOS_TOKITO/connect.js",
           "sha256": "20a7b90f55849b261368542453a30b9d3e55675a852ac33e435838770a57227d",
-          "size": 47522
+          "size": 47522,
+          "gitSha": "e2a6296e2f769150e644d1837c4675709d99cd46"
         }
       ],
       "delete": [],
@@ -4295,7 +4303,8 @@
         {
           "path": "DADOS_TOKITO/plugins/admin/open.js",
           "sha256": "a43b77e7d3b2bc9fa77f35baa871267866b6df9709adc0545b4f9a459c812aae",
-          "size": 6610
+          "size": 6610,
+          "gitSha": "85331d22ac674785871620d4e3618c02aff34dec"
         }
       ],
       "delete": [],
@@ -4316,7 +4325,8 @@
         {
           "path": "package.json",
           "sha256": "e2bdaaa93f42c75b85db88cfa0df8b2e7576649d58e26ccc071873f8a3eb19d4",
-          "size": 1166
+          "size": 1166,
+          "gitSha": "46c2489ad09374d031f014599a23776a7c156e5b"
         }
       ],
       "delete": [],
@@ -4337,7 +4347,8 @@
         {
           "path": "DADOS_TOKITO/database/lib/deps.js",
           "sha256": "5efb00ab1ec97a9a33db592280f5eeeb490cfbfdf45e31d5560c48f90e3cfa42",
-          "size": 4432
+          "size": 4432,
+          "gitSha": "b80ebe767d2843e8a11320b49d6ffd535165f7f2"
         }
       ],
       "delete": [],
@@ -4358,7 +4369,8 @@
         {
           "path": "DADOS_TOKITO/connect.js",
           "sha256": "e971ff0a6b27ed7d65a4810546e48458570ccdf0c7b6875e5f4b491905f5c01d",
-          "size": 48268
+          "size": 48268,
+          "gitSha": "8f057790c7b4f72241c536c3cdd36177e781a32a"
         }
       ],
       "delete": [],
@@ -4380,12 +4392,14 @@
         {
           "path": "DADOS_TOKITO/connect.js",
           "sha256": "518ad0fc9bc75db66d05971bab2c227d56db871130942cc21fd5406b9d185710",
-          "size": 48283
+          "size": 48283,
+          "gitSha": "cff652a46ebef9e2270c4cf09337335939d0d5ab"
         },
         {
           "path": "DADOS_TOKITO/plugins/admin/open.js",
           "sha256": "ca5fa389010603b3586df269cbc89854fe65d6d060e547cd7a7e0a0fff80fccd",
-          "size": 9819
+          "size": 9819,
+          "gitSha": "23eab4e377309a9753e6d97ee74349d06c750447"
         }
       ],
       "delete": [],
@@ -4397,16 +4411,25 @@
       "fromVersion": "10.2.78",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix(revelar): diagnose WhatsApp view-once stubs that arrive with no message payload",
-      "notice": "A versão 10.2.79 já está disponível para atualização.",
+      "title": "Tokito Bot V10.2.79 — reparo de integridade na atualização",
+      "notice": "Reparo do instalador incremental: arquivos verificados pelo hash e pelo identificador exato no GitHub.",
       "changelog": [
-        "Conexão do bot atualizada"
+        "[Atualizador] Corrigida a verificação de integridade de connect.js: downloads de versões antigas agora possuem identificador imutável do GitHub para recuperação quando o link principal entregar outra revisão.",
+        "[Arquivos] Arquivos recentes da 10.2.73 à 10.2.79 vinculados ao blob correto do GitHub, com SHA-256 e tamanho validados.",
+        "[Revelar] Preservadas as correções de captura e download do comando open/revelar, sem alterar a biblioteca Stone."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/connect.js",
           "sha256": "3b877f58442bc16df69d7f2c35f7ea0ed557fd9516b23497a5add40879fbe451",
+          "gitSha": "428a096f0a7eb0081c70b0f4ff5189da4553e404",
           "size": 48485
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/open.js",
+          "sha256": "ca5fa389010603b3586df269cbc89854fe65d6d060e547cd7a7e0a0fff80fccd",
+          "gitSha": "23eab4e377309a9753e6d97ee74349d06c750447",
+          "size": 9819
         }
       ],
       "delete": [],
