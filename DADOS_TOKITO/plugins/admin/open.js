@@ -167,6 +167,7 @@ categoria: 'admin'
 
 async executar(ctx) {
 with (ctx) {
+let etapa = 'preparando'
 try {
 if (!isGroup)
 return reply(mess.sogrupo())
@@ -196,7 +197,7 @@ stanzaId: contexto?.stanzaId || '',
 fromMe: Boolean(itemSalvo?.key?.fromMe),
 participant: itemSalvo?.key?.participant || contexto?.participant || ''
 }
-let etapa = 'baixando'
+etapa = 'baixando'
 const mediaSalva = extrairMedia(salvo)
 const midias = []
 const addMedia = valor => {
