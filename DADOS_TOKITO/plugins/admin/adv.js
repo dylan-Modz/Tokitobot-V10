@@ -29,6 +29,7 @@
  */
 
 const adv = require('../../sistemas/advertencias')
+const hierarquia = require('../../sistemas/hierarquia.js')
 
 const dylan = require('../../database/lib/comandos')
 
@@ -46,15 +47,32 @@ async executar(ctx) {
 const { isGroup, isGroupAdmins, isBotGroupAdmins, SoDono, menc_jid2, menc_prt, q, sender, dataGp, setGp, reply, mess, tokito, from, canalInfo, selo, normalizar } = ctx
 if (!isGroup)
 return reply(mess.sogrupo())
-if (!isGroupAdmins && !SoDono)
-return reply(mess.soadm())
 if (!isBotGroupAdmins)
 return reply(mess.botadm())
-const alvo = normalizar((menc_jid2 || [])[0] || menc_prt || '')
-if (!alvo)
+const destino = normalizar((menc_jid2 || [])[0] || menc_prt || '')
+if (!destino)
 return reply(mess.advUso(ctx.prefix))
-if (alvo === sender)
+
+const permissao = await hierarquia.advertencia(ctx, destino)
+if (!permissao.ok) {
+if (permissao.motivo === 'sem_permissao')
+return reply(mess.soadm())
+if (permissao.motivo === 'proprio_usuario')
 return reply(mess.advMesmo())
+const mensagens = {
+indisponivel: 'Não consegui consultar os cargos atuais do grupo. Nenhuma advertência foi aplicada.',
+fora_do_grupo: 'O usuário não foi encontrado na lista atual de participantes do grupo.',
+dono_protegido: 'O dono do grupo, os donos do bot e o próprio bot não podem receber advertências.',
+admin_protegido: 'Apenas o dono do grupo ou do bot pode advertir administradores.'
+}
+return reply(mess.padraoAviso({
+emoji: '🛡️',
+titulo: 'ADV NÃO PERMITIDA',
+descricao: mensagens[permissao.motivo] || 'Você não tem permissão para aplicar essa advertência.'
+}))
+}
+
+const alvo = permissao.alvo
 const motivo = String(q || '').replace(/@\S+/g, '').trim() || 'Não informado'
 const r = adv.adicionar({
 dataGp,
@@ -67,14 +85,17 @@ autor: sender
 let removido = false
 if (r.remove) {
 try {
-await tokito.groupParticipantsUpdate(from, [alvo], 'remove')
-removido = true
+const resposta = await tokito.groupParticipantsUpdate(from, [alvo], 'remove')
+const status = Array.isArray(resposta) ? resposta[0]?.status : resposta?.status
+removido = !status || /^2/.test(String(status))
+} catch (error) {
+console.log('[ADV] Falha ao remover após 3 advertências:', error?.message || error)
 }
-catch {
 }
-}
+const aviso = mess.advAplicada(alvo, r.quantidade, r.limite, motivo, removido) +
+(r.remove && !removido ? '\n> ⚠️ ׄ ( ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ʀᴇᴍᴏᴠᴇʀ ᴏ ᴜsᴜᴀ́ʀɪᴏ. )' : '')
 await tokito.sendMessage(from, {
-text: mess.advAplicada(alvo, r.quantidade, r.limite, motivo, removido),
+text: aviso,
 contextInfo: canalInfo([alvo, sender])
 }, { quoted: selo })
 }
