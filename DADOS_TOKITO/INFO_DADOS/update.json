@@ -1,130 +1,162 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.82",
+  "version": "10.2.83",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-04T22:19:18.098Z",
+  "publishedAt": "2026-11-04T22:26:51.363Z",
   "changelog": [
-    "[Correção] fix(viewoncex9): match Tokito anti-filter alert design and quoted seal",
-    "A versão 10.2.82 já está disponível para atualização.",
-    "Filtro Viewoncex9 atualizado"
+    "[Melhoria] refactor(tokito): organize 15 anti-filters in sistemas/filtros and prepare V10.2.83",
+    "A versão 10.2.83 já está disponível para atualização.",
+    "Viewoncex9 atualizado",
+    "Filtro Antiaudio movido",
+    "Antiaudio atualizado",
+    "Filtro Antibot movido",
+    "Antibot atualizado",
+    "Filtro Anticanal movido",
+    "Anticanal atualizado",
+    "Filtro Anticontato movido",
+    "Anticontato atualizado",
+    "Filtro Antidocumento movido",
+    "Antidocumento atualizado",
+    "Filtro Antifoto movido",
+    "Antifoto atualizado",
+    "Filtro Antilink movido",
+    "Antilink atualizado",
+    "Filtro Antilocalizacao movido",
+    "Antilocalizacao atualizado",
+    "Filtro Antimarcacao movido",
+    "Antimarcacao atualizado",
+    "Filtro Antispam movido",
+    "Antispam atualizado",
+    "Filtro Antistatus movido",
+    "Antistatus atualizado",
+    "Filtro Antisticker movido",
+    "Antisticker atualizado",
+    "Filtro Antivideo movido",
+    "Antivideo atualizado",
+    "Filtro Antivisu movido",
+    "Antivisu atualizado",
+    "Filtro Viewoncex9 movido",
+    "Funcoes atualizado",
+    "Package atualizado"
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/admin/filtro-antiaudio.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antibot.js",
+    "DADOS_TOKITO/plugins/admin/filtro-anticanal.js",
+    "DADOS_TOKITO/plugins/admin/filtro-anticontato.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antidocumento.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antifoto.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antilink.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antilocalizacao.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antimarcacao.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antispam.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antistatus.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antisticker.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antivideo.js",
+    "DADOS_TOKITO/plugins/admin/filtro-antivisu.js",
+    "DADOS_TOKITO/plugins/admin/filtro-viewoncex9.js"
+  ],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix(viewoncex9): match Tokito anti-filter alert design and quoted seal",
-  "notice": "A versão 10.2.82 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "refactor(tokito): organize 15 anti-filters in sistemas/filtros and prepare V10.2.83",
+  "notice": "A versão 10.2.83 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/filtro-viewoncex9.js",
-      "sha256": "809a9e72cad67f623bb1afec2ef7e872f3064abafa07034e16a10557106a7333",
-      "size": 2176
+      "path": "DADOS_TOKITO/plugins/admin/viewoncex9.js",
+      "sha256": "85d9605d3df6cfa7ede54caf2972cf8f90133a52ab135d3aa6cfa7d27b1ce1f5",
+      "size": 785
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antiaudio.js",
+      "sha256": "838970bb5cd1f3dcd4bd14aa608aa601b60567fd859460de301653acb436f29e",
+      "size": 1957
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antibot.js",
+      "sha256": "675e41f6fd57a0dc300fe712e229e8938214cfc8994e10573a73f18553ff7cea",
+      "size": 3182
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/anticanal.js",
+      "sha256": "682841c342ee375f0d7ef6258b3986b150f2ba7611fef259deaecc1b348b9e07",
+      "size": 2826
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/anticontato.js",
+      "sha256": "e28929902c28d19d89c09d1d8384b0b2719665f963d2d3144288beb81fd2a0a4",
+      "size": 2013
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antidocumento.js",
+      "sha256": "e8ef23d7996909a41b9175eb3728f8217dfd1a5c76d7bd9e27a2d33ffea6f07a",
+      "size": 2016
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antifoto.js",
+      "sha256": "35d85c7c76988bb2d7b86a79534dda9ab7c52584403ac5a4404feafeddef07be",
+      "size": 2213
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antilink.js",
+      "sha256": "09b2feab5d6bdec4dd8bde83b6a27e6a17e97b6edf4eeb15069356ed22c61e17",
+      "size": 5419
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antilocalizacao.js",
+      "sha256": "1746e6e50ecee5738473f5591d54803fc7f7bc4c4663b6fc0a595cd7bb24a83a",
+      "size": 2089
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antimarcacao.js",
+      "sha256": "385569bc69469195aef5e16859f4ebb9bdfb098f8fbef589fbf66ca22c47542f",
+      "size": 2160
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antispam.js",
+      "sha256": "04294df545bded9d15c87eaa3368f0ffcd1d8e0b141b51dcc4a65c6f785b6010",
+      "size": 3643
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antistatus.js",
+      "sha256": "67faf73b966431794bcb8594cb97db1b132737ae5cd2078b0137ac822ee79a4a",
+      "size": 1964
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antisticker.js",
+      "sha256": "529bb9d5692dc53bbc9717a3d582c4a4e6cbbda94fb89cf62fec201d17872e31",
+      "size": 2504
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antivideo.js",
+      "sha256": "c9ae132182f9d31a85cc97cda241eb2d6c0ee462585045c985336b154e19b3bd",
+      "size": 2222
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antivisu.js",
+      "sha256": "c08e57bbbc4e5f7ef4e103fd83199bfef14b8b72bcfc5bb23c2cb9b62fe4063c",
+      "size": 3103
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/viewoncex9.js",
+      "sha256": "9213bd9dbcf64e5a52d7994756581475f7c16a0e0627bdb80e035b4cc942e302",
+      "size": 2145
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/funcoes.js",
+      "sha256": "b7b4338812aba142d0340bb214fa249a09fb1dfdbd20769c94a1b8997f7f890e",
+      "size": 5960
+    },
+    {
+      "path": "package.json",
+      "sha256": "53c29101888e8134978db27eba1146470927ae3eb52c94155684c6c3169030ee",
+      "size": 1166
     }
   ],
   "releases": [
-    {
-      "version": "10.1.59",
-      "fromVersion": "10.1.58",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "RPG Pokémon expandido",
-      "notice": "A versão 10.1.59 já está disponível para atualização.",
-      "changelog": [
-        "Expande Quiz Trivia, Quiz Geografia e Quiz Filmes para 200 perguntas cada.",
-        "Quiz Pokémon passa a usar uma base compartilhada de 200 Pokémon e artes oficiais hospedadas no GitHub/PokéAPI, sem salvar um link em cada registro.",
-        "RPG Pokémon passa a usar a mesma base dos 200 Pokémon, incluindo tipos, stats, raridade e evolução.",
-        "Adiciona 46 comandos novos para Pokédex, captura, Pokébolas, coleção, equipe, golpes, cura, transformações, mapa, Safari, pesca, ginásios, Elite Four, PokéMart, ovos, breeding, trocas, leilão, raids, daily, conquistas e títulos.",
-        "Adiciona Pokémon selvagens automáticos no grupo, chance de Shiny, Lure e encontros especiais.",
-        "Melhora batalhapokemon com simulação por turnos, golpes, velocidade, crítico e vantagem de tipos.",
-        "Loja Pokémon recebe paginação para suportar os 200 Pokémon sem mensagens gigantes.",
-        "Compra, venda e evolução foram integradas ao novo sistema de coleção.",
-        "Quiz Pokémon tenta uma segunda imagem do próprio repositório de sprites caso a arte principal falhe.",
-        "Mew foi classificado como Mítico na base compartilhada."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/database/jogos/pokemon.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/database/jogos/trivia.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/database/jogos/geografia.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/database/jogos/filmes.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/index.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/pokemon-core.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/expansao.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/eventos/pokemon-selvagem.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/cuidados.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/comprarpokemon.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/venderpokemon.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/evoluirpokemon.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T13:01:47.374Z"
-    },
     {
       "version": "10.1.60",
       "fromVersion": "10.1.59",
@@ -4462,6 +4494,159 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-04T22:19:18.098Z"
+    },
+    {
+      "version": "10.2.83",
+      "fromVersion": "10.2.82",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "refactor(tokito): organize 15 anti-filters in sistemas/filtros and prepare V10.2.83",
+      "notice": "A versão 10.2.83 já está disponível para atualização.",
+      "changelog": [
+        "Viewoncex9 atualizado",
+        "Filtro Antiaudio movido",
+        "Antiaudio atualizado",
+        "Filtro Antibot movido",
+        "Antibot atualizado",
+        "Filtro Anticanal movido",
+        "Anticanal atualizado",
+        "Filtro Anticontato movido",
+        "Anticontato atualizado",
+        "Filtro Antidocumento movido",
+        "Antidocumento atualizado",
+        "Filtro Antifoto movido",
+        "Antifoto atualizado",
+        "Filtro Antilink movido",
+        "Antilink atualizado",
+        "Filtro Antilocalizacao movido",
+        "Antilocalizacao atualizado",
+        "Filtro Antimarcacao movido",
+        "Antimarcacao atualizado",
+        "Filtro Antispam movido",
+        "Antispam atualizado",
+        "Filtro Antistatus movido",
+        "Antistatus atualizado",
+        "Filtro Antisticker movido",
+        "Antisticker atualizado",
+        "Filtro Antivideo movido",
+        "Antivideo atualizado",
+        "Filtro Antivisu movido",
+        "Antivisu atualizado",
+        "Filtro Viewoncex9 movido",
+        "Funcoes atualizado",
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/admin/viewoncex9.js",
+          "sha256": "85d9605d3df6cfa7ede54caf2972cf8f90133a52ab135d3aa6cfa7d27b1ce1f5",
+          "size": 785
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antiaudio.js",
+          "sha256": "838970bb5cd1f3dcd4bd14aa608aa601b60567fd859460de301653acb436f29e",
+          "size": 1957
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antibot.js",
+          "sha256": "675e41f6fd57a0dc300fe712e229e8938214cfc8994e10573a73f18553ff7cea",
+          "size": 3182
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/anticanal.js",
+          "sha256": "682841c342ee375f0d7ef6258b3986b150f2ba7611fef259deaecc1b348b9e07",
+          "size": 2826
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/anticontato.js",
+          "sha256": "e28929902c28d19d89c09d1d8384b0b2719665f963d2d3144288beb81fd2a0a4",
+          "size": 2013
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antidocumento.js",
+          "sha256": "e8ef23d7996909a41b9175eb3728f8217dfd1a5c76d7bd9e27a2d33ffea6f07a",
+          "size": 2016
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antifoto.js",
+          "sha256": "35d85c7c76988bb2d7b86a79534dda9ab7c52584403ac5a4404feafeddef07be",
+          "size": 2213
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antilink.js",
+          "sha256": "09b2feab5d6bdec4dd8bde83b6a27e6a17e97b6edf4eeb15069356ed22c61e17",
+          "size": 5419
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antilocalizacao.js",
+          "sha256": "1746e6e50ecee5738473f5591d54803fc7f7bc4c4663b6fc0a595cd7bb24a83a",
+          "size": 2089
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antimarcacao.js",
+          "sha256": "385569bc69469195aef5e16859f4ebb9bdfb098f8fbef589fbf66ca22c47542f",
+          "size": 2160
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antispam.js",
+          "sha256": "04294df545bded9d15c87eaa3368f0ffcd1d8e0b141b51dcc4a65c6f785b6010",
+          "size": 3643
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antistatus.js",
+          "sha256": "67faf73b966431794bcb8594cb97db1b132737ae5cd2078b0137ac822ee79a4a",
+          "size": 1964
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antisticker.js",
+          "sha256": "529bb9d5692dc53bbc9717a3d582c4a4e6cbbda94fb89cf62fec201d17872e31",
+          "size": 2504
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antivideo.js",
+          "sha256": "c9ae132182f9d31a85cc97cda241eb2d6c0ee462585045c985336b154e19b3bd",
+          "size": 2222
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antivisu.js",
+          "sha256": "c08e57bbbc4e5f7ef4e103fd83199bfef14b8b72bcfc5bb23c2cb9b62fe4063c",
+          "size": 3103
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/viewoncex9.js",
+          "sha256": "9213bd9dbcf64e5a52d7994756581475f7c16a0e0627bdb80e035b4cc942e302",
+          "size": 2145
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/funcoes.js",
+          "sha256": "b7b4338812aba142d0340bb214fa249a09fb1dfdbd20769c94a1b8997f7f890e",
+          "size": 5960
+        },
+        {
+          "path": "package.json",
+          "sha256": "53c29101888e8134978db27eba1146470927ae3eb52c94155684c6c3169030ee",
+          "size": 1166
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/admin/filtro-antiaudio.js",
+        "DADOS_TOKITO/plugins/admin/filtro-antibot.js",
+        "DADOS_TOKITO/plugins/admin/filtro-anticanal.js",
+        "DADOS_TOKITO/plugins/admin/filtro-anticontato.js",
+        "DADOS_TOKITO/plugins/admin/filtro-antidocumento.js",
+        "DADOS_TOKITO/plugins/admin/filtro-antifoto.js",
+        "DADOS_TOKITO/plugins/admin/filtro-antilink.js",
+        "DADOS_TOKITO/plugins/admin/filtro-antilocalizacao.js",
+        "DADOS_TOKITO/plugins/admin/filtro-antimarcacao.js",
+        "DADOS_TOKITO/plugins/admin/filtro-antispam.js",
+        "DADOS_TOKITO/plugins/admin/filtro-antistatus.js",
+        "DADOS_TOKITO/plugins/admin/filtro-antisticker.js",
+        "DADOS_TOKITO/plugins/admin/filtro-antivideo.js",
+        "DADOS_TOKITO/plugins/admin/filtro-antivisu.js",
+        "DADOS_TOKITO/plugins/admin/filtro-viewoncex9.js"
+      ],
+      "required": false,
+      "publishedAt": "2026-11-04T22:26:51.362Z"
     }
   ],
   "mode": "incremental",
