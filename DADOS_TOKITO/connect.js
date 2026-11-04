@@ -69,7 +69,9 @@ const proxima = atual.ephemeralMessage?.message ||
 atual.viewOnceMessage?.message ||
 atual.viewOnceMessageV2?.message ||
 atual.viewOnceMessageV2Extension?.message ||
-atual.documentWithCaptionMessage?.message
+atual.documentWithCaptionMessage?.message ||
+atual.editedMessage?.message ||
+atual.associatedChildMessage?.message
 if (!proxima) break
 atual = proxima
 }
@@ -84,14 +86,28 @@ if (agora - item.at > MIDIA_RECENTE_MS) cache.delete(id)
 for (const item of messages || []) {
 const jid = item?.key?.remoteJid
 const id = item?.key?.id
-if (!jid || !id || !item.message) continue
-const conteudo = envolverMidiaOriginal(item.message)
+const mensagem = item?.message || item?.update?.message
+if (!jid || !id || !mensagem) continue
+const conteudo = envolverMidiaOriginal(mensagem)
 const media = conteudo?.imageMessage || conteudo?.videoMessage ||
 conteudo?.ptvMessage || conteudo?.audioMessage
-if (!media?.mediaKey || !(media.url || media.directPath)) continue
+if (!media) continue
 const chave = jid + '|' + id
+const completa = Boolean(media.mediaKey && (media.url || media.directPath))
+const antiga = cache.get(chave)
+// Um update parcial não deve sobrescrever uma mídia completa já recebida.
+if (!completa && antiga) continue
 cache.delete(chave)
-cache.set(chave, { message: item.message, at: agora })
+cache.set(chave, { message: mensagem, at: agora })
+if (process.env.TOKITO_DEBUG_REVELAR === '1') {
+console.log('[REVELAR RX]', {
+tipo: conteudo?.imageMessage ? 'image' : conteudo?.audioMessage ? 'audio' : 'video',
+temChave: Boolean(media.mediaKey),
+temCaminho: Boolean(media.url || media.directPath),
+tipoEvento: item.update ? 'update' : 'upsert',
+viewOnce: Boolean(item.key?.isViewOnce || media.viewOnce)
+})
+}
 }
 while (cache.size > MIDIA_RECENTE_MAX) cache.delete(cache.keys().next().value)
 }
@@ -1278,6 +1294,9 @@ break
  * MENSAGENS
  * Mantido no mesmo fluxo da base original.
  */
+if (events['messages.update']) {
+registrarMidiasRecebidas(tokito, events['messages.update'])
+}
 if (events['messages.upsert']) {
 const upsert = events['messages.upsert']
 try {
