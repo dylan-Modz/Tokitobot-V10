@@ -6,22 +6,37 @@
   "ref": "main",
   "publishedAt": "2026-11-04T17:16:16.409Z",
   "changelog": [
-    "[Correção] fix(tokito): unwrap Stone view-once messages and handle unavailable quoted media",
-    "A versão 10.2.72 já está disponível para atualização.",
-    "Open atualizado"
+    "[Comando open/revelar] Corrigido o reconhecimento de imagem, vídeo e áudio citados nos formatos viewOnceMessage, viewOnceMessageV2 e viewOnceMessageV2Extension.",
+    "[Stone WPP] Corrigida a leitura de mídias dentro de envelopes de mensagens temporárias, sem alterar a biblioteca.",
+    "[Download] O comando passa a tentar o arquivo recebido quando a mensagem possui chave e caminho de mídia válidos.",
+    "[Tratamento de erros] Mídias que chegam apenas como registro ou sem chave de download recebem aviso em vez de falha silenciosa.",
+    "[Permissões] Mantida a utilização exclusiva para administradores de grupo."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(tokito): unwrap Stone view-once messages and handle unavailable quoted media",
-  "notice": "A versão 10.2.72 já está disponível para atualização.",
+  "title": "Tokito Bot V10.2.72 — correção do comando Open/Revelar",
+  "notice": "A versão 10.2.72 corrige o comando open/revelar na Stone WPP.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/admin/open.js",
-      "sha256": "1dc73741df9272223ab1165bf7f90e1bb0b998c65253a9792489cf611639739e",
+      "gitSha": "9b53df1e484be58e39973994ec868dee237bc14f",
+      "sha256": "",
       "size": 5653
+    },
+    {
+      "path": "package.json",
+      "gitSha": "346ed7bc9effdbce46c6645c34ad9d6a23e721d0",
+      "sha256": "",
+      "size": 1166
+    },
+    {
+      "path": "README.md",
+      "gitSha": "08521f423f1b351b4589a1800c9873be8929f0ad",
+      "sha256": "",
+      "size": 8977
     }
   ],
   "releases": [
@@ -4614,16 +4629,33 @@
       "fromVersion": "10.2.71",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix(tokito): unwrap Stone view-once messages and handle unavailable quoted media",
-      "notice": "A versão 10.2.72 já está disponível para atualização.",
+      "title": "Tokito Bot V10.2.72 — correção do comando Open/Revelar",
+      "notice": "A versão 10.2.72 corrige o comando open/revelar na Stone WPP.",
       "changelog": [
-        "Open atualizado"
+        "[Comando open/revelar] Corrigido o reconhecimento de imagem, vídeo e áudio citados nos formatos viewOnceMessage, viewOnceMessageV2 e viewOnceMessageV2Extension.",
+        "[Stone WPP] Corrigida a leitura de mídias dentro de envelopes de mensagens temporárias, sem alterar a biblioteca.",
+        "[Download] O comando passa a tentar o arquivo recebido quando a mensagem possui chave e caminho de mídia válidos.",
+        "[Tratamento de erros] Mídias que chegam apenas como registro ou sem chave de download recebem aviso em vez de falha silenciosa.",
+        "[Permissões] Mantida a utilização exclusiva para administradores de grupo."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/plugins/admin/open.js",
-          "sha256": "1dc73741df9272223ab1165bf7f90e1bb0b998c65253a9792489cf611639739e",
+          "gitSha": "9b53df1e484be58e39973994ec868dee237bc14f",
+          "sha256": "",
           "size": 5653
+        },
+        {
+          "path": "package.json",
+          "gitSha": "346ed7bc9effdbce46c6645c34ad9d6a23e721d0",
+          "sha256": "",
+          "size": 1166
+        },
+        {
+          "path": "README.md",
+          "gitSha": "08521f423f1b351b4589a1800c9873be8929f0ad",
+          "sha256": "",
+          "size": 8977
         }
       ],
       "delete": [],
@@ -4634,11 +4666,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.70",
+  "fromVersion": "10.2.71",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.71"
+  "publicVersion": "10.2.72"
 }
