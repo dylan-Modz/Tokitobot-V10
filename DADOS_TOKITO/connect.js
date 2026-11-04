@@ -87,7 +87,12 @@ for (const item of messages || []) {
 const jid = item?.key?.remoteJid
 const id = item?.key?.id
 const mensagem = item?.message || item?.update?.message
-if (!jid || !id || !mensagem) continue
+if (!jid || !id) continue
+if (!mensagem) {
+if (process.env.TOKITO_DEBUG_REVELAR === '1' && item?.key?.isViewOnce)
+console.log('[REVELAR RX]', { tipoEvento: 'viewOnceStub', temConteudo: false, temChave: false, temCaminho: false })
+continue
+}
 const conteudo = envolverMidiaOriginal(mensagem)
 const media = conteudo?.imageMessage || conteudo?.videoMessage ||
 conteudo?.ptvMessage || conteudo?.audioMessage
