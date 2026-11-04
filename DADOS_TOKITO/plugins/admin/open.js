@@ -28,58 +28,37 @@
  * ============================================================
  */
 
-const pegarContexto = info => {
-const m = info?.message || {}
+const CAMADAS = ['ephemeralMessage', 'viewOnceMessage', 'viewOnceMessageV2',
+  'viewOnceMessageV2Extension', 'documentWithCaptionMessage', 'editedMessage']
 
-return m?.extendedTextMessage?.contextInfo ||
-m?.imageMessage?.contextInfo ||
-m?.videoMessage?.contextInfo ||
-m?.audioMessage?.contextInfo ||
-m?.documentMessage?.contextInfo ||
-m?.stickerMessage?.contextInfo || null
+const desenrolar = entrada => {
+  let msg = entrada?.message || entrada || {}
+  for (let i = 0; i < 12; i++) {
+    const camada = CAMADAS.find(c => msg?.[c]?.message)
+    if (!camada) break
+    msg = msg[camada].message
+  }
+  return msg
 }
 
-const pegarMarcada = info => pegarContexto(info)?.quotedMessage || null
+const pegarContexto = entrada => {
+  let msg = entrada?.message || entrada || {}
+  for (let i = 0; i < 12; i++) {
+    const contexto = msg?.extendedTextMessage?.contextInfo ||
+      msg?.imageMessage?.contextInfo || msg?.videoMessage?.contextInfo ||
+      msg?.audioMessage?.contextInfo || msg?.documentMessage?.contextInfo ||
+      msg?.stickerMessage?.contextInfo
+    if (contexto) return contexto
+    const camada = CAMADAS.find(c => msg?.[c]?.message)
+    if (!camada) break
+    msg = msg[camada].message
+  }
+  return null
+}
 
-const temViewOnce = msg => {
-if (!msg)
-return false
-
-if (
-msg?.viewOnceMessage?.message ||
-msg?.viewOnceMessageV2?.message ||
-msg?.viewOnceMessageV2Extension?.message
+const possuiArquivo = media => Boolean(
+  media?.mediaKey && (media?.url || media?.directPath)
 )
-return true
-
-if (msg?.ephemeralMessage?.message)
-return temViewOnce(msg.ephemeralMessage.message)
-
-if (msg?.documentWithCaptionMessage?.message)
-return temViewOnce(msg.documentWithCaptionMessage.message)
-
-return false
-}
-
-const desenrolar = msg => {
-let m = msg || {}
-
-for (let i = 0; i < 5; i++) {
-if (m?.ephemeralMessage?.message) {
-m = m.ephemeralMessage.message
-continue
-}
-
-if (m?.documentWithCaptionMessage?.message) {
-m = m.documentWithCaptionMessage.message
-continue
-}
-
-break
-}
-
-return m
-}
 
 const bufferMidia = async (ctx, media, tipo) => {
 if (typeof ctx.getFileBuffer !== 'function')
@@ -101,7 +80,7 @@ comandos: ['open', 'revelar'],
 categoria: 'admin',
 
 info: {
-descricao: 'Reenvia imagem, vídeo ou áudio normal respondido pelo administrador.',
+descricao: 'Reenvia mídia respondida, inclusive visualização única quando o arquivo foi recebido pela Stone.',
 uso: 'open respondendo uma mídia',
 permissao: 'ADM',
 categoria: 'admin'
@@ -116,10 +95,11 @@ return reply(mess.sogrupo())
 if (!isGroupAdmins)
 return reply(mess.soadm())
 
-await reagir(from, '👁️')
+await reagir(from, '👁️').catch(() => {})
 
-const marcada = pegarMarcada(info)
-const origem = marcada || info?.message
+const contexto = ctxMsg?.quotedMessage ? ctxMsg : pegarContexto(info)
+const marcada = contexto?.quotedMessage || null
+const origem = marcada || (contexto?.stanzaId ? null : info?.message)
 
 if (!origem) {
 await reagir(from, '❌').catch(() => {})
@@ -128,15 +108,13 @@ return reply(`- 👁️ \`𝙾𝙿𝙴𝙽\`
 > *『 ${prefix + command} 』— ʀᴇsᴘᴏɴᴅᴀ ᴀ ᴜᴍᴀ ɪᴍᴀɢᴇᴍ, ᴠɪ́ᴅᴇᴏ ᴏᴜ ᴀ́ᴜᴅɪᴏ.*`)
 }
 
-if (temViewOnce(origem)) {
-await reagir(from, '🔒').catch(() => {})
-return reply(`- 🔒 \`𝚅𝙸𝚂𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝚄́𝙽𝙸𝙲𝙰\`
-
-> *『 👁️ 』— ᴇssᴀ ᴍɪ́ᴅɪᴀ ғᴏɪ ᴇɴᴠɪᴀᴅᴀ ᴄᴏᴍᴏ ᴠɪsᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ᴜ́ɴɪᴄᴀ ᴇ ɴᴀ̃ᴏ ᴘᴏᴅᴇ sᴇʀ ʀᴇᴘᴜʙʟɪᴄᴀᴅᴀ ᴘᴇʟᴏ ʙᴏᴛ.*`)
-}
-
 const msg = desenrolar(origem)
 const usandoMarcada = Boolean(marcada)
+const media = msg?.imageMessage || msg?.videoMessage || msg?.ptvMessage || msg?.audioMessage
+if (media && !possuiArquivo(media)) {
+  await reagir(from, '🔒').catch(() => {})
+  return reply('A mídia foi recebida sem a chave ou o caminho do arquivo. Não foi possível baixar.')
+}
 
 if (msg?.imageMessage) {
 const media = msg.imageMessage
@@ -154,8 +132,8 @@ await reagir(from, '✅')
 return
 }
 
-if (msg?.videoMessage) {
-const media = msg.videoMessage
+if (msg?.videoMessage || msg?.ptvMessage) {
+const media = msg.videoMessage || msg.ptvMessage
 const buffer = await bufferMidia(ctx, media, 'video')
 const caption = usandoMarcada ? String(media.caption || '').trim() : ''
 
@@ -205,7 +183,7 @@ await reagir(from, '❌').catch(() => {})
 
 return reply(mess.padraoErro({
 titulo: 'ERRO NO OPEN',
-descricao: 'Não foi possível processar essa mídia.'
+descricao: 'Não foi possível baixar ou reenviar a mídia. Confira se o arquivo ainda está disponível.'
 }))
 }
 }
