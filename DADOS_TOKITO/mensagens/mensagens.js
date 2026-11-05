@@ -849,12 +849,12 @@ return `- 🎮 \`𝙼𝙾𝙳𝙾 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴\`
 exports.salaFreeFireUso = prefix => {
 return `- 📋 \`𝙻𝙸𝚂𝚃𝙰 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴\`
 
-> 🎮 ׄ ( ${prefix}sala 1x1 )
-> 🎮 ׄ ( ${prefix}sala 2x2 )
-> 🎮 ׄ ( ${prefix}sala 3x3 )
-> 🎮 ׄ ( ${prefix}sala 4x4 )
-> 🎮 ׄ ( ${prefix}sala 5x5 )
-> 🎮 ׄ ( ${prefix}sala 6x6 )
+> 🎮 ׄ ( ${prefix}listsala 1x1 )
+> 🎮 ׄ ( ${prefix}listsala 2x2 )
+> 🎮 ׄ ( ${prefix}listsala 3x3 )
+> 🎮 ׄ ( ${prefix}listsala 4x4 )
+> 🎮 ׄ ( ${prefix}listsala 5x5 )
+> 🎮 ׄ ( ${prefix}listsala 6x6 )
 
 > 📝 ׄ ( ᴅᴇᴘᴏɪs, ᴏ ʀᴇsᴘᴏɴsᴀ́ᴠᴇʟ ᴇɴᴠɪᴀ ᴀᴘᴇɴᴀs ᴏs ɴᴏᴍᴇs. )`
 }

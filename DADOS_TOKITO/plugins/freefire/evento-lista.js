@@ -7,7 +7,7 @@
  */
 
 const x4 = require('./x4')
-const lista = require('./lista-sala')
+const lista = require('./listasala')
 
 module.exports = {
 nome: 'evento-lista-freefire',
@@ -69,7 +69,7 @@ await lista.concluir(ctx, sessao)
 } catch {
 await ctx.reply(ctx.mess.padraoErro({
 titulo: 'NÃO CONSEGUI ABRIR O GRUPO',
-descricao: `Use ${ctx.prefix}sala finalizar para tentar novamente.`
+descricao: `Use ${ctx.prefix}listsala finalizar para tentar novamente.`
 }))
 }
 

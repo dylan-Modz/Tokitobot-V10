@@ -29,7 +29,7 @@
  */
 
 const api = require('../../scrapers/downloads/pesquisas')
-const { numero, texto } = require('./_novas_rotas')
+const { numero, texto } = require('./utilitarios')
 const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({

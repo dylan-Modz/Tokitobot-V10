@@ -49,7 +49,7 @@ await ctx.tokito.groupSettingUpdate(ctx.from, 'not_announcement')
 } catch {
 return ctx.reply(ctx.mess.padraoErro({
 titulo: 'NÃO CONSEGUI ABRIR O GRUPO',
-descricao: `A lista continua ativa. Tente novamente ou use ${ctx.prefix}sala cancelar.`
+descricao: `A lista continua ativa. Tente novamente ou use ${ctx.prefix}listsala cancelar.`
 }))
 }
 }

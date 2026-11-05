@@ -7,17 +7,17 @@
  */
 
 const x4 = require('./x4')
-const lista = require('./lista-sala')
+const lista = require('./listasala')
 const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({
-nome: 'sala',
-comandos: ['sala', 'listaff'],
+nome: 'listsala',
+comandos: ['listsala', 'sala', 'listaff'],
 categoria: 'freefire',
 
 info: {
 descricao: 'Cria uma lista organizada de jogadores de 1x1 até 6x6.',
-uso: 'sala 1x1 até 6x6',
+uso: 'listsala 1x1 até 6x6',
 permissao: 'ADM',
 categoria: 'freefire'
 },
@@ -51,7 +51,7 @@ if (!atual)
 return ctx.reply(ctx.mess.padraoAviso({
 emoji: '📋',
 titulo: 'SEM LISTA ATIVA',
-descricao: `Crie uma lista com ${ctx.prefix}sala 4x4.`
+descricao: `Crie uma lista com ${ctx.prefix}listsala 4x4.`
 }))
 
 if (!lista.ehCriador(ctx, atual) && !ctx.SoDono)
@@ -78,7 +78,7 @@ if (!atual)
 return ctx.reply(ctx.mess.padraoAviso({
 emoji: '📋',
 titulo: 'SEM LISTA ATIVA',
-descricao: `Crie uma lista com ${ctx.prefix}sala 4x4.`
+descricao: `Crie uma lista com ${ctx.prefix}listsala 4x4.`
 }))
 
 if (!lista.ehCriador(ctx, atual) && !ctx.SoDono)
@@ -112,7 +112,7 @@ ctx.mess.padraoAviso({
 emoji: '📋',
 titulo: 'LISTA JÁ ATIVA',
 descricao: `A lista ${atual.modo} ainda está sendo preenchida.`,
-detalhe: `Use ${ctx.prefix}sala cancelar para encerrar.`
+detalhe: `Use ${ctx.prefix}listsala cancelar para encerrar.`
 }),
 [atual.criador]
 )

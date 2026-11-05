@@ -30,7 +30,7 @@
 
 const { prepareWAMessageMedia } = require('@stone-wpp/ofc')
 const api = require('../../scrapers/downloads/pesquisas')
-const { limitar, texto } = require('./_novas_rotas')
+const { limitar, texto } = require('./utilitarios')
 const dylan = require('../../database/lib/comandos')
 
 function botaoUrl(textoBotao, url) {

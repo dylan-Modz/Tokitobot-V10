@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { urlValida } = require('./_novas_rotas')
+const { urlValida } = require('./utilitarios')
 const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({

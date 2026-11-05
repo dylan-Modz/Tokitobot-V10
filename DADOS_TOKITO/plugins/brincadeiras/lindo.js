@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const criar = require('./base')
+const criar = require('./porcentagem')
 
 const dylan = require('../../database/lib/comandos')
 

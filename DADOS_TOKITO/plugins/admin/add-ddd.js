@@ -31,12 +31,12 @@
 const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({
-nome: "listddd",
-comandos: ["listddd"],
+nome: "add-ddd",
+comandos: ["add-ddd", "addddd"],
 categoria: "grupo",
 info: {
-"descricao": "Executa o comando listddd.",
-"uso": "listddd",
+"descricao": "Adiciona DDDs à lista de bloqueio do grupo.",
+"uso": "add-ddd 11",
 "categoria": "grupo"
 },
 async executar(ctx) {
@@ -44,8 +44,21 @@ with (ctx) {
 {
 if (!isGroup)
 return reply(mess.sogrupo())
+if (!isGroupAdmins)
+return reply(mess.soadm())
+const ddds = [
+...new Set(String(q || '').split(/[\s,;|]+/).map(v => v.replace(/\D/g, '')).filter(v => /^\d{2}$/.test(v) && v !== '00'))
+]
+if (!ddds.length)
+return reply(mess.dddUso(prefix, command))
 const lista = dataGp[0].funcoes.antiddd.listaProibidos
-return reply(mess.dddLista(lista))
+const novos = ddds.filter(ddd => !lista.includes(ddd))
+if (!novos.length)
+return reply(mess.dddJaCadastrado(ddds))
+dataGp[0].funcoes.antiddd.listaProibidos = [...lista, ...novos]
+setGp(dataGp)
+await reagir(from, '✅')
+return reply(mess.dddAdicionado(novos))
 }
 }
 }

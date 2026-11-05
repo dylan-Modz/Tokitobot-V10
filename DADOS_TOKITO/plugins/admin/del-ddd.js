@@ -31,12 +31,12 @@
 const dylan = require('../../database/lib/comandos')
 
 dylan.setCommand({
-nome: "delddd",
-comandos: ["delddd"],
+nome: "del-ddd",
+comandos: ["del-ddd", "delddd"],
 categoria: "grupo",
 info: {
-"descricao": "Executa o comando delddd.",
-"uso": "delddd",
+"descricao": "Remove DDDs da lista de bloqueio do grupo.",
+"uso": "del-ddd 11",
 "categoria": "grupo"
 },
 async executar(ctx) {

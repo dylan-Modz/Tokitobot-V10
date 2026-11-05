@@ -32,7 +32,7 @@
 const fs = require('fs')
 const path = require('path')
 const runtimeSub = require('../../sub/runtime.js')
-const h = require('./base')
+const h = require('./ffcore')
 const dylan = require('../../database/lib/comandos')
 
 const ARQUIVO = runtimeSub.isSubBot

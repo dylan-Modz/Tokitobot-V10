@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const criar = require('./base')
+const criar = require('./porcentagem')
 
 module.exports = criar({
 'comandos': ['safado', 'danado', 'malicioso', 'atrevido', 'safadometro2'],

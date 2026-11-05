@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const h = require('./base')
+const h = require('./ffcore')
 
 const session = ctx => String(ctx.q || '').trim()
 

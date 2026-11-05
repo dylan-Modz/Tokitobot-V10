@@ -298,10 +298,18 @@ mentionedJid: mentions,
 
 const UPDATE_CHECK_MS = 60 * 1000
 
+// Evita exibir títulos técnicos de commits em inglês nos avisos do bot.
+const resumoEmPortugues = (valor, padrao) => {
+const texto = String(valor || '').trim()
+if (!texto) return padrao
+if (/^(?:\[(?:Correção|Atualização|Novidade|Melhoria)\]\s*)?(?:fix|feat|refactor|chore|perf|build|ci|test|docs)(?:\([^)]*\))?\s*:/i.test(texto)) return padrao
+return texto
+}
+
 const textoAvisoUpdate = check => {
 const remoto = check?.remote || {}
 const reparo = check?.repair === true
-const mudancas = Array.isArray(remoto.changelog) ? remoto.changelog.slice(0, 10) : []
+const mudancas = Array.isArray(remoto.changelog) ? remoto.changelog.slice(0, 10).map(item => resumoEmPortugues(item, 'Melhorias técnicas e ajustes internos do Tokito.')) : []
 const lista = mudancas.length
 ? mudancas.map((item, index) => '> ' + (index + 1) + '. ׄ ( ' + String(item || '').trim() + ' )').join('\n')
 : '> • ׄ ( Melhorias, correções e novidades do Tokito. )'
@@ -316,7 +324,7 @@ reparo
 reparo
   ? '> 🛠️ ׄ ( ᴄᴏʀʀᴇᴄ̧ᴀ̃ᴏ ᴅᴏs ᴀʀǫᴜɪᴠᴏs ɴᴀ ᴍᴇsᴍᴀ ᴠᴇʀsᴀ̃ᴏ. )'
   : '> ✨ ׄ ( ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (remoto.publicVersion || remoto.version || '—') + ' )',
-'> 📌 ׄ ( ' + String(remoto.title || remoto.notice || 'Nova atualização disponível').trim() + ' )',
+'> 📌 ׄ ( ' + resumoEmPortugues(remoto.title, String(remoto.notice || 'Nova atualização disponível').trim()) + ' )',
 '',
 '- 📝 *𝙾 𝚀𝚄𝙴 𝙼𝚄𝙳𝙾𝚄*',
 '',

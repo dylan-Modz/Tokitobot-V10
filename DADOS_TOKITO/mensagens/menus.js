@@ -366,9 +366,9 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡📵｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐿𝐼𝑆𝑇𝐴-𝑁𝐸𝐺𝑅𝐴-𝐸-𝐷𝐷𝐷
 ├╾═╼･ﾟ𖤐ﾟ･｡🚫｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}addddd 11
-┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}delddd 11
-┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}listddd
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}add-ddd 11
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}del-ddd 11
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}list-ddd
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}addlistanegra @usuario
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}dellistanegra @usuario
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}listanegra
@@ -1306,8 +1306,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├─ ⊹ 𖤐  𝙼𝙾𝙳𝙾-𝙵𝚁𝙴𝙴-𝙵𝙸𝚁𝙴
 ├╾═╼･ﾟ𖤐ﾟ･｡🎮｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}modofreefire 1/0
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}sala 1x1 até 6x6
-┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}sala cancelar
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}listsala 1x1 até 6x6
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}listsala cancelar
 ┃࣪ ╎—̳͟͞͞ 🔒 f — fechar o grupo
 ┃࣪ ╎—̳͟͞͞ 🔓 a — abrir o grupo
 ┃࣪ ╎—̳͟͞͞ 📢 m — marcar o grupo
