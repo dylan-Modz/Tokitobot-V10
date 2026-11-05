@@ -1,76 +1,330 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.84",
+  "version": "10.2.85",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-04T23:10:18.535Z",
+  "publishedAt": "2026-11-05T01:14:57.202Z",
   "changelog": [
-    "[Correção] fix(adv): enforce member/admin/owner hierarchy with live group roles and regression tests (V10.2.84)",
-    "A versão 10.2.84 já está disponível para atualização.",
-    "Adv atualizado",
-    "Hierarquia atualizado",
-    "Package atualizado",
-    "Adv.test atualizado"
+    "[Novidade] Otimização dos arquivos e comandos para deixar o Tokito mais rápido (V10.2.85)",
+    "A versão 10.2.85 já está disponível para atualização.",
+    "Conexão do bot atualizada",
+    "Mensagens atualizado",
+    "Menus atualizado",
+    "Addddd movido",
+    "Add Ddd atualizado",
+    "Delddd movido",
+    "Del Ddd atualizado",
+    "Listddd movido",
+    "List Ddd atualizado",
+    "Brincadeira Baiana atualizada",
+    "Brincadeira Baiano atualizada",
+    "Brincadeira Bebado atualizada",
+    "Brincadeira Beta atualizada",
+    "Brincadeira Carioca atualizada",
+    "Brincadeira Corno atualizada",
+    "Brincadeira Feio atualizada",
+    "Brincadeira Fiel atualizada",
+    "Brincadeira Fumar atualizada",
+    "Brincadeira Gado atualizada",
+    "Brincadeira Gay atualizada",
+    "Brincadeira Gostosa atualizada",
+    "Brincadeira Gostoso atualizada",
+    "Brincadeira Linda atualizada",
+    "Brincadeira Lindo atualizada",
+    "Brincadeira Louca atualizada",
+    "Brincadeira Louco atualizada",
+    "Brincadeira Macaca atualizada",
+    "Brincadeira Macaco atualizada",
+    "Brincadeira Nazista atualizada",
+    "Base movido",
+    "Brincadeira Porcentagem atualizada",
+    "Brincadeira Puta atualizada",
+    "Brincadeira Safada atualizada",
+    "Brincadeira Safado atualizada",
+    "Brincadeira Sigma atualizada",
+    "Brincadeira Vesgo atualizada",
+    "Animesearch atualizado",
+    "Appstore atualizado",
+    "Lyrics atualizado",
+    "Mangasearch atualizado"
   ],
-  "delete": [],
+  "delete": [
+    "DADOS_TOKITO/plugins/admin/addddd.js",
+    "DADOS_TOKITO/plugins/admin/delddd.js",
+    "DADOS_TOKITO/plugins/admin/listddd.js",
+    "DADOS_TOKITO/plugins/brincadeiras/base.js",
+    "DADOS_TOKITO/plugins/downloads/_novas_rotas.js",
+    "DADOS_TOKITO/plugins/freefire/base.js",
+    "DADOS_TOKITO/plugins/freefire/lista-sala.js",
+    "DADOS_TOKITO/plugins/freefire/sala-lista.js",
+    "DADOS_TOKITO/plugins/magia/base.js",
+    "DADOS_TOKITO/plugins/sub/00-cadastro.js"
+  ],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix(adv): enforce member/admin/owner hierarchy with live group roles and regression tests (V10.2.84)",
-  "notice": "A versão 10.2.84 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "Otimização dos arquivos e comandos para deixar o Tokito mais rápido (V10.2.85)",
+  "notice": "A versão 10.2.85 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/admin/adv.js",
-      "sha256": "b0a2f000a1e7a6b2e1685346a51e7f44cb4b1329abd4051da656ea7620a6ffe0",
-      "size": 3634
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "d19e2c7fc80fad742bc42275861c186b161eba578e95789e57ffb494f6b714df",
+      "size": 49206
     },
     {
-      "path": "DADOS_TOKITO/sistemas/hierarquia.js",
-      "sha256": "668ee18c5f603fb22fd14cb6562a48f577a8f2fe802ef08e5fbbdc855289e430",
-      "size": 3304
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "6b5bfc90b31f90126f66935125eb801c38e3e693e4751e95a9336bb168ab5bf1",
+      "size": 231654
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "1ad9688ea46e1f13f4e278c36c0ca0b3126b42a00a2fe23974099d68c3f2a15b",
+      "size": 78849
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/add-ddd.js",
+      "sha256": "303a07f69776c6a01594902e9e877dbf84cad04435090b0b0803588ae6f85599",
+      "size": 2007
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/del-ddd.js",
+      "sha256": "8da3f2aa2b06fe2e0378b7bce3fc26d4bdd77a8addff2925a2e63a129ac247c9",
+      "size": 2040
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/list-ddd.js",
+      "sha256": "9aac1c78db8c2e4942fbe7bccd7f53998333baa6e55726c7b8a615e6495b0076",
+      "size": 1528
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/baiana.js",
+      "sha256": "b7a643e473b9dcff81b1a369f3eeebb52ba1114ff3bd7d130eb2be5d6a9e8da8",
+      "size": 1318
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/baiano.js",
+      "sha256": "d4769d9548ac6f325093144ab925c60762ef87c2430e568c227ddba750996f77",
+      "size": 1318
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/bebado.js",
+      "sha256": "505a3fa43797dac9fce37fb99dd8c63151b71d3e04b83a2833135c7ffde8be1d",
+      "size": 1322
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/beta.js",
+      "sha256": "32692683b4bcf82685de299a8efa62817befe65a7bbe3bf698bb7e5e248646eb",
+      "size": 1302
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/carioca.js",
+      "sha256": "e3d78eb82c7ad0a034846a8165cd912b7398bc0a09dd53d62ec1b001a95d3f3e",
+      "size": 1368
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/corno.js",
+      "sha256": "82e64b1c6680c14ca97b042a0b1d6c63d08925cdaf568f4202b2c77038b7517a",
+      "size": 1354
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/feio.js",
+      "sha256": "7566d37a07bcc038624eca5de0691dba8e62b6e4ccfe02ea7269b90db6f38133",
+      "size": 1342
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/fiel.js",
+      "sha256": "6f539a625b8e640fdae474ac442e6ba82001bbfed8ac398573c5f32fc4d2dea7",
+      "size": 1340
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/fumar.js",
+      "sha256": "d8bace70f4c7b6d187e6b00845781842c88be89619613de9c55cb08f34f45418",
+      "size": 1321
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/gado.js",
+      "sha256": "9c3f42ce36d58eb2a18b4016aa08d9330d3e00d0b7c0dd708f3ebb6499aa2e05",
+      "size": 1344
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/gay.js",
+      "sha256": "cbc6bb1ab7709f66b9999b6aa003988082ff388c3ea05bc09451b7febae37125",
+      "size": 1343
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/gostosa.js",
+      "sha256": "3787a584ab970927a8090ead34b4750bd11b17eec2cde0a5af89e64e14625f8d",
+      "size": 1372
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/gostoso.js",
+      "sha256": "e86ccc4c802921b284c22b80c4a6eea376767f69c6b70d6ea908007187fe17c5",
+      "size": 1372
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/linda.js",
+      "sha256": "58e4dfd8d9a96c30991c5c5fe09f07e0edea95f8094a8a8df86bb382a4515991",
+      "size": 1352
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/lindo.js",
+      "sha256": "317c554cb8e8d75a1f9ef53509eccd5529d2aecd629832c47d13d01aee55c252",
+      "size": 1352
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/louca.js",
+      "sha256": "df48474d4ec596643940e46d8b5395a1208cd355ed7804c53bb518bdfdef93d0",
+      "size": 1353
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/louco.js",
+      "sha256": "d230f08bc23cb726d8bfb0dddde68190bac01fdcbcfc4532d31a76b9b617813a",
+      "size": 1362
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/macaca.js",
+      "sha256": "fe8f6ffefb14c2a43a407c46b3b4425aa828a4860e353c5f1b9ca09e43c20a7d",
+      "size": 1318
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/macaco.js",
+      "sha256": "2f7f5e0f62b002902b0db6a06fa5d9f6203db62f315b87b37e16afcdd882c520",
+      "size": 1318
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/nazista.js",
+      "sha256": "0250d948a9374d80406ab89fdc3c6803f8a8735e43fbeb386d104f318df2b85b",
+      "size": 1328
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/porcentagem.js",
+      "sha256": "e89a85a2ce9693c5b0f3a2c01f12c2ace61e49faa70d3d9d9cc7acdf28dbd035",
+      "size": 2671
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/puta.js",
+      "sha256": "0539aa9ea85163460c8f02abc4e84e1a16f826ca2e63196f37cfa876926fab86",
+      "size": 1302
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/safada.js",
+      "sha256": "ac8fed8ed8cb9d573b96e5f4ee7b195dc42691cfcafc439c31dbd4123b1fe60a",
+      "size": 1370
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/safado.js",
+      "sha256": "32012d517972015757da7d1082b4124a23d117c1390c88830cbffb423b5d36dc",
+      "size": 1369
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/sigma.js",
+      "sha256": "cc00b210ed7c7904bf8b4c187121287460629a1132c0d09908effe63d65d23a2",
+      "size": 1310
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/brincadeiras/vesgo.js",
+      "sha256": "dd108a50f4603d45f5c3c7e89829f4a31cb4a7eec475ee39c70000df35600765",
+      "size": 1352
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/animesearch.js",
+      "sha256": "7bdda1de632f1eea091650e92cad4aca805927f5d2e4c00b854c319e09b2668a",
+      "size": 3386
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/appstore.js",
+      "sha256": "e5cf55714b90a0a744351d3048496690c1c8f92d5eb7320778fb02f6283f21fc",
+      "size": 5300
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/lyrics.js",
+      "sha256": "a07ab541a5df3e07c38f958f8d26fa074be371aabdee01147b37ac13744af85f",
+      "size": 3108
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/mangasearch.js",
+      "sha256": "b5e1acf49cc3d90b399e7797a7a6376c2e9d7f17a5420a8444d3f172a405bce3",
+      "size": 3383
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/printsite.js",
+      "sha256": "aaeb5254e1d46119132f3baffd93bd32618f42019f47da21fea92f6f3f521490",
+      "size": 3361
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/soundcloudsearch.js",
+      "sha256": "de45c0ed6f8ef339e750d45a1cd6bbd8497c59f7bc42a3523e97346022da947b",
+      "size": 3207
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/spotifysearch.js",
+      "sha256": "ba126b9fc6c8d82d0b58c7b767f2ff088a34d4562051b709ec528384b261f6ef",
+      "size": 3135
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/utilitarios.js",
+      "sha256": "6b89cbdd4398a9918aaf64ccc548969c330b68c2c2214649f33a3ce9057f5ae1",
+      "size": 2301
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/wikipedia.js",
+      "sha256": "ccce9f4a5a51aff907094d5526c94777ca48630e2639b5800716b2ae6282d36d",
+      "size": 2989
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/evento-lista.js",
+      "sha256": "33c34057dd275e2eaafc81c533ee5264e3f2bdb367d625157ccb48636f20ad00",
+      "size": 1578
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+      "sha256": "0c6d8a37f9f051f1cf700a8f54dd2b101da731abba0954182323c96c2f7a0f9b",
+      "size": 3517
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/likes.js",
+      "sha256": "95c9a44b2a4d89b6578dc718a2eb63decc1216b314ab5b6b6a289198db347e57",
+      "size": 14310
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/listasala.js",
+      "sha256": "fd4f15421ad221ba3247a34adb8a51f559159ad8c8e5bd9406984dd170bcd587",
+      "size": 3925
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/listsala.js",
+      "sha256": "2efac505d86e0f6bc4174619801f463496553570c981a50b1b9413a41ef439c9",
+      "size": 3124
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/modox4.js",
+      "sha256": "3df79a90fe2e23add3f536a0160c26a26192d4f68fdf67becb2ad59c1308e5f4",
+      "size": 2353
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+      "sha256": "53304eac8e19e4653ce92cda2d3ca0df44acc1d946a371ee307395e802e9c0cc",
+      "size": 6719
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/magia/arcana.js",
+      "sha256": "87fbc9387be10512732c47e0a1fa1b20c9a90998eac983ac2347fe2e9eb38588",
+      "size": 3858
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/sub/cadastroevento.js",
+      "sha256": "57938e5dee15c90f2f3c85f46c617e1ddadcb7d7ebfc851966c6d748078be4da",
+      "size": 271
     },
     {
       "path": "package.json",
-      "sha256": "0681db010fec9a8637fd84534e0bacceff7bd1e64c716e36c071716010de9caa",
+      "sha256": "bbc5f16e58d583abd22a629cff8e5a0472226859803f37fb65f03e213d457063",
       "size": 1211
-    },
-    {
-      "path": "tests/adv.test.js",
-      "sha256": "2cdced3718cd25a793595e72487a982fb0f826f9e1d4089ddc24276e029a353e",
-      "size": 2853
     }
   ],
   "releases": [
-    {
-      "version": "10.1.61",
-      "fromVersion": "10.1.60",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "Loja Pokémon em carrossel",
-      "notice": "A versão 10.1.61 já está disponível para atualização.",
-      "changelog": [
-        "O comando lojapokemon agora abre 4 cards, um para cada página dos Pokémon comuns.",
-        "Cada card usa a mídia do menu do Tokito e permite escolher o Pokémon pela lista.",
-        "A compra continua usando o comando comprarpokemon."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
-          "sha256": "d1b0ef87614d48414b668a3e439cafd941516327f84f7d9cc7956197cc954f57",
-          "size": 6248
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T13:51:52.141Z"
-    },
     {
       "version": "10.1.62",
       "fromVersion": "10.1.61",
@@ -4545,6 +4799,327 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-04T23:10:18.534Z"
+    },
+    {
+      "version": "10.2.85",
+      "fromVersion": "10.2.84",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "Otimização dos arquivos e comandos para deixar o Tokito mais rápido (V10.2.85)",
+      "notice": "A versão 10.2.85 já está disponível para atualização.",
+      "changelog": [
+        "Conexão do bot atualizada",
+        "Mensagens atualizado",
+        "Menus atualizado",
+        "Addddd movido",
+        "Add Ddd atualizado",
+        "Delddd movido",
+        "Del Ddd atualizado",
+        "Listddd movido",
+        "List Ddd atualizado",
+        "Brincadeira Baiana atualizada",
+        "Brincadeira Baiano atualizada",
+        "Brincadeira Bebado atualizada",
+        "Brincadeira Beta atualizada",
+        "Brincadeira Carioca atualizada",
+        "Brincadeira Corno atualizada",
+        "Brincadeira Feio atualizada",
+        "Brincadeira Fiel atualizada",
+        "Brincadeira Fumar atualizada",
+        "Brincadeira Gado atualizada",
+        "Brincadeira Gay atualizada",
+        "Brincadeira Gostosa atualizada",
+        "Brincadeira Gostoso atualizada",
+        "Brincadeira Linda atualizada",
+        "Brincadeira Lindo atualizada",
+        "Brincadeira Louca atualizada",
+        "Brincadeira Louco atualizada",
+        "Brincadeira Macaca atualizada",
+        "Brincadeira Macaco atualizada",
+        "Brincadeira Nazista atualizada",
+        "Base movido",
+        "Brincadeira Porcentagem atualizada",
+        "Brincadeira Puta atualizada",
+        "Brincadeira Safada atualizada",
+        "Brincadeira Safado atualizada",
+        "Brincadeira Sigma atualizada",
+        "Brincadeira Vesgo atualizada",
+        "Animesearch atualizado",
+        "Appstore atualizado",
+        "Lyrics atualizado",
+        "Mangasearch atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "d19e2c7fc80fad742bc42275861c186b161eba578e95789e57ffb494f6b714df",
+          "size": 49206
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "6b5bfc90b31f90126f66935125eb801c38e3e693e4751e95a9336bb168ab5bf1",
+          "size": 231654
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "1ad9688ea46e1f13f4e278c36c0ca0b3126b42a00a2fe23974099d68c3f2a15b",
+          "size": 78849
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/add-ddd.js",
+          "sha256": "303a07f69776c6a01594902e9e877dbf84cad04435090b0b0803588ae6f85599",
+          "size": 2007
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/del-ddd.js",
+          "sha256": "8da3f2aa2b06fe2e0378b7bce3fc26d4bdd77a8addff2925a2e63a129ac247c9",
+          "size": 2040
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/list-ddd.js",
+          "sha256": "9aac1c78db8c2e4942fbe7bccd7f53998333baa6e55726c7b8a615e6495b0076",
+          "size": 1528
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/baiana.js",
+          "sha256": "b7a643e473b9dcff81b1a369f3eeebb52ba1114ff3bd7d130eb2be5d6a9e8da8",
+          "size": 1318
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/baiano.js",
+          "sha256": "d4769d9548ac6f325093144ab925c60762ef87c2430e568c227ddba750996f77",
+          "size": 1318
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/bebado.js",
+          "sha256": "505a3fa43797dac9fce37fb99dd8c63151b71d3e04b83a2833135c7ffde8be1d",
+          "size": 1322
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/beta.js",
+          "sha256": "32692683b4bcf82685de299a8efa62817befe65a7bbe3bf698bb7e5e248646eb",
+          "size": 1302
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/carioca.js",
+          "sha256": "e3d78eb82c7ad0a034846a8165cd912b7398bc0a09dd53d62ec1b001a95d3f3e",
+          "size": 1368
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/corno.js",
+          "sha256": "82e64b1c6680c14ca97b042a0b1d6c63d08925cdaf568f4202b2c77038b7517a",
+          "size": 1354
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/feio.js",
+          "sha256": "7566d37a07bcc038624eca5de0691dba8e62b6e4ccfe02ea7269b90db6f38133",
+          "size": 1342
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/fiel.js",
+          "sha256": "6f539a625b8e640fdae474ac442e6ba82001bbfed8ac398573c5f32fc4d2dea7",
+          "size": 1340
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/fumar.js",
+          "sha256": "d8bace70f4c7b6d187e6b00845781842c88be89619613de9c55cb08f34f45418",
+          "size": 1321
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/gado.js",
+          "sha256": "9c3f42ce36d58eb2a18b4016aa08d9330d3e00d0b7c0dd708f3ebb6499aa2e05",
+          "size": 1344
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/gay.js",
+          "sha256": "cbc6bb1ab7709f66b9999b6aa003988082ff388c3ea05bc09451b7febae37125",
+          "size": 1343
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/gostosa.js",
+          "sha256": "3787a584ab970927a8090ead34b4750bd11b17eec2cde0a5af89e64e14625f8d",
+          "size": 1372
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/gostoso.js",
+          "sha256": "e86ccc4c802921b284c22b80c4a6eea376767f69c6b70d6ea908007187fe17c5",
+          "size": 1372
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/linda.js",
+          "sha256": "58e4dfd8d9a96c30991c5c5fe09f07e0edea95f8094a8a8df86bb382a4515991",
+          "size": 1352
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/lindo.js",
+          "sha256": "317c554cb8e8d75a1f9ef53509eccd5529d2aecd629832c47d13d01aee55c252",
+          "size": 1352
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/louca.js",
+          "sha256": "df48474d4ec596643940e46d8b5395a1208cd355ed7804c53bb518bdfdef93d0",
+          "size": 1353
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/louco.js",
+          "sha256": "d230f08bc23cb726d8bfb0dddde68190bac01fdcbcfc4532d31a76b9b617813a",
+          "size": 1362
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/macaca.js",
+          "sha256": "fe8f6ffefb14c2a43a407c46b3b4425aa828a4860e353c5f1b9ca09e43c20a7d",
+          "size": 1318
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/macaco.js",
+          "sha256": "2f7f5e0f62b002902b0db6a06fa5d9f6203db62f315b87b37e16afcdd882c520",
+          "size": 1318
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/nazista.js",
+          "sha256": "0250d948a9374d80406ab89fdc3c6803f8a8735e43fbeb386d104f318df2b85b",
+          "size": 1328
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/porcentagem.js",
+          "sha256": "e89a85a2ce9693c5b0f3a2c01f12c2ace61e49faa70d3d9d9cc7acdf28dbd035",
+          "size": 2671
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/puta.js",
+          "sha256": "0539aa9ea85163460c8f02abc4e84e1a16f826ca2e63196f37cfa876926fab86",
+          "size": 1302
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/safada.js",
+          "sha256": "ac8fed8ed8cb9d573b96e5f4ee7b195dc42691cfcafc439c31dbd4123b1fe60a",
+          "size": 1370
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/safado.js",
+          "sha256": "32012d517972015757da7d1082b4124a23d117c1390c88830cbffb423b5d36dc",
+          "size": 1369
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/sigma.js",
+          "sha256": "cc00b210ed7c7904bf8b4c187121287460629a1132c0d09908effe63d65d23a2",
+          "size": 1310
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/brincadeiras/vesgo.js",
+          "sha256": "dd108a50f4603d45f5c3c7e89829f4a31cb4a7eec475ee39c70000df35600765",
+          "size": 1352
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/animesearch.js",
+          "sha256": "7bdda1de632f1eea091650e92cad4aca805927f5d2e4c00b854c319e09b2668a",
+          "size": 3386
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/appstore.js",
+          "sha256": "e5cf55714b90a0a744351d3048496690c1c8f92d5eb7320778fb02f6283f21fc",
+          "size": 5300
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/lyrics.js",
+          "sha256": "a07ab541a5df3e07c38f958f8d26fa074be371aabdee01147b37ac13744af85f",
+          "size": 3108
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/mangasearch.js",
+          "sha256": "b5e1acf49cc3d90b399e7797a7a6376c2e9d7f17a5420a8444d3f172a405bce3",
+          "size": 3383
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/printsite.js",
+          "sha256": "aaeb5254e1d46119132f3baffd93bd32618f42019f47da21fea92f6f3f521490",
+          "size": 3361
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/soundcloudsearch.js",
+          "sha256": "de45c0ed6f8ef339e750d45a1cd6bbd8497c59f7bc42a3523e97346022da947b",
+          "size": 3207
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/spotifysearch.js",
+          "sha256": "ba126b9fc6c8d82d0b58c7b767f2ff088a34d4562051b709ec528384b261f6ef",
+          "size": 3135
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/utilitarios.js",
+          "sha256": "6b89cbdd4398a9918aaf64ccc548969c330b68c2c2214649f33a3ce9057f5ae1",
+          "size": 2301
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/wikipedia.js",
+          "sha256": "ccce9f4a5a51aff907094d5526c94777ca48630e2639b5800716b2ae6282d36d",
+          "size": 2989
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/evento-lista.js",
+          "sha256": "33c34057dd275e2eaafc81c533ee5264e3f2bdb367d625157ccb48636f20ad00",
+          "size": 1578
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+          "sha256": "0c6d8a37f9f051f1cf700a8f54dd2b101da731abba0954182323c96c2f7a0f9b",
+          "size": 3517
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/likes.js",
+          "sha256": "95c9a44b2a4d89b6578dc718a2eb63decc1216b314ab5b6b6a289198db347e57",
+          "size": 14310
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/listasala.js",
+          "sha256": "fd4f15421ad221ba3247a34adb8a51f559159ad8c8e5bd9406984dd170bcd587",
+          "size": 3925
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/listsala.js",
+          "sha256": "2efac505d86e0f6bc4174619801f463496553570c981a50b1b9413a41ef439c9",
+          "size": 3124
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/modox4.js",
+          "sha256": "3df79a90fe2e23add3f536a0160c26a26192d4f68fdf67becb2ad59c1308e5f4",
+          "size": 2353
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+          "sha256": "53304eac8e19e4653ce92cda2d3ca0df44acc1d946a371ee307395e802e9c0cc",
+          "size": 6719
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/magia/arcana.js",
+          "sha256": "87fbc9387be10512732c47e0a1fa1b20c9a90998eac983ac2347fe2e9eb38588",
+          "size": 3858
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/sub/cadastroevento.js",
+          "sha256": "57938e5dee15c90f2f3c85f46c617e1ddadcb7d7ebfc851966c6d748078be4da",
+          "size": 271
+        },
+        {
+          "path": "package.json",
+          "sha256": "bbc5f16e58d583abd22a629cff8e5a0472226859803f37fb65f03e213d457063",
+          "size": 1211
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/admin/addddd.js",
+        "DADOS_TOKITO/plugins/admin/delddd.js",
+        "DADOS_TOKITO/plugins/admin/listddd.js",
+        "DADOS_TOKITO/plugins/brincadeiras/base.js",
+        "DADOS_TOKITO/plugins/downloads/_novas_rotas.js",
+        "DADOS_TOKITO/plugins/freefire/base.js",
+        "DADOS_TOKITO/plugins/freefire/lista-sala.js",
+        "DADOS_TOKITO/plugins/freefire/sala-lista.js",
+        "DADOS_TOKITO/plugins/magia/base.js",
+        "DADOS_TOKITO/plugins/sub/00-cadastro.js"
+      ],
+      "required": false,
+      "publishedAt": "2026-11-05T01:14:57.201Z"
     }
   ],
   "mode": "incremental",
