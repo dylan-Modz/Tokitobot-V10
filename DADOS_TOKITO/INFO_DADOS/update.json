@@ -1,64 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.86",
+  "version": "10.2.87",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-07T13:41:00.666Z",
+  "publishedAt": "2026-11-07T13:41:59.737Z",
   "changelog": [
-    "[Correção] fix(fundoping): salvar fundos permanentes via Tokito APIs em vez de links temporários",
-    "A versão 10.2.86 já está disponível para atualização.",
-    "Fundoping atualizado"
+    "[Correção] fix(ping): usar imagem padrão existente no repositório do bot",
+    "A versão 10.2.87 já está disponível para atualização.",
+    "Ping atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(fundoping): salvar fundos permanentes via Tokito APIs em vez de links temporários",
-  "notice": "A versão 10.2.86 já está disponível para atualização.",
+  "title": "fix(ping): usar imagem padrão existente no repositório do bot",
+  "notice": "A versão 10.2.87 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/dono/fundoping.js",
-      "sha256": "0b47a17ad25693901012e2cbdfb9cbcf6ed7e03885b40c31c7ddf345d1c2c9aa",
-      "size": 3438
+      "path": "DADOS_TOKITO/plugins/info/ping.js",
+      "sha256": "d1e2af6aa1d13767be8841fbe0d913493520ab17600ec99a00b973d3afca8613",
+      "size": 4637
     }
   ],
   "releases": [
-    {
-      "version": "10.1.63",
-      "fromVersion": "10.1.62",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Ativar em carrossel e novos emojis",
-      "notice": "A versão 10.1.63 já está disponível para atualização.",
-      "changelog": [
-        "O comando ativar agora usa carouselMessage com apenas um card, igual ao padrão da Loja Pokémon.",
-        "Cada função do ativar recebe um emoji próprio de acordo com sua finalidade.",
-        "Os estados seguem o padrão do comando status: 𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ✅ e 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝙳𝙾 ❌.",
-        "A Loja Pokémon recebe emoji temático no título e no botão."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T14:20:00.000Z"
-    },
     {
       "version": "10.1.64",
       "fromVersion": "10.1.63",
@@ -4808,6 +4774,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-07T13:41:00.665Z"
+    },
+    {
+      "version": "10.2.87",
+      "fromVersion": "10.2.86",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(ping): usar imagem padrão existente no repositório do bot",
+      "notice": "A versão 10.2.87 já está disponível para atualização.",
+      "changelog": [
+        "Ping atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/info/ping.js",
+          "sha256": "d1e2af6aa1d13767be8841fbe0d913493520ab17600ec99a00b973d3afca8613",
+          "size": 4637
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-07T13:41:59.736Z"
     }
   ],
   "mode": "incremental",
