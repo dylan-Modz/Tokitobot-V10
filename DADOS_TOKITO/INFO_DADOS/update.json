@@ -1,66 +1,42 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.7",
+  "version": "10.3.8",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T23:00:25.976Z",
+  "publishedAt": "2026-11-08T23:01:56.484Z",
   "changelog": [
-    "[Correção] fix(salas): CTA convite da Garena com domínio validado e URL comercial",
-    "A versão 10.3.7 já está disponível para atualização.",
+    "[Novidade] feat(menuff): exibir entrarsala por convite no menu Free Fire",
+    "A versão 10.3.8 já está disponível para atualização.",
     "Mensagens atualizado",
-    "Ffcore atualizado"
+    "Menus atualizado",
+    "Salas atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix(salas): CTA convite da Garena com domínio validado e URL comercial",
-  "notice": "A versão 10.3.7 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat(menuff): exibir entrarsala por convite no menu Free Fire",
+  "notice": "A versão 10.3.8 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "5905433f87cadf432f04fd6075297ac6dc1f1f6be90f9fea159884284a93ff9d",
-      "size": 233941
+      "sha256": "20476d5c4daf22268fa55c8dd192dece1e4c4f8749f5d81bb599952f5e2312bf",
+      "size": 234003
     },
     {
-      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
-      "sha256": "6586389a7c90b1e538ce72c79af17f5406a843aecc20f9f7222ffabf018993ce",
-      "size": 10413
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "ec43d4f0d7d73a6d00c0a222d3ba46ffca83c21f85b1d7780d2301c76fe68462",
+      "size": 78981
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+      "sha256": "b3c8ed1b26f83e2ccfb8876ae74fa512ec43e702f621ca32c5c2d5235efb2198",
+      "size": 21194
     }
   ],
   "releases": [
-    {
-      "version": "10.2.9",
-      "fromVersion": "10.2.8",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Contato nativo no comando criador",
-      "notice": "O comando criador agora envia o cartão de contato nativo do WhatsApp.",
-      "changelog": [
-        "O comando criador agora envia um cartão de contato nativo do WhatsApp (vCard), substituindo a mensagem de apresentação antiga.",
-        "O cartão usa o nome dylan [00] e o telefone de desenvolvedor terminado em 1060, como solicitado.",
-        "Demais comandos e mensagens mantidos sem alterações."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/info/criador.js",
-          "gitSha": "77d99320f1bfc7749e6d7cf48fbb8f26f1975358",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "gitSha": "a57501c3dfde51d8ad804f680bae63cfb8b0cb0e",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-11T03:26:25.561Z"
-    },
     {
       "version": "10.2.10",
       "fromVersion": "10.2.9",
@@ -4177,6 +4153,39 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T23:00:25.976Z"
+    },
+    {
+      "version": "10.3.8",
+      "fromVersion": "10.3.7",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat(menuff): exibir entrarsala por convite no menu Free Fire",
+      "notice": "A versão 10.3.8 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado",
+        "Menus atualizado",
+        "Salas atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "20476d5c4daf22268fa55c8dd192dece1e4c4f8749f5d81bb599952f5e2312bf",
+          "size": 234003
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "ec43d4f0d7d73a6d00c0a222d3ba46ffca83c21f85b1d7780d2301c76fe68462",
+          "size": 78981
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+          "sha256": "b3c8ed1b26f83e2ccfb8876ae74fa512ec43e702f621ca32c5c2d5235efb2198",
+          "size": 21194
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T23:01:56.484Z"
     }
   ],
   "mode": "incremental",
