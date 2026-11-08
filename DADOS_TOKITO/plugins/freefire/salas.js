@@ -72,11 +72,11 @@ const reqSala = async (ctx,rota,params={}) => {
   return data
 }
 const menuGerencia = (ctx,texto) => h.menuListaSala(ctx,texto,'Gerenciar sala',[
-  {texto:'🔎 Ver sala',descricao:'Detalhes da sala deste grupo',id:ctx.prefix+'versala'},
-  {texto:'👥 Ver jogadores',descricao:'Nicks, UIDs e equipes',id:ctx.prefix+'jogadoressala'},
-  {texto:'🖼️ Imagem dos jogadores',descricao:'Quadro da sala em PNG',id:ctx.prefix+'imagensala'},
-  {texto:'🚀 Iniciar partida',descricao:'Exclusivo do criador',id:ctx.prefix+'iniciarsala'},
-  {texto:'⛔ Encerrar sala',descricao:'Exclusivo do criador',id:ctx.prefix+'pararsala'}
+  {texto:'🔎⃞ ᴠᴇʀ sᴀʟᴀ',descricao:'🆔 ɪᴅ ᴇ ɪɴғᴏʀᴍᴀᴄ̧ᴏ̃ᴇs',id:ctx.prefix+'versala'},
+  {texto:'👥⃞ ᴠᴇʀ ᴊᴏɢᴀᴅᴏʀᴇs',descricao:'👤 ɴɪᴄᴋs, ᴜɪᴅs ᴇ ᴇǫᴜɪᴘᴇs',id:ctx.prefix+'jogadoressala'},
+  {texto:'🖼️⃞ ɪᴍᴀɢᴇᴍ ᴅᴀ sᴀʟᴀ',descricao:'🖼️ ǫᴜᴀᴅʀᴏ ᴘɴɢ',id:ctx.prefix+'imagensala'},
+  {texto:'🚀⃞ ɪɴɪᴄɪᴀʀ ᴘᴀʀᴛɪᴅᴀ',descricao:'🔒 sᴏᴍᴇɴᴛᴇ ᴏ ᴄʀɪᴀᴅᴏʀ',id:ctx.prefix+'iniciarsala'},
+  {texto:'⛔⃞ ᴇɴᴄᴇʀʀᴀʀ sᴀʟᴀ',descricao:'🔒 sᴏᴍᴇɴᴛᴇ ᴏ ᴄʀɪᴀᴅᴏʀ',id:ctx.prefix+'pararsala'}
 ])
 
 const pararMonitor = ctx => {
@@ -188,9 +188,9 @@ dylan.setCommand({
             '\n> 👤 Criador: '+(salaAtiva.criadorNome || 'Jogador')+
             '\n\n> 📋 Escolha uma opção na lista.')
           return h.menuListaSala(ctx,
-            '- 🎮 *CRIAR SALA FREE FIRE*\n\n> 🎯 Escolha um dos modos para criar uma sala neste grupo.\n> 📋 A criação só acontece depois de apertar *Criar sala*.',
+            '- 🎮 \x60𝙲𝚁𝙸𝙰𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\x60\n\n> 🎯 ׄ ( ᴇsᴄᴏʟʜᴀ ᴏ ᴍᴏᴅᴏ ɴᴏ ᴍᴇɴᴜ ʟɪsᴛ. )\n> 📋 ׄ ( ᴅᴇᴘᴏɪs ᴄʟɪǫᴜᴇ ᴇᴍ *ᴄʀɪᴀʀ sᴀʟᴀ*. )',
             'Escolher modo',h.MODOS_SALA.map(m=>({
-              texto:'🎮 '+m.nome,descricao:'Até '+m.limite+' jogadores',
+              texto:'🎮⃞ '+({ap_padrao:'ᴀᴘ ᴘᴀᴅʀᴀ̃ᴏ',gelo_inf:'ɢᴇʟᴏ ɪɴғɪɴɪᴛᴏ',tatico:'ᴍᴏᴅᴏ ᴛᴀ́ᴛɪᴄᴏ',ap_fullcapa:'ғᴜʟʟ ᴄᴀᴘᴀ',capa_3:'ᴄᴀᴘᴀ 3',ap_uxd:'ᴀᴘ ᴜxᴅ',ap_7r:'ᴀᴘ 7ʀ',br_padrao:'ʙᴀᴛᴛʟᴇ ʀᴏʏᴀʟᴇ'}[m.id]||m.nome),descricao:'👥 ᴀᴛᴇ́ '+m.limite+' ᴊᴏɢᴀᴅᴏʀᴇs',
               id:ctx.prefix+'criarsala selecionar '+m.id
             })))
         }
@@ -211,10 +211,9 @@ dylan.setCommand({
             '\n> 👥 Capacidade: '+modo.limite+' jogadores'+
             '\n> 🗺️ Mapa: Bermuda\n> 🌎 Região: BR\n> ⏱️ Início automático: 10 minutos'+
             '\n> 🔑 Senha: gerada automaticamente\n\n> ✅ Aperte *Criar sala* para confirmar. Será consumido um crédito apenas se a criação for confirmada.'
-          if (!ctx.isBotoes) return ctx.reply(resumo+'\n\n> Para confirmar: '+ctx.prefix+'criarsala confirmar '+nonce)
-          return h.enviar(ctx,resumo,[{
-            texto:'✅ Criar sala',id:ctx.prefix+'criarsala confirmar '+nonce
-          },{texto:'❌ Cancelar',id:ctx.prefix+'criarsala cancelar'}],[ctx.sender])
+          return h.menuListaSala(ctx,resumo,'Confirmar sala',[{
+            texto:'✅ ᴄʀɪᴀʀ sᴀʟᴀ',descricao:'ᴄᴏɴғɪʀᴍᴀʀ ᴀ ᴄʀɪᴀᴄ̧ᴀ̃ᴏ',id:ctx.prefix+'criarsala confirmar '+nonce
+          },{texto:'❌ ᴄᴀɴᴄᴇʟᴀʀ',descricao:'ɴᴇɴʜᴜᴍ ᴄʀᴇ́ᴅɪᴛᴏ ᴜsᴀᴅᴏ',id:ctx.prefix+'criarsala cancelar'}])
         }
         if (args[0]==='cancelar') {
           const g=grupo(ctx),u=usuario(ctx)
