@@ -37,6 +37,12 @@ const monitores = new Map()
 const criando = new Set()
 const MONITOR_MS = 5000
 const PENDENTE_MS = 5 * 60 * 1000
+let janelaConsultas=Date.now(),quantidadeConsultas=0
+const podeConsultar=()=>{
+  if(Date.now()-janelaConsultas>=60000){janelaConsultas=Date.now();quantidadeConsultas=0}
+  if(quantidadeConsultas>=240)return false
+  quantidadeConsultas++;return true
+}
 const modoPorId = id => h.MODOS_SALA.find(m=>m.id===id)
 const destino = ctx => String(ctx.subId || ctx.tokito?.user?.id || 'principal')+'|'+String(ctx.from || '')
 const usuario = ctx => typeof ctx.nJid==='function' ? ctx.nJid(ctx.sender) : String(ctx.sender || '')
@@ -103,7 +109,7 @@ const alertarJogador = async (ctx, sala, player, total) => {
 // consultas leves enquanto a sessão estiver ativa, sem propagandas de
 // "instantâneo". Deixar um monitor por grupo e nenhuma consulta duplicada.
 function monitorarSala(ctx, inicial=false) {
-  if (!ctx?.isGroup || !ativa(ctx) || !ctx.axios?.get || !ctx.tokito?.sendMessage) return false
+  if (!ctx?.isGroup || !ativa(ctx) || ativa(ctx).status !== 'active' || !ctx.axios?.get || !ctx.tokito?.sendMessage) return false
   const key=destino(ctx),sala=ativa(ctx),atual=monitores.get(key)
   if (atual && atual.sessionId===sala.sessionId) return true
   if (atual) pararMonitor(ctx)
@@ -112,7 +118,7 @@ function monitorarSala(ctx, inicial=false) {
     ctx,sala
   }
   const verificar=async()=>{
-    if (registro.busy || monitores.get(key)!==registro) return
+    if (registro.busy || monitores.get(key)!==registro || !podeConsultar() || (registro.errors>0 && Date.now() < (registro.retryAfter||0))) return
     registro.busy=true
     try {
       const r=await ctx.axios.get(urlBase(ctx)+'/jogadores',{
@@ -142,7 +148,12 @@ function monitorarSala(ctx, inicial=false) {
       registro.errors=0
     } catch(error) {
       registro.errors++
-      if ([404,410].includes(Number(error?.response?.status))) pararMonitor(ctx)
+      if ([404,410].includes(Number(error?.response?.status))) {
+        pararMonitor(ctx)
+        if (ativa(ctx)?.sessionId === registro.sessionId) gravar(ctx,null)
+      }
+      if (Number(error?.response?.status)===429){registro.errors=20;registro.retryAfter=Date.now()+60000}
+      else registro.retryAfter=Date.now()+Math.min(30000,registro.errors*5000)
       if (registro.errors===5) console.log('[SALAS] Monitor de entradas sem resposta:',error?.message)
     } finally {registro.busy=false}
   }
@@ -281,7 +292,7 @@ dylan.setCommand({
           NomeDoBot:ctx.NomeDoBot,pushname:ctx.pushname,players,
           total:data.memberCount ?? data.total ?? players.length
         })
-        return h.enviar(ctx,texto,h.botoesSala(ctx,['imagem','ver','iniciar']),[ctx.sender])
+        return h.enviar(ctx,texto,h.botoesSala(ctx,'active',['imagem','ver','iniciar']),[ctx.sender])
       }
       if(command==='imagensala') {
         const response=await ctx.axios.get(urlBase(ctx)+'/jogadores/imagem',{
