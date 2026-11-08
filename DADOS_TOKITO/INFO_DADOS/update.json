@@ -1,81 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.4",
+  "version": "10.3.5",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T22:45:25.691Z",
+  "publishedAt": "2026-11-08T22:57:25.766Z",
   "changelog": [
-    "#criarsala mostra carrossel com a mesma mídia e lista interativa do #menu.",
-    "Escolha de modos e confirmação com opções clicáveis no carrossel.",
-    "Mensagens de criação, jogadores, avisos e controles com a fonte do Tokito.",
-    "Todas as operações usam a sala ativa do grupo sem SESSION_ID."
+    "[Novidade] feat(salas): botão Entrar na sala usa somente convite HTTPS real da API",
+    "A versão 10.3.5 já está disponível para atualização.",
+    "Ffcore atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Tokito Bot 10.3.4 — carrossel e design original das salas",
-  "notice": "Corrigido carrossel e design das salas Free Fire.",
+  "type": "Novidade",
+  "title": "feat(salas): botão Entrar na sala usa somente convite HTTPS real da API",
+  "notice": "A versão 10.3.5 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "5b5a6900a4539ac533de30143913ffcedbed2afe624ad02751ef2c3a2155dcfd",
-      "size": 1210,
-      "gitSha": "8c2ad1e7103ba561b23c6101d334d61bba955e92"
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "ba37cedda564ba2211272712d094b15062d9371e7968e4ba2bcca30922844ea3",
-      "size": 232199,
-      "gitSha": "63386561acb0b3a02cc65b373404ffd56c967a24"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/salas.js",
-      "sha256": "1b7333620216c7e4849fdca5d16dc0d016112ada148e79efe5f3797ca3b75043",
-      "size": 19342,
-      "gitSha": "bbddbd1c699efb3d0db64219d187b88157ccc015"
+      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+      "sha256": "8663a4d6a9fb0e59f4539cff196b34c3e0242d64abf9d101747df0c69d96686a",
+      "size": 10398
     }
   ],
   "releases": [
-    {
-      "version": "10.2.6",
-      "fromVersion": "10.2.5",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Menu RPG, emojis e horários de grupo",
-      "notice": "Menu RPG decorado, emojis de categorias e comando horariogp.",
-      "changelog": [
-        "As 10 categorias internas do Menu RPG agora têm cabeçalhos e rodapés completos no padrão dos outros menus.",
-        "Cada submenu no painel principal ganhou um emoji próprio, no lugar do emoji de gelo.",
-        "Novo comando horariogp mostra a abertura e o fechamento programados do grupo com explicação compacta.",
-        "O comando horariogp foi adicionado ao Menu ADM, sem alterar horários ou dados salvos."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "gitSha": "38c1b47b3353be411c5bfbaf1458bba9681477d4",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/horariogp.js",
-          "sha256": "",
-          "gitSha": "0e919eced251ca8181b47a1cc47f6409273577bb",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "gitSha": "ee2aab524e51897c31a3a594e528d71aca0d1bdf",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-09T17:43:17.907Z"
-    },
     {
       "version": "10.2.7",
       "fromVersion": "10.2.6",
@@ -4243,6 +4192,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T22:45:25.690Z"
+    },
+    {
+      "version": "10.3.5",
+      "fromVersion": "10.3.4",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat(salas): botão Entrar na sala usa somente convite HTTPS real da API",
+      "notice": "A versão 10.3.5 já está disponível para atualização.",
+      "changelog": [
+        "Ffcore atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+          "sha256": "8663a4d6a9fb0e59f4539cff196b34c3e0242d64abf9d101747df0c69d96686a",
+          "size": 10398
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T22:57:25.765Z"
     }
   ],
   "mode": "incremental",
