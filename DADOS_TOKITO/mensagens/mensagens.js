@@ -3869,6 +3869,31 @@ ${players.length ? players.map((p, i) => `> 👥 ׄ ( ${i + 1}° — ${p.nicknam
 > 👥 ׄ ( ${p.uid || 'N/A'} — ᴜɪᴅ • ᴛɪᴍᴇ ${p.team || 'N/A'} )`).join('\n\n') : '> 👥 ׄ ( ɴᴇɴʜᴜᴍ ᴊᴏɢᴀᴅᴏʀ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ. )'}`
 }
 
+exports.ffImagemSala = ({ roomId, modeName, mapName, total, maxPlayers }) => {
+  return [
+    '- 🖼️ \x60𝙸𝙼𝙰𝙶𝙴𝙼 𝙳𝙰 𝚂𝙰𝙻𝙰 𝙵𝙵\x60',
+    '',
+    '> 🆔 ׄ ( ɪᴅ: '+(roomId||'N/A')+' )',
+    '> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(modeName||'Free Fire')+' )',
+    '> 🗺️ ׄ ( ᴍᴀᴘᴀ: '+(mapName||'Bermuda')+' )',
+    '> 👥 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: '+(total??0)+'/'+(maxPlayers||8)+' )',
+    '',
+    '> ✅ ׄ ( ᴠᴇᴊᴀ ɴᴀ ɪᴍᴀɢᴇᴍ ᴏs ᴛɪᴍᴇs ᴇ ᴀs ᴠᴀɢᴀs. )'
+  ].join('\n')
+}
+
+exports.ffConviteSala = ({roomId, modeName, link}) => {
+  return [
+    '- 🎮 \x60𝙴𝙽𝚃𝚁𝙰𝚁 𝙽𝙰 𝚂𝙰𝙻𝙰\x60',
+    '',
+    '> 🆔 ׄ ( ɪᴅ: '+(roomId||'N/A')+' )',
+    '> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(modeName||'Free Fire')+' )',
+    '> 🌐 ׄ ( ᴄʟɪǫᴜᴇ ɴᴏ ʟɪɴᴋ ᴀʙᴀɪxᴏ. )',
+    '',
+    String(link||'')
+  ].join('\n')
+}
+
 exports.ffExpulsarUso = prefix => {
 return '- 🚫 \x60𝙴𝚇𝙿𝚄𝙻𝚂𝙰𝚁 𝙹𝙾𝙶𝙰𝙳𝙾𝚁\x60\n\n'+
 '> 📋 ׄ ( ᴜsᴇ '+prefix+'expulsarsala UID ɴᴏ ɢʀᴜᴘᴏ. )\n'+
