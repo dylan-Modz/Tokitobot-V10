@@ -134,35 +134,70 @@ const enviarAcoesSala = async (ctx, texto) => {
   }
 };
 
-// Lista genérica utilizada na escolha do modo e nas ações da sala.
-// Mantém os botões no próprio WhatsApp; nunca envia um sessionId ao usuário.
-const menuListaSala = async (ctx, texto, titulo, linhas) => {
-  const rows = linhas.map(item=>({
-    title:String(item.texto).slice(0,50),
-    description:String(item.descricao || '').slice(0,80),
-    id:String(item.id || '')
-  })).filter(x=>x.id)
-  if(ctx.isBotoes && ctx.proto?.Message?.InteractiveMessage &&
-     typeof ctx.generateWAMessageFromContent==='function' &&
-     typeof ctx.tokito?.relayMessage==='function') {
-    try {
-      const M=ctx.proto.Message.InteractiveMessage
-      const msg=ctx.generateWAMessageFromContent(ctx.from,{
-        interactiveMessage:M.create({
-          contextInfo:typeof ctx.canalInfo==='function'?ctx.canalInfo([ctx.sender]):{},
-          body:M.Body.create({text:texto}),
-          footer:M.Footer.create({text:ctx.NomeDoBot||'Tokito Bot'}),
-          nativeFlowMessage:M.NativeFlowMessage.create({
-            buttons:[{name:'single_select',buttonParamsJson:JSON.stringify({
-              title:titulo,sections:[{title:'🎮 Selecione uma opção',rows}]
-            })}],messageParamsJson:''
-          })
-        })
-      },{quoted:ctx.selo,userJid:ctx.tokito.user?.id})
-      return await ctx.tokito.relayMessage(ctx.from,msg.message,{messageId:msg.key.id})
-    }catch(error){console.log('[SALAS MENU LIST]',error?.message)}
+// Replica o carouselMessage + single_select do #menu principal.
+// Nao depende de isBotoes nem de generateWAMessageFromContent:
+const menuListaSala = async (ctx, texto, titulo, linhas = []) => {
+  const rows = linhas
+    .filter(item=>item?.id)
+    .map(item=>({
+      title:String(item.texto||'🎮 Selecionar').slice(0,72),
+      description:String(item.descricao||'').slice(0,100),
+      id:String(item.id)
+    }))
+  if (!rows.length) return ctx.reply(ctx.mess?.error?.() || 'Nenhuma opção disponível.')
+  const select = {
+    title:'🧊⃞ '+String(titulo||'ᴍᴇɴᴜ ᴅᴇ sᴀʟᴀs').slice(0,45)+' ⃞🧊',
+    sections:[{
+      title:'🧊⃞ ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄᴀᴏ ⃞🧊',
+      rows
+    }]
   }
-  return ctx.reply(texto+'\n\n'+linhas.map(x=>x.texto+': '+x.id).join('\n'))
+  try {
+    // A mídia do menu é a mesma do Tokito (vídeo/GIF ou imagem).
+    const media = await ctx.modulos.midiaMenu(ctx.tokito)
+    const attachment = media?.videoMessage
+      ? {videoMessage:media.videoMessage}
+      : media?.imageMessage
+        ? {imageMessage:media.imageMessage}
+        : null
+    const content = [
+      '❪🧊.ꯧᴍᴇɴᴜ ʟɪsᴛ • sᴀʟᴀs FFꯧ⸼🧊❫',
+      '┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓',
+      '├⊹ 🧊 ʙᴏᴛ: '+String(ctx.NomeDoBot||'Tokito Bot'),
+      '├⊹ 🎮 ᴍᴇɴᴜ: '+String(titulo||'Salas Free Fire'),
+      '├⊹ 👤 ᴜsᴜᴀʀɪᴏ: '+String(ctx.pushname||'Jogador'),
+      '┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛',
+      '',
+      String(texto||'')
+    ].join('\n')
+    const card={
+      ...(attachment?{header:{hasMediaAttachment:true,...attachment},headerType:media.videoMessage?'VIDEO':'IMAGE'}:{}),
+      body:{text:content},
+      footer:{text:'ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄᴀᴏ ᴀʙᴀɪxᴏ'},
+      nativeFlowMessage:{buttons:[{
+        name:'single_select',
+        buttonParamsJson:JSON.stringify(select)
+      }]}
+    }
+    const quoted=ctx.selo||{}
+    return await ctx.tokito.relayMessage(ctx.from,{
+      interactiveMessage:{
+        contextInfo:{
+          ...(quoted.message?{quotedMessage:quoted.message}:{}),
+          ...(quoted.key?.participant?{participant:quoted.key.participant}:{}),
+          ...(quoted.key?.id?{stanzaId:quoted.key.id}:{}),
+          ...(quoted.key?.remoteJid?{remoteJid:quoted.key.remoteJid}:{}),
+          mentionedJid:[ctx.sender].filter(Boolean)
+        },
+        body:{text:'*🧊⃞ ᴍᴇɴᴜ ᴅᴇ sᴀʟᴀs ғʀᴇᴇ ғɪʀᴇ ⃞🧊*'},
+        carouselMessage:{cards:[card]}
+      }
+    },{})
+  } catch (error) {
+    console.log('[SALAS CARROSSEL]',error?.message||error)
+    // Nunca expor os IDs internos como lista de comandos brutos.
+    return ctx.reply('- 🎮 𝙼𝙴𝙽𝚄 𝙳𝙴 𝚂𝙰𝙻𝙰𝚂\n\n> ⚠️ ׄ ( ᴏ ᴡʜᴀᴛsᴀᴘᴘ ɴᴀ̃ᴏ ᴀʙʀɪᴜ ᴏ ᴍᴇɴᴜ ɪɴᴛᴇʀᴀᴛɪᴠᴏ. )\n> 🔄 ׄ ( ᴛᴇɴᴛᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ ᴏ ᴄᴏᴍᴀɴᴅᴏ. )')
+  }
 }
 
 const dataBR = valor => {
