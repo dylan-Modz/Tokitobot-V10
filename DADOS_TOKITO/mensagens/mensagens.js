@@ -3809,35 +3809,29 @@ return `- ${aberto ? '🔓' : '🔒'} \`𝙶𝚁𝚄𝙿𝙾 ${aberto ? '𝙰�
 > 📌 ׄ ( sᴛᴀᴛᴜs: ${aberto ? 'Todos os membros podem enviar mensagens.' : 'Somente administradores podem enviar mensagens.'} )`
 }
 exports.ffSalaUso = prefix => {
-return `- 🎮 \`𝙲𝚁𝙸𝙰𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\`
-
-> 📋 ׄ ( ғᴏʀᴍᴀᴛᴏ: ${prefix}criarsala NOME|SENHA|JOGADORES|MODO|REGIÃO )
-> 💡 ׄ ( ᴇxᴇᴍᴘʟᴏ: ${prefix}criarsala TESTE|1234|12|1|BR )`
+  return '- 🎮 \x60𝙲𝚁𝙸𝙰𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\x60\n\n' +
+    '> 📋 Use '+prefix+'criarsala e escolha o modo na lista.\n' +
+    '> ✅ Confirme no botão Criar sala para solicitar a criação.'
 }
 
 exports.ffSalaCriada = ({ NomeDoBot, pushname, sala, roomName, roomPassword, maxPlayers, mode, region, data }) => {
-return `- 🎮 \`𝚂𝙰𝙻𝙰 𝙵𝚁𝙴𝙴 𝙵𝙸𝚁𝙴 𝙲𝚁𝙸𝙰𝙳𝙰\`
-
-> 🤖 ׄ ( ʙᴏᴛ: ${NomeDoBot} )
-> 👤 ׄ ( ᴜsᴜᴀ́ʀɪᴏ: ${pushname} )
-> 🏷️ ׄ ( ɴᴏᴍᴇ: ${sala?.roomName || roomName} )
-> 🆔 ׄ ( ʀᴏᴏᴍ ɪᴅ: ${sala?.roomId || 'Indisponível'} )
-> 🔐 ׄ ( sᴇssɪᴏɴ ɪᴅ: ${sala?.sessionId || 'Indisponível'} )
-> 🔑 ׄ ( sᴇɴʜᴀ: ${sala?.password || roomPassword} )
-> 🎯 ׄ ( ᴍᴏᴅᴏ: ${sala?.modeName || mode} )
-> 👥 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: ${maxPlayers} )
-> 🌎 ׄ ( ʀᴇɢɪᴀ̃ᴏ: ${region} )
-
-> 📊 ׄ ( ʀᴇsᴛᴀɴᴛᴇs: ${data?.limite?.restantes ?? 'N/A'} )
-> 📈 ׄ ( ᴜsᴀᴅᴀs: ${data?.limite?.usadas ?? 'N/A'} )
-
-> 🎮 ׄ ( ✅ sᴀʟᴀ ᴄʀɪᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ! )`
+  return '- 🎮 \x60𝚂𝙰𝙻𝙰 𝙵𝙵 𝙲𝚁𝙸𝙰𝙳𝙰\x60\n\n' +
+    '> ✅ Sala criada com sucesso!\n' +
+    '> 👤 Criador: '+(pushname||'Jogador')+'\n' +
+    '> 🏷️ Nome: '+(sala?.roomName||roomName||'Sala Free Fire')+'\n' +
+    '> 🆔 ID: '+(sala?.roomId||'Indisponível')+'\n' +
+    '> 🔑 Senha: '+(sala?.password||roomPassword||'Indisponível')+'\n' +
+    '> 🎯 Modo: '+(sala?.modeName||mode||'Free Fire')+'\n' +
+    '> 🗺️ Mapa: '+(sala?.mapName||'Bermuda')+'\n' +
+    '> 👥 Jogadores: 0/'+(sala?.maxPlayers||maxPlayers||8)+'\n' +
+    '> 🌎 Região: '+(sala?.region||region||'BR')+'\n\n' +
+    '> 📊 Salas restantes: '+(data?.limite?.restantes??'N/A')+'\n' +
+    '> 📋 Use o menu de gerenciamento abaixo para acompanhar a sala.'
 }
 
 exports.ffVerSalaUso = prefix => {
-return `- 🔎 \`𝚅𝙴𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\`
-
-> 📋 ׄ ( ғᴏʀᴍᴀᴛᴏ: ${prefix}versala SESSION_ID )`
+  return '- 🔎 \x60𝚅𝙴𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\x60\n\n' +
+    '> 📋 Use '+prefix+'versala no grupo que criou a sala.'
 }
 
 exports.ffSalaInfo = ({ NomeDoBot, pushname, sala, tempo }) => {
@@ -3854,9 +3848,8 @@ return `- 🔎 \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝚂�
 }
 
 exports.ffJogadoresUso = prefix => {
-return `- 👥 \`𝙹𝙾𝙶𝙰𝙳𝙾𝚁𝙴𝚂 𝙳𝙰 𝚂𝙰𝙻𝙰\`
-
-> 📋 ׄ ( ғᴏʀᴍᴀᴛᴏ: ${prefix}jogadoressala SESSION_ID )`
+  return '- 👥 \x60𝙹𝙾𝙶𝙰𝙳𝙾𝚁𝙴𝚂 𝙳𝙰 𝚂𝙰𝙻𝙰\x60\n\n' +
+    '> 📋 Use '+prefix+'jogadoressala no grupo da sala ativa.'
 }
 
 exports.ffJogadores = ({ NomeDoBot, pushname, players, total }) => {
@@ -3871,9 +3864,9 @@ ${players.length ? players.map((p, i) => `> 👥 ׄ ( ${i + 1}° — ${p.nicknam
 }
 
 exports.ffExpulsarUso = prefix => {
-return `- 🚫 \`𝙴𝚇𝙿𝚄𝙻𝚂𝙰𝚁 𝙹𝙾𝙶𝙰𝙳𝙾𝚁\`
-
-> 📋 ׄ ( ғᴏʀᴍᴀᴛᴏ: ${prefix}expulsarsala SESSION_ID|UID )`
+  return '- 🚫 \x60𝙴𝚇𝙿𝚄𝙻𝚂𝙰𝚁 𝙹𝙾𝙶𝙰𝙳𝙾𝚁\x60\n\n' +
+    '> 📋 Use '+prefix+'expulsarsala UID\n' +
+    '> 🔒 Somente o criador pode remover jogadores da sala.'
 }
 
 exports.ffExpulso = ({ NomeDoBot, pushname, targetUid, message }) => {
@@ -3887,35 +3880,25 @@ return `- 🚫 \`𝙹𝙾𝙶𝙰𝙳𝙾𝚁 𝙴𝚇𝙿𝚄𝙻𝚂𝙾\`
 }
 
 exports.ffIniciarUso = prefix => {
-return `- 🚀 \`𝙸𝙽𝙸𝙲𝙸𝙰𝚁 𝚂𝙰𝙻𝙰\`
-
-> 📋 ׄ ( ғᴏʀᴍᴀᴛᴏ: ${prefix}iniciarsala SESSION_ID )`
+  return '- 🚀 \x60𝙸𝙽𝙸𝙲𝙸𝙰𝚁 𝚂𝙰𝙻𝙰\x60\n\n' +
+    '> 📋 Use '+prefix+'iniciarsala no grupo da sala ativa.'
 }
 
 exports.ffSalaIniciada = ({ NomeDoBot, pushname, sessionId, message }) => {
-return `- 🚀 \`𝚂𝙰𝙻𝙰 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙰\`
-
-> 🤖 ׄ ( ʙᴏᴛ: ${NomeDoBot} )
-> 👤 ׄ ( ᴜsᴜᴀ́ʀɪᴏ: ${pushname} )
-> 🔐 ׄ ( sᴇssɪᴏɴ ɪᴅ: ${sessionId} )
-
-> 🚀 ׄ ( ✅ ${message || 'Sala iniciada com sucesso!'} )`
+  return '- 🚀 \x60𝚂𝙰𝙻𝙰 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙰\x60\n\n' +
+    '> 👤 Criador: '+(pushname||'Jogador')+'\n' +
+    '> ✅ '+(message||'A partida foi iniciada com sucesso!') 
 }
 
 exports.ffPararUso = prefix => {
-return `- ⛔ \`𝙿𝙰𝚁𝙰𝚁 𝚂𝙰𝙻𝙰\`
-
-> 📋 ׄ ( ғᴏʀᴍᴀᴛᴏ: ${prefix}pararsala SESSION_ID )`
+  return '- ⛔ \x60𝙴𝙽𝙲𝙴𝚁𝚁𝙰𝚁 𝚂𝙰𝙻𝙰\x60\n\n' +
+    '> 📋 Use '+prefix+'pararsala no grupo da sala ativa.'
 }
 
 exports.ffSalaParada = ({ NomeDoBot, pushname, sessionId, message }) => {
-return `- ⛔ \`𝚂𝙰𝙻𝙰 𝙿𝙰𝚁𝙰𝙳𝙰\`
-
-> 🤖 ׄ ( ʙᴏᴛ: ${NomeDoBot} )
-> 👤 ׄ ( ᴜsᴜᴀ́ʀɪᴏ: ${pushname} )
-> 🔐 ׄ ( sᴇssɪᴏɴ ɪᴅ: ${sessionId} )
-
-> ⛔ ׄ ( ✅ ${message || 'Sala parada com sucesso!'} )`
+  return '- ⛔ \x60𝚂𝙰𝙻𝙰 𝙴𝙽𝙲𝙴𝚁𝚁𝙰𝙳𝙰\x60\n\n' +
+    '> 👤 Criador: '+(pushname||'Jogador')+'\n' +
+    '> ✅ '+(message||'A sala foi encerrada com sucesso!')
 }
 
 exports.ffStatusApi = ({ NomeDoBot, pushname, data }) => {
