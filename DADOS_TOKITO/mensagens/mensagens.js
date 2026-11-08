@@ -3815,18 +3815,22 @@ return '- 🎮 \x60𝙲𝚁𝙸𝙰𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\x60\n\n'+
 }
 
 exports.ffSalaCriada = ({ NomeDoBot, pushname, sala, roomName, roomPassword, maxPlayers, mode, region, data }) => {
-return '- 🎮 \x60𝚂𝙰𝙻𝙰 𝙵𝙵 𝙲𝚁𝙸𝙰𝙳𝙰\x60\n\n'+
-'> 🤖 ׄ ( ʙᴏᴛ: '+(NomeDoBot||'Tokito Bot')+' )\n'+
-'> 👤 ׄ ( ᴄʀɪᴀᴅᴏʀ: '+(pushname||'Jogador')+' )\n'+
-'> 🏷️ ׄ ( ɴᴏᴍᴇ: '+(sala?.roomName||roomName||'Sala Free Fire')+' )\n'+
-'> 🆔 ׄ ( ɪᴅ ᴅᴀ sᴀʟᴀ: '+(sala?.roomId||'Indisponível')+' )\n'+
-'> 🔑 ׄ ( sᴇɴʜᴀ: '+(sala?.password||roomPassword||'Indisponível')+' )\n'+
-'> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(sala?.modeName||mode||'Free Fire')+' )\n'+
-'> 🗺️ ׄ ( ᴍᴀᴘᴀ: '+(sala?.mapName||'Bermuda')+' )\n'+
-'> 👥 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: 0/'+(sala?.maxPlayers||maxPlayers||8)+' )\n'+
-'> 🌎 ׄ ( ʀᴇɢɪᴀ̃ᴏ: '+(sala?.region||region||'BR')+' )\n\n'+
-'> 📊 ׄ ( sᴀʟᴀs ʀᴇsᴛᴀɴᴛᴇs: '+(data?.limite?.restantes??'N/A')+' )\n'+
-'> ✅ ׄ ( sᴀʟᴀ ᴄʀɪᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ! )'
+  return [
+    '- 🎮 \x60𝚂𝙰𝙻𝙰 𝙵𝙵 𝙲𝚁𝙸𝙰𝙳𝙰\x60',
+    '',
+    '> ✅ ׄ ( sᴀʟᴀ ᴄʀɪᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ! )',
+    '> 👤 ׄ ( ᴄʀɪᴀᴅᴏʀ: '+(pushname||'Jogador')+' )',
+    '> 🏷️ ׄ ( ɴᴏᴍᴇ: '+(sala?.roomName||roomName||'Sala Free Fire')+' )',
+    '> 🆔 ׄ ( ɪᴅ: '+(sala?.roomId||'Indisponível')+' )',
+    '> 🔑 ׄ ( sᴇɴʜᴀ: '+(sala?.password||roomPassword||'Indisponível')+' )',
+    '> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(sala?.modeName||mode||'Free Fire')+' )',
+    '> 🗺️ ׄ ( ᴍᴀᴘᴀ: '+(sala?.mapName||'Bermuda')+' )',
+    '> 👥 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: 0/'+(sala?.maxPlayers||maxPlayers||8)+' )',
+    '> 🌎 ׄ ( ʀᴇɢɪᴀ̃ᴏ: '+(sala?.region||region||'BR')+' )',
+    '',
+    '> 📊 ׄ ( sᴀʟᴀs ʀᴇsᴛᴀɴᴛᴇs: '+(data?.limite?.restantes??'N/A')+' )',
+    '> 📋 ׄ ( ɢᴇʀᴇɴᴄɪᴇ ᴀ sᴀʟᴀ ᴘᴇʟᴏ ᴍᴇɴᴜ ʟɪsᴛ. )'
+  ].join('\n')
 }
 
 exports.ffVerSalaUso = prefix => {
@@ -3835,16 +3839,18 @@ return '- 🔎 \x60𝚅𝙴𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\x60\n\n'+
 }
 
 exports.ffSalaInfo = ({ NomeDoBot, pushname, sala, tempo }) => {
-return `- 🔎 \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝚂𝙰𝙻𝙰\`
-
-> 🤖 ׄ ( ʙᴏᴛ: ${NomeDoBot} )
-> 👤 ׄ ( ᴜsᴜᴀ́ʀɪᴏ: ${pushname} )
-> 🆔 ׄ ( ʀᴏᴏᴍ ɪᴅ: ${sala?.roomId || 'Indisponível'} )
-> 📡 ׄ ( sᴛᴀᴛᴜs: ${sala?.status || 'Indisponível'} )
-> ⏱️ ׄ ( ɪɴɪ́ᴄɪᴏ: ${tempo} )
-> 🚀 ׄ ( ᴀᴜᴛᴏ sᴛᴀʀᴛ: ${sala?.autoStart ? 'Ativado' : 'Desativado'} )
-
-> 🔎 ׄ ( ✅ sᴀʟᴀ ᴇɴᴄᴏɴᴛʀᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ! )`
+  return [
+    '- 🔎 \x60𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝚂𝙰𝙻𝙰\x60',
+    '',
+    '> 🤖 ׄ ( ʙᴏᴛ: '+(NomeDoBot||'Tokito Bot')+' )',
+    '> 👤 ׄ ( ᴜsᴜᴀ́ʀɪᴏ: '+(pushname||'Jogador')+' )',
+    '> 🆔 ׄ ( ɪᴅ: '+(sala?.roomId||'Indisponível')+' )',
+    '> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(sala?.modeName||sala?.mode||'Free Fire')+' )',
+    '> 📡 ׄ ( sᴛᴀᴛᴜs: '+(sala?.status||'Indisponível')+' )',
+    '> ⏱️ ׄ ( ɪɴɪ́ᴄɪᴏ: '+tempo+' )',
+    '',
+    '> 🔎 ׄ ( sᴀʟᴀ ᴀᴛɪᴠᴀ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )'
+  ].join('\n')
 }
 
 exports.ffJogadoresUso = prefix => {
