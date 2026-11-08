@@ -1,86 +1,42 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.96",
+  "version": "10.2.97",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T20:45:17.290Z",
+  "publishedAt": "2026-11-08T20:46:47.370Z",
   "changelog": [
-    "[Novidade] feat(salas): armazenamento por grupo, criador e monitor de entradas",
-    "A versão 10.2.96 já está disponível para atualização.",
-    "Evento Sala Monitor atualizado",
-    "Sala Grupo atualizado",
-    "Salas atualizado"
+    "[Novidade] feat(salas): ações por lista interativa sem parâmetros de sessão",
+    "A versão 10.2.97 já está disponível para atualização.",
+    "Mensagens atualizado",
+    "Menus atualizado",
+    "Ffcore atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
-  "title": "feat(salas): armazenamento por grupo, criador e monitor de entradas",
-  "notice": "A versão 10.2.96 já está disponível para atualização.",
+  "title": "feat(salas): ações por lista interativa sem parâmetros de sessão",
+  "notice": "A versão 10.2.97 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/freefire/evento-sala-monitor.js",
-      "sha256": "ffb78ba1925fbd325e25bff184a75988cc0aa4581ade73aa418ba7cb3e8baa35",
-      "size": 428
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "1a874ab6e878f56d8a01329721740c502df2a69be6d4df0b452fa6c9ed1c8bd1",
+      "size": 231585
     },
     {
-      "path": "DADOS_TOKITO/plugins/freefire/sala-grupo.js",
-      "sha256": "d337d13a3bed4252e4c179d42a902bafc0b0a0b8cfbaa9a1c96207e7fc5c2b3a",
-      "size": 6346
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "996a5bef3d6a0f072b2843503ac0d8f194982b09a0432c8a791b2d285f999e26",
+      "size": 78934
     },
     {
-      "path": "DADOS_TOKITO/plugins/freefire/salas.js",
-      "sha256": "814abab649ab12546dcf701a0ff3deea6f42c6a3d6013498d4fa551822651ad6",
-      "size": 16541
+      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+      "sha256": "880dba3c17a86d5161335cac224566a83bcaee6f0787f8252bd3bca0094f45ea",
+      "size": 6140
     }
   ],
   "releases": [
-    {
-      "version": "10.1.73",
-      "fromVersion": "10.1.72",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Remoção definitiva do Shazam e sincronização dos arquivos",
-      "notice": "A versão 10.1.73 já está disponível para atualização, com a remoção definitiva do Shazam e a sincronização dos arquivos principais do bot.",
-      "changelog": [
-        "Confirma a remoção definitiva do Shazam, do ACRCloud e das referências residuais nos módulos e menus do Tokito.",
-        "Sincroniza o arquivo principal tokito.js, os módulos, os menus, as mensagens e o package.json.",
-        "Mantém a exclusão do Shazam e do ACRCloud no histórico de atualização para limpar instalações anteriores.",
-        "Define a versão 10.1.73 como atualização estável oficial do Tokito Bot V10."
-      ],
-      "files": [
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "tokito.js",
-          "sha256": "33c1c26fbf61c3a966fa85f15928db9a1c56a32bdc0e2b79f340c1f549daefb6",
-          "size": 52366
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/modulos.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T23:28:14.004Z"
-    },
     {
       "version": "10.1.74",
       "fromVersion": "10.1.73",
@@ -4657,6 +4613,39 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T20:45:17.290Z"
+    },
+    {
+      "version": "10.2.97",
+      "fromVersion": "10.2.96",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat(salas): ações por lista interativa sem parâmetros de sessão",
+      "notice": "A versão 10.2.97 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado",
+        "Menus atualizado",
+        "Ffcore atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "1a874ab6e878f56d8a01329721740c502df2a69be6d4df0b452fa6c9ed1c8bd1",
+          "size": 231585
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "996a5bef3d6a0f072b2843503ac0d8f194982b09a0432c8a791b2d285f999e26",
+          "size": 78934
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+          "sha256": "880dba3c17a86d5161335cac224566a83bcaee6f0787f8252bd3bca0094f45ea",
+          "size": 6140
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T20:46:47.369Z"
     }
   ],
   "mode": "incremental",
