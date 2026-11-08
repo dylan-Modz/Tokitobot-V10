@@ -87,47 +87,51 @@ const MODOS_SALA = Object.freeze([
 
 // Os comandos públicos usam a sala ativa do próprio grupo. O sessionId
 // permanece privado e só é enviado à API pelo bot.
-const botoesSala = (ctx, opcoes = ['ver','jogadores','imagem','iniciar','parar']) => {
+// A sessão é obtida pelo grupo, nunca pedida em comandos ou exposta nos botões.
+const botoesSala = (ctx, sessionId, opcoes = ['ver', 'jogadores', 'imagem', 'iniciar', 'parar']) => {
+  if (!sessionId) return [];
   const mapa = {
-    ver: {texto:'🔎 Ver sala',id:ctx.prefix+'versala'},
-    jogadores: {texto:'👥 Ver jogadores',id:ctx.prefix+'jogadoressala'},
-    imagem: {texto:'🖼️ Imagem da sala',id:ctx.prefix+'imagensala'},
-    iniciar: {texto:'🚀 Iniciar partida',id:ctx.prefix+'iniciarsala'},
-    parar: {texto:'⛔ Encerrar sala',id:ctx.prefix+'pararsala'},
-    expulsar: {texto:'🚫 Expulsar jogador',id:ctx.prefix+'expulsarsala'}
+    ver: { texto: ctx.mess.botaoVerSala(), id: ctx.prefix+'versala' },
+    jogadores: { texto: ctx.mess.botaoJogadoresSala(), id: ctx.prefix+'jogadoressala' },
+    imagem: { texto: '🖼️ Imagem da sala', id: ctx.prefix+'imagensala' },
+    iniciar: { texto: ctx.mess.botaoIniciarSala(), id: ctx.prefix+'iniciarsala' },
+    parar: { texto: ctx.mess.botaoPararSala(), id: ctx.prefix+'pararsala' }
+  };
+  return opcoes.map(x=>mapa[x]).filter(Boolean);
+};
+// Todas as ações em uma única lista: evita o limite de três quick-replies.
+const enviarAcoesSala = async (ctx, texto) => {
+  if (!ctx.isBotoes || !ctx.proto?.Message?.InteractiveMessage ||
+      !ctx.generateWAMessageFromContent || !ctx.tokito?.relayMessage) {
+    return enviar(ctx,texto,botoesSala(ctx,'active',['jogadores','imagem','iniciar']),[ctx.sender]);
   }
-  return opcoes.map(x=>mapa[x]).filter(Boolean)
-}
-
-const menuListaSala = async (ctx, texto, titulo, linhas) => {
-  const rows = linhas.map(item=>({
-    title:String(item.texto).slice(0,50),
-    description:String(item.descricao || '').slice(0,80),
-    id:item.id
-  }))
-  if (ctx.isBotoes && ctx.proto?.Message?.InteractiveMessage &&
-      typeof ctx.generateWAMessageFromContent==='function' &&
-      typeof ctx.tokito?.relayMessage==='function') {
-    try {
-      const M=ctx.proto.Message.InteractiveMessage
-      const mensagem=ctx.generateWAMessageFromContent(ctx.from,{
-        interactiveMessage:M.create({
-          contextInfo:typeof ctx.canalInfo==='function'?ctx.canalInfo([ctx.sender]):{},
-          body:M.Body.create({text:texto}),
-          footer:M.Footer.create({text:ctx.NomeDoBot || 'Tokito Bot'}),
-          nativeFlowMessage:M.NativeFlowMessage.create({
-            buttons:[{name:'single_select',buttonParamsJson:JSON.stringify({
-              title:titulo,
-              sections:[{title:'🎮 Escolha uma opção',rows}]
-            })}]
-          })
+  try {
+    const lista = {
+      title:'🎮 AÇÕES DA SALA',
+      sections:[{title:'🎮 SALA ATIVA NESTE GRUPO',rows:[
+        {title:'🔎 Ver sala',description:'ID, senha e modo da sala criada',id:ctx.prefix+'versala'},
+        {title:'👥 Ver jogadores',description:'Lista dos jogadores atuais',id:ctx.prefix+'jogadoressala'},
+        {title:'🖼️ Imagem dos jogadores',description:'Quadro PNG da sala',id:ctx.prefix+'imagensala'},
+        {title:'🚀 Iniciar partida',description:'Somente quem criou a sala',id:ctx.prefix+'iniciarsala'},
+        {title:'⛔ Encerrar sala',description:'Somente quem criou a sala',id:ctx.prefix+'pararsala'}
+      ]}]
+    };
+    const msg=ctx.generateWAMessageFromContent(ctx.from,{
+      interactiveMessage:ctx.proto.Message.InteractiveMessage.create({
+        contextInfo:typeof ctx.canalInfo==='function'?ctx.canalInfo([ctx.sender]):{},
+        body:ctx.proto.Message.InteractiveMessage.Body.create({text:String(texto)}),
+        footer:ctx.proto.Message.InteractiveMessage.Footer.create({text:'Escolha uma ação da sala'}),
+        nativeFlowMessage:ctx.proto.Message.InteractiveMessage.NativeFlowMessage.create({
+          buttons:[{name:'single_select',buttonParamsJson:JSON.stringify(lista)}],
+          messageParamsJson:''
         })
-      },{quoted:ctx.selo,userJid:ctx.tokito.user?.id})
-      return await ctx.tokito.relayMessage(ctx.from,mensagem.message,{messageId:mensagem.key.id})
-    }catch(e){console.log('[MENU SALAS] fallback:',e?.message)}
+      })
+    },{quoted:ctx.selo,userJid:ctx.tokito.user.id});
+    return ctx.tokito.relayMessage(ctx.from,msg.message,{messageId:msg.key.id});
+  } catch (error) {
+    return enviar(ctx,texto,botoesSala(ctx,'active',['jogadores','imagem','iniciar']),[ctx.sender]);
   }
-  return ctx.reply(texto+'\n\n'+linhas.map(x=>x.texto+': '+x.id).join('\n'))
-}
+};
 
 const dataBR = valor => {
 if (!valor)
