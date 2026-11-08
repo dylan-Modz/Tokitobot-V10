@@ -1,88 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.89",
+  "version": "10.2.90",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T00:39:31.021Z",
+  "publishedAt": "2026-11-08T00:42:30.899Z",
   "changelog": [
-    "[Melhoria] docs: atualizar badge da versao 10.2.86",
-    "A versão 10.2.89 já está disponível para atualização.",
-    "Menus atualizado",
-    "Tiktok Gif atualizado",
+    "[Novidade] feat(tiktok-gif): publicar Tokito Bot 10.2.90 com GIFs animados",
+    "A versão 10.2.90 já está disponível para atualização.",
     "README atualizado",
     "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "docs: atualizar badge da versao 10.2.86",
-  "notice": "A versão 10.2.89 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat(tiktok-gif): publicar Tokito Bot 10.2.90 com GIFs animados",
+  "notice": "A versão 10.2.90 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "767fa9ca857b39e1e817a8341954d07650065d919d32f06b50f895a72b4869b8",
-      "size": 78959
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/tiktok_gif.js",
-      "sha256": "7d50201faed484a151e04b569179fb488cb334f307df0fc2e2d41b524ee67751",
-      "size": 4678
-    },
-    {
       "path": "README.md",
-      "sha256": "c43c139c556c0b7e299793204bc39546c4daab1aeaebf892a8f03c4df01baea0",
+      "sha256": "283b56e36c978898e74b6861b1dde4f9a4b9aac0835812261d741ea66a3072fa",
       "size": 8977
     },
     {
       "path": "package.json",
-      "sha256": "6c7dfa7e5a6c60dc77cfa184c8f2da0142dfd1b3405926004cb1464a5fce40d0",
+      "sha256": "17fe43b6c195ac9c53b95f36aa4177899bda449c4ce13d3af912a73dfebe7c81",
       "size": 1211
     }
   ],
   "releases": [
-    {
-      "version": "10.1.66",
-      "fromVersion": "10.1.65",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Captura Pokémon animada e Menu RPG renovado",
-      "notice": "A versão 10.1.66 já está disponível para atualização.",
-      "changelog": [
-        "Comando capturar recebe animação em GIF antes do resultado usando o vídeo de captura informado.",
-        "Quando a captura falha, o bot envia a animação de falha com o resultado no padrão visual do mensagens.js.",
-        "Quando a captura dá certo, o Pokémon capturado continua sendo exibido com imagem e mensagem padronizada.",
-        "A captura mantém o Acessar canal e bloqueia tentativas simultâneas no mesmo grupo durante a animação.",
-        "Menu RPG/Pokémon troca os emojis 🔴 genéricos por emojis relacionados a cada comando e seção."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/expansao.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T15:00:00.000Z"
-    },
     {
       "version": "10.1.67",
       "fromVersion": "10.1.66",
@@ -4786,6 +4734,33 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T00:39:31.020Z"
+    },
+    {
+      "version": "10.2.90",
+      "fromVersion": "10.2.89",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat(tiktok-gif): publicar Tokito Bot 10.2.90 com GIFs animados",
+      "notice": "A versão 10.2.90 já está disponível para atualização.",
+      "changelog": [
+        "README atualizado",
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "README.md",
+          "sha256": "283b56e36c978898e74b6861b1dde4f9a4b9aac0835812261d741ea66a3072fa",
+          "size": 8977
+        },
+        {
+          "path": "package.json",
+          "sha256": "17fe43b6c195ac9c53b95f36aa4177899bda449c4ce13d3af912a73dfebe7c81",
+          "size": 1211
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T00:42:30.899Z"
     }
   ],
   "mode": "incremental",
