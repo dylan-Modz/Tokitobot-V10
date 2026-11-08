@@ -41,7 +41,10 @@ dylan.setCommand({
         }
 
         await reagir(from, '🎞️').catch(() => {})
-        await reply(mess.wait())
+        await reply(
+          '- 📡 `𝙲𝙾𝙽𝙴𝙲𝚃𝙰𝙽𝙳𝙾...`\n\n' +
+          '> 📡 ׄ ( ᴛᴏ̂ ʙᴜsᴄᴀɴᴅᴏ ᴛᴜᴅᴏ ᴘʀᴀ ᴠᴏᴄᴇ̂, sᴏ́ ᴍᴀɪs ᴜᴍ ᴘᴏᴜǫᴜɪɴʜᴏ. 📡 )'
+        )
 
         const { animacoes } = await scraper.consultar(link)
         const quantidade = animacoes.length
@@ -56,19 +59,12 @@ dylan.setCommand({
           mentionedJid: [sender]
         }
 
-        // Primeiro mostra o total; depois envia um GIF por vez, em ordem.
+        // Mesmo visual das mensagens do bot; o comando continua tiktok-gif.
+        const titulo = '- 🎞️ `𝚃𝙸𝙺𝚃𝙾𝙺 𝙰𝙽𝙸𝙼𝙰𝙳𝙾`'
         await tokito.sendMessage(from, {
-          text:
-            '╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ──────⟡\n' +
-            '┃ ┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓\n' +
-            '├╾═╼･ﾟ𖤐ﾟ･｡🎞️｡･ﾟ𖤐ﾟ･╾═╼┤\n' +
-            '├─ ⊹ 𖤐  𝚃𝙸𝙺𝚃𝙾𝙺-𝙶𝙸𝙵\n' +
-            '├╾═╼･ﾟ𖤐ﾟ･｡📥｡･ﾟ𖤐ﾟ･╾═╼┤\n' +
-            '┃࣪ ╎—̳͟͞͞ 🎬 𝙰𝙽𝙸𝙼𝙰𝙲̧𝙾̃𝙴𝚂: ' + quantidade + '\n' +
-            '┃࣪ ╎—̳͟͞͞ 📲 𝙵𝙾𝚁𝙼𝙰𝚃𝙾: 𝙶𝙸𝙵\n' +
-            '┃࣪ ╎—̳͟͞͞ ⏳ 𝙴𝙽𝚅𝙸𝙰𝙽𝙳𝙾 𝚄𝙼 𝙿𝙾𝚁 𝚄𝙼\n' +
-            '┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛\n' +
-            '╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡',
+          text: titulo + '\n\n' +
+            '> 🎬 ׄ ( ᴇɴᴄᴏɴᴛʀᴇɪ ' + quantidade + ' ᴀɴɪᴍᴀᴄ̧ᴏ̃ᴇs! )\n' +
+            '> 📤 ׄ ( ᴠᴏᴜ ᴇɴᴠɪᴀʀ ᴜᴍᴀ ᴘᴏʀ ᴜᴍᴀ ᴘʀᴀ ᴠᴏᴄᴇ̂. )',
           contextInfo: contexto
         }, { quoted: selo })
 
@@ -84,9 +80,9 @@ dylan.setCommand({
               video: arquivo,
               mimetype: 'video/mp4',
               gifPlayback: true,
-              caption:
-                '🎞️ *𝚃𝙸𝙺𝚃𝙾𝙺 𝙶𝙸𝙵*  ' + (i + 1) + '/' + quantidade +
-                (item.duracao ? '\n⏱️ *𝙳𝚄𝚁𝙰𝙲̧𝙰̃𝙾:* ' + item.duracao : ''),
+              caption: titulo + '\n\n' +
+                '> 🎬 ׄ ( ᴀɴɪᴍᴀᴄ̧ᴀ̃ᴏ ' + (i + 1) + '/' + quantidade + ' )' +
+                (item.duracao ? '\n> ⏱️ ׄ ( ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ' + item.duracao + ' )' : ''),
               contextInfo: contexto
             }, { quoted: selo })
             enviados++
@@ -102,14 +98,15 @@ dylan.setCommand({
 
         if (!enviados) {
           await reagir(from, '❌').catch(() => {})
-          return reply('❌ Não foi possível enviar nenhum GIF. Os links podem ter expirado; tente o comando novamente.')
+          return reply('- ❌ `𝙵𝙰𝙻𝙷𝙰 𝙽𝙾 𝚃𝙸𝙺𝚃𝙾𝙺 𝙰𝙽𝙸𝙼𝙰𝙳𝙾`\n\n' +
+            '> ⚠️ ׄ ( ɴᴀ̃ᴏ ᴄᴏɴsᴇɢᴜɪ ᴇɴᴠɪᴀʀ ɴᴇɴʜᴜᴍᴀ ᴀɴɪᴍᴀᴄ̧ᴀ̃ᴏ. ᴛᴇɴᴛᴇ ɴᴏᴠᴀᴍᴇɴᴛᴇ. )')
         }
 
         await reagir(from, '✅').catch(() => {})
         if (falhas) {
-          await reply('🎞️ *𝚃𝙸𝙺𝚃𝙾𝙺-𝙶𝙸𝙵*\n\n' +
-            '✅ Enviados: *' + enviados + '/' + quantidade + '*\n' +
-            '❌ Não enviados: *' + falhas + '*')
+          await reply(titulo + '\n\n' +
+            '> ✅ ׄ ( ᴇɴᴠɪᴀᴅᴏs: ' + enviados + '/' + quantidade + ' )\n' +
+            '> ❌ ׄ ( ɴᴀ̃ᴏ ᴇɴᴠɪᴀᴅᴏs: ' + falhas + ' )')
         }
       } catch (erro) {
         console.log('[TIKTOK GIF]', modulos.sanitizarErro(erro, [API_KEY_TOKITO]))
