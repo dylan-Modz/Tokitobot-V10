@@ -1,30 +1,28 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.8",
+  "version": "10.3.9",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T23:01:56.484Z",
+  "publishedAt": "2026-11-08T23:14:57.027Z",
   "changelog": [
-    "Sala criada e Ver sala exibem convite real quando a Tokito APIs retornar inviteLink oficial da Garena.",
-    "Botão Entrar na sala (URL Garena) no carrossel e comando entrarsala no grupo, sem SESSION_ID.",
-    "Imagem da sala continua sendo PNG produzido pelo site, com equipes, vagas e avatares; legenda formatada no mensagens.js.",
-    "Menus Free Fire e mensagens de sala mostram a identidade visual original do Tokito.",
-    "Validação do domínio do link para evitar URL externa errada e fallback por ID/senha se convite ausente."
+    "O link de convite não aparece mais no texto de sala criada, na consulta Ver sala nem na legenda da imagem.",
+    "O botão Entrar na sala, o comando entrarsala e o design atual dos menus permanecem inalterados.",
+    "Atualização sequencial de 10.3.8 para 10.3.9, sem pular versões."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "Tokito Bot 10.3.8 — Convite de sala, imagem e design Tokito",
-  "notice": "Atualização do botão de convite e imagem de sala disponível.",
+  "type": "Correção",
+  "title": "Tokito Bot 10.3.9 — Link oculto no resultado da sala",
+  "notice": "Correção da exibição de convites de salas Free Fire.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "package.json",
-      "sha256": "6b241c2d74ff2b80988c5134d26a21f5f35069e131a7a0d62c87489293c9af02",
+      "sha256": "7dce3588a25203015d827e5c2fe39229287fbc1ac0f770abd3bf811a33345db9",
       "size": 1210,
-      "gitSha": "00211ddb6a829f3e44b543c176fb5be184420664"
+      "gitSha": "778714df762d710e54ed51fa6d0bf7b7650d15ef"
     },
     {
       "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
@@ -40,9 +38,9 @@
     },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "20476d5c4daf22268fa55c8dd192dece1e4c4f8749f5d81bb599952f5e2312bf",
-      "size": 234003,
-      "gitSha": "80ee954679c6512e11362c27c579be5303690892"
+      "sha256": "5721749526afeed7484c1f3f3e950f975dd8c0aa490769051335d76a3d504cfc",
+      "size": 233704,
+      "gitSha": "1f44154958411b1addd550af24e365e1ac53113b"
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
@@ -4218,6 +4216,36 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T23:01:56.484Z"
+    },
+    {
+      "version": "10.3.9",
+      "fromVersion": "10.3.8",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Tokito Bot 10.3.9 — Link oculto no resultado da sala",
+      "notice": "Correção da exibição de convites de salas Free Fire.",
+      "changelog": [
+        "O link de convite não aparece mais no texto de sala criada, na consulta Ver sala nem na legenda da imagem.",
+        "O botão Entrar na sala, o comando entrarsala e o design atual dos menus permanecem inalterados.",
+        "Atualização sequencial de 10.3.8 para 10.3.9, sem pular versões."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "5721749526afeed7484c1f3f3e950f975dd8c0aa490769051335d76a3d504cfc",
+          "size": 233704,
+          "gitSha": "1f44154958411b1addd550af24e365e1ac53113b"
+        },
+        {
+          "path": "package.json",
+          "sha256": "7dce3588a25203015d827e5c2fe39229287fbc1ac0f770abd3bf811a33345db9",
+          "size": 1210,
+          "gitSha": "778714df762d710e54ed51fa6d0bf7b7650d15ef"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T23:14:57.027Z"
     }
   ],
   "mode": "incremental",
@@ -4229,5 +4257,5 @@
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.8"
+  "publicVersion": "10.3.9"
 }
