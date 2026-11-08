@@ -75,6 +75,7 @@ const menuGerencia = (ctx,texto,sala=ativa(ctx)) => h.menuListaSala(ctx,texto,'G
   {texto:'🔎⃞ ᴠᴇʀ sᴀʟᴀ',descricao:'🆔 ɪᴅ ᴇ ɪɴғᴏʀᴍᴀᴄ̧ᴏ̃ᴇs',id:ctx.prefix+'versala'},
   {texto:'👥⃞ ᴠᴇʀ ᴊᴏɢᴀᴅᴏʀᴇs',descricao:'👤 ɴɪᴄᴋs, ᴜɪᴅs ᴇ ᴇǫᴜɪᴘᴇs',id:ctx.prefix+'jogadoressala'},
   {texto:'🖼️⃞ ɪᴍᴀɢᴇᴍ ᴅᴀ sᴀʟᴀ',descricao:'🖼️ ǫᴜᴀᴅʀᴏ ᴘɴɢ',id:ctx.prefix+'imagensala'},
+  ...(h.linkConviteSala(sala?.inviteLink)?[{texto:'🎮⃞ ᴇɴᴛʀᴀʀ ɴᴀ sᴀʟᴀ',descricao:'🌐 ʟɪɴᴋ ᴅᴏ ғʀᴇᴇ ғɪʀᴇ',id:ctx.prefix+'entrarsala'}]:[]),
   {texto:'🚀⃞ ɪɴɪᴄɪᴀʀ ᴘᴀʀᴛɪᴅᴀ',descricao:'🔒 sᴏᴍᴇɴᴛᴇ ᴏ ᴄʀɪᴀᴅᴏʀ',id:ctx.prefix+'iniciarsala'},
   {texto:'⛔⃞ ᴇɴᴄᴇʀʀᴀʀ sᴀʟᴀ',descricao:'🔒 sᴏᴍᴇɴᴛᴇ ᴏ ᴄʀɪᴀᴅᴏʀ',id:ctx.prefix+'pararsala'}
 ],{inviteLink:sala?.inviteLink})
@@ -169,7 +170,7 @@ function monitorarSala(ctx, inicial=false) {
 
 dylan.setCommand({
   nome:'criarsala',
-  comandos:['criarsala','versala','jogadoressala','imagensala','expulsarsala','iniciarsala','pararsala','statussalas'],
+  comandos:['criarsala','versala','jogadoressala','imagensala','entrarsala','expulsarsala','iniciarsala','pararsala','statussalas'],
   categoria:'freefire',
   info:{descricao:'Cria e gerencia salas no próprio grupo, por lista de modos.',uso:'criarsala',categoria:'freefire'},
   async executar(ctx) {
@@ -297,6 +298,24 @@ dylan.setCommand({
             inviteLink,modeName:sala.modeName||salaAtiva.modeName},tempo
         })
         return menuGerencia(ctx,texto,convite)
+      }
+      if(command==='entrarsala') {
+        let link=h.linkConviteSala(salaAtiva.inviteLink)
+        if(!link) {
+          const info=await reqSala(ctx,'info',{sessionId:salaAtiva.sessionId})
+          link=h.linkConviteSala(info.room?.inviteLink)
+          if(link) gravar(ctx,{...salaAtiva,inviteLink:link})
+        }
+        if(!link) {
+          return ctx.reply('- 🎮 \x60𝙴𝙽𝚃𝚁𝙰𝚁 𝙽𝙰 𝚂𝙰𝙻𝙰\x60\n\n'+
+            '> ⚠️ ׄ ( ᴀ ᴀᴘɪ ɴᴀ̃ᴏ ʀᴇᴛᴏʀɴᴏᴜ ᴜᴍ ʟɪɴᴋ ᴅᴇ ᴄᴏɴᴠɪᴛᴇ. )\n'+
+            '> 🆔 ׄ ( ɪᴅ: '+(salaAtiva.roomId||'N/A')+' )\n'+
+            '> 🔑 ׄ ( sᴇɴʜᴀ: '+(salaAtiva.password||'N/A')+' )\n'+
+            '> 🎮 ׄ ( ᴇɴᴛʀᴇ ɴᴀ sᴀʟᴀ ᴘᴇʟᴏ ɪᴅ ɴᴏ ᴊᴏɢᴏ. )')
+        }
+        return ctx.reply(ctx.mess.ffConviteSala({
+          roomId:salaAtiva.roomId,modeName:salaAtiva.modeName,link
+        }))
       }
       if(command==='jogadoressala') {
         const data=await reqSala(ctx,'jogadores',{sessionId:salaAtiva.sessionId})
