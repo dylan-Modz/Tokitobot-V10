@@ -1292,13 +1292,14 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🎮｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝑆𝐴𝐿𝐴𝑆-𝐹𝐹
 ├╾═╼･ﾟ𖤐ﾟ･｡🔥｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}criarsala NOME|SENHA|12|1|BR
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}versala SESSION_ID
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}jogadoressala SESSION_ID
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}expulsarsala SESSION_ID|UID
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}iniciarsala SESSION_ID
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}pararsala SESSION_ID
-┃࣪ ╎—̳͟͞͞ 🔥 ${prefix}statussalas
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}criarsala
+┃࣪ ╎—̳͟͞͞ 🔎 ${prefix}versala
+┃࣪ ╎—̳͟͞͞ 👥 ${prefix}jogadoressala
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}imagensala
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}expulsarsala UID
+┃࣪ ╎—̳͟͞͞ 🚀 ${prefix}iniciarsala
+┃࣪ ╎—̳͟͞͞ ⛔ ${prefix}pararsala
+┃࣪ ╎—̳͟͞͞ 📊 ${prefix}statussalas
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
