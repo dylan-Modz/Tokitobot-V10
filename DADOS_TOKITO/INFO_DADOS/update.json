@@ -6,24 +6,56 @@
   "ref": "main",
   "publishedAt": "2026-11-08T20:52:54.792Z",
   "changelog": [
-    "[Melhoria] release: sincronizar package.json com manifesto 10.2.100",
-    "A versão 10.2.101 já está disponível para atualização.",
-    "Sala Grupo removido",
-    "Package atualizado"
+    "Escolha entre 8 modos pela lista do WhatsApp e confirme antes de criar a sala.",
+    "Os comandos usam automaticamente a sala ativa do grupo, sem solicitar ID da sessão.",
+    "ID de sala, senha, jogadores e imagem PNG; iniciar, encerrar e expulsar exclusivos do criador.",
+    "Notificação de entrada com nick, UID e avatar quando disponível. Verificação a cada 5 segundos: o fornecedor ainda não oferece eventos instantâneos.",
+    "Menu Free Fire e mensagens atualizados, sem README."
   ],
   "delete": [
     "DADOS_TOKITO/plugins/freefire/sala-grupo.js"
   ],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "release: sincronizar package.json com manifesto 10.2.100",
-  "notice": "A versão 10.2.101 já está disponível para atualização.",
+  "title": "Salas FF: menu de modos, controle por grupo e alertas de jogadores",
+  "notice": "Nova atualização das salas Free Fire disponível.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+      "sha256": "a36e6f4849b569bf2393db67b119488d124b9f66fb380b985a5ebe15f935cda3",
+      "gitSha": "a45b651d18ae0f18deae3f6ea83a43db098d8c80",
+      "size": 17412
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+      "sha256": "e645f21c5ad38bf21fb983a2f3f1f26ca494379da47811c3a1c56053995f2f67",
+      "gitSha": "5fb53e79e3a1ee502165ffb37813faf69432a374",
+      "size": 7706
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/evento-sala-monitor.js",
+      "sha256": "ffb78ba1925fbd325e25bff184a75988cc0aa4581ade73aa418ba7cb3e8baa35",
+      "gitSha": "4fc9921724b973bccc6fdac4163d6c052e265262",
+      "size": 428
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "996a5bef3d6a0f072b2843503ac0d8f194982b09a0432c8a791b2d285f999e26",
+      "gitSha": "2dbd9b2271c005d97606eedffc37f9c28abc196b",
+      "size": 78934
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "1a874ab6e878f56d8a01329721740c502df2a69be6d4df0b452fa6c9ed1c8bd1",
+      "gitSha": "a1098661a05194275cde8b4dfda8da0ea96b205f",
+      "size": 231585
+    },
+    {
       "path": "package.json",
-      "sha256": "0d426c2a44f9261c9fa5c44d4f62fcc0745138d448a1a513e59261921896f125",
+      "sha256": "4b047bfb37d5616251279d793ee068b9edf0a089a6bc487530db5b97133d1f15",
+      "gitSha": "dcfd549a054e84b750d13efded1ffb1126d5a020",
       "size": 1212
     }
   ],
@@ -4446,11 +4478,6 @@
           "size": 428
         },
         {
-          "path": "DADOS_TOKITO/plugins/freefire/sala-grupo.js",
-          "sha256": "d337d13a3bed4252e4c179d42a902bafc0b0a0b8cfbaa9a1c96207e7fc5c2b3a",
-          "size": 6346
-        },
-        {
           "path": "DADOS_TOKITO/plugins/freefire/salas.js",
           "sha256": "814abab649ab12546dcf701a0ff3deea6f42c6a3d6013498d4fa551822651ad6",
           "size": 16541
@@ -4567,16 +4594,50 @@
       "fromVersion": "10.2.100",
       "channel": "stable",
       "type": "Melhoria",
-      "title": "release: sincronizar package.json com manifesto 10.2.100",
+      "title": "Salas FF: menu de modos, controle por grupo e alertas de jogadores",
       "notice": "A versão 10.2.101 já está disponível para atualização.",
       "changelog": [
-        "Sala Grupo removido",
-        "Package atualizado"
+        "Escolha entre 8 modos pela lista do WhatsApp e confirme antes de criar a sala.",
+        "Os comandos usam automaticamente a sala ativa do grupo, sem solicitar ID da sessão.",
+        "ID de sala, senha, jogadores e imagem PNG; iniciar, encerrar e expulsar exclusivos do criador.",
+        "Notificação de entrada com nick, UID e avatar quando disponível. Verificação a cada 5 segundos: o fornecedor ainda não oferece eventos instantâneos.",
+        "Menu Free Fire e mensagens atualizados, sem README."
       ],
       "files": [
         {
+          "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+          "sha256": "a36e6f4849b569bf2393db67b119488d124b9f66fb380b985a5ebe15f935cda3",
+          "gitSha": "a45b651d18ae0f18deae3f6ea83a43db098d8c80",
+          "size": 17412
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+          "sha256": "e645f21c5ad38bf21fb983a2f3f1f26ca494379da47811c3a1c56053995f2f67",
+          "gitSha": "5fb53e79e3a1ee502165ffb37813faf69432a374",
+          "size": 7706
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/evento-sala-monitor.js",
+          "sha256": "ffb78ba1925fbd325e25bff184a75988cc0aa4581ade73aa418ba7cb3e8baa35",
+          "gitSha": "4fc9921724b973bccc6fdac4163d6c052e265262",
+          "size": 428
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "996a5bef3d6a0f072b2843503ac0d8f194982b09a0432c8a791b2d285f999e26",
+          "gitSha": "2dbd9b2271c005d97606eedffc37f9c28abc196b",
+          "size": 78934
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "1a874ab6e878f56d8a01329721740c502df2a69be6d4df0b452fa6c9ed1c8bd1",
+          "gitSha": "a1098661a05194275cde8b4dfda8da0ea96b205f",
+          "size": 231585
+        },
+        {
           "path": "package.json",
-          "sha256": "0d426c2a44f9261c9fa5c44d4f62fcc0745138d448a1a513e59261921896f125",
+          "sha256": "4b047bfb37d5616251279d793ee068b9edf0a089a6bc487530db5b97133d1f15",
+          "gitSha": "dcfd549a054e84b750d13efded1ffb1126d5a020",
           "size": 1212
         }
       ],
@@ -4596,5 +4657,5 @@
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.81"
+  "publicVersion": "10.2.101"
 }
