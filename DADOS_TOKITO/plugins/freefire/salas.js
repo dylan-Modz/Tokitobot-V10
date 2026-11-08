@@ -71,13 +71,13 @@ const reqSala = async (ctx,rota,params={}) => {
   }
   return data
 }
-const menuGerencia = (ctx,texto) => h.menuListaSala(ctx,texto,'Gerenciar sala',[
+const menuGerencia = (ctx,texto,sala=ativa(ctx)) => h.menuListaSala(ctx,texto,'Gerenciar sala',[
   {texto:'🔎⃞ ᴠᴇʀ sᴀʟᴀ',descricao:'🆔 ɪᴅ ᴇ ɪɴғᴏʀᴍᴀᴄ̧ᴏ̃ᴇs',id:ctx.prefix+'versala'},
   {texto:'👥⃞ ᴠᴇʀ ᴊᴏɢᴀᴅᴏʀᴇs',descricao:'👤 ɴɪᴄᴋs, ᴜɪᴅs ᴇ ᴇǫᴜɪᴘᴇs',id:ctx.prefix+'jogadoressala'},
   {texto:'🖼️⃞ ɪᴍᴀɢᴇᴍ ᴅᴀ sᴀʟᴀ',descricao:'🖼️ ǫᴜᴀᴅʀᴏ ᴘɴɢ',id:ctx.prefix+'imagensala'},
   {texto:'🚀⃞ ɪɴɪᴄɪᴀʀ ᴘᴀʀᴛɪᴅᴀ',descricao:'🔒 sᴏᴍᴇɴᴛᴇ ᴏ ᴄʀɪᴀᴅᴏʀ',id:ctx.prefix+'iniciarsala'},
   {texto:'⛔⃞ ᴇɴᴄᴇʀʀᴀʀ sᴀʟᴀ',descricao:'🔒 sᴏᴍᴇɴᴛᴇ ᴏ ᴄʀɪᴀᴅᴏʀ',id:ctx.prefix+'pararsala'}
-])
+],{inviteLink:sala?.inviteLink})
 
 const pararMonitor = ctx => {
   const key=destino(ctx),registro=monitores.get(key)
@@ -252,7 +252,10 @@ dylan.setCommand({
               password:String(sala.password || roomPassword),mode:modo.id,
               modeName:String(sala.modeName || modo.nome),
               maxPlayers:Number(sala.maxPlayers || modo.limite),mapName:'Bermuda',
-              region:'BR',status:'active',criador:u,criadorNome:ctx.pushname||'Jogador',
+              region:'BR',status:'active',
+              inviteLink:h.linkConviteSala(sala.inviteLink||data.inviteLink)||null,
+              inviteCode:String(sala.inviteCode||'').slice(0,120)||null,
+              criador:u,criadorNome:ctx.pushname||'Jogador',
               criadoEm:Date.now()
             }
             gravar(ctx,criada)
@@ -260,10 +263,11 @@ dylan.setCommand({
             monitorarSala(ctx,true)
             await ctx.reagir(ctx.from,'✅').catch(()=>{})
             return menuGerencia(ctx,ctx.mess.ffSalaCriada({
-              NomeDoBot:ctx.NomeDoBot,pushname:ctx.pushname,sala,roomName,
+              NomeDoBot:ctx.NomeDoBot,pushname:ctx.pushname,
+              sala:{...sala,inviteLink:criada.inviteLink,inviteCode:criada.inviteCode},roomName,
               roomPassword:criada.password,maxPlayers:criada.maxPlayers,
               mode:criada.modeName,region:'BR',data
-            }))
+            }),criada)
           } finally {criando.delete(key)}
         }
         return ctx.reply(ctx.mess.ffSalaUso(ctx.prefix))
