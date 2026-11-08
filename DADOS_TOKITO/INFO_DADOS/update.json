@@ -1,51 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.98",
+  "version": "10.2.99",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T20:48:16.874Z",
+  "publishedAt": "2026-11-08T20:49:46.685Z",
   "changelog": [
-    "[Correção] fix(salas): restaurar menu list genérico para seleção de modos e ações",
-    "A versão 10.2.98 já está disponível para atualização.",
-    "Ffcore atualizado"
+    "[Correção] fix(salas): limitar monitoramento e respeitar início/expiração e botões corretos",
+    "A versão 10.2.99 já está disponível para atualização.",
+    "Salas atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(salas): restaurar menu list genérico para seleção de modos e ações",
-  "notice": "A versão 10.2.98 já está disponível para atualização.",
+  "title": "fix(salas): limitar monitoramento e respeitar início/expiração e botões corretos",
+  "notice": "A versão 10.2.99 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
-      "sha256": "e645f21c5ad38bf21fb983a2f3f1f26ca494379da47811c3a1c56053995f2f67",
-      "size": 7706
+      "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+      "sha256": "2e954330cf00f12c8fc621718b91a71bd1e67eac165a7f72e419e2294fabdb5d",
+      "size": 17315
     }
   ],
   "releases": [
-    {
-      "version": "10.1.75",
-      "fromVersion": "10.1.74",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Arquivo principal do bot atualizado",
-      "notice": "A versão 10.1.75 já está disponível para atualização.",
-      "changelog": [
-        "Arquivo principal do bot atualizado"
-      ],
-      "files": [
-        {
-          "path": "tokito.js",
-          "sha256": "33c1c26fbf61c3a966fa85f15928db9a1c56a32bdc0e2b79f340c1f549daefb6",
-          "size": 52366
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T23:33:12.150Z"
-    },
     {
       "version": "10.1.76",
       "fromVersion": "10.1.75",
@@ -4634,6 +4613,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T20:48:16.874Z"
+    },
+    {
+      "version": "10.2.99",
+      "fromVersion": "10.2.98",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(salas): limitar monitoramento e respeitar início/expiração e botões corretos",
+      "notice": "A versão 10.2.99 já está disponível para atualização.",
+      "changelog": [
+        "Salas atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+          "sha256": "2e954330cf00f12c8fc621718b91a71bd1e67eac165a7f72e419e2294fabdb5d",
+          "size": 17315
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T20:49:46.684Z"
     }
   ],
   "mode": "incremental",
