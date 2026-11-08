@@ -6,21 +6,41 @@
   "ref": "main",
   "publishedAt": "2026-11-08T00:47:01.413Z",
   "changelog": [
-    "[Correção] fix(release): versao 10.2.91 sem atualizar README",
-    "A versão 10.2.91 já está disponível para atualização.",
-    "Package atualizado"
+    "Novo comando tiktok-gif e scraper oficial para as Live Photos animadas.",
+    "Exibe o total e envia os GIFs do TikTok individualmente no WhatsApp.",
+    "Atualiza os menus de downloads e a versão do bot.",
+    "README.md removido de todas as operações de atualização."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(release): versao 10.2.91 sem atualizar README",
-  "notice": "A versão 10.2.91 já está disponível para atualização.",
+  "title": "TikTok GIF — atualização 10.2.91 sem README",
+  "notice": "Versão 10.2.91 disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/scrapers/downloads/tiktok_gif.js",
+      "sha256": "2d760708f9044a321871b59040d5448579093211dccf339a63a0317b9abe1df6",
+      "gitSha": "b8a7eff647c0ff308300c9fefff4511e83daed96",
+      "size": 3336
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/downloads/tiktok_gif.js",
+      "sha256": "7d50201faed484a151e04b569179fb488cb334f307df0fc2e2d41b524ee67751",
+      "gitSha": "b0e8931c3c52d6e025c40f01b3e934a4be55461f",
+      "size": 4678
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "1ad9688ea46e1f13f4e278c36c0ca0b3126b42a00a2fe23974099d68c3f2a15b",
+      "gitSha": "1caefb4dfaf42619ed0b85629b7ee8f0adf13ee9",
+      "size": 78849
+    },
+    {
       "path": "package.json",
       "sha256": "bb98bd3b96475c15c7e5cecdca012dd58780f39a5bf3c7cf06ed1940adebf8fa",
+      "gitSha": "17cf0efcbd666f6092b443098644f749a9a75431",
       "size": 1211
     }
   ],
@@ -2624,12 +2644,6 @@
           "size": 15147
         },
         {
-          "path": "README.md",
-          "gitSha": "e2ed509e3bdd15acdb3966e026a8090246ebc6f1",
-          "sha256": "becc6dfb91a1ea0f5fe8075f5346554f6ec3795c3eaccecdf87af44de9decce1",
-          "size": 8977
-        },
-        {
           "path": "package.json",
           "gitSha": "98f0888182468b770d5923650cba711de14b53a9",
           "sha256": "c297fb0b1452bb5148909cd0c38038ecc54d860bbc84b5a6f987339f6594ee3c",
@@ -3705,12 +3719,6 @@
           "gitSha": "346ed7bc9effdbce46c6645c34ad9d6a23e721d0",
           "sha256": "",
           "size": 1166
-        },
-        {
-          "path": "README.md",
-          "gitSha": "08521f423f1b351b4589a1800c9873be8929f0ad",
-          "sha256": "",
-          "size": 8977
         }
       ],
       "delete": [],
@@ -4596,11 +4604,6 @@
           "size": 4678
         },
         {
-          "path": "README.md",
-          "sha256": "c43c139c556c0b7e299793204bc39546c4daab1aeaebf892a8f03c4df01baea0",
-          "size": 8977
-        },
-        {
           "path": "package.json",
           "sha256": "6c7dfa7e5a6c60dc77cfa184c8f2da0142dfd1b3405926004cb1464a5fce40d0",
           "size": 1211
@@ -4643,12 +4646,6 @@
           "size": 78959
         },
         {
-          "path": "README.md",
-          "sha256": "283b56e36c978898e74b6861b1dde4f9a4b9aac0835812261d741ea66a3072fa",
-          "gitSha": "caa9ea233bc20dc669859d926f457669dfec1bde",
-          "size": 8977
-        },
-        {
           "path": "package.json",
           "sha256": "17fe43b6c195ac9c53b95f36aa4177899bda449c4ce13d3af912a73dfebe7c81",
           "gitSha": "ee386701bd0cfe5fa5a0a60c9d052db3838bf02a",
@@ -4664,15 +4661,37 @@
       "fromVersion": "10.2.90",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix(release): versao 10.2.91 sem atualizar README",
-      "notice": "A versão 10.2.91 já está disponível para atualização.",
+      "title": "TikTok GIF — atualização 10.2.91 sem README",
+      "notice": "Versão 10.2.91 disponível para atualização.",
       "changelog": [
-        "Package atualizado"
+        "Novo comando tiktok-gif e scraper oficial para as Live Photos animadas.",
+        "Exibe o total e envia os GIFs do TikTok individualmente no WhatsApp.",
+        "Atualiza os menus de downloads e a versão do bot.",
+        "README.md removido de todas as operações de atualização."
       ],
       "files": [
         {
+          "path": "DADOS_TOKITO/scrapers/downloads/tiktok_gif.js",
+          "sha256": "2d760708f9044a321871b59040d5448579093211dccf339a63a0317b9abe1df6",
+          "gitSha": "b8a7eff647c0ff308300c9fefff4511e83daed96",
+          "size": 3336
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/tiktok_gif.js",
+          "sha256": "7d50201faed484a151e04b569179fb488cb334f307df0fc2e2d41b524ee67751",
+          "gitSha": "b0e8931c3c52d6e025c40f01b3e934a4be55461f",
+          "size": 4678
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "1ad9688ea46e1f13f4e278c36c0ca0b3126b42a00a2fe23974099d68c3f2a15b",
+          "gitSha": "1caefb4dfaf42619ed0b85629b7ee8f0adf13ee9",
+          "size": 78849
+        },
+        {
           "path": "package.json",
           "sha256": "bb98bd3b96475c15c7e5cecdca012dd58780f39a5bf3c7cf06ed1940adebf8fa",
+          "gitSha": "17cf0efcbd666f6092b443098644f749a9a75431",
           "size": 1211
         }
       ],
