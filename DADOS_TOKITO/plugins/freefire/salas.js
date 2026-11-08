@@ -200,6 +200,7 @@ dylan.setCommand({
             '\n> 👥 Capacidade: '+modo.limite+' jogadores'+
             '\n> 🗺️ Mapa: Bermuda\n> 🌎 Região: BR\n> ⏱️ Início automático: 10 minutos'+
             '\n> 🔑 Senha: gerada automaticamente\n\n> ✅ Aperte *Criar sala* para confirmar. Será consumido um crédito apenas se a criação for confirmada.'
+          if (!ctx.isBotoes) return ctx.reply(resumo+'\n\n> Para confirmar: '+ctx.prefix+'criarsala confirmar '+nonce)
           return h.enviar(ctx,resumo,[{
             texto:'✅ Criar sala',id:ctx.prefix+'criarsala confirmar '+nonce
           },{texto:'❌ Cancelar',id:ctx.prefix+'criarsala cancelar'}],[ctx.sender])
