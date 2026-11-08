@@ -1296,6 +1296,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🔎 ${prefix}versala
 ┃࣪ ╎—̳͟͞͞ 👥 ${prefix}jogadoressala
 ┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}imagensala
+┃࣪ ╎—̳͟͞͞ 🎮 ${prefix}entrarsala
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}expulsarsala UID
 ┃࣪ ╎—̳͟͞͞ 🚀 ${prefix}iniciarsala
 ┃࣪ ╎—̳͟͞͞ ⛔ ${prefix}pararsala
