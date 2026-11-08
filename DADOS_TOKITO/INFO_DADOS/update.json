@@ -6,22 +6,30 @@
   "ref": "main",
   "publishedAt": "2026-11-08T00:57:31.115Z",
   "changelog": [
-    "[Correção] fix(tiktok-gif): recuperar link temporário expirado e padronizar erros",
-    "A versão 10.2.93 já está disponível para atualização.",
-    "Tiktok Gif atualizado"
+    "Melhora a recuperação de links de GIF expirados, consultando novamente as mídias originais quando necessário.",
+    "Padroniza a mensagem quando a publicação não possui GIFs animados.",
+    "Mantém o título TikTok Animado e o envio separado em formato GIF.",
+    "Atualização exclusiva do comando tiktok_gif.js e do package.json; README não é enviado."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(tiktok-gif): recuperar link temporário expirado e padronizar erros",
-  "notice": "A versão 10.2.93 já está disponível para atualização.",
+  "title": "TikTok Animado — atualização do comando tiktok-gif",
+  "notice": "Versão 10.2.93 disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/downloads/tiktok_gif.js",
       "sha256": "70f562568bd87aa94018cd673c50e9a1470900f764731e176c210b209156fb84",
+      "gitSha": "e7f0859155c51cfec22d588ed8c177bc2ce720c4",
       "size": 5566
+    },
+    {
+      "path": "package.json",
+      "sha256": "6e4795a94a92b69e52fe983e23b33d04a16f19bc637612ade221c7e27a92099c",
+      "gitSha": "422368e1a3528f73ff3f0b4f525760cbaea37f21",
+      "size": 1211
     }
   ],
   "releases": [
@@ -4650,16 +4658,26 @@
       "fromVersion": "10.2.92",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix(tiktok-gif): recuperar link temporário expirado e padronizar erros",
-      "notice": "A versão 10.2.93 já está disponível para atualização.",
+      "title": "TikTok Animado — atualização do comando tiktok-gif",
+      "notice": "Versão 10.2.93 disponível para atualização.",
       "changelog": [
-        "Tiktok Gif atualizado"
+        "Melhora a recuperação de links de GIF expirados, consultando novamente as mídias originais quando necessário.",
+        "Padroniza a mensagem quando a publicação não possui GIFs animados.",
+        "Mantém o título TikTok Animado e o envio separado em formato GIF.",
+        "Atualização exclusiva do comando tiktok_gif.js e do package.json; README não é enviado."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/plugins/downloads/tiktok_gif.js",
           "sha256": "70f562568bd87aa94018cd673c50e9a1470900f764731e176c210b209156fb84",
+          "gitSha": "e7f0859155c51cfec22d588ed8c177bc2ce720c4",
           "size": 5566
+        },
+        {
+          "path": "package.json",
+          "sha256": "6e4795a94a92b69e52fe983e23b33d04a16f19bc637612ade221c7e27a92099c",
+          "gitSha": "422368e1a3528f73ff3f0b4f525760cbaea37f21",
+          "size": 1211
         }
       ],
       "delete": [],
