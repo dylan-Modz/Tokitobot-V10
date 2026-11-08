@@ -56,8 +56,8 @@ const gravar = (ctx, sala) => {
   ctx.setGp(ctx.dataGp)
   return true
 }
-const semSala = ctx => ctx.reply('- 🎮 *SEM SALA ATIVA*\n\n> ⚠️ Nenhuma sala foi criada neste grupo.\n> 🎮 Use '+ctx.prefix+'criarsala para selecionar o modo.')
-const negado = ctx => ctx.reply('- ❌ *ACESSO NEGADO*\n\n> ⚠️ Somente quem criou esta sala neste grupo pode iniciar, encerrar ou expulsar jogadores.')
+const semSala = ctx => ctx.reply('- 🎮 \x60𝚂𝙴𝙼 𝚂𝙰𝙻𝙰 𝙰𝚃𝙸𝚅𝙰\x60\n\n> ⚠️ ׄ ( ɴᴇɴʜᴜᴍᴀ sᴀʟᴀ ᴀᴛɪᴠᴀ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )\n> 🎮 ׄ ( ᴜsᴇ '+ctx.prefix+'criarsala ᴘᴀʀᴀ ᴇsᴄᴏʟʜᴇʀ ᴏ ᴍᴏᴅᴏ. )')
+const negado = ctx => ctx.reply('- ❌ \x60𝙰𝙲𝙴𝚂𝚂𝙾 𝙽𝙴𝙶𝙰𝙳𝙾\x60\n\n> 🔒 ׄ ( sᴏᴍᴇɴᴛᴇ ᴏ ᴄʀɪᴀᴅᴏʀ ᴅᴀ sᴀʟᴀ ᴘᴏᴅᴇ ɪɴɪᴄɪᴀʀ, ᴇɴᴄᴇʀʀᴀʀ ᴏᴜ ᴇxᴘᴜʟsᴀʀ. )')
 const donoDaSala = (ctx, sala) => Boolean(sala && sala.criador && sala.criador===usuario(ctx))
 const urlBase = ctx => String(ctx.API_URL || '').replace(/\/+$/,'')+'/api/salas'
 const reqSala = async (ctx,rota,params={}) => {
@@ -225,13 +225,13 @@ dylan.setCommand({
           const g=grupo(ctx),u=usuario(ctx)
           if (g?.salaApiPendentes)delete g.salaApiPendentes[u]
           if(g)ctx.setGp(ctx.dataGp)
-          return ctx.reply('- 🎮 *CRIAÇÃO CANCELADA*\n\n> Nenhuma sala foi criada.')
+          return ctx.reply('- 🎮 \x60𝙲𝚁𝙸𝙰𝙲̧𝙰̃𝙾 𝙲𝙰𝙽𝙲𝙴𝙻𝙰𝙳𝙰\x60\n\n> ✅ ׄ ( ɴᴇɴʜᴜᴍᴀ sᴀʟᴀ ғᴏɪ ᴄʀɪᴀᴅᴀ. )')
         }
         if (args[0]==='confirmar') {
           const g=grupo(ctx),u=usuario(ctx),pendente=g?.salaApiPendentes?.[u]
           if(!pendente || pendente.nonce!==args[1] ||
             Date.now()-Number(pendente.criadoEm)>PENDENTE_MS)
-            return ctx.reply('- ⚠️ Esta confirmação expirou ou pertence a outro jogador.\n> Use '+ctx.prefix+'criarsala novamente.')
+            return ctx.reply('- ⚠️ \x60𝙲𝙾𝙽𝙵𝙸𝚁𝙼𝙰𝙲̧𝙰̃𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙰\x60\n\n> 🔒 ׄ ( ᴇsᴛᴀ ᴄᴏɴғɪʀᴍᴀᴄ̧ᴀ̃ᴏ ᴇxᴘɪʀᴏᴜ ᴏᴜ ɴᴀ̃ᴏ ᴇ́ sᴜᴀ. )\n> 🎮 ׄ ( ᴜsᴇ '+ctx.prefix+'criarsala ɴᴏᴠᴀᴍᴇɴᴛᴇ. )')
           const modo=modoPorId(pendente.modo)
           if(!modo) return ctx.reply(ctx.mess.ffSalaUso(ctx.prefix))
           const key=destino(ctx)
@@ -323,7 +323,7 @@ dylan.setCommand({
         }))
       }
       if(command==='iniciarsala') {
-        if(salaAtiva.status==='started')return ctx.reply('- 🚀 Esta partida já foi iniciada.')
+        if(salaAtiva.status==='started')return ctx.reply('- 🚀 \x60𝙿𝙰𝚁𝚃𝙸𝙳𝙰 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙰\x60\n\n> ⚠️ ׄ ( ᴇsᴛᴀ ᴘᴀʀᴛɪᴅᴀ ᴊᴀ́ ғᴏɪ ɪɴɪᴄɪᴀᴅᴀ. )')
         const data=await reqSala(ctx,'iniciar',{sessionId:salaAtiva.sessionId})
         gravar(ctx,{...salaAtiva,status:'started'})
         pararMonitor(ctx)
