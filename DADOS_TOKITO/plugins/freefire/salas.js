@@ -88,14 +88,15 @@ const alertarJogador = async (ctx, sala, player, total) => {
   const uid=String(player.uid || '').replace(/\D/g,'').slice(0,24)
   const nick=String(player.nickname || player.nick || 'Jogador').slice(0,75)
   const time=String(player.team || player.team_num || 'N/A').slice(0,25)
-  const titulo='- 🎮 *NOVO JOGADOR NA SALA*'
-  const mensagem=titulo+'\n\n> 👤 Nick: '+nick+
-    '\n> 🆔 UID: '+(uid || 'Indisponível')+
-    '\n> 🔵 Equipe: '+time+
-    '\n> 🎯 Modo: '+(sala.modeName || sala.mode || 'Free Fire')+
-    '\n> 👥 Jogadores: '+total+'/'+(sala.maxPlayers || 8)+
-    (uid?'\n> 🔎 Perfil: '+ctx.prefix+'infoff '+uid:'')+
-    '\n\n> 👥 Para ver a lista: '+ctx.prefix+'jogadoressala'
+  const titulo='- 🎮 \x60𝙽𝙾𝚅𝙾 𝙹𝙾𝙶𝙰𝙳𝙾𝚁 𝙽𝙰 𝚂𝙰𝙻𝙰\x60'
+  const mensagem=titulo+'\n\n'+
+    '> 👤 ׄ ( ɴɪᴄᴋ: '+nick+' )\n'+
+    '> 🆔 ׄ ( ᴜɪᴅ: '+(uid || 'Indisponível')+' )\n'+
+    '> 🔵 ׄ ( ᴇǫᴜɪᴘᴇ: '+time+' )\n'+
+    '> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(sala.modeName || sala.mode || 'Free Fire')+' )\n'+
+    '> 👥 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: '+total+'/'+(sala.maxPlayers || 8)+' )\n'+
+    (uid?'> 🔎 ׄ ( ᴘᴇʀғɪʟ: '+ctx.prefix+'infoff '+uid+' )\n':'')+
+    '\n> 📋 ׄ ( ʟɪsᴛᴀ ᴅᴀ sᴀʟᴀ: '+ctx.prefix+'jogadoressala )'
   const avatar=String(player.avatar || '')
   try {
     if (/^https:\/\/tokito-apis\.com\.br\/api\/v1\/player\/imagem\/\d{6,18}\.png$/i.test(avatar)) {
@@ -183,10 +184,10 @@ dylan.setCommand({
         const args=argumento.split(/\s+/)
         if (!argumento) {
           if (salaAtiva && salaAtiva.status!=='started') return menuGerencia(ctx,
-            '- 🎮 *SALA ATIVA NESTE GRUPO*\n\n> 🆔 ID: '+(salaAtiva.roomId || 'N/A')+
-            '\n> 🎯 Modo: '+(salaAtiva.modeName || 'Free Fire')+
-            '\n> 👤 Criador: '+(salaAtiva.criadorNome || 'Jogador')+
-            '\n\n> 📋 Escolha uma opção na lista.')
+            '- 🎮 \x60𝚂𝙰𝙻𝙰 𝙰𝚃𝙸𝚅𝙰 𝙽𝙾 𝙶𝚁𝚄𝙿𝙾\x60\n\n> 🆔 ׄ ( ɪᴅ: '+(salaAtiva.roomId || 'N/A')+
+            ' )\n> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(salaAtiva.modeName || 'Free Fire')+
+            ' )\n> 👤 ׄ ( ᴄʀɪᴀᴅᴏʀ: '+(salaAtiva.criadorNome || 'Jogador')+
+            ' )\n\n> 📋 ׄ ( ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ɴᴀ ʟɪsᴛᴀ. )')
           return h.menuListaSala(ctx,
             '- 🎮 \x60𝙲𝚁𝙸𝙰𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\x60\n\n> 🎯 ׄ ( ᴇsᴄᴏʟʜᴀ ᴏ ᴍᴏᴅᴏ ɴᴏ ᴍᴇɴᴜ ʟɪsᴛ. )\n> 📋 ׄ ( ᴅᴇᴘᴏɪs ᴄʟɪǫᴜᴇ ᴇᴍ *ᴄʀɪᴀʀ sᴀʟᴀ*. )',
             'Escolher modo',h.MODOS_SALA.map(m=>({
@@ -207,10 +208,15 @@ dylan.setCommand({
           pendentes[u]={modo:modo.id,nonce,criadoEm:Date.now()}
           g.salaApiPendentes=pendentes
           ctx.setGp(ctx.dataGp)
-          const resumo='- 🎮 *CONFIRMAR CRIAÇÃO DE SALA*\n\n> 🎯 Modo: '+modo.nome+
-            '\n> 👥 Capacidade: '+modo.limite+' jogadores'+
-            '\n> 🗺️ Mapa: Bermuda\n> 🌎 Região: BR\n> ⏱️ Início automático: 10 minutos'+
-            '\n> 🔑 Senha: gerada automaticamente\n\n> ✅ Aperte *Criar sala* para confirmar. Será consumido um crédito apenas se a criação for confirmada.'
+          const resumo='- 🎮 \x60𝙲𝙾𝙽𝙵𝙸𝚁𝙼𝙰𝚁 𝚂𝙰𝙻𝙰\x60\n\n'+
+            '> 🎯 ׄ ( ᴍᴏᴅᴏ: '+modo.nome+' )\n'+
+            '> 👥 ׄ ( ᴠᴀɢᴀs: '+modo.limite+' ᴊᴏɢᴀᴅᴏʀᴇs )\n'+
+            '> 🗺️ ׄ ( ᴍᴀᴘᴀ: ʙᴇʀᴍᴜᴅᴀ )\n'+
+            '> 🌎 ׄ ( ʀᴇɢɪᴀ̃ᴏ: ʙʀ )\n'+
+            '> ⏱️ ׄ ( ɪɴɪ́ᴄɪᴏ: 10 ᴍɪɴᴜᴛᴏs )\n'+
+            '> 🔐 ׄ ( sᴇɴʜᴀ ɢᴇʀᴀᴅᴀ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀᴍᴇɴᴛᴇ )\n\n'+
+            '> ✅ ׄ ( ᴄʟɪǫᴜᴇ ᴇᴍ ᴄʀɪᴀʀ sᴀʟᴀ ᴘᴀʀᴀ ᴄᴏɴғɪʀᴍᴀʀ. )\n'+
+            '> 🎫 ׄ ( sᴏ́ ᴄᴏɴsᴏᴍᴇ sᴀʟᴅᴏ sᴇ ᴀ ᴀᴘɪ ᴄʀɪᴀʀ ᴀ sᴀʟᴀ. )'
           return h.menuListaSala(ctx,resumo,'Confirmar sala',[{
             texto:'✅ ᴄʀɪᴀʀ sᴀʟᴀ',descricao:'ᴄᴏɴғɪʀᴍᴀʀ ᴀ ᴄʀɪᴀᴄ̧ᴀ̃ᴏ',id:ctx.prefix+'criarsala confirmar '+nonce
           },{texto:'❌ ᴄᴀɴᴄᴇʟᴀʀ',descricao:'ɴᴇɴʜᴜᴍ ᴄʀᴇ́ᴅɪᴛᴏ ᴜsᴀᴅᴏ',id:ctx.prefix+'criarsala cancelar'}])
