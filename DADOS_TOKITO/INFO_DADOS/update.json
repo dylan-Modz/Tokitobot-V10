@@ -1,71 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.93",
+  "version": "10.2.94",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T00:57:31.115Z",
+  "publishedAt": "2026-11-08T01:59:50.839Z",
   "changelog": [
-    "Melhora a recuperação de links de GIF expirados, consultando novamente as mídias originais quando necessário.",
-    "Padroniza a mensagem quando a publicação não possui GIFs animados.",
-    "Mantém o título TikTok Animado e o envio separado em formato GIF.",
-    "Atualização exclusiva do comando tiktok_gif.js e do package.json; README não é enviado."
+    "[Correção] fix(instagram): enviar foto ou vídeo conforme mídia recebida da Tokito APIs",
+    "A versão 10.2.94 já está disponível para atualização.",
+    "Instagram atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "TikTok Animado — atualização do comando tiktok-gif",
-  "notice": "Versão 10.2.93 disponível para atualização.",
+  "title": "fix(instagram): enviar foto ou vídeo conforme mídia recebida da Tokito APIs",
+  "notice": "A versão 10.2.94 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/downloads/tiktok_gif.js",
-      "sha256": "70f562568bd87aa94018cd673c50e9a1470900f764731e176c210b209156fb84",
-      "gitSha": "e7f0859155c51cfec22d588ed8c177bc2ce720c4",
-      "size": 5566
-    },
-    {
-      "path": "package.json",
-      "sha256": "6e4795a94a92b69e52fe983e23b33d04a16f19bc637612ade221c7e27a92099c",
-      "gitSha": "422368e1a3528f73ff3f0b4f525760cbaea37f21",
-      "size": 1211
+      "path": "DADOS_TOKITO/plugins/downloads/instagram.js",
+      "sha256": "8afb0aba3fd65782f5d0f0797d9fbd0411f39a19aae252fc78d1a002b1c84018",
+      "size": 3509
     }
   ],
   "releases": [
-    {
-      "version": "10.1.70",
-      "fromVersion": "10.1.69",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Shazam com estrutura do Akame Bot",
-      "notice": "A versão 10.1.70 refaz o motor do Shazam com ACRCloud como reconhecimento principal e busca complementar no YouTube.",
-      "changelog": [
-        "Shazam passa a usar a mesma estrutura do Akame Bot, com ACRCloud como motor principal de reconhecimento.",
-        "A mídia é baixada pelo Tokito e o ACRCloud retorna artista, título, álbum e gravadora.",
-        "Depois do reconhecimento, artista + título são pesquisados na rota youtube-play para completar capa, duração, canal, views e link.",
-        "Áudios e vídeos são suportados; vídeos têm o áudio extraído antes do reconhecimento.",
-        "SongFinder foi mantido como fallback caso o ACRCloud esteja sem configuração ou não reconheça a faixa.",
-        "Adiciona acrcloud.json sem credenciais hardcoded para configuração segura do reconhecimento.",
-        "Também aceita ACRCLOUD_HOST, ACRCLOUD_ACCESS_KEY e ACRCLOUD_ACCESS_SECRET pelo ambiente.",
-        "O card do Shazam continua com os botões Áudio e Vídeo usando play_audio e play_video."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/modulos.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T17:25:00.000Z"
-    },
     {
       "version": "10.1.71",
       "fromVersion": "10.1.70",
@@ -4683,6 +4642,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T00:57:31.114Z"
+    },
+    {
+      "version": "10.2.94",
+      "fromVersion": "10.2.93",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(instagram): enviar foto ou vídeo conforme mídia recebida da Tokito APIs",
+      "notice": "A versão 10.2.94 já está disponível para atualização.",
+      "changelog": [
+        "Instagram atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/instagram.js",
+          "sha256": "8afb0aba3fd65782f5d0f0797d9fbd0411f39a19aae252fc78d1a002b1c84018",
+          "size": 3509
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T01:59:50.838Z"
     }
   ],
   "mode": "incremental",
