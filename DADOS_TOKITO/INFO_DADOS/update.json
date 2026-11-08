@@ -6,19 +6,19 @@
   "ref": "main",
   "publishedAt": "2026-11-08T20:52:54.792Z",
   "changelog": [
-    "Escolha entre 8 modos pela lista do WhatsApp e confirme antes de criar a sala.",
-    "Os comandos usam automaticamente a sala ativa do grupo, sem solicitar ID da sessão.",
-    "ID de sala, senha, jogadores e imagem PNG; iniciar, encerrar e expulsar exclusivos do criador.",
-    "Notificação de entrada com nick, UID e avatar quando disponível. Verificação a cada 5 segundos: o fornecedor ainda não oferece eventos instantâneos.",
-    "Menu Free Fire e mensagens atualizados, sem README."
+    "Menu list com escolha de modo e confirmação antes de debitar crédito.",
+    "Comandos por grupo sem sessionId: versala, jogadoressala, imagensala, expulsarsala UID, iniciarsala e pararsala.",
+    "Apenas o criador da sala pode iniciar, encerrar ou expulsar jogadores.",
+    "Aviso automático de novos jogadores via consulta a cada 5 segundos; eventos instantâneos dependem de suporte do fornecedor.",
+    "Controle de consultas, sala protegida contra criações simultâneas e reinício de salas após a partida."
   ],
   "delete": [
     "DADOS_TOKITO/plugins/freefire/sala-grupo.js"
   ],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Salas FF: menu de modos, controle por grupo e alertas de jogadores",
-  "notice": "Nova atualização das salas Free Fire disponível.",
+  "title": "Tokito Bot 10.2.101 — Salas por grupo e avisos de entrada",
+  "notice": "Atualize pelo comando update.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -27,30 +27,6 @@
       "sha256": "a36e6f4849b569bf2393db67b119488d124b9f66fb380b985a5ebe15f935cda3",
       "gitSha": "a45b651d18ae0f18deae3f6ea83a43db098d8c80",
       "size": 17412
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
-      "sha256": "e645f21c5ad38bf21fb983a2f3f1f26ca494379da47811c3a1c56053995f2f67",
-      "gitSha": "5fb53e79e3a1ee502165ffb37813faf69432a374",
-      "size": 7706
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/evento-sala-monitor.js",
-      "sha256": "ffb78ba1925fbd325e25bff184a75988cc0aa4581ade73aa418ba7cb3e8baa35",
-      "gitSha": "4fc9921724b973bccc6fdac4163d6c052e265262",
-      "size": 428
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "996a5bef3d6a0f072b2843503ac0d8f194982b09a0432c8a791b2d285f999e26",
-      "gitSha": "2dbd9b2271c005d97606eedffc37f9c28abc196b",
-      "size": 78934
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "1a874ab6e878f56d8a01329721740c502df2a69be6d4df0b452fa6c9ed1c8bd1",
-      "gitSha": "a1098661a05194275cde8b4dfda8da0ea96b205f",
-      "size": 231585
     },
     {
       "path": "package.json",
@@ -4594,14 +4570,14 @@
       "fromVersion": "10.2.100",
       "channel": "stable",
       "type": "Melhoria",
-      "title": "Salas FF: menu de modos, controle por grupo e alertas de jogadores",
-      "notice": "A versão 10.2.101 já está disponível para atualização.",
+      "title": "Tokito Bot 10.2.101 — Salas por grupo e avisos de entrada",
+      "notice": "Atualize pelo comando update.",
       "changelog": [
-        "Escolha entre 8 modos pela lista do WhatsApp e confirme antes de criar a sala.",
-        "Os comandos usam automaticamente a sala ativa do grupo, sem solicitar ID da sessão.",
-        "ID de sala, senha, jogadores e imagem PNG; iniciar, encerrar e expulsar exclusivos do criador.",
-        "Notificação de entrada com nick, UID e avatar quando disponível. Verificação a cada 5 segundos: o fornecedor ainda não oferece eventos instantâneos.",
-        "Menu Free Fire e mensagens atualizados, sem README."
+        "Menu list com escolha de modo e confirmação antes de debitar crédito.",
+        "Comandos por grupo sem sessionId: versala, jogadoressala, imagensala, expulsarsala UID, iniciarsala e pararsala.",
+        "Apenas o criador da sala pode iniciar, encerrar ou expulsar jogadores.",
+        "Aviso automático de novos jogadores via consulta a cada 5 segundos; eventos instantâneos dependem de suporte do fornecedor.",
+        "Controle de consultas, sala protegida contra criações simultâneas e reinício de salas após a partida."
       ],
       "files": [
         {
@@ -4609,30 +4585,6 @@
           "sha256": "a36e6f4849b569bf2393db67b119488d124b9f66fb380b985a5ebe15f935cda3",
           "gitSha": "a45b651d18ae0f18deae3f6ea83a43db098d8c80",
           "size": 17412
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
-          "sha256": "e645f21c5ad38bf21fb983a2f3f1f26ca494379da47811c3a1c56053995f2f67",
-          "gitSha": "5fb53e79e3a1ee502165ffb37813faf69432a374",
-          "size": 7706
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/freefire/evento-sala-monitor.js",
-          "sha256": "ffb78ba1925fbd325e25bff184a75988cc0aa4581ade73aa418ba7cb3e8baa35",
-          "gitSha": "4fc9921724b973bccc6fdac4163d6c052e265262",
-          "size": 428
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "996a5bef3d6a0f072b2843503ac0d8f194982b09a0432c8a791b2d285f999e26",
-          "gitSha": "2dbd9b2271c005d97606eedffc37f9c28abc196b",
-          "size": 78934
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "1a874ab6e878f56d8a01329721740c502df2a69be6d4df0b452fa6c9ed1c8bd1",
-          "gitSha": "a1098661a05194275cde8b4dfda8da0ea96b205f",
-          "size": 231585
         },
         {
           "path": "package.json",
