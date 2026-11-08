@@ -6,14 +6,14 @@
   "ref": "main",
   "publishedAt": "2026-11-08T01:59:50.839Z",
   "changelog": [
-    "[Correção] fix(instagram): enviar foto ou vídeo conforme mídia recebida da Tokito APIs",
-    "A versão 10.2.94 já está disponível para atualização.",
-    "Instagram atualizado"
+    "Rota da Tokito APIs aceita apenas o link do Instagram, sem campo INDEX.",
+    "Corrige o comando instagram para enviar foto quando a API retornar uma imagem e vídeo quando retornar um MP4.",
+    "Mantém os demais comandos sem alterações. README fora da atualização."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(instagram): enviar foto ou vídeo conforme mídia recebida da Tokito APIs",
+  "title": "Instagram — baixar e enviar foto ou vídeo diretamente",
   "notice": "A versão 10.2.94 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
@@ -21,7 +21,14 @@
     {
       "path": "DADOS_TOKITO/plugins/downloads/instagram.js",
       "sha256": "8afb0aba3fd65782f5d0f0797d9fbd0411f39a19aae252fc78d1a002b1c84018",
+      "gitSha": "3eaec31b5811f6e310c457e3b6d62dbbca810654",
       "size": 3509
+    },
+    {
+      "path": "package.json",
+      "sha256": "05579912c75274537eb12471b0589c27ee879f71b4ae9aedfae4ec9a3f049151",
+      "gitSha": "bec99f8c5dd5991214a90b7eb7fb30870d9a4144",
+      "size": 1211
     }
   ],
   "releases": [
@@ -4648,16 +4655,25 @@
       "fromVersion": "10.2.93",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix(instagram): enviar foto ou vídeo conforme mídia recebida da Tokito APIs",
+      "title": "Instagram — baixar e enviar foto ou vídeo diretamente",
       "notice": "A versão 10.2.94 já está disponível para atualização.",
       "changelog": [
-        "Instagram atualizado"
+        "Rota da Tokito APIs aceita apenas o link do Instagram, sem campo INDEX.",
+        "Corrige o comando instagram para enviar foto quando a API retornar uma imagem e vídeo quando retornar um MP4.",
+        "Mantém os demais comandos sem alterações. README fora da atualização."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/plugins/downloads/instagram.js",
           "sha256": "8afb0aba3fd65782f5d0f0797d9fbd0411f39a19aae252fc78d1a002b1c84018",
+          "gitSha": "3eaec31b5811f6e310c457e3b6d62dbbca810654",
           "size": 3509
+        },
+        {
+          "path": "package.json",
+          "sha256": "05579912c75274537eb12471b0589c27ee879f71b4ae9aedfae4ec9a3f049151",
+          "gitSha": "bec99f8c5dd5991214a90b7eb7fb30870d9a4144",
+          "size": 1211
         }
       ],
       "delete": [],
