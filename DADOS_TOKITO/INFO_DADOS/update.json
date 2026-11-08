@@ -1,63 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.97",
+  "version": "10.2.98",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T20:46:47.370Z",
+  "publishedAt": "2026-11-08T20:48:16.874Z",
   "changelog": [
-    "[Novidade] feat(salas): ações por lista interativa sem parâmetros de sessão",
-    "A versão 10.2.97 já está disponível para atualização.",
-    "Mensagens atualizado",
-    "Menus atualizado",
+    "[Correção] fix(salas): restaurar menu list genérico para seleção de modos e ações",
+    "A versão 10.2.98 já está disponível para atualização.",
     "Ffcore atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat(salas): ações por lista interativa sem parâmetros de sessão",
-  "notice": "A versão 10.2.97 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix(salas): restaurar menu list genérico para seleção de modos e ações",
+  "notice": "A versão 10.2.98 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "1a874ab6e878f56d8a01329721740c502df2a69be6d4df0b452fa6c9ed1c8bd1",
-      "size": 231585
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "996a5bef3d6a0f072b2843503ac0d8f194982b09a0432c8a791b2d285f999e26",
-      "size": 78934
-    },
-    {
       "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
-      "sha256": "880dba3c17a86d5161335cac224566a83bcaee6f0787f8252bd3bca0094f45ea",
-      "size": 6140
+      "sha256": "e645f21c5ad38bf21fb983a2f3f1f26ca494379da47811c3a1c56053995f2f67",
+      "size": 7706
     }
   ],
   "releases": [
-    {
-      "version": "10.1.74",
-      "fromVersion": "10.1.73",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Arquivo principal do bot atualizado",
-      "notice": "A versão 10.1.74 já está disponível para atualização.",
-      "changelog": [
-        "Arquivo principal do bot atualizado"
-      ],
-      "files": [
-        {
-          "path": "tokito.js",
-          "sha256": "33c1c26fbf61c3a966fa85f15928db9a1c56a32bdc0e2b79f340c1f549daefb6",
-          "size": 52366
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T23:29:25.447Z"
-    },
     {
       "version": "10.1.75",
       "fromVersion": "10.1.74",
@@ -4646,6 +4613,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T20:46:47.369Z"
+    },
+    {
+      "version": "10.2.98",
+      "fromVersion": "10.2.97",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(salas): restaurar menu list genérico para seleção de modos e ações",
+      "notice": "A versão 10.2.98 já está disponível para atualização.",
+      "changelog": [
+        "Ffcore atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+          "sha256": "e645f21c5ad38bf21fb983a2f3f1f26ca494379da47811c3a1c56053995f2f67",
+          "size": 7706
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T20:48:16.874Z"
     }
   ],
   "mode": "incremental",
