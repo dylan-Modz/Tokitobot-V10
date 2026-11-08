@@ -1,175 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.90",
+  "version": "10.2.91",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T00:44:31.399Z",
+  "publishedAt": "2026-11-08T00:47:01.413Z",
   "changelog": [
-    "Novo comando tiktok-gif na pasta Downloads, com alias ttgif.",
-    "GIFs originais enviados individualmente pelo WhatsApp (gifPlayback: true).",
-    "Inclui o scraper de download, menu principal e menudown.",
-    "Corrige o manifesto de atualização com SHA-256 e Git Blob SHA exatos para impedir erros de integridade por cache antigo."
+    "[Correção] fix(release): versao 10.2.91 sem atualizar README",
+    "A versão 10.2.91 já está disponível para atualização.",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "TikTok GIF — envio de Live Photos e correção da integridade da atualização",
-  "notice": "A versão 10.2.90 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix(release): versao 10.2.91 sem atualizar README",
+  "notice": "A versão 10.2.91 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/scrapers/downloads/tiktok_gif.js",
-      "sha256": "2d760708f9044a321871b59040d5448579093211dccf339a63a0317b9abe1df6",
-      "gitSha": "b8a7eff647c0ff308300c9fefff4511e83daed96",
-      "size": 3336
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/tiktok_gif.js",
-      "sha256": "7d50201faed484a151e04b569179fb488cb334f307df0fc2e2d41b524ee67751",
-      "gitSha": "b0e8931c3c52d6e025c40f01b3e934a4be55461f",
-      "size": 4678
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "767fa9ca857b39e1e817a8341954d07650065d919d32f06b50f895a72b4869b8",
-      "gitSha": "1caefb4dfaf42619ed0b85629b7ee8f0adf13ee9",
-      "size": 78959
-    },
-    {
-      "path": "README.md",
-      "sha256": "283b56e36c978898e74b6861b1dde4f9a4b9aac0835812261d741ea66a3072fa",
-      "gitSha": "caa9ea233bc20dc669859d926f457669dfec1bde",
-      "size": 8977
-    },
-    {
       "path": "package.json",
-      "sha256": "17fe43b6c195ac9c53b95f36aa4177899bda449c4ce13d3af912a73dfebe7c81",
-      "gitSha": "ee386701bd0cfe5fa5a0a60c9d052db3838bf02a",
+      "sha256": "bb98bd3b96475c15c7e5cecdca012dd58780f39a5bf3c7cf06ed1940adebf8fa",
       "size": 1211
     }
   ],
   "releases": [
-    {
-      "version": "10.1.67",
-      "fromVersion": "10.1.66",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Novos jogos e Menu Jogos reorganizado",
-      "notice": "A versão 10.1.67 chegou com novos jogos, reset centralizado e um Menu Jogos mais organizado.",
-      "changelog": [
-        "Adiciona Doulingo com 70 perguntas em JSON, capa e alternativas interativas.",
-        "Adiciona Anagrama com banco JSON de palavras, dicas, resposta automática e opção para revelar a palavra.",
-        "Adiciona Quiz Animais com 27 animais, imagens e resposta automática pelo nome.",
-        "Adiciona jogodavelha2 para jogar contra o próprio Tokito usando o mesmo card e tabuleiro do Jogo da Velha normal.",
-        "Cria o comando infojogos explicando de forma simples como resetar cada partida.",
-        "O comando rv agora centraliza os resets: velha, dama, forca, caca, adivinhe, quiz e mines.",
-        "Remove do Menu Jogos o bloco duplicado Jogos-BN e o bloco antigo com vários comandos de reset.",
-        "Menu Jogos recebe os novos jogos e emojis relacionados a cada opção.",
-        "O aviso automático de nova versão foi redesenhado com versão atual, nova versão, resumo das mudanças e comandos de atualização."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/doulingo.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/anagrama.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/revelaranagrama.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/quizanimais.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/revelarquiz.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/jogodavelha2.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/infojogos.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/rv.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/database/jogos/doulingo.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/database/jogos/anagrama.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/database/jogos/quizanimais.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/jogodavelha.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-jogodavelha.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/resetvelha.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T17:05:00.000Z"
-    },
     {
       "version": "10.1.68",
       "fromVersion": "10.1.67",
@@ -4803,6 +4658,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T00:44:31.399Z"
+    },
+    {
+      "version": "10.2.91",
+      "fromVersion": "10.2.90",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(release): versao 10.2.91 sem atualizar README",
+      "notice": "A versão 10.2.91 já está disponível para atualização.",
+      "changelog": [
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "bb98bd3b96475c15c7e5cecdca012dd58780f39a5bf3c7cf06ed1940adebf8fa",
+          "size": 1211
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T00:47:01.412Z"
     }
   ],
   "mode": "incremental",
