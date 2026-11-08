@@ -3829,7 +3829,6 @@ exports.ffSalaCriada = ({ NomeDoBot, pushname, sala, roomName, roomPassword, max
     '> 🌎 ׄ ( ʀᴇɢɪᴀ̃ᴏ: '+(sala?.region||region||'BR')+' )',
     '',
     '> 📊 ׄ ( sᴀʟᴀs ʀᴇsᴛᴀɴᴛᴇs: '+(data?.limite?.restantes??'N/A')+' )',
-    ...(sala?.inviteLink ? ['> 🔗 ׄ ( ᴄᴏɴᴠɪᴛᴇ: '+sala.inviteLink+' )'] : []),
     ...(sala?.inviteCode ? ['> 🎟️ ׄ ( ᴄᴏ́ᴅɪɢᴏ ᴅᴇ ᴄᴏɴᴠɪᴛᴇ: '+sala.inviteCode+' )'] : []),
     '> 📋 ׄ ( ɢᴇʀᴇɴᴄɪᴇ ᴀ sᴀʟᴀ ᴘᴇʟᴏ ᴍᴇɴᴜ ʟɪsᴛ. )',
     ...(sala?.inviteLink?['> 🎮 ׄ ( ᴜsᴇ ᴏ ʙᴏᴛᴀ̃ᴏ ᴇɴᴛʀᴀʀ ɴᴀ sᴀʟᴀ. )']:[])
@@ -3852,7 +3851,6 @@ exports.ffSalaInfo = ({ NomeDoBot, pushname, sala, tempo }) => {
     '> 📡 ׄ ( sᴛᴀᴛᴜs: '+(sala?.status||'Indisponível')+' )',
     '> ⏱️ ׄ ( ɪɴɪ́ᴄɪᴏ: '+tempo+' )',
     '',
-    ...(sala?.inviteLink ? ['> 🔗 ׄ ( ᴇɴᴛʀᴀʀ ɴᴀ sᴀʟᴀ: '+sala.inviteLink+' )'] : []),
     '> 🔎 ׄ ( sᴀʟᴀ ᴀᴛɪᴠᴀ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )'
   ].join('\n')
 }
@@ -3888,7 +3886,6 @@ exports.ffImagemSala = ({ sala = {}, roomId, modeName, mapName, total, maxPlayer
     ...(ocupacao!==null?['> 📊 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: '+ocupacao+'/'+vagas+' )']:[]),
     '',
     '> ✅ ׄ ( ᴠᴇᴊᴀ ɴᴀ ɪᴍᴀɢᴇᴍ ᴏs ᴛɪᴍᴇs ᴇ ᴀs ᴠᴀɢᴀs. )',
-    ...(inviteLink?['','> 🔗 ׄ ( ʟɪɴᴋ ᴅᴇ ᴇɴᴛʀᴀᴅᴀ: )',String(inviteLink)]:[])
   ].join('\n')
 }
 
