@@ -174,10 +174,14 @@ const menuListaSala = async (ctx, texto, titulo, linhas = []) => {
       ...(attachment?{header:{hasMediaAttachment:true,...attachment},headerType:media.videoMessage?'VIDEO':'IMAGE'}:{}),
       body:{text:content},
       footer:{text:'ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄᴀᴏ ᴀʙᴀɪxᴏ'},
-      nativeFlowMessage:{buttons:[{
-        name:'single_select',
-        buttonParamsJson:JSON.stringify(select)
-      }]}
+      nativeFlowMessage:{buttons:
+        /^confirmar/i.test(String(titulo||'')) && rows.length<=3
+          ? rows.map(item=>({
+              name:'quick_reply',
+              buttonParamsJson:JSON.stringify({display_text:item.title,id:item.id})
+            }))
+          : [{name:'single_select',buttonParamsJson:JSON.stringify(select)}]
+      }
     }
     const quoted=ctx.selo||{}
     return await ctx.tokito.relayMessage(ctx.from,{
