@@ -1,81 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.94",
+  "version": "10.2.95",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T01:59:50.839Z",
+  "publishedAt": "2026-11-08T20:43:46.690Z",
   "changelog": [
-    "Rota da Tokito APIs aceita apenas o link do Instagram, sem campo INDEX.",
-    "Corrige o comando instagram para enviar foto quando a API retornar uma imagem e vídeo quando retornar um MP4.",
-    "Mantém os demais comandos sem alterações. README fora da atualização."
+    "[Novidade] feat(salas): menu list de modos e gerência sem IDs de sessão",
+    "A versão 10.2.95 já está disponível para atualização.",
+    "Ffcore atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Instagram — baixar e enviar foto ou vídeo diretamente",
-  "notice": "A versão 10.2.94 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat(salas): menu list de modos e gerência sem IDs de sessão",
+  "notice": "A versão 10.2.95 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/downloads/instagram.js",
-      "sha256": "8afb0aba3fd65782f5d0f0797d9fbd0411f39a19aae252fc78d1a002b1c84018",
-      "gitSha": "3eaec31b5811f6e310c457e3b6d62dbbca810654",
-      "size": 3509
-    },
-    {
-      "path": "package.json",
-      "sha256": "05579912c75274537eb12471b0589c27ee879f71b4ae9aedfae4ec9a3f049151",
-      "gitSha": "bec99f8c5dd5991214a90b7eb7fb30870d9a4144",
-      "size": 1211
+      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+      "sha256": "ee1b61a2d9816bd17d808bb49050d225cfbff00e3b2d23029a2d08a16ad99c7f",
+      "size": 5435
     }
   ],
   "releases": [
-    {
-      "version": "10.1.71",
-      "fromVersion": "10.1.70",
-      "channel": "stable",
-      "type": "Remoção",
-      "title": "Remoção do Shazam",
-      "notice": "A versão 10.1.71 remove completamente o sistema Shazam do Tokito.",
-      "changelog": [
-        "Remove completamente o comando Shazam do Tokito Bot.",
-        "Remove o módulo plugins/downloads/shazam.js.",
-        "Remove o motor de reconhecimento por SongFinder e ACRCloud do sistema modular.",
-        "Remove o arquivo de configuração INFO_DADOS/acrcloud.json.",
-        "Remove a dependência acrcloud do package.json.",
-        "Remove as mensagens específicas do Shazam e a opção Shazam do menu de downloads."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/modulos.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [
-        "DADOS_TOKITO/plugins/downloads/shazam.js",
-        "DADOS_TOKITO/INFO_DADOS/acrcloud.json"
-      ],
-      "required": true,
-      "publishedAt": "2026-10-07T17:40:00.000Z"
-    },
     {
       "version": "10.1.72",
       "fromVersion": "10.1.71",
@@ -4679,6 +4628,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T01:59:50.838Z"
+    },
+    {
+      "version": "10.2.95",
+      "fromVersion": "10.2.94",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat(salas): menu list de modos e gerência sem IDs de sessão",
+      "notice": "A versão 10.2.95 já está disponível para atualização.",
+      "changelog": [
+        "Ffcore atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+          "sha256": "ee1b61a2d9816bd17d808bb49050d225cfbff00e3b2d23029a2d08a16ad99c7f",
+          "size": 5435
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T20:43:46.689Z"
     }
   ],
   "mode": "incremental",
