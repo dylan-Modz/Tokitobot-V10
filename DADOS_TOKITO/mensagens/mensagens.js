@@ -3831,7 +3831,8 @@ exports.ffSalaCriada = ({ NomeDoBot, pushname, sala, roomName, roomPassword, max
     '> 📊 ׄ ( sᴀʟᴀs ʀᴇsᴛᴀɴᴛᴇs: '+(data?.limite?.restantes??'N/A')+' )',
     ...(sala?.inviteLink ? ['> 🔗 ׄ ( ᴄᴏɴᴠɪᴛᴇ: '+sala.inviteLink+' )'] : []),
     ...(sala?.inviteCode ? ['> 🎟️ ׄ ( ᴄᴏ́ᴅɪɢᴏ ᴅᴇ ᴄᴏɴᴠɪᴛᴇ: '+sala.inviteCode+' )'] : []),
-    '> 📋 ׄ ( ɢᴇʀᴇɴᴄɪᴇ ᴀ sᴀʟᴀ ᴘᴇʟᴏ ᴍᴇɴᴜ ʟɪsᴛ. )'
+    '> 📋 ׄ ( ɢᴇʀᴇɴᴄɪᴇ ᴀ sᴀʟᴀ ᴘᴇʟᴏ ᴍᴇɴᴜ ʟɪsᴛ. )',
+    ...(sala?.inviteLink?['> 🎮 ׄ ( ᴜsᴇ ᴏ ʙᴏᴛᴀ̃ᴏ ᴇɴᴛʀᴀʀ ɴᴀ sᴀʟᴀ. )']:[])
   ].join('\n')
 }
 
@@ -3872,23 +3873,22 @@ ${players.length ? players.map((p, i) => `> 👥 ׄ ( ${i + 1}° — ${p.nicknam
 > 👥 ׄ ( ${p.uid || 'N/A'} — ᴜɪᴅ • ᴛɪᴍᴇ ${p.team || 'N/A'} )`).join('\n\n') : '> 👥 ׄ ( ɴᴇɴʜᴜᴍ ᴊᴏɢᴀᴅᴏʀ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ. )'}`
 }
 
-exports.ffImagemSala = ({ NomeDoBot, pushname, sala, inviteLink, roomId, modeName, mapName, total, maxPlayers }={}) => {
-  const room=sala||{}
-  const contador=total??room.playerCount
-  const limite=room.maxPlayers||maxPlayers||8
+exports.ffImagemSala = ({ sala = {}, roomId, modeName, mapName, total, maxPlayers, inviteLink } = {}) => {
+  const info=sala && typeof sala==='object'?sala:{}
+  const vagas=maxPlayers||info.maxPlayers||8
+  const ocupacao=Number.isInteger(total)?total:
+    (Number.isInteger(info.playerCount)?info.playerCount:null)
   return [
     '- 🖼️ \x60𝙸𝙼𝙰𝙶𝙴𝙼 𝙳𝙰 𝚂𝙰𝙻𝙰 𝙵𝙵\x60',
     '',
-    '> 🤖 ׄ ( ʙᴏᴛ: '+(NomeDoBot||'Tokito Bot')+' )',
-    '> 👤 ׄ ( ᴜsᴜᴀ́ʀɪᴏ: '+(pushname||'Jogador')+' )',
-    '> 🆔 ׄ ( ɪᴅ: '+(room.roomId||roomId||'N/A')+' )',
-    '> 🔐 ׄ ( sᴇɴʜᴀ: '+(room.password||'Indisponível')+' )',
-    '> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(room.modeName||modeName||'Free Fire')+' )',
-    '> 🗺️ ׄ ( ᴍᴀᴘᴀ: '+(room.mapName||mapName||'Bermuda')+' )',
-    '> 👥 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: '+(contador==null?'—':contador)+'/'+limite+' )',
-    ...(inviteLink ? ['> 🔗 ׄ ( ᴄᴏɴᴠɪᴛᴇ: '+inviteLink+' )'] : []),
+    '> 🆔 ׄ ( ɪᴅ: '+(roomId||info.roomId||'N/A')+' )',
+    '> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(modeName||info.modeName||'Free Fire')+' )',
+    '> 🗺️ ׄ ( ᴍᴀᴘᴀ: '+(mapName||info.mapName||'Bermuda')+' )',
+    '> 👥 ׄ ( ᴠᴀɢᴀs: '+vagas+' )',
+    ...(ocupacao!==null?['> 📊 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: '+ocupacao+'/'+vagas+' )']:[]),
     '',
-    '> ✅ ׄ ( ᴠᴇᴊᴀ ɴᴀ ɪᴍᴀɢᴇᴍ ᴏs ᴛɪᴍᴇs ᴇ ᴀs ᴠᴀɢᴀs. )'
+    '> ✅ ׄ ( ᴠᴇᴊᴀ ɴᴀ ɪᴍᴀɢᴇᴍ ᴏs ᴛɪᴍᴇs ᴇ ᴀs ᴠᴀɢᴀs. )',
+    ...(inviteLink?['','> 🔗 ׄ ( ʟɪɴᴋ ᴅᴇ ᴇɴᴛʀᴀᴅᴀ: )',String(inviteLink)]:[])
   ].join('\n')
 }
 
