@@ -74,28 +74,59 @@ return ctx.botaozin(texto, botoes, mentions)
 return ctx.reply(texto, mentions)
 }
 
-const botoesSala = (ctx, sessionId, opcoes = ['ver', 'jogadores', 'iniciar', 'parar']) => {
-if (!sessionId)
-return []
-const mapa = {
-ver: {
-texto: ctx.mess.botaoVerSala(),
-id: `${ctx.prefix}versala ${sessionId}`
-},
-jogadores: {
-texto: ctx.mess.botaoJogadoresSala(),
-id: `${ctx.prefix}jogadoressala ${sessionId}`
-},
-iniciar: {
-texto: ctx.mess.botaoIniciarSala(),
-id: `${ctx.prefix}iniciarsala ${sessionId}`
-},
-parar: {
-texto: ctx.mess.botaoPararSala(),
-id: `${ctx.prefix}pararsala ${sessionId}`
+const MODOS_SALA = Object.freeze([
+  {id:'ap_padrao',nome:'AP Padrão',limite:8},
+  {id:'gelo_inf',nome:'Gelo Infinito',limite:8},
+  {id:'tatico',nome:'Modo Tático',limite:8},
+  {id:'ap_fullcapa',nome:'Full Capa',limite:8},
+  {id:'capa_3',nome:'Capa 3',limite:8},
+  {id:'ap_uxd',nome:'AP UXD',limite:8},
+  {id:'ap_7r',nome:'AP 7R',limite:8},
+  {id:'br_padrao',nome:'Battle Royale',limite:48}
+])
+
+// Os comandos públicos usam a sala ativa do próprio grupo. O sessionId
+// permanece privado e só é enviado à API pelo bot.
+const botoesSala = (ctx, opcoes = ['ver','jogadores','imagem','iniciar','parar']) => {
+  const mapa = {
+    ver: {texto:'🔎 Ver sala',id:ctx.prefix+'versala'},
+    jogadores: {texto:'👥 Ver jogadores',id:ctx.prefix+'jogadoressala'},
+    imagem: {texto:'🖼️ Imagem da sala',id:ctx.prefix+'imagensala'},
+    iniciar: {texto:'🚀 Iniciar partida',id:ctx.prefix+'iniciarsala'},
+    parar: {texto:'⛔ Encerrar sala',id:ctx.prefix+'pararsala'},
+    expulsar: {texto:'🚫 Expulsar jogador',id:ctx.prefix+'expulsarsala'}
+  }
+  return opcoes.map(x=>mapa[x]).filter(Boolean)
 }
-}
-return opcoes.map(x => mapa[x]).filter(Boolean)
+
+const menuListaSala = async (ctx, texto, titulo, linhas) => {
+  const rows = linhas.map(item=>({
+    title:String(item.texto).slice(0,50),
+    description:String(item.descricao || '').slice(0,80),
+    id:item.id
+  }))
+  if (ctx.isBotoes && ctx.proto?.Message?.InteractiveMessage &&
+      typeof ctx.generateWAMessageFromContent==='function' &&
+      typeof ctx.tokito?.relayMessage==='function') {
+    try {
+      const M=ctx.proto.Message.InteractiveMessage
+      const mensagem=ctx.generateWAMessageFromContent(ctx.from,{
+        interactiveMessage:M.create({
+          contextInfo:typeof ctx.canalInfo==='function'?ctx.canalInfo([ctx.sender]):{},
+          body:M.Body.create({text:texto}),
+          footer:M.Footer.create({text:ctx.NomeDoBot || 'Tokito Bot'}),
+          nativeFlowMessage:M.NativeFlowMessage.create({
+            buttons:[{name:'single_select',buttonParamsJson:JSON.stringify({
+              title:titulo,
+              sections:[{title:'🎮 Escolha uma opção',rows}]
+            })}]
+          })
+        })
+      },{quoted:ctx.selo,userJid:ctx.tokito.user?.id})
+      return await ctx.tokito.relayMessage(ctx.from,mensagem.message,{messageId:mensagem.key.id})
+    }catch(e){console.log('[MENU SALAS] fallback:',e?.message)}
+  }
+  return ctx.reply(texto+'\n\n'+linhas.map(x=>x.texto+': '+x.id).join('\n'))
 }
 
 const dataBR = valor => {
@@ -127,5 +158,7 @@ retornoErro,
 mensagemRetorno,
 enviar,
 botoesSala,
+menuListaSala,
+MODOS_SALA,
 dataBR
 }
