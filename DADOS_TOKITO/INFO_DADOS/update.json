@@ -1,38 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.101",
+  "version": "10.3.01",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T20:52:54.792Z",
+  "publishedAt": "2026-11-08T22:29:12.426Z",
   "changelog": [
-    "Menu list com escolha de modo e confirmação antes de debitar crédito.",
-    "Comandos por grupo sem sessionId: versala, jogadoressala, imagensala, expulsarsala UID, iniciarsala e pararsala.",
-    "Apenas o criador da sala pode iniciar, encerrar ou expulsar jogadores.",
-    "Aviso automático de novos jogadores via consulta a cada 5 segundos; eventos instantâneos dependem de suporte do fornecedor.",
-    "Controle de consultas, sala protegida contra criações simultâneas e reinício de salas após a partida."
+    "Versão principal atualizada para 10.3.01.",
+    "Mantidas as melhorias de salas por grupo e os avisos automáticos da versão anterior."
   ],
-  "delete": [
-    "DADOS_TOKITO/plugins/freefire/sala-grupo.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Tokito Bot 10.2.101 — Salas por grupo e avisos de entrada",
-  "notice": "Atualize pelo comando update.",
+  "title": "Tokito Bot V10.3.01 — nova numeração",
+  "notice": "A versão 10.3.01 está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/freefire/salas.js",
-      "sha256": "a36e6f4849b569bf2393db67b119488d124b9f66fb380b985a5ebe15f935cda3",
-      "gitSha": "a45b651d18ae0f18deae3f6ea83a43db098d8c80",
-      "size": 17412
-    },
-    {
       "path": "package.json",
-      "sha256": "4b047bfb37d5616251279d793ee068b9edf0a089a6bc487530db5b97133d1f15",
-      "gitSha": "dcfd549a054e84b750d13efded1ffb1126d5a020",
-      "size": 1212
+      "sha256": "155b7d54cb3f5c0c8aadf5aadf5cd47fe1828b1f20e64bbd6322d63459b721b4",
+      "gitSha": "b732f4cc9b1cfdc49acaf907a575b3caecde293a",
+      "size": 1211
     }
   ],
   "releases": [
@@ -4598,6 +4587,29 @@
       ],
       "required": false,
       "publishedAt": "2026-11-08T20:52:54.792Z"
+    },
+    {
+      "version": "10.3.01",
+      "fromVersion": "10.2.101",
+      "channel": "stable",
+      "type": "Atualização",
+      "title": "Tokito Bot V10.3.01 — nova numeração",
+      "notice": "A versão 10.3.01 está disponível para atualização.",
+      "changelog": [
+        "Versão principal atualizada para 10.3.01.",
+        "Mantidas as melhorias de salas por grupo e os avisos automáticos da versão anterior."
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "155b7d54cb3f5c0c8aadf5aadf5cd47fe1828b1f20e64bbd6322d63459b721b4",
+          "gitSha": "b732f4cc9b1cfdc49acaf907a575b3caecde293a",
+          "size": 1211
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T22:29:12.426Z"
     }
   ],
   "mode": "incremental",
@@ -4609,5 +4621,5 @@
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.2.101"
+  "publicVersion": "10.3.01"
 }
