@@ -3809,29 +3809,29 @@ return `- ${aberto ? '🔓' : '🔒'} \`𝙶𝚁𝚄𝙿𝙾 ${aberto ? '𝙰�
 > 📌 ׄ ( sᴛᴀᴛᴜs: ${aberto ? 'Todos os membros podem enviar mensagens.' : 'Somente administradores podem enviar mensagens.'} )`
 }
 exports.ffSalaUso = prefix => {
-  return '- 🎮 \x60𝙲𝚁𝙸𝙰𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\x60\n\n' +
-    '> 📋 Use '+prefix+'criarsala e escolha o modo na lista.\n' +
-    '> ✅ Confirme no botão Criar sala para solicitar a criação.'
+return '- 🎮 \x60𝙲𝚁𝙸𝙰𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\x60\n\n'+
+'> 🎯 ׄ ( ᴜsᴇ '+prefix+'criarsala ᴘᴀʀᴀ ᴇsᴄᴏʟʜᴇʀ ᴏ ᴍᴏᴅᴏ. )\n'+
+'> 📋 ׄ ( ᴄᴏɴғɪʀᴍᴇ ᴇᴍ ᴄʀɪᴀʀ sᴀʟᴀ ɴᴏ ᴍᴇɴᴜ ʟɪsᴛ. )'
 }
 
 exports.ffSalaCriada = ({ NomeDoBot, pushname, sala, roomName, roomPassword, maxPlayers, mode, region, data }) => {
-  return '- 🎮 \x60𝚂𝙰𝙻𝙰 𝙵𝙵 𝙲𝚁𝙸𝙰𝙳𝙰\x60\n\n' +
-    '> ✅ Sala criada com sucesso!\n' +
-    '> 👤 Criador: '+(pushname||'Jogador')+'\n' +
-    '> 🏷️ Nome: '+(sala?.roomName||roomName||'Sala Free Fire')+'\n' +
-    '> 🆔 ID: '+(sala?.roomId||'Indisponível')+'\n' +
-    '> 🔑 Senha: '+(sala?.password||roomPassword||'Indisponível')+'\n' +
-    '> 🎯 Modo: '+(sala?.modeName||mode||'Free Fire')+'\n' +
-    '> 🗺️ Mapa: '+(sala?.mapName||'Bermuda')+'\n' +
-    '> 👥 Jogadores: 0/'+(sala?.maxPlayers||maxPlayers||8)+'\n' +
-    '> 🌎 Região: '+(sala?.region||region||'BR')+'\n\n' +
-    '> 📊 Salas restantes: '+(data?.limite?.restantes??'N/A')+'\n' +
-    '> 📋 Use o menu de gerenciamento abaixo para acompanhar a sala.'
+return '- 🎮 \x60𝚂𝙰𝙻𝙰 𝙵𝙵 𝙲𝚁𝙸𝙰𝙳𝙰\x60\n\n'+
+'> 🤖 ׄ ( ʙᴏᴛ: '+(NomeDoBot||'Tokito Bot')+' )\n'+
+'> 👤 ׄ ( ᴄʀɪᴀᴅᴏʀ: '+(pushname||'Jogador')+' )\n'+
+'> 🏷️ ׄ ( ɴᴏᴍᴇ: '+(sala?.roomName||roomName||'Sala Free Fire')+' )\n'+
+'> 🆔 ׄ ( ɪᴅ ᴅᴀ sᴀʟᴀ: '+(sala?.roomId||'Indisponível')+' )\n'+
+'> 🔑 ׄ ( sᴇɴʜᴀ: '+(sala?.password||roomPassword||'Indisponível')+' )\n'+
+'> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(sala?.modeName||mode||'Free Fire')+' )\n'+
+'> 🗺️ ׄ ( ᴍᴀᴘᴀ: '+(sala?.mapName||'Bermuda')+' )\n'+
+'> 👥 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: 0/'+(sala?.maxPlayers||maxPlayers||8)+' )\n'+
+'> 🌎 ׄ ( ʀᴇɢɪᴀ̃ᴏ: '+(sala?.region||region||'BR')+' )\n\n'+
+'> 📊 ׄ ( sᴀʟᴀs ʀᴇsᴛᴀɴᴛᴇs: '+(data?.limite?.restantes??'N/A')+' )\n'+
+'> ✅ ׄ ( sᴀʟᴀ ᴄʀɪᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ! )'
 }
 
 exports.ffVerSalaUso = prefix => {
-  return '- 🔎 \x60𝚅𝙴𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\x60\n\n' +
-    '> 📋 Use '+prefix+'versala no grupo que criou a sala.'
+return '- 🔎 \x60𝚅𝙴𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\x60\n\n'+
+'> 📋 ׄ ( ᴜsᴇ '+prefix+'versala ɴᴏ ɢʀᴜᴘᴏ ᴅᴀ sᴀʟᴀ. )'
 }
 
 exports.ffSalaInfo = ({ NomeDoBot, pushname, sala, tempo }) => {
@@ -3848,8 +3848,8 @@ return `- 🔎 \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙰 𝚂�
 }
 
 exports.ffJogadoresUso = prefix => {
-  return '- 👥 \x60𝙹𝙾𝙶𝙰𝙳𝙾𝚁𝙴𝚂 𝙳𝙰 𝚂𝙰𝙻𝙰\x60\n\n' +
-    '> 📋 Use '+prefix+'jogadoressala no grupo da sala ativa.'
+return '- 👥 \x60𝙹𝙾𝙶𝙰𝙳𝙾𝚁𝙴𝚂 𝙳𝙰 𝚂𝙰𝙻𝙰\x60\n\n'+
+'> 📋 ׄ ( ᴜsᴇ '+prefix+'jogadoressala ɴᴏ ɢʀᴜᴘᴏ ᴅᴀ sᴀʟᴀ. )'
 }
 
 exports.ffJogadores = ({ NomeDoBot, pushname, players, total }) => {
@@ -3864,9 +3864,9 @@ ${players.length ? players.map((p, i) => `> 👥 ׄ ( ${i + 1}° — ${p.nicknam
 }
 
 exports.ffExpulsarUso = prefix => {
-  return '- 🚫 \x60𝙴𝚇𝙿𝚄𝙻𝚂𝙰𝚁 𝙹𝙾𝙶𝙰𝙳𝙾𝚁\x60\n\n' +
-    '> 📋 Use '+prefix+'expulsarsala UID\n' +
-    '> 🔒 Somente o criador pode remover jogadores da sala.'
+return '- 🚫 \x60𝙴𝚇𝙿𝚄𝙻𝚂𝙰𝚁 𝙹𝙾𝙶𝙰𝙳𝙾𝚁\x60\n\n'+
+'> 📋 ׄ ( ᴜsᴇ '+prefix+'expulsarsala UID ɴᴏ ɢʀᴜᴘᴏ. )\n'+
+'> 🔒 ׄ ( sᴏᴍᴇɴᴛᴇ ᴏ ᴄʀɪᴀᴅᴏʀ ᴘᴏᴅᴇ ᴇxᴘᴜʟsᴀʀ. )'
 }
 
 exports.ffExpulso = ({ NomeDoBot, pushname, targetUid, message }) => {
@@ -3880,25 +3880,27 @@ return `- 🚫 \`𝙹𝙾𝙶𝙰𝙳𝙾𝚁 𝙴𝚇𝙿𝚄𝙻𝚂𝙾\`
 }
 
 exports.ffIniciarUso = prefix => {
-  return '- 🚀 \x60𝙸𝙽𝙸𝙲𝙸𝙰𝚁 𝚂𝙰𝙻𝙰\x60\n\n' +
-    '> 📋 Use '+prefix+'iniciarsala no grupo da sala ativa.'
+return '- 🚀 \x60𝙸𝙽𝙸𝙲𝙸𝙰𝚁 𝚂𝙰𝙻𝙰 𝙵𝙵\x60\n\n'+
+'> 📋 ׄ ( ᴜsᴇ '+prefix+'iniciarsala ɴᴏ ɢʀᴜᴘᴏ ᴅᴀ sᴀʟᴀ. )'
 }
 
 exports.ffSalaIniciada = ({ NomeDoBot, pushname, sessionId, message }) => {
-  return '- 🚀 \x60𝚂𝙰𝙻𝙰 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙰\x60\n\n' +
-    '> 👤 Criador: '+(pushname||'Jogador')+'\n' +
-    '> ✅ '+(message||'A partida foi iniciada com sucesso!') 
+return '- 🚀 \x60𝚂𝙰𝙻𝙰 𝙸𝙽𝙸𝙲𝙸𝙰𝙳𝙰\x60\n\n'+
+'> 🤖 ׄ ( ʙᴏᴛ: '+(NomeDoBot||'Tokito Bot')+' )\n'+
+'> 👤 ׄ ( ᴄʀɪᴀᴅᴏʀ: '+(pushname||'Jogador')+' )\n\n'+
+'> 🚀 ׄ ( ✅ '+(message||'Partida iniciada com sucesso!')+' )'
 }
 
 exports.ffPararUso = prefix => {
-  return '- ⛔ \x60𝙴𝙽𝙲𝙴𝚁𝚁𝙰𝚁 𝚂𝙰𝙻𝙰\x60\n\n' +
-    '> 📋 Use '+prefix+'pararsala no grupo da sala ativa.'
+return '- ⛔ \x60𝙴𝙽𝙲𝙴𝚁𝚁𝙰𝚁 𝚂𝙰𝙻𝙰\x60\n\n'+
+'> 📋 ׄ ( ᴜsᴇ '+prefix+'pararsala ɴᴏ ɢʀᴜᴘᴏ ᴅᴀ sᴀʟᴀ. )'
 }
 
 exports.ffSalaParada = ({ NomeDoBot, pushname, sessionId, message }) => {
-  return '- ⛔ \x60𝚂𝙰𝙻𝙰 𝙴𝙽𝙲𝙴𝚁𝚁𝙰𝙳𝙰\x60\n\n' +
-    '> 👤 Criador: '+(pushname||'Jogador')+'\n' +
-    '> ✅ '+(message||'A sala foi encerrada com sucesso!')
+return '- ⛔ \x60𝚂𝙰𝙻𝙰 𝙴𝙽𝙲𝙴𝚁𝚁𝙰𝙳𝙰\x60\n\n'+
+'> 🤖 ׄ ( ʙᴏᴛ: '+(NomeDoBot||'Tokito Bot')+' )\n'+
+'> 👤 ׄ ( ᴄʀɪᴀᴅᴏʀ: '+(pushname||'Jogador')+' )\n\n'+
+'> ⛔ ׄ ( ✅ '+(message||'Sala encerrada com sucesso!')+' )'
 }
 
 exports.ffStatusApi = ({ NomeDoBot, pushname, data }) => {
