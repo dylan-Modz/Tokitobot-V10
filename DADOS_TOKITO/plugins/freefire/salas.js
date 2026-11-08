@@ -284,15 +284,19 @@ dylan.setCommand({
       if(command==='versala') {
         const data=await reqSala(ctx,'info',{sessionId:salaAtiva.sessionId})
         const sala=data.room||{}
+        const inviteLink=h.linkConviteSala(sala.inviteLink||salaAtiva.inviteLink)
+        const convite={...salaAtiva,inviteLink:inviteLink||null,
+          inviteCode:String(sala.inviteCode||salaAtiva.inviteCode||'').slice(0,120)||null}
+        if (inviteLink && inviteLink!==salaAtiva.inviteLink) gravar(ctx,convite)
         const segundos=Number(sala.autoStart?.remainingSeconds||0)
         const tempo=segundos>0 ? Math.floor(segundos/60)+'m '+(segundos%60)+'s' :
           (sala.status==='started'?'Iniciada':'Aguardando')
         const texto=ctx.mess.ffSalaInfo({
           NomeDoBot:ctx.NomeDoBot,pushname:ctx.pushname,
-          sala:{...sala,roomId:sala.roomId||salaAtiva.roomId,
-            modeName:sala.modeName||salaAtiva.modeName},tempo
+          sala:{...convite,...sala,roomId:sala.roomId||salaAtiva.roomId,
+            inviteLink,modeName:sala.modeName||salaAtiva.modeName},tempo
         })
-        return menuGerencia(ctx,texto)
+        return menuGerencia(ctx,texto,convite)
       }
       if(command==='jogadoressala') {
         const data=await reqSala(ctx,'jogadores',{sessionId:salaAtiva.sessionId})
@@ -313,8 +317,10 @@ dylan.setCommand({
             imagem[2]!==78 || imagem[3]!==71) throw Error('A API não retornou um PNG válido.')
         return ctx.tokito.sendMessage(ctx.from,{
           image:imagem,mimetype:'image/png',
-          caption:'- 🖼️ *JOGADORES DA SALA*\n\n> 🆔 ID: '+(salaAtiva.roomId||'N/A')+
-            '\n> 🎯 Modo: '+salaAtiva.modeName
+          caption:ctx.mess.ffImagemSala({
+            NomeDoBot:ctx.NomeDoBot,pushname:ctx.pushname,
+            sala:salaAtiva,inviteLink:h.linkConviteSala(salaAtiva.inviteLink)
+          })
         },{quoted:ctx.selo})
       }
       if(command==='expulsarsala') {
