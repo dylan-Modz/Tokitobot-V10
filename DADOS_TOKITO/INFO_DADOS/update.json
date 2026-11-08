@@ -6,34 +6,49 @@
   "ref": "main",
   "publishedAt": "2026-11-08T23:01:56.484Z",
   "changelog": [
-    "[Novidade] feat(menuff): exibir entrarsala por convite no menu Free Fire",
-    "A versão 10.3.8 já está disponível para atualização.",
-    "Mensagens atualizado",
-    "Menus atualizado",
-    "Salas atualizado"
+    "Sala criada e Ver sala exibem convite real quando a Tokito APIs retornar inviteLink oficial da Garena.",
+    "Botão Entrar na sala (URL Garena) no carrossel e comando entrarsala no grupo, sem SESSION_ID.",
+    "Imagem da sala continua sendo PNG produzido pelo site, com equipes, vagas e avatares; legenda formatada no mensagens.js.",
+    "Menus Free Fire e mensagens de sala mostram a identidade visual original do Tokito.",
+    "Validação do domínio do link para evitar URL externa errada e fallback por ID/senha se convite ausente."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
-  "title": "feat(menuff): exibir entrarsala por convite no menu Free Fire",
-  "notice": "A versão 10.3.8 já está disponível para atualização.",
+  "title": "Tokito Bot 10.3.8 — Convite de sala, imagem e design Tokito",
+  "notice": "Atualização do botão de convite e imagem de sala disponível.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "20476d5c4daf22268fa55c8dd192dece1e4c4f8749f5d81bb599952f5e2312bf",
-      "size": 234003
+      "path": "package.json",
+      "sha256": "6b241c2d74ff2b80988c5134d26a21f5f35069e131a7a0d62c87489293c9af02",
+      "size": 1210,
+      "gitSha": "00211ddb6a829f3e44b543c176fb5be184420664"
     },
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "ec43d4f0d7d73a6d00c0a222d3ba46ffca83c21f85b1d7780d2301c76fe68462",
-      "size": 78981
+      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+      "sha256": "6586389a7c90b1e538ce72c79af17f5406a843aecc20f9f7222ffabf018993ce",
+      "size": 10413,
+      "gitSha": "048097303b7e9c34131afdc51688f77c0944a664"
     },
     {
       "path": "DADOS_TOKITO/plugins/freefire/salas.js",
       "sha256": "b3c8ed1b26f83e2ccfb8876ae74fa512ec43e702f621ca32c5c2d5235efb2198",
-      "size": 21194
+      "size": 21194,
+      "gitSha": "89293d921dfaf3be379a25e7a72238146ba9c262"
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "20476d5c4daf22268fa55c8dd192dece1e4c4f8749f5d81bb599952f5e2312bf",
+      "size": 234003,
+      "gitSha": "80ee954679c6512e11362c27c579be5303690892"
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "ec43d4f0d7d73a6d00c0a222d3ba46ffca83c21f85b1d7780d2301c76fe68462",
+      "size": 78981,
+      "gitSha": "b104cef0a5fdab3578dc3f305161936ea219bf5d"
     }
   ],
   "releases": [
@@ -4159,28 +4174,45 @@
       "fromVersion": "10.3.7",
       "channel": "stable",
       "type": "Novidade",
-      "title": "feat(menuff): exibir entrarsala por convite no menu Free Fire",
-      "notice": "A versão 10.3.8 já está disponível para atualização.",
+      "title": "Tokito Bot 10.3.8 — Convite de sala, imagem e design Tokito",
+      "notice": "Atualização do botão de convite e imagem de sala disponível.",
       "changelog": [
-        "Mensagens atualizado",
-        "Menus atualizado",
-        "Salas atualizado"
+        "Sala criada e Ver sala exibem convite real quando a Tokito APIs retornar inviteLink oficial da Garena.",
+        "Botão Entrar na sala (URL Garena) no carrossel e comando entrarsala no grupo, sem SESSION_ID.",
+        "Imagem da sala continua sendo PNG produzido pelo site, com equipes, vagas e avatares; legenda formatada no mensagens.js.",
+        "Menus Free Fire e mensagens de sala mostram a identidade visual original do Tokito.",
+        "Validação do domínio do link para evitar URL externa errada e fallback por ID/senha se convite ausente."
       ],
       "files": [
         {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "20476d5c4daf22268fa55c8dd192dece1e4c4f8749f5d81bb599952f5e2312bf",
-          "size": 234003
+          "path": "package.json",
+          "sha256": "6b241c2d74ff2b80988c5134d26a21f5f35069e131a7a0d62c87489293c9af02",
+          "size": 1210,
+          "gitSha": "00211ddb6a829f3e44b543c176fb5be184420664"
         },
         {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "ec43d4f0d7d73a6d00c0a222d3ba46ffca83c21f85b1d7780d2301c76fe68462",
-          "size": 78981
+          "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+          "sha256": "6586389a7c90b1e538ce72c79af17f5406a843aecc20f9f7222ffabf018993ce",
+          "size": 10413,
+          "gitSha": "048097303b7e9c34131afdc51688f77c0944a664"
         },
         {
           "path": "DADOS_TOKITO/plugins/freefire/salas.js",
           "sha256": "b3c8ed1b26f83e2ccfb8876ae74fa512ec43e702f621ca32c5c2d5235efb2198",
-          "size": 21194
+          "size": 21194,
+          "gitSha": "89293d921dfaf3be379a25e7a72238146ba9c262"
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "20476d5c4daf22268fa55c8dd192dece1e4c4f8749f5d81bb599952f5e2312bf",
+          "size": 234003,
+          "gitSha": "80ee954679c6512e11362c27c579be5303690892"
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "ec43d4f0d7d73a6d00c0a222d3ba46ffca83c21f85b1d7780d2301c76fe68462",
+          "size": 78981,
+          "gitSha": "b104cef0a5fdab3578dc3f305161936ea219bf5d"
         }
       ],
       "delete": [],
@@ -4197,5 +4229,5 @@
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.4"
+  "publicVersion": "10.3.8"
 }
