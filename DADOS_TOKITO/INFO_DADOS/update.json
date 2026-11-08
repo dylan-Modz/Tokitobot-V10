@@ -6,28 +6,43 @@
   "ref": "main",
   "publishedAt": "2026-11-08T22:45:25.691Z",
   "changelog": [
-    "[Melhoria] style(salas): restaurar layout Tokito em confirmação, lobby e entradas",
-    "A versão 10.3.4 já está disponível para atualização.",
-    "Mensagens atualizado",
-    "Salas atualizado"
+    "#criarsala abre o mesmo carrossel com menu list do #menu principal, inclusive no sub-bot.",
+    "Oito modos de sala em lista interativa com identidade visual Tokito e mídia do menu.",
+    "Depois de selecionar o modo, botões Criar sala e Cancelar na confirmação.",
+    "Mensagens de sala criada, confirmação e avisos com o layout original do bot.",
+    "Nenhum SESSION_ID é exibido; controles usam a sala do próprio grupo."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "style(salas): restaurar layout Tokito em confirmação, lobby e entradas",
-  "notice": "A versão 10.3.4 já está disponível para atualização.",
+  "title": "Tokito Bot 10.3.4 — Carrossel de salas com design original",
+  "notice": "Correção do carrossel de Salas FF disponível no comando update.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "30062385caa01ce9b3e1c11276ba159479490e618c6f179628b2e63b6a258758",
-      "size": 232047
+      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+      "sha256": "3fa4b1457cc0f7f0caead32ee7f9ccb798e567f28075f5edb08e4c6754d3d775",
+      "size": 9376,
+      "gitSha": "56b7348580077ed9ef859b1f322138757a4099e2"
     },
     {
       "path": "DADOS_TOKITO/plugins/freefire/salas.js",
-      "sha256": "3b5c443413dd26d96566ce4b3c42e21352c51bac1be785b8bdddc5dbb2bfe9e7",
-      "size": 18717
+      "sha256": "1b7333620216c7e4849fdca5d16dc0d016112ada148e79efe5f3797ca3b75043",
+      "size": 19342,
+      "gitSha": "bbddbd1c699efb3d0db64219d187b88157ccc015"
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "ba37cedda564ba2211272712d094b15062d9371e7968e4ba2bcca30922844ea3",
+      "size": 232199,
+      "gitSha": "63386561acb0b3a02cc65b373404ffd56c967a24"
+    },
+    {
+      "path": "package.json",
+      "sha256": "5b5a6900a4539ac533de30143913ffcedbed2afe624ad02751ef2c3a2155dcfd",
+      "size": 1210,
+      "gitSha": "8c2ad1e7103ba561b23c6101d334d61bba955e92"
     }
   ],
   "releases": [
@@ -4204,22 +4219,39 @@
       "fromVersion": "10.3.3",
       "channel": "stable",
       "type": "Melhoria",
-      "title": "style(salas): restaurar layout Tokito em confirmação, lobby e entradas",
-      "notice": "A versão 10.3.4 já está disponível para atualização.",
+      "title": "Tokito Bot 10.3.4 — Carrossel de salas com design original",
+      "notice": "Correção do carrossel de Salas FF disponível no comando update.",
       "changelog": [
-        "Mensagens atualizado",
-        "Salas atualizado"
+        "#criarsala abre o mesmo carrossel com menu list do #menu principal, inclusive no sub-bot.",
+        "Oito modos de sala em lista interativa com identidade visual Tokito e mídia do menu.",
+        "Depois de selecionar o modo, botões Criar sala e Cancelar na confirmação.",
+        "Mensagens de sala criada, confirmação e avisos com o layout original do bot.",
+        "Nenhum SESSION_ID é exibido; controles usam a sala do próprio grupo."
       ],
       "files": [
         {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "30062385caa01ce9b3e1c11276ba159479490e618c6f179628b2e63b6a258758",
-          "size": 232047
+          "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+          "sha256": "3fa4b1457cc0f7f0caead32ee7f9ccb798e567f28075f5edb08e4c6754d3d775",
+          "size": 9376,
+          "gitSha": "56b7348580077ed9ef859b1f322138757a4099e2"
         },
         {
           "path": "DADOS_TOKITO/plugins/freefire/salas.js",
-          "sha256": "3b5c443413dd26d96566ce4b3c42e21352c51bac1be785b8bdddc5dbb2bfe9e7",
-          "size": 18717
+          "sha256": "1b7333620216c7e4849fdca5d16dc0d016112ada148e79efe5f3797ca3b75043",
+          "size": 19342,
+          "gitSha": "bbddbd1c699efb3d0db64219d187b88157ccc015"
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "ba37cedda564ba2211272712d094b15062d9371e7968e4ba2bcca30922844ea3",
+          "size": 232199,
+          "gitSha": "63386561acb0b3a02cc65b373404ffd56c967a24"
+        },
+        {
+          "path": "package.json",
+          "sha256": "5b5a6900a4539ac533de30143913ffcedbed2afe624ad02751ef2c3a2155dcfd",
+          "size": 1210,
+          "gitSha": "8c2ad1e7103ba561b23c6101d334d61bba955e92"
         }
       ],
       "delete": [],
@@ -4236,5 +4268,5 @@
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.01"
+  "publicVersion": "10.3.4"
 }
