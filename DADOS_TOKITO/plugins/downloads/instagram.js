@@ -28,6 +28,7 @@
  * ============================================================
  */
 
+const axios = require('axios')
 const scraper = require('../../scrapers/downloads/instagram')
 
 const dylan = require('../../database/lib/comandos')
@@ -49,13 +50,36 @@ if (!q || !q.trim())
 return reply(mess.downloadUso({ tipo: 'LINK INSTAGRAM', prefix, command, exemplo: 'https://instagram.com/reel/...' }))
 await reagir(from, '📸')
 await reply(mess.wait())
+// A API envia a mídia binária diretamente. Instagram pode devolver foto
+// ou vídeo: detectar o tipo antes de encaminhar ao WhatsApp.
+const resposta = await axios.get(scraper.url(q.trim()), {
+  responseType: 'arraybuffer',
+  timeout: 90000,
+  maxContentLength: 40 * 1024 * 1024,
+  maxBodyLength: 40 * 1024 * 1024,
+  validateStatus: () => true
+})
+if (resposta.status !== 200) throw new Error('Falha no download do Instagram: HTTP ' + resposta.status)
+const arquivo = Buffer.from(resposta.data || [])
+if (arquivo.length < 12) throw new Error('Mídia do Instagram vazia ou inválida')
+const tipo = String(resposta.headers?.['content-type'] || '').split(';')[0].trim().toLowerCase()
+const jpg = arquivo[0] === 0xff && arquivo[1] === 0xd8 && arquivo[2] === 0xff
+const png = arquivo[0] === 0x89 && arquivo.toString('ascii', 1, 4) === 'PNG'
+const webp = arquivo.toString('ascii', 0, 4) === 'RIFF' && arquivo.toString('ascii', 8, 12) === 'WEBP'
+const mp4 = arquivo.toString('ascii', 4, 8) === 'ftyp'
+const webm = arquivo[0] === 0x1a && arquivo[1] === 0x45 && arquivo[2] === 0xdf && arquivo[3] === 0xa3
+const isImage = jpg || png || webp || /^image\//.test(tipo)
+const isVideo = mp4 || webm || /^video\//.test(tipo)
+if (!isImage && !isVideo) throw new Error('API não retornou foto nem vídeo válido')
+const conteudo = isImage
+  ? { image: arquivo, mimetype: jpg ? 'image/jpeg' : png ? 'image/png' : webp ? 'image/webp' : tipo }
+  : { video: arquivo, mimetype: webm ? 'video/webm' : 'video/mp4' }
 await tokito.sendMessage(from, {
-video: { url: scraper.url(q.trim()) },
-mimetype: 'video/mp4',
-contextInfo: {
-...newsletter,
-mentionedJid: [sender]
-}
+  ...conteudo,
+  contextInfo: {
+    ...newsletter,
+    mentionedJid: [sender]
+  }
 }, { quoted: selo })
 await reagir(from, '✅')
 }
