@@ -136,7 +136,23 @@ const enviarAcoesSala = async (ctx, texto) => {
 
 // Replica o carouselMessage + single_select do #menu principal.
 // Nao depende de isBotoes nem de generateWAMessageFromContent:
-const menuListaSala = async (ctx, texto, titulo, linhas = []) => {
+// Exibe somente o convite HTTPS real retornado pela API. Nunca tenta
+// inventar links a partir do ID da sala ou mostrar endpoints internos.
+const linkConviteSala = valor => {
+  const link=String(valor||'').trim()
+  if (!link || link.length>2048 || /[\s\u0000-\u001f]/.test(link)) return ''
+  try {
+    const parsed=new URL(link)
+    const host=parsed.hostname.toLowerCase()
+    if (parsed.protocol!=='https:' || !host || parsed.username || parsed.password) return ''
+    if (host==='localhost' || host.endsWith('.localhost') ||
+      host.endsWith('.local') || host.endsWith('.internal') ||
+      /^\d{1,3}(?:\.\d{1,3}){3}$/.test(host) || host.includes(':')) return ''
+    return link
+  } catch (_) { return '' }
+}
+
+const menuListaSala = async (ctx, texto, titulo, linhas = [], options = {}) => {
   const rows = linhas
     .filter(item=>item?.id)
     .map(item=>({
@@ -160,6 +176,7 @@ const menuListaSala = async (ctx, texto, titulo, linhas = []) => {
       : media?.imageMessage
         ? {imageMessage:media.imageMessage}
         : null
+    const convite=linkConviteSala(options?.inviteLink)
     const content = [
       '❪🧊.ꯧᴍᴇɴᴜ ʟɪsᴛ • sᴀʟᴀs FFꯧ⸼🧊❫',
       '┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓',
@@ -181,6 +198,13 @@ const menuListaSala = async (ctx, texto, titulo, linhas = []) => {
               buttonParamsJson:JSON.stringify({display_text:item.title,id:item.id})
             }))
           : [{name:'single_select',buttonParamsJson:JSON.stringify(select)}]
+        .concat(convite ? [{
+          name:'cta_url',
+          buttonParamsJson:JSON.stringify({
+            display_text:'🎮 ᴇɴᴛʀᴀʀ ɴᴀ sᴀʟᴀ',
+            url:convite
+          })
+        }] : [])
       }
     }
     const quoted=ctx.selo||{}
@@ -234,6 +258,7 @@ mensagemRetorno,
 enviar,
 botoesSala,
 menuListaSala,
+linkConviteSala,
 MODOS_SALA,
 dataBR
 }
