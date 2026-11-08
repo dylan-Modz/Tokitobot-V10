@@ -1,56 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.87",
+  "version": "10.2.88",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-07T13:41:59.737Z",
+  "publishedAt": "2026-11-08T00:38:00.737Z",
   "changelog": [
-    "[Correção] fix(ping): usar imagem padrão existente no repositório do bot",
-    "A versão 10.2.87 já está disponível para atualização.",
-    "Ping atualizado"
+    "[Novidade] feat(downloads): scraper TikTok GIF usando Tokito APIs e MP4 originais",
+    "A versão 10.2.88 já está disponível para atualização.",
+    "Tiktok Gif atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix(ping): usar imagem padrão existente no repositório do bot",
-  "notice": "A versão 10.2.87 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat(downloads): scraper TikTok GIF usando Tokito APIs e MP4 originais",
+  "notice": "A versão 10.2.88 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/info/ping.js",
-      "sha256": "d1e2af6aa1d13767be8841fbe0d913493520ab17600ec99a00b973d3afca8613",
-      "size": 4637
+      "path": "DADOS_TOKITO/scrapers/downloads/tiktok_gif.js",
+      "sha256": "2d760708f9044a321871b59040d5448579093211dccf339a63a0317b9abe1df6",
+      "size": 3336
     }
   ],
   "releases": [
-    {
-      "version": "10.1.64",
-      "fromVersion": "10.1.63",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Ajuste visual da Loja Pokémon",
-      "notice": "A versão 10.1.64 já está disponível para atualização.",
-      "changelog": [
-        "Troca o ícone genérico do título interno da Loja Pokémon pelo ícone temático ⚡."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/lojapokemon.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T14:25:00.000Z"
-    },
     {
       "version": "10.1.65",
       "fromVersion": "10.1.64",
@@ -4795,6 +4769,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-07T13:41:59.736Z"
+    },
+    {
+      "version": "10.2.88",
+      "fromVersion": "10.2.87",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat(downloads): scraper TikTok GIF usando Tokito APIs e MP4 originais",
+      "notice": "A versão 10.2.88 já está disponível para atualização.",
+      "changelog": [
+        "Tiktok Gif atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/scrapers/downloads/tiktok_gif.js",
+          "sha256": "2d760708f9044a321871b59040d5448579093211dccf339a63a0317b9abe1df6",
+          "size": 3336
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T00:38:00.736Z"
     }
   ],
   "mode": "incremental",
