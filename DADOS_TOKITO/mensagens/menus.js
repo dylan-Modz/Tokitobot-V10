@@ -84,6 +84,7 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}tiktok link
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}tiktok_audio link
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}tiktok_foto link
+┃࣪ ╎—̳͟͞͞ 🎞️ ${prefix}tiktok-gif link
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}instagram link
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}instagram_audio link
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}facebook link
@@ -585,6 +586,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}tiktok link
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}tiktok_audio link
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}tiktok_foto link
+┃࣪ ╎—̳͟͞͞ 🎞️ ${prefix}tiktok-gif link
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}instagram link
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}instagram_audio link
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}facebook link
