@@ -1,279 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.01",
+  "version": "10.3.2",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T22:29:12.426Z",
+  "publishedAt": "2026-11-08T22:40:55.624Z",
   "changelog": [
-    "Versão principal atualizada para 10.3.01.",
-    "Mantidas as melhorias de salas por grupo e os avisos automáticos da versão anterior."
+    "[Correção] fix(salas): confirmação Criar sala em botão real do carrossel",
+    "A versão 10.3.2 já está disponível para atualização.",
+    "Ffcore atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Tokito Bot V10.3.01 — nova numeração",
-  "notice": "A versão 10.3.01 está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix(salas): confirmação Criar sala em botão real do carrossel",
+  "notice": "A versão 10.3.2 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "155b7d54cb3f5c0c8aadf5aadf5cd47fe1828b1f20e64bbd6322d63459b721b4",
-      "gitSha": "b732f4cc9b1cfdc49acaf907a575b3caecde293a",
-      "size": 1211
+      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+      "sha256": "3fa4b1457cc0f7f0caead32ee7f9ccb798e567f28075f5edb08e4c6754d3d775",
+      "size": 9376
     }
   ],
   "releases": [
-    {
-      "version": "10.1.78",
-      "fromVersion": "10.1.77",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Tokito Bot V10.1.78",
-      "notice": "A versão 10.1.78 está disponível com as melhorias e correções mais recentes.",
-      "changelog": [
-        "Melhorias e ajustes nos jogos do Tokito.",
-        "Atualizações de segurança e administração integradas à versão 10.1.78.",
-        "Atualizador corrigido para preservar os arquivos e dados existentes.",
-        "Numeração de versões normalizada: após 10.1.99, a próxima versão será 10.2.0."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/ignis.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/anagrama.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/doulingo.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/quizanimais.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/jogodavelha2.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/quizzes.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/rv.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-adivinhe.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-cacapalavras.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-dama.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-forca.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-jogodavelha.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-mines.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/jogos/sistema-quiz.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/antiinvisivel.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/antiinvisivel.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/database/lib/deps.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/detector.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/antipay.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/funcoes.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/database/lib/update-cli.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/dono/update.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/dados.js",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [
-        "DADOS_TOKITO/plugins/jogos/sistema-base.js",
-        "DADOS_TOKITO/plugins/admin/filtro-antipay.js",
-        "DADOS_TOKITO/sistemas/floodpagamento.js"
-      ],
-      "required": true,
-      "publishedAt": "2026-10-08T18:06:17.106Z"
-    },
-    {
-      "version": "10.1.79",
-      "fromVersion": "10.1.78",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "RPG reorganizado, mineração expandida e novo visual dos downloads",
-      "notice": "A versão 10.1.79 já está disponível para atualização.",
-      "changelog": [
-        "[Atualização] Tokito Bot V10.1.79",
-        "Menu RPG reorganizado em categorias com Jornada, Aventura, Desafios, Guildas, Magia, Pokémon, Pets, Cidade, N-Coins e Mineração.",
-        "Mineração expandida com inventário de minérios, venda, picaretas, loja, melhorias, minas, exploração e ranking.",
-        "Resultados do RPG receberam o novo padrão visual compacto.",
-        "Play, Spotify, Deezer, SoundCloud, Apple Music, vídeo e documento receberam o novo design de informações.",
-        "Packfig agora mostra apenas o aviso de criação e envia o pacote diretamente ao finalizar."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/figurinhas/packfig.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/play.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/spotify.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/soundcloud.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/deezer.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/applemusic.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/playvideo.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/playdoc.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/texto.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/coins/minerar.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-09T15:30:00.000Z"
-    },
     {
       "version": "10.1.104",
       "fromVersion": "10.1.79",
@@ -4610,6 +4361,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T22:29:12.426Z"
+    },
+    {
+      "version": "10.3.2",
+      "fromVersion": "10.3.01",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(salas): confirmação Criar sala em botão real do carrossel",
+      "notice": "A versão 10.3.2 já está disponível para atualização.",
+      "changelog": [
+        "Ffcore atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+          "sha256": "3fa4b1457cc0f7f0caead32ee7f9ccb798e567f28075f5edb08e4c6754d3d775",
+          "size": 9376
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T22:40:55.623Z"
     }
   ],
   "mode": "incremental",
