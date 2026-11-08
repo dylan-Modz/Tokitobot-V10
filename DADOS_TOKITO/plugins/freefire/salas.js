@@ -182,7 +182,7 @@ dylan.setCommand({
         await ctx.reagir(ctx.from,'🎮').catch(()=>{})
         const args=argumento.split(/\s+/)
         if (!argumento) {
-          if (salaAtiva) return menuGerencia(ctx,
+          if (salaAtiva && salaAtiva.status!=='started') return menuGerencia(ctx,
             '- 🎮 *SALA ATIVA NESTE GRUPO*\n\n> 🆔 ID: '+(salaAtiva.roomId || 'N/A')+
             '\n> 🎯 Modo: '+(salaAtiva.modeName || 'Free Fire')+
             '\n> 👤 Criador: '+(salaAtiva.criadorNome || 'Jogador')+
@@ -195,7 +195,7 @@ dylan.setCommand({
             })))
         }
         if (args[0]==='selecionar') {
-          if (salaAtiva) return ctx.reply('- 🎮 Já existe uma sala neste grupo. Use '+ctx.prefix+'versala.')
+          if (salaAtiva && salaAtiva.status!=='started') return ctx.reply('- 🎮 Já existe uma sala neste grupo. Use '+ctx.prefix+'versala.')
           const modo=modoPorId(args[1])
           if (!modo) return ctx.reply(ctx.mess.ffSalaUso(ctx.prefix))
           const u=usuario(ctx),g=grupo(ctx),nonce=crypto.randomBytes(8).toString('hex')
@@ -230,7 +230,7 @@ dylan.setCommand({
           const modo=modoPorId(pendente.modo)
           if(!modo) return ctx.reply(ctx.mess.ffSalaUso(ctx.prefix))
           const key=destino(ctx)
-          if(ativa(ctx)||criando.has(key))return ctx.reply('- ⚠️ Já existe uma sala ativa ou em criação neste grupo.')
+          if((ativa(ctx)&&ativa(ctx).status!=='started')||criando.has(key))return ctx.reply('- ⚠️ Já existe uma sala ativa ou em criação neste grupo.')
           criando.add(key)
           try {
             const roomName=String(ctx.groupName || 'Sala Tokito').replace(/[<>]/g,'').slice(0,40)
