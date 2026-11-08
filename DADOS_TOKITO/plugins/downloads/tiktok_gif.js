@@ -74,7 +74,20 @@ dylan.setCommand({
         for (let i = 0; i < quantidade; i++) {
           const item = animacoes[i]
           try {
-            const arquivo = await scraper.baixar(item.download)
+            let arquivo
+            try {
+              arquivo = await scraper.baixar(item.download)
+            } catch (erroDownload) {
+              // O link de cada MP4 é temporário. Se expirar durante o envio,
+              // consulta uma única vez o mesmo TikTok e tenta o slide novamente.
+              if (!/expirou|status code 410|status code 404/i.test(String(erroDownload?.message || ''))) {
+                throw erroDownload
+              }
+              const novaConsulta = await scraper.consultar(link)
+              const novoItem = novaConsulta.animacoes?.[i]
+              if (!novoItem?.download) throw erroDownload
+              arquivo = await scraper.baixar(novoItem.download)
+            }
             // GIF no WhatsApp é enviado como MP4 com gifPlayback: true.
             await tokito.sendMessage(from, {
               video: arquivo,
@@ -112,7 +125,14 @@ dylan.setCommand({
         console.log('[TIKTOK GIF]', modulos.sanitizarErro(erro, [API_KEY_TOKITO]))
         await reagir(from, '❌').catch(() => {})
         if (erro?.response?.status === 404) {
-          return reply(mess.downloadNaoEncontrado('GIFS ANIMADOS'))
+          return reply('- 🎞️ `𝚃𝙸𝙺𝚃𝙾𝙺 𝙰𝙽𝙸𝙼𝙰𝙳𝙾`\n\n' +
+            '> ⚠️ ׄ ( ɴᴀ̃ᴏ ᴇɴᴄᴏɴᴛʀᴇɪ ᴀɴɪᴍᴀᴄ̧ᴏ̃ᴇs ɴᴇssᴇ ʟɪɴᴋ. )')
+        }
+        if (/link (do TikTok )?inválido|Informe um link/i.test(String(erro?.message || ''))) {
+          return reply(mess.downloadUso({
+            tipo: 'LINK TIKTOK', prefix, command,
+            exemplo: 'https://vt.tiktok.com/ZSpkAcKeo'
+          }))
         }
         await reply(mess.erroApi(API_URL))
       }
