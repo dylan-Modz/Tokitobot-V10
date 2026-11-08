@@ -4,28 +4,29 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T00:54:31.179Z",
+  "publishedAt": "2026-11-08T00:54:46.201Z",
   "changelog": [
-    "[Novidade] feat(tiktok-gif): resultado TikTok Animado no estilo original do bot, v10.2.92",
-    "A versão 10.2.92 já está disponível para atualização.",
-    "Tiktok Gif atualizado",
-    "Package atualizado"
+    "O comando tiktok-gif mostra TikTok Animado no resultado e nas legendas.",
+    "Mensagens seguem o mesmo formato visual do bot, com total de animações e envio individual.",
+    "O comando continua na categoria Downloads; README não participa da atualização."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
-  "title": "feat(tiktok-gif): resultado TikTok Animado no estilo original do bot, v10.2.92",
-  "notice": "A versão 10.2.92 já está disponível para atualização.",
+  "title": "TikTok Animado — novo design do comando tiktok-gif",
+  "notice": "Versão 10.2.92 disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/downloads/tiktok_gif.js",
+      "gitSha": "5ac2908fce2d3e24fc3bb0f79dda3c0aa896156e",
       "sha256": "2d9a564041fefe151d8759666e4ba528eab3dabc3c39246240380274ced4ba39",
       "size": 4498
     },
     {
       "path": "package.json",
+      "gitSha": "2aadbcc64c712e9a7ebb09479f467b5870da3d44",
       "sha256": "ea768f61b04698c836dddebdbead5d886cb0b6a8469edc88744b3aacae61ef13",
       "size": 1211
     }
@@ -4656,28 +4657,31 @@
       "version": "10.2.92",
       "fromVersion": "10.2.91",
       "channel": "stable",
-      "type": "Novidade",
-      "title": "feat(tiktok-gif): resultado TikTok Animado no estilo original do bot, v10.2.92",
-      "notice": "A versão 10.2.92 já está disponível para atualização.",
+      "type": "Melhoria",
+      "title": "TikTok Animado — novo design do comando tiktok-gif",
+      "notice": "Versão 10.2.92 disponível para atualização.",
       "changelog": [
-        "Tiktok Gif atualizado",
-        "Package atualizado"
+        "O comando tiktok-gif mostra TikTok Animado no resultado e nas legendas.",
+        "Mensagens seguem o mesmo formato visual do bot, com total de animações e envio individual.",
+        "O comando continua na categoria Downloads; README não participa da atualização."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/plugins/downloads/tiktok_gif.js",
+          "gitSha": "5ac2908fce2d3e24fc3bb0f79dda3c0aa896156e",
           "sha256": "2d9a564041fefe151d8759666e4ba528eab3dabc3c39246240380274ced4ba39",
           "size": 4498
         },
         {
           "path": "package.json",
+          "gitSha": "2aadbcc64c712e9a7ebb09479f467b5870da3d44",
           "sha256": "ea768f61b04698c836dddebdbead5d886cb0b6a8469edc88744b3aacae61ef13",
           "size": 1211
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-08T00:54:31.178Z"
+      "publishedAt": "2026-11-08T00:54:46.201Z"
     }
   ],
   "mode": "incremental",
