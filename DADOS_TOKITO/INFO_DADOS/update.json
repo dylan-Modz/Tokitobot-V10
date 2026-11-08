@@ -1,69 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.2",
+  "version": "10.3.3",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T22:40:55.624Z",
+  "publishedAt": "2026-11-08T22:42:25.495Z",
   "changelog": [
-    "[Correção] fix(salas): confirmação Criar sala em botão real do carrossel",
-    "A versão 10.3.2 já está disponível para atualização.",
-    "Ffcore atualizado"
+    "[Correção] fix(salas): estilizar modos e ações e confirmar via carrossel com botões reais",
+    "A versão 10.3.3 já está disponível para atualização.",
+    "Salas atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(salas): confirmação Criar sala em botão real do carrossel",
-  "notice": "A versão 10.3.2 já está disponível para atualização.",
+  "title": "fix(salas): estilizar modos e ações e confirmar via carrossel com botões reais",
+  "notice": "A versão 10.3.3 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
-      "sha256": "3fa4b1457cc0f7f0caead32ee7f9ccb798e567f28075f5edb08e4c6754d3d775",
-      "size": 9376
+      "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+      "sha256": "1839a0a067b3915b0f2eaaea5b74a025eb59c058d4dda4e310fa266c4efdf217",
+      "size": 18034
     }
   ],
   "releases": [
-    {
-      "version": "10.1.104",
-      "fromVersion": "10.1.79",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Menu RPG completo e histórico consolidado",
-      "notice": "Menu RPG completo e histórico técnico consolidado.",
-      "changelog": [
-        "O Menu RPG exibe novamente os comandos existentes de Pokémon, Pets, Magia, Cidade, Level e N-Coins que não estavam listados.",
-        "Mantidas todas as categorias Jornada, Aventura, Desafios, Guildas, Magia, Pokémon, Pets, Cidade, N-Coins e Mineração.",
-        "Histórico técnico consolidado após a recuperação da 10.1.103, sem reanunciar as versões de correção 10.1.80 e 10.1.81.",
-        "Atualizações futuras continuam usando o fluxo incremental depois da recuperação inicial."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/dados.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/INFO_DADOS/update-structure.json",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-09T17:00:00.000Z"
-    },
     {
       "version": "10.2.5",
       "fromVersion": "10.1.104",
@@ -4382,6 +4343,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T22:40:55.623Z"
+    },
+    {
+      "version": "10.3.3",
+      "fromVersion": "10.3.2",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(salas): estilizar modos e ações e confirmar via carrossel com botões reais",
+      "notice": "A versão 10.3.3 já está disponível para atualização.",
+      "changelog": [
+        "Salas atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+          "sha256": "1839a0a067b3915b0f2eaaea5b74a025eb59c058d4dda4e310fa266c4efdf217",
+          "size": 18034
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T22:42:25.494Z"
     }
   ],
   "mode": "incremental",
