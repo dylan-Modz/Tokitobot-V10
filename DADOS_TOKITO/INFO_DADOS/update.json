@@ -1,83 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.91",
+  "version": "10.2.92",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T00:47:01.413Z",
+  "publishedAt": "2026-11-08T00:54:31.179Z",
   "changelog": [
-    "Novo comando tiktok-gif e scraper oficial para as Live Photos animadas.",
-    "Exibe o total e envia os GIFs do TikTok individualmente no WhatsApp.",
-    "Atualiza os menus de downloads e a versão do bot.",
-    "README.md removido de todas as operações de atualização."
+    "[Novidade] feat(tiktok-gif): resultado TikTok Animado no estilo original do bot, v10.2.92",
+    "A versão 10.2.92 já está disponível para atualização.",
+    "Tiktok Gif atualizado",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "TikTok GIF — atualização 10.2.91 sem README",
-  "notice": "Versão 10.2.91 disponível para atualização.",
+  "type": "Novidade",
+  "title": "feat(tiktok-gif): resultado TikTok Animado no estilo original do bot, v10.2.92",
+  "notice": "A versão 10.2.92 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/scrapers/downloads/tiktok_gif.js",
-      "sha256": "2d760708f9044a321871b59040d5448579093211dccf339a63a0317b9abe1df6",
-      "gitSha": "b8a7eff647c0ff308300c9fefff4511e83daed96",
-      "size": 3336
-    },
-    {
       "path": "DADOS_TOKITO/plugins/downloads/tiktok_gif.js",
-      "sha256": "7d50201faed484a151e04b569179fb488cb334f307df0fc2e2d41b524ee67751",
-      "gitSha": "b0e8931c3c52d6e025c40f01b3e934a4be55461f",
-      "size": 4678
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "767fa9ca857b39e1e817a8341954d07650065d919d32f06b50f895a72b4869b8",
-      "gitSha": "1caefb4dfaf42619ed0b85629b7ee8f0adf13ee9",
-      "size": 78959
+      "sha256": "2d9a564041fefe151d8759666e4ba528eab3dabc3c39246240380274ced4ba39",
+      "size": 4498
     },
     {
       "path": "package.json",
-      "sha256": "bb98bd3b96475c15c7e5cecdca012dd58780f39a5bf3c7cf06ed1940adebf8fa",
-      "gitSha": "17cf0efcbd666f6092b443098644f749a9a75431",
+      "sha256": "ea768f61b04698c836dddebdbead5d886cb0b6a8469edc88744b3aacae61ef13",
       "size": 1211
     }
   ],
   "releases": [
-    {
-      "version": "10.1.68",
-      "fromVersion": "10.1.67",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Shazam interativo por áudio e vídeo",
-      "notice": "A versão 10.1.68 adiciona o Shazam modular com reconhecimento por áudio/vídeo e botões para baixar a música.",
-      "changelog": [
-        "Adiciona o comando Shazam em módulo dentro de plugins/downloads.",
-        "Shazam reconhece músicas respondendo áudio, mensagem de voz ou vídeo.",
-        "O resultado mostra capa, título, artista, álbum, duração, gênero e confiança quando disponíveis.",
-        "Quando os botões estão ativos, o resultado recebe as opções Áudio e Vídeo.",
-        "O botão Áudio reutiliza play_audio e a rota /api/youtube-audio.",
-        "O botão Vídeo reutiliza play_video e a rota /api/youtube-video.",
-        "Quando os botões estão desativados, o Shazam mostra os dois comandos de download em texto.",
-        "A mensagem de mídia grande foi corrigida para o limite real de 10 MB."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T16:45:00.000Z"
-    },
     {
       "version": "10.1.69",
       "fromVersion": "10.1.68",
@@ -4698,6 +4651,33 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T00:47:01.412Z"
+    },
+    {
+      "version": "10.2.92",
+      "fromVersion": "10.2.91",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat(tiktok-gif): resultado TikTok Animado no estilo original do bot, v10.2.92",
+      "notice": "A versão 10.2.92 já está disponível para atualização.",
+      "changelog": [
+        "Tiktok Gif atualizado",
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/tiktok_gif.js",
+          "sha256": "2d9a564041fefe151d8759666e4ba528eab3dabc3c39246240380274ced4ba39",
+          "size": 4498
+        },
+        {
+          "path": "package.json",
+          "sha256": "ea768f61b04698c836dddebdbead5d886cb0b6a8469edc88744b3aacae61ef13",
+          "size": 1211
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T00:54:31.178Z"
     }
   ],
   "mode": "incremental",
