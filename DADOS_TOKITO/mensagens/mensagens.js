@@ -3829,6 +3829,8 @@ exports.ffSalaCriada = ({ NomeDoBot, pushname, sala, roomName, roomPassword, max
     '> 🌎 ׄ ( ʀᴇɢɪᴀ̃ᴏ: '+(sala?.region||region||'BR')+' )',
     '',
     '> 📊 ׄ ( sᴀʟᴀs ʀᴇsᴛᴀɴᴛᴇs: '+(data?.limite?.restantes??'N/A')+' )',
+    ...(sala?.inviteLink ? ['> 🔗 ׄ ( ᴄᴏɴᴠɪᴛᴇ: '+sala.inviteLink+' )'] : []),
+    ...(sala?.inviteCode ? ['> 🎟️ ׄ ( ᴄᴏ́ᴅɪɢᴏ ᴅᴇ ᴄᴏɴᴠɪᴛᴇ: '+sala.inviteCode+' )'] : []),
     '> 📋 ׄ ( ɢᴇʀᴇɴᴄɪᴇ ᴀ sᴀʟᴀ ᴘᴇʟᴏ ᴍᴇɴᴜ ʟɪsᴛ. )'
   ].join('\n')
 }
@@ -3849,6 +3851,7 @@ exports.ffSalaInfo = ({ NomeDoBot, pushname, sala, tempo }) => {
     '> 📡 ׄ ( sᴛᴀᴛᴜs: '+(sala?.status||'Indisponível')+' )',
     '> ⏱️ ׄ ( ɪɴɪ́ᴄɪᴏ: '+tempo+' )',
     '',
+    ...(sala?.inviteLink ? ['> 🔗 ׄ ( ᴇɴᴛʀᴀʀ ɴᴀ sᴀʟᴀ: '+sala.inviteLink+' )'] : []),
     '> 🔎 ׄ ( sᴀʟᴀ ᴀᴛɪᴠᴀ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )'
   ].join('\n')
 }
@@ -3869,14 +3872,21 @@ ${players.length ? players.map((p, i) => `> 👥 ׄ ( ${i + 1}° — ${p.nicknam
 > 👥 ׄ ( ${p.uid || 'N/A'} — ᴜɪᴅ • ᴛɪᴍᴇ ${p.team || 'N/A'} )`).join('\n\n') : '> 👥 ׄ ( ɴᴇɴʜᴜᴍ ᴊᴏɢᴀᴅᴏʀ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ. )'}`
 }
 
-exports.ffImagemSala = ({ roomId, modeName, mapName, total, maxPlayers }) => {
+exports.ffImagemSala = ({ NomeDoBot, pushname, sala, inviteLink, roomId, modeName, mapName, total, maxPlayers }={}) => {
+  const room=sala||{}
+  const contador=total??room.playerCount
+  const limite=room.maxPlayers||maxPlayers||8
   return [
     '- 🖼️ \x60𝙸𝙼𝙰𝙶𝙴𝙼 𝙳𝙰 𝚂𝙰𝙻𝙰 𝙵𝙵\x60',
     '',
-    '> 🆔 ׄ ( ɪᴅ: '+(roomId||'N/A')+' )',
-    '> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(modeName||'Free Fire')+' )',
-    '> 🗺️ ׄ ( ᴍᴀᴘᴀ: '+(mapName||'Bermuda')+' )',
-    '> 👥 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: '+(total??0)+'/'+(maxPlayers||8)+' )',
+    '> 🤖 ׄ ( ʙᴏᴛ: '+(NomeDoBot||'Tokito Bot')+' )',
+    '> 👤 ׄ ( ᴜsᴜᴀ́ʀɪᴏ: '+(pushname||'Jogador')+' )',
+    '> 🆔 ׄ ( ɪᴅ: '+(room.roomId||roomId||'N/A')+' )',
+    '> 🔐 ׄ ( sᴇɴʜᴀ: '+(room.password||'Indisponível')+' )',
+    '> 🎯 ׄ ( ᴍᴏᴅᴏ: '+(room.modeName||modeName||'Free Fire')+' )',
+    '> 🗺️ ׄ ( ᴍᴀᴘᴀ: '+(room.mapName||mapName||'Bermuda')+' )',
+    '> 👥 ׄ ( ᴊᴏɢᴀᴅᴏʀᴇs: '+(contador==null?'—':contador)+'/'+limite+' )',
+    ...(inviteLink ? ['> 🔗 ׄ ( ᴄᴏɴᴠɪᴛᴇ: '+inviteLink+' )'] : []),
     '',
     '> ✅ ׄ ( ᴠᴇᴊᴀ ɴᴀ ɪᴍᴀɢᴇᴍ ᴏs ᴛɪᴍᴇs ᴇ ᴀs ᴠᴀɢᴀs. )'
   ].join('\n')
