@@ -1,70 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.6",
+  "version": "10.3.7",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T22:58:56.122Z",
+  "publishedAt": "2026-11-08T23:00:25.976Z",
   "changelog": [
-    "[Correção] fix(salas): ver sala atualiza convite e imagem usa legenda oficial do mensagens.js",
-    "A versão 10.3.6 já está disponível para atualização.",
+    "[Correção] fix(salas): CTA convite da Garena com domínio validado e URL comercial",
+    "A versão 10.3.7 já está disponível para atualização.",
     "Mensagens atualizado",
-    "Salas atualizado"
+    "Ffcore atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(salas): ver sala atualiza convite e imagem usa legenda oficial do mensagens.js",
-  "notice": "A versão 10.3.6 já está disponível para atualização.",
+  "title": "fix(salas): CTA convite da Garena com domínio validado e URL comercial",
+  "notice": "A versão 10.3.7 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "347fa5763665c2521d74129a7dc85ed0e33534891f8d69f2e40a63408fddb8a6",
-      "size": 233134
+      "sha256": "5905433f87cadf432f04fd6075297ac6dc1f1f6be90f9fea159884284a93ff9d",
+      "size": 233941
     },
     {
-      "path": "DADOS_TOKITO/plugins/freefire/salas.js",
-      "sha256": "1241318d7906a9414f56000f41596ababfe04b2ca8bfd164e8b6deda04f69a7b",
-      "size": 20050
+      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+      "sha256": "6586389a7c90b1e538ce72c79af17f5406a843aecc20f9f7222ffabf018993ce",
+      "size": 10413
     }
   ],
   "releases": [
-    {
-      "version": "10.2.8",
-      "fromVersion": "10.2.7",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Correção do comando minerar",
-      "notice": "Corrige /minerar e elimina conflito causado pelo módulo duplicado mineracao.js.",
-      "changelog": [
-        "Corrigido o carregamento do comando minerar, afetado pela importação antecipada do arquivo mineracao.js durante a inicialização dos plugins.",
-        "O módulo duplicado mineracao.js foi removido; minerar.js agora concentra a execução da mineração e das ações relacionadas.",
-        "Mantidos inventário de minérios, venda, picaretas, minas, exploração e ranking, sem criar o comando principal mineração.",
-        "Removido o alias mine: a mineração é iniciada somente pelo comando minerar.",
-        "Preservados o tempo de espera da mineração, minérios armazenados, progresso, N-Coins e as demais funções do bot."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/coins/minerar.js",
-          "sha256": "",
-          "gitSha": "8d2cf6de43c81e7980d70933d2eeca27065505f4",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "gitSha": "c0fcd8b308e71cf0961cf08772e0accc81bfaeea",
-          "size": 0
-        }
-      ],
-      "delete": [
-        "DADOS_TOKITO/plugins/coins/mineracao.js"
-      ],
-      "required": true,
-      "publishedAt": "2026-10-09T21:01:56.103Z"
-    },
     {
       "version": "10.2.9",
       "fromVersion": "10.2.8",
@@ -4184,6 +4150,33 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T22:58:56.122Z"
+    },
+    {
+      "version": "10.3.7",
+      "fromVersion": "10.3.6",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(salas): CTA convite da Garena com domínio validado e URL comercial",
+      "notice": "A versão 10.3.7 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado",
+        "Ffcore atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "5905433f87cadf432f04fd6075297ac6dc1f1f6be90f9fea159884284a93ff9d",
+          "size": 233941
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
+          "sha256": "6586389a7c90b1e538ce72c79af17f5406a843aecc20f9f7222ffabf018993ce",
+          "size": 10413
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T23:00:25.976Z"
     }
   ],
   "mode": "incremental",
