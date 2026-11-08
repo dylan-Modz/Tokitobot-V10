@@ -1,51 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.99",
+  "version": "10.2.100",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T20:49:46.685Z",
+  "publishedAt": "2026-11-08T20:51:25.164Z",
   "changelog": [
-    "[Correção] fix(salas): limitar monitoramento e respeitar início/expiração e botões corretos",
-    "A versão 10.2.99 já está disponível para atualização.",
-    "Salas atualizado"
+    "[Correção] fix(salas): permitir nova sala no grupo após iniciar a partida",
+    "A versão 10.2.100 já está disponível para atualização.",
+    "Salas atualizado",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(salas): limitar monitoramento e respeitar início/expiração e botões corretos",
-  "notice": "A versão 10.2.99 já está disponível para atualização.",
+  "title": "fix(salas): permitir nova sala no grupo após iniciar a partida",
+  "notice": "A versão 10.2.100 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/freefire/salas.js",
-      "sha256": "2e954330cf00f12c8fc621718b91a71bd1e67eac165a7f72e419e2294fabdb5d",
-      "size": 17315
+      "sha256": "a36e6f4849b569bf2393db67b119488d124b9f66fb380b985a5ebe15f935cda3",
+      "size": 17412
+    },
+    {
+      "path": "package.json",
+      "sha256": "850860e0904d9f7a9e7ba2a56867e7ea4ad214577de20d4cc6a055fabc5f8704",
+      "size": 1211
     }
   ],
   "releases": [
-    {
-      "version": "10.1.76",
-      "fromVersion": "10.1.75",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Detector atualizado",
-      "notice": "A versão 10.1.76 já está disponível para atualização.",
-      "changelog": [
-        "Detector atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/detector.js",
-          "sha256": "e77d06f09294cb89ff3d16807e1568cc59ef6d437faeac297e1c92a407290225",
-          "size": 5100
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-07T23:37:05.371Z"
-    },
     {
       "version": "10.1.77",
       "fromVersion": "10.1.76",
@@ -4634,6 +4619,33 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T20:49:46.684Z"
+    },
+    {
+      "version": "10.2.100",
+      "fromVersion": "10.2.99",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix(salas): permitir nova sala no grupo após iniciar a partida",
+      "notice": "A versão 10.2.100 já está disponível para atualização.",
+      "changelog": [
+        "Salas atualizado",
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+          "sha256": "a36e6f4849b569bf2393db67b119488d124b9f66fb380b985a5ebe15f935cda3",
+          "size": 17412
+        },
+        {
+          "path": "package.json",
+          "sha256": "850860e0904d9f7a9e7ba2a56867e7ea4ad214577de20d4cc6a055fabc5f8704",
+          "size": 1211
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T20:51:25.163Z"
     }
   ],
   "mode": "incremental",
