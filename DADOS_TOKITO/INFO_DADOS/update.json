@@ -1,67 +1,42 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.2.95",
+  "version": "10.2.96",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T20:43:46.690Z",
+  "publishedAt": "2026-11-08T20:45:17.290Z",
   "changelog": [
-    "[Novidade] feat(salas): menu list de modos e gerência sem IDs de sessão",
-    "A versão 10.2.95 já está disponível para atualização.",
-    "Ffcore atualizado"
+    "[Novidade] feat(salas): armazenamento por grupo, criador e monitor de entradas",
+    "A versão 10.2.96 já está disponível para atualização.",
+    "Evento Sala Monitor atualizado",
+    "Sala Grupo atualizado",
+    "Salas atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
-  "title": "feat(salas): menu list de modos e gerência sem IDs de sessão",
-  "notice": "A versão 10.2.95 já está disponível para atualização.",
+  "title": "feat(salas): armazenamento por grupo, criador e monitor de entradas",
+  "notice": "A versão 10.2.96 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
-      "sha256": "ee1b61a2d9816bd17d808bb49050d225cfbff00e3b2d23029a2d08a16ad99c7f",
-      "size": 5435
+      "path": "DADOS_TOKITO/plugins/freefire/evento-sala-monitor.js",
+      "sha256": "ffb78ba1925fbd325e25bff184a75988cc0aa4581ade73aa418ba7cb3e8baa35",
+      "size": 428
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/sala-grupo.js",
+      "sha256": "d337d13a3bed4252e4c179d42a902bafc0b0a0b8cfbaa9a1c96207e7fc5c2b3a",
+      "size": 6346
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+      "sha256": "814abab649ab12546dcf701a0ff3deea6f42c6a3d6013498d4fa551822651ad6",
+      "size": 16541
     }
   ],
   "releases": [
-    {
-      "version": "10.1.72",
-      "fromVersion": "10.1.71",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Limpeza final da remoção do Shazam",
-      "notice": "A versão 10.1.72 finaliza a remoção do Shazam e corrige referências residuais.",
-      "changelog": [
-        "Finaliza a remoção do Shazam do Tokito.",
-        "Remove uma referência residual do antigo ACRCloud que havia ficado dentro do upload temporário.",
-        "Remove a segunda entrada do Shazam que ainda aparecia no menu de downloads.",
-        "Mantém o sistema de upload temporário funcionando normalmente após a remoção."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/modulos.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [
-        "DADOS_TOKITO/plugins/downloads/shazam.js",
-        "DADOS_TOKITO/INFO_DADOS/acrcloud.json"
-      ],
-      "required": true,
-      "publishedAt": "2026-10-07T17:50:00.000Z"
-    },
     {
       "version": "10.1.73",
       "fromVersion": "10.1.72",
@@ -4649,6 +4624,39 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T20:43:46.689Z"
+    },
+    {
+      "version": "10.2.96",
+      "fromVersion": "10.2.95",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat(salas): armazenamento por grupo, criador e monitor de entradas",
+      "notice": "A versão 10.2.96 já está disponível para atualização.",
+      "changelog": [
+        "Evento Sala Monitor atualizado",
+        "Sala Grupo atualizado",
+        "Salas atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/evento-sala-monitor.js",
+          "sha256": "ffb78ba1925fbd325e25bff184a75988cc0aa4581ade73aa418ba7cb3e8baa35",
+          "size": 428
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/sala-grupo.js",
+          "sha256": "d337d13a3bed4252e4c179d42a902bafc0b0a0b8cfbaa9a1c96207e7fc5c2b3a",
+          "size": 6346
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/freefire/salas.js",
+          "sha256": "814abab649ab12546dcf701a0ff3deea6f42c6a3d6013498d4fa551822651ad6",
+          "size": 16541
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-08T20:45:17.290Z"
     }
   ],
   "mode": "incremental",
