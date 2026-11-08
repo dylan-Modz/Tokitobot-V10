@@ -33,9 +33,9 @@
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "1ad9688ea46e1f13f4e278c36c0ca0b3126b42a00a2fe23974099d68c3f2a15b",
+      "sha256": "767fa9ca857b39e1e817a8341954d07650065d919d32f06b50f895a72b4869b8",
       "gitSha": "1caefb4dfaf42619ed0b85629b7ee8f0adf13ee9",
-      "size": 78849
+      "size": 78959
     },
     {
       "path": "package.json",
@@ -4684,9 +4684,9 @@
         },
         {
           "path": "DADOS_TOKITO/mensagens/menus.js",
-          "sha256": "1ad9688ea46e1f13f4e278c36c0ca0b3126b42a00a2fe23974099d68c3f2a15b",
+          "sha256": "767fa9ca857b39e1e817a8341954d07650065d919d32f06b50f895a72b4869b8",
           "gitSha": "1caefb4dfaf42619ed0b85629b7ee8f0adf13ee9",
-          "size": 78849
+          "size": 78959
         },
         {
           "path": "package.json",
