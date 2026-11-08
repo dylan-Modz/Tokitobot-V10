@@ -144,10 +144,10 @@ const linkConviteSala = valor => {
   try {
     const parsed=new URL(link)
     const host=parsed.hostname.toLowerCase()
-    if (parsed.protocol!=='https:' || !host || parsed.username || parsed.password) return ''
-    if (host==='localhost' || host.endsWith('.localhost') ||
-      host.endsWith('.local') || host.endsWith('.internal') ||
-      /^\d{1,3}(?:\.\d{1,3}){3}$/.test(host) || host.includes(':')) return ''
+    // A API publica o link oficial para convidados neste domínio.
+    // Não abrir URLs de terceiros inseridas por engano na resposta.
+    if (parsed.protocol!=='https:' || host!=='ffshare.garena.com' ||
+        parsed.username || parsed.password || parsed.port) return ''
     return link
   } catch (_) { return '' }
 }
@@ -202,7 +202,8 @@ const menuListaSala = async (ctx, texto, titulo, linhas = [], options = {}) => {
           name:'cta_url',
           buttonParamsJson:JSON.stringify({
             display_text:'🎮 ᴇɴᴛʀᴀʀ ɴᴀ sᴀʟᴀ',
-            url:convite
+            url:convite,
+            merchant_url:convite
           })
         }] : [])
       }
