@@ -1,164 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.9",
+  "version": "10.3.10",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-08T23:14:57.027Z",
+  "publishedAt": "2026-11-09T14:23:49.618Z",
   "changelog": [
-    "O link de convite não aparece mais no texto de sala criada, na consulta Ver sala nem na legenda da imagem.",
-    "O botão Entrar na sala, o comando entrarsala e o design atual dos menus permanecem inalterados.",
-    "Atualização sequencial de 10.3.8 para 10.3.9, sem pular versões."
+    "[Melhoria] Corrigir modo IA: imagem direta, áudio resiliente, tempo de consulta e personalidade",
+    "A versão 10.3.10 já está disponível para atualização.",
+    "IA Index atualizada"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Tokito Bot 10.3.9 — Link oculto no resultado da sala",
-  "notice": "Correção da exibição de convites de salas Free Fire.",
+  "type": "Melhoria",
+  "title": "Corrigir modo IA: imagem direta, áudio resiliente, tempo de consulta e personalidade",
+  "notice": "A versão 10.3.10 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "7dce3588a25203015d827e5c2fe39229287fbc1ac0f770abd3bf811a33345db9",
-      "size": 1210,
-      "gitSha": "778714df762d710e54ed51fa6d0bf7b7650d15ef"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/ffcore.js",
-      "sha256": "6586389a7c90b1e538ce72c79af17f5406a843aecc20f9f7222ffabf018993ce",
-      "size": 10413,
-      "gitSha": "048097303b7e9c34131afdc51688f77c0944a664"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/freefire/salas.js",
-      "sha256": "b3c8ed1b26f83e2ccfb8876ae74fa512ec43e702f621ca32c5c2d5235efb2198",
-      "size": 21194,
-      "gitSha": "89293d921dfaf3be379a25e7a72238146ba9c262"
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "5721749526afeed7484c1f3f3e950f975dd8c0aa490769051335d76a3d504cfc",
-      "size": 233704,
-      "gitSha": "1f44154958411b1addd550af24e365e1ac53113b"
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "ec43d4f0d7d73a6d00c0a222d3ba46ffca83c21f85b1d7780d2301c76fe68462",
-      "size": 78981,
-      "gitSha": "b104cef0a5fdab3578dc3f305161936ea219bf5d"
+      "path": "DADOS_TOKITO/ia/index.js",
+      "sha256": "279272ed47b7fa4cbc4e2307f1cc7340280045d6092004f420c8a7daef0fdf2c",
+      "size": 59547
     }
   ],
   "releases": [
-    {
-      "version": "10.2.10",
-      "fromVersion": "10.2.9",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Novos comandos de consulta e pesquisa",
-      "notice": "Sete novos comandos de pesquisa e informações pela Tokito APIs.",
-      "changelog": [
-        "Sete novos comandos usando a Tokito APIs: robloxstalker, brasileirao, wallpaper, noticias, username, filme e serie.",
-        "Roblox Stalker consulta nome, perfil, avatar, amigos, seguidores, status e verificação.",
-        "Brasileirão mostra a classificação, os artilheiros e os jogos disponíveis na rota.",
-        "Wallpaper envia imagens, com tentativa de outro resultado quando o envio falha.",
-        "Notícias do Brasil e gerador de usernames recebem mensagens no novo padrão visual do Tokito.",
-        "Filme e série mostram pôster e informações que realmente retornam pela API.",
-        "Menu Downloads recebeu os sete comandos e o título PESQUISAS-API foi simplificado para PESQUISAS.",
-        "Adicionados tratamentos de indisponibilidade da API e envio de mídia, sem alterar comandos antigos."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
-          "gitSha": "be2663324e841d01749e17c16e7a64f361d6a7d9",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/info/robloxstalker.js",
-          "gitSha": "39626f1d6c74bad633282f5f51523f5d391c1edc",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/info/brasileirao.js",
-          "gitSha": "160e47f5d0d765a6a33093c8d595e41cb193146b",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/wallpaper.js",
-          "gitSha": "b36944dee2bf4459d7ecce546cd7bca8b1582999",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/info/noticias.js",
-          "gitSha": "97487dc6251c86df7d571da860afd54794325e30",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/filme.js",
-          "gitSha": "2267bcd2e0bef9addb8cba69a153d81c172ca150",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/downloads/serie.js",
-          "gitSha": "0142515c6c1c3da821724ba5ecb80e7fae438839",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "gitSha": "b2fa6ca09082a09243ffcdb221a2304b33770ecd",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "gitSha": "10bc3d8d42b809ca49930341e3bb881a7a73c663",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-11T04:17:47.710Z"
-    },
-    {
-      "version": "10.2.11",
-      "fromVersion": "10.2.10",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Brasileirão completo e nova imagem",
-      "notice": "Brasileirão com tabela completa no design do V10 e nova imagem do Boca Notícias.",
-      "changelog": [
-        "Comando brasileirao atualizado para listar toda a classificação disponível, como no Tokito V9, com o design atual do V10.",
-        "Exibe posição, clube, sigla, pontos, jogos, vitórias, empates, derrotas, saldo de gols e aproveitamento de cada time.",
-        "Imagem do Brasileirão agora usa exclusivamente o link da arte do Boca Notícias; classificação permanece na Tokito APIs.",
-        "Resumo do campeonato e líder mantidos; artilharia e jogos da rodada continuam aparecendo quando a API oferece informações.",
-        "Datas e horários dos jogos só aparecem se a API devolver esses campos; outros comandos preservados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
-          "gitSha": "ecff744b37390ee1f5a03982520edf0b443ff2ff",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "gitSha": "b40b1a9bc55b09fc6a3a57d13d6dbcd1d21590fc",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-11T05:21:27.264Z"
-    },
     {
       "version": "10.2.12",
       "fromVersion": "10.2.11",
@@ -4246,6 +4112,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-08T23:14:57.027Z"
+    },
+    {
+      "version": "10.3.10",
+      "fromVersion": "10.3.9",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Corrigir modo IA: imagem direta, áudio resiliente, tempo de consulta e personalidade",
+      "notice": "A versão 10.3.10 já está disponível para atualização.",
+      "changelog": [
+        "IA Index atualizada"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "279272ed47b7fa4cbc4e2307f1cc7340280045d6092004f420c8a7daef0fdf2c",
+          "size": 59547
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-09T14:23:49.617Z"
     }
   ],
   "mode": "incremental",
