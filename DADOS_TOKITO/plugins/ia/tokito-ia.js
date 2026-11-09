@@ -29,6 +29,7 @@
  */
 
 const dylan = require('../../database/lib/comandos')
+const ia = require('../../ia/index')
 
 dylan.setCommand({
 nome: "tokito-ia",
@@ -50,8 +51,22 @@ titulo: 'TOKITO IA',
 uso: `${prefix}${command} sua pergunta`,
 descricao: 'Faça uma pergunta para a Tokito IA.'
 }))
-const apiUrl = `${API_URL}/api/tokito-ia?texto=${encodeURIComponent(q.trim())}&apikey=${encodeURIComponent(API_KEY_TOKITO)}`
-const { data } = await axios.get(apiUrl, { timeout: 90000 })
+if (ia.pedidoImagemIA(q.trim())) {
+return await ia.enviarImagemGerada(ctx, q.trim())
+}
+const { data } = await axios.get(`${API_URL}/api/tokito-ia`, {
+params: {
+  texto: q.trim(),
+  tipo: 'texto',
+  modo: dataGp?.[0]?.funcoes?.modoia?.adulto === true ? 'adulto' : 'normal',
+  apikey: API_KEY_TOKITO
+},
+timeout: 115000,
+maxContentLength: 3 * 1024 * 1024
+})
+if (data?.status === false) {
+  return reply(mess.padraoErro({ titulo: 'TOKITO IA', descricao: 'Não consegui obter resposta agora. Tenta novamente em instantes.' }))
+}
 const resposta = String(data?.resposta ||
 data?.resultado ||
 data?.result ||
@@ -71,7 +86,10 @@ contextInfo: canalInfo([sender])
 }
 catch (error) {
 console.log('[TOKITO IA ERRO]', modulos.sanitizarErro(error, [API_KEY_TOKITO]))
-await reply(mess.erroApi(API_URL))
+await reply(mess.padraoErro({
+  titulo: 'TOKITO IA',
+  descricao: ia.mensagemErroIA(error)
+}))
 }
 }
 }
