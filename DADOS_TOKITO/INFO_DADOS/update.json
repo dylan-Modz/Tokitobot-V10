@@ -1,51 +1,63 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.11",
+  "version": "10.3.10",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-09T14:26:50.226Z",
+  "publishedAt": "2026-11-09T14:30:11.043Z",
   "changelog": [
-    "[Melhoria] Ajustar comando Tokito IA para chats privados e timeouts",
-    "A versão 10.3.11 já está disponível para atualização.",
-    "IA Index atualizada",
-    "Mensagens atualizado",
-    "Modoia atualizado",
-    "IA Iaaudio atualizada",
-    "IA Tokito Ia atualizada"
+    "Modo IA agora espera o tempo correto da API e trata falhas de acesso, limite e indisponibilidade.",
+    "Modo IA áudio: voz Isabela, estado de gravação corrigido, tempo alinhado e fallback de resposta por texto.",
+    "FFmpeg não fica travado indefinidamente: limites para conversão e waveform.",
+    "Pedidos claros de imagens geram e enviam imagens pelo WhatsApp com confirmação antecipada.",
+    "Prévia de execução reservada a tarefas de mídias; evita promessas genéricas de processamento.",
+    "Modo adulto opcional por grupo com comando modoia adulto 1/0.",
+    "Comandos tokito-ia e iaaudio atualizados, preservando os menus, a API Key e as rotas.",
+    "Versão sequencial 10.3.9 para 10.3.10, sem pular numeração."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Ajustar comando Tokito IA para chats privados e timeouts",
-  "notice": "A versão 10.3.11 já está disponível para atualização.",
+  "type": "Novidade",
+  "title": "Tokito Bot 10.3.10 — IA estável, voz e imagens",
+  "notice": "Integração do modo IA com criação de imagens, recuperação de áudio e melhorias de personalidade.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/ia/index.js",
       "sha256": "ef05c16ddde4bf9c8bdf29d453ef5bf51e42d52ebc8bb9395dea155d55621293",
-      "size": 60082
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "e3e4aa698aa517a67309e5c1698aefe826b7fc1c5e4f27ab16798e14654e304a",
-      "size": 233764
+      "size": 60082,
+      "gitSha": "0bce8067ce26e5d8e2a69edf8b4ce7d5e77e838d"
     },
     {
       "path": "DADOS_TOKITO/plugins/admin/modoia.js",
       "sha256": "87c18df04ff4b6442bc48766dc8dcdb148374f3f17ef1743d440f8b648aa2445",
-      "size": 2983
+      "size": 2983,
+      "gitSha": "26fa3f76c6e3949bccb9d3c89ebbd091efc228c5"
     },
     {
       "path": "DADOS_TOKITO/plugins/ia/iaaudio.js",
       "sha256": "a1a63e2bd92272b2c9f2fd5bc96cc4dec406e49fa816ec2ecd02947102506ef6",
-      "size": 2282
+      "size": 2282,
+      "gitSha": "b8cd20adcdf8c5ed698c0f5c97dc9371c107d680"
     },
     {
       "path": "DADOS_TOKITO/plugins/ia/tokito-ia.js",
       "sha256": "dd7f7e8e75ad8fc18c5a0be35d5f067abf89165a3421f79f00cad7e0550f647a",
-      "size": 2683
+      "size": 2683,
+      "gitSha": "ad943221ea9be4a6630b8715da5a9c48d90783c3"
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "e3e4aa698aa517a67309e5c1698aefe826b7fc1c5e4f27ab16798e14654e304a",
+      "size": 233764,
+      "gitSha": "9f8164d56f8949a1f09e60b24daf5583346c4747"
+    },
+    {
+      "path": "package.json",
+      "sha256": "a14d4ef3ac2f0caa56cf95090a7128067708648548854fb1cb7c944e71149b8a",
+      "size": 1211,
+      "gitSha": "2dff40d31877c686234b981e747d630aae5f5eb7"
     }
   ],
   "releases": [
@@ -4109,77 +4121,70 @@
       "version": "10.3.10",
       "fromVersion": "10.3.9",
       "channel": "stable",
-      "type": "Melhoria",
-      "title": "Corrigir modo IA: imagem direta, áudio resiliente, tempo de consulta e personalidade",
-      "notice": "A versão 10.3.10 já está disponível para atualização.",
+      "type": "Novidade",
+      "title": "Tokito Bot 10.3.10 — IA estável, voz e imagens",
+      "notice": "Integração do modo IA com criação de imagens, recuperação de áudio e melhorias de personalidade.",
       "changelog": [
-        "IA Index atualizada"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/ia/index.js",
-          "sha256": "279272ed47b7fa4cbc4e2307f1cc7340280045d6092004f420c8a7daef0fdf2c",
-          "size": 59547
-        }
-      ],
-      "delete": [],
-      "required": false,
-      "publishedAt": "2026-11-09T14:23:49.617Z"
-    },
-    {
-      "version": "10.3.11",
-      "fromVersion": "10.3.10",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Ajustar comando Tokito IA para chats privados e timeouts",
-      "notice": "A versão 10.3.11 já está disponível para atualização.",
-      "changelog": [
-        "IA Index atualizada",
-        "Mensagens atualizado",
-        "Modoia atualizado",
-        "IA Iaaudio atualizada",
-        "IA Tokito Ia atualizada"
+        "Modo IA agora espera o tempo correto da API e trata falhas de acesso, limite e indisponibilidade.",
+        "Modo IA áudio: voz Isabela, estado de gravação corrigido, tempo alinhado e fallback de resposta por texto.",
+        "FFmpeg não fica travado indefinidamente: limites para conversão e waveform.",
+        "Pedidos claros de imagens geram e enviam imagens pelo WhatsApp com confirmação antecipada.",
+        "Prévia de execução reservada a tarefas de mídias; evita promessas genéricas de processamento.",
+        "Modo adulto opcional por grupo com comando modoia adulto 1/0.",
+        "Comandos tokito-ia e iaaudio atualizados, preservando os menus, a API Key e as rotas.",
+        "Versão sequencial 10.3.9 para 10.3.10, sem pular numeração."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/ia/index.js",
           "sha256": "ef05c16ddde4bf9c8bdf29d453ef5bf51e42d52ebc8bb9395dea155d55621293",
-          "size": 60082
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "e3e4aa698aa517a67309e5c1698aefe826b7fc1c5e4f27ab16798e14654e304a",
-          "size": 233764
+          "size": 60082,
+          "gitSha": "0bce8067ce26e5d8e2a69edf8b4ce7d5e77e838d"
         },
         {
           "path": "DADOS_TOKITO/plugins/admin/modoia.js",
           "sha256": "87c18df04ff4b6442bc48766dc8dcdb148374f3f17ef1743d440f8b648aa2445",
-          "size": 2983
+          "size": 2983,
+          "gitSha": "26fa3f76c6e3949bccb9d3c89ebbd091efc228c5"
         },
         {
           "path": "DADOS_TOKITO/plugins/ia/iaaudio.js",
           "sha256": "a1a63e2bd92272b2c9f2fd5bc96cc4dec406e49fa816ec2ecd02947102506ef6",
-          "size": 2282
+          "size": 2282,
+          "gitSha": "b8cd20adcdf8c5ed698c0f5c97dc9371c107d680"
         },
         {
           "path": "DADOS_TOKITO/plugins/ia/tokito-ia.js",
           "sha256": "dd7f7e8e75ad8fc18c5a0be35d5f067abf89165a3421f79f00cad7e0550f647a",
-          "size": 2683
+          "size": 2683,
+          "gitSha": "ad943221ea9be4a6630b8715da5a9c48d90783c3"
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "e3e4aa698aa517a67309e5c1698aefe826b7fc1c5e4f27ab16798e14654e304a",
+          "size": 233764,
+          "gitSha": "9f8164d56f8949a1f09e60b24daf5583346c4747"
+        },
+        {
+          "path": "package.json",
+          "sha256": "a14d4ef3ac2f0caa56cf95090a7128067708648548854fb1cb7c944e71149b8a",
+          "size": 1211,
+          "gitSha": "2dff40d31877c686234b981e747d630aae5f5eb7"
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-09T14:26:50.225Z"
+      "publishedAt": "2026-11-09T14:30:11.043Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.2.71",
+  "fromVersion": "10.3.9",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.9"
+  "publicVersion": "10.3.10"
 }
