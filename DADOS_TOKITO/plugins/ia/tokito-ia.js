@@ -58,10 +58,10 @@ const { data } = await axios.get(`${API_URL}/api/tokito-ia`, {
 params: {
   texto: q.trim(),
   tipo: 'texto',
-  modo: dataGp?.[0]?.funcoes?.modoia?.adulto === true ? 'adulto' : 'normal',
+  modo: ctx.dataGp?.[0]?.funcoes?.modoia?.adulto === true ? 'adulto' : 'normal',
   apikey: API_KEY_TOKITO
 },
-timeout: 115000,
+timeout: 160000,
 maxContentLength: 3 * 1024 * 1024
 })
 if (data?.status === false) {
