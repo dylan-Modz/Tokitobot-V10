@@ -3056,7 +3056,8 @@ return `- 🧠 \`𝙼𝙾𝙳𝙾 𝙸𝙰\`
 > 🧠 ׄ ( ᴀ́ᴜᴅɪᴏ: ${prefix}modoia 1 audio )
 > 🧠 ׄ ( ᴛʀᴏᴄᴀʀ: ${prefix}modoia texto|audio )
 > 🧠 ׄ ( ᴅᴇsʟɪɢᴀʀ: ${prefix}modoia 0 )
-> 🧠 ׄ ( ᴇsᴘᴏɴᴛᴀ̂ɴᴇᴏ: ${prefix}modoia espontaneo 1/0 )`
+> 🧠 ׄ ( ᴇsᴘᴏɴᴛᴀ̂ɴᴇᴏ: ${prefix}modoia espontaneo 1/0 )
+> 🧠 ׄ ( ᴀᴅᴜʟᴛᴏ: ${prefix}modoia adulto 1/0 )`
 }
 
 exports.modoIaAlterado = (ativo, tipo) => {
