@@ -61,7 +61,8 @@ if (!cfg || typeof cfg !== 'object')
 cfg = {
 ativo: false,
 tipo: 'texto',
-espontaneo: true
+espontaneo: true,
+adulto: false
 }
 if (p[0] === '0') {
 cfg.ativo = false
@@ -74,6 +75,11 @@ else if (p[0] === '1') {
 cfg.ativo = true
 if (['texto', 'audio', 'áudio'].includes(p[1]))
 cfg.tipo = p[1].startsWith('a') ? 'audio' : 'texto'
+}
+else if (p[0] === 'adulto' || p[0] === '18') {
+if (!['0', '1'].includes(p[1]))
+return responderModoIa(ctx.mess.modoIaUso(ctx.prefix))
+cfg.adulto = p[1] === '1'
 }
 else if (p[0] === 'espontaneo' || p[0] === 'espontâneo') {
 cfg.espontaneo = p[1] !== '0'
