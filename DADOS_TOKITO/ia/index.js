@@ -697,7 +697,7 @@ return { action: 'usar_ferramenta', command: top.nome, args: [], mention: Boolea
 return null
 }
 
-const promessaSemAcao = txt => /\b(?:vou procurar|ja te mando|já te mando|vou mandar|vou fazer|deixa comigo|pera ai|pera aí|aguarde|vou executar|vou tocar|vou baixar|vou buscar|estou procurando|to procurando|tô procurando)\b/i.test(String(txt || ''))
+const promessaSemAcao = txt => /\b(?:vou procurar|ja te mando|já te mando|vou mandar|vou fazer|vou gerar|deixa comigo|pera ai|pera aí|aguarde|vou executar|vou tocar|vou baixar|vou buscar|estou procurando|to procurando|tô procurando|estou processando|to processando|tô processando)\b/i.test(String(txt || ''))
 
 const catalogoRelevante = (ctx, pergunta, limite = 18) => {
 const termos = palavras(pergunta)
@@ -801,7 +801,7 @@ modo: ctx.dataGp?.[0]?.funcoes?.modoia?.adulto === true ? 'adulto' : 'normal'
 },
 headers: { accept: 'application/json', 'user-agent': 'TokitoBot/10' },
 httpsAgent: agenteHttps,
-timeout: 110000,
+timeout: 160000,
 maxContentLength: 3 * 1024 * 1024,
 validateStatus: status => status >= 200 && status < 300
 })
@@ -995,11 +995,19 @@ const ff = spawn('ffmpeg', [
 
 const chunks = []
 let erro = '', terminou = false
+const watchdog = setTimeout(() => {
+  if (terminou) return
+  terminou = true
+  ff.kill('SIGKILL')
+  reject(new Error('Conversão de áudio excedeu o limite de tempo.'))
+}, 45000)
+watchdog.unref?.()
 
 ff.stdout.on('data', chunk => chunks.push(chunk))
 ff.stderr.on('data', chunk => erro += chunk.toString())
 
 ff.on('error', error => {
+clearTimeout(watchdog)
 if (terminou) return
 
 terminou = true
@@ -1007,6 +1015,7 @@ reject(new Error(`Erro ao executar FFmpeg: ${error.message}`))
 })
 
 ff.on('close', codigo => {
+clearTimeout(watchdog)
 if (terminou) return
 
 terminou = true
@@ -1058,11 +1067,19 @@ const ff = spawn('ffmpeg', [
 
 const chunks = []
 let erro = '', terminou = false
+const watchdog = setTimeout(() => {
+  if (terminou) return
+  terminou = true
+  ff.kill('SIGKILL')
+  reject(new Error('Waveform excedeu o limite de tempo.'))
+}, 12000)
+watchdog.unref?.()
 
 ff.stdout.on('data', chunk => chunks.push(chunk))
 ff.stderr.on('data', chunk => erro += chunk.toString())
 
 ff.on('error', error => {
+clearTimeout(watchdog)
 if (terminou) return
 
 terminou = true
@@ -1070,6 +1087,7 @@ reject(new Error(`Erro ao gerar waveform: ${error.message}`))
 })
 
 ff.on('close', codigo => {
+clearTimeout(watchdog)
 if (terminou) return
 
 terminou = true
@@ -1424,7 +1442,7 @@ ctx.tokito.sendPresenceUpdate('composing', ctx.from).catch(() => {})
 const response = await axios.get(ctx.API_URL + '/api/tokito-ia', {
  params: { texto, tipo: 'imagem', tamanho: '1:1', apikey: ctx.API_KEY_TOKITO },
  responseType: 'arraybuffer',
- timeout: 130000,
+ timeout: 160000,
  maxContentLength: 16 * 1024 * 1024,
  httpsAgent: agenteHttps,
  headers: { Accept: 'image/*,application/json', 'User-Agent': 'TokitoBot/10' },
