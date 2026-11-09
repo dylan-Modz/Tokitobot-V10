@@ -116,6 +116,7 @@ const personalidadeIA = (ctx, pergunta, tipo = 'texto', espontaneo = false) => {
   const pedido = normalizarTexto(pergunta)
   const serio = /\b(?:suicidio|suicida|me matar|me machucar|luto|morreu|falecimento|depressao|ansiedade|crise|doente|hospital|emergencia|assedio|violencia|abuso)\b/i.test(pedido)
   const zoeira = /\b(?:maluco|doido|chato|inutil|burro|lerdo|desgracado|merda|porra|caralho|zoa|zoeira|resenha|brinca|brincadeira|xing[aue])\b/i.test(pedido)
+  const adultoAtivo = ctx.dataGp?.[0]?.funcoes?.modoia?.adulto === true
   const tratamento = pessoa.cargo === 'criador'
     ? 'Interlocutor: CRIADOR Dylan, confirmado pelo numero oficial do bot. Pode chama-lo de "meu criador Dylan" ou "meu criador" de vez em quando, com intimidade e brincadeiras. Nao repita o titulo em toda frase.'
     : pessoa.cargo === 'administrador'
@@ -130,6 +131,7 @@ const personalidadeIA = (ctx, pergunta, tipo = 'texto', espontaneo = false) => {
         ? 'TOM AGORA: a pessoa parece estar na resenha. Pode devolver a provocacao com palavroes ocasionais, como "porra", "caralho" ou "seu desgracado", se houver brincadeira reciproca. Pare se a pessoa demonstrar desconforto.'
         : 'TOM AGORA: natural, descontraido e variavel. Palavroes so se combinarem com a situacao; nao os force.',
     'Zoe sem ficar repetindo frases, bordoes, xingamentos ou o nome da pessoa. Nao humilhe, ameace, discrimine nem dirija ofensas gratuitas a terceiros. Respeite limites e pedidos para parar. Se pedirem ajuda, ajude de verdade.',
+    adultoAtivo && !serio ? 'MODO ADULTO: seja mais espontaneo, atrevido e brincalhao; pode usar humor de duplo sentido, palavroes naturais e flerte consensual entre adultos quando combinar. Nao repita apelidos em toda frase. Nao produza descricoes sexuais graficas nem sexualize menores. Priorize a ajuda quando a pessoa pedir alguma tarefa.' : '',
     espontaneo
       ? 'INTERACAO ESPONTANEA: entre na conversa apenas com comentario curto e relevante; nao aja como se tivesse sido chamado, nao vire o centro do grupo e nao provoque pessoas gratuitamente.'
       : 'CHAMADA DIRETA: responda a pergunta e acompanhe o clima. Se a pessoa pedir uma funcao real do bot, priorize fazer a acao permitida.',
@@ -372,6 +374,17 @@ return { ativo: nome || marcou || respondeu, nome, marcou, respondeu }
 }
 
 const limparChamada = ctx => limparChamadaTexto(ctx, ctx.body)
+
+const mensagemErroIA = erro => {
+const status = Number(erro?.response?.status || erro?.status || 0)
+const code = String(erro?.code || erro?.cause?.code || '').toUpperCase()
+if ([401, 403].includes(status)) return 'A IA não conseguiu autorizar a consulta. O responsável pelo serviço precisa conferir o acesso.'
+if (status === 402) return 'O serviço de IA está sem saldo disponível no momento.'
+if (status === 429) return 'A IA está com muitos pedidos agora. Tenta mais uma vez daqui a pouquinho.'
+if ([502, 503, 504].includes(status) || code === 'ECONNABORTED' || code.includes('TIMEOUT'))
+return 'A IA demorou ou ficou indisponível agora. Isso não significa necessariamente problema na tua conta; tenta novamente em instantes.'
+return 'Não consegui concluir a resposta agora. Tenta novamente em instantes.'
+}
 
 const textoResposta = data => {
 if (typeof data === 'string') return data.trim()
@@ -780,10 +793,16 @@ const montarPrompt = (ctx, pergunta, nivel = 0, opcoes = {}) => {
 
 const consultar = async (ctx, pergunta, opcoes = {}) => {
 const requisitar = async nivel => axios.get(`${ctx.API_URL}/api/tokito-ia`, {
-params: { texto: montarPrompt(ctx, pergunta, nivel, opcoes), apikey: ctx.API_KEY_TOKITO },
+params: {
+texto: montarPrompt(ctx, pergunta, nivel, opcoes),
+apikey: ctx.API_KEY_TOKITO,
+tipo: 'texto',
+modo: ctx.dataGp?.[0]?.funcoes?.modoia?.adulto === true ? 'adulto' : 'normal'
+},
 headers: { accept: 'application/json', 'user-agent': 'TokitoBot/10' },
 httpsAgent: agenteHttps,
-timeout: 14000,
+timeout: 110000,
+maxContentLength: 3 * 1024 * 1024,
 validateStatus: status => status >= 200 && status < 300
 })
 
@@ -793,6 +812,11 @@ const niveis = [0]
 for (const nivel of niveis) {
 try {
 const { data } = await requisitar(nivel)
+if (data?.status === false || data?.sucesso === false) {
+  const e = new Error('A API não conseguiu concluir a resposta.')
+  e.response = { status: 502, data: { status: false } }
+  throw e
+}
 return parse(data)
 } catch (error) {
 ultimoErro = error
@@ -907,7 +931,8 @@ params: { texto: fala, apikey: ctx.API_KEY_TOKITO },
 headers: { accept: 'audio/mpeg,audio/*,*/*', 'user-agent': 'TokitoBot/10' },
 httpsAgent: agenteHttps,
 responseType: 'arraybuffer',
-timeout: 90000,
+timeout: 135000,
+maxContentLength: 12 * 1024 * 1024,
 validateStatus: () => true
 })
 } catch (error) {
@@ -1114,21 +1139,17 @@ ff.stdin.end(buffer)
 })
 
 const enviarAudio = async (ctx, texto) => {
-ctx.tokito.sendPresenceUpdate('recording', ctx.from).catch(() => {})
-
+ctx.tokito.sendPresenceUpdate('composing', ctx.from).catch(() => {})
 try {
 const fala = limparFalaIA(aplicarUsuarioAudio(ctx, texto)) || 'Tô aqui'
 const { buffer } = await gerarAudio(ctx, fala)
+ctx.tokito.sendPresenceUpdate('recording', ctx.from).catch(() => {})
 const audio = await voz(buffer)
 const waveform = await onda(audio).catch(() => null)
-
 const payload = {
-audio,
-mimetype: 'audio/ogg; codecs=opus',
-ptt: true,
+audio, mimetype: 'audio/ogg; codecs=opus', ptt: true,
 ...(waveform?.length ? { waveform } : {})
 }
-
 try {
 return await ctx.tokito.sendMessage(ctx.from, payload, { quoted: ctx.selo })
 } catch {
@@ -1144,9 +1165,14 @@ if (temBlocoCodigo(texto)) {
 return enviarTextoComCodigo(ctx, texto)
 }
 
-return tipo === 'audio'
-? enviarAudio(ctx, texto)
-: enviarTexto(ctx, texto)
+if (tipo !== 'audio') return enviarTexto(ctx, texto)
+try {
+return await enviarAudio(ctx, texto)
+} catch (erro) {
+console.warn('[TOKITO IA] Falha no TTS: resposta entregue em texto',
+  modulos.sanitizarErro(erro, [ctx.API_KEY_TOKITO]).slice(0, 200))
+return enviarTexto(ctx, texto)
+}
 }
 
 const gerarMensagemAcao = async (ctx, pergunta, comando, tipo, sugerida = '') => {
@@ -1273,22 +1299,15 @@ salvarMemoria(ctx, pergunta, perguntaDado, { action: `aguardando:${cmd}` })
 return responder(ctx, perguntaDado, tipo)
 }
 
-// Primeiro responde à pessoa. Só depois chama o plugin real.
+// Somente tarefas que realmente enviam mídias precisam de confirmação antecipada.
+const mostrarPrevia = ['downloads', 'download', 'figurinhas', 'midia', 'mídia'].includes(categoriaFerramenta) ||
+['play_audio', 'playaudio', 'play', 'ytplay', 'sticker', 'fig', 'toimg'].includes(cmd)
+if (mostrarPrevia) {
 const inicio = await gerarMensagemAcao(ctx, pergunta, cmd, tipo, data?.resposta)
 if (inicio) {
-  let confirmou = false
-  try {
-    await responder(ctx, inicio, tipo)
-    confirmou = true
-  } catch (erro) {
-    // Se o TTS estiver fora, confirma em texto antes de enviar qualquer resultado.
-    if (tipo === 'audio') {
-      try { await enviarTexto(ctx, inicio); confirmou = true } catch {}
-    }
-    console.log('[IA CONFIRMACAO]', String(erro?.message || erro))
-  }
-  // Nunca executa a ação sem antes entregar uma confirmação à pessoa.
-  if (!confirmou) return false
+try { await enviarTexto(ctx, inicio) }
+catch (erro) { console.warn('[IA CONFIRMACAO]', erro?.code || erro?.name || 'falha') }
+}
 }
 
 const preservarSaida = categoriaFerramenta === 'menus' || data?.preservarSaida === true
@@ -1378,6 +1397,66 @@ const pedidoMusicaEspontaneo = ctx => {
   return true
 }
 
+const pedidoImagemIA = pergunta => {
+  const t = normalizarTexto(pergunta).replace(/\s+/g, ' ')
+  if (!t || t.length > 2000) return false
+  if (/^(?:como|me ensina|me explique|me explica|explica|qual|quais|porque|por que|o que|oque)\b/.test(t)) return false
+  return /\b(?:gera|gere|gerar|cria|crie|criar|faz|faca|fazer|desenha|desenhe|desenhar|ilustra|ilustre|renderiza|renderize|produza|produzir|monta|monte)\b.{0,110}\b(?:imagem|foto|fotografia|desenho|ilustracao|arte|banner|logo|avatar|wallpaper|poster|capa|paisagem)\b/.test(t) ||
+    /^(?:desenha|desenhe|desenhar)\b/.test(t)
+}
+
+const imagensEmAndamento = global.__TOKITO_IA_GERANDO_IMAGEM__ ||= new Set()
+
+const enviarImagemGerada = async (ctx, pergunta) => {
+const texto = String(pergunta || '').trim().slice(0, 1100)
+const chave = String(ctx.from || '') + ':' + String(jidUsuario(ctx) || ctx.sender || '')
+if (imagensEmAndamento.has(chave)) {
+await enviarTexto(ctx, 'Já estou gerando tua imagem anterior. Aguarda ela terminar antes de pedir outra.')
+return true
+}
+imagensEmAndamento.add(chave)
+try {
+const adulto = ctx.dataGp?.[0]?.funcoes?.modoia?.adulto === true
+await enviarTexto(ctx, adulto
+  ? 'Ah, tá bom, bebê! Vou gerar essa imagem pra você. 🎨'
+  : 'Beleza! Vou gerar tua imagem agora. 🎨').catch(() => {})
+ctx.tokito.sendPresenceUpdate('composing', ctx.from).catch(() => {})
+const response = await axios.get(ctx.API_URL + '/api/tokito-ia', {
+ params: { texto, tipo: 'imagem', tamanho: '1:1', apikey: ctx.API_KEY_TOKITO },
+ responseType: 'arraybuffer',
+ timeout: 130000,
+ maxContentLength: 16 * 1024 * 1024,
+ httpsAgent: agenteHttps,
+ headers: { Accept: 'image/*,application/json', 'User-Agent': 'TokitoBot/10' },
+ validateStatus: () => true
+})
+const conteudo = String(response?.headers?.['content-type'] || '').toLowerCase()
+const imagem = Buffer.from(response?.data || [])
+const reconhecida = imagem.length > 10 && (
+  (imagem[0] === 0x89 && imagem.subarray(1, 4).toString('ascii') === 'PNG') ||
+  (imagem[0] === 0xff && imagem[1] === 0xd8 && imagem[2] === 0xff) ||
+  (imagem.subarray(0, 4).toString('ascii') === 'RIFF' && imagem.subarray(8, 12).toString('ascii') === 'WEBP')
+)
+if (response.status !== 200 || !conteudo.startsWith('image/') || !reconhecida) {
+  const e = new Error('Imagem não retornada pela API.')
+  e.response = { status: Number(response.status || 502) === 200 ? 502 : response.status }
+  throw modulos.marcarErroApi(e)
+}
+const payload = { image: imagem, caption: '🎨 *TOKITO IA*\n\n> Imagem gerada pra você!' }
+try { await ctx.tokito.sendMessage(ctx.from, payload, { quoted: ctx.selo }) }
+catch { await ctx.tokito.sendMessage(ctx.from, payload) }
+salvarMemoria(ctx, pergunta, 'Imagem gerada e enviada.', { action: 'gerar_imagem' })
+return true
+} catch (erro) {
+ console.warn('[TOKITO IA IMAGEM]', modulos.sanitizarErro(erro, [ctx.API_KEY_TOKITO]).slice(0, 250))
+ await enviarTexto(ctx, 'Não consegui gerar a imagem agora. ' + mensagemErroIA(erro)).catch(() => {})
+ return true
+} finally {
+imagensEmAndamento.delete(chave)
+ctx.tokito.sendPresenceUpdate('paused', ctx.from).catch(() => {})
+}
+}
+
 const evento = async ctx => {
 if (!ctx.isGroup) return false
 
@@ -1404,7 +1483,7 @@ const assunto = memoriaStore.textoContexto(ctx)
 if (assunto) {
 const data = await consultar(ctx, 'Comente brevemente o assunto recente do grupo, se realmente houver algo relevante: ' + assunto, { semHistorico: true, somenteResposta: true, tipoResposta: cfg.tipo, espontaneo: true })
 const resposta = String(data?.resposta || textoResposta(data) || '').trim()
-if (resposta) {
+if (resposta && !promessaSemAcao(resposta)) {
 await reagirContextual(ctx, ctx.body, resposta, 'espontaneo')
 await responder(ctx, resposta, cfg.tipo)
 return true
@@ -1419,7 +1498,7 @@ modulos.sanitizarErro(error, [ctx.API_KEY_TOKITO]) || 'Erro sem detalhes'
 
 try {
 const aviso = modulos.ehErroApi(error, ctx.API_URL)
-? ctx.mess.erroApi(modulos.siteApi ? modulos.siteApi(ctx.API_URL) : ctx.API_URL)
+? mensagemErroIA(error)
 : ctx.mess.iaErro()
 await enviarAvisoIA(ctx, aviso)
 return true
@@ -1464,11 +1543,7 @@ textoAudioOriginal
 } catch (erro) {
 
 if (modulos.ehErroApi(erro, ctx.API_URL)) {
-await modulos.responderErroApi(
-ctx,
-erro,
-'MODO IA ÁUDIO'
-)
+await enviarAvisoIA(ctx, mensagemErroIA(erro))
 } else {
 console.log(
 '[ MODO IA ÁUDIO • TOKITO ]',
@@ -1504,10 +1579,7 @@ return true
 }
 
 try {
-ctx.tokito.sendPresenceUpdate(
-tipoResposta === 'audio' ? 'recording' : 'composing',
-ctx.from
-).catch(() => {})
+ctx.tokito.sendPresenceUpdate('composing', ctx.from).catch(() => {})
 
 const continuacao = continuarPendente(ctx, pergunta)
 
@@ -1521,6 +1593,9 @@ await reagirContextual(ctx, pergunta, '', continuacao.command)
 return executarAcao(ctx, continuacao, pergunta, tipoResposta)
 }
 
+if (pedidoImagemIA(pergunta)) {
+return await enviarImagemGerada(ctx, pergunta)
+}
 const local = detectarAcaoLocal(ctx, pergunta)
 
 if (local?.action === 'pedir_dado' && local?.command) {
@@ -1614,6 +1689,7 @@ pergunta,
 tipoResposta
 )
 }
+return responder(ctx, 'Não encontrei uma função do bot para executar isso agora. Não vou prometer uma ação que não consigo realizar.', tipoResposta)
 }
 
 salvarMemoria(
@@ -1641,11 +1717,7 @@ error,
 ctx.API_URL
 )
 ) {
-await modulos.responderErroApi(
-ctx,
-error,
-'MODO IA'
-)
+await enviarAvisoIA(ctx, mensagemErroIA(error))
 
 return true
 }
@@ -1676,5 +1748,6 @@ nomeUsuario, nomeUsuarioAudio, MARCADOR_USUARIO, aplicarUsuarioTexto,
 aplicarUsuarioAudio, normalizarLinguagemCodeMeta, extrairPartesCodigo,
 temBlocoCodigo, enviarCodeMeta, enviarTextoComCodigo,
 responderRestricao, reagirContextual, emojiContextual, detectarTipoResposta,
-continuarPendente, perguntaPendente, detectarConfiguracaoDono, enviarAvisoIA
+continuarPendente, perguntaPendente, detectarConfiguracaoDono, enviarAvisoIA,
+pedidoImagemIA, enviarImagemGerada, mensagemErroIA
 }
