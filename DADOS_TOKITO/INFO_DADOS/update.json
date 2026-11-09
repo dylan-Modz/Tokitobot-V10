@@ -1,62 +1,54 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.10",
+  "version": "10.3.11",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-09T14:23:49.618Z",
+  "publishedAt": "2026-11-09T14:26:50.226Z",
   "changelog": [
-    "[Melhoria] Corrigir modo IA: imagem direta, áudio resiliente, tempo de consulta e personalidade",
-    "A versão 10.3.10 já está disponível para atualização.",
-    "IA Index atualizada"
+    "[Melhoria] Ajustar comando Tokito IA para chats privados e timeouts",
+    "A versão 10.3.11 já está disponível para atualização.",
+    "IA Index atualizada",
+    "Mensagens atualizado",
+    "Modoia atualizado",
+    "IA Iaaudio atualizada",
+    "IA Tokito Ia atualizada"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Corrigir modo IA: imagem direta, áudio resiliente, tempo de consulta e personalidade",
-  "notice": "A versão 10.3.10 já está disponível para atualização.",
+  "title": "Ajustar comando Tokito IA para chats privados e timeouts",
+  "notice": "A versão 10.3.11 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "279272ed47b7fa4cbc4e2307f1cc7340280045d6092004f420c8a7daef0fdf2c",
-      "size": 59547
+      "sha256": "ef05c16ddde4bf9c8bdf29d453ef5bf51e42d52ebc8bb9395dea155d55621293",
+      "size": 60082
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "e3e4aa698aa517a67309e5c1698aefe826b7fc1c5e4f27ab16798e14654e304a",
+      "size": 233764
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/modoia.js",
+      "sha256": "87c18df04ff4b6442bc48766dc8dcdb148374f3f17ef1743d440f8b648aa2445",
+      "size": 2983
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/ia/iaaudio.js",
+      "sha256": "a1a63e2bd92272b2c9f2fd5bc96cc4dec406e49fa816ec2ecd02947102506ef6",
+      "size": 2282
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/ia/tokito-ia.js",
+      "sha256": "dd7f7e8e75ad8fc18c5a0be35d5f067abf89165a3421f79f00cad7e0550f647a",
+      "size": 2683
     }
   ],
   "releases": [
-    {
-      "version": "10.2.12",
-      "fromVersion": "10.2.11",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Brasileirão completo com imagem separada",
-      "notice": "Brasileirão com imagem do Boca Notícias e tabela completa em texto sem cortes.",
-      "changelog": [
-        "Brasileirão envia a imagem original do Boca Notícias em mensagem separada, seguida da classificação completa no design do V10.",
-        "Tabela inclui todos os clubes retornados pela Tokito APIs, com pontos, jogos, vitórias, empates, derrotas, saldo e aproveitamento.",
-        "A separação evita ultrapassar o limite de legenda da imagem no WhatsApp e mantém o texto completo mesmo que a imagem falhe.",
-        "Artilharia e jogos com datas e horários continuam aparecendo quando a API fornece esses dados.",
-        "Outros comandos e menus preservados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
-          "gitSha": "7393c2e0dacc41d61bb46082f2e82edb280d7a68",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "gitSha": "86566ca42046c1933d6f2f8fdd6b5dc2994e0230",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-11T05:26:57.858Z"
-    },
     {
       "version": "10.2.13",
       "fromVersion": "10.2.12",
@@ -4133,6 +4125,51 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-09T14:23:49.617Z"
+    },
+    {
+      "version": "10.3.11",
+      "fromVersion": "10.3.10",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Ajustar comando Tokito IA para chats privados e timeouts",
+      "notice": "A versão 10.3.11 já está disponível para atualização.",
+      "changelog": [
+        "IA Index atualizada",
+        "Mensagens atualizado",
+        "Modoia atualizado",
+        "IA Iaaudio atualizada",
+        "IA Tokito Ia atualizada"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "ef05c16ddde4bf9c8bdf29d453ef5bf51e42d52ebc8bb9395dea155d55621293",
+          "size": 60082
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "e3e4aa698aa517a67309e5c1698aefe826b7fc1c5e4f27ab16798e14654e304a",
+          "size": 233764
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/modoia.js",
+          "sha256": "87c18df04ff4b6442bc48766dc8dcdb148374f3f17ef1743d440f8b648aa2445",
+          "size": 2983
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/ia/iaaudio.js",
+          "sha256": "a1a63e2bd92272b2c9f2fd5bc96cc4dec406e49fa816ec2ecd02947102506ef6",
+          "size": 2282
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/ia/tokito-ia.js",
+          "sha256": "dd7f7e8e75ad8fc18c5a0be35d5f067abf89165a3421f79f00cad7e0550f647a",
+          "size": 2683
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-09T14:26:50.225Z"
     }
   ],
   "mode": "incremental",
