@@ -50,13 +50,16 @@ const data = await ia.consultar(ctx, String(ctx.q).trim())
 const texto = String(data?.resposta || ia.textoResposta(data) || '').trim()
 if (!texto)
 return ctx.reply(ctx.mess.iaErro())
-await ia.enviarAudio(ctx, texto)
+await ia.responder(ctx, texto, 'audio')
 }
 catch (e) {
 ctx.tokito.sendPresenceUpdate('paused', ctx.from).catch(() => {})
 
 if (ctx.modulos.ehErroApi(e, ctx.API_URL)) {
-return ctx.modulos.responderErroApi(ctx, e, 'IA AUDIO')
+return ctx.reply(ctx.mess.padraoErro({
+  titulo: 'IA AUDIO',
+  descricao: ia.mensagemErroIA(e)
+}))
 }
 
 console.log(
