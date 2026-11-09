@@ -1,63 +1,43 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.10",
+  "version": "10.3.11",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-09T14:30:11.043Z",
+  "publishedAt": "2026-11-09T14:56:49.291Z",
   "changelog": [
-    "Modo IA agora espera o tempo correto da API e trata falhas de acesso, limite e indisponibilidade.",
-    "Modo IA áudio: voz Isabela, estado de gravação corrigido, tempo alinhado e fallback de resposta por texto.",
-    "FFmpeg não fica travado indefinidamente: limites para conversão e waveform.",
-    "Pedidos claros de imagens geram e enviam imagens pelo WhatsApp com confirmação antecipada.",
-    "Prévia de execução reservada a tarefas de mídias; evita promessas genéricas de processamento.",
-    "Modo adulto opcional por grupo com comando modoia adulto 1/0.",
-    "Comandos tokito-ia e iaaudio atualizados, preservando os menus, a API Key e as rotas.",
-    "Versão sequencial 10.3.9 para 10.3.10, sem pular numeração."
+    "No modo IA em áudio, o indicador 'gravando áudio' começa assim que a IA inicia a resposta, em vez de exibir 'digitando'.",
+    "A síntese da voz Isabela mantém o indicador de gravação do início até a entrega do áudio.",
+    "Mensagens de confirmação de mídia não substituem o status de gravação.",
+    "Pedidos de imagem continuam indicando processamento de imagem, sem fingir gravação de voz.",
+    "O comando iaaudio encerra o indicador caso a IA não retorne texto.",
+    "Atualização estritamente sequencial: 10.3.10 → 10.3.11."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "Tokito Bot 10.3.10 — IA estável, voz e imagens",
-  "notice": "Integração do modo IA com criação de imagens, recuperação de áudio e melhorias de personalidade.",
+  "type": "Correção",
+  "title": "Tokito Bot 10.3.11 — Gravação no modo IA áudio",
+  "notice": "Indicador de voz corrigido no modo IA áudio.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "ef05c16ddde4bf9c8bdf29d453ef5bf51e42d52ebc8bb9395dea155d55621293",
-      "size": 60082,
-      "gitSha": "0bce8067ce26e5d8e2a69edf8b4ce7d5e77e838d"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/modoia.js",
-      "sha256": "87c18df04ff4b6442bc48766dc8dcdb148374f3f17ef1743d440f8b648aa2445",
-      "size": 2983,
-      "gitSha": "26fa3f76c6e3949bccb9d3c89ebbd091efc228c5"
+      "sha256": "841c1fae35196cd7ac0185c54bd9f90caed6707cdea5602675e8c2c3e10fdccb",
+      "size": 60530,
+      "gitSha": "e7a7075dafdd68c1b658366e14d07a9b620928b8"
     },
     {
       "path": "DADOS_TOKITO/plugins/ia/iaaudio.js",
-      "sha256": "a1a63e2bd92272b2c9f2fd5bc96cc4dec406e49fa816ec2ecd02947102506ef6",
-      "size": 2282,
-      "gitSha": "b8cd20adcdf8c5ed698c0f5c97dc9371c107d680"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/ia/tokito-ia.js",
-      "sha256": "dd7f7e8e75ad8fc18c5a0be35d5f067abf89165a3421f79f00cad7e0550f647a",
-      "size": 2683,
-      "gitSha": "ad943221ea9be4a6630b8715da5a9c48d90783c3"
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "e3e4aa698aa517a67309e5c1698aefe826b7fc1c5e4f27ab16798e14654e304a",
-      "size": 233764,
-      "gitSha": "9f8164d56f8949a1f09e60b24daf5583346c4747"
+      "sha256": "69e14985bcc900819a599eca91efedf6a6b05c65ffef02fe4be970c1f83190a6",
+      "size": 2352,
+      "gitSha": "912fc979577ee15f3b268cd117758f4d6c2c40be"
     },
     {
       "path": "package.json",
-      "sha256": "a14d4ef3ac2f0caa56cf95090a7128067708648548854fb1cb7c944e71149b8a",
+      "sha256": "a6bc94569be10b383c4d12fca5038ce8328131ae05432f18cb885d5f352322fa",
       "size": 1211,
-      "gitSha": "2dff40d31877c686234b981e747d630aae5f5eb7"
+      "gitSha": "6b58aea0a6817851c5adc0df797e9968285a028c"
     }
   ],
   "releases": [
@@ -4175,16 +4155,55 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-09T14:30:11.043Z"
+    },
+    {
+      "version": "10.3.11",
+      "fromVersion": "10.3.10",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Tokito Bot 10.3.11 — Gravação no modo IA áudio",
+      "notice": "Indicador de voz corrigido no modo IA áudio.",
+      "changelog": [
+        "No modo IA em áudio, o indicador 'gravando áudio' começa assim que a IA inicia a resposta, em vez de exibir 'digitando'.",
+        "A síntese da voz Isabela mantém o indicador de gravação do início até a entrega do áudio.",
+        "Mensagens de confirmação de mídia não substituem o status de gravação.",
+        "Pedidos de imagem continuam indicando processamento de imagem, sem fingir gravação de voz.",
+        "O comando iaaudio encerra o indicador caso a IA não retorne texto.",
+        "Atualização estritamente sequencial: 10.3.10 → 10.3.11."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "841c1fae35196cd7ac0185c54bd9f90caed6707cdea5602675e8c2c3e10fdccb",
+          "size": 60530,
+          "gitSha": "e7a7075dafdd68c1b658366e14d07a9b620928b8"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/ia/iaaudio.js",
+          "sha256": "69e14985bcc900819a599eca91efedf6a6b05c65ffef02fe4be970c1f83190a6",
+          "size": 2352,
+          "gitSha": "912fc979577ee15f3b268cd117758f4d6c2c40be"
+        },
+        {
+          "path": "package.json",
+          "sha256": "a6bc94569be10b383c4d12fca5038ce8328131ae05432f18cb885d5f352322fa",
+          "size": 1211,
+          "gitSha": "6b58aea0a6817851c5adc0df797e9968285a028c"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-09T14:56:49.291Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.9",
+  "fromVersion": "10.3.10",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.10"
+  "publicVersion": "10.3.11"
 }

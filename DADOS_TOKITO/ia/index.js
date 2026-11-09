@@ -863,12 +863,14 @@ return ''
 }
 }
 
-const enviarTexto = async (ctx, texto) => {
+const enviarTexto = async (ctx, texto, opcoes = {}) => {
 const resposta = String(texto || '').trim() || 'Tô aqui 😄'
 const final = aplicarUsuarioTexto(ctx, resposta)
 const mencoesPermitidas = final.mencionou && final.jid ? [final.jid] : []
 
+if (!opcoes.preservarGravacao) {
 ctx.tokito.sendPresenceUpdate('composing', ctx.from).catch(() => {})
+}
 
 const payload = {
 text: final.texto,
@@ -882,7 +884,9 @@ return await ctx.tokito.sendMessage(ctx.from, payload, { quoted: ctx.selo })
 return await ctx.tokito.sendMessage(ctx.from, payload)
 }
 } finally {
+if (!opcoes.preservarGravacao) {
 ctx.tokito.sendPresenceUpdate('paused', ctx.from).catch(() => {})
+}
 }
 }
 
@@ -1157,7 +1161,8 @@ ff.stdin.end(buffer)
 })
 
 const enviarAudio = async (ctx, texto) => {
-ctx.tokito.sendPresenceUpdate('composing', ctx.from).catch(() => {})
+// A resposta em voz não deve alternar para 'digitando' durante o TTS.
+ctx.tokito.sendPresenceUpdate('recording', ctx.from).catch(() => {})
 try {
 const fala = limparFalaIA(aplicarUsuarioAudio(ctx, texto)) || 'Tô aqui'
 const { buffer } = await gerarAudio(ctx, fala)
@@ -1323,7 +1328,7 @@ const mostrarPrevia = ['downloads', 'download', 'figurinhas', 'midia', 'mídia']
 if (mostrarPrevia) {
 const inicio = await gerarMensagemAcao(ctx, pergunta, cmd, tipo, data?.resposta)
 if (inicio) {
-try { await enviarTexto(ctx, inicio) }
+try { await enviarTexto(ctx, inicio, { preservarGravacao: tipo === 'audio' }) }
 catch (erro) { console.warn('[IA CONFIRMACAO]', erro?.code || erro?.name || 'falha') }
 }
 }
@@ -1597,7 +1602,10 @@ return true
 }
 
 try {
-ctx.tokito.sendPresenceUpdate('composing', ctx.from).catch(() => {})
+// No modo áudio, aparece 'gravando' desde a consulta da IA.
+// Pedidos de imagem continuam com 'digitando', pois produzem uma imagem, não voz.
+const statusInicial = tipoResposta === 'audio' && !pedidoImagemIA(pergunta) ? 'recording' : 'composing'
+ctx.tokito.sendPresenceUpdate(statusInicial, ctx.from).catch(() => {})
 
 const continuacao = continuarPendente(ctx, pergunta)
 

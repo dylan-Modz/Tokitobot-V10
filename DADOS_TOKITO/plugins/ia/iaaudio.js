@@ -48,8 +48,10 @@ try {
 ctx.tokito.sendPresenceUpdate('recording', ctx.from).catch(() => {})
 const data = await ia.consultar(ctx, String(ctx.q).trim())
 const texto = String(data?.resposta || ia.textoResposta(data) || '').trim()
-if (!texto)
+if (!texto) {
+ctx.tokito.sendPresenceUpdate('paused', ctx.from).catch(() => {})
 return ctx.reply(ctx.mess.iaErro())
+}
 await ia.responder(ctx, texto, 'audio')
 }
 catch (e) {
