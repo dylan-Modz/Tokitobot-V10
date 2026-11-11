@@ -151,6 +151,7 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}s
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}brat texto
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}bratvid texto
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}qc texto
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}take
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}roubar
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}toimg
