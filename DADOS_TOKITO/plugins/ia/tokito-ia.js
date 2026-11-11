@@ -51,14 +51,13 @@ titulo: 'TOKITO IA',
 uso: `${prefix}${command} sua pergunta`,
 descricao: 'Faça uma pergunta para a Tokito IA.'
 }))
-if (ia.pedidoImagemIA(q.trim())) {
-return await ia.enviarImagemGerada(ctx, q.trim())
+const pergunta = q.trim()
+if (ia.pedidoImagemIA(pergunta)) {
+return await ia.enviarImagemGerada(ctx, pergunta)
 }
 const { data } = await axios.get(`${API_URL}/api/tokito-ia`, {
 params: {
-  texto: q.trim(),
-  tipo: 'texto',
-  modo: ctx.dataGp?.[0]?.funcoes?.modoia?.adulto === true ? 'adulto' : 'normal',
+  ...ia.parametrosPerguntaDireta(ctx, pergunta),
   apikey: API_KEY_TOKITO
 },
 timeout: 160000,

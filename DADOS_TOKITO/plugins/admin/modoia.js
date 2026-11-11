@@ -61,8 +61,7 @@ if (!cfg || typeof cfg !== 'object')
 cfg = {
 ativo: false,
 tipo: 'texto',
-espontaneo: true,
-adulto: false
+espontaneo: true
 }
 if (p[0] === '0') {
 cfg.ativo = false

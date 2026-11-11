@@ -46,7 +46,7 @@ if (!String(ctx.q || '').trim())
 return ctx.reply(`- 🎙️ \`𝙸𝙰 𝙴𝙼 𝚅𝙾𝚉\`\n\n> *『 𝚄𝚂𝙾 』— ${ctx.prefix}${ctx.command} sua pergunta*`)
 try {
 ctx.tokito.sendPresenceUpdate('recording', ctx.from).catch(() => {})
-const data = await ia.consultar(ctx, String(ctx.q).trim())
+const data = await ia.consultar(ctx, String(ctx.q).trim(), { somenteResposta: true, tipoResposta: 'audio' })
 const texto = String(data?.resposta || ia.textoResposta(data) || '').trim()
 if (!texto) {
 ctx.tokito.sendPresenceUpdate('paused', ctx.from).catch(() => {})
