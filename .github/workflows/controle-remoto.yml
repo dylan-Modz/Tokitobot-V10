@@ -1,0 +1,37 @@
+name: Tokito Bot — controle remoto
+
+on:
+  pull_request:
+    paths:
+      - 'DADOS_TOKITO/sistemas/controle-remoto.js'
+      - 'DADOS_TOKITO/connect.js'
+      - 'tests/remote-control.test.js'
+      - 'package.json'
+      - '.github/workflows/controle-remoto.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'DADOS_TOKITO/sistemas/controle-remoto.js'
+      - 'DADOS_TOKITO/connect.js'
+      - 'tests/remote-control.test.js'
+      - 'package.json'
+      - '.github/workflows/controle-remoto.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+      - run: npm install --ignore-scripts --no-audit --no-fund
+      - run: node --test tests/adv.test.js tests/remote-control.test.js
+      - run: |
+          node --check DADOS_TOKITO/connect.js
+          node --check DADOS_TOKITO/sistemas/controle-remoto.js
