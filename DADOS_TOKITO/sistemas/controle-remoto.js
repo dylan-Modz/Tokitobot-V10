@@ -7,6 +7,7 @@ const dados = require('./dados');
 
 const CONFIG = path.resolve(__dirname, '..', 'INFO_DADOS', 'config-all.json');
 const INTERVAL_MS = 45_000;
+const RUNTIME_STARTED_AT = new Date().toISOString();
 
 // Um processo iniciado diretamente por "node" não pode prometer reinício.
 // PM2 (com autorestart ativo) ou supervisor explicitamente configurado é obrigatório.
@@ -45,7 +46,7 @@ function createControlAgent({ request = axios, license = dados, getConfig = curr
       const headers = { Authorization: 'Bearer ' + token, 'User-Agent': 'TokitoBot-V10/controle' };
       const supported = isSupervised();
       const response = await request.get(base + '/api/bot/v10/control', {
-        headers, params: { installationId, restartSupported: supported ? 'true' : 'false' },
+        headers, params: { installationId, restartSupported: supported ? 'true' : 'false', runtimeStartedAt: RUNTIME_STARTED_AT },
         timeout: 12000, validateStatus: () => true
       });
       if (response.status !== 200 || !supported || !validateCommand(response.data?.command)) return false;
