@@ -36,6 +36,7 @@ const modulos = require('./sistemas/modulos.js')
 const detector = require('./detector.js')
 const qrcodeTerminal = require('qrcode-terminal')
 const dadosSistema = require('./sistemas/dados.js')
+const controleRemoto = require('./sistemas/controle-remoto.js')
 const avisosOficiais = require('./sistemas/avisos.js')
 const autoInativo = require('./sistemas/autoinativo.js')
 const donoSistema = require('./sistemas/dono.js')
@@ -1368,6 +1369,7 @@ process.exit(24)
 return
 }
 if (!sessaoRegistrada() || process.argv.includes('painel')) await showMenu()
+controleRemoto.start()
 placar.ciclo(resultado => {
 if (!resultado?.definitive) return
 erro(`A licença foi recusada pelo servidor: ${resultado.message || resultado.code || 'acesso bloqueado'}`)
