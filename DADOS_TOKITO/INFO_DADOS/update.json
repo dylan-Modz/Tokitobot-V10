@@ -1,52 +1,40 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.13",
+  "version": "10.3.14",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-11T20:49:07.240Z",
+  "publishedAt": "2026-11-13T12:00:00Z",
   "changelog": [
-    "A Tokito IA fala no feminino e varia entre carinho, ironia e deboche conforme o papo.",
-    "O tom adulto é padrão, com flerte e zoeira quando há abertura. Use modoia adulto 0 para escolher um tom mais leve no grupo.",
-    "A Tokito se apresenta brevemente quando perguntam quem ela é e adapta a resposta para fala no iaaudio."
+    "A Tokito IA permite solicitar o reinício de uma instalação própria sob PM2 ou supervisor configurado.",
+    "A ordem tem expiração, pertence à instalação autenticada e exige confirmação antes de ser aplicada.",
+    "Nenhuma sessão, configuração ou arquivo local é apagado pelo comando remoto."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Tokito Bot 10.3.13 — Personalidade da Tokito IA",
-  "notice": "A Tokito IA conversa com mais naturalidade no texto, no áudio e no grupo.",
+  "title": "Tokito Bot 10.3.14 — Controle remoto seguro",
+  "notice": "Integração opcional com reinício remoto supervisionado da Tokito IA.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/ia/index.js",
-      "sha256": "f89992baaedbee7f728663e87693a49adf2a4e916c1a2ac6d29a8882036f69ae",
-      "size": 60366,
-      "gitSha": "4e2f3abb9926e2c28ef0c2d698268c5f15f82b1b"
+      "path": "DADOS_TOKITO/sistemas/controle-remoto.js",
+      "sha256": "",
+      "gitSha": "d6782631c498be9ed3140e8bc7bfdb9ffd1cc5f7",
+      "size": 0
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/modoia.js",
-      "sha256": "18a848a154cca4a2ee10158f721166a2dcb9f121fccbdba2b6f343a9a9335e84",
-      "size": 2968,
-      "gitSha": "aed94db66beb6d53526ecaf659a42e3122a59bec"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/ia/iaaudio.js",
-      "sha256": "21d3327c60427cfa90438d3b6ab395e457444b36f0d5f428930abb12b74d293e",
-      "size": 2402,
-      "gitSha": "b1392046ac2f650b3a73c170f0a121c26e1f7309"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/ia/tokito-ia.js",
-      "sha256": "84d19a599c7e20fb32492a85d4e19332ba3f5e552c8336412c9fb79c58ebc4de",
-      "size": 2641,
-      "gitSha": "2ebf93260be6964e6d6dbb248669adada5922d75"
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "",
+      "gitSha": "7567726455bd3286b45f06f1e7669a7125708621",
+      "size": 0
     },
     {
       "path": "package.json",
-      "sha256": "ecedf8d0abfaf707be2f2b889e8f64529effabae1ef2bebd70ef1855b91c1be8",
-      "size": 1211,
-      "gitSha": "cc721ad467422d424dcf73fad5ba6b653091924b"
+      "sha256": "",
+      "gitSha": "7cd9ce39256f415783de9f689f1f02c1d4e125c3",
+      "size": 0
     }
   ],
   "releases": [
@@ -4290,12 +4278,48 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-11T20:49:07.240Z"
+    },
+    {
+      "version": "10.3.14",
+      "fromVersion": "10.3.13",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Tokito Bot 10.3.14 — Controle remoto seguro",
+      "notice": "Integração opcional com reinício remoto supervisionado da Tokito IA.",
+      "changelog": [
+        "A Tokito IA permite solicitar o reinício de uma instalação própria sob PM2 ou supervisor configurado.",
+        "A ordem tem expiração, pertence à instalação autenticada e exige confirmação antes de ser aplicada.",
+        "Nenhuma sessão, configuração ou arquivo local é apagado pelo comando remoto."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/controle-remoto.js",
+          "sha256": "",
+          "gitSha": "d6782631c498be9ed3140e8bc7bfdb9ffd1cc5f7",
+          "size": 0
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "gitSha": "7567726455bd3286b45f06f1e7669a7125708621",
+          "size": 0
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "gitSha": "7cd9ce39256f415783de9f689f1f02c1d4e125c3",
+          "size": 0
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-13T12:00:00Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.12",
+  "fromVersion": "10.3.13",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
