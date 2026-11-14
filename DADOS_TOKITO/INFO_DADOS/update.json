@@ -1,208 +1,35 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.14",
+  "version": "10.3.15",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-13T12:00:00Z",
+  "publishedAt": "2026-11-14T23:16:47.490Z",
   "changelog": [
-    "A Tokito IA permite solicitar o reinício de uma instalação própria sob PM2 ou supervisor configurado.",
-    "A ordem tem expiração, pertence à instalação autenticada e exige confirmação antes de ser aplicada.",
-    "Nenhuma sessão, configuração ou arquivo local é apagado pelo comando remoto."
+    "[Melhoria] chore: remover arquivo de testes solicitado",
+    "A versão 10.3.15 já está disponível para atualização.",
+    "Package atualizado",
+    "Adv.test removido",
+    "Remote Control.test removido"
   ],
-  "delete": [],
+  "delete": [
+    "tests/adv.test.js",
+    "tests/remote-control.test.js"
+  ],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Tokito Bot 10.3.14 — Controle remoto seguro",
-  "notice": "Integração opcional com reinício remoto supervisionado da Tokito IA.",
+  "title": "chore: remover arquivo de testes solicitado",
+  "notice": "A versão 10.3.15 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/controle-remoto.js",
-      "sha256": "",
-      "gitSha": "950fe0f1865a8b64617ec43c5c831e8c3ef80e2b",
-      "size": 0
-    },
-    {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "",
-      "gitSha": "7567726455bd3286b45f06f1e7669a7125708621",
-      "size": 0
-    },
-    {
       "path": "package.json",
-      "sha256": "",
-      "gitSha": "7cd9ce39256f415783de9f689f1f02c1d4e125c3",
-      "size": 0
+      "sha256": "aa65e6e5274ed0d2cdeb9d892b267d31b195799c5241e9e4069ec781a59ef8f8",
+      "size": 1244
     }
   ],
   "releases": [
-    {
-      "version": "10.2.13",
-      "fromVersion": "10.2.12",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Correção de cache na integridade do atualizador",
-      "notice": "Atualizador verifica arquivos por SHA e recupera a versão exata do GitHub em caso de cache antigo.",
-      "changelog": [
-        "Corrige downloads de atualização quando o cache do GitHub Raw entrega uma revisão diferente do arquivo.",
-        "Quando o hash não confere, o atualizador tenta uma URL sem cache e busca o blob imutável do GitHub identificado pelo SHA publicado.",
-        "A validação de SHA continua obrigatória: arquivos não verificados jamais são aplicados.",
-        "Demais comandos, menu e imagem do Brasileirão preservados sem alterações."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/dados.js",
-          "gitSha": "8409d3f53db1c132ab49da06a91bc7c32942e53d",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "gitSha": "207873881d3e290bc1dd0145eb9bd672b4f01fb0",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-11T05:33:30.359Z"
-    },
-    {
-      "version": "10.2.14",
-      "fromVersion": "10.2.13",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Brasileirão em card único, wallpaper em álbum e menu organizado",
-      "notice": "Card do Brasileirão e álbum de wallpapers, com remoção do gerador de nomes.",
-      "changelog": [
-        "Brasileirão com capa do Boca Notícias e tabela completa de até 20 clubes geradas juntas em uma única imagem, sem mensagens separadas.",
-        "Card inclui pontos, jogos, vitórias, empates, derrotas, saldo, aproveitamento, artilheiros e confrontos com data e hora quando disponíveis.",
-        "Novo renderizador de imagens sem dependências nativas, mais compatível com Termux e Android; o supervisor instala o pacote pureimage quando necessário.",
-        "Wallpaper pesquisa até 8 resultados e envia em álbum do WhatsApp, usando albumMessage e albumParentKey como no Pinterest.",
-        "Comando username removido do bot, do menu e da lista de atualização.",
-        "Menu Downloads reorganizado: pesquisas, futebol, Roblox, filmes, séries e álbum; lyrics passa para Música e appstore para Apps.",
-        "Atualizador com verificação de integridade preservado, além dos demais comandos e configurações."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
-          "gitSha": "fc261c487ffcd2983953c093e1b67aeefc0df2c6",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "gitSha": "6710afebe13d27717434b9d2d1f11c80a40dea50",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "gitSha": "58052eebafdef6be0a3224dedf1267f1f6d5f565",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [
-        "DADOS_TOKITO/plugins/info/username.js"
-      ],
-      "required": true,
-      "publishedAt": "2026-10-11T05:58:51.323Z"
-    },
-    {
-      "version": "10.2.15",
-      "fromVersion": "10.2.14",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Brasileirão com imagem e resultado na mesma mensagem",
-      "notice": "Brasileirão volta a enviar capa do Boca Notícias com tabela completa na legenda, sem card e sem texto separado.",
-      "changelog": [
-        "Brasileirão voltou ao envio nativo do WhatsApp: foto do Boca Notícias como capa e classificação completa na legenda da MESMA mensagem, igual ao comando play.",
-        "Lógica do Brasileirão centralizada em DADOS_TOKITO/plugins/info/brasileirao.js, sem geração de card ou bibliotecas gráficas.",
-        "Tabela apresenta os clubes retornados pela Tokito APIs, com pontos, jogos, vitórias, empates, derrotas, saldo e aproveitamento; inclui artilharia e jogos com horários quando disponíveis.",
-        "brasileirao-card.js removido e dependência pureimage retirada, evitando erros de renderização e instalação no Termux.",
-        "Envio de wallpaper em álbum, menus, comandos restantes e verificação de integridade preservados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/info/brasileirao.js",
-          "gitSha": "33552c7a6100ae0cf9c872ec2a3f75d8770b40bd",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/scrapers/downloads/consultas.js",
-          "gitSha": "692a88e8ddc6849f2858169c2dc12d9961cdd477",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "gitSha": "6ee465f91377623d7d0597b390dcabbd1e688eae",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [
-        "DADOS_TOKITO/scrapers/downloads/brasileirao-card.js"
-      ],
-      "required": true,
-      "publishedAt": "2026-10-11T06:10:00.000Z"
-    },
-    {
-      "version": "10.2.16",
-      "fromVersion": "10.2.15",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Novo sistema Passaporte Tokito V10",
-      "notice": "Passaporte de apresentação com botão, registro interativo e desbloqueio dos comandos por grupo.",
-      "changelog": [
-        "Novo Passaporte Tokito V10 com botão de apresentação enviado quando um novo membro entra em grupo com o sistema ativado.",
-        "Registro em três etapas interativas: apelido, interesses e frase de apresentação, seguido de confirmação para desbloquear comandos.",
-        "Somente novos membros ficam pendentes ao entrar depois da ativação; membros antigos, administradores e dono não perdem acesso.",
-        "Estados e perfis salvos por grupo em database/sistemas/passaporte, preservados nas atualizações e removidos quando um membro sai.",
-        "Comandos passaporte on/off, iniciar, editar, perfil, registros, cancelar e apagar; alternativa apresentar e painel ativar atualizados.",
-        "Bloqueio aplicado antes dos comandos especiais; chats normais continuam liberados. Exclusão do perfil não contorna um registro pendente.",
-        "Sem dependências novas; sistema desativado por padrão e com fallback para texto quando botões não estiverem disponíveis."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "gitSha": "02db747cadd4fc064febaf6cb164d58ec227ae63",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "tokito.js",
-          "gitSha": "1587a5feba04ba3efde492a2a2ce18a35453f0c4",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "gitSha": "cb09fe9097b0b0e25056c509969133733246c566",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-          "gitSha": "36c93aa7fac90ac02f00ab742385771a4b9b69a9",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "gitSha": "ce6e55ff2685702ec9baed3b0392be64f572660c",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-11T06:25:31.847Z"
-    },
     {
       "version": "10.2.17",
       "fromVersion": "10.2.16",
@@ -4314,6 +4141,32 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-13T12:00:00Z"
+    },
+    {
+      "version": "10.3.15",
+      "fromVersion": "10.3.14",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "chore: remover arquivo de testes solicitado",
+      "notice": "A versão 10.3.15 já está disponível para atualização.",
+      "changelog": [
+        "Package atualizado",
+        "Adv.test removido",
+        "Remote Control.test removido"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "aa65e6e5274ed0d2cdeb9d892b267d31b195799c5241e9e4069ec781a59ef8f8",
+          "size": 1244
+        }
+      ],
+      "delete": [
+        "tests/adv.test.js",
+        "tests/remote-control.test.js"
+      ],
+      "required": false,
+      "publishedAt": "2026-11-14T23:16:47.490Z"
     }
   ],
   "mode": "incremental",
