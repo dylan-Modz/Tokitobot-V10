@@ -1,115 +1,45 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.15",
+  "version": "10.3.16",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-14T23:16:47.490Z",
+  "publishedAt": "2026-11-14T23:21:17.972Z",
   "changelog": [
-    "[Melhoria] chore: remover arquivo de testes solicitado",
-    "A versão 10.3.15 já está disponível para atualização.",
-    "Package atualizado",
-    "Adv.test removido",
-    "Remote Control.test removido"
+    "[Melhoria] refactor: simplificar controle remoto para controle.js",
+    "A versão 10.3.16 já está disponível para atualização.",
+    "Controle Remoto movido",
+    "Controle atualizado",
+    "Conexão do bot atualizada"
   ],
   "delete": [
-    "tests/adv.test.js",
-    "tests/remote-control.test.js"
+    ".github/workflows/controle-remoto.yml",
+    "DADOS_TOKITO/sistemas/controle-remoto.js"
   ],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "chore: remover arquivo de testes solicitado",
-  "notice": "A versão 10.3.15 já está disponível para atualização.",
+  "title": "refactor: simplificar controle remoto para controle.js",
+  "notice": "A versão 10.3.16 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "aa65e6e5274ed0d2cdeb9d892b267d31b195799c5241e9e4069ec781a59ef8f8",
-      "size": 1244
+      "path": ".github/workflows/controle.yml",
+      "sha256": "2eddd348230774173d86cfb3044bd2e233b188a44c03e7b9c6023355a3b6cf3d",
+      "size": 816
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "3161b07a73ae75e36a341643b240e9cc244479f6c50850b549e9d0e9c1b12dca",
+      "size": 49286
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/controle.js",
+      "sha256": "9e0d1a43c0fb88a641412c4d17e5f7fa942314a55f392caf8c3486192d2ffc20",
+      "size": 3559
     }
   ],
   "releases": [
-    {
-      "version": "10.2.17",
-      "fromVersion": "10.2.16",
-      "channel": "stable",
-      "type": "Atualização",
-      "title": "Registro integrado ao perfil original",
-      "notice": "Novo botão REGISTRAR com foto ao entrar e dados incorporados no /perfil, sem comando Passaporte.",
-      "changelog": [
-        "Registro redesenhado: administrador ativa/desativa usando registrar 1 ou registrar 0; removido o comando passaporte.",
-        "Mensagem de entrada com foto real de perfil do novo membro e botão interativo REGISTRAR, inclusive quando os botões gerais estiverem desligados.",
-        "Cadastro sequencial no grupo com nome ou apelido, idade, gênero, orientação sexual e gostos; campos pessoais opcionais podem ser pulados e só aparecem no perfil com autorização explícita.",
-        "Nome digitado substitui o nick exibido no perfil original, mantendo menção, cargo, VIP, bio, Coins, RPG, imagem, botões Ping/Menu e layout anterior.",
-        "Informações autorizadas adicionadas ao bloco normal do perfil, sem criar seção de apresentação ou linha de status de registro.",
-        "Novo cadastro usa os arquivos registro.js e registrar.js; módulos antigos passaporte.js eliminados da árvore, mantendo compatibilidade com dados existentes.",
-        "Bloqueio de comandos até o cadastro continua limitado a novos membros nos grupos com registro ativado; ADM e dono dispensados.",
-        "Botão no grupo respeita prefixo personalizado e o sistema é configurável também pelo painel ativar."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/registro.js",
-          "gitSha": "41311ed09d2a1b726bde31e7ddf9b78d75f4f039",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/registrar.js",
-          "gitSha": "6b7fafd986474cc0ab49016e33e2813afde24e6d",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "gitSha": "95c6ef0c7d9a12852d27b3b95f64786a9ad6bf89",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "tokito.js",
-          "gitSha": "dbb652a564c33762c5b50b88f4b87c49f9945f97",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/ativar.js",
-          "gitSha": "6f5a82150c63cf8e547a972d4da76078e60ca954",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "gitSha": "24a8bfcc0aaad64ff419e621981827fe7b87f463",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/info/perfil.js",
-          "gitSha": "9c2932e097581a47bfaf6d990ec0e924aad282cd",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "gitSha": "c3b18b8f42ba3c8be1f7fecff7041d80c61cd248",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "gitSha": "1f4fb2618cc02f5d4aedcd0f39671f99e6508c05",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [
-        "DADOS_TOKITO/sistemas/passaporte.js",
-        "DADOS_TOKITO/plugins/admin/passaporte.js"
-      ],
-      "required": true,
-      "publishedAt": "2026-10-11T06:54:31.095Z"
-    },
     {
       "version": "10.2.18",
       "fromVersion": "10.2.17",
@@ -4167,6 +4097,42 @@
       ],
       "required": false,
       "publishedAt": "2026-11-14T23:16:47.490Z"
+    },
+    {
+      "version": "10.3.16",
+      "fromVersion": "10.3.15",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "refactor: simplificar controle remoto para controle.js",
+      "notice": "A versão 10.3.16 já está disponível para atualização.",
+      "changelog": [
+        "Controle Remoto movido",
+        "Controle atualizado",
+        "Conexão do bot atualizada"
+      ],
+      "files": [
+        {
+          "path": ".github/workflows/controle.yml",
+          "sha256": "2eddd348230774173d86cfb3044bd2e233b188a44c03e7b9c6023355a3b6cf3d",
+          "size": 816
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "3161b07a73ae75e36a341643b240e9cc244479f6c50850b549e9d0e9c1b12dca",
+          "size": 49286
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/controle.js",
+          "sha256": "9e0d1a43c0fb88a641412c4d17e5f7fa942314a55f392caf8c3486192d2ffc20",
+          "size": 3559
+        }
+      ],
+      "delete": [
+        ".github/workflows/controle-remoto.yml",
+        "DADOS_TOKITO/sistemas/controle-remoto.js"
+      ],
+      "required": false,
+      "publishedAt": "2026-11-14T23:21:17.971Z"
     }
   ],
   "mode": "incremental",
