@@ -5,6 +5,7 @@ on:
     paths:
       - 'DADOS_TOKITO/sistemas/controle.js'
       - 'DADOS_TOKITO/connect.js'
+      - 'DADOS_TOKITO/mensagens/menus.js'
       - 'tokito.js'
       - 'DADOS_TOKITO/plugins/downloads/playcall.js'
       - 'DADOS_TOKITO/plugins/dono/callstatus.js'
@@ -15,6 +16,7 @@ on:
     paths:
       - 'DADOS_TOKITO/sistemas/controle.js'
       - 'DADOS_TOKITO/connect.js'
+      - 'DADOS_TOKITO/mensagens/menus.js'
       - 'tokito.js'
       - 'DADOS_TOKITO/plugins/downloads/playcall.js'
       - 'DADOS_TOKITO/plugins/dono/callstatus.js'
@@ -35,9 +37,4 @@ jobs:
         with:
           node-version: '22.16.0'
       - run: npm install --ignore-scripts --no-audit --no-fund
-      - run: |
-          node --check tokito.js
-          node --check DADOS_TOKITO/connect.js
-          node --check DADOS_TOKITO/plugins/downloads/playcall.js
-          node --check DADOS_TOKITO/plugins/dono/callstatus.js
-          node --check DADOS_TOKITO/sistemas/controle.js
+      - run: npm test
