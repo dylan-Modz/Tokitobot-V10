@@ -754,6 +754,15 @@ if (!state.creds.registered && metodo === 'codigo') await startPairing(tokito)
 if (!state.creds.registered && metodo === 'qr') info('Aguardando geração do QR-Code...')
 tokito.ev.process(async events => {
 if (socketAtual !== tokito) return
+// Recarrega os dados modificados pelos comandos enquanto o socket segue ativo.
+recarregarConfigBot()
+// A Stone pode informar atualizações do cadastro ou dos cargos via eventos.
+if (events['groups.update']) {
+const cache = global.__TOKITO_METADATA_CACHE__
+for (const grupo of events['groups.update'] || []) {
+if (grupo?.id) cache?.delete?.(grupo.id)
+}
+}
 /*
  * ANTI CALL
  */
@@ -765,6 +774,8 @@ await donoSistema.processarChamadas(tokito, events['call'], [ownerNumber, ...Arr
  */
 if (events['group-participants.update']) {
 const update = events['group-participants.update']
+// Qualquer alteração de membros/cargos invalida o cache usado nas permissões.
+if (update?.id) global.__TOKITO_METADATA_CACHE__?.delete?.(update.id)
 try {
 const caminhoGp = `${grupos}/${update.id}.json`
 if (!fs.existsSync(caminhoGp)) return
