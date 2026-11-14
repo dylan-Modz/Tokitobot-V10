@@ -31,6 +31,7 @@
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
+const { aplicarAtualizacaoParticipantes } = require('./sistemas/metadata-live.js')
 const registro = require('./sistemas/registro.js')
 const modulos = require('./sistemas/modulos.js')
 const detector = require('./detector.js')
@@ -765,6 +766,12 @@ await donoSistema.processarChamadas(tokito, events['call'], [ownerNumber, ...Arr
  */
 if (events['group-participants.update']) {
 const update = events['group-participants.update']
+// Atualiza o cache de admin antes de rotinas de boas-vindas ou arquivo de grupo.
+try {
+  aplicarAtualizacaoParticipantes(global.__TOKITO_METADATA_CACHE__, update)
+} catch (e) {
+  console.warn('[GROUP METADATA LIVE]', e?.message || e)
+}
 try {
 const caminhoGp = `${grupos}/${update.id}.json`
 if (!fs.existsSync(caminhoGp)) return
