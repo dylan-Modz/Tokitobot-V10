@@ -63,6 +63,8 @@ const admins = groupAdmins.map(i => normalizar(i))
 if (admins.includes(alvo))
 return reply(mess.jaadm())
 await tokito.groupParticipantsUpdate(from, [alvo], 'promote')
+// Reflete a promoção/rebaixamento sem depender de reiniciar o bot.
+global.__TOKITO_METADATA_CACHE__?.delete(from)
 await tokito.sendMessage(from, {
 text: mess.promovido(alvo),
 contextInfo: {
