@@ -23,17 +23,20 @@
     {
       "path": ".github/workflows/controle.yml",
       "sha256": "c57ad7adab01d144b6b5a6d23342bc7d53557d4c01b597ffdbdaa02c0dc26d73",
-      "size": 1049
+      "size": 1049,
+      "gitSha": "33534ecedf6be40bbd3209a4059780c140136acb"
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "b1b5d4336bbc7b9ae6f922d363c8a44c96b4404bc8bc624413e0ccc459f738cc",
-      "size": 79224
+      "size": 79224,
+      "gitSha": "3a668f670e83eb871e6a4b946cf50096262e4bbf"
     },
     {
       "path": "package.json",
       "sha256": "ac86126e505995e5805594ac448a624a18cdcc85407d795b0962e5e75de68fa9",
-      "size": 1770
+      "size": 1770,
+      "gitSha": "72948a118d3cf091f4bd430466865c8d8d496a95"
     }
   ],
   "releases": [
@@ -4137,7 +4140,8 @@
         {
           "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
           "sha256": "261cbf83801c0b191d63cd1f30b9dba02fd03fb4d1df7075241c597b2c30b3f7",
-          "size": 12163
+          "size": 12163,
+          "gitSha": "212c177321ed056461d804fd511f4125e678177b"
         }
       ],
       "delete": [],
@@ -4160,17 +4164,20 @@
         {
           "path": ".github/workflows/controle.yml",
           "sha256": "c57ad7adab01d144b6b5a6d23342bc7d53557d4c01b597ffdbdaa02c0dc26d73",
-          "size": 1049
+          "size": 1049,
+          "gitSha": "33534ecedf6be40bbd3209a4059780c140136acb"
         },
         {
           "path": "DADOS_TOKITO/mensagens/menus.js",
           "sha256": "b1b5d4336bbc7b9ae6f922d363c8a44c96b4404bc8bc624413e0ccc459f738cc",
-          "size": 79224
+          "size": 79224,
+          "gitSha": "3a668f670e83eb871e6a4b946cf50096262e4bbf"
         },
         {
           "path": "package.json",
           "sha256": "ac86126e505995e5805594ac448a624a18cdcc85407d795b0962e5e75de68fa9",
-          "size": 1770
+          "size": 1770,
+          "gitSha": "72948a118d3cf091f4bd430466865c8d8d496a95"
         }
       ],
       "delete": [],
