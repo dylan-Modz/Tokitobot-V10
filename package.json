@@ -7,7 +7,7 @@
     "start": "node tokito.js",
     "update": "node tokito.js up",
     "install:bot": "bash DADOS_TOKITO/database/lib/install.sh",
-    "test": "node --test tests/adv.test.js"
+    "test": "node --check tokito.js && node --check DADOS_TOKITO/connect.js"
   },
   "keywords": [],
   "author": "dylanModz",
