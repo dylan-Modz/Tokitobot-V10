@@ -1,62 +1,42 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.16",
+  "version": "10.3.17",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-14T23:34:48.160Z",
+  "publishedAt": "2026-11-14T23:37:48.347Z",
   "changelog": [
-    "[Correção] fix: PlayCall com áudio pré-carregado como na chamada individual da Aurora",
-    "A versão 10.3.16 já está disponível para atualização.",
-    "Playcall atualizado"
+    "[Correção] fix: exibir PlayCall no bot e alinhar versao 10.3.17",
+    "A versão 10.3.17 já está disponível para atualização.",
+    "Controle atualizado",
+    "Menus atualizado",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: PlayCall com áudio pré-carregado como na chamada individual da Aurora",
-  "notice": "A versão 10.3.16 já está disponível para atualização.",
+  "title": "fix: exibir PlayCall no bot e alinhar versao 10.3.17",
+  "notice": "A versão 10.3.17 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
-      "sha256": "261cbf83801c0b191d63cd1f30b9dba02fd03fb4d1df7075241c597b2c30b3f7",
-      "size": 12163
+      "path": ".github/workflows/controle.yml",
+      "sha256": "c57ad7adab01d144b6b5a6d23342bc7d53557d4c01b597ffdbdaa02c0dc26d73",
+      "size": 1049
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "b1b5d4336bbc7b9ae6f922d363c8a44c96b4404bc8bc624413e0ccc459f738cc",
+      "size": 79224
+    },
+    {
+      "path": "package.json",
+      "sha256": "ac86126e505995e5805594ac448a624a18cdcc85407d795b0962e5e75de68fa9",
+      "size": 1770
     }
   ],
   "releases": [
-    {
-      "version": "10.2.18",
-      "fromVersion": "10.2.17",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Corrigir FFmpeg e limpeza dos temporários",
-      "notice": "Vídeos alterados sem erro de entrada igual à saída e sem salvar arquivos permanentes.",
-      "changelog": [
-        "Corrige o FFmpeg dos alteradores de vídeo: a entrada e a saída não usam mais o mesmo arquivo MP4.",
-        "Cada alteração cria uma pasta única em /tmp, processa a mídia, envia o arquivo gerado ao WhatsApp e remove os temporários ao finalizar (inclusive após erros).",
-        "Videolento, videorapido e videocontrario mantêm envio de vídeo MP4 e tentam processar sem faixa de áudio caso a primeira conversão falhe.",
-        "Corrige o fluxo para vídeo não executar FFmpeg duas vezes nem cair na resposta de áudio após gerar o vídeo.",
-        "Alteradores de áudio continuam retornando MP3; registro integrado ao perfil da V10.2.17, menus e outros comandos preservados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/alteradores/alteradores.js",
-          "gitSha": "38063c02fc1143b385cf82212ef3e2468a291a5f",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "gitSha": "40a2657ddbce9669fe4603b47d9ed98a2e06eea0",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-11T07:08:27.915Z"
-    },
     {
       "version": "10.2.19",
       "fromVersion": "10.2.18",
@@ -4163,6 +4143,39 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-14T23:34:48.160Z"
+    },
+    {
+      "version": "10.3.17",
+      "fromVersion": "10.3.16",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: exibir PlayCall no bot e alinhar versao 10.3.17",
+      "notice": "A versão 10.3.17 já está disponível para atualização.",
+      "changelog": [
+        "Controle atualizado",
+        "Menus atualizado",
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": ".github/workflows/controle.yml",
+          "sha256": "c57ad7adab01d144b6b5a6d23342bc7d53557d4c01b597ffdbdaa02c0dc26d73",
+          "size": 1049
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "b1b5d4336bbc7b9ae6f922d363c8a44c96b4404bc8bc624413e0ccc459f738cc",
+          "size": 79224
+        },
+        {
+          "path": "package.json",
+          "sha256": "ac86126e505995e5805594ac448a624a18cdcc85407d795b0962e5e75de68fa9",
+          "size": 1770
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-14T23:37:48.346Z"
     }
   ],
   "mode": "incremental",
