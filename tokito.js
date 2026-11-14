@@ -57,7 +57,7 @@ const fundos = require('./DADOS_TOKITO/sistemas/fundos')
 const comandos = () => [...new Set([...similar.casos(__filename), ...plugins.comandos()])]
 
 // Metadata em cache: nunca segura um comando quando já existe dado salvo.
-const tempoCache = 600000, esperaGp = 1200
+const tempoCache = 15000, esperaGp = 2200
 
 const atualizarGp = (tokito, jid) => {
 if (!jid || refreshGp.has(jid)) return
@@ -81,10 +81,7 @@ refreshGp.delete(jid)
 const metadataSeguro = async (tokito, jid) => {
 const agora = Date.now()
 const salvo = cacheGp.get(jid)
-if (salvo?.dados) {
-if (agora - Number(salvo.tempo || 0) >= tempoCache) atualizarGp(tokito, jid)
-return salvo.dados
-}
+if (salvo?.dados && agora - Number(salvo.tempo || 0) < tempoCache) return salvo.dados
 try {
 const dados = await Promise.race([tokito.groupMetadata(jid), new Promise((_, reject) => setTimeout(() => reject(new Error('TIMEOUT_GROUP_METADATA')), esperaGp))])
 if (dados) {
@@ -96,6 +93,8 @@ tempo: Date.now()
 return dados || null
 } catch {
 atualizarGp(tokito, jid)
+// Em falha temporária, dados antigos só podem valer para recursos não sensíveis.
+// Metadados antigos nunca devem conceder cargo de administrador.
 return null
 }
 }
@@ -373,6 +372,18 @@ const isGroup = from?.endsWith('@g.us')
 const isStatus = from === 'status@broadcast'
 const isNewsletter = String(from || '').endsWith('@newsletter')
 if (!from) continue
+// Configuração ativa por mensagem: comandos do painel e do WhatsApp valem sem reiniciar.
+const configAtual = runtimeSub.config()
+const NomeDoBot = String(configAtual.NomeDoBot || 'Tokito Bot V10')
+const ownerName = String(configAtual.ownerName || '')
+const prefixGlobal = String(configAtual.prefix || '!')
+const channel = String(configAtual.channel || '')
+const channeldl = String(configAtual.channeldl || '0@newsletter')
+const ownerNumber = String(configAtual.ownerNumber || '')
+const CREDENTIALS_USER = configAtual.CREDENTIALS_USER || {}
+const API_URL = String(configAtual.API_URL || 'https://tokito-apis.com.br').replace(/\/+$/, '')
+const API_KEY_TOKITO = String(configAtual.API_KEY_TOKITO || '')
+Object.assign(setting, configAtual)
 // Registra apenas ID e horário originais, para apagar mensagens só na conta do bot.
 const mensagensRecebidas = (tokito.__tokitoMessageTimestamps ||= new Map());
 const brutoTimestamp = info.messageTimestamp;
