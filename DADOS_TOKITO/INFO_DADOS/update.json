@@ -21,12 +21,6 @@
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": ".github/workflows/controle.yml",
-      "sha256": "c57ad7adab01d144b6b5a6d23342bc7d53557d4c01b597ffdbdaa02c0dc26d73",
-      "size": 1049,
-      "gitSha": "33534ecedf6be40bbd3209a4059780c140136acb"
-    },
-    {
       "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "b1b5d4336bbc7b9ae6f922d363c8a44c96b4404bc8bc624413e0ccc459f738cc",
       "size": 79224,
@@ -4109,12 +4103,6 @@
           "sha256": "",
           "gitSha": "950fe0f1865a8b64617ec43c5c831e8c3ef80e2b",
           "size": 3559
-        },
-        {
-          "path": ".github/workflows/controle.yml",
-          "sha256": "",
-          "gitSha": "112a2a297a24f0951fef663ee33915a376469aaa",
-          "size": 1224
         }
       ],
       "delete": [
@@ -4161,12 +4149,6 @@
         "Package atualizado"
       ],
       "files": [
-        {
-          "path": ".github/workflows/controle.yml",
-          "sha256": "c57ad7adab01d144b6b5a6d23342bc7d53557d4c01b597ffdbdaa02c0dc26d73",
-          "size": 1049,
-          "gitSha": "33534ecedf6be40bbd3209a4059780c140136acb"
-        },
         {
           "path": "DADOS_TOKITO/mensagens/menus.js",
           "sha256": "b1b5d4336bbc7b9ae6f922d363c8a44c96b4404bc8bc624413e0ccc459f738cc",
