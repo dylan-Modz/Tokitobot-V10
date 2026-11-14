@@ -22,8 +22,10 @@ const jidContato = (ctx) => {
     ...(Array.isArray(ctx.mentionedList) ? ctx.mentionedList : []),
     ...(Array.isArray(ctx.menc_jid2) ? ctx.menc_jid2 : []),
     ...(Array.isArray(ctx.menc_os2) ? ctx.menc_os2 : []),
+    ctx.menc_jid2,
+    ctx.menc_os2,
     ctx.menc_prt
-  ].filter(Boolean)
+  ].filter(value => typeof value === 'string' || (value && typeof value === 'object'))
   const primeiro = marcados[0]
   if (!primeiro) return ''
   const jid = String(ctx.nJid ? ctx.nJid(primeiro) : primeiro)
@@ -123,6 +125,8 @@ dylan.setCommand({
   async executar(ctx) {
     const { tokito, from, reply, prefix, q, sender } = ctx
     if (!ctx.SoDono) return reply(ctx.mess?.onlyOwner?.() || 'Apenas o dono pode iniciar ligações.')
+    // A mensagem pode trazer a menção em forma de lista ou JID único.
+    // O bot precisa registrar o comando mesmo antes da pessoa ser marcada.
     const destino = jidContato(ctx)
     const entrada = pesquisaEntrada(q)
     if (!destino || !entrada) {
