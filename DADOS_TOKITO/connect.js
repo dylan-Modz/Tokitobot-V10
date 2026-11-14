@@ -29,7 +29,7 @@
  */
 
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
-const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario } = require('./database/lib/exports.js')
+const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario, cacheGp } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
 const registro = require('./sistemas/registro.js')
 const modulos = require('./sistemas/modulos.js')
@@ -754,6 +754,8 @@ if (!state.creds.registered && metodo === 'codigo') await startPairing(tokito)
 if (!state.creds.registered && metodo === 'qr') info('Aguardando geração do QR-Code...')
 tokito.ev.process(async events => {
 if (socketAtual !== tokito) return
+// Recarrega configurações alteradas pelo painel ou por comandos do WhatsApp.
+recarregarConfigBot()
 /*
  * ANTI CALL
  */
@@ -765,6 +767,7 @@ await donoSistema.processarChamadas(tokito, events['call'], [ownerNumber, ...Arr
  */
 if (events['group-participants.update']) {
 const update = events['group-participants.update']
+if (update?.id) cacheGp.delete(update.id)
 try {
 const caminhoGp = `${grupos}/${update.id}.json`
 if (!fs.existsSync(caminhoGp)) return
@@ -783,6 +786,7 @@ metadata = await tokito.groupMetadata(update.id)
 return
 }
 if (!metadata?.id?.endsWith('@g.us')) return
+cacheGp.set(update.id, { dados: metadata, tempo: Date.now() })
 const membros = metadata.participants || []
 const mapaJids = new Map()
 for (const membro of membros) {

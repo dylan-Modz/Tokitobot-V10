@@ -29,6 +29,7 @@
  */
 
 const dylan = require('../../database/lib/comandos')
+const runtimeSub = require('../../sub/runtime')
 
 dylan.setCommand({
 nome: "nome-dono",
@@ -47,6 +48,7 @@ return reply(mess.onlyOwner())
 const novoNomeDono = String(q || '').trim()
 if (!novoNomeDono)
 return reply(mess.ownerNameRequired(prefix))
+if (runtimeSub.isSubBot) return reply('O nome principal do dono só pode ser alterado no bot principal.')
 setting.ownerName = novoNomeDono
 fs.writeFileSync('./DADOS_TOKITO/INFO_DADOS/config-all.json', JSON.stringify(setting, null, 2))
 await reply(mess.ownerNameChanged(novoNomeDono))
