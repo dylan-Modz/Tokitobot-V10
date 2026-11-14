@@ -7,6 +7,7 @@ on:
       - 'DADOS_TOKITO/connect.js'
       - 'tokito.js'
       - 'DADOS_TOKITO/plugins/downloads/playcall.js'
+      - 'DADOS_TOKITO/mensagens/menus.js'
       - 'DADOS_TOKITO/plugins/dono/callstatus.js'
       - 'package.json'
       - '.github/workflows/controle.yml'
@@ -17,6 +18,7 @@ on:
       - 'DADOS_TOKITO/connect.js'
       - 'tokito.js'
       - 'DADOS_TOKITO/plugins/downloads/playcall.js'
+      - 'DADOS_TOKITO/mensagens/menus.js'
       - 'DADOS_TOKITO/plugins/dono/callstatus.js'
       - 'package.json'
       - '.github/workflows/controle.yml'
@@ -39,5 +41,7 @@ jobs:
           node --check tokito.js
           node --check DADOS_TOKITO/connect.js
           node --check DADOS_TOKITO/plugins/downloads/playcall.js
+          node --check DADOS_TOKITO/mensagens/menus.js
+          node -e "const a=require('node:assert/strict');const d=require('./DADOS_TOKITO/database/lib/comandos');d.abrir('playcall');require('./DADOS_TOKITO/plugins/downloads/playcall.js');const c=d.fechar('playcall');a.equal(c?.nome,'playcall');a.deepEqual(c?.comandos,['playcall']);const fs=require('node:fs');const menu=fs.readFileSync('DADOS_TOKITO/mensagens/menus.js','utf8');a.ok(menu.includes('\u0024{prefix}playcall @pessoa música/link'))"
           node --check DADOS_TOKITO/plugins/dono/callstatus.js
           node --check DADOS_TOKITO/sistemas/controle.js
