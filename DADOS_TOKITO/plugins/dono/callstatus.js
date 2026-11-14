@@ -25,6 +25,7 @@ dylan.setCommand({
       '📞 *𝚂𝚃𝙾𝙽𝙴 𝚅𝙾𝙸𝙿*',
       '> 🧩 Motor: ' + (estado.initialized ? 'iniciado (experimental)' : 'não iniciado'),
       '> 📞 Iniciar: ' + (recursos.startCall ? 'disponível' : 'indisponível'),
+      '> 🌐 Transporte: ' + String(estado.transport || recursos.transport || 'não inicializado'),
       '> 🎧 Arquivos de áudio: ' + (recursos.audioFiles ? 'disponível' : 'indisponível'),
       '> 🔊 Transmissão: ' + (recursos.liveAudio ? 'exposta (experimental)' : 'indisponível'),
       '> 🎵 PlayCall: ' + (atual?.fase || 'sem chamada ativa'),
