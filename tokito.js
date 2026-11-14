@@ -57,7 +57,7 @@ const fundos = require('./DADOS_TOKITO/sistemas/fundos')
 const comandos = () => [...new Set([...similar.casos(__filename), ...plugins.comandos()])]
 
 // Metadata em cache: nunca segura um comando quando já existe dado salvo.
-const tempoCache = 600000, esperaGp = 1200
+const tempoCache = 600000, tempoCacheComando = 15000, esperaGp = 1200
 
 const atualizarGp = (tokito, jid) => {
 if (!jid || refreshGp.has(jid)) return
@@ -78,11 +78,23 @@ refreshGp.delete(jid)
 })
 }
 
-const metadataSeguro = async (tokito, jid) => {
+const metadataSeguro = async (tokito, jid, { comando = false } = {}) => {
 const agora = Date.now()
 const salvo = cacheGp.get(jid)
 if (salvo?.dados) {
-if (agora - Number(salvo.tempo || 0) >= tempoCache) atualizarGp(tokito, jid)
+const idade = agora - Number(salvo.tempo || 0)
+// Em comandos, valide os cargos periodicamente; nunca dependa do cache de 10 minutos.
+// O evento de promoção/rebaixamento também invalida o cache imediatamente.
+if (comando && idade >= tempoCacheComando && !refreshGp.has(jid)) {
+try {
+const dados = await Promise.race([tokito.groupMetadata(jid), new Promise((_, reject) => setTimeout(() => reject(new Error('TIMEOUT_GROUP_METADATA')), esperaGp))])
+if (dados) {
+cacheGp.set(jid, { dados, tempo: Date.now() })
+return dados
+}
+} catch { atualizarGp(tokito, jid) }
+}
+if (idade >= tempoCache) atualizarGp(tokito, jid)
 return salvo.dados
 }
 try {
@@ -368,6 +380,13 @@ try {
 if (!sorteio.ativo()) return
 if (!runtimeSub.isSubBot) aluguel.iniciar(tokito)
 for (const info of upsert?.messages || []) {
+// Configurações persistidas passam a valer na mensagem seguinte, sem reiniciar.
+const configAtual = runtimeSub.config()
+Object.assign(setting, configAtual)
+const {
+NomeDoBot, ownerName, prefix: prefixGlobal, channel, channeldl,
+ownerNumber, CREDENTIALS_USER, API_URL, API_KEY_TOKITO
+} = configAtual
 const from = info.key?.remoteJid
 const isGroup = from?.endsWith('@g.us')
 const isStatus = from === 'status@broadcast'
@@ -511,7 +530,7 @@ var PR_String = Procurar_String.toLowerCase()
 .replace(/[\u0300-\u036f]/g, '')
 let groupMetadata = ''
 if (isGroup) {
-groupMetadata = (await metadataSeguro(tokito, from)) || ''
+groupMetadata = (await metadataSeguro(tokito, from, { comando: isCmd })) || ''
 }
 const groupName = isGroup ? groupMetadata?.subject || '' : ''
 const groupDesc = isGroup ? groupMetadata?.desc || '' : ''
@@ -803,9 +822,15 @@ const DonoOficial = runtimeSub.isSubBot ? isSubOwner : nmrdn ? nmrdn === sender 
 const groupAdmins = isGroup ? getGroupAdmins(groupMembers) : []
 const membrosGrupo = isGroup ? getMembros(groupMembers) : []
 const adminsNormalizados = groupAdmins.map(admin => nJid(admin)).filter(Boolean)
+// Um participante pode chegar com PN (@s.whatsapp.net) ou LID (@lid).
+// Compare todas as identidades do membro administrador, não só a primeira.
+const idsAdministradores = new Set(groupMembers
+.filter(membro => ['admin', 'superadmin'].includes(membro?.admin))
+.flatMap(membro => [membro?.phoneNumber, membro?.participantPn, membro?.participantAlt, membro?.jid, membro?.id, membro?.participant, membro?.lid])
+.map(limpo).filter(Boolean))
 const botNormalizado = nJid(botNumber)
-const isGroupAdmins = SoDono || adminsNormalizados.includes(senderNormalizado)
-const isBotGroupAdmins = !isGroup || adminsNormalizados.includes(botNormalizado)
+const isGroupAdmins = SoDono || adminsNormalizados.includes(senderNormalizado) || idsAdministradores.has(limpo(sender)) || idsAdministradores.has(limpo(senderNormalizado))
+const isBotGroupAdmins = !isGroup || adminsNormalizados.includes(botNormalizado) || idsAdministradores.has(limpo(botNumber)) || idsAdministradores.has(limpo(botNormalizado))
 let vipAlterado = false
 for (let i = vip.length - 1; i >= 0; i--) {
 const membroVip = vip[i]
