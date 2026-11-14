@@ -25,7 +25,7 @@ const jidContato = (ctx) => {
     ctx.menc_jid2,
     ctx.menc_os2,
     ctx.menc_prt
-  ].filter(value => typeof value === 'string' || (value && typeof value === 'object'))
+  ].filter(value => typeof value === 'string' ? Boolean(value) : Boolean(value && !Array.isArray(value) && typeof value === 'object'))
   const primeiro = marcados[0]
   if (!primeiro) return ''
   const jid = String(ctx.nJid ? ctx.nJid(primeiro) : primeiro)
