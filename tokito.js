@@ -57,7 +57,7 @@ const fundos = require('./DADOS_TOKITO/sistemas/fundos')
 const comandos = () => [...new Set([...similar.casos(__filename), ...plugins.comandos()])]
 
 // Metadata em cache: nunca segura um comando quando já existe dado salvo.
-const tempoCache = 600000, esperaGp = 1200
+const tempoCache = 30000, esperaGp = 1200
 
 const atualizarGp = (tokito, jid) => {
 if (!jid || refreshGp.has(jid)) return
@@ -82,7 +82,21 @@ const metadataSeguro = async (tokito, jid) => {
 const agora = Date.now()
 const salvo = cacheGp.get(jid)
 if (salvo?.dados) {
-if (agora - Number(salvo.tempo || 0) >= tempoCache) atualizarGp(tokito, jid)
+if (agora - Number(salvo.tempo || 0) >= tempoCache) {
+  // Tenta uma resposta atual. Se houver timeout, mantém metadados conhecidos
+  // e agenda refresh sem segurar todos os comandos.
+  try {
+    const atual = await Promise.race([
+      tokito.groupMetadata(jid),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('TIMEOUT_GROUP_METADATA')), esperaGp))
+    ])
+    if (atual?.participants) {
+      cacheGp.set(jid, { dados: atual, tempo: Date.now() })
+      return atual
+    }
+  } catch {}
+  atualizarGp(tokito, jid)
+}
 return salvo.dados
 }
 try {
@@ -368,6 +382,12 @@ try {
 if (!sorteio.ativo()) return
 if (!runtimeSub.isSubBot) aluguel.iniciar(tokito)
 for (const info of upsert?.messages || []) {
+  // O JSON pode mudar por comando, painel ou sub bot sem recriar o socket.
+  // Sombra os valores imutáveis lidos ao carregar o módulo.
+  const {
+    NomeDoBot, ownerName, prefix: prefixGlobal, channel, channeldl,
+    ownerNumber, CREDENTIALS_USER, API_URL, API_KEY_TOKITO
+  } = runtimeSub.config()
 const from = info.key?.remoteJid
 const isGroup = from?.endsWith('@g.us')
 const isStatus = from === 'status@broadcast'
