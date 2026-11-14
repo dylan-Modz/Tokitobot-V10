@@ -1,90 +1,27 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.15",
+  "version": "10.3.16",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-14T23:24:04.443Z",
+  "publishedAt": "2026-11-14T23:34:48.160Z",
   "changelog": [
-    "Stone WPP 1.0.7 (commit verificado do GitHub, instalação com npm)",
-    "Novo #playcall por nome ou link do YouTube: capa, foto do contato, eventos de ligação e áudio condicionado à conexão",
-    "Novo #callstatus para consultar capacidade e erros do motor VoIP experimental",
-    "Promoção e rebaixamento de ADM reconhecidos sem reiniciar",
-    "Prefixo, canal, nome e número do dono atualizados nas mensagens sem reiniciar",
-    "Organização do módulo interno controle.js e verificação de sintaxe"
+    "[Correção] fix: PlayCall com áudio pré-carregado como na chamada individual da Aurora",
+    "A versão 10.3.16 já está disponível para atualização.",
+    "Playcall atualizado"
   ],
-  "delete": [
-    "tests/adv.test.js",
-    "tests/remote-control.test.js",
-    "DADOS_TOKITO/sistemas/controle-remoto.js",
-    ".github/workflows/controle-remoto.yml"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Tokito V10: PlayCall e atualizacao sem reiniciar",
-  "notice": "A versão 10.3.15 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: PlayCall com áudio pré-carregado como na chamada individual da Aurora",
+  "notice": "A versão 10.3.16 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "",
-      "gitSha": "dc1d88ef2786b51dc8c18576b836fe8f3229e73f",
-      "size": 1446
-    },
-    {
-      "path": "tokito.js",
-      "sha256": "",
-      "gitSha": "cf33d3338bb21a340dd65d61231a44d651dad473",
-      "size": 55084
-    },
-    {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "",
-      "gitSha": "fd0205452412a96a7acc8cf169568073ffe8f6fe",
-      "size": 49502
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/promover.js",
-      "sha256": "",
-      "gitSha": "a8977aff819b6bf26df0474e88a5ec63e3328d94",
-      "size": 2306
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/rebaixar.js",
-      "sha256": "",
-      "gitSha": "efbab88fe1d4062aebec780b30372410cc2eee65",
-      "size": 2417
-    },
-    {
       "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
-      "sha256": "",
-      "gitSha": "969ae26c050bbe8376546c7b5b91e228c58e146b",
-      "size": 11834
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/callstatus.js",
-      "sha256": "",
-      "gitSha": "a7146f8c048dc59b2152a52d00616e95157accef",
-      "size": 1601
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/nome-dono.js",
-      "sha256": "",
-      "gitSha": "3d2cda3bbcf70f5b98816f27d4e8c94ad8a383c9",
-      "size": 1875
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/controle.js",
-      "sha256": "",
-      "gitSha": "950fe0f1865a8b64617ec43c5c831e8c3ef80e2b",
-      "size": 3559
-    },
-    {
-      "path": ".github/workflows/controle.yml",
-      "sha256": "",
-      "gitSha": "112a2a297a24f0951fef663ee33915a376469aaa",
-      "size": 1224
+      "sha256": "261cbf83801c0b191d63cd1f30b9dba02fd03fb4d1df7075241c597b2c30b3f7",
+      "size": 12163
     }
   ],
   "releases": [
@@ -4205,6 +4142,27 @@
       ],
       "required": false,
       "publishedAt": "2026-11-14T23:24:04.443Z"
+    },
+    {
+      "version": "10.3.16",
+      "fromVersion": "10.3.15",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: PlayCall com áudio pré-carregado como na chamada individual da Aurora",
+      "notice": "A versão 10.3.16 já está disponível para atualização.",
+      "changelog": [
+        "Playcall atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
+          "sha256": "261cbf83801c0b191d63cd1f30b9dba02fd03fb4d1df7075241c597b2c30b3f7",
+          "size": 12163
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-14T23:34:48.160Z"
     }
   ],
   "mode": "incremental",
