@@ -1,7 +1,8 @@
 /*
  * TOKITO BOT V10 — PlayCall
- * Usa a mesma busca do Play e somente inicia áudio após confirmação de chamada conectada.
- * VoIP experimental: nunca apresenta sinalização como áudio transmitido.
+ * Busca por nome/link como Play, prepara MP3 e entrega o arquivo ao motor
+ * VoIP no startCall, como no fluxo de chamada individual usado na Aurora.
+ * O áudio é preparado antes, mas só é transmitido após a conexão real.
  */
 'use strict'
 
@@ -184,9 +185,10 @@ dylan.setCommand({
       void (async () => {
         try {
           if (timer) clearTimeout(timer)
-          await calls.loadAudio(callId, temporario.arquivo)
+          // startCall recebeu o áudio pronto. A Stone inicia o envio quando
+          // a mídia da chamada individual estiver efetivamente conectada.
           chamadas.set(sessao, { fase: 'transmitindo', destino, origem: from, musica: musica.titulo, callId })
-          await aviso('🎧 *𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻*\n> ✅ @' + ident(destino) + ' conectou à chamada!\n> 🎵 ' + musica.titulo + '\n> 🔊 Reprodução entregue ao motor VoIP experimental.')
+          await aviso('🎧 *𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻*\n> ✅ @' + ident(destino) + ' conectou à chamada!\n> 🎵 ' + musica.titulo + '\n> 🔊 Áudio preparado para transmissão pela Stone.')
           const avatar = await tokito.profilePictureUrl(destino, 'image').catch(() => '')
           if (avatar) await tokito.sendMessage(from, {
             image: { url: avatar }, caption: '👤 Contato conectado: @' + ident(destino),
@@ -221,7 +223,9 @@ dylan.setCommand({
       await aviso('📞 *𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻*\n> Aguardando @' + ident(destino) + ' atender...\n> A música só será iniciada após a conexão confirmada.')
       calls.on('state', observar)
       ouvindo = true
-      callId = await calls.startCall({ peerJid: destino, isVideo: false })
+      // Entrega o arquivo no início da chamada: evita depender de loadAudio
+      // depois de um evento que pode ter sido recebido antes do callId.
+      callId = await calls.startCall({ peerJid: destino, isVideo: false, audioFile: temporario.arquivo })
       chamadas.set(sessao, { fase: 'chamando', destino, origem: from, musica: musica.titulo, callId })
       timer = setTimeout(() => { if (!tocando) void encerrar('tempo') }, 60000)
       timer.unref?.()
