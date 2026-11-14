@@ -37,4 +37,7 @@ jobs:
         with:
           node-version: '22.16.0'
       - run: npm install --ignore-scripts --no-audit --no-fund
+      - run: npm ls @stone-wpp/ofc --depth=0
       - run: npm test
+      - run: node -e "const d=require('./DADOS_TOKITO/database/lib/comandos');d.abrir('playcall');require('./DADOS_TOKITO/plugins/downloads/playcall.js');const x=d.fechar('playcall');if(x?.nome!=='playcall'||!x?.comandos?.includes('playcall'))process.exit(1);console.log('PlayCall registrado:',x.nome)"
+
