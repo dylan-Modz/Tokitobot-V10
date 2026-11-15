@@ -6,34 +6,38 @@
   "ref": "main",
   "publishedAt": "2026-11-15T13:24:19.568Z",
   "changelog": [
-    "[Correção] fix: PlayCall texto renovado, encerramento estilizado e numero direto — 10.3.23",
-    "A versão 10.3.23 já está disponível para atualização.",
-    "Menus atualizado",
-    "Playcall atualizado",
-    "Package atualizado"
+    "PlayCall com mensagens totalmente redesenhadas, inclusive a de encerramento e a ajuda.",
+    "Sem termos técnicos nas respostas: os textos mostram apenas música, telefone e situação da chamada.",
+    "Agora aceita número digitado com DDI/DDD, sem precisar mencionar: /playcall 5511999999999 nome da música.",
+    "Número do contato exibido em todas as fases; selo e informações de canal incluídos em todas as mensagens.",
+    "Chamada permanece conectada até o WhatsApp informar o encerramento; áudio enviado após o contato atender.",
+    "Stone WPP 1.0.7 do NPM e demais comandos preservados."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: PlayCall texto renovado, encerramento estilizado e numero direto — 10.3.23",
-  "notice": "A versão 10.3.23 já está disponível para atualização.",
+  "title": "PlayCall: design de texto novo e telefone sem marcação",
+  "notice": "Tokito Bot 10.3.23 disponível: PlayCall renovado e ligação por número direto.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "6e14b6aeae5e329bea0303f402f28245ea3e7adc527379d1f0b1bcfadb01b8c8",
-      "size": 79230
+      "size": 79230,
+      "gitSha": "7b831dff146eda3cfd6163852563397e0f7cdb45"
     },
     {
       "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
       "sha256": "4f4604352ba0d020fbeb1887ae1e68d3de366a57cab5c105e2841d55ed1f89c3",
-      "size": 14081
+      "size": 14081,
+      "gitSha": "cbe6eb2fb8d3e5613dda0ae80dd6d52d63e127f5"
     },
     {
       "path": "package.json",
       "sha256": "bd2f658b8110207da6b4c10e9d2d99fb4a39711ec4f46103ae67d32a873a40bc",
-      "size": 1770
+      "size": 1770,
+      "gitSha": "ba8c477b0e4f4ae4d63ede639a1e4b8d84235baa"
     }
   ],
   "releases": [
@@ -4214,28 +4218,34 @@
       "fromVersion": "10.3.22",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix: PlayCall texto renovado, encerramento estilizado e numero direto — 10.3.23",
-      "notice": "A versão 10.3.23 já está disponível para atualização.",
+      "title": "PlayCall: design de texto novo e telefone sem marcação",
+      "notice": "Tokito Bot 10.3.23 disponível: PlayCall renovado e ligação por número direto.",
       "changelog": [
-        "Menus atualizado",
-        "Playcall atualizado",
-        "Package atualizado"
+        "PlayCall com mensagens totalmente redesenhadas, inclusive a de encerramento e a ajuda.",
+        "Sem termos técnicos nas respostas: os textos mostram apenas música, telefone e situação da chamada.",
+        "Agora aceita número digitado com DDI/DDD, sem precisar mencionar: /playcall 5511999999999 nome da música.",
+        "Número do contato exibido em todas as fases; selo e informações de canal incluídos em todas as mensagens.",
+        "Chamada permanece conectada até o WhatsApp informar o encerramento; áudio enviado após o contato atender.",
+        "Stone WPP 1.0.7 do NPM e demais comandos preservados."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/mensagens/menus.js",
           "sha256": "6e14b6aeae5e329bea0303f402f28245ea3e7adc527379d1f0b1bcfadb01b8c8",
-          "size": 79230
+          "size": 79230,
+          "gitSha": "7b831dff146eda3cfd6163852563397e0f7cdb45"
         },
         {
           "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
           "sha256": "4f4604352ba0d020fbeb1887ae1e68d3de366a57cab5c105e2841d55ed1f89c3",
-          "size": 14081
+          "size": 14081,
+          "gitSha": "cbe6eb2fb8d3e5613dda0ae80dd6d52d63e127f5"
         },
         {
           "path": "package.json",
           "sha256": "bd2f658b8110207da6b4c10e9d2d99fb4a39711ec4f46103ae67d32a873a40bc",
-          "size": 1770
+          "size": 1770,
+          "gitSha": "ba8c477b0e4f4ae4d63ede639a1e4b8d84235baa"
         }
       ],
       "delete": [],
@@ -4246,11 +4256,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.21",
+  "fromVersion": "10.3.22",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.22"
+  "publicVersion": "10.3.23"
 }
