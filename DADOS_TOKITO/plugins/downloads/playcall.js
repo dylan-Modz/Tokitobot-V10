@@ -1,8 +1,8 @@
 /*
  * TOKITO BOT V10 — PlayCall
- * Busca por nome/link como Play, prepara MP3 e entrega o arquivo ao motor
- * VoIP no startCall, como no fluxo de chamada individual usado na Aurora.
- * O áudio é preparado antes, mas só é transmitido após a conexão real.
+ * Busca por nome/link como Play, prepara MP3 e carrega a mídia no motor
+ * VoIP via loadAudio(callId, arquivo) após iniciar a chamada.
+ * Chamada conectada não comprova áudio transmitido: não confundir estados.
  */
 'use strict'
 
@@ -145,7 +145,8 @@ dylan.setCommand({
     let callId = null
     let ouvindo = false
     let finalizado = false
-    let tocando = false
+    let conectado = false
+    let audioCarregado = false
     let timer = null
     let timerFim = null
     let mensagemStatus = null
@@ -169,7 +170,7 @@ dylan.setCommand({
       if (timerFim) clearTimeout(timerFim)
       if (ouvindo) calls.off?.('state', observar)
       chamadas.delete(sessao)
-      if (callId && motivo === 'tempo') await calls.endCall(callId).catch(() => {})
+      if (callId && (motivo === 'tempo' || motivo === 'falha')) await calls.endCall(callId).catch(() => {})
       if (temporario) await fs.promises.rm(temporario.pasta, { recursive: true, force: true }).catch(() => {})
       const descricao = motivo === 'tempo' ? '⏰ Chamada não atendida ou conexão de áudio não confirmada.'
         : motivo === 'falha' ? '❌ A ligação foi interrompida.'
@@ -184,23 +185,20 @@ dylan.setCommand({
         void encerrar('encerrada')
         return
       }
-      if (!estadosAtivos.has(estado) || tocando) return
-      tocando = true
+      if (!estadosAtivos.has(estado) || conectado) return
+      conectado = true
       void (async () => {
         try {
           if (timer) clearTimeout(timer)
-          // startCall recebeu o áudio pronto. A Stone inicia o envio quando
-          // a mídia da chamada individual estiver efetivamente conectada.
-          chamadas.set(sessao, { fase: 'transmitindo', destino, origem: from, musica: musica.titulo, callId })
-          await aviso('🎧 *𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻*\n> ✅ @' + ident(destino) + ' conectou à chamada!\n> 🎵 ' + musica.titulo + '\n> 🔊 Áudio preparado para transmissão pela Stone.')
+          chamadas.set(sessao, { fase: audioCarregado ? 'audio-carregado' : 'carregando-audio', destino, origem: from, musica: musica.titulo, callId })
+          await aviso('🎧 *𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻*\n> ✅ @' + ident(destino) + ' conectou à chamada!\n> 🎵 ' + musica.titulo + '\n> 🔊 ' + (audioCarregado ? 'Música carregada no motor de áudio.' : 'Preparando transmissão da música...'))
           const avatar = await tokito.profilePictureUrl(destino, 'image').catch(() => '')
           if (avatar) await tokito.sendMessage(from, {
             image: { url: avatar }, caption: '👤 Contato conectado: @' + ident(destino),
             contextInfo: { mentionedJid: [destino] }
-          }).catch(() => {})
+          }, { quoted: ctx.selo }).catch(() => {})
         } catch (e) {
-          await aviso('⚠️ Chamada conectada, mas não foi possível carregar o áudio: ' + String(e?.message || e).slice(0, 160))
-          await encerrar('falha')
+          console.warn('[PLAYCALL STATUS]', String(e?.message || e).slice(0, 160))
         }
       })()
     }
@@ -227,16 +225,26 @@ dylan.setCommand({
       await aviso('📞 *𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻*\n> Aguardando @' + ident(destino) + ' atender...\n> A música só será iniciada após a conexão confirmada.')
       calls.on('state', observar)
       ouvindo = true
-      // Entrega o arquivo no início da chamada: evita depender de loadAudio
-      // depois de um evento que pode ter sido recebido antes do callId.
-      callId = await calls.startCall({ peerJid: destino, isVideo: false, audioFile: temporario.arquivo })
-      chamadas.set(sessao, { fase: 'chamando', destino, origem: from, musica: musica.titulo, callId })
-      timer = setTimeout(() => { if (!tocando) void encerrar('tempo') }, 60000)
+      // startCall só inicia a sinalização. O MP3 PRECISA ser carregado
+      // explicitamente: passar audioFile em startCall não bastou em chamadas reais.
+      callId = await calls.startCall({ peerJid: destino, isVideo: false })
+      chamadas.set(sessao, { fase: 'carregando-audio', destino, origem: from, musica: musica.titulo, callId })
+      timer = setTimeout(() => { if (!conectado) void encerrar('tempo') }, 60000)
       timer.unref?.()
       timerFim = setTimeout(() => { void encerrar('tempo') }, 12 * 60 * 1000)
       timerFim.unref?.()
       const atual = calls.getCall(callId)
       if (atual) observar(atual)
+      // O motor usa FFmpeg para decodificar o MP3 e enfileirar PCM de saída.
+      // Não apague o arquivo temporário antes de a chamada terminar.
+      await calls.loadAudio(callId, temporario.arquivo)
+      audioCarregado = true
+      if (!finalizado) {
+        chamadas.set(sessao, { fase: conectado ? 'audio-carregado' : 'aguardando-conexao', destino, origem: from, musica: musica.titulo, callId })
+        if (conectado) {
+          await aviso('🎧 *𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻*\n> ✅ @' + ident(destino) + ' conectou à chamada!\n> 🎵 ' + musica.titulo + '\n> 🔊 Música carregada no motor de áudio da chamada.')
+        }
+      }
     } catch (erro) {
       const texto = String(erro?.message || erro || 'Erro desconhecido').slice(0, 220)
       if (!finalizado) {
@@ -245,6 +253,7 @@ dylan.setCommand({
         if (ouvindo) calls.off?.('state', observar)
         chamadas.delete(sessao)
         finalizado = true
+        if (callId) await calls.endCall(callId).catch(() => {})
         if (temporario) await fs.promises.rm(temporario.pasta, { recursive: true, force: true }).catch(() => {})
       }
       await reply('❌ *PLAYCALL INDISPONÍVEL*\n> ' + texto + '\n> O VoIP da Stone 1.0.7 ainda é experimental.')
