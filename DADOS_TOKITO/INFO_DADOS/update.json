@@ -1,39 +1,39 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.19",
+  "version": "10.3.20",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-15T02:35:13.254Z",
+  "publishedAt": "2026-11-15T02:38:30.671Z",
   "changelog": [
-    "Modo IA ativo não impede mais membros comuns de utilizar comandos com prefixo.",
-    "Áudio e respostas espontâneas da IA ignoram mensagens identificadas como comandos, incluindo aliases sem prefixo.",
-    "Preservadas as permissões soadm, VIP, dono e as configurações de texto ou áudio do grupo."
+    "Aviso de atualização verifica novamente o número do dono configurado, mesmo após alterações sem reiniciar.",
+    "Aumentadas para quatro as tentativas de notificação, com intervalo de três minutos, para evitar que um aviso aceito mas não exibido desapareça.",
+    "Preservadas as correções do Modo IA, comandos e Stone WPP 1.0.7."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Modo IA espontâneo sem bloquear comandos",
-  "notice": "A versão 10.3.19 já está disponível: comandos liberados com Modo IA ativo.",
+  "title": "Aviso automático de atualização mais confiável",
+  "notice": "Tokito Bot V10.3.20 disponível: melhorias na entrega de avisos de atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "tokito.js",
+      "path": "DADOS_TOKITO/connect.js",
       "sha256": "",
-      "gitSha": "b154e40d4fa6d47bf4606ee580c59762536c2a6d",
-      "size": 54932
+      "gitSha": "e12e2bca70b2338026bbf7c3a30b5ca79ebec97f",
+      "size": 49599
     },
     {
-      "path": "DADOS_TOKITO/ia/index.js",
+      "path": "DADOS_TOKITO/sistemas/dados.js",
       "sha256": "",
-      "gitSha": "30c68e8deb3a1a9dbfbc9d75746e36c24de672ba",
-      "size": 60548
+      "gitSha": "e39471114a97f36f8a52a1949fa3c75b2af0f194",
+      "size": 39572
     },
     {
       "path": "package.json",
       "sha256": "",
-      "gitSha": "fc02bcf30963a6e4d48b5dce73e1e065173291ec",
+      "gitSha": "7ad91149d89c8086c74675d1a4a820d9d8f9ac8b",
       "size": 1770
     }
   ],
@@ -4293,16 +4293,52 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-15T02:35:13.254Z"
+    },
+    {
+      "version": "10.3.20",
+      "fromVersion": "10.3.19",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Aviso automático de atualização mais confiável",
+      "notice": "Tokito Bot V10.3.20 disponível: melhorias na entrega de avisos de atualização.",
+      "changelog": [
+        "Aviso de atualização verifica novamente o número do dono configurado, mesmo após alterações sem reiniciar.",
+        "Aumentadas para quatro as tentativas de notificação, com intervalo de três minutos, para evitar que um aviso aceito mas não exibido desapareça.",
+        "Preservadas as correções do Modo IA, comandos e Stone WPP 1.0.7."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "gitSha": "e12e2bca70b2338026bbf7c3a30b5ca79ebec97f",
+          "size": 49599
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "sha256": "",
+          "gitSha": "e39471114a97f36f8a52a1949fa3c75b2af0f194",
+          "size": 39572
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "gitSha": "7ad91149d89c8086c74675d1a4a820d9d8f9ac8b",
+          "size": 1770
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-15T02:38:30.671Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.18",
+  "fromVersion": "10.3.19",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.19"
+  "publicVersion": "10.3.20"
 }
