@@ -1,92 +1,40 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.18",
+  "version": "10.3.19",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-14T23:49:00.000Z",
+  "publishedAt": "2026-11-15T02:35:13.254Z",
   "changelog": [
-    "Corrigido o comando PlayCall ausente: o atualizador agora baixa o arquivo playcall.js e o registrador de comandos.",
-    "CallStatus reenviado e atualizado para mostrar o transporte VoIP.",
-    "Stone WPP 1.0.7 instalada diretamente do NPM (@stone-wpp/ofc).",
-    "Sincronizados os arquivos de núcleo, configurações em tempo real, permissões de administradores e menus.",
-    "Removido arquivo de GitHub Actions do bot; configurações e sessões dos usuários preservadas."
+    "Modo IA ativo não impede mais membros comuns de utilizar comandos com prefixo.",
+    "Áudio e respostas espontâneas da IA ignoram mensagens identificadas como comandos, incluindo aliases sem prefixo.",
+    "Preservadas as permissões soadm, VIP, dono e as configurações de texto ou áudio do grupo."
   ],
-  "delete": [
-    ".github/workflows/controle.yml"
-  ],
+  "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "PlayCall instalado e Stone NPM 1.0.7",
-  "notice": "Tokito Bot V10.3.18 disponível: corrige PlayCall inexistente.",
+  "title": "Modo IA espontâneo sem bloquear comandos",
+  "notice": "A versão 10.3.19 já está disponível: comandos liberados com Modo IA ativo.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "package.json",
-      "sha256": "",
-      "gitSha": "4b59ccf77b0f237b89f6444ffa49fdcf0057cf1d",
-      "size": 1729
-    },
-    {
       "path": "tokito.js",
       "sha256": "",
-      "gitSha": "cf33d3338bb21a340dd65d61231a44d651dad473",
-      "size": 55084
+      "gitSha": "b154e40d4fa6d47bf4606ee580c59762536c2a6d",
+      "size": 54932
     },
     {
-      "path": "DADOS_TOKITO/connect.js",
+      "path": "DADOS_TOKITO/ia/index.js",
       "sha256": "",
-      "gitSha": "fd0205452412a96a7acc8cf169568073ffe8f6fe",
-      "size": 49502
+      "gitSha": "30c68e8deb3a1a9dbfbc9d75746e36c24de672ba",
+      "size": 60548
     },
     {
-      "path": "DADOS_TOKITO/plugins/index.js",
+      "path": "package.json",
       "sha256": "",
-      "gitSha": "8bcec0be0118f1ee8a4b4f3bc2ec3f5c09719bdb",
-      "size": 7465
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/promover.js",
-      "sha256": "",
-      "gitSha": "a8977aff819b6bf26df0474e88a5ec63e3328d94",
-      "size": 2306
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/rebaixar.js",
-      "sha256": "",
-      "gitSha": "efbab88fe1d4062aebec780b30372410cc2eee65",
-      "size": 2417
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
-      "sha256": "",
-      "gitSha": "401c7ccd41885c954cc503268bca7a6a4fcfca66",
-      "size": 12465
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/callstatus.js",
-      "sha256": "",
-      "gitSha": "8e83eb733901dfc714db911d68c924f2f5dfd5d5",
-      "size": 1702
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/nome-dono.js",
-      "sha256": "",
-      "gitSha": "3d2cda3bbcf70f5b98816f27d4e8c94ad8a383c9",
-      "size": 1875
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "",
-      "gitSha": "3a668f670e83eb871e6a4b946cf50096262e4bbf",
-      "size": 79224
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/controle.js",
-      "sha256": "",
-      "gitSha": "950fe0f1865a8b64617ec43c5c831e8c3ef80e2b",
-      "size": 3559
+      "gitSha": "fc02bcf30963a6e4d48b5dce73e1e065173291ec",
+      "size": 1770
     }
   ],
   "releases": [
@@ -4309,16 +4257,52 @@
       ],
       "required": false,
       "publishedAt": "2026-11-14T23:49:00.000Z"
+    },
+    {
+      "version": "10.3.19",
+      "fromVersion": "10.3.18",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Modo IA espontâneo sem bloquear comandos",
+      "notice": "A versão 10.3.19 já está disponível: comandos liberados com Modo IA ativo.",
+      "changelog": [
+        "Modo IA ativo não impede mais membros comuns de utilizar comandos com prefixo.",
+        "Áudio e respostas espontâneas da IA ignoram mensagens identificadas como comandos, incluindo aliases sem prefixo.",
+        "Preservadas as permissões soadm, VIP, dono e as configurações de texto ou áudio do grupo."
+      ],
+      "files": [
+        {
+          "path": "tokito.js",
+          "sha256": "",
+          "gitSha": "b154e40d4fa6d47bf4606ee580c59762536c2a6d",
+          "size": 54932
+        },
+        {
+          "path": "DADOS_TOKITO/ia/index.js",
+          "sha256": "",
+          "gitSha": "30c68e8deb3a1a9dbfbc9d75746e36c24de672ba",
+          "size": 60548
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "gitSha": "fc02bcf30963a6e4d48b5dce73e1e065173291ec",
+          "size": 1770
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-15T02:35:13.254Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.17",
+  "fromVersion": "10.3.18",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.18"
+  "publicVersion": "10.3.19"
 }
