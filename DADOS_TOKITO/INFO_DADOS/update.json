@@ -6,28 +6,31 @@
   "ref": "main",
   "publishedAt": "2026-11-15T13:18:19.632Z",
   "changelog": [
-    "[Correção] fix: PlayCall com selo, visual do Play e musica apos conectar — 10.3.22",
-    "A versão 10.3.22 já está disponível para atualização.",
-    "Playcall atualizado",
-    "Package atualizado"
+    "PlayCall com mensagens de texto no padrão do Play: capa, título, autor, duração, status e link da música.",
+    "Selo citado e informações do canal do Tokito aplicados às mensagens, inclusive avisos e encerramento.",
+    "Validação do arquivo com FFmpeg e carregamento da música no motor VoIP somente após o contato atender.",
+    "Chamada conectada não é encerrada por tempo limite; espera o evento real de desligamento do WhatsApp.",
+    "Falhas de áudio são informadas sem afirmar que a pessoa ouviu a música, mantendo a Stone WPP 1.0.7 do NPM."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: PlayCall com selo, visual do Play e musica apos conectar — 10.3.22",
-  "notice": "A versão 10.3.22 já está disponível para atualização.",
+  "title": "PlayCall completo: design, selo e áudio na chamada",
+  "notice": "Tokito Bot 10.3.22 disponível: visual PlayCall, selo e áudio carregado após a ligação conectar.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
       "sha256": "b84ea1ab3c00aaa8ebcc9c90a69aedefa723f7e5032dd5ba7329a33aaa97eb48",
-      "size": 16412
+      "size": 16412,
+      "gitSha": "5d697846a3104aeab1f28fd4848218df5d98ea78"
     },
     {
       "path": "package.json",
       "sha256": "5ab97f1a511ae6d425a32e3b24c8ac0d3fc856cfe89c532b0e37d661a6b35bb6",
-      "size": 1770
+      "size": 1770,
+      "gitSha": "e68044e082443598fb9731d51326b7a10ae50f8f"
     }
   ],
   "releases": [
@@ -4198,22 +4201,27 @@
       "fromVersion": "10.3.21",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix: PlayCall com selo, visual do Play e musica apos conectar — 10.3.22",
-      "notice": "A versão 10.3.22 já está disponível para atualização.",
+      "title": "PlayCall completo: design, selo e áudio na chamada",
+      "notice": "Tokito Bot 10.3.22 disponível: visual PlayCall, selo e áudio carregado após a ligação conectar.",
       "changelog": [
-        "Playcall atualizado",
-        "Package atualizado"
+        "PlayCall com mensagens de texto no padrão do Play: capa, título, autor, duração, status e link da música.",
+        "Selo citado e informações do canal do Tokito aplicados às mensagens, inclusive avisos e encerramento.",
+        "Validação do arquivo com FFmpeg e carregamento da música no motor VoIP somente após o contato atender.",
+        "Chamada conectada não é encerrada por tempo limite; espera o evento real de desligamento do WhatsApp.",
+        "Falhas de áudio são informadas sem afirmar que a pessoa ouviu a música, mantendo a Stone WPP 1.0.7 do NPM."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
           "sha256": "b84ea1ab3c00aaa8ebcc9c90a69aedefa723f7e5032dd5ba7329a33aaa97eb48",
-          "size": 16412
+          "size": 16412,
+          "gitSha": "5d697846a3104aeab1f28fd4848218df5d98ea78"
         },
         {
           "path": "package.json",
           "sha256": "5ab97f1a511ae6d425a32e3b24c8ac0d3fc856cfe89c532b0e37d661a6b35bb6",
-          "size": 1770
+          "size": 1770,
+          "gitSha": "e68044e082443598fb9731d51326b7a10ae50f8f"
         }
       ],
       "delete": [],
@@ -4224,11 +4232,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.20",
+  "fromVersion": "10.3.21",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.21"
+  "publicVersion": "10.3.22"
 }
