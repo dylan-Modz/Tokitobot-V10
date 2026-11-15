@@ -20,25 +20,6 @@ const chamadas = global.__TOKITO_PLAYCALL_ATIVAS__ ||= new Map()
 const estadosAtivos = new Set(['connected', 'established', 'in_call', 'active', 'media_connected'])
 const estadosFinais = new Set(['ended', 'terminate', 'terminated', 'rejected', 'reject', 'declined', 'timeout', 'failed', 'disconnected', 'error'])
 
-const jidContato = (ctx) => {
-  const marcados = [
-    ...(Array.isArray(ctx.mentionedList) ? ctx.mentionedList : []),
-    ...(Array.isArray(ctx.menc_jid2) ? ctx.menc_jid2 : []),
-    ...(Array.isArray(ctx.menc_os2) ? ctx.menc_os2 : []),
-    ctx.menc_jid2,
-    ctx.menc_os2,
-    ctx.menc_prt
-  ].filter(value => typeof value === 'string' ? Boolean(value) : Boolean(value && !Array.isArray(value) && typeof value === 'object'))
-  const primeiro = marcados[0]
-  if (!primeiro) return ''
-  const jid = String(ctx.nJid ? ctx.nJid(primeiro) : primeiro)
-  return jid.endsWith('@s.whatsapp.net') ? jid : ''
-}
-
-const pesquisaEntrada = (q) => String(q || '').trim()
-  .replace(/^\s*@[\d]+\s*/, '')
-  .trim()
-
 const youtubeUrl = (value) => {
   try {
     const url = new URL(value)
@@ -121,232 +102,201 @@ async function prepararAudio(ctx, videoUrl) {
   }
 }
 
-const ident = jid => String(jid || '').split('@')[0].replace(/\D/g, '')
-const rotulo = nome => String(nome || '—').replace(/\s+/g, ' ').trim()
-const tituloPlayCall = '• \`𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻\` 📞'
-const textoEncerramento = (contato, duracao, motivo) => [
-  tituloPlayCall,
-  '> 📴 \`𝙲𝙷𝙰𝙼𝙰𝙳𝙰 𝙴𝙽𝙲𝙴𝚁𝚁𝙰𝙳𝙰\`',
-  '',
-  '> 👤 ᴄᴏɴᴛᴀᴛᴏ: @' + contato,
-  ...(duracao ? ['> ⏱️ ᴛᴇᴍᴘᴏ: ' + duracao] : []),
-  '> 📲 ᴇsᴛᴀᴅᴏ: ' + (motivo === 'nao-atendida' ? 'ɴᴀ̃ᴏ ᴀᴛᴇɴᴅɪᴅᴀ' : 'ғɪɴᴀʟɪᴢᴀᴅᴀ'),
-  '',
-  motivo === 'nao-atendida' ? '> ⚠️ O contato não atendeu a chamada.' : '> 🎧 Chamada finalizada.'
-].join('\n')
+
+const digits = x => String(x || '').split('@')[0].split(':')[0].replace(/\D/g, '')
+const tel = jid => '+' + digits(jid)
+const limpo = x => String(x || '—').replace(/\s+/g, ' ').trim()
+const borda = '╰━━━━━━━━━━━━━━━━━━╯'
+const formatar = (topo, itens, fim = borda) => [topo, ...itens.map(linha => '┃ ' + linha), fim].join('\n')
+const cardMusica = (m, jid) => formatar('╭━━〔 🎧 *𝙿𝙻𝙰𝚈𝙲𝙰𝙻𝙻* 〕━━╮', [
+  '🎶 *MÚSICA ENCONTRADA!*', '',
+  '🎵 *' + limpo(m.titulo) + '*',
+  '🎤 ᴀᴜᴛᴏʀ: ' + limpo(m.artista),
+  '⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ' + limpo(m.duracao),
+  '🔗 ' + m.url, '',
+  '━━━━〔 ☎️ *LIGAÇÃO* 〕━━━━',
+  '👤 ɴᴜ́ᴍᴇʀᴏ: ' + tel(jid),
+  '🟡 *CHAMANDO...*'
+])
+const cardChamando = (jid, m) => formatar('╭━━〔 ☎️ *PLAYCALL* 〕━━╮', [
+  '🟡 *CHAMANDO...*', '',
+  '👤 ' + tel(jid),
+  '🎵 ' + limpo(m.titulo), '',
+  '📲 Aguardando atender'
+])
+const cardPreparando = jid => formatar('╭━━〔 ✅ *ATENDEU!* 〕━━╮', [
+  '👤 ' + tel(jid),
+  '🎶 Preparando sua música...'
+])
+const cardConectou = (jid, m) => formatar('╭━━〔 🎧 *PLAYCALL* 〕━━╮', [
+  '✅ *CHAMADA CONECTADA!*', '',
+  '👤 ɴᴜ́ᴍᴇʀᴏ: ' + tel(jid),
+  '🎵 *' + limpo(m.titulo) + '*',
+  '🔊 Música enviada para a ligação!', '',
+  '🎶 Aproveite o som!'
+])
+const cardSemAudio = (jid, m) => formatar('╭━━〔 ⚠️ *PLAYCALL* 〕━━╮', [
+  '🔇 *SEM ÁUDIO*', '',
+  '👤 ' + tel(jid),
+  '🎵 ' + limpo(m.titulo),
+  '❌ Não foi possível enviar a música.', '',
+  '☎️ A ligação continua ativa.'
+])
+const cardFim = (jid, tempo, conectou) => formatar('╭━━〔 📴 *CHAMADA ENCERRADA* 〕━━╮', [
+  '🎧 *PLAYCALL FINALIZADO*', '',
+  '👤 ɴᴜ́ᴍᴇʀᴏ: ' + tel(jid),
+  ...(tempo ? ['⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ' + tempo] : []),
+  '📞 ' + (conectou ? 'Chamada finalizada.' : 'Não atendida.')
+])
+const cardUso = p => formatar('╭━━〔 🎧 *PLAYCALL* 〕━━╮', [
+  '🎶 *Música por ligação*', '',
+  '📲 *USAR NÚMERO*',
+  p + 'playcall 5511999999999 vem cá', '',
+  '👤 *OU MARCAR ALGUÉM*',
+  p + 'playcall @pessoa vem cá', '',
+  '🔗 Aceita link do YouTube.'
+])
+
+// Consome apenas o telefone inicial, preservando a música ou link integral.
+const porNumero = entrada => {
+  const texto = String(entrada || '').trim().replace(/^@(?=\+?\d)/, '')
+  const tokens = texto.split(/\s+/)
+  let resultado = null
+  for (let n = 1; n < tokens.length && n <= 6; n++) {
+    const candidato = tokens.slice(0, n).join(' ')
+    if (!/^\+?[\d().\-\s]+$/.test(candidato)) break
+    let numero = candidato.replace(/\D/g, '')
+    if (!numero.startsWith('55') && [10, 11].includes(numero.length)) numero = '55' + numero
+    if (numero.length >= 10 && numero.length <= 15) {
+      resultado = { destino: numero + '@s.whatsapp.net', busca: tokens.slice(n).join(' ').trim() }
+    }
+  }
+  return resultado?.busca ? resultado : null
+}
+const porMencao = (ctx, texto) => {
+  const arr = [
+    ...(Array.isArray(ctx.mentionedList) ? ctx.mentionedList : []),
+    ...(Array.isArray(ctx.menc_jid2) ? ctx.menc_jid2 : []),
+    ctx.menc_os2, ctx.menc_prt
+  ]
+  const raw = arr.find(x => typeof x === 'string' && x.endsWith('@s.whatsapp.net'))
+  if (!raw) return null
+  const destino = String(ctx.nJid ? ctx.nJid(raw) : raw)
+  if (!/^\d+(?::\d+)?@s\.whatsapp\.net$/.test(destino)) return null
+  const busca = String(texto || '').replace(/^@\S+\s*/, '').trim()
+  return busca ? { destino, busca } : null
+}
 
 dylan.setCommand({
   nome: 'playcall',
   comandos: ['playcall'],
   categoria: 'downloads',
   info: {
-    descricao: 'Liga para o contato marcado e carrega uma música na chamada após conectar (VoIP experimental).',
-    uso: 'playcall @pessoa nome da música | playcall @pessoa link do YouTube',
-    categoria: 'downloads',
-    permissao: 'Dono'
+    descricao: 'Liga para um número ou contato marcado e toca uma música na ligação.',
+    uso: 'playcall 5511999999999 música | playcall @pessoa música',
+    categoria: 'downloads', permissao: 'Dono'
   },
   async executar(ctx) {
-    const { tokito, from, reply, prefix, q, sender } = ctx
+    const { tokito, from, reply, prefix, sender } = ctx
     if (!ctx.SoDono) return reply(ctx.mess?.onlyOwner?.() || 'Apenas o dono pode iniciar ligações.')
-    const destino = jidContato(ctx)
-    const entrada = pesquisaEntrada(q)
-    if (!destino || !entrada) {
-      return reply([
-        tituloPlayCall,
-        '> ℹ️ \`𝙲𝙾𝙼𝙾 𝚄𝚂𝙰𝚁\`',
-        '',
-        '> 🎧 ' + prefix + 'playcall @pessoa nome da música',
-        '> 🔗 ' + prefix + 'playcall @pessoa link-do-YouTube',
-        '',
-        '> 📞 Marque o contato e informe a música.'
-      ].join('\n'))
+    const pedido = porNumero(ctx.q) || porMencao(ctx, ctx.q)
+    if (!pedido) return reply(cardUso(prefix))
+    const { destino, busca } = pedido
+    if (!digits(destino) || digits(destino) === digits(ctx.botNumber)) {
+      return reply('❌ Informe o número de outra pessoa.')
     }
-    if (destino === ctx.botNumber) return reply('❌ Não é possível ligar para a própria conta do bot.')
     const calls = tokito.calls
-    if (!calls || typeof calls.enableVoip !== 'function' || typeof calls.startCall !== 'function' || typeof calls.loadAudio !== 'function') {
-      return reply('📞 O motor de chamadas e música ainda não está disponível nesta instalação.')
+    if (!calls || typeof calls.enableVoip !== 'function' ||
+      typeof calls.startCall !== 'function' || typeof calls.loadAudio !== 'function') {
+      return reply('📞 Não foi possível iniciar a ligação agora.')
     }
     const sessao = String(tokito.user?.id || ctx.botNumber || 'bot')
-    if (chamadas.has(sessao)) return reply('📞 Já existe uma chamada PlayCall ativa. Encerre-a antes de iniciar outra.')
-    chamadas.set(sessao, { fase: 'preparando', destino, origem: from, musica: entrada })
-
-    let temporario = null
-    let musica = null
-    let callId = null
-    let ouvindo = false
-    let finalizado = false
-    let conectado = false
-    let carregando = false
-    let audioCarregado = false
-    let iniciadoEm = null
-    let timerAtendimento = null
-    let mensagemStatus = null
-
-    const mencoes = [destino, sender].filter(Boolean)
-    const canalInfo = (ids = mencoes) => typeof ctx.canalInfo === 'function'
-      ? ctx.canalInfo(ids)
-      : { mentionedJid: ids }
-    // Mesmo formato do comando play: citação do selo e metadados do canal.
-    const enviar = (conteudo, ids = mencoes) => tokito.sendMessage(from,
-      { ...conteudo, contextInfo: { ...canalInfo(ids), ...(conteudo.contextInfo || {}), mentionedJid: ids } },
-      { quoted: ctx.selo })
+    if (chamadas.has(sessao)) return reply('☎️ Já existe uma ligação PlayCall ativa.')
+    chamadas.set(sessao, { fase: 'preparando', destino, origem: from, musica: busca })
+    let mp3 = null, musica = null, callId = null
+    let ouvindo = false, finalizado = false, conectado = false, carregando = false
+    let inicio = null
+    const ids = [destino, sender].filter(Boolean)
+    const ctxMsg = para => typeof ctx.canalInfo === 'function'
+      ? { ...ctx.canalInfo(para), mentionedJid: para }
+      : { mentionedJid: para }
+    // NÃO editar a mensagem antiga: cada etapa ganha um cartão de texto novo,
+    // sempre citando o selo do bot e usando o canal configurado (igual Play).
+    const enviar = (payload, para = ids) => tokito.sendMessage(from,
+      { ...payload, contextInfo: ctxMsg(para) }, { quoted: ctx.selo })
     const aviso = async texto => {
-      if (finalizado) return
-      if (mensagemStatus?.key) {
-        try {
-          await tokito.sendMessage(from, { text: texto, edit: mensagemStatus.key, contextInfo: canalInfo(mencoes) })
-          return
-        } catch {
-          // Alguns clientes não aceitam edição: envia nova resposta citando o selo.
-        }
-      }
-      try {
-        const enviada = await enviar({ text: texto })
-        if (!mensagemStatus?.key && enviada?.key) mensagemStatus = enviada
-      } catch (erro) {
-        console.warn('[PLAYCALL MENSAGEM]', String(erro?.message || erro).slice(0, 160))
-      }
+      try { await enviar({ text: texto }) }
+      catch (e) { console.warn('[PLAYCALL MENSAGEM]', String(e?.message || e).slice(0, 120)) }
     }
-    const apresentarStatus = (estado, audio) => [
-      tituloPlayCall,
-      '> ℹ️ \`𝙴𝚂𝚃𝙰𝙳𝙾 𝙳𝙰 𝙲𝙷𝙰𝙼𝙰𝙳𝙰\`',
-      '',
-      '> 👤 ᴅᴇsᴛɪɴᴏ: @' + ident(destino),
-      '> 📲 sᴛᴀᴛᴜs: ' + estado,
-      '> 🎼 ᴀ́ᴜᴅɪᴏ: ' + audio
-    ].join('\n')
     const duracao = () => {
-      if (!iniciadoEm) return ''
-      const segundos = Math.max(0, Math.floor((Date.now() - iniciadoEm) / 1000))
-      return String(Math.floor(segundos / 60)).padStart(2, '0') + ':' + String(segundos % 60).padStart(2, '0')
+      if (!inicio) return ''
+      const s = Math.max(0, Math.floor((Date.now() - inicio) / 1000))
+      return String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0')
     }
-    const encerrar = async motivo => {
+    const terminar = async () => {
       if (finalizado) return
       finalizado = true
-      if (timerAtendimento) clearTimeout(timerAtendimento)
       if (ouvindo) calls.off?.('state', observar)
       chamadas.delete(sessao)
-      // Somente chamada sem atendimento expira. Depois de conectar, o
-      // encerramento depende do evento real da Stone/WhatsApp.
-      if (callId && motivo === 'nao-atendida') await calls.endCall(callId).catch(() => {})
-      if (temporario) await fs.promises.rm(temporario.pasta, { recursive: true, force: true }).catch(() => {})
-      await enviar({ text: textoEncerramento(ident(destino), duracao(), motivo) }, [destino]).catch(() => {})
+      if (mp3) await fs.promises.rm(mp3.pasta, { recursive: true, force: true }).catch(() => {})
+      await aviso(cardFim(destino, duracao(), conectado))
     }
-    const carregarNaChamada = async () => {
-      if (finalizado || !conectado || carregando || !callId || !temporario) return
+    const tocar = async () => {
+      if (!conectado || finalizado || carregando || !mp3 || !callId) return
       carregando = true
-      chamadas.set(sessao, { fase: 'carregando-audio', destino, origem: from, musica: musica.titulo, callId })
-      await aviso(apresentarStatus('ᴄᴏɴᴇᴄᴛᴀᴅᴏ ✅', 'ᴘʀᴇᴘᴀʀᴀɴᴅᴏ ᴏ sᴏᴍ...'))
+      await aviso(cardPreparando(destino))
       try {
-        // Envia PCM somente depois que a pessoa atende e o motor recebe
-        // o estado conectado. Não confundir startCall com transmissão.
-        await calls.loadAudio(callId, temporario.arquivo)
+        await calls.loadAudio(callId, mp3.arquivo)
         if (finalizado) return
-        audioCarregado = true
-        chamadas.set(sessao, { fase: 'audio-carregado', destino, origem: from, musica: musica.titulo, callId })
-        await aviso([
-          tituloPlayCall,
-          '> ✅ \`𝙲𝙷𝙰𝙼𝙰𝙳𝙰 𝙲𝙾𝙽𝙴𝙲𝚃𝙰𝙳𝙰\`',
-          '',
-          '> 👤 ᴄᴏɴᴛᴀᴛᴏ: @' + ident(destino),
-          '> 🎵 ᴍᴜ́sɪᴄᴀ: ' + rotulo(musica.titulo),
-          '> 🎼 ᴀ́ᴜᴅɪᴏ: ᴄᴀʀʀᴇɢᴀᴅᴏ ɴᴏ ᴍᴏᴛᴏʀ',
-          '',
-          '> 🎧 A chamada continua até alguém desligar.'
-        ].join('\n'))
-      } catch (erro) {
-        if (finalizado) return
-        chamadas.set(sessao, { fase: 'erro-audio', destino, origem: from, musica: musica.titulo, callId })
-        console.warn('[PLAYCALL ÁUDIO]', String(erro?.message || erro).slice(0, 200))
-        await aviso([
-          tituloPlayCall,
-          '> ⚠️ \`𝙵𝙰𝙻𝙷𝙰 𝙽𝙾 𝙰́𝚄𝙳𝙸𝙾\`',
-          '',
-          '> 📞 ᴄʜᴀᴍᴀᴅᴀ: ᴄᴏɴᴇᴄᴛᴀᴅᴀ',
-          '> 🎵 ᴍᴜ́sɪᴄᴀ: ' + rotulo(musica.titulo),
-          '> 🔇 Não foi possível carregar o som no VoIP.',
-          '> 📍 ' + String(erro?.message || erro).slice(0, 120),
-          '',
-          '> 📴 Desligue a chamada para encerrar.'
-        ].join('\n'))
-      } finally {
-        carregando = false
-      }
+        chamadas.set(sessao, { fase: 'musica-enviada', destino, origem: from, musica: musica.titulo, callId })
+        await aviso(cardConectou(destino, musica))
+      } catch (e) {
+        if (!finalizado) {
+          console.warn('[PLAYCALL ÁUDIO]', String(e?.message || e).slice(0, 130))
+          chamadas.set(sessao, { fase: 'sem-audio', destino, origem: from, musica: musica.titulo, callId })
+          await aviso(cardSemAudio(destino, musica))
+        }
+      } finally { carregando = false }
     }
-    const observar = item => {
-      if (finalizado || !callId || String(item?.callId || item?.id || '') !== String(callId)) return
-      const estado = String(item?.stateData?.state || item?.status || '').toLowerCase()
-      if (estadosFinais.has(estado)) {
-        void encerrar('encerrada')
-        return
-      }
+    const observar = evento => {
+      if (finalizado || !callId || String(evento?.callId || evento?.id || '') !== String(callId)) return
+      const estado = String(evento?.stateData?.state || evento?.status || '').toLowerCase()
+      if (estadosFinais.has(estado)) { void terminar(); return }
       if (!estadosAtivos.has(estado) || conectado) return
       conectado = true
-      iniciadoEm = Date.now()
-      if (timerAtendimento) clearTimeout(timerAtendimento)
-      timerAtendimento = null
-      // A chamada conectada não recebe temporizador de desligamento.
-      void carregarNaChamada()
-      void (async () => {
-        const foto = await tokito.profilePictureUrl(destino, 'image').catch(() => '')
-        if (foto && !finalizado) await enviar({
-          image: { url: foto },
-          caption: '> 👤 ᴄᴏɴᴛᴀᴛᴏ ᴄᴏɴᴇᴄᴛᴀᴅᴏ: @' + ident(destino)
-        }, [destino]).catch(() => {})
-      })()
+      inicio = Date.now()
+      // Chamada conectada só termina com o evento real do WhatsApp.
+      void tocar()
     }
-
     try {
       const cap = await calls.enableVoip()
-      if (!cap?.startCall || !cap?.audioFiles) throw new Error('Motor VoIP ou FFmpeg não disponível nesta instalação.')
-      musica = await localizar(ctx, entrada)
-      temporario = await prepararAudio(ctx, musica.url)
-      const descricao = [
-        '• \`𝙼𝚄́𝚂𝙸𝙲𝙰 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰\` 🎧',
-        '> ℹ️ \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂\`',
-        '',
-        '> ✏️ ᴛɪ́ᴛᴜʟᴏ: ' + rotulo(musica.titulo),
-        '> ⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ' + rotulo(musica.duracao),
-        '> 👨‍🎤 ᴀᴜᴛᴏʀ: ' + rotulo(musica.artista),
-        '> 🔗 ʟɪɴᴋ: ' + musica.url,
-        '',
-        '• \`𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻\` 📞',
-        '> 👤 ᴅᴇsᴛɪɴᴏ: @' + ident(destino),
-        '> 📲 sᴛᴀᴛᴜs: ᴄʜᴀᴍᴀɴᴅᴏ...',
-        '> 🎼 ᴀ́ᴜᴅɪᴏ: ᴘʀᴏɴᴛᴏ ᴘᴀʀᴀ ᴇɴᴠɪᴏ'
-      ].join('\n')
+      if (!cap?.startCall || !cap?.audioFiles) throw new Error('Áudio indisponível')
+      musica = await localizar(ctx, busca)
+      mp3 = await prepararAudio(ctx, musica.url)
       if (musica.capa) {
-        await enviar({ image: { url: musica.capa }, caption: descricao })
-          .catch(() => enviar({ text: descricao }))
-      } else await enviar({ text: descricao })
-      await aviso(apresentarStatus('ᴄʜᴀᴍᴀɴᴅᴏ...', 'ᴀɢᴜᴀʀᴅᴀɴᴅᴏ ᴄᴏɴᴇxᴀ̃ᴏ'))
+        await enviar({ image: { url: musica.capa }, caption: cardMusica(musica, destino) })
+          .catch(() => enviar({ text: cardMusica(musica, destino) }))
+      } else await enviar({ text: cardMusica(musica, destino) })
+      await aviso(cardChamando(destino, musica))
       calls.on('state', observar)
       ouvindo = true
       callId = await calls.startCall({ peerJid: destino, isVideo: false })
       chamadas.set(sessao, { fase: 'chamando', destino, origem: from, musica: musica.titulo, callId })
-      // Evita chamada não atendida presa. Não se aplica após conectar.
-      timerAtendimento = setTimeout(() => {
-        if (!conectado) void encerrar('nao-atendida')
-      }, 90000)
-      timerAtendimento.unref?.()
       const atual = calls.getCall(callId)
       if (atual) observar(atual)
-    } catch (erro) {
-      const texto = String(erro?.message || erro || 'Erro desconhecido').slice(0, 200)
+    } catch(e) {
       if (!finalizado) {
         finalizado = true
-        if (timerAtendimento) clearTimeout(timerAtendimento)
         if (ouvindo) calls.off?.('state', observar)
         chamadas.delete(sessao)
         if (callId && !conectado) await calls.endCall(callId).catch(() => {})
-        if (temporario) await fs.promises.rm(temporario.pasta, { recursive: true, force: true }).catch(() => {})
+        if (mp3) await fs.promises.rm(mp3.pasta, { recursive: true, force: true }).catch(() => {})
       }
-      await reply([
-        tituloPlayCall,
-        '> ❌ \`𝙽𝙰̃𝙾 𝙵𝙾𝙸 𝙿𝙾𝚂𝚂𝙸́𝚅𝙴𝙻 𝙸𝙽𝙸𝙲𝙸𝙰𝚁\`',
-        '',
-        '> ⚠️ ' + texto
-      ].join('\n'))
+      console.warn('[PLAYCALL FALHA]', String(e?.message || e).slice(0, 130))
+      return reply(formatar('╭━━〔 ⚠️ *PLAYCALL* 〕━━╮', [
+        'Não foi possível iniciar a ligação.',
+        'Confira o número e tente novamente.'
+      ]))
     }
   }
 })
