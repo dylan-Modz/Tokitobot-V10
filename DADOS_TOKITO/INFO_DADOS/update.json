@@ -1,37 +1,37 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.24",
+  "version": "10.3.25",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-15T13:34:17.775Z",
+  "publishedAt": "2026-11-15T13:42:36.085Z",
   "changelog": [
-    "Mensagens de música, chamada em andamento, atendida, reprodução e encerramento no visual do Play, sem caixas com bordas.",
-    "Menções com identificador LID são convertidas para o número real pelo mapeamento do WhatsApp ou pelos dados do grupo.",
-    "Se não existir telefone confirmado, o comando pede o número com DDI/DDD; nunca mostra LID como número.",
-    "Quem digita um número direto continua podendo chamar normalmente.",
-    "A mensagem de chamada encerrada só aparece após um evento de término real; quedas momentâneas de conexão não encerram o cartão.",
-    "Áudio continua sendo preparado para tocar somente após a pessoa atender; chamada permanece ativa até o encerramento."
+    "Visual original do comando Play na mensagem de música encontrada e em todas as etapas da ligação, inclusive encerramento.",
+    "Capa original da música mantida; foto do contato exibida depois do atendimento quando o WhatsApp permitir.",
+    "Marcações com LID agora precisam ser resolvidas para número verdadeiro pelo grupo ou mapeamento do WhatsApp antes da ligação.",
+    "Uma marcação @número nunca é tratada como telefone digitado; se não houver telefone real, pede DDI e DDD sem exibir LID.",
+    "Ligação só informa encerramento após evento real, e permanece conectada após o áudio iniciar.",
+    "Ao atender, reprodução da música é iniciada sem esperar o carregamento da foto do contato."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "PlayCall com visual do Play e número real do WhatsApp",
-  "notice": "Novo visual do PlayCall sem bordas; número verdadeiro resolvido antes de ligar.",
+  "title": "PlayCall: visual original do Play e menção sem LID",
+  "notice": "PlayCall restaurado ao estilo do Play, com números telefônicos reais nas chamadas.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
-      "sha256": "b5d60a5c2ec407dffa95a99d83f3fd0a3ae6f2c4824223f4f567e78a5b7b0cc6",
-      "size": 16561,
-      "gitSha": "a27f815a3f2f9e2b84e716546e0b27bf87490a89"
+      "sha256": "e49c84e452c1b916d0f5fa9c80deeab07661b7e14b0ec334b328a4da30b4e558",
+      "size": 17545,
+      "gitSha": "7307d0e83b4e61e4b02a31c9c0cc47cea34bbd84"
     },
     {
       "path": "package.json",
-      "sha256": "486460b846fc49af78ade269ad974c3087eeca492f86806ff4b7fb2cf879a240",
+      "sha256": "de600d4dc25aef44ab48c64d0db4ad377354d626dbc52856b49076c1cae21a3a",
       "size": 1770,
-      "gitSha": "37b8ca53c92de39b3d258f318839c18704228388"
+      "gitSha": "d4480395dd6f073ee3ba5d1ebb50fffaacfd8ca7"
     }
   ],
   "releases": [
@@ -4278,6 +4278,39 @@
       ],
       "required": false,
       "publishedAt": "2026-11-15T13:34:17.775Z"
+    },
+    {
+      "version": "10.3.25",
+      "fromVersion": "10.3.24",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "PlayCall: visual original do Play e menção sem LID",
+      "notice": "PlayCall restaurado ao estilo do Play, com números telefônicos reais nas chamadas.",
+      "changelog": [
+        "Visual original do comando Play na mensagem de música encontrada e em todas as etapas da ligação, inclusive encerramento.",
+        "Capa original da música mantida; foto do contato exibida depois do atendimento quando o WhatsApp permitir.",
+        "Marcações com LID agora precisam ser resolvidas para número verdadeiro pelo grupo ou mapeamento do WhatsApp antes da ligação.",
+        "Uma marcação @número nunca é tratada como telefone digitado; se não houver telefone real, pede DDI e DDD sem exibir LID.",
+        "Ligação só informa encerramento após evento real, e permanece conectada após o áudio iniciar.",
+        "Ao atender, reprodução da música é iniciada sem esperar o carregamento da foto do contato."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
+          "sha256": "e49c84e452c1b916d0f5fa9c80deeab07661b7e14b0ec334b328a4da30b4e558",
+          "size": 17545,
+          "gitSha": "7307d0e83b4e61e4b02a31c9c0cc47cea34bbd84"
+        },
+        {
+          "path": "package.json",
+          "sha256": "de600d4dc25aef44ab48c64d0db4ad377354d626dbc52856b49076c1cae21a3a",
+          "size": 1770,
+          "gitSha": "d4480395dd6f073ee3ba5d1ebb50fffaacfd8ca7"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-15T13:42:36.085Z"
     }
   ],
   "mode": "incremental",
