@@ -1,199 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.21",
+  "version": "10.3.22",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-15T13:13:41.092Z",
+  "publishedAt": "2026-11-15T13:18:19.632Z",
   "changelog": [
-    "PlayCall agora carrega o MP3 de fato no motor VoIP com calls.loadAudio após iniciar a chamada.",
-    "Estado de conexão e estado de carregamento do áudio são tratados separadamente para não informar reprodução sem confirmação.",
-    "Se o motor de áudio falhar, a chamada é encerrada e o erro é informado, evitando ligação silenciosa presa.",
-    "Mantida a Stone WPP 1.0.7 do NPM, sem modificar outros comandos."
+    "[Correção] fix: PlayCall com selo, visual do Play e musica apos conectar — 10.3.22",
+    "A versão 10.3.22 já está disponível para atualização.",
+    "Playcall atualizado",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "PlayCall — correção do áudio em ligações",
-  "notice": "A versão 10.3.21 está disponível: corrige ligação PlayCall conectada sem música.",
+  "title": "fix: PlayCall com selo, visual do Play e musica apos conectar — 10.3.22",
+  "notice": "A versão 10.3.22 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
-      "sha256": "",
-      "gitSha": "77704ce03c70557ad65a195ba4bd45726f8c7836",
-      "size": 13104
+      "sha256": "b84ea1ab3c00aaa8ebcc9c90a69aedefa723f7e5032dd5ba7329a33aaa97eb48",
+      "size": 16412
     },
     {
       "path": "package.json",
-      "sha256": "",
-      "gitSha": "8e2d6196fb73009c81d0429ff3e343b3590bbdc0",
+      "sha256": "5ab97f1a511ae6d425a32e3b24c8ac0d3fc856cfe89c532b0e37d661a6b35bb6",
       "size": 1770
     }
   ],
   "releases": [
-    {
-      "version": "10.2.19",
-      "fromVersion": "10.2.18",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Vídeos alterados sem legenda",
-      "notice": "Videolento, videorapido e videocontrario agora retornam só o vídeo modificado, sem texto na mensagem.",
-      "changelog": [
-        "Removida a legenda dos vídeos enviados pelos comandos videolento, videorapido e videocontrario; agora o resultado é somente o vídeo alterado, sem texto.",
-        "Mantida a correção FFmpeg da 10.2.18 com entrada e saída separadas, arquivos temporários únicos e limpeza automática após o envio.",
-        "Alteradores de áudio, registro, perfil, menus e demais recursos não foram alterados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/alteradores/alteradores.js",
-          "gitSha": "dc91eb08603bf38dcf73a8489d17e3b5d1f2a045",
-          "sha256": "",
-          "size": 0
-        },
-        {
-          "path": "package.json",
-          "gitSha": "60757e502161330409d62234361e2064deafbc5a",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-11T07:18:28.284Z"
-    },
-    {
-      "version": "10.2.20",
-      "fromVersion": "10.2.19",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Correção dos menus numéricos",
-      "notice": "Corrigida a seleção de grupos do sairall e o carregamento de respostas sem prefixo.",
-      "changelog": [
-        "[Correção] Menus numéricos: o sairall agora exporta as funções usadas pelo evento de respostas.",
-        "[Correção] Ao abrir sairall, seleções pendentes do bangplit são encerradas para evitar conflitos.",
-        "[Melhoria] O carregador recupera eventos pendentes mesmo em mensagens sem prefixo."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/dono/sairall.js",
-          "sha256": "ff96fff17c5f4213089c24ca91d9c22b464d457db15dc80367d5f8d29ea1bd52",
-          "size": 3577
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/index.js",
-          "sha256": "3321aec3d6bc97c2d7abce72c9b1b94d474b0995178837cfa9b920bd21f4b0f0",
-          "size": 8278
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-11T07:37:45.534Z"
-    },
-    {
-      "version": "10.2.21",
-      "fromVersion": "10.2.20",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Sincronização do pacote da correção",
-      "notice": "Atualiza o package.json para a família V10.2.20 e conclui o pacote de correções dos menus.",
-      "changelog": [
-        "Sincroniza package.json da correção V10.2.20 e preserva todas as melhorias publicadas."
-      ],
-      "files": [
-        {
-          "path": "package.json",
-          "sha256": "ed40632359a9062cac7b5bbbe544e327ab9e19e71e90f142e64b4076a12b47eb",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-11T07:39:15.187Z"
-    },
-    {
-      "version": "10.2.22",
-      "fromVersion": "10.2.21",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Apresentação com prazo e cadastro simplificado",
-      "notice": "Registro com 10 minutos para concluir nome, idade e cidade.",
-      "changelog": [
-        "Registro com prazo de 10 minutos para membros novos se apresentarem, com aviso automático quando o prazo vence.",
-        "Cadastro simplificado em 3 etapas: nome, idade e cidade. Idade e cidade podem ser puladas.",
-        "Os dados de apresentação passam a aparecer no perfil do membro, sem alterar perfis antigos.",
-        "Prazo continua válido após reiniciar o bot; ao vencer, interrompe a tentativa e mantém os comandos bloqueados até concluir o cadastro.",
-        "Não remove membros automaticamente do grupo; nova tentativa disponível com registrar iniciar."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "sha256": "8063fedb402bbb953dcaa2577da7bf1c8617efb34773fa44e2355dfdff064e20",
-          "size": 41529
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "sha256": "90d36f950e3f4e5208ea70ddd7d47988da108e5ffcbf95177cdcfbee3b21a9da",
-          "size": 231773
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/registrar.js",
-          "sha256": "186caff0ee755cfd92017cfbd4d09c3f597c63311289f8b57c0a9a64762f6acd",
-          "size": 1544
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/registro.js",
-          "sha256": "3c6b075096e1831bb449a4e86167013dff1d575ce808ee6e533dacc04443f814",
-          "size": 12953
-        },
-        {
-          "path": "package.json",
-          "gitSha": "922fd0e81e68f68359362944bf9037036e01da1a",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-11T07:51:16.196Z"
-    },
-    {
-      "version": "10.2.23",
-      "fromVersion": "10.2.22",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Registro com prazo de 5 minutos",
-      "notice": "Novo prazo de 5 minutos para o registro de membros, mantendo nome, idade e cidade.",
-      "changelog": [
-        "Prazo para se apresentar reduzido de 10 para 5 minutos no registro do Tokito.",
-        "Mensagens do convite e comando registrar mostram o tempo de 5 minutos.",
-        "Cadastros ainda pendentes passam a respeitar 5 minutos desde a entrada; o prazo não reinicia ao tocar no botão.",
-        "Nome, idade e cidade continuam nas mesmas três etapas, sem expulsão automática.",
-        "Modo IA permanece sem alterações nesta versão."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/admin/registrar.js",
-          "sha256": "508d4d63705fdecc30899da0e4f90d7c6cb06770d47e8da841d67a0c4391bb2a",
-          "size": 1543
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/registro.js",
-          "sha256": "55afbd53f186466a5f29a8bba6005f2a19406ff86d5f1e4b7aa1f59ec647fc34",
-          "size": 13249
-        },
-        {
-          "path": "package.json",
-          "gitSha": "3539befd390d10401d0b0a3036f2d3e41abcf6a4",
-          "sha256": "",
-          "size": 0
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-12T17:43:52.346Z"
-    },
     {
       "version": "10.2.24",
       "fromVersion": "10.2.23",
@@ -4355,6 +4192,33 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-15T13:13:41.092Z"
+    },
+    {
+      "version": "10.3.22",
+      "fromVersion": "10.3.21",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: PlayCall com selo, visual do Play e musica apos conectar — 10.3.22",
+      "notice": "A versão 10.3.22 já está disponível para atualização.",
+      "changelog": [
+        "Playcall atualizado",
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
+          "sha256": "b84ea1ab3c00aaa8ebcc9c90a69aedefa723f7e5032dd5ba7329a33aaa97eb48",
+          "size": 16412
+        },
+        {
+          "path": "package.json",
+          "sha256": "5ab97f1a511ae6d425a32e3b24c8ac0d3fc856cfe89c532b0e37d661a6b35bb6",
+          "size": 1770
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-15T13:18:19.632Z"
     }
   ],
   "mode": "incremental",
