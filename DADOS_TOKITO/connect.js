@@ -362,6 +362,8 @@ if (global.__TOKITO_UPDATE_NOTICE_BUSY__) return false
 global.__TOKITO_UPDATE_NOTICE_BUSY__ = true
 try {
 if (!tokito || typeof tokito.sendMessage !== 'function') return false
+// Lê o número do dono de novo: ele pode mudar sem reiniciar a conexão.
+recarregarConfigBot()
 const check = await dadosSistema.verificarUpdate()
 global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__ = {
 at: new Date().toISOString(),
