@@ -307,6 +307,7 @@ dylan.setCommand({
       })().catch(() => {})
       try {
         await calls.loadAudio(callId, mp3.arquivo)
+        await avisoAtendido
         if (finalizado) return
         chamadas.set(sessao, { fase: 'musica-enviada', destino, origem: from, musica: musica.titulo, callId })
         await aviso(cardConectou(numero, musica))
