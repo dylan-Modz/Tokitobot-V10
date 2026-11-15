@@ -1,43 +1,37 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.23",
+  "version": "10.3.24",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-15T13:24:19.568Z",
+  "publishedAt": "2026-11-15T13:34:17.775Z",
   "changelog": [
-    "PlayCall com mensagens totalmente redesenhadas, inclusive a de encerramento e a ajuda.",
-    "Sem termos técnicos nas respostas: os textos mostram apenas música, telefone e situação da chamada.",
-    "Agora aceita número digitado com DDI/DDD, sem precisar mencionar: /playcall 5511999999999 nome da música.",
-    "Número do contato exibido em todas as fases; selo e informações de canal incluídos em todas as mensagens.",
-    "Chamada permanece conectada até o WhatsApp informar o encerramento; áudio enviado após o contato atender.",
-    "Stone WPP 1.0.7 do NPM e demais comandos preservados."
+    "Mensagens de música, chamada em andamento, atendida, reprodução e encerramento no visual do Play, sem caixas com bordas.",
+    "Menções com identificador LID são convertidas para o número real pelo mapeamento do WhatsApp ou pelos dados do grupo.",
+    "Se não existir telefone confirmado, o comando pede o número com DDI/DDD; nunca mostra LID como número.",
+    "Quem digita um número direto continua podendo chamar normalmente.",
+    "A mensagem de chamada encerrada só aparece após um evento de término real; quedas momentâneas de conexão não encerram o cartão.",
+    "Áudio continua sendo preparado para tocar somente após a pessoa atender; chamada permanece ativa até o encerramento."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "PlayCall: design de texto novo e telefone sem marcação",
-  "notice": "Tokito Bot 10.3.23 disponível: PlayCall renovado e ligação por número direto.",
+  "title": "PlayCall com visual do Play e número real do WhatsApp",
+  "notice": "Novo visual do PlayCall sem bordas; número verdadeiro resolvido antes de ligar.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "sha256": "6e14b6aeae5e329bea0303f402f28245ea3e7adc527379d1f0b1bcfadb01b8c8",
-      "size": 79230,
-      "gitSha": "7b831dff146eda3cfd6163852563397e0f7cdb45"
-    },
-    {
       "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
-      "sha256": "4f4604352ba0d020fbeb1887ae1e68d3de366a57cab5c105e2841d55ed1f89c3",
-      "size": 14081,
-      "gitSha": "cbe6eb2fb8d3e5613dda0ae80dd6d52d63e127f5"
+      "sha256": "b5d60a5c2ec407dffa95a99d83f3fd0a3ae6f2c4824223f4f567e78a5b7b0cc6",
+      "size": 16561,
+      "gitSha": "a27f815a3f2f9e2b84e716546e0b27bf87490a89"
     },
     {
       "path": "package.json",
-      "sha256": "bd2f658b8110207da6b4c10e9d2d99fb4a39711ec4f46103ae67d32a873a40bc",
+      "sha256": "486460b846fc49af78ade269ad974c3087eeca492f86806ff4b7fb2cf879a240",
       "size": 1770,
-      "gitSha": "ba8c477b0e4f4ae4d63ede639a1e4b8d84235baa"
+      "gitSha": "37b8ca53c92de39b3d258f318839c18704228388"
     }
   ],
   "releases": [
@@ -4251,6 +4245,39 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-15T13:24:19.568Z"
+    },
+    {
+      "version": "10.3.24",
+      "fromVersion": "10.3.23",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "PlayCall com visual do Play e número real do WhatsApp",
+      "notice": "Novo visual do PlayCall sem bordas; número verdadeiro resolvido antes de ligar.",
+      "changelog": [
+        "Mensagens de música, chamada em andamento, atendida, reprodução e encerramento no visual do Play, sem caixas com bordas.",
+        "Menções com identificador LID são convertidas para o número real pelo mapeamento do WhatsApp ou pelos dados do grupo.",
+        "Se não existir telefone confirmado, o comando pede o número com DDI/DDD; nunca mostra LID como número.",
+        "Quem digita um número direto continua podendo chamar normalmente.",
+        "A mensagem de chamada encerrada só aparece após um evento de término real; quedas momentâneas de conexão não encerram o cartão.",
+        "Áudio continua sendo preparado para tocar somente após a pessoa atender; chamada permanece ativa até o encerramento."
+      ],
+      "delete": [],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
+          "sha256": "b5d60a5c2ec407dffa95a99d83f3fd0a3ae6f2c4824223f4f567e78a5b7b0cc6",
+          "size": 16561,
+          "gitSha": "a27f815a3f2f9e2b84e716546e0b27bf87490a89"
+        },
+        {
+          "path": "package.json",
+          "sha256": "486460b846fc49af78ade269ad974c3087eeca492f86806ff4b7fb2cf879a240",
+          "size": 1770,
+          "gitSha": "37b8ca53c92de39b3d258f318839c18704228388"
+        }
+      ],
+      "required": false,
+      "publishedAt": "2026-11-15T13:34:17.775Z"
     }
   ],
   "mode": "incremental",
