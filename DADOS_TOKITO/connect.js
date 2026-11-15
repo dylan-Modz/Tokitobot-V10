@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
+const { Browsers, default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario, cacheGp } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
 const registro = require('./sistemas/registro.js')
@@ -653,6 +653,83 @@ return solicitarToken()
 return acesso
 }
 
+// TOKITO_MODO_WHATSAPP_V1
+// Mantem o modo escolhido apenas para a sessao vinculada a este bot.
+const arquivoTipoWhatsapp = path.join(qrcode, 'tipo-whatsapp-tokito.json')
+const navegadorPadraoTokito = ['Linux', 'Opera', '10.0.22631']
+const lerTipoWhatsapp = () => {
+  try {
+    const tipo = JSON.parse(fs.readFileSync(arquivoTipoWhatsapp, 'utf8')).tipo
+    return tipo === 'normal' || tipo === 'business' ? tipo : 'padrao'
+  } catch { return 'padrao' }
+}
+let tipoWhatsapp = lerTipoWhatsapp()
+const salvarTipoWhatsapp = tipo => {
+  const temporario = arquivoTipoWhatsapp + '.tmp'
+  fs.mkdirSync(qrcode, { recursive: true })
+  try {
+    fs.writeFileSync(temporario, JSON.stringify({ tipo }, null, 2) + '\n', { mode: 0o600 })
+    fs.renameSync(temporario, arquivoTipoWhatsapp)
+  } catch (erroSalvar) {
+    try { fs.unlinkSync(temporario) } catch {}
+    throw erroSalvar
+  }
+}
+const navegadorDoTokito = () => {
+  // Nunca altera o perfil da conexao independente de Sub Bot / detector.
+  if (runtimeSub.isSubBot) return [...navegadorPadraoTokito]
+  if (tipoWhatsapp === 'normal') return Browsers.android('Chrome')
+  return [...navegadorPadraoTokito]
+}
+
+async function escolherTipoWhatsapp() {
+  while (true) {
+    console.log('')
+    topoPainel('❪🧊.ꯧ𝚃𝙸𝙿𝙾 𝙳𝙴 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿ꯧ⸼🧊❫')
+    linhaPainel('1', '📱', 'WhatsApp Normal')
+    linhaPainel('2', '💼', 'WhatsApp Business')
+    fimPainel()
+    console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴏ ᴛɪᴘᴏ ᴅᴏ sᴇᴜ ᴡʜᴀᴛsᴀᴘᴘ'))
+    let escolha = String(await question(colors.white.bold('╰━━➤ '))).trim()
+    if (escolha !== '1' && escolha !== '2') {
+      erro('Opção inválida. Escolha 1 ou 2.')
+      continue
+    }
+    const novoTipo = escolha === '1' ? 'normal' : 'business'
+    if (sessaoRegistrada()) {
+      if (tipoWhatsapp !== novoTipo) {
+        aviso('A sessão existente será mantida no perfil em que já foi conectada. ' +
+          'Para mudar a identificação do dispositivo, é necessário um novo pareamento; ' +
+          'não apague nem substitua a sessão automaticamente.')
+      }
+      sucesso('Sessão existente preservada; abrindo painel original.')
+      return
+    }
+    try {
+      salvarTipoWhatsapp(novoTipo)
+      tipoWhatsapp = novoTipo
+    } catch (erroSalvar) {
+      erroSistema('Não foi possível salvar o tipo de WhatsApp', erroSalvar)
+      continue
+    }
+    sucesso(novoTipo === 'normal' ? 'WhatsApp Normal selecionado.' : 'WhatsApp Business selecionado.')
+    if (novoTipo === 'normal') {
+      aviso('Identificação Android experimental: pode falhar ou causar restrições. ' +
+        'Não garante acesso a mídias de visualização única.')
+    }
+    return
+  }
+}
+
+async function painelInicialTokito() {
+  // O painel do bot permanece igual; voltar retorna à escolha de WhatsApp.
+  while (true) {
+    await escolherTipoWhatsapp()
+    const resultado = await showMenu()
+    if (resultado !== 'trocar-tipo') return resultado
+  }
+}
+
 async function showMenu() {
 console.log('')
 info('Escolha como deseja iniciar.')
@@ -662,10 +739,12 @@ linhaPainel('1', '📱', 'Código de conexão')
 linhaPainel('2', '🧊', 'QR-Code WhatsApp')
 linhaPainel('3', '🌊', 'Suporte / Ajuda')
 linhaPainel('4', '⚙️', 'Editar bot')
+linhaPainel('0', '🔙', 'Voltar')
 fimPainel()
 console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'))
 let option = await question(colors.white.bold('╰━━➤ '))
 option = option.trim()
+if (option === '0') return 'trocar-tipo'
 if (option === '1' || option === '2') {
 recarregarConfigBot()
 metodo = option === '1' ? 'codigo' : 'qr'
@@ -716,7 +795,7 @@ const { state, saveCreds } = await useMultiFileAuthState(qrcode)
 const tokito = makeWASocket({
 version,
 logger,
-browser: ['Linux', 'Opera', '10.0.22631'],
+browser: navegadorDoTokito(),
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, logger)
@@ -1374,7 +1453,7 @@ erro(`Não foi possível liberar o acesso: ${acesso?.message || acesso?.code || 
 process.exit(24)
 return
 }
-if (!sessaoRegistrada() || process.argv.includes('painel')) await showMenu()
+if (!sessaoRegistrada() || process.argv.includes('painel')) await painelInicialTokito()
 controleRemoto.start()
 placar.ciclo(resultado => {
 if (!resultado?.definitive) return
