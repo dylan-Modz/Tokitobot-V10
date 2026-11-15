@@ -63,6 +63,7 @@ const correcoesAntirroubo = new Map()
 // do WhatsApp omita mediaKey/directPath. Não baixa nem salva arquivos no disco.
 const MIDIA_RECENTE_MS = 10 * 60 * 1000
 const MIDIA_RECENTE_MAX = 400
+const STONE_INDISPONIVEL_MS = 10 * 60 * 1000
 const envolverMidiaOriginal = entrada => {
 let atual = entrada || {}
 for (let i = 0; i < 12; i++) {
@@ -792,10 +793,13 @@ try { anterior.end(new Error('Substituindo conexão antiga do Tokito')) } catch 
 }
 const { version } = await fetchLatestStoneWPPVersion()
 const { state, saveCreds } = await useMultiFileAuthState(qrcode)
+const browserAtivo = navegadorDoTokito()
+info(`Perfil de conexão: ${runtimeSub.isSubBot ? 'Sub Bot (padrão)' : tipoWhatsapp === 'normal' ? 'WhatsApp Normal (Android experimental)' : tipoWhatsapp === 'business' ? 'WhatsApp Business (Web padrão)' : 'Web padrão'}.`)
+if (state.creds.registered) info('Sessão já vinculada: essa opção não faz novo pareamento nem garante mudança de protocolo.')
 const tokito = makeWASocket({
 version,
 logger,
-browser: navegadorDoTokito(),
+browser: browserAtivo,
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, logger)
@@ -818,6 +822,21 @@ getMessage: async key => undefined
 })
 socketAtual = tokito
 global.tokito = tokito
+// Stone informa metadados de mensagens não disponíveis para este dispositivo.
+// Não armazena URL, chave de mídia, conteúdo, participante nem miniatura.
+tokito.__tokitoEstadoMidia = new Map()
+tokito.ev.on('stone.message.availability', registro => {
+  if (socketAtual !== tokito || !registro?.remoteJid || !registro?.messageId) return
+  const map = tokito.__tokitoEstadoMidia
+  const agora = Date.now()
+  for (const [key, valor] of map) {
+    if (agora - valor.at > STONE_INDISPONIVEL_MS) map.delete(key)
+  }
+  const motivo = String(registro.reason || 'indisponivel')
+  map.set(registro.remoteJid + '|' + registro.messageId, { motivo, at: agora })
+  while (map.size > MIDIA_RECENTE_MAX) map.delete(map.keys().next().value)
+  console.log('[STONE RX]', { estado: 'indisponivel', motivo, metadados: false })
+})
 // Observa os sinais da biblioteca principal. Nao cria mensagens artificiais.
 tokito.ev.on('tokito.security.ciphertext', dados => {
 Promise.resolve(antiInvisivel.registrar(tokito, dados)).catch(error => {
