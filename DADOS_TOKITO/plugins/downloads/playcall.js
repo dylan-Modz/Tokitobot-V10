@@ -12,6 +12,9 @@ const fs = require('node:fs')
 const os = require('node:os')
 const path = require('node:path')
 const { pipeline } = require('node:stream/promises')
+const { execFile } = require('node:child_process')
+const { promisify } = require('node:util')
+const executarFfmpeg = promisify(execFile)
 
 const chamadas = global.__TOKITO_PLAYCALL_ATIVAS__ ||= new Map()
 const estadosAtivos = new Set(['connected', 'established', 'in_call', 'active', 'media_connected'])
@@ -103,6 +106,14 @@ async function prepararAudio(ctx, videoUrl) {
     })
     await pipeline(resposta.data, fs.createWriteStream(arquivo))
     if (bytes < 1024) throw new Error('O arquivo de áudio recebido está vazio ou incompleto.')
+    // O content-type sozinho não comprova que a resposta é áudio decodificável.
+    // Usa o mesmo FFmpeg necessário ao motor VoIP, sem tocar música no chat.
+    const { stdout } = await executarFfmpeg(process.env.FFMPEG_PATH || 'ffmpeg', [
+      '-nostdin', '-hide_banner', '-loglevel', 'error', '-i', arquivo,
+      '-t', '3', '-vn', '-sn', '-dn', '-ac', '1', '-ar', '16000',
+      '-f', 's16le', 'pipe:1'
+    ], { timeout: 20000, maxBuffer: 512 * 1024, encoding: 'buffer' })
+    if (!stdout || stdout.length < 3200) throw new Error('A música não pôde ser decodificada pelo FFmpeg.')
     return { pasta, arquivo }
   } catch (erro) {
     await fs.promises.rm(pasta, { recursive: true, force: true }).catch(() => {})
@@ -111,13 +122,25 @@ async function prepararAudio(ctx, videoUrl) {
 }
 
 const ident = jid => String(jid || '').split('@')[0].replace(/\D/g, '')
+const rotulo = nome => String(nome || '—').replace(/\s+/g, ' ').trim()
+const tituloPlayCall = '• \`𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻\` 📞'
+const textoEncerramento = (contato, duracao, motivo) => [
+  tituloPlayCall,
+  '> 📴 \`𝙲𝙷𝙰𝙼𝙰𝙳𝙰 𝙴𝙽𝙲𝙴𝚁𝚁𝙰𝙳𝙰\`',
+  '',
+  '> 👤 ᴄᴏɴᴛᴀᴛᴏ: @' + contato,
+  ...(duracao ? ['> ⏱️ ᴛᴇᴍᴘᴏ: ' + duracao] : []),
+  '> 📲 ᴇsᴛᴀᴅᴏ: ' + (motivo === 'nao-atendida' ? 'ɴᴀ̃ᴏ ᴀᴛᴇɴᴅɪᴅᴀ' : 'ғɪɴᴀʟɪᴢᴀᴅᴀ'),
+  '',
+  motivo === 'nao-atendida' ? '> ⚠️ O contato não atendeu a chamada.' : '> 🎧 Chamada finalizada.'
+].join('\n')
 
 dylan.setCommand({
   nome: 'playcall',
   comandos: ['playcall'],
   categoria: 'downloads',
   info: {
-    descricao: 'Liga para o contato marcado e toca uma música após a chamada conectar (VoIP experimental).',
+    descricao: 'Liga para o contato marcado e carrega uma música na chamada após conectar (VoIP experimental).',
     uso: 'playcall @pessoa nome da música | playcall @pessoa link do YouTube',
     categoria: 'downloads',
     permissao: 'Dono'
@@ -125,58 +148,130 @@ dylan.setCommand({
   async executar(ctx) {
     const { tokito, from, reply, prefix, q, sender } = ctx
     if (!ctx.SoDono) return reply(ctx.mess?.onlyOwner?.() || 'Apenas o dono pode iniciar ligações.')
-    // A mensagem pode trazer a menção em forma de lista ou JID único.
-    // O bot precisa registrar o comando mesmo antes da pessoa ser marcada.
     const destino = jidContato(ctx)
     const entrada = pesquisaEntrada(q)
     if (!destino || !entrada) {
-      return reply('🎧 *PLAYCALL*\n> Uso: ' + prefix + 'playcall @pessoa nome da música\n> Ou: ' + prefix + 'playcall @pessoa link-do-YouTube')
+      return reply([
+        tituloPlayCall,
+        '> ℹ️ \`𝙲𝙾𝙼𝙾 𝚄𝚂𝙰𝚁\`',
+        '',
+        '> 🎧 ' + prefix + 'playcall @pessoa nome da música',
+        '> 🔗 ' + prefix + 'playcall @pessoa link-do-YouTube',
+        '',
+        '> 📞 Marque o contato e informe a música.'
+      ].join('\n'))
     }
-    if (destino === ctx.botNumber) return reply('Não é possível ligar para a própria conta do bot.')
+    if (destino === ctx.botNumber) return reply('❌ Não é possível ligar para a própria conta do bot.')
     const calls = tokito.calls
-    if (!calls || typeof calls.enableVoip !== 'function' || typeof calls.startCall !== 'function') {
-      return reply('📞 A Stone instalada ainda não disponibiliza o motor VoIP.')
+    if (!calls || typeof calls.enableVoip !== 'function' || typeof calls.startCall !== 'function' || typeof calls.loadAudio !== 'function') {
+      return reply('📞 O motor de chamadas e música ainda não está disponível nesta instalação.')
     }
     const sessao = String(tokito.user?.id || ctx.botNumber || 'bot')
-    if (chamadas.has(sessao)) return reply('📞 Já existe uma chamada PlayCall ativa neste bot. Aguarde encerrar.')
+    if (chamadas.has(sessao)) return reply('📞 Já existe uma chamada PlayCall ativa. Encerre-a antes de iniciar outra.')
     chamadas.set(sessao, { fase: 'preparando', destino, origem: from, musica: entrada })
 
     let temporario = null
+    let musica = null
     let callId = null
     let ouvindo = false
     let finalizado = false
     let conectado = false
+    let carregando = false
     let audioCarregado = false
-    let timer = null
-    let timerFim = null
+    let iniciadoEm = null
+    let timerAtendimento = null
     let mensagemStatus = null
-    let musica = null
 
-    const aviso = async descricao => {
+    const mencoes = [destino, sender].filter(Boolean)
+    const canalInfo = (ids = mencoes) => typeof ctx.canalInfo === 'function'
+      ? ctx.canalInfo(ids)
+      : { mentionedJid: ids }
+    // Mesmo formato do comando play: citação do selo e metadados do canal.
+    const enviar = (conteudo, ids = mencoes) => tokito.sendMessage(from,
+      { ...conteudo, contextInfo: { ...canalInfo(ids), ...(conteudo.contextInfo || {}), mentionedJid: ids } },
+      { quoted: ctx.selo })
+    const aviso = async texto => {
       if (finalizado) return
-      try {
-        const atualizado = mensagemStatus?.key
-          ? await tokito.sendMessage(from, { text: descricao, edit: mensagemStatus.key })
-          : await tokito.sendMessage(from, { text: descricao, contextInfo: { mentionedJid: [destino, sender] } }, { quoted: ctx.selo })
-        if (!mensagemStatus) mensagemStatus = atualizado
-      } catch {
-        await tokito.sendMessage(from, { text: descricao, contextInfo: { mentionedJid: [destino] } }).catch(() => {})
+      if (mensagemStatus?.key) {
+        try {
+          await tokito.sendMessage(from, { text: texto, edit: mensagemStatus.key, contextInfo: canalInfo(mencoes) })
+          return
+        } catch {
+          // Alguns clientes não aceitam edição: envia nova resposta citando o selo.
+        }
       }
+      try {
+        const enviada = await enviar({ text: texto })
+        if (!mensagemStatus?.key && enviada?.key) mensagemStatus = enviada
+      } catch (erro) {
+        console.warn('[PLAYCALL MENSAGEM]', String(erro?.message || erro).slice(0, 160))
+      }
+    }
+    const apresentarStatus = (estado, audio) => [
+      tituloPlayCall,
+      '> ℹ️ \`𝙴𝚂𝚃𝙰𝙳𝙾 𝙳𝙰 𝙲𝙷𝙰𝙼𝙰𝙳𝙰\`',
+      '',
+      '> 👤 ᴅᴇsᴛɪɴᴏ: @' + ident(destino),
+      '> 📲 sᴛᴀᴛᴜs: ' + estado,
+      '> 🎼 ᴀ́ᴜᴅɪᴏ: ' + audio
+    ].join('\n')
+    const duracao = () => {
+      if (!iniciadoEm) return ''
+      const segundos = Math.max(0, Math.floor((Date.now() - iniciadoEm) / 1000))
+      return String(Math.floor(segundos / 60)).padStart(2, '0') + ':' + String(segundos % 60).padStart(2, '0')
     }
     const encerrar = async motivo => {
       if (finalizado) return
       finalizado = true
-      if (timer) clearTimeout(timer)
-      if (timerFim) clearTimeout(timerFim)
+      if (timerAtendimento) clearTimeout(timerAtendimento)
       if (ouvindo) calls.off?.('state', observar)
       chamadas.delete(sessao)
-      if (callId && (motivo === 'tempo' || motivo === 'falha')) await calls.endCall(callId).catch(() => {})
+      // Somente chamada sem atendimento expira. Depois de conectar, o
+      // encerramento depende do evento real da Stone/WhatsApp.
+      if (callId && motivo === 'nao-atendida') await calls.endCall(callId).catch(() => {})
       if (temporario) await fs.promises.rm(temporario.pasta, { recursive: true, force: true }).catch(() => {})
-      const descricao = motivo === 'tempo' ? '⏰ Chamada não atendida ou conexão de áudio não confirmada.'
-        : motivo === 'falha' ? '❌ A ligação foi interrompida.'
-        : '📵 Chamada encerrada.'
-      await tokito.sendMessage(from, { text: '🎧 *PLAYCALL*\n> 👤 @' + ident(destino) + '\n> ' + descricao,
-        contextInfo: { mentionedJid: [destino] } }).catch(() => {})
+      await enviar({ text: textoEncerramento(ident(destino), duracao(), motivo) }, [destino]).catch(() => {})
+    }
+    const carregarNaChamada = async () => {
+      if (finalizado || !conectado || carregando || !callId || !temporario) return
+      carregando = true
+      chamadas.set(sessao, { fase: 'carregando-audio', destino, origem: from, musica: musica.titulo, callId })
+      await aviso(apresentarStatus('ᴄᴏɴᴇᴄᴛᴀᴅᴏ ✅', 'ᴘʀᴇᴘᴀʀᴀɴᴅᴏ ᴏ sᴏᴍ...'))
+      try {
+        // Envia PCM somente depois que a pessoa atende e o motor recebe
+        // o estado conectado. Não confundir startCall com transmissão.
+        await calls.loadAudio(callId, temporario.arquivo)
+        if (finalizado) return
+        audioCarregado = true
+        chamadas.set(sessao, { fase: 'audio-carregado', destino, origem: from, musica: musica.titulo, callId })
+        await aviso([
+          tituloPlayCall,
+          '> ✅ \`𝙲𝙷𝙰𝙼𝙰𝙳𝙰 𝙲𝙾𝙽𝙴𝙲𝚃𝙰𝙳𝙰\`',
+          '',
+          '> 👤 ᴄᴏɴᴛᴀᴛᴏ: @' + ident(destino),
+          '> 🎵 ᴍᴜ́sɪᴄᴀ: ' + rotulo(musica.titulo),
+          '> 🎼 ᴀ́ᴜᴅɪᴏ: ᴄᴀʀʀᴇɢᴀᴅᴏ ɴᴏ ᴍᴏᴛᴏʀ',
+          '',
+          '> 🎧 A chamada continua até alguém desligar.'
+        ].join('\n'))
+      } catch (erro) {
+        if (finalizado) return
+        chamadas.set(sessao, { fase: 'erro-audio', destino, origem: from, musica: musica.titulo, callId })
+        console.warn('[PLAYCALL ÁUDIO]', String(erro?.message || erro).slice(0, 200))
+        await aviso([
+          tituloPlayCall,
+          '> ⚠️ \`𝙵𝙰𝙻𝙷𝙰 𝙽𝙾 𝙰́𝚄𝙳𝙸𝙾\`',
+          '',
+          '> 📞 ᴄʜᴀᴍᴀᴅᴀ: ᴄᴏɴᴇᴄᴛᴀᴅᴀ',
+          '> 🎵 ᴍᴜ́sɪᴄᴀ: ' + rotulo(musica.titulo),
+          '> 🔇 Não foi possível carregar o som no VoIP.',
+          '> 📍 ' + String(erro?.message || erro).slice(0, 120),
+          '',
+          '> 📴 Desligue a chamada para encerrar.'
+        ].join('\n'))
+      } finally {
+        carregando = false
+      }
     }
     const observar = item => {
       if (finalizado || !callId || String(item?.callId || item?.id || '') !== String(callId)) return
@@ -187,76 +282,71 @@ dylan.setCommand({
       }
       if (!estadosAtivos.has(estado) || conectado) return
       conectado = true
+      iniciadoEm = Date.now()
+      if (timerAtendimento) clearTimeout(timerAtendimento)
+      timerAtendimento = null
+      // A chamada conectada não recebe temporizador de desligamento.
+      void carregarNaChamada()
       void (async () => {
-        try {
-          if (timer) clearTimeout(timer)
-          chamadas.set(sessao, { fase: audioCarregado ? 'audio-carregado' : 'carregando-audio', destino, origem: from, musica: musica.titulo, callId })
-          await aviso('🎧 *𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻*\n> ✅ @' + ident(destino) + ' conectou à chamada!\n> 🎵 ' + musica.titulo + '\n> 🔊 ' + (audioCarregado ? 'Música carregada no motor de áudio.' : 'Preparando transmissão da música...'))
-          const avatar = await tokito.profilePictureUrl(destino, 'image').catch(() => '')
-          if (avatar) await tokito.sendMessage(from, {
-            image: { url: avatar }, caption: '👤 Contato conectado: @' + ident(destino),
-            contextInfo: { mentionedJid: [destino] }
-          }, { quoted: ctx.selo }).catch(() => {})
-        } catch (e) {
-          console.warn('[PLAYCALL STATUS]', String(e?.message || e).slice(0, 160))
-        }
+        const foto = await tokito.profilePictureUrl(destino, 'image').catch(() => '')
+        if (foto && !finalizado) await enviar({
+          image: { url: foto },
+          caption: '> 👤 ᴄᴏɴᴛᴀᴛᴏ ᴄᴏɴᴇᴄᴛᴀᴅᴏ: @' + ident(destino)
+        }, [destino]).catch(() => {})
       })()
     }
 
     try {
       const cap = await calls.enableVoip()
-      if (!cap?.startCall || !cap?.audioFiles) throw new Error('Motor VoIP ou arquivos de áudio não disponíveis nesta instalação. Verifique FFmpeg e codecs.')
+      if (!cap?.startCall || !cap?.audioFiles) throw new Error('Motor VoIP ou FFmpeg não disponível nesta instalação.')
       musica = await localizar(ctx, entrada)
       temporario = await prepararAudio(ctx, musica.url)
-      chamadas.set(sessao, { fase: 'chamando', destino, origem: from, musica: musica.titulo })
-      const texto = '• *𝙼𝚄́𝚂𝙸𝙲𝙰 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰* 🎧\n' +
-        '> 🎵 ᴛɪ́ᴛᴜʟᴏ: ' + musica.titulo + '\n' +
-        '> 👨‍🎤 ᴀᴜᴛᴏʀ: ' + musica.artista + '\n' +
-        '> ⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ' + musica.duracao + '\n' +
-        '> 👤 ᴅᴇsᴛɪɴᴏ: @' + ident(destino) + '\n' +
-        '> 📞 ᴇsᴛᴀᴅᴏ: ᴄʜᴀᴍᴀɴᴅᴏ...'
+      const descricao = [
+        '• \`𝙼𝚄́𝚂𝙸𝙲𝙰 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰\` 🎧',
+        '> ℹ️ \`𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂\`',
+        '',
+        '> ✏️ ᴛɪ́ᴛᴜʟᴏ: ' + rotulo(musica.titulo),
+        '> ⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ' + rotulo(musica.duracao),
+        '> 👨‍🎤 ᴀᴜᴛᴏʀ: ' + rotulo(musica.artista),
+        '> 🔗 ʟɪɴᴋ: ' + musica.url,
+        '',
+        '• \`𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻\` 📞',
+        '> 👤 ᴅᴇsᴛɪɴᴏ: @' + ident(destino),
+        '> 📲 sᴛᴀᴛᴜs: ᴄʜᴀᴍᴀɴᴅᴏ...',
+        '> 🎼 ᴀ́ᴜᴅɪᴏ: ᴘʀᴏɴᴛᴏ ᴘᴀʀᴀ ᴇɴᴠɪᴏ'
+      ].join('\n')
       if (musica.capa) {
-        await tokito.sendMessage(from, { image: { url: musica.capa }, caption: texto,
-          contextInfo: { mentionedJid: [destino] } }, { quoted: ctx.selo })
-          .catch(() => tokito.sendMessage(from, { text: texto, contextInfo: { mentionedJid: [destino] } }))
-      } else {
-        await tokito.sendMessage(from, { text: texto, contextInfo: { mentionedJid: [destino] } })
-      }
-      await aviso('📞 *𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻*\n> Aguardando @' + ident(destino) + ' atender...\n> A música só será iniciada após a conexão confirmada.')
+        await enviar({ image: { url: musica.capa }, caption: descricao })
+          .catch(() => enviar({ text: descricao }))
+      } else await enviar({ text: descricao })
+      await aviso(apresentarStatus('ᴄʜᴀᴍᴀɴᴅᴏ...', 'ᴀɢᴜᴀʀᴅᴀɴᴅᴏ ᴄᴏɴᴇxᴀ̃ᴏ'))
       calls.on('state', observar)
       ouvindo = true
-      // startCall só inicia a sinalização. O MP3 PRECISA ser carregado
-      // explicitamente: passar audioFile em startCall não bastou em chamadas reais.
       callId = await calls.startCall({ peerJid: destino, isVideo: false })
-      chamadas.set(sessao, { fase: 'carregando-audio', destino, origem: from, musica: musica.titulo, callId })
-      timer = setTimeout(() => { if (!conectado) void encerrar('tempo') }, 60000)
-      timer.unref?.()
-      timerFim = setTimeout(() => { void encerrar('tempo') }, 12 * 60 * 1000)
-      timerFim.unref?.()
+      chamadas.set(sessao, { fase: 'chamando', destino, origem: from, musica: musica.titulo, callId })
+      // Evita chamada não atendida presa. Não se aplica após conectar.
+      timerAtendimento = setTimeout(() => {
+        if (!conectado) void encerrar('nao-atendida')
+      }, 90000)
+      timerAtendimento.unref?.()
       const atual = calls.getCall(callId)
       if (atual) observar(atual)
-      // O motor usa FFmpeg para decodificar o MP3 e enfileirar PCM de saída.
-      // Não apague o arquivo temporário antes de a chamada terminar.
-      await calls.loadAudio(callId, temporario.arquivo)
-      audioCarregado = true
-      if (!finalizado) {
-        chamadas.set(sessao, { fase: conectado ? 'audio-carregado' : 'aguardando-conexao', destino, origem: from, musica: musica.titulo, callId })
-        if (conectado) {
-          await aviso('🎧 *𝙿𝙻𝙰𝚈 𝙲𝙰𝙻𝙻*\n> ✅ @' + ident(destino) + ' conectou à chamada!\n> 🎵 ' + musica.titulo + '\n> 🔊 Música carregada no motor de áudio da chamada.')
-        }
-      }
     } catch (erro) {
-      const texto = String(erro?.message || erro || 'Erro desconhecido').slice(0, 220)
+      const texto = String(erro?.message || erro || 'Erro desconhecido').slice(0, 200)
       if (!finalizado) {
-        if (timer) clearTimeout(timer)
-        if (timerFim) clearTimeout(timerFim)
+        finalizado = true
+        if (timerAtendimento) clearTimeout(timerAtendimento)
         if (ouvindo) calls.off?.('state', observar)
         chamadas.delete(sessao)
-        finalizado = true
-        if (callId) await calls.endCall(callId).catch(() => {})
+        if (callId && !conectado) await calls.endCall(callId).catch(() => {})
         if (temporario) await fs.promises.rm(temporario.pasta, { recursive: true, force: true }).catch(() => {})
       }
-      await reply('❌ *PLAYCALL INDISPONÍVEL*\n> ' + texto + '\n> O VoIP da Stone 1.0.7 ainda é experimental.')
+      await reply([
+        tituloPlayCall,
+        '> ❌ \`𝙽𝙰̃𝙾 𝙵𝙾𝙸 𝙿𝙾𝚂𝚂𝙸́𝚅𝙴𝙻 𝙸𝙽𝙸𝙲𝙸𝙰𝚁\`',
+        '',
+        '> ⚠️ ' + texto
+      ].join('\n'))
     }
   }
 })
