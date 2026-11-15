@@ -1498,6 +1498,9 @@ ctx.tokito.sendPresenceUpdate('paused', ctx.from).catch(() => {})
 
 const evento = async ctx => {
 if (!ctx.isGroup) return false
+// Comandos com prefixo, aliases sem prefixo e figurinhas cadastradas
+// pertencem ao despachante do bot, não às respostas espontâneas da IA.
+if (ctx.isCmd === true) return false
 
 const cfg = ctx.dataGp?.[0]?.funcoes?.modoia
 
