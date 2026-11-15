@@ -114,70 +114,68 @@ const numeroPN = valor => {
   return /^\d{10,15}$/.test(numero) ? numero : ''
 }
 const telefone = numero => numero ? '+' + numero : 'Número indisponível'
-const limpo = x => String(x || '—').replace(/\s+/g, ' ').trim()
-const etiqueta = valor => String.fromCharCode(96) + valor + String.fromCharCode(96)
-const montar = (titulo, emoji, linhas) => [
-  '• ' + etiqueta(titulo) + ' ' + emoji, '',
-  ...linhas.filter(Boolean).map(linha => '> ' + linha),
-  '', '> 🧊 ᴛᴏᴋɪᴛᴏ ʙᴏᴛ ᴠ10'
+const limpo = value => String(value || '—').replace(/\s+/g, ' ').trim()
+const marcado = valor => String.fromCharCode(96) + valor + String.fromCharCode(96)
+const infoPlay = (titulo, linhas, emoji = '🎧') => [
+  '• ' + marcado(titulo) + ' ' + emoji,
+  '> ℹ️ ' + marcado('𝙸𝙽𝙵𝙾𝚁𝙼𝙰𝙲̧𝙾̃𝙴𝚂'),
+  ...linhas.map(x => x ? '> ' + x : '')
 ].join('\n')
-const cardMusica = (m, numero) => montar('𝙼𝚄́𝚂𝙸𝙲𝙰 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰', '🎧', [
-  '🎵 ᴛɪ́ᴛᴜʟᴏ: *' + limpo(m.titulo) + '*',
-  '🎤 ᴀᴜᴛᴏʀ: ' + limpo(m.artista),
+const cardMusica = (m, n) => infoPlay('𝙼𝚄́𝚂𝙸𝙲𝙰 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰', [
+  '✏️ ᴛɪ́ᴛᴜʟᴏ: ' + limpo(m.titulo),
   '⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ' + limpo(m.duracao),
-  '🔗 ʟɪɴᴋ: ' + m.url,
-  '',
-  '📞 ᴄʜᴀᴍᴀᴅᴀ: ' + telefone(numero),
-  '🟡 ᴇsᴛᴀᴅᴏ: Preparando a ligação'
+  '👨‍🎤 ᴀᴜᴛᴏʀ: ' + limpo(m.artista),
+  '🔗 ʟɪɴᴋ: ' + m.url, '',
+  '📱 ᴅᴇsᴛɪɴᴏ: ' + telefone(n),
+  '📞 ᴇsᴛᴀᴅᴏ: Música encontrada'
 ])
-const cardChamando = (numero, m) => montar('𝙲𝙷𝙰𝙼𝙰𝙽𝙳𝙾', '📞', [
-  '🟡 ᴇsᴛᴀᴅᴏ: Chamando...',
-  '📱 ᴛᴇʟᴇғᴏɴᴇ: ' + telefone(numero),
+const cardChamando = (n,m) => infoPlay('𝙿𝙻𝙰𝚈𝙲𝙰𝙻𝙻 𝙲𝙷𝙰𝙼𝙰𝙽𝙳𝙾',[
+  '📱 ᴄᴏɴᴛᴀᴛᴏ: ' + telefone(n),
   '🎵 ᴍᴜ́sɪᴄᴀ: ' + limpo(m.titulo),
-  '💬 Aguardando a pessoa atender.'
-])
-const cardPreparando = numero => montar('𝙲𝙷𝙰𝙼𝙰𝙳𝙰 𝙰𝚃𝙴𝙽𝙳𝙸𝙳𝙰', '✅', [
-  '📱 ᴛᴇʟᴇғᴏɴᴇ: ' + telefone(numero),
-  '🎶 Preparando a música para a ligação...'
-])
-const cardConectou = (numero, m) => montar('𝙼𝚄́𝚂𝙸𝙲𝙰 𝙽𝙰 𝙲𝙷𝙰𝙼𝙰𝙳𝙰', '🎧', [
-  '✅ ᴇsᴛᴀᴅᴏ: Ligação atendida',
-  '📱 ᴛᴇʟᴇғᴏɴᴇ: ' + telefone(numero),
-  '🎵 ᴍᴜ́sɪᴄᴀ: *' + limpo(m.titulo) + '*',
-  '▶️ Reprodução iniciada.',
-  '📞 A ligação continua até ser desligada.'
-])
-const cardSemAudio = (numero, m) => montar('𝙼𝚄́𝚂𝙸𝙲𝙰 𝙸𝙽𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻', '⚠️', [
-  '📱 ᴛᴇʟᴇғᴏɴᴇ: ' + telefone(numero),
+  '📞 ᴇsᴛᴀᴅᴏ: Chamando...',
+  '⌛ Aguardando atender.'
+], '📞')
+const cardPreparando = (n,m) => infoPlay('𝙲𝙷𝙰𝙼𝙰𝙳𝙰 𝙰𝚃𝙴𝙽𝙳𝙸𝙳𝙰',[
+  '✅ A pessoa atendeu.',
+  '📱 ᴄᴏɴᴛᴀᴛᴏ: ' + telefone(n),
   '🎵 ᴍᴜ́sɪᴄᴀ: ' + limpo(m.titulo),
+  '🎧 Preparando a música.'
+], '✅')
+const cardConectou = (n,m) => infoPlay('𝙿𝙻𝙰𝚈𝙲𝙰𝙻𝙻 𝙲𝙾𝙽𝙴𝙲𝚃𝙰𝙳𝙾',[
+  '✅ Chamada atendida.',
+  '📱 ᴄᴏɴᴛᴀᴛᴏ: ' + telefone(n),
+  '🎵 ᴍᴜ́sɪᴄᴀ: ' + limpo(m.titulo),
+  '🎶 Música iniciada na ligação.',
+  '📞 A chamada continua até desligarem.'
+], '🎧')
+const cardSemAudio = (n,m) => infoPlay('𝙿𝙻𝙰𝚈𝙲𝙰𝙻𝙻',[
   '🔇 Não foi possível tocar a música.',
-  '📞 A ligação permanece aberta.'
-])
-const cardFim = (numero, tempo, conectou) => montar('𝙲𝙷𝙰𝙼𝙰𝙳𝙰 𝙴𝙽𝙲𝙴𝚁𝚁𝙰𝙳𝙰', '📴', [
-  '📱 ᴛᴇʟᴇғᴏɴᴇ: ' + telefone(numero),
-  ...(tempo ? ['⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ' + tempo] : []),
-  '📞 ᴇsᴛᴀᴅᴏ: ' + (conectou ? 'Ligação finalizada.' : 'Não atendida.')
-])
-const cardUso = p => montar('𝙿𝙻𝙰𝚈𝙲𝙰𝙻𝙻', '🎧', [
-  '📞 Ligue para alguém e toque uma música.',
-  '',
-  '📱 ᴘᴏʀ ɴᴜ́ᴍᴇʀᴏ:',
-  p + 'playcall 5511999999999 vem cá',
-  '',
-  '👤 ᴘᴏʀ ᴍᴇɴᴄ̧ᴀ̃ᴏ:',
-  p + 'playcall @pessoa vem cá',
+  '📱 ᴄᴏɴᴛᴀᴛᴏ: ' + telefone(n),
+  '🎵 ᴍᴜ́sɪᴄᴀ: ' + limpo(m.titulo),
+  '📞 A ligação continua ativa.'
+], '⚠️')
+const cardFim = (n,t,conectou) => infoPlay('𝙲𝙷𝙰𝙼𝙰𝙳𝙰 𝙴𝙽𝙲𝙴𝚁𝚁𝙰𝙳𝙰',[
+  '📱 ᴄᴏɴᴛᴀᴛᴏ: ' + telefone(n),
+  ...(t ? ['⏱️ ᴅᴜʀᴀᴄ̧ᴀ̃ᴏ: ' + t] : []),
+  '📞 ᴇsᴛᴀᴅᴏ: ' + (conectou ? 'Chamada finalizada.' : 'Não atendida.')
+], '📴')
+const cardUso = p => infoPlay('𝙿𝙻𝙰𝚈𝙲𝙰𝙻𝙻',[
+  '📞 Música por ligação',
+  '📱 ɴᴜ́ᴍᴇʀᴏ: ' + p + 'playcall 5511999999999 vem cá',
+  '👤 ᴍᴇɴᴄ̧ᴀ̃ᴏ: ' + p + 'playcall @pessoa vem cá',
   '🔗 Também aceita link do YouTube.'
 ])
-const cardSemNumero = p => montar('𝙿𝙻𝙰𝚈𝙲𝙰𝙻𝙻', '⚠️', [
-  'Não consegui identificar o telefone dessa pessoa.',
+const cardSemNumero = p => infoPlay('𝙿𝙻𝙰𝚈𝙲𝙰𝙻𝙻',[
+  '⚠️ O telefone do contato marcado não está disponível.',
   '📱 Digite o número real com DDI e DDD:',
   p + 'playcall 5511999999999 nome da música'
-])
-
+], '⚠️')
 
 // Consome apenas o telefone inicial, preservando a música ou link integral.
 const porNumero = entrada => {
-  const texto = String(entrada || '').trim().replace(/^@(?=\+?\d)/, '')
+  const texto = String(entrada || '').trim()
+  // @contato não é número digitado: seus dígitos podem ser um LID.
+  if (!texto || texto.startsWith('@')) return null
   const tokens = texto.split(/\s+/)
   let resultado = null
   for (let n = 1; n < tokens.length && n <= 6; n++) {
@@ -192,50 +190,47 @@ const porNumero = entrada => {
   return resultado?.busca ? resultado : null
 }
 
-const lidNormalizado = jid => String(jid || '').trim().replace(/:\d+(?=@)/, '')
-const porMencao = async (ctx, texto) => {
+const normalizarId = jid => String(jid || '').trim().replace(/:\d+(?=@)/, '').toLowerCase()
+const ehLid = jid => /@(?:lid|hosted\.lid)$/i.test(normalizarId(jid))
+const ehTelefone = jid => /@(?:s\.whatsapp\.net|c\.us)$/i.test(normalizarId(jid))
+const porMencao = async (ctx, entrada) => {
+  const busca = String(entrada || '').replace(/^@\S+\s*/, '').trim()
+  if (!busca) return null
   const contexto = ctx.ctxMsg || {}
-  const origem = [
+  const origens = [
     ...(Array.isArray(contexto.mentionedJid) ? contexto.mentionedJid : []),
     ...(Array.isArray(ctx.mentionedList) ? ctx.mentionedList : []),
     ...(Array.isArray(ctx.mentions) ? ctx.mentions : []),
-    ...(Array.isArray(ctx.menc_jid2) ? ctx.menc_jid2 : []),
-    ctx.menc_os2, ctx.menc_prt
-  ]
-  const marcado = origem.find(jid => typeof jid === 'string' &&
-    /@(?:lid|hosted\.lid|s\.whatsapp\.net|c\.us)$/i.test(jid))
-  if (!marcado) return null
-  const busca = String(texto || '').replace(/^@\S+\s*/, '').trim()
-  if (!busca) return null
-
+    ...(Array.isArray(ctx.menc_jid2) ? ctx.menc_jid2 : [])
+  ].filter(v => typeof v === 'string' && (ehLid(v) || ehTelefone(v)))
+  if (!origens.length) return null
+  // A menção original @lid prevalece sobre possíveis representações já normalizadas.
+  const selecionado = origens.find(ehLid) || origens[0]
+  const ids = origens.map(normalizarId)
+  const membros = Array.isArray(ctx.groupMembers) ? ctx.groupMembers : []
+  const membro = membros.find(m => [
+    m?.lid, m?.id, m?.jid, m?.participant,
+    m?.phoneNumber, m?.participantPn, m?.participantAlt
+  ].some(id => ids.includes(normalizarId(id))))
   let numero = ''
-  const lid = /@(?:lid|hosted\.lid)$/i.test(marcado) ? lidNormalizado(marcado) : ''
-  if (lid) {
-    const membros = Array.isArray(ctx.groupMembers) ? ctx.groupMembers : []
-    const membro = membros.find(item => [
-      item?.lid, item?.id, item?.jid, item?.participant
-    ].some(valor => lidNormalizado(valor) === lid))
-    const candidatos = [
-      membro?.phoneNumber, membro?.participantPn, membro?.participantAlt,
-      membro?.jid, membro?.id
-    ]
-    for (const valor of candidatos) {
-      numero = numeroPN(valor)
-      if (numero) break
-    }
-    if (!numero && typeof ctx.tokito?.signalRepository?.lidMapping?.getPNForLID === 'function') {
-      try {
-        const pn = await ctx.tokito.signalRepository.lidMapping.getPNForLID(lid)
-        numero = numeroPN(pn)
-      } catch {}
-    }
-  } else {
-    numero = numeroPN(marcado)
+  for (const id of [membro?.phoneNumber, membro?.participantPn, membro?.participantAlt, membro?.jid, membro?.id]) {
+    if (ehTelefone(id) && numeroPN(id)) { numero = numeroPN(id); break }
   }
-  // Não inventar telefone nem converter dígitos de @lid em número.
+  if (!numero && ehLid(selecionado)) {
+    const mapa = ctx.tokito?.signalRepository?.lidMapping
+    if (typeof mapa?.getPNForLID === 'function') {
+      for (const id of origens.filter(ehLid)) {
+        try {
+          const pn = await mapa.getPNForLID(normalizarId(id))
+          if (ehTelefone(pn) && numeroPN(pn)) { numero = numeroPN(pn); break }
+        } catch {}
+      }
+    }
+  }
+  // Não tratar números internos do @lid como telefone, mesmo que tenham 15 dígitos.
+  if (!numero && ehTelefone(selecionado)) numero = numeroPN(selecionado)
   return numero ? { destino: numero + '@s.whatsapp.net', numero, busca } : null
 }
-
 
 dylan.setCommand({
   nome: 'playcall',
@@ -296,7 +291,15 @@ dylan.setCommand({
     const tocar = async () => {
       if (!conectado || finalizado || carregando || !mp3 || !callId) return
       carregando = true
-      await aviso(cardPreparando(numero))
+      const textoAtendeu = cardPreparando(numero, musica)
+      let foto = ''
+      if (typeof tokito.profilePictureUrl === 'function') {
+        try { foto = await tokito.profilePictureUrl(destino, 'image') } catch {}
+      }
+      if (typeof foto === 'string' && /^https?:\/\/\S+$/i.test(foto)) {
+        try { await enviar({ image: { url: foto }, caption: textoAtendeu }) }
+        catch { await aviso(textoAtendeu) }
+      } else await aviso(textoAtendeu)
       try {
         await calls.loadAudio(callId, mp3.arquivo)
         if (finalizado) return
@@ -327,8 +330,8 @@ dylan.setCommand({
       mp3 = await prepararAudio(ctx, musica.url)
       if (musica.capa) {
         await enviar({ image: { url: musica.capa }, caption: cardMusica(musica, numero) })
-          .catch(() => enviar({ text: cardMusica(musica, destino) }))
-      } else await enviar({ text: cardMusica(musica, destino) })
+          .catch(() => enviar({ text: cardMusica(musica, numero) }))
+      } else await enviar({ text: cardMusica(musica, numero) })
       calls.on('state', observar)
       ouvindo = true
       callId = await calls.startCall({ peerJid: destino, isVideo: false })
@@ -345,7 +348,7 @@ dylan.setCommand({
         if (mp3) await fs.promises.rm(mp3.pasta, { recursive: true, force: true }).catch(() => {})
       }
       console.warn('[PLAYCALL FALHA]', String(e?.message || e).slice(0, 130))
-      return reply(montar('𝙿𝙻𝙰𝚈𝙲𝙰𝙻𝙻', '⚠️', [
+      return reply(infoPlay('𝙿𝙻𝙰𝚈𝙲𝙰𝙻𝙻', [
         'Não foi possível iniciar a ligação.',
         '📱 Confira o número e tente novamente.'
       ]))
