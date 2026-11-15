@@ -486,7 +486,7 @@ return String(marker.id || '').trim() !== migration.id
 }
 
 // O envio aceito pelo WhatsApp não garante que o aviso foi exibido ao dono.
-// Uma nova versão tem até duas tentativas espaçadas, evitando avisos em loop.
+// Uma nova versão tem até quatro tentativas espaçadas, evitando avisos em loop.
 // O registro também depende do destinatário: não suprime o aviso de um novo dono.
 // WhatsApp aceitar um envio não confirma que o dono viu a mensagem.
 // Mantém um número pequeno de novas tentativas para atualizações pendentes.
