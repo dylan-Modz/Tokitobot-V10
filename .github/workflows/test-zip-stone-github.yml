@@ -1,0 +1,47 @@
+name: Tokito Bot V10 - Stone GitHub e ZIP completo
+on:
+  push:
+    branches:
+      - teste/stone-github-midia-20261115
+permissions:
+  contents: read
+jobs:
+  empacotar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar sintaxe e testes de mídia
+        run: |
+          node --check tokito.js
+          node --check DADOS_TOKITO/connect.js
+          node --check DADOS_TOKITO/plugins/admin/open.js
+          node --test test/open-media.test.cjs
+      - name: Montar bot completo
+        run: |
+          mkdir -p "$RUNNER_TEMP/TokitoBot-V10"
+          rsync -a --exclude='.git' --exclude='.github' --exclude='node_modules' ./ "$RUNNER_TEMP/TokitoBot-V10/"
+          (cd "$RUNNER_TEMP" && zip -q -r "$GITHUB_WORKSPACE/TokitoBot-V10-10.3.26-Stone-GitHub.zip" TokitoBot-V10)
+          unzip -t "$GITHUB_WORKSPACE/TokitoBot-V10-10.3.26-Stone-GitHub.zip" | tail -1
+          test "$(unzip -Z1 "$GITHUB_WORKSPACE/TokitoBot-V10-10.3.26-Stone-GitHub.zip" | wc -l)" -ge 600
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tokito-Bot-V10-Completo-Stone-GitHub
+          path: TokitoBot-V10-10.3.26-Stone-GitHub.zip
+          retention-days: 7
+          if-no-files-found: error
+  instalar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Instalar dependencias reais pelo GitHub
+        run: npm install --no-audit --no-fund --omit=optional
+      - name: Confirmar helper Stone da branch fixada
+        run: |
+          node -e "import('./node_modules/@stone-wpp/ofc/lib/Socket/stone-media-availability.js').then(x=>{if(typeof x.emitMediaAvailability!=='function')process.exit(1);console.log('Stone GitHub: evento disponivel')}).catch(e=>{console.error(e);process.exit(1)})"
+      - name: Testar bot
+        run: npm test
