@@ -1,0 +1,33 @@
+name: Pacote de teste Tokito completo
+on:
+  push:
+    branches:
+      - teste/zip-tokito-conexao-20261115
+permissions:
+  contents: read
+jobs:
+  empacotar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Checar sintaxe dos arquivos principais
+        run: |
+          node --check tokito.js
+          node --check DADOS_TOKITO/connect.js
+          node --check DADOS_TOKITO/detector.js
+      - name: Criar ZIP com todo o bot
+        run: |
+          mkdir -p "$RUNNER_TEMP/TokitoBot-V10"
+          rsync -a --exclude='.git' --exclude='.github' ./ "$RUNNER_TEMP/TokitoBot-V10/"
+          (cd "$RUNNER_TEMP" && zip -q -r "$GITHUB_WORKSPACE/TokitoBot-V10-Completo.zip" TokitoBot-V10)
+          unzip -t "$GITHUB_WORKSPACE/TokitoBot-V10-Completo.zip" | tail -1
+          unzip -l "$GITHUB_WORKSPACE/TokitoBot-V10-Completo.zip" | tail -2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Tokito-Bot-V10-Tudo-Conexao
+          path: TokitoBot-V10-Completo.zip
+          retention-days: 7
+          if-no-files-found: error
