@@ -486,10 +486,12 @@ return String(marker.id || '').trim() !== migration.id
 }
 
 // O envio aceito pelo WhatsApp não garante que o aviso foi exibido ao dono.
-// Uma nova versão tem até duas tentativas espaçadas, evitando avisos em loop.
+// Uma nova versão tem até quatro tentativas espaçadas, evitando avisos em loop.
 // O registro também depende do destinatário: não suprime o aviso de um novo dono.
-const UPDATE_NOTICE_RETRY_MS = 5 * 60 * 1000
-const UPDATE_NOTICE_MAX_ATTEMPTS = 2
+// WhatsApp aceitar um envio não confirma que o dono viu a mensagem.
+// Mantém um número pequeno de novas tentativas para atualizações pendentes.
+const UPDATE_NOTICE_RETRY_MS = 3 * 60 * 1000
+const UPDATE_NOTICE_MAX_ATTEMPTS = 4
 
 function deveAvisarUpdate(version, ownerJid = '') {
 const valor = String(version || '').trim()
