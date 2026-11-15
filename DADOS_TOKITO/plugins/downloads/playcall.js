@@ -291,15 +291,20 @@ dylan.setCommand({
     const tocar = async () => {
       if (!conectado || finalizado || carregando || !mp3 || !callId) return
       carregando = true
-      const textoAtendeu = cardPreparando(numero, musica)
-      let foto = ''
-      if (typeof tokito.profilePictureUrl === 'function') {
-        try { foto = await tokito.profilePictureUrl(destino, 'image') } catch {}
-      }
-      if (typeof foto === 'string' && /^https?:\/\/\S+$/i.test(foto)) {
-        try { await enviar({ image: { url: foto }, caption: textoAtendeu }) }
-        catch { await aviso(textoAtendeu) }
-      } else await aviso(textoAtendeu)
+      // Inicia o áudio sem aguardar a busca da foto do contato.
+      // O avatar e a mensagem são enviados em paralelo.
+      const avisoAtendido = (async () => {
+        const textoAtendeu = cardPreparando(numero, musica)
+        let foto = ''
+        if (typeof tokito.profilePictureUrl === 'function') {
+          try { foto = await tokito.profilePictureUrl(destino, 'image') } catch {}
+        }
+        if (typeof foto === 'string' && /^https?:\/\/\S+$/i.test(foto)) {
+          try { await enviar({ image: { url: foto }, caption: textoAtendeu }); return }
+          catch {}
+        }
+        await aviso(textoAtendeu)
+      })().catch(() => {})
       try {
         await calls.loadAudio(callId, mp3.arquivo)
         if (finalizado) return
