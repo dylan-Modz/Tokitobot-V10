@@ -129,7 +129,8 @@ key: {
 remoteJid: ctx.from,
 id: referencia.stanzaId,
 fromMe: Boolean(referencia.fromMe),
-...(referencia.participant ? { participant: referencia.participant } : {})
+...(referencia.participant ? { participant: referencia.participant } : {}),
+...(referencia.participantAlt ? { participantAlt: referencia.participantAlt } : {})
 },
 message: { [campo]: media }
 }
@@ -150,8 +151,11 @@ ultimaFalha = erroRenovacao
 }
 }
 
-if (!existeChave)
-throw codigoErro('SEM_CHAVE', 'O WhatsApp não disponibilizou a chave de mídia.')
+if (!existeChave) {
+const motivo = String(referencia.motivoIndisponibilidade || '')
+if (motivo) throw codigoErro('MIDIA_INDISPONIVEL', 'O WhatsApp informou que a mídia não está disponível neste dispositivo.')
+throw codigoErro('SEM_CHAVE', 'A citação não incluiu a chave da mídia e não há original disponível no cache.')
+}
 if (!existeCaminho && !renovacaoTentada)
 throw codigoErro('SEM_CAMINHO', 'A mídia chegou sem URL ou directPath.')
 throw codigoErro('FALHA_DOWNLOAD', 'A tentativa de download não foi concluída.', ultimaFalha)
@@ -201,7 +205,11 @@ const usandoMarcada = Boolean(marcada)
 const referencia = {
 stanzaId: contexto?.stanzaId || '',
 fromMe: Boolean(itemSalvo?.key?.fromMe),
-participant: itemSalvo?.key?.participant || contexto?.participant || ''
+participant: itemSalvo?.key?.participant || contexto?.participant || '',
+participantAlt: itemSalvo?.key?.participantAlt || contexto?.participantAlt || '',
+motivoIndisponibilidade: contexto?.stanzaId
+? tokito?.__tokitoEstadoMidia?.get(from + '|' + contexto.stanzaId)?.motivo || ''
+: ''
 }
 etapa = 'baixando'
 const mediaSalva = extrairMedia(salvo)
@@ -290,14 +298,19 @@ temCitacao: Boolean(ctxMsg?.stanzaId),
 cacheOriginal: Boolean(ctxMsg?.stanzaId && (
 tokito?.__tokitoMidiasOriginais?.has(from + '|' + ctxMsg.stanzaId) ||
 (global.messageStore?.[ctxMsg.stanzaId]?.key?.remoteJid === from &&
-global.messageStore?.[ctxMsg.stanzaId]?.message)))
+global.messageStore?.[ctxMsg.stanzaId]?.message))),
+estadoStone: ctxMsg?.stanzaId
+? tokito?.__tokitoEstadoMidia?.get(from + '|' + ctxMsg.stanzaId)?.motivo || null
+: null
 })
 await reagir(from, '❌').catch(() => {})
 
 const descricao = (typeof etapa === 'string' && etapa === 'enviando')
 ? 'A mídia foi baixada, mas houve um erro ao reenviar no grupo.'
+: codigo === 'MIDIA_INDISPONIVEL'
+? 'O WhatsApp sinalizou que esta mídia não está disponível no dispositivo vinculado. Peça o envio como mídia normal.'
 : codigo === 'SEM_CHAVE'
-? 'O WhatsApp não entregou a chave do arquivo ao bot. Não é possível descriptografar a mídia sem ela.'
+? 'A citação não contém a chave do arquivo, e o bot não recebeu o original completo. Não é possível baixar a mídia sem esses dados.'
 : codigo === 'SEM_CAMINHO'
 ? 'Recebi a chave, mas o WhatsApp não forneceu o endereço da mídia.'
 : codigo === 'FALHA_DOWNLOAD'
