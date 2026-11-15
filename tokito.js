@@ -1628,12 +1628,8 @@ return false
 })
 if (bloqueadoEventoPlugin) continue
 if (!isCmd) continue
-if (isGroup && dataGp?.[0]?.funcoes?.modoia?.ativo === true && !isGroupAdmins && !SoDono) {
-await agenteIA
-.responderRestricao(plug(), command, 'administrador', dataGp?.[0]?.funcoes?.modoia?.tipo || 'texto')
-.catch(() => reply('No modo IA, membros conversam comigo normalmente sem usar comandos.'))
-continue
-}
+// O Modo IA é espontâneo e não retira dos membros o acesso aos comandos.
+// Permissões continuam sendo verificadas normalmente abaixo (soadm, VIP etc.).
 if (isGroup && dataGp?.[0]?.funcoes?.soadm === true && !isGroupAdmins && !SoDono) {
 await reply(mess.soadmBloqueado())
 continue
