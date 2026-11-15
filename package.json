@@ -1,13 +1,13 @@
 {
   "name": "TokitoBot-Md",
-  "version": "10.3.18",
+  "version": "10.3.19",
   "description": "Qualquer dúvida chama no WhatsApp: +55 11 97543-1163",
   "main": "tokito.js",
   "scripts": {
     "start": "node tokito.js",
     "update": "node tokito.js up",
     "install:bot": "bash DADOS_TOKITO/database/lib/install.sh",
-    "test": "node --check tokito.js && node --check DADOS_TOKITO/connect.js && node --check DADOS_TOKITO/plugins/downloads/playcall.js && node --check DADOS_TOKITO/plugins/dono/callstatus.js && node --check DADOS_TOKITO/mensagens/menus.js && node -e \"const d=require('./DADOS_TOKITO/database/lib/comandos');const f=require.resolve('./DADOS_TOKITO/plugins/downloads/playcall.js');d.abrir(f);require(f);const cmd=d.fechar(f);if(!cmd||!cmd.comandos.includes('playcall')||cmd.categoria!=='downloads')process.exit(1)\" && node --check DADOS_TOKITO/plugins/index.js"
+    "test": "node --check tokito.js && node --check DADOS_TOKITO/connect.js && node --check DADOS_TOKITO/plugins/downloads/playcall.js && node --check DADOS_TOKITO/plugins/dono/callstatus.js && node --check DADOS_TOKITO/mensagens/menus.js && node -e \"const d=require('./DADOS_TOKITO/database/lib/comandos');const f=require.resolve('./DADOS_TOKITO/plugins/downloads/playcall.js');d.abrir(f);require(f);const cmd=d.fechar(f);if(!cmd||!cmd.comandos.includes('playcall')||cmd.categoria!=='downloads')process.exit(1)\" && node --check DADOS_TOKITO/plugins/index.js && node --check DADOS_TOKITO/ia/index.js"
   },
   "keywords": [],
   "author": "dylanModz",
