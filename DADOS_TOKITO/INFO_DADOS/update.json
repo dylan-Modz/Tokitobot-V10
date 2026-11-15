@@ -1,61 +1,42 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.22",
+  "version": "10.3.23",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-15T13:18:19.632Z",
+  "publishedAt": "2026-11-15T13:24:19.568Z",
   "changelog": [
-    "PlayCall com mensagens de texto no padrão do Play: capa, título, autor, duração, status e link da música.",
-    "Selo citado e informações do canal do Tokito aplicados às mensagens, inclusive avisos e encerramento.",
-    "Validação do arquivo com FFmpeg e carregamento da música no motor VoIP somente após o contato atender.",
-    "Chamada conectada não é encerrada por tempo limite; espera o evento real de desligamento do WhatsApp.",
-    "Falhas de áudio são informadas sem afirmar que a pessoa ouviu a música, mantendo a Stone WPP 1.0.7 do NPM."
+    "[Correção] fix: PlayCall texto renovado, encerramento estilizado e numero direto — 10.3.23",
+    "A versão 10.3.23 já está disponível para atualização.",
+    "Menus atualizado",
+    "Playcall atualizado",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "PlayCall completo: design, selo e áudio na chamada",
-  "notice": "Tokito Bot 10.3.22 disponível: visual PlayCall, selo e áudio carregado após a ligação conectar.",
+  "title": "fix: PlayCall texto renovado, encerramento estilizado e numero direto — 10.3.23",
+  "notice": "A versão 10.3.23 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "6e14b6aeae5e329bea0303f402f28245ea3e7adc527379d1f0b1bcfadb01b8c8",
+      "size": 79230
+    },
+    {
       "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
-      "sha256": "b84ea1ab3c00aaa8ebcc9c90a69aedefa723f7e5032dd5ba7329a33aaa97eb48",
-      "size": 16412,
-      "gitSha": "5d697846a3104aeab1f28fd4848218df5d98ea78"
+      "sha256": "4f4604352ba0d020fbeb1887ae1e68d3de366a57cab5c105e2841d55ed1f89c3",
+      "size": 14081
     },
     {
       "path": "package.json",
-      "sha256": "5ab97f1a511ae6d425a32e3b24c8ac0d3fc856cfe89c532b0e37d661a6b35bb6",
-      "size": 1770,
-      "gitSha": "e68044e082443598fb9731d51326b7a10ae50f8f"
+      "sha256": "bd2f658b8110207da6b4c10e9d2d99fb4a39711ec4f46103ae67d32a873a40bc",
+      "size": 1770
     }
   ],
   "releases": [
-    {
-      "version": "10.2.24",
-      "fromVersion": "10.2.23",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "feat: Tokito personality integrated into text audio and spontaneous IA",
-      "notice": "A versão 10.2.24 já está disponível para atualização.",
-      "changelog": [
-        "IA Index atualizada"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/ia/index.js",
-          "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
-          "size": 54489,
-          "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6"
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-12T18:00:22.450Z"
-    },
     {
       "version": "10.2.25",
       "fromVersion": "10.2.24",
@@ -4227,6 +4208,39 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-15T13:18:19.632Z"
+    },
+    {
+      "version": "10.3.23",
+      "fromVersion": "10.3.22",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: PlayCall texto renovado, encerramento estilizado e numero direto — 10.3.23",
+      "notice": "A versão 10.3.23 já está disponível para atualização.",
+      "changelog": [
+        "Menus atualizado",
+        "Playcall atualizado",
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "6e14b6aeae5e329bea0303f402f28245ea3e7adc527379d1f0b1bcfadb01b8c8",
+          "size": 79230
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
+          "sha256": "4f4604352ba0d020fbeb1887ae1e68d3de366a57cab5c105e2841d55ed1f89c3",
+          "size": 14081
+        },
+        {
+          "path": "package.json",
+          "sha256": "bd2f658b8110207da6b4c10e9d2d99fb4a39711ec4f46103ae67d32a873a40bc",
+          "size": 1770
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-15T13:24:19.568Z"
     }
   ],
   "mode": "incremental",
