@@ -76,7 +76,7 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ├─ ⊹ 𖤐  𝐷𝑂𝑊𝑁𝐿𝑂𝐴𝐷𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡📥｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}play música
-┃࣪ ╎—̳͟͞͞ 📞 ${prefix}playcall @pessoa música/link
+┃࣪ ╎—̳͟͞͞ 📞 ${prefix}playcall número/@pessoa música
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}playlist — playlists e rádio
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}play_audio música
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}playvideo música
@@ -573,7 +573,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├─ ⊹ 𖤐  𝑌𝑂𝑈𝑇𝑈𝐵𝐸
 ├╾═╼･ﾟ𖤐ﾟ･｡🎧｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}play música
-┃࣪ ╎—̳͟͞͞ 📞 ${prefix}playcall @pessoa música/link
+┃࣪ ╎—̳͟͞͞ 📞 ${prefix}playcall número/@pessoa música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}playlist — playlists e rádio
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}play_audio música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}playvideo música
