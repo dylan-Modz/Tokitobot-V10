@@ -99,7 +99,11 @@ const check = await sistema.verificarUpdate()
 const salvo = sistema.state()
 const automatico = global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__ || {}
 const ultimaFalha = String(global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ || automatico.error || '').trim()
-const telefoneConfigurado = String(ctx.ownerNumber || '').replace(/\D/g, '')
+let telefoneConfigurado = ''
+try {
+  const configAtual = JSON.parse(fs.readFileSync(configDestinoArquivo, 'utf8'))
+  telefoneConfigurado = String(configAtual?.ownerNumber || '').replace(/\D/g, '')
+} catch { telefoneConfigurado = String(ctx.ownerNumber || '').replace(/\D/g, '') }
 const ativo = Boolean(global.__TOKITO_UPDATE_NOTICE_TIMER__ && global.__TOKITO_UPDATE_SOCKET__)
 const falhaInstalacao = global.__TOKITO_UPDATE_LAST_FAILURE__ || {}
 const versaoLocal = check?.local?.version || '—'
