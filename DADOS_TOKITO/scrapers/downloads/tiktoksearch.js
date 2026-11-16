@@ -54,7 +54,7 @@ function publicacao(item) {
   }
   const autor = item.autor || item.author || {}
   const nome = String(autor.username || autor.usuario || autor.unique_id ||
-    item.username || '').trim().replace(/^@/, '')
+    autor.nickname || item.username || '').trim().replace(/^@/, '')
   const id = String(item.id || item.video_id || item.aweme_id || '').trim()
   if (/^[\w.]{1,32}$/.test(nome) && /^\d{15,22}$/.test(id)) {
     return 'https://www.tiktok.com/@' + nome + '/video/' + id
@@ -67,7 +67,7 @@ function linksDiretos(item) {
   const links = new Set()
   for (const entrada of [
     item.video_sem_marca, item.video, item.download, item.download_url,
-    item.downloadUrl, item.play, item.hdplay, item.nowatermark, item.nowatermark_hd
+    item.downloadUrl, item.data, item.play, item.hdplay, item.nowatermark, item.nowatermark_hd
   ]) {
     const url = seguraUrl(entrada)
     if (!url || /\.(?:png|jpe?g|webp|gif|avif)(?:$|[?#])/i.test(url)) continue
@@ -82,9 +82,12 @@ const temVideo = item => Boolean(publicacao(item) || linksDiretos(item).length)
 
 async function obterVideo(item) {
   const post = publicacao(item)
+  // Os resultados da pesquisa já trazem o MP4 no campo "data".
+  // Evita uma segunda consulta se o vídeo direto estiver válido;
+  // usa a rota de download apenas se o link temporário expirar.
   const tentativas = [
-    ...(post ? [client.url('/api/tiktok-video', { url: post })] : []),
-    ...linksDiretos(item)
+    ...linksDiretos(item),
+    ...(post ? [client.url('/api/tiktok-video', { url: post })] : [])
   ]
   if (!tentativas.length) throw new Error('O resultado não contém link de vídeo ou publicação.')
 
