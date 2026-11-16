@@ -302,7 +302,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}listapalavra
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antilinkeasy 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antilinkmedium 1/0
-┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antilinkhard 1/0
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antilinkhard 1/0\n┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}antilinkconfig\n┃࣪ ╎—̳͟͞͞ ✅ ${prefix}antilinkpermitir site.com\n┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antilinkbloquear site.com
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antipay 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antibot 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antivideo 1/0
