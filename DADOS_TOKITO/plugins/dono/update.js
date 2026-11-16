@@ -125,6 +125,20 @@ const falhaInstalacao = global.__TOKITO_UPDATE_LAST_FAILURE__ || {}
 const versaoLocal = check?.local?.version || '—'
 const versaoRemota = check?.remote?.version || 'indisponível'
 const fonte = check?.fonte || 'indisponível'
+const pendentes = Array.isArray(check?.pendingFiles) ? check.pendingFiles.map(item => String(item?.path || '')).filter(Boolean) : []
+const visualEmMemoria = (() => {
+  try {
+    const modelo = ctx.mess.commandNotFound({
+      prefix: ctx.prefix || '#', command: 'plai', nome: (ctx.prefix || '#') + 'play',
+      porcentagem: '80.0%', tempo: '1.000 ms', usuario: 'Teste'
+    })
+    return modelo.includes('ᴛᴇᴍᴘᴏ ᴅᴇ ʙᴜsᴄᴀ') && modelo.includes('sᴜɢᴇsᴛᴀ̃ᴏ:')
+  } catch { return false }
+})()
+const fonteCarregada = visualEmMemoria ? 'NOVO VISUAL' : 'VISUAL ANTIGO'
+const codigoPendente = pendentes.filter(item =>
+  item === 'tokito.js' || item === 'DADOS_TOKITO/mensagens/mensagens.js')
+
 const notificada = salvo?.lastNotifiedPrincipalVersion || 'nenhuma'
 const quando = automatico.at
   ? new Date(automatico.at).toLocaleString('pt-BR', { timeZone: 'America/Fortaleza' })
@@ -137,6 +151,15 @@ return ctx.reply([
 '> ✨ ׄ ( ᴠᴇʀsᴀ̃ᴏ ɴᴏ ɢɪᴛʜᴜʙ: ' + versaoRemota + ' )',
 '> 📡 ׄ ( ғᴏɴᴛᴇ: ' + fonte + ' )',
 '> 📥 ׄ ( ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ᴘᴇɴᴅᴇɴᴛᴇ: ' + (check?.available ? 'SIM' : 'NÃO') + ' )',
+'> 🛠️ ׄ ( ʀᴇᴘᴀʀᴏ ɴᴀ ᴍᴇsᴍᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (check?.repair ? 'SIM' : 'NÃO') + ' )',
+'> 🎨 ׄ ( ᴅᴇsɪɢɴ ᴅᴏ ᴄᴏᴍᴀɴᴅᴏ ɪɴᴠᴀ́ʟɪᴅᴏ ᴇᴍ ᴍᴇᴍᴏ́ʀɪᴀ: ' + fonteCarregada + ' )',
+'> 📦 ׄ ( ᴀʀǫᴜɪᴠᴏs ᴘᴇɴᴅᴇɴᴛᴇs: ' + pendentes.length + ' )',
+...(codigoPendente.length ? [
+'> 📝 ׄ ( ᴀʀǫᴜɪᴠᴏs ᴅᴏ ᴅᴇsɪɢɴ ᴘᴇɴᴅᴇɴᴛᴇs: ' + codigoPendente.join(', ') + ' )'
+] : []),
+...(visualEmMemoria === false ? [
+'> 🔄 ׄ ( ᴀᴘᴏ́s ɪɴsᴛᴀʟᴀʀ, ʀᴇɪɴɪᴄɪᴇ ᴏ ᴘʀᴏᴄᴇssᴏ ᴅᴏ ʙᴏᴛ. )'
+] : []),
 '',
 '- 🔔 \`𝙰𝚅𝙸𝚂𝙾 𝙰𝚄𝚃𝙾𝙼𝙰́𝚃𝙸𝙲𝙾\`',
 '',
