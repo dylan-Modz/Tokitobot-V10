@@ -1,67 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.29",
+  "version": "10.3.30",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-16T16:50:19.135Z",
+  "publishedAt": "2026-11-16T16:54:04.260Z",
   "changelog": [
-    "[Correção] fix: TikTok Search tenta MP4 de até 4 publicações antes de falhar",
-    "A versão 10.3.29 já está disponível para atualização.",
+    "[Correção] fix: TikTok Search recebe MP4 em data e prioriza mídia direta",
+    "A versão 10.3.30 já está disponível para atualização.",
     "Tiktoksearch atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: TikTok Search tenta MP4 de até 4 publicações antes de falhar",
-  "notice": "A versão 10.3.29 já está disponível para atualização.",
+  "title": "fix: TikTok Search recebe MP4 em data e prioriza mídia direta",
+  "notice": "A versão 10.3.30 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/downloads/tiktoksearch.js",
-      "sha256": "1d971d2da453ca800fae003854113f9c9b2fa24046298dd28ee615330cdd3612",
-      "size": 5768
-    },
-    {
       "path": "DADOS_TOKITO/scrapers/downloads/tiktoksearch.js",
-      "sha256": "4fcc4c6560531266af74efcb6d7a7cea27013c4fcb5fc456f1f89a0a191801ef",
-      "size": 4444
+      "sha256": "4e376b0af181e66182dfc80431651433c3a75795f4dad892eb0820e2f6a81f4d",
+      "size": 4672
     }
   ],
   "releases": [
-    {
-      "version": "10.2.31",
-      "fromVersion": "10.2.30",
-      "type": "Correção",
-      "title": "Restaurada a IA generativa do Tokito",
-      "channel": "stable",
-      "notice": "A IA voltou a usar a rota de respostas /api/tokito-ia; Gemini TTS e modos existentes seguem iguais.",
-      "changelog": [
-        "[IA] Restaurada a geração de respostas pela rota /api/tokito-ia, substituindo a inteligência de frases locais.",
-        "[IA] Mantidas a personalidade do Tokito, identificação do criador Dylan e dos administradores, e a participação espontânea.",
-        "[IA Áudio] Rota gemini-tts mantida para geração de voz, sem alterações.",
-        "[Comandos] Pedidos de música e outras funções seguem com confirmação antes de executar o comando real.",
-        "[Atualizador] Atualização incremental validada por SHA-256 e Git Blob SHA dos arquivos efetivamente publicados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/ia/index.js",
-          "sha256": "ddace8747e5613c26c57df66ac03125feb743a1ee20a715e682aea6f52ddee9b",
-          "gitSha": "08120eba99bb826ff0c618b996380aa7a48a19e6",
-          "size": 54489
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "gitSha": "fd3a0fa2724aa459bf52a84573089ec2dbc845a5",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-12T19:04:10.578Z"
-    },
     {
       "version": "10.2.32",
       "fromVersion": "10.2.31",
@@ -4439,6 +4402,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-16T16:50:19.134Z"
+    },
+    {
+      "version": "10.3.30",
+      "fromVersion": "10.3.29",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: TikTok Search recebe MP4 em data e prioriza mídia direta",
+      "notice": "A versão 10.3.30 já está disponível para atualização.",
+      "changelog": [
+        "Tiktoksearch atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/scrapers/downloads/tiktoksearch.js",
+          "sha256": "4e376b0af181e66182dfc80431651433c3a75795f4dad892eb0820e2f6a81f4d",
+          "size": 4672
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-16T16:54:04.259Z"
     }
   ],
   "mode": "incremental",
