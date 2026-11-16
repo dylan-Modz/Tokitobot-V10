@@ -6,22 +6,35 @@
   "ref": "main",
   "publishedAt": "2026-11-16T16:54:44.331Z",
   "changelog": [
-    "[Melhoria] chore: alinhar versão do bot 10.3.29 sem pular numeração",
-    "A versão 10.3.31 já está disponível para atualização.",
-    "Package atualizado"
+    "Corrigido o manifesto de integridade para instalar o TikTok Search sem erro de hash.",
+    "Arquivos históricos 10.3.29 e 10.3.30 vinculados aos blobs imutáveis do GitHub.",
+    "Mantida a verificação SHA-256, sem desativar a segurança do atualizador."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "chore: alinhar versão do bot 10.3.29 sem pular numeração",
-  "notice": "A versão 10.3.31 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "Correção da integridade do TikTok Search",
+  "notice": "Corrigida a verificação de integridade dos arquivos do TikTok Search.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/plugins/downloads/tiktoksearch.js",
+      "sha256": "1d971d2da453ca800fae003854113f9c9b2fa24046298dd28ee615330cdd3612",
+      "size": 5768,
+      "gitSha": "ee630c17b1e9a2915689139af2e510b08c6a3415"
+    },
+    {
+      "path": "DADOS_TOKITO/scrapers/downloads/tiktoksearch.js",
+      "sha256": "4e376b0af181e66182dfc80431651433c3a75795f4dad892eb0820e2f6a81f4d",
+      "size": 4672,
+      "gitSha": "82c9797ce744307dc249727c69b2da8ef465e8b0"
+    },
+    {
       "path": "package.json",
       "sha256": "5ce798874bab89c736bc65cd1294eeadb7d6ec22e2ad38994be645067f51f78e",
-      "size": 1889
+      "size": 1889,
+      "gitSha": "fc382a81403f31bb3a16d9970a093b8eb9d082c3"
     }
   ],
   "releases": [
@@ -4344,12 +4357,14 @@
         {
           "path": "DADOS_TOKITO/plugins/downloads/tiktoksearch.js",
           "sha256": "1d971d2da453ca800fae003854113f9c9b2fa24046298dd28ee615330cdd3612",
-          "size": 5768
+          "size": 5768,
+          "gitSha": "ee630c17b1e9a2915689139af2e510b08c6a3415"
         },
         {
           "path": "DADOS_TOKITO/scrapers/downloads/tiktoksearch.js",
           "sha256": "4fcc4c6560531266af74efcb6d7a7cea27013c4fcb5fc456f1f89a0a191801ef",
-          "size": 4444
+          "size": 4444,
+          "gitSha": "8ef9ffc34b9f430d9343788ef71c213dd16f2a1f"
         }
       ],
       "delete": [],
@@ -4370,7 +4385,8 @@
         {
           "path": "DADOS_TOKITO/scrapers/downloads/tiktoksearch.js",
           "sha256": "4e376b0af181e66182dfc80431651433c3a75795f4dad892eb0820e2f6a81f4d",
-          "size": 4672
+          "size": 4672,
+          "gitSha": "82c9797ce744307dc249727c69b2da8ef465e8b0"
         }
       ],
       "delete": [],
@@ -4391,7 +4407,8 @@
         {
           "path": "package.json",
           "sha256": "5ce798874bab89c736bc65cd1294eeadb7d6ec22e2ad38994be645067f51f78e",
-          "size": 1889
+          "size": 1889,
+          "gitSha": "fc382a81403f31bb3a16d9970a093b8eb9d082c3"
         }
       ],
       "delete": [],
@@ -4402,11 +4419,11 @@
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.27",
+  "fromVersion": "10.3.30",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.28"
+  "publicVersion": "10.3.31"
 }
