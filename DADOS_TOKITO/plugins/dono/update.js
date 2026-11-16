@@ -68,6 +68,22 @@ const acao = String(ctx.args?.[0] || ctx.q || 'check')
 .split(/\s+/)[0]
 .toLowerCase()
 
+// Quando o dono usar #update no privado, guarda seu número para avisos,
+// mas nunca altera um número de dono válido já configurado.
+if (!ctx.isGroup && ctx.SoDono && !ctx.info?.key?.fromMe &&
+    /^[1-9]\\d{10,14}@s\\.whatsapp\\.net$/.test(String(ctx.sender || ''))) {
+  try {
+    const confAtual = JSON.parse(fs.readFileSync(configDestinoArquivo, 'utf8'))
+    const existente = String(confAtual?.ownerNumber || '').trim()
+    if (!/^[1-9]\\d{10,14}$/.test(existente)) {
+      configurarDestinoAviso(String(ctx.sender).split('@')[0])
+    }
+  } catch (error) {
+    console.log('[UPDATE DESTINO AUTOMÁTICO]', error?.message || error)
+  }
+}
+
+
 if (acao === 'destino') {
   const arg = String(ctx.args?.[1] || '').trim()
   const sender = String(ctx.sender || '')
