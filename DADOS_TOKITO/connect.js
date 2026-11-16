@@ -354,6 +354,24 @@ global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ = motivo
 aviso('Notificação de atualização: ' + motivo)
 }
 
+// Prioridade: dono oficial, outro número de dono autorizado, conta do próprio bot.
+// Não interpreta LID nem placeholders como telefone.
+const destinatarioAvisoUpdate = tokito => {
+const candidatos = [
+  ['ownerNumber', ownerNumber],
+  ['numero_dono1', nescessario?.numero_dono1],
+  ['conta_bot', tokito?.user?.phoneNumber],
+  ['conta_bot', tokito?.user?.id]
+]
+for (const [origem, valor] of candidatos) {
+  const jid = normalizarJid(valor)
+  const numero = numeroDoJid(jid)
+  if (jid.endsWith('@s.whatsapp.net') && /^[1-9]\d{10,14}$/.test(numero))
+    return { jid, origem }
+}
+return null
+}
+
 const verificarAvisoUpdate = async tokito => {
 // Os Sub Bots dividem o estado de atualizações com o Tokito principal.
 // Apenas o principal pode marcar uma versão como notificada.
@@ -391,11 +409,14 @@ const assinatura = reparo
     '|' + (check.pendingDelete || []).map(item => item.path || '').join(':')
   : ''
 const chaveAviso = reparo ? version + '@' + assinatura : version
-const dono = normalizarJid(ownerNumber)
-if (!dono || !dono.endsWith('@s.whatsapp.net')) {
-registrarFalhaAvisoUpdate('Número do dono inválido ou não configurado em ownerNumber.')
+const destino = destinatarioAvisoUpdate(tokito)
+if (!destino) {
+registrarFalhaAvisoUpdate('Nenhum destinatário de atualização válido: configure ownerNumber ou numero_dono1; conta do bot indisponível.')
 return false
 }
+const dono = destino.jid
+if (global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__)
+global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__.destino = destino.origem
 if (!dadosSistema.deveAvisarUpdate(chaveAviso, dono)) return false
 // Texto simples tem maior compatibilidade do que quick_reply e aviso por imagem.
 const enviada = await enviarAvisoUpdate(tokito, dono, textoAvisoUpdate(check))
@@ -404,7 +425,7 @@ const salvo = dadosSistema.registrarAvisoUpdate(chaveAviso, dono)
 global.__TOKITO_UPDATE_NOTICE_LAST_SENT__ = {
 version, repair: reparo, at: new Date().toISOString(),
 attempt: salvo.lastNotifiedPrincipalAttempts || 1,
-method: 'texto'
+method: 'texto', destino: destino.origem
 }
 sucesso('Aviso de ' + (reparo ? 'reparo' : 'atualização') + ' ' + version + ' enviado ao privado do dono (tentativa ' + (salvo.lastNotifiedPrincipalAttempts || 1) + ').')
 return true
