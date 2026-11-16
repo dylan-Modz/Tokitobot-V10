@@ -984,20 +984,53 @@ return `- ❌ \`𝚃𝙾𝙳𝙾𝚂 𝚁𝙴𝙲𝚄𝚂𝙰𝙳𝙾𝚂\`
 > ❌ ׄ ( ${quantidade} — ${quantidade === 1 ? 'ᴜᴍᴀ sᴏʟɪᴄɪᴛᴀᴄ̧ᴀ̃ᴏ ғᴏɪ ʀᴇᴄᴜsᴀᴅᴀ' : 'sᴏʟɪᴄɪᴛᴀᴄ̧ᴏ̃ᴇs ғᴏʀᴀᴍ ʀᴇᴄᴜsᴀᴅᴀs'} ᴄᴏᴍ sᴜᴄᴇssᴏ. 🙇‍♂️ )`
 }
 
-exports.antilinkDetectado = (nivel, numero, removido = true) => {
-const dados = {
-easy: ['🛡️', '𝙰𝙽𝚃𝙸-𝙻𝙸𝙽𝙺 𝙴𝙰𝚂𝚈', 'ᴏ ʟɪɴᴋ ғᴏɪ ᴅᴇᴛᴇᴄᴛᴀᴅᴏ ᴇ ᴀ ᴍᴇɴsᴀɢᴇᴍ ғᴏɪ ᴀᴘᴀɢᴀᴅᴀ'],
-medium: ['🔒', '𝙰𝙽𝚃𝙸-𝙻𝙸𝙽𝙺 𝙼𝙴𝙳𝙸𝚄𝙼', 'ᴏ ʟɪɴᴋ ғᴏɪ ᴀᴘᴀɢᴀᴅᴏ, ᴏ ɢʀᴜᴘᴏ ғᴏɪ ғᴇᴄʜᴀᴅᴏ ᴇ ᴀʙᴇʀᴛᴏ ɴᴏᴠᴀᴍᴇɴᴛᴇ'],
-hard: [
-'🚫',
-'𝙰𝙽𝚃𝙸-𝙻𝙸𝙽𝙺 𝙷𝙰𝚁𝙳',
-removido ? 'ᴏ ʟɪɴᴋ ғᴏɪ ᴀᴘᴀɢᴀᴅᴏ, ᴏ ɢʀᴜᴘᴏ ғᴏɪ ғᴇᴄʜᴀᴅᴏ, ᴏ ᴜsᴜᴀ́ʀɪᴏ ғᴏɪ ʀᴇᴍᴏᴠɪᴅᴏ ᴇ ᴏ ɢʀᴜᴘᴏ ғᴏɪ ᴀʙᴇʀᴛᴏ ɴᴏᴠᴀᴍᴇɴᴛᴇ' : 'ᴀ ᴍᴇɴsᴀɢᴇᴍ ғᴏɪ ᴀᴘᴀɢᴀᴅᴀ, ᴍᴀs ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ʀᴇᴍᴏᴠᴇʀ ᴏ ᴜsᴜᴀ́ʀɪᴏ'
-]
-}
-const atual = dados[nivel] || dados.easy
-return `- ${atual[0]} \`${atual[1]}\`
+const antilinkFormato = (emoji, titulo, linhas) =>
+'- ' + emoji + ' ' + String.fromCharCode(96) + titulo + String.fromCharCode(96) + '\n\n' +
+linhas.map(linha => '> ' + linha).join('\n')
 
-> 🧊 ׄ ( @${numero} — ${atual[2]}. 🙇‍♂️ )`
+exports.antilinkDetectado = (nivel, mencao, detalhes = {}) => {
+const nome = String(mencao || '@membro')
+if (nivel === 'easy') return antilinkFormato('🛡️', '𝙰𝙽𝚃𝙸-𝙻𝙸𝙽𝙺 𝙴𝙰𝚂𝚈', [
+'🧊 ׄ ( ' + nome + ' — ᴏ ᴄᴏɴᴠɪᴛᴇ ғᴏɪ ᴅᴇᴛᴇᴄᴛᴀᴅᴏ ᴇ ᴀ ᴍᴇɴsᴀɢᴇᴍ ғᴏɪ ᴀᴘᴀɢᴀᴅᴀ. 🙇‍♂️ )'
+])
+if (nivel === 'medium') {
+const quantidade = Number(detalhes.quantidade || 1)
+const mensagem = quantidade >= 3
+? (detalhes.removido ? 'ᴏ ʟɪɴᴋ ғᴏɪ ᴀᴘᴀɢᴀᴅᴏ ᴇ ᴏ ᴍᴇᴍʙʀᴏ ғᴏɪ ʀᴇᴍᴏᴠɪᴅᴏ.' : 'ᴏ ʟɪɴᴋ ғᴏɪ ᴀᴘᴀɢᴀᴅᴏ, ᴍᴀs ᴀ ʀᴇᴍᴏᴄ̧ᴀ̃ᴏ ғᴀʟʜᴏᴜ.')
+: 'ᴏ ʟɪɴᴋ ғᴏɪ ᴅᴇᴛᴇᴄᴛᴀᴅᴏ ᴇ ᴀᴘᴀɢᴀᴅᴏ.'
+return antilinkFormato('🔒', '𝙰𝙽𝚃𝙸-𝙻𝙸𝙽𝙺 𝙼𝙴𝙳𝙸𝚄𝙼', [
+'🧊 ׄ ( ' + nome + ' — ' + mensagem + ' 🙇‍♂️ )',
+'⚠️ ׄ ( ᴀᴅᴠᴇʀᴛᴇ̂ɴᴄɪᴀ: ' + Math.min(quantidade, 3) + '/3 — ʀᴇɪɴɪᴄɪᴀ ᴇᴍ 𝟸𝟺ʜ. )'
+])
+}
+const removido = detalhes?.removido !== false
+return antilinkFormato('🚫', '𝙰𝙽𝚃𝙸-𝙻𝙸𝙽𝙺 𝙷𝙰𝚁𝙳', [
+'🧊 ׄ ( ' + nome + ' — ᴏ ʟɪɴᴋ ғᴏɪ ᴅᴇᴛᴇᴄᴛᴀᴅᴏ ᴇ ᴀᴘᴀɢᴀᴅᴏ. )',
+'🚫 ׄ ( ' + (removido ? 'ᴏ ᴍᴇᴍʙʀᴏ ғᴏɪ ʀᴇᴍᴏᴠɪᴅᴏ ᴅᴏ ɢʀᴜᴘᴏ.' : 'ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ʀᴇᴍᴏᴠᴇʀ ᴏ ᴍᴇᴍʙʀᴏ.') + ' 🙇‍♂️ )'
+])
+}
+
+exports.antilinkPainel = (nivel, dominios = [], estatisticas = {}) => antilinkFormato(
+'🛡️', '𝙲𝙾𝙽𝙵𝙸𝙶 𝙰𝙽𝚃𝙸-𝙻𝙸𝙽𝙺', [
+'📌 ׄ ( ᴍᴏᴅᴏ: ' + nivel + ' )',
+'🧊 ׄ ( ᴍᴇɴsᴀɢᴇɴs ᴀᴘᴀɢᴀᴅᴀs: ' + Number(estatisticas.apagados || 0) + ' )',
+'🚫 ׄ ( ᴍᴇᴍʙʀᴏs ʀᴇᴍᴏᴠɪᴅᴏs: ' + Number(estatisticas.removidos || 0) + ' )',
+'✅ ׄ ( sɪᴛᴇs ʟɪʙᴇʀᴀᴅᴏs: ' + (dominios.length ? dominios.join(', ') : 'ɴᴇɴʜᴜᴍ') + ' )',
+'🛠️ ׄ ( ᴜsᴇ ᴀɴᴛɪʟɪɴᴋᴘᴇʀᴍɪᴛɪʀ ᴏᴜ ᴀɴᴛɪʟɪɴᴋʙʟᴏǫᴜᴇᴀʀ ᴘᴀʀᴀ ɢᴇʀᴇɴᴄɪᴀʀ. )'
+])
+
+exports.antilinkDominio = (tipo, dominio) => {
+const mensagens = {
+invalido: 'ɪɴғᴏʀᴍᴇ ᴜᴍ ᴅᴏᴍɪ́ɴɪᴏ ᴠᴀ́ʟɪᴅᴏ, ᴇxᴇᴍᴘʟᴏ: ɢᴏᴏɢʟᴇ.ᴄᴏᴍ.',
+existe: 'ᴇssᴇ sɪᴛᴇ ᴊᴀ́ ᴇsᴛᴀ́ ʟɪʙᴇʀᴀᴅᴏ.',
+limite: 'ʟɪᴍɪᴛᴇ ᴅᴇ 𝟹𝟶 sɪᴛᴇs ʟɪʙᴇʀᴀᴅᴏs ᴀᴛɪɴɢɪᴅᴏ.',
+nao: 'ᴇssᴇ sɪᴛᴇ ɴᴀ̃ᴏ ᴇsᴛᴀ́ ɴᴀ ʟɪsᴛᴀ.',
+adicionado: 'ᴏ sɪᴛᴇ ғᴏɪ ʟɪʙᴇʀᴀᴅᴏ ᴄᴏᴍ sᴜᴄᴇssᴏ.',
+removido: 'ᴏ sɪᴛᴇ ғᴏɪ ʀᴇᴍᴏᴠɪᴅᴏ ᴅᴀ ʟɪsᴛᴀ ᴅᴇ ᴇxᴄᴇᴄ̧ᴏ̃ᴇs.'
+}
+return antilinkFormato('🔗', '𝙳𝙾𝙼𝙸́𝙽𝙸𝙾 𝙰𝙽𝚃𝙸-𝙻𝙸𝙽𝙺', [
+'🧊 ׄ ( ' + String(dominio || '—').slice(0, 100) + ' — ' + (mensagens[tipo] || mensagens.invalido) + ' 🙇‍♂️ )'
+])
 }
 
 exports.detectorUso = prefix => {
