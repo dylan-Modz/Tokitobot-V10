@@ -4,8 +4,9 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-16T15:01:57.984Z",
+  "publishedAt": "2026-11-16T15:03:08.612Z",
   "changelog": [
+    "Diagnóstico #update diag agora mostra se o novo visual de comando inválido foi carregado na memória, se há reparo da mesma versão e quais arquivos do design faltam instalar.",
     "Visual do comando inválido renovado no estilo das Informações do Bot: nome do usuário, comando digitado, sugestão, similaridade real e tempo real de busca.",
     "Mensagem sem sugestão agora orienta a usar #menu; menção do usuário preservada pela resposta do WhatsApp.",
     "Corrigido o monitor que não enviava avisos quando ownerNumber ainda estava com o valor de exemplo.",
@@ -28,8 +29,8 @@
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Sugestão de comando: novo visual",
-  "notice": "Correção na versão 10.3.27: novo design do aviso de comando inválido.",
+  "title": "Correção do comando inválido e diagnóstico de instalação",
+  "notice": "Atualização corretiva 10.3.27: visual da sugestão e verificação do código carregado no bot.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -48,8 +49,8 @@
     {
       "path": "DADOS_TOKITO/plugins/dono/update.js",
       "sha256": "",
-      "gitSha": "731cd9c8721b2561de858127df6a01e765df9f1f",
-      "size": 11186
+      "size": 12549,
+      "gitSha": "99eda9495fb8e3508ce83c57fd1197b0f8f0aeeb"
     },
     {
       "path": "DADOS_TOKITO/sistemas/parcerias.js",
@@ -4342,9 +4343,10 @@
       "fromVersion": "10.3.26",
       "channel": "stable",
       "type": "Melhoria",
-      "title": "Sugestão de comando: novo visual",
-      "notice": "Correção na versão 10.3.27: novo design do aviso de comando inválido.",
+      "title": "Correção do comando inválido e diagnóstico de instalação",
+      "notice": "Atualização corretiva 10.3.27: visual da sugestão e verificação do código carregado no bot.",
       "changelog": [
+        "Diagnóstico #update diag agora mostra se o novo visual de comando inválido foi carregado na memória, se há reparo da mesma versão e quais arquivos do design faltam instalar.",
         "Visual do comando inválido renovado no estilo das Informações do Bot: nome do usuário, comando digitado, sugestão, similaridade real e tempo real de busca.",
         "Mensagem sem sugestão agora orienta a usar #menu; menção do usuário preservada pela resposta do WhatsApp.",
         "Corrigido o monitor que não enviava avisos quando ownerNumber ainda estava com o valor de exemplo.",
@@ -4380,8 +4382,8 @@
         {
           "path": "DADOS_TOKITO/plugins/dono/update.js",
           "sha256": "",
-          "gitSha": "731cd9c8721b2561de858127df6a01e765df9f1f",
-          "size": 11186
+          "size": 12549,
+          "gitSha": "99eda9495fb8e3508ce83c57fd1197b0f8f0aeeb"
         },
         {
           "path": "DADOS_TOKITO/sistemas/parcerias.js",
@@ -4452,7 +4454,7 @@
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-16T15:01:57.984Z"
+      "publishedAt": "2026-11-16T15:03:08.612Z"
     }
   ],
   "mode": "incremental",
