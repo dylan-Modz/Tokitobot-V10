@@ -34,17 +34,33 @@ return `- 🧊 \`𝙰𝙲𝙴𝚂𝚂𝙾 𝙳𝙾 𝙳𝙾𝙽𝙾\`
 > 🧊 ׄ ( ᴇssᴇ ᴄᴏᴍᴀɴᴅᴏ ᴇ́ ᴇxᴄʟᴜsɪᴠᴏ ᴘᴀʀᴀ ᴏ ᴍᴇᴜ ᴅᴏɴᴏ ᴜᴛɪʟɪᴢᴀʀ. 🙇‍♂️ )`
 }
 
-exports.commandNotFound = ({ prefix, command, nome, porcentagem, tempo }) => {
-const digitado = String(prefix || '!') + String(command || 'desconhecido')
-const achou = nome && nome !== 'Nenhum'
-return `• \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\` ❌
-> O comando informado não foi reconhecido pelo Tokito.
-- Comando — ( \`${digitado} ❌\` )
-> Esse comando não existe.
-- Sugestão — ( \`${achou ? nome : 'Nenhuma'} ${achou ? '✅' : '🔎'}\` )
-> ${achou ? 'Talvez seja esse o comando que você procura.' : 'Não encontramos um comando parecido.'}
-- Similaridade — ( \`${porcentagem || '0%'} 🔎\` )
-- Tempo — ( \`${tempo || '0 ms'} ⏱️\` )`
+exports.commandNotFound = ({ prefix, command, nome, porcentagem, tempo, usuario }) => {
+const p = String(prefix || '!')
+const digitado = p + String(command || 'desconhecido').trim()
+const sugestao = String(nome || '').trim()
+const achou = Boolean(sugestao && sugestao !== 'Nenhum')
+const nomeSeguro = String(usuario || 'membro')
+.replace(/[\r\n\t@>*]/g, '')
+.replace(/[\u200b-\u200d\u2060\ufeff]/g, '')
+.trim()
+.slice(0, 45) || 'membro'
+const rotulo = '@' + nomeSeguro
+const percentual = String(porcentagem || '0.0%')
+const duracao = String(tempo || '0.000 ms')
+const sugerido = achou ? sugestao : 'ɴᴇɴʜᴜᴍᴀ'
+const titulo = achou
+? '- ❌ \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙽𝙰̃𝙾 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙾\`'
+: '- ⚠️ \`𝙲𝙾𝙼𝙰𝙽𝙳𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\`'
+const dica = achou
+? 'ᴠᴄ ǫᴜɪs ᴅɪɢɪᴛᴀʀ ' + sugestao + '?'
+: 'ᴜsᴇ ' + p + 'menu ᴘᴀʀᴀ ᴠᴇʀ ᴏs ᴄᴏᴍᴀɴᴅᴏs.'
+return titulo + '\n\n' +
+'> 👤 ׄ ( ᴜsᴜᴀ́ʀɪᴏ: ' + rotulo + ' )\n' +
+'> ❌ ׄ ( ᴄᴏᴍᴀɴᴅᴏ ᴅɪɢɪᴛᴀᴅᴏ: ' + digitado + ' )\n' +
+'> 🔎 ׄ ( sᴜɢᴇsᴛᴀ̃ᴏ: ' + sugerido + ' )\n' +
+'> 📊 ׄ ( sᴇᴍᴇʟʜᴀɴᴄ̧ᴀ: ' + percentual + ' )\n' +
+'> ⚡ ׄ ( ᴛᴇᴍᴘᴏ ᴅᴇ ʙᴜsᴄᴀ: ' + duracao + ' )\n\n' +
+'> 💡 ׄ ( ' + dica + ' )'
 }
 exports.sogrupo = () => {
 return `- 👥 \`𝙰𝙿𝙴𝙽𝙰𝚂 𝙴𝙼 𝙶𝚁𝚄𝙿𝙾𝚂\`
