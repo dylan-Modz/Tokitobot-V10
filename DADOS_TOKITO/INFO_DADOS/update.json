@@ -4,20 +4,27 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-16T14:31:40.650Z",
+  "publishedAt": "2026-11-16T14:50:57.471Z",
   "changelog": [
     "Corrigido o monitor que não enviava avisos quando ownerNumber ainda estava com o valor de exemplo.",
     "O aviso tenta o número do dono configurado; se estiver inválido, usa numero_dono1 ou a conta do próprio bot como destino seguro.",
     "Os avisos continuam enviados em texto simples, com tentativas de reenvio e histórico de verificação.",
     "Quando não há destinatário válido, o monitor registra a causa no diagnóstico em vez de falhar silenciosamente.",
     "Package.json e manifesto corrigidos para anunciar a mesma versão 10.3.27 sem pular numeração.",
-    "Comando #update destino aqui permite cadastrar o WhatsApp do dono para receber avisos, sem editar manualmente a configuração nem alterar tokens."
+    "Comando #update destino aqui permite cadastrar o WhatsApp do dono para receber avisos, sem editar manualmente a configuração nem alterar tokens.",
+    "Modo Parceria reformulado com aprovação direta pelo administrador: addparceria @usuario 3, editarparceria e removerparceria.",
+    "Links enviados por parceiros são contabilizados automaticamente; cada URL consome uma divulgação diária, sem comando de divulgação.",
+    "Ao atingir ou ultrapassar o limite, a mensagem com o link é apagada e o usuário recebe um aviso no estilo original do mensagens.js.",
+    "O saldo diário renova à meia-noite no horário de Brasília; no grupo é possível consultar parcerias e o próprio saldo.",
+    "Anti-Link e Anti-Canal respeitam divulgações autorizadas, sem punir parceiros por links dentro da cota.",
+    "Os comandos antigos baseados em ID, cadastro de projeto, solicitações e bypass deixaram de ser oferecidos.",
+    "Menu ADM atualizado com os novos comandos. Versão mantida em 10.3.27, sem novo release numerado."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Avisos automáticos de atualização corrigidos",
-  "notice": "Notificações do Tokito corrigidas quando o destinatário do dono não está configurado.",
+  "type": "Melhoria",
+  "title": "Modo Parceria: limites diários de divulgação",
+  "notice": "Reparo da versão 10.3.27: novo Modo Parceria com limites diários e novos comandos.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -38,6 +45,66 @@
       "sha256": "",
       "gitSha": "e2c8f3c644ceb5be8663a9e5bb5174587422815d",
       "size": 10543
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/parcerias.js",
+      "sha256": "",
+      "size": 18836,
+      "gitSha": "944bf94d759ea3218abbf53309327bc4abe1b50a"
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/parceria.js",
+      "sha256": "",
+      "size": 1894,
+      "gitSha": "c3193e4f17e9345ab1189d5464924fe1da9afc3b"
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/funcoes.js",
+      "sha256": "",
+      "size": 6067,
+      "gitSha": "b2b639214f7eb3500e6e741a902674cbf1890007"
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/antilink.js",
+      "sha256": "",
+      "size": 9649,
+      "gitSha": "073a0b5c1b3bb3ea7faa777db93f32c4de1aff96"
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/filtros/anticanal.js",
+      "sha256": "",
+      "size": 2812,
+      "gitSha": "1524ca4bea1990decdce81cd956ef33e67c9b0e3"
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/parceria/gerenciar.js",
+      "sha256": "",
+      "size": 2383,
+      "gitSha": "313c70f61b3374e04acabb24ad1d76c6a13f9f8e"
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/parceria/parceria.js",
+      "sha256": "",
+      "size": 1691,
+      "gitSha": "61d2db760ac9fa6515c95e50d879acf01ee059be"
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/parceria/solicitacoes.js",
+      "sha256": "",
+      "size": 244,
+      "gitSha": "0368251dccd5d4de88ec7614971a1c46ce998494"
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "",
+      "size": 229950,
+      "gitSha": "ac926075cc7499b2a07afa28225a231cf8a49874"
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "",
+      "size": 79786,
+      "gitSha": "4ce8cdba4102b893e03be02dad8fa4ae2ae7894a"
     }
   ],
   "releases": [
@@ -4263,16 +4330,23 @@
       "version": "10.3.27",
       "fromVersion": "10.3.26",
       "channel": "stable",
-      "type": "Correção",
-      "title": "Avisos automáticos de atualização corrigidos",
-      "notice": "Notificações do Tokito corrigidas quando o destinatário do dono não está configurado.",
+      "type": "Melhoria",
+      "title": "Modo Parceria: limites diários de divulgação",
+      "notice": "Reparo da versão 10.3.27: novo Modo Parceria com limites diários e novos comandos.",
       "changelog": [
         "Corrigido o monitor que não enviava avisos quando ownerNumber ainda estava com o valor de exemplo.",
         "O aviso tenta o número do dono configurado; se estiver inválido, usa numero_dono1 ou a conta do próprio bot como destino seguro.",
         "Os avisos continuam enviados em texto simples, com tentativas de reenvio e histórico de verificação.",
         "Quando não há destinatário válido, o monitor registra a causa no diagnóstico em vez de falhar silenciosamente.",
         "Package.json e manifesto corrigidos para anunciar a mesma versão 10.3.27 sem pular numeração.",
-        "Comando #update destino aqui permite cadastrar o WhatsApp do dono para receber avisos, sem editar manualmente a configuração nem alterar tokens."
+        "Comando #update destino aqui permite cadastrar o WhatsApp do dono para receber avisos, sem editar manualmente a configuração nem alterar tokens.",
+        "Modo Parceria reformulado com aprovação direta pelo administrador: addparceria @usuario 3, editarparceria e removerparceria.",
+        "Links enviados por parceiros são contabilizados automaticamente; cada URL consome uma divulgação diária, sem comando de divulgação.",
+        "Ao atingir ou ultrapassar o limite, a mensagem com o link é apagada e o usuário recebe um aviso no estilo original do mensagens.js.",
+        "O saldo diário renova à meia-noite no horário de Brasília; no grupo é possível consultar parcerias e o próprio saldo.",
+        "Anti-Link e Anti-Canal respeitam divulgações autorizadas, sem punir parceiros por links dentro da cota.",
+        "Os comandos antigos baseados em ID, cadastro de projeto, solicitações e bypass deixaram de ser oferecidos.",
+        "Menu ADM atualizado com os novos comandos. Versão mantida em 10.3.27, sem novo release numerado."
       ],
       "files": [
         {
@@ -4292,11 +4366,71 @@
           "sha256": "",
           "gitSha": "e2c8f3c644ceb5be8663a9e5bb5174587422815d",
           "size": 10543
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/parcerias.js",
+          "sha256": "",
+          "size": 18836,
+          "gitSha": "944bf94d759ea3218abbf53309327bc4abe1b50a"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/parceria.js",
+          "sha256": "",
+          "size": 1894,
+          "gitSha": "c3193e4f17e9345ab1189d5464924fe1da9afc3b"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/funcoes.js",
+          "sha256": "",
+          "size": 6067,
+          "gitSha": "b2b639214f7eb3500e6e741a902674cbf1890007"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antilink.js",
+          "sha256": "",
+          "size": 9649,
+          "gitSha": "073a0b5c1b3bb3ea7faa777db93f32c4de1aff96"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/anticanal.js",
+          "sha256": "",
+          "size": 2812,
+          "gitSha": "1524ca4bea1990decdce81cd956ef33e67c9b0e3"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/parceria/gerenciar.js",
+          "sha256": "",
+          "size": 2383,
+          "gitSha": "313c70f61b3374e04acabb24ad1d76c6a13f9f8e"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/parceria/parceria.js",
+          "sha256": "",
+          "size": 1691,
+          "gitSha": "61d2db760ac9fa6515c95e50d879acf01ee059be"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/parceria/solicitacoes.js",
+          "sha256": "",
+          "size": 244,
+          "gitSha": "0368251dccd5d4de88ec7614971a1c46ce998494"
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 229950,
+          "gitSha": "ac926075cc7499b2a07afa28225a231cf8a49874"
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 79786,
+          "gitSha": "4ce8cdba4102b893e03be02dad8fa4ae2ae7894a"
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-16T14:31:40.650Z"
+      "publishedAt": "2026-11-16T14:50:57.471Z"
     }
   ],
   "mode": "incremental",
