@@ -359,9 +359,7 @@ aviso('Notificação de atualização: ' + motivo)
 const destinatarioAvisoUpdate = tokito => {
 const candidatos = [
   ['ownerNumber', ownerNumber],
-  ['numero_dono1', nescessario?.numero_dono1],
-  ['conta_bot', tokito?.user?.phoneNumber],
-  ['conta_bot', tokito?.user?.id]
+  ['numero_dono1', nescessario?.numero_dono1]
 ]
 for (const [origem, valor] of candidatos) {
   const jid = normalizarJid(valor)
@@ -411,7 +409,7 @@ const assinatura = reparo
 const chaveAviso = reparo ? version + '@' + assinatura : version
 const destino = destinatarioAvisoUpdate(tokito)
 if (!destino) {
-registrarFalhaAvisoUpdate('Nenhum destinatário de atualização válido: configure ownerNumber ou numero_dono1; conta do bot indisponível.')
+registrarFalhaAvisoUpdate('Aviso não enviado: configure o telefone do dono com #update destino aqui ou #update destino 55DDDNUMERO.')
 return false
 }
 const dono = destino.jid
