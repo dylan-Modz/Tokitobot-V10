@@ -4,7 +4,7 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-16T14:50:57.471Z",
+  "publishedAt": "2026-11-16T14:57:13.205Z",
   "changelog": [
     "Corrigido o monitor que não enviava avisos quando ownerNumber ainda estava com o valor de exemplo.",
     "O aviso tenta o número do dono configurado; se estiver inválido, usa numero_dono1 ou a conta do próprio bot como destino seguro.",
@@ -18,21 +18,24 @@
     "O saldo diário renova à meia-noite no horário de Brasília; no grupo é possível consultar parcerias e o próprio saldo.",
     "Anti-Link e Anti-Canal respeitam divulgações autorizadas, sem punir parceiros por links dentro da cota.",
     "Os comandos antigos baseados em ID, cadastro de projeto, solicitações e bypass deixaram de ser oferecidos.",
-    "Menu ADM atualizado com os novos comandos. Versão mantida em 10.3.27, sem novo release numerado."
+    "Menu ADM atualizado com os novos comandos. Versão mantida em 10.3.27, sem novo release numerado.",
+    "Corrigido o aviso automático: não tenta mais notificar a própria conta do bot quando o número do dono não está configurado.",
+    "Ao usar #update no privado, o dono autorizado pode registrar automaticamente seu número para os próximos avisos, sem substituir um número válido já existente.",
+    "O comando #update diag continua mostrando os erros de notificação para verificar a entrega."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
   "title": "Modo Parceria: limites diários de divulgação",
-  "notice": "Reparo da versão 10.3.27: novo Modo Parceria com limites diários e novos comandos.",
+  "notice": "Correções da versão 10.3.27: Modo Parceria diário e destinatário de avisos de atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/connect.js",
       "sha256": "",
-      "size": 50387,
-      "gitSha": "9f7508fc1b5832928b8eeeb37ce10d3e7a666946"
+      "gitSha": "daabdb61aec8c293f2da1de81b956edff2ecf809",
+      "size": 50300
     },
     {
       "path": "package.json",
@@ -43,8 +46,8 @@
     {
       "path": "DADOS_TOKITO/plugins/dono/update.js",
       "sha256": "",
-      "gitSha": "e2c8f3c644ceb5be8663a9e5bb5174587422815d",
-      "size": 10543
+      "gitSha": "731cd9c8721b2561de858127df6a01e765df9f1f",
+      "size": 11186
     },
     {
       "path": "DADOS_TOKITO/sistemas/parcerias.js",
@@ -4332,7 +4335,7 @@
       "channel": "stable",
       "type": "Melhoria",
       "title": "Modo Parceria: limites diários de divulgação",
-      "notice": "Reparo da versão 10.3.27: novo Modo Parceria com limites diários e novos comandos.",
+      "notice": "Correções da versão 10.3.27: Modo Parceria diário e destinatário de avisos de atualização.",
       "changelog": [
         "Corrigido o monitor que não enviava avisos quando ownerNumber ainda estava com o valor de exemplo.",
         "O aviso tenta o número do dono configurado; se estiver inválido, usa numero_dono1 ou a conta do próprio bot como destino seguro.",
@@ -4346,14 +4349,17 @@
         "O saldo diário renova à meia-noite no horário de Brasília; no grupo é possível consultar parcerias e o próprio saldo.",
         "Anti-Link e Anti-Canal respeitam divulgações autorizadas, sem punir parceiros por links dentro da cota.",
         "Os comandos antigos baseados em ID, cadastro de projeto, solicitações e bypass deixaram de ser oferecidos.",
-        "Menu ADM atualizado com os novos comandos. Versão mantida em 10.3.27, sem novo release numerado."
+        "Menu ADM atualizado com os novos comandos. Versão mantida em 10.3.27, sem novo release numerado.",
+        "Corrigido o aviso automático: não tenta mais notificar a própria conta do bot quando o número do dono não está configurado.",
+        "Ao usar #update no privado, o dono autorizado pode registrar automaticamente seu número para os próximos avisos, sem substituir um número válido já existente.",
+        "O comando #update diag continua mostrando os erros de notificação para verificar a entrega."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/connect.js",
           "sha256": "",
-          "size": 50387,
-          "gitSha": "9f7508fc1b5832928b8eeeb37ce10d3e7a666946"
+          "gitSha": "daabdb61aec8c293f2da1de81b956edff2ecf809",
+          "size": 50300
         },
         {
           "path": "package.json",
@@ -4364,8 +4370,8 @@
         {
           "path": "DADOS_TOKITO/plugins/dono/update.js",
           "sha256": "",
-          "gitSha": "e2c8f3c644ceb5be8663a9e5bb5174587422815d",
-          "size": 10543
+          "gitSha": "731cd9c8721b2561de858127df6a01e765df9f1f",
+          "size": 11186
         },
         {
           "path": "DADOS_TOKITO/sistemas/parcerias.js",
@@ -4430,7 +4436,7 @@
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-16T14:50:57.471Z"
+      "publishedAt": "2026-11-16T14:57:13.205Z"
     }
   ],
   "mode": "incremental",
