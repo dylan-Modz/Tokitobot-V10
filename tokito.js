@@ -1674,6 +1674,7 @@ plug(),
 mess.commandNotFound({
 prefix,
 command,
+usuario: pushname,
 nome: achado.nome ? `${prefix}${achado.nome}` : 'Nenhum',
 porcentagem: `${Number(achado.porcentagem || 0).toFixed(1)}%`,
 tempo: `${tempoSimilar.toFixed(3)} ms`
@@ -1693,6 +1694,7 @@ plug(),
 mess.commandNotFound({
 prefix,
 command,
+usuario: pushname,
 nome: 'Nenhum',
 porcentagem: '0.0%',
 tempo: '0.000 ms'
