@@ -234,6 +234,13 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}totag mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}cita mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}status
+┃࣪ ╎—̳͟͞͞ 🤝 ${prefix}modoparceria 1/0
+┃࣪ ╎—̳͟͞͞ 🤝 ${prefix}parceria
+┃࣪ ╎—̳͟͞͞ 🤝 ${prefix}addparceria @usuario 3
+┃࣪ ╎—̳͟͞͞ 🤝 ${prefix}editarparceria @usuario 5
+┃࣪ ╎—̳͟͞͞ 🤝 ${prefix}removerparceria @usuario
+┃࣪ ╎—̳͟͞͞ 🤝 ${prefix}parcerias
+┃࣪ ╎—̳͟͞͞ 🤝 ${prefix}minhaparceria
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
