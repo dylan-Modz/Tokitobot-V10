@@ -4,24 +4,33 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-16T14:30:29.261Z",
+  "publishedAt": "2026-11-16T14:31:40.650Z",
   "changelog": [
-    "[Correção] fix(update): enviar avisos mesmo com ownerNumber padrão sem telefone",
-    "A versão 10.3.27 já está disponível para atualização.",
-    "Conexão do bot atualizada"
+    "Corrigido o monitor que não enviava avisos quando ownerNumber ainda estava com o valor de exemplo.",
+    "O aviso tenta o número do dono configurado; se estiver inválido, usa numero_dono1 ou a conta do próprio bot como destino seguro.",
+    "Os avisos continuam enviados em texto simples, com tentativas de reenvio e histórico de verificação.",
+    "Quando não há destinatário válido, o monitor registra a causa no diagnóstico em vez de falhar silenciosamente.",
+    "Package.json e manifesto corrigidos para anunciar a mesma versão 10.3.27 sem pular numeração."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix(update): enviar avisos mesmo com ownerNumber padrão sem telefone",
-  "notice": "A versão 10.3.27 já está disponível para atualização.",
+  "title": "Avisos automáticos de atualização corrigidos",
+  "notice": "Notificações do Tokito corrigidas quando o destinatário do dono não está configurado.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/connect.js",
-      "sha256": "dc208b38effe9c86569062cf40f6f30c0afb61c65608ae577a7a7ffc591df8de",
-      "size": 50387
+      "sha256": "",
+      "size": 50387,
+      "gitSha": "9f7508fc1b5832928b8eeeb37ce10d3e7a666946"
+    },
+    {
+      "path": "package.json",
+      "sha256": "",
+      "size": 1889,
+      "gitSha": "64b163b89a0be0e8f2f84c83aa49c6f9c20165fe"
     }
   ],
   "releases": [
@@ -4248,31 +4257,42 @@
       "fromVersion": "10.3.26",
       "channel": "stable",
       "type": "Correção",
-      "title": "fix(update): enviar avisos mesmo com ownerNumber padrão sem telefone",
-      "notice": "A versão 10.3.27 já está disponível para atualização.",
+      "title": "Avisos automáticos de atualização corrigidos",
+      "notice": "Notificações do Tokito corrigidas quando o destinatário do dono não está configurado.",
       "changelog": [
-        "Conexão do bot atualizada"
+        "Corrigido o monitor que não enviava avisos quando ownerNumber ainda estava com o valor de exemplo.",
+        "O aviso tenta o número do dono configurado; se estiver inválido, usa numero_dono1 ou a conta do próprio bot como destino seguro.",
+        "Os avisos continuam enviados em texto simples, com tentativas de reenvio e histórico de verificação.",
+        "Quando não há destinatário válido, o monitor registra a causa no diagnóstico em vez de falhar silenciosamente.",
+        "Package.json e manifesto corrigidos para anunciar a mesma versão 10.3.27 sem pular numeração."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/connect.js",
-          "sha256": "dc208b38effe9c86569062cf40f6f30c0afb61c65608ae577a7a7ffc591df8de",
-          "size": 50387
+          "sha256": "",
+          "size": 50387,
+          "gitSha": "9f7508fc1b5832928b8eeeb37ce10d3e7a666946"
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 1889,
+          "gitSha": "64b163b89a0be0e8f2f84c83aa49c6f9c20165fe"
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-16T14:30:29.261Z"
+      "publishedAt": "2026-11-16T14:31:40.650Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.25",
+  "fromVersion": "10.3.26",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.26"
+  "publicVersion": "10.3.27"
 }
