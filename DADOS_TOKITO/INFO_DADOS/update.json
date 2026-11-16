@@ -1,77 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.30",
+  "version": "10.3.31",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-16T16:54:04.260Z",
+  "publishedAt": "2026-11-16T16:54:44.331Z",
   "changelog": [
-    "[Correção] fix: TikTok Search recebe MP4 em data e prioriza mídia direta",
-    "A versão 10.3.30 já está disponível para atualização.",
-    "Tiktoksearch atualizado"
+    "[Melhoria] chore: alinhar versão do bot 10.3.29 sem pular numeração",
+    "A versão 10.3.31 já está disponível para atualização.",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "fix: TikTok Search recebe MP4 em data e prioriza mídia direta",
-  "notice": "A versão 10.3.30 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "chore: alinhar versão do bot 10.3.29 sem pular numeração",
+  "notice": "A versão 10.3.31 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/scrapers/downloads/tiktoksearch.js",
-      "sha256": "4e376b0af181e66182dfc80431651433c3a75795f4dad892eb0820e2f6a81f4d",
-      "size": 4672
+      "path": "package.json",
+      "sha256": "5ce798874bab89c736bc65cd1294eeadb7d6ec22e2ad38994be645067f51f78e",
+      "size": 1889
     }
   ],
   "releases": [
-    {
-      "version": "10.2.32",
-      "fromVersion": "10.2.31",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "Batalha Pokémon interativa por turnos",
-      "notice": "Nova batalha com desafio, aceitação, botões, imagens, narração e viradas épicas.",
-      "changelog": [
-        "Novo !batalhapokemon @usuario com convite de 60 segundos e botões Aceitar/Recusar; apenas o desafiado pode responder.",
-        "Batalha Pokémon por turnos de 45 segundos, com 4 botões nativos: Golpe Especial, Ataque, Defender e Poção.",
-        "HP em barras, golpes, acertos, críticos, vantagem de tipos, defesa, cura, chances de virada épica e narração emocionante do Tokito em cada rodada.",
-        "Imagens oficiais dos Pokémon pelo PokeAPI nas mensagens; comando de texto alternativo quando os botões não estiverem disponíveis.",
-        "Estado dos desafios salvo em database/jogos/batalhas-pokemon.json e opção !batalhapokemon status para retomar os botões após reiniciar.",
-        "Preservadas recompensas do RPG: +70 XP ao vencedor, +30 XP ao perdedor, +600 N-Coins; 10 minutos de descanso só após luta concluída.",
-        "Permissões, botões vencidos e cliques de rodada antiga validados; convite recusado ou expirado não causa cooldown.",
-        "Verificação de integridade da release 10.2.32 com SHA-256 e Git Blob SHA dos 4 arquivos atualizados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-          "gitSha": "751cb4451285ef764fa772fd60f4794f7cf0eca2",
-          "sha256": "6f9dadb94c506917255318d57430e01ba749c4281fc66695a6b18f174ac5abc3",
-          "size": 22046
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/batalhapokemon.js",
-          "gitSha": "2c3556643d487b8020df2109391fdbb6a836a0f7",
-          "sha256": "9ce8d31514f97299f4ea6b030b5d4e179f4d630e6b5655b7091a5e8861afeab0",
-          "size": 474
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/pokemon/cuidados.js",
-          "gitSha": "6f6a88fbb7f3d9143dc73365eaef3db6d5876868",
-          "sha256": "be8ea673f0d4a49b56872d8eeaf240588b03d53a38dd5c45b92d86915cfa7605",
-          "size": 9485
-        },
-        {
-          "path": "package.json",
-          "gitSha": "c9b1123a2f684b73ece117f79a76cb41b7dc7712",
-          "sha256": "ac826ece7a4c7f83c21e66c5eb899111d1ee554fc32888d9e48904deadd0a5aa",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-13T12:12:19.323Z"
-    },
     {
       "version": "10.2.33",
       "fromVersion": "10.2.32",
@@ -4423,6 +4376,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-16T16:54:04.259Z"
+    },
+    {
+      "version": "10.3.31",
+      "fromVersion": "10.3.30",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "chore: alinhar versão do bot 10.3.29 sem pular numeração",
+      "notice": "A versão 10.3.31 já está disponível para atualização.",
+      "changelog": [
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "5ce798874bab89c736bc65cd1294eeadb7d6ec22e2ad38994be645067f51f78e",
+          "size": 1889
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-16T16:54:44.329Z"
     }
   ],
   "mode": "incremental",
