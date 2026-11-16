@@ -36,8 +36,8 @@
     {
       "path": "DADOS_TOKITO/plugins/dono/update.js",
       "sha256": "",
-      "gitSha": "040352fa3b5aae2c93c9ce9df5a5826cbd3baea0",
-      "size": 10340
+      "gitSha": "e2c8f3c644ceb5be8663a9e5bb5174587422815d",
+      "size": 10543
     }
   ],
   "releases": [
@@ -4290,8 +4290,8 @@
         {
           "path": "DADOS_TOKITO/plugins/dono/update.js",
           "sha256": "",
-          "gitSha": "040352fa3b5aae2c93c9ce9df5a5826cbd3baea0",
-          "size": 10340
+          "gitSha": "e2c8f3c644ceb5be8663a9e5bb5174587422815d",
+          "size": 10543
         }
       ],
       "delete": [],
