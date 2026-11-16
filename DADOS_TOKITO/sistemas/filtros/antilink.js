@@ -131,7 +131,7 @@ const verificar = async ctx => {
   const { tokito, info, from, sender, body, isGroup, isGroupAdmins, isBotGroupAdmins, config } = ctx
   if (!isGroup || !config?.antilink?.ativo || !dadosNivel[config.antilink.nivel]) return false
   if (isGroupAdmins || ctx.dono || ctx.SoDono || info?.key?.fromMe || !isBotGroupAdmins) return false
-  if (parcerias.podeIgnorarAntiLink(from, sender)) return false
+  if (ctx.parceriaLiberada === true) return false
   const { dados, estado } = grupoEstado(ctx), nivel = config.antilink.nivel
   if (!detectar(body, nivel, permitidos(dados))) return false
   if (!await base.apagar(tokito, info)) return false
