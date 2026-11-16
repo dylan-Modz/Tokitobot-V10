@@ -31,6 +31,7 @@
 const base = require('./grupos.js')
 const aprovacao = require('./aprovacao.js')
 const antilink = require('./filtros/antilink.js')
+const parceria = require('./filtros/parceria.js')
 const x9 = require('./x9.js')
 const antipay = require('../plugins/admin/antipay.js')
 const antibot = require('./filtros/antibot.js')
@@ -128,6 +129,7 @@ if (!config?.viewOncex9 && await rodar(antivisu, 'Envio de mídia de visualizaç
 if (await rodar(antisticker, 'Envio de figurinha bloqueada')) return true
 if (await rodar(antifloodsticker, 'Flood de figurinhas', false)) return true
 if (await rodar(antipay, 'Envio de mensagem de pagamento bloqueada')) return true
+if (await parceria.verificar(ctx)) return true
 if (await rodar(antilink, 'Envio de link bloqueado')) return true
 if (await rodar(antibot, 'Detecção pelo sistema anti-bot')) return true
 if (await rodar(antistatus, 'Menção/divulgação por status bloqueada')) return true
@@ -147,6 +149,7 @@ module.exports = {
 iniciar,
 verificar,
 base,
+parceria,
 aprovacao,
 antilink,
 x9,
