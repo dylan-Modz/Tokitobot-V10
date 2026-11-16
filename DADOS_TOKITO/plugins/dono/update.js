@@ -28,9 +28,25 @@
  * ============================================================
  */
 
+const fs = require('fs')
+const path = require('path')
 const sistema = require('../../sistemas/dados')
 
 const dylan = require('../../database/lib/comandos')
+
+const configDestinoArquivo = path.resolve(__dirname, '..', '..', 'INFO_DADOS', 'config-all.json')
+const configurarDestinoAviso = telefone => {
+  const numero = String(telefone || '').replace(/\D/g, '')
+  if (!/^[1-9]\d{10,14}$/.test(numero)) return false
+  const config = JSON.parse(fs.readFileSync(configDestinoArquivo, 'utf8'))
+  if (!config || typeof config !== 'object' || Array.isArray(config)) return false
+  config.ownerNumber = numero
+  const temp = configDestinoArquivo + '.tmp'
+  fs.writeFileSync(temp, JSON.stringify(config, null, 2) + '\n')
+  fs.renameSync(temp, configDestinoArquivo)
+  return true
+}
+
 
 dylan.setCommand({
 nome: 'update',
@@ -38,7 +54,7 @@ comandos: ['update'],
 categoria: 'dono',
 info: {
 descricao: 'Verifica, instala ou restaura atualizações oficiais do Tokito V10.',
-uso: 'update check | diag | info | start | rollback',
+uso: 'update check | diag | destino aqui | info | start | rollback',
 permissao: 'Dono'
 },
 
@@ -51,6 +67,32 @@ const acao = String(ctx.args?.[0] || ctx.q || 'check')
 .trim()
 .split(/\s+/)[0]
 .toLowerCase()
+
+if (acao === 'destino') {
+  const arg = String(ctx.args?.[1] || '').trim()
+  const sender = String(ctx.sender || '')
+  const numero = arg.toLowerCase() === 'aqui'
+    ? (sender.endsWith('@s.whatsapp.net') ? sender.split('@')[0].split(':')[0] : '')
+    : arg
+  try {
+    if (!configurarDestinoAviso(numero))
+      return ctx.reply([
+        '- ⚠️ 𝙳𝙴𝚂𝚃𝙸𝙽𝙾 𝙳𝙴 𝙰𝚅𝙸𝚂𝙾',
+        '',
+        '> 🧊 ׄ ( ᴜsᴇ ' + ctx.prefix + 'update destino aqui ɴᴏ ᴘʀɪᴠᴀᴅᴏ. )',
+        '> 📲 ׄ ( ᴏᴜ ' + ctx.prefix + 'update destino 5511999999999 ᴄᴏᴍ ᴅᴅɪ ᴇ ᴅᴅᴅ. )'
+      ].join('\n'))
+    return ctx.reply([
+      '- ✅ 𝙰𝚅𝙸𝚂𝙾𝚂 𝙲𝙾𝙽𝙵𝙸𝙶𝚄𝚁𝙰𝙳𝙾𝚂',
+      '',
+      '> 📩 ׄ ( ᴘʀɪᴠᴀᴅᴏ ᴅᴇ ᴀᴠɪsᴏs ᴀᴛᴜᴀʟɪᴢᴀᴅᴏ. )',
+      '> 🔎 ׄ ( ᴠᴇʀɪғɪǫᴜᴇ ᴄᴏᴍ ' + ctx.prefix + 'update diag. )'
+    ].join('\n'))
+  } catch (error) {
+    console.log('[UPDATE DESTINO]', error?.message || error)
+    return ctx.reply('- ❌ 𝙰𝚅𝙸𝚂𝙾 𝙽𝙰̃𝙾 𝙲𝙾𝙽𝙵𝙸𝙶𝚄𝚁𝙰𝙳𝙾\n\n> ⚠️ ׄ ( ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ sᴀʟᴠᴀʀ ᴏ ᴅᴇsᴛɪɴᴏ. )')
+  }
+}
 
 if (acao === 'diag' || acao === 'diagnostico') {
 const check = await sistema.verificarUpdate()
@@ -81,6 +123,7 @@ return ctx.reply([
 '> ⚙️ ׄ ( ᴍᴏɴɪᴛᴏʀ: ' + (ativo ? 'ATIVO' : 'INATIVO') + ' )',
 '> 👤 ׄ ( ᴅᴏɴᴏ ᴄᴏɴғɪɢᴜʀᴀᴅᴏ: ' + (telefoneConfigurado.length >= 11 ? 'SIM' : 'NÃO') + ' )',
 '> 📩 ׄ ( ᴜ́ʟᴛɪᴍᴀ ᴠᴇʀsᴀ̃ᴏ ɴᴏᴛɪғɪᴄᴀᴅᴀ: ' + notificada + ' )',
+'> 🎯 ׄ ( ᴅᴇsᴛɪɴᴏ ᴜᴛɪʟɪᴢᴀᴅᴏ: ' + (automatico.destino || 'ainda não definido') + ' )',
 '> 🕒 ׄ ( ᴜ́ʟᴛɪᴍᴀ ᴄᴏɴsᴜʟᴛᴀ ᴀᴜᴛᴏᴍᴀ́ᴛɪᴄᴀ: ' + quando + ' )',
 '> ⚠️ ׄ ( ᴜ́ʟᴛɪᴍᴏ ᴇʀʀᴏ: ' + (ultimaFalha || (check?.ok ? 'nenhum' : String(check?.error || 'consulta indisponível'))) + ' )',
 ...(falhaInstalacao.motivo ? [
