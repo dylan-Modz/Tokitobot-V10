@@ -10,7 +10,8 @@
     "O aviso tenta o número do dono configurado; se estiver inválido, usa numero_dono1 ou a conta do próprio bot como destino seguro.",
     "Os avisos continuam enviados em texto simples, com tentativas de reenvio e histórico de verificação.",
     "Quando não há destinatário válido, o monitor registra a causa no diagnóstico em vez de falhar silenciosamente.",
-    "Package.json e manifesto corrigidos para anunciar a mesma versão 10.3.27 sem pular numeração."
+    "Package.json e manifesto corrigidos para anunciar a mesma versão 10.3.27 sem pular numeração.",
+    "Comando #update destino aqui permite cadastrar o WhatsApp do dono para receber avisos, sem editar manualmente a configuração nem alterar tokens."
   ],
   "delete": [],
   "archiveSha256": "",
@@ -31,6 +32,12 @@
       "sha256": "",
       "size": 1889,
       "gitSha": "64b163b89a0be0e8f2f84c83aa49c6f9c20165fe"
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/update.js",
+      "sha256": "",
+      "gitSha": "040352fa3b5aae2c93c9ce9df5a5826cbd3baea0",
+      "size": 10340
     }
   ],
   "releases": [
@@ -4264,7 +4271,8 @@
         "O aviso tenta o número do dono configurado; se estiver inválido, usa numero_dono1 ou a conta do próprio bot como destino seguro.",
         "Os avisos continuam enviados em texto simples, com tentativas de reenvio e histórico de verificação.",
         "Quando não há destinatário válido, o monitor registra a causa no diagnóstico em vez de falhar silenciosamente.",
-        "Package.json e manifesto corrigidos para anunciar a mesma versão 10.3.27 sem pular numeração."
+        "Package.json e manifesto corrigidos para anunciar a mesma versão 10.3.27 sem pular numeração.",
+        "Comando #update destino aqui permite cadastrar o WhatsApp do dono para receber avisos, sem editar manualmente a configuração nem alterar tokens."
       ],
       "files": [
         {
@@ -4278,6 +4286,12 @@
           "sha256": "",
           "size": 1889,
           "gitSha": "64b163b89a0be0e8f2f84c83aa49c6f9c20165fe"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/update.js",
+          "sha256": "",
+          "gitSha": "040352fa3b5aae2c93c9ce9df5a5826cbd3baea0",
+          "size": 10340
         }
       ],
       "delete": [],
