@@ -1,37 +1,57 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.25",
+  "version": "10.3.26",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-15T13:42:36.085Z",
+  "publishedAt": "2026-11-16T14:26:21.837Z",
   "changelog": [
-    "Visual original do comando Play na mensagem de música encontrada e em todas as etapas da ligação, inclusive encerramento.",
-    "Capa original da música mantida; foto do contato exibida depois do atendimento quando o WhatsApp permitir.",
-    "Marcações com LID agora precisam ser resolvidas para número verdadeiro pelo grupo ou mapeamento do WhatsApp antes da ligação.",
-    "Uma marcação @número nunca é tratada como telefone digitado; se não houver telefone real, pede DDI e DDD sem exibir LID.",
-    "Ligação só informa encerramento após evento real, e permanece conectada após o áudio iniciar.",
-    "Ao atender, reprodução da música é iniciada sem esperar o carregamento da foto do contato."
+    "Anti-Link Easy agora apaga convites de grupos e canais do WhatsApp e marca o membro com a menção nativa.",
+    "Anti-Link Medium passa a bloquear convites, links de redes sociais e encurtadores; aplica até 3 advertências por membro em 24 horas.",
+    "No Medium, o grupo só fecha temporariamente após uma sequência de spam, evitando fechar a cada link.",
+    "Anti-Link Hard agora detecta links de sites em geral, inclusive domínios sem https, e tenta remover o membro na primeira infração.",
+    "Links em textos e legendas passam pela detecção, incluindo algumas formas de disfarçar domínio.",
+    "Administradores e parceiros autorizados continuam isentos; administradores podem liberar e revogar domínios permitidos.",
+    "Mensagens do Anti-Link mantêm o visual original do mensagens.js e enviam menções reais com mentionedJid.",
+    "Novos comandos de grupo: antilinkconfig, antilinkpermitir e antilinkbloquear; painel com estatísticas de bloqueio."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "PlayCall: visual original do Play e menção sem LID",
-  "notice": "PlayCall restaurado ao estilo do Play, com números telefônicos reais nas chamadas.",
+  "type": "Melhoria",
+  "title": "Anti-Link: proteção por níveis e menções reais",
+  "notice": "Anti-Link Easy, Medium e Hard melhorados: proteção contra links, advertências, liberação de domínios e marcação nativa dos membros.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/downloads/playcall.js",
-      "sha256": "e49c84e452c1b916d0f5fa9c80deeab07661b7e14b0ec334b328a4da30b4e558",
-      "size": 17545,
-      "gitSha": "7307d0e83b4e61e4b02a31c9c0cc47cea34bbd84"
+      "path": "DADOS_TOKITO/sistemas/filtros/antilink.js",
+      "sha256": "",
+      "size": 9663,
+      "gitSha": "0e3015edc429de3b4c2bb484505ef162895a8c0c"
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "",
+      "size": 235962,
+      "gitSha": "332015702fa43675ac318c3cadb43caaa5282072"
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/antilinkconfig.js",
+      "sha256": "",
+      "size": 1002,
+      "gitSha": "62360a09d831cb0e43f5e40c9d810816e8a80bbe"
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "sha256": "",
+      "size": 79410,
+      "gitSha": "bb36750deee2f3f999561a98b8f2bf72f24a6376"
     },
     {
       "path": "package.json",
-      "sha256": "de600d4dc25aef44ab48c64d0db4ad377354d626dbc52856b49076c1cae21a3a",
-      "size": 1770,
-      "gitSha": "d4480395dd6f073ee3ba5d1ebb50fffaacfd8ca7"
+      "sha256": "",
+      "size": 1889,
+      "gitSha": "b56171d363e15320526baeed74cd4cc113137546"
     }
   ],
   "releases": [
@@ -4311,16 +4331,69 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-15T13:42:36.085Z"
+    },
+    {
+      "version": "10.3.26",
+      "fromVersion": "10.3.25",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Anti-Link: proteção por níveis e menções reais",
+      "notice": "Anti-Link Easy, Medium e Hard melhorados: proteção contra links, advertências, liberação de domínios e marcação nativa dos membros.",
+      "changelog": [
+        "Anti-Link Easy agora apaga convites de grupos e canais do WhatsApp e marca o membro com a menção nativa.",
+        "Anti-Link Medium passa a bloquear convites, links de redes sociais e encurtadores; aplica até 3 advertências por membro em 24 horas.",
+        "No Medium, o grupo só fecha temporariamente após uma sequência de spam, evitando fechar a cada link.",
+        "Anti-Link Hard agora detecta links de sites em geral, inclusive domínios sem https, e tenta remover o membro na primeira infração.",
+        "Links em textos e legendas passam pela detecção, incluindo algumas formas de disfarçar domínio.",
+        "Administradores e parceiros autorizados continuam isentos; administradores podem liberar e revogar domínios permitidos.",
+        "Mensagens do Anti-Link mantêm o visual original do mensagens.js e enviam menções reais com mentionedJid.",
+        "Novos comandos de grupo: antilinkconfig, antilinkpermitir e antilinkbloquear; painel com estatísticas de bloqueio."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antilink.js",
+          "sha256": "",
+          "size": 9663,
+          "gitSha": "0e3015edc429de3b4c2bb484505ef162895a8c0c"
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "size": 235962,
+          "gitSha": "332015702fa43675ac318c3cadb43caaa5282072"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/antilinkconfig.js",
+          "sha256": "",
+          "size": 1002,
+          "gitSha": "62360a09d831cb0e43f5e40c9d810816e8a80bbe"
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "size": 79410,
+          "gitSha": "bb36750deee2f3f999561a98b8f2bf72f24a6376"
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "size": 1889,
+          "gitSha": "b56171d363e15320526baeed74cd4cc113137546"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-16T14:26:21.837Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.22",
+  "fromVersion": "10.3.25",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.23"
+  "publicVersion": "10.3.26"
 }
