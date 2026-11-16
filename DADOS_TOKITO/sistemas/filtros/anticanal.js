@@ -77,7 +77,7 @@ const verificar = async ctx => {
   )
     return false
 
-  if (parcerias.podeIgnorarAntiLink(from, sender))
+  if (ctx.parceriaLiberada === true)
     return false
 
   if (!isBotGroupAdmins)
