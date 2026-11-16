@@ -577,3 +577,109 @@ module.exports = {
   podeIgnorarAntiLink,
   validadeTexto
 }
+
+
+// ============================================================
+// MODO PARCERIA V2 — LIMITE DIÁRIO POR PARTICIPANTE
+// Preserva os registros do formato antigo para não perder parceiros.
+// ============================================================
+const DIA_PARCEIRO_TZ = 'America/Sao_Paulo'
+const diaParceria = (quando = Date.now()) => {
+  const partes = new Intl.DateTimeFormat('en-US', {
+    timeZone: DIA_PARCEIRO_TZ, year: 'numeric', month: '2-digit', day: '2-digit'
+  }).formatToParts(new Date(quando))
+  const item = tipo => partes.find(parte => parte.type === tipo)?.value || '00'
+  return item('year') + '-' + item('month') + '-' + item('day')
+}
+const limiteSeguro = valor => Number.isInteger(Number(valor)) && Number(valor) >= 1 &&
+  Number(valor) <= 1000 ? Number(valor) : 0
+const parceiroAtual = (grupo, usuario) => grupo?.parcerias?.find(item =>
+  normalizarUsuario(item?.responsavel) === normalizarUsuario(usuario) &&
+  item.status === 'ativo' && !expirou(item)) || null
+const estadoDiario = (parceiro, dia = diaParceria()) => {
+  const limite = limiteSeguro(parceiro.limiteDiario) || 3
+  const usados = parceiro.diaContagem === dia
+    ? Math.max(0, Number(parceiro.usadosHoje) || 0) : 0
+  return { limite, usados, restantes: Math.max(0, limite - usados), dia }
+}
+
+const definirParceiro = (jidGrupo, usuario, limite) => {
+  const quantidade = limiteSeguro(limite)
+  const responsavel = normalizarUsuario(usuario)
+  if (!jidGrupo || !responsavel || !quantidade) return { ok: false, motivo: 'dados' }
+  const dados = ler()
+  const grupo = obterGrupo(dados, jidGrupo)
+  const anterior = grupo.parcerias.find(item =>
+    normalizarUsuario(item?.responsavel) === responsavel)
+  if (anterior) {
+    const antes = estadoDiario(anterior)
+    anterior.limiteDiario = quantidade
+    anterior.diaContagem = antes.dia
+    anterior.usadosHoje = antes.usados
+    anterior.status = 'ativo'
+    anterior.expiraEm = null
+    anterior.bypass = false
+    anterior.atualizadoEm = new Date().toISOString()
+  } else {
+    grupo.parcerias.push({
+      responsavel, status: 'ativo', limiteDiario: quantidade,
+      diaContagem: diaParceria(), usadosHoje: 0,
+      criadoEm: new Date().toISOString(), bypass: false
+    })
+  }
+  salvar(dados)
+  return { ok: true, atualizado: Boolean(anterior), parceiro: parceiroAtual(grupo, responsavel) }
+}
+
+const excluirParceiro = (jidGrupo, usuario) => {
+  const dados = ler()
+  const grupo = obterGrupo(dados, jidGrupo)
+  const alvo = normalizarUsuario(usuario)
+  const antes = grupo.parcerias.length
+  grupo.parcerias = grupo.parcerias.filter(item =>
+    normalizarUsuario(item?.responsavel) !== alvo)
+  if (grupo.parcerias.length === antes) return { ok: false }
+  salvar(dados)
+  return { ok: true }
+}
+
+const consultarParceiro = (jidGrupo, usuario) => {
+  const dados = ler()
+  const grupo = obterGrupo(dados, jidGrupo)
+  const parceiro = parceiroAtual(grupo, usuario)
+  if (!parceiro) return null
+  return { responsavel: parceiro.responsavel, ...estadoDiario(parceiro) }
+}
+
+const listarParceiros = jidGrupo => {
+  const dados = ler()
+  const grupo = obterGrupo(dados, jidGrupo)
+  return grupo.parcerias.filter(item => item?.status === 'ativo' && !expirou(item))
+    .map(item => ({ responsavel: item.responsavel, ...estadoDiario(item) }))
+}
+
+// Um envio pode conter vários links. Cada link consome uma divulgação.
+// Só confirma o uso quando o envio cabe integralmente no saldo.
+const consumirDivulgacoes = (jidGrupo, usuario, quantidade = 1) => {
+  const total = Number(quantidade)
+  if (!Number.isInteger(total) || total < 1 || total > 1000)
+    return { parceiro: false, permitido: false }
+  const dados = ler()
+  const grupo = obterGrupo(dados, jidGrupo)
+  if (!grupo?.ativo) return { parceiro: false, permitido: false, desativado: true }
+  const parceiro = parceiroAtual(grupo, usuario)
+  if (!parceiro) return { parceiro: false, permitido: false }
+  const atual = estadoDiario(parceiro)
+  if (total > atual.restantes) return { parceiro: true, permitido: false, ...atual }
+  parceiro.diaContagem = atual.dia
+  parceiro.usadosHoje = atual.usados + total
+  salvar(dados)
+  return { parceiro: true, permitido: true,
+    limite: atual.limite, usados: parceiro.usadosHoje,
+    restantes: atual.restantes - total, dia: atual.dia }
+}
+
+Object.assign(module.exports, {
+  diaParceria, definirParceiro, excluirParceiro, consultarParceiro,
+  listarParceiros, consumirDivulgacoes
+})
