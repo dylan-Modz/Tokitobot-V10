@@ -59,18 +59,34 @@ dylan.setCommand({
           return reply(mess.downloadNaoEncontrado('VÍDEO'))
         }
 
-        // Seleciona um único vídeo válido por pesquisa, sem enviar a lista inteira.
-        const disponiveis = lista.filter(item =>
-          achar(item?.video_sem_marca, item?.video, item?.download, item?.url, item?.data)
-        )
+        // A pesquisa pode retornar somente a publicação, sem link de MP4.
+        // Tenta usar o downloader da API antes de descartar o resultado.
+        const disponiveis = lista.filter(scraper.temVideo)
 
         if (!disponiveis.length) {
           await reagir(from, '❌')
           return reply(mess.downloadSemMidia('VÍDEO'))
         }
 
-        const item = disponiveis[Math.floor(Math.random() * disponiveis.length)]
-        const link = achar(item?.video_sem_marca, item?.video, item?.download, item?.url, item?.data)
+        const candidatos = [...disponiveis].sort(() => Math.random() - 0.5).slice(0, 4)
+        let item = null
+        let arquivo = null
+
+        for (const candidato of candidatos) {
+          try {
+            arquivo = await scraper.obterVideo(candidato)
+            item = candidato
+            break
+          } catch (erro) {
+            console.log('[TIKTOK SEARCH] Mídia indisponível:', modulos.sanitizarErro(erro, [API_KEY_TOKITO]))
+          }
+        }
+
+        if (!arquivo || !item) {
+          await reagir(from, '❌')
+          return reply(mess.downloadSemMidia('VÍDEO'))
+        }
+
         const autor = item?.autor || item?.author || {}
         const musica = item?.musica_info || item?.music_info || {}
         const stats = item?.stats || {}
@@ -90,7 +106,7 @@ dylan.setCommand({
           autor?.nome || autor?.fullname || autor?.name || autor?.nickname || 'Desconhecido', 70
         )
         const usuario = resumir(autor?.usuario || autor?.username || autor?.unique_id || autor?.nickname, 50)
-        const tituloMusica = resumir(item?.musica || musica?.titulo || musica?.title, 80)
+        const tituloMusica = resumir(musica?.titulo || musica?.title || (item?.musica && !/^https?:\/\//i.test(item.musica) ? item.musica : ''), 80)
 
         // Mesma identidade visual usada no comando Play do Tokito Bot V10.
         const legenda = [
@@ -111,7 +127,7 @@ dylan.setCommand({
         ].filter(Boolean).join('\n')
 
         await tokito.sendMessage(from, {
-          video: { url: link },
+          video: arquivo,
           mimetype: 'video/mp4',
           caption: legenda,
           contextInfo: {
