@@ -1,36 +1,22 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.27",
+  "version": "10.3.28",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-16T15:03:08.612Z",
+  "publishedAt": "2026-11-16T15:05:12.525Z",
   "changelog": [
-    "Diagnóstico #update diag agora mostra se o novo visual de comando inválido foi carregado na memória, se há reparo da mesma versão e quais arquivos do design faltam instalar.",
-    "Visual do comando inválido renovado no estilo das Informações do Bot: nome do usuário, comando digitado, sugestão, similaridade real e tempo real de busca.",
-    "Mensagem sem sugestão agora orienta a usar #menu; menção do usuário preservada pela resposta do WhatsApp.",
-    "Corrigido o monitor que não enviava avisos quando ownerNumber ainda estava com o valor de exemplo.",
-    "O aviso tenta o número do dono configurado; se estiver inválido, usa numero_dono1 ou a conta do próprio bot como destino seguro.",
-    "Os avisos continuam enviados em texto simples, com tentativas de reenvio e histórico de verificação.",
-    "Quando não há destinatário válido, o monitor registra a causa no diagnóstico em vez de falhar silenciosamente.",
-    "Package.json e manifesto corrigidos para anunciar a mesma versão 10.3.27 sem pular numeração.",
-    "Comando #update destino aqui permite cadastrar o WhatsApp do dono para receber avisos, sem editar manualmente a configuração nem alterar tokens.",
-    "Modo Parceria reformulado com aprovação direta pelo administrador: addparceria @usuario 3, editarparceria e removerparceria.",
-    "Links enviados por parceiros são contabilizados automaticamente; cada URL consome uma divulgação diária, sem comando de divulgação.",
-    "Ao atingir ou ultrapassar o limite, a mensagem com o link é apagada e o usuário recebe um aviso no estilo original do mensagens.js.",
-    "O saldo diário renova à meia-noite no horário de Brasília; no grupo é possível consultar parcerias e o próprio saldo.",
-    "Anti-Link e Anti-Canal respeitam divulgações autorizadas, sem punir parceiros por links dentro da cota.",
-    "Os comandos antigos baseados em ID, cadastro de projeto, solicitações e bypass deixaram de ser oferecidos.",
-    "Menu ADM atualizado com os novos comandos. Versão mantida em 10.3.27, sem novo release numerado.",
-    "Corrigido o aviso automático: não tenta mais notificar a própria conta do bot quando o número do dono não está configurado.",
-    "Ao usar #update no privado, o dono autorizado pode registrar automaticamente seu número para os próximos avisos, sem substituir um número válido já existente.",
-    "O comando #update diag continua mostrando os erros de notificação para verificar a entrega."
+    "Comando inválido redesenhado no estilo Informações do Bot: nome do usuário marcado, comando digitado, sugestão, semelhança e tempo real da busca.",
+    "Quando não há sugestão, o bot orienta a consultar o menu; a porcentagem e o tempo continuam calculados pelo motor atual.",
+    "Ajustado #update diag para identificar se o visual carregado é o antigo ou o novo e listar arquivos pendentes.",
+    "Incluídos no pacote incremental os arquivos corrigidos da 10.3.27 para instalações que não receberam reparos na mesma versão.",
+    "Versão oficial atualizada de 10.3.27 para 10.3.28, sem pular numeração."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Correção do comando inválido e diagnóstico de instalação",
-  "notice": "Atualização corretiva 10.3.27: visual da sugestão e verificação do código carregado no bot.",
+  "title": "Novo visual da sugestão de comandos",
+  "notice": "Novo visual do comando inválido com sugestões reais e diagnóstico de atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -43,80 +29,80 @@
     {
       "path": "package.json",
       "sha256": "",
-      "size": 1889,
-      "gitSha": "64b163b89a0be0e8f2f84c83aa49c6f9c20165fe"
+      "gitSha": "250d991d278b1dc01c3f89ca7d610b5ab37ee581",
+      "size": 1889
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/update.js",
       "sha256": "",
-      "size": 12549,
-      "gitSha": "99eda9495fb8e3508ce83c57fd1197b0f8f0aeeb"
+      "gitSha": "99eda9495fb8e3508ce83c57fd1197b0f8f0aeeb",
+      "size": 12549
     },
     {
       "path": "DADOS_TOKITO/sistemas/parcerias.js",
       "sha256": "",
-      "size": 18836,
-      "gitSha": "944bf94d759ea3218abbf53309327bc4abe1b50a"
+      "gitSha": "944bf94d759ea3218abbf53309327bc4abe1b50a",
+      "size": 18836
     },
     {
       "path": "DADOS_TOKITO/sistemas/filtros/parceria.js",
       "sha256": "",
-      "size": 1894,
-      "gitSha": "c3193e4f17e9345ab1189d5464924fe1da9afc3b"
+      "gitSha": "c3193e4f17e9345ab1189d5464924fe1da9afc3b",
+      "size": 1894
     },
     {
       "path": "DADOS_TOKITO/sistemas/funcoes.js",
       "sha256": "",
-      "size": 6067,
-      "gitSha": "b2b639214f7eb3500e6e741a902674cbf1890007"
+      "gitSha": "b2b639214f7eb3500e6e741a902674cbf1890007",
+      "size": 6067
     },
     {
       "path": "DADOS_TOKITO/sistemas/filtros/antilink.js",
       "sha256": "",
-      "size": 9649,
-      "gitSha": "073a0b5c1b3bb3ea7faa777db93f32c4de1aff96"
+      "gitSha": "073a0b5c1b3bb3ea7faa777db93f32c4de1aff96",
+      "size": 9649
     },
     {
       "path": "DADOS_TOKITO/sistemas/filtros/anticanal.js",
       "sha256": "",
-      "size": 2812,
-      "gitSha": "1524ca4bea1990decdce81cd956ef33e67c9b0e3"
+      "gitSha": "1524ca4bea1990decdce81cd956ef33e67c9b0e3",
+      "size": 2812
     },
     {
       "path": "DADOS_TOKITO/plugins/parceria/gerenciar.js",
       "sha256": "",
-      "size": 2383,
-      "gitSha": "313c70f61b3374e04acabb24ad1d76c6a13f9f8e"
+      "gitSha": "313c70f61b3374e04acabb24ad1d76c6a13f9f8e",
+      "size": 2383
     },
     {
       "path": "DADOS_TOKITO/plugins/parceria/parceria.js",
       "sha256": "",
-      "size": 1691,
-      "gitSha": "61d2db760ac9fa6515c95e50d879acf01ee059be"
+      "gitSha": "61d2db760ac9fa6515c95e50d879acf01ee059be",
+      "size": 1691
     },
     {
       "path": "DADOS_TOKITO/plugins/parceria/solicitacoes.js",
       "sha256": "",
-      "size": 244,
-      "gitSha": "0368251dccd5d4de88ec7614971a1c46ce998494"
+      "gitSha": "0368251dccd5d4de88ec7614971a1c46ce998494",
+      "size": 244
     },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
       "sha256": "",
-      "size": 230629,
-      "gitSha": "24be027fc6dc3615778fa22a749b6e3228667e01"
+      "gitSha": "24be027fc6dc3615778fa22a749b6e3228667e01",
+      "size": 230629
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "",
-      "size": 79786,
-      "gitSha": "4ce8cdba4102b893e03be02dad8fa4ae2ae7894a"
+      "gitSha": "4ce8cdba4102b893e03be02dad8fa4ae2ae7894a",
+      "size": 79786
     },
     {
       "path": "tokito.js",
       "sha256": "",
-      "size": 54970,
-      "gitSha": "473c2654fc481c7f507a89fed4a8d22794e764f9"
+      "gitSha": "473c2654fc481c7f507a89fed4a8d22794e764f9",
+      "size": 54970
     }
   ],
   "releases": [
@@ -4455,16 +4441,120 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-16T15:03:08.612Z"
+    },
+    {
+      "version": "10.3.28",
+      "fromVersion": "10.3.27",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Novo visual da sugestão de comandos",
+      "notice": "Novo visual do comando inválido com sugestões reais e diagnóstico de atualização.",
+      "changelog": [
+        "Comando inválido redesenhado no estilo Informações do Bot: nome do usuário marcado, comando digitado, sugestão, semelhança e tempo real da busca.",
+        "Quando não há sugestão, o bot orienta a consultar o menu; a porcentagem e o tempo continuam calculados pelo motor atual.",
+        "Ajustado #update diag para identificar se o visual carregado é o antigo ou o novo e listar arquivos pendentes.",
+        "Incluídos no pacote incremental os arquivos corrigidos da 10.3.27 para instalações que não receberam reparos na mesma versão.",
+        "Versão oficial atualizada de 10.3.27 para 10.3.28, sem pular numeração."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "",
+          "gitSha": "daabdb61aec8c293f2da1de81b956edff2ecf809",
+          "size": 50300
+        },
+        {
+          "path": "package.json",
+          "sha256": "",
+          "gitSha": "250d991d278b1dc01c3f89ca7d610b5ab37ee581",
+          "size": 1889
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/update.js",
+          "sha256": "",
+          "gitSha": "99eda9495fb8e3508ce83c57fd1197b0f8f0aeeb",
+          "size": 12549
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/parcerias.js",
+          "sha256": "",
+          "gitSha": "944bf94d759ea3218abbf53309327bc4abe1b50a",
+          "size": 18836
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/parceria.js",
+          "sha256": "",
+          "gitSha": "c3193e4f17e9345ab1189d5464924fe1da9afc3b",
+          "size": 1894
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/funcoes.js",
+          "sha256": "",
+          "gitSha": "b2b639214f7eb3500e6e741a902674cbf1890007",
+          "size": 6067
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/antilink.js",
+          "sha256": "",
+          "gitSha": "073a0b5c1b3bb3ea7faa777db93f32c4de1aff96",
+          "size": 9649
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/filtros/anticanal.js",
+          "sha256": "",
+          "gitSha": "1524ca4bea1990decdce81cd956ef33e67c9b0e3",
+          "size": 2812
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/parceria/gerenciar.js",
+          "sha256": "",
+          "gitSha": "313c70f61b3374e04acabb24ad1d76c6a13f9f8e",
+          "size": 2383
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/parceria/parceria.js",
+          "sha256": "",
+          "gitSha": "61d2db760ac9fa6515c95e50d879acf01ee059be",
+          "size": 1691
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/parceria/solicitacoes.js",
+          "sha256": "",
+          "gitSha": "0368251dccd5d4de88ec7614971a1c46ce998494",
+          "size": 244
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "",
+          "gitSha": "24be027fc6dc3615778fa22a749b6e3228667e01",
+          "size": 230629
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "sha256": "",
+          "gitSha": "4ce8cdba4102b893e03be02dad8fa4ae2ae7894a",
+          "size": 79786
+        },
+        {
+          "path": "tokito.js",
+          "sha256": "",
+          "gitSha": "473c2654fc481c7f507a89fed4a8d22794e764f9",
+          "size": 54970
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-16T15:05:12.525Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.26",
+  "fromVersion": "10.3.27",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.27"
+  "publicVersion": "10.3.28"
 }
