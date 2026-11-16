@@ -1869,292 +1869,110 @@ return `- ⚠️ \`𝙼𝙾𝙳𝙾 𝙹𝙰́ 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰�
 
 
 // ============================================================
-// MODO PARCERIA
+// MODO PARCERIA — DIVULGAÇÕES DIÁRIAS
+// ============================================================
+const tituloParceria = (emoji, titulo) => '- ' + emoji + ' ' + String.fromCharCode(96) +
+  titulo + String.fromCharCode(96)
+const nomeParceiro = numero => '@' + String(numero || 'membro').replace(/^@/, '').split('@')[0]
+
+exports.modoParceriaUso = (prefix, command) => [
+  tituloParceria('🤝', '𝙼𝙾𝙳𝙾 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰'), '',
+  '> ✅ ׄ ( ' + prefix + command + ' 1 — ᴀᴛɪᴠᴀʀ )',
+  '> ❌ ׄ ( ' + prefix + command + ' 0 — ᴅᴇsᴀᴛɪᴠᴀʀ )'
+].join('\n')
+exports.modoParceriaAtivado = () => [
+  tituloParceria('🤝', '𝙼𝙾𝙳𝙾 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰'), '',
+  '> ✅ ׄ ( sɪsᴛᴇᴍᴀ ᴅᴇ ᴘᴀʀᴄᴇʀɪᴀs ᴀᴛɪᴠᴀᴅᴏ! )',
+  '> 🔗 ׄ ( ᴏs ʟɪɴᴋs sᴇʀᴀ̃ᴏ ᴄᴏɴᴛʀᴏʟᴀᴅᴏs ᴘᴇʟᴏ ʟɪᴍɪᴛᴇ ᴅɪᴀ́ʀɪᴏ. )'
+].join('\n')
+exports.modoParceriaDesativado = () => [
+  tituloParceria('🤝', '𝙼𝙾𝙳𝙾 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰'), '',
+  '> ❌ ׄ ( sɪsᴛᴇᴍᴀ ᴅᴇ ᴘᴀʀᴄᴇʀɪᴀs ᴅᴇsᴀᴛɪᴠᴀᴅᴏ. )'
+].join('\n')
+exports.modoParceriaJaAtivado = () => [
+  tituloParceria('🤝', '𝙼𝙾𝙳𝙾 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰'), '',
+  '> ⚠️ ׄ ( ᴏ ᴍᴏᴅᴏ ᴊᴀ́ ᴇsᴛᴀ́ ᴀᴛɪᴠᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )'
+].join('\n')
+exports.modoParceriaJaDesativado = () => [
+  tituloParceria('🤝', '𝙼𝙾𝙳𝙾 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰'), '',
+  '> ⚠️ ׄ ( ᴏ ᴍᴏᴅᴏ ᴊᴀ́ ᴇsᴛᴀ́ ᴅᴇsᴀᴛɪᴠᴀᴅᴏ. )'
+].join('\n')
+exports.parceriaModoDesativado = prefix => [
+  tituloParceria('⚠️', '𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝙳𝙰'), '',
+  '> 🔧 ׄ ( ᴜsᴇ ' + prefix + 'modoparceria 1 ᴘᴀʀᴀ ᴀᴛɪᴠᴀʀ. )'
+].join('\n')
+exports.parceriaCentral = prefix => [
+  tituloParceria('🤝', '𝙲𝙴𝙽𝚃𝚁𝙰𝙻 𝙳𝙴 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰𝚂'), '',
+  '> ➕ ׄ ( ' + prefix + 'addparceria @usuario 3 )',
+  '> 📝 ׄ ( ' + prefix + 'editarparceria @usuario 5 )',
+  '> ❌ ׄ ( ' + prefix + 'removerparceria @usuario )',
+  '> 🤝 ׄ ( ' + prefix + 'parcerias )',
+  '> 👤 ׄ ( ' + prefix + 'minhaparceria )',
+  '> 🔄 ׄ ( ʟɪᴍɪᴛᴇ ʀᴇɴᴏᴠᴀᴅᴏ ᴀ ᴄᴀᴅᴀ ᴅɪᴀ. )'
+].join('\n')
+exports.parceriaAddUso = prefix => [
+  tituloParceria('🤝', '𝙰𝙳𝙸𝙲𝙸𝙾𝙽𝙰𝚁 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰'), '',
+  '> 👤 ׄ ( ' + prefix + 'addparceria @usuario 3 )',
+  '> 📝 ׄ ( ' + prefix + 'editarparceria @usuario 5 )',
+  '> 🔗 ׄ ( ᴏ ɴᴜ́ᴍᴇʀᴏ ɪɴᴅɪᴄᴀ ǫᴜᴀɴᴛᴏs ʟɪɴᴋs ᴘᴏᴅᴇᴍ sᴇʀ ᴇɴᴠɪᴀᴅᴏs ᴘᴏʀ ᴅɪᴀ. )'
+].join('\n')
+exports.parceriaRemoverUso = prefix => [
+  tituloParceria('❌', '𝚁𝙴𝙼𝙾𝚅𝙴𝚁 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰'), '',
+  '> 👤 ׄ ( ' + prefix + 'removerparceria @usuario )'
+].join('\n')
+exports.parceriaDefinida = (usuario, limite, alterada) => [
+  tituloParceria('🤝', alterada ? '𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙳𝙰' : '𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝙰𝙿𝚁𝙾𝚅𝙰𝙳𝙰'), '',
+  '> 👤 ׄ ( ᴘᴀʀᴄᴇɪʀᴏ: ' + nomeParceiro(usuario) + ' )',
+  '> 📢 ׄ ( ᴅɪᴠᴜʟɢᴀᴄ̧ᴏ̃ᴇs: ' + limite + ' ᴘᴏʀ ᴅɪᴀ )',
+  '> ✅ ׄ ( sᴛᴀᴛᴜs: ᴀᴛɪᴠᴏ )',
+  '> 🔄 ׄ ( ʀᴇɴᴏᴠᴀᴄ̧ᴀ̃ᴏ: ᴅɪᴀ́ʀɪᴀ )'
+].join('\n')
+exports.parceriaRemovida = usuario => [
+  tituloParceria('❌', '𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝚁𝙴𝙼𝙾𝚅𝙸𝙳𝙰'), '',
+  '> 👤 ׄ ( ' + nomeParceiro(usuario) + ' )',
+  '> 🚫 ׄ ( ᴏ ᴜsᴜᴀ́ʀɪᴏ ɴᴀ̃ᴏ ᴘᴏssᴜɪ ᴍᴀɪs ᴘᴇʀᴍɪssᴀ̃ᴏ ᴘᴀʀᴀ ᴅɪᴠᴜʟɢᴀʀ. )'
+].join('\n')
+exports.parceriaNaoEncontrada = () => [
+  tituloParceria('⚠️', '𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝙽𝙰̃𝙾 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰'), '',
+  '> 🔎 ׄ ( ɴᴇɴʜᴜᴍ ᴘᴀʀᴄᴇɪʀᴏ ᴇɴᴄᴏɴᴛʀᴀᴅᴏ. )'
+].join('\n')
+exports.parceriaSemCadastradas = () => [
+  tituloParceria('🤝', '𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰𝚂'), '',
+  '> 📭 ׄ ( ɴᴇɴʜᴜᴍ ᴘᴀʀᴄᴇɪʀᴏ ᴄᴀᴅᴀsᴛʀᴀᴅᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )'
+].join('\n')
+exports.parceriaLista = (lista, total) => [
+  tituloParceria('🤝', '𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰𝚂 𝙰𝚃𝙸𝚅𝙰𝚂'), '', lista, '',
+  '> 📊 ׄ ( ᴛᴏᴛᴀʟ: ' + total + ' )'
+].join('\n')
+exports.parceriaSaldo = (usuario, dados) => [
+  tituloParceria('🤝', '𝙼𝙸𝙽𝙷𝙰 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰'), '',
+  '> 👤 ׄ ( ' + nomeParceiro(usuario) + ' )',
+  '> 📢 ׄ ( ᴘᴇʀᴍɪᴛɪᴅᴏs: ' + dados.limite + ' ʟɪɴᴋs ᴘᴏʀ ᴅɪᴀ )',
+  '> ✅ ׄ ( ᴜsᴀᴅᴏs ʜᴏᴊᴇ: ' + dados.usados + ' )',
+  '> 🔗 ׄ ( ʀᴇsᴛᴀɴᴛᴇs: ' + dados.restantes + ' )',
+  '> 🔄 ׄ ( ʀᴇɴᴏᴠᴀ ᴀᴍᴀɴʜᴀ̃. )'
+].join('\n')
+exports.parceriaSemMinha = () => [
+  tituloParceria('⚠️', '𝚂𝙴𝙼 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰'), '',
+  '> 🚫 ׄ ( ᴠᴄ ɴᴀ̃ᴏ ᴘᴏssᴜɪ ᴘᴀʀᴄᴇʀɪᴀ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )'
+].join('\n')
+exports.parceriaLimite = (usuario, limite, restantes) => [
+  tituloParceria('⚠️', '𝙻𝙸𝙼𝙸𝚃𝙴 𝙳𝙴 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰'), '',
+  '> 👤 ׄ ( ' + nomeParceiro(usuario) + ' )',
+  '> 🚫 ׄ ( ᴠᴄ ᴊᴀ́ ᴀᴛɪɴɢɪᴜ ᴏ ʟɪᴍɪᴛᴇ ᴅᴇ ' + limite + ' ʟɪɴᴋs ᴘᴏʀ ᴅɪᴀ. )',
+  '> 🔗 ׄ ( ʀᴇsᴛᴀɴᴛᴇs: ' + restantes + ' )',
+  '> 🗑️ ׄ ( ᴏ ʟɪɴᴋ ғᴏɪ ʀᴇᴍᴏᴠɪᴅᴏ. )',
+  '> 🔄 ׄ ( sᴇᴜ ʟɪᴍɪᴛᴇ ᴠᴏʟᴛᴀ ᴀᴍᴀɴʜᴀ̃. )'
+].join('\n')
+exports.parceriaNaoAutorizada = usuario => [
+  tituloParceria('🚫', '𝙳𝙸𝚅𝚄𝙻𝙶𝙰𝙲̧𝙰̃𝙾 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳𝙰'), '',
+  '> 👤 ׄ ( ' + nomeParceiro(usuario) + ' )',
+  '> 🔗 ׄ ( ᴠᴄ ɴᴀ̃ᴏ ᴘᴏssᴜɪ ᴘᴀʀᴄᴇʀɪᴀ ᴘᴀʀᴀ ᴇɴᴠɪᴀʀ ʟɪɴᴋs. )',
+  '> 🗑️ ׄ ( ᴏ ʟɪɴᴋ ғᴏɪ ʀᴇᴍᴏᴠɪᴅᴏ. )'
+].join('\n')
+
 // ============================================================
 
-exports.modoParceriaUso = (prefix, command) => {
-return `- 🤝 \`𝙼𝙾𝙳𝙾 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> ✅ ׄ ( ${prefix + command} 1 — ᴀᴛɪᴠᴀʀ ᴏ sɪsᴛᴇᴍᴀ ᴅᴇ ᴘᴀʀᴄᴇʀɪᴀs )
-> ❌ ׄ ( ${prefix + command} 0 — ᴅᴇsᴀᴛɪᴠᴀʀ ᴏ sɪsᴛᴇᴍᴀ ᴅᴇ ᴘᴀʀᴄᴇʀɪᴀs )`
-}
-
-exports.modoParceriaAtivado = () => {
-return `- ✅ \`𝙼𝙾𝙳𝙾 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 🤝 ׄ ( ᴏ sɪsᴛᴇᴍᴀ ᴅᴇ ᴘᴀʀᴄᴇʀɪᴀs ғᴏɪ ᴀᴛɪᴠᴀᴅᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )`
-}
-
-exports.modoParceriaDesativado = () => {
-return `- ❌ \`𝙼𝙾𝙳𝙾 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 🤝 ׄ ( ᴏ sɪsᴛᴇᴍᴀ ᴅᴇ ᴘᴀʀᴄᴇʀɪᴀs ғᴏɪ ᴅᴇsᴀᴛɪᴠᴀᴅᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )`
-}
-
-exports.modoParceriaJaAtivado = () => {
-return `- ⚠️ \`𝙼𝙾𝙳𝙾 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> ✅ ׄ ( ᴏ sɪsᴛᴇᴍᴀ ᴅᴇ ᴘᴀʀᴄᴇʀɪᴀs ᴊᴀ́ ᴇsᴛᴀ́ ᴀᴛɪᴠᴀᴅᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )`
-}
-
-exports.modoParceriaJaDesativado = () => {
-return `- ⚠️ \`𝙼𝙾𝙳𝙾 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> ❌ ׄ ( ᴏ sɪsᴛᴇᴍᴀ ᴅᴇ ᴘᴀʀᴄᴇʀɪᴀs ᴊᴀ́ ᴇsᴛᴀ́ ᴅᴇsᴀᴛɪᴠᴀᴅᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )`
-}
-
-exports.parceriaModoDesativado = prefix => {
-return `- 🤝 \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰𝚂 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝙳𝙰𝚂\`
-
-> ❌ ׄ ( ᴏ ᴍᴏᴅᴏ ᴘᴀʀᴄᴇʀɪᴀ ɴᴀ̃ᴏ ᴇsᴛᴀ́ ᴀᴛɪᴠᴏ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )
-> ✅ ׄ ( ᴜsᴇ ${prefix}modoparceria 1 ᴘᴀʀᴀ ᴀᴛɪᴠᴀʀ. )`
-}
-
-exports.parceriaSolicitada = id => {
-return `- 📨 \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝙳𝙴 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 🆔 ׄ ( ɪᴅ: ${id} )
-> ⏳ ׄ ( ᴀ sᴜᴀ sᴏʟɪᴄɪᴛᴀᴄ̧ᴀ̃ᴏ ғᴏɪ ᴇɴᴠɪᴀᴅᴀ ᴘᴀʀᴀ ᴀɴᴀ́ʟɪsᴇ. )`
-}
-
-exports.parceriaAprovada = (numero, id) => {
-return `- 🤝 \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝙰𝙿𝚁𝙾𝚅𝙰𝙳𝙰\`
-
-> 👤 ׄ ( @${String(numero).split('@')[0]} )
-> 🆔 ׄ ( ɪᴅ: ${id || 'N/A'} )
-> ✅ ׄ ( ᴀ ᴘᴀʀᴄᴇʀɪᴀ ғᴏɪ ᴀᴘʀᴏᴠᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ. )
-> 🔗 ׄ ( ᴏ ᴘᴀʀᴄᴇɪʀᴏ ᴘᴏssᴜɪ ʟɪʙᴇʀᴀᴄ̧ᴀ̃ᴏ ɴᴏs sɪsᴛᴇᴍᴀs ᴅᴇ ᴀɴᴛɪ-ʟɪɴᴋ. )`
-}
-
-exports.parceriaRecusada = (numero, motivo = 'Sem motivo informado') => {
-return `- ❌ \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝚁𝙴𝙲𝚄𝚂𝙰𝙳𝙰\`
-
-> 👤 ׄ ( @${String(numero).split('@')[0]} )
-> 📝 ׄ ( ᴍᴏᴛɪᴠᴏ: ${motivo} )`
-}
-
-exports.parceriaRemovida = numero => {
-return `- ❌ \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝚁𝙴𝙼𝙾𝚅𝙸𝙳𝙰\`
-
-> 👤 ׄ ( @${String(numero).split('@')[0]} )
-> 🚫 ׄ ( ᴏ ᴜsᴜᴀ́ʀɪᴏ ɴᴀ̃ᴏ ғᴀᴢ ᴍᴀɪs ᴘᴀʀᴛᴇ ᴅᴀs ᴘᴀʀᴄᴇʀɪᴀs ᴅᴏ ɢʀᴜᴘᴏ. )
-> 🔗 ׄ ( ᴀ ʟɪʙᴇʀᴀᴄ̧ᴀ̃ᴏ ᴅᴇ ᴀɴᴛɪ-ʟɪɴᴋ ғᴏɪ ʀᴇᴍᴏᴠɪᴅᴀ. )`
-}
-
-exports.parceriaSuspensa = numero => {
-return `- ⏸️ \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝚂𝚄𝚂𝙿𝙴𝙽𝚂𝙰\`
-
-> 👤 ׄ ( @${String(numero).split('@')[0]} )
-> ⏸️ ׄ ( ᴀ ᴘᴀʀᴄᴇʀɪᴀ ғᴏɪ sᴜsᴘᴇɴsᴀ ᴛᴇᴍᴘᴏʀᴀʀɪᴀᴍᴇɴᴛᴇ. )
-> 🔗 ׄ ( ᴏ ʙʏᴘᴀss ᴅᴇ ᴀɴᴛɪ-ʟɪɴᴋ ғɪᴄᴀʀᴀ́ ᴅᴇsᴀᴛɪᴠᴀᴅᴏ ᴀᴛᴇ́ ᴀ ʀᴇᴀᴛɪᴠᴀᴄ̧ᴀ̃ᴏ. )`
-}
-
-exports.parceriaReativada = numero => {
-return `- ✅ \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝚁𝙴𝙰𝚃𝙸𝚅𝙰𝙳𝙰\`
-
-> 👤 ׄ ( @${String(numero).split('@')[0]} )
-> 🤝 ׄ ( ᴀ ᴘᴀʀᴄᴇʀɪᴀ ғᴏɪ ʀᴇᴀᴛɪᴠᴀᴅᴀ ᴄᴏᴍ sᴜᴄᴇssᴏ. )
-> 🔗 ׄ ( ᴀ ʟɪʙᴇʀᴀᴄ̧ᴀ̃ᴏ ᴅᴇ ᴀɴᴛɪ-ʟɪɴᴋ ᴠᴏʟᴛᴏᴜ ᴀ ғᴜɴᴄɪᴏɴᴀʀ. )`
-}
-
-exports.parceriaExpirada = (nome, id) => {
-return `- ⏳ \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝙴𝚇𝙿𝙸𝚁𝙰𝙳𝙰\`
-
-> 🤝 ׄ ( ${nome || 'Parceria'} )
-> 🆔 ׄ ( ɪᴅ: ${id || 'N/A'} )
-> ⏳ ׄ ( ᴏ ᴘᴇʀɪ́ᴏᴅᴏ ᴅᴀ ᴘᴀʀᴄᴇʀɪᴀ ᴄʜᴇɢᴏᴜ ᴀᴏ ғɪᴍ. )
-> 🔗 ׄ ( ᴏ ʙʏᴘᴀss ᴅᴇ ᴀɴᴛɪ-ʟɪɴᴋ ғᴏɪ ᴅᴇsᴀᴛɪᴠᴀᴅᴏ. )`
-}
-
-exports.parceriaRenovada = (nome, dias) => {
-const validade = String(dias) === '∞'
-? 'ᴀ ᴘᴀʀᴄᴇʀɪᴀ ᴀɢᴏʀᴀ ᴇ́ ᴘᴇʀᴍᴀɴᴇɴᴛᴇ.'
-: `ᴀ ᴘᴀʀᴄᴇʀɪᴀ ғᴏɪ ʀᴇɴᴏᴠᴀᴅᴀ ᴘᴏʀ ${dias} ᴅɪᴀs.`
-
-return `- 🔄 \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝚁𝙴𝙽𝙾𝚅𝙰𝙳𝙰\`
-
-> 🤝 ׄ ( ${nome || 'Parceria'} )
-> 📅 ׄ ( ${validade} )
-> 🔗 ׄ ( ᴏ ʙʏᴘᴀss ᴅᴇ ᴀɴᴛɪ-ʟɪɴᴋ ᴇsᴛᴀ́ ᴀᴛɪᴠᴏ. )`
-}
-
-exports.parceriaBypassAlterado = (numero, ativo) => {
-return `- 🔗 \`𝙱𝚈𝙿𝙰𝚂𝚂 𝙳𝙴 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 👤 ׄ ( @${String(numero).split('@')[0]} )
-> ${ativo ? '✅' : '❌'} ׄ ( ᴏ ʙʏᴘᴀss ᴅᴇ ᴀɴᴛɪ-ʟɪɴᴋ ғᴏɪ ${ativo ? 'ᴀᴛɪᴠᴀᴅᴏ' : 'ᴅᴇsᴀᴛɪᴠᴀᴅᴏ'}. )`
-}
-
-exports.parceriaNaoEncontrada = () => {
-return `- ❌ \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝙽𝙰̃𝙾 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰\`
-
-> 🔎 ׄ ( ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴇɴᴄᴏɴᴛʀᴀʀ ᴇssᴀ ᴘᴀʀᴄᴇʀɪᴀ. )`
-}
-
-exports.parceriaSemCadastradas = () => {
-return `- 🤝 \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰𝚂\`
-
-> 📭 ׄ ( ɴᴀ̃ᴏ ʜᴀ́ ɴᴇɴʜᴜᴍᴀ ᴘᴀʀᴄᴇʀɪᴀ ᴄᴀᴅᴀsᴛʀᴀᴅᴀ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )`
-}
-
-exports.parceriaLista = (lista, total) => {
-return `- 🤝 \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰𝚂 𝙰𝚃𝙸𝚅𝙰𝚂\`
-
-${lista}
-
-> 📊 ׄ ( ᴛᴏᴛᴀʟ: ${total} )`
-}
-
-exports.parceriaPerfil = ({ id, nome, tipo, responsavel, nivel, status, bypass, validade }) => {
-return `- 🤝 \`𝙿𝙴𝚁𝙵𝙸𝙻 𝙳𝙰 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 🆔 ׄ ( ɪᴅ: ${id || 'N/A'} )
-> 📛 ׄ ( ɴᴏᴍᴇ: ${nome || 'Sem nome'} )
-> 📢 ׄ ( ᴛɪᴘᴏ: ${tipo || 'Não informado'} )
-> 👤 ׄ ( ʀᴇsᴘᴏɴsᴀ́ᴠᴇʟ: @${String(responsavel || '').split('@')[0]} )
-> ⭐ ׄ ( ɴɪ́ᴠᴇʟ: ${nivel || 'Padrão'} )
-> ${status === 'ativo' ? '🟢' : '🔴'} ׄ ( sᴛᴀᴛᴜs: ${status || 'desconhecido'} )
-> ${bypass ? '✅' : '❌'} ׄ ( ᴀɴᴛɪ-ʟɪɴᴋ: ${bypass ? 'ʟɪʙᴇʀᴀᴅᴏ' : 'ʙʟᴏǫᴜᴇᴀᴅᴏ'} )
-> 📅 ׄ ( ᴠᴀʟɪᴅᴀᴅᴇ: ${validade || 'Permanente'} )`
-}
-
-exports.parceriaDivulgacao = ({ nome, tipo, descricao, link }) => {
-return `- 🤝 \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝙾𝙵𝙸𝙲𝙸𝙰𝙻\`
-
-> 📛 ׄ ( ${nome || 'Parceria'} )
-> 📢 ׄ ( ${tipo || 'Parceiro'} )
-> 📝 ׄ ( ${descricao || 'Sem descrição'} )
-> 🔗 ׄ ( ${link || 'Link indisponível'} )`
-}
-
-exports.parceriaSolicitacoes = (lista, total) => {
-return `- 📨 \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙴 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-${lista}
-
-> 📊 ׄ ( ᴘᴇɴᴅᴇɴᴛᴇs: ${total} )`
-}
-
-exports.parceriaRegras = regras => {
-return `- 📜 \`𝚁𝙴𝙶𝚁𝙰𝚂 𝙳𝙴 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-${regras}`
-}
-
-
-exports.parceriaCentral = prefix => {
-return `- 🤝 \`𝙲𝙴𝙽𝚃𝚁𝙰𝙻 𝙳𝙴 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰𝚂\`
-
-> 📨 ׄ ( ${prefix}solicitarparceria ɴᴏᴍᴇ | ᴛɪᴘᴏ | ʟɪɴᴋ | ᴅᴇsᴄʀɪᴄ̧ᴀ̃ᴏ )
-> 🤝 ׄ ( ${prefix}parcerias — ᴠᴇʀ ᴘᴀʀᴄᴇʀɪᴀs ᴀᴛɪᴠᴀs )
-> 👤 ׄ ( ${prefix}minhasparcerias — ᴠᴇʀ sᴜᴀs ᴘᴀʀᴄᴇʀɪᴀs )
-> 🔎 ׄ ( ${prefix}perfilparceria P001 — ᴠᴇʀ ᴘᴇʀғɪʟ )
-> 📢 ׄ ( ${prefix}divulgarparceria P001 — ᴅɪᴠᴜʟɢᴀʀ )
-> 📜 ׄ ( ${prefix}regrasparceria — ᴠᴇʀ ᴀs ʀᴇɢʀᴀs )`
-}
-
-exports.parceriaAddUso = prefix => {
-return `- 🤝 \`𝙰𝙳𝙸𝙲𝙸𝙾𝙽𝙰𝚁 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 👤 ׄ ( ${prefix}addparceria @usuario | ɴᴏᴍᴇ | ᴛɪᴘᴏ | ʟɪɴᴋ | ᴅɪᴀs | ɴɪ́ᴠᴇʟ | ᴅᴇsᴄʀɪᴄ̧ᴀ̃ᴏ )
-> 📅 ׄ ( ᴜsᴇ 0 ᴅɪᴀs ᴘᴀʀᴀ ᴅᴇɪxᴀʀ ᴀ ᴘᴀʀᴄᴇʀɪᴀ ᴘᴇʀᴍᴀɴᴇɴᴛᴇ. )`
-}
-
-exports.parceriaSolicitarUso = prefix => {
-return `- 📨 \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝚁 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 🤝 ׄ ( ${prefix}solicitarparceria ɴᴏᴍᴇ | ᴛɪᴘᴏ | ʟɪɴᴋ | ᴅᴇsᴄʀɪᴄ̧ᴀ̃ᴏ )
-> 💡 ׄ ( ᴇxᴇᴍᴘʟᴏ: ${prefix}solicitarparceria ᴍᴇᴜ ᴄᴀɴᴀʟ | ᴄᴀɴᴀʟ | https://... | ᴅɪᴠᴜʟɢᴀᴄ̧ᴏ̃ᴇs )`
-}
-
-exports.parceriaAprovarUso = prefix => {
-return `- ✅ \`𝙰𝙿𝚁𝙾𝚅𝙰𝚁 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 📨 ׄ ( ${prefix}aprovarparceria S001 30 ᴏғɪᴄɪᴀʟ )
-> 📅 ׄ ( ᴜsᴇ 0 ɴᴏs ᴅɪᴀs ᴘᴀʀᴀ ᴘᴀʀᴄᴇʀɪᴀ ᴘᴇʀᴍᴀɴᴇɴᴛᴇ. )`
-}
-
-exports.parceriaRecusarUso = prefix => {
-return `- ❌ \`𝚁𝙴𝙲𝚄𝚂𝙰𝚁 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 📨 ׄ ( ${prefix}recusarparceria S001 ᴍᴏᴛɪᴠᴏ )`
-}
-
-exports.parceriaRenovarUso = prefix => {
-return `- 🔄 \`𝚁𝙴𝙽𝙾𝚅𝙰𝚁 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 🤝 ׄ ( ${prefix}renovarparceria P001 30 )
-> 📅 ׄ ( ᴜsᴇ 0 ᴘᴀʀᴀ ᴛᴏʀɴᴀʀ ᴀ ᴘᴀʀᴄᴇʀɪᴀ ᴘᴇʀᴍᴀɴᴇɴᴛᴇ. )`
-}
-
-exports.parceriaBypassUso = prefix => {
-return `- 🔗 \`𝙱𝚈𝙿𝙰𝚂𝚂 𝙳𝙴 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> ✅ ׄ ( ${prefix}bypassparceria P001 1 — ᴀᴛɪᴠᴀʀ )
-> ❌ ׄ ( ${prefix}bypassparceria P001 0 — ᴅᴇsᴀᴛɪᴠᴀʀ )`
-}
-
-exports.parceriaTermoUso = (prefix, command) => {
-return `- 🤝 \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 🆔 ׄ ( ${prefix}${command} P001 )
-> 👤 ׄ ( ᴠᴏᴄᴇ̂ ᴛᴀᴍʙᴇ́ᴍ ᴘᴏᴅᴇ ᴍᴀʀᴄᴀʀ ᴏ ʀᴇsᴘᴏɴsᴀ́ᴠᴇʟ. )`
-}
-
-exports.parceriaJaCadastrada = id => {
-return `- ⚠️ \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝙹𝙰́ 𝙲𝙰𝙳𝙰𝚂𝚃𝚁𝙰𝙳𝙰\`
-
-> 🤝 ׄ ( ᴇssᴇ ᴜsᴜᴀ́ʀɪᴏ ᴊᴀ́ ᴘᴏssᴜɪ ᴜᴍᴀ ᴘᴀʀᴄᴇʀɪᴀ ᴀᴛɪᴠᴀ. )
-> 🆔 ׄ ( ɪᴅ: ${id || 'N/A'} )`
-}
-
-exports.parceriaJaSuspensa = () => {
-return `- ⚠️ \`𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰 𝙹𝙰́ 𝚂𝚄𝚂𝙿𝙴𝙽𝚂𝙰\`
-
-> ⏸️ ׄ ( ᴇssᴀ ᴘᴀʀᴄᴇʀɪᴀ ᴊᴀ́ ᴇsᴛᴀ́ sᴜsᴘᴇɴsᴀ. )`
-}
-
-exports.parceriaSolicitacaoJaExiste = id => {
-return `- ⚠️ \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝙿𝙴𝙽𝙳𝙴𝙽𝚃𝙴\`
-
-> 📨 ׄ ( ᴠᴏᴄᴇ̂ ᴊᴀ́ ᴘᴏssᴜɪ ᴜᴍᴀ sᴏʟɪᴄɪᴛᴀᴄ̧ᴀ̃ᴏ ᴀɢᴜᴀʀᴅᴀɴᴅᴏ ᴀɴᴀ́ʟɪsᴇ. )
-> 🆔 ׄ ( ɪᴅ: ${id || 'N/A'} )`
-}
-
-exports.parceriaSolicitacaoNaoEncontrada = () => {
-return `- ❌ \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙰̃𝙾 𝙽𝙰̃𝙾 𝙴𝙽𝙲𝙾𝙽𝚃𝚁𝙰𝙳𝙰\`
-
-> 🔎 ׄ ( ɴᴀ̃ᴏ ғᴏɪ ᴘᴏssɪ́ᴠᴇʟ ᴇɴᴄᴏɴᴛʀᴀʀ ᴇssᴇ ᴘᴇᴅɪᴅᴏ ᴅᴇ ᴘᴀʀᴄᴇʀɪᴀ. )`
-}
-
-exports.parceriaSemSolicitacoes = () => {
-return `- 📨 \`𝚂𝙾𝙻𝙸𝙲𝙸𝚃𝙰𝙲̧𝙾̃𝙴𝚂 𝙳𝙴 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰\`
-
-> 📭 ׄ ( ɴᴀ̃ᴏ ʜᴀ́ sᴏʟɪᴄɪᴛᴀᴄ̧ᴏ̃ᴇs ᴘᴇɴᴅᴇɴᴛᴇs ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )`
-}
-
-exports.parceriaSemMinhas = () => {
-return `- 🤝 \`𝙼𝙸𝙽𝙷𝙰𝚂 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰𝚂\`
-
-> 📭 ׄ ( ᴠᴏᴄᴇ̂ ɴᴀ̃ᴏ ᴘᴏssᴜɪ ɴᴇɴʜᴜᴍᴀ ᴘᴀʀᴄᴇʀɪᴀ ᴄᴀᴅᴀsᴛʀᴀᴅᴀ ɴᴇsᴛᴇ ɢʀᴜᴘᴏ. )`
-}
-
-exports.parceriaMinhas = (lista, total) => {
-return `- 🤝 \`𝙼𝙸𝙽𝙷𝙰𝚂 𝙿𝙰𝚁𝙲𝙴𝚁𝙸𝙰𝚂\`
-
-${lista}
-
-> 📊 ׄ ( ᴛᴏᴛᴀʟ: ${total} )`
-}
-
-exports.parceriaDivulgacaoNegada = () => {
-return `- 🚫 \`𝙳𝙸𝚅𝚄𝙻𝙶𝙰𝙲̧𝙰̃𝙾 𝙱𝙻𝙾𝚀𝚄𝙴𝙰𝙳𝙰\`
-
-> 🤝 ׄ ( ᴀᴘᴇɴᴀs ᴏ ʀᴇsᴘᴏɴsᴀ́ᴠᴇʟ ᴅᴀ ᴘᴀʀᴄᴇʀɪᴀ ᴏᴜ ᴜᴍ ᴀᴅᴍɪɴ ᴘᴏᴅᴇ ᴅɪᴠᴜʟɢᴀʀ. )`
-}
-
-
-// ============================================================
 // MANUTENÇÃO DE COMANDOS
 // ============================================================
 
