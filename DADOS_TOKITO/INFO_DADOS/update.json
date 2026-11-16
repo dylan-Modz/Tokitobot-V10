@@ -4,8 +4,10 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-16T14:57:13.205Z",
+  "publishedAt": "2026-11-16T15:01:57.984Z",
   "changelog": [
+    "Visual do comando inválido renovado no estilo das Informações do Bot: nome do usuário, comando digitado, sugestão, similaridade real e tempo real de busca.",
+    "Mensagem sem sugestão agora orienta a usar #menu; menção do usuário preservada pela resposta do WhatsApp.",
     "Corrigido o monitor que não enviava avisos quando ownerNumber ainda estava com o valor de exemplo.",
     "O aviso tenta o número do dono configurado; se estiver inválido, usa numero_dono1 ou a conta do próprio bot como destino seguro.",
     "Os avisos continuam enviados em texto simples, com tentativas de reenvio e histórico de verificação.",
@@ -26,8 +28,8 @@
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Modo Parceria: limites diários de divulgação",
-  "notice": "Correções da versão 10.3.27: Modo Parceria diário e destinatário de avisos de atualização.",
+  "title": "Sugestão de comando: novo visual",
+  "notice": "Correção na versão 10.3.27: novo design do aviso de comando inválido.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -100,14 +102,20 @@
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
       "sha256": "",
-      "size": 229950,
-      "gitSha": "ac926075cc7499b2a07afa28225a231cf8a49874"
+      "size": 230629,
+      "gitSha": "24be027fc6dc3615778fa22a749b6e3228667e01"
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
       "sha256": "",
       "size": 79786,
       "gitSha": "4ce8cdba4102b893e03be02dad8fa4ae2ae7894a"
+    },
+    {
+      "path": "tokito.js",
+      "sha256": "",
+      "size": 54970,
+      "gitSha": "473c2654fc481c7f507a89fed4a8d22794e764f9"
     }
   ],
   "releases": [
@@ -4334,9 +4342,11 @@
       "fromVersion": "10.3.26",
       "channel": "stable",
       "type": "Melhoria",
-      "title": "Modo Parceria: limites diários de divulgação",
-      "notice": "Correções da versão 10.3.27: Modo Parceria diário e destinatário de avisos de atualização.",
+      "title": "Sugestão de comando: novo visual",
+      "notice": "Correção na versão 10.3.27: novo design do aviso de comando inválido.",
       "changelog": [
+        "Visual do comando inválido renovado no estilo das Informações do Bot: nome do usuário, comando digitado, sugestão, similaridade real e tempo real de busca.",
+        "Mensagem sem sugestão agora orienta a usar #menu; menção do usuário preservada pela resposta do WhatsApp.",
         "Corrigido o monitor que não enviava avisos quando ownerNumber ainda estava com o valor de exemplo.",
         "O aviso tenta o número do dono configurado; se estiver inválido, usa numero_dono1 ou a conta do próprio bot como destino seguro.",
         "Os avisos continuam enviados em texto simples, com tentativas de reenvio e histórico de verificação.",
@@ -4424,19 +4434,25 @@
         {
           "path": "DADOS_TOKITO/mensagens/mensagens.js",
           "sha256": "",
-          "size": 229950,
-          "gitSha": "ac926075cc7499b2a07afa28225a231cf8a49874"
+          "size": 230629,
+          "gitSha": "24be027fc6dc3615778fa22a749b6e3228667e01"
         },
         {
           "path": "DADOS_TOKITO/mensagens/menus.js",
           "sha256": "",
           "size": 79786,
           "gitSha": "4ce8cdba4102b893e03be02dad8fa4ae2ae7894a"
+        },
+        {
+          "path": "tokito.js",
+          "sha256": "",
+          "size": 54970,
+          "gitSha": "473c2654fc481c7f507a89fed4a8d22794e764f9"
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-16T14:57:13.205Z"
+      "publishedAt": "2026-11-16T15:01:57.984Z"
     }
   ],
   "mode": "incremental",
