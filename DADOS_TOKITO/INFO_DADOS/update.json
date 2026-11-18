@@ -1,69 +1,54 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.33",
+  "version": "10.3.34",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-18T17:51:00.303Z",
+  "publishedAt": "2026-11-18T17:52:30.497Z",
   "changelog": [
-    "[Novidade] feat: mensagens de assinatura Tokito APIs no padrão visual original",
-    "A versão 10.3.33 já está disponível para atualização.",
-    "Mensagens atualizado",
-    "Planosite atualizado"
+    "[Melhoria] release: Tokito Bot V10.3.30 — planos Tokito APIs no WhatsApp",
+    "A versão 10.3.34 já está disponível para atualização.",
+    "Conexão do bot atualizada",
+    "Plans atualizado",
+    "Ui atualizado",
+    "Package atualizado",
+    "Arquivo principal do bot atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "feat: mensagens de assinatura Tokito APIs no padrão visual original",
-  "notice": "A versão 10.3.33 já está disponível para atualização.",
+  "type": "Melhoria",
+  "title": "release: Tokito Bot V10.3.30 — planos Tokito APIs no WhatsApp",
+  "notice": "A versão 10.3.34 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "2934184eb84d5c2872bf973343b859f05945ad6e474065f8d315ed4162b1b901",
-      "size": 233378
+      "path": "DADOS_TOKITO/connect.js",
+      "sha256": "fece78719accf44827f4d17362f01546e554804dd31a7264ca5bda3bdc4d0a1c",
+      "size": 50401
     },
     {
-      "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
-      "sha256": "1f67287d28ec305ad2795b80be76da27c5cd2ce564d8828519f2311f49736d1b",
-      "size": 3131
+      "path": "DADOS_TOKITO/plugins/aluguel/plans.js",
+      "sha256": "a34edd5c6716058955929bef53d2a6a9d7aa424e0237c4ad873afd9bf9d5f73b",
+      "size": 6675
+    },
+    {
+      "path": "DADOS_TOKITO/sub/ui.js",
+      "sha256": "5425f636f77d2e9eda57578aa1df670c9b1c857e80219e034fa6b05e86498dd1",
+      "size": 16303
+    },
+    {
+      "path": "package.json",
+      "sha256": "1b44e89f616485c5fd8e091632ade6db2f33bcc852271561eceba992c79f63ec",
+      "size": 1889
+    },
+    {
+      "path": "tokito.js",
+      "sha256": "3d2ca236cde3e5490a35e097c70abe303e5f7df1b9e41d2da4131749ee625d7f",
+      "size": 55022
     }
   ],
   "releases": [
-    {
-      "version": "10.2.35",
-      "fromVersion": "10.2.34",
-      "type": "Novidade",
-      "channel": "stable",
-      "title": "As cinco imagens da batalha Pokémon",
-      "notice": "Desafio, turnos, golpe especial, narração e virada épica com imagens próprias.",
-      "changelog": [
-        "[Pokémon] Integradas cinco imagens temáticas ao batalhapokemon, conforme as ideias originais: desafio, batalha por turnos, golpes especiais, narração e virada épica.",
-        "[Pokémon] Substituído o link quebrado da segunda imagem por uma tela clássica de batalha Pokémon com opções Fight, Bag, Pokémon e Run.",
-        "[Pokémon] Convites exibem arte de desafio junto dos botões Aceitar/Recusar; rodada interativa mostra a tela de golpes; ataques especiais e viradas usam artes próprias; narração usa arte de treinador.",
-        "[Estabilidade] Se o site de uma imagem falhar, tenta a arte do Pokémon participante do PokeAPI e mantém os botões e os textos de RPG.",
-        "[Integridade] Release com Git blob SHA e SHA-256 verificados para 3 arquivos; recompensas, HP e botões mantidos.",
-        "[Compatibilidade] Os links das imagens são instalados pelo caminho permitido na versão 10.2.36; o caminho protegido de LOGOS não participa das atualizações."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-          "gitSha": "d34ab57b29f1226f04f9c70a03621c937be48eb5",
-          "sha256": "80d0650ada33d08e040f4938b30e09dfeb5adccf013e10de57f24239679e17a4",
-          "size": 24697
-        },
-        {
-          "path": "package.json",
-          "gitSha": "dff0c6297da323cbd3f5a470567183ce971cf326",
-          "sha256": "a58f74da92bc01896b4abfe8a22b8393a90664a5fab947481b52324f8ee6eb5d",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-13T12:41:09.134Z"
-    },
     {
       "version": "10.2.36",
       "fromVersion": "10.2.35",
@@ -4390,6 +4375,51 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-18T17:51:00.302Z"
+    },
+    {
+      "version": "10.3.34",
+      "fromVersion": "10.3.33",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "release: Tokito Bot V10.3.30 — planos Tokito APIs no WhatsApp",
+      "notice": "A versão 10.3.34 já está disponível para atualização.",
+      "changelog": [
+        "Conexão do bot atualizada",
+        "Plans atualizado",
+        "Ui atualizado",
+        "Package atualizado",
+        "Arquivo principal do bot atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "sha256": "fece78719accf44827f4d17362f01546e554804dd31a7264ca5bda3bdc4d0a1c",
+          "size": 50401
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/plans.js",
+          "sha256": "a34edd5c6716058955929bef53d2a6a9d7aa424e0237c4ad873afd9bf9d5f73b",
+          "size": 6675
+        },
+        {
+          "path": "DADOS_TOKITO/sub/ui.js",
+          "sha256": "5425f636f77d2e9eda57578aa1df670c9b1c857e80219e034fa6b05e86498dd1",
+          "size": 16303
+        },
+        {
+          "path": "package.json",
+          "sha256": "1b44e89f616485c5fd8e091632ade6db2f33bcc852271561eceba992c79f63ec",
+          "size": 1889
+        },
+        {
+          "path": "tokito.js",
+          "sha256": "3d2ca236cde3e5490a35e097c70abe303e5f7df1b9e41d2da4131749ee625d7f",
+          "size": 55022
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-18T17:52:30.496Z"
     }
   ],
   "mode": "incremental",
