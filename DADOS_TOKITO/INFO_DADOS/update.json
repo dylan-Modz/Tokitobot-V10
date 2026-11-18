@@ -22,12 +22,14 @@
     {
       "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
       "sha256": "5e4b73f04f6b77467c60d325474c954b9546e2236b2d6ba6de6518836b27abb8",
-      "size": 1949
+      "size": 1949,
+      "gitSha": "e61ab2b4bceb0feecf6ac53af252329436ef591d"
     },
     {
       "path": "DADOS_TOKITO/sistemas/planos-site.js",
       "sha256": "d8b4742f903544d779eaaa78efa200a4f1f75232576aca9ab21413ef46521001",
-      "size": 7161
+      "size": 7161,
+      "gitSha": "9aecd08a021c5118897bd420ebcb74d32d3fc336"
     }
   ],
   "releases": [
@@ -4384,12 +4386,14 @@
         {
           "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
           "sha256": "5e4b73f04f6b77467c60d325474c954b9546e2236b2d6ba6de6518836b27abb8",
-          "size": 1949
+          "size": 1949,
+          "gitSha": "e61ab2b4bceb0feecf6ac53af252329436ef591d"
         },
         {
           "path": "DADOS_TOKITO/sistemas/planos-site.js",
           "sha256": "d8b4742f903544d779eaaa78efa200a4f1f75232576aca9ab21413ef46521001",
-          "size": 7161
+          "size": 7161,
+          "gitSha": "9aecd08a021c5118897bd420ebcb74d32d3fc336"
         }
       ],
       "delete": [],
