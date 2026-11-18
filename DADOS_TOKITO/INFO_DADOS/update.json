@@ -1,84 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.35",
+  "version": "10.3.36",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-18T17:58:04.535Z",
+  "publishedAt": "2026-11-18T18:08:56.985Z",
   "changelog": [
-    "[Correção] fix: planos do site usam token já configurado, sem vinculação extra",
-    "A versão 10.3.35 já está disponível para atualização.",
-    "Mensagens atualizado",
+    "[Correção] fix: link de pagamento abre checkout do plano e escolha do gateway",
+    "A versão 10.3.36 já está disponível para atualização.",
     "Planosite atualizado",
     "Planos Site atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: planos do site usam token já configurado, sem vinculação extra",
-  "notice": "A versão 10.3.35 já está disponível para atualização.",
+  "title": "fix: link de pagamento abre checkout do plano e escolha do gateway",
+  "notice": "A versão 10.3.36 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "sha256": "7e4c3016c299bd2051e7c6de087d5599b1da6078438b5be620b8e1de1ebe5aca",
-      "size": 232855,
-      "gitSha": "d14b18992c1bd1ed209f46b6635a6560430f07a8"
-    },
-    {
       "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
-      "sha256": "c75609f52815c178b6184aa5ab6bc9d75187dce90f915971cbad8f27275bd31c",
-      "size": 2308,
-      "gitSha": "899a1a6414d0370f84069a76f5e05bfdd9b80d29"
+      "sha256": "5e4b73f04f6b77467c60d325474c954b9546e2236b2d6ba6de6518836b27abb8",
+      "size": 1949
     },
     {
       "path": "DADOS_TOKITO/sistemas/planos-site.js",
-      "sha256": "21f304f61c8493098ef3f0879050dd20cf9be3591acd702469e537e85043bcfe",
-      "size": 7296,
-      "gitSha": "454653835f938fa36c8f5a52d1c4868f2c4172bd"
+      "sha256": "d8b4742f903544d779eaaa78efa200a4f1f75232576aca9ab21413ef46521001",
+      "size": 7161
     }
   ],
   "releases": [
-    {
-      "version": "10.2.37",
-      "fromVersion": "10.2.36",
-      "type": "Melhoria",
-      "channel": "stable",
-      "title": "Bateria HP desenhada e golpes individuais Pokémon",
-      "notice": "Bateria de HP desenhada e ataques conforme os golpes aprendidos de cada Pokémon.",
-      "changelog": [
-        "[Pokémon] Barra de vida redesenhada como bateria com contorno, conector lateral, 10 segmentos de carga e indicador verde/amarelo/vermelho; exibe HP real.",
-        "[Pokémon] Batalha usa os golpes aprendidos e armazenados na coleção de cada Pokémon (incluindo golpes obtidos por TM), em vez de escolher o mesmo especial só pelo tipo.",
-        "[Pokémon] Botões no design do play mostram os dois nomes de golpes daquele Pokémon, com emojis associados ao tipo do golpe, além de Defender e Poção.",
-        "[Pokémon] Golpes iniciais adaptados por espécie para 200 Pokémon, com configurações específicas de Pikachu, Sandshrew, Weepinbell, Charizard e outras espécies populares.",
-        "[Compatibilidade] Migração controlada dos golpes genéricos automáticos antigos; não substitui listas personalizadas com ataques aprendidos pelo treinador.",
-        "[RPG] Dano e vantagem de tipo calculados com o tipo real do golpe executado; recompensas, botões interativos e as cinco imagens temáticas permanecem."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-          "gitSha": "f1173b1df6306d8652cd7ea25c751cfa19d04c08",
-          "sha256": "cf56dfe9b0908bf1b78b50c695510a1e718827c8c90651b3bcc5869b1f72a1c5",
-          "size": 28433
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/pokemon-core.js",
-          "gitSha": "8cdb012d8baaa096b2adfc11e40bfbb18d1bc5e7",
-          "sha256": "0670c5f16bc598f20d03f2303e95c7bbaf1434577153efacc9511c6966eb2add",
-          "size": 20640
-        },
-        {
-          "path": "package.json",
-          "gitSha": "db0cfd543012ccef57f7f00291e58d33bfc7c531",
-          "sha256": "9ffbd40dfa81abbfb11bc38b60679acadddc498f23ba33fb50e743135c771648",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-13T13:05:57.246Z"
-    },
     {
       "version": "10.2.38",
       "fromVersion": "10.2.37",
@@ -4416,6 +4368,33 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-18T17:58:04.534Z"
+    },
+    {
+      "version": "10.3.36",
+      "fromVersion": "10.3.35",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: link de pagamento abre checkout do plano e escolha do gateway",
+      "notice": "A versão 10.3.36 já está disponível para atualização.",
+      "changelog": [
+        "Planosite atualizado",
+        "Planos Site atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
+          "sha256": "5e4b73f04f6b77467c60d325474c954b9546e2236b2d6ba6de6518836b27abb8",
+          "size": 1949
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/planos-site.js",
+          "sha256": "d8b4742f903544d779eaaa78efa200a4f1f75232576aca9ab21413ef46521001",
+          "size": 7161
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-18T18:08:56.983Z"
     }
   ],
   "mode": "incremental",
