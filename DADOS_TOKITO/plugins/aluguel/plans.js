@@ -29,6 +29,7 @@
  */
 
 const aluguel = require('../../sistemas/aluguel/index')
+const subSistema = require('../../sub')
 
 const moeda = valor => Number(valor || 0).toFixed(2).replace('.', ',')
 
@@ -85,7 +86,10 @@ dylan.setCommand({
   async executar(ctx) {
     const entrada = String(ctx.q || '').trim(), planos = lerPlanos()
 
-    if (!entrada) return ctx.reply(painel(ctx, planos))
+    if (!entrada) {
+      if (ctx.command === 'planos') return subSistema.ui.enviarLoja(ctx, planos)
+      return ctx.reply(painel(ctx, planos))
+    }
     if (!ctx.SoDono) return ctx.reply(ctx.mess.onlyOwner())
 
     const partes = entrada.split(/\s+/), acao = String(partes.shift() || '').toLowerCase()
