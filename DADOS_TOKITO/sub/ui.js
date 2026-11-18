@@ -3,6 +3,7 @@ const path = require('path')
 const { proto, prepareWAMessageMedia, generateWAMessageFromContent, jidNormalizedUser } = require('@stone-wpp/ofc')
 const runtime = require('./runtime')
 const store = require('./store')
+const planosSite = require('../sistemas/planos-site')
 
 const moeda = value => Number(value || 0).toFixed(2).replace('.', ',')
 const dataBR = value => {
@@ -96,7 +97,7 @@ const lojaTexto = (ctx, planosGrupo = []) => {
     `> 『 \`${store.plans.length + i + 1}°\` 』— 👥 ${p.nome || `Plano ${i + 1}`} — R$ ${moeda(p.preco)} • ${Number(p.dias || 0)} dias`
   ).join('\n') || '> • ׄ ( Nenhum plano de grupo cadastrado no momento. )'
 
-  return `- 🛒 \`𝙻𝙾𝙹𝙰 𝚃𝙾𝙺𝙸𝚃𝙾\`\n\n- 🤖 \`𝚂𝚄𝙱 𝙱𝙾𝚃\`\n\n${subs}\n\n> • ׄ ( R$ 1,00 por dia. )\n> • ׄ ( Use ${ctx.prefix}sub dias para contratar. )\n\n- 👥 \`𝙰𝙻𝚄𝙶𝚄𝙴𝙻 𝙴𝙼 𝙶𝚁𝚄𝙿𝙾\`\n\n${grupos}\n\n> • ׄ ( Para grupo, use ${ctx.prefix}alugarbot link-do-grupo. )`
+  return `- 🛒 \`𝙻𝙾𝙹𝙰 𝚃𝙾𝙺𝙸𝚃𝙾\`\n\n- 🤖 \`𝚂𝚄𝙱 𝙱𝙾𝚃\`\n\n${subs}\n\n> • ׄ ( R$ 1,00 por dia. )\n> • ׄ ( Use ${ctx.prefix}sub dias para contratar. )\n\n- 👥 \`𝙰𝙻𝚄𝙶𝚄𝙴𝙻 𝙴𝙼 𝙶𝚁𝚄𝙿𝙾\`\n\n${grupos}\n\n> • ׄ ( Para grupo, use ${ctx.prefix}alugarbot link-do-grupo. )\n\n- 💎 \`𝙿𝙻𝙰𝙽𝙾𝚂 𝚃𝙾𝙺𝙸𝚃𝙾 𝙰𝙿𝙸𝚂\`\n\n> • ׄ ( Contrate ou renove pelo ${ctx.prefix}planosite. )`
 }
 
 const enviarLoja = async (ctx, planosGrupo = []) => {
@@ -113,6 +114,22 @@ const enviarLoja = async (ctx, planosGrupo = []) => {
       description: `${Number(p.dias || 0)} dias • aluguel do Tokito dentro do seu grupo.`,
       id: `${ctx.prefix}alugarbot`
     }))
+
+    let apiRows = []
+    try {
+      const itens = await planosSite.planos()
+      apiRows = planosSite.formatos(itens).map(item => ({
+        title: item.title, description: item.description,
+        id: `${ctx.prefix}planosite ${item.id}`
+      }))
+    } catch (_) {
+      // Sem integração configurada, o card mantém o acesso às informações do site.
+    }
+    if (!apiRows.length) apiRows = [{
+      title: '💎 Consultar Tokito APIs',
+      description: 'Ver planos e opções para contratar ou renovar.',
+      id: `${ctx.prefix}planosite`
+    }]
 
     const mkCard = (body, title, rows) => {
       const card = {
@@ -151,6 +168,11 @@ const enviarLoja = async (ctx, planosGrupo = []) => {
           `- 👥 \`𝙰𝙻𝚄𝙶𝚄𝙴𝙻 𝙴𝙼 𝙶𝚁𝚄𝙿𝙾\`\n\n> 🏠 ׄ ( O Tokito principal entra no seu grupo. )\n> 📦 ׄ ( Os planos abaixo usam o sistema de aluguel já cadastrado. )\n> 🔗 ׄ ( Depois envie o link do grupo. )`,
           '👥 Ver planos de grupo',
           grupoRows
+        ),
+        mkCard(
+          '- 💎 `𝙿𝙻𝙰𝙽𝙾𝚂 𝚃𝙾𝙺𝙸𝚃𝙾 𝙰𝙿𝙸𝚂`\n\n> 🌐 ׄ ( Contrate ou renove seu plano do site diretamente pelo bot. )\n> 💳 ׄ ( O pagamento é feito no checkout seguro da Tokito APIs. )\n> 🔔 ׄ ( Avisos no privado somente para faturas ainda pendentes. )',
+          '💎 Escolher plano Tokito APIs',
+          apiRows
         )
       ]
     }
