@@ -1,75 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.31",
+  "version": "10.3.32",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-16T16:54:44.331Z",
+  "publishedAt": "2026-11-18T17:49:41.593Z",
   "changelog": [
-    "Corrigido o manifesto de integridade para instalar o TikTok Search sem erro de hash.",
-    "Arquivos históricos 10.3.29 e 10.3.30 vinculados aos blobs imutáveis do GitHub.",
-    "Mantida a verificação SHA-256, sem desativar a segurança do atualizador."
+    "[Novidade] feat: integração de checkout Tokito APIs e avisos WhatsApp",
+    "A versão 10.3.32 já está disponível para atualização.",
+    "Planos Site atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Correção da integridade do TikTok Search",
-  "notice": "Corrigida a verificação de integridade dos arquivos do TikTok Search.",
+  "type": "Novidade",
+  "title": "feat: integração de checkout Tokito APIs e avisos WhatsApp",
+  "notice": "A versão 10.3.32 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/downloads/tiktoksearch.js",
-      "sha256": "1d971d2da453ca800fae003854113f9c9b2fa24046298dd28ee615330cdd3612",
-      "size": 5768,
-      "gitSha": "ee630c17b1e9a2915689139af2e510b08c6a3415"
-    },
-    {
-      "path": "DADOS_TOKITO/scrapers/downloads/tiktoksearch.js",
-      "sha256": "4e376b0af181e66182dfc80431651433c3a75795f4dad892eb0820e2f6a81f4d",
-      "size": 4672,
-      "gitSha": "82c9797ce744307dc249727c69b2da8ef465e8b0"
-    },
-    {
-      "path": "package.json",
-      "sha256": "5ce798874bab89c736bc65cd1294eeadb7d6ec22e2ad38994be645067f51f78e",
-      "size": 1889,
-      "gitSha": "fc382a81403f31bb3a16d9970a093b8eb9d082c3"
+      "path": "DADOS_TOKITO/sistemas/planos-site.js",
+      "sha256": "57de9de32dfaeda900b56d5bf547055d711979e40d1c3352209c519b3874e082",
+      "size": 6358
     }
   ],
   "releases": [
-    {
-      "version": "10.2.33",
-      "fromVersion": "10.2.32",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Design da batalha Pokémon padronizado",
-      "notice": "Batalhas interativas com o visual e resultado padrão dos demais comandos Pokémon.",
-      "changelog": [
-        "[Pokémon] Design do comando batalhapokemon padronizado com o mesmo compacto e fonte estilizada dos outros comandos de RPG Pokémon.",
-        "[Pokémon] Resultado final voltou ao painel 'Batalha Pokémon' com Pokémon versus Pokémon, vencedor, derrotado, HP, XP e N-Coins como no resultado tradicional.",
-        "[Pokémon] Desafio, início da batalha, rodadas, narração e recusa agora usam os títulos estilizados do RPG.",
-        "[Botões] Mantidos os botões nativos do tipo play: aceitar, recusar, golpe especial, ataque, defender e poção; rodadas continuam interativas.",
-        "[Integridade] SHA-256 e identificador Git imutável conferidos para os dois arquivos alterados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-          "gitSha": "4b0e020e19efdbe745ca228d79aeaa09a4702a19",
-          "sha256": "5e1a96c9d91e961a9cba90741e8b331d84d33747fc3d90561040180032d45985",
-          "size": 22287
-        },
-        {
-          "path": "package.json",
-          "gitSha": "14f659f24972ae26557271191c93698409cb4f87",
-          "sha256": "63ee4d3dac31156f3fff3c48a37f3b000fd00435e2c1faabf172dbe4e710f737",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-13T12:19:12.451Z"
-    },
     {
       "version": "10.2.34",
       "fromVersion": "10.2.33",
@@ -4414,6 +4369,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-16T16:54:44.329Z"
+    },
+    {
+      "version": "10.3.32",
+      "fromVersion": "10.3.31",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: integração de checkout Tokito APIs e avisos WhatsApp",
+      "notice": "A versão 10.3.32 já está disponível para atualização.",
+      "changelog": [
+        "Planos Site atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/planos-site.js",
+          "sha256": "57de9de32dfaeda900b56d5bf547055d711979e40d1c3352209c519b3874e082",
+          "size": 6358
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-18T17:49:41.592Z"
     }
   ],
   "mode": "incremental",
