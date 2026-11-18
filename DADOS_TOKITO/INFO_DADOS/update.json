@@ -23,17 +23,20 @@
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
       "sha256": "7e4c3016c299bd2051e7c6de087d5599b1da6078438b5be620b8e1de1ebe5aca",
-      "size": 232855
+      "size": 232855,
+      "gitSha": "d14b18992c1bd1ed209f46b6635a6560430f07a8"
     },
     {
       "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
       "sha256": "c75609f52815c178b6184aa5ab6bc9d75187dce90f915971cbad8f27275bd31c",
-      "size": 2308
+      "size": 2308,
+      "gitSha": "899a1a6414d0370f84069a76f5e05bfdd9b80d29"
     },
     {
       "path": "DADOS_TOKITO/sistemas/planos-site.js",
       "sha256": "21f304f61c8493098ef3f0879050dd20cf9be3591acd702469e537e85043bcfe",
-      "size": 7296
+      "size": 7296,
+      "gitSha": "454653835f938fa36c8f5a52d1c4868f2c4172bd"
     }
   ],
   "releases": [
@@ -4291,7 +4294,8 @@
         {
           "path": "DADOS_TOKITO/sistemas/planos-site.js",
           "sha256": "57de9de32dfaeda900b56d5bf547055d711979e40d1c3352209c519b3874e082",
-          "size": 6358
+          "size": 6358,
+          "gitSha": "3f80c0f4fc1747bcce9295c912fb613aa530ce48"
         }
       ],
       "delete": [],
@@ -4313,12 +4317,14 @@
         {
           "path": "DADOS_TOKITO/mensagens/mensagens.js",
           "sha256": "2934184eb84d5c2872bf973343b859f05945ad6e474065f8d315ed4162b1b901",
-          "size": 233378
+          "size": 233378,
+          "gitSha": "3931836427c6a8d1030fc3e0ac9b67542532ab4f"
         },
         {
           "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
           "sha256": "1f67287d28ec305ad2795b80be76da27c5cd2ce564d8828519f2311f49736d1b",
-          "size": 3131
+          "size": 3131,
+          "gitSha": "e51e26b899fd061fe635fe170d0130ad22fcd710"
         }
       ],
       "delete": [],
@@ -4343,27 +4349,32 @@
         {
           "path": "DADOS_TOKITO/connect.js",
           "sha256": "fece78719accf44827f4d17362f01546e554804dd31a7264ca5bda3bdc4d0a1c",
-          "size": 50401
+          "size": 50401,
+          "gitSha": "70fa7b33f4d2a364f04768704519bc8af0b2eab1"
         },
         {
           "path": "DADOS_TOKITO/plugins/aluguel/plans.js",
           "sha256": "a34edd5c6716058955929bef53d2a6a9d7aa424e0237c4ad873afd9bf9d5f73b",
-          "size": 6675
+          "size": 6675,
+          "gitSha": "b658408db28877b20913d149704b424982d39cd4"
         },
         {
           "path": "DADOS_TOKITO/sub/ui.js",
           "sha256": "5425f636f77d2e9eda57578aa1df670c9b1c857e80219e034fa6b05e86498dd1",
-          "size": 16303
+          "size": 16303,
+          "gitSha": "42b997a8cba252da8f10b7b7ae9f21168d7f4711"
         },
         {
           "path": "package.json",
           "sha256": "1b44e89f616485c5fd8e091632ade6db2f33bcc852271561eceba992c79f63ec",
-          "size": 1889
+          "size": 1889,
+          "gitSha": "39f284c32763a0c567cf93531a497568e53b1948"
         },
         {
           "path": "tokito.js",
           "sha256": "3d2ca236cde3e5490a35e097c70abe303e5f7df1b9e41d2da4131749ee625d7f",
-          "size": 55022
+          "size": 55022,
+          "gitSha": "cd25618fcc92a66a56a1200e9b149f7fa0652f2b"
         }
       ],
       "delete": [],
@@ -4386,17 +4397,20 @@
         {
           "path": "DADOS_TOKITO/mensagens/mensagens.js",
           "sha256": "7e4c3016c299bd2051e7c6de087d5599b1da6078438b5be620b8e1de1ebe5aca",
-          "size": 232855
+          "size": 232855,
+          "gitSha": "d14b18992c1bd1ed209f46b6635a6560430f07a8"
         },
         {
           "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
           "sha256": "c75609f52815c178b6184aa5ab6bc9d75187dce90f915971cbad8f27275bd31c",
-          "size": 2308
+          "size": 2308,
+          "gitSha": "899a1a6414d0370f84069a76f5e05bfdd9b80d29"
         },
         {
           "path": "DADOS_TOKITO/sistemas/planos-site.js",
           "sha256": "21f304f61c8493098ef3f0879050dd20cf9be3591acd702469e537e85043bcfe",
-          "size": 7296
+          "size": 7296,
+          "gitSha": "454653835f938fa36c8f5a52d1c4868f2c4172bd"
         }
       ],
       "delete": [],
