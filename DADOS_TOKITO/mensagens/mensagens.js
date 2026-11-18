@@ -5348,14 +5348,9 @@ exports.sitePlanoIndisponivel = () => tituloPlanoSite('⚠️', '𝙿𝙻𝙰�
   '\n\n> 🌐 ׄ ( Consulte os planos em https://tokito-apis.com.br/painel/planos. )\n> ⏳ ׄ ( A integração direta de pagamentos pode estar temporariamente indisponível. )';
 exports.sitePlanoErro = descricao => tituloPlanoSite('❌', '𝙵𝙰𝙻𝙷𝙰 𝙽𝙾𝚂 𝙿𝙻𝙰𝙽𝙾𝚂') +
   '\n\n> ⚠️ ׄ ( ' + String(descricao || 'Tente novamente.').replace(/[\r\n]+/g, ' ').slice(0, 180) + ' )';
-exports.sitePlanoVincular = prefix => tituloPlanoSite('🔗', '𝚅𝙸𝙽𝙲𝚄𝙻𝙰𝚁 𝚂𝚄𝙰 𝙲𝙾𝙽𝚃𝙰') +
-  '\n\n> 💎 ׄ ( Vincule uma vez seu WhatsApp à conta da Tokito APIs. )' +
-  '\n> 🔐 ׄ ( Entre no site, copie o código e envie no privado: ' + String(prefix || '#') + 'vincularsite CODIGO. )' +
-  '\n> 🛡️ ׄ ( Não compartilhe o código com ninguém. )';
-exports.sitePlanoVinculado = conta => tituloPlanoSite('✅', '𝙲𝙾𝙽𝚃𝙰 𝚅𝙸𝙽𝙲𝚄𝙻𝙰𝙳𝙰') +
-  '\n\n> 👤 ׄ ( ' + String(conta?.nome || 'Usuário').replace(/[\r\n]+/g, ' ') + ' — conta da Tokito APIs. )' +
-  '\n> 💎 ׄ ( ' + String(conta?.plan?.nome || 'Sem plano').replace(/[\r\n]+/g, ' ') + ' — plano atual. )' +
-  '\n> 🔔 ׄ ( Avisos de vencimento habilitados neste privado. )';
+exports.sitePlanoSiteExterno = () => tituloPlanoSite('💎', '𝙿𝙻𝙰𝙽𝙾𝚂 𝚃𝙾𝙺𝙸𝚃𝙾 𝙰𝙿𝙸𝚂') +
+  '\n\n> 🌐 ׄ ( Entre na sua conta da Tokito APIs para contratar ou renovar. )' +
+  '\n> 🔒 ׄ ( O pagamento é feito diretamente no checkout seguro do site. )';
 exports.sitePlanoCheckout = dados => tituloPlanoSite('💳', '𝙿𝙰𝙶𝙰𝙼𝙴𝙽𝚃𝙾 𝙳𝙾 𝙿𝙻𝙰𝙽𝙾') +
   '\n\n> 💎 ׄ ( ' + String(dados?.nome || 'Tokito APIs').replace(/[\r\n]+/g, ' ') + ' — plano escolhido. )' +
   '\n> 💸 ׄ ( R$ ' + String(dados?.preco || '0,00') + ' — valor. )' +

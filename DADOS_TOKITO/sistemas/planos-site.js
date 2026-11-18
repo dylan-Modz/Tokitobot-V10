@@ -2,54 +2,65 @@
 
 const axios = require('axios');
 const { proto, generateWAMessageFromContent } = require('@stone-wpp/ofc');
+const runtime = require('../sub/runtime');
 const mensagens = require('../mensagens/mensagens.js');
 
-const secret = () => String(process.env.TOKITO_BOT_BRIDGE_SECRET || '').trim();
+// Reutiliza a chave de API já configurada no bot, sem variáveis/credenciais extras.
+const token = () => {
+  const value = String(runtime.config().API_KEY_TOKITO || '').trim();
+  return value && !/^(TOKEN_API_TOKITO|SUA_CHAVE|API_KEY|TOKEN)$/i.test(value) ? value : '';
+};
 const origem = () => {
-  const raw = String(process.env.TOKITO_BOT_BRIDGE_URL || 'https://tokito-apis.com.br').replace(/\/+$/, '');
-  const url = new URL(raw);
-  if (url.protocol !== 'https:') throw new Error('A integração com o site exige HTTPS.');
+  const url = new URL(String(runtime.config().API_URL || 'https://tokito-apis.com.br').replace(/\/+$/, ''));
+  if (url.protocol !== 'https:') throw new Error('A Tokito APIs exige HTTPS.');
   return url.origin;
 };
-const configurado = () => secret().length >= 24;
-const numero = jid => {
-  const address = String(jid || '').trim().toLowerCase();
-  if (!address.endsWith('@s.whatsapp.net')) return '';
-  const digits = address.split('@')[0].split(':')[0];
+const configurado = () => !!token();
+const numero = value => {
+  const address = String(value || '').trim();
+  if (address.includes('@') && !address.endsWith('@s.whatsapp.net')) return '';
+  let digits = address.split('@')[0].split(':')[0].replace(/\D/g, '');
+  if (/^\d{10,11}$/.test(digits) && !digits.startsWith('55')) digits = '55' + digits;
   return /^[1-9]\d{10,14}$/.test(digits) ? digits : '';
 };
+const ehDonoDaConta = sender => {
+  const owner = numero(runtime.config().ownerNumber || '');
+  return !!owner && owner === numero(sender);
+};
+const numeroDono = () => numero(runtime.config().ownerNumber || '');
 const dinheiro = value => Number(value || 0).toFixed(2).replace('.', ',');
+const confereTelefone = (conta, dono = numeroDono()) =>
+  !conta?.telefoneConta || numero(conta.telefoneConta) === dono;
 
 async function pedir(method, path, data) {
-  if (!configurado()) throw new Error('A integração de planos ainda não foi configurada pelo proprietário.');
+  const apikey = token();
+  if (!apikey) throw new Error('Configure o token da Tokito APIs no bot.');
   try {
     const response = await axios({
-      method, url: origem() + '/api/tokito-bot/' + path,
+      method,
+      url: origem() + '/api/tokito-bot/' + path,
       ...(method === 'GET' ? { params: data || {} } : { data: data || {} }),
-      headers: { Authorization: 'Bearer ' + secret() },
-      timeout: 12000, maxRedirects: 0,
+      headers: { Authorization: 'Bearer ' + apikey },
+      timeout: 12000,
+      maxRedirects: 0,
       validateStatus: status => status >= 200 && status < 300
     });
     return response.data || {};
   } catch (error) {
-    // Nunca exibir tokens, URLs internas ou dados brutos de erro na conversa.
-    const message = String(error.response?.data?.mensagem || '').slice(0, 160);
-    throw new Error(message || 'A Tokito APIs está indisponível no momento.');
+    // Não incluir token nem conteúdo bruto da resposta em mensagens ou logs.
+    const safe = String(error.response?.data?.mensagem || '').replace(/[\r\n]/g, ' ').slice(0, 160);
+    throw new Error(safe || 'A Tokito APIs não respondeu no momento.');
   }
 }
 async function planos() {
   const result = await pedir('GET', 'planos');
   return Array.isArray(result.planos) ? result.planos : [];
 }
-async function conta(telefone) {
-  const result = await pedir('GET', 'conta', { telefone });
-  return result.account;
+async function conta() {
+  return (await pedir('GET', 'conta')).account;
 }
-async function vincular(telefone, codigo) {
-  return (await pedir('POST', 'vincular', { telefone, codigo })).account;
-}
-async function checkout(telefone, opts = {}) {
-  return pedir('POST', 'checkout', { telefone, planoId: opts.planoId, invoiceId: opts.invoiceId });
+async function checkout(opts = {}) {
+  return pedir('POST', 'checkout', { planoId: opts.planoId, invoiceId: opts.invoiceId });
 }
 async function avisos() {
   const result = await pedir('GET', 'avisos');
@@ -70,11 +81,11 @@ function dataBR(value) {
   return Number.isFinite(date.getTime())
     ? date.toLocaleDateString('pt-BR', { timeZone: 'America/Fortaleza' }) : '—';
 }
-async function enviarLink(ctx, url, text, label = '💎﹚𝐀𝐁𝐑𝐈𝐑 𝐏𝐀𝐆𝐀𝐌𝐄𝐍𝐓𝐎﹙💎') {
-  if (!/^https:\/\//i.test(String(url || ''))) throw new Error('Link HTTPS de pagamento não disponível.');
+async function enviarLink(ctx, url, content, label = '💎﹚𝐀𝐁𝐑𝐈𝐑 𝐏𝐀𝐆𝐀𝐌𝐄𝐍𝐓𝐎﹙💎') {
+  if (!/^https:\/\//i.test(String(url || ''))) throw new Error('Link de pagamento indisponível.');
   try {
     const interactive = proto.Message.InteractiveMessage.create({
-      body: proto.Message.InteractiveMessage.Body.create({ text }),
+      body: proto.Message.InteractiveMessage.Body.create({ text: content }),
       footer: proto.Message.InteractiveMessage.Footer.create({ text: '' }),
       nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
         messageParamsJson: JSON.stringify({}),
@@ -88,48 +99,59 @@ async function enviarLink(ctx, url, text, label = '💎﹚𝐀𝐁𝐑𝐈𝐑 �
     }, { quoted: ctx.selo, userJid: ctx.tokito.user?.id });
     await ctx.tokito.relayMessage(ctx.from, msg.message, { messageId: msg.key.id });
     return true;
-  } catch (error) {
-    return ctx.reply(text + '\n\n🔗 ' + url);
+  } catch (_) {
+    await ctx.reply(content + '\n\n🔗 ' + url);
+    return true;
   }
 }
+
 let socketAtual = null;
 let timer = null;
 let ocupado = false;
-
 async function verificarAvisos() {
   if (ocupado || !socketAtual || !configurado()) return;
+  const dono = numeroDono();
+  if (!dono) return;
   ocupado = true;
   try {
     const lista = await avisos();
     for (const aviso of lista) {
-      const telefone = numero(String(aviso.telefone || '') + '@s.whatsapp.net');
-      if (!telefone) continue;
+      // O mesmo token identifica somente uma conta. Não enviar aviso a outro usuário.
       let estado;
-      try { estado = await conta(telefone); } catch { continue; }
-      if (!estado?.invoice || estado.invoice.id !== aviso.invoiceId ||
+      try { estado = await conta(); } catch (_) { continue; }
+      if (!confereTelefone(estado, dono) ||
+          !estado?.invoice || estado.invoice.id !== aviso.invoiceId ||
           estado.plan?.renewalPaid || estado.invoice.status === 'paid') continue;
       let url = origem() + '/painel/historico?fatura=' + encodeURIComponent(aviso.invoiceId);
       try {
-        const pedido = await checkout(telefone, { invoiceId: aviso.invoiceId });
-        if (pedido.checkoutUrl?.startsWith('https://')) url = pedido.checkoutUrl;
+        const pedido = await checkout({ invoiceId: aviso.invoiceId });
+        if (String(pedido.checkoutUrl || '').startsWith('https://')) url = pedido.checkoutUrl;
       } catch (_) {
-        // Sem gateway por link, o usuário pode quitar a fatura autenticado no painel.
+        // Sem checkout por link, usar a fatura no painel para a conta autenticada.
       }
+      // Revalidar imediatamente antes de enviar: pode ter sido pago no site enquanto gerávamos o link.
+      try {
+        const atualizado = await conta();
+        if (!atualizado?.invoice || atualizado.invoice.id !== aviso.invoiceId ||
+            atualizado.plan?.renewalPaid || !confereTelefone(atualizado, dono)) continue;
+      } catch (_) { continue; }
+
       const texto = mensagens.sitePlanoAviso({
         nome: aviso.plano, vencimento: dataBR(aviso.vencimento),
         dias: aviso.dias, valor: dinheiro(aviso.valor)
       });
-      const jid = telefone + '@s.whatsapp.net';
-      const ctx = { from: jid, tokito: socketAtual, selo: null, reply: text => socketAtual.sendMessage(jid, { text }) };
+      const jid = dono + '@s.whatsapp.net';
+      const ctx = { from: jid, tokito: socketAtual, selo: null,
+        reply: content => socketAtual.sendMessage(jid, { text: content }) };
       try {
         await enviarLink(ctx, url, texto, '💎﹚𝐑𝐄𝐍𝐎𝐕𝐀𝐑 𝐏𝐋𝐀𝐍𝐎﹙💎');
         await confirmarAviso(aviso.id);
       } catch (error) {
-        console.log('[PLANOS SITE] Aviso não entregue:', error?.message || 'Falha no envio.');
+        console.log('[PLANOS SITE] Falha no envio do aviso:', error?.message || 'Indisponível.');
       }
     }
   } catch (error) {
-    console.log('[PLANOS SITE] Não foi possível consultar vencimentos:', error?.message || 'Indisponível.');
+    console.log('[PLANOS SITE] Avisos indisponíveis:', error?.message || 'Erro.');
   } finally {
     ocupado = false;
   }
@@ -143,6 +165,7 @@ function iniciar(tokito) {
   timer.unref?.();
 }
 module.exports = {
-  configurado, numero, dinheiro, planos, conta, vincular, checkout,
-  formatos, dataBR, enviarLink, iniciar, verificarAvisos
+  configurado, numero, numeroDono, ehDonoDaConta, confereTelefone,
+  dinheiro, planos, conta, checkout, formatos, dataBR,
+  enviarLink, iniciar, verificarAvisos
 };
