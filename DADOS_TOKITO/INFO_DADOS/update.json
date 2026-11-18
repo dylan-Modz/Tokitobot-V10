@@ -1,93 +1,42 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.34",
+  "version": "10.3.35",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-18T17:52:30.497Z",
+  "publishedAt": "2026-11-18T17:58:04.535Z",
   "changelog": [
-    "[Melhoria] release: Tokito Bot V10.3.30 — planos Tokito APIs no WhatsApp",
-    "A versão 10.3.34 já está disponível para atualização.",
-    "Conexão do bot atualizada",
-    "Plans atualizado",
-    "Ui atualizado",
-    "Package atualizado",
-    "Arquivo principal do bot atualizado"
+    "[Correção] fix: planos do site usam token já configurado, sem vinculação extra",
+    "A versão 10.3.35 já está disponível para atualização.",
+    "Mensagens atualizado",
+    "Planosite atualizado",
+    "Planos Site atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "release: Tokito Bot V10.3.30 — planos Tokito APIs no WhatsApp",
-  "notice": "A versão 10.3.34 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "fix: planos do site usam token já configurado, sem vinculação extra",
+  "notice": "A versão 10.3.35 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "sha256": "fece78719accf44827f4d17362f01546e554804dd31a7264ca5bda3bdc4d0a1c",
-      "size": 50401
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "7e4c3016c299bd2051e7c6de087d5599b1da6078438b5be620b8e1de1ebe5aca",
+      "size": 232855
     },
     {
-      "path": "DADOS_TOKITO/plugins/aluguel/plans.js",
-      "sha256": "a34edd5c6716058955929bef53d2a6a9d7aa424e0237c4ad873afd9bf9d5f73b",
-      "size": 6675
+      "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
+      "sha256": "c75609f52815c178b6184aa5ab6bc9d75187dce90f915971cbad8f27275bd31c",
+      "size": 2308
     },
     {
-      "path": "DADOS_TOKITO/sub/ui.js",
-      "sha256": "5425f636f77d2e9eda57578aa1df670c9b1c857e80219e034fa6b05e86498dd1",
-      "size": 16303
-    },
-    {
-      "path": "package.json",
-      "sha256": "1b44e89f616485c5fd8e091632ade6db2f33bcc852271561eceba992c79f63ec",
-      "size": 1889
-    },
-    {
-      "path": "tokito.js",
-      "sha256": "3d2ca236cde3e5490a35e097c70abe303e5f7df1b9e41d2da4131749ee625d7f",
-      "size": 55022
+      "path": "DADOS_TOKITO/sistemas/planos-site.js",
+      "sha256": "21f304f61c8493098ef3f0879050dd20cf9be3591acd702469e537e85043bcfe",
+      "size": 7296
     }
   ],
   "releases": [
-    {
-      "version": "10.2.36",
-      "fromVersion": "10.2.35",
-      "type": "Correção",
-      "channel": "stable",
-      "title": "Corrigido atualizador e visual Pokémon",
-      "notice": "Instalação corrigida: imagens fora da pasta protegida, botões no estilo play e resultados iguais ao ping/RPG.",
-      "changelog": [
-        "[Correção] Atualizador não tenta mais instalar arquivos em INFO_DADOS/LOGOS, pasta protegida do Tokito.",
-        "[Correção] Histórico da 10.2.35 revisado: arquivo protegido retirado da fila incremental de instalação.",
-        "[Pokémon] As cinco imagens temáticas continuam disponíveis, com configuração no caminho permitido DADOS_TOKITO/sistemas/rpg/links_batalha_pokemon.json.",
-        "[Design] Resultado, desafio e rodadas no mesmo formato do ping/perfil Pokémon: título estilizado e linhas > emoji ׄ ( texto ).",
-        "[Botões] Estilo visual igual ao play: emojis e letras negritadas (ex.: ✅﹚𝐀𝐂𝐄𝐈𝐓𝐀𝐑﹙✅); os comandos internos não aparecem na mensagem.",
-        "[RPG] Barras de HP, narração, turnos interativos e recompensas preservadas."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-          "gitSha": "6a447ddc404ad300832a39ab05ac2c71a1361230",
-          "sha256": "1e93724ac1046147c4c5454f8f483c97bf4f9645701e3e5fc57c3b34639a8528",
-          "size": 26088
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/links_batalha_pokemon.json",
-          "gitSha": "567612738a67d4928eef8a178aa832cd911e73cf",
-          "sha256": "c9dbea2b9b3d8a2846aa6ea89e5ef47517dc79346d21d7709697c84efcf1e8ce",
-          "size": 497
-        },
-        {
-          "path": "package.json",
-          "gitSha": "399cdd09bd5367f3b8c981a2cccc23c95dd01996",
-          "sha256": "39de09618423914271558f04dcd7b1c69d8cb9f815d71045d2cc295c3bf015c2",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-13T12:54:24.872Z"
-    },
     {
       "version": "10.2.37",
       "fromVersion": "10.2.36",
@@ -4420,6 +4369,39 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-18T17:52:30.496Z"
+    },
+    {
+      "version": "10.3.35",
+      "fromVersion": "10.3.34",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "fix: planos do site usam token já configurado, sem vinculação extra",
+      "notice": "A versão 10.3.35 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado",
+        "Planosite atualizado",
+        "Planos Site atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "7e4c3016c299bd2051e7c6de087d5599b1da6078438b5be620b8e1de1ebe5aca",
+          "size": 232855
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
+          "sha256": "c75609f52815c178b6184aa5ab6bc9d75187dce90f915971cbad8f27275bd31c",
+          "size": 2308
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/planos-site.js",
+          "sha256": "21f304f61c8493098ef3f0879050dd20cf9be3591acd702469e537e85043bcfe",
+          "size": 7296
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-18T17:58:04.534Z"
     }
   ],
   "mode": "incremental",
