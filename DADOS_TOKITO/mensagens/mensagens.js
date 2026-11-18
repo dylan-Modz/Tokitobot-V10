@@ -5340,3 +5340,31 @@ exports.jogoVelhaBotVitoria = () => '- 🤖 *𝙵𝙸𝙼 𝙳𝙴 𝙹𝙾𝙶�
 exports.jogoVelhaBotDerrota = () => '- 🏆 *𝙵𝙸𝙼 𝙳𝙴 𝙹𝙾𝙶𝙾*\n\n> ❌ ׄ ( ᴠᴄ ᴠᴇɴᴄᴇᴜ ᴏ ᴛᴏᴋɪᴛᴏ! )'
 exports.jogoVelhaBotEmpate = () => '- 🤝 *𝙵𝙸𝙼 𝙳𝙴 𝙹𝙾𝙶𝙾*\n\n> 🎮 ׄ ( ᴀ ᴘᴀʀᴛɪᴅᴀ ᴛᴇʀᴍɪɴᴏᴜ ᴇᴍ ᴇᴍᴘᴀᴛᴇ. )'
 /* FIM_TOKITO_JOGOS_NOVOS_10_1_67 */
+
+
+// Mensagens dos planos Tokito APIs: mesmo padrão visual do restante do bot.
+const tituloPlanoSite = (icone, titulo) => '- ' + icone + ' ' + String.fromCharCode(96) + titulo + String.fromCharCode(96);
+exports.sitePlanoIndisponivel = () => tituloPlanoSite('⚠️', '𝙿𝙻𝙰𝙽𝙾𝚂 𝙸𝙽𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙸𝚂') +
+  '\n\n> 🌐 ׄ ( Consulte os planos em https://tokito-apis.com.br/painel/planos. )\n> ⏳ ׄ ( A integração direta de pagamentos pode estar temporariamente indisponível. )';
+exports.sitePlanoErro = descricao => tituloPlanoSite('❌', '𝙵𝙰𝙻𝙷𝙰 𝙽𝙾𝚂 𝙿𝙻𝙰𝙽𝙾𝚂') +
+  '\n\n> ⚠️ ׄ ( ' + String(descricao || 'Tente novamente.').replace(/[\r\n]+/g, ' ').slice(0, 180) + ' )';
+exports.sitePlanoVincular = prefix => tituloPlanoSite('🔗', '𝚅𝙸𝙽𝙲𝚄𝙻𝙰𝚁 𝚂𝚄𝙰 𝙲𝙾𝙽𝚃𝙰') +
+  '\n\n> 💎 ׄ ( Vincule uma vez seu WhatsApp à conta da Tokito APIs. )' +
+  '\n> 🔐 ׄ ( Entre no site, copie o código e envie no privado: ' + String(prefix || '#') + 'vincularsite CODIGO. )' +
+  '\n> 🛡️ ׄ ( Não compartilhe o código com ninguém. )';
+exports.sitePlanoVinculado = conta => tituloPlanoSite('✅', '𝙲𝙾𝙽𝚃𝙰 𝚅𝙸𝙽𝙲𝚄𝙻𝙰𝙳𝙰') +
+  '\n\n> 👤 ׄ ( ' + String(conta?.nome || 'Usuário').replace(/[\r\n]+/g, ' ') + ' — conta da Tokito APIs. )' +
+  '\n> 💎 ׄ ( ' + String(conta?.plan?.nome || 'Sem plano').replace(/[\r\n]+/g, ' ') + ' — plano atual. )' +
+  '\n> 🔔 ׄ ( Avisos de vencimento habilitados neste privado. )';
+exports.sitePlanoCheckout = dados => tituloPlanoSite('💳', '𝙿𝙰𝙶𝙰𝙼𝙴𝙽𝚃𝙾 𝙳𝙾 𝙿𝙻𝙰𝙽𝙾') +
+  '\n\n> 💎 ׄ ( ' + String(dados?.nome || 'Tokito APIs').replace(/[\r\n]+/g, ' ') + ' — plano escolhido. )' +
+  '\n> 💸 ׄ ( R$ ' + String(dados?.preco || '0,00') + ' — valor. )' +
+  '\n> 🔒 ׄ ( Use o botão abaixo para pagar no checkout seguro. )' +
+  '\n> ✅ ׄ ( Seu plano só será ativado ou renovado após a confirmação do site. )';
+exports.sitePlanoAviso = dados => tituloPlanoSite('⚠️', '𝙰𝚅𝙸𝚂𝙾 𝙳𝙴 𝚅𝙴𝙽𝙲𝙸𝙼𝙴𝙽𝚃𝙾') +
+  '\n\n> 💎 ׄ ( ' + String(dados?.nome || 'Tokito APIs').replace(/[\r\n]+/g, ' ') + ' — plano do site. )' +
+  '\n> 📅 ׄ ( ' + String(dados?.vencimento || '—') + ' — vencimento. )' +
+  '\n> ⏳ ׄ ( ' + (Number(dados?.dias) <= 0 ? 'Vencido' : String(dados.dias) + ' dia(s) restantes') + '. )' +
+  '\n> 💸 ׄ ( R$ ' + String(dados?.valor || '0,00') + ' — renovação. )' +
+  '\n\n> 🔔 ׄ ( Esta fatura ainda consta como pendente no site. )' +
+  '\n> ✅ ׄ ( Se você já pagou, não precisa gerar outra cobrança. )';
