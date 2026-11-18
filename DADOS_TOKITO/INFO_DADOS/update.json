@@ -1,63 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.32",
+  "version": "10.3.33",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-18T17:49:41.593Z",
+  "publishedAt": "2026-11-18T17:51:00.303Z",
   "changelog": [
-    "[Novidade] feat: integração de checkout Tokito APIs e avisos WhatsApp",
-    "A versão 10.3.32 já está disponível para atualização.",
-    "Planos Site atualizado"
+    "[Novidade] feat: mensagens de assinatura Tokito APIs no padrão visual original",
+    "A versão 10.3.33 já está disponível para atualização.",
+    "Mensagens atualizado",
+    "Planosite atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
-  "title": "feat: integração de checkout Tokito APIs e avisos WhatsApp",
-  "notice": "A versão 10.3.32 já está disponível para atualização.",
+  "title": "feat: mensagens de assinatura Tokito APIs no padrão visual original",
+  "notice": "A versão 10.3.33 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/planos-site.js",
-      "sha256": "57de9de32dfaeda900b56d5bf547055d711979e40d1c3352209c519b3874e082",
-      "size": 6358
+      "path": "DADOS_TOKITO/mensagens/mensagens.js",
+      "sha256": "2934184eb84d5c2872bf973343b859f05945ad6e474065f8d315ed4162b1b901",
+      "size": 233378
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
+      "sha256": "1f67287d28ec305ad2795b80be76da27c5cd2ce564d8828519f2311f49736d1b",
+      "size": 3131
     }
   ],
   "releases": [
-    {
-      "version": "10.2.34",
-      "fromVersion": "10.2.33",
-      "type": "Correção",
-      "channel": "stable",
-      "title": "Botões reais na Batalha Pokémon",
-      "notice": "Botões nativos do play em convites e turnos; comandos expostos removidos; barra de HP com bateria.",
-      "changelog": [
-        "[Pokémon] Desafio e turnos passam a enviar quick_reply nativo no mesmo padrão do comando play, independente do botão global.",
-        "[Pokémon] Removidas as linhas visíveis de comandos 'Aceitar: /batalhapokemon ...' e 'Recusar: /batalhapokemon ...' de todos os painéis.",
-        "[Pokémon] Compatibilidade de envio: primeiro tenta botões nativos com arte, depois sem arte; para até 3 botões, tenta o formato de botões clássicos caso o NativeFlow falhe.",
-        "[Pokémon] Caso nenhum formato aceite o desafio, o convite é cancelado em vez de ficar preso sem botões.",
-        "[Pokémon] Barra de vida da batalha agora aparece como '🔋 HP' com blocos verdes, amarelos ou vermelhos.",
-        "[Integridade] Atualização 10.2.34 com SHA-256 e Git blob SHAs conferidos para os arquivos publicados."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/rpg/batalha-interativa.js",
-          "gitSha": "47fc6895dd957ba9a552a04d08740f455ac3fae5",
-          "sha256": "e100022e90c04904d903e1ed7f3ea48e726128cda90ff014df298dec8b21e9d8",
-          "size": 23981
-        },
-        {
-          "path": "package.json",
-          "gitSha": "92d9d105e7d34e4eb7b4adeb0f49e0fc32406103",
-          "sha256": "0dd8face108091164749627bd9f1646f467b2c0a590bfba19fd6cda78f92bc77",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-13T12:30:39.562Z"
-    },
     {
       "version": "10.2.35",
       "fromVersion": "10.2.34",
@@ -4390,6 +4363,33 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-18T17:49:41.592Z"
+    },
+    {
+      "version": "10.3.33",
+      "fromVersion": "10.3.32",
+      "channel": "stable",
+      "type": "Novidade",
+      "title": "feat: mensagens de assinatura Tokito APIs no padrão visual original",
+      "notice": "A versão 10.3.33 já está disponível para atualização.",
+      "changelog": [
+        "Mensagens atualizado",
+        "Planosite atualizado"
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/mensagens.js",
+          "sha256": "2934184eb84d5c2872bf973343b859f05945ad6e474065f8d315ed4162b1b901",
+          "size": 233378
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
+          "sha256": "1f67287d28ec305ad2795b80be76da27c5cd2ce564d8828519f2311f49736d1b",
+          "size": 3131
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-18T17:51:00.302Z"
     }
   ],
   "mode": "incremental",
