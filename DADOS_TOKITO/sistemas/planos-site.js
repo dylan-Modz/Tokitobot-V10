@@ -122,13 +122,9 @@ async function verificarAvisos() {
       if (!confereTelefone(estado, dono) ||
           !estado?.invoice || estado.invoice.id !== aviso.invoiceId ||
           estado.plan?.renewalPaid || estado.invoice.status === 'paid') continue;
-      let url = origem() + '/painel/historico?fatura=' + encodeURIComponent(aviso.invoiceId);
-      try {
-        const pedido = await checkout({ invoiceId: aviso.invoiceId });
-        if (String(pedido.checkoutUrl || '').startsWith('https://')) url = pedido.checkoutUrl;
-      } catch (_) {
-        // Sem checkout por link, usar a fatura no painel para a conta autenticada.
-      }
+      // O aviso abre o mesmo seletor de Pix, Mercado Pago e InfinitePay do site.
+      // Não gera cobrança antecipada e a sessão do site confirma o titular.
+      const url = origem() + '/pagamento/plano/' + encodeURIComponent(estado.plan.id);
       // Revalidar imediatamente antes de enviar: pode ter sido pago no site enquanto gerávamos o link.
       try {
         const atualizado = await conta();
