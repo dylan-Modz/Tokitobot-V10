@@ -1,21 +1,20 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.36",
+  "version": "10.3.37",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-18T18:08:56.985Z",
+  "publishedAt": "2026-11-18T18:11:52.298Z",
   "changelog": [
-    "[Correção] fix: link de pagamento abre checkout do plano e escolha do gateway",
-    "A versão 10.3.36 já está disponível para atualização.",
-    "Planosite atualizado",
-    "Planos Site atualizado"
+    "[Planos Tokito APIs] O botão no WhatsApp abre diretamente a escolha de Pix, Mercado Pago e InfinitePay do plano selecionado.",
+    "[Renovação] Avisos apontam ao mesmo checkout autenticado sem redirecionar para a vitrine de planos.",
+    "[Integridade] Arquivos assinados por SHA-256 e Git Blob SHA para download seguro."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "fix: link de pagamento abre checkout do plano e escolha do gateway",
-  "notice": "A versão 10.3.36 já está disponível para atualização.",
+  "title": "Checkout direto no site para planos selecionados pelo Tokito Bot",
+  "notice": "A versão 10.3.37 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -4399,16 +4398,46 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-18T18:08:56.983Z"
+    },
+    {
+      "version": "10.3.37",
+      "fromVersion": "10.3.36",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Checkout direto no site para planos selecionados pelo Tokito Bot",
+      "notice": "A versão 10.3.37 já está disponível para atualização.",
+      "changelog": [
+        "[Planos Tokito APIs] O botão no WhatsApp abre diretamente a escolha de Pix, Mercado Pago e InfinitePay do plano selecionado.",
+        "[Renovação] Avisos apontam ao mesmo checkout autenticado sem redirecionar para a vitrine de planos.",
+        "[Integridade] Arquivos assinados por SHA-256 e Git Blob SHA para download seguro."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/aluguel/planosite.js",
+          "sha256": "5e4b73f04f6b77467c60d325474c954b9546e2236b2d6ba6de6518836b27abb8",
+          "size": 1949,
+          "gitSha": "e61ab2b4bceb0feecf6ac53af252329436ef591d"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/planos-site.js",
+          "sha256": "d8b4742f903544d779eaaa78efa200a4f1f75232576aca9ab21413ef46521001",
+          "size": 7161,
+          "gitSha": "9aecd08a021c5118897bd420ebcb74d32d3fc336"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-18T18:11:52.298Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.30",
+  "fromVersion": "10.3.36",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.31"
+  "publicVersion": "10.3.37"
 }
