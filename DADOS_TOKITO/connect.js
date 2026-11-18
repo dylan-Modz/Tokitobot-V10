@@ -38,6 +38,7 @@ const qrcodeTerminal = require('qrcode-terminal')
 const dadosSistema = require('./sistemas/dados.js')
 const controleRemoto = require('./sistemas/controle.js')
 const avisosOficiais = require('./sistemas/avisos.js')
+const avisosPlanoSite = require('./sistemas/planos-site.js')
 const autoInativo = require('./sistemas/autoinativo.js')
 const donoSistema = require('./sistemas/dono.js')
 const antiNuke = require('./sistemas/nuke.js')
@@ -1226,7 +1227,10 @@ break
 case 'open':
 global.startTime = Math.floor(Date.now() / 1000)
 // O aviso de atualização pertence ao bot principal, nunca a um Sub Bot.
-if (!runtimeSub.isSubBot) iniciarAvisosUpdate(tokito)
+if (!runtimeSub.isSubBot) {
+  iniciarAvisosUpdate(tokito)
+  avisosPlanoSite.iniciar(tokito)
+}
 avisosOficiais.iniciar(tokito)
 reconectando = false
 metodo = null
