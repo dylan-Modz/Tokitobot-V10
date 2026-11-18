@@ -1579,7 +1579,7 @@ id: `${prefix}menu`
 ])
 continue
 }
-const comandosComerciaisGrupo = new Set(['lojinha', 'loja', 'sub', 'code', 'meu'])
+const comandosComerciaisGrupo = new Set(['lojinha', 'loja', 'sub', 'code', 'meu', 'planos', 'planosite', 'planosapi', 'vincularsite'])
 const liberarComercialGrupo = isCmd && comandosComerciaisGrupo.has(String(command || '').toLowerCase())
 if (!runtimeSub.isSubBot && isGroup && nescessario.aluguel === true && !SoDono && !aluguel.autorizado(from) && !liberarComercialGrupo) {
 if (isCmd) await reply(mess.aluguelBloqueado(prefix))
