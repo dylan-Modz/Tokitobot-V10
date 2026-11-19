@@ -61,79 +61,12 @@ const question = text => (runtimeSub.isSubBot ? Promise.resolve('') : new Promis
 const msgRetryCounterCache = new NodeCache()
 const fotos = new NodeCache({ stdTTL: 1800, checkperiod: 60 })
 const correcoesAntirroubo = new Map()
-// Guarda temporariamente os metadados da mídia recebida antes que a citação
-// do WhatsApp omita mediaKey/directPath. Não baixa nem salva arquivos no disco.
-const MIDIA_RECENTE_MS = 10 * 60 * 1000
-const MIDIA_RECENTE_MAX = 400
-const envolverMidiaOriginal = entrada => {
-let atual = entrada || {}
-for (let i = 0; i < 12; i++) {
-const proxima = atual.ephemeralMessage?.message ||
-atual.viewOnceMessage?.message ||
-atual.viewOnceMessageV2?.message ||
-atual.viewOnceMessageV2Extension?.message ||
-atual.documentWithCaptionMessage?.message ||
-atual.editedMessage?.message ||
-atual.associatedChildMessage?.message
-if (!proxima) break
-atual = proxima
-}
-return atual
-}
-const registrarMidiasRecebidas = (sock, messages) => {
-const cache = (sock.__tokitoMidiasOriginais ||= new Map())
-const agora = Date.now()
-for (const [id, item] of cache) {
-if (agora - item.at > MIDIA_RECENTE_MS) cache.delete(id)
-}
-for (const item of messages || []) {
-const jid = item?.key?.remoteJid
-const id = item?.key?.id
-const mensagem = item?.message || item?.update?.message
-if (!jid || !id) continue
-if (!mensagem) {
-if (item?.key?.isViewOnce) {
-console.log('[REVELAR RX]', {
-tipoEvento: item.update ? 'update' : 'upsert',
-tipo: 'viewOnceStub',
-temConteudo: false,
-temChave: false,
-temCaminho: false
-})
-}
-continue
-}
-const conteudo = envolverMidiaOriginal(mensagem)
-const media = conteudo?.imageMessage || conteudo?.videoMessage ||
-conteudo?.ptvMessage || conteudo?.audioMessage
-if (!media) continue
-const chave = jid + '|' + id
-const completa = Boolean(media.mediaKey && (media.url || media.directPath))
-const antiga = cache.get(chave)
-// Um update parcial não deve sobrescrever uma mídia completa já recebida.
-if (!completa && antiga) continue
-cache.delete(chave)
-cache.set(chave, { message: mensagem, key: item.key, at: agora })
-// Diagnóstico mínimo de view-once, habilitado automaticamente na hospedagem.
-// Não registra IDs, remetentes, URLs, mediaKey, miniaturas ou conteúdo.
-const viewOnce = Boolean(
-item.key?.isViewOnce || media.viewOnce ||
-mensagem.viewOnceMessage || mensagem.viewOnceMessageV2 ||
-mensagem.viewOnceMessageV2Extension
-)
-if (viewOnce) {
-console.log('[REVELAR RX]', {
-tipo: conteudo?.imageMessage ? 'image' : conteudo?.audioMessage ? 'audio' : 'video',
-temChave: Boolean(media.mediaKey),
-temCaminho: Boolean(media.url || media.directPath),
-tipoEvento: item.update ? 'update' : 'upsert',
-viewOnce: true
-})
-}
-}
-while (cache.size > MIDIA_RECENTE_MAX) cache.delete(cache.keys().next().value)
-}
-
+// Cache temporario de view-once e outras midias recebidas pela Stone.
+// Compartilha mensagens completas entre /s e /open sem gravar arquivos no disco.
+const {
+  registrarRecebidas: registrarMidiasRecebidas,
+  vincularCache: vincularCacheMidia
+} = require('./sistemas/midia-citada')
 
 let { NomeDoBot, ownerName, prefix, channel, channeldl, ownerNumber, CREDENTIALS_USER, API_URL, API_KEY_TOKITO, TOKEN_SALA, TOKEN_LIKE_FF } = require('./INFO_DADOS/config-all.json')
 let iniciando = false, reconectando = false, metodo = null, ultimoQr = null, processarMsg = null
@@ -792,6 +725,7 @@ emitOwnEvents: true,
 shouldSyncHistoryMessage: () => false,
 getMessage: async key => undefined
 })
+vincularCacheMidia(tokito)
 socketAtual = tokito
 global.tokito = tokito
 // Observa os sinais da biblioteca principal. Nao cria mensagens artificiais.
