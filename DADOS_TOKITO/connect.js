@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, fetchLatestWaWebVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent, Browsers } = require('@stone-wpp/ofc')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario, cacheGp } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
 const registro = require('./sistemas/registro.js')
@@ -47,6 +47,7 @@ const sorteioGrupo = require('./sistemas/sorteios.js')
 const promocoes = require('./sistemas/promocoes.js')
 const placar = require('./database/lib/placar.js')
 const runtimeSub = require('./sub/runtime.js')
+const { lerTipo: lerTipoWhatsapp, salvarTipo: salvarTipoWhatsapp, nomeTipo: nomeTipoWhatsapp, navegador: navegadorWhatsapp } = require('./sistemas/tipo-whatsapp.js')
 const sistemaSub = runtimeSub.isSubBot ? null : require('./sub/index.js')
 
 const CONFIG_FILE = path.join(__dirname, 'INFO_DADOS', 'config-all.json')
@@ -60,79 +61,12 @@ const question = text => (runtimeSub.isSubBot ? Promise.resolve('') : new Promis
 const msgRetryCounterCache = new NodeCache()
 const fotos = new NodeCache({ stdTTL: 1800, checkperiod: 60 })
 const correcoesAntirroubo = new Map()
-// Guarda temporariamente os metadados da mídia recebida antes que a citação
-// do WhatsApp omita mediaKey/directPath. Não baixa nem salva arquivos no disco.
-const MIDIA_RECENTE_MS = 10 * 60 * 1000
-const MIDIA_RECENTE_MAX = 400
-const envolverMidiaOriginal = entrada => {
-let atual = entrada || {}
-for (let i = 0; i < 12; i++) {
-const proxima = atual.ephemeralMessage?.message ||
-atual.viewOnceMessage?.message ||
-atual.viewOnceMessageV2?.message ||
-atual.viewOnceMessageV2Extension?.message ||
-atual.documentWithCaptionMessage?.message ||
-atual.editedMessage?.message ||
-atual.associatedChildMessage?.message
-if (!proxima) break
-atual = proxima
-}
-return atual
-}
-const registrarMidiasRecebidas = (sock, messages) => {
-const cache = (sock.__tokitoMidiasOriginais ||= new Map())
-const agora = Date.now()
-for (const [id, item] of cache) {
-if (agora - item.at > MIDIA_RECENTE_MS) cache.delete(id)
-}
-for (const item of messages || []) {
-const jid = item?.key?.remoteJid
-const id = item?.key?.id
-const mensagem = item?.message || item?.update?.message
-if (!jid || !id) continue
-if (!mensagem) {
-if (item?.key?.isViewOnce) {
-console.log('[REVELAR RX]', {
-tipoEvento: item.update ? 'update' : 'upsert',
-tipo: 'viewOnceStub',
-temConteudo: false,
-temChave: false,
-temCaminho: false
-})
-}
-continue
-}
-const conteudo = envolverMidiaOriginal(mensagem)
-const media = conteudo?.imageMessage || conteudo?.videoMessage ||
-conteudo?.ptvMessage || conteudo?.audioMessage
-if (!media) continue
-const chave = jid + '|' + id
-const completa = Boolean(media.mediaKey && (media.url || media.directPath))
-const antiga = cache.get(chave)
-// Um update parcial não deve sobrescrever uma mídia completa já recebida.
-if (!completa && antiga) continue
-cache.delete(chave)
-cache.set(chave, { message: mensagem, key: item.key, at: agora })
-// Diagnóstico mínimo de view-once, habilitado automaticamente na hospedagem.
-// Não registra IDs, remetentes, URLs, mediaKey, miniaturas ou conteúdo.
-const viewOnce = Boolean(
-item.key?.isViewOnce || media.viewOnce ||
-mensagem.viewOnceMessage || mensagem.viewOnceMessageV2 ||
-mensagem.viewOnceMessageV2Extension
-)
-if (viewOnce) {
-console.log('[REVELAR RX]', {
-tipo: conteudo?.imageMessage ? 'image' : conteudo?.audioMessage ? 'audio' : 'video',
-temChave: Boolean(media.mediaKey),
-temCaminho: Boolean(media.url || media.directPath),
-tipoEvento: item.update ? 'update' : 'upsert',
-viewOnce: true
-})
-}
-}
-while (cache.size > MIDIA_RECENTE_MAX) cache.delete(cache.keys().next().value)
-}
-
+// Cache temporario de view-once e outras midias recebidas pela Stone.
+// Compartilha mensagens completas entre /s e /open sem gravar arquivos no disco.
+const {
+  registrarRecebidas: registrarMidiasRecebidas,
+  vincularCache: vincularCacheMidia
+} = require('./sistemas/midia-citada')
 
 let { NomeDoBot, ownerName, prefix, channel, channeldl, ownerNumber, CREDENTIALS_USER, API_URL, API_KEY_TOKITO, TOKEN_SALA, TOKEN_LIKE_FF } = require('./INFO_DADOS/config-all.json')
 let iniciando = false, reconectando = false, metodo = null, ultimoQr = null, processarMsg = null
@@ -675,22 +609,28 @@ return acesso
 
 async function showMenu() {
 console.log('')
-info('Escolha como deseja iniciar.')
+info('Escolha o tipo de WhatsApp para conectar.')
 console.log('')
 topoPainel('❪🧊.ꯧ𝙿𝙰𝙸𝙽𝙴𝙻 𝙳𝙴 𝙲𝙾𝙽𝚃𝚁𝙾𝙻𝙴ꯧ⸼🧊❫')
-linhaPainel('1', '📱', 'Código de conexão')
-linhaPainel('2', '🧊', 'QR-Code WhatsApp')
+linhaPainel('1', '📱', 'WhatsApp Normal')
+linhaPainel('2', '💼', 'WhatsApp Business')
 linhaPainel('3', '🌊', 'Suporte / Ajuda')
 linhaPainel('4', '⚙️', 'Editar bot')
 fimPainel()
 console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'))
-let option = await question(colors.white.bold('╰━━➤ '))
-option = option.trim()
+let option = String(await question(colors.white.bold('╰━━➤ ')) || '').trim()
 if (option === '1' || option === '2') {
-recarregarConfigBot()
-metodo = option === '1' ? 'codigo' : 'qr'
-sucesso(option === '1' ? 'Conexão por código selecionada.' : 'Conexão por QR-Code selecionada.')
-return metodo
+const tipo = option === '1' ? 'normal' : 'business'
+const anterior = lerTipoWhatsapp(qrcode)
+if (sessaoRegistrada() && anterior !== tipo) {
+aviso('Ja existe uma sessao registrada. Para proteger essa conexao, o perfil atual nao sera trocado.')
+aviso('Para testar outro perfil, use uma instalacao separada, sem copiar as credenciais existentes.')
+return showMenu()
+}
+if (!sessaoRegistrada()) salvarTipoWhatsapp(qrcode, tipo)
+sucesso(nomeTipoWhatsapp(tipo) + ' selecionado.')
+info('Primeiro pareamento via navegador Web; identificacao Android somente apos registro.')
+return showMenuPareamento()
 }
 if (option === '3') {
 await openWhatsappSupport()
@@ -702,6 +642,26 @@ return showMenu()
 }
 erro('Opção inválida. Escolha 1, 2, 3 ou 4.')
 return showMenu()
+}
+
+async function showMenuPareamento() {
+console.log('')
+topoPainel('❪🧊.ꯧ𝙲𝙾𝙽𝙴𝚇𝙰̃𝙾 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿ꯧ⸼🧊❫')
+linhaPainel('1', '📱', 'Código de conexão')
+linhaPainel('2', '🧊', 'QR-Code WhatsApp')
+linhaPainel('0', '↩️', 'Voltar')
+fimPainel()
+console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'))
+let option = String(await question(colors.white.bold('╰━━➤ ')) || '').trim()
+if (option === '0') return showMenu()
+if (option === '1' || option === '2') {
+recarregarConfigBot()
+metodo = option === '1' ? 'codigo' : 'qr'
+sucesso(option === '1' ? 'Conexão por código selecionada.' : 'Conexão por QR-Code selecionada.')
+return metodo
+}
+erro('Opção inválida. Escolha 0, 1 ou 2.')
+return showMenuPareamento()
 }
 
 const sessaoRegistrada = () => {
@@ -731,12 +691,20 @@ socketAtual = null
 if (anterior && typeof anterior.end === 'function') {
 try { anterior.end(new Error('Substituindo conexão antiga do Tokito')) } catch {}
 }
-const { version } = await fetchLatestStoneWPPVersion()
+// Teste controlado com a revisao indicada no exemplo do Yuta.
+// Pode ser recusada pelo WhatsApp; nao substituir automaticamente a main.
+const version = [2, 3000, 1044006379]
+info('Versao de conexao (teste Yuta): ' + version.join('.'))
 const { state, saveCreds } = await useMultiFileAuthState(qrcode)
+const perfilNavegador = runtimeSub.isSubBot
+  ? ['Linux', 'Opera', '10.0.22631']
+  : navegadorWhatsapp(lerTipoWhatsapp(qrcode), Browsers, state.creds?.registered === true)
+info('Perfil de conexao: ' + (state.creds?.registered === true ? 'registrado' : 'primeiro pareamento') +
+  ' | browser=' + String(perfilNavegador[0]) + ' | transporte=Web/companion')
 const tokito = makeWASocket({
 version,
 logger,
-browser: ['Linux', 'Opera', '10.0.22631'],
+browser: perfilNavegador,
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, logger)
@@ -747,7 +715,7 @@ fireInitQueries: true,
 markOnlineOnConnect: true,
 generateHighQualityLinkPreview: true,
 connectTimeoutMs: 20000,
-keepAliveIntervalMs: 40000,
+keepAliveIntervalMs: 25000,
 defaultQueryTimeoutMs: 60000,
 retryRequestDelayMs: 5000,
 maxMsgRetryCount: 5,
@@ -757,6 +725,7 @@ emitOwnEvents: true,
 shouldSyncHistoryMessage: () => false,
 getMessage: async key => undefined
 })
+vincularCacheMidia(tokito)
 socketAtual = tokito
 global.tokito = tokito
 // Observa os sinais da biblioteca principal. Nao cria mensagens artificiais.
@@ -1299,6 +1268,7 @@ console.log(banner3?.string || colors.cyan('\nTOKITO | V10\n'))
 console.log(banner2?.string || colors.blue('dylan Modz'))
 console.log('')
 sucesso(`${NomeDoBot} conectado com sucesso.`)
+info('WhatsApp selecionado: ' + nomeTipoWhatsapp(lerTipoWhatsapp(qrcode)) + ' (aparelho vinculado).')
 console.log('')
 await sistemaSub?.iniciar(tokito).catch(error => erroSistema('Erro ao iniciar sistema de Sub Bots', error))
 }
@@ -1351,6 +1321,18 @@ break
  * MENSAGENS
  * Mantido no mesmo fluxo da base original.
  */
+if (events['messages.unavailable']) {
+for (const aviso of events['messages.unavailable'] || []) {
+if (aviso?.kind !== 'view_once') continue
+// Não registrar ID, remetente, chave, URL ou conteúdo.
+console.log('[STONE MIDIA INDISPONIVEL]', {
+tipo: aviso.kind,
+subtipo: aviso.subtype || 'view_once',
+temConteudo: false,
+podeReenviar: false
+})
+}
+}
 if (events['messages.update']) {
 registrarMidiasRecebidas(tokito, events['messages.update'])
 }
