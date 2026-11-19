@@ -31,17 +31,16 @@ const salvarTipo = (sessao, tipo) => {
 
 const nomeTipo = tipo => tipo === 'normal' ? 'WhatsApp Normal' : 'WhatsApp Business'
 
-const navegador = (tipo, Browsers) => {
-  if (tipo === 'normal') {
-    if (!Browsers || typeof Browsers.windows !== 'function') {
-      throw new Error('STONE_BROWSER_WINDOWS_INDISPONIVEL')
-    }
-    // Browser desktop para o pareamento via codigo ou QR.
-    // A selecao Normal/Business identifica o aplicativo do usuario no menu,
-    // nao modifica o tipo de conta e nem habilita mobile-primary.
-    return Browsers.windows('Chrome')
+// O perfil Android e usado somente APOS a sessao Web/companion registrar.
+// '13' e 'SMB_ANDROID' sao nomes de browser na Stone, nao transportes mobile.
+const navegador = (tipo, Browsers, registrado = false) => {
+  if (!registrado) return ['Linux', 'Opera', '10.0.22631']
+  if (!Browsers || typeof Browsers.android !== 'function') {
+    throw new Error('STONE_BROWSER_ANDROID_INDISPONIVEL')
   }
-  return ['Linux', 'Opera', '10.0.22631']
+  return tipo === 'business'
+    ? Browsers.android('SMB_ANDROID')
+    : Browsers.android('13')
 }
 
 module.exports = { lerTipo, salvarTipo, nomeTipo, navegador, tipoValido }
