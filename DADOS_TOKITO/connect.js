@@ -621,15 +621,16 @@ console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙ�
 let option = String(await question(colors.white.bold('╰━━➤ ')) || '').trim()
 if (option === '1' || option === '2') {
 const tipo = option === '1' ? 'normal' : 'business'
-const anterior = lerTipoWhatsapp(qrcode)
-if (sessaoRegistrada() && anterior !== tipo) {
-aviso('Ja existe uma sessao registrada. Para proteger essa conexao, o perfil atual nao sera trocado.')
-aviso('Para testar outro perfil, use uma instalacao separada, sem copiar as credenciais existentes.')
-return showMenu()
-}
-if (!sessaoRegistrada()) salvarTipoWhatsapp(qrcode, tipo)
+const registrada = sessaoRegistrada()
+// Salva apenas a preferencia do browser, nunca apaga ou substitui creds.json.
+salvarTipoWhatsapp(qrcode, tipo)
 sucesso(nomeTipoWhatsapp(tipo) + ' selecionado.')
-info('Pareamento Web inicial. Android Normal/Business identificado apos registro.')
+if (registrada) {
+  info('Sessao existente preservada. A identificacao Android escolhida vale na conexao atual.')
+  metodo = null
+  return tipo
+}
+info('Primeiro pareamento pelo navegador Web; perfil Android entra na reconexao.')
 return showMenuPareamento()
 }
 if (option === '3') {
