@@ -20,7 +20,13 @@ test('WhatsApp Normal usa perfil web Android experimental', t => {
   salvarTipo(dir, 'normal')
   assert.equal(lerTipo(dir), 'normal')
   assert.equal(nomeTipo(lerTipo(dir)), 'WhatsApp Normal')
-  assert.deepEqual(navegador(lerTipo(dir)), ['Chrome', 'Android', ''])
+  let navegadorRecebido = null
+  const Browsers = { android: nome => {
+    navegadorRecebido = nome
+    return [nome, 'Android', '']
+  } }
+  assert.deepEqual(navegador(lerTipo(dir), Browsers), ['13', 'Android', ''])
+  assert.equal(navegadorRecebido, '13')
 })
 
 test('WhatsApp Business conserva navegador atual do bot', t => {
@@ -29,6 +35,10 @@ test('WhatsApp Business conserva navegador atual do bot', t => {
   salvarTipo(dir, 'business')
   assert.equal(lerTipo(dir), 'business')
   assert.equal(nomeTipo(lerTipo(dir)), 'WhatsApp Business')
+})
+
+test('o modo Android exige a funcao Browsers.android da Stone', () => {
+  assert.throws(() => navegador('normal', {}), /STONE_BROWSER_ANDROID_INDISPONIVEL/)
 })
 
 test('não sobrescreve creds.json', t => {
