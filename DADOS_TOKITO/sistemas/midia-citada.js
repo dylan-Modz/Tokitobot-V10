@@ -183,8 +183,14 @@ const registrarRecebidas = (socket, mensagens) => {
       conteudo?.ptvMessage || conteudo?.audioMessage
     if (!media) continue
     const chave = jid + '|' + id
-    // Evita substituir um original completo por um evento posterior parcial.
-    if (media.mediaKey) {
+    // Atualizacoes parciais nao substituem o original completo ja recebido.
+    const anterior = cache.get(chave)
+    const mediaAnterior = anterior && (
+      extrair(anterior.message, 'image') ||
+      extrair(anterior.message, 'video') ||
+      extrair(anterior.message, 'audio')
+    )
+    if (media.mediaKey && (!completo(mediaAnterior) || completo(media))) {
       cache.delete(chave)
       cache.set(chave, { message: mensagem, key: item.key, at: agora })
     }
