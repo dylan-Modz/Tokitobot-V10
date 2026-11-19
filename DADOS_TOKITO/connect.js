@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, fetchLatestWaWebVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent, Browsers } = require('@stone-wpp/ofc')
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, fetchLatestWaWebVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario, cacheGp } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
 const registro = require('./sistemas/registro.js')
@@ -629,7 +629,7 @@ return showMenu()
 }
 if (!sessaoRegistrada()) salvarTipoWhatsapp(qrcode, tipo)
 sucesso(nomeTipoWhatsapp(tipo) + ' selecionado.')
-info('Primeiro pareamento via navegador Web; identificacao Android somente apos registro.')
+info('Pareamento via WhatsApp Web selecionado.')
 return showMenuPareamento()
 }
 if (option === '3') {
@@ -691,20 +691,26 @@ socketAtual = null
 if (anterior && typeof anterior.end === 'function') {
 try { anterior.end(new Error('Substituindo conexão antiga do Tokito')) } catch {}
 }
-// Teste controlado com a revisao indicada no exemplo do Yuta.
-// Pode ser recusada pelo WhatsApp; nao substituir automaticamente a main.
-const version = [2, 3000, 1044006379]
-info('Versao de conexao (teste Yuta): ' + version.join('.'))
+// Prefere a revisao Web atual; usa o padrao da Stone se a consulta falhar.
+const versaoWeb = await fetchLatestWaWebVersion()
+const versaoAtualValida = versaoWeb?.isLatest === true &&
+  Array.isArray(versaoWeb.version) &&
+  versaoWeb.version.length === 3 &&
+  versaoWeb.version.every(n => Number.isSafeInteger(n) && n > 0)
+if (!versaoAtualValida) {
+  aviso('Revisao do WhatsApp Web indisponivel; usando versao da Stone.')
+}
+const version = versaoAtualValida
+  ? versaoWeb.version
+  : (await fetchLatestStoneWPPVersion()).version
+info('Versao de conexao: ' + (Array.isArray(version) ? version.join('.') : String(version || 'desconhecida')))
 const { state, saveCreds } = await useMultiFileAuthState(qrcode)
-const perfilNavegador = runtimeSub.isSubBot
-  ? ['Linux', 'Opera', '10.0.22631']
-  : navegadorWhatsapp(lerTipoWhatsapp(qrcode), Browsers, state.creds?.registered === true)
-info('Perfil de conexao: ' + (state.creds?.registered === true ? 'registrado' : 'primeiro pareamento') +
-  ' | browser=' + String(perfilNavegador[0]) + ' | transporte=Web/companion')
 const tokito = makeWASocket({
 version,
 logger,
-browser: perfilNavegador,
+browser: runtimeSub.isSubBot
+  ? ['Linux', 'Opera', '10.0.22631']
+  : navegadorWhatsapp(lerTipoWhatsapp(qrcode)),
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, logger)
@@ -715,7 +721,7 @@ fireInitQueries: true,
 markOnlineOnConnect: true,
 generateHighQualityLinkPreview: true,
 connectTimeoutMs: 20000,
-keepAliveIntervalMs: 25000,
+keepAliveIntervalMs: 40000,
 defaultQueryTimeoutMs: 60000,
 retryRequestDelayMs: 5000,
 maxMsgRetryCount: 5,
@@ -1321,17 +1327,14 @@ break
  * MENSAGENS
  * Mantido no mesmo fluxo da base original.
  */
-if (events['messages.unavailable']) {
-for (const aviso of events['messages.unavailable'] || []) {
-if (aviso?.kind !== 'view_once') continue
-// Não registrar ID, remetente, chave, URL ou conteúdo.
-console.log('[STONE MIDIA INDISPONIVEL]', {
-tipo: aviso.kind,
-subtipo: aviso.subtype || 'view_once',
-temConteudo: false,
-podeReenviar: false
-})
-}
+if (events['messages.unavailable'] && process.env.TOKITO_DEBUG_RX === '1') {
+  for (const aviso of events['messages.unavailable'] || []) {
+    if (aviso?.kind !== 'view_once') continue
+    console.log('[STONE MIDIA INDISPONIVEL]', {
+      tipo: aviso.kind, subtipo: aviso.subtype || 'view_once',
+      temConteudo: false, podeReenviar: false
+    })
+  }
 }
 if (events['messages.update']) {
 registrarMidiasRecebidas(tokito, events['messages.update'])
