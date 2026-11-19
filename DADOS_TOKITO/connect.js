@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent, Browsers } = require('@stone-wpp/ofc')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario, cacheGp } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
 const registro = require('./sistemas/registro.js')
@@ -696,7 +696,7 @@ return showMenu()
 }
 if (!sessaoRegistrada()) salvarTipoWhatsapp(qrcode, tipo)
 sucesso(nomeTipoWhatsapp(tipo) + ' selecionado.')
-if (tipo === 'normal') aviso('Identificacao Android experimental; ainda utiliza WhatsApp vinculado, nao mobile principal.')
+if (tipo === 'normal') aviso('Teste Browsers.android(\'13\'): 13 e o nome do navegador, nao a versao do Android. A conexao continua vinculada.')
 return showMenuPareamento()
 }
 if (option === '3') {
@@ -763,7 +763,7 @@ const { state, saveCreds } = await useMultiFileAuthState(qrcode)
 const tokito = makeWASocket({
 version,
 logger,
-browser: runtimeSub.isSubBot ? ['Linux', 'Opera', '10.0.22631'] : navegadorWhatsapp(lerTipoWhatsapp(qrcode)),
+browser: runtimeSub.isSubBot ? ['Linux', 'Opera', '10.0.22631'] : navegadorWhatsapp(lerTipoWhatsapp(qrcode), Browsers),
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, logger)
