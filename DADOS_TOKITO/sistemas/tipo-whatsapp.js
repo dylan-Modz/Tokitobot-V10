@@ -31,16 +31,8 @@ const salvarTipo = (sessao, tipo) => {
 
 const nomeTipo = tipo => tipo === 'normal' ? 'WhatsApp Normal' : 'WhatsApp Business'
 
-// O perfil Android e usado somente APOS a sessao Web/companion registrar.
-// '13' e 'SMB_ANDROID' sao nomes de browser na Stone, nao transportes mobile.
-const navegador = (tipo, Browsers, registrado = false) => {
-  if (!registrado) return ['Linux', 'Opera', '10.0.22631']
-  if (!Browsers || typeof Browsers.android !== 'function') {
-    throw new Error('STONE_BROWSER_ANDROID_INDISPONIVEL')
-  }
-  return tipo === 'business'
-    ? Browsers.android('SMB_ANDROID')
-    : Browsers.android('13')
-}
+// Ambos os aplicativos funcionam pelo pareamento Web/companion padrao.
+// A escolha altera apenas o menu; nao mascara Android nem ativa mobile.
+const navegador = () => ['Linux', 'Opera', '10.0.22631']
 
 module.exports = { lerTipo, salvarTipo, nomeTipo, navegador, tipoValido }
