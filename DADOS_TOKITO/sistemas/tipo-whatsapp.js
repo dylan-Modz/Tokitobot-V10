@@ -31,8 +31,16 @@ const salvarTipo = (sessao, tipo) => {
 
 const nomeTipo = tipo => tipo === 'normal' ? 'WhatsApp Normal' : 'WhatsApp Business'
 
-const navegador = tipo => tipo === 'normal'
-  ? ['Chrome', 'Android', '']
-  : ['Linux', 'Opera', '10.0.22631']
+const navegador = (tipo, Browsers) => {
+  if (tipo === 'normal') {
+    if (!Browsers || typeof Browsers.android !== 'function') {
+      throw new Error('STONE_BROWSER_ANDROID_INDISPONIVEL')
+    }
+    // Teste solicitado: "13" e o nome do browser, NAO a versao do Android.
+    // A conexao permanece no transporte Web/companion.
+    return Browsers.android('13')
+  }
+  return ['Linux', 'Opera', '10.0.22631']
+}
 
 module.exports = { lerTipo, salvarTipo, nomeTipo, navegador, tipoValido }
