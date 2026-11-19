@@ -31,8 +31,16 @@ const salvarTipo = (sessao, tipo) => {
 
 const nomeTipo = tipo => tipo === 'normal' ? 'WhatsApp Normal' : 'WhatsApp Business'
 
-// Ambos os aplicativos funcionam pelo pareamento Web/companion padrao.
-// A escolha altera apenas o menu; nao mascara Android nem ativa mobile.
-const navegador = () => ['Linux', 'Opera', '10.0.22631']
+// Mesmo esquema do Yuta: a primeira conexao usa o browser original.
+// Na reconexao da sessao registrada, diferencia Normal de Business.
+const navegador = (tipo, Browsers, registrado = false) => {
+  if (!registrado) return ['Linux', 'Opera', '10.0.22631']
+  if (!Browsers || typeof Browsers.android !== 'function') {
+    throw new Error('STONE_BROWSER_ANDROID_INDISPONIVEL')
+  }
+  return tipo === 'business'
+    ? Browsers.android('SMB_ANDROID')
+    : Browsers.android('13')
+}
 
 module.exports = { lerTipo, salvarTipo, nomeTipo, navegador, tipoValido }
