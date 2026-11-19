@@ -132,3 +132,47 @@ test('comando /s informa quando a chave não foi recebida', async () => {
   assert.equal(resultado.arquivo, null)
   assert.match(resultado.replies[0], /chave|imagem ou vídeo/i)
 })
+
+
+test('cache recebe mídia view-once e preserva a chave original', () => {
+  const conexao = {}
+  const chave = { remoteJid: 'cache@g.us', id: 'view-once-1', isViewOnce: true }
+  const media = { mediaKey: Buffer.from('segredo-exemplo'), directPath: '/media' }
+  midia.vincularCache(conexao)
+  midia.registrarRecebidas(conexao, [{
+    key: chave,
+    message: { viewOnceMessageV2: { message: { imageMessage: media } } }
+  }])
+  const original = midia.obterOriginal(conexao, chave.remoteJid, chave.id)
+  assert.equal(midia.extrair(original.message, 'image'), media)
+})
+
+test('stub de visualização única não inventa mídia no cache', () => {
+  const conexao = {}
+  midia.vincularCache(conexao)
+  midia.registrarRecebidas(conexao, [{
+    key: { remoteJid: 'cache@g.us', id: 'stub-1', isViewOnce: true }
+  }])
+  assert.equal(midia.obterOriginal(conexao, 'cache@g.us', 'stub-1'), null)
+})
+
+test('evento parcial não substitui mídia original', () => {
+  const conexao = {}
+  midia.vincularCache(conexao)
+  const key = { remoteJid: 'cache@g.us', id: 'view-once-2' }
+  const media = { mediaKey: Buffer.from('chave'), directPath: '/origem' }
+  midia.registrarRecebidas(conexao, [{
+    key, message: { viewOnceMessageV2: { message: { imageMessage: media } } }
+  }])
+  midia.registrarRecebidas(conexao, [{
+    key, update: { message: { imageMessage: { viewOnce: true } } }
+  }])
+  assert.equal(midia.extrair(midia.obterOriginal(conexao, key.remoteJid, key.id).message, 'image'), media)
+})
+
+test('cache em RAM acompanha reconexão sem acessar outro chat', () => {
+  const novoSocket = {}
+  midia.vincularCache(novoSocket)
+  assert.ok(midia.obterOriginal(novoSocket, 'cache@g.us', 'view-once-1'))
+  assert.equal(midia.obterOriginal(novoSocket, 'outro@g.us', 'view-once-1'), null)
+})
