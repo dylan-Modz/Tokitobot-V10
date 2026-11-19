@@ -35,7 +35,7 @@
     "qrcode-terminal": "^0.12.0",
     "uuid": "^9.0.1",
     "yt-search": "^2.13.1",
-    "@stone-wpp/ofc": "github:dylan-Modz/stone-wpp-ofc#db56a78f241bcd4c3c46c514091c2d0ca86d5911"
+    "@stone-wpp/ofc": "github:dylan-Modz/stone-wpp-ofc#e2b693575ae85498fd9203b0f798a9ab3c10a9de"
   },
   "repository": {
     "type": "git",
