@@ -168,12 +168,14 @@ const registrarRecebidas = (socket, mensagens) => {
     if (!jid || !id) continue
     const mensagem = item?.message || item?.update?.message
     if (!mensagem) {
-      if (item?.key?.isViewOnce) console.log('[REVELAR RX]', {
-        tipoEvento: item.update ? 'update' : 'upsert',
-        tipo: 'viewOnceStub',
-        temConteudo: false, temChave: false, temCaminho: false,
-        cacheOriginal: cache.has(jid + '|' + id)
-      })
+      if (item?.key?.isViewOnce && process.env.TOKITO_DEBUG_RX === '1') {
+        console.log('[REVELAR RX]', {
+          tipoEvento: item.update ? 'update' : 'upsert',
+          tipo: 'viewOnceStub',
+          temConteudo: false, temChave: false, temCaminho: false,
+          cacheOriginal: cache.has(jid + '|' + id)
+        })
+      }
       continue
     }
     const conteudo = desenrolar(mensagem)
@@ -191,7 +193,7 @@ const registrarRecebidas = (socket, mensagens) => {
       mensagem.viewOnceMessage || mensagem.viewOnceMessageV2 ||
       mensagem.viewOnceMessageV2Extension
     )
-    if (viewOnce) console.log('[REVELAR RX]', {
+    if (viewOnce && process.env.TOKITO_DEBUG_RX === '1') console.log('[REVELAR RX]', {
       tipoEvento: item.update ? 'update' : 'upsert',
       tipo: conteudo?.imageMessage ? 'image' : conteudo?.audioMessage ? 'audio' : 'video',
       temChave: Boolean(media.mediaKey),
