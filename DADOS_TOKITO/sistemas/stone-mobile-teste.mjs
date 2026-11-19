@@ -50,7 +50,11 @@ async function iniciar() {
   }
   fs.mkdirSync(sessao, { recursive: true, mode: 0o700 })
   info('Sessão isolada: DADOS_TOKITO/database/stone-mobile-teste')
+  aviso('Mantenha esta pasta ao atualizar o ZIP. Substituir toda a instalacao apaga a sessao de teste.')
   aviso('Nunca copie a pasta qrcode da instalação principal para este teste.')
+  if (sessao.startsWith('/sdcard/')) {
+    aviso('O banco da sessao esta no armazenamento compartilhado Android. Evite compartilhar esse diretorio.')
+  }
   let modoAtual = 'inicializando'
   const receptor = await criarReceptorExperimentalStone({
     diretorio: sessao,
@@ -59,6 +63,19 @@ async function iniciar() {
     tentarAndroidAposVinculo: experimental,
     avisar: info,
     evento: (tipo, dados) => {
+      if (tipo === 'sessao') {
+        info('Banco SQLite: ' + (dados.bancoExiste ? 'encontrado' : 'ainda nao criado'))
+        info('Credenciais: ' + (dados.registrada ? 'sessao registrada' : 'nao registradas'))
+        if (dados.falhaLeitura) erro('Falha ao ler sessao salva. Nao apague o banco SQLite.')
+      }
+      if (tipo === 'sessao-verificada') {
+        if (dados.registrada && dados.bancoExiste && !dados.falhaLeitura) {
+          info('Sessao CONFIRMADA no SQLite. Feche com Ctrl+C e abra novamente com a MESMA pasta.')
+        } else {
+          erro('Pareamento ocorreu, mas nao foi possivel confirmar as credenciais no SQLite.')
+          aviso('Nao substitua o ZIP nem apague DADOS_TOKITO/database/stone-mobile-teste.')
+        }
+      }
       if (tipo === 'codigo') {
         const c = String(dados.codigo || '').replace(/\s|-/g, '')
         titulo('𝙲𝙾́𝙳𝙸𝙶𝙾 𝙳𝙴 𝙲𝙾𝙽𝙴𝚇𝙰̃𝙾')
