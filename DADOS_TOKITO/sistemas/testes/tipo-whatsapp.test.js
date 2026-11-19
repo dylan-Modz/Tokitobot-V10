@@ -14,31 +14,32 @@ test('sessão antiga preserva identificação original', t => {
   assert.deepEqual(navegador(lerTipo(dir)), ['Linux', 'Opera', '10.0.22631'])
 })
 
-test('WhatsApp Normal usa perfil desktop para pareamento', t => {
+test('WhatsApp Normal faz primeiro pareamento no browser original', t => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'tokito-tipo-'))
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }))
   salvarTipo(dir, 'normal')
   assert.equal(lerTipo(dir), 'normal')
-  assert.equal(nomeTipo(lerTipo(dir)), 'WhatsApp Normal')
-  let navegadorRecebido = null
-  const Browsers = { windows: nome => {
-    navegadorRecebido = nome
-    return ['Windows', nome, '10.0.22631']
+  assert.deepEqual(navegador('normal', undefined, false), ['Linux', 'Opera', '10.0.22631'])
+})
+
+test('WhatsApp Normal usa Browsers.android(13) depois de registrado', () => {
+  const chamadas = []
+  const Browsers = { android: nome => {
+    chamadas.push(nome)
+    return [nome, 'Android', '']
   } }
-  assert.deepEqual(navegador(lerTipo(dir), Browsers), ['Windows', 'Chrome', '10.0.22631'])
-  assert.equal(navegadorRecebido, 'Chrome')
+  assert.deepEqual(navegador('normal', Browsers, true), ['13', 'Android', ''])
+  assert.deepEqual(chamadas, ['13'])
 })
 
-test('WhatsApp Business conserva navegador atual do bot', t => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'tokito-tipo-'))
-  t.after(() => fs.rmSync(dir, { recursive: true, force: true }))
-  salvarTipo(dir, 'business')
-  assert.equal(lerTipo(dir), 'business')
-  assert.equal(nomeTipo(lerTipo(dir)), 'WhatsApp Business')
+test('WhatsApp Business usa SMB_ANDROID somente apos registrar', () => {
+  const Browsers = { android: nome => [nome, 'Android', ''] }
+  assert.deepEqual(navegador('business', Browsers, false), ['Linux', 'Opera', '10.0.22631'])
+  assert.deepEqual(navegador('business', Browsers, true), ['SMB_ANDROID', 'Android', ''])
 })
 
-test('perfil desktop exige Browsers.windows da Stone', () => {
-  assert.throws(() => navegador('normal', {}), /STONE_BROWSER_WINDOWS_INDISPONIVEL/)
+test('perfil registrado precisa de Browsers.android da Stone', () => {
+  assert.throws(() => navegador('normal', {}, true), /STONE_BROWSER_ANDROID_INDISPONIVEL/)
 })
 
 test('não sobrescreve creds.json', t => {
