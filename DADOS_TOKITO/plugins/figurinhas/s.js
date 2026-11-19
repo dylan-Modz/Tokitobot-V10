@@ -81,7 +81,7 @@ dylan.setCommand({
     } catch (error) {
       console.warn('[STICKER]', error?.code || error?.message || 'falha')
       const descricao = error?.code === 'SEM_CHAVE'
-        ? 'A mensagem chegou sem a chave de mídia. Não foi possível criar a figurinha.'
+        ? 'O WhatsApp não entregou essa mídia ao bot (sem chave de arquivo). Peça para reenviar a imagem ou vídeo normalmente, sem visualização única.'
         : error?.code === 'SEM_CAMINHO'
         ? 'O WhatsApp não disponibilizou o arquivo da mensagem citada.'
         : 'Não foi possível baixar ou converter essa mídia em figurinha.'
