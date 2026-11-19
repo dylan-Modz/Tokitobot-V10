@@ -142,4 +142,65 @@ const baixar = async (ctx, tipo, lista, referencia = {}) => {
   throw error
 }
 
-module.exports = { desenrolar, obterContexto, extrair, completo, obterOriginal, preparar, candidatos, baixar }
+
+/**
+ * Cache limitado, somente em RAM, compartilhado por reconexoes do mesmo
+ * processo. Preserva a mensagem criptografada/metadata original se a Stone
+ * de fato a recebeu. Nao inventa chave, arquivo ou caminho de mídia.
+ */
+const MAX_CACHE = 400
+const originaisRecebidos = new Map()
+
+const vincularCache = socket => {
+  if (socket) socket.__tokitoMidiasOriginais = originaisRecebidos
+  return originaisRecebidos
+}
+
+const registrarRecebidas = (socket, mensagens) => {
+  const cache = vincularCache(socket)
+  const agora = Date.now()
+  for (const [id, item] of cache) {
+    if (agora - item.at > CACHE_MS) cache.delete(id)
+  }
+  for (const item of mensagens || []) {
+    const jid = item?.key?.remoteJid
+    const id = item?.key?.id
+    if (!jid || !id) continue
+    const mensagem = item?.message || item?.update?.message
+    if (!mensagem) {
+      if (item?.key?.isViewOnce) console.log('[REVELAR RX]', {
+        tipoEvento: item.update ? 'update' : 'upsert',
+        tipo: 'viewOnceStub',
+        temConteudo: false, temChave: false, temCaminho: false,
+        cacheOriginal: cache.has(jid + '|' + id)
+      })
+      continue
+    }
+    const conteudo = desenrolar(mensagem)
+    const media = conteudo?.imageMessage || conteudo?.videoMessage ||
+      conteudo?.ptvMessage || conteudo?.audioMessage
+    if (!media) continue
+    const chave = jid + '|' + id
+    // Evita substituir um original completo por um evento posterior parcial.
+    if (media.mediaKey) {
+      cache.delete(chave)
+      cache.set(chave, { message: mensagem, key: item.key, at: agora })
+    }
+    const viewOnce = Boolean(
+      item.key?.isViewOnce || media.viewOnce ||
+      mensagem.viewOnceMessage || mensagem.viewOnceMessageV2 ||
+      mensagem.viewOnceMessageV2Extension
+    )
+    if (viewOnce) console.log('[REVELAR RX]', {
+      tipoEvento: item.update ? 'update' : 'upsert',
+      tipo: conteudo?.imageMessage ? 'image' : conteudo?.audioMessage ? 'audio' : 'video',
+      temChave: Boolean(media.mediaKey),
+      temCaminho: Boolean(media.url || media.directPath),
+      cacheOriginal: cache.has(chave),
+      viewOnce: true
+    })
+  }
+  while (cache.size > MAX_CACHE) cache.delete(cache.keys().next().value)
+}
+
+module.exports = { desenrolar, obterContexto, extrair, completo, obterOriginal, preparar, candidatos, baixar, vincularCache, registrarRecebidas }
