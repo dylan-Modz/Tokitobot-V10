@@ -762,8 +762,51 @@ global.mostrarQrTokito = false
 funcoes.iniciar(tokito, prefix)
 if (!state.creds.registered && metodo === 'codigo') await startPairing(tokito)
 if (!state.creds.registered && metodo === 'qr') info('Aguardando geração do QR-Code...')
+// Cada chat mantém sua ordem; chats distintos nao ficam bloqueados
+// por comandos pesados, respostas de grupos ou tarefas de sincronizacao.
+const pendentesPorChat = new Map()
+const enfileirarUpsert = upsert => {
+  if (!Array.isArray(upsert?.messages) || upsert.messages.length === 0) return
+  registrarMidiasRecebidas(tokito, upsert.messages)
+  const gruposDoLote = new Map()
+  for (const mensagem of upsert.messages) {
+    const jid = String(mensagem?.key?.remoteJid || '')
+    if (!jid) continue
+    if (!gruposDoLote.has(jid)) gruposDoLote.set(jid, [])
+    gruposDoLote.get(jid).push(mensagem)
+  }
+  for (const [jid, messages] of gruposDoLote) {
+    const anterior = pendentesPorChat.get(jid) || Promise.resolve()
+    const inicioFila = Date.now()
+    const tarefa = anterior.catch(() => {}).then(async () => {
+      if (socketAtual !== tokito) return
+      const eventoChat = { ...upsert, messages }
+      try {
+        await antiInvisivel.receber(tokito, eventoChat)
+      } catch (error) {
+        erroSistema('Monitoramento Anti-Invisivel', error)
+      }
+      if (socketAtual !== tokito) return
+      await processarMsg(tokito, eventoChat)
+    }).catch(error => {
+      erroSistema('Erro no tokito.js', error)
+    })
+    pendentesPorChat.set(jid, tarefa)
+    void tarefa.then(() => {
+      if (pendentesPorChat.get(jid) === tarefa) pendentesPorChat.delete(jid)
+      if (process.env.TOKITO_DEBUG_LATENCY === '1') {
+        const duracao = Date.now() - inicioFila
+        if (duracao >= 2000) info('Processamento de mensagens: ' + duracao + ' ms.')
+      }
+    })
+  }
+}
 tokito.ev.process(async events => {
 if (socketAtual !== tokito) return
+// Prioridade: entregar mensagens aos comandos antes de tarefas de grupo,
+// conexao e sincronizacao que podem demorar vários segundos.
+if (events['messages.update']) registrarMidiasRecebidas(tokito, events['messages.update'])
+if (events['messages.upsert']) enfileirarUpsert(events['messages.upsert'])
 // Recarrega configurações alteradas pelo painel ou por comandos do WhatsApp.
 recarregarConfigBot()
 /*
@@ -1265,7 +1308,7 @@ tempo: agora
 return true
 })
 .catch(() => false)
-await Promise.race([aquecerGrupos, delay(2500)]).catch(() => {})
+void aquecerGrupos
 }
 promocoes.iniciar(tokito)
 autoInativo.iniciar(tokito, {
@@ -1289,7 +1332,7 @@ console.log('')
 sucesso(`${NomeDoBot} conectado com sucesso.`)
 info('WhatsApp selecionado: ' + nomeTipoWhatsapp(lerTipoWhatsapp(qrcode)) + ' (aparelho vinculado).')
 console.log('')
-await sistemaSub?.iniciar(tokito).catch(error => erroSistema('Erro ao iniciar sistema de Sub Bots', error))
+void Promise.resolve().then(() => sistemaSub?.iniciar(tokito)).catch(error => erroSistema('Erro ao iniciar sistema de Sub Bots', error))
 }
 break
 case 'close':
@@ -1349,23 +1392,8 @@ if (events['messages.unavailable'] && process.env.TOKITO_DEBUG_RX === '1') {
     })
   }
 }
-if (events['messages.update']) {
-registrarMidiasRecebidas(tokito, events['messages.update'])
-}
-if (events['messages.upsert']) {
-const upsert = events['messages.upsert']
-try {
-registrarMidiasRecebidas(tokito, upsert?.messages)
-await antiInvisivel.receber(tokito, upsert).catch(error => {
-erroSistema('Monitoramento Anti-Invisivel', error)
-})
-if (!processarMsg) processarMsg = require('../tokito.js')
-if (process.env.TOKITO_DEBUG_RX === '1') info(`RX messages.upsert recebido (${upsert?.type || 'sem tipo'})`)
-await processarMsg(tokito, upsert)
-} catch (error) {
-erroSistema('Erro no tokito.js', error)
-}
-}
+// messages.update e messages.upsert são enfileirados no começo
+// do processamento do lote, sem esperar as tarefas de grupo.
 if (events['creds.update']) await saveCreds()
 })
 iniciando = false
