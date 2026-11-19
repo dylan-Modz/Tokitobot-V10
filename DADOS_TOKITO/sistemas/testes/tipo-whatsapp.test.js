@@ -14,19 +14,19 @@ test('sessão antiga preserva identificação original', t => {
   assert.deepEqual(navegador(lerTipo(dir)), ['Linux', 'Opera', '10.0.22631'])
 })
 
-test('WhatsApp Normal usa perfil web Android experimental', t => {
+test('WhatsApp Normal usa perfil desktop para pareamento', t => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'tokito-tipo-'))
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }))
   salvarTipo(dir, 'normal')
   assert.equal(lerTipo(dir), 'normal')
   assert.equal(nomeTipo(lerTipo(dir)), 'WhatsApp Normal')
   let navegadorRecebido = null
-  const Browsers = { android: nome => {
+  const Browsers = { windows: nome => {
     navegadorRecebido = nome
-    return [nome, 'Android', '']
+    return ['Windows', nome, '10.0.22631']
   } }
-  assert.deepEqual(navegador(lerTipo(dir), Browsers), ['13', 'Android', ''])
-  assert.equal(navegadorRecebido, '13')
+  assert.deepEqual(navegador(lerTipo(dir), Browsers), ['Windows', 'Chrome', '10.0.22631'])
+  assert.equal(navegadorRecebido, 'Chrome')
 })
 
 test('WhatsApp Business conserva navegador atual do bot', t => {
@@ -37,8 +37,8 @@ test('WhatsApp Business conserva navegador atual do bot', t => {
   assert.equal(nomeTipo(lerTipo(dir)), 'WhatsApp Business')
 })
 
-test('o modo Android exige a funcao Browsers.android da Stone', () => {
-  assert.throws(() => navegador('normal', {}), /STONE_BROWSER_ANDROID_INDISPONIVEL/)
+test('perfil desktop exige Browsers.windows da Stone', () => {
+  assert.throws(() => navegador('normal', {}), /STONE_BROWSER_WINDOWS_INDISPONIVEL/)
 })
 
 test('não sobrescreve creds.json', t => {
