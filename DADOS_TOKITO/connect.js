@@ -28,226 +28,157 @@
  * ============================================================
  */
 
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
+const { default: socket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, fetchLatestWaWebVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent, Browsers } = require('@stone-wpp/ofc')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario, cacheGp } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
 const registro = require('./sistemas/registro.js')
 const modulos = require('./sistemas/modulos.js')
 const detector = require('./detector.js')
-const qrcodeTerminal = require('qrcode-terminal')
+const qrterminal = require('qrcode-terminal')
 const dadosSistema = require('./sistemas/dados.js')
-const controleRemoto = require('./sistemas/controle.js')
-const avisosOficiais = require('./sistemas/avisos.js')
-const avisosPlanoSite = require('./sistemas/planos-site.js')
-const autoInativo = require('./sistemas/autoinativo.js')
-const donoSistema = require('./sistemas/dono.js')
-const antiNuke = require('./sistemas/nuke.js')
-const antiInvisivel = require('./sistemas/antiinvisivel.js')
-const sorteioGrupo = require('./sistemas/sorteios.js')
+const controle = require('./sistemas/controle.js')
+const avisos = require('./sistemas/avisos.js')
+const planos = require('./sistemas/planos-site.js')
+const inativo = require('./sistemas/autoinativo.js')
+const dono = require('./sistemas/dono.js')
+const nuke = require('./sistemas/nuke.js')
+const invisivel = require('./sistemas/antiinvisivel.js')
+const sorteios = require('./sistemas/sorteios.js')
 const promocoes = require('./sistemas/promocoes.js')
 const placar = require('./database/lib/placar.js')
-const runtimeSub = require('./sub/runtime.js')
-const sistemaSub = runtimeSub.isSubBot ? null : require('./sub/index.js')
+const runtime = require('./sub/runtime.js')
+const { lerTipo, salvarTipo, nomeTipo, navegador } = require('./sistemas/tipo-whatsapp.js')
+const subs = runtime.isSubBot ? null : require('./sub/index.js')
 
-const CONFIG_FILE = path.join(__dirname, 'INFO_DADOS', 'config-all.json')
-const qrcode = runtimeSub.sessionDir
-const grupos = runtimeSub.groupsDir
+const arquivoConfig = path.join(__dirname, 'INFO_DADOS', 'config-all.json')
+const qrcode = runtime.sessionDir
+const grupos = runtime.groupsDir
 const logger = pino({ level: 'silent' })
 
-const rl = runtimeSub.isSubBot ? null : readline.createInterface({ input: process.stdin, output: process.stdout })
-const question = text => (runtimeSub.isSubBot ? Promise.resolve('') : new Promise(resolve => rl.question(text, resolve)))
+const rl = runtime.isSubBot ? null : readline.createInterface({ input: process.stdin, output: process.stdout })
+const question = text => (runtime.isSubBot ? Promise.resolve('') : new Promise(resolve => rl.question(text, resolve)))
 
-const msgRetryCounterCache = new NodeCache()
+const retry = new NodeCache()
 const fotos = new NodeCache({ stdTTL: 1800, checkperiod: 60 })
-const correcoesAntirroubo = new Map()
-// Guarda temporariamente os metadados da mídia recebida antes que a citação
-// do WhatsApp omita mediaKey/directPath. Não baixa nem salva arquivos no disco.
-const MIDIA_RECENTE_MS = 10 * 60 * 1000
-const MIDIA_RECENTE_MAX = 400
-const envolverMidiaOriginal = entrada => {
-let atual = entrada || {}
-for (let i = 0; i < 12; i++) {
-const proxima = atual.ephemeralMessage?.message ||
-atual.viewOnceMessage?.message ||
-atual.viewOnceMessageV2?.message ||
-atual.viewOnceMessageV2Extension?.message ||
-atual.documentWithCaptionMessage?.message ||
-atual.editedMessage?.message ||
-atual.associatedChildMessage?.message
-if (!proxima) break
-atual = proxima
-}
-return atual
-}
-const registrarMidiasRecebidas = (sock, messages) => {
-const cache = (sock.__tokitoMidiasOriginais ||= new Map())
-const agora = Date.now()
-for (const [id, item] of cache) {
-if (agora - item.at > MIDIA_RECENTE_MS) cache.delete(id)
-}
-for (const item of messages || []) {
-const jid = item?.key?.remoteJid
-const id = item?.key?.id
-const mensagem = item?.message || item?.update?.message
-if (!jid || !id) continue
-if (!mensagem) {
-if (item?.key?.isViewOnce) {
-console.log('[REVELAR RX]', {
-tipoEvento: item.update ? 'update' : 'upsert',
-tipo: 'viewOnceStub',
-temConteudo: false,
-temChave: false,
-temCaminho: false
-})
-}
-continue
-}
-const conteudo = envolverMidiaOriginal(mensagem)
-const media = conteudo?.imageMessage || conteudo?.videoMessage ||
-conteudo?.ptvMessage || conteudo?.audioMessage
-if (!media) continue
-const chave = jid + '|' + id
-const completa = Boolean(media.mediaKey && (media.url || media.directPath))
-const antiga = cache.get(chave)
-// Um update parcial não deve sobrescrever uma mídia completa já recebida.
-if (!completa && antiga) continue
-cache.delete(chave)
-cache.set(chave, { message: mensagem, key: item.key, at: agora })
-// Diagnóstico mínimo de view-once, habilitado automaticamente na hospedagem.
-// Não registra IDs, remetentes, URLs, mediaKey, miniaturas ou conteúdo.
-const viewOnce = Boolean(
-item.key?.isViewOnce || media.viewOnce ||
-mensagem.viewOnceMessage || mensagem.viewOnceMessageV2 ||
-mensagem.viewOnceMessageV2Extension
-)
-if (viewOnce) {
-console.log('[REVELAR RX]', {
-tipo: conteudo?.imageMessage ? 'image' : conteudo?.audioMessage ? 'audio' : 'video',
-temChave: Boolean(media.mediaKey),
-temCaminho: Boolean(media.url || media.directPath),
-tipoEvento: item.update ? 'update' : 'upsert',
-viewOnce: true
-})
-}
-}
-while (cache.size > MIDIA_RECENTE_MAX) cache.delete(cache.keys().next().value)
-}
-
+const correcoes = new Map()
+const {
+  registrarRecebidas: midias,
+  vincularCache: vincular
+} = require('./sistemas/midia-citada')
 
 let { NomeDoBot, ownerName, prefix, channel, channeldl, ownerNumber, CREDENTIALS_USER, API_URL, API_KEY_TOKITO, TOKEN_SALA, TOKEN_LIKE_FF } = require('./INFO_DADOS/config-all.json')
-let iniciando = false, reconectando = false, metodo = null, ultimoQr = null, processarMsg = null
-let socketAtual = null
-let primeiraConexaoSub = false
+let iniciando = false, reconectando = false, metodo = null, ultimoQr = null, processar = null
+let bot = null
+let primeiraSub = false
 
-// A mensagem IPC só pode ser enviada enquanto o canal com o bot principal existir.
-const enviarAoPai = mensagem => {
-if (!runtimeSub.isSubBot || !process.connected || typeof process.send !== 'function') return false
-try {
-process.send(mensagem, error => {
-if (error && error.code !== 'ERR_IPC_CHANNEL_CLOSED') {
-erroSistema('Comunicação com bot principal', error)
-}
-})
-return true
-} catch (error) {
-if (error?.code !== 'ERR_IPC_CHANNEL_CLOSED') erroSistema('Comunicação com bot principal', error)
-return false
-}
+const enviarPai = mensagem => {
+  if (!runtime.isSubBot || !process.connected || typeof process.send !== 'function') return false
+  try {
+    process.send(mensagem, error => {
+      if (error && error.code !== 'ERR_IPC_CHANNEL_CLOSED') {
+        erroSistema('Comunicação com bot principal', error)
+      }
+    })
+    return true
+  } catch (error) {
+    if (error?.code !== 'ERR_IPC_CHANNEL_CLOSED') erroSistema('Comunicação com bot principal', error)
+    return false
+  }
 }
 
-if (runtimeSub.isSubBot) {
-process.once('disconnect', () => {
-aviso('Bot principal foi encerrado. Finalizando Sub Bot para evitar sessões duplicadas.')
-process.exit(0)
-})
+if (runtime.isSubBot) {
+  process.once('disconnect', () => {
+    aviso('Bot principal foi encerrado. Finalizando Sub Bot para evitar sessões duplicadas.')
+    process.exit(0)
+  })
 }
 
 if (!fs.existsSync(qrcode)) fs.mkdirSync(qrcode, { recursive: true })
 if (!fs.existsSync(grupos)) fs.mkdirSync(grupos, { recursive: true })
 
-const lerConfigBot = () => {
-try {
-return JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'))
-} catch {
-return {}
-}
-}
-
-const recarregarConfigBot = () => {
-const dados = runtimeSub.config()
-;({ NomeDoBot, ownerName, prefix, channel, channeldl, ownerNumber, CREDENTIALS_USER, API_URL, API_KEY_TOKITO, TOKEN_SALA, TOKEN_LIKE_FF } = dados)
-NomeDoBot = String(NomeDoBot || 'TokitoBot-MD')
-ownerName = String(ownerName || 'Dylan Modz')
-prefix = String(prefix || '!')
-channel = String(channel || '')
-channeldl = String(channeldl || '0@newsletter')
-ownerNumber = String(ownerNumber || '')
-CREDENTIALS_USER = CREDENTIALS_USER && typeof CREDENTIALS_USER === 'object' ? CREDENTIALS_USER : {}
-API_URL = String(API_URL || 'https://tokito-apis.com.br').replace(/\/+$/, '')
-API_KEY_TOKITO = String(API_KEY_TOKITO || '')
-TOKEN_SALA = String(TOKEN_SALA || '')
-TOKEN_LIKE_FF = String(TOKEN_LIKE_FF || '')
-return dados
+const lerConfig = () => {
+  try {
+    return JSON.parse(fs.readFileSync(arquivoConfig, 'utf8'))
+  } catch {
+    return {}
+  }
 }
 
-const salvarConfigBot = config => {
-fs.writeFileSync(CONFIG_FILE, JSON.stringify(config, null, 2) + '\n')
-recarregarConfigBot()
-try {
-delete require.cache[require.resolve('./INFO_DADOS/config-all.json')]
-} catch {}
-try {
-delete require.cache[require.resolve('./database/lib/exports.js')]
-} catch {}
-return config
+const recarregar = () => {
+  const dados = runtime.config()
+  ;({ NomeDoBot, ownerName, prefix, channel, channeldl, ownerNumber, CREDENTIALS_USER, API_URL, API_KEY_TOKITO, TOKEN_SALA, TOKEN_LIKE_FF } = dados)
+  NomeDoBot = String(NomeDoBot || 'TokitoBot-MD')
+  ownerName = String(ownerName || 'Dylan Modz')
+  prefix = String(prefix || '!')
+  channel = String(channel || '')
+  channeldl = String(channeldl || '0@newsletter')
+  ownerNumber = String(ownerNumber || '')
+  CREDENTIALS_USER = CREDENTIALS_USER && typeof CREDENTIALS_USER === 'object' ? CREDENTIALS_USER : {}
+  API_URL = String(API_URL || 'https://tokito-apis.com.br').replace(/\/+$/, '')
+  API_KEY_TOKITO = String(API_KEY_TOKITO || '')
+  TOKEN_SALA = String(TOKEN_SALA || '')
+  TOKEN_LIKE_FF = String(TOKEN_LIKE_FF || '')
+  return dados
 }
 
-recarregarConfigBot()
-
-function collectNumbers(inputString) {
-return String(inputString || '').replace(/\D/g, '')
+const salvarConfig = config => {
+  fs.writeFileSync(arquivoConfig, JSON.stringify(config, null, 2) + '\n')
+  recarregar()
+  try {
+    delete require.cache[require.resolve('./INFO_DADOS/config-all.json')]
+  } catch {}
+  try {
+    delete require.cache[require.resolve('./database/lib/exports.js')]
+  } catch {}
+  return config
 }
 
-function normalizarJid(jid) {
-let texto = String(jid || '').trim()
-if (!texto) return ''
-if (texto.endsWith('@c.us')) texto = texto.replace('@c.us', '@s.whatsapp.net')
-if (texto.includes(':') && texto.includes('@')) texto = `${texto.split(':')[0]}@${texto.split('@')[1]}`
-if (texto.includes('@')) return texto
-const numero = collectNumbers(texto)
-return numero ? `${numero}@s.whatsapp.net` : ''
+recarregar()
+
+function numeros(inputString) {
+  return String(inputString || '').replace(/\D/g, '')
 }
 
-function numeroDoJid(jid) {
-return collectNumbers(
-String(jid || '')
-.split('@')[0]
-.split(':')[0]
-)
+function normalizar(jid) {
+  let texto = String(jid || '').trim()
+  if (!texto) return ''
+  if (texto.endsWith('@c.us')) texto = texto.replace('@c.us', '@s.whatsapp.net')
+  if (texto.includes(':') && texto.includes('@')) texto = `${texto.split(':')[0]}@${texto.split('@')[1]}`
+  if (texto.includes('@')) return texto
+  const numero = numeros(texto)
+  return numero ? `${numero}@s.whatsapp.net` : ''
 }
 
-function ocultarSegredos(texto) {
-let final = String(texto || '')
-final = final
-.replace(/([?&]apikey=)[^&\s]+/gi, '$1***')
-.replace(/([?&]api_key=)[^&\s]+/gi, '$1***')
-.replace(/([?&]key=)[^&\s]+/gi, '$1***')
-.replace(/([?&]token=)[^&\s]+/gi, '$1***')
-.replace(/(authorization:\s*bearer\s+)[^\s]+/gi, '$1***')
-if (API_KEY_TOKITO) final = final.split(String(API_KEY_TOKITO)).join('***')
-if (TOKEN_SALA) final = final.split(String(TOKEN_SALA)).join('***')
-if (TOKEN_LIKE_FF) final = final.split(String(TOKEN_LIKE_FF)).join('***')
-return final
+function telefone(jid) {
+  return numeros(
+  String(jid || '')
+  .split('@')[0]
+  .split(':')[0]
+  )
+}
+
+function ocultar(texto) {
+  let final = String(texto || '')
+  final = final
+  .replace(/([?&]apikey=)[^&\s]+/gi, '$1***')
+  .replace(/([?&]api_key=)[^&\s]+/gi, '$1***')
+  .replace(/([?&]key=)[^&\s]+/gi, '$1***')
+  .replace(/([?&]token=)[^&\s]+/gi, '$1***')
+  .replace(/(authorization:\s*bearer\s+)[^\s]+/gi, '$1***')
+  if (API_KEY_TOKITO) final = final.split(String(API_KEY_TOKITO)).join('***')
+  if (TOKEN_SALA) final = final.split(String(TOKEN_SALA)).join('***')
+  if (TOKEN_LIKE_FF) final = final.split(String(TOKEN_LIKE_FF)).join('***')
+  return final
 }
 
 const info = texto => console.log(colors.bgRed.white.bold(' INFO - TOKITO ') + colors.white(` - ${texto}`))
 const sucesso = texto => console.log(colors.bgGreen.black.bold(' OK - TOKITO ') + colors.white(` - ${texto}`))
 const aviso = texto => console.log(colors.bgYellow.black.bold(' AVISO - TOKITO ') + colors.white(` - ${texto}`))
-const erro = texto => console.log(colors.bgRed.white.bold(' ERRO - TOKITO ') + colors.white(` - ${ocultarSegredos(texto)}`))
+const erro = texto => console.log(colors.bgRed.white.bold(' ERRO - TOKITO ') + colors.white(` - ${ocultar(texto)}`))
 
 const erroSistema = (titulo, error) => {
-const mensagem = error?.message || error || 'Erro desconhecido'
-erro(`${titulo}: ${ocultarSegredos(mensagem)}`)
+  const mensagem = error?.message || error || 'Erro desconhecido'
+  erro(`${titulo}: ${ocultar(mensagem)}`)
 }
 
 const originalConsoleError = console.error
@@ -266,1148 +197,1142 @@ const forbiddenStrings = [
 ]
 
 console.error = function () {
-const message = ocultarSegredos(util.format(...arguments))
-if (forbiddenStrings.some(str => message.includes(str))) return
-originalConsoleError.call(console, message)
+  const message = ocultar(util.format(...arguments))
+  if (forbiddenStrings.some(str => message.includes(str))) return
+  originalConsoleError.call(console, message)
 }
 
 console.warn = function () {
-const message = ocultarSegredos(util.format(...arguments))
-if (forbiddenStrings.some(str => message.includes(str))) return
-originalConsoleWarn.call(console, message)
+  const message = ocultar(util.format(...arguments))
+  if (forbiddenStrings.some(str => message.includes(str))) return
+  originalConsoleWarn.call(console, message)
 }
 
 console.info = function () {
-const message = ocultarSegredos(util.format(...arguments))
-if (forbiddenStrings.some(str => message.includes(str))) return
-originalConsoleInfo.call(console, message)
+  const message = ocultar(util.format(...arguments))
+  if (forbiddenStrings.some(str => message.includes(str))) return
+  originalConsoleInfo.call(console, message)
 }
 
 const canalInfo = (mentions = []) => ({
-mentionedJid: mentions,
-...(channeldl && channeldl !== '0@newsletter'
-? {
-  isForwarded: true,
-  forwardingScore: 1,
-  forwardedNewsletterMessageInfo: {
-  newsletterJid: channeldl,
-  newsletterName: NomeDoBot,
-  serverMessageId: ''
+  mentionedJid: mentions,
+  ...(channeldl && channeldl !== '0@newsletter'
+  ? {
+    isForwarded: true,
+    forwardingScore: 1,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: channeldl,
+      newsletterName: NomeDoBot,
+      serverMessageId: ''
+    }
   }
-  }
-: {})
+  : {})
 })
 
-const UPDATE_CHECK_MS = 60 * 1000
+const intervalo = 60 * 1000
 
-// Evita exibir títulos técnicos de commits em inglês nos avisos do bot.
-const resumoEmPortugues = (valor, padrao) => {
-const texto = String(valor || '').trim()
-if (!texto) return padrao
-if (/^(?:\[(?:Correção|Atualização|Novidade|Melhoria)\]\s*)?(?:fix|feat|refactor|chore|perf|build|ci|test|docs)(?:\([^)]*\))?\s*:/i.test(texto)) return padrao
-return texto
+const resumo = (valor, padrao) => {
+  const texto = String(valor || '').trim()
+  if (!texto) return padrao
+  if (/^(?:\[(?:Correção|Atualização|Novidade|Melhoria)\]\s*)?(?:fix|feat|refactor|chore|perf|build|ci|test|docs)(?:\([^)]*\))?\s*:/i.test(texto)) return padrao
+  return texto
 }
 
-const textoAvisoUpdate = check => {
-const remoto = check?.remote || {}
-const reparo = check?.repair === true
-const mudancas = Array.isArray(remoto.changelog) ? remoto.changelog.slice(0, 10).map(item => resumoEmPortugues(item, 'Melhorias técnicas e ajustes internos do Tokito.')) : []
-const lista = mudancas.length
-? mudancas.map((item, index) => '> ' + (index + 1) + '. ׄ ( ' + String(item || '').trim() + ' )').join('\n')
-: '> • ׄ ( Melhorias, correções e novidades do Tokito. )'
-const obrigatoria = remoto.required === true ? '\n\n> ⚠️ ׄ ( ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ɪᴍᴘᴏʀᴛᴀɴᴛᴇ — ʀᴇᴄᴏᴍᴇɴᴅᴀᴅᴏ ᴀᴛᴜᴀʟɪᴢᴀʀ. )' : ''
-return [
-reparo
+const textoUpdate = check => {
+  const remoto = check?.remote || {}
+  const reparo = check?.repair === true
+  const mudancas = Array.isArray(remoto.changelog) ? remoto.changelog.slice(0, 10).map(item => resumo(item, 'Melhorias técnicas e ajustes internos do Tokito.')) : []
+  const lista = mudancas.length
+  ? mudancas.map((item, index) => '> ' + (index + 1) + '. ׄ ( ' + String(item || '').trim() + ' )').join('\n')
+  : '> • ׄ ( Melhorias, correções e novidades do Tokito. )'
+  const obrigatoria = remoto.required === true ? '\n\n> ⚠️ ׄ ( ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ɪᴍᴘᴏʀᴛᴀɴᴛᴇ — ʀᴇᴄᴏᴍᴇɴᴅᴀᴅᴏ ᴀᴛᴜᴀʟɪᴢᴀʀ. )' : ''
+  return [
+  reparo
   ? '- 🛠️ *𝚁𝙴𝙿𝙰𝚁𝙾 𝙳𝙾 𝚃𝙾𝙺𝙸𝚃𝙾 𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻*'
   : '- 🚀 *𝙽𝙾𝚅𝙰 𝙰𝚃𝚄𝙰𝙻𝙸𝚉𝙰𝙲̧𝙰̃𝙾 𝙳𝙸𝚂𝙿𝙾𝙽𝙸́𝚅𝙴𝙻*',
-'',
-'> 🤖 ׄ ( ᴛᴏᴋɪᴛᴏ ʙᴏᴛ ᴠ10 )',
-'> 📦 ׄ ( sᴜᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (check?.local?.publicVersion || check?.local?.version || '—') + ' )',
-reparo
+  '',
+  '> 🤖 ׄ ( ᴛᴏᴋɪᴛᴏ ʙᴏᴛ ᴠ10 )',
+  '> 📦 ׄ ( sᴜᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (check?.local?.publicVersion || check?.local?.version || '—') + ' )',
+  reparo
   ? '> 🛠️ ׄ ( ᴄᴏʀʀᴇᴄ̧ᴀ̃ᴏ ᴅᴏs ᴀʀǫᴜɪᴠᴏs ɴᴀ ᴍᴇsᴍᴀ ᴠᴇʀsᴀ̃ᴏ. )'
   : '> ✨ ׄ ( ɴᴏᴠᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (remoto.publicVersion || remoto.version || '—') + ' )',
-'> 📌 ׄ ( ' + resumoEmPortugues(remoto.title, String(remoto.notice || 'Nova atualização disponível').trim()) + ' )',
-'',
-'- 📝 *𝙾 𝚀𝚄𝙴 𝙼𝚄𝙳𝙾𝚄*',
-'',
-lista + obrigatoria,
-'',
-'> 🔎 ׄ ( ᴅᴇᴛᴀʟʜᴇs: ' + prefix + 'update info )',
-'> ⬆️ ׄ ( ᴀᴛᴜᴀʟɪᴢᴀʀ: ' + prefix + 'update start )',
-'> 💻 ׄ ( ᴛᴇʀᴍɪɴᴀʟ: npm start up )'
-].join('\n')
+  '> 📌 ׄ ( ' + resumo(remoto.title, String(remoto.notice || 'Nova atualização disponível').trim()) + ' )',
+  '',
+  '- 📝 *𝙾 𝚀𝚄𝙴 𝙼𝚄𝙳𝙾𝚄*',
+  '',
+  lista + obrigatoria,
+  '',
+  '> 🔎 ׄ ( ᴅᴇᴛᴀʟʜᴇs: ' + prefix + 'update info )',
+  '> ⬆️ ׄ ( ᴀᴛᴜᴀʟɪᴢᴀʀ: ' + prefix + 'update start )',
+  '> 💻 ׄ ( ᴛᴇʀᴍɪɴᴀʟ: npm start up )'
+  ].join('\n')
 }
 
-// Usa os mesmos quick_reply nativos do comando Play e do aviso de comando inválido.
-// O WhatsApp pode aceitar um card interativo sem exibi-lo. O aviso de versão
-// é uma mensagem de texto simples para não depender de mídia ou botões.
-// O monitor registra a tentativa; a entrega real depende do WhatsApp.
-const enviarAvisoUpdate = async (tokito, dono, texto) => {
-const enviada = await tokito.sendMessage(dono, { text: texto })
-if (!enviada) throw new Error('O WhatsApp não aceitou o envio do aviso em texto.')
-return true
+const notificar = async (tokito, dono, texto) => {
+  const enviada = await tokito.sendMessage(dono, { text: texto })
+  if (!enviada) throw new Error('O WhatsApp não aceitou o envio do aviso em texto.')
+  return true
 }
 
-const registrarFalhaAvisoUpdate = mensagem => {
-const motivo = String(mensagem || 'Falha desconhecida.').trim()
-if (global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ === motivo) return
-global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ = motivo
-aviso('Notificação de atualização: ' + motivo)
+const falha = mensagem => {
+  const motivo = String(mensagem || 'Falha desconhecida.').trim()
+  if (global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ === motivo) return
+  global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ = motivo
+  aviso('Notificação de atualização: ' + motivo)
 }
 
-// Prioridade: dono oficial, outro número de dono autorizado, conta do próprio bot.
-// Não interpreta LID nem placeholders como telefone.
-const destinatarioAvisoUpdate = tokito => {
-const candidatos = [
+const destinatario = tokito => {
+  const candidatos = [
   ['ownerNumber', ownerNumber],
   ['numero_dono1', nescessario?.numero_dono1]
-]
-for (const [origem, valor] of candidatos) {
-  const jid = normalizarJid(valor)
-  const numero = numeroDoJid(jid)
-  if (jid.endsWith('@s.whatsapp.net') && /^[1-9]\d{10,14}$/.test(numero))
+  ]
+  for (const [origem, valor] of candidatos) {
+    const jid = normalizar(valor)
+    const numero = telefone(jid)
+    if (jid.endsWith('@s.whatsapp.net') && /^[1-9]\d{10,14}$/.test(numero))
     return { jid, origem }
-}
-return null
+  }
+  return null
 }
 
-const verificarAvisoUpdate = async tokito => {
-// Os Sub Bots dividem o estado de atualizações com o Tokito principal.
-// Apenas o principal pode marcar uma versão como notificada.
-if (runtimeSub.isSubBot) return false
-if (global.__TOKITO_UPDATE_NOTICE_BUSY__) return false
-global.__TOKITO_UPDATE_NOTICE_BUSY__ = true
-try {
-if (!tokito || typeof tokito.sendMessage !== 'function') return false
-// Lê o número do dono de novo: ele pode mudar sem reiniciar a conexão.
-recarregarConfigBot()
-const check = await dadosSistema.verificarUpdate()
-global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__ = {
-at: new Date().toISOString(),
-ok: check?.ok === true,
-available: check?.available === true,
-fonte: String(check?.fonte || ''),
-local: String(check?.local?.version || ''),
-remota: String(check?.remote?.version || ''),
-error: check?.ok ? '' : String(check?.error || 'Falha na consulta.')
-}
-if (!check?.ok) {
-registrarFalhaAvisoUpdate(check?.error || 'Falha ao verificar novas versões.')
-return false
-}
-global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ = ''
-// Arquivos corrigidos na mesma versão também merecem aviso.
-// O fingerprint identifica o reparo específico e evita notificações em loop.
-if (!check.available || check.remote?.notify === false) return false
-const version = String(check.remote?.version || '').trim()
-const installed = String(check.local?.version || '').trim()
-const reparo = check.repair === true
-if (!version || (version === installed && !reparo)) return false
-const assinatura = reparo
-  ? (check.pendingFiles || []).map(item => item.gitSha || item.sha256 || '').join(':') +
+const verificar = async tokito => {
+  if (runtime.isSubBot) return false
+  if (global.__TOKITO_UPDATE_NOTICE_BUSY__) return false
+  global.__TOKITO_UPDATE_NOTICE_BUSY__ = true
+  try {
+    if (!tokito || typeof tokito.sendMessage !== 'function') return false
+    recarregar()
+    const check = await dadosSistema.verificarUpdate()
+    global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__ = {
+      at: new Date().toISOString(),
+      ok: check?.ok === true,
+      available: check?.available === true,
+      fonte: String(check?.fonte || ''),
+      local: String(check?.local?.version || ''),
+      remota: String(check?.remote?.version || ''),
+      error: check?.ok ? '' : String(check?.error || 'Falha na consulta.')
+    }
+    if (!check?.ok) {
+      falha(check?.error || 'Falha ao verificar novas versões.')
+      return false
+    }
+    global.__TOKITO_UPDATE_NOTICE_LAST_ERROR__ = ''
+    if (!check.available || check.remote?.notify === false) return false
+    const version = String(check.remote?.version || '').trim()
+    const installed = String(check.local?.version || '').trim()
+    const reparo = check.repair === true
+    if (!version || (version === installed && !reparo)) return false
+    const assinatura = reparo
+    ? (check.pendingFiles || []).map(item => item.gitSha || item.sha256 || '').join(':') +
     '|' + (check.pendingDelete || []).map(item => item.path || '').join(':')
-  : ''
-const chaveAviso = reparo ? version + '@' + assinatura : version
-const destino = destinatarioAvisoUpdate(tokito)
-if (!destino) {
-registrarFalhaAvisoUpdate('Aviso não enviado: configure o telefone do dono com #update destino aqui ou #update destino 55DDDNUMERO.')
-return false
-}
-const dono = destino.jid
-if (global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__)
-global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__.destino = destino.origem
-if (!dadosSistema.deveAvisarUpdate(chaveAviso, dono)) return false
-// Texto simples tem maior compatibilidade do que quick_reply e aviso por imagem.
-const enviada = await enviarAvisoUpdate(tokito, dono, textoAvisoUpdate(check))
-if (!enviada) throw new Error('O WhatsApp não confirmou o envio do aviso.')
-const salvo = dadosSistema.registrarAvisoUpdate(chaveAviso, dono)
-global.__TOKITO_UPDATE_NOTICE_LAST_SENT__ = {
-version, repair: reparo, at: new Date().toISOString(),
-attempt: salvo.lastNotifiedPrincipalAttempts || 1,
-method: 'texto', destino: destino.origem
-}
-sucesso('Aviso de ' + (reparo ? 'reparo' : 'atualização') + ' ' + version + ' enviado ao privado do dono (tentativa ' + (salvo.lastNotifiedPrincipalAttempts || 1) + ').')
-return true
-} catch (error) {
-registrarFalhaAvisoUpdate(error?.message || error)
-return false
-} finally {
-global.__TOKITO_UPDATE_NOTICE_BUSY__ = false
-}
-}
-
-const iniciarAvisosUpdate = tokito => {
-if (runtimeSub.isSubBot) return
-global.__TOKITO_UPDATE_SOCKET__ = tokito
-// Verificação rápida após conectar; se o envio falhar, o próximo ciclo tenta novamente.
-setTimeout(() => {
-const socketAtual = global.__TOKITO_UPDATE_SOCKET__
-if (socketAtual) verificarAvisoUpdate(socketAtual).catch(erro => registrarFalhaAvisoUpdate(erro?.message || erro))
-}, 5000).unref?.()
-if (global.__TOKITO_UPDATE_NOTICE_TIMER__) return
-global.__TOKITO_UPDATE_NOTICE_TIMER__ = setInterval(() => {
-const socketAtual = global.__TOKITO_UPDATE_SOCKET__
-if (socketAtual) verificarAvisoUpdate(socketAtual).catch(erro => registrarFalhaAvisoUpdate(erro?.message || erro))
-}, UPDATE_CHECK_MS)
-global.__TOKITO_UPDATE_NOTICE_TIMER__.unref?.()
+    : ''
+    const chaveAviso = reparo ? version + '@' + assinatura : version
+    const destino = destinatario(tokito)
+    if (!destino) {
+      falha('Aviso não enviado: configure o telefone do dono com #update destino aqui ou #update destino 55DDDNUMERO.')
+      return false
+    }
+    const dono = destino.jid
+    if (global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__)
+    global.__TOKITO_UPDATE_NOTICE_LAST_CHECK__.destino = destino.origem
+    if (!dadosSistema.deveAvisarUpdate(chaveAviso, dono)) return false
+    const enviada = await notificar(tokito, dono, textoUpdate(check))
+    if (!enviada) throw new Error('O WhatsApp não confirmou o envio do aviso.')
+    const salvo = dadosSistema.registrarAvisoUpdate(chaveAviso, dono)
+    global.__TOKITO_UPDATE_NOTICE_LAST_SENT__ = {
+      version, repair: reparo, at: new Date().toISOString(),
+      attempt: salvo.lastNotifiedPrincipalAttempts || 1,
+      method: 'texto', destino: destino.origem
+    }
+    sucesso('Aviso de ' + (reparo ? 'reparo' : 'atualização') + ' ' + version + ' enviado ao privado do dono (tentativa ' + (salvo.lastNotifiedPrincipalAttempts || 1) + ').')
+    return true
+  } catch (error) {
+    falha(error?.message || error)
+    return false
+  } finally {
+    global.__TOKITO_UPDATE_NOTICE_BUSY__ = false
+  }
 }
 
-async function startPairing(tokito) {
-const phoneNumber = runtimeSub.isSubBot ? String(process.env.TOKITO_SUB_NUMBER || runtimeSub.id || '') : await question(colors.white('╰━━➤ Digite o número com DDI: '))
-const numerosColetados = collectNumbers(phoneNumber)
-if (!numerosColetados || numerosColetados.length < 11) {
-if (runtimeSub.isSubBot) {
-enviarAoPai({ type: 'error', message: 'Número do Sub Bot inválido.' })
-return
-}
-erro('Número inválido. Exemplo: 5511999999999')
-return startPairing(tokito)
-}
-try {
-info(runtimeSub.isSubBot ? `Gerando código do Sub Bot ${numerosColetados}...` : 'Gerando código de conexão...')
-// Em uma sessão nova o socket ainda pode estar terminando o handshake interno.
-// Dar um pequeno tempo evita solicitar o pairing code enquanto a conexão ainda está fechando/abrindo.
-if (runtimeSub.isSubBot) await delay(1800)
-let code
-let ultimoErro
-for (let tentativa = 1; tentativa <= (runtimeSub.isSubBot ? 3 : 1); tentativa++) {
-try {
-code = await tokito.requestPairingCode(numerosColetados)
-if (code) break
-} catch (error) {
-ultimoErro = error
-if (!runtimeSub.isSubBot || tentativa >= 3) throw error
-aviso(`Pairing do Sub Bot ainda não ficou pronto. Nova tentativa ${tentativa + 1}/3...`)
-await delay(2200)
-}
-}
-if (!code && ultimoErro) throw ultimoErro
-if (runtimeSub.isSubBot) {
-enviarAoPai({ type: 'pairing-code', code, number: numerosColetados })
-return code
-}
-console.log('')
-topoPainel('❪🧊.ꯧ𝙲𝙾́𝙳𝙸𝙶𝙾 𝙳𝙴 𝙲𝙾𝙽𝙴𝚇𝙰̃𝙾ꯧ⸼🧊❫')
-console.log(colors.cyan('├̟⊹ 🔐 ') + colors.white(`〔 ${code} 〕`))
-fimPainel()
-console.log('')
-info('Abra o WhatsApp > Aparelhos conectados > Conectar com número de telefone.')
-console.log('')
-return code
-} catch (error) {
-if (runtimeSub.isSubBot) enviarAoPai({ type: 'error', message: String(error?.message || error) })
-erroSistema('Não foi possível gerar o código de conexão', error)
-}
+const monitorar = tokito => {
+  if (runtime.isSubBot) return
+  global.__TOKITO_UPDATE_SOCKET__ = tokito
+  setTimeout(() => {
+    const bot = global.__TOKITO_UPDATE_SOCKET__
+    if (bot) verificar(bot).catch(erro => falha(erro?.message || erro))
+  }, 5000).unref?.()
+  if (global.__TOKITO_UPDATE_NOTICE_TIMER__) return
+  global.__TOKITO_UPDATE_NOTICE_TIMER__ = setInterval(() => {
+    const bot = global.__TOKITO_UPDATE_SOCKET__
+    if (bot) verificar(bot).catch(erro => falha(erro?.message || erro))
+  }, intervalo)
+  global.__TOKITO_UPDATE_NOTICE_TIMER__.unref?.()
 }
 
-async function openWhatsappSupport() {
-const numero = collectNumbers(ownerNumber)
-console.log('')
-topoPainel('❪🧊.ꯧ𝚂𝚄𝙿𝙾𝚁𝚃𝙴 𝚃𝙾𝙺𝙸𝚃𝙾ꯧ⸼🧊❫')
-console.log(colors.cyan('├̟⊹ 🌊 ') + colors.white(`https://wa.me/${numero || '5511975431163'}`))
-fimPainel()
-console.log('')
+async function parear(tokito) {
+  const phoneNumber = runtime.isSubBot ? String(process.env.TOKITO_SUB_NUMBER || runtime.id || '') : await question(colors.white('╰━━➤ Digite o número com DDI: '))
+  const numerosColetados = numeros(phoneNumber)
+  if (!numerosColetados || numerosColetados.length < 11) {
+    if (runtime.isSubBot) {
+      enviarPai({ type: 'error', message: 'Número do Sub Bot inválido.' })
+      return
+    }
+    erro('Número inválido. Exemplo: 5511999999999')
+    return parear(tokito)
+  }
+  try {
+    info(runtime.isSubBot ? `Gerando código do Sub Bot ${numerosColetados}...` : 'Gerando código de conexão...')
+    if (runtime.isSubBot) await delay(1800)
+    let code
+    let ultimoErro
+    for (let tentativa = 1; tentativa <= (runtime.isSubBot ? 3 : 1); tentativa++) {
+      try {
+        code = await tokito.requestPairingCode(numerosColetados)
+        if (code) break
+      } catch (error) {
+        ultimoErro = error
+        if (!runtime.isSubBot || tentativa >= 3) throw error
+        aviso(`Pairing do Sub Bot ainda não ficou pronto. Nova tentativa ${tentativa + 1}/3...`)
+        await delay(2200)
+      }
+    }
+    if (!code && ultimoErro) throw ultimoErro
+    if (runtime.isSubBot) {
+      enviarPai({ type: 'pairing-code', code, number: numerosColetados })
+      return code
+    }
+    console.log('')
+    topoPainel('❪🧊.ꯧ𝙲𝙾́𝙳𝙸𝙶𝙾 𝙳𝙴 𝙲𝙾𝙽𝙴𝚇𝙰̃𝙾ꯧ⸼🧊❫')
+    console.log(colors.cyan('├̟⊹ 🔐 ') + colors.white(`〔 ${code} 〕`))
+    fimPainel()
+    console.log('')
+    info('Abra o WhatsApp > Aparelhos conectados > Conectar com número de telefone.')
+    console.log('')
+    return code
+  } catch (error) {
+    if (runtime.isSubBot) enviarPai({ type: 'error', message: String(error?.message || error) })
+    erroSistema('Não foi possível gerar o código de conexão', error)
+  }
+}
+
+async function suporte() {
+  const numero = numeros(ownerNumber)
+  console.log('')
+  topoPainel('❪🧊.ꯧ𝚂𝚄𝙿𝙾𝚁𝚃𝙴 𝚃𝙾𝙺𝙸𝚃𝙾ꯧ⸼🧊❫')
+  console.log(colors.cyan('├̟⊹ 🌊 ') + colors.white(`https://wa.me/${numero || '5511975431163'}`))
+  fimPainel()
+  console.log('')
 }
 
 const mostrarValor = (chave, valor) => {
-const texto = String(valor || '')
-if (!texto) return colors.gray('Não configurado')
-if (['API_KEY_TOKITO', 'TOKEN_SALA', 'TOKEN_LIKE_FF'].includes(chave)) {
-if (texto === '.') return colors.gray('.')
-if (texto.length <= 10) return colors.green('Configurado')
-return colors.green(`${texto.slice(0, 6)}••••${texto.slice(-4)}`)
-}
-return colors.white(texto)
+  const texto = String(valor || '')
+  if (!texto) return colors.gray('Não configurado')
+  if (['API_KEY_TOKITO', 'TOKEN_SALA', 'TOKEN_LIKE_FF'].includes(chave)) {
+    if (texto === '.') return colors.gray('.')
+    if (texto.length <= 10) return colors.green('Configurado')
+    return colors.green(`${texto.slice(0, 6)}••••${texto.slice(-4)}`)
+  }
+  return colors.white(texto)
 }
 
 const tokenValido = token => /^tokito_/i.test(String(token || '').trim())
 
 const topoPainel = titulo => {
-console.log(colors.cyan(titulo))
-console.log(colors.cyan('┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓'))
+  console.log(colors.cyan(titulo))
+  console.log(colors.cyan('┏☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┓'))
 }
 
 const fimPainel = () => console.log(colors.cyan('┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛'))
 
 const linhaPainel = (numero, icone, texto) => {
-console.log(colors.cyan(`├̟⊹ ${icone} `) + colors.white(`〔 ${numero} 〕`) + colors.red(' ➢ ') + colors.white(texto))
+  console.log(colors.cyan(`├̟⊹ ${icone} `) + colors.white(`〔 ${numero} 〕`) + colors.red(' ➢ ') + colors.white(texto))
 }
 
 async function editarCampoBot(chave, titulo, opcoes = {}) {
-const config = lerConfigBot()
-const atual = config[chave] ?? ''
-console.log('')
-info(`${titulo} atual: ${mostrarValor(chave, atual)}`)
-if (opcoes.ponto) console.log(colors.gray('Digite . caso não queira configurar este campo.'))
-console.log(colors.gray('Apenas pressione Enter para manter o valor atual.'))
-let valor = await question(colors.white.bold('╰━━➤ '))
-valor = String(valor ?? '').trim()
-if (!valor) {
-aviso('Nenhuma alteração realizada.')
-return false
-}
-if (chave === 'ownerNumber') {
-valor = collectNumbers(valor)
-if (valor.length < 10) {
-erro('Número inválido. Digite com DDI e DDD.')
-return false
-}
-}
-if (chave === 'prefix' && valor.length > 4) {
-erro('Prefixo muito grande. Use até 4 caracteres.')
-return false
-}
-if (chave === 'API_KEY_TOKITO' && !tokenValido(valor)) {
-erro('Token da API inválido. O token deve começar com tokito_.')
-return false
-}
-config[chave] = valor
-salvarConfigBot(config)
-sucesso(`${titulo} atualizado com sucesso.`)
-return true
+  const config = lerConfig()
+  const atual = config[chave] ?? ''
+  console.log('')
+  info(`${titulo} atual: ${mostrarValor(chave, atual)}`)
+  if (opcoes.ponto) console.log(colors.gray('Digite . caso não queira configurar este campo.'))
+  console.log(colors.gray('Apenas pressione Enter para manter o valor atual.'))
+  let valor = await question(colors.white.bold('╰━━➤ '))
+  valor = String(valor ?? '').trim()
+  if (!valor) {
+    aviso('Nenhuma alteração realizada.')
+    return false
+  }
+  if (chave === 'ownerNumber') {
+    valor = numeros(valor)
+    if (valor.length < 10) {
+      erro('Número inválido. Digite com DDI e DDD.')
+      return false
+    }
+  }
+  if (chave === 'prefix' && valor.length > 4) {
+    erro('Prefixo muito grande. Use até 4 caracteres.')
+    return false
+  }
+  if (chave === 'API_KEY_TOKITO' && !tokenValido(valor)) {
+    erro('Token da API inválido. O token deve começar com tokito_.')
+    return false
+  }
+  config[chave] = valor
+  salvarConfig(config)
+  sucesso(`${titulo} atualizado com sucesso.`)
+  return true
 }
 
 async function editarBot() {
-while (true) {
-recarregarConfigBot()
-console.log('')
-topoPainel('❪🧊.ꯧ𝙴𝙳𝙸𝚃𝙰𝚁 𝙿𝙰𝙸𝙽𝙴𝙻ꯧ⸼🧊❫')
-linhaPainel('1', '🤖', 'Nome do bot')
-linhaPainel('2', '👑', 'Nome do dono')
-linhaPainel('3', '📱', 'Número do dono')
-linhaPainel('4', '🧩', 'Prefixo do Bot')
-linhaPainel('5', '🎮', 'Token de salas')
-linhaPainel('6', '👍', 'Token de likes')
-linhaPainel('0', '🔙', 'Voltar')
-fimPainel()
-console.log(colors.gray('• Os dados principais podem ser alterados quando quiser.'))
-console.log(colors.gray('• Se não usar Salas ou Likes, digite . nesses campos.'))
-console.log(colors.gray('• O acesso Tokito é configurado automaticamente ao iniciar o bot.'))
-console.log(colors.gray('• Ao editar qualquer campo, pressione Enter para manter o valor atual.'))
-console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴏ ǫᴜᴇ ᴅᴇsᴇᴊᴀ ᴇᴅɪᴛᴀʀ'))
-let option = await question(colors.white.bold('╰━━➤ '))
-option = option.trim()
-if (option === '0') return
-if (option === '1') await editarCampoBot('NomeDoBot', 'Nome do bot')
-else if (option === '2') await editarCampoBot('ownerName', 'Nome do dono')
-else if (option === '3') await editarCampoBot('ownerNumber', 'Número do dono')
-else if (option === '4') await editarCampoBot('prefix', 'Prefixo')
-else if (option === '5') await editarCampoBot('TOKEN_SALA', 'Token de salas', { ponto: true })
-else if (option === '6') await editarCampoBot('TOKEN_LIKE_FF', 'Token de likes', { ponto: true })
-else erro('Opção inválida. Escolha uma opção do painel.')
-}
+  while (true) {
+    recarregar()
+    console.log('')
+    topoPainel('❪🧊.ꯧ𝙴𝙳𝙸𝚃𝙰𝚁 𝙿𝙰𝙸𝙽𝙴𝙻ꯧ⸼🧊❫')
+    linhaPainel('1', '🤖', 'Nome do bot')
+    linhaPainel('2', '👑', 'Nome do dono')
+    linhaPainel('3', '📱', 'Número do dono')
+    linhaPainel('4', '🧩', 'Prefixo do Bot')
+    linhaPainel('5', '🎮', 'Token de salas')
+    linhaPainel('6', '👍', 'Token de likes')
+    linhaPainel('0', '🔙', 'Voltar')
+    fimPainel()
+    console.log(colors.gray('• Os dados principais podem ser alterados quando quiser.'))
+    console.log(colors.gray('• Se não usar Salas ou Likes, digite . nesses campos.'))
+    console.log(colors.gray('• O acesso Tokito é configurado automaticamente ao iniciar o bot.'))
+    console.log(colors.gray('• Ao editar qualquer campo, pressione Enter para manter o valor atual.'))
+    console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴏ ǫᴜᴇ ᴅᴇsᴇᴊᴀ ᴇᴅɪᴛᴀʀ'))
+    let option = await question(colors.white.bold('╰━━➤ '))
+    option = option.trim()
+    if (option === '0') return
+    if (option === '1') await editarCampoBot('NomeDoBot', 'Nome do bot')
+    else if (option === '2') await editarCampoBot('ownerName', 'Nome do dono')
+    else if (option === '3') await editarCampoBot('ownerNumber', 'Número do dono')
+    else if (option === '4') await editarCampoBot('prefix', 'Prefixo')
+    else if (option === '5') await editarCampoBot('TOKEN_SALA', 'Token de salas', { ponto: true })
+    else if (option === '6') await editarCampoBot('TOKEN_LIKE_FF', 'Token de likes', { ponto: true })
+    else erro('Opção inválida. Escolha uma opção do painel.')
+  }
 }
 
 const tokenMascarado = token => {
-const valor = String(token || '').trim()
-if (!valor) return 'Não configurado'
-if (valor.length < 14) return `${valor.slice(0, 4)}••••`
-return `${valor.slice(0, 7)}••••••${valor.slice(-5)}`
+  const valor = String(token || '').trim()
+  if (!valor) return 'Não configurado'
+  if (valor.length < 14) return `${valor.slice(0, 4)}••••`
+  return `${valor.slice(0, 7)}••••••${valor.slice(-5)}`
 }
 
 const detalhesAcesso = acesso => {
-const plano = acesso?.plan || acesso?.license?.plan || null
-const nomePlano = plano?.nome || plano?.name || acesso?.license?.planName || 'Plano ativo'
-const expira = acesso?.license?.planExpiresAt || plano?.expiresAt || plano?.expires_at || null
-sucesso('Token confirmado com sucesso.')
-sucesso(`Acesso liberado · ${nomePlano}`)
-if (expira) {
-const data = new Date(expira)
-if (!Number.isNaN(data.getTime())) info(`Validade do plano: ${data.toLocaleString('pt-BR')}`)
-}
-info(`Token salvo: ${tokenMascarado(API_KEY_TOKITO)}`)
+  const plano = acesso?.plan || acesso?.license?.plan || null
+  const nomePlano = plano?.nome || plano?.name || acesso?.license?.planName || 'Plano ativo'
+  const expira = acesso?.license?.planExpiresAt || plano?.expiresAt || plano?.expires_at || null
+  sucesso('Token confirmado com sucesso.')
+  sucesso(`Acesso liberado · ${nomePlano}`)
+  if (expira) {
+    const data = new Date(expira)
+    if (!Number.isNaN(data.getTime())) info(`Validade do plano: ${data.toLocaleString('pt-BR')}`)
+  }
+  info(`Token salvo: ${tokenMascarado(API_KEY_TOKITO)}`)
 }
 
 async function solicitarToken() {
-console.log('')
-aviso('Não foi possível iniciar o bot porque nenhum Token Tokito válido foi encontrado.')
-console.log(colors.yellow.bold('⚠️  Seu token é pessoal. Não envie, compartilhe ou publique ele.'))
-console.log(colors.gray('Se você ainda não possui um token, crie sua conta e ative um plano em:'))
-console.log(colors.cyan('https://tokito-apis.com.br'))
-console.log('')
-info('Cole seu Token Tokito abaixo para liberar o acesso ao bot.')
-while (true) {
-let token = String((await question(colors.white.bold('╰━━➤ '))) || '').trim()
-if (!tokenValido(token)) {
-erro('Token inválido. Confira o token copiado no painel Tokito e tente novamente.')
-continue
-}
-const config = lerConfigBot()
-config.API_KEY_TOKITO = token
-salvarConfigBot(config)
-info('Verificando token e plano no servidor...')
-const acesso = await placar.entrada()
-if (acesso.allowed) {
-detalhesAcesso(acesso)
-return acesso
-}
-config.API_KEY_TOKITO = ''
-salvarConfigBot(config)
-erro(acesso.message || 'O token não possui acesso ativo ao Tokito Bot V10.')
-if (acesso.online === false) {
-aviso('Não foi possível confirmar o acesso no servidor agora. Verifique sua conexão e tente novamente.')
-}
-console.log(colors.gray('Você pode obter ou renovar seu acesso em https://tokito-apis.com.br'))
-}
+  console.log('')
+  aviso('Não foi possível iniciar o bot porque nenhum Token Tokito válido foi encontrado.')
+  console.log(colors.yellow.bold('⚠️  Seu token é pessoal. Não envie, compartilhe ou publique ele.'))
+  console.log(colors.gray('Se você ainda não possui um token, crie sua conta e ative um plano em:'))
+  console.log(colors.cyan('https://tokito-apis.com.br'))
+  console.log('')
+  info('Cole seu Token Tokito abaixo para liberar o acesso ao bot.')
+  while (true) {
+    let token = String((await question(colors.white.bold('╰━━➤ '))) || '').trim()
+    if (!tokenValido(token)) {
+      erro('Token inválido. Confira o token copiado no painel Tokito e tente novamente.')
+      continue
+    }
+    const config = lerConfig()
+    config.API_KEY_TOKITO = token
+    salvarConfig(config)
+    info('Verificando token e plano no servidor...')
+    const acesso = await placar.entrada()
+    if (acesso.allowed) {
+      detalhesAcesso(acesso)
+      return acesso
+    }
+    config.API_KEY_TOKITO = ''
+    salvarConfig(config)
+    erro(acesso.message || 'O token não possui acesso ativo ao Tokito Bot V10.')
+    if (acesso.online === false) {
+      aviso('Não foi possível confirmar o acesso no servidor agora. Verifique sua conexão e tente novamente.')
+    }
+    console.log(colors.gray('Você pode obter ou renovar seu acesso em https://tokito-apis.com.br'))
+  }
 }
 
 async function prepararAcesso() {
-recarregarConfigBot()
-if (!tokenValido(API_KEY_TOKITO)) {
-return solicitarToken()
-}
-info('Verificando acesso ao Tokito Bot V10...')
-const acesso = await placar.entrada()
-if (acesso.allowed) {
-if (acesso.online) sucesso(acesso.message || 'Acesso confirmado.')
-else aviso(acesso.message || 'Servidor indisponível. Usando acesso local válido.')
-return acesso
-}
-if (acesso.online === true) {
-erro(acesso.message || 'O token salvo não possui um plano ativo.')
-const config = lerConfigBot()
-config.API_KEY_TOKITO = ''
-salvarConfigBot(config)
-return solicitarToken()
-}
-return acesso
-}
-
-async function showMenu() {
-console.log('')
-info('Escolha como deseja iniciar.')
-console.log('')
-topoPainel('❪🧊.ꯧ𝙿𝙰𝙸𝙽𝙴𝙻 𝙳𝙴 𝙲𝙾𝙽𝚃𝚁𝙾𝙻𝙴ꯧ⸼🧊❫')
-linhaPainel('1', '📱', 'Código de conexão')
-linhaPainel('2', '🧊', 'QR-Code WhatsApp')
-linhaPainel('3', '🌊', 'Suporte / Ajuda')
-linhaPainel('4', '⚙️', 'Editar bot')
-fimPainel()
-console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'))
-let option = await question(colors.white.bold('╰━━➤ '))
-option = option.trim()
-if (option === '1' || option === '2') {
-recarregarConfigBot()
-metodo = option === '1' ? 'codigo' : 'qr'
-sucesso(option === '1' ? 'Conexão por código selecionada.' : 'Conexão por QR-Code selecionada.')
-return metodo
-}
-if (option === '3') {
-await openWhatsappSupport()
-return showMenu()
-}
-if (option === '4') {
-await editarBot()
-return showMenu()
-}
-erro('Opção inválida. Escolha 1, 2, 3 ou 4.')
-return showMenu()
-}
-
-const sessaoRegistrada = () => {
-try {
-const credsFile = path.join(qrcode, 'creds.json')
-if (!fs.existsSync(credsFile)) return false
-const creds = JSON.parse(fs.readFileSync(credsFile, 'utf8'))
-return creds?.registered === true
-} catch {
-return false
-}
-}
-
-/*
- * CONEXÃO PRINCIPAL
- */
-
-async function startConnect() {
-if (iniciando) return
-iniciando = true
-try {
-info('Iniciando conexão...')
-
-// Encerra explicitamente a instância anterior, sem reaproveitar event handlers obsoletos.
-const anterior = socketAtual
-socketAtual = null
-if (anterior && typeof anterior.end === 'function') {
-try { anterior.end(new Error('Substituindo conexão antiga do Tokito')) } catch {}
-}
-const { version } = await fetchLatestStoneWPPVersion()
-const { state, saveCreds } = await useMultiFileAuthState(qrcode)
-const tokito = makeWASocket({
-version,
-logger,
-browser: ['Linux', 'Opera', '10.0.22631'],
-auth: {
-creds: state.creds,
-keys: makeCacheableSignalKeyStore(state.keys, logger)
-},
-msgRetryCounterCache,
-mobile: false,
-fireInitQueries: true,
-markOnlineOnConnect: true,
-generateHighQualityLinkPreview: true,
-connectTimeoutMs: 20000,
-keepAliveIntervalMs: 40000,
-defaultQueryTimeoutMs: 60000,
-retryRequestDelayMs: 5000,
-maxMsgRetryCount: 5,
-syncFullHistory: false,
-downloadHistory: false,
-emitOwnEvents: true,
-shouldSyncHistoryMessage: () => false,
-getMessage: async key => undefined
-})
-socketAtual = tokito
-global.tokito = tokito
-// Observa os sinais da biblioteca principal. Nao cria mensagens artificiais.
-tokito.ev.on('tokito.security.ciphertext', dados => {
-Promise.resolve(antiInvisivel.registrar(tokito, dados)).catch(error => {
-erroSistema('Anti-Invisivel', error)
-})
-})
-if (!runtimeSub.isSubBot)
-detector.iniciar(tokito).catch(error => {
-erroSistema('Erro ao iniciar detector Anti-Pay', error)
-})
-global.qrTokitoAtual = null
-global.mostrarQrTokito = false
-funcoes.iniciar(tokito, prefix)
-if (!state.creds.registered && metodo === 'codigo') await startPairing(tokito)
-if (!state.creds.registered && metodo === 'qr') info('Aguardando geração do QR-Code...')
-tokito.ev.process(async events => {
-if (socketAtual !== tokito) return
-// Recarrega configurações alteradas pelo painel ou por comandos do WhatsApp.
-recarregarConfigBot()
-/*
- * ANTI CALL
- */
-if (events['call'] && !runtimeSub.isSubBot) {
-await donoSistema.processarChamadas(tokito, events['call'], [ownerNumber, ...Array.from({ length: 6 }, (_, i) => nescessario?.[`numero_dono${i + 1}`])].filter(Boolean)).catch(() => {})
-}
-/*
- * EVENTO DE GRUPO
- */
-if (events['group-participants.update']) {
-const update = events['group-participants.update']
-if (update?.id) cacheGp.delete(update.id)
-try {
-const caminhoGp = `${grupos}/${update.id}.json`
-if (!fs.existsSync(caminhoGp)) return
-let jsonGp
-try {
-jsonGp = JSON.parse(fs.readFileSync(caminhoGp, 'utf8'))
-if (!Array.isArray(jsonGp)) jsonGp = [jsonGp]
-if (!jsonGp[0]) jsonGp[0] = {}
-} catch {
-return
-}
-let metadata
-try {
-metadata = await tokito.groupMetadata(update.id)
-} catch {
-return
-}
-if (!metadata?.id?.endsWith('@g.us')) return
-cacheGp.set(update.id, { dados: metadata, tempo: Date.now() })
-const membros = metadata.participants || []
-const mapaJids = new Map()
-for (const membro of membros) {
-const candidatos = [membro?.phoneNumber, membro?.participantAlt, membro?.participantPn, membro?.jid, membro?.id, membro?.participant, membro?.lid].filter(Boolean)
-const real = candidatos.map(normalizarJid).find(jid => jid.endsWith('@s.whatsapp.net')) || ''
-if (!real) continue
-for (const candidato of candidatos) mapaJids.set(String(candidato), real)
-mapaJids.set(real, real)
-}
-const resolverJid = alvo => {
-if (!alvo) return ''
-if (typeof alvo === 'object') {
-alvo = alvo?.phoneNumber || alvo?.participantAlt || alvo?.participantPn || alvo?.jid || alvo?.id || alvo?.participant || alvo?.lid || ''
-}
-const bruto = String(alvo || '').trim()
-if (!bruto) return ''
-if (mapaJids.has(bruto)) return mapaJids.get(bruto)
-const normalizado = normalizarJid(bruto)
-if (mapaJids.has(normalizado)) return mapaJids.get(normalizado)
-return normalizado.includes('@lid') ? '' : normalizado
-}
-const botJid = normalizarJid(tokito?.user?.id || tokito?.user?.lid || '')
-const donoGrupo = resolverJid(membros.find(membro => membro?.admin === 'superadmin'))
-const donosBot = [ownerNumber]
-if (!runtimeSub.isSubBot) for (let i = 1; i <= 6; i++) donosBot.push(nescessario?.[`numero_dono${i}`])
-const donosBotJids = [...new Set(donosBot.map(normalizarJid).filter(jid => jid.endsWith('@s.whatsapp.net')))]
-const botAdmin = membros.some(membro => resolverJid(membro) === botJid && ['admin', 'superadmin'].includes(membro?.admin))
-const funcoesGp = jsonGp[0].funcoes && typeof jsonGp[0].funcoes === 'object' ? jsonGp[0].funcoes : {}
-const listaNegra = Array.isArray(jsonGp[0].listanegra) ? jsonGp[0].listanegra.map(normalizarJid).filter(Boolean) : []
-const antiDDD =
-funcoesGp.antiddd && typeof funcoesGp.antiddd === 'object'
-? funcoesGp.antiddd
-: {
-  ativo: false,
-  listaProibidos: []
+  recarregar()
+  if (!tokenValido(API_KEY_TOKITO)) {
+    return solicitarToken()
   }
-const dddsProibidos = Array.isArray(antiDDD.listaProibidos) ? antiDDD.listaProibidos.map(v => collectNumbers(v).slice(0, 2)).filter(v => /^\d{2}$/.test(v)) : []
-/*
- * ANTI-NUKE
- */
-if (funcoesGp.antinuke && botAdmin && ['remove', 'promote', 'demote'].includes(update.action)) {
-const autorRaw = update.author || update.authorPn || update.authorLid || update.actor || update.initiator || ''
-const autor = resolverJid(autorRaw)
-const alvos = (Array.isArray(update.participants) ? update.participants : []).map(resolverJid).filter(Boolean)
-const protegidosNuke = [botJid, donoGrupo, ...donosBotJids].filter(Boolean)
-const membrosAdmins = new Set(
-membros
-.filter(membro => ['admin', 'superadmin'].includes(membro?.admin))
-.map(resolverJid)
-.filter(Boolean)
-)
-const resultadoNuke = antiNuke.registrar({
-grupo: update.id,
-autor,
-acao: update.action,
-alvos,
-admins: membrosAdmins,
-protegidos: protegidosNuke
-})
-if (resultadoNuke.disparou && autor) {
-await tokito.groupParticipantsUpdate(update.id, [autor], 'demote').catch(() => {})
-await tokito
-.sendMessage(update.id, {
-text: mess.padraoAviso({
-emoji: '🛡️',
-titulo: 'ANTI-NUKE',
-descricao: `@${numeroDoJid(autor)} realizou várias ações administrativas em pouco tempo e foi rebaixado automaticamente para proteger o grupo.`
-}),
-contextInfo: canalInfo([autor])
-})
-.catch(() => {})
-antiNuke.bloquearTemporariamente(update.id, autor)
+  info('Verificando acesso ao Tokito Bot V10...')
+  const acesso = await placar.entrada()
+  if (acesso.allowed) {
+    if (acesso.online) sucesso(acesso.message || 'Acesso confirmado.')
+    else aviso(acesso.message || 'Servidor indisponível. Usando acesso local válido.')
+    return acesso
+  }
+  if (acesso.online === true) {
+    erro(acesso.message || 'O token salvo não possui um plano ativo.')
+    const config = lerConfig()
+    config.API_KEY_TOKITO = ''
+    salvarConfig(config)
+    return solicitarToken()
+  }
+  return acesso
 }
+
+async function menu() {
+  console.log('')
+  info('Escolha o tipo de WhatsApp para conectar.')
+  console.log('')
+  topoPainel('❪🧊.ꯧ𝙿𝙰𝙸𝙽𝙴𝙻 𝙳𝙴 𝙲𝙾𝙽𝚃𝚁𝙾𝙻𝙴ꯧ⸼🧊❫')
+  linhaPainel('1', '📱', 'WhatsApp Normal')
+  linhaPainel('2', '💼', 'WhatsApp Business')
+  linhaPainel('3', '🌊', 'Suporte / Ajuda')
+  linhaPainel('4', '⚙️', 'Editar bot')
+  fimPainel()
+  console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'))
+  let option = String(await question(colors.white.bold('╰━━➤ ')) || '').trim()
+  if (option === '1' || option === '2') {
+    const tipo = option === '1' ? 'normal' : 'business'
+    const registrada = registrado()
+    salvarTipo(qrcode, tipo)
+    sucesso(nomeTipo(tipo) + ' selecionado.')
+    if (registrada) {
+      info('Sessao existente preservada. A identificacao Android escolhida vale na conexao atual.')
+      metodo = null
+      return tipo
+    }
+    info('Primeiro pareamento pelo navegador Web; perfil Android entra na reconexao.')
+    return pareamento()
+  }
+  if (option === '3') {
+    await suporte()
+    return menu()
+  }
+  if (option === '4') {
+    await editarBot()
+    return menu()
+  }
+  erro('Opção inválida. Escolha 1, 2, 3 ou 4.')
+  return menu()
 }
-/*
- * ANTIROUBO
- */
-if (funcoesGp.antirroubo && ['promote', 'demote'].includes(update.action) && botAdmin) {
-const autorRaw = update.author || update.authorPn || update.authorLid || update.actor || update.initiator || ''
-const autor = resolverJid(autorRaw)
-const alvos = (Array.isArray(update.participants) ? update.participants : []).map(resolverJid).filter(Boolean)
-const agora = Date.now()
-for (const [chave, expira] of correcoesAntirroubo.entries()) {
-if (expira <= agora) correcoesAntirroubo.delete(chave)
+
+async function pareamento() {
+  console.log('')
+  topoPainel('❪🧊.ꯧ𝙲𝙾𝙽𝙴𝚇𝙰̃𝙾 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿ꯧ⸼🧊❫')
+  linhaPainel('1', '📱', 'Código de conexão')
+  linhaPainel('2', '🧊', 'QR-Code WhatsApp')
+  linhaPainel('0', '↩️', 'Voltar')
+  fimPainel()
+  console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'))
+  let option = String(await question(colors.white.bold('╰━━➤ ')) || '').trim()
+  if (option === '0') return menu()
+  if (option === '1' || option === '2') {
+    recarregar()
+    metodo = option === '1' ? 'codigo' : 'qr'
+    sucesso(option === '1' ? 'Conexão por código selecionada.' : 'Conexão por QR-Code selecionada.')
+    return metodo
+  }
+  erro('Opção inválida. Escolha 0, 1 ou 2.')
+  return pareamento()
 }
-const alvosReais = alvos.filter(alvo => {
-const chave = `${update.id}|${update.action}|${numeroDoJid(alvo)}`
-if (!correcoesAntirroubo.has(chave)) return true
-correcoesAntirroubo.delete(chave)
-return false
-})
-const autorPermitido = [botJid, donoGrupo, ...donosBotJids].filter(Boolean).includes(autor)
-const alvosProtegidos = alvosReais.filter(alvo => alvo !== botJid && alvo !== donoGrupo)
-if (autor && !autorPermitido && alvosProtegidos.length) {
-const alterarCargo = async (usuario, acao) => {
-try {
-correcoesAntirroubo.set(`${update.id}|${acao}|${numeroDoJid(usuario)}`, Date.now() + 12000)
-await tokito.groupParticipantsUpdate(update.id, [usuario], acao)
-return true
-} catch {
-return false
+
+const registrado = () => {
+  try {
+    const credsFile = path.join(qrcode, 'creds.json')
+    if (!fs.existsSync(credsFile)) return false
+    const creds = JSON.parse(fs.readFileSync(credsFile, 'utf8'))
+    return creds?.registered === true
+  } catch {
+    return false
+  }
 }
-}
-if (update.action === 'promote') {
-for (const alvo of alvosProtegidos) {
-await alterarCargo(alvo, 'demote')
-await delay(350)
-}
-if (autor !== donoGrupo) await alterarCargo(autor, 'demote')
-await tokito
-.sendMessage(update.id, {
-text: mess.antirrouboPromocao(autor, alvosProtegidos),
-contextInfo: canalInfo([autor, ...alvosProtegidos])
-})
-.catch(() => {})
-}
-if (update.action === 'demote') {
-for (const alvo of alvosProtegidos) {
-await alterarCargo(alvo, 'promote')
-await delay(350)
-}
-if (autor !== donoGrupo) await alterarCargo(autor, 'demote')
-await tokito
-.sendMessage(update.id, {
-text: mess.antirrouboRebaixamento(autor, alvosProtegidos),
-contextInfo: canalInfo([autor, ...alvosProtegidos])
-})
-.catch(() => {})
-}
-}
-}
-if (!['add', 'remove'].includes(update.action)) return
-/*
- * ENTRADA / SAÍDA
- */
-for (const participanteRaw of update.participants || []) {
-const participante = resolverJid(participanteRaw)
-if (!participante) continue
-const numero = numeroDoJid(participante)
-const protegido = [botJid, donoGrupo, ...donosBotJids].filter(Boolean).includes(participante)
-/*
- * LISTA NEGRA
- */
-if (update.action === 'add' && botAdmin && !protegido && listaNegra.includes(participante)) {
-await tokito
-.sendMessage(update.id, {
-text: mess.blackListEntrada(numero),
-contextInfo: canalInfo([participante])
-})
-.catch(() => {})
-await delay(700)
-await tokito.groupParticipantsUpdate(update.id, [participante], 'remove').catch(() => {})
-continue
-}
-/*
- * AUTOBAN GLOBAL
- */
-if (update.action === 'add' && botAdmin && !protegido && donoSistema.autobanTem(participante)) {
-await tokito
-.sendMessage(update.id, {
-text: mess.padraoAviso({
-emoji: '🚫',
-titulo: 'AUTOBAN GLOBAL',
-descricao: `@${numero} está na lista global de bloqueio e será removido.`
-}),
-contextInfo: canalInfo([participante])
-})
-.catch(() => {})
-await delay(700)
-await tokito.groupParticipantsUpdate(update.id, [participante], 'remove').catch(() => {})
-continue
-}
-/*
- * ANTI-FAKE
- */
-if (update.action === 'add' && botAdmin && !protegido && funcoesGp.antifake && !numero.startsWith('55')) {
-await tokito
-.sendMessage(update.id, {
-text: mess.antifakeEntrada(numero),
-contextInfo: canalInfo([participante])
-})
-.catch(() => {})
-await delay(700)
-await tokito.groupParticipantsUpdate(update.id, [participante], 'remove').catch(() => {})
-continue
-}
-/*
- * ANTI-DDD
- */
-const ddd = numero.startsWith('55') && numero.length >= 12 ? numero.slice(2, 4) : ''
-if (update.action === 'add' && botAdmin && !protegido && antiDDD.ativo && ddd && dddsProibidos.includes(ddd)) {
-await tokito
-.sendMessage(update.id, {
-text: mess.antidddEntrada(numero, ddd),
-contextInfo: canalInfo([participante])
-})
-.catch(() => {})
-await delay(700)
-await tokito.groupParticipantsUpdate(update.id, [participante], 'remove').catch(() => {})
-continue
-}
-/*
- * PASSAPORTE TOKITO
- * Independente dos modos de boas-vindas existentes.
- */
-try {
-const ingresso = typeof participanteRaw === 'object' ? participanteRaw : participante
-const dadosPassaporte = {
-tokito,
-grupo: update.id,
-participante: ingresso,
-membros,
-prefix: funcoesGp.multiprefix && funcoesGp.prefixGrupo ? String(funcoesGp.prefixGrupo) : prefix,
-sub: runtimeSub.isSubBot ? String(runtimeSub.id || 'sub') : ''
-}
-if (update.action === 'remove') {
-registro.saida(dadosPassaporte)
-} else if (update.action === 'add' && (funcoesGp.registrar === true || (funcoesGp.registrar === undefined && funcoesGp.passaporte === true)) && !protegido) {
-await registro.entrada({
-...dadosPassaporte
-// Botão sempre disponível, mesmo com botões comuns desligados.
-})
-}
-} catch (error) {
-erroSistema('Registro Tokito', error)
-}
-/*
- * BEM-VINDOS
- */
-const agora = new Date()
-const grupoNome = metadata.subject || jsonGp[0].name || 'Grupo'
-const groupDesc = metadata.desc || ''
-const entrou = update.action === 'add'
-const dadosLegenda = {
-numero,
-grupo: grupoNome,
-membros: membros.length,
-hora: agora.toLocaleTimeString('pt-BR', { timeZone: 'America/Fortaleza', hour: '2-digit', minute: '2-digit' }),
-dia: agora.toLocaleDateString('pt-BR', { timeZone: 'America/Fortaleza', weekday: 'long' }),
-data: agora.toLocaleDateString('pt-BR', { timeZone: 'America/Fortaleza' }),
-ano: agora.toLocaleDateString('pt-BR', { timeZone: 'America/Fortaleza', year: 'numeric' })
-}
-const legendaBase = texto => {
-const tags = {
-'#numero#': `@${numero}`,
-'#numerodele#': `@${numero}`,
-'#nomegrupo#': grupoNome,
-'#nomedogp#': grupoNome,
-'#prefixo#': prefix,
-'#nomedobot#': NomeDoBot,
-'#hora#': dadosLegenda.hora,
-'#dia#': dadosLegenda.dia,
-'#data#': dadosLegenda.data,
-'#ano#': dadosLegenda.ano,
-'#year#': dadosLegenda.ano,
-'#yeah#': dadosLegenda.ano,
-'#estado#': estado(numero),
-'#membros#': membros.length,
-'#descrição#': groupDesc
-}
-let final = String(texto || '')
-for (const [tag, valor] of Object.entries(tags)) final = final.split(tag).join(String(valor))
-return final
-}
-const fotoPerfil = async jid => {
-const fallback = 'https://telegra.ph/file/24fa902ead26340f3df2c.png'
-try {
-const chave = `foto:${jid}`
-const salva = fotos.get(chave)
-if (salva) return salva
-const foto = await tokito.profilePictureUrl(jid, 'image').catch(() => fallback)
-fotos.set(chave, foto || fallback)
-return foto || fallback
-} catch {
-return fallback
-}
-}
-const wellcome = Array.isArray(jsonGp[0].wellcome) ? jsonGp[0].wellcome : []
-/*
- * BEM-VINDO 1
- */
-if (wellcome?.[0]?.bemvindo1) {
-const config = wellcome[0]
-const texto = legendaBase(entrou ? config.legendabv : config.legendasaiu)
-const fundo = entrou ? config.fundobv : config.fundosaiu
-const tipo = entrou ? config.fundobv_tipo : config.fundosaiu_tipo
-if (fundo && tipo) {
-const buffer = Buffer.from(fundo, 'base64')
-if (tipo === 'video') {
-await tokito
-.sendMessage(update.id, {
-video: buffer,
-mimetype: 'video/mp4',
-gifPlayback: true,
-caption: texto,
-contextInfo: canalInfo([participante])
-})
-.catch(() => {})
-} else {
-await tokito
-.sendMessage(update.id, {
-image: buffer,
-caption: texto,
-contextInfo: canalInfo([participante])
-})
-.catch(() => {})
-}
-} else {
-const avatar = await fotoPerfil(participante)
-await tokito
-.sendMessage(update.id, {
-image: { url: avatar },
-caption: texto,
-contextInfo: canalInfo([participante])
-})
-.catch(() => {})
-}
-}
-/*
- * BEM-VINDO 2
- */
-if (wellcome?.[1]?.bemvindo2) {
-const config = wellcome[1]
-const texto = legendaBase(entrou ? config.legendabv2 : config.legendasaiu2)
-const avatar = await fotoPerfil(participante)
-const fundoPadrao = 'https://raw.githubusercontent.com/dylanModz/uploads/main/midias/imagens/344hs4hph.jpg'
-const fundo = entrou ? config.fundobv2 || fundoPadrao : config.fundosaiu2 || fundoPadrao
-const titulo = entrou ? 'Bem-vindo(a)!' : 'Saída do Grupo'
-const sub = entrou ? 'É um prazer ter você aqui. Fique à vontade' : 'Sentiremos sua falta, volte sempre!'
-const imgURL = `${API_URL}/canvas/welcome?apikey=${encodeURIComponent(API_KEY_TOKITO)}&fundo=${encodeURIComponent(fundo)}&avatar=${encodeURIComponent(avatar)}&titulo=${encodeURIComponent(titulo)}&sub=${encodeURIComponent(sub)}`
-await tokito
-.sendMessage(update.id, {
-image: { url: imgURL },
-caption: texto,
-contextInfo: canalInfo([participante])
-})
-.catch(() => {})
-}
-/*
- * BEM-VINDO 3
- */
-if (wellcome?.[2]?.bemvindo3) {
-const config = wellcome[2]
-const texto = legendaBase(entrou ? config.legendabv3 : config.legendasaiu3)
-await tokito
-.sendMessage(update.id, {
-text: texto,
-contextInfo: canalInfo([participante])
-})
-.catch(() => {})
-}
-/*
- * BEM-VINDO 4
- */
-if (wellcome?.[3]?.bemvindo4) {
-const config = wellcome[3]
-const midia = entrou ? config.stickerbv : config.stickersaiu
-const nomeArquivo = path.basename(String(midia?.arquivo || ''))
-const arquivoMidia = nomeArquivo ? path.join(runtimeSub.mediaDir, nomeArquivo) : ''
-if (arquivoMidia && fs.existsSync(arquivoMidia)) {
-await tokito
-.sendMessage(update.id, {
-sticker: fs.readFileSync(arquivoMidia),
-contextInfo: canalInfo([participante])
-})
-.catch(() => {})
-}
-}
-/*
- * BEM-VINDO 5
- */
-if (wellcome?.[4]?.bemvindo5) {
-const config = wellcome[4]
-const midia = entrou ? config.audiobv : config.audiosaiu
-const nomeArquivo = path.basename(String(midia?.arquivo || ''))
-const arquivoMidia = nomeArquivo ? path.join(runtimeSub.mediaDir, nomeArquivo) : ''
-if (arquivoMidia && fs.existsSync(arquivoMidia)) {
-await tokito
-.sendMessage(update.id, {
-audio: fs.readFileSync(arquivoMidia),
-mimetype: String(midia?.mimetype || 'audio/ogg; codecs=opus'),
-ptt: midia?.ptt === true,
-contextInfo: canalInfo([participante])
-})
-.catch(() => {})
-}
-}
-await delay(400)
-}
-} catch (error) {
-erroSistema('Erro no evento do grupo', error)
-}
-}
-/*
- * CONEXÃO
- */
-if (events['connection.update']) {
-const update = events['connection.update']
-const { connection, lastDisconnect, qr } = update
-if (qr) {
-ultimoQr = qr
-global.qrTokitoAtual = qr
-if (metodo === 'qr' && !state.creds.registered) {
-console.log('')
-info('Escaneie o QR-Code abaixo para conectar.')
-console.log('')
-qrcodeTerminal.generate(qr, { small: true })
-console.log('')
-}
-}
-const shouldReconnect = lastDisconnect?.error ? new Boom(lastDisconnect.error).output.statusCode : 0
-switch (connection) {
-case 'connecting':
-info(`${NomeDoBot} está conectando ao WhatsApp...`)
-break
-case 'open':
-global.startTime = Math.floor(Date.now() / 1000)
-// O aviso de atualização pertence ao bot principal, nunca a um Sub Bot.
-if (!runtimeSub.isSubBot) {
-  iniciarAvisosUpdate(tokito)
-  avisosPlanoSite.iniciar(tokito)
-}
-avisosOficiais.iniciar(tokito)
-reconectando = false
-metodo = null
-ultimoQr = null
-global.qrTokitoAtual = null
-global.mostrarQrTokito = false
-void tokito.sendPresenceUpdate('available').catch(() => {})
-void tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
-void modulos.midiaMenu(tokito).catch(() => null)
-const configuracaoDoGrupo = jid => {
-try {
-const local = path.join(grupos, String(jid) + '.json')
-const dados = JSON.parse(fs.readFileSync(local, 'utf8'))
-return (Array.isArray(dados) ? dados[0] : dados)?.funcoes || {}
-} catch {
-return {}
-}
-}
-registro.iniciarPrazos(tokito, {
-sub: runtimeSub.isSubBot ? String(runtimeSub.id || 'sub') : '',
-prefix: jid => {
-const f = configuracaoDoGrupo(jid)
-return f.multiprefix === true && f.prefixGrupo ? String(f.prefixGrupo) : prefix
-},
-habilitado: jid => {
-const f = configuracaoDoGrupo(jid)
-return f.registrar === true || (f.registrar === undefined && f.passaporte === true)
-}
-})
-if (typeof tokito.groupFetchAllParticipating === 'function') {
-const aquecerGrupos = Promise.resolve()
-.then(() => tokito.groupFetchAllParticipating())
-.then(lista => {
-const cache = (global.__TOKITO_METADATA_CACHE__ ||= new Map())
-const agora = Date.now()
-for (const [jid, dados] of Object.entries(lista || {})) {
-if (dados) {
-cache.set(jid, {
-dados,
-tempo: agora
-})
-}
-}
-return true
-})
-.catch(() => false)
-await Promise.race([aquecerGrupos, delay(2500)]).catch(() => {})
-}
-promocoes.iniciar(tokito)
-autoInativo.iniciar(tokito, {
-groupsDir: grupos,
-owners: [ownerNumber, ...Array.from({ length: 6 }, (_, i) => nescessario?.[`numero_dono${i + 1}`])].filter(Boolean)
-})
-if (runtimeSub.isSubBot) {
-if (!primeiraConexaoSub) {
-primeiraConexaoSub = true
-sucesso(`Sub Bot ${runtimeSub.id} conectado com sucesso.`)
-} else {
-info(`Sub Bot ${runtimeSub.id} reconectado.`)
-}
-enviarAoPai({ type: 'online', number: runtimeSub.id })
-} else {
-donoSistema.iniciar(tokito)
-sorteioGrupo.iniciar(tokito)
-console.log(banner3?.string || colors.cyan('\nTOKITO | V10\n'))
-console.log(banner2?.string || colors.blue('dylan Modz'))
-console.log('')
-sucesso(`${NomeDoBot} conectado com sucesso.`)
-console.log('')
-await sistemaSub?.iniciar(tokito).catch(error => erroSistema('Erro ao iniciar sistema de Sub Bots', error))
-}
-break
-case 'close':
-avisosOficiais.pausar(tokito)
-if (global.__TOKITO_UPDATE_SOCKET__ === tokito) global.__TOKITO_UPDATE_SOCKET__ = null
-// 440 indica sessão substituída. Repetir conexão aqui só causa tempestade de logins.
-if (runtimeSub.isSubBot && shouldReconnect === 440) {
-erro('Sub Bot desconectado: sessão substituída (440). Verifique se existe outra instância com o mesmo número.')
-enviarAoPai({ type: 'conflict', number: runtimeSub.id })
-setTimeout(() => process.exit(0), 300)
-break
-}
-if (runtimeSub.isSubBot) {
-enviarAoPai({ type: 'reconnecting', number: runtimeSub.id, code: shouldReconnect })
-}
-// Durante o primeiro pareamento do Sub Bot ainda não existe uma sessão registrada.
-// Alguns fechamentos transitórios chegam como 401; eles não devem ser tratados como logout definitivo.
-if (runtimeSub.isSubBot && !state.creds.registered) {
-aviso(`Conexão inicial do Sub Bot fechada. Aguardando novo handshake. Código: ${shouldReconnect}`)
-if (!reconectando) {
-reconectando = true
-setTimeout(() => {
-reconectando = false
-iniciando = false
-startConnect()
-}, 2500)
-}
-break
-}
-if (shouldReconnect === DisconnectReason.loggedOut || shouldReconnect === 401) {
-erro('Sessão encerrada. Apague a pasta qrcode e conecte novamente.')
-if (runtimeSub.isSubBot) enviarAoPai({ type: 'logged-out', number: runtimeSub.id })
-process.exit(0)
-}
-if (!reconectando) {
-reconectando = true
-aviso(`Conexão fechada. Reconectando em 5 segundos. Código: ${shouldReconnect}`)
-setTimeout(() => {
-reconectando = false
-iniciando = false
-startConnect()
-}, 5000)
-}
-break
-}
-}
-/*
- * MENSAGENS
- * Mantido no mesmo fluxo da base original.
- */
-if (events['messages.update']) {
-registrarMidiasRecebidas(tokito, events['messages.update'])
-}
-if (events['messages.upsert']) {
-const upsert = events['messages.upsert']
-try {
-registrarMidiasRecebidas(tokito, upsert?.messages)
-await antiInvisivel.receber(tokito, upsert).catch(error => {
-erroSistema('Monitoramento Anti-Invisivel', error)
-})
-if (!processarMsg) processarMsg = require('../tokito.js')
-if (process.env.TOKITO_DEBUG_RX === '1') info(`RX messages.upsert recebido (${upsert?.type || 'sem tipo'})`)
-await processarMsg(tokito, upsert)
-} catch (error) {
-erroSistema('Erro no tokito.js', error)
-}
-}
-if (events['creds.update']) await saveCreds()
-})
-iniciando = false
-} catch (error) {
-erroSistema('Ocorreu um erro ao iniciar a conexão', error)
-aviso('Tentando iniciar novamente em 5 segundos...')
-setTimeout(() => {
-iniciando = false
-startConnect()
-}, 5000)
-}
+
+async function conectar() {
+  if (iniciando) return
+  iniciando = true
+  try {
+    info('Iniciando conexão...')
+
+    const anterior = bot
+    bot = null
+    if (anterior && typeof anterior.end === 'function') {
+      try { anterior.end(new Error('Substituindo conexão antiga do Tokito')) } catch {}
+    }
+    const version = [2, 3000, 1044006379]
+    const { state, saveCreds } = await useMultiFileAuthState(qrcode)
+    if (!processar) {
+      const carregamento = Date.now()
+      processar = require('../tokito.js')
+      info('Comandos preparados em ' + (Date.now() - carregamento) + ' ms.')
+    }
+    const tipo = lerTipo(qrcode)
+    const browser = navegador(tipo, Browsers, state.creds?.registered === true)
+    info('WhatsApp: ' + nomeTipo(tipo) +
+    ' | browser: ' + String(browser[0]) +
+    ' | transporte: Web/companion')
+    const antiRate = {
+      cachedGroupMetadata: async jid => {
+        const salvo = cacheGp.get(jid)
+        if (!salvo?.dados || Date.now() - Number(salvo.tempo || 0) > 30000) return undefined
+        return salvo.dados
+      }
+    }
+    const tokito = socket({
+      version,
+      logger,
+      browser: browser,
+      auth: {
+        creds: state.creds,
+        keys: makeCacheableSignalKeyStore(state.keys, logger)
+      },
+      msgRetryCounterCache: retry,
+      mobile: false,
+      fireInitQueries: true,
+      markOnlineOnConnect: true,
+      generateHighQualityLinkPreview: true,
+      connectTimeoutMs: 20000,
+      keepAliveIntervalMs: 25000,
+      defaultQueryTimeoutMs: 60000,
+      retryRequestDelayMs: 5000,
+      maxMsgRetryCount: 5,
+      syncFullHistory: false,
+      downloadHistory: false,
+      emitOwnEvents: false,
+      shouldSyncHistoryMessage: () => false,
+      cachedGroupMetadata: antiRate.cachedGroupMetadata,
+      getMessage: async key => undefined
+    })
+    vincular(tokito)
+    bot = tokito
+    global.tokito = tokito
+    tokito.ev.on('tokito.security.ciphertext', dados => {
+      Promise.resolve(invisivel.registrar(tokito, dados)).catch(error => {
+        erroSistema('Anti-Invisivel', error)
+      })
+    })
+    if (!runtime.isSubBot)
+    detector.iniciar(tokito).catch(error => {
+      erroSistema('Erro ao iniciar detector Anti-Pay', error)
+    })
+    global.qrTokitoAtual = null
+    global.mostrarQrTokito = false
+    funcoes.iniciar(tokito, prefix)
+    if (!state.creds.registered && metodo === 'codigo') await parear(tokito)
+    if (!state.creds.registered && metodo === 'qr') info('Aguardando geração do QR-Code...')
+    const pendentesPorChat = new Map()
+    const mensagens = upsert => {
+      if (!Array.isArray(upsert?.messages) || upsert.messages.length === 0) return
+      midias(tokito, upsert.messages)
+      const gruposDoLote = new Map()
+      for (const mensagem of upsert.messages) {
+        const jid = String(mensagem?.key?.remoteJid || '')
+        if (!jid) continue
+        if (!gruposDoLote.has(jid)) gruposDoLote.set(jid, [])
+        gruposDoLote.get(jid).push(mensagem)
+      }
+      for (const [jid, messages] of gruposDoLote) {
+        const anterior = pendentesPorChat.get(jid) || Promise.resolve()
+        const inicioFila = Date.now()
+        const tarefa = anterior.catch(() => {}).then(async () => {
+          if (bot !== tokito) return
+          const eventoChat = { ...upsert, messages }
+          try {
+            await invisivel.receber(tokito, eventoChat)
+          } catch (error) {
+            erroSistema('Monitoramento Anti-Invisivel', error)
+          }
+          if (bot !== tokito) return
+          await processar(tokito, eventoChat)
+        }).catch(error => {
+          erroSistema('Erro no tokito.js', error)
+        })
+        pendentesPorChat.set(jid, tarefa)
+        void tarefa.then(() => {
+          if (pendentesPorChat.get(jid) === tarefa) pendentesPorChat.delete(jid)
+          if (process.env.TOKITO_DEBUG_LATENCY === '1') {
+            const duracao = Date.now() - inicioFila
+            if (duracao >= 2000) info('Processamento de mensagens: ' + duracao + ' ms.')
+          }
+        })
+      }
+    }
+    tokito.ev.process(async events => {
+      if (bot !== tokito) return
+      if (events['messages.update']) midias(tokito, events['messages.update'])
+      if (events['messages.upsert']) mensagens(events['messages.upsert'])
+      recarregar()
+      if (events['call'] && !runtime.isSubBot) {
+        await dono.processarChamadas(tokito, events['call'], [ownerNumber, ...Array.from({ length: 6 }, (_, i) => nescessario?.[`numero_dono${i + 1}`])].filter(Boolean)).catch(() => {})
+      }
+      if (events['group-participants.update']) {
+        const update = events['group-participants.update']
+        if (update?.id) cacheGp.delete(update.id)
+        try {
+          const caminhoGp = `${grupos}/${update.id}.json`
+          if (!fs.existsSync(caminhoGp)) return
+          let jsonGp
+          try {
+            jsonGp = JSON.parse(fs.readFileSync(caminhoGp, 'utf8'))
+            if (!Array.isArray(jsonGp)) jsonGp = [jsonGp]
+            if (!jsonGp[0]) jsonGp[0] = {}
+          } catch {
+            return
+          }
+          let metadata
+          try {
+            metadata = await tokito.groupMetadata(update.id)
+          } catch {
+            return
+          }
+          if (!metadata?.id?.endsWith('@g.us')) return
+          cacheGp.set(update.id, { dados: metadata, tempo: Date.now() })
+          const membros = metadata.participants || []
+          const mapaJids = new Map()
+          for (const membro of membros) {
+            const candidatos = [membro?.phoneNumber, membro?.participantAlt, membro?.participantPn, membro?.jid, membro?.id, membro?.participant, membro?.lid].filter(Boolean)
+            const real = candidatos.map(normalizar).find(jid => jid.endsWith('@s.whatsapp.net')) || ''
+            if (!real) continue
+            for (const candidato of candidatos) mapaJids.set(String(candidato), real)
+            mapaJids.set(real, real)
+          }
+          const resolverJid = alvo => {
+            if (!alvo) return ''
+            if (typeof alvo === 'object') {
+              alvo = alvo?.phoneNumber || alvo?.participantAlt || alvo?.participantPn || alvo?.jid || alvo?.id || alvo?.participant || alvo?.lid || ''
+            }
+            const bruto = String(alvo || '').trim()
+            if (!bruto) return ''
+            if (mapaJids.has(bruto)) return mapaJids.get(bruto)
+            const normalizado = normalizar(bruto)
+            if (mapaJids.has(normalizado)) return mapaJids.get(normalizado)
+            return normalizado.includes('@lid') ? '' : normalizado
+          }
+          const botJid = normalizar(tokito?.user?.id || tokito?.user?.lid || '')
+          const donoGrupo = resolverJid(membros.find(membro => membro?.admin === 'superadmin'))
+          const donosBot = [ownerNumber]
+          if (!runtime.isSubBot) for (let i = 1; i <= 6; i++) donosBot.push(nescessario?.[`numero_dono${i}`])
+          const donosBotJids = [...new Set(donosBot.map(normalizar).filter(jid => jid.endsWith('@s.whatsapp.net')))]
+          const botAdmin = membros.some(membro => resolverJid(membro) === botJid && ['admin', 'superadmin'].includes(membro?.admin))
+          const funcoesGp = jsonGp[0].funcoes && typeof jsonGp[0].funcoes === 'object' ? jsonGp[0].funcoes : {}
+          const listaNegra = Array.isArray(jsonGp[0].listanegra) ? jsonGp[0].listanegra.map(normalizar).filter(Boolean) : []
+          const antiDDD =
+          funcoesGp.antiddd && typeof funcoesGp.antiddd === 'object'
+          ? funcoesGp.antiddd
+          : {
+            ativo: false,
+            listaProibidos: []
+          }
+          const dddsProibidos = Array.isArray(antiDDD.listaProibidos) ? antiDDD.listaProibidos.map(v => numeros(v).slice(0, 2)).filter(v => /^\d{2}$/.test(v)) : []
+          if (funcoesGp.antinuke && botAdmin && ['remove', 'promote', 'demote'].includes(update.action)) {
+            const autorRaw = update.author || update.authorPn || update.authorLid || update.actor || update.initiator || ''
+            const autor = resolverJid(autorRaw)
+            const alvos = (Array.isArray(update.participants) ? update.participants : []).map(resolverJid).filter(Boolean)
+            const protegidosNuke = [botJid, donoGrupo, ...donosBotJids].filter(Boolean)
+            const membrosAdmins = new Set(
+            membros
+            .filter(membro => ['admin', 'superadmin'].includes(membro?.admin))
+            .map(resolverJid)
+            .filter(Boolean)
+            )
+            const resultadoNuke = nuke.registrar({
+              grupo: update.id,
+              autor,
+              acao: update.action,
+              alvos,
+              admins: membrosAdmins,
+              protegidos: protegidosNuke
+            })
+            if (resultadoNuke.disparou && autor) {
+              await tokito.groupParticipantsUpdate(update.id, [autor], 'demote').catch(() => {})
+              await tokito
+              .sendMessage(update.id, {
+                text: mess.padraoAviso({
+                  emoji: '🛡️',
+                  titulo: 'ANTI-NUKE',
+                  descricao: `@${telefone(autor)} realizou várias ações administrativas em pouco tempo e foi rebaixado automaticamente para proteger o grupo.`
+                }),
+                contextInfo: canalInfo([autor])
+              })
+              .catch(() => {})
+              nuke.bloquearTemporariamente(update.id, autor)
+            }
+          }
+          if (funcoesGp.antirroubo && ['promote', 'demote'].includes(update.action) && botAdmin) {
+            const autorRaw = update.author || update.authorPn || update.authorLid || update.actor || update.initiator || ''
+            const autor = resolverJid(autorRaw)
+            const alvos = (Array.isArray(update.participants) ? update.participants : []).map(resolverJid).filter(Boolean)
+            const agora = Date.now()
+            for (const [chave, expira] of correcoes.entries()) {
+              if (expira <= agora) correcoes.delete(chave)
+            }
+            const alvosReais = alvos.filter(alvo => {
+              const chave = `${update.id}|${update.action}|${telefone(alvo)}`
+              if (!correcoes.has(chave)) return true
+              correcoes.delete(chave)
+              return false
+            })
+            const autorPermitido = [botJid, donoGrupo, ...donosBotJids].filter(Boolean).includes(autor)
+            const alvosProtegidos = alvosReais.filter(alvo => alvo !== botJid && alvo !== donoGrupo)
+            if (autor && !autorPermitido && alvosProtegidos.length) {
+              const alterarCargo = async (usuario, acao) => {
+                try {
+                  correcoes.set(`${update.id}|${acao}|${telefone(usuario)}`, Date.now() + 12000)
+                  await tokito.groupParticipantsUpdate(update.id, [usuario], acao)
+                  return true
+                } catch {
+                  return false
+                }
+              }
+              if (update.action === 'promote') {
+                for (const alvo of alvosProtegidos) {
+                  await alterarCargo(alvo, 'demote')
+                  await delay(350)
+                }
+                if (autor !== donoGrupo) await alterarCargo(autor, 'demote')
+                await tokito
+                .sendMessage(update.id, {
+                  text: mess.antirrouboPromocao(autor, alvosProtegidos),
+                  contextInfo: canalInfo([autor, ...alvosProtegidos])
+                })
+                .catch(() => {})
+              }
+              if (update.action === 'demote') {
+                for (const alvo of alvosProtegidos) {
+                  await alterarCargo(alvo, 'promote')
+                  await delay(350)
+                }
+                if (autor !== donoGrupo) await alterarCargo(autor, 'demote')
+                await tokito
+                .sendMessage(update.id, {
+                  text: mess.antirrouboRebaixamento(autor, alvosProtegidos),
+                  contextInfo: canalInfo([autor, ...alvosProtegidos])
+                })
+                .catch(() => {})
+              }
+            }
+          }
+          if (!['add', 'remove'].includes(update.action)) return
+          for (const participanteRaw of update.participants || []) {
+            const participante = resolverJid(participanteRaw)
+            if (!participante) continue
+            const numero = telefone(participante)
+            const protegido = [botJid, donoGrupo, ...donosBotJids].filter(Boolean).includes(participante)
+            if (update.action === 'add' && botAdmin && !protegido && listaNegra.includes(participante)) {
+              await tokito
+              .sendMessage(update.id, {
+                text: mess.blackListEntrada(numero),
+                contextInfo: canalInfo([participante])
+              })
+              .catch(() => {})
+              await delay(700)
+              await tokito.groupParticipantsUpdate(update.id, [participante], 'remove').catch(() => {})
+              continue
+            }
+            if (update.action === 'add' && botAdmin && !protegido && dono.autobanTem(participante)) {
+              await tokito
+              .sendMessage(update.id, {
+                text: mess.padraoAviso({
+                  emoji: '🚫',
+                  titulo: 'AUTOBAN GLOBAL',
+                  descricao: `@${numero} está na lista global de bloqueio e será removido.`
+                }),
+                contextInfo: canalInfo([participante])
+              })
+              .catch(() => {})
+              await delay(700)
+              await tokito.groupParticipantsUpdate(update.id, [participante], 'remove').catch(() => {})
+              continue
+            }
+            if (update.action === 'add' && botAdmin && !protegido && funcoesGp.antifake && !numero.startsWith('55')) {
+              await tokito
+              .sendMessage(update.id, {
+                text: mess.antifakeEntrada(numero),
+                contextInfo: canalInfo([participante])
+              })
+              .catch(() => {})
+              await delay(700)
+              await tokito.groupParticipantsUpdate(update.id, [participante], 'remove').catch(() => {})
+              continue
+            }
+            const ddd = numero.startsWith('55') && numero.length >= 12 ? numero.slice(2, 4) : ''
+            if (update.action === 'add' && botAdmin && !protegido && antiDDD.ativo && ddd && dddsProibidos.includes(ddd)) {
+              await tokito
+              .sendMessage(update.id, {
+                text: mess.antidddEntrada(numero, ddd),
+                contextInfo: canalInfo([participante])
+              })
+              .catch(() => {})
+              await delay(700)
+              await tokito.groupParticipantsUpdate(update.id, [participante], 'remove').catch(() => {})
+              continue
+            }
+            try {
+              const ingresso = typeof participanteRaw === 'object' ? participanteRaw : participante
+              const dadosPassaporte = {
+                tokito,
+                grupo: update.id,
+                participante: ingresso,
+                membros,
+                prefix: funcoesGp.multiprefix && funcoesGp.prefixGrupo ? String(funcoesGp.prefixGrupo) : prefix,
+                sub: runtime.isSubBot ? String(runtime.id || 'sub') : ''
+              }
+              if (update.action === 'remove') {
+                registro.saida(dadosPassaporte)
+              } else if (update.action === 'add' && (funcoesGp.registrar === true || (funcoesGp.registrar === undefined && funcoesGp.passaporte === true)) && !protegido) {
+                await registro.entrada({
+                  ...dadosPassaporte
+                })
+              }
+            } catch (error) {
+              erroSistema('Registro Tokito', error)
+            }
+            const agora = new Date()
+            const grupoNome = metadata.subject || jsonGp[0].name || 'Grupo'
+            const groupDesc = metadata.desc || ''
+            const entrou = update.action === 'add'
+            const dadosLegenda = {
+              numero,
+              grupo: grupoNome,
+              membros: membros.length,
+              hora: agora.toLocaleTimeString('pt-BR', { timeZone: 'America/Fortaleza', hour: '2-digit', minute: '2-digit' }),
+              dia: agora.toLocaleDateString('pt-BR', { timeZone: 'America/Fortaleza', weekday: 'long' }),
+              data: agora.toLocaleDateString('pt-BR', { timeZone: 'America/Fortaleza' }),
+              ano: agora.toLocaleDateString('pt-BR', { timeZone: 'America/Fortaleza', year: 'numeric' })
+            }
+            const legendaBase = texto => {
+              const tags = {
+                '#numero#': `@${numero}`,
+                '#numerodele#': `@${numero}`,
+                '#nomegrupo#': grupoNome,
+                '#nomedogp#': grupoNome,
+                '#prefixo#': prefix,
+                '#nomedobot#': NomeDoBot,
+                '#hora#': dadosLegenda.hora,
+                '#dia#': dadosLegenda.dia,
+                '#data#': dadosLegenda.data,
+                '#ano#': dadosLegenda.ano,
+                '#year#': dadosLegenda.ano,
+                '#yeah#': dadosLegenda.ano,
+                '#estado#': estado(numero),
+                '#membros#': membros.length,
+                '#descrição#': groupDesc
+              }
+              let final = String(texto || '')
+              for (const [tag, valor] of Object.entries(tags)) final = final.split(tag).join(String(valor))
+              return final
+            }
+            const fotoPerfil = async jid => {
+              const fallback = 'https://telegra.ph/file/24fa902ead26340f3df2c.png'
+              try {
+                const chave = `foto:${jid}`
+                const salva = fotos.get(chave)
+                if (salva) return salva
+                const foto = await tokito.profilePictureUrl(jid, 'image').catch(() => fallback)
+                fotos.set(chave, foto || fallback)
+                return foto || fallback
+              } catch {
+                return fallback
+              }
+            }
+            const wellcome = Array.isArray(jsonGp[0].wellcome) ? jsonGp[0].wellcome : []
+            if (wellcome?.[0]?.bemvindo1) {
+              const config = wellcome[0]
+              const texto = legendaBase(entrou ? config.legendabv : config.legendasaiu)
+              const fundo = entrou ? config.fundobv : config.fundosaiu
+              const tipo = entrou ? config.fundobv_tipo : config.fundosaiu_tipo
+              if (fundo && tipo) {
+                const buffer = Buffer.from(fundo, 'base64')
+                if (tipo === 'video') {
+                  await tokito
+                  .sendMessage(update.id, {
+                    video: buffer,
+                    mimetype: 'video/mp4',
+                    gifPlayback: true,
+                    caption: texto,
+                    contextInfo: canalInfo([participante])
+                  })
+                  .catch(() => {})
+                } else {
+                  await tokito
+                  .sendMessage(update.id, {
+                    image: buffer,
+                    caption: texto,
+                    contextInfo: canalInfo([participante])
+                  })
+                  .catch(() => {})
+                }
+              } else {
+                const avatar = await fotoPerfil(participante)
+                await tokito
+                .sendMessage(update.id, {
+                  image: { url: avatar },
+                  caption: texto,
+                  contextInfo: canalInfo([participante])
+                })
+                .catch(() => {})
+              }
+            }
+            if (wellcome?.[1]?.bemvindo2) {
+              const config = wellcome[1]
+              const texto = legendaBase(entrou ? config.legendabv2 : config.legendasaiu2)
+              const avatar = await fotoPerfil(participante)
+              const fundoPadrao = 'https://raw.githubusercontent.com/dylanModz/uploads/main/midias/imagens/344hs4hph.jpg'
+              const fundo = entrou ? config.fundobv2 || fundoPadrao : config.fundosaiu2 || fundoPadrao
+              const titulo = entrou ? 'Bem-vindo(a)!' : 'Saída do Grupo'
+              const sub = entrou ? 'É um prazer ter você aqui. Fique à vontade' : 'Sentiremos sua falta, volte sempre!'
+              const imgURL = `${API_URL}/canvas/welcome?apikey=${encodeURIComponent(API_KEY_TOKITO)}&fundo=${encodeURIComponent(fundo)}&avatar=${encodeURIComponent(avatar)}&titulo=${encodeURIComponent(titulo)}&sub=${encodeURIComponent(sub)}`
+              await tokito
+              .sendMessage(update.id, {
+                image: { url: imgURL },
+                caption: texto,
+                contextInfo: canalInfo([participante])
+              })
+              .catch(() => {})
+            }
+            if (wellcome?.[2]?.bemvindo3) {
+              const config = wellcome[2]
+              const texto = legendaBase(entrou ? config.legendabv3 : config.legendasaiu3)
+              await tokito
+              .sendMessage(update.id, {
+                text: texto,
+                contextInfo: canalInfo([participante])
+              })
+              .catch(() => {})
+            }
+            if (wellcome?.[3]?.bemvindo4) {
+              const config = wellcome[3]
+              const midia = entrou ? config.stickerbv : config.stickersaiu
+              const nomeArquivo = path.basename(String(midia?.arquivo || ''))
+              const arquivoMidia = nomeArquivo ? path.join(runtime.mediaDir, nomeArquivo) : ''
+              if (arquivoMidia && fs.existsSync(arquivoMidia)) {
+                await tokito
+                .sendMessage(update.id, {
+                  sticker: fs.readFileSync(arquivoMidia),
+                  contextInfo: canalInfo([participante])
+                })
+                .catch(() => {})
+              }
+            }
+            if (wellcome?.[4]?.bemvindo5) {
+              const config = wellcome[4]
+              const midia = entrou ? config.audiobv : config.audiosaiu
+              const nomeArquivo = path.basename(String(midia?.arquivo || ''))
+              const arquivoMidia = nomeArquivo ? path.join(runtime.mediaDir, nomeArquivo) : ''
+              if (arquivoMidia && fs.existsSync(arquivoMidia)) {
+                await tokito
+                .sendMessage(update.id, {
+                  audio: fs.readFileSync(arquivoMidia),
+                  mimetype: String(midia?.mimetype || 'audio/ogg; codecs=opus'),
+                  ptt: midia?.ptt === true,
+                  contextInfo: canalInfo([participante])
+                })
+                .catch(() => {})
+              }
+            }
+            await delay(400)
+          }
+        } catch (error) {
+          erroSistema('Erro no evento do grupo', error)
+        }
+      }
+      if (events['connection.update']) {
+        const update = events['connection.update']
+        const { connection, lastDisconnect, qr } = update
+        if (qr) {
+          ultimoQr = qr
+          global.qrTokitoAtual = qr
+          if (metodo === 'qr' && !state.creds.registered) {
+            console.log('')
+            info('Escaneie o QR-Code abaixo para conectar.')
+            console.log('')
+            qrterminal.generate(qr, { small: true })
+            console.log('')
+          }
+        }
+        const shouldReconnect = lastDisconnect?.error ? new Boom(lastDisconnect.error).output.statusCode : 0
+        switch (connection) {
+          case 'connecting':
+          info(`${NomeDoBot} está conectando ao WhatsApp...`)
+          break
+          case 'open':
+          global.startTime = Math.floor(Date.now() / 1000)
+          if (!runtime.isSubBot) {
+            monitorar(tokito)
+            planos.iniciar(tokito)
+          }
+          avisos.iniciar(tokito)
+          reconectando = false
+          metodo = null
+          ultimoQr = null
+          global.qrTokitoAtual = null
+          global.mostrarQrTokito = false
+          void tokito.sendPresenceUpdate('available').catch(() => {})
+          void tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
+          void modulos.midiaMenu(tokito).catch(() => null)
+          const configuracaoDoGrupo = jid => {
+            try {
+              const local = path.join(grupos, String(jid) + '.json')
+              const dados = JSON.parse(fs.readFileSync(local, 'utf8'))
+              return (Array.isArray(dados) ? dados[0] : dados)?.funcoes || {}
+            } catch {
+              return {}
+            }
+          }
+          registro.iniciarPrazos(tokito, {
+            sub: runtime.isSubBot ? String(runtime.id || 'sub') : '',
+            prefix: jid => {
+              const f = configuracaoDoGrupo(jid)
+              return f.multiprefix === true && f.prefixGrupo ? String(f.prefixGrupo) : prefix
+            },
+            habilitado: jid => {
+              const f = configuracaoDoGrupo(jid)
+              return f.registrar === true || (f.registrar === undefined && f.passaporte === true)
+            }
+          })
+          if (typeof tokito.groupFetchAllParticipating === 'function') {
+            const aquecerGrupos = Promise.resolve()
+            .then(() => tokito.groupFetchAllParticipating())
+            .then(lista => {
+              const cache = (global.__TOKITO_METADATA_CACHE__ ||= new Map())
+              const agora = Date.now()
+              for (const [jid, dados] of Object.entries(lista || {})) {
+                if (dados) {
+                  cache.set(jid, {
+                    dados,
+                    tempo: agora
+                  })
+                }
+              }
+              return true
+            })
+            .catch(() => false)
+            void aquecerGrupos
+          }
+          promocoes.iniciar(tokito)
+          inativo.iniciar(tokito, {
+            groupsDir: grupos,
+            owners: [ownerNumber, ...Array.from({ length: 6 }, (_, i) => nescessario?.[`numero_dono${i + 1}`])].filter(Boolean)
+          })
+          if (runtime.isSubBot) {
+            if (!primeiraSub) {
+              primeiraSub = true
+              sucesso(`Sub Bot ${runtime.id} conectado com sucesso.`)
+            } else {
+              info(`Sub Bot ${runtime.id} reconectado.`)
+            }
+            enviarPai({ type: 'online', number: runtime.id })
+          } else {
+            dono.iniciar(tokito)
+            sorteios.iniciar(tokito)
+            console.log(banner3?.string || colors.cyan('\nTOKITO | V10\n'))
+            console.log(banner2?.string || colors.blue('dylan Modz'))
+            console.log('')
+            sucesso(`${NomeDoBot} conectado com sucesso.`)
+            info('WhatsApp selecionado: ' + nomeTipo(lerTipo(qrcode)) + ' (aparelho vinculado).')
+            console.log('')
+            void Promise.resolve().then(() => subs?.iniciar(tokito)).catch(error => erroSistema('Erro ao iniciar sistema de Sub Bots', error))
+          }
+          break
+          case 'close':
+          avisos.pausar(tokito)
+          if (global.__TOKITO_UPDATE_SOCKET__ === tokito) global.__TOKITO_UPDATE_SOCKET__ = null
+          if (runtime.isSubBot && shouldReconnect === 440) {
+            erro('Sub Bot desconectado: sessão substituída (440). Verifique se existe outra instância com o mesmo número.')
+            enviarPai({ type: 'conflict', number: runtime.id })
+            setTimeout(() => process.exit(0), 300)
+            break
+          }
+          if (runtime.isSubBot) {
+            enviarPai({ type: 'reconnecting', number: runtime.id, code: shouldReconnect })
+          }
+          if (runtime.isSubBot && !state.creds.registered) {
+            aviso(`Conexão inicial do Sub Bot fechada. Aguardando novo handshake. Código: ${shouldReconnect}`)
+            if (!reconectando) {
+              reconectando = true
+              setTimeout(() => {
+                reconectando = false
+                iniciando = false
+                conectar()
+              }, 2500)
+            }
+            break
+          }
+          if (shouldReconnect === DisconnectReason.loggedOut || shouldReconnect === 401) {
+            erro('Sessão encerrada. Apague a pasta qrcode e conecte novamente.')
+            if (runtime.isSubBot) enviarPai({ type: 'logged-out', number: runtime.id })
+            process.exit(0)
+          }
+          if (!reconectando) {
+            reconectando = true
+            aviso(`Conexão fechada. Reconectando em 5 segundos. Código: ${shouldReconnect}`)
+            setTimeout(() => {
+              reconectando = false
+              iniciando = false
+              conectar()
+            }, 5000)
+          }
+          break
+        }
+      }
+      if (events['messages.unavailable'] && process.env.TOKITO_DEBUG_RX === '1') {
+        for (const aviso of events['messages.unavailable'] || []) {
+          if (aviso?.kind !== 'view_once') continue
+          console.log('[STONE MIDIA INDISPONIVEL]', {
+            tipo: aviso.kind, subtipo: aviso.subtype || 'view_once',
+            temConteudo: false, podeReenviar: false
+          })
+        }
+      }
+      if (events['creds.update']) await saveCreds()
+    })
+    iniciando = false
+  } catch (error) {
+    erroSistema('Ocorreu um erro ao iniciar a conexão', error)
+    aviso('Tentando iniciar novamente em 5 segundos...')
+    setTimeout(() => {
+      iniciando = false
+      conectar()
+    }, 5000)
+  }
 }
 
 process.on('uncaughtException', error => erroSistema('uncaughtException detectado', error))
 process.on('unhandledRejection', error => erroSistema('unhandledRejection detectado', error))
 
-async function iniciarTokito() {
-recarregarConfigBot()
-if (runtimeSub.isSubBot) {
-metodo = sessaoRegistrada() ? null : 'codigo'
-startConnect()
-return
-}
-const acesso = await prepararAcesso()
-if (!acesso?.allowed) {
-erro(`Não foi possível liberar o acesso: ${acesso?.message || acesso?.code || 'validação indisponível'}`)
-process.exit(24)
-return
-}
-if (!sessaoRegistrada() || process.argv.includes('painel')) await showMenu()
-controleRemoto.start()
-placar.ciclo(resultado => {
-if (!resultado?.definitive) return
-erro(`A licença foi recusada pelo servidor: ${resultado.message || resultado.code || 'acesso bloqueado'}`)
-setTimeout(() => process.exit(24), 1200)
-})
-startConnect()
+async function iniciar() {
+  recarregar()
+  if (runtime.isSubBot) {
+    metodo = registrado() ? null : 'codigo'
+    conectar()
+    return
+  }
+  const acesso = await prepararAcesso()
+  if (!acesso?.allowed) {
+    erro(`Não foi possível liberar o acesso: ${acesso?.message || acesso?.code || 'validação indisponível'}`)
+    process.exit(24)
+    return
+  }
+  if (!registrado() || process.argv.includes('painel')) await menu()
+  controle.start()
+  placar.ciclo(resultado => {
+    if (!resultado?.definitive) return
+    erro(`A licença foi recusada pelo servidor: ${resultado.message || resultado.code || 'acesso bloqueado'}`)
+    setTimeout(() => process.exit(24), 1200)
+  })
+  conectar()
 }
 
-iniciarTokito().catch(error => {
-erroSistema('Falha ao validar o acesso do Tokito V10', error)
-process.exit(24)
+iniciar().catch(error => {
+  erroSistema('Falha ao validar o acesso do Tokito V10', error)
+  process.exit(24)
 })
+

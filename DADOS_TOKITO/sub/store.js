@@ -64,7 +64,7 @@ const upsert = (number, data = {}) => {
   return db[id]
 }
 
-const create = ({ owner, number, days, paid = false, buyer = '' }) => {
+const create = ({ owner, number, days, paid = false, buyer = '', originChat = '', originRequester = '' }) => {
   const p = plan(days)
   if (!p) throw new Error('PLANO_SUB_INVALIDO')
   const id = normalize(number)
@@ -76,6 +76,8 @@ const create = ({ owner, number, days, paid = false, buyer = '' }) => {
   return upsert(id, {
     owner: dono,
     buyer: normalize(buyer),
+    originChat: String(originChat || ''),
+    originRequester: normalize(originRequester),
     plan: p.id,
     days: p.dias,
     value: p.valor,

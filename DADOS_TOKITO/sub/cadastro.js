@@ -2,6 +2,8 @@ const store = require('./store')
 const manager = require('./manager')
 const ui = require('./ui')
 const runtime = require('./runtime')
+const path = require('path')
+const { salvarTipo } = require('../sistemas/tipo-whatsapp')
 
 const pending = new Map()
 
@@ -61,6 +63,38 @@ const handle = async ctx => {
     return true
   }
 
+  if (state.step === 'tipo') {
+    const tipo = text.toLowerCase()
+    if (tipo !== 'normal' && tipo !== 'business') {
+      return ctx.reply(`- 📱 \`𝚃𝙸𝙿𝙾 𝙳𝙴 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿\`\n\n> 📱 ׄ ( Digite normal para WhatsApp Normal. )\n> 💼 ׄ ( Digite business para WhatsApp Business. )`)
+    }
+
+    pending.delete(k)
+    const atual = store.get(state.number)
+    if (!atual) return ctx.reply('❌ Sub Bot não encontrado.')
+
+    try {
+      salvarTipo(path.join(store.ROOT, atual.number, 'qrcode'), tipo)
+      const sub = store.update(atual.number, { tipo })
+
+      await ctx.reply(`- 🧊 \`𝙿𝚁𝙴𝙿𝙰𝚁𝙰𝙽𝙳𝙾 𝚂𝚄𝙱 𝙱𝙾𝚃\`\n\n> 📱 ׄ ( ${sub.number} — sessão sendo preparada. )\n> • ׄ ( Gerando código de conexão... )`)
+
+      const result = manager.start(sub.number, {
+        onCode: (code, current) => ui.enviarCodigoPrivado(ctx, current, code),
+        onOnline: current => ui.enviarConectado({ ...ctx, from: String(current?.originChat || ctx.from) }, current),
+        onError: error => ctx.reply(`- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙾 𝚂𝚄𝙱 𝙱𝙾𝚃\`\n\n> • ׄ ( ${String(error?.message || error)} )`)
+      })
+
+      if (result.registered) {
+        await ctx.reply(`- 🟡 \`𝚂𝙴𝚂𝚂𝙰̃𝙾 𝙹𝙰́ 𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙰𝙳𝙰\`\n\n> • ׄ ( Iniciando a sessão salva desse Sub Bot. )`)
+      }
+    } catch (error) {
+      store.update(atual.number, { status: 'erro', lastError: String(error?.message || error) })
+      await ctx.reply(`- ❌ \`𝙴𝚁𝚁𝙾 𝙰𝙾 𝙸𝙽𝙸𝙲𝙸𝙰𝚁\`\n\n> • ׄ ( ${String(error?.message || error)} )`)
+    }
+    return true
+  }
+
   const number = store.normalize(text)
   if (number.length < 10 || number.length > 15) {
     await ctx.reply(`- ⚠️ \`𝙽𝚄́𝙼𝙴𝚁𝙾 𝙸𝙽𝚅𝙰́𝙻𝙸𝙳𝙾\`\n\n> • ׄ ( Envie DDI + DDD + número, somente números. )`)
@@ -76,40 +110,22 @@ const handle = async ctx => {
   }
 
   if (state.step === 'bot') {
-    pending.delete(k)
-
     if (store.get(number)) {
       await ctx.reply(`- ⚠️ \`𝚂𝚄𝙱 𝙹𝙰́ 𝙲𝙰𝙳𝙰𝚂𝚃𝚁𝙰𝙳𝙾\`\n\n> • ׄ ( Esse número já possui um cadastro de Sub Bot. )`)
       return true
     }
 
     const sub = store.create({
-      owner: state.owner,
-      number,
-      days: state.plan.dias,
-      paid: state.paid,
-      buyer: state.buyer,
-      originChat: String(ctx.from || ''),
+      owner: state.owner, number, days: state.plan.dias, paid: state.paid,
+      buyer: state.buyer, originChat: String(ctx.from || ''),
       originRequester: store.normalize(ctx.sender)
     })
 
-    await ctx.reply(`- 🧊 \`𝙿𝚁𝙴𝙿𝙰𝚁𝙰𝙽𝙳𝙾 𝚂𝚄𝙱 𝙱𝙾𝚃\`\n\n> 📱 ׄ ( ${sub.number} — sessão sendo preparada. )\n> • ׄ ( Gerando código de conexão... )`)
+    state.number = sub.number
+    state.step = 'tipo'
+    pending.set(k, state)
 
-    try {
-      const result = manager.start(sub.number, {
-        onCode: (code, current) => ui.enviarCodigoPrivado(ctx, current, code),
-        onOnline: current => ui.enviarConectado({ ...ctx, from: String(current?.originChat || ctx.from) }, current),
-        onError: error => ctx.reply(`- ❌ \`𝙴𝚁𝚁𝙾 𝙽𝙾 𝚂𝚄𝙱 𝙱𝙾𝚃\`\n\n> • ׄ ( ${String(error?.message || error)} )`)
-      })
-
-      if (result.registered) {
-        await ctx.reply(`- 🟡 \`𝚂𝙴𝚂𝚂𝙰̃𝙾 𝙹𝙰́ 𝚁𝙴𝙶𝙸𝚂𝚃𝚁𝙰𝙳𝙰\`\n\n> • ׄ ( Iniciando a sessão salva desse Sub Bot. )`)
-      }
-    } catch (error) {
-      store.update(sub.number, { status: 'erro', lastError: String(error?.message || error) })
-      await ctx.reply(`- ❌ \`𝙴𝚁𝚁𝙾 𝙰𝙾 𝙸𝙽𝙸𝙲𝙸𝙰𝚁\`\n\n> • ׄ ( ${String(error?.message || error)} )`)
-    }
-
+    await ctx.reply(`- 📱 \`𝚃𝙸𝙿𝙾 𝙳𝙴 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿\`\n\n> 📱 ׄ ( Digite normal para WhatsApp Normal. )\n> 💼 ׄ ( Digite business para WhatsApp Business. )\n\n> • ׄ ( Após escolher, enviarei o código no privado do dono. )`)
     return true
   }
 
