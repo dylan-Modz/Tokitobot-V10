@@ -29,6 +29,7 @@
  */
 
 const dylan = require('../../database/lib/comandos')
+const midiaCitada = require('../../sistemas/midia-citada')
 
 dylan.setCommand({
 nome: "fechargp",
@@ -65,14 +66,18 @@ mensagem?.stickerMessage?.contextInfo ||
 
 const marcada = extrair(contexto?.quotedMessage)
 
-const imagem = marcada?.imageMessage
-const video = marcada?.videoMessage
-const audio = marcada?.audioMessage
+const { fontes, referencia } = midiaCitada.preparar(ctx)
+const imagens = midiaCitada.candidatos(fontes, 'image')
+const videos = midiaCitada.candidatos(fontes, 'video')
+const audios = midiaCitada.candidatos(fontes, 'audio')
+const imagem = imagens[0]
+const video = videos[0]
+const audio = audios[0]
 const sticker = marcada?.stickerMessage
 let midia = atual.fecharmidia || null
 await reagir(from, '⏳')
 if (video) {
-const buffer = await getFileBuffer(video, 'video')
+const buffer = await midiaCitada.baixar(ctx, 'video', videos, referencia)
 const nome = `${from.split('@')[0]}-f-${Date.now()}-${getRandom('.mp4')}`
 const destino = path.join(pasta, nome)
 fs.writeFileSync(destino, buffer)
@@ -83,7 +88,7 @@ arquivo: nome
 }
 }
 else if (imagem) {
-const buffer = await getFileBuffer(imagem, 'image')
+const buffer = await midiaCitada.baixar(ctx, 'image', imagens, referencia)
 const nome = `${from.split('@')[0]}-f-${Date.now()}-${getRandom('.jpg')}`
 const destino = path.join(pasta, nome)
 fs.writeFileSync(destino, buffer)
@@ -94,7 +99,7 @@ arquivo: nome
 }
 }
 else if (audio) {
-const buffer = await getFileBuffer(audio, 'audio')
+const buffer = await midiaCitada.baixar(ctx, 'audio', audios, referencia)
 const mimetype = audio.mimetype || 'audio/ogg; codecs=opus'
 
 let extensao = '.ogg'
