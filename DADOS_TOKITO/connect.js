@@ -696,7 +696,7 @@ return showMenu()
 }
 if (!sessaoRegistrada()) salvarTipoWhatsapp(qrcode, tipo)
 sucesso(nomeTipoWhatsapp(tipo) + ' selecionado.')
-if (tipo === 'normal') aviso('Teste Browsers.android(\'13\'): 13 e o nome do navegador, nao a versao do Android. A conexao continua vinculada.')
+if (tipo === 'normal') info('Pareamento pelo WhatsApp Web com navegador desktop (Chrome).')
 return showMenuPareamento()
 }
 if (option === '3') {
@@ -759,6 +759,7 @@ if (anterior && typeof anterior.end === 'function') {
 try { anterior.end(new Error('Substituindo conexão antiga do Tokito')) } catch {}
 }
 const { version } = await fetchLatestStoneWPPVersion()
+info('Versao Web para pareamento: ' + (Array.isArray(version) ? version.join('.') : String(version || 'desconhecida')))
 const { state, saveCreds } = await useMultiFileAuthState(qrcode)
 const tokito = makeWASocket({
 version,
