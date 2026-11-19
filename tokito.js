@@ -415,9 +415,8 @@ console.log(`[RX TOKITO] ${upsert?.type || 'sem-tipo'} | ${from} | ${info?.key?.
 }
 if (isStatus) {
 if (modulos.globalCfg().visualizarmsg) {
-try {
-await tokito.readMessages([info.key])
-} catch {}
+  // Confirmacao de leitura nao pode impedir que o comando seja respondido.
+  void Promise.resolve().then(() => tokito.readMessages([info.key])).catch(() => {})
 }
 continue
 }
@@ -444,9 +443,8 @@ const type = stub ? 'viewOnceStub' : getContentType(mensagem)
 const content = JSON.stringify(mensagem)
 const pushname = info.pushName || 'Usuário'
 if (modulos.globalCfg().visualizarmsg) {
-try {
-await tokito.readMessages([info.key])
-} catch {}
+  // Confirmacao de leitura nao pode impedir que o comando seja respondido.
+  void Promise.resolve().then(() => tokito.readMessages([info.key])).catch(() => {})
 }
 function extrairTexto(message) {
 const paths = [
