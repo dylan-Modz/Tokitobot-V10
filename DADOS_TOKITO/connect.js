@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent, Browsers } = require('@stone-wpp/ofc')
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, fetchLatestWaWebVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent, Browsers } = require('@stone-wpp/ofc')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario, cacheGp } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
 const registro = require('./sistemas/registro.js')
@@ -758,8 +758,21 @@ socketAtual = null
 if (anterior && typeof anterior.end === 'function') {
 try { anterior.end(new Error('Substituindo conexão antiga do Tokito')) } catch {}
 }
-const { version } = await fetchLatestStoneWPPVersion()
-info('Versao Web para pareamento: ' + (Array.isArray(version) ? version.join('.') : String(version || 'desconhecida')))
+// Consulta a revisao real do WhatsApp Web; a versao padrao da Stone
+// pode estar defasada e recusar novas sessoes, mesmo gerando o codigo.
+const versaoWeb = await fetchLatestWaWebVersion()
+const versaoAtualValida = versaoWeb?.isLatest === true &&
+  Array.isArray(versaoWeb.version) &&
+  versaoWeb.version.length >= 3 &&
+  versaoWeb.version.every(n => Number.isSafeInteger(n) && n > 0)
+const versaoFonte = versaoAtualValida ? 'WhatsApp Web' : 'Stone (alternativa)'
+if (!versaoAtualValida) {
+  aviso('Nao foi possivel consultar a revisao do WhatsApp Web. Tentando versao da Stone.')
+}
+const version = versaoAtualValida
+  ? versaoWeb.version
+  : (await fetchLatestStoneWPPVersion()).version
+info('Versao de conexao (' + versaoFonte + '): ' + (Array.isArray(version) ? version.join('.') : String(version || 'desconhecida')))
 const { state, saveCreds } = await useMultiFileAuthState(qrcode)
 const tokito = makeWASocket({
 version,
