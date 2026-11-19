@@ -1,6 +1,6 @@
 {
   "name": "TokitoBot-Md",
-  "version": "10.3.44",
+  "version": "10.3.45",
   "description": "Qualquer dúvida chama no WhatsApp: +55 11 97543-1163",
   "main": "tokito.js",
   "scripts": {
@@ -11,7 +11,8 @@
     "test:midia": "node --test DADOS_TOKITO/sistemas/testes/midia-citada.test.js",
     "test:conexao": "node --check DADOS_TOKITO/connect.js && node --test DADOS_TOKITO/sistemas/testes/tipo-whatsapp.test.js",
     "test:stone-mobile": "node --test DADOS_TOKITO/sistemas/testes/stone-mobile-receptor.test.mjs",
-    "stone:mobile:test": "node DADOS_TOKITO/sistemas/stone-mobile-teste.mjs"
+    "stone:mobile:test": "node DADOS_TOKITO/sistemas/stone-mobile-teste.mjs",
+    "test:cache-midias": "node --test DADOS_TOKITO/sistemas/testes/midia-citada.test.js DADOS_TOKITO/sistemas/testes/tipo-whatsapp.test.js"
   },
   "keywords": [],
   "author": "dylanModz",
