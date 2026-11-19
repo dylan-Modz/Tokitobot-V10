@@ -283,7 +283,7 @@ const enviarConectado = async (ctx, sub) => {
   try { cfg = JSON.parse(fs.readFileSync(cfgFile, 'utf8')) } catch {}
 
   const destino = String(sub.originChat || ctx.from || '').trim()
-  const text = `- ✅ \`𝚂𝚄𝙱 𝙱𝙾𝚃 𝙲𝙾𝙽𝙴𝙲𝚃𝙰𝙳𝙾\`\n\n> 👤 ׄ ( ${sub.owner} — dono. )\n> 📱 ׄ ( ${sub.number} — número conectado. )\n> 🟢 ׄ ( Online — status atual. )\n> ⚙️ ׄ ( ${String(cfg.prefix || '!')} — prefixo atual. )\n> 📦 ׄ ( ${sub.days} dias — plano ativo. )\n> 📅 ׄ ( ${dataBR(sub.expiresAt)} — validade. )\n\n> • ׄ ( Seu Sub Bot já está pronto para uso. )`
+  const text = `- ✅ \`𝚂𝚄𝙱 𝙱𝙾𝚃 𝙲𝙾𝙽𝙴𝙲𝚃𝙰𝙳𝙾\`\n\n> 👤 ׄ ( ${sub.owner} — dono. )\n> 📱 ׄ ( ${sub.number} — número conectado. )\n> 📲 ׄ ( ${sub.tipo === 'normal' ? 'WhatsApp Normal' : sub.tipo === 'business' ? 'WhatsApp Business' : 'Tipo não definido'} — conexão. )\n> 🟢 ׄ ( Online — status atual. )\n> ⚙️ ׄ ( ${String(cfg.prefix || '!')} — prefixo atual. )\n> 📦 ׄ ( ${sub.days} dias — plano ativo. )\n> 📅 ׄ ( ${dataBR(sub.expiresAt)} — validade. )\n\n> • ׄ ( Seu Sub Bot já está pronto para uso. )`
 
   if (!destino) return false
   try {
