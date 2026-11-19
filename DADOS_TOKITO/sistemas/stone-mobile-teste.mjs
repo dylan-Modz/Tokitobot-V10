@@ -43,11 +43,15 @@ async function iniciar() {
     aviso('Transporte Android experimental selecionado.')
     aviso('Use somente uma sessão separada de testes. A conexão pode ser recusada.')
     const confirmar = await pedir('Digite TESTAR para continuar:')
-    if (confirmar !== 'TESTAR') return
+    if (confirmar.toLocaleUpperCase('pt-BR') !== 'TESTAR') {
+      aviso('Teste cancelado. Confirme com TESTAR para iniciar.')
+      return
+    }
   }
   fs.mkdirSync(sessao, { recursive: true, mode: 0o700 })
   info('Sessão isolada: DADOS_TOKITO/database/stone-mobile-teste')
   aviso('Nunca copie a pasta qrcode da instalação principal para este teste.')
+  let modoAtual = 'inicializando'
   const receptor = await criarReceptorExperimentalStone({
     diretorio: sessao,
     numero,
@@ -65,20 +69,29 @@ async function iniciar() {
       if (tipo === 'midia') {
         console.log('[STONE RX MIDIA]', {
           tipo: dados.tipo, temChave: dados.temChave,
-          temCaminho: dados.temCaminho
+          temCaminho: dados.temCaminho, modo: modoAtual
         })
       }
       if (tipo === 'indisponivel') {
         console.log('[STONE RX INDISPONIVEL]', {
-          tipo: dados.tipo, temChave: false, temCaminho: false
+          tipo: dados.tipo, temChave: false, temCaminho: false, modo: modoAtual
         })
       }
       if (tipo === 'conexao') info('Status: ' + dados.status + (dados.motivo ? ' (' + dados.motivo + ')' : ''))
-      if (tipo === 'pareado') info('Sessão de teste vinculada. Reinicie com --android-experimental para experimentar transporte Android.')
+      if (tipo === 'pareado') info('Sessao vinculada salva. Reinicie o teste com --android-experimental se quiser tentar o transporte Android (nao garante modo principal).')
       if (tipo === 'erro-pareamento') erro(dados.mensagem)
     }
   })
-  info('Perfil de conexão: ' + receptor.modo.modo)
+  modoAtual = receptor.modo.modo
+  info('Perfil de conexão: ' + modoAtual)
+  if (experimental && modoAtual === 'vinculado') {
+    aviso('Ainda nao existe sessao registrada: esta PRIMEIRA execucao usa modo vinculado.')
+    aviso('Conclua o pareamento, encerre com Ctrl+C e execute novamente para testar o transporte Android.')
+  }
+  if (experimental && modoAtual === 'mobile-experimental') {
+    aviso('Tentando transporte Android com credenciais de um dispositivo vinculado.')
+    aviso('Isso NAO transforma a sessao em WhatsApp Android principal e pode ser rejeitado.')
+  }
   if (!experimental && receptor.modo.modo === 'vinculado')
     aviso('Primeira sessão via pareamento. Modo Android exige credenciais válidas e teste explícito.')
   rl.close()
