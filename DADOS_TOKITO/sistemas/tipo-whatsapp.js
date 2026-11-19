@@ -33,12 +33,13 @@ const nomeTipo = tipo => tipo === 'normal' ? 'WhatsApp Normal' : 'WhatsApp Busin
 
 const navegador = (tipo, Browsers) => {
   if (tipo === 'normal') {
-    if (!Browsers || typeof Browsers.android !== 'function') {
-      throw new Error('STONE_BROWSER_ANDROID_INDISPONIVEL')
+    if (!Browsers || typeof Browsers.windows !== 'function') {
+      throw new Error('STONE_BROWSER_WINDOWS_INDISPONIVEL')
     }
-    // Teste solicitado: "13" e o nome do browser, NAO a versao do Android.
-    // A conexao permanece no transporte Web/companion.
-    return Browsers.android('13')
+    // Browser desktop para o pareamento via codigo ou QR.
+    // A selecao Normal/Business identifica o aplicativo do usuario no menu,
+    // nao modifica o tipo de conta e nem habilita mobile-primary.
+    return Browsers.windows('Chrome')
   }
   return ['Linux', 'Opera', '10.0.22631']
 }
