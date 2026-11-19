@@ -1351,6 +1351,18 @@ break
  * MENSAGENS
  * Mantido no mesmo fluxo da base original.
  */
+if (events['messages.unavailable']) {
+for (const aviso of events['messages.unavailable'] || []) {
+if (aviso?.kind !== 'view_once') continue
+// Não registrar ID, remetente, chave, URL ou conteúdo.
+console.log('[STONE MIDIA INDISPONIVEL]', {
+tipo: aviso.kind,
+subtipo: aviso.subtype || 'view_once',
+temConteudo: false,
+podeReenviar: false
+})
+}
+}
 if (events['messages.update']) {
 registrarMidiasRecebidas(tokito, events['messages.update'])
 }

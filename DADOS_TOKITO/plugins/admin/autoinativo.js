@@ -112,12 +112,12 @@ return itens.sort((a, b) => b.ms - a.ms)
 
 dylan.setCommand({
 nome: 'autoinativo',
-comandos: ['autoinativo', 'inativos'],
+comandos: ['autoinativo', 'autoinativos'],
 categoria: 'admin',
 
 info: {
 descricao: 'Remove automaticamente membros que ficam sem enviar mensagens no grupo.',
-uso: 'autoinativo 1 | autoinativo 0 | autoinativo 3d | inativos',
+uso: 'autoinativo 1 | autoinativo 0 | autoinativo 3d | autoinativos',
 permissao: 'ADM'
 },
 
@@ -128,7 +128,7 @@ return ctx.reply(ctx.mess.sogrupo())
 if (!ctx.isGroupAdmins && !ctx.SoDono)
 return ctx.reply(ctx.mess.soadm())
 
-if (ctx.command === 'inativos') {
+if (ctx.command === 'autoinativos') {
 const cfg = garantir(ctx)
 
 if (!cfg.ativo)
