@@ -10,7 +10,7 @@
     "test": "node --check tokito.js && node --check DADOS_TOKITO/connect.js && node --check DADOS_TOKITO/plugins/downloads/playcall.js && node --check DADOS_TOKITO/plugins/dono/callstatus.js && node --check DADOS_TOKITO/mensagens/menus.js && node -e \"const d=require('./DADOS_TOKITO/database/lib/comandos');const f=require.resolve('./DADOS_TOKITO/plugins/downloads/playcall.js');d.abrir(f);require(f);const cmd=d.fechar(f);if(!cmd||!cmd.comandos.includes('playcall')||cmd.categoria!=='downloads')process.exit(1)\" && node --check DADOS_TOKITO/plugins/index.js && node --check DADOS_TOKITO/ia/index.js && node --check DADOS_TOKITO/sistemas/filtros/antilink.js && node --check DADOS_TOKITO/plugins/admin/antilinkconfig.js",
     "test:midia": "node --test DADOS_TOKITO/sistemas/testes/midia-citada.test.js",
     "test:conexao": "node --check DADOS_TOKITO/connect.js && node --test DADOS_TOKITO/sistemas/testes/tipo-whatsapp.test.js",
-    "test:stone-mobile": "node --test node_modules/@stone-wpp/ofc/lib/Socket/stone-mobile-receiver.test.mjs",
+    "test:stone-mobile": "node --test DADOS_TOKITO/sistemas/testes/stone-mobile-receptor.test.mjs",
     "stone:mobile:test": "node DADOS_TOKITO/sistemas/stone-mobile-teste.mjs"
   },
   "keywords": [],
