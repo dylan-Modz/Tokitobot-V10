@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, fetchLatestWaWebVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, fetchLatestWaWebVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent, Browsers } = require('@stone-wpp/ofc')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario, cacheGp } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
 const registro = require('./sistemas/registro.js')
@@ -629,7 +629,7 @@ return showMenu()
 }
 if (!sessaoRegistrada()) salvarTipoWhatsapp(qrcode, tipo)
 sucesso(nomeTipoWhatsapp(tipo) + ' selecionado.')
-info('Pareamento via WhatsApp Web selecionado.')
+info('Pareamento Web inicial. Android Normal/Business identificado apos registro.')
 return showMenuPareamento()
 }
 if (option === '3') {
@@ -691,26 +691,38 @@ socketAtual = null
 if (anterior && typeof anterior.end === 'function') {
 try { anterior.end(new Error('Substituindo conexão antiga do Tokito')) } catch {}
 }
-// Prefere a revisao Web atual; usa o padrao da Stone se a consulta falhar.
-const versaoWeb = await fetchLatestWaWebVersion()
-const versaoAtualValida = versaoWeb?.isLatest === true &&
-  Array.isArray(versaoWeb.version) &&
-  versaoWeb.version.length === 3 &&
-  versaoWeb.version.every(n => Number.isSafeInteger(n) && n > 0)
-if (!versaoAtualValida) {
-  aviso('Revisao do WhatsApp Web indisponivel; usando versao da Stone.')
-}
-const version = versaoAtualValida
-  ? versaoWeb.version
-  : (await fetchLatestStoneWPPVersion()).version
-info('Versao de conexao: ' + (Array.isArray(version) ? version.join('.') : String(version || 'desconhecida')))
+// Configuracao exata da revisao informada no socket Yuta.
+const version = [2, 3000, 1044006379]
 const { state, saveCreds } = await useMultiFileAuthState(qrcode)
+// Carrega o nucleo e registra os plugins ANTES dos primeiros upserts.
+// A licenca ja foi validada em iniciarTokito(); elimina cold start por mensagem.
+if (!processarMsg) {
+  const carregamento = Date.now()
+  processarMsg = require('../tokito.js')
+  info('Comandos preparados em ' + (Date.now() - carregamento) + ' ms.')
+}
+const tipoConexao = lerTipoWhatsapp(qrcode)
+// O modelo Yuta usa o navegador padrao no pareamento, alternando
+// para Android Normal/Business APENAS quando o estado esta registrado.
+const navegadorSelecionado = runtimeSub.isSubBot
+  ? ['Linux', 'Opera', '10.0.22631']
+  : navegadorWhatsapp(tipoConexao, Browsers, state.creds?.registered === true)
+info('WhatsApp: ' + nomeTipoWhatsapp(tipoConexao) +
+  ' | browser: ' + String(navegadorSelecionado[0]) +
+  ' | transporte: Web/companion')
+const antiRate = {
+  // O cacheGp interno guarda {dados,tempo}; a Stone espera so metadata.
+  // Cache recente, em memoria, sem consulta extra no caminho do socket.
+  cachedGroupMetadata: async jid => {
+    const salvo = cacheGp.get(jid)
+    if (!salvo?.dados || Date.now() - Number(salvo.tempo || 0) > 30000) return undefined
+    return salvo.dados
+  }
+}
 const tokito = makeWASocket({
 version,
 logger,
-browser: runtimeSub.isSubBot
-  ? ['Linux', 'Opera', '10.0.22631']
-  : navegadorWhatsapp(lerTipoWhatsapp(qrcode)),
+browser: navegadorSelecionado,
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, logger)
@@ -721,14 +733,15 @@ fireInitQueries: true,
 markOnlineOnConnect: true,
 generateHighQualityLinkPreview: true,
 connectTimeoutMs: 20000,
-keepAliveIntervalMs: 40000,
+keepAliveIntervalMs: 25000,
 defaultQueryTimeoutMs: 60000,
 retryRequestDelayMs: 5000,
 maxMsgRetryCount: 5,
 syncFullHistory: false,
 downloadHistory: false,
-emitOwnEvents: true,
+emitOwnEvents: false,
 shouldSyncHistoryMessage: () => false,
+cachedGroupMetadata: antiRate.cachedGroupMetadata,
 getMessage: async key => undefined
 })
 vincularCacheMidia(tokito)
