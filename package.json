@@ -9,7 +9,7 @@
     "install:bot": "bash DADOS_TOKITO/database/lib/install.sh",
     "test": "node --check tokito.js && node --check DADOS_TOKITO/connect.js && node --check DADOS_TOKITO/plugins/downloads/playcall.js && node --check DADOS_TOKITO/plugins/dono/callstatus.js && node --check DADOS_TOKITO/mensagens/menus.js && node -e \"const d=require('./DADOS_TOKITO/database/lib/comandos');const f=require.resolve('./DADOS_TOKITO/plugins/downloads/playcall.js');d.abrir(f);require(f);const cmd=d.fechar(f);if(!cmd||!cmd.comandos.includes('playcall')||cmd.categoria!=='downloads')process.exit(1)\" && node --check DADOS_TOKITO/plugins/index.js && node --check DADOS_TOKITO/ia/index.js && node --check DADOS_TOKITO/sistemas/filtros/antilink.js && node --check DADOS_TOKITO/plugins/admin/antilinkconfig.js"
   },
-  "keywords": [],
+  "keywords": ["bot", "whatsapp", "web"],
   "author": "dylanModz",
   "license": "SEE LICENSE IN DADOS_TOKITO/LICENSE",
   "type": "commonjs",
