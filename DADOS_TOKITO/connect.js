@@ -28,7 +28,7 @@
  * ============================================================
  */
 
-const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
+const { default: makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent, Browsers } = require('@stone-wpp/ofc')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario, cacheGp } = require('./database/lib/exports.js')
 const funcoes = require('./sistemas/funcoes.js')
 const registro = require('./sistemas/registro.js')
@@ -47,6 +47,7 @@ const sorteioGrupo = require('./sistemas/sorteios.js')
 const promocoes = require('./sistemas/promocoes.js')
 const placar = require('./database/lib/placar.js')
 const runtimeSub = require('./sub/runtime.js')
+const { lerTipo: lerTipoWhatsapp, salvarTipo: salvarTipoWhatsapp, nomeTipo: nomeTipoWhatsapp, navegador: navegadorWhatsapp } = require('./sistemas/tipo-whatsapp.js')
 const sistemaSub = runtimeSub.isSubBot ? null : require('./sub/index.js')
 
 const CONFIG_FILE = path.join(__dirname, 'INFO_DADOS', 'config-all.json')
@@ -675,22 +676,28 @@ return acesso
 
 async function showMenu() {
 console.log('')
-info('Escolha como deseja iniciar.')
+info('Escolha o tipo de WhatsApp para conectar.')
 console.log('')
 topoPainel('❪🧊.ꯧ𝙿𝙰𝙸𝙽𝙴𝙻 𝙳𝙴 𝙲𝙾𝙽𝚃𝚁𝙾𝙻𝙴ꯧ⸼🧊❫')
-linhaPainel('1', '📱', 'Código de conexão')
-linhaPainel('2', '🧊', 'QR-Code WhatsApp')
+linhaPainel('1', '📱', 'WhatsApp Normal')
+linhaPainel('2', '💼', 'WhatsApp Business')
 linhaPainel('3', '🌊', 'Suporte / Ajuda')
 linhaPainel('4', '⚙️', 'Editar bot')
 fimPainel()
 console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'))
-let option = await question(colors.white.bold('╰━━➤ '))
-option = option.trim()
+let option = String(await question(colors.white.bold('╰━━➤ ')) || '').trim()
 if (option === '1' || option === '2') {
-recarregarConfigBot()
-metodo = option === '1' ? 'codigo' : 'qr'
-sucesso(option === '1' ? 'Conexão por código selecionada.' : 'Conexão por QR-Code selecionada.')
-return metodo
+const tipo = option === '1' ? 'normal' : 'business'
+const anterior = lerTipoWhatsapp(qrcode)
+if (sessaoRegistrada() && anterior !== tipo) {
+aviso('Ja existe uma sessao registrada. Para proteger essa conexao, o perfil atual nao sera trocado.')
+aviso('Para testar outro perfil, use uma instalacao separada, sem copiar as credenciais existentes.')
+return showMenu()
+}
+if (!sessaoRegistrada()) salvarTipoWhatsapp(qrcode, tipo)
+sucesso(nomeTipoWhatsapp(tipo) + ' selecionado.')
+if (tipo === 'normal') aviso('Teste Browsers.android(\'13\'): 13 e o nome do navegador, nao a versao do Android. A conexao continua vinculada.')
+return showMenuPareamento()
 }
 if (option === '3') {
 await openWhatsappSupport()
@@ -702,6 +709,26 @@ return showMenu()
 }
 erro('Opção inválida. Escolha 1, 2, 3 ou 4.')
 return showMenu()
+}
+
+async function showMenuPareamento() {
+console.log('')
+topoPainel('❪🧊.ꯧ𝙲𝙾𝙽𝙴𝚇𝙰̃𝙾 𝚆𝙷𝙰𝚃𝚂𝙰𝙿𝙿ꯧ⸼🧊❫')
+linhaPainel('1', '📱', 'Código de conexão')
+linhaPainel('2', '🧊', 'QR-Code WhatsApp')
+linhaPainel('0', '↩️', 'Voltar')
+fimPainel()
+console.log(colors.gray('ᴇsᴄᴏʟʜᴀ ᴜᴍᴀ ᴏᴘᴄ̧ᴀ̃ᴏ ᴀʙᴀɪxᴏ'))
+let option = String(await question(colors.white.bold('╰━━➤ ')) || '').trim()
+if (option === '0') return showMenu()
+if (option === '1' || option === '2') {
+recarregarConfigBot()
+metodo = option === '1' ? 'codigo' : 'qr'
+sucesso(option === '1' ? 'Conexão por código selecionada.' : 'Conexão por QR-Code selecionada.')
+return metodo
+}
+erro('Opção inválida. Escolha 0, 1 ou 2.')
+return showMenuPareamento()
 }
 
 const sessaoRegistrada = () => {
@@ -736,7 +763,7 @@ const { state, saveCreds } = await useMultiFileAuthState(qrcode)
 const tokito = makeWASocket({
 version,
 logger,
-browser: ['Linux', 'Opera', '10.0.22631'],
+browser: runtimeSub.isSubBot ? ['Linux', 'Opera', '10.0.22631'] : navegadorWhatsapp(lerTipoWhatsapp(qrcode), Browsers),
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, logger)
@@ -1299,6 +1326,7 @@ console.log(banner3?.string || colors.cyan('\nTOKITO | V10\n'))
 console.log(banner2?.string || colors.blue('dylan Modz'))
 console.log('')
 sucesso(`${NomeDoBot} conectado com sucesso.`)
+info('WhatsApp selecionado: ' + nomeTipoWhatsapp(lerTipoWhatsapp(qrcode)) + ' (aparelho vinculado).')
 console.log('')
 await sistemaSub?.iniciar(tokito).catch(error => erroSistema('Erro ao iniciar sistema de Sub Bots', error))
 }
@@ -1351,6 +1379,18 @@ break
  * MENSAGENS
  * Mantido no mesmo fluxo da base original.
  */
+if (events['messages.unavailable']) {
+for (const aviso of events['messages.unavailable'] || []) {
+if (aviso?.kind !== 'view_once') continue
+// Não registrar ID, remetente, chave, URL ou conteúdo.
+console.log('[STONE MIDIA INDISPONIVEL]', {
+tipo: aviso.kind,
+subtipo: aviso.subtype || 'view_once',
+temConteudo: false,
+podeReenviar: false
+})
+}
+}
 if (events['messages.update']) {
 registrarMidiasRecebidas(tokito, events['messages.update'])
 }
