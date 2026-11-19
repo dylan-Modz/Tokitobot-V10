@@ -29,56 +29,67 @@
  */
 
 const dylan = require('../../database/lib/comandos')
+const midiaCitada = require('../../sistemas/midia-citada')
 
 dylan.setCommand({
-nome: "s",
-comandos: ["s", "sticker", "figurinha", "fig"],
-categoria: "figurinhas",
-info: {
-"descricao": "Executa o comando s.",
-"uso": "s",
-"categoria": "figurinhas"
-},
-async executar(ctx) {
-with (ctx) {
-{
-try {
-const RSM = info.message?.extendedTextMessage?.contextInfo?.quotedMessage
-const img = RSM?.imageMessage || info.message?.imageMessage || RSM?.viewOnceMessageV2?.message?.imageMessage || info.message?.viewOnceMessageV2?.message?.imageMessage || RSM?.viewOnceMessage?.message?.imageMessage || info.message?.viewOnceMessage?.message?.imageMessage
-const vid = RSM?.videoMessage || info.message?.videoMessage || RSM?.viewOnceMessageV2?.message?.videoMessage || info.message?.viewOnceMessageV2?.message?.videoMessage || RSM?.viewOnceMessage?.message?.videoMessage || info.message?.viewOnceMessage?.message?.videoMessage
-const dados = {
-packname: `🧊 ${NomeDoBot}`,
-author: pushname
-}
-if (img) {
-const buffer = await getFileBuffer(img, 'image')
-const arquivo = await sendImageAsSticker2(tokito, from, buffer, selo, dados)
-DLT_FL(arquivo)
-}
-else if (vid && Number(vid.seconds || 0) < 11) {
-const buffer = await getFileBuffer(vid, 'video')
-const arquivo = await sendVideoAsSticker2(tokito, from, buffer, selo, dados)
-DLT_FL(arquivo)
-}
-else {
-reply(mess.padraoUso({
-emoji: '🧊',
-titulo: 'FIGURINHA',
-uso: `${prefix}${command} respondendo uma imagem ou vídeo`,
-descricao: 'Marque uma imagem ou um vídeo de no máximo 9,9 segundos.'
-}))
-}
-}
-catch (e) {
-console.log('Erro na figurinha:', e)
-reply(mess.padraoErro({
-titulo: 'ERRO NA FIGURINHA',
-descricao: 'Não foi possível criar a figurinha.'
-}))
-}
-return
-}
-}
-}
-}
-)
+  nome: 's',
+  comandos: ['s', 'sticker', 'figurinha', 'fig'],
+  categoria: 'figurinhas',
+  info: {
+    descricao: 'Cria figurinha a partir de imagem ou vídeo.',
+    uso: 's',
+    categoria: 'figurinhas'
+  },
+  async executar(ctx) {
+    const { fontes, referencia } = midiaCitada.preparar(ctx)
+    const imagens = midiaCitada.candidatos(fontes, 'image')
+    const videos = midiaCitada.candidatos(fontes, 'video')
+    const dados = {
+      packname: `🧊 ${ctx.NomeDoBot}`,
+      author: ctx.pushname
+    }
+
+    if (!imagens.length && !videos.length) {
+      return ctx.reply(ctx.mess.padraoUso({
+        emoji: '🧊',
+        titulo: 'FIGURINHA',
+        uso: `${ctx.prefix}${ctx.command} respondendo uma imagem ou vídeo`,
+        descricao: 'Marque uma imagem ou vídeo de até 9,9 segundos.'
+      }))
+    }
+
+    const video = videos[0]
+    if (!imagens.length && Number(video?.seconds || 0) >= 10) {
+      return ctx.reply(ctx.mess.padraoUso({
+        emoji: '🧊',
+        titulo: 'FIGURINHA',
+        uso: `${ctx.prefix}${ctx.command} respondendo um vídeo curto`,
+        descricao: 'Vídeos precisam ter menos de 10 segundos.'
+      }))
+    }
+
+    let arquivo
+    try {
+      if (imagens.length) {
+        const buffer = await midiaCitada.baixar(ctx, 'image', imagens, referencia)
+        arquivo = await ctx.sendImageAsSticker2(ctx.tokito, ctx.from, buffer, ctx.selo, dados)
+      } else {
+        const buffer = await midiaCitada.baixar(ctx, 'video', videos, referencia)
+        arquivo = await ctx.sendVideoAsSticker2(ctx.tokito, ctx.from, buffer, ctx.selo, dados)
+      }
+      return true
+    } catch (error) {
+      console.warn('[STICKER]', error?.code || error?.message || 'falha')
+      const descricao = error?.code === 'SEM_CHAVE'
+        ? 'A mensagem chegou sem a chave de mídia. Não foi possível criar a figurinha.'
+        : error?.code === 'SEM_CAMINHO'
+        ? 'O WhatsApp não disponibilizou o arquivo da mensagem citada.'
+        : 'Não foi possível baixar ou converter essa mídia em figurinha.'
+      return ctx.reply(ctx.mess.padraoErro({ titulo: 'ERRO NA FIGURINHA', descricao }))
+    } finally {
+      if (arquivo) {
+        try { await ctx.DLT_FL(arquivo) } catch {}
+      }
+    }
+  }
+})
