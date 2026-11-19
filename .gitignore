@@ -1,0 +1,4 @@
+# Saidas locais e dependencias
+node_modules/
+DADOS_TOKITO/database/stone-mobile-teste/
+*.log
