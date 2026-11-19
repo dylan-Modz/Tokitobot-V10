@@ -696,7 +696,7 @@ return showMenu()
 }
 if (!sessaoRegistrada()) salvarTipoWhatsapp(qrcode, tipo)
 sucesso(nomeTipoWhatsapp(tipo) + ' selecionado.')
-if (tipo === 'normal') info('Pareamento pelo WhatsApp Web com navegador desktop (Chrome).')
+info('Primeiro pareamento via navegador Web; identificacao Android somente apos registro.')
 return showMenuPareamento()
 }
 if (option === '3') {
@@ -758,26 +758,20 @@ socketAtual = null
 if (anterior && typeof anterior.end === 'function') {
 try { anterior.end(new Error('Substituindo conexão antiga do Tokito')) } catch {}
 }
-// Consulta a revisao real do WhatsApp Web; a versao padrao da Stone
-// pode estar defasada e recusar novas sessoes, mesmo gerando o codigo.
-const versaoWeb = await fetchLatestWaWebVersion()
-const versaoAtualValida = versaoWeb?.isLatest === true &&
-  Array.isArray(versaoWeb.version) &&
-  versaoWeb.version.length >= 3 &&
-  versaoWeb.version.every(n => Number.isSafeInteger(n) && n > 0)
-const versaoFonte = versaoAtualValida ? 'WhatsApp Web' : 'Stone (alternativa)'
-if (!versaoAtualValida) {
-  aviso('Nao foi possivel consultar a revisao do WhatsApp Web. Tentando versao da Stone.')
-}
-const version = versaoAtualValida
-  ? versaoWeb.version
-  : (await fetchLatestStoneWPPVersion()).version
-info('Versao de conexao (' + versaoFonte + '): ' + (Array.isArray(version) ? version.join('.') : String(version || 'desconhecida')))
+// Teste controlado com a revisao indicada no exemplo do Yuta.
+// Pode ser recusada pelo WhatsApp; nao substituir automaticamente a main.
+const version = [2, 3000, 1044006379]
+info('Versao de conexao (teste Yuta): ' + version.join('.'))
 const { state, saveCreds } = await useMultiFileAuthState(qrcode)
+const perfilNavegador = runtimeSub.isSubBot
+  ? ['Linux', 'Opera', '10.0.22631']
+  : navegadorWhatsapp(lerTipoWhatsapp(qrcode), Browsers, state.creds?.registered === true)
+info('Perfil de conexao: ' + (state.creds?.registered === true ? 'registrado' : 'primeiro pareamento') +
+  ' | browser=' + String(perfilNavegador[0]) + ' | transporte=Web/companion')
 const tokito = makeWASocket({
 version,
 logger,
-browser: runtimeSub.isSubBot ? ['Linux', 'Opera', '10.0.22631'] : navegadorWhatsapp(lerTipoWhatsapp(qrcode), Browsers),
+browser: perfilNavegador,
 auth: {
 creds: state.creds,
 keys: makeCacheableSignalKeyStore(state.keys, logger)
@@ -788,7 +782,7 @@ fireInitQueries: true,
 markOnlineOnConnect: true,
 generateHighQualityLinkPreview: true,
 connectTimeoutMs: 20000,
-keepAliveIntervalMs: 40000,
+keepAliveIntervalMs: 25000,
 defaultQueryTimeoutMs: 60000,
 retryRequestDelayMs: 5000,
 maxMsgRetryCount: 5,
