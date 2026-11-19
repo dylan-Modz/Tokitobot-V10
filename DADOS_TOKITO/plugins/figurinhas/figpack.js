@@ -32,6 +32,7 @@ const fs = require('fs')
 const path = require('path')
 const os = require('os')
 const Crypto = require('crypto')
+const midiaCitada = require('../../sistemas/midia-citada')
 const {
 MAX_FIGURINHAS,
 prepararImagem,
@@ -68,22 +69,16 @@ null
 }
 
 const imagemMarcada = ctx => {
-const m = ctx.info?.message || ctx.mensagem || {}
-const q = m.extendedTextMessage?.contextInfo?.quotedMessage ||
-m.imageMessage?.contextInfo?.quotedMessage ||
-{}
-return q.imageMessage ||
-q.viewOnceMessageV2?.message?.imageMessage ||
-q.viewOnceMessage?.message?.imageMessage ||
-q.ephemeralMessage?.message?.imageMessage ||
-null
+const { fontes } = midiaCitada.preparar(ctx)
+return midiaCitada.candidatos(fontes, 'image')[0] || null
 }
 
 const adicionarImagem = async (ctx, sessao, imagem) => {
 if (!imagem || sessao.arquivos.length >= MAX_FIGURINHAS)
 return false
 
-const original = await ctx.getFileBuffer(imagem, 'image')
+const { referencia } = midiaCitada.preparar(ctx)
+const original = await midiaCitada.baixar(ctx, 'image', [imagem], referencia)
 if (!original?.length)
 return false
 
