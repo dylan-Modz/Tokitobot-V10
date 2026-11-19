@@ -58,22 +58,8 @@ const pegarContexto = entrada => {
 
 // A citação de visualização única pode omitir dados presentes no original.
 // O bot só consulta metadados que já recebeu, mantidos brevemente em RAM.
-const obterOriginal = (socket, jid, stanzaId) => {
-if (!jid || !stanzaId) return null
-const chave = jid + '|' + stanzaId
-const item = socket?.__tokitoMidiasOriginais?.get(chave)
-
-if (item && Date.now() - item.at <= 10 * 60 * 1000)
-return { message: desenrolar(item.message), key: item.key || {} }
-if (item) socket?.__tokitoMidiasOriginais?.delete(chave)
-// Segunda fonte: cache do X9, sempre limitado ao ID e grupo exatos.
-const alternativa = global.messageStore?.[stanzaId]
-if (!alternativa?.message || alternativa.key?.remoteJid !== jid) return null
-const mensagem = desenrolar(alternativa.message)
-const media = extrairMedia(mensagem)
-if (!media?.mediaKey || !(media.url || media.directPath)) return null
-return { message: mensagem, key: alternativa.key || {} }
-}
+// Os comandos open/revelar e s compartilham a mesma recuperação do original.
+const obterOriginal = require('../../sistemas/midia-citada').obterOriginal
 
 const extrairMedia = msg => msg?.imageMessage || msg?.videoMessage ||
   msg?.ptvMessage || msg?.audioMessage || null
