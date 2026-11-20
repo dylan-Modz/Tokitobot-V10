@@ -1,113 +1,41 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.38",
+  "version": "10.3.39",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-19T21:04:53.224Z",
+  "publishedAt": "2026-11-20T00:13:20.535Z",
   "changelog": [
-    "[Figurinhas] Melhorias nos comandos s, sticker e figpack para mídias respondidas.",
-    "[Visualização única] Corrigido o tratamento de mídias citadas nos comandos open e revelar, usando o cache quando a mídia original foi recebida.",
-    "[Desempenho] Comandos preparados antes da primeira mensagem, processamento por conversa e leitura sem bloquear as respostas.",
-    "[Conexão] Melhorias na identificação WhatsApp Normal/Business e na reconexão, preservando a sessão existente.",
-    "[Sub Bots] Escolha Normal ou Business no cadastro e pelo code, preferência salva por sessão e aviso online corrigido."
+    "[Figurinhas] Novos comandos exclusivos do dono: rgreact, react, verreact e delreact para registrar sua figurinha e tentar reagir a mensagens.",
+    "[Stone WPP] Reação experimental via STICKER_ANNOTATION; até 10 envios por execução e envio de mídia preparada, sem URL fixa.",
+    "[Menus] Corrigidos emojis de vídeo, informações, casal, calculadoras, cidade e N-Coins sem mudar o layout original.",
+    "[Comandos] figpack adicionado à lista de figurinhas; revelar incluído no menu de administração e exemplo do packfig melhorado.",
+    "[Compatibilidade] Preservados rgfig, take e demais comandos existentes; arquivo de figurinha registrado mantido fora dos diretórios de atualização."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Melhorias nos comandos de figurinha, revelar e Sub Bots",
-  "notice": "A versão 10.3.38 já está disponível para atualização.",
+  "title": "Reações com figurinha personalizada e revisão dos emojis dos menus",
+  "notice": "A versão 10.3.39 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "5a38aa4a7af602c09604032daf4dd7c5430aa6fd",
-      "size": 56343,
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "gitSha": "7905057271d083cd0aa7026c3e63574a08f22774",
+      "size": 80111,
       "sha256": ""
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/abrirgp.js",
-      "gitSha": "110af3d580479f55cf8e6f2ed90cf5bc5830721b",
-      "size": 4336,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/fechargp.js",
-      "gitSha": "504f804b0fba5b6925d293d6a4ae03bde83f2907",
-      "size": 4297,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/open.js",
-      "gitSha": "32ac20644b2afc3f9af7af2ed8c09f9e40a083a5",
-      "size": 9734,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/fotomenu.js",
-      "gitSha": "0819700bba9a90fd155b432d6f09040bc530f407",
-      "size": 2490,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/figurinhas/figpack.js",
-      "gitSha": "0edf1b506d11f152ccbb8b05b755f5fe3cfbcf7d",
-      "size": 9095,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/figurinhas/s.js",
-      "gitSha": "7c23ba60396298b33d5beba267e658109250e2be",
-      "size": 3531,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/sub/code.js",
-      "gitSha": "7639619296bdd0f7942e47055dce4b11e6747b25",
-      "size": 3427,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/midia-citada.js",
-      "gitSha": "ec7b0acd1f994a291737ea5d60db30426fa1d009",
-      "size": 7759,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/tipo-whatsapp.js",
-      "gitSha": "f658709fda904f52e0fb5a3987a6155f192a2ae6",
-      "size": 1676,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/sub/cadastro.js",
-      "gitSha": "db2de5928d63cbdcd8e0863803b569ef2e449993",
-      "size": 5079,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/sub/store.js",
-      "gitSha": "5a6e84bf379a13dcce479a0cd34d278d0764833a",
-      "size": 4223,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/sub/ui.js",
-      "gitSha": "afafa56dbb978420218ee463187968d86cf88106",
-      "size": 16448,
+      "path": "DADOS_TOKITO/plugins/figurinhas/react.js",
+      "gitSha": "3175cdac1a4b723bc622d104c5f1975b130b64ae",
+      "size": 8298,
       "sha256": ""
     },
     {
       "path": "package.json",
-      "gitSha": "1005028c3523080617e737445443977204404827",
+      "gitSha": "f0ae6c0eaca1f8a49d1f325be3d8ec14d225990a",
       "size": 1956,
-      "sha256": ""
-    },
-    {
-      "path": "tokito.js",
-      "gitSha": "f34404aefa0cf6bab569148cfc52fdf58252661a",
-      "size": 55234,
       "sha256": ""
     }
   ],
@@ -4618,16 +4546,54 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-19T21:04:53.224Z"
+    },
+    {
+      "version": "10.3.39",
+      "fromVersion": "10.3.38",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Reações com figurinha personalizada e revisão dos emojis dos menus",
+      "notice": "A versão 10.3.39 já está disponível para atualização.",
+      "changelog": [
+        "[Figurinhas] Novos comandos exclusivos do dono: rgreact, react, verreact e delreact para registrar sua figurinha e tentar reagir a mensagens.",
+        "[Stone WPP] Reação experimental via STICKER_ANNOTATION; até 10 envios por execução e envio de mídia preparada, sem URL fixa.",
+        "[Menus] Corrigidos emojis de vídeo, informações, casal, calculadoras, cidade e N-Coins sem mudar o layout original.",
+        "[Comandos] figpack adicionado à lista de figurinhas; revelar incluído no menu de administração e exemplo do packfig melhorado.",
+        "[Compatibilidade] Preservados rgfig, take e demais comandos existentes; arquivo de figurinha registrado mantido fora dos diretórios de atualização."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "7905057271d083cd0aa7026c3e63574a08f22774",
+          "size": 80111,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/react.js",
+          "gitSha": "3175cdac1a4b723bc622d104c5f1975b130b64ae",
+          "size": 8298,
+          "sha256": ""
+        },
+        {
+          "path": "package.json",
+          "gitSha": "f0ae6c0eaca1f8a49d1f325be3d8ec14d225990a",
+          "size": 1956,
+          "sha256": ""
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-20T00:13:20.535Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.37",
+  "fromVersion": "10.3.38",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.38"
+  "publicVersion": "10.3.39"
 }

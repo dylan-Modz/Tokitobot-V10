@@ -111,9 +111,9 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ├╾═╼･ﾟ𖤐ﾟ･｡🎚️｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐴𝐿𝑇𝐸𝑅𝐴𝐷𝑂𝑅𝐸𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡🎧｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}videolento
-┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}videorapido
-┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}videocontrario
+┃࣪ ╎—̳͟͞͞ 🎞️ ${prefix}videolento
+┃࣪ ╎—̳͟͞͞ 🎞️ ${prefix}videorapido
+┃࣪ ╎—̳͟͞͞ 🎞️ ${prefix}videocontrario
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}audiolento
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}audiorapido
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}speedup
@@ -159,7 +159,8 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}togif
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rename nome|autor
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figperfil
-┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}packfig
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}packfig tema
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figpack criar Nome do Pack
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figu 5
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figuemoji 5
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figuanime 5
@@ -179,16 +180,16 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ├╾═╼･ﾟ𖤐ﾟ･｡📡｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐼𝑁𝐹𝑂𝑅𝑀𝐴𝐶̧𝑂̃𝐸𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡⚡｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}perfil
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}getperfil
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}getbio
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}getbanner
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}ping
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}criador
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}idade 23/12/2007
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}clima cidade
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}totalcmd
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}gerarlink
+┃࣪ ╎—̳͟͞͞ 👤 ${prefix}perfil
+┃࣪ ╎—̳͟͞͞ 👤 ${prefix}getperfil
+┃࣪ ╎—̳͟͞͞ 📝 ${prefix}getbio
+┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}getbanner
+┃࣪ ╎—̳͟͞͞ 📶 ${prefix}ping
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}criador
+┃࣪ ╎—̳͟͞͞ 🎂 ${prefix}idade 23/12/2007
+┃࣪ ╎—̳͟͞͞ 🌤️ ${prefix}clima cidade
+┃࣪ ╎—̳͟͞͞ 📊 ${prefix}totalcmd
+┃࣪ ╎—̳͟͞͞ 🔗 ${prefix}gerarlink
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
@@ -225,6 +226,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}apagar 
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}limpar
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}linkgp 
+┃࣪ ╎—̳͟͞͞ 👁️ ${prefix}revelar
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcar mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcar2 mensagem
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}marcarwa mensagem
@@ -453,6 +455,10 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rgfig comando
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}delfig
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}listafig
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rgreact
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}react 10
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}verreact
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}delreact
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rgtake nome|autor
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rntake nome|autor
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}take
@@ -751,18 +757,18 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡💞｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐶𝐴𝑆𝐴𝐿-𝑊𝐸𝐵
 ├╾═╼･ﾟ𖤐ﾟ･｡🌐｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}namorar @usuario
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}aceitar
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}recusar
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}cancelar
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}terminar
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}minhadupla
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}meunoivo
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}minhanoiva
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}casais
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}casar @usuario
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}meucasamento
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}divorciar
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}namorar @usuario
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}aceitar
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}recusar
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}cancelar
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}terminar
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}minhadupla
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}meunoivo
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}minhanoiva
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}casais
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}casar @usuario
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}meucasamento
+┃࣪ ╎—̳͟͞͞ 💞 ${prefix}divorciar
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -835,8 +841,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🧮｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐶𝐴𝐿𝐶𝑈𝐿𝐴𝐷𝑂𝑅𝐸𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡⚡｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}obesidade 70/1.75
-┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}contardias 31/03/2024
+┃࣪ ╎—̳͟͞͞ ⚖️ ${prefix}obesidade 70/1.75
+┃࣪ ╎—̳͟͞͞ 📅 ${prefix}contardias 31/03/2024
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -1239,9 +1245,9 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├─ ⊹ 𖤐  𝑁-𝐶𝑂𝐼𝑁𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡🪙｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🪙 ${prefix}coins
-┃࣪ ╎—̳͟͞͞ 🪙 ${prefix}minerar
-┃࣪ ╎—̳͟͞͞ 🪙 ${prefix}rankcoins
-┃࣪ ╎—̳͟͞͞ 🪙 ${prefix}doarcoins 100 @usuario
+┃࣪ ╎—̳͟͞͞ ⛏️ ${prefix}minerar
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}rankcoins
+┃࣪ ╎—̳͟͞͞ 💸 ${prefix}doarcoins 100 @usuario
 ┃࣪ ╎—̳͟͞͞ 🪙 ${prefix}modocoins 1/0
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
@@ -1251,12 +1257,12 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🏙️｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐶𝐼𝐷𝐴𝐷𝐸
 ├╾═╼･ﾟ𖤐ﾟ･｡💼｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 💼 ${prefix}registrarcidade nome
-┃࣪ ╎—̳͟͞͞ 💼 ${prefix}perfilcidade
+┃࣪ ╎—̳͟͞͞ 🌆 ${prefix}registrarcidade nome
+┃࣪ ╎—̳͟͞͞ 👤 ${prefix}perfilcidade
 ┃࣪ ╎—̳͟͞͞ 💼 ${prefix}trabalhar
-┃࣪ ╎—̳͟͞͞ 💼 ${prefix}depositar valor
-┃࣪ ╎—̳͟͞͞ 💼 ${prefix}sacar valor
-┃࣪ ╎—̳͟͞͞ 💼 ${prefix}banco
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}depositar valor
+┃࣪ ╎—̳͟͞͞ 📤 ${prefix}sacar valor
+┃࣪ ╎—̳͟͞͞ 🏦 ${prefix}banco
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
