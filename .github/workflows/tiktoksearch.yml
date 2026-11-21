@@ -1,0 +1,36 @@
+name: TikTok Search — não repetir vídeos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'DADOS_TOKITO/plugins/downloads/tiktoksearch.js'
+      - 'DADOS_TOKITO/scrapers/downloads/tiktoksearch.js'
+      - 'tests/tiktoksearch-rotation.test.js'
+      - '.github/workflows/tiktoksearch.yml'
+  pull_request:
+    paths:
+      - 'DADOS_TOKITO/plugins/downloads/tiktoksearch.js'
+      - 'DADOS_TOKITO/scrapers/downloads/tiktoksearch.js'
+      - 'tests/tiktoksearch-rotation.test.js'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+      - name: Validar sintaxe
+        run: |
+          node --check DADOS_TOKITO/scrapers/downloads/tiktoksearch.js
+          node --check DADOS_TOKITO/plugins/downloads/tiktoksearch.js
+          node --check tests/tiktoksearch-rotation.test.js
+      - name: Testar vídeos diferentes
+        run: node --test tests/tiktoksearch-rotation.test.js
