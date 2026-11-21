@@ -30,7 +30,11 @@
 
 const client = require('./client')
 
-const buscar = entrada => client.get('/api/tiktok-search', { query: entrada })
+const buscar = (entrada, opcoes = {}) => client.get('/api/tiktok-search', {
+  query: entrada,
+  limite: Math.max(1, Math.min(30, Number(opcoes.limite) || 20)),
+  cursor: Math.max(0, Math.floor(Number(opcoes.cursor) || 0))
+})
 
 function seguraUrl(texto) {
   if (typeof texto !== 'string') return ''
@@ -78,6 +82,51 @@ function linksDiretos(item) {
   return [...links]
 }
 
+
+// A chave identifica a PUBLICAÇÃO, não a URL temporária do MP4.
+function chaveVideo(item) {
+  const id = String(item?.id || item?.video_id || item?.aweme_id || '').trim()
+  if (/^\d{15,22}$/.test(id)) return 'id:' + id
+  const post = publicacao(item)
+  const extraido = post.match(/\/(?:video|photo)\/(\d{15,22})(?:[/?#]|$)/)
+  if (extraido) return 'id:' + extraido[1]
+  if (post) return 'post:' + post.split('?')[0].toLowerCase()
+  const direto = linksDiretos(item)[0]
+  if (direto) {
+    const u = new URL(direto)
+    return 'media:' + u.origin + u.pathname
+  }
+  return ''
+}
+
+const historicos = new Map()
+const TTL = 60 * 60 * 1000
+const MAX_SESSOES = 300
+
+function sessaoBusca(chat, consulta) {
+  const key = String(chat || '') + '\n' +
+    String(consulta || '').trim().replace(/\s+/g, ' ').toLowerCase()
+  const now = Date.now()
+  for (const [id, info] of historicos) if (now - info.ultimoUso >= TTL) historicos.delete(id)
+  let info = historicos.get(key)
+  if (!info) {
+    info = { vistos: new Set(), cursor: 0, ultimoUso: now }
+    historicos.set(key, info)
+  }
+  info.ultimoUso = now
+  if (historicos.size > MAX_SESSOES) historicos.delete(historicos.keys().next().value)
+  return info
+}
+
+function embaralhar(itens) {
+  const values = [...itens]
+  for (let i = values.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[values[i], values[j]] = [values[j], values[i]]
+  }
+  return values
+}
+
 const temVideo = item => Boolean(publicacao(item) || linksDiretos(item).length)
 
 async function obterVideo(item) {
@@ -117,4 +166,4 @@ async function obterVideo(item) {
   throw new Error('Nenhum MP4 válido foi entregue. ' + ultimo)
 }
 
-module.exports = { buscar, publicacao, linksDiretos, temVideo, obterVideo }
+module.exports = { buscar, publicacao, linksDiretos, temVideo, obterVideo, chaveVideo, sessaoBusca, embaralhar }
