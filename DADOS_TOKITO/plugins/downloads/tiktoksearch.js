@@ -51,40 +51,59 @@ dylan.setCommand({
         await reagir(from, '🔎')
         await reply(mess.wait())
 
-        const dados = await scraper.buscar(q.trim())
-        const lista = itens(dados)
-
-        if (!lista.length) {
-          await reagir(from, '❌')
-          return reply(mess.downloadNaoEncontrado('VÍDEO'))
-        }
-
-        // A pesquisa pode retornar somente a publicação, sem link de MP4.
-        // Tenta usar o downloader da API antes de descartar o resultado.
-        const disponiveis = lista.filter(scraper.temVideo)
-
-        if (!disponiveis.length) {
-          await reagir(from, '❌')
-          return reply(mess.downloadSemMidia('VÍDEO'))
-        }
-
-        const candidatos = [...disponiveis].sort(() => Math.random() - 0.5).slice(0, 4)
+        const historico = scraper.sessaoBusca(from, q.trim())
+        let cursor = historico.cursor
         let item = null
         let arquivo = null
+        let encontrouResultados = false
+        let encontrouMidia = false
+        const tentadosNestaBusca = new Set()
 
-        for (const candidato of candidatos) {
-          try {
-            arquivo = await scraper.obterVideo(candidato)
-            item = candidato
-            break
-          } catch (erro) {
-            console.log('[TIKTOK SEARCH] Mídia indisponível:', modulos.sanitizarErro(erro, [API_KEY_TOKITO]))
+        // A mesma pesquisa não deve repetir vídeo já entregue neste chat.
+        // Quando uma página acaba, consulta páginas seguintes em vez de
+        // sortear novamente os mesmos resultados do cursor 0.
+        for (let pagina = 0; pagina < 4 && !arquivo; pagina++) {
+          const dados = await scraper.buscar(q.trim(), { cursor, limite: 20 })
+          const lista = itens(dados)
+          if (lista.length) encontrouResultados = true
+          const disponiveis = lista.filter(scraper.temVideo)
+          if (disponiveis.length) encontrouMidia = true
+
+          const novos = scraper.embaralhar(disponiveis).filter(video => {
+            const chave = scraper.chaveVideo(video)
+            return chave && !historico.vistos.has(chave) && !tentadosNestaBusca.has(chave)
+          })
+          for (const candidato of novos) {
+            const chave = scraper.chaveVideo(candidato)
+            tentadosNestaBusca.add(chave)
+            try {
+              arquivo = await scraper.obterVideo(candidato)
+              item = candidato
+              break
+            } catch (erro) {
+              console.log('[TIKTOK SEARCH] Mídia indisponível:', modulos.sanitizarErro(erro, [API_KEY_TOKITO]))
+            }
           }
+
+          if (arquivo) {
+            historico.cursor = cursor
+            break
+          }
+
+          // A API devolve cursor da página seguinte quando há; se a
+          // fonte principal não fornece, avançamos pelo limite solicitado.
+          const proximo = Number(dados?.cursor)
+          cursor = Number.isInteger(proximo) && proximo > cursor
+            ? proximo : cursor + 20
+          historico.cursor = cursor
+          if (cursor > 100000) break
         }
 
         if (!arquivo || !item) {
           await reagir(from, '❌')
-          return reply(mess.downloadSemMidia('VÍDEO'))
+          return reply(!encontrouResultados
+            ? mess.downloadNaoEncontrado('VÍDEO')
+            : mess.downloadSemMidia('VÍDEO'))
         }
 
         const autor = item?.autor || item?.author || {}
@@ -136,6 +155,8 @@ dylan.setCommand({
           }
         }, { quoted: selo })
 
+        // Marca apenas depois do envio ser confirmado pelo WhatsApp.
+        historico.vistos.add(scraper.chaveVideo(item))
         await reagir(from, '✅')
       } catch (e) {
         console.log('[TIKTOK SEARCH]', modulos.sanitizarErro(e, [API_KEY_TOKITO]))
