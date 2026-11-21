@@ -1,342 +1,46 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.41",
+  "version": "10.3.42",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-21T17:53:13.960Z",
+  "publishedAt": "2026-11-21T22:44:13.061Z",
   "changelog": [
-    "[Administração] 8 comandos de cargos internos: addcargo, delcargo, listacargo, setcargo, tirarcargo, vercargo, permcargo e cargotempo, com persistência por grupo.",
-    "[Permissões] A permissão adv concedida a cargos internos é validada no sistema de advertências; donos, admins protegidos e o próprio bot continuam protegidos.",
-    "[Figurinhas] Novo limitefig para configurar a quantidade e o intervalo do antifloodsticker existente, sem duplicar o filtro.",
-    "[Dono] pausacmd e liberacmd controlam manutenção com prazo automático; cmdtop apresenta contagens coletadas a partir desta versão.",
-    "[Backups] backupbot, listabackup, backupinfo, delbackup e restaurarbot fazem cópias locais de configurações de grupo com validação de integridade e confirmação para exclusão/restauração. Não exportam sessões ou credenciais.",
-    "[Menus] Inseridos os 17 novos comandos nas seções ADM e DONO, mantendo o visual original."
+    "[Melhoria] ci(tiktoksearch): testar seleção de vídeos sem repetição",
+    "A versão 10.3.42 já está disponível para atualização.",
+    "Tiktoksearch atualizado",
+    "Tiktoksearch Rotation.test atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Cargos, controle de comandos, backups e limite de figurinhas",
-  "notice": "A versão 10.3.41 já está disponível para atualização.",
+  "title": "ci(tiktoksearch): testar seleção de vídeos sem repetição",
+  "notice": "A versão 10.3.42 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/cargos-tokito.js",
-      "gitSha": "fee4a23413589ddb851fa87fcb2aa3a807909da3",
-      "size": 1028,
-      "sha256": ""
+      "path": ".github/workflows/tiktoksearch.yml",
+      "sha256": "52cd7a2f16dff61e432f8eeafb7e9fae75907418b578af1612b1b2df1182a7e8",
+      "size": 1076
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/cargos-tokito.js",
-      "gitSha": "e7f7b0476c87b9c27881d95c62ae5b0e2c327239",
-      "size": 4556,
-      "sha256": ""
+      "path": "DADOS_TOKITO/plugins/downloads/tiktoksearch.js",
+      "sha256": "c6280fd07a63d40fb5c178129253c9f6189b1b17a19d1e300414abcbf843b1f1",
+      "size": 6923
     },
     {
-      "path": "DADOS_TOKITO/sistemas/hierarquia.js",
-      "gitSha": "f94a3e5606eaaedc9ec8bec16313664d6ffdae2b",
-      "size": 3474,
-      "sha256": ""
+      "path": "DADOS_TOKITO/scrapers/downloads/tiktoksearch.js",
+      "sha256": "da7d3615731dbc1697e8cd74e12d28ebb30fab726e54ff788a5c392a491c5a5a",
+      "size": 6290
     },
     {
-      "path": "DADOS_TOKITO/sistemas/manutencao.js",
-      "gitSha": "31c3b516464d9ff82fb4c8fe3d7059c352170fff",
-      "size": 3134,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/uso-comandos.js",
-      "gitSha": "45cb4dce05c753a27d81822d08bf4b146d097ff8",
-      "size": 1268,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/index.js",
-      "gitSha": "3534e883e81d3d7a3755432d692fca2902badbad",
-      "size": 7557,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/controlecmd.js",
-      "gitSha": "968afcaf21cc1beb1631e69b84f84014ef7025ae",
-      "size": 2739,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/backups.js",
-      "gitSha": "aa276deff42ffe117e56abc4809b839784cccb93",
-      "size": 6002,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/floodsticker.js",
-      "gitSha": "50a4cbd5cd1fce4e0342cfc26da1f5a511bdc87b",
-      "size": 2032,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/admin/limitefig.js",
-      "gitSha": "fc5e00cd1865996d032b66b93a4eda8db0f94695",
-      "size": 1800,
-      "sha256": ""
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "gitSha": "8b580257ec16724e9c140dc0e88d9fc7106652bd",
-      "size": 81090,
-      "sha256": ""
-    },
-    {
-      "path": "package.json",
-      "gitSha": "90faea53ec5b64e28bba8055b88a5dde4ff3cbf0",
-      "size": 1956,
-      "sha256": ""
+      "path": "tests/tiktoksearch-rotation.test.js",
+      "sha256": "a15f83241acac3973a6d4efdb2106f3a07c5474a0a34f9882e7ad1a7792b073a",
+      "size": 4686
     }
   ],
   "releases": [
-    {
-      "version": "10.2.38",
-      "fromVersion": "10.2.37",
-      "type": "Novidade",
-      "channel": "stable",
-      "title": "Novo comando Status de Grupo",
-      "notice": "mencstatus, statusgp e testestatus para publicar Status de Grupo por texto, imagem, vídeo ou áudio.",
-      "changelog": [
-        "[ADM] Novo comando mencstatus para publicar texto, foto, vídeo ou áudio respondido como Status de Grupo.",
-        "[ADM] Adicionados os apelidos statusgp e testestatus ao novo comando; status e statusfuncoes continuam no painel de funções do grupo.",
-        "[ADM] Permissão restrita a administradores do grupo e dono; reconhece mídias citadas, mensagens temporárias e legendas.",
-        "[Baileys] Envio com envelope groupStatusMessageV2 e contextInfo.isGroupStatus, utilizando o protocolo disponível no fork do Tokito.",
-        "[Menu] Comando mencstatus texto/mídia adicionado ao menuadm, na seção GERENCIAR-GRUPO.",
-        "[Segurança] Tratamento de erros e checagem de grupo/permissões antes de tentar publicar o status."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/admin/mencstatus.js",
-          "gitSha": "6b3febdd2ba110c3c3912f6c35c2f19bf95efc35",
-          "size": 5818
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/admin/status.js",
-          "gitSha": "3b2a6e251e54c928d61865d5eff4d52be9538971",
-          "size": 1732
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "gitSha": "7cf2a3dec8c37a9b857dd9922a50e816bca8f820",
-          "size": 78071
-        },
-        {
-          "path": "package.json",
-          "gitSha": "f2d7fb8c3988f46cc5d70a80ce64a1bf1e945b77",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-13T19:12:29.216Z"
-    },
-    {
-      "version": "10.2.39",
-      "fromVersion": "10.2.38",
-      "type": "Melhoria",
-      "channel": "stable",
-      "title": "Comando inválido compacto e fundos de erro/prefixo",
-      "notice": "Novos fundoerro e fundoprefix com foto, GIF, vídeo e remoção via 0; aviso de comando inválido compacto.",
-      "changelog": [
-        "[Design] Aviso de Comando Inválido refeito no estilo compacto do Tokito com comando digitado, sugestão, similaridade e tempo.",
-        "[Dono] Adicionados fundoerro e fundoprefix para personalizar com foto, GIF ou vídeo o fundo dos avisos do bot.",
-        "[Dono] fundoerro 0 e fundoprefix 0 removem as mídias e restauram os avisos em texto.",
-        "[Mídia] Novos fundos seguem o fotomenu: mídia da mensagem ou respondida, armazenada localmente em INFO_DADOS/LOGOS, protegida do atualizador.",
-        "[Compatibilidade] GIFs enviados pelo WhatsApp como vídeo preservam animação; arquivos GIF originais também são aceitos mediante FFmpeg.",
-        "[Interação] Avisos com fundo preservam texto, marcação e botão de menu quando habilitado; em falha de mídia, exibem o texto.",
-        "[Menu] fundoerro e fundoprefix adicionados ao menudono, em Configurações.",
-        "[Prefixo] Fundo utilizado para a resposta ao texto 'prefixo' e confirmação do setprefix/prefixo."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/fundos.js",
-          "gitSha": "0849daebf22831c57543262f4843b866fbf320d5",
-          "sha256": "6be8a9c8a932b4f152615bfbdc719e6a043d9668857221355fc60652b7ca0dc1",
-          "size": 5463
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/dono/fundoerro.js",
-          "gitSha": "e4a1d9f027752225456e7a4f2aa346bf3512e944",
-          "sha256": "996c8a404f7054de2126f5a16184df9de2a3bacefb2dd27265f644216a9dc722",
-          "size": 1845
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "gitSha": "30b889cfc1a500ce0f331870c418b1eaadac20c0",
-          "sha256": "707c9869b5318fde4fad556184949691c0b054ddfbcddc02505d2a657e468b9e",
-          "size": 231518
-        },
-        {
-          "path": "tokito.js",
-          "gitSha": "963ee20c356cb811bcefafb9c06ba7d9b0429f62",
-          "sha256": "045101337b64c1557fc8cbc42b884e18b804136d1a046f00068f4b49315303de",
-          "size": 53268
-        },
-        {
-          "path": "DADOS_TOKITO/mensagens/menus.js",
-          "gitSha": "ea010171a54ef8fdbd0e2d0e861bd3915babe056",
-          "sha256": "337bd2e8107b22c8f280e3d735897fb1330c9c9227248f8c3a8fcf2704264b50",
-          "size": 78165
-        },
-        {
-          "path": "DADOS_TOKITO/plugins/dono/prefixo.js",
-          "gitSha": "2ac065175429502502710ef86ff8c16679adf7f7",
-          "sha256": "9b6e51ce2060b0224d773e980765a7aa8bddd78964d64cb4f3e461162d1f3f59",
-          "size": 1902
-        },
-        {
-          "path": "package.json",
-          "gitSha": "46673a7ad058fa06a4950d9b206ced57d4c7d7ea",
-          "sha256": "3abc8befcdced76b652715e6032ae6685b307b554c23536b362ba1d68fe31998",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-13T23:30:58.229Z"
-    },
-    {
-      "version": "10.2.40",
-      "fromVersion": "10.2.39",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "Fundos padrão de erro e prefixo",
-      "notice": "Novos fundos azuis de erro e prefixo instalados automaticamente, sem perder imagens personalizadas.",
-      "changelog": [
-        "[Mídia] Os dois novos fundos azuis (erro de comando e prefixo) foram adicionados como imagens padrão oficiais do Tokito.",
-        "[Atualização] fundoerro.png e fundoprefix.png passam a ser instalados automaticamente nos assets da versão 10.2.40.",
-        "[Personalização] Fundos escolhidos pelo dono em INFO_DADOS/LOGOS continuam com prioridade e são preservados pelo atualizador.",
-        "[Comandos] fundoerro 0 e fundoprefix 0 removem o fundo personalizado e deixam o aviso em texto; enviar nova mídia reativa o fundo.",
-        "[Avisos] Bot passa a anunciar a atualização 10.2.40 pelo verificador de versões e pelo comando update."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/fundos.js",
-          "gitSha": "d91ebc1962262b5085ec5d852ca64c948d65ede9",
-          "sha256": "",
-          "size": 6105
-        },
-        {
-          "path": "DADOS_TOKITO/assets/fundos/fundoerro.png",
-          "gitSha": "e5dc03abf56bc647f5969b79300138379b330531",
-          "sha256": "0775f7876cdfe43ca5b12bc17c7291dcbd736ba18455a92d568175b21bb60ea8",
-          "size": 2242616
-        },
-        {
-          "path": "DADOS_TOKITO/assets/fundos/fundoprefix.png",
-          "gitSha": "48d8b591e111413cc4e5b5b8a6b4f6acb37a93b7",
-          "sha256": "f4de7a182e9b8302996ff21f7e5387fbb1a58ad0b1fb7baf355a835c5ebd78f1",
-          "size": 2395805
-        },
-        {
-          "path": "package.json",
-          "gitSha": "7323b6f8a2c34619117f1063a82e9404d6d9c32d",
-          "sha256": "",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-14T00:52:32.662Z"
-    },
-    {
-      "version": "10.2.41",
-      "fromVersion": "10.2.40",
-      "channel": "stable",
-      "type": "Correção",
-      "title": "Avisos automáticos de atualização",
-      "notice": "Notificação mais rápida e confiável, com novas tentativas e avisos de falha no terminal.",
-      "changelog": [
-        "[Correção] Verificador automático agora consulta novidades a cada 1 minuto, com checagem rápida após o WhatsApp conectar.",
-        "[Correção] Falhas de consulta ou envio do aviso deixam de ser ocultadas e aparecem no terminal sem mensagens repetitivas.",
-        "[Confiabilidade] Notificação é registrada somente depois de o envio pelo WhatsApp retornar com sucesso; falhas são tentadas novamente.",
-        "[Proteção] Controle impede verificações simultâneas e notificações repetidas da mesma versão.",
-        "[Compatibilidade] O update check, update info e update start continuam funcionando normalmente."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "gitSha": "49bc1ce7c23ffc074e968b9caf83cafd29dabdca",
-          "sha256": "",
-          "size": 42943
-        },
-        {
-          "path": "package.json",
-          "gitSha": "464c727a912f00419e90cf9365ad0fa756d3733b",
-          "sha256": "",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-14T01:02:19.756Z"
-    },
-    {
-      "version": "10.2.42",
-      "fromVersion": "10.2.41",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "Avisos oficiais do criador",
-      "notice": "Nova função: comunicados de Dylan Modz chegam automaticamente no privado do dono, sem precisar atualizar a cada novo aviso.",
-      "changelog": [
-        "[Avisos Oficiais] Novo sistema de comunicados do criador, independentes das atualizações do bot.",
-        "[Automação] Cada Tokito consulta avisos.json no GitHub a cada 5 minutos e após conectar, enviando novidades no privado do seu próprio dono.",
-        "[Privacidade] Nenhum número de dono é enviado ao criador: o próprio bot faz a entrega e guarda os IDs já enviados em arquivo local protegido.",
-        "[Confiabilidade] Avisos não se repetem e são tentados novamente após falhas; comunicados inativos, expirados ou antigos são ignorados.",
-        "[Controle] É possível desativar apenas estes comunicados definindo avisosOficiais: false no config-all.json, sem afetar avisos de atualização.",
-        "[Desempenho] Verificação leve, com controle de concorrência, tamanho de resposta limitado e nenhum upload de mídia."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/sistemas/avisos.js",
-          "gitSha": "eeb9dbb21cff7b3e78eaf1dd7e2f55228be1249e",
-          "sha256": "",
-          "size": 4854
-        },
-        {
-          "path": "DADOS_TOKITO/connect.js",
-          "gitSha": "ea3b038a1437572dfbb277c5cf504d2f7cf54285",
-          "sha256": "",
-          "size": 43061
-        },
-        {
-          "path": "package.json",
-          "gitSha": "d39f0054eb82c59fe94b2f7953d982b1acbe3a1f",
-          "sha256": "",
-          "size": 1164
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-14T12:57:18.924Z"
-    },
-    {
-      "version": "10.2.43",
-      "fromVersion": "10.2.42",
-      "channel": "stable",
-      "type": "Melhoria",
-      "title": "docs: publicar aviso oficial de pausa nas atualizações",
-      "notice": "A versão 10.2.43 já está disponível para atualização.",
-      "changelog": [
-        "Avisos atualizado"
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/INFO_DADOS/avisos.json",
-          "sha256": "9aa4772dda9413807d52b09736776ed96694921c6ef5a89a8bac475e106e4b38",
-          "size": 795
-        }
-      ],
-      "delete": [],
-      "required": true,
-      "publishedAt": "2026-10-14T13:10:42.675Z"
-    },
     {
       "version": "10.2.44",
       "fromVersion": "10.2.43",
@@ -4769,6 +4473,43 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-21T17:53:13.960Z"
+    },
+    {
+      "version": "10.3.42",
+      "fromVersion": "10.3.41",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "ci(tiktoksearch): testar seleção de vídeos sem repetição",
+      "notice": "A versão 10.3.42 já está disponível para atualização.",
+      "changelog": [
+        "Tiktoksearch atualizado",
+        "Tiktoksearch Rotation.test atualizado"
+      ],
+      "files": [
+        {
+          "path": ".github/workflows/tiktoksearch.yml",
+          "sha256": "52cd7a2f16dff61e432f8eeafb7e9fae75907418b578af1612b1b2df1182a7e8",
+          "size": 1076
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/downloads/tiktoksearch.js",
+          "sha256": "c6280fd07a63d40fb5c178129253c9f6189b1b17a19d1e300414abcbf843b1f1",
+          "size": 6923
+        },
+        {
+          "path": "DADOS_TOKITO/scrapers/downloads/tiktoksearch.js",
+          "sha256": "da7d3615731dbc1697e8cd74e12d28ebb30fab726e54ff788a5c392a491c5a5a",
+          "size": 6290
+        },
+        {
+          "path": "tests/tiktoksearch-rotation.test.js",
+          "sha256": "a15f83241acac3973a6d4efdb2106f3a07c5474a0a34f9882e7ad1a7792b073a",
+          "size": 4686
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-21T22:44:13.060Z"
     }
   ],
   "mode": "incremental",
