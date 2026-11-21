@@ -33,15 +33,18 @@ dono ||
 !mensagem?.stickerMessage
 ) return false
 
+const cfg = config?.limitefig && typeof config.limitefig === 'object' ? config.limitefig : {}
+const janela = Number.isFinite(cfg.janelaMs) && cfg.janelaMs >= 5000 && cfg.janelaMs <= 120000 ? cfg.janelaMs : JANELA
+const limite = Number.isInteger(cfg.max) && cfg.max >= 1 && cfg.max <= 20 ? cfg.max : LIMITE - 1
 const chave = `${from}:${sender}`
 const agora = Date.now()
 const lista = (usuarios.get(chave) || [])
-.filter(tempo => agora - tempo <= JANELA)
+.filter(tempo => agora - tempo <= janela)
 
 lista.push(agora)
 usuarios.set(chave, lista)
 
-if (lista.length < LIMITE)
+if (lista.length <= limite)
 return false
 
 usuarios.delete(chave)
@@ -58,7 +61,7 @@ from,
 
 await tokito.sendMessage(from, {
 text:
-`- 🚫 \`𝙰𝙽𝚃𝙸-𝙵𝙻𝙾𝙾𝙳 𝚂𝚃𝙸𝙲𝙺𝙴𝚁\`\n\n> 👤 ׄ ( @${String(sender).split('@')[0]} — ʀᴇᴍᴏᴠɪᴅᴏ ᴘᴏʀ ғʟᴏᴏᴅ ᴅᴇ ғɪɢᴜʀɪɴʜᴀs. )\n> 🚫 ׄ ( ${LIMITE} ғɪɢᴜʀɪɴʜᴀs ᴇᴍ ${JANELA / 1000} sᴇɢᴜɴᴅᴏs. )`,
+`- 🚫 \`𝙰𝙽𝚃𝙸-𝙵𝙻𝙾𝙾𝙳 𝚂𝚃𝙸𝙲𝙺𝙴𝚁\`\n\n> 👤 ׄ ( @${String(sender).split('@')[0]} — ʀᴇᴍᴏᴠɪᴅᴏ ᴘᴏʀ ғʟᴏᴏᴅ ᴅᴇ ғɪɢᴜʀɪɴʜᴀs. )\n> 🚫 ׄ ( ᴍᴀ́xɪᴍᴏ ${limite} ғɪɢᴜʀɪɴʜᴀs ᴇᴍ ${janela / 1000} sᴇɢᴜɴᴅᴏs. )`,
 mentions: [sender],
 contextInfo: {
 ...(newsletter || {}),

@@ -3,6 +3,8 @@
  * Confere permissões usando os participantes atuais do WhatsApp.
  */
 
+const cargosTokito = require('./cargos-tokito')
+
 const identificar = pessoa => {
   if (typeof pessoa === 'string') return [pessoa]
   if (!pessoa || typeof pessoa !== 'object') return []
@@ -65,7 +67,8 @@ const advertencia = async (ctx, alvo) => {
     autorGrupo?.admin === 'superadmin' ||
     (metadata.owner && mesmo(ctx, ctx.sender, metadata.owner))
   )
-  const autorAdmin = Boolean(autorDono || ['admin', 'superadmin'].includes(autorGrupo?.admin))
+  const autorInterno = Boolean(autorGrupo && cargosTokito.pode(ctx.dataGp, ctx.sender, 'adv', ctx.nJid))
+  const autorAdmin = Boolean(autorDono || ['admin', 'superadmin'].includes(autorGrupo?.admin) || autorInterno)
 
   if (!autorAdmin) return { ok: false, motivo: 'sem_permissao' }
   if (mesmo(ctx, alvoGrupo, ctx.sender)) return { ok: false, motivo: 'proprio_usuario' }

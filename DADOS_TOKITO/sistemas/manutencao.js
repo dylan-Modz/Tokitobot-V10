@@ -57,7 +57,7 @@ const salvar = dados => {
   fs.renameSync(tmp, arquivo)
 }
 
-const adicionar = (comando, motivo = '') => {
+const adicionar = (comando, motivo = '', expiraEm = 0) => {
   const nome = normalizar(comando)
 
   if (!nome)
@@ -70,7 +70,8 @@ const adicionar = (comando, motivo = '') => {
 
   dados.comandos[nome] = {
     motivo: String(motivo || '').trim(),
-    adicionadoEm: new Date().toISOString()
+    adicionadoEm: new Date().toISOString(),
+    expiraEm: Number(expiraEm) > Date.now() ? Number(expiraEm) : 0
   }
 
   salvar(dados)
@@ -99,10 +100,13 @@ const obter = comando => {
   if (!nome || !dados.comandos[nome])
     return null
 
-  return {
-    nome,
-    ...dados.comandos[nome]
+  const atual = dados.comandos[nome]
+  if (atual.expiraEm && Number(atual.expiraEm) <= Date.now()) {
+    delete dados.comandos[nome]
+    salvar(dados)
+    return null
   }
+  return { nome, ...atual }
 }
 
 const ativo = comando => Boolean(obter(comando))
@@ -111,6 +115,7 @@ const listar = () => {
   const dados = ler()
 
   return Object.entries(dados.comandos)
+    .filter(([, info]) => !info?.expiraEm || Number(info.expiraEm) > Date.now())
     .map(([nome, info]) => ({
       nome,
       motivo: String(info?.motivo || '').trim(),
