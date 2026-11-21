@@ -219,6 +219,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}abrirgp 07:00
 ┃࣪ ╎—̳͟͞͞ ⏰ ${prefix}horariogp
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}add 5511999999999
+┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}addai
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}ban @usuario
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}promover @usuario
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}promover2 @usuario 18:00/22:00

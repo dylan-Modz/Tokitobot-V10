@@ -1,40 +1,39 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.39",
+  "version": "10.3.40",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-20T00:13:20.535Z",
+  "publishedAt": "2026-11-21T16:50:00.000Z",
   "changelog": [
-    "[Figurinhas] Novos comandos exclusivos do dono: rgreact, react, verreact e delreact para registrar sua figurinha e tentar reagir a mensagens.",
-    "[Stone WPP] Reação experimental via STICKER_ANNOTATION; até 10 envios por execução e envio de mídia preparada, sem URL fixa.",
-    "[Menus] Corrigidos emojis de vídeo, informações, casal, calculadoras, cidade e N-Coins sem mudar o layout original.",
-    "[Comandos] figpack adicionado à lista de figurinhas; revelar incluído no menu de administração e exemplo do packfig melhorado.",
-    "[Compatibilidade] Preservados rgfig, take e demais comandos existentes; arquivo de figurinha registrado mantido fora dos diretórios de atualização."
+    "[Administração] Novo comando addai para tentar adicionar a Meta AI ao grupo usando o JID de bot informado.",
+    "[Permissões] addai disponível apenas para administradores do grupo ou dono do Tokito; requer bot administrador.",
+    "[Stone WPP] Verificação do retorno de groupParticipantsUpdate e conferência da lista do grupo, evitando aviso falso de sucesso.",
+    "[Menus] addai adicionado ao menu ADM com o emoji padrão de administração, sem mudar o visual dos outros comandos."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Reações com figurinha personalizada e revisão dos emojis dos menus",
-  "notice": "A versão 10.3.39 já está disponível para atualização.",
+  "title": "Comando addai para grupos e permissões de administração",
+  "notice": "A versão 10.3.40 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
-      "gitSha": "7905057271d083cd0aa7026c3e63574a08f22774",
-      "size": 80111,
+      "gitSha": "e8300493096eee22d64da1fab3c89d9290d21d1a",
+      "size": 80156,
       "sha256": ""
     },
     {
-      "path": "DADOS_TOKITO/plugins/figurinhas/react.js",
-      "gitSha": "3175cdac1a4b723bc622d104c5f1975b130b64ae",
-      "size": 8298,
+      "path": "DADOS_TOKITO/plugins/admin/addai.js",
+      "gitSha": "d1f5d32038bc9b47de5f53381805dbb2c2d36051",
+      "size": 3335,
       "sha256": ""
     },
     {
       "path": "package.json",
-      "gitSha": "f0ae6c0eaca1f8a49d1f325be3d8ec14d225990a",
+      "gitSha": "a93598650a361075f33404760f2ee815a77d85a8",
       "size": 1956,
       "sha256": ""
     }
@@ -4584,16 +4583,53 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-20T00:13:20.535Z"
+    },
+    {
+      "version": "10.3.40",
+      "fromVersion": "10.3.39",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Comando addai para grupos e permissões de administração",
+      "notice": "A versão 10.3.40 já está disponível para atualização.",
+      "changelog": [
+        "[Administração] Novo comando addai para tentar adicionar a Meta AI ao grupo usando o JID de bot informado.",
+        "[Permissões] addai disponível apenas para administradores do grupo ou dono do Tokito; requer bot administrador.",
+        "[Stone WPP] Verificação do retorno de groupParticipantsUpdate e conferência da lista do grupo, evitando aviso falso de sucesso.",
+        "[Menus] addai adicionado ao menu ADM com o emoji padrão de administração, sem mudar o visual dos outros comandos."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "e8300493096eee22d64da1fab3c89d9290d21d1a",
+          "size": 80156,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/addai.js",
+          "gitSha": "d1f5d32038bc9b47de5f53381805dbb2c2d36051",
+          "size": 3335,
+          "sha256": ""
+        },
+        {
+          "path": "package.json",
+          "gitSha": "a93598650a361075f33404760f2ee815a77d85a8",
+          "size": 1956,
+          "sha256": ""
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-21T16:50:00.000Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.38",
+  "fromVersion": "10.3.39",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.39"
+  "publicVersion": "10.3.40"
 }
