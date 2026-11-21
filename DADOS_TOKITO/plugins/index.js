@@ -33,6 +33,7 @@ const path = require('path')
 const modulosSistema = require('../sistemas/modulos')
 const dadosSistema = require('../sistemas/dados')
 const manutencao = require('../sistemas/manutencao')
+const usoComandos = require('../sistemas/uso-comandos')
 const rodada = require('../database/lib/rodada')
 const dylan = require('../database/lib/comandos')
 
@@ -177,6 +178,7 @@ command: achado.comando,
 comandoCanonico: achado.canonico,
 plugin: achado.mod
 })
+usoComandos.contar(achado.canonico)
 return true
 }
 

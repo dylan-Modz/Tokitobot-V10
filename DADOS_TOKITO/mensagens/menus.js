@@ -220,6 +220,14 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ ⏰ ${prefix}horariogp
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}add 5511999999999
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}addai
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}addcargo Moderador
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}delcargo Moderador
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}listacargo
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setcargo @usuario Moderador
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}tirarcargo @usuario
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}vercargo @usuario
+┃࣪ ╎—̳͟͞͞ 🔐 ${prefix}permcargo Moderador adv 1
+┃࣪ ╎—̳͟͞͞ ⏳ ${prefix}cargotempo @usuario Moderador 7d
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}ban @usuario
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}promover @usuario
 ┃࣪ ╎—̳͟͞͞ 🛡️ ${prefix}promover2 @usuario 18:00/22:00
@@ -320,6 +328,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antivisu 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antisticker 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antifloodsticker 1/0
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}limitefig 5 30s
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}anticontato 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antilocalizacao 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antidocumento 1/0
@@ -560,6 +569,14 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}addcmdvip comando
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}delcmdvip comando
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}listcmdvip
+┃࣪ ╎—̳͟͞͞ ⏸️ ${prefix}pausacmd play 2h
+┃࣪ ╎—̳͟͞͞ ▶️ ${prefix}liberacmd play
+┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}cmdtop
+┃࣪ ╎—̳͟͞͞ 📦 ${prefix}backupbot
+┃࣪ ╎—̳͟͞͞ 📦 ${prefix}listabackup
+┃࣪ ╎—̳͟͞͞ 🔎 ${prefix}backupinfo ID
+┃࣪ ╎—̳͟͞͞ ♻️ ${prefix}restaurarbot ID confirmar
+┃࣪ ╎—̳͟͞͞ 🗑️ ${prefix}delbackup ID confirmar
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }

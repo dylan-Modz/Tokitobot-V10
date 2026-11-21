@@ -1,39 +1,95 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.40",
+  "version": "10.3.41",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-21T16:50:00.000Z",
+  "publishedAt": "2026-11-21T17:53:13.960Z",
   "changelog": [
-    "[Administração] Novo comando addai para tentar adicionar a Meta AI ao grupo usando o JID de bot informado.",
-    "[Permissões] addai disponível apenas para administradores do grupo ou dono do Tokito; requer bot administrador.",
-    "[Stone WPP] Verificação do retorno de groupParticipantsUpdate e conferência da lista do grupo, evitando aviso falso de sucesso.",
-    "[Menus] addai adicionado ao menu ADM com o emoji padrão de administração, sem mudar o visual dos outros comandos."
+    "[Administração] 8 comandos de cargos internos: addcargo, delcargo, listacargo, setcargo, tirarcargo, vercargo, permcargo e cargotempo, com persistência por grupo.",
+    "[Permissões] A permissão adv concedida a cargos internos é validada no sistema de advertências; donos, admins protegidos e o próprio bot continuam protegidos.",
+    "[Figurinhas] Novo limitefig para configurar a quantidade e o intervalo do antifloodsticker existente, sem duplicar o filtro.",
+    "[Dono] pausacmd e liberacmd controlam manutenção com prazo automático; cmdtop apresenta contagens coletadas a partir desta versão.",
+    "[Backups] backupbot, listabackup, backupinfo, delbackup e restaurarbot fazem cópias locais de configurações de grupo com validação de integridade e confirmação para exclusão/restauração. Não exportam sessões ou credenciais.",
+    "[Menus] Inseridos os 17 novos comandos nas seções ADM e DONO, mantendo o visual original."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Comando addai para grupos e permissões de administração",
-  "notice": "A versão 10.3.40 já está disponível para atualização.",
+  "title": "Cargos, controle de comandos, backups e limite de figurinhas",
+  "notice": "A versão 10.3.41 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "gitSha": "e8300493096eee22d64da1fab3c89d9290d21d1a",
-      "size": 80156,
+      "path": "DADOS_TOKITO/sistemas/cargos-tokito.js",
+      "gitSha": "fee4a23413589ddb851fa87fcb2aa3a807909da3",
+      "size": 1028,
       "sha256": ""
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/addai.js",
-      "gitSha": "d1f5d32038bc9b47de5f53381805dbb2c2d36051",
-      "size": 3335,
+      "path": "DADOS_TOKITO/plugins/admin/cargos-tokito.js",
+      "gitSha": "e7f7b0476c87b9c27881d95c62ae5b0e2c327239",
+      "size": 4556,
+      "sha256": ""
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/hierarquia.js",
+      "gitSha": "f94a3e5606eaaedc9ec8bec16313664d6ffdae2b",
+      "size": 3474,
+      "sha256": ""
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/manutencao.js",
+      "gitSha": "31c3b516464d9ff82fb4c8fe3d7059c352170fff",
+      "size": 3134,
+      "sha256": ""
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/uso-comandos.js",
+      "gitSha": "45cb4dce05c753a27d81822d08bf4b146d097ff8",
+      "size": 1268,
+      "sha256": ""
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/index.js",
+      "gitSha": "3534e883e81d3d7a3755432d692fca2902badbad",
+      "size": 7557,
+      "sha256": ""
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/controlecmd.js",
+      "gitSha": "968afcaf21cc1beb1631e69b84f84014ef7025ae",
+      "size": 2739,
+      "sha256": ""
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/backups.js",
+      "gitSha": "aa276deff42ffe117e56abc4809b839784cccb93",
+      "size": 6002,
+      "sha256": ""
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/floodsticker.js",
+      "gitSha": "50a4cbd5cd1fce4e0342cfc26da1f5a511bdc87b",
+      "size": 2032,
+      "sha256": ""
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/admin/limitefig.js",
+      "gitSha": "fc5e00cd1865996d032b66b93a4eda8db0f94695",
+      "size": 1800,
+      "sha256": ""
+    },
+    {
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "gitSha": "8b580257ec16724e9c140dc0e88d9fc7106652bd",
+      "size": 81090,
       "sha256": ""
     },
     {
       "path": "package.json",
-      "gitSha": "a93598650a361075f33404760f2ee815a77d85a8",
+      "gitSha": "90faea53ec5b64e28bba8055b88a5dde4ff3cbf0",
       "size": 1956,
       "sha256": ""
     }
@@ -4620,16 +4676,109 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-21T16:50:00.000Z"
+    },
+    {
+      "version": "10.3.41",
+      "fromVersion": "10.3.40",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Cargos, controle de comandos, backups e limite de figurinhas",
+      "notice": "A versão 10.3.41 já está disponível para atualização.",
+      "changelog": [
+        "[Administração] 8 comandos de cargos internos: addcargo, delcargo, listacargo, setcargo, tirarcargo, vercargo, permcargo e cargotempo, com persistência por grupo.",
+        "[Permissões] A permissão adv concedida a cargos internos é validada no sistema de advertências; donos, admins protegidos e o próprio bot continuam protegidos.",
+        "[Figurinhas] Novo limitefig para configurar a quantidade e o intervalo do antifloodsticker existente, sem duplicar o filtro.",
+        "[Dono] pausacmd e liberacmd controlam manutenção com prazo automático; cmdtop apresenta contagens coletadas a partir desta versão.",
+        "[Backups] backupbot, listabackup, backupinfo, delbackup e restaurarbot fazem cópias locais de configurações de grupo com validação de integridade e confirmação para exclusão/restauração. Não exportam sessões ou credenciais.",
+        "[Menus] Inseridos os 17 novos comandos nas seções ADM e DONO, mantendo o visual original."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/cargos-tokito.js",
+          "gitSha": "fee4a23413589ddb851fa87fcb2aa3a807909da3",
+          "size": 1028,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/cargos-tokito.js",
+          "gitSha": "e7f7b0476c87b9c27881d95c62ae5b0e2c327239",
+          "size": 4556,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/hierarquia.js",
+          "gitSha": "f94a3e5606eaaedc9ec8bec16313664d6ffdae2b",
+          "size": 3474,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/manutencao.js",
+          "gitSha": "31c3b516464d9ff82fb4c8fe3d7059c352170fff",
+          "size": 3134,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/uso-comandos.js",
+          "gitSha": "45cb4dce05c753a27d81822d08bf4b146d097ff8",
+          "size": 1268,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/index.js",
+          "gitSha": "3534e883e81d3d7a3755432d692fca2902badbad",
+          "size": 7557,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/controlecmd.js",
+          "gitSha": "968afcaf21cc1beb1631e69b84f84014ef7025ae",
+          "size": 2739,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/backups.js",
+          "gitSha": "aa276deff42ffe117e56abc4809b839784cccb93",
+          "size": 6002,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/floodsticker.js",
+          "gitSha": "50a4cbd5cd1fce4e0342cfc26da1f5a511bdc87b",
+          "size": 2032,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/admin/limitefig.js",
+          "gitSha": "fc5e00cd1865996d032b66b93a4eda8db0f94695",
+          "size": 1800,
+          "sha256": ""
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "8b580257ec16724e9c140dc0e88d9fc7106652bd",
+          "size": 81090,
+          "sha256": ""
+        },
+        {
+          "path": "package.json",
+          "gitSha": "90faea53ec5b64e28bba8055b88a5dde4ff3cbf0",
+          "size": 1956,
+          "sha256": ""
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-21T17:53:13.960Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.39",
+  "fromVersion": "10.3.40",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.40"
+  "publicVersion": "10.3.41"
 }
