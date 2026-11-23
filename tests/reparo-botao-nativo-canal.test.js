@@ -5,68 +5,64 @@ const assert = require('node:assert/strict')
 const fs = require('node:fs')
 const path = require('node:path')
 const canal = require('../DADOS_TOKITO/sistemas/canal-oficial')
-const root = path.join(__dirname, '..')
+const root = path.resolve(__dirname, '..')
+const JID = '120363555555555555@newsletter'
 const LINK = 'https://whatsapp.com/channel/0029VbCAgovIyPtbjBhrIi3u'
 
-const cfg = {
-  channel: '120363999999999999@newsletter',
-  channeldl: '120363999999999999@newsletter',
-  channelLink: LINK,
-  channelName: 'Canal de teste',
-  channelServerMessageId: 268
-}
-
-test('cartão nativo usa JID, nome e ID da postagem de verdade', () => {
-  const contexto = canal.contextoNativo(cfg, ['5511987654321@s.whatsapp.net'])
+test('V10.3.41 cria selo com JID, nome do bot e serverMessageId vazio', () => {
+  const contexto = canal.contextoV1041({
+    channel: JID,
+    channeldl: JID,
+    channelLink: LINK
+  }, 'Tokito Bot V10', ['5511987654321@s.whatsapp.net'])
   assert.deepEqual(contexto.forwardedNewsletterMessageInfo, {
-    newsletterJid: cfg.channeldl,
-    newsletterName: cfg.channelName,
-    serverMessageId: 268
+    newsletterJid: JID,
+    newsletterName: 'Tokito Bot V10',
+    serverMessageId: ''
   })
   assert.equal(contexto.isForwarded, true)
   assert.equal(contexto.forwardingScore, 1)
-  assert.equal(contexto.externalAdReply, undefined)
   assert.deepEqual(contexto.mentionedJid, ['5511987654321@s.whatsapp.net'])
+  assert.equal(contexto.externalAdReply, undefined)
 })
 
-test('sem ID real de postagem não inventa botão nem cola link', () => {
-  for (const valor of [null, undefined, 0, -1, 2.5, 2147483648, 'invalido']) {
-    const resultado = canal.contextoNativo({ ...cfg, channelServerMessageId: valor })
+test('como na 10.3.41 não exige ID de postagem nem nome armazenado', () => {
+  const contexto = canal.contextoV1041({
+    channel: JID, channeldl: JID, channelServerMessageId: null,
+    channelName: ''
+  }, 'Tokito', [])
+  assert.equal(contexto.forwardedNewsletterMessageInfo.newsletterJid, JID)
+  assert.equal(contexto.forwardedNewsletterMessageInfo.serverMessageId, '')
+})
+
+test('sem JID válido não fabrica selo de canal nem muda o texto', () => {
+  for (const value of ['0@newsletter', '', 'https://whatsapp.com/channel/teste', '120363555555555555@s.whatsapp.net']) {
+    const resultado = canal.contextoV1041({ channel: LINK, channeldl: value }, 'Tokito')
     assert.deepEqual(resultado, { mentionedJid: [] })
   }
-  assert.deepEqual(canal.contextoNativo({ ...cfg, channel:'0@newsletter', channeldl:'0@newsletter' }), { mentionedJid: [] })
 })
 
-test('não associa cartão nativo a canal sem nome ou JID', () => {
-  assert.deepEqual(canal.contextoNativo({ ...cfg, channelName:'' }), { mentionedJid: [] })
-  assert.deepEqual(canal.contextoNativo({ ...cfg, channeldl:'0@newsletter' }), { mentionedJid: [] })
+test('os caminhos de envio do bot usam o contexto histórico', () => {
+  const bot = fs.readFileSync(path.join(root, 'tokito.js'), 'utf8')
+  const connect = fs.readFileSync(path.join(root, 'DADOS_TOKITO/connect.js'), 'utf8')
+  assert.match(bot, /return canalOficial\.contextoV1041\(cfgCanal, NomeDoBot, mentions\)/)
+  assert.match(connect, /return canalOficial\.contextoV1041\(cfgCanal, NomeDoBot, mentions\)/)
+  assert.doesNotMatch(bot, /textoSeguro \+ '\\n\\n- 📢/)
+  assert.doesNotMatch(bot, /const botaoCanal = canalOficial\.botaoAcesso/)
 })
 
-test('respostas e menu não acrescentam o link ao texto', () => {
-  const core = fs.readFileSync(path.join(root, 'tokito.js'), 'utf8')
+test('menu mantém lista antiga sem botão URL adicional', () => {
   const menu = fs.readFileSync(path.join(root, 'DADOS_TOKITO/plugins/menus/menu.js'), 'utf8')
-  const projetos = fs.readFileSync(path.join(root, 'DADOS_TOKITO/sistemas/divulgacao-projetos.js'), 'utf8')
-  assert.match(core, /return canalOficial\.contextoNativo\(cfgCanal, mentions\)/)
-  assert.doesNotMatch(core, /textoSeguro\s*\+\s*'\\n\\n- 📢/)
-  assert.doesNotMatch(menu, /return texto \+ \(linkCanalMenu/)
-  assert.match(menu, /\.\.\.canalInfo\(\[sender\]\)/)
-  assert.doesNotMatch(menu, /botaoCanalMenu/)
-  assert.doesNotMatch(projetos, /texto \+= '\\n\\n- 📢/)
+  assert.match(menu, /name: 'single_select'/)
+  assert.doesNotMatch(menu, /botaoCanalMenu|name: 'cta_url'/)
 })
 
-test('sub-bot mantém referência real da postagem separadamente', () => {
-  const src = fs.readFileSync(path.join(root, 'DADOS_TOKITO/sub/runtime.js'), 'utf8')
-  const channel = fs.readFileSync(path.join(root, 'DADOS_TOKITO/plugins/dono/channel.js'), 'utf8')
-  assert.match(src, /channelServerMessageId: Number\(local\.channelServerMessageId\) \|\| null/)
-  assert.match(channel, /const mesmaOrigem = Boolean\(jid && citado\?\.jid === jid\)/)
-  assert.match(channel, /channelServerMessageId = mesmaOrigem \? citado\.serverMessageId : null/)
-})
-
-test('manifesto anuncia reparo sem subir da versão 10.3.44', () => {
+test('continua na 10.3.44 e novo reparo pode ser detectado', () => {
   const m = JSON.parse(fs.readFileSync(path.join(root, 'DADOS_TOKITO/INFO_DADOS/update.json'), 'utf8'))
   const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
-  assert.equal(m.version, '10.3.44')
   assert.equal(pkg.version, '10.3.44')
-  assert.equal(m.repairId, 'ver-canal-sem-cta-20261123-1')
+  assert.equal(m.version, '10.3.44')
+  assert.equal(m.repairId, 'restaurar-canal-1041-20261123-1')
   assert.equal(m.releases.at(-1).repairId, m.repairId)
+  assert.equal(m.notify, true)
 })
