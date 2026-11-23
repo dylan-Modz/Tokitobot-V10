@@ -15,7 +15,7 @@ test('respostas de comandos comuns não recebem cartões experimentais', () => {
   assert.equal(seguro.forwardedNewsletterMessageInfo, undefined)
   for (const file of ['tokito.js', 'DADOS_TOKITO/connect.js']) {
     const c = fs.readFileSync(path.join(root, file), 'utf8')
-    assert.match(c, /return canalOficial\.contextoSeguro\(mentions\)/)
+    assert.match(c, /return canalOficial\.contextoNativo\(cfgCanal, mentions\)/)
     assert.doesNotMatch(c, /return canalOficial\.contexto\(.*mentions\)/)
   }
 })
@@ -65,7 +65,7 @@ test('menu adiciona botão do canal, mantendo a lista de menus', async () => {
   assert.equal(JSON.parse(cta.buttonParamsJson).url, LINK)
 })
 
-test('se WhatsApp rejeitar carrossel, menu responde em texto com link', async () => {
+test('se WhatsApp rejeitar carrossel, menu responde em texto sem URL colada', async () => {
   const src = fs.readFileSync(path.join(root, 'DADOS_TOKITO/plugins/menus/menu.js'), 'utf8')
   let comando, fallback = ''
   const dylan = { setCommand(cmd) { comando = cmd } }
@@ -93,7 +93,7 @@ test('se WhatsApp rejeitar carrossel, menu responde em texto com link', async ()
   }
   await comando.executar(ctx)
   assert.match(fallback, /MENU/)
-  assert.ok(fallback.includes(LINK))
+  assert.equal(fallback, 'MENU')
   assert.notEqual(fallback, 'ERRO')
 })
 
