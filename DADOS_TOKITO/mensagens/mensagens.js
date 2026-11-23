@@ -451,12 +451,16 @@ return `- 🚫 \`𝙲𝙰𝙽𝙰𝙻 𝙳𝙴𝚂𝙰𝚃𝙸𝚅𝙰𝙳𝙾\`
 > 🚫 ׄ ( ᴏ ᴄᴀɴᴀʟ ғᴏɪ ᴅᴇsᴀᴛɪᴠᴀᴅᴏ ᴄᴏᴍ sᴜᴄᴇssᴏ ᴇ ɴᴀ̃ᴏ sᴇʀᴀ́ ᴍᴀɪs ᴍᴏsᴛʀᴀᴅᴏ ɴᴀs ᴍᴇɴsᴀɢᴇɴs. 🙇‍♂️ )`
 }
 
-exports.channelEnabled = (jid, link) => {
+exports.channelEnabled = (jid, link, nome = '', serverMessageId = 0) => {
+const detalhes = nome ? `\n> 🏷️ ׄ ( ᴄᴀɴᴀʟ: ${nome} )` : ''
+const comprovante = Number(serverMessageId) > 0
+  ? `\n> ✅ ׄ ( ᴄᴀʀᴛᴀ̃ᴏ: ɪᴅ ᴅᴀ ᴍᴇɴsᴀɢᴇᴍ ${serverMessageId} ʀᴇɢɪsᴛʀᴀᴅᴏ. )`
+  : `\n> ℹ️ ׄ ( ᴄᴀʀᴛᴀ̃ᴏ: ᴀɢᴜᴀʀᴅᴀɴᴅᴏ ᴍᴇɴsᴀɢᴇᴍ ᴅᴏ ᴄᴀɴᴀʟ. )`
 return `- 📢 \`𝙲𝙰𝙽𝙰𝙻 𝙰𝚃𝙸𝚅𝙰𝙳𝙾\`
 
-> 📢 ׄ ( ${jid} — ᴏ ᴄᴀɴᴀʟ ғᴏɪ ᴀᴛɪᴠᴀᴅᴏ ᴄᴏᴍ sᴜᴄᴇssᴏ. )
+> 📢 ׄ ( ${jid} — ᴏ ᴄᴀɴᴀʟ ғᴏɪ ᴀᴛɪᴠᴀᴅᴏ ᴄᴏᴍ sᴜᴄᴇssᴏ. )${detalhes}${comprovante}
 
-> 📢 ׄ ( ${link} — ᴇssᴇ ᴇ́ ᴏ ʟɪɴᴋ ᴅᴏ ᴄᴀɴᴀʟ ᴄᴀᴅᴀsᴛʀᴀᴅᴏ. 🙇‍♂️ )`
+> 📢 ׄ ( ${link} — ᴄᴀɴᴀʟ ᴄᴀᴅᴀsᴛʀᴀᴅᴏ. )`
 }
 
 exports.channelLinkEnabled = link => {
