@@ -30,6 +30,7 @@
 
 const dylan = require('../../database/lib/comandos')
 const { version } = require('../../../package.json')
+const canalOficial = require('../../sistemas/canal-oficial')
 
 dylan.setCommand({
 nome: "menu",
@@ -44,8 +45,13 @@ async executar(ctx) {
 with (ctx) {
 {
 try {
+const linkCanalMenu = canalOficial.link(setting)
+const textoMenuSeguro = () => {
+  const texto = linguagem.menu(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion)
+  return texto + (linkCanalMenu ? '\n\n- 📢 *Acessar canal:* ' + linkCanalMenu : '')
+}
 if (!isBotoes)
-return dylanModz(linguagem.menu(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion))
+return dylanModz(textoMenuSeguro())
 reagir(from, '🧊').catch(() => {})
 const caminhoVideo = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
 const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
@@ -159,7 +165,15 @@ const botoes = [
 {
 name: 'single_select',
 buttonParamsJson: JSON.stringify(listaMenus)
-}
+},
+...(linkCanalMenu ? [{
+name: 'cta_url',
+buttonParamsJson: JSON.stringify({
+display_text: '📢 Acessar canal',
+url: linkCanalMenu,
+merchant_url: linkCanalMenu
+})
+}] : [])
 ]
 const carouselMessage = {
 cards: [
@@ -210,12 +224,13 @@ carouselMessage
 }, {})
 }
 catch (e) {
-console.log('ᴇʀʀᴏ ɴᴏ ᴍᴇɴᴜ:', e)
-await tokito.sendMessage(from, {
-text: mess.error()
-}, {
-quoted: selo
-})
+console.log('[MENU] Falha no envio interativo, utilizando texto:', e?.message || e)
+try {
+  return await dylanModz(textoMenuSeguro())
+} catch (fallbackError) {
+  console.log('[MENU] Falha também no envio do texto:', fallbackError?.message || fallbackError)
+  return reply(mess.error())
+}
 }
 }
 }
