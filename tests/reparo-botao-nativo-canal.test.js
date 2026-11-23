@@ -49,7 +49,8 @@ test('respostas e menu não acrescentam o link ao texto', () => {
   assert.match(core, /return canalOficial\.contextoNativo\(cfgCanal, mentions\)/)
   assert.doesNotMatch(core, /textoSeguro\s*\+\s*'\\n\\n- 📢/)
   assert.doesNotMatch(menu, /return texto \+ \(linkCanalMenu/)
-  assert.match(menu, /canalOficial\.botaoAcesso/)
+  assert.match(menu, /\.\.\.canalInfo\(\[sender\]\)/)
+  assert.doesNotMatch(menu, /botaoCanalMenu/)
   assert.doesNotMatch(projetos, /texto \+= '\\n\\n- 📢/)
 })
 
@@ -66,6 +67,6 @@ test('manifesto anuncia reparo sem subir da versão 10.3.44', () => {
   const pkg = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'))
   assert.equal(m.version, '10.3.44')
   assert.equal(pkg.version, '10.3.44')
-  assert.equal(m.repairId, 'botao-nativo-canal-20261123-1')
+  assert.equal(m.repairId, 'ver-canal-sem-cta-20261123-1')
   assert.equal(m.releases.at(-1).repairId, m.repairId)
 })
