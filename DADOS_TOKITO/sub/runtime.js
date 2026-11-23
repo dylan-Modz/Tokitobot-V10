@@ -64,7 +64,8 @@ const subConfig = () => {
     prefix: String(current.prefix || '!'),
     channel: String(current.channel || '0@newsletter'),
     channelLink: String(current.channelLink || ''),
-    channelName: String(current.channelName || '')
+    channelName: String(current.channelName || ''),
+    channelServerMessageId: Number(current.channelServerMessageId) || null
   }
 }
 
@@ -82,6 +83,7 @@ const config = () => {
     channeldl: channel,
     channelLink: String(local.channelLink || ''),
     channelName: String(local.channelName || ''),
+    channelServerMessageId: Number(local.channelServerMessageId) || null,
     ownerNumber: owner() || main.ownerNumber || ''
   }
 }
@@ -104,6 +106,11 @@ const updateSubConfig = patch => {
   }
   if (Object.prototype.hasOwnProperty.call(patch || {}, 'channelName')) {
     next.channelName = String(patch.channelName || '').trim().slice(0, 120)
+  }
+
+  if (Object.prototype.hasOwnProperty.call(patch || {}, 'channelServerMessageId')) {
+    const id = Number(patch.channelServerMessageId)
+    next.channelServerMessageId = Number.isSafeInteger(id) && id > 0 && id <= 2147483647 ? id : null
   }
 
   return writeJson(configFile, next)
