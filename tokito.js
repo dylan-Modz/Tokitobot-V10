@@ -965,16 +965,30 @@ let selo = isVerificado ? SeloMeta : info
 const reply = async (text, mentions = []) => {
 if (!text) text = ' '
 const textoSeguro = modulos.sanitizarErro(String(text), [API_KEY_TOKITO]) || ' '
-return tokito.sendMessage(
-from,
-{
-text: textoSeguro,
-contextInfo: canalInfo(mentions)
-},
-{
-quoted: selo
+const cfgCanal = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
+// Fallback em texto para quem ainda não tem uma mensagem REAL encaminhada
+// do canal. Não injeta externalAdReply globalmente, pois pode impedir replies.
+const acesso = canalOficial.acessoTexto(cfgCanal, tokito)
+const url = canalOficial.link(cfgCanal)
+const textoFinal = acesso && !textoSeguro.includes(url)
+  ? textoSeguro + '\n\n' + acesso
+  : textoSeguro
+const contexto = canalInfo(mentions)
+try {
+  return await tokito.sendMessage(
+    from,
+    { text: textoFinal, contextInfo: contexto },
+    { quoted: selo }
+  )
+} catch (error) {
+  console.warn('[TOKITO REPLY] Falha ao enviar resposta com contexto:', error?.message || error)
+  // O texto do comando tem prioridade. Uma falha na apresentação do canal
+  // não pode deixar o comando apenas com a reação.
+  return tokito.sendMessage(
+    from,
+    { text: textoFinal, contextInfo: { mentionedJid: mentions } }
+  )
 }
-)
 }
 const enviarbuton = botoes =>
 botoes
