@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "setchannel-json-20261123-1",
+  "type": "reparacao",
+  "title": "Correção do setchannel com resposta não JSON",
+  "notice": "O comando setchannel continua ativando o link de Acessar canal mesmo quando o WhatsApp não retorna o JID.",
+  "description": [
+    "Validação dos links do WhatsApp e dos JIDs de canais.",
+    "Fallback seguro de link para respostas w:mex que não sejam JSON.",
+    "Preservação da desativação com setchannel 0 e dos canais personalizados.",
+    "Sem alterações na versão instalada, credenciais, mídias nem grupos."
+  ],
+  "safety": {
+    "preserveInstalledVersion": true,
+    "preserveCredentials": true,
+    "preserveChannelSettings": true,
+    "doNotModifyStoneWpp": true
+  }
+}
