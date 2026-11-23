@@ -428,7 +428,6 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}dono1 @usuario
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}deldono número
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}donos
-┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setchannel link
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setprefix !
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fotomenu
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fundoerro
