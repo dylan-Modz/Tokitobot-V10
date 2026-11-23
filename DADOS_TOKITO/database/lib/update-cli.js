@@ -82,8 +82,10 @@ async function main() {
       return
     }
 
-    info(
-      `Nova atualização disponível: ${versaoAtual} → ${novaVersao}.`
+    const reparo = check.repair === true
+    info(reparo
+      ? `Reparação de comandos disponível na versão ${versaoAtual}, sem alterar a versão.`
+      : `Nova atualização disponível: ${versaoAtual} → ${novaVersao}.`
     )
 
     aviso(
@@ -160,8 +162,9 @@ async function main() {
         0
       )
 
-    sucesso(
-      `Atualização concluída: ${anterior} → ${nova}.`
+    sucesso(reparo
+      ? `Reparação concluída: versão ${nova} mantida.`
+      : `Atualização concluída: ${anterior} → ${nova}.`
     )
 
     sucesso(
@@ -174,12 +177,14 @@ async function main() {
       )
     }
 
-    info(
-      'Atualização instalada com sucesso.'
+    info(reparo
+      ? 'Arquivos reparados com sucesso, sem mudar a versão.'
+      : 'Atualização instalada com sucesso.'
     )
 
-    aviso(
-      'Reiniciando a Tokito com a nova versão...'
+    aviso(reparo
+      ? 'Reinicie a Tokito para carregar os arquivos reparados.'
+      : 'Reiniciando a Tokito com a nova versão...'
     )
 
     if (auto) {
