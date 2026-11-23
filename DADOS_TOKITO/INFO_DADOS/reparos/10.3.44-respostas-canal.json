@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "respostas-canal-20261123-1",
+  "type": "reparacao",
+  "title": "Correção de respostas do bot e cartão nativo de canal",
+  "notice": "Reparo de comandos que apenas reagiam e não enviavam respostas, com cartão de canal correto quando existir serverMessageId válido.",
+  "changes": [
+    "Respostas do bot não dependem de prévia externalAdReply global; erro no contexto gera nova tentativa de mensagem de texto.",
+    "Sem dados de mensagem encaminhada, o link do canal aparece no texto e continua clicável.",
+    "Com JID, nome e serverMessageId reais, o cartão nativo usa forwardedNewsletterMessageInfo.",
+    "Setchannel aceita JID, link, ID da mensagem e nome; também extrai metadados de mensagem encaminhada citada.",
+    "Configurações de sub-bots mantêm nome e identificador da mensagem de canal.",
+    "Verificação do atualizador mantém a mesma versão 10.3.44 e oferece novo repairId."
+  ],
+  "safety": {
+    "sameVersion": true,
+    "preserveInstalledVersion": true,
+    "preserveSessions": true,
+    "preserveConfigFile": true,
+    "preserveStickers": true,
+    "doNotInventFollowers": true
+  },
+  "testScope": "Verificações de sintaxe, mock de envio e testes automatizados adicionados; teste real WhatsApp pendente."
+}
