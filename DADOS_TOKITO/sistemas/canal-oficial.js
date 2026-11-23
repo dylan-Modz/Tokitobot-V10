@@ -116,6 +116,26 @@ const botaoAcesso = config => {
   }
 }
 
+// Compatibilidade com o cartão antigo "Ver canal" do WhatsApp.
+// Diferentemente de cta_url, este contexto usa o JID de newsletter
+// configurado e preserva o formato utilizado pela V10 anterior.
+const contextoNativo = (config, socket, nomeBot, mentionedJid = []) => {
+  const base = contextoSeguro(mentionedJid)
+  const dados = informacoes(config, socket)
+  if (!isJid(dados.jid)) return base
+  return {
+    ...base,
+    isForwarded: true,
+    forwardingScore: 1,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: dados.jid,
+      newsletterName: dados.name || parse(nomeBot) || 'Canal WhatsApp',
+      // O cliente antigo do Tokito esperava esta propriedade em branco.
+      serverMessageId: ''
+    }
+  }
+}
+
 const jid = (config, socket) => informacoes(config, socket).jid
 
 // Respostas comuns precisam de contextInfo mínimo. O cartão de canal
@@ -162,5 +182,5 @@ const contexto = (config, socket, nomeBot, mentionedJid = []) => {
 }
 
 module.exports = {
-  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto, contextoSeguro, botaoAcesso
+  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto, contextoSeguro, botaoAcesso, contextoNativo
 }
