@@ -933,7 +933,7 @@ const whatIsPhone = messageId.substring(0, 2) === '3A' ? 'iPhone 🍎' : message
 const canalOficial = require('./DADOS_TOKITO/sistemas/canal-oficial')
 const canalInfo = (mentions = []) => {
 const cfgCanal = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
-return canalOficial.contextoNativo(cfgCanal, mentions)
+return canalOficial.contextoV1041(cfgCanal, NomeDoBot, mentions)
 }
 const newsletter = canalInfo([])
 const isVerificado = nescessario.verificado
