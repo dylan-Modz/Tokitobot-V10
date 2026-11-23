@@ -44,7 +44,7 @@ info: {
 async executar(ctx) {
 with (ctx) {
 {
-// Os menus preservam texto original; acesso ao canal só por botão CTA.
+const botaoCanalMenu = canalOficial.botaoAcesso(ctx.setting || {})
 const textoMenuSeguro = () =>
   linguagem.menu(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion)
 try {
@@ -164,7 +164,7 @@ const botoes = [
 name: 'single_select',
 buttonParamsJson: JSON.stringify(listaMenus)
 },
-...(canalOficial.botaoAcesso(ctx.setting || {}) ? [canalOficial.botaoAcesso(ctx.setting || {})] : [])
+...(botaoCanalMenu ? [botaoCanalMenu] : [])
 ]
 const carouselMessage = {
 cards: [
