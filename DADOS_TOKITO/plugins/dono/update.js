@@ -139,6 +139,17 @@ const fonteCarregada = visualEmMemoria ? 'NOVO VISUAL' : 'VISUAL ANTIGO'
 const codigoPendente = pendentes.filter(item =>
   item === 'tokito.js' || item === 'DADOS_TOKITO/mensagens/mensagens.js')
 
+const comandosEsperados = ['gitbot', 'site', 'stone', 'figaudio', 'rgfigaudio', 'verfigaudio', 'delfigaudio', 'autostickeraudio']
+const registroDisponivel = typeof ctx.plugins?.comandos === 'function'
+const comandosRegistrados = registroDisponivel ? new Set(ctx.plugins.comandos()) : new Set()
+const comandosAusentes = registroDisponivel ? comandosEsperados.filter(cmd => !comandosRegistrados.has(cmd)) : []
+const arquivosProjetos = [
+  '../info/gitbot.js', '../info/site.js', '../info/stone.js',
+  '../figurinhas/figaudio.js', '../figurinhas/autostickeraudio.js',
+  '../../sistemas/divulgacao-projetos.js', '../../sistemas/sticker-audio.js'
+]
+const arquivosAusentes = arquivosProjetos.filter(rel => !fs.existsSync(path.resolve(__dirname, rel)))
+
 const notificada = salvo?.lastNotifiedPrincipalVersion || 'nenhuma'
 const quando = automatico.at
   ? new Date(automatico.at).toLocaleString('pt-BR', { timeZone: 'America/Fortaleza' })
@@ -154,6 +165,9 @@ return ctx.reply([
 '> 🛠️ ׄ ( ʀᴇᴘᴀʀᴏ ɴᴀ ᴍᴇsᴍᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (check?.repair ? 'SIM' : 'NÃO') + ' )',
 '> 🎨 ׄ ( ᴅᴇsɪɢɴ ᴅᴏ ᴄᴏᴍᴀɴᴅᴏ ɪɴᴠᴀ́ʟɪᴅᴏ ᴇᴍ ᴍᴇᴍᴏ́ʀɪᴀ: ' + fonteCarregada + ' )',
 '> 📦 ׄ ( ᴀʀǫᴜɪᴠᴏs ᴘᴇɴᴅᴇɴᴛᴇs: ' + pendentes.length + ' )',
+'> 🧩 ׄ ( ᴄᴏᴍᴀɴᴅᴏs ʀᴇsᴛᴀᴜʀᴀᴅᴏs: ' + (registroDisponivel ? (comandosEsperados.length - comandosAusentes.length) + '/' + comandosEsperados.length : 'registro indisponível') + ' )',
+...(comandosAusentes.length ? ['> ⚠️ ׄ ( ғᴀʟᴛᴀᴍ ᴄᴏᴍᴀɴᴅᴏs: ' + comandosAusentes.join(', ') + ' )'] : []),
+...(arquivosAusentes.length ? ['> 📂 ׄ ( ғᴀʟᴛᴀᴍ ᴀʀǫᴜɪᴠᴏs: ' + arquivosAusentes.map(rel => path.basename(rel)).join(', ') + ' )'] : []),
 ...(codigoPendente.length ? [
 '> 📝 ׄ ( ᴀʀǫᴜɪᴠᴏs ᴅᴏ ᴅᴇsɪɢɴ ᴘᴇɴᴅᴇɴᴛᴇs: ' + codigoPendente.join(', ') + ' )'
 ] : []),
