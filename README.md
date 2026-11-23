@@ -300,7 +300,7 @@ Exemplo:
   "prefix": "PREFIXO",
   "NomeDoBot": "𝑻𝒐𝒌𝒊𝒕𝒐𝑩𝒐𝒕-𝑽10-𝑴𝑫",
   "ownerName": "NICK_DONO",
-  "channeldl": "120363421690941003@newsletter",
+  "channeldl": "0@newsletter",
   "channel": "https://whatsapp.com/channel/0029VbCAgovIyPtbjBhrIi3u",
   "API_URL": "https://tokito-apis.com.br",
   "API_KEY_TOKITO": "TOKEN_API_TOKITO",
