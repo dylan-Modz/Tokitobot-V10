@@ -1,6 +1,5 @@
 const permitidosDonoSub = new Set([
   'prefixo',
-  'channel',
   'bangp',
   'bangplit',
   'entrar',
@@ -11,7 +10,6 @@ const permitidosDonoSub = new Set([
 
 const aliasesPermitidos = new Set([
   'prefixo', 'setprefix',
-  'channel', 'setchannel',
   'bangp', 'unbangp',
   'bangplit',
   'entrar', 'sairgp',
