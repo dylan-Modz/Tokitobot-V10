@@ -109,3 +109,45 @@ test('não substitui outros canais nem faz requisições desnecessárias', async
   }, rt), false)
   assert.equal(consultas, 0)
 })
+
+function comandoCtx(config) {
+  const mensagens = []
+  const ctx = {
+    sender: '5511999999999@s.whatsapp.net',
+    from: 'grupo@g.us',
+    selo: {},
+    setting: config,
+    isBotoes: false,
+    tokito: {
+      user: { id: 'bot@s.whatsapp.net' },
+      waUploadToServer: async () => {},
+      sendMessage: async (_, payload) => { mensagens.push(payload) }
+    },
+    modulos: { midiaMenu: async () => null },
+    prepareWAMessageMedia: async () => ({ imageMessage: {} }),
+    reagir: async () => {},
+    canalInfo: mentions => ({ mentionedJid: mentions }),
+    reply: async texto => { mensagens.push({ text: texto }) }
+  }
+  return { ctx, mensagens }
+}
+
+test('gitbot, site e stone usam novo link em todas as apresentações ativas', async () => {
+  for (const tipo of ['gitbot', 'site', 'stone']) {
+    const { ctx, mensagens } = comandoCtx(antigos())
+    await projetos.enviar(ctx, tipo)
+    const texto = mensagens.map(msg => msg.text || msg.caption || '').join('\n')
+    assert.ok(texto.includes(canal.LINK_OFICIAL), tipo)
+    assert.ok(!texto.includes(canal.LINK_LEGADO), tipo)
+  }
+})
+
+test('gitbot, site e stone escondem o canal quando desligado', async () => {
+  for (const tipo of ['gitbot', 'site', 'stone']) {
+    const { ctx, mensagens } = comandoCtx({ ...antigos(), channel: canal.DESLIGADO })
+    await projetos.enviar(ctx, tipo)
+    const texto = mensagens.map(msg => msg.text || msg.caption || '').join('\n')
+    assert.ok(!texto.includes('𝙰𝙲𝙴𝚂𝚂𝙰𝚁 𝙲𝙰𝙽𝙰𝙻'), tipo)
+    assert.ok(!texto.includes(canal.LINK_LEGADO), tipo)
+  }
+})
