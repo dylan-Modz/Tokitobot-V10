@@ -54,7 +54,7 @@ comandos: ['update'],
 categoria: 'dono',
 info: {
 descricao: 'Verifica, instala ou restaura atualizações oficiais do Tokito V10.',
-uso: 'update check | diag | destino aqui | info | start | rollback',
+uso: 'update check | diag | destino aqui | info | start | reparo | rollback',
 permissao: 'Dono'
 },
 
@@ -217,7 +217,8 @@ prefix: ctx.prefix
 }))
 }
 
-if (acao === 'start') {
+// 'reparo' usa o instalador incremental oficial, inclusive na mesma versão.
+if (acao === 'start' || acao === 'reparo' || acao === 'reparar') {
 await ctx.reply(ctx.mess.updatePreparing())
 let etapaAtual = 'Consultando a versão oficial'
 

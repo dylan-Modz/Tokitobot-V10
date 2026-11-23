@@ -309,6 +309,8 @@ const verificar = async tokito => {
       at: new Date().toISOString(),
       ok: check?.ok === true,
       available: check?.available === true,
+      repair: check?.repair === true,
+      pendingFiles: Array.isArray(check?.pendingFiles) ? check.pendingFiles.length : 0,
       fonte: String(check?.fonte || ''),
       local: String(check?.local?.version || ''),
       remota: String(check?.remote?.version || ''),

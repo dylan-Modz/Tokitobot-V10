@@ -1,0 +1,31 @@
+{
+  "schema": 1,
+  "version": "10.3.43",
+  "repairId": "canal-tk-20261123-2",
+  "type": "reparacao",
+  "title": "Reparação dos comandos e do canal oficial",
+  "notice": "O Tokito Bot V10.3.43 possui uma reparação de comandos disponível, sem mudança de versão.",
+  "channel": "https://whatsapp.com/channel/0029VbCAgovIyPtbjBhrIi3u",
+  "commands": [
+    "gitbot",
+    "site",
+    "stone"
+  ],
+  "explanation": "Marcador de integridade para o sistema de reparação da versão 10.3.43. A ausência do arquivo identifica reparo pendente, sem mudar a versão principal nem sobrescrever configurações.",
+  "safety": {
+    "preserveInstalledVersion": true,
+    "preserveCredentials": true,
+    "preserveConfig": true,
+    "preserveCustomChannel": true,
+    "respectChannelOff": true
+  },
+  "files": [
+    "DADOS_TOKITO/sistemas/canal-oficial.js",
+    "DADOS_TOKITO/sistemas/divulgacao-projetos.js",
+    "tokito.js",
+    "DADOS_TOKITO/connect.js",
+    "DADOS_TOKITO/plugins/info/gitbot.js",
+    "DADOS_TOKITO/plugins/info/site.js",
+    "DADOS_TOKITO/plugins/info/stone.js"
+  ]
+}
