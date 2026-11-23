@@ -42,11 +42,16 @@ function patchProtocolo() {
   }
   if (sticker[PATCH]) return
   const anterior = sticker.encode
+  // Se uma versão futura da Stone já codificar audioMessage, não duplicar.
+  if (/\baudioMessage\b/.test(Function.prototype.toString.call(anterior))) {
+    Object.defineProperty(sticker, PATCH, { value: true })
+    return
+  }
   sticker.encode = function (valor, writer) {
     const resultado = anterior.call(this, valor, writer)
     // Campo 26, wire type 2 -> tag varint 210. Não duplicar se o schema
     // da Stone passar a suportar o campo nativamente.
-    if (valor?.audioMessage && !sticker.__tokitoAudioNativo) {
+    if (valor?.audioMessage) {
       audio.encode(valor.audioMessage, resultado.uint32(210).fork()).ldelim()
     }
     return resultado
@@ -104,7 +109,7 @@ function temOpus(mime, bytes) {
   // Áudio do WhatsApp costuma ser OGG/Opus. Não confiar apenas no MIME.
   return /audio\/ogg/i.test(mime) &&
     bytes.length >= 8 && bytes.subarray(0, 4).toString('ascii') === 'OggS' &&
-    (bytes.includes(Buffer.from('OpusHead')) || /opus/i.test(mime))
+    bytes.includes(Buffer.from('OpusHead'))
 }
 
 async function normalizarAudio(ctx, audioOrigem) {
@@ -162,8 +167,8 @@ function construirMensagem(fig, som) {
   // fromObject normalmente ignora campos experimentais desconhecidos;
   // adicionar o áudio DEPOIS do fromObject garante o encoder patchado.
   resultado.stickerMessage.audioMessage = som.audioMessage
-  if (typeof resultado.stickerMessage.audioMessage?.mediaKey === 'undefined' ||
-      !resultado.stickerMessage.audioMessage?.directPath) {
+  if (!resultado.stickerMessage.audioMessage?.mediaKey ||
+      !(resultado.stickerMessage.audioMessage?.directPath || resultado.stickerMessage.audioMessage?.url)) {
     throw new Error('Áudio sem metadados de upload; não é seguro anunciar envio com som.')
   }
   return resultado
