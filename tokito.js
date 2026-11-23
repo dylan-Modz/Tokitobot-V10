@@ -1004,7 +1004,7 @@ contextInfo: canalInfo(mentions),
 body: proto.Message.InteractiveMessage.Body.create({ text: modulos.sanitizarErro(String(texto || ' '), [API_KEY_TOKITO]) }),
 footer: proto.Message.InteractiveMessage.Footer.create({ text: `` }),
 nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-buttons: [...enviarbuton(botoes), ...(botaoCanal ? [botaoCanal] : [])]
+buttons: [...enviarbuton(botoesAtivos), ...(botaoCanal ? [botaoCanal] : [])]
 })
 })
 },
@@ -1034,9 +1034,10 @@ const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS'
 const contextInfo = canalInfo([sender])
 const cfgMenu = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
 const botaoCanal = canalOficial.botaoAcesso(cfgMenu)
+// O botão de acesso ao canal é independente do alternador dos outros botões.
+const botoesAtivos = isBotoes ? botoes : []
 let resultado
-// O botão do canal só é incluído nos menus interativos; não é texto anexado.
-if (!isBotoes || (!botoes.length && !botaoCanal)) {
+if (!botoesAtivos.length && !botaoCanal) {
 try {
 const media = await modulos.midiaMenu(tokito)
 if (media?.videoMessage) {
