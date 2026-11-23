@@ -101,6 +101,21 @@ const informacoes = (config, socket) => {
   }
 }
 
+// Botão de URL suportado pelo fluxo interativo do WhatsApp.
+// Não deve ser substituído por texto/link inserido no fim dos comandos.
+const botaoAcesso = config => {
+  const url = link(config)
+  if (!url) return null
+  return {
+    name: 'cta_url',
+    buttonParamsJson: JSON.stringify({
+      display_text: '📢 Acessar canal',
+      url,
+      merchant_url: url
+    })
+  }
+}
+
 const jid = (config, socket) => informacoes(config, socket).jid
 
 // Respostas comuns precisam de contextInfo mínimo. O cartão de canal
@@ -147,5 +162,5 @@ const contexto = (config, socket, nomeBot, mentionedJid = []) => {
 }
 
 module.exports = {
-  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto, contextoSeguro
+  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto, contextoSeguro, botaoAcesso
 }
