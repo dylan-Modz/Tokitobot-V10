@@ -965,13 +965,8 @@ let selo = isVerificado ? SeloMeta : info
 const reply = async (text, mentions = []) => {
 if (!text) text = ' '
 const textoSeguro = modulos.sanitizarErro(String(text), [API_KEY_TOKITO]) || ' '
-const cfgCanal = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
-const linkCanal = canalOficial.link(cfgCanal)
-// Mensagens JSON e blocos de código precisam ficar intactos (ex.: /get).
-const ehDadoEstruturado = /^\s*(?:\{|\[|```)/.test(textoSeguro)
-const textoFinal = linkCanal && !ehDadoEstruturado && !textoSeguro.includes(linkCanal)
-  ? textoSeguro + '\n\n- 📢 𝙰𝙲𝙴𝚂𝚂𝙰𝚁 𝙲𝙰𝙽𝙰𝙻\n> 🔗 ' + linkCanal
-  : textoSeguro
+// Respostas comuns não recebem URL solta nem metadados de encaminhamento.
+const textoFinal = textoSeguro
 try {
   return await tokito.sendMessage(from, {
     text: textoFinal,
@@ -1035,8 +1030,12 @@ reagir(from, emoji).catch(() => {})
 const caminhoVideo = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
 const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
 const contextInfo = canalInfo([sender])
+const cfgMenu = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
+const botaoCanal = canalOficial.botaoAcesso(cfgMenu)
+// O botão de acesso ao canal é independente do alternador dos outros botões.
+const botoesAtivos = isBotoes ? botoes : []
 let resultado
-if (!isBotoes || !botoes.length) {
+if (!botoesAtivos.length && !botaoCanal) {
 try {
 const media = await modulos.midiaMenu(tokito)
 if (media?.videoMessage) {
@@ -1110,7 +1109,9 @@ const dados = {
 contextInfo,
 body: proto.Message.InteractiveMessage.Body.create({ text: texto }),
 footer: proto.Message.InteractiveMessage.Footer.create({ text: `` }),
-nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: enviarbuton(botoes) })
+nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+buttons: [...enviarbuton(botoesAtivos), ...(botaoCanal ? [botaoCanal] : [])]
+})
 }
 if (header) dados.header = header
 const msg = generateWAMessageFromContent(
