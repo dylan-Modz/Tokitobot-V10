@@ -125,21 +125,37 @@ const contextoSeguro = (mentionedJid = []) => ({
   mentionedJid: Array.isArray(mentionedJid) ? mentionedJid : []
 })
 
-// Contexto rico reservado para mensagens que anunciam explicitamente um canal.
-const contexto = (config, socket, nomeBot, mentionedJid = []) => {
-  const dados = informacoes(config, socket)
-  const base = { mentionedJid }
-  if (dados.jid) {
-    return {
-      ...base,
-      isForwarded: true,
-      forwardingScore: 1,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: dados.jid,
-        newsletterName: dados.name || parse(nomeBot) || 'Canal WhatsApp'
-      }
+// O cartão nativo "Acessar canal" depende de dados de uma postagem REAL
+// encaminhada daquele mesmo canal. Só o link e o JID não bastam:
+// serverMessageId é identificador da postagem, não do canal.
+const contextoNativo = (config, mentionedJid = []) => {
+  const base = contextoSeguro(mentionedJid)
+  const cfg = config || {}
+  if (!ativo(cfg)) return base
+  const newsletterJid = parse(cfg.channeldl)
+  const serverMessageId = Number(cfg.channelServerMessageId)
+  const newsletterName = parse(cfg.channelName).slice(0, 120)
+  if (!isJid(newsletterJid) || newsletterJid === JID_ANTIGO ||
+      !Number.isSafeInteger(serverMessageId) || serverMessageId <= 0 ||
+      serverMessageId > 2147483647 || !newsletterName) return base
+  return {
+    ...base,
+    forwardingScore: 1,
+    isForwarded: true,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid,
+      serverMessageId,
+      newsletterName
     }
   }
+}
+
+// Contexto rico reservado para mensagens que anunciam explicitamente um canal.
+const contexto = (config, socket, nomeBot, mentionedJid = []) => {
+  const nativo = contextoNativo(config, mentionedJid)
+  if (nativo.forwardedNewsletterMessageInfo) return nativo
+  const dados = informacoes(config, socket)
+  const base = contextoSeguro(mentionedJid)
   // Sem JID real não há como gerar o cartão de canal encaminhado.
   // Fallback mantém o acesso clicável, sem atribuir uma mensagem inexistente.
   if (dados.link) {
@@ -162,5 +178,5 @@ const contexto = (config, socket, nomeBot, mentionedJid = []) => {
 }
 
 module.exports = {
-  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto, contextoSeguro, botaoAcesso
+  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto, contextoSeguro, contextoNativo, botaoAcesso
 }
