@@ -27,12 +27,11 @@ test('canal desligado não produz cartão nem metadados falsos', () => {
   assert.equal(contexto.forwardedNewsletterMessageInfo, undefined)
 })
 
-test('JID conhecido gera contexto nativo com identificador real', () => {
+test('JID sem postagem real não simula encaminhamento, mas mantém link', () => {
   const cfg = { channel: '120363999999999999@newsletter', channeldl: '120363999999999999@newsletter', channelLink: link }
   const contexto = canal.contexto(cfg, {}, 'Tokito', [])
-  assert.equal(contexto.forwardedNewsletterMessageInfo.newsletterJid, cfg.channeldl)
-  assert.equal(contexto.externalAdReply, undefined)
-  assert.equal(contexto.forwardedNewsletterMessageInfo.serverMessageId, undefined)
+  assert.equal(contexto.forwardedNewsletterMessageInfo, undefined)
+  assert.equal(contexto.externalAdReply.sourceUrl, link)
 })
 
 test('resolução assíncrona recupera nome, JID e seguidores reais', async () => {
@@ -44,9 +43,13 @@ test('resolução assíncrona recupera nome, JID e seguidores reais', async () =
   } }
   canal.contexto(cfg, socket, 'Tokito')
   await new Promise(resolve => setTimeout(resolve, 0))
-  const atualizado = canal.contexto(cfg, socket, 'Tokito')
-  assert.equal(atualizado.forwardedNewsletterMessageInfo.newsletterJid, '120363888888888888@newsletter')
-  assert.equal(atualizado.forwardedNewsletterMessageInfo.newsletterName, 'Canal de testes')
+  const atualizado = canal.informacoes(cfg, socket)
+  assert.equal(atualizado.jid, '120363888888888888@newsletter')
+  assert.equal(atualizado.name, 'Canal de testes')
+  assert.equal(atualizado.subscribers, 33)
+  const contexto = canal.contexto(cfg, socket, 'Tokito')
+  assert.equal(contexto.forwardedNewsletterMessageInfo, undefined)
+  assert.equal(contexto.externalAdReply.sourceUrl, link)
 })
 
 function motorEmMemoria() {
