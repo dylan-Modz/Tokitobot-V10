@@ -1,0 +1,19 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "ver-canal-sem-cta-20261123-1",
+  "type": "reparacao",
+  "title": "Ver canal nativo sem botão CTA URL artificial",
+  "changes": [
+    "Mantido o contexto nativo com JID, nome e ID real de postagem do canal.",
+    "Retirado o botão cta_url dos menus que deveria ser o Ver canal nativo.",
+    "Mensagens comuns continuam preservadas, sem links brutos adicionados.",
+    "Se mensagem de menu com contexto de canal falhar, bot responde com texto por caminho seguro.",
+    "Reparo 10.3.44 incremental mantendo código de identificação de postagem, sessões, configurações e mídias."
+  ],
+  "limitations": [
+    "O WhatsApp precisa reconhecer a referência da postagem encaminhada para mostrar Ver canal.",
+    "Somente link ou JID, sem serverMessageId positivo de postagem válida, não confirma cartão nativo.",
+    "A referência do canal Teste não é automaticamente usada em outro canal."
+  ]
+}
