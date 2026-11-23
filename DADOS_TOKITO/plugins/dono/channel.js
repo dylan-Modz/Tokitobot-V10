@@ -211,7 +211,7 @@ dylan.setCommand({
         channelName
       })
       return ctx.reply(jid
-        ? ctx.mess.channelEnabled(jid, link || jid)
+        ? ctx.mess.channelEnabled(jid, link || jid, channelName, serverMessageId)
         : ctx.mess.channelLinkEnabled(link))
     } catch (e) {
       console.warn('[SETCHANNEL] Falha ao gravar:', e?.code || 'erro')
