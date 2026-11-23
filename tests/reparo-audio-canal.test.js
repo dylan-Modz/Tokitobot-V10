@@ -109,7 +109,7 @@ test('manifesto mantém reparação na versão 10.3.44', () => {
   assert.equal(m.version, '10.3.44')
   assert.equal(m.publicVersion, '10.3.44')
   assert.equal(m.repair, true)
-  assert.equal(m.repairId, 'botao-canal-20261123-1')
+  assert.equal(m.repairId, 'ver-canal-nativo-20261123-1')
   assert.equal(m.mode, 'incremental')
   assert.equal(m.notify, true)
 })
