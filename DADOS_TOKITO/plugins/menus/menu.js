@@ -30,7 +30,6 @@
 
 const dylan = require('../../database/lib/comandos')
 const { version } = require('../../../package.json')
-const canalOficial = require('../../sistemas/canal-oficial')
 
 dylan.setCommand({
 nome: "menu",
@@ -44,7 +43,6 @@ info: {
 async executar(ctx) {
 with (ctx) {
 {
-const botaoCanalMenu = canalOficial.botaoAcesso(ctx.setting || {})
 const textoMenuSeguro = () =>
   linguagem.menu(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion)
 try {
@@ -163,8 +161,7 @@ const botoes = [
 {
 name: 'single_select',
 buttonParamsJson: JSON.stringify(listaMenus)
-},
-...(botaoCanalMenu ? [botaoCanalMenu] : [])
+}
 ]
 const carouselMessage = {
 cards: [
