@@ -4,20 +4,21 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-23T20:34:24.037Z",
+  "publishedAt": "2026-11-23T20:44:58.188Z",
   "changelog": [
-    "[Atualizador] Consulta alternativa da API GitHub Contents com cache de 5 minutos se o GitHub Raw estiver indisponível ou desatualizado.",
-    "[Avisos] Após 4 tentativas aceitas pelo socket, novas tentativas uma vez por dia enquanto houver reparação pendente.",
-    "[LID] /update destino aqui reconhece número real do privado pelo remoteJidAlt quando o dono aparece como @lid.",
-    "[Compatibilidade] Mantidas todas as correções já publicadas de respostas, canais, figurinhas sonoras e menus.",
-    "[Segurança] Instalação incremental, sem mexer nas sessões, licenças ou mídias privadas.",
-    "[Testes] Verificação de manifesto alternativo, destinatário LID, intervalos de aviso e integridade do reparo."
+    "[Canal] Removido link de Acessar canal acrescentado automaticamente a todas as respostas e menus em texto.",
+    "[Botão] Incluído CTA nativo Acessar canal nas mensagens interativas de menus usando o link configurado.",
+    "[Menus] Botão de canal independente da opção de botões gerais; textos e mensagens JSON permanecem intactos.",
+    "[Fallback] Se o WhatsApp recusar mensagens interativas, o envio em texto não recebe URL extra nem perde o conteúdo.",
+    "[Compatibilidade] Não utiliza metadados de encaminhamento de canal fabricados nem inventa contagem de seguidores.",
+    "[Atualizador] Reparo incremental da própria versão 10.3.44, sem alterar credenciais, sessões ou dados privados.",
+    "[Testes] Cenários de botão com canal ligado, desligado, botões desligados e retorno seguro em texto."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Reparação do recebimento de atualizações — V10.3.44",
-  "notice": "Reparação 10.3.44: atualizador recupera manifesto mesmo com bloqueio ou cache antigo e melhora aviso ao dono.",
+  "title": "Reparação do botão Acessar canal — V10.3.44",
+  "notice": "Reparação 10.3.44: Acessar canal aparece como botão nos menus, e não como link escrito no fim da mensagem.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -63,23 +64,23 @@
     },
     {
       "path": "DADOS_TOKITO/plugins/menus/menu.js",
-      "gitSha": "0e942f88559cb6bddbe2973e26c8857e82f69c0f",
-      "size": 7719
+      "gitSha": "6e60c3eb1b9e4e8472429c4155d924b0b6ead598",
+      "size": 7495
     },
     {
       "path": "package.json",
-      "gitSha": "f473515ab247fea860e2f7fd7d2a291e4c4995f7",
-      "size": 2834
+      "gitSha": "24c8363b7b4180de5beb658b2fe4185f0809f4af",
+      "size": 2988
     },
     {
       "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
-      "gitSha": "8a6cf3053e72e403fe6e7cd2ca5db7201c1055ef",
-      "size": 5812
+      "gitSha": "078114b42a47fad4249cfe30197878bcada88854",
+      "size": 6207
     },
     {
       "path": "tokito.js",
-      "gitSha": "795b0ff3bcffd27334bee1960a4bfa8926e15bbe",
-      "size": 55989
+      "gitSha": "bd577be785b82e4d394e58a8618d9af15f648b74",
+      "size": 55939
     },
     {
       "path": "README.md",
@@ -148,8 +149,8 @@
     },
     {
       "path": "tests/sticker-audio.test.js",
-      "gitSha": "60945b032a856d4bf15f1d0f6ea571e3306fd052",
-      "size": 2565
+      "gitSha": "e8b98b9becf3bfc5187ac8b9a7364d56e3b3a349",
+      "size": 2562
     },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
@@ -168,8 +169,8 @@
     },
     {
       "path": "tests/reparo-audio-canal.test.js",
-      "gitSha": "d04991329ada70b3f4cae2a40d1e9e518d8cdca6",
-      "size": 5371
+      "gitSha": "77ab596cd46ec078496b99340538d24d88c16909",
+      "size": 5368
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-audio-canal.json",
@@ -183,8 +184,8 @@
     },
     {
       "path": "tests/reparo-deteccao.test.js",
-      "gitSha": "03ad80bd031868e76f2ad52120afefff13653f3c",
-      "size": 3384
+      "gitSha": "afd5a51a7e29f3652dbbdae3ce5d6679e02e8f34",
+      "size": 3366
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-deteccao.json",
@@ -193,8 +194,8 @@
     },
     {
       "path": "tests/reparo-respostas-canal.test.js",
-      "gitSha": "f0d19ddce25e6f28c012bdb55d6570f861e7baf6",
-      "size": 5283
+      "gitSha": "762fd0e050f4ac59fca31b4c6da6a787f1af00c2",
+      "size": 5299
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-respostas-canal.json",
@@ -203,8 +204,8 @@
     },
     {
       "path": "tests/reparo-resposta-segura.test.js",
-      "gitSha": "af837ad2cbc6011b3aff8aae4104165e999104dd",
-      "size": 2670
+      "gitSha": "5d58d4383122c9a6daad69ad2cf13141a21709b0",
+      "size": 2732
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-resposta-segura.json",
@@ -213,13 +214,23 @@
     },
     {
       "path": "tests/reparo-entrega-reparo.test.js",
-      "gitSha": "2fa33c29efe90b0196f982fe41ebf9d3dd246e6e",
-      "size": 4409
+      "gitSha": "26f615b11d0da5ab25359d78dba55739ddf736b6",
+      "size": 4403
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-entrega-reparo.json",
       "gitSha": "bda4a8f85ffce945fb2f83008a9fc86391baa36c",
       "size": 1078
+    },
+    {
+      "path": "tests/reparo-botao-canal.test.js",
+      "gitSha": "d14ca70648fa698353f9a836d302049019dc7f34",
+      "size": 4699
+    },
+    {
+      "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-botao-canal.json",
+      "gitSha": "d66982b9088cc911345120273f1cbb88133d9c57",
+      "size": 996
     }
   ],
   "releases": [
@@ -4810,15 +4821,16 @@
       "fromVersion": "10.3.43",
       "channel": "stable",
       "type": "Correção",
-      "title": "Reparação do recebimento de atualizações — V10.3.44",
-      "notice": "Reparação 10.3.44: atualizador recupera manifesto mesmo com bloqueio ou cache antigo e melhora aviso ao dono.",
+      "title": "Reparação do botão Acessar canal — V10.3.44",
+      "notice": "Reparação 10.3.44: Acessar canal aparece como botão nos menus, e não como link escrito no fim da mensagem.",
       "changelog": [
-        "[Atualizador] Consulta alternativa da API GitHub Contents com cache de 5 minutos se o GitHub Raw estiver indisponível ou desatualizado.",
-        "[Avisos] Após 4 tentativas aceitas pelo socket, novas tentativas uma vez por dia enquanto houver reparação pendente.",
-        "[LID] /update destino aqui reconhece número real do privado pelo remoteJidAlt quando o dono aparece como @lid.",
-        "[Compatibilidade] Mantidas todas as correções já publicadas de respostas, canais, figurinhas sonoras e menus.",
-        "[Segurança] Instalação incremental, sem mexer nas sessões, licenças ou mídias privadas.",
-        "[Testes] Verificação de manifesto alternativo, destinatário LID, intervalos de aviso e integridade do reparo."
+        "[Canal] Removido link de Acessar canal acrescentado automaticamente a todas as respostas e menus em texto.",
+        "[Botão] Incluído CTA nativo Acessar canal nas mensagens interativas de menus usando o link configurado.",
+        "[Menus] Botão de canal independente da opção de botões gerais; textos e mensagens JSON permanecem intactos.",
+        "[Fallback] Se o WhatsApp recusar mensagens interativas, o envio em texto não recebe URL extra nem perde o conteúdo.",
+        "[Compatibilidade] Não utiliza metadados de encaminhamento de canal fabricados nem inventa contagem de seguidores.",
+        "[Atualizador] Reparo incremental da própria versão 10.3.44, sem alterar credenciais, sessões ou dados privados.",
+        "[Testes] Cenários de botão com canal ligado, desligado, botões desligados e retorno seguro em texto."
       ],
       "files": [
         {
@@ -4863,23 +4875,23 @@
         },
         {
           "path": "DADOS_TOKITO/plugins/menus/menu.js",
-          "gitSha": "0e942f88559cb6bddbe2973e26c8857e82f69c0f",
-          "size": 7719
+          "gitSha": "6e60c3eb1b9e4e8472429c4155d924b0b6ead598",
+          "size": 7495
         },
         {
           "path": "package.json",
-          "gitSha": "f473515ab247fea860e2f7fd7d2a291e4c4995f7",
-          "size": 2834
+          "gitSha": "24c8363b7b4180de5beb658b2fe4185f0809f4af",
+          "size": 2988
         },
         {
           "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
-          "gitSha": "8a6cf3053e72e403fe6e7cd2ca5db7201c1055ef",
-          "size": 5812
+          "gitSha": "078114b42a47fad4249cfe30197878bcada88854",
+          "size": 6207
         },
         {
           "path": "tokito.js",
-          "gitSha": "795b0ff3bcffd27334bee1960a4bfa8926e15bbe",
-          "size": 55989
+          "gitSha": "bd577be785b82e4d394e58a8618d9af15f648b74",
+          "size": 55939
         },
         {
           "path": "README.md",
@@ -4948,8 +4960,8 @@
         },
         {
           "path": "tests/sticker-audio.test.js",
-          "gitSha": "60945b032a856d4bf15f1d0f6ea571e3306fd052",
-          "size": 2565
+          "gitSha": "e8b98b9becf3bfc5187ac8b9a7364d56e3b3a349",
+          "size": 2562
         },
         {
           "path": "DADOS_TOKITO/mensagens/mensagens.js",
@@ -4968,8 +4980,8 @@
         },
         {
           "path": "tests/reparo-audio-canal.test.js",
-          "gitSha": "d04991329ada70b3f4cae2a40d1e9e518d8cdca6",
-          "size": 5371
+          "gitSha": "77ab596cd46ec078496b99340538d24d88c16909",
+          "size": 5368
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-audio-canal.json",
@@ -4983,8 +4995,8 @@
         },
         {
           "path": "tests/reparo-deteccao.test.js",
-          "gitSha": "03ad80bd031868e76f2ad52120afefff13653f3c",
-          "size": 3384
+          "gitSha": "afd5a51a7e29f3652dbbdae3ce5d6679e02e8f34",
+          "size": 3366
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-deteccao.json",
@@ -4993,8 +5005,8 @@
         },
         {
           "path": "tests/reparo-respostas-canal.test.js",
-          "gitSha": "f0d19ddce25e6f28c012bdb55d6570f861e7baf6",
-          "size": 5283
+          "gitSha": "762fd0e050f4ac59fca31b4c6da6a787f1af00c2",
+          "size": 5299
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-respostas-canal.json",
@@ -5003,8 +5015,8 @@
         },
         {
           "path": "tests/reparo-resposta-segura.test.js",
-          "gitSha": "af837ad2cbc6011b3aff8aae4104165e999104dd",
-          "size": 2670
+          "gitSha": "5d58d4383122c9a6daad69ad2cf13141a21709b0",
+          "size": 2732
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-resposta-segura.json",
@@ -5013,20 +5025,30 @@
         },
         {
           "path": "tests/reparo-entrega-reparo.test.js",
-          "gitSha": "2fa33c29efe90b0196f982fe41ebf9d3dd246e6e",
-          "size": 4409
+          "gitSha": "26f615b11d0da5ab25359d78dba55739ddf736b6",
+          "size": 4403
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-entrega-reparo.json",
           "gitSha": "bda4a8f85ffce945fb2f83008a9fc86391baa36c",
           "size": 1078
+        },
+        {
+          "path": "tests/reparo-botao-canal.test.js",
+          "gitSha": "d14ca70648fa698353f9a836d302049019dc7f34",
+          "size": 4699
+        },
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-botao-canal.json",
+          "gitSha": "d66982b9088cc911345120273f1cbb88133d9c57",
+          "size": 996
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-23T20:34:24.037Z",
+      "publishedAt": "2026-11-23T20:44:58.188Z",
       "repair": true,
-      "repairId": "entrega-reparo-20261123-1"
+      "repairId": "botao-canal-20261123-1"
     }
   ],
   "mode": "incremental",
@@ -5040,5 +5062,5 @@
   },
   "publicVersion": "10.3.44",
   "repair": true,
-  "repairId": "entrega-reparo-20261123-1"
+  "repairId": "botao-canal-20261123-1"
 }
