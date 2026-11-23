@@ -151,7 +151,11 @@ return ctx.reply([
 '> ✨ ׄ ( ᴠᴇʀsᴀ̃ᴏ ɴᴏ ɢɪᴛʜᴜʙ: ' + versaoRemota + ' )',
 '> 📡 ׄ ( ғᴏɴᴛᴇ: ' + fonte + ' )',
 '> 📥 ׄ ( ᴀᴛᴜᴀʟɪᴢᴀᴄ̧ᴀ̃ᴏ ᴘᴇɴᴅᴇɴᴛᴇ: ' + (check?.available ? 'SIM' : 'NÃO') + ' )',
+'> 🧰 ׄ ( ᴄᴏᴍᴀɴᴅᴏ ᴅᴏ ʀᴇᴘᴀʀᴏ: ' + (ctx.prefix || '#') + 'update reparo )',
 '> 🛠️ ׄ ( ʀᴇᴘᴀʀᴏ ɴᴀ ᴍᴇsᴍᴀ ᴠᴇʀsᴀ̃ᴏ: ' + (check?.repair ? 'SIM' : 'NÃO') + ' )',
+'> 🆔 ׄ ( ɪᴅ ᴅᴏ ʀᴇᴘᴀʀᴏ ʟᴏᴄᴀʟ: ' + (check?.local?.repairId || 'não registrado') + ' )',
+'> 🆕 ׄ ( ɪᴅ ᴅᴏ ʀᴇᴘᴀʀᴏ ɴᴏ ɢɪᴛʜᴜʙ: ' + (check?.remote?.repairId || 'não publicado') + ' )',
+'> 🧩 ׄ ( ʀᴇᴘᴀʀᴏ ᴘᴇʟᴏ ɪᴅ ᴘᴇɴᴅᴇɴᴛᴇ: ' + (check?.repairIdPendente ? 'SIM' : 'NÃO') + ' )',
 '> 🎨 ׄ ( ᴅᴇsɪɢɴ ᴅᴏ ᴄᴏᴍᴀɴᴅᴏ ɪɴᴠᴀ́ʟɪᴅᴏ ᴇᴍ ᴍᴇᴍᴏ́ʀɪᴀ: ' + fonteCarregada + ' )',
 '> 📦 ׄ ( ᴀʀǫᴜɪᴠᴏs ᴘᴇɴᴅᴇɴᴛᴇs: ' + pendentes.length + ' )',
 ...(codigoPendente.length ? [

@@ -20,7 +20,7 @@ test('versão publicada segue 10.3.43 → 10.3.44 sem saltos', () => {
   assert.equal(manifesto.mode, 'incremental')
   assert.equal(manifesto.notify, true)
   assert.equal(manifesto.repair, true)
-  assert.equal(manifesto.repairId, 'audio-canal-20261123-1')
+  assert.equal(manifesto.repairId, 'deteccao-reparo-20261123-1')
 })
 
 test('comandos estão publicados na categoria de figurinhas', () => {
@@ -44,7 +44,8 @@ test('mídia é registrada em diretório protegido pelo atualizador', () => {
   const motor = ler('DADOS_TOKITO/sistemas/sticker-audio.js')
   assert.match(motor, /database', 'sistemas', 'sticker-audio\.webp'/)
   assert.match(motor, /prepareWAMessageMedia/)
-  assert.match(motor, /audioStickerMessage/)
+  assert.match(motor, /resultado\.stickerMessage\.audioMessage = som\.audioMessage/)
+  assert.match(motor, /resultado\.uint32\(210\)/)
   const arquivos = new Set(manifesto.files.map(f => f.path))
   assert.ok(arquivos.has('DADOS_TOKITO/sistemas/sticker-audio.js'))
   assert.ok(!arquivos.has('DADOS_TOKITO/database/sistemas/sticker-audio.webp'))
