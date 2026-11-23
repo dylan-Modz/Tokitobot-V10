@@ -4,20 +4,23 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-23T20:12:31.062Z",
+  "publishedAt": "2026-11-23T20:21:49.270Z",
   "changelog": [
-    "[Atualizador] Detecta reparações pelo repairId, além de conferir os hashes dos arquivos alterados.",
-    "[Instalação] Reparo sem arquivos pendentes sincroniza o manifesto sem apagar nem reinstalar o bot.",
-    "[Notificações] Avisos usam identificador de reparação estável para prevenir silêncios ou repetições após atualizações parciais.",
-    "[Diagnóstico] update diag informa os IDs de reparação local e remoto e se há pendências.",
-    "[Compatibilidade] Mantidos os ajustes anteriores de figurinha sonora e Acessar canal na 10.3.44.",
-    "[Segurança] Preserva sessões, configurações, grupos, arquivos registrados e histórico de versões."
+    "[Respostas] Remove contexto externalAdReply potencialmente incompatível de todas as respostas, evitando comandos que só reagem.",
+    "[Respostas] Se o envio com contexto falhar, o texto será reenviado sem metadados de canal e sem citação.",
+    "[Canal] Usa newsletterJid, newsletterName e serverMessageId quando fornecidos por um encaminhamento real ou configurados explicitamente pelo dono.",
+    "[Canal] Sem serverMessageId, não falsifica cartão; mostra o link Acessar canal diretamente no texto dos comandos.",
+    "[Setchannel] Aceita JID, link, número da mensagem e nome; extrai metadados ao citar uma mensagem encaminhada.",
+    "[Metadados] Não inventa contagem de seguidores quando a consulta não fornece esse número.",
+    "[Sub-bots] Persiste nome e serverMessageId sem alterar permissões, grupos ou sessões.",
+    "[Atualizador] Novo repairId na versão 10.3.44; a versão não é incrementada.",
+    "[Testes] Regressões de resposta, canal e detecção de reparos."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Reparação do sistema de atualizações — V10.3.44",
-  "notice": "Correção da detecção de reparação na versão 10.3.44 sem pular versões.",
+  "title": "Reparação de respostas e canal nativo — V10.3.44",
+  "notice": "Reparação disponível na 10.3.44: comandos voltam a responder e cartão de canal usa metadados reais.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -48,13 +51,13 @@
     },
     {
       "path": "DADOS_TOKITO/sub/runtime.js",
-      "gitSha": "e5673a6a175affee8b88e4f5ce9eb878721ac508",
-      "size": 3939
+      "gitSha": "c1a023fec753112ee2626de305510e932e6f7d3e",
+      "size": 4648
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/channel.js",
-      "gitSha": "8ada8479ce753a536db340822c523eca615e09d8",
-      "size": 5899
+      "gitSha": "2a349f118372551fb95055902c0a96fc5001b297",
+      "size": 8188
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
@@ -68,18 +71,18 @@
     },
     {
       "path": "package.json",
-      "gitSha": "eb10291b6dfa92de5874b51361a756bc35a2615d",
-      "size": 2628
+      "gitSha": "f1110cffc76f5149842b75c5496d8e6855bc8a39",
+      "size": 2724
     },
     {
       "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
-      "gitSha": "65fddf1722d499404087a5957b6e2747a5403664",
-      "size": 5248
+      "gitSha": "d3bb865ef32c9037ac7ff70e7feb78e1284b0cea",
+      "size": 6223
     },
     {
       "path": "tokito.js",
-      "gitSha": "b374e83e0a12d65fc2d4f8f46b6ed203a677407c",
-      "size": 55083
+      "gitSha": "80b5516cd55055485921d229427b1a10a49dc207",
+      "size": 55928
     },
     {
       "path": "README.md",
@@ -148,18 +151,18 @@
     },
     {
       "path": "tests/sticker-audio.test.js",
-      "gitSha": "30f96233805f6506afc18c5b26e28ae4ff490c3c",
+      "gitSha": "e6d9f44c8653939c8531fc1009fc90ed40c4da19",
       "size": 2566
     },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "gitSha": "9ff3e3ee0ff2b1ba5c56c722395e17469779d9f4",
-      "size": 233280
+      "gitSha": "8b91459e889302d7187bacb503f05dc365b94211",
+      "size": 233645
     },
     {
       "path": "tests/reparo-setchannel.test.js",
-      "gitSha": "bb3d1c522c70776b3346504b96c6573e679d5886",
-      "size": 5577
+      "gitSha": "1e0232977a2896909cbf098ba2837ce26518c3f1",
+      "size": 7773
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-setchannel.json",
@@ -168,8 +171,8 @@
     },
     {
       "path": "tests/reparo-audio-canal.test.js",
-      "gitSha": "dc8795a2aa82f9d4a8aac93bb2866840e61a0708",
-      "size": 5372
+      "gitSha": "44af7ba18cd9bd2e3c6a5031704ae908ddbe1998",
+      "size": 6224
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-audio-canal.json",
@@ -183,13 +186,23 @@
     },
     {
       "path": "tests/reparo-deteccao.test.js",
-      "gitSha": "f41dcf2602df86684a1bf61ac0fd0dfa5a9002b0",
+      "gitSha": "009b3fd91a7f224c7b85089c3bd0a4846dbb9dc2",
       "size": 3390
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-deteccao.json",
       "gitSha": "567718bd7643f27de7d9025b2c24a17ae4fd953c",
       "size": 925
+    },
+    {
+      "path": "tests/reparo-respostas-canal.test.js",
+      "gitSha": "0d591b4afc77d43344e740470741e0eb139c511b",
+      "size": 2844
+    },
+    {
+      "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-respostas-canal.json",
+      "gitSha": "3eae31622a2aaac63df7a4261de6dae3af986dcf",
+      "size": 1303
     }
   ],
   "releases": [
@@ -4818,13 +4831,13 @@
         },
         {
           "path": "DADOS_TOKITO/sub/runtime.js",
-          "gitSha": "e5673a6a175affee8b88e4f5ce9eb878721ac508",
-          "size": 3939
+          "gitSha": "c1a023fec753112ee2626de305510e932e6f7d3e",
+          "size": 4648
         },
         {
           "path": "DADOS_TOKITO/plugins/dono/channel.js",
-          "gitSha": "8ada8479ce753a536db340822c523eca615e09d8",
-          "size": 5899
+          "gitSha": "2a349f118372551fb95055902c0a96fc5001b297",
+          "size": 8188
         },
         {
           "path": "DADOS_TOKITO/mensagens/menus.js",
@@ -4838,18 +4851,18 @@
         },
         {
           "path": "package.json",
-          "gitSha": "eb10291b6dfa92de5874b51361a756bc35a2615d",
-          "size": 2628
+          "gitSha": "f1110cffc76f5149842b75c5496d8e6855bc8a39",
+          "size": 2724
         },
         {
           "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
-          "gitSha": "65fddf1722d499404087a5957b6e2747a5403664",
-          "size": 5248
+          "gitSha": "d3bb865ef32c9037ac7ff70e7feb78e1284b0cea",
+          "size": 6223
         },
         {
           "path": "tokito.js",
-          "gitSha": "b374e83e0a12d65fc2d4f8f46b6ed203a677407c",
-          "size": 55083
+          "gitSha": "80b5516cd55055485921d229427b1a10a49dc207",
+          "size": 55928
         },
         {
           "path": "README.md",
@@ -4918,18 +4931,18 @@
         },
         {
           "path": "tests/sticker-audio.test.js",
-          "gitSha": "30f96233805f6506afc18c5b26e28ae4ff490c3c",
+          "gitSha": "e6d9f44c8653939c8531fc1009fc90ed40c4da19",
           "size": 2566
         },
         {
           "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "gitSha": "9ff3e3ee0ff2b1ba5c56c722395e17469779d9f4",
-          "size": 233280
+          "gitSha": "8b91459e889302d7187bacb503f05dc365b94211",
+          "size": 233645
         },
         {
           "path": "tests/reparo-setchannel.test.js",
-          "gitSha": "bb3d1c522c70776b3346504b96c6573e679d5886",
-          "size": 5577
+          "gitSha": "1e0232977a2896909cbf098ba2837ce26518c3f1",
+          "size": 7773
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-setchannel.json",
@@ -4938,8 +4951,8 @@
         },
         {
           "path": "tests/reparo-audio-canal.test.js",
-          "gitSha": "dc8795a2aa82f9d4a8aac93bb2866840e61a0708",
-          "size": 5372
+          "gitSha": "44af7ba18cd9bd2e3c6a5031704ae908ddbe1998",
+          "size": 6224
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-audio-canal.json",
@@ -4953,13 +4966,23 @@
         },
         {
           "path": "tests/reparo-deteccao.test.js",
-          "gitSha": "f41dcf2602df86684a1bf61ac0fd0dfa5a9002b0",
+          "gitSha": "009b3fd91a7f224c7b85089c3bd0a4846dbb9dc2",
           "size": 3390
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-deteccao.json",
           "gitSha": "567718bd7643f27de7d9025b2c24a17ae4fd953c",
           "size": 925
+        },
+        {
+          "path": "tests/reparo-respostas-canal.test.js",
+          "gitSha": "0d591b4afc77d43344e740470741e0eb139c511b",
+          "size": 2844
+        },
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-respostas-canal.json",
+          "gitSha": "3eae31622a2aaac63df7a4261de6dae3af986dcf",
+          "size": 1303
         }
       ],
       "delete": [],
@@ -4980,5 +5003,5 @@
   },
   "publicVersion": "10.3.44",
   "repair": true,
-  "repairId": "deteccao-reparo-20261123-1"
+  "repairId": "respostas-canal-20261123-1"
 }
