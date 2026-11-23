@@ -74,8 +74,8 @@
     },
     {
       "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
-      "gitSha": "12ff6d475d8c8b4ba3fa59cd1ecd39473954223d",
-      "size": 5184
+      "gitSha": "65fddf1722d499404087a5957b6e2747a5403664",
+      "size": 5248
     },
     {
       "path": "tokito.js",
@@ -4830,8 +4830,8 @@
         },
         {
           "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
-          "gitSha": "12ff6d475d8c8b4ba3fa59cd1ecd39473954223d",
-          "size": 5184
+          "gitSha": "65fddf1722d499404087a5957b6e2747a5403664",
+          "size": 5248
         },
         {
           "path": "tokito.js",
