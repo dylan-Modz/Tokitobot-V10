@@ -4,21 +4,21 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-23T19:51:44.843Z",
+  "publishedAt": "2026-11-23T20:04:05.274Z",
   "changelog": [
-    "[Setchannel] Corrigido erro SyntaxError no comando ao processar link de canal; uma resposta inválida da Stone não impede salvar o link.",
-    "[Link] Validação e normalização de links oficiais WhatsApp; JID real é usado quando a consulta retorna corretamente.",
-    "[Fallback] Em caso de resposta w:mex malformada, salva URL de Acessar canal sem inventar JID nem habilitar encaminhamento falso.",
-    "[Desativar] Mantido setchannel 0 com gravação segura no arquivo de configuração.",
-    "[Sub-bots] Corrigida persistência por sessão e preservadas configurações dos canais personalizados.",
-    "[Atualização] Reparação incremental da 10.3.44, sem aumentar versão nem alterar dados protegidos.",
-    "[Testes] Casos para JSON inválido, link válido, JID direto, desativação e permissões do dono."
+    "[Figurinha sonora] O áudio agora é incorporado no campo 26 de StickerMessage; removido uso do envelope FutureProof não confirmado.",
+    "[Formato] Áudios convertidos para OGG/Opus e limitados a 10s quando FFmpeg está disponível; áudio Opus curto funciona sem FFmpeg.",
+    "[Comandos] Mantidos rgfigaudio, figaudio, verfigaudio, delfigaudio e autostickeraudio; mídia citada reconhecida por tipos reais.",
+    "[Canal] Contexto nativo com JID real e nome retornado pelo WhatsApp; sem JID válido, prévia clicável de Acessar canal com URL oficial.",
+    "[Canal] Metadados são consultados novamente por link com cache por conexão; contagem de seguidores só é exibida quando confirmada.",
+    "[Atualizador] Reparação incremental na 10.3.44, preservando configurações, mídias, sessões e correções anteriores.",
+    "[Testes] Verificações do áudio no campo 26, acesso por link, canal desativado, JID nativo e resolução de metadados."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Reparação do setchannel e consulta de canal — V10.3.44",
-  "notice": "Reparação disponível na versão 10.3.44: setchannel continua ativando Acessar canal quando a Stone WPP retorna resposta não JSON.",
+  "title": "Reparação de figurinha sonora e Acessar canal — V10.3.44",
+  "notice": "Reparação 10.3.44: áudio embutido na figurinha e contexto de Acessar canal corrigido sem alterar versão.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -69,18 +69,18 @@
     },
     {
       "path": "package.json",
-      "gitSha": "0dd02206a9ee9408253e89aab982658b04594684",
-      "size": 2381
+      "gitSha": "1f57d3c0343f72a9c00a8f886fc1855e03106144",
+      "size": 2484
     },
     {
       "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
-      "gitSha": "6ba12c019da2fd8e6d9fc275b2188b91062e54ca",
-      "size": 3495
+      "gitSha": "12ff6d475d8c8b4ba3fa59cd1ecd39473954223d",
+      "size": 5184
     },
     {
       "path": "tokito.js",
-      "gitSha": "89eb93f324c8326272a87d0de0deecd5ec967a27",
-      "size": 55285
+      "gitSha": "b374e83e0a12d65fc2d4f8f46b6ed203a677407c",
+      "size": 55083
     },
     {
       "path": "README.md",
@@ -89,8 +89,8 @@
     },
     {
       "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "6000e2ce78f22e7d70dd8a0545e4aada7f5fb730",
-      "size": 56565
+      "gitSha": "4f3d87c65a06f245c70a1a930f9374dbc7b67e74",
+      "size": 56325
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.43-canal-tk.json",
@@ -114,8 +114,8 @@
     },
     {
       "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "9a73f2a6c3972002a443aa64dcf4904e0fa9a956",
-      "size": 6291
+      "gitSha": "31aa2b9e641c27c4db974e188ab448cef4f64579",
+      "size": 8139
     },
     {
       "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
@@ -149,8 +149,8 @@
     },
     {
       "path": "tests/sticker-audio.test.js",
-      "gitSha": "75f63d932ed06059e73afff62eaff1f09f46c647",
-      "size": 2476
+      "gitSha": "31266f026287b6845804a3108bf028d4b4986942",
+      "size": 2472
     },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
@@ -166,6 +166,16 @@
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-setchannel.json",
       "gitSha": "8b8e5d1ed0b42950ff16b0427738630fb2f805af",
       "size": 774
+    },
+    {
+      "path": "tests/reparo-audio-canal.test.js",
+      "gitSha": "d0d19b91fe6419548197b2436db3c2aedf3d2495",
+      "size": 5368
+    },
+    {
+      "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-audio-canal.json",
+      "gitSha": "4b6cd8be5ab807fe886fa21716d6c01ddcce82f8",
+      "size": 1142
     }
   ],
   "releases": [
@@ -4815,18 +4825,18 @@
         },
         {
           "path": "package.json",
-          "gitSha": "0dd02206a9ee9408253e89aab982658b04594684",
-          "size": 2381
+          "gitSha": "1f57d3c0343f72a9c00a8f886fc1855e03106144",
+          "size": 2484
         },
         {
           "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
-          "gitSha": "6ba12c019da2fd8e6d9fc275b2188b91062e54ca",
-          "size": 3495
+          "gitSha": "12ff6d475d8c8b4ba3fa59cd1ecd39473954223d",
+          "size": 5184
         },
         {
           "path": "tokito.js",
-          "gitSha": "89eb93f324c8326272a87d0de0deecd5ec967a27",
-          "size": 55285
+          "gitSha": "b374e83e0a12d65fc2d4f8f46b6ed203a677407c",
+          "size": 55083
         },
         {
           "path": "README.md",
@@ -4835,8 +4845,8 @@
         },
         {
           "path": "DADOS_TOKITO/connect.js",
-          "gitSha": "6000e2ce78f22e7d70dd8a0545e4aada7f5fb730",
-          "size": 56565
+          "gitSha": "4f3d87c65a06f245c70a1a930f9374dbc7b67e74",
+          "size": 56325
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.43-canal-tk.json",
@@ -4860,8 +4870,8 @@
         },
         {
           "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-          "gitSha": "9a73f2a6c3972002a443aa64dcf4904e0fa9a956",
-          "size": 6291
+          "gitSha": "31aa2b9e641c27c4db974e188ab448cef4f64579",
+          "size": 8139
         },
         {
           "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
@@ -4895,8 +4905,8 @@
         },
         {
           "path": "tests/sticker-audio.test.js",
-          "gitSha": "75f63d932ed06059e73afff62eaff1f09f46c647",
-          "size": 2476
+          "gitSha": "31266f026287b6845804a3108bf028d4b4986942",
+          "size": 2472
         },
         {
           "path": "DADOS_TOKITO/mensagens/mensagens.js",
@@ -4912,6 +4922,16 @@
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-setchannel.json",
           "gitSha": "8b8e5d1ed0b42950ff16b0427738630fb2f805af",
           "size": 774
+        },
+        {
+          "path": "tests/reparo-audio-canal.test.js",
+          "gitSha": "d0d19b91fe6419548197b2436db3c2aedf3d2495",
+          "size": 5368
+        },
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-audio-canal.json",
+          "gitSha": "4b6cd8be5ab807fe886fa21716d6c01ddcce82f8",
+          "size": 1142
         }
       ],
       "delete": [],
@@ -4930,5 +4950,5 @@
   },
   "publicVersion": "10.3.44",
   "repair": true,
-  "repairId": "setchannel-json-20261123-1"
+  "repairId": "audio-canal-20261123-1"
 }
