@@ -28,63 +28,141 @@
  * ============================================================
  */
 
+const fs = require('fs')
 const dylan = require('../../database/lib/comandos')
 const runtimeSub = require('../../sub/runtime.js')
+const canalOficial = require('../../sistemas/canal-oficial')
+
+const JID_CANAL = /^\d{8,25}@newsletter$/i
+const TOKEN_CANAL = /^[A-Za-z0-9_-]{15,128}$/
+const LINK_CANAL = /^https?:\/\/(?:www\.)?(?:whatsapp\.com|wa\.me)\/channel\/([A-Za-z0-9_-]{15,128})\/?(?:[?#][^\s]*)?$/i
+const INATIVO = '0@newsletter'
+const TEMPO_CONSULTA = 5000
+
+const normalizarJid = valor => {
+  const texto = String(valor || '').trim()
+  if (JID_CANAL.test(texto)) return texto.toLowerCase()
+  if (/^\d{8,25}$/.test(texto)) return texto + '@newsletter'
+  return ''
+}
+
+const normalizarLink = valor => {
+  const match = String(valor || '').trim().match(LINK_CANAL)
+  if (!match) return ''
+  const url = 'https://whatsapp.com/channel/' + match[1]
+  return canalOficial.link({ channel: url, channeldl: INATIVO }) || url
+}
+
+const lerEntrada = texto => {
+  const valor = String(texto || '').trim()
+  if (!valor || /[\r\n]/.test(valor)) return null
+  const partes = valor.split(/\s+/)
+  if (partes.length > 2) return null
+  const primeiro = partes[0]
+  const jid = normalizarJid(primeiro)
+  if (jid) {
+    const link = partes[1] ? normalizarLink(partes[1]) : ''
+    return partes[1] && !link ? null : { jid, link }
+  }
+  if (partes.length !== 1) return null
+  const link = normalizarLink(primeiro) ||
+    (TOKEN_CANAL.test(primeiro) ? normalizarLink('https://whatsapp.com/channel/' + primeiro) : '')
+  return link ? { jid: '', link } : null
+}
+
+const salvarConfig = (ctx, alteracoes) => {
+  const proxima = { ...ctx.setting, ...alteracoes }
+  if (runtimeSub.isSubBot) {
+    runtimeSub.updateSubConfig({
+      channel: proxima.channel,
+      channelLink: proxima.channelLink
+    })
+  } else {
+    const arquivo = runtimeSub.GLOBAL_CONFIG
+    const temp = arquivo + '.' + process.pid + '.tmp'
+    try {
+      fs.writeFileSync(temp, JSON.stringify(proxima, null, 2) + '\n')
+      fs.renameSync(temp, arquivo)
+    } finally {
+      try { fs.rmSync(temp, { force: true }) } catch {}
+    }
+  }
+  Object.assign(ctx.setting, alteracoes)
+}
+
+const consultarJid = async (tokito, token) => {
+  if (typeof tokito?.newsletterMetadata !== 'function') return ''
+  let timer
+  try {
+    const consulta = Promise.resolve().then(() => tokito.newsletterMetadata('invite', token))
+    const limite = new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error('TIMEOUT_CANAL')), TEMPO_CONSULTA)
+      timer.unref?.()
+    })
+    const meta = await Promise.race([consulta, limite])
+    return normalizarJid(meta?.jid || meta?.id || meta?.result?.jid || meta?.result?.id)
+  } catch {
+    console.warn('[SETCHANNEL] Consulta de metadados indisponível; mantendo o link direto.')
+    return ''
+  } finally {
+    if (timer) clearTimeout(timer)
+  }
+}
 
 dylan.setCommand({
-nome: "channel",
-comandos: ["channel", "setchannel"],
-categoria: "dono",
-info: {
-"descricao": "Executa o comando channel.",
-"uso": "channel",
-"categoria": "dono"
-},
-async executar(ctx) {
-with (ctx) {
-{
-if (!SoDono)
-return reply(mess.onlyOwner())
-const entradaCanal = String(q || '').trim()
-if (!entradaCanal)
-return reply(mess.channelRequired(prefix, command))
-if (entradaCanal === '0') {
-setting.channeldl = '0@newsletter'
-setting.channel = '0@newsletter'
-setting.channelLink = ''
-if (runtimeSub.isSubBot) runtimeSub.updateSubConfig({ channel: '0@newsletter', channelLink: '' })
-else fs.writeFileSync('./DADOS_TOKITO/INFO_DADOS/config-all.json', JSON.stringify(setting, null, 2))
-return reply(mess.channelDisabled())
-}
-try {
-let jidReal = entradaCanal.endsWith('@newsletter') ? entradaCanal : ''
-if (!jidReal) {
-const convite = entradaCanal
-.replace(/.*whatsapp\.com\/channel\//i, '')
-.replace(/.*wa\.me\/channel\//i, '')
-.split(/[\/?\s]/)[0]
-if (!convite)
-return reply(mess.error())
-const meta = await tokito.newsletterMetadata('invite', convite)
-jidReal = meta?.jid || meta?.id || ''
-}
-if (!jidReal)
-return reply(mess.error())
-// Mantém o JID para os recursos internos e o link para o botão Acessar canal.
-const linkCanal = entradaCanal.match(/https?:\/\/(?:www\.)?whatsapp\.com\/channel\/[a-zA-Z0-9_-]+/i)?.[0] || ''
-setting.channeldl = jidReal
-setting.channel = jidReal
-setting.channelLink = linkCanal
-if (runtimeSub.isSubBot) runtimeSub.updateSubConfig({ channel: jidReal, channelLink: linkCanal })
-else fs.writeFileSync('./DADOS_TOKITO/INFO_DADOS/config-all.json', JSON.stringify(setting, null, 2))
-await reply(mess.channelEnabled(jidReal, entradaCanal))
-}
-catch (e) {
-console.log('[SETCHANNEL ERRO]', e)
-await reply(mess.error())
-}
-}
-}
-}
-}
-)
+  nome: 'channel',
+  comandos: ['channel', 'setchannel'],
+  categoria: 'dono',
+  info: {
+    descricao: 'Configura o link ou JID do canal utilizado pelo bot.',
+    uso: 'setchannel link | setchannel JID | setchannel 0',
+    permissao: 'Dono'
+  },
+  async executar(ctx) {
+    if (!ctx.SoDono) return ctx.reply(ctx.mess.onlyOwner())
+    const entrada = String(ctx.q || '').trim()
+    if (!entrada) return ctx.reply(ctx.mess.channelRequired(ctx.prefix, ctx.command))
+
+    if (entrada === '0') {
+      try {
+        salvarConfig(ctx, { channeldl: INATIVO, channel: INATIVO, channelLink: '' })
+        return ctx.reply(ctx.mess.channelDisabled())
+      } catch (e) {
+        console.warn('[SETCHANNEL] Falha ao desativar:', e?.code || 'erro')
+        return ctx.reply(ctx.mess.padraoErro({
+          titulo: 'ERRO AO DESATIVAR CANAL',
+          descricao: 'Não foi possível salvar a configuração. Tente novamente.'
+        }))
+      }
+    }
+
+    const pedido = lerEntrada(entrada)
+    if (!pedido) return ctx.reply(ctx.mess.padraoUso({
+      emoji: '📢',
+      titulo: 'LINK DO CANAL INVÁLIDO',
+      uso: ctx.prefix + 'setchannel https://whatsapp.com/channel/CODIGO',
+      descricao: 'Informe o link do canal, um JID @newsletter ou 0 para desativar.'
+    }))
+
+    let jid = pedido.jid
+    if (!jid && pedido.link) jid = await consultarJid(ctx.tokito, pedido.link.split('/').pop())
+    const link = pedido.link
+
+    try {
+      salvarConfig(ctx, {
+        channeldl: jid || INATIVO,
+        channel: jid || link,
+        channelLink: link
+      })
+      return ctx.reply(jid
+        ? ctx.mess.channelEnabled(jid, link || jid)
+        : ctx.mess.channelLinkEnabled(link))
+    } catch (e) {
+      console.warn('[SETCHANNEL] Falha ao gravar:', e?.code || 'erro')
+      return ctx.reply(ctx.mess.padraoErro({
+        titulo: 'ERRO AO SALVAR CANAL',
+        descricao: 'Não foi possível gravar a configuração do canal.'
+      }))
+    }
+  }
+})
