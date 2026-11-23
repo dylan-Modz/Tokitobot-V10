@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "restaurar-canal-1041-20261123-1",
+  "type": "reparacao",
+  "title": "Restaurar o selo de canal original do Tokito Bot V10.3.41",
+  "historicalCommit": "b13326809081e469a204beba713c3ca00cd0ce5e",
+  "changes": [
+    "Restaurado o formato original forwardedNewsletterMessageInfo nas respostas, mídia, áudios e eventos.",
+    "Usa newsletterJid, newsletterName e serverMessageId vazio como na V10.3.41.",
+    "Exige JID de canal real: não usa URL ou identificador de uma postagem de outro canal como JID.",
+    "Removidos os novos CTAs de canal que substituíam indevidamente o selo antigo.",
+    "Menu volta ao fluxo original de mídia e botões sem acrescentar link ao texto.",
+    "Comandos e sistema de figurinha com áudio mantidos intactos.",
+    "Reparação incremental na mesma versão 10.3.44."
+  ],
+  "notes": [
+    "Para um canal cujo convite mudou, o dono deve configurar o JID real com /setchannel JID LINK.",
+    "O JSON encaminhado de um canal chamado Teste não identifica automaticamente o canal oficial configurado.",
+    "A exibição final do selo depende da versão do WhatsApp do destinatário."
+  ],
+  "safety": {
+    "preserveVersion": true,
+    "preserveSessions": true,
+    "preserveMedia": true,
+    "preserveConfig": true,
+    "neverUseUnverifiedChannelId": true
+  }
+}
