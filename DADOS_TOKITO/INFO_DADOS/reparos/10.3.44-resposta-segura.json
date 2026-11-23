@@ -1,0 +1,28 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "respostas-seguras-20261123-2",
+  "type": "reparacao",
+  "title": "Reparação de respostas de comandos e fallback de canal",
+  "notice": "Respostas normais com tentativa de recuperação e link de acesso ao canal, sem alterar o número da versão.",
+  "changes": [
+    "Mantém contextoSeguro do canal nas mensagens comuns e botão Acessar canal nos menus.",
+    "Adiciona uma segunda tentativa de enviar a resposta sem a citação se o primeiro envio falhar.",
+    "Se link de canal estiver ativo, respostas de texto exibem URL segura sem fingir encaminhamento de canal.",
+    "Preserva JSON de comandos como /get e blocos de código sem anexar texto ao resultado.",
+    "Não exibe seguidores desconhecidos como zero e preserva configurações do usuário.",
+    "Atualizador detecta reparação pelo novo identificador na mesma versão 10.3.44."
+  ],
+  "tests": [
+    "teste de resposta de texto",
+    "falha de citação com novo envio",
+    "JSON intacto",
+    "canal desligado"
+  ],
+  "safety": {
+    "preserveInstalledVersion": true,
+    "preserveCredentials": true,
+    "preserveSavedMedia": true,
+    "preserveChannelSettings": true
+  }
+}
