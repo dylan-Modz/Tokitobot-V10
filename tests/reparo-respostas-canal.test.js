@@ -63,9 +63,10 @@ test('menu adiciona botão do canal, mantendo a lista de menus', async () => {
   assert.ok(select)
   assert.ok(cta)
   assert.equal(JSON.parse(cta.buttonParamsJson).url, LINK)
+  assert.equal(JSON.parse(cta.buttonParamsJson).display_text, 'Acessar canal')
 })
 
-test('se WhatsApp rejeitar carrossel, menu responde em texto com link', async () => {
+test('se WhatsApp rejeitar carrossel, menu responde sem URL anexada', async () => {
   const src = fs.readFileSync(path.join(root, 'DADOS_TOKITO/plugins/menus/menu.js'), 'utf8')
   let comando, fallback = ''
   const dylan = { setCommand(cmd) { comando = cmd } }
@@ -93,7 +94,7 @@ test('se WhatsApp rejeitar carrossel, menu responde em texto com link', async ()
   }
   await comando.executar(ctx)
   assert.match(fallback, /MENU/)
-  assert.ok(fallback.includes(LINK))
+  assert.equal(fallback, 'MENU')
   assert.notEqual(fallback, 'ERRO')
 })
 
