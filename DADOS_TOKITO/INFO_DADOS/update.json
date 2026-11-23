@@ -1,77 +1,30 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.42",
+  "version": "10.3.43",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-21T22:44:13.061Z",
+  "publishedAt": "2026-11-23T21:10:43.281Z",
   "changelog": [
-    "[Melhoria] ci(tiktoksearch): testar seleção de vídeos sem repetição",
-    "A versão 10.3.42 já está disponível para atualização.",
-    "Tiktoksearch atualizado",
-    "Tiktoksearch Rotation.test atualizado"
+    "[Melhoria] chore(rollback): restaurar V10.3.42 com versão exibida corretamente",
+    "A versão 10.3.43 já está disponível para atualização.",
+    "Package atualizado"
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "ci(tiktoksearch): testar seleção de vídeos sem repetição",
-  "notice": "A versão 10.3.42 já está disponível para atualização.",
+  "title": "chore(rollback): restaurar V10.3.42 com versão exibida corretamente",
+  "notice": "A versão 10.3.43 já está disponível para atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": ".github/workflows/tiktoksearch.yml",
-      "sha256": "52cd7a2f16dff61e432f8eeafb7e9fae75907418b578af1612b1b2df1182a7e8",
-      "size": 1076
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/downloads/tiktoksearch.js",
-      "sha256": "c6280fd07a63d40fb5c178129253c9f6189b1b17a19d1e300414abcbf843b1f1",
-      "size": 6923
-    },
-    {
-      "path": "DADOS_TOKITO/scrapers/downloads/tiktoksearch.js",
-      "sha256": "da7d3615731dbc1697e8cd74e12d28ebb30fab726e54ff788a5c392a491c5a5a",
-      "size": 6290
-    },
-    {
-      "path": "tests/tiktoksearch-rotation.test.js",
-      "sha256": "a15f83241acac3973a6d4efdb2106f3a07c5474a0a34f9882e7ad1a7792b073a",
-      "size": 4686
+      "path": "package.json",
+      "sha256": "6645b5ababb719903359344e373bafdc7315a8019195d9a0136b764576433f90",
+      "size": 1956
     }
   ],
   "releases": [
-    {
-      "version": "10.2.44",
-      "fromVersion": "10.2.43",
-      "channel": "stable",
-      "type": "Novidade",
-      "title": "Comando WAME com foto de perfil",
-      "notice": "Novo comando wame: link direto para o WhatsApp do usuário com a foto de perfil pública.",
-      "changelog": [
-        "[Novo comando] wame retorna link direto wa.me e o telefone de quem executou o comando, com o design de gelo.",
-        "[Foto do usuário] Envia a foto de perfil pública com o link na legenda; caso indisponível, envia o link em texto.",
-        "[Compatibilidade] Reconhece número de usuários com LID quando o WhatsApp permite e evita links feitos com IDs internos.",
-        "[Robustez] Se ocorrer falha ao enviar a foto, o link é enviado por texto. Respeita o prefixo atual."
-      ],
-      "files": [
-        {
-          "path": "DADOS_TOKITO/plugins/info/wame.js",
-          "sha256": "",
-          "gitSha": "3b94d2dc6a2199cca6685aba8f743293ea88d409",
-          "size": 4306
-        },
-        {
-          "path": "package.json",
-          "sha256": "",
-          "gitSha": "67d53a614aaaa9527b33632d26fd54880509e512",
-          "size": 1163
-        }
-      ],
-      "delete": [],
-      "required": false,
-      "publishedAt": "2026-10-14T14:15:00.000Z"
-    },
     {
       "version": "10.2.45",
       "fromVersion": "10.2.44",
@@ -4510,6 +4463,27 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-21T22:44:13.060Z"
+    },
+    {
+      "version": "10.3.43",
+      "fromVersion": "10.3.42",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "chore(rollback): restaurar V10.3.42 com versão exibida corretamente",
+      "notice": "A versão 10.3.43 já está disponível para atualização.",
+      "changelog": [
+        "Package atualizado"
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "sha256": "6645b5ababb719903359344e373bafdc7315a8019195d9a0136b764576433f90",
+          "size": 1956
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-23T21:10:43.281Z"
     }
   ],
   "mode": "incremental",
