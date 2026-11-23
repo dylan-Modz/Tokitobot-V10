@@ -19,7 +19,8 @@ test('versão publicada segue 10.3.43 → 10.3.44 sem saltos', () => {
   assert.equal(manifesto.releases.at(-1).fromVersion, '10.3.43')
   assert.equal(manifesto.mode, 'incremental')
   assert.equal(manifesto.notify, true)
-  assert.notEqual(manifesto.repair, true)
+  assert.equal(manifesto.repair, true)
+  assert.equal(manifesto.repairId, 'setchannel-json-20261123-1')
 })
 
 test('comandos estão publicados na categoria de figurinhas', () => {
