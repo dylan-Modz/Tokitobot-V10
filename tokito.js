@@ -930,20 +930,20 @@ const numeroSender = String(sender || '')
 .replace(/\D/g, '')
 const messageId = String(info.key?.id || '')
 const whatIsPhone = messageId.substring(0, 2) === '3A' ? 'iPhone 🍎' : messageId.length > 21 ? 'Android 👤' : 'Whatsapp Web 🌐'
+const canalOficial = require('./DADOS_TOKITO/sistemas/canal-oficial')
 const canalInfo = (mentions = []) => {
-const canal = runtimeSub.isSubBot ? String(runtimeSub.config().channeldl || channeldl || '0@newsletter') : channeldl
+const cfgCanal = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
+const canal = canalOficial.jid(cfgCanal, tokito)
 return {
-...(canal && canal !== '0@newsletter'
-? {
+...(canal ? {
   isForwarded: true,
   forwardingScore: 1,
   forwardedNewsletterMessageInfo: {
-  newsletterJid: canal,
-  newsletterName: NomeDoBot,
-  serverMessageId: ''
+    newsletterJid: canal,
+    newsletterName: NomeDoBot,
+    serverMessageId: ''
   }
-  }
-: {}),
+} : {}),
 mentionedJid: mentions
 }
 }
