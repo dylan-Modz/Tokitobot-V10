@@ -965,16 +965,28 @@ let selo = isVerificado ? SeloMeta : info
 const reply = async (text, mentions = []) => {
 if (!text) text = ' '
 const textoSeguro = modulos.sanitizarErro(String(text), [API_KEY_TOKITO]) || ' '
-return tokito.sendMessage(
-from,
-{
-text: textoSeguro,
-contextInfo: canalInfo(mentions)
-},
-{
-quoted: selo
+const cfgCanal = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
+const linkCanal = canalOficial.link(cfgCanal)
+// Mensagens JSON e blocos de código precisam ficar intactos (ex.: /get).
+const ehDadoEstruturado = /^\s*(?:\{|\[|```)/.test(textoSeguro)
+const textoFinal = linkCanal && !ehDadoEstruturado && !textoSeguro.includes(linkCanal)
+  ? textoSeguro + '\n\n- 📢 𝙰𝙲𝙴𝚂𝚂𝙰𝚁 𝙲𝙰𝙽𝙰𝙻\n> 🔗 ' + linkCanal
+  : textoSeguro
+try {
+  return await tokito.sendMessage(from, {
+    text: textoFinal,
+    contextInfo: canalInfo(mentions)
+  }, { quoted: selo })
+} catch (error) {
+  const motivo = modulos.sanitizarErro(String(error?.message || error), [API_KEY_TOKITO])
+  console.warn('[TOKITO REPLY] Tentativa de envio com citação falhou:', motivo)
+  // Nunca deixar o comando somente com a reação por causa da citação
+  // ou de metadados adicionais. Reenvio simples, uma única tentativa.
+  return tokito.sendMessage(from, {
+    text: textoFinal,
+    contextInfo: { mentionedJid: mentions }
+  })
 }
-)
 }
 const enviarbuton = botoes =>
 botoes
