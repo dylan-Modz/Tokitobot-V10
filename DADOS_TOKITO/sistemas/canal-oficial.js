@@ -101,6 +101,21 @@ const informacoes = (config, socket) => {
   }
 }
 
+// Botão de URL nativo do WhatsApp (nativeFlow/cta_url).
+// Não inventa que uma resposta do bot foi encaminhada de uma postagem do canal.
+const botaoAcessar = config => {
+  const url = link(config)
+  if (!url) return null
+  return {
+    name: 'cta_url',
+    buttonParamsJson: JSON.stringify({
+      display_text: 'Acessar canal',
+      url,
+      merchant_url: url
+    })
+  }
+}
+
 const jid = (config, socket) => informacoes(config, socket).jid
 
 // Respostas comuns precisam de contextInfo mínimo. O cartão de canal
@@ -147,5 +162,5 @@ const contexto = (config, socket, nomeBot, mentionedJid = []) => {
 }
 
 module.exports = {
-  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto, contextoSeguro
+  LINK_ATUAL, ativo, canalPadrao, link, botaoAcessar, jid, informacoes, contexto, contextoSeguro
 }
