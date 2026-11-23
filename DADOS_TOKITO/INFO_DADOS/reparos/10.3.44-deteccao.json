@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "deteccao-reparo-20261123-1",
+  "type": "reparacao",
+  "title": "Reparação de detecção e aviso de atualizações na mesma versão",
+  "notice": "Tokito Bot 10.3.44: correção do aviso de reparações que não eram recebidas.",
+  "changes": [
+    "Compara o repairId do manifesto local com o publicado, além dos hashes Git dos arquivos.",
+    "Atualiza o manifesto mesmo quando os arquivos já existem localmente e estão íntegros.",
+    "Usa ID de reparo estável para os avisos, evitando inconsistência de avisos após atualização parcial.",
+    "Exibe IDs de reparação local e remota no diagnóstico do comando update.",
+    "Preserva integralmente a versão 10.3.44, as credenciais, grupos e as figurinhas registradas."
+  ],
+  "safety": {
+    "keepVersion": true,
+    "keepHistory": true,
+    "preserveUserFiles": true,
+    "doNotChangeStone": true
+  }
+}
