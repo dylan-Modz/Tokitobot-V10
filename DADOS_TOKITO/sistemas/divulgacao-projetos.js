@@ -2,15 +2,14 @@
 // Envia os projetos oficiais com suas próprias capas, respeitando o canal configurado.
 // Não mexe na mídia do menu, nas credenciais ou em configurações do usuário.
 const mensagens = require('../mensagens/projetos')
+const canalOficial = require('./canal-oficial')
 
 const BANNERS = Object.freeze({
   site: 'https://raw.githubusercontent.com/dylan-Modz/upload/main/midias/imagens/s3ie6.jpg',
   stone: 'https://raw.githubusercontent.com/dylan-Modz/upload/main/midias/imagens/z0knv.jpg'
 })
-const CANAL_PADRAO_JID = '120363421690941003@newsletter'
-const CANAL_PADRAO_URL = 'https://whatsapp.com/channel/0029VbBbHVs7oQhTLxKWBW2q'
-
-const canalLigado = cfg => {
+const canalLigado = raw => {
+  const cfg = canalOficial.normalizar(raw)
   const canal = String(cfg.channel || '').trim()
   const jid = String(cfg.channeldl || '').trim()
   if (!canal || canal === '0' || canal === '0@newsletter') return false
@@ -19,14 +18,13 @@ const canalLigado = cfg => {
 }
 
 const linkCanal = async ctx => {
-  const cfg = ctx.runtimeSub?.config?.() || ctx.setting || {}
+  const cfg = canalOficial.normalizar(ctx.runtimeSub?.config?.() || ctx.setting || {})
   if (!canalLigado(cfg)) return ''
   const entradas = [cfg.channelLink, cfg.channel, cfg.channeldl]
     .map(x => String(x || '').trim())
   const link = entradas.find(x => /^https:\/\/(?:www\.)?whatsapp\.com\/channel\/[a-zA-Z0-9_-]+\/?$/i.test(x))
   if (link) return link
   const jid = entradas.find(x => /^\d+@newsletter$/i.test(x) && x !== '0@newsletter')
-  if (jid === CANAL_PADRAO_JID) return CANAL_PADRAO_URL
   if (!jid || typeof ctx.tokito?.newsletterMetadata !== 'function') return ''
   try {
     const meta = await ctx.tokito.newsletterMetadata('jid', jid)
