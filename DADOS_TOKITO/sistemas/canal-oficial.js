@@ -100,41 +100,53 @@ const informacoes = (config, socket) => {
 
 const jid = (config, socket) => informacoes(config, socket).jid
 
+// Somente uma mensagem REAL do canal fornece um serverMessageId válido.
+// O link e o JID, isoladamente, não são prova de um encaminhamento.
+const messageId = config => {
+  const raw = config?.channelMessageId ?? config?.serverMessageId
+  const value = Number(raw)
+  return Number.isSafeInteger(value) && value > 0 ? value : 0
+}
+
 const contexto = (config, socket, nomeBot, mentionedJid = []) => {
-  const dados = informacoes(config, socket)
-  const base = { mentionedJid }
-  if (dados.jid) {
-    return {
-      ...base,
-      isForwarded: true,
-      forwardingScore: 1,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: dados.jid,
-        newsletterName: dados.name || parse(nomeBot) || 'Canal WhatsApp'
+  const base = { mentionedJid: Array.isArray(mentionedJid) ? mentionedJid : [] }
+  try {
+    const dados = informacoes(config, socket)
+    const serverMessageId = messageId(config)
+    // A ausência do serverMessageId fazia algumas versões do WhatsApp
+    // descartarem o cartão ou falharem ao enviar respostas.
+    if (dados.jid && serverMessageId > 0) {
+      return {
+        ...base,
+        isForwarded: true,
+        forwardingScore: 1,
+        forwardedNewsletterMessageInfo: {
+          newsletterJid: dados.jid,
+          serverMessageId,
+          newsletterName: dados.name || parse(nomeBot) || 'Canal WhatsApp'
+        }
       }
     }
+  } catch (e) {
+    console.warn('[TOKITO CANAL] Contexto indisponível:', e?.message || 'erro')
   }
-  // Sem JID real não há como gerar o cartão de canal encaminhado.
-  // Fallback mantém o acesso clicável, sem atribuir uma mensagem inexistente.
-  if (dados.link) {
-    const seguidores = Number.isInteger(dados.subscribers)
-      ? ' • ' + dados.subscribers.toLocaleString('pt-BR') + ' seguidores'
-      : ''
-    return {
-      ...base,
-      externalAdReply: {
-        title: '📢 Acessar canal',
-        body: (dados.name || 'Canal do WhatsApp') + seguidores,
-        sourceUrl: dados.link,
-        mediaType: 1,
-        showAdAttribution: false,
-        renderLargerThumbnail: false
-      }
-    }
-  }
+  // Não colocar externalAdReply globalmente nas respostas dos comandos:
+  // o cliente pode rejeitar a estrutura e impedir qualquer reply.
   return base
 }
 
+const acessoTexto = (config, socket) => {
+  if (!ativo(config)) return ''
+  const url = link(config)
+  if (!url || (informacoes(config, socket).jid && messageId(config))) return ''
+  const dados = informacoes(config, socket)
+  const titulo = dados.name ? ' • ' + dados.name : ''
+  const seguidores = Number.isInteger(dados.subscribers)
+    ? ' • ' + dados.subscribers.toLocaleString('pt-BR') + ' seguidores'
+    : ''
+  return '- 📢 𝙰𝙲𝙴𝚂𝚂𝙰𝚁 𝙲𝙰𝙽𝙰𝙻' + titulo + seguidores + '\n> 🔗 ' + url
+}
+
 module.exports = {
-  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto
+  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto, acessoTexto, messageId
 }
