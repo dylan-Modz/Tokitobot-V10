@@ -1077,15 +1077,10 @@ contextInfo
 { quoted: selo }
 )
 }
-} catch {
-resultado = await tokito.sendMessage(
-from,
-{
-text: texto,
-contextInfo
-},
-{ quoted: selo }
-)
+} catch (error) {
+console.warn('[MENU MÍDIA]', modulos.sanitizarErro(String(error?.message || error), [API_KEY_TOKITO]))
+// reply oferece nova tentativa sem metadados em caso de incompatibilidade.
+resultado = await reply(texto)
 }
 } else {
 try {
@@ -1120,14 +1115,7 @@ userJid: tokito.user.id
 resultado = await tokito.relayMessage(from, msg.message, { messageId: msg.key.id })
 } catch (e) {
 console.log('[BOTÕES MENU]', modulos.sanitizarErro(e, [API_KEY_TOKITO]) || 'Erro sem detalhes')
-resultado = await tokito.sendMessage(
-from,
-{
-text: texto,
-contextInfo
-},
-{ quoted: selo }
-)
+resultado = await reply(texto)
 }
 }
 try {
