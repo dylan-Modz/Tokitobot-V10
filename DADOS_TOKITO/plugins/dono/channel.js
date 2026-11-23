@@ -53,21 +53,63 @@ const normalizarLink = valor => {
   return canalOficial.link({ channel: url, channeldl: INATIVO }) || url
 }
 
+const idValido = valor => {
+  const numero = Number(valor)
+  return Number.isSafeInteger(numero) && numero > 0 ? numero : 0
+}
+
 const lerEntrada = texto => {
   const valor = String(texto || '').trim()
   if (!valor || /[\r\n]/.test(valor)) return null
   const partes = valor.split(/\s+/)
-  if (partes.length > 2) return null
-  const primeiro = partes[0]
-  const jid = normalizarJid(primeiro)
+  if (partes.length > 4) return null
+  const jid = normalizarJid(partes[0])
   if (jid) {
-    const link = partes[1] ? normalizarLink(partes[1]) : ''
-    return partes[1] && !link ? null : { jid, link }
+    let link = ''
+    let serverMessageId = 0
+    let channelName = ''
+    for (const parte of partes.slice(1)) {
+      const url = normalizarLink(parte)
+      if (url && !link) { link = url; continue }
+      if (/^\d+$/.test(parte) && !serverMessageId) {
+        serverMessageId = idValido(parte)
+        if (!serverMessageId) return null
+        continue
+      }
+      if (!channelName && !parte.includes('/')) {
+        channelName = parte.slice(0, 120)
+        continue
+      }
+      return null
+    }
+    return { jid, link, serverMessageId, channelName }
   }
   if (partes.length !== 1) return null
-  const link = normalizarLink(primeiro) ||
-    (TOKEN_CANAL.test(primeiro) ? normalizarLink('https://whatsapp.com/channel/' + primeiro) : '')
-  return link ? { jid: '', link } : null
+  const link = normalizarLink(partes[0]) ||
+    (TOKEN_CANAL.test(partes[0]) ? normalizarLink('https://whatsapp.com/channel/' + partes[0]) : '')
+  return link ? { jid: '', link, serverMessageId: 0, channelName: '' } : null
+}
+
+const dadosEncaminhamento = ctx => {
+  const citada = ctx.ctxMsg?.quotedMessage ||
+    ctx.info?.message?.extendedTextMessage?.contextInfo?.quotedMessage
+  if (!citada) return null
+  const tipos = [
+    citada.extendedTextMessage, citada.imageMessage,
+    citada.videoMessage, citada.documentMessage,
+    citada.stickerMessage, citada.audioMessage
+  ]
+  for (const mensagem of tipos) {
+    const info = mensagem?.contextInfo?.forwardedNewsletterMessageInfo
+    if (info && normalizarJid(info.newsletterJid) && idValido(info.serverMessageId)) {
+      return {
+        jid: normalizarJid(info.newsletterJid),
+        serverMessageId: idValido(info.serverMessageId),
+        channelName: String(info.newsletterName || '').trim().slice(0, 120)
+      }
+    }
+  }
+  return null
 }
 
 const salvarConfig = (ctx, alteracoes) => {
@@ -75,7 +117,9 @@ const salvarConfig = (ctx, alteracoes) => {
   if (runtimeSub.isSubBot) {
     runtimeSub.updateSubConfig({
       channel: proxima.channel,
-      channelLink: proxima.channelLink
+      channelLink: proxima.channelLink,
+      channelMessageId: proxima.channelMessageId,
+      channelName: proxima.channelName
     })
   } else {
     const arquivo = runtimeSub.GLOBAL_CONFIG
@@ -121,11 +165,12 @@ dylan.setCommand({
   async executar(ctx) {
     if (!ctx.SoDono) return ctx.reply(ctx.mess.onlyOwner())
     const entrada = String(ctx.q || '').trim()
-    if (!entrada) return ctx.reply(ctx.mess.channelRequired(ctx.prefix, ctx.command))
+    const encaminhada = dadosEncaminhamento(ctx)
+    if (!entrada && !encaminhada) return ctx.reply(ctx.mess.channelRequired(ctx.prefix, ctx.command))
 
     if (entrada === '0') {
       try {
-        salvarConfig(ctx, { channeldl: INATIVO, channel: INATIVO, channelLink: '' })
+        salvarConfig(ctx, { channeldl: INATIVO, channel: INATIVO, channelLink: '', channelMessageId: 0, channelName: '' })
         return ctx.reply(ctx.mess.channelDisabled())
       } catch (e) {
         console.warn('[SETCHANNEL] Falha ao desativar:', e?.code || 'erro')
@@ -136,7 +181,7 @@ dylan.setCommand({
       }
     }
 
-    const pedido = lerEntrada(entrada)
+    const pedido = lerEntrada(entrada) || (!entrada && encaminhada ? { ...encaminhada, link: '' } : null)
     if (!pedido) return ctx.reply(ctx.mess.padraoUso({
       emoji: '📢',
       titulo: 'LINK DO CANAL INVÁLIDO',
@@ -146,13 +191,24 @@ dylan.setCommand({
 
     let jid = pedido.jid
     if (!jid && pedido.link) jid = await consultarJid(ctx.tokito, pedido.link.split('/').pop())
-    const link = pedido.link
+    const link = pedido.link ||
+      (jid && jid === normalizarJid(ctx.setting?.channeldl) ? normalizarLink(ctx.setting?.channelLink) : '')
+    const provado = encaminhada && encaminhada.jid === jid ? encaminhada : null
+    const anterior = jid && jid === normalizarJid(ctx.setting?.channeldl)
+      ? ctx.setting : {}
+    const serverMessageId = idValido(pedido.serverMessageId) ||
+      idValido(provado?.serverMessageId) ||
+      idValido(anterior.channelMessageId)
+    const channelName = String(pedido.channelName ||
+      provado?.channelName || anterior.channelName || '').trim().slice(0, 120)
 
     try {
       salvarConfig(ctx, {
         channeldl: jid || INATIVO,
         channel: jid || link,
-        channelLink: link
+        channelLink: link,
+        channelMessageId: serverMessageId,
+        channelName
       })
       return ctx.reply(jid
         ? ctx.mess.channelEnabled(jid, link || jid)
