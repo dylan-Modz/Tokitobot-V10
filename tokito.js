@@ -1030,12 +1030,8 @@ reagir(from, emoji).catch(() => {})
 const caminhoVideo = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
 const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
 const contextInfo = canalInfo([sender])
-const cfgMenu = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
-const botaoCanal = canalOficial.botaoAcesso(cfgMenu)
-// O botão de acesso ao canal é independente do alternador dos outros botões.
-const botoesAtivos = isBotoes ? botoes : []
 let resultado
-if (!botoesAtivos.length && !botaoCanal) {
+if (!isBotoes || !botoes.length) {
 try {
 const media = await modulos.midiaMenu(tokito)
 if (media?.videoMessage) {
@@ -1110,7 +1106,7 @@ contextInfo,
 body: proto.Message.InteractiveMessage.Body.create({ text: texto }),
 footer: proto.Message.InteractiveMessage.Footer.create({ text: `` }),
 nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-buttons: [...enviarbuton(botoesAtivos), ...(botaoCanal ? [botaoCanal] : [])]
+buttons: enviarbuton(botoes)
 })
 }
 if (header) dados.header = header
