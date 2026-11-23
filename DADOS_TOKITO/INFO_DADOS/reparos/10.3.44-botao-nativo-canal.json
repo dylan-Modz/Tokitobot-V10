@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "botao-nativo-canal-20261123-1",
+  "title": "Botão nativo Acessar canal sem URL no rodapé",
+  "type": "reparacao",
+  "changes": [
+    "Remove URLs adicionadas automaticamente ao final das respostas e menus.",
+    "Mantém botão cta_url para o canal no menu interativo e divulgações.",
+    "Configura cartão de canal usando JID, nome e serverMessageId de uma postagem realmente citada.",
+    "Não inventa serverMessageId nem associa canal de outra origem ao link informado.",
+    "Distingue link salvo de metadados suficientes para tentar exibir o cartão nativo.",
+    "Confirma envios por simulação e mantém resposta simples de segurança se a biblioteca não aceitar o contexto.",
+    "Versão 10.3.44 preservada, instalação incremental sem tocar nas sessões."
+  ],
+  "limitations": [
+    "O cartão nativo depende da versão do WhatsApp e de uma postagem do canal configurado.",
+    "JID e serverMessageId de outros canais não devem ser reutilizados.",
+    "Sem JID e postagem validados, fica apenas o botão explícito de URL onde houver interface compatível."
+  ],
+  "safety": {
+    "preserveVersion": true,
+    "preserveSessions": true,
+    "preserveMedia": true,
+    "preserveSavedChannelLink": true
+  }
+}

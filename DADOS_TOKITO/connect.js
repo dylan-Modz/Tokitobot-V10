@@ -216,7 +216,8 @@ console.info = function () {
 
 const canalOficial = require('./sistemas/canal-oficial')
 const canalInfo = (mentions = []) => {
-  return canalOficial.contextoSeguro(mentions)
+  const cfgCanal = runtime.config()
+  return canalOficial.contextoNativo(cfgCanal, mentions)
 }
 
 const intervalo = 60 * 1000

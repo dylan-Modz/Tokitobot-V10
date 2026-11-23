@@ -4,21 +4,21 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-23T20:44:58.188Z",
+  "publishedAt": "2026-11-23T20:55:53.560Z",
   "changelog": [
-    "[Canal] Removido link de Acessar canal acrescentado automaticamente a todas as respostas e menus em texto.",
-    "[Botão] Incluído CTA nativo Acessar canal nas mensagens interativas de menus usando o link configurado.",
-    "[Menus] Botão de canal independente da opção de botões gerais; textos e mensagens JSON permanecem intactos.",
-    "[Fallback] Se o WhatsApp recusar mensagens interativas, o envio em texto não recebe URL extra nem perde o conteúdo.",
-    "[Compatibilidade] Não utiliza metadados de encaminhamento de canal fabricados nem inventa contagem de seguidores.",
-    "[Atualizador] Reparo incremental da própria versão 10.3.44, sem alterar credenciais, sessões ou dados privados.",
-    "[Testes] Cenários de botão com canal ligado, desligado, botões desligados e retorno seguro em texto."
+    "[Textos] Removida URL solta no final dos comandos, menus e divulgações.",
+    "[Canal] Contexto nativo somente com JID, nome e ID de postagem realmente marcada do mesmo canal; nunca usa ID de outro canal.",
+    "[Menus] Botão CTA de acesso ao canal já publicado foi preservado em vez de substituído.",
+    "[Configuração] /setchannel associa postagem encaminhada ao canal quando os JIDs correspondem, com persistência também para sub-bots.",
+    "[Compatibilidade] Na ausência de postagem válida, usa somente botões explícitos de URL; mantém fallback simples para respostas de comandos.",
+    "[Atualizador] Reparação incremental sem mudar 10.3.44, mantendo arquivos protegidos e melhorias de aviso.",
+    "[Testes] Verificações de emissão do cartão, origem dos metadados, CTA e respostas sem link."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Reparação do botão Acessar canal — V10.3.44",
-  "notice": "Reparação 10.3.44: Acessar canal aparece como botão nos menus, e não como link escrito no fim da mensagem.",
+  "title": "Reparação do cartão nativo Acessar canal — V10.3.44",
+  "notice": "Reparação 10.3.44: preserva botões CTA de canal, remove URL dos textos e permite cartão nativo com metadados reais de postagem.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -29,8 +29,8 @@
     },
     {
       "path": "DADOS_TOKITO/sistemas/divulgacao-projetos.js",
-      "gitSha": "910d649f7008a06f60a7698147edc1e6fe3bfa73",
-      "size": 5566
+      "gitSha": "750d47529ec7361dd6f58b382344743d312b91a4",
+      "size": 5543
     },
     {
       "path": "DADOS_TOKITO/plugins/info/gitbot.js",
@@ -49,13 +49,13 @@
     },
     {
       "path": "DADOS_TOKITO/sub/runtime.js",
-      "gitSha": "0bd317afe26e8a07cd1d372ad4c38e1ea7ca1f92",
-      "size": 4195
+      "gitSha": "f6605f0e2f73ba1dc1a62888644a29dc09104ae5",
+      "size": 4588
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/channel.js",
-      "gitSha": "83232f671499539cf28d0be676111c16e64d2c94",
-      "size": 7041
+      "gitSha": "dabb7403b6fe9bdeb5d33328c085f3a33ce71c25",
+      "size": 7756
     },
     {
       "path": "DADOS_TOKITO/mensagens/menus.js",
@@ -69,18 +69,18 @@
     },
     {
       "path": "package.json",
-      "gitSha": "24c8363b7b4180de5beb658b2fe4185f0809f4af",
-      "size": 2988
+      "gitSha": "d76a8bd33dc1cd37cfde38bd488b9d34b940eabb",
+      "size": 3043
     },
     {
       "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
-      "gitSha": "078114b42a47fad4249cfe30197878bcada88854",
-      "size": 6207
+      "gitSha": "d61e5c1abc98c468bd88aea9900a1bcdb10a7a22",
+      "size": 7006
     },
     {
       "path": "tokito.js",
-      "gitSha": "e1f749368358e018f444ff657f765ff608403200",
-      "size": 55939
+      "gitSha": "cc101eae31c73917730695ecdf3e6b8a51dcc6d0",
+      "size": 55949
     },
     {
       "path": "README.md",
@@ -89,8 +89,8 @@
     },
     {
       "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "72b946052af9cea4352b80e92a931b3ba2718a54",
-      "size": 56691
+      "gitSha": "efa3b7c9cd7d86d61b5b9c1633b3fe51fc187774",
+      "size": 56737
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.43-canal-tk.json",
@@ -149,18 +149,18 @@
     },
     {
       "path": "tests/sticker-audio.test.js",
-      "gitSha": "e8b98b9becf3bfc5187ac8b9a7364d56e3b3a349",
-      "size": 2562
+      "gitSha": "2e736771cde9194038fb7292a69508488c169886",
+      "size": 2569
     },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "gitSha": "9ff3e3ee0ff2b1ba5c56c722395e17469779d9f4",
-      "size": 233280
+      "gitSha": "978d03f5d9cd66fec6bb078495248f6b388f8043",
+      "size": 233891
     },
     {
       "path": "tests/reparo-setchannel.test.js",
-      "gitSha": "06cac48725e2ffb47d2049afe2aad20f6ef573a3",
-      "size": 6362
+      "gitSha": "79e7e35862b16c61fccc0072b858a9de0d496ac3",
+      "size": 6510
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-setchannel.json",
@@ -169,8 +169,8 @@
     },
     {
       "path": "tests/reparo-audio-canal.test.js",
-      "gitSha": "77ab596cd46ec078496b99340538d24d88c16909",
-      "size": 5368
+      "gitSha": "8ca058ee47d87254a8c8889082ac74478c738570",
+      "size": 5320
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-audio-canal.json",
@@ -184,8 +184,8 @@
     },
     {
       "path": "tests/reparo-deteccao.test.js",
-      "gitSha": "afd5a51a7e29f3652dbbdae3ce5d6679e02e8f34",
-      "size": 3366
+      "gitSha": "233ae1211f088a2a5c44d5e23f88869b01338cfc",
+      "size": 3408
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-deteccao.json",
@@ -194,8 +194,8 @@
     },
     {
       "path": "tests/reparo-respostas-canal.test.js",
-      "gitSha": "762fd0e050f4ac59fca31b4c6da6a787f1af00c2",
-      "size": 5299
+      "gitSha": "080305841816219ad9a80027f13b6d491d3fae50",
+      "size": 5316
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-respostas-canal.json",
@@ -214,8 +214,8 @@
     },
     {
       "path": "tests/reparo-entrega-reparo.test.js",
-      "gitSha": "26f615b11d0da5ab25359d78dba55739ddf736b6",
-      "size": 4403
+      "gitSha": "9a68e6d2c352d3bbc0b0636568fc6672dfd94497",
+      "size": 4417
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-entrega-reparo.json",
@@ -224,13 +224,23 @@
     },
     {
       "path": "tests/reparo-botao-canal.test.js",
-      "gitSha": "d14ca70648fa698353f9a836d302049019dc7f34",
-      "size": 4699
+      "gitSha": "8367063684830a74692dbdfb31ad519dc5fdae7e",
+      "size": 4713
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-botao-canal.json",
       "gitSha": "d66982b9088cc911345120273f1cbb88133d9c57",
       "size": 996
+    },
+    {
+      "path": "tests/reparo-botao-nativo-canal.test.js",
+      "gitSha": "4b54cb54400d01bb3f5d2b78e38607e1b8ff7d4f",
+      "size": 3402
+    },
+    {
+      "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-botao-nativo-canal.json",
+      "gitSha": "6c0c3270348b3e13c16ac94fb9628c63af0ac4ff",
+      "size": 1283
     }
   ],
   "releases": [
@@ -4821,16 +4831,16 @@
       "fromVersion": "10.3.43",
       "channel": "stable",
       "type": "Correção",
-      "title": "Reparação do botão Acessar canal — V10.3.44",
-      "notice": "Reparação 10.3.44: Acessar canal aparece como botão nos menus, e não como link escrito no fim da mensagem.",
+      "title": "Reparação do cartão nativo Acessar canal — V10.3.44",
+      "notice": "Reparação 10.3.44: preserva botões CTA de canal, remove URL dos textos e permite cartão nativo com metadados reais de postagem.",
       "changelog": [
-        "[Canal] Removido link de Acessar canal acrescentado automaticamente a todas as respostas e menus em texto.",
-        "[Botão] Incluído CTA nativo Acessar canal nas mensagens interativas de menus usando o link configurado.",
-        "[Menus] Botão de canal independente da opção de botões gerais; textos e mensagens JSON permanecem intactos.",
-        "[Fallback] Se o WhatsApp recusar mensagens interativas, o envio em texto não recebe URL extra nem perde o conteúdo.",
-        "[Compatibilidade] Não utiliza metadados de encaminhamento de canal fabricados nem inventa contagem de seguidores.",
-        "[Atualizador] Reparo incremental da própria versão 10.3.44, sem alterar credenciais, sessões ou dados privados.",
-        "[Testes] Cenários de botão com canal ligado, desligado, botões desligados e retorno seguro em texto."
+        "[Textos] Removida URL solta no final dos comandos, menus e divulgações.",
+        "[Canal] Contexto nativo somente com JID, nome e ID de postagem realmente marcada do mesmo canal; nunca usa ID de outro canal.",
+        "[Menus] Botão CTA de acesso ao canal já publicado foi preservado em vez de substituído.",
+        "[Configuração] /setchannel associa postagem encaminhada ao canal quando os JIDs correspondem, com persistência também para sub-bots.",
+        "[Compatibilidade] Na ausência de postagem válida, usa somente botões explícitos de URL; mantém fallback simples para respostas de comandos.",
+        "[Atualizador] Reparação incremental sem mudar 10.3.44, mantendo arquivos protegidos e melhorias de aviso.",
+        "[Testes] Verificações de emissão do cartão, origem dos metadados, CTA e respostas sem link."
       ],
       "files": [
         {
@@ -4840,8 +4850,8 @@
         },
         {
           "path": "DADOS_TOKITO/sistemas/divulgacao-projetos.js",
-          "gitSha": "910d649f7008a06f60a7698147edc1e6fe3bfa73",
-          "size": 5566
+          "gitSha": "750d47529ec7361dd6f58b382344743d312b91a4",
+          "size": 5543
         },
         {
           "path": "DADOS_TOKITO/plugins/info/gitbot.js",
@@ -4860,13 +4870,13 @@
         },
         {
           "path": "DADOS_TOKITO/sub/runtime.js",
-          "gitSha": "0bd317afe26e8a07cd1d372ad4c38e1ea7ca1f92",
-          "size": 4195
+          "gitSha": "f6605f0e2f73ba1dc1a62888644a29dc09104ae5",
+          "size": 4588
         },
         {
           "path": "DADOS_TOKITO/plugins/dono/channel.js",
-          "gitSha": "83232f671499539cf28d0be676111c16e64d2c94",
-          "size": 7041
+          "gitSha": "dabb7403b6fe9bdeb5d33328c085f3a33ce71c25",
+          "size": 7756
         },
         {
           "path": "DADOS_TOKITO/mensagens/menus.js",
@@ -4880,18 +4890,18 @@
         },
         {
           "path": "package.json",
-          "gitSha": "24c8363b7b4180de5beb658b2fe4185f0809f4af",
-          "size": 2988
+          "gitSha": "d76a8bd33dc1cd37cfde38bd488b9d34b940eabb",
+          "size": 3043
         },
         {
           "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
-          "gitSha": "078114b42a47fad4249cfe30197878bcada88854",
-          "size": 6207
+          "gitSha": "d61e5c1abc98c468bd88aea9900a1bcdb10a7a22",
+          "size": 7006
         },
         {
           "path": "tokito.js",
-          "gitSha": "e1f749368358e018f444ff657f765ff608403200",
-          "size": 55939
+          "gitSha": "cc101eae31c73917730695ecdf3e6b8a51dcc6d0",
+          "size": 55949
         },
         {
           "path": "README.md",
@@ -4900,8 +4910,8 @@
         },
         {
           "path": "DADOS_TOKITO/connect.js",
-          "gitSha": "72b946052af9cea4352b80e92a931b3ba2718a54",
-          "size": 56691
+          "gitSha": "efa3b7c9cd7d86d61b5b9c1633b3fe51fc187774",
+          "size": 56737
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.43-canal-tk.json",
@@ -4960,18 +4970,18 @@
         },
         {
           "path": "tests/sticker-audio.test.js",
-          "gitSha": "e8b98b9becf3bfc5187ac8b9a7364d56e3b3a349",
-          "size": 2562
+          "gitSha": "2e736771cde9194038fb7292a69508488c169886",
+          "size": 2569
         },
         {
           "path": "DADOS_TOKITO/mensagens/mensagens.js",
-          "gitSha": "9ff3e3ee0ff2b1ba5c56c722395e17469779d9f4",
-          "size": 233280
+          "gitSha": "978d03f5d9cd66fec6bb078495248f6b388f8043",
+          "size": 233891
         },
         {
           "path": "tests/reparo-setchannel.test.js",
-          "gitSha": "06cac48725e2ffb47d2049afe2aad20f6ef573a3",
-          "size": 6362
+          "gitSha": "79e7e35862b16c61fccc0072b858a9de0d496ac3",
+          "size": 6510
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-setchannel.json",
@@ -4980,8 +4990,8 @@
         },
         {
           "path": "tests/reparo-audio-canal.test.js",
-          "gitSha": "77ab596cd46ec078496b99340538d24d88c16909",
-          "size": 5368
+          "gitSha": "8ca058ee47d87254a8c8889082ac74478c738570",
+          "size": 5320
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-audio-canal.json",
@@ -4995,8 +5005,8 @@
         },
         {
           "path": "tests/reparo-deteccao.test.js",
-          "gitSha": "afd5a51a7e29f3652dbbdae3ce5d6679e02e8f34",
-          "size": 3366
+          "gitSha": "233ae1211f088a2a5c44d5e23f88869b01338cfc",
+          "size": 3408
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-deteccao.json",
@@ -5005,8 +5015,8 @@
         },
         {
           "path": "tests/reparo-respostas-canal.test.js",
-          "gitSha": "762fd0e050f4ac59fca31b4c6da6a787f1af00c2",
-          "size": 5299
+          "gitSha": "080305841816219ad9a80027f13b6d491d3fae50",
+          "size": 5316
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-respostas-canal.json",
@@ -5025,8 +5035,8 @@
         },
         {
           "path": "tests/reparo-entrega-reparo.test.js",
-          "gitSha": "26f615b11d0da5ab25359d78dba55739ddf736b6",
-          "size": 4403
+          "gitSha": "9a68e6d2c352d3bbc0b0636568fc6672dfd94497",
+          "size": 4417
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-entrega-reparo.json",
@@ -5035,20 +5045,30 @@
         },
         {
           "path": "tests/reparo-botao-canal.test.js",
-          "gitSha": "d14ca70648fa698353f9a836d302049019dc7f34",
-          "size": 4699
+          "gitSha": "8367063684830a74692dbdfb31ad519dc5fdae7e",
+          "size": 4713
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-botao-canal.json",
           "gitSha": "d66982b9088cc911345120273f1cbb88133d9c57",
           "size": 996
+        },
+        {
+          "path": "tests/reparo-botao-nativo-canal.test.js",
+          "gitSha": "4b54cb54400d01bb3f5d2b78e38607e1b8ff7d4f",
+          "size": 3402
+        },
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-botao-nativo-canal.json",
+          "gitSha": "6c0c3270348b3e13c16ac94fb9628c63af0ac4ff",
+          "size": 1283
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-23T20:44:58.188Z",
+      "publishedAt": "2026-11-23T20:55:53.560Z",
       "repair": true,
-      "repairId": "botao-canal-20261123-1"
+      "repairId": "botao-nativo-canal-20261123-1"
     }
   ],
   "mode": "incremental",
@@ -5062,5 +5082,5 @@
   },
   "publicVersion": "10.3.44",
   "repair": true,
-  "repairId": "botao-canal-20261123-1"
+  "repairId": "botao-nativo-canal-20261123-1"
 }
