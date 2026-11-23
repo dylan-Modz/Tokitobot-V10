@@ -1030,12 +1030,9 @@ reagir(from, emoji).catch(() => {})
 const caminhoVideo = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
 const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
 const contextInfo = canalInfo([sender])
-const cfgMenu = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
-const botaoCanal = canalOficial.botaoAcesso(cfgMenu)
-// O botão de acesso ao canal é independente do alternador dos outros botões.
-const botoesAtivos = isBotoes ? botoes : []
+// A navegação "Ver canal" é gerada pelo contextInfo nativo validado.
 let resultado
-if (!botoesAtivos.length && !botaoCanal) {
+if (!isBotoes || !botoes.length) {
 try {
 const media = await modulos.midiaMenu(tokito)
 if (media?.videoMessage) {
@@ -1080,15 +1077,9 @@ contextInfo
 { quoted: selo }
 )
 }
-} catch {
-resultado = await tokito.sendMessage(
-from,
-{
-text: texto,
-contextInfo
-},
-{ quoted: selo }
-)
+ } catch (error) {
+console.warn('[MENU MÍDIA]', modulos.sanitizarErro(String(error?.message || error), [API_KEY_TOKITO]))
+resultado = await reply(texto)
 }
 } else {
 try {
@@ -1109,9 +1100,7 @@ const dados = {
 contextInfo,
 body: proto.Message.InteractiveMessage.Body.create({ text: texto }),
 footer: proto.Message.InteractiveMessage.Footer.create({ text: `` }),
-nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-buttons: [...enviarbuton(botoesAtivos), ...(botaoCanal ? [botaoCanal] : [])]
-})
+nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: enviarbuton(botoes) })
 }
 if (header) dados.header = header
 const msg = generateWAMessageFromContent(
@@ -1125,14 +1114,7 @@ userJid: tokito.user.id
 resultado = await tokito.relayMessage(from, msg.message, { messageId: msg.key.id })
 } catch (e) {
 console.log('[BOTÕES MENU]', modulos.sanitizarErro(e, [API_KEY_TOKITO]) || 'Erro sem detalhes')
-resultado = await tokito.sendMessage(
-from,
-{
-text: texto,
-contextInfo
-},
-{ quoted: selo }
-)
+resultado = await reply(texto)
 }
 }
 try {
