@@ -299,6 +299,9 @@ const verificar = async tokito => {
       available: check?.available === true,
       repair: check?.repair === true,
       pendingFiles: Array.isArray(check?.pendingFiles) ? check.pendingFiles.length : 0,
+      repairIdLocal: String(check?.local?.repairId || ''),
+      repairIdRemoto: String(check?.remote?.repairId || ''),
+      repairIdPendente: check?.repairIdPendente === true,
       fonte: String(check?.fonte || ''),
       local: String(check?.local?.version || ''),
       remota: String(check?.remote?.version || ''),
@@ -318,7 +321,11 @@ const verificar = async tokito => {
     ? (check.pendingFiles || []).map(item => item.gitSha || item.sha256 || '').join(':') +
     '|' + (check.pendingDelete || []).map(item => item.path || '').join(':')
     : ''
-    const chaveAviso = reparo ? version + '@' + assinatura : version
+    // Chave estável por reparação: o número de arquivos pendentes pode mudar
+    // após um download parcial, mas o aviso não deve ser repetido sem motivo.
+    const chaveAviso = reparo
+      ? version + '@reparo:' + String(check.remote?.repairId || assinatura)
+      : version
     const destino = destinatario(tokito)
     if (!destino) {
       falha('Aviso não enviado: configure o telefone do dono com #update destino aqui ou #update destino 55DDDNUMERO.')
