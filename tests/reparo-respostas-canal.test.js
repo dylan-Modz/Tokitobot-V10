@@ -103,7 +103,7 @@ test('manifesto continua na 10.3.44 e habilita reparo da mesma versão', () => {
   assert.equal(m.version, '10.3.44')
   assert.equal(m.publicVersion, '10.3.44')
   assert.equal(m.repair, true)
-  assert.equal(m.repairId, 'entrega-reparo-20261123-1')
+  assert.equal(m.repairId, 'botao-canal-nativo-20261123-1')
   assert.equal(m.mode, 'incremental')
   assert.equal(m.notify, true)
   for (const p of ['tokito.js', 'DADOS_TOKITO/connect.js', 'DADOS_TOKITO/plugins/menus/menu.js',
