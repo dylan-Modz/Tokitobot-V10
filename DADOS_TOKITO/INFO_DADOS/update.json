@@ -4,19 +4,19 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-23T16:02:12.420Z",
+  "publishedAt": "2026-11-23T16:12:45.651Z",
   "changelog": [
-    "[Reparação] Corrigido o botão Acessar canal em todos os comandos de apresentação.",
-    "[Canal] O endereço antigo do canal padrão agora direciona para o Channel-TK oficial sem alterar canais personalizados.",
-    "[Compatibilidade] Configuração protegida permanece intacta; o novo JID do canal é consultado de forma segura.",
-    "[Mídia] Apresentações, banners e foto do menu foram mantidos.",
-    "[Canal] Links de canal corrigidos também nas mensagens do conector e nos Sub Bots."
+    "[Reparação] Arquivos dos comandos gitbot, site e stone e links do canal oficial corrigidos sem alterar a versão 10.3.43.",
+    "[Detecção] Marcador de reparação por hash permite identificar a correção pendente na mesma versão, mesmo quando o bot já instalou a 10.3.43.",
+    "[Atualizador] Comando update reparo/reparar usa o mesmo instalador incremental do update start.",
+    "[Aviso] Terminal passa a identificar reparação, e diagnóstico automático registra se há arquivos pendentes.",
+    "[Segurança] Instalação preserva config-all.json, credenciais, mídias e canais personalizados."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "Apresentação oficial do Tokito Bot, Tokito APIs e Stone WPP",
-  "notice": "Reparação disponível para Tokito Bot V10.3.43 — link oficial do Channel-TK atualizado.",
+  "type": "Correção",
+  "title": "Reparação de comandos e canal oficial — V10.3.43",
+  "notice": "Reparação de comandos disponível para Tokito Bot V10.3.43, mantendo a mesma versão.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -87,8 +87,28 @@
     },
     {
       "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "db6272a4de6da458d46ff59c8d876b48946323ff",
-      "size": 56439
+      "gitSha": "6000e2ce78f22e7d70dd8a0545e4aada7f5fb730",
+      "size": 56565
+    },
+    {
+      "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.43-canal-tk.json",
+      "gitSha": "adb0325ac2fcaf63953be900ac440b671bbb8bc0",
+      "size": 1080
+    },
+    {
+      "path": "DADOS_TOKITO/database/lib/update-cli.js",
+      "gitSha": "10053c737f5a2d8c378b16b38ef2c7fbf0bf866e",
+      "size": 4444
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/dono/update.js",
+      "gitSha": "1e58e18ba0040048221c2dd6c49d93f6b4ca38eb",
+      "size": 12679
+    },
+    {
+      "path": "tests/reparo-mesma-versao.test.js",
+      "gitSha": "73863cf14b98d09f4814eaf5fb961e3f0e25fa8e",
+      "size": 2613
     }
   ],
   "releases": [
@@ -4566,15 +4586,15 @@
       "version": "10.3.43",
       "fromVersion": "10.3.42",
       "channel": "stable",
-      "type": "Novidade",
-      "title": "Apresentação oficial do Tokito Bot, Tokito APIs e Stone WPP",
-      "notice": "Reparação disponível para Tokito Bot V10.3.43 — link oficial do Channel-TK atualizado.",
+      "type": "Correção",
+      "title": "Reparação de comandos e canal oficial — V10.3.43",
+      "notice": "Reparação de comandos disponível para Tokito Bot V10.3.43, mantendo a mesma versão.",
       "changelog": [
-        "[Reparação] Corrigido o botão Acessar canal em todos os comandos de apresentação.",
-        "[Canal] O endereço antigo do canal padrão agora direciona para o Channel-TK oficial sem alterar canais personalizados.",
-        "[Compatibilidade] Configuração protegida permanece intacta; o novo JID do canal é consultado de forma segura.",
-        "[Mídia] Apresentações, banners e foto do menu foram mantidos.",
-        "[Canal] Links de canal corrigidos também nas mensagens do conector e nos Sub Bots."
+        "[Reparação] Arquivos dos comandos gitbot, site e stone e links do canal oficial corrigidos sem alterar a versão 10.3.43.",
+        "[Detecção] Marcador de reparação por hash permite identificar a correção pendente na mesma versão, mesmo quando o bot já instalou a 10.3.43.",
+        "[Atualizador] Comando update reparo/reparar usa o mesmo instalador incremental do update start.",
+        "[Aviso] Terminal passa a identificar reparação, e diagnóstico automático registra se há arquivos pendentes.",
+        "[Segurança] Instalação preserva config-all.json, credenciais, mídias e canais personalizados."
       ],
       "files": [
         {
@@ -4644,13 +4664,35 @@
         },
         {
           "path": "DADOS_TOKITO/connect.js",
-          "gitSha": "db6272a4de6da458d46ff59c8d876b48946323ff",
-          "size": 56439
+          "gitSha": "6000e2ce78f22e7d70dd8a0545e4aada7f5fb730",
+          "size": 56565
+        },
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.43-canal-tk.json",
+          "gitSha": "adb0325ac2fcaf63953be900ac440b671bbb8bc0",
+          "size": 1080
+        },
+        {
+          "path": "DADOS_TOKITO/database/lib/update-cli.js",
+          "gitSha": "10053c737f5a2d8c378b16b38ef2c7fbf0bf866e",
+          "size": 4444
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/update.js",
+          "gitSha": "1e58e18ba0040048221c2dd6c49d93f6b4ca38eb",
+          "size": 12679
+        },
+        {
+          "path": "tests/reparo-mesma-versao.test.js",
+          "gitSha": "73863cf14b98d09f4814eaf5fb961e3f0e25fa8e",
+          "size": 2613
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-23T16:02:12.420Z"
+      "publishedAt": "2026-11-23T16:12:45.651Z",
+      "repairId": "canal-tk-20261123-2",
+      "repair": true
     }
   ],
   "mode": "incremental",
@@ -4662,5 +4704,7 @@
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.43"
+  "publicVersion": "10.3.43",
+  "repairId": "canal-tk-20261123-2",
+  "repair": true
 }
