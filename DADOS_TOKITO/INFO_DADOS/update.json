@@ -4790,16 +4790,17 @@
       "version": "10.3.44",
       "fromVersion": "10.3.43",
       "channel": "stable",
-      "type": "Novidade",
-      "title": "Figurinhas com áudio e padronização dos menus — V10.3.44",
-      "notice": "Correção da detecção de reparação na versão 10.3.44 sem pular versões.",
+      "type": "Correção",
+      "title": "Reparação do canal e das respostas de comandos — V10.3.44",
+      "notice": "Reparo 10.3.44: respostas que só reagiam voltam a usar contexto seguro; menu preserva acesso ao canal.",
       "changelog": [
-        "[Atualizador] Detecta reparações pelo repairId, além de conferir os hashes dos arquivos alterados.",
-        "[Instalação] Reparo sem arquivos pendentes sincroniza o manifesto sem apagar nem reinstalar o bot.",
-        "[Notificações] Avisos usam identificador de reparação estável para prevenir silêncios ou repetições após atualizações parciais.",
-        "[Diagnóstico] update diag informa os IDs de reparação local e remoto e se há pendências.",
-        "[Compatibilidade] Mantidos os ajustes anteriores de figurinha sonora e Acessar canal na 10.3.44.",
-        "[Segurança] Preserva sessões, configurações, grupos, arquivos registrados e histórico de versões."
+        "[Mensagens] Evita adicionar prévia experimental do canal a todas as respostas do bot, protegendo o envio de texto, menus e comandos.",
+        "[Menu] Inclui botão Acessar canal quando há link configurado e responde com menu em texto se carrossel não for aceito.",
+        "[Setchannel] Aceita link ou JID; ao citar uma mensagem encaminhada de canal, recupera JID e nome reais sem depender do endpoint de metadados.",
+        "[Segurança] Não usa serverMessageId 268 de uma postagem como se todo comando fosse encaminhado dela.",
+        "[Sub-bots] Nome de canal preservado separadamente na configuração.",
+        "[Atualizador] Reparação incremental na mesma 10.3.44, com novo repairId e sem apagar arquivos de sessões, mídia ou credenciais.",
+        "[Testes] Inclui regressões de contexto seguro, menu com botão e fallback de texto, canal citado e detecção de reparo."
       ],
       "files": [
         {
@@ -4985,9 +4986,9 @@
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-23T19:39:20.582Z",
+      "publishedAt": "2026-11-23T20:21:34.930Z",
       "repair": true,
-      "repairId": "deteccao-reparo-20261123-1"
+      "repairId": "respostas-canal-20261123-1"
     }
   ],
   "mode": "incremental",
