@@ -20,13 +20,14 @@ const criar = (config, sender) => {
 const url = 'https://whatsapp.com/channel/0029VbCAgovIyPtbjBhrIi3u'
 const cfg = { channel: url, channelLink: url, channeldl: '0@newsletter' }
 
-test('mensagem comum contém link sem cartão experimental', async () => {
+test('mensagem comum preserva texto sem link nem cartão experimental', async () => {
   const chamadas = []
   const reply = criar(cfg, async (_, msg) => { chamadas.push(msg); return true })
   await reply('Pong')
   assert.equal(chamadas.length, 1)
   assert.ok(chamadas[0].text.includes('Pong'))
-  assert.ok(chamadas[0].text.includes(url))
+  assert.equal(chamadas[0].text, 'Pong')
+  assert.equal(chamadas[0].text.includes(url), false)
   assert.equal(chamadas[0].contextInfo.externalAdReply, undefined)
 })
 
