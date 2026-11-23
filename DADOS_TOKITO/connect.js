@@ -1178,6 +1178,10 @@ async function conectar() {
           void tokito.sendPresenceUpdate('available').catch(() => {})
           void tokito.updateProfileStatus(`[ ${NomeDoBot} ONLINE 🧊 ]`).catch(() => {})
           void modulos.midiaMenu(tokito).catch(() => null)
+          // Repara o ID interno do canal depois de validar o novo convite.
+          void require('./sistemas/canal-oficial').resolver(tokito, runtime)
+            .then(alterou => { if (alterou) recarregar() })
+            .catch(error => erroSistema('Reparo do canal oficial', error))
           const configuracaoDoGrupo = jid => {
             try {
               const local = path.join(grupos, String(jid) + '.json')
