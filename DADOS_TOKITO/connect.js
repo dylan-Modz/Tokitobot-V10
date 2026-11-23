@@ -216,19 +216,7 @@ console.info = function () {
 
 const canalOficial = require('./sistemas/canal-oficial')
 const canalInfo = (mentions = []) => {
-  const jid = canalOficial.jid(runtime.config(), bot)
-  return {
-    mentionedJid: mentions,
-    ...(jid ? {
-      isForwarded: true,
-      forwardingScore: 1,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: jid,
-        newsletterName: NomeDoBot,
-        serverMessageId: ''
-      }
-    } : {})
-  }
+  return canalOficial.contexto(runtime.config(), bot, NomeDoBot, mentions)
 }
 
 const intervalo = 60 * 1000
