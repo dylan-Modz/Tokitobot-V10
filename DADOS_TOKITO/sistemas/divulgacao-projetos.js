@@ -91,7 +91,7 @@ async function enviar(ctx, tipo) {
   if (typeof criar !== 'function') throw new Error('Projeto oficial inválido.')
   let texto = criar(ctx)
   const canal = await linkCanal(ctx)
-  if (canal) texto += '\n\n- 📢 𝙰𝙲𝙴𝚂𝚂𝙰𝚁 𝙲𝙰𝙽𝙰𝙻\n> 🔗 ' + canal
+  // O acesso ao canal fica no botão cta_url, nunca como URL colada ao texto.
   const buttons = [botaoUrl(...links[tipo])]
   if (canal) buttons.push(botaoUrl('📢 Acessar canal', canal))
   ctx.reagir?.(ctx.from, tipo === 'stone' ? '💚' : '💙')?.catch?.(() => {})
