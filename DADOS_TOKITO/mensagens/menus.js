@@ -161,6 +161,8 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figperfil
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}packfig tema
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figpack criar Nome do Pack
+┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}figaudio — áudio marcado
+┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}verfigaudio
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figu 5
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figuemoji 5
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figuanime 5
@@ -186,6 +188,9 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}getbanner
 ┃࣪ ╎—̳͟͞͞ 📶 ${prefix}ping
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}criador
+┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}gitbot — conhecer o bot
+┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}site — Tokito APIs
+┃࣪ ╎—̳͟͞͞ 💚 ${prefix}stone — Stone WPP
 ┃࣪ ╎—̳͟͞͞ 🎂 ${prefix}idade 23/12/2007
 ┃࣪ ╎—̳͟͞͞ 🌤️ ${prefix}clima cidade
 ┃࣪ ╎—̳͟͞͞ 📊 ${prefix}totalcmd
@@ -348,6 +353,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}ativar
 ┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}autodl 1/0
 ┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}autosticker 1/0
+┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}autostickeraudio 1/0
 ┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}autortext 1/0
 ┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}multiprefix 1/0
 ┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}addprefix !
@@ -430,6 +436,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}donos
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}setprefix !
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fotomenu
+┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}rgfigaudio
+┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}delfigaudio
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fundoerro
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fundoprefix
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}fotobot
