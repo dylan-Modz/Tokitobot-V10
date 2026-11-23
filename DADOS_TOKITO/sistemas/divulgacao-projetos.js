@@ -7,26 +7,19 @@ const BANNERS = Object.freeze({
   site: 'https://raw.githubusercontent.com/dylan-Modz/upload/main/midias/imagens/s3ie6.jpg',
   stone: 'https://raw.githubusercontent.com/dylan-Modz/upload/main/midias/imagens/z0knv.jpg'
 })
-const CANAL_PADRAO_JID = '120363421690941003@newsletter'
-const CANAL_PADRAO_URL = 'https://whatsapp.com/channel/0029VbBbHVs7oQhTLxKWBW2q'
-
-const canalLigado = cfg => {
-  const canal = String(cfg.channel || '').trim()
-  const jid = String(cfg.channeldl || '').trim()
-  if (!canal || canal === '0' || canal === '0@newsletter') return false
-  if (jid === '0@newsletter' && !/^https:\/\/(?:www\.)?whatsapp\.com\/channel\//i.test(canal)) return false
-  return true
-}
+const canalOficial = require('./canal-oficial')
+const canalLigado = canalOficial.ativo
 
 const linkCanal = async ctx => {
   const cfg = ctx.runtimeSub?.config?.() || ctx.setting || {}
   if (!canalLigado(cfg)) return ''
-  const entradas = [cfg.channelLink, cfg.channel, cfg.channeldl]
-    .map(x => String(x || '').trim())
-  const link = entradas.find(x => /^https:\/\/(?:www\.)?whatsapp\.com\/channel\/[a-zA-Z0-9_-]+\/?$/i.test(x))
-  if (link) return link
-  const jid = entradas.find(x => /^\d+@newsletter$/i.test(x) && x !== '0@newsletter')
-  if (jid === CANAL_PADRAO_JID) return CANAL_PADRAO_URL
+  const configurado = canalOficial.link(cfg)
+  if (configurado) return configurado
+
+  // Canais personalizados antigos podem ter apenas o JID salvo.
+  const jid = [cfg.channeldl, cfg.channel]
+    .map(value => String(value || '').trim())
+    .find(value => /^\d+@newsletter$/.test(value) && value !== '0@newsletter')
   if (!jid || typeof ctx.tokito?.newsletterMetadata !== 'function') return ''
   try {
     const meta = await ctx.tokito.newsletterMetadata('jid', jid)
@@ -36,8 +29,13 @@ const linkCanal = async ctx => {
     ]
     for (const item of candidatos) {
       const valor = String(item || '').trim()
-      if (/^https:\/\/(?:www\.)?whatsapp\.com\/channel\/[a-zA-Z0-9_-]+\/?$/i.test(valor)) return valor
-      if (/^[a-zA-Z0-9_-]{15,}$/.test(valor)) return 'https://whatsapp.com/channel/' + valor
+      const normalizado = /^https:\/\//i.test(valor)
+        ? valor
+        : /^[A-Za-z0-9_-]{15,}$/.test(valor)
+          ? 'https://whatsapp.com/channel/' + valor
+          : ''
+      const link = canalOficial.link({ channel: normalizado, channeldl: jid })
+      if (link) return link
     }
   } catch (e) {
     console.log('[PROJETOS CANAL]', e?.message || 'Não foi possível consultar o canal.')
