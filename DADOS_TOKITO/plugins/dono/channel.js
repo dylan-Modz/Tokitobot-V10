@@ -51,7 +51,8 @@ return reply(mess.channelRequired(prefix, command))
 if (entradaCanal === '0') {
 setting.channeldl = '0@newsletter'
 setting.channel = '0@newsletter'
-if (runtimeSub.isSubBot) runtimeSub.updateSubConfig({ channel: '0@newsletter' })
+setting.channelLink = ''
+if (runtimeSub.isSubBot) runtimeSub.updateSubConfig({ channel: '0@newsletter', channelLink: '' })
 else fs.writeFileSync('./DADOS_TOKITO/INFO_DADOS/config-all.json', JSON.stringify(setting, null, 2))
 return reply(mess.channelDisabled())
 }
@@ -69,9 +70,12 @@ jidReal = meta?.jid || meta?.id || ''
 }
 if (!jidReal)
 return reply(mess.error())
+// Mantém o JID para os recursos internos e o link para o botão Acessar canal.
+const linkCanal = entradaCanal.match(/https?:\/\/(?:www\.)?whatsapp\.com\/channel\/[a-zA-Z0-9_-]+/i)?.[0] || ''
 setting.channeldl = jidReal
 setting.channel = jidReal
-if (runtimeSub.isSubBot) runtimeSub.updateSubConfig({ channel: jidReal })
+setting.channelLink = linkCanal
+if (runtimeSub.isSubBot) runtimeSub.updateSubConfig({ channel: jidReal, channelLink: linkCanal })
 else fs.writeFileSync('./DADOS_TOKITO/INFO_DADOS/config-all.json', JSON.stringify(setting, null, 2))
 await reply(mess.channelEnabled(jidReal, entradaCanal))
 }
