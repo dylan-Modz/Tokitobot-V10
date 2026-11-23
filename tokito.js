@@ -933,19 +933,7 @@ const whatIsPhone = messageId.substring(0, 2) === '3A' ? 'iPhone 🍎' : message
 const canalOficial = require('./DADOS_TOKITO/sistemas/canal-oficial')
 const canalInfo = (mentions = []) => {
 const cfgCanal = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
-const canal = canalOficial.jid(cfgCanal, tokito)
-return {
-...(canal ? {
-  isForwarded: true,
-  forwardingScore: 1,
-  forwardedNewsletterMessageInfo: {
-    newsletterJid: canal,
-    newsletterName: NomeDoBot,
-    serverMessageId: ''
-  }
-} : {}),
-mentionedJid: mentions
-}
+return canalOficial.contexto(cfgCanal, tokito, NomeDoBot, mentions)
 }
 const newsletter = canalInfo([])
 const isVerificado = nescessario.verificado
