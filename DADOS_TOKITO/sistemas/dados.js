@@ -657,10 +657,7 @@ const versaoPendente = comparacao > 0
 const reparos = comparacao === 0 ? arquivosParaReparar(remote) : []
 // Detecta explicitamente uma nova reparação mesmo quando os arquivos já foram
 // copiados manualmente, mas o manifesto local ainda é o antigo.
-const reparacaoIdPendente = comparacao === 0 &&
-  remote.repair === true &&
-  Boolean(String(remote.repairId || '').trim()) &&
-  String(remote.repairId) !== String(local.repairId || '')
+const reparacaoIdPendente = reparacaoIdDiferente(local, remote)
 const operacoes = versaoPendente ? pending.operations : reparos
 
 if (
@@ -811,6 +808,15 @@ incremental,
 releases,
 operations: [...operations.values()]
 }
+}
+
+// Reparações conservam a versão e mudam o identificador publicado.
+// O identificador é um sinal adicional aos hashes dos arquivos alterados.
+function reparacaoIdDiferente(local = {}, remote = {}) {
+return remote.repair === true &&
+Boolean(String(remote.repairId || '').trim()) &&
+String(remote.version || '') === String(local.version || '') &&
+String(remote.repairId) !== String(local.repairId || '')
 }
 
 // Detecta instalação incompleta sem depender somente do número da versão.
@@ -1694,5 +1700,6 @@ localLicenseStatus,
 state,
 deveAvisarUpdate,
 registrarAvisoUpdate,
-modoUpdate
+modoUpdate,
+reparacaoIdDiferente
 }
