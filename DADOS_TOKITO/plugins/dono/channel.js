@@ -86,7 +86,12 @@ const canalCitado = ctx => {
     const jid = normalizarJid(item?.newsletterJid)
     if (!jid) continue
     const nome = String(item.newsletterName || '').trim().slice(0, 120)
-    return { jid, nome }
+    const serverMessageId = Number(item.serverMessageId)
+    return {
+      jid, nome,
+      serverMessageId: Number.isSafeInteger(serverMessageId) && serverMessageId > 0 && serverMessageId <= 2147483647
+        ? serverMessageId : null
+    }
   }
   return null
 }
@@ -97,7 +102,8 @@ const salvarConfig = (ctx, alteracoes) => {
     runtimeSub.updateSubConfig({
       channel: proxima.channel,
       channelLink: proxima.channelLink,
-      channelName: proxima.channelName
+      channelName: proxima.channelName,
+      channelServerMessageId: proxima.channelServerMessageId
     })
   } else {
     const arquivo = runtimeSub.GLOBAL_CONFIG
@@ -147,7 +153,7 @@ dylan.setCommand({
 
     if (entrada === '0') {
       try {
-        salvarConfig(ctx, { channeldl: INATIVO, channel: INATIVO, channelLink: '', channelName: '' })
+        salvarConfig(ctx, { channeldl: INATIVO, channel: INATIVO, channelLink: '', channelName: '', channelServerMessageId: null })
         return ctx.reply(ctx.mess.channelDisabled())
       } catch (e) {
         console.warn('[SETCHANNEL] Falha ao desativar:', e?.code || 'erro')
@@ -167,21 +173,27 @@ dylan.setCommand({
     }))
 
     const citado = canalCitado(ctx)
-    let jid = pedido.jid || (pedido.link ? citado?.jid : '') || ''
+    // Para associar uma postagem ao link é necessário confirmar seu JID.
+    // Não associar uma mensagem citada de outro canal ao link informado.
+    let jid = pedido.jid
     if (!jid && pedido.link) jid = await consultarJid(ctx.tokito, pedido.link.split('/').pop())
     const link = pedido.link
-    const nome = citado?.jid === jid ? citado.nome : ''
+    const mesmaOrigem = Boolean(jid && citado?.jid === jid)
+    const nome = mesmaOrigem ? citado.nome : ''
+    const channelServerMessageId = mesmaOrigem ? citado.serverMessageId : null
 
     try {
       salvarConfig(ctx, {
         channeldl: jid || INATIVO,
         channel: jid || link,
         channelLink: link,
-        channelName: nome
+        channelName: nome,
+        channelServerMessageId
       })
-      return ctx.reply(jid
-        ? ctx.mess.channelEnabled(jid, link || jid)
-        : ctx.mess.channelLinkEnabled(link))
+      return ctx.reply(channelServerMessageId && typeof ctx.mess.channelNativeEnabled === 'function'
+        ? ctx.mess.channelNativeEnabled(jid, nome)
+        : jid ? ctx.mess.channelEnabled(jid, link || jid)
+          : ctx.mess.channelLinkEnabled(link))
     } catch (e) {
       console.warn('[SETCHANNEL] Falha ao gravar:', e?.code || 'erro')
       return ctx.reply(ctx.mess.padraoErro({
