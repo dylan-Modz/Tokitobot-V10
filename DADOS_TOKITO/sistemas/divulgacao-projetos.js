@@ -90,10 +90,9 @@ async function enviar(ctx, tipo) {
   const criar = mensagens[tipo]
   if (typeof criar !== 'function') throw new Error('Projeto oficial inválido.')
   let texto = criar(ctx)
-  const canal = await linkCanal(ctx)
   // O acesso ao canal fica no botão cta_url, nunca como URL colada ao texto.
   const buttons = [botaoUrl(...links[tipo])]
-  if (canal) buttons.push(botaoUrl('📢 Acessar canal', canal))
+  // O acesso ao canal vem do contexto de encaminhamento (V10.3.41).
   ctx.reagir?.(ctx.from, tipo === 'stone' ? '💚' : '💙')?.catch?.(() => {})
 
   let media = null
