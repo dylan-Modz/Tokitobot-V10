@@ -1003,9 +1003,7 @@ interactiveMessage: proto.Message.InteractiveMessage.create({
 contextInfo: canalInfo(mentions),
 body: proto.Message.InteractiveMessage.Body.create({ text: modulos.sanitizarErro(String(texto || ' '), [API_KEY_TOKITO]) }),
 footer: proto.Message.InteractiveMessage.Footer.create({ text: `` }),
-nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
-buttons: [...enviarbuton(botoesAtivos), ...(botaoCanal ? [botaoCanal] : [])]
-})
+nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: enviarbuton(botoes) })
 })
 },
 {
@@ -1111,7 +1109,9 @@ const dados = {
 contextInfo,
 body: proto.Message.InteractiveMessage.Body.create({ text: texto }),
 footer: proto.Message.InteractiveMessage.Footer.create({ text: `` }),
-nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: enviarbuton(botoes) })
+nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+buttons: [...enviarbuton(botoesAtivos), ...(botaoCanal ? [botaoCanal] : [])]
+})
 }
 if (header) dados.header = header
 const msg = generateWAMessageFromContent(
