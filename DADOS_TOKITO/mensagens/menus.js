@@ -186,6 +186,9 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}getbanner
 ┃࣪ ╎—̳͟͞͞ 📶 ${prefix}ping
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}criador
+┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}gitbot — conhecer o bot
+┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}site — Tokito APIs
+┃࣪ ╎—̳͟͞͞ 💚 ${prefix}stone — Stone WPP
 ┃࣪ ╎—̳͟͞͞ 🎂 ${prefix}idade 23/12/2007
 ┃࣪ ╎—̳͟͞͞ 🌤️ ${prefix}clima cidade
 ┃࣪ ╎—̳͟͞͞ 📊 ${prefix}totalcmd
