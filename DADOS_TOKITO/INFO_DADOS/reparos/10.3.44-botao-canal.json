@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "botao-canal-nativo-20261123-1",
+  "type": "reparacao",
+  "title": "Acesso ao canal como botão nativo do WhatsApp",
+  "changes": [
+    "Removido o URL de Acessar canal anexado ao rodapé de respostas normais e menus.",
+    "Menü principal e menus interativos recebem botão nativo cta_url Acessar canal quando houver URL válida.",
+    "Preserva botões de comandos existentes e não injeta link em textos e JSON de comandos.",
+    "Card de projetos usa o botão de acesso ao canal sem repetir URL no conteúdo.",
+    "Mensagens seguem funcionando em texto quando o WhatsApp rejeita botões; não finge encaminhamento de canal com serverMessageId inventado.",
+    "Versão 10.3.44 mantida; reparação incremental, sem alterar mídia, sessão e configurações."
+  ],
+  "notes": [
+    "Botão nativo cta_url depende do suporte do cliente WhatsApp; etiqueta de postagem encaminhada não é aplicável a uma mensagem comum do bot.",
+    "Confirmação de renderização no WhatsApp real depende do dispositivo receptor."
+  ],
+  "safety": {
+    "preserveVersion": true,
+    "preserveSessions": true,
+    "preserveConfiguration": true,
+    "preserveMedia": true
+  }
+}
