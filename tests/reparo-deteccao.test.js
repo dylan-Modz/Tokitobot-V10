@@ -17,7 +17,7 @@ test('reparo usa 10.3.44 e preserva histórico de versões', () => {
   assert.equal(manifesto.version, '10.3.44')
   assert.equal(manifesto.publicVersion, '10.3.44')
   assert.equal(manifesto.repair, true)
-  assert.equal(manifesto.repairId, 'botao-nativo-canal-20261123-1')
+  assert.equal(manifesto.repairId, 'restaurar-canal-1041-20261123-1')
   assert.equal(manifesto.mode, 'incremental')
   assert.equal(manifesto.notify, true)
   assert.equal(manifesto.releases.at(-1).version, '10.3.44')
@@ -26,25 +26,25 @@ test('reparo usa 10.3.44 e preserva histórico de versões', () => {
 test('identifica uma reparação nova mesmo na mesma versão', () => {
   assert.equal(dados.reparacaoIdDiferente(
     { version: '10.3.44', repairId: 'audio-canal-20261123-1' },
-    { version: '10.3.44', repairId: 'botao-nativo-canal-20261123-1', repair: true }
+    { version: '10.3.44', repairId: 'restaurar-canal-1041-20261123-1', repair: true }
   ), true)
 })
 
 test('não repete reparação quando ID local já corresponde ao GitHub', () => {
   assert.equal(dados.reparacaoIdDiferente(
-    { version: '10.3.44', repairId: 'botao-nativo-canal-20261123-1' },
-    { version: '10.3.44', repairId: 'botao-nativo-canal-20261123-1', repair: true }
+    { version: '10.3.44', repairId: 'restaurar-canal-1041-20261123-1' },
+    { version: '10.3.44', repairId: 'restaurar-canal-1041-20261123-1', repair: true }
   ), false)
 })
 
 test('um release normal não é confundido com reparação', () => {
   assert.equal(dados.reparacaoIdDiferente(
     { version: '10.3.43' },
-    { version: '10.3.44', repairId: 'botao-nativo-canal-20261123-1', repair: true }
+    { version: '10.3.44', repairId: 'restaurar-canal-1041-20261123-1', repair: true }
   ), false)
   assert.equal(dados.reparacaoIdDiferente(
     { version: '10.3.44' },
-    { version: '10.3.44', repairId: 'botao-nativo-canal-20261123-1', repair: false }
+    { version: '10.3.44', repairId: 'restaurar-canal-1041-20261123-1', repair: false }
   ), false)
   assert.equal(dados.reparacaoIdDiferente(
     { version: '10.3.44' },
