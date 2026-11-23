@@ -137,20 +137,12 @@ const contextoNativo = (config, mentionedJid = []) => {
 
 // Contexto rico reservado para mensagens que anunciam explicitamente um canal.
 const contexto = (config, socket, nomeBot, mentionedJid = []) => {
+  const nativo = contextoNativo(config, mentionedJid)
+  if (nativo.forwardedNewsletterMessageInfo) return nativo
   const dados = informacoes(config, socket)
-  const base = { mentionedJid }
-  if (dados.jid) {
-    return {
-      ...base,
-      isForwarded: true,
-      forwardingScore: 1,
-      forwardedNewsletterMessageInfo: {
-        newsletterJid: dados.jid,
-        newsletterName: dados.name || parse(nomeBot) || 'Canal WhatsApp'
-      }
-    }
-  }
-  // Sem JID real não há como gerar o cartão de canal encaminhado.
+  const base = contextoSeguro(mentionedJid)
+  // Sem postagem real, usar apenas link de acesso, nunca atribuir um
+  // encaminhamento de canal inexistente à mensagem enviada.
   // Fallback mantém o acesso clicável, sem atribuir uma mensagem inexistente.
   if (dados.link) {
     const seguidores = Number.isInteger(dados.subscribers)
