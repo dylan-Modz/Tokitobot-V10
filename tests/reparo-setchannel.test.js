@@ -116,6 +116,7 @@ test('desativar com 0 zera os campos sem consultar a Stone', async () => {
   assert.equal(ctx.setting.channel, '0@newsletter')
   assert.equal(ctx.setting.channeldl, '0@newsletter')
   assert.equal(ctx.setting.channelLink, '')
+  assert.equal(ctx.setting.channelServerMessageId, null)
   assert.equal(ctx.respostas[0], 'DESATIVADO')
   assert.equal(ambiente.chamadas, 0)
 })
@@ -152,7 +153,7 @@ test('só o dono pode configurar canal', async () => {
 
 test('JID e nome do canal encaminhado citado são preservados sem consultar metadados', async () => {
   const ambiente = criar({ metadata: () => { throw new Error('consulta não deveria ocorrer') } })
-  const ctx = ambiente.ctx(LINK)
+  const ctx = ambiente.ctx('120363423684523217@newsletter ' + LINK)
   ctx.ctxMsg = { quotedMessage: {
     extendedTextMessage: { contextInfo: { forwardedNewsletterMessageInfo: {
       newsletterJid: '120363423684523217@newsletter',
@@ -164,6 +165,7 @@ test('JID e nome do canal encaminhado citado são preservados sem consultar meta
   assert.equal(ambiente.chamadas, 0)
   assert.equal(ctx.setting.channeldl, '120363423684523217@newsletter')
   assert.equal(ctx.setting.channelName, 'Teste')
+  assert.equal(ctx.setting.channelServerMessageId, 268)
   assert.equal(ctx.setting.channelLink, LINK)
   assert.equal(JSON.parse(ambiente.escrita).channelName, 'Teste')
 })
