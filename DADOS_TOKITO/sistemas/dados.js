@@ -492,6 +492,9 @@ return String(marker.id || '').trim() !== migration.id
 // Mantém um número pequeno de novas tentativas para atualizações pendentes.
 const UPDATE_NOTICE_RETRY_MS = 3 * 60 * 1000
 const UPDATE_NOTICE_MAX_ATTEMPTS = 4
+// Após quatro tentativas o aviso volta a ser tentado uma vez por dia,
+// pois sucesso no envio pelo socket não comprova entrega ao dono.
+const UPDATE_NOTICE_LONG_RETRY_MS = 24 * 60 * 60 * 1000
 
 function deveAvisarUpdate(version, ownerJid = '') {
 const valor = String(version || '').trim()
@@ -502,9 +505,11 @@ if (String(anterior.lastNotifiedPrincipalVersion || '') !== valor) return true
 if (destino && String(anterior.lastNotifiedPrincipalJid || '') !== destino) return true
 const tentativas = Number(anterior.lastNotifiedPrincipalAttempts || 0)
 // Versões antigas não guardavam o número de tentativas: oferece uma nova chance.
-if (tentativas >= UPDATE_NOTICE_MAX_ATTEMPTS) return false
 const anteriorEm = Date.parse(anterior.lastNotifiedAt || '')
-return !Number.isFinite(anteriorEm) || Date.now() - anteriorEm >= UPDATE_NOTICE_RETRY_MS
+if (!Number.isFinite(anteriorEm)) return true
+const intervalo = tentativas >= UPDATE_NOTICE_MAX_ATTEMPTS
+  ? UPDATE_NOTICE_LONG_RETRY_MS : UPDATE_NOTICE_RETRY_MS
+return Date.now() - anteriorEm >= intervalo
 }
 
 function registrarAvisoUpdate(version, ownerJid = '') {
