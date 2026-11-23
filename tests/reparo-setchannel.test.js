@@ -148,3 +148,56 @@ test('só o dono pode configurar canal', async () => {
   assert.equal(ctx.respostas[0], 'DONO')
   assert.equal(ambiente.chamadas, 0)
 })
+
+
+test('aceita JID, link, serverMessageId e nome confirmados pelo usuário', async () => {
+  const ambiente = criar({ metadata: () => { throw new Error('não chamar') } })
+  const ctx = ambiente.ctx('120363423684523217@newsletter ' + LINK + ' 268 Teste')
+  await ambiente.comando.executar(ctx)
+  assert.equal(ctx.setting.channeldl, '120363423684523217@newsletter')
+  assert.equal(ctx.setting.channelLink, LINK)
+  assert.equal(ctx.setting.channelMessageId, 268)
+  assert.equal(ctx.setting.channelName, 'Teste')
+  assert.equal(ambiente.chamadas, 0)
+  assert.equal(canalOficial.contexto(ctx.setting, {}, 'Tokito').forwardedNewsletterMessageInfo.serverMessageId, 268)
+})
+
+test('captura o JID e o número da mensagem do canal ao marcar encaminhamento', async () => {
+  const ambiente = criar()
+  const ctx = ambiente.ctx('')
+  ctx.ctxMsg = { quotedMessage: { extendedTextMessage: { contextInfo: {
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: '120363423684523217@newsletter',
+      serverMessageId: 268,
+      newsletterName: 'Teste'
+    }
+  } } } }
+  await ambiente.comando.executar(ctx)
+  assert.equal(ctx.setting.channeldl, '120363423684523217@newsletter')
+  assert.equal(ctx.setting.channelMessageId, 268)
+  assert.equal(ctx.setting.channelName, 'Teste')
+  assert.equal(ambiente.chamadas, 0)
+})
+
+test('não usa mensagem encaminhada de outro canal para o JID configurado', async () => {
+  const ambiente = criar()
+  const ctx = ambiente.ctx('120363999999999999@newsletter ' + LINK)
+  ctx.ctxMsg = { quotedMessage: { extendedTextMessage: { contextInfo: {
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: '120363423684523217@newsletter', serverMessageId: 268, newsletterName: 'Teste'
+    }
+  } } } }
+  await ambiente.comando.executar(ctx)
+  assert.equal(ctx.setting.channelMessageId, 0)
+  assert.equal(ctx.setting.channelName, '')
+})
+
+test('desligar limpa o identificador do canal e da mensagem', async () => {
+  const ambiente = criar()
+  const ctx = ambiente.ctx('0')
+  ctx.setting.channelMessageId = 268
+  ctx.setting.channelName = 'Teste'
+  await ambiente.comando.executar(ctx)
+  assert.equal(ctx.setting.channelMessageId, 0)
+  assert.equal(ctx.setting.channelName, '')
+})
