@@ -965,13 +965,8 @@ let selo = isVerificado ? SeloMeta : info
 const reply = async (text, mentions = []) => {
 if (!text) text = ' '
 const textoSeguro = modulos.sanitizarErro(String(text), [API_KEY_TOKITO]) || ' '
-const cfgCanal = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
-const linkCanal = canalOficial.link(cfgCanal)
-// Mensagens JSON e blocos de código precisam ficar intactos (ex.: /get).
-const ehDadoEstruturado = /^\s*(?:\{|\[|```)/.test(textoSeguro)
-const textoFinal = linkCanal && !ehDadoEstruturado && !textoSeguro.includes(linkCanal)
-  ? textoSeguro + '\n\n- 📢 𝙰𝙲𝙴𝚂𝚂𝙰𝚁 𝙲𝙰𝙽𝙰𝙻\n> 🔗 ' + linkCanal
-  : textoSeguro
+// Não acrescentar o URL do canal às mensagens de texto.
+const textoFinal = textoSeguro
 try {
   return await tokito.sendMessage(from, {
     text: textoFinal,
@@ -988,8 +983,8 @@ try {
   })
 }
 }
-const enviarbuton = botoes =>
-botoes
+const enviarbuton = botoes => {
+const lista = (Array.isArray(botoes) ? botoes : [])
 .filter(item => item?.texto && item?.id)
 .map(item => ({
 name: 'quick_reply',
@@ -998,8 +993,14 @@ display_text: String(item.texto),
 id: String(item.id)
 })
 }))
+const cfg = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
+const canal = canalOficial.botaoAcessar(cfg)
+if (canal && lista.length < 10) lista.push(canal)
+return lista
+}
 const botaozin = async (texto, botoes = [], mentions = []) => {
-if (!isBotoes || !botoes.length) return reply(texto, mentions)
+const botoesNative = isBotoes ? enviarbuton(botoes) : []
+if (!botoesNative.length) return reply(texto, mentions)
 try {
 const msg = generateWAMessageFromContent(
 from,
@@ -1008,7 +1009,7 @@ interactiveMessage: proto.Message.InteractiveMessage.create({
 contextInfo: canalInfo(mentions),
 body: proto.Message.InteractiveMessage.Body.create({ text: modulos.sanitizarErro(String(texto || ' '), [API_KEY_TOKITO]) }),
 footer: proto.Message.InteractiveMessage.Footer.create({ text: `` }),
-nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: enviarbuton(botoes) })
+nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: botoesNative })
 })
 },
 {
@@ -1035,8 +1036,9 @@ reagir(from, emoji).catch(() => {})
 const caminhoVideo = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
 const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
 const contextInfo = canalInfo([sender])
+const botoesNative = isBotoes ? enviarbuton(botoes) : []
 let resultado
-if (!isBotoes || !botoes.length) {
+if (!botoesNative.length) {
 try {
 const media = await modulos.midiaMenu(tokito)
 if (media?.videoMessage) {
@@ -1110,7 +1112,7 @@ const dados = {
 contextInfo,
 body: proto.Message.InteractiveMessage.Body.create({ text: texto }),
 footer: proto.Message.InteractiveMessage.Footer.create({ text: `` }),
-nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: enviarbuton(botoes) })
+nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: botoesNative })
 }
 if (header) dados.header = header
 const msg = generateWAMessageFromContent(
