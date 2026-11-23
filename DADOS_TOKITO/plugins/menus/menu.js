@@ -135,6 +135,21 @@ id: `${prefix}ping`
 title: '🧊⃞ ᴄʀɪᴀᴅᴏʀ ⃞🧊',
 description: 'ᴍᴏsᴛʀᴀ ᴀs ɪɴғᴏʀᴍᴀᴄᴏᴇs ᴇ ᴏ ᴄᴏɴᴛᴀᴛᴏ ᴅᴏ ᴄʀɪᴀᴅᴏʀ.',
 id: `${prefix}criador`
+},
+{
+title: '🤖 ᴛᴏᴋɪᴛᴏ ʙᴏᴛ — ɢɪᴛʜᴜʙ',
+description: 'ᴀᴘʀᴇsᴇɴᴛᴀ ᴏ ʙᴏᴛ, sᴇᴜs ʀᴇᴄᴜʀsᴏs ᴇ ᴏ ɢɪᴛʜᴜʙ ᴏғɪᴄɪᴀʟ.',
+id: `${prefix}gitbot`
+},
+{
+title: '🌐 ᴛᴏᴋɪᴛᴏ ᴀᴘɪs',
+description: 'sᴇʀᴠɪᴄ̧ᴏs, ᴀᴘɪs ᴇ ғᴜɴᴄ̧ᴏᴇs ᴅᴀ ᴘʟᴀᴛᴀғᴏʀᴍᴀ.',
+id: `${prefix}site`
+},
+{
+title: '💚 sᴛᴏɴᴇ ᴡᴘᴘ',
+description: 'ʙɪʙʟɪᴏᴛᴇᴄᴀ, ɢᴀᴛᴇᴡᴀʏ ᴇ sᴛᴜᴅɪᴏ ᴏғɪᴄɪᴀʟ.',
+id: `${prefix}stone`
 }
 ]
 }
