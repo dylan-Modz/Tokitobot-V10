@@ -148,8 +148,8 @@
     },
     {
       "path": "tests/sticker-audio.test.js",
-      "gitSha": "90491193ea98b44a29e3b04d2b03dd6b1f502d64",
-      "size": 2476
+      "gitSha": "30f96233805f6506afc18c5b26e28ae4ff490c3c",
+      "size": 2566
     },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
@@ -4918,8 +4918,8 @@
         },
         {
           "path": "tests/sticker-audio.test.js",
-          "gitSha": "90491193ea98b44a29e3b04d2b03dd6b1f502d64",
-          "size": 2476
+          "gitSha": "30f96233805f6506afc18c5b26e28ae4ff490c3c",
+          "size": 2566
         },
         {
           "path": "DADOS_TOKITO/mensagens/mensagens.js",
