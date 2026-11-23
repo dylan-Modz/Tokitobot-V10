@@ -8,15 +8,19 @@ const canal = require('../DADOS_TOKITO/sistemas/canal-oficial')
 const root = path.resolve(__dirname, '..')
 const LINK = 'https://whatsapp.com/channel/0029VbCAgovIyPtbjBhrIi3u'
 
-test('botão de acesso é CTA nativo e não texto de URL', () => {
-  const botao = canal.botaoAcesso({channel: LINK, channelLink: LINK, channeldl: '0@newsletter'})
-  assert.equal(botao.name, 'cta_url')
-  const dados = JSON.parse(botao.buttonParamsJson)
-  assert.equal(dados.display_text, '📢 Acessar canal')
-  assert.equal(dados.url, LINK)
-  assert.equal(dados.merchant_url, LINK)
-  assert.equal(canal.botaoAcesso({channel:'0@newsletter'}), null)
+test('o selo de canal voltou a usar o contexto da 10.3.41', () => {
+  const contexto = canal.contextoV1041({
+    channel: LINK, channeldl: '120363555555555555@newsletter'
+  }, 'Tokito', [])
+  assert.deepEqual(contexto.forwardedNewsletterMessageInfo, {
+    newsletterJid: '120363555555555555@newsletter',
+    newsletterName: 'Tokito',
+    serverMessageId: ''
+  })
+  assert.equal(contexto.isForwarded, true)
+  assert.equal(contexto.externalAdReply, undefined)
 })
+
 
 test('reply normal e fallback do menu não acrescentam link solto', () => {
   const bot = fs.readFileSync(path.join(root,'tokito.js'),'utf8')
@@ -24,7 +28,7 @@ test('reply normal e fallback do menu não acrescentam link solto', () => {
   assert.doesNotMatch(bot, /textoSeguro \+ '\\n\\n- 📢/)
   assert.doesNotMatch(menu, /texto \+ \(linkCanalMenu/)
   assert.match(bot, /const textoFinal = textoSeguro/)
-  assert.match(menu, /canalOficial\.botaoAcesso/)
+  assert.doesNotMatch(menu, /canalOficial\.botaoAcesso/)
 })
 
 function obterMenuEmMemoria(config, isBotoes) {
@@ -64,25 +68,22 @@ function obterMenuEmMemoria(config, isBotoes) {
   return {cmd,envios}
 }
 
-test('menu gera botão do canal mesmo com os outros botões desativados', async () => {
-  const teste = obterMenuEmMemoria({channel: LINK,channelLink: LINK,channeldl:'0@newsletter'}, false)
+test('menu sem botões preserva o envio simples da 10.3.41', async () => {
+  const teste = obterMenuEmMemoria({ channel: LINK, channeldl: '0@newsletter' }, false)
   await teste.cmd('MENU')
-  assert.equal(teste.envios.length,1)
-  const msg = teste.envios[0].interactiveMessage
-  assert.ok(msg)
-  const botoes = msg.nativeFlowMessage.buttons
-  assert.equal(botoes.length,1)
-  assert.equal(botoes[0].name,'cta_url')
-  assert.equal(JSON.parse(botoes[0].buttonParamsJson).url,LINK)
-  assert.equal(msg.body.text,'MENU')
+  assert.equal(teste.envios.length, 1)
+  assert.equal(teste.envios[0].text, 'MENU')
+  assert.equal(teste.envios[0].interactiveMessage, undefined)
 })
 
-test('menu com comando mantém botões existentes mais Acessar canal', async () => {
-  const teste = obterMenuEmMemoria({channel:LINK,channelLink:LINK,channeldl:'0@newsletter'}, true)
-  await teste.cmd('MENU','🧊',[{texto:'Voltar',id:'/menu'}])
+
+test('menu interativo mantém apenas os botões que o comando declarou', async () => {
+  const teste = obterMenuEmMemoria({ channel: LINK, channeldl: '0@newsletter' }, true)
+  await teste.cmd('MENU', '🧊', [{texto:'Voltar',id:'/menu'}])
   const botoes = teste.envios[0].interactiveMessage.nativeFlowMessage.buttons
-  assert.deepEqual(botoes.map(x=>x.name),['quick_reply','cta_url'])
+  assert.deepEqual(botoes.map(x => x.name), ['quick_reply'])
 })
+
 
 test('canal desligado mantém envio simples sem CTA', async () => {
   const teste = obterMenuEmMemoria({channel:'0@newsletter',channeldl:'0@newsletter'}, false)
@@ -96,8 +97,8 @@ test('reparo mantém a mesma versão sem perder o histórico', () => {
   const pkg = JSON.parse(fs.readFileSync(path.join(root,'package.json'),'utf8'))
   assert.equal(pkg.version,'10.3.44')
   assert.equal(manifest.version,'10.3.44')
-  assert.equal(manifest.repairId,'botao-nativo-canal-20261123-1')
-  assert.equal(manifest.releases.at(-1).repairId,'botao-nativo-canal-20261123-1')
+  assert.equal(manifest.repairId,'restaurar-canal-1041-20261123-1')
+  assert.equal(manifest.releases.at(-1).repairId,'restaurar-canal-1041-20261123-1')
   assert.equal(manifest.notify,true)
   assert.equal(manifest.mode,'incremental')
 })
