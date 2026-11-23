@@ -965,13 +965,8 @@ let selo = isVerificado ? SeloMeta : info
 const reply = async (text, mentions = []) => {
 if (!text) text = ' '
 const textoSeguro = modulos.sanitizarErro(String(text), [API_KEY_TOKITO]) || ' '
-const cfgCanal = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
-const linkCanal = canalOficial.link(cfgCanal)
-// Mensagens JSON e blocos de código precisam ficar intactos (ex.: /get).
-const ehDadoEstruturado = /^\s*(?:\{|\[|```)/.test(textoSeguro)
-const textoFinal = linkCanal && !ehDadoEstruturado && !textoSeguro.includes(linkCanal)
-  ? textoSeguro + '\n\n- 📢 𝙰𝙲𝙴𝚂𝚂𝙰𝚁 𝙲𝙰𝙽𝙰𝙻\n> 🔗 ' + linkCanal
-  : textoSeguro
+// Respostas comuns não recebem URL solta nem metadados de encaminhamento.
+const textoFinal = textoSeguro
 try {
   return await tokito.sendMessage(from, {
     text: textoFinal,
@@ -1008,7 +1003,9 @@ interactiveMessage: proto.Message.InteractiveMessage.create({
 contextInfo: canalInfo(mentions),
 body: proto.Message.InteractiveMessage.Body.create({ text: modulos.sanitizarErro(String(texto || ' '), [API_KEY_TOKITO]) }),
 footer: proto.Message.InteractiveMessage.Footer.create({ text: `` }),
-nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({ buttons: enviarbuton(botoes) })
+nativeFlowMessage: proto.Message.InteractiveMessage.NativeFlowMessage.create({
+buttons: [...enviarbuton(botoes), ...(botaoCanal ? [botaoCanal] : [])]
+})
 })
 },
 {
@@ -1035,8 +1032,11 @@ reagir(from, emoji).catch(() => {})
 const caminhoVideo = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
 const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
 const contextInfo = canalInfo([sender])
+const cfgMenu = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
+const botaoCanal = canalOficial.botaoAcesso(cfgMenu)
 let resultado
-if (!isBotoes || !botoes.length) {
+// O botão do canal só é incluído nos menus interativos; não é texto anexado.
+if (!isBotoes || (!botoes.length && !botaoCanal)) {
 try {
 const media = await modulos.midiaMenu(tokito)
 if (media?.videoMessage) {
