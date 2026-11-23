@@ -44,7 +44,7 @@ info: {
 async executar(ctx) {
 with (ctx) {
 {
-const botaoCanalMenu = canalOficial.botaoAcesso(ctx.setting || {})
+// Ver canal é gerado pelo contextInfo nativo; não adicionamos CTA_url.
 const textoMenuSeguro = () =>
   linguagem.menu(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion)
 try {
@@ -163,8 +163,7 @@ const botoes = [
 {
 name: 'single_select',
 buttonParamsJson: JSON.stringify(listaMenus)
-},
-...(botaoCanalMenu ? [botaoCanalMenu] : [])
+}
 ]
 const carouselMessage = {
 cards: [
@@ -201,11 +200,11 @@ buttons: botoes
 await tokito.relayMessage(from, {
 interactiveMessage: {
 contextInfo: {
+...canalInfo([sender]),
 quotedMessage: selo.message,
 ...(selo.key?.participant ? { participant: selo.key.participant } : {}),
 stanzaId: selo.key?.id,
-remoteJid: selo.key?.remoteJid,
-mentionedJid: [sender]
+remoteJid: selo.key?.remoteJid
 },
 body: {
 text: `*🧊⃞ ᴀǫᴜɪ ᴇsᴛᴀ sᴇᴜ ᴍᴇɴᴜ ⃞🧊*`
