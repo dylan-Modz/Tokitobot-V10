@@ -62,7 +62,8 @@ const subConfig = () => {
   const current = readJson(configFile, {})
   return {
     prefix: String(current.prefix || '!'),
-    channel: String(current.channel || '0@newsletter')
+    channel: String(current.channel || '0@newsletter'),
+    channelLink: String(current.channelLink || '')
   }
 }
 
@@ -78,6 +79,7 @@ const config = () => {
     prefix: String(local.prefix || main.prefix || '!'),
     channel,
     channeldl: channel,
+    channelLink: String(local.channelLink || ''),
     ownerNumber: owner() || main.ownerNumber || ''
   }
 }
@@ -94,6 +96,9 @@ const updateSubConfig = patch => {
 
   if (Object.prototype.hasOwnProperty.call(patch || {}, 'channel')) {
     next.channel = String(patch.channel || '0@newsletter').trim() || '0@newsletter'
+  }
+  if (Object.prototype.hasOwnProperty.call(patch || {}, 'channelLink')) {
+    next.channelLink = String(patch.channelLink || '').trim()
   }
 
   return writeJson(configFile, next)
