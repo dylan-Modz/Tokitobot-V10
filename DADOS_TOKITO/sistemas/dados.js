@@ -655,6 +655,12 @@ const versaoPendente = comparacao > 0
 // Mesmo quando o número já foi salvo, verifica se os arquivos de fato
 // chegaram. Isso evita o falso "atualizado" após um update incompleto.
 const reparos = comparacao === 0 ? arquivosParaReparar(remote) : []
+// Detecta explicitamente uma nova reparação mesmo quando os arquivos já foram
+// copiados manualmente, mas o manifesto local ainda é o antigo.
+const reparacaoIdPendente = comparacao === 0 &&
+  remote.repair === true &&
+  Boolean(String(remote.repairId || '').trim()) &&
+  String(remote.repairId) !== String(local.repairId || '')
 const operacoes = versaoPendente ? pending.operations : reparos
 
 if (
@@ -669,8 +675,9 @@ throw new Error('A versão nova foi anunciada sem arquivos no manifesto oficial.
 
 return {
 ok: true,
-available: versaoPendente || migracaoPendente || reparos.length > 0,
-repair: !versaoPendente && reparos.length > 0,
+available: versaoPendente || migracaoPendente || reparos.length > 0 || reparacaoIdPendente,
+repair: !versaoPendente && (reparos.length > 0 || reparacaoIdPendente),
+repairIdPendente: reparacaoIdPendente,
 local,
 remote,
 apiFalhou,
@@ -1377,6 +1384,7 @@ lastBackupType: 'incremental',
 lastUpdateAt: new Date().toISOString(),
 previousVersion: check.local.version,
 installedVersion: check.remote.version,
+installedRepairId: String(check.remote.repairId || ''),
 addedByLastUpdate: added,
 lastUpdatedFiles: operations
 .filter(item => item.type === 'file')
@@ -1451,12 +1459,34 @@ const totalOperacoes =
 (Array.isArray(check.pendingDelete) ? check.pendingDelete.length : 0)
 
 if (!totalOperacoes) {
-return {
-updated: false,
-reason: 'empty_update',
-version: check.local.version,
-remote: check.remote
-}
+  if (check.repair === true && check.repairIdPendente === true) {
+    // Somente o manifesto está atrasado: sincronizar o identificador do reparo
+    // sem reinstalar o bot, sem apagar arquivos e sem simular arquivos copiados.
+    onProgress('Sincronizando o manifesto da reparação ' + check.remote.repairId + '...')
+    writeJson(UPDATE_FILE, check.remote)
+    saveState({
+      installedVersion: check.remote.version,
+      installedRepairId: check.remote.repairId,
+      lastUpdateAt: new Date().toISOString()
+    })
+    return {
+      updated: true,
+      repair: true,
+      from: check.local.version,
+      version: check.remote.version,
+      filesUpdated: 0,
+      filesDeleted: 0,
+      remote: check.remote,
+      incremental: true,
+      manifestOnly: true
+    }
+  }
+  return {
+    updated: false,
+    reason: 'empty_update',
+    version: check.local.version,
+    remote: check.remote
+  }
 }
 
 return instalarUpdateIncremental(
