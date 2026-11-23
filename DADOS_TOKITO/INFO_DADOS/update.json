@@ -4,19 +4,18 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-23T15:46:47.012Z",
+  "publishedAt": "2026-11-23T16:02:43.702Z",
   "changelog": [
-    "[Novidade] Comandos gitbot, site e stone com capas oficiais, apresentação dos projetos e botões de acesso.",
-    "[Mídia] gitbot reaproveita a mídia do menu; site e stone exibem os banners configurados.",
-    "[Canal] Botão Acessar canal aparece somente com canal ativado e link válido.",
-    "[Configuração] setchannel preserva o link do convite sem alterar o JID usado internamente.",
-    "[Menus] Atalhos adicionados ao menu principal e menu lista."
+    "[Reparo] O link Acessar canal em gitbot, site e stone agora aponta ao novo canal oficial quando ele está ativado.",
+    "[Canal] Configurações antigas são normalizadas automaticamente sem perder a opção de canal desligado ou substituir canais personalizados.",
+    "[WhatsApp] O ID antigo de newsletter não é reutilizado; o novo ID é consultado no WhatsApp ao conectar.",
+    "[Preservação] Não altera as capas, textos dos comandos, configurações privadas ou mídias do usuário."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Novidade",
-  "title": "Apresentação oficial do Tokito Bot, Tokito APIs e Stone WPP",
-  "notice": "A versão 10.3.43 já está disponível para atualização.",
+  "type": "Correção",
+  "title": "Reparo do canal oficial em todas as divulgações",
+  "notice": "Reparo disponível para a versão 10.3.43: link do canal corrigido.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -27,8 +26,8 @@
     },
     {
       "path": "DADOS_TOKITO/sistemas/divulgacao-projetos.js",
-      "gitSha": "44e2baa1401893222d83521dcf7cc836221d6f84",
-      "size": 5911
+      "gitSha": "6c12992127b3d5b7ae4646d3688019c6c27ce73a",
+      "size": 5832
     },
     {
       "path": "DADOS_TOKITO/plugins/info/gitbot.js",
@@ -47,8 +46,8 @@
     },
     {
       "path": "DADOS_TOKITO/sub/runtime.js",
-      "gitSha": "e5673a6a175affee8b88e4f5ce9eb878721ac508",
-      "size": 3939
+      "gitSha": "6aa570429464a3902387d642b6ac18289761a7e4",
+      "size": 4047
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/channel.js",
@@ -69,6 +68,26 @@
       "path": "package.json",
       "gitSha": "2202245a836ec13f52b6fbfffc445a7d5c652eb3",
       "size": 1956
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
+      "gitSha": "958198aeb622f4981a00b76f9a2e3fc4755835b2",
+      "size": 3173
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "gitSha": "f2016e1187a103aa03435e562c2a0724aec8e282",
+      "size": 56631
+    },
+    {
+      "path": "README.md",
+      "gitSha": "09700571aae9da58df605c03dd56a9a402b71359",
+      "size": 9034
+    },
+    {
+      "path": "tests/canal-oficial.test.js",
+      "gitSha": "10cb2dd43ee62436248b5cf7e5199ef70ced667b",
+      "size": 5311
     }
   ],
   "releases": [
@@ -4546,15 +4565,14 @@
       "version": "10.3.43",
       "fromVersion": "10.3.42",
       "channel": "stable",
-      "type": "Novidade",
-      "title": "Apresentação oficial do Tokito Bot, Tokito APIs e Stone WPP",
-      "notice": "A versão 10.3.43 já está disponível para atualização.",
+      "type": "Correção",
+      "title": "Reparo do canal oficial em todas as divulgações",
+      "notice": "Reparo disponível para a versão 10.3.43: link do canal corrigido.",
       "changelog": [
-        "[Novidade] Comandos gitbot, site e stone com capas oficiais, apresentação dos projetos e botões de acesso.",
-        "[Mídia] gitbot reaproveita a mídia do menu; site e stone exibem os banners configurados.",
-        "[Canal] Botão Acessar canal aparece somente com canal ativado e link válido.",
-        "[Configuração] setchannel preserva o link do convite sem alterar o JID usado internamente.",
-        "[Menus] Atalhos adicionados ao menu principal e menu lista."
+        "[Reparo] O link Acessar canal em gitbot, site e stone agora aponta ao novo canal oficial quando ele está ativado.",
+        "[Canal] Configurações antigas são normalizadas automaticamente sem perder a opção de canal desligado ou substituir canais personalizados.",
+        "[WhatsApp] O ID antigo de newsletter não é reutilizado; o novo ID é consultado no WhatsApp ao conectar.",
+        "[Preservação] Não altera as capas, textos dos comandos, configurações privadas ou mídias do usuário."
       ],
       "files": [
         {
@@ -4564,8 +4582,8 @@
         },
         {
           "path": "DADOS_TOKITO/sistemas/divulgacao-projetos.js",
-          "gitSha": "44e2baa1401893222d83521dcf7cc836221d6f84",
-          "size": 5911
+          "gitSha": "6c12992127b3d5b7ae4646d3688019c6c27ce73a",
+          "size": 5832
         },
         {
           "path": "DADOS_TOKITO/plugins/info/gitbot.js",
@@ -4584,8 +4602,8 @@
         },
         {
           "path": "DADOS_TOKITO/sub/runtime.js",
-          "gitSha": "e5673a6a175affee8b88e4f5ce9eb878721ac508",
-          "size": 3939
+          "gitSha": "6aa570429464a3902387d642b6ac18289761a7e4",
+          "size": 4047
         },
         {
           "path": "DADOS_TOKITO/plugins/dono/channel.js",
@@ -4606,11 +4624,31 @@
           "path": "package.json",
           "gitSha": "2202245a836ec13f52b6fbfffc445a7d5c652eb3",
           "size": 1956
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
+          "gitSha": "958198aeb622f4981a00b76f9a2e3fc4755835b2",
+          "size": 3173
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "f2016e1187a103aa03435e562c2a0724aec8e282",
+          "size": 56631
+        },
+        {
+          "path": "README.md",
+          "gitSha": "09700571aae9da58df605c03dd56a9a402b71359",
+          "size": 9034
+        },
+        {
+          "path": "tests/canal-oficial.test.js",
+          "gitSha": "10cb2dd43ee62436248b5cf7e5199ef70ced667b",
+          "size": 5311
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-23T15:46:47.012Z"
+      "publishedAt": "2026-11-23T16:02:43.702Z"
     }
   ],
   "mode": "incremental",
