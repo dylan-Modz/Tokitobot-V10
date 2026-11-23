@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "botao-canal-20261123-1",
+  "type": "reparacao",
+  "title": "Acessar canal com botão clicável nos menus",
+  "changes": [
+    "Removido link bruto acrescentado automaticamente ao final de respostas normais.",
+    "Removido link bruto acrescentado como rodapé do menu.",
+    "Botão CTA Acessar canal usa o link configurado para o bot e abre a URL do canal.",
+    "Botão aplicado aos menus interativos sem exigir ativar outros botões.",
+    "Se o envio interativo falhar, o texto não é corrompido nem recebe URL inserida.",
+    "Preservados formato do menu, funções e configurações dos usuários."
+  ],
+  "limitations": [
+    "A aparência final do botão depende do suporte do WhatsApp ao nativeFlowMessage.",
+    "Sem metadados oficiais e postagem real não é possível garantir o cartão de encaminhamento de canal com contagem de seguidores.",
+    "Requer instalação do reparo no servidor onde o bot está executando."
+  ]
+}
