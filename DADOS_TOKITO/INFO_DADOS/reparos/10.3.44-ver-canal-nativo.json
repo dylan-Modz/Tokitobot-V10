@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "ver-canal-nativo-20261123-1",
+  "type": "reparacao",
+  "title": "Restaurar a apresentação nativa Ver canal do WhatsApp",
+  "changes": [
+    "Restaura em comandos a estrutura antiga de encaminhamento de canal com JID real, nome e serverMessageId vazio.",
+    "Remove CTA_url e links artificiais introduzidos nos menus.",
+    "Mensagens comuns mantêm o texto original, sem URL acrescentada.",
+    "Canal sem JID válido não cria encaminhamento fictício; instrução de setchannel diferencia link e identificação nativa.",
+    "Respostas e menus usam fallback seguro de texto se o cliente WhatsApp rejeitar os metadados de encaminhamento.",
+    "Reparo incremental preserva versão 10.3.44, credenciais, figurinhas registradas e dados locais."
+  ],
+  "limitations": [
+    "A interface Ver canal é renderizada pelo WhatsApp e depende de um JID real aceito pelo aplicativo.",
+    "O JSON fornecido identifica o canal Teste; não associa automaticamente esse JID a links de outros canais.",
+    "Testes simulados de protocolo não substituem teste real no aparelho."
+  ]
+}
