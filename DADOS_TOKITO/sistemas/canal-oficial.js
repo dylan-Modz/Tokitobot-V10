@@ -150,6 +150,27 @@ const contextoNativo = (config, mentionedJid = []) => {
   }
 }
 
+// Compatibilidade original V10.3.41: o selo "Acessar canal" era
+// forwardedNewsletterMessageInfo em mensagens comuns, NÃO cta_url.
+// Exige um JID @newsletter realmente configurado via /setchannel.
+// Na versão 10.3.41, serverMessageId era uma string vazia.
+const contextoV1041 = (config, nomeBot, mentionedJid = []) => {
+  const cfg = config || {}
+  const jidCanal = parse(cfg.channeldl)
+  const base = contextoSeguro(mentionedJid)
+  if (!isJid(jidCanal)) return base
+  return {
+    isForwarded: true,
+    forwardingScore: 1,
+    forwardedNewsletterMessageInfo: {
+      newsletterJid: jidCanal,
+      newsletterName: parse(nomeBot) || 'Canal WhatsApp',
+      serverMessageId: ''
+    },
+    mentionedJid: base.mentionedJid
+  }
+}
+
 // Contexto rico reservado para mensagens que anunciam explicitamente um canal.
 const contexto = (config, socket, nomeBot, mentionedJid = []) => {
   const nativo = contextoNativo(config, mentionedJid)
@@ -178,5 +199,5 @@ const contexto = (config, socket, nomeBot, mentionedJid = []) => {
 }
 
 module.exports = {
-  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto, contextoSeguro, contextoNativo, botaoAcesso
+  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto, contextoSeguro, contextoV1041, contextoNativo, botaoAcesso
 }
