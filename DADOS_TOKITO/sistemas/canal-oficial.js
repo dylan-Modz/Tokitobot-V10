@@ -21,6 +21,7 @@ const normalizar = config => {
   // Um canal desativado nunca deve continuar com metadados de encaminhamento.
   if (desligado(next)) {
     next.channeldl = DESLIGADO
+    if (canalUrl(next.channelLink) === LINK_LEGADO) next.channelLink = LINK_OFICIAL
     return next
   }
 
