@@ -70,12 +70,34 @@ const lerEntrada = texto => {
   return link ? { jid: '', link } : null
 }
 
+// Recupera o canal de uma mensagem realmente encaminhada e citada pelo dono.
+// Não copia serverMessageId: ele identifica uma postagem, não o canal inteiro.
+const canalCitado = ctx => {
+  const quoted = ctx.ctxMsg?.quotedMessage ||
+    ctx.info?.message?.extendedTextMessage?.contextInfo?.quotedMessage ||
+    ctx.mensagem?.extendedTextMessage?.contextInfo?.quotedMessage || {}
+  const candidatos = [
+    quoted.extendedTextMessage?.contextInfo?.forwardedNewsletterMessageInfo,
+    quoted.imageMessage?.contextInfo?.forwardedNewsletterMessageInfo,
+    quoted.videoMessage?.contextInfo?.forwardedNewsletterMessageInfo,
+    quoted.documentMessage?.contextInfo?.forwardedNewsletterMessageInfo
+  ]
+  for (const item of candidatos) {
+    const jid = normalizarJid(item?.newsletterJid)
+    if (!jid) continue
+    const nome = String(item.newsletterName || '').trim().slice(0, 120)
+    return { jid, nome }
+  }
+  return null
+}
+
 const salvarConfig = (ctx, alteracoes) => {
   const proxima = { ...ctx.setting, ...alteracoes }
   if (runtimeSub.isSubBot) {
     runtimeSub.updateSubConfig({
       channel: proxima.channel,
-      channelLink: proxima.channelLink
+      channelLink: proxima.channelLink,
+      channelName: proxima.channelName
     })
   } else {
     const arquivo = runtimeSub.GLOBAL_CONFIG
@@ -125,7 +147,7 @@ dylan.setCommand({
 
     if (entrada === '0') {
       try {
-        salvarConfig(ctx, { channeldl: INATIVO, channel: INATIVO, channelLink: '' })
+        salvarConfig(ctx, { channeldl: INATIVO, channel: INATIVO, channelLink: '', channelName: '' })
         return ctx.reply(ctx.mess.channelDisabled())
       } catch (e) {
         console.warn('[SETCHANNEL] Falha ao desativar:', e?.code || 'erro')
@@ -144,15 +166,18 @@ dylan.setCommand({
       descricao: 'Informe o link do canal, um JID @newsletter ou 0 para desativar.'
     }))
 
-    let jid = pedido.jid
+    const citado = canalCitado(ctx)
+    let jid = pedido.jid || (pedido.link ? citado?.jid : '') || ''
     if (!jid && pedido.link) jid = await consultarJid(ctx.tokito, pedido.link.split('/').pop())
     const link = pedido.link
+    const nome = citado?.jid === jid ? citado.nome : ''
 
     try {
       salvarConfig(ctx, {
         channeldl: jid || INATIVO,
         channel: jid || link,
-        channelLink: link
+        channelLink: link,
+        channelName: nome
       })
       return ctx.reply(jid
         ? ctx.mess.channelEnabled(jid, link || jid)

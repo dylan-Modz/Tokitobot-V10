@@ -148,3 +148,22 @@ test('só o dono pode configurar canal', async () => {
   assert.equal(ctx.respostas[0], 'DONO')
   assert.equal(ambiente.chamadas, 0)
 })
+
+
+test('JID e nome do canal encaminhado citado são preservados sem consultar metadados', async () => {
+  const ambiente = criar({ metadata: () => { throw new Error('consulta não deveria ocorrer') } })
+  const ctx = ambiente.ctx(LINK)
+  ctx.ctxMsg = { quotedMessage: {
+    extendedTextMessage: { contextInfo: { forwardedNewsletterMessageInfo: {
+      newsletterJid: '120363423684523217@newsletter',
+      newsletterName: 'Teste',
+      serverMessageId: 268
+    } } }
+  } }
+  await ambiente.comando.executar(ctx)
+  assert.equal(ambiente.chamadas, 0)
+  assert.equal(ctx.setting.channeldl, '120363423684523217@newsletter')
+  assert.equal(ctx.setting.channelName, 'Teste')
+  assert.equal(ctx.setting.channelLink, LINK)
+  assert.equal(JSON.parse(ambiente.escrita).channelName, 'Teste')
+})

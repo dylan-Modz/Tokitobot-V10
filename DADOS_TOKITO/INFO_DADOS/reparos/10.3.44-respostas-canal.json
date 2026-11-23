@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "respostas-canal-20261123-1",
+  "type": "reparacao",
+  "title": "Respostas de comandos e acesso confiável ao canal",
+  "changes": [
+    "Remove a prévia experimental global de todas as respostas, preservando textos normais e menções.",
+    "O menu inclui botão de Acessar canal somente com link configurado.",
+    "Se o carrossel falhar, o menu envia o texto normal com link de canal em vez de só reagir.",
+    "setchannel aceita um JID real informado pelo dono e aproveita nome e JID de uma postagem encaminhada citada.",
+    "O reparo não reaproveita serverMessageId de outras postagens como se fosse um encaminhamento verdadeiro.",
+    "Reparo incremental na mesma versão com ID novo para detecção e aviso."
+  ],
+  "limitations": [
+    "A apresentação nativa de canal encaminhado depende de metadados e de uma mensagem realmente encaminhada.",
+    "Não há contagem de seguidores no JSON fornecido, portanto nenhuma contagem é inventada.",
+    "Envio e renderização no WhatsApp dependem do cliente; testes em dispositivo real permanecem necessários."
+  ],
+  "safety": {
+    "preserveInstalledVersion": true,
+    "preserveCredentials": true,
+    "preserveSavedMedia": true,
+    "preserveChannelSettings": true
+  }
+}
