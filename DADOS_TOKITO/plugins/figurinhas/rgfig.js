@@ -52,7 +52,7 @@ const db = modulos.figuras()
 if (ctx.command === 'listafig') {
 const a = Object.entries(db)
 return ctx.reply(ctx.mess.padraoLista({
-emoji: '🧊',
+emoji: '🎭',
 titulo: 'SYSTEM FIGURINHAS',
 itens: a.map(([hash, comando]) => `${comando} — ${hash.slice(0, 12)}…`),
 vazio: 'Nenhuma figurinha registrada.'
@@ -62,7 +62,7 @@ const st = sticker(ctx)
 const h = st?.fileSha256 ? Buffer.from(st.fileSha256).toString('base64') : ''
 if (!h)
 return ctx.reply(ctx.mess.padraoUso({
-emoji: '🧊',
+emoji: '🎭',
 titulo: 'FIGURINHA NECESSÁRIA',
 uso: `${ctx.prefix}${ctx.command}`,
 descricao: 'Responda a uma figurinha para continuar.'
@@ -70,14 +70,14 @@ descricao: 'Responda a uma figurinha para continuar.'
 if (ctx.command === 'delfig') {
 if (!db[h])
 return ctx.reply(ctx.mess.padraoAviso({
-emoji: '🧊',
+emoji: '🎭',
 titulo: 'FIGURINHA NÃO REGISTRADA',
 descricao: 'Essa figurinha não está registrada no sistema.'
 }))
 delete db[h]
 modulos.salvarFiguras(db)
 return ctx.reply(ctx.mess.padraoSucesso({
-emoji: '🧊',
+emoji: '🎭',
 titulo: 'FIGURINHA REMOVIDA',
 descricao: 'A figurinha foi removida do sistema.'
 }))
@@ -85,7 +85,7 @@ descricao: 'A figurinha foi removida do sistema.'
 const cmd = cmdNorm(String(ctx.q || '').split(/\s+/)[0])
 if (!cmd)
 return ctx.reply(ctx.mess.padraoUso({
-emoji: '🧊',
+emoji: '🎭',
 titulo: 'REGISTRAR FIGURINHA',
 uso: `${ctx.prefix}rgfig ban`,
 descricao: 'Responda a uma figurinha e informe o comando que ela deve executar.'
@@ -98,7 +98,7 @@ descricao: `O comando ${cmd} não existe nos plugins.`
 db[h] = cmd
 modulos.salvarFiguras(db)
 return ctx.reply(ctx.mess.padraoSucesso({
-emoji: '🧊',
+emoji: '🎭',
 titulo: 'FIGURINHA REGISTRADA',
 descricao: `Essa figurinha agora executa ${ctx.prefix}${cmd}.`
 }))

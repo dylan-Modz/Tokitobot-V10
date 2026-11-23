@@ -19,9 +19,9 @@ const marcado = ctx => ctx.ctxMsg?.quotedMessage?.stickerMessage || ctx.mensagem
 const jid = valor => {
   try { return jidNormalizedUser(String(valor || '')) } catch { return String(valor || '') }
 }
-const aviso = (ctx, titulo, descricao) => ctx.reply(ctx.mess.padraoAviso({ emoji: '🧊', titulo, descricao }))
+const aviso = (ctx, titulo, descricao) => ctx.reply(ctx.mess.padraoAviso({ emoji: '🎭', titulo, descricao }))
 const erro = (ctx, titulo, descricao) => ctx.reply(ctx.mess.padraoErro({ titulo, descricao }))
-const sucesso = (ctx, titulo, descricao) => ctx.reply(ctx.mess.padraoSucesso({ emoji: '🧊', titulo, descricao }))
+const sucesso = (ctx, titulo, descricao) => ctx.reply(ctx.mess.padraoSucesso({ emoji: '🎭', titulo, descricao }))
 
 dylan.setCommand({
   nome: 'react',
@@ -40,7 +40,7 @@ dylan.setCommand({
         if (ativos.size) return aviso(ctx, 'REAÇÃO EM ANDAMENTO', 'Aguarde o envio atual terminar.')
         const st = marcado(ctx)
         if (!st) return ctx.reply(ctx.mess.padraoUso({
-          emoji: '🧊', titulo: 'REGISTRAR REAÇÃO',
+          emoji: '🎭', titulo: 'REGISTRAR REAÇÃO',
           uso: `${ctx.prefix}rgreact`,
           descricao: 'Responda à figurinha que deseja utilizar nas reações.'
         }))
@@ -82,7 +82,7 @@ dylan.setCommand({
       const quantidade = Number(String(ctx.q || '').trim() || '1')
       if (!Number.isSafeInteger(quantidade) || quantidade < 1 || quantidade > 10) {
         return ctx.reply(ctx.mess.padraoUso({
-          emoji: '🧊', titulo: 'REAGIR COM FIGURINHA',
+          emoji: '🎭', titulo: 'REAGIR COM FIGURINHA',
           uso: `${ctx.prefix}react 10`,
           descricao: 'Responda a uma mensagem e escolha de 1 a 10 reações.'
         }))
@@ -91,7 +91,7 @@ dylan.setCommand({
       const contexto = ctx.ctxMsg
       if (!contexto?.stanzaId || !contexto?.quotedMessage) {
         return ctx.reply(ctx.mess.padraoUso({
-          emoji: '🧊', titulo: 'MARQUE UMA MENSAGEM',
+          emoji: '🎭', titulo: 'MARQUE UMA MENSAGEM',
           uso: `${ctx.prefix}react 10`,
           descricao: 'Responda à mensagem de outro participante.'
         }))
