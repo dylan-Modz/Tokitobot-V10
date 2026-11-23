@@ -1,115 +1,38 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.45",
+  "version": "10.3.46",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-23T21:14:02.784Z",
+  "publishedAt": "2026-11-23T21:29:57.323Z",
   "changelog": [
-    "[Restauração] Os arquivos e comportamentos do bot voltam ao estado da versão 10.3.42, publicados como 10.3.45.",
-    "[Comandos] Removidos gitbot, site, stone, figaudio e autostickeraudio, além dos outros recursos adicionados nas versões 10.3.43 e 10.3.44.",
-    "[Menus] Menus, canal, mensagens e comandos restaurados ao funcionamento da 10.3.42.",
-    "[Atualizador] Upgrade incremental 10.3.44 → 10.3.45, restaurando arquivos alterados e excluindo arquivos introduzidos após 10.3.42.",
-    "[Segurança] Configurações personalizadas, credenciais, sessões e dados locais protegidos são preservados."
+    "[Melhorias] Comandos e menus revisados para manter a organização e evitar opções que não são mais utilizadas.",
+    "[Comandos] Removidos setchannel e channel, que eram dois nomes para a mesma configuração de canal.",
+    "[Menus] Retirada a opção setchannel do menu do dono e das permissões dos Sub Bots.",
+    "[Continuidade] Mantida a base de comandos e sistemas da versão 10.3.42, restaurada na atualização 10.3.45.",
+    "[Atualizador] Nova versão incremental, preservando configurações, credenciais, sessões e outros dados pessoais."
   ],
   "delete": [
-    "DADOS_TOKITO/INFO_DADOS/reparos/10.3.43-canal-tk.json",
-    "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-audio-canal.json",
-    "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-botao-canal.json",
-    "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-botao-nativo-canal.json",
-    "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-deteccao.json",
-    "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-entrega-reparo.json",
-    "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-resposta-segura.json",
-    "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-respostas-canal.json",
-    "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-setchannel.json",
-    "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-ver-canal-sem-cta.json",
-    "DADOS_TOKITO/mensagens/projetos.js",
-    "DADOS_TOKITO/plugins/eventos/autostickeraudio.js",
-    "DADOS_TOKITO/plugins/figurinhas/autostickeraudio.js",
-    "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
-    "DADOS_TOKITO/plugins/info/gitbot.js",
-    "DADOS_TOKITO/plugins/info/site.js",
-    "DADOS_TOKITO/plugins/info/stone.js",
-    "DADOS_TOKITO/sistemas/canal-oficial.js",
-    "DADOS_TOKITO/sistemas/divulgacao-projetos.js",
-    "DADOS_TOKITO/sistemas/sticker-audio.js",
-    "tests/reparo-audio-canal.test.js",
-    "tests/reparo-botao-canal.test.js",
-    "tests/reparo-botao-nativo-canal.test.js",
-    "tests/reparo-deteccao.test.js",
-    "tests/reparo-entrega-reparo.test.js",
-    "tests/reparo-mesma-versao.test.js",
-    "tests/reparo-resposta-segura.test.js",
-    "tests/reparo-respostas-canal.test.js",
-    "tests/reparo-setchannel.test.js",
-    "tests/sticker-audio.test.js"
+    "DADOS_TOKITO/plugins/dono/channel.js"
   ],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Restauração da base 10.3.42 — versão 10.3.45",
-  "notice": "A versão 10.3.45 está disponível: retorno aos comandos e sistemas da 10.3.42.",
+  "type": "Melhoria",
+  "title": "Melhorias e organização dos comandos",
+  "notice": "Tokito Bot V10.3.46 disponível: menus atualizados, comandos antigos removidos e base restaurada preservada.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "5a38aa4a7af602c09604032daf4dd7c5430aa6fd"
-    },
-    {
-      "path": "DADOS_TOKITO/database/lib/update-cli.js",
-      "gitSha": "4d1624b40c44783f4a7d9500acf78d57ee5ae631"
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/mensagens.js",
-      "gitSha": "d14b18992c1bd1ed209f46b6635a6560430f07a8"
-    },
-    {
       "path": "DADOS_TOKITO/mensagens/menus.js",
-      "gitSha": "8b580257ec16724e9c140dc0e88d9fc7106652bd"
+      "gitSha": "6abc14a1d9df58a82a4b5b14cdb380b918387aba"
     },
     {
-      "path": "DADOS_TOKITO/plugins/admin/autos.js",
-      "gitSha": "a15ce762691fd4f778bf93147b1058f0d3c20d03"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/channel.js",
-      "gitSha": "6eef372ec115ae1f95068764951254c747588b7d"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/update.js",
-      "gitSha": "99eda9495fb8e3508ce83c57fd1197b0f8f0aeeb"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/figurinhas/react.js",
-      "gitSha": "3175cdac1a4b723bc622d104c5f1975b130b64ae"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/figurinhas/rgfig.js",
-      "gitSha": "4e53e0b9e034ad89f0325a032659b6f0af5ac846"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/menus/menu.js",
-      "gitSha": "9b610456e429e839af62090c4dc56511e284b1c0"
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/dados.js",
-      "gitSha": "e39471114a97f36f8a52a1949fa3c75b2af0f194"
-    },
-    {
-      "path": "DADOS_TOKITO/sub/runtime.js",
-      "gitSha": "56ce7c2e30771aacf3137528f969fa62db05648a"
+      "path": "DADOS_TOKITO/sub/permissoes.js",
+      "gitSha": "ad1da6096284934eae013933fd20fce9bb1ac600"
     },
     {
       "path": "package.json",
-      "gitSha": "772e76628c487c302364d11551e3eaefa204e919"
-    },
-    {
-      "path": "README.md",
-      "gitSha": "caa9ea233bc20dc669859d926f457669dfec1bde"
-    },
-    {
-      "path": "tokito.js",
-      "gitSha": "f34404aefa0cf6bab569148cfc52fdf58252661a"
+      "gitSha": "05b20d28cf75d2bb59e81c876e87837d0acf710f"
     }
   ],
   "releases": [
@@ -5054,17 +4977,51 @@
       ],
       "required": false,
       "publishedAt": "2026-11-23T21:14:02.784Z"
+    },
+    {
+      "version": "10.3.46",
+      "fromVersion": "10.3.45",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Melhorias e organização dos comandos",
+      "notice": "Tokito Bot V10.3.46 disponível: menus atualizados, comandos antigos removidos e base restaurada preservada.",
+      "changelog": [
+        "[Melhorias] Comandos e menus revisados para manter a organização e evitar opções que não são mais utilizadas.",
+        "[Comandos] Removidos setchannel e channel, que eram dois nomes para a mesma configuração de canal.",
+        "[Menus] Retirada a opção setchannel do menu do dono e das permissões dos Sub Bots.",
+        "[Continuidade] Mantida a base de comandos e sistemas da versão 10.3.42, restaurada na atualização 10.3.45.",
+        "[Atualizador] Nova versão incremental, preservando configurações, credenciais, sessões e outros dados pessoais."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "6abc14a1d9df58a82a4b5b14cdb380b918387aba"
+        },
+        {
+          "path": "DADOS_TOKITO/sub/permissoes.js",
+          "gitSha": "ad1da6096284934eae013933fd20fce9bb1ac600"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "05b20d28cf75d2bb59e81c876e87837d0acf710f"
+        }
+      ],
+      "delete": [
+        "DADOS_TOKITO/plugins/dono/channel.js"
+      ],
+      "required": false,
+      "publishedAt": "2026-11-23T21:29:57.323Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.44",
+  "fromVersion": "10.3.45",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.45",
+  "publicVersion": "10.3.46",
   "repair": false
 }
