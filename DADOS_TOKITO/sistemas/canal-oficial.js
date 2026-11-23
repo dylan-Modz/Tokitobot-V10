@@ -83,8 +83,11 @@ const informacoes = (config, socket) => {
           if (isJid(id) && id !== JID_ANTIGO) item.jid = id
           const nome = parse(meta?.name || meta?.thread_metadata?.name?.text)
           if (nome) item.name = nome.slice(0, 120)
-          const count = Number(meta?.subscribers ?? meta?.thread_metadata?.subscribers_count)
-          if (Number.isFinite(count) && count >= 0) item.subscribers = Math.round(count)
+          const brutoCount = meta?.subscribers ?? meta?.thread_metadata?.subscribers_count
+          if (brutoCount !== undefined && brutoCount !== null && brutoCount !== '') {
+            const count = Number(brutoCount)
+            if (Number.isFinite(count) && count >= 0) item.subscribers = Math.round(count)
+          }
         })
         .catch(e => console.log('[TOKITO CANAL]', 'Metadados do canal indisponíveis:', e?.code || e?.message || 'erro'))
         .finally(() => { item.promise = null })
