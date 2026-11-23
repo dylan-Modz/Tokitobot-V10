@@ -44,11 +44,9 @@ info: {
 async executar(ctx) {
 with (ctx) {
 {
-const linkCanalMenu = canalOficial.link(ctx.setting || {})
-const textoMenuSeguro = () => {
-  const texto = linguagem.menu(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion)
-  return texto + (linkCanalMenu ? '\n\n- 📢 *Acessar canal:* ' + linkCanalMenu : '')
-}
+// Os menus preservam texto original; acesso ao canal só por botão CTA.
+const textoMenuSeguro = () =>
+  linguagem.menu(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion)
 try {
 if (!isBotoes)
 return dylanModz(textoMenuSeguro())
@@ -166,14 +164,7 @@ const botoes = [
 name: 'single_select',
 buttonParamsJson: JSON.stringify(listaMenus)
 },
-...(linkCanalMenu ? [{
-name: 'cta_url',
-buttonParamsJson: JSON.stringify({
-display_text: '📢 Acessar canal',
-url: linkCanalMenu,
-merchant_url: linkCanalMenu
-})
-}] : [])
+...(canalOficial.botaoAcesso(ctx.setting || {}) ? [canalOficial.botaoAcesso(ctx.setting || {})] : [])
 ]
 const carouselMessage = {
 cards: [
