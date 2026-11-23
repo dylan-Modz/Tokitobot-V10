@@ -48,16 +48,16 @@ test('update destino aqui reconhece LID e número alternativo sem mexer no dono'
     SoDono: true,
     isGroup: false,
     info: { key: {
-      remoteJid: '38951729508382@lid',
-      remoteJidAlt: '5511975431163@s.whatsapp.net',
+      remoteJid: '38951729000000@lid',
+      remoteJidAlt: '5511987654321@s.whatsapp.net',
       fromMe: false
     } },
-    sender: '38951729508382@lid',
+    sender: '38951729000000@lid',
     args: ['destino', 'aqui'], q: 'destino aqui', prefix: '/',
     mess: { onlyOwner: () => 'DONO' },
     reply: texto => { reply = texto }
   })
-  assert.equal(config.ownerNumber, '5511975431163')
+  assert.equal(config.ownerNumber, '5511987654321')
   assert.match(reply, /𝙲𝙾𝙽𝙵𝙸𝙶𝚄𝚁𝙰𝙳𝙾𝚂/)
 })
 
@@ -98,7 +98,7 @@ test('avisos excedidos retornam em no máximo um dia', () => {
   const agora = Date.now()
   let salvo = {
     lastNotifiedPrincipalVersion: '10.3.44@reparo:teste',
-    lastNotifiedPrincipalJid: '5511975431163@s.whatsapp.net',
+    lastNotifiedPrincipalJid: '5511987654321@s.whatsapp.net',
     lastNotifiedPrincipalAttempts: 4,
     lastNotifiedAt: new Date(agora - 25 * 60 * 60 * 1000).toISOString()
   }
