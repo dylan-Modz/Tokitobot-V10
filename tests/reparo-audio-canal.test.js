@@ -10,14 +10,15 @@ const root = path.resolve(__dirname, '..')
 const canal = require('../DADOS_TOKITO/sistemas/canal-oficial')
 const link = 'https://whatsapp.com/channel/0029VbCAgovIyPtbjBhrIi3u'
 
-test('canal por link mantém prévia clicável quando JID não existe', () => {
+test('canal por link mantém acesso textual e não bloqueia respostas sem JID', () => {
   const cfg = { channel: link, channeldl: '0@newsletter', channelLink: link }
   assert.equal(canal.ativo(cfg), true)
   assert.equal(canal.link(cfg), link)
   const contexto = canal.contexto(cfg, {}, 'Tokito', [])
-  assert.equal(contexto.externalAdReply.sourceUrl, link)
-  assert.equal(contexto.externalAdReply.title, '📢 Acessar canal')
+  assert.equal(contexto.externalAdReply, undefined)
   assert.equal(contexto.forwardedNewsletterMessageInfo, undefined)
+  assert.match(canal.acessoTexto(cfg, {}), /ACESSAR CANAL|𝙰𝙲𝙴𝚂𝚂𝙰𝚁 𝙲𝙰𝙽𝙰𝙻/)
+  assert.ok(canal.acessoTexto(cfg, {}).includes(link))
 })
 
 test('canal desligado não produz cartão nem metadados falsos', () => {
@@ -27,12 +28,22 @@ test('canal desligado não produz cartão nem metadados falsos', () => {
   assert.equal(contexto.forwardedNewsletterMessageInfo, undefined)
 })
 
-test('JID conhecido gera contexto nativo com identificador real', () => {
+test('JID sem ID de mensagem não finge encaminhamento de canal', () => {
   const cfg = { channel: '120363999999999999@newsletter', channeldl: '120363999999999999@newsletter', channelLink: link }
   const contexto = canal.contexto(cfg, {}, 'Tokito', [])
-  assert.equal(contexto.forwardedNewsletterMessageInfo.newsletterJid, cfg.channeldl)
+  assert.equal(contexto.forwardedNewsletterMessageInfo, undefined)
   assert.equal(contexto.externalAdReply, undefined)
-  assert.equal(contexto.forwardedNewsletterMessageInfo.serverMessageId, undefined)
+  assert.ok(canal.acessoTexto(cfg, {}).includes(link))
+})
+
+test('metadados reais da mensagem exibem o cartão do canal', () => {
+  const cfg = { channel: '120363423684523217@newsletter', channeldl: '120363423684523217@newsletter', channelLink: link, channelName: 'Teste', channelMessageId: 268 }
+  const contexto = canal.contexto(cfg, {}, 'Tokito', [])
+  assert.equal(contexto.forwardedNewsletterMessageInfo.newsletterJid, cfg.channeldl)
+  assert.equal(contexto.forwardedNewsletterMessageInfo.serverMessageId, 268)
+  assert.equal(contexto.forwardedNewsletterMessageInfo.newsletterName, 'Teste')
+  assert.equal(contexto.externalAdReply, undefined)
+  assert.equal(canal.acessoTexto(cfg, {}), '')
 })
 
 test('resolução assíncrona recupera nome, JID e seguidores reais', async () => {
@@ -45,8 +56,11 @@ test('resolução assíncrona recupera nome, JID e seguidores reais', async () =
   canal.contexto(cfg, socket, 'Tokito')
   await new Promise(resolve => setTimeout(resolve, 0))
   const atualizado = canal.contexto(cfg, socket, 'Tokito')
-  assert.equal(atualizado.forwardedNewsletterMessageInfo.newsletterJid, '120363888888888888@newsletter')
-  assert.equal(atualizado.forwardedNewsletterMessageInfo.newsletterName, 'Canal de testes')
+  assert.equal(atualizado.forwardedNewsletterMessageInfo, undefined)
+  assert.equal(canal.informacoes(cfg, socket).jid, '120363888888888888@newsletter')
+  assert.equal(canal.informacoes(cfg, socket).name, 'Canal de testes')
+  assert.equal(canal.informacoes(cfg, socket).subscribers, 33)
+  assert.ok(canal.acessoTexto(cfg, socket).includes('33 seguidores'))
 })
 
 function motorEmMemoria() {
@@ -109,7 +123,7 @@ test('manifesto mantém reparação na versão 10.3.44', () => {
   assert.equal(m.version, '10.3.44')
   assert.equal(m.publicVersion, '10.3.44')
   assert.equal(m.repair, true)
-  assert.equal(m.repairId, 'deteccao-reparo-20261123-1')
+  assert.equal(m.repairId, 'respostas-canal-20261123-1')
   assert.equal(m.mode, 'incremental')
   assert.equal(m.notify, true)
 })
