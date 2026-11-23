@@ -137,7 +137,7 @@ dylan.setCommand({
   categoria: 'dono',
   info: {
     descricao: 'Configura o link ou JID do canal utilizado pelo bot.',
-    uso: 'setchannel link | setchannel JID | setchannel 0',
+    uso: 'setchannel link | setchannel JID link | setchannel 0',
     permissao: 'Dono'
   },
   async executar(ctx) {
