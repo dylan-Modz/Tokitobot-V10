@@ -4,19 +4,18 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-23T15:46:47.012Z",
+  "publishedAt": "2026-11-23T16:00:53.187Z",
   "changelog": [
-    "[Novidade] Comandos gitbot, site e stone com capas oficiais, apresentação dos projetos e botões de acesso.",
-    "[Mídia] gitbot reaproveita a mídia do menu; site e stone exibem os banners configurados.",
-    "[Canal] Botão Acessar canal aparece somente com canal ativado e link válido.",
-    "[Configuração] setchannel preserva o link do convite sem alterar o JID usado internamente.",
-    "[Menus] Atalhos adicionados ao menu principal e menu lista."
+    "[Reparação] Corrigido o botão Acessar canal em todos os comandos de apresentação.",
+    "[Canal] O endereço antigo do canal padrão agora direciona para o Channel-TK oficial sem alterar canais personalizados.",
+    "[Compatibilidade] Configuração protegida permanece intacta; o novo JID do canal é consultado de forma segura.",
+    "[Mídia] Apresentações, banners e foto do menu foram mantidos."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Novidade",
   "title": "Apresentação oficial do Tokito Bot, Tokito APIs e Stone WPP",
-  "notice": "A versão 10.3.43 já está disponível para atualização.",
+  "notice": "Reparação disponível para Tokito Bot V10.3.43 — link oficial do Channel-TK atualizado.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -27,8 +26,8 @@
     },
     {
       "path": "DADOS_TOKITO/sistemas/divulgacao-projetos.js",
-      "gitSha": "44e2baa1401893222d83521dcf7cc836221d6f84",
-      "size": 5911
+      "gitSha": "910d649f7008a06f60a7698147edc1e6fe3bfa73",
+      "size": 5566
     },
     {
       "path": "DADOS_TOKITO/plugins/info/gitbot.js",
@@ -69,6 +68,21 @@
       "path": "package.json",
       "gitSha": "2202245a836ec13f52b6fbfffc445a7d5c652eb3",
       "size": 1956
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
+      "gitSha": "6ba12c019da2fd8e6d9fc275b2188b91062e54ca",
+      "size": 3495
+    },
+    {
+      "path": "tokito.js",
+      "gitSha": "89eb93f324c8326272a87d0de0deecd5ec967a27",
+      "size": 55285
+    },
+    {
+      "path": "README.md",
+      "gitSha": "f8f70ff35b3c9658d9d6a7ea2487371a12e6af71",
+      "size": 8960
     }
   ],
   "releases": [
@@ -4548,13 +4562,12 @@
       "channel": "stable",
       "type": "Novidade",
       "title": "Apresentação oficial do Tokito Bot, Tokito APIs e Stone WPP",
-      "notice": "A versão 10.3.43 já está disponível para atualização.",
+      "notice": "Reparação disponível para Tokito Bot V10.3.43 — link oficial do Channel-TK atualizado.",
       "changelog": [
-        "[Novidade] Comandos gitbot, site e stone com capas oficiais, apresentação dos projetos e botões de acesso.",
-        "[Mídia] gitbot reaproveita a mídia do menu; site e stone exibem os banners configurados.",
-        "[Canal] Botão Acessar canal aparece somente com canal ativado e link válido.",
-        "[Configuração] setchannel preserva o link do convite sem alterar o JID usado internamente.",
-        "[Menus] Atalhos adicionados ao menu principal e menu lista."
+        "[Reparação] Corrigido o botão Acessar canal em todos os comandos de apresentação.",
+        "[Canal] O endereço antigo do canal padrão agora direciona para o Channel-TK oficial sem alterar canais personalizados.",
+        "[Compatibilidade] Configuração protegida permanece intacta; o novo JID do canal é consultado de forma segura.",
+        "[Mídia] Apresentações, banners e foto do menu foram mantidos."
       ],
       "files": [
         {
@@ -4564,8 +4577,8 @@
         },
         {
           "path": "DADOS_TOKITO/sistemas/divulgacao-projetos.js",
-          "gitSha": "44e2baa1401893222d83521dcf7cc836221d6f84",
-          "size": 5911
+          "gitSha": "910d649f7008a06f60a7698147edc1e6fe3bfa73",
+          "size": 5566
         },
         {
           "path": "DADOS_TOKITO/plugins/info/gitbot.js",
@@ -4606,11 +4619,26 @@
           "path": "package.json",
           "gitSha": "2202245a836ec13f52b6fbfffc445a7d5c652eb3",
           "size": 1956
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
+          "gitSha": "6ba12c019da2fd8e6d9fc275b2188b91062e54ca",
+          "size": 3495
+        },
+        {
+          "path": "tokito.js",
+          "gitSha": "89eb93f324c8326272a87d0de0deecd5ec967a27",
+          "size": 55285
+        },
+        {
+          "path": "README.md",
+          "gitSha": "f8f70ff35b3c9658d9d6a7ea2487371a12e6af71",
+          "size": 8960
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-23T15:46:47.012Z"
+      "publishedAt": "2026-11-23T16:00:53.187Z"
     }
   ],
   "mode": "incremental",
