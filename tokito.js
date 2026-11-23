@@ -933,7 +933,7 @@ const whatIsPhone = messageId.substring(0, 2) === '3A' ? 'iPhone 🍎' : message
 const canalOficial = require('./DADOS_TOKITO/sistemas/canal-oficial')
 const canalInfo = (mentions = []) => {
 const cfgCanal = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
-return canalOficial.contextoSeguro(mentions)
+return canalOficial.contextoNativo(cfgCanal, mentions)
 }
 const newsletter = canalInfo([])
 const isVerificado = nescessario.verificado
@@ -965,13 +965,7 @@ let selo = isVerificado ? SeloMeta : info
 const reply = async (text, mentions = []) => {
 if (!text) text = ' '
 const textoSeguro = modulos.sanitizarErro(String(text), [API_KEY_TOKITO]) || ' '
-const cfgCanal = runtimeSub.isSubBot ? runtimeSub.config() : configAtual
-const linkCanal = canalOficial.link(cfgCanal)
-// Mensagens JSON e blocos de código precisam ficar intactos (ex.: /get).
-const ehDadoEstruturado = /^\s*(?:\{|\[|```)/.test(textoSeguro)
-const textoFinal = linkCanal && !ehDadoEstruturado && !textoSeguro.includes(linkCanal)
-  ? textoSeguro + '\n\n- 📢 𝙰𝙲𝙴𝚂𝚂𝙰𝚁 𝙲𝙰𝙽𝙰𝙻\n> 🔗 ' + linkCanal
-  : textoSeguro
+const textoFinal = textoSeguro
 try {
   return await tokito.sendMessage(from, {
     text: textoFinal,
