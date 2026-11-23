@@ -61,18 +61,19 @@ const informacoes = (config, socket) => {
     : (isJid(cfg.channel) && parse(cfg.channel) !== JID_ANTIGO ? parse(cfg.channel) : '')
 
   let item
-  if (socket && (typeof socket.newsletterMetadata === 'function') && url) {
+  const cacheKey = url || direto
+  if (socket && (typeof socket.newsletterMetadata === 'function') && cacheKey) {
     let porLink = cachePorSocket.get(socket)
     if (!porLink) {
       porLink = new Map()
       cachePorSocket.set(socket, porLink)
     }
-    item = porLink.get(url) || { jid: '', name: '', subscribers: null, ultima: 0, promise: null }
-    if (!porLink.has(url)) porLink.set(url, item)
+    item = porLink.get(cacheKey) || { jid: '', name: '', subscribers: null, ultima: 0, promise: null }
+    if (!porLink.has(cacheKey)) porLink.set(cacheKey, item)
     if (!item.promise && Date.now() - item.ultima >= TEMPO_TENTATIVA &&
         !(direto && item.name)) {
       item.ultima = Date.now()
-      const token = url.split('/').pop()
+      const token = url ? url.split('/').pop() : ''
       const tipo = direto ? 'jid' : 'invite'
       const chave = direto || token
       item.promise = Promise.resolve()
