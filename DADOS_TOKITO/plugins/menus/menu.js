@@ -44,12 +44,12 @@ info: {
 async executar(ctx) {
 with (ctx) {
 {
-try {
 const linkCanalMenu = canalOficial.link(setting)
 const textoMenuSeguro = () => {
   const texto = linguagem.menu(NomeDoBot, sender, isCargo, isChVip, horaBR, prefix, ownerName, stoneVersion)
   return texto + (linkCanalMenu ? '\n\n- 📢 *Acessar canal:* ' + linkCanalMenu : '')
 }
+try {
 if (!isBotoes)
 return dylanModz(textoMenuSeguro())
 reagir(from, '🧊').catch(() => {})
