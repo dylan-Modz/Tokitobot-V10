@@ -1030,7 +1030,7 @@ reagir(from, emoji).catch(() => {})
 const caminhoVideo = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.mp4')
 const caminhoImagem = path.join(__dirname, 'DADOS_TOKITO', 'INFO_DADOS', 'LOGOS', 'fotomenu.png')
 const contextInfo = canalInfo([sender])
-// A navegação "Ver canal" é gerada pelo contextInfo nativo validado.
+// O selo de canal segue forwardedNewsletterMessageInfo da V10.3.41 quando há JID configurado.
 let resultado
 if (!isBotoes || !botoes.length) {
 try {
