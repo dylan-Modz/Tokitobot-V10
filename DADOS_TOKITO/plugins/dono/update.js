@@ -35,6 +35,20 @@ const sistema = require('../../sistemas/dados')
 const dylan = require('../../database/lib/comandos')
 
 const configDestinoArquivo = path.resolve(__dirname, '..', '..', 'INFO_DADOS', 'config-all.json')
+// Sender pode ser @lid; remoteJidAlt revela o número real no privado.
+// Só utiliza este valor nos comandos autorizados do dono.
+const numeroDoPrivado = ctx => {
+  const candidatos = [
+    ctx.sender, ctx.info?.key?.remoteJidAlt,
+    ctx.info?.key?.participantAlt, ctx.info?.key?.remoteJid
+  ]
+  for (const valor of candidatos) {
+    const match = String(valor || '').match(/^([1-9]\d{10,14})@s\.whatsapp\.net$/)
+    if (match) return match[1]
+  }
+  return ''
+}
+
 const configurarDestinoAviso = telefone => {
   const numero = String(telefone || '').replace(/\D/g, '')
   if (!/^[1-9]\d{10,14}$/.test(numero)) return false
@@ -70,13 +84,12 @@ const acao = String(ctx.args?.[0] || ctx.q || 'check')
 
 // Quando o dono usar #update no privado, guarda seu número para avisos,
 // mas nunca altera um número de dono válido já configurado.
-if (!ctx.isGroup && ctx.SoDono && !ctx.info?.key?.fromMe &&
-    /^[1-9]\d{10,14}@s\.whatsapp\.net$/.test(String(ctx.sender || ''))) {
+if (!ctx.isGroup && ctx.SoDono && !ctx.info?.key?.fromMe && numeroDoPrivado(ctx)) {
   try {
     const confAtual = JSON.parse(fs.readFileSync(configDestinoArquivo, 'utf8'))
     const existente = String(confAtual?.ownerNumber || '').trim()
     if (!/^[1-9]\d{10,14}$/.test(existente)) {
-      configurarDestinoAviso(String(ctx.sender).split('@')[0])
+      configurarDestinoAviso(numeroDoPrivado(ctx))
     }
   } catch (error) {
     console.log('[UPDATE DESTINO AUTOMÁTICO]', error?.message || error)
@@ -86,10 +99,7 @@ if (!ctx.isGroup && ctx.SoDono && !ctx.info?.key?.fromMe &&
 
 if (acao === 'destino') {
   const arg = String(ctx.args?.[1] || '').trim()
-  const sender = String(ctx.sender || '')
-  const numero = arg.toLowerCase() === 'aqui'
-    ? (sender.endsWith('@s.whatsapp.net') ? sender.split('@')[0].split(':')[0] : '')
-    : arg
+  const numero = arg.toLowerCase() === 'aqui' ? numeroDoPrivado(ctx) : arg
   try {
     if (!configurarDestinoAviso(numero))
       return ctx.reply([

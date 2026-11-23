@@ -20,7 +20,7 @@ test('versão publicada segue 10.3.43 → 10.3.44 sem saltos', () => {
   assert.equal(manifesto.mode, 'incremental')
   assert.equal(manifesto.notify, true)
   assert.equal(manifesto.repair, true)
-  assert.equal(manifesto.repairId, 'respostas-seguras-20261123-2')
+  assert.equal(manifesto.repairId, 'entrega-reparo-20261123-1')
 })
 
 test('comandos estão publicados na categoria de figurinhas', () => {

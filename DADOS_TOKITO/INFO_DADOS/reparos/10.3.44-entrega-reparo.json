@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "entrega-reparo-20261123-1",
+  "title": "Consulta e aviso de reparações na mesma versão",
+  "type": "reparacao",
+  "changes": [
+    "Consulta secundária pela API de conteúdos do GitHub se o endereço Raw falhar ou apresentar manifesto antigo.",
+    "Cache de cinco minutos para não exceder limite público de consultas.",
+    "Notificação volta a ser tentada diariamente após quatro avisos sem confirmação de leitura.",
+    "update destino aqui identifica o número real de mensagens no modo LID pelo remoteJidAlt.",
+    "A versão pública permanece 10.3.44; reparo incremental preserva dados, credenciais e mídias."
+  ],
+  "notes": [
+    "O GitHub não instala código diretamente na hospedagem. O bot precisa consultar e instalar o manifesto.",
+    "Instalações com atualizador antigo/bloqueado podem requerer execução do atualizador na shell da hospedagem."
+  ],
+  "safety": {
+    "preserveVersion": true,
+    "preserveSessions": true,
+    "preserveConfiguration": true,
+    "preserveMedia": true
+  }
+}
