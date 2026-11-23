@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "version": "10.3.44",
+  "repairId": "audio-canal-20261123-1",
+  "type": "reparacao",
+  "title": "Ajustes de figurinha sonora e acesso ao canal",
+  "notice": "Reparação da 10.3.44 melhora o audio sticker e a apresentação do canal.",
+  "changes": [
+    "StickerMessage.audioMessage no campo 26 sem wrapper FutureProof não confirmado.",
+    "Áudio OGG/Opus até 10 segundos com conversão opcional pelo FFmpeg.",
+    "Detecção de mídia citada e reenvio manual e automático mantendo comandos existentes.",
+    "Contexto de canal: JID verdadeiro quando identificado, senão prévia clicável do link.",
+    "Consulta de metadados em segundo plano com cache por conexão e link.",
+    "Sem alterar o número da versão, o token de conexão ou as configurações protegidas."
+  ],
+  "limitations": [
+    "Reprodução de áudio em figurinha depende do aplicativo WhatsApp receptor.",
+    "O cartão nativo com seguidores requer metadados de um canal válido."
+  ],
+  "safety": {
+    "preserveInstalledVersion": true,
+    "preserveCredentials": true,
+    "preserveSavedStickers": true,
+    "preserveChannels": true
+  }
+}
