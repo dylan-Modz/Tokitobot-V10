@@ -4,20 +4,20 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-23T20:26:24.130Z",
+  "publishedAt": "2026-11-23T20:34:24.037Z",
   "changelog": [
-    "[Comandos] Corrigido caso de resposta ausente depois da reação; se envio com citação falhar, tenta mensagem simples.",
-    "[Canal] Mantido contextoSeguro em respostas e botão Acessar canal do menu; link ativo pode aparecer no texto das respostas.",
-    "[Segurança] Mensagens JSON como /get e blocos de código não são modificados pelo rodapé do canal.",
-    "[Metadados] A contagem de seguidores não é falsificada quando o WhatsApp não retorna dados.",
-    "[Atualizador] Novo repairId na mesma versão 10.3.44, preservando sessões, mídias e config-all.json.",
-    "[Testes] Regressões de respostas, fallback, link e reparação."
+    "[Atualizador] Consulta alternativa da API GitHub Contents com cache de 5 minutos se o GitHub Raw estiver indisponível ou desatualizado.",
+    "[Avisos] Após 4 tentativas aceitas pelo socket, novas tentativas uma vez por dia enquanto houver reparação pendente.",
+    "[LID] /update destino aqui reconhece número real do privado pelo remoteJidAlt quando o dono aparece como @lid.",
+    "[Compatibilidade] Mantidas todas as correções já publicadas de respostas, canais, figurinhas sonoras e menus.",
+    "[Segurança] Instalação incremental, sem mexer nas sessões, licenças ou mídias privadas.",
+    "[Testes] Verificação de manifesto alternativo, destinatário LID, intervalos de aviso e integridade do reparo."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Reparação de comandos e link do canal — V10.3.44",
-  "notice": "Reparação 10.3.44 disponível: comandos voltam a responder caso a citação falhe; link do canal aparece no texto.",
+  "title": "Reparação do recebimento de atualizações — V10.3.44",
+  "notice": "Reparação 10.3.44: atualizador recupera manifesto mesmo com bloqueio ou cache antigo e melhora aviso ao dono.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -68,8 +68,8 @@
     },
     {
       "path": "package.json",
-      "gitSha": "dac8e4c3d36b938aa3857878d86e140cf0886be7",
-      "size": 2783
+      "gitSha": "f473515ab247fea860e2f7fd7d2a291e4c4995f7",
+      "size": 2834
     },
     {
       "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
@@ -103,8 +103,8 @@
     },
     {
       "path": "DADOS_TOKITO/plugins/dono/update.js",
-      "gitSha": "d3962505a7f6fbc60fb0a30533f8d32ac8cded65",
-      "size": 13149
+      "gitSha": "05ee16a1aefcebfe68e6d013548ed709598099e9",
+      "size": 13445
     },
     {
       "path": "tests/reparo-mesma-versao.test.js",
@@ -148,8 +148,8 @@
     },
     {
       "path": "tests/sticker-audio.test.js",
-      "gitSha": "15ef1e9a1fa8755f8433582d8cadb718365fe176",
-      "size": 2568
+      "gitSha": "60945b032a856d4bf15f1d0f6ea571e3306fd052",
+      "size": 2565
     },
     {
       "path": "DADOS_TOKITO/mensagens/mensagens.js",
@@ -168,8 +168,8 @@
     },
     {
       "path": "tests/reparo-audio-canal.test.js",
-      "gitSha": "ea3c9b2c3672876d76644f88208eb773b80b2122",
-      "size": 5374
+      "gitSha": "d04991329ada70b3f4cae2a40d1e9e518d8cdca6",
+      "size": 5371
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-audio-canal.json",
@@ -178,13 +178,13 @@
     },
     {
       "path": "DADOS_TOKITO/sistemas/dados.js",
-      "gitSha": "9979c4146a54b1e1c1bdf52c9402d64baa1f9685",
-      "size": 41161
+      "gitSha": "41d7eb0cfefba649f1feba3ccb63e60680633c65",
+      "size": 44278
     },
     {
       "path": "tests/reparo-deteccao.test.js",
-      "gitSha": "f65558c11576e51fb8a2c4bada51c1ae4226a4b6",
-      "size": 3402
+      "gitSha": "03ad80bd031868e76f2ad52120afefff13653f3c",
+      "size": 3384
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-deteccao.json",
@@ -193,8 +193,8 @@
     },
     {
       "path": "tests/reparo-respostas-canal.test.js",
-      "gitSha": "144ae9ec1a849ea70d0606c6b2e38f31e95d3f47",
-      "size": 5286
+      "gitSha": "f0d19ddce25e6f28c012bdb55d6570f861e7baf6",
+      "size": 5283
     },
     {
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-respostas-canal.json",
@@ -210,6 +210,16 @@
       "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-resposta-segura.json",
       "gitSha": "decdfb4a5842278be104ccab4b421ced8b6dbe49",
       "size": 1204
+    },
+    {
+      "path": "tests/reparo-entrega-reparo.test.js",
+      "gitSha": "2fa33c29efe90b0196f982fe41ebf9d3dd246e6e",
+      "size": 4409
+    },
+    {
+      "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-entrega-reparo.json",
+      "gitSha": "bda4a8f85ffce945fb2f83008a9fc86391baa36c",
+      "size": 1078
     }
   ],
   "releases": [
@@ -4800,16 +4810,15 @@
       "fromVersion": "10.3.43",
       "channel": "stable",
       "type": "Correção",
-      "title": "Reparação do canal e das respostas de comandos — V10.3.44",
-      "notice": "Reparo 10.3.44: respostas que só reagiam voltam a usar contexto seguro; menu preserva acesso ao canal.",
+      "title": "Reparação do recebimento de atualizações — V10.3.44",
+      "notice": "Reparação 10.3.44: atualizador recupera manifesto mesmo com bloqueio ou cache antigo e melhora aviso ao dono.",
       "changelog": [
-        "[Mensagens] Evita adicionar prévia experimental do canal a todas as respostas do bot, protegendo o envio de texto, menus e comandos.",
-        "[Menu] Inclui botão Acessar canal quando há link configurado e responde com menu em texto se carrossel não for aceito.",
-        "[Setchannel] Aceita link ou JID; ao citar uma mensagem encaminhada de canal, recupera JID e nome reais sem depender do endpoint de metadados.",
-        "[Segurança] Não usa serverMessageId 268 de uma postagem como se todo comando fosse encaminhado dela.",
-        "[Sub-bots] Nome de canal preservado separadamente na configuração.",
-        "[Atualizador] Reparação incremental na mesma 10.3.44, com novo repairId e sem apagar arquivos de sessões, mídia ou credenciais.",
-        "[Testes] Inclui regressões de contexto seguro, menu com botão e fallback de texto, canal citado e detecção de reparo."
+        "[Atualizador] Consulta alternativa da API GitHub Contents com cache de 5 minutos se o GitHub Raw estiver indisponível ou desatualizado.",
+        "[Avisos] Após 4 tentativas aceitas pelo socket, novas tentativas uma vez por dia enquanto houver reparação pendente.",
+        "[LID] /update destino aqui reconhece número real do privado pelo remoteJidAlt quando o dono aparece como @lid.",
+        "[Compatibilidade] Mantidas todas as correções já publicadas de respostas, canais, figurinhas sonoras e menus.",
+        "[Segurança] Instalação incremental, sem mexer nas sessões, licenças ou mídias privadas.",
+        "[Testes] Verificação de manifesto alternativo, destinatário LID, intervalos de aviso e integridade do reparo."
       ],
       "files": [
         {
@@ -4859,8 +4868,8 @@
         },
         {
           "path": "package.json",
-          "gitSha": "dac8e4c3d36b938aa3857878d86e140cf0886be7",
-          "size": 2783
+          "gitSha": "f473515ab247fea860e2f7fd7d2a291e4c4995f7",
+          "size": 2834
         },
         {
           "path": "DADOS_TOKITO/sistemas/canal-oficial.js",
@@ -4894,8 +4903,8 @@
         },
         {
           "path": "DADOS_TOKITO/plugins/dono/update.js",
-          "gitSha": "d3962505a7f6fbc60fb0a30533f8d32ac8cded65",
-          "size": 13149
+          "gitSha": "05ee16a1aefcebfe68e6d013548ed709598099e9",
+          "size": 13445
         },
         {
           "path": "tests/reparo-mesma-versao.test.js",
@@ -4939,8 +4948,8 @@
         },
         {
           "path": "tests/sticker-audio.test.js",
-          "gitSha": "15ef1e9a1fa8755f8433582d8cadb718365fe176",
-          "size": 2568
+          "gitSha": "60945b032a856d4bf15f1d0f6ea571e3306fd052",
+          "size": 2565
         },
         {
           "path": "DADOS_TOKITO/mensagens/mensagens.js",
@@ -4959,8 +4968,8 @@
         },
         {
           "path": "tests/reparo-audio-canal.test.js",
-          "gitSha": "ea3c9b2c3672876d76644f88208eb773b80b2122",
-          "size": 5374
+          "gitSha": "d04991329ada70b3f4cae2a40d1e9e518d8cdca6",
+          "size": 5371
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-audio-canal.json",
@@ -4969,13 +4978,13 @@
         },
         {
           "path": "DADOS_TOKITO/sistemas/dados.js",
-          "gitSha": "9979c4146a54b1e1c1bdf52c9402d64baa1f9685",
-          "size": 41161
+          "gitSha": "41d7eb0cfefba649f1feba3ccb63e60680633c65",
+          "size": 44278
         },
         {
           "path": "tests/reparo-deteccao.test.js",
-          "gitSha": "f65558c11576e51fb8a2c4bada51c1ae4226a4b6",
-          "size": 3402
+          "gitSha": "03ad80bd031868e76f2ad52120afefff13653f3c",
+          "size": 3384
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-deteccao.json",
@@ -4984,8 +4993,8 @@
         },
         {
           "path": "tests/reparo-respostas-canal.test.js",
-          "gitSha": "144ae9ec1a849ea70d0606c6b2e38f31e95d3f47",
-          "size": 5286
+          "gitSha": "f0d19ddce25e6f28c012bdb55d6570f861e7baf6",
+          "size": 5283
         },
         {
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-respostas-canal.json",
@@ -5001,13 +5010,23 @@
           "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-resposta-segura.json",
           "gitSha": "decdfb4a5842278be104ccab4b421ced8b6dbe49",
           "size": 1204
+        },
+        {
+          "path": "tests/reparo-entrega-reparo.test.js",
+          "gitSha": "2fa33c29efe90b0196f982fe41ebf9d3dd246e6e",
+          "size": 4409
+        },
+        {
+          "path": "DADOS_TOKITO/INFO_DADOS/reparos/10.3.44-entrega-reparo.json",
+          "gitSha": "bda4a8f85ffce945fb2f83008a9fc86391baa36c",
+          "size": 1078
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-23T20:21:34.930Z",
+      "publishedAt": "2026-11-23T20:34:24.037Z",
       "repair": true,
-      "repairId": "respostas-canal-20261123-1"
+      "repairId": "entrega-reparo-20261123-1"
     }
   ],
   "mode": "incremental",
@@ -5021,5 +5040,5 @@
   },
   "publicVersion": "10.3.44",
   "repair": true,
-  "repairId": "respostas-seguras-20261123-2"
+  "repairId": "entrega-reparo-20261123-1"
 }
