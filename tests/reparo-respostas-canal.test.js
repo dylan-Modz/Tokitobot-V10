@@ -49,6 +49,12 @@ test('menu adiciona botão do canal, mantendo a lista de menus', async () => {
       channel: LINK, channelLink: LINK, channeldl: '0@newsletter'
     },
     selo: { key: { id: 'abc', remoteJid: '123@s.whatsapp.net' }, message: {} },
+    canalInfo: mentions => canal.contextoNativo({
+      channel: '120363423684523217@newsletter',
+      channeldl: '120363423684523217@newsletter',
+      channelLink: LINK,
+      channelName: 'Teste'
+    }, {}, 'TokitoBot-V10-MD', mentions),
     reagir: async () => true, mess: { error: () => 'ERRO' },
     linguagem: { menu: () => 'MENU' },
     modulos: { midiaMenu: async () => ({ imageMessage: { url: 'https://example.org/image.webp' } }) },
@@ -60,8 +66,9 @@ test('menu adiciona botão do canal, mantendo a lista de menus', async () => {
   const select = botoes.find(b => b.name === 'single_select')
   const cta = botoes.find(b => b.name === 'cta_url')
   assert.ok(select)
-  assert.ok(cta)
-  assert.equal(JSON.parse(cta.buttonParamsJson).url, LINK)
+  assert.equal(cta, undefined)
+  assert.equal(enviada.msg.interactiveMessage.contextInfo.forwardedNewsletterMessageInfo.newsletterJid,
+    '120363423684523217@newsletter')
 })
 
 test('se WhatsApp rejeitar carrossel, mantém texto sem acrescentar link solto', async () => {
@@ -83,6 +90,12 @@ test('se WhatsApp rejeitar carrossel, mantém texto sem acrescentar link solto',
     stoneVersion: '1.0.7', horaBR: '16:00',
     setting: { channel: LINK, channeldl: '0@newsletter', channelLink: LINK },
     selo: { key: { id: 'abc', remoteJid: '123@s.whatsapp.net' }, message: {} },
+    canalInfo: mentions => canal.contextoNativo({
+      channel: '120363423684523217@newsletter',
+      channeldl: '120363423684523217@newsletter',
+      channelLink: LINK,
+      channelName: 'Teste'
+    }, {}, 'TokitoBot-V10-MD', mentions),
     reagir: async () => true, mess: { error: () => 'ERRO' },
     linguagem: { menu: () => 'MENU' },
     modulos: { midiaMenu: async () => ({ imageMessage: { url: 'https://example.org/image.webp' } }) },
