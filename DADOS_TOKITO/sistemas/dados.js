@@ -492,6 +492,9 @@ return String(marker.id || '').trim() !== migration.id
 // Mantém um número pequeno de novas tentativas para atualizações pendentes.
 const UPDATE_NOTICE_RETRY_MS = 3 * 60 * 1000
 const UPDATE_NOTICE_MAX_ATTEMPTS = 4
+// Após quatro tentativas o aviso volta a ser tentado uma vez por dia,
+// pois sucesso no envio pelo socket não comprova entrega ao dono.
+const UPDATE_NOTICE_LONG_RETRY_MS = 24 * 60 * 60 * 1000
 
 function deveAvisarUpdate(version, ownerJid = '') {
 const valor = String(version || '').trim()
@@ -502,9 +505,11 @@ if (String(anterior.lastNotifiedPrincipalVersion || '') !== valor) return true
 if (destino && String(anterior.lastNotifiedPrincipalJid || '') !== destino) return true
 const tentativas = Number(anterior.lastNotifiedPrincipalAttempts || 0)
 // Versões antigas não guardavam o número de tentativas: oferece uma nova chance.
-if (tentativas >= UPDATE_NOTICE_MAX_ATTEMPTS) return false
 const anteriorEm = Date.parse(anterior.lastNotifiedAt || '')
-return !Number.isFinite(anteriorEm) || Date.now() - anteriorEm >= UPDATE_NOTICE_RETRY_MS
+if (!Number.isFinite(anteriorEm)) return true
+const intervalo = tentativas >= UPDATE_NOTICE_MAX_ATTEMPTS
+  ? UPDATE_NOTICE_LONG_RETRY_MS : UPDATE_NOTICE_RETRY_MS
+return Date.now() - anteriorEm >= intervalo
 }
 
 function registrarAvisoUpdate(version, ownerJid = '') {
@@ -539,6 +544,54 @@ throw new Error('Referência de atualização inválida em update.json.')
 return `https://raw.githubusercontent.com/${repo}/${ref}/DADOS_TOKITO/INFO_DADOS/update.json`
 }
 
+// Fonte alternativa quando raw.githubusercontent.com é bloqueado ou serve cache antigo.
+// Cache de cinco minutos evita estourar os limites públicos da API do GitHub.
+const GITHUB_MANIFEST_TTL_MS = 5 * 60 * 1000
+let githubManifestCache = { at: 0, manifest: null, status: 0 }
+
+const githubManifestUrl = info => {
+  const repo = String(info.repository || '').trim()
+  const ref = String(info.ref || 'main').trim()
+  const partes = repo.split('/')
+  if (partes.length !== 2 || partes.some(x => !/^[A-Za-z0-9_.-]+$/.test(x)) ||
+      !/^[A-Za-z0-9_./-]+$/.test(ref)) {
+    throw new Error('Repositório de atualização inválido.')
+  }
+  return 'https://api.github.com/repos/' + repo +
+    '/contents/DADOS_TOKITO/INFO_DADOS/update.json?ref=' + encodeURIComponent(ref)
+}
+
+async function consultarManifestoGithub(info) {
+  if (githubManifestCache.at && Date.now() - githubManifestCache.at < GITHUB_MANIFEST_TTL_MS) {
+    return githubManifestCache
+  }
+  const retorno = { at: Date.now(), manifest: null, status: 0 }
+  try {
+    const response = await axios.get(githubManifestUrl(info), {
+      timeout: 8000, validateStatus: () => true,
+      headers: {
+        'User-Agent': 'TokitoBot-V10-Update',
+        'Accept': 'application/vnd.github+json'
+      }
+    })
+    retorno.status = Number(response.status || 0)
+    const base64 = response.data?.content
+    if (response.status === 200 && response.data?.encoding === 'base64' &&
+        typeof base64 === 'string' && base64.length < 5 * 1024 * 1024) {
+      const texto = Buffer.from(base64.replace(/\s/g, ''), 'base64').toString('utf8')
+      const json = JSON.parse(texto)
+      if (json && typeof json === 'object' && !Array.isArray(json) &&
+          typeof json.version === 'string' && Array.isArray(json.files)) {
+        retorno.manifest = json
+      }
+    }
+  } catch (error) {
+    retorno.status = Number(error?.response?.status || 0)
+  }
+  githubManifestCache = retorno
+  return retorno
+}
+
 async function verificarUpdate() {
 const local = localInfo()
 let apiRemote = null
@@ -546,6 +599,9 @@ let rawRemote = null
 let apiFalhou = false
 let rawFalhou = false
 let rawStatus = 0
+let githubRemote = null
+let githubStatus = 0
+let githubFalhou = false
 
 const [apiResultado, rawResultado] = await Promise.allSettled([
 axios.get(
@@ -607,8 +663,20 @@ rawFalhou = true
 rawFalhou = true
 }
 
-if (!apiRemote && !rawRemote) {
-if (rawStatus === 404) {
+// Se o Raw falhou ou parece igual ao manifesto instalado, consulta a API
+// GitHub Contents para detectar uma reparação mais recente da mesma versão.
+if (!rawRemote || (
+  String(rawRemote.version || '') === String(local.version || '') &&
+  String(rawRemote.repairId || '') === String(local.repairId || '')
+)) {
+  const gh = await consultarManifestoGithub(local)
+  githubRemote = gh.manifest
+  githubStatus = gh.status
+  githubFalhou = !githubRemote
+}
+
+if (!apiRemote && !rawRemote && !githubRemote) {
+if (rawStatus === 404 && githubStatus === 404) {
 return {
 ok: false,
 available: false,
@@ -635,8 +703,13 @@ error: 'Não foi possível consultar a atualização pela API nem pelo GitHub.'
 // O código e o pacote oficial vêm do GitHub. Enquanto o manifesto do
 // repositório estiver acessível, ele é a fonte autoritativa: a API pode
 // anunciar uma versão antes que os arquivos tenham sido publicados.
-let remote = rawRemote || apiRemote
-let fonte = rawRemote ? 'github' : 'api'
+const githubMaisNovo = Boolean(githubRemote && (
+  !rawRemote ||
+  Date.parse(githubRemote.publishedAt || '') > Date.parse(rawRemote.publishedAt || '') ||
+  compareVersions(githubRemote.version, rawRemote.version) > 0
+))
+let remote = githubMaisNovo ? githubRemote : rawRemote || githubRemote || apiRemote
+let fonte = githubMaisNovo ? 'github-api' : rawRemote ? 'github' : githubRemote ? 'github-api' : 'api'
 
 try {
 if (
@@ -679,6 +752,7 @@ local,
 remote,
 apiFalhou,
 rawFalhou,
+githubFalhou,
 fonte,
 mode: migracaoPendente ? 'clean' : modo,
 incremental: migracaoPendente || modo === 'clean' ? false : pending.incremental,
