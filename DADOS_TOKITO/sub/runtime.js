@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const canalOficial = require('../sistemas/canal-oficial')
 
 const DADOS = path.resolve(__dirname, '..')
 const ROOT = path.resolve(DADOS, '..')
@@ -55,7 +56,7 @@ const writeJson = (file, data) => {
   return data
 }
 
-const globalConfig = () => readJson(GLOBAL_CONFIG, {})
+const globalConfig = () => canalOficial.normalizar(readJson(GLOBAL_CONFIG, {}))
 
 const subConfig = () => {
   if (!isSubBot || !id) return {}
@@ -74,14 +75,14 @@ const config = () => {
   const local = subConfig()
   const channel = String(local.channel || '0@newsletter')
 
-  return {
+  return canalOficial.normalizar({
     ...main,
     prefix: String(local.prefix || main.prefix || '!'),
     channel,
     channeldl: channel,
     channelLink: String(local.channelLink || ''),
     ownerNumber: owner() || main.ownerNumber || ''
-  }
+  })
 }
 
 const updateSubConfig = patch => {
