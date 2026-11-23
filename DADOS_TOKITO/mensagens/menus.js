@@ -76,7 +76,7 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ├─ ⊹ 𖤐  𝐷𝑂𝑊𝑁𝐿𝑂𝐴𝐷𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡📥｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}play música
-┃࣪ ╎—̳͟͞͞ 📞 ${prefix}playcall número/@pessoa música
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}playcall número/@pessoa música
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}playlist — playlists e rádio
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}play_audio música
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}playvideo música
@@ -85,7 +85,7 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}tiktok link
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}tiktok_audio link
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}tiktok_foto link
-┃࣪ ╎—̳͟͞͞ 🎞️ ${prefix}tiktok-gif link
+┃࣪ ╎—̳͟͞͞ 📥 ${prefix}tiktok-gif link
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}instagram link
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}instagram_audio link
 ┃࣪ ╎—̳͟͞͞ 📥 ${prefix}facebook link
@@ -172,6 +172,11 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figuanimais 5
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figudesenho 5
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figurimuru 5
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rgfigaudio
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figaudio
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}verfigaudio
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}delfigaudio
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}autostickeraudio 1/0
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡
 
@@ -180,19 +185,19 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ├╾═╼･ﾟ𖤐ﾟ･｡📡｡･ﾟ𖤐ﾟ･╾═╼┤
 ├─ ⊹ 𖤐  𝐼𝑁𝐹𝑂𝑅𝑀𝐴𝐶̧𝑂̃𝐸𝑆
 ├╾═╼･ﾟ𖤐ﾟ･｡⚡｡･ﾟ𖤐ﾟ･╾═╼┤
-┃࣪ ╎—̳͟͞͞ 👤 ${prefix}perfil
-┃࣪ ╎—̳͟͞͞ 👤 ${prefix}getperfil
-┃࣪ ╎—̳͟͞͞ 📝 ${prefix}getbio
-┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}getbanner
-┃࣪ ╎—̳͟͞͞ 📶 ${prefix}ping
-┃࣪ ╎—̳͟͞͞ 👑 ${prefix}criador
-┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}gitbot — conhecer o bot
-┃࣪ ╎—̳͟͞͞ 🌐 ${prefix}site — Tokito APIs
-┃࣪ ╎—̳͟͞͞ 💚 ${prefix}stone — Stone WPP
-┃࣪ ╎—̳͟͞͞ 🎂 ${prefix}idade 23/12/2007
-┃࣪ ╎—̳͟͞͞ 🌤️ ${prefix}clima cidade
-┃࣪ ╎—̳͟͞͞ 📊 ${prefix}totalcmd
-┃࣪ ╎—̳͟͞͞ 🔗 ${prefix}gerarlink
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}perfil
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}getperfil
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}getbio
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}getbanner
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}ping
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}criador
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}gitbot — conhecer o bot
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}site — Tokito APIs
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}stone — Stone WPP
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}idade 23/12/2007
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}clima cidade
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}totalcmd
+┃࣪ ╎—̳͟͞͞ ⚡ ${prefix}gerarlink
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
@@ -285,7 +290,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo2
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo3
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo4
-┃࣪ ╎—̳͟͞͞ 🪪 ${prefix}registrar 1/0
+┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}registrar 1/0
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}bemvindo5
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendabv texto
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}legendasaiu texto
@@ -298,9 +303,9 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}audiobv
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}audiosaiu
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}fundobv
-┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}fundobv2
+┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}fundobv2
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}fundosaiu
-┃࣪ ╎—̳͟͞͞ 🖼️ ${prefix}fundosaiu2
+┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}fundosaiu2
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}delfundos
 ┃࣪ ╎—̳͟͞͞ 🌸 ${prefix}infobemvindos
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
@@ -331,7 +336,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antivisu 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antisticker 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antifloodsticker 1/0
-┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}limitefig 5 30s
+┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}limitefig 5 30s
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}anticontato 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antilocalizacao 1/0
 ┃࣪ ╎—̳͟͞͞ 🚫 ${prefix}antidocumento 1/0
@@ -350,7 +355,8 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├╾═╼･ﾟ𖤐ﾟ･｡🤖｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}ativar
 ┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}autodl 1/0
-┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}autosticker 1/0
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}autosticker 1/0
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}autostickeraudio 1/0
 ┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}autortext 1/0
 ┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}multiprefix 1/0
 ┃࣪ ╎—̳͟͞͞ 🤖 ${prefix}addprefix !
@@ -472,6 +478,11 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}react 10
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}verreact
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}delreact
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rgfigaudio
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figaudio
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}verfigaudio
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}delfigaudio
+┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}autostickeraudio 1/0
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rgtake nome|autor
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}rntake nome|autor
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}take
@@ -572,14 +583,14 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}addcmdvip comando
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}delcmdvip comando
 ┃࣪ ╎—̳͟͞͞ 👑 ${prefix}listcmdvip
-┃࣪ ╎—̳͟͞͞ ⏸️ ${prefix}pausacmd play 2h
-┃࣪ ╎—̳͟͞͞ ▶️ ${prefix}liberacmd play
-┃࣪ ╎—̳͟͞͞ 🏆 ${prefix}cmdtop
-┃࣪ ╎—̳͟͞͞ 📦 ${prefix}backupbot
-┃࣪ ╎—̳͟͞͞ 📦 ${prefix}listabackup
-┃࣪ ╎—̳͟͞͞ 🔎 ${prefix}backupinfo ID
-┃࣪ ╎—̳͟͞͞ ♻️ ${prefix}restaurarbot ID confirmar
-┃࣪ ╎—̳͟͞͞ 🗑️ ${prefix}delbackup ID confirmar
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}pausacmd play 2h
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}liberacmd play
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}cmdtop
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}backupbot
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}listabackup
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}backupinfo ID
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}restaurarbot ID confirmar
+┃࣪ ╎—̳͟͞͞ 👑 ${prefix}delbackup ID confirmar
 ┃ ┗☆∻∹⋰ ★∻∹⋰ ☆∻∹⋰ ★∻∹⋰┛
 ╰─ ͡┄┄───────ׂ─ׅ───ׂ─ׅ─ׅ───ׅ───⟡`
 }
@@ -607,7 +618,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ├─ ⊹ 𖤐  𝑌𝑂𝑈𝑇𝑈𝐵𝐸
 ├╾═╼･ﾟ𖤐ﾟ･｡🎧｡･ﾟ𖤐ﾟ･╾═╼┤
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}play música
-┃࣪ ╎—̳͟͞͞ 📞 ${prefix}playcall número/@pessoa música
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}playcall número/@pessoa música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}playlist — playlists e rádio
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}play_audio música
 ┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}playvideo música
@@ -624,7 +635,7 @@ return `╭─ ͡┄┄───────ׅ─ׅ─ׅ──ׂ─ׅ───�
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}tiktok link
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}tiktok_audio link
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}tiktok_foto link
-┃࣪ ╎—̳͟͞͞ 🎞️ ${prefix}tiktok-gif link
+┃࣪ ╎—̳͟͞͞ 📲 ${prefix}tiktok-gif link
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}instagram link
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}instagram_audio link
 ┃࣪ ╎—̳͟͞͞ 📲 ${prefix}facebook link
