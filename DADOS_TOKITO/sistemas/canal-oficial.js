@@ -100,6 +100,14 @@ const informacoes = (config, socket) => {
 
 const jid = (config, socket) => informacoes(config, socket).jid
 
+// Respostas comuns precisam de contextInfo mínimo. O cartão de canal
+// experimental não deve ser injetado em textos, botões e mídias de todos
+// os comandos: alguns clientes ignoram a resposta inteira.
+const contextoSeguro = (mentionedJid = []) => ({
+  mentionedJid: Array.isArray(mentionedJid) ? mentionedJid : []
+})
+
+// Contexto rico reservado para mensagens que anunciam explicitamente um canal.
 const contexto = (config, socket, nomeBot, mentionedJid = []) => {
   const dados = informacoes(config, socket)
   const base = { mentionedJid }
@@ -136,5 +144,5 @@ const contexto = (config, socket, nomeBot, mentionedJid = []) => {
 }
 
 module.exports = {
-  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto
+  LINK_ATUAL, ativo, canalPadrao, link, jid, informacoes, contexto, contextoSeguro
 }
