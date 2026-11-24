@@ -4,19 +4,20 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T13:07:48.233Z",
+  "publishedAt": "2026-11-24T13:11:18.059Z",
   "changelog": [
     "[Take/Rename] Recuperação do áudio original mesmo quando a citação contém apenas a figurinha WebP, usando o ID da mensagem enviada.",
     "[Figurinhas sonoras] Reenvio com a mesma AudioMessage criptografada e sem recodificar ou cortar o áudio; somente a marca EXIF é alterada.",
     "[Cache] Metadados sonoros das figurinhas enviadas são guardados por ID com expiração e persistência protegida para sobreviver a reinícios.",
     "[Mídias citadas] Figurinhas passam a ter acesso ao cache da mensagem original recebida, como imagens, vídeos e áudios.",
-    "[Continuidade] /figaudio, música de até 60s, vídeos animados, marcas de usuários e figurinhas normais permanecem disponíveis."
+    "[Continuidade] /figaudio, música de até 60s, vídeos animados, marcas de usuários e figurinhas normais permanecem disponíveis.",
+    "[Aviso automático] Quando não existe telefone do dono configurado, envia a notificação ao próprio número WhatsApp conectado."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Take e Rename preservam som da figurinha",
-  "notice": "Tokito Bot V10.3.57 disponível: /take e /rename agora recuperam o áudio da figurinha original pelo ID da mensagem, evitando reenviar figurinhas sonoras sem o som.",
+  "title": "Take/Rename com áudio e reparação do aviso de atualização",
+  "notice": "Tokito Bot V10.3.57: correção do take/rename com áudio e reparo do aviso automático de atualização.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -35,6 +36,10 @@
     {
       "path": "package.json",
       "gitSha": "0bde975629b33652c38b495a481817edb237f5fc"
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "gitSha": "19ba3a81c48d7d4362e38f47e61c4b6de904fa53"
     }
   ],
   "releases": [
@@ -5433,14 +5438,15 @@
       "fromVersion": "10.3.56",
       "channel": "stable",
       "type": "Correção",
-      "title": "Take e Rename preservam som da figurinha",
-      "notice": "Tokito Bot V10.3.57 disponível: /take e /rename agora recuperam o áudio da figurinha original pelo ID da mensagem, evitando reenviar figurinhas sonoras sem o som.",
+      "title": "Take/Rename com áudio e reparação do aviso de atualização",
+      "notice": "Tokito Bot V10.3.57: correção do take/rename com áudio e reparo do aviso automático de atualização.",
       "changelog": [
         "[Take/Rename] Recuperação do áudio original mesmo quando a citação contém apenas a figurinha WebP, usando o ID da mensagem enviada.",
         "[Figurinhas sonoras] Reenvio com a mesma AudioMessage criptografada e sem recodificar ou cortar o áudio; somente a marca EXIF é alterada.",
         "[Cache] Metadados sonoros das figurinhas enviadas são guardados por ID com expiração e persistência protegida para sobreviver a reinícios.",
         "[Mídias citadas] Figurinhas passam a ter acesso ao cache da mensagem original recebida, como imagens, vídeos e áudios.",
-        "[Continuidade] /figaudio, música de até 60s, vídeos animados, marcas de usuários e figurinhas normais permanecem disponíveis."
+        "[Continuidade] /figaudio, música de até 60s, vídeos animados, marcas de usuários e figurinhas normais permanecem disponíveis.",
+        "[Aviso automático] Quando não existe telefone do dono configurado, envia a notificação ao próprio número WhatsApp conectado."
       ],
       "files": [
         {
@@ -5458,11 +5464,15 @@
         {
           "path": "package.json",
           "gitSha": "0bde975629b33652c38b495a481817edb237f5fc"
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "19ba3a81c48d7d4362e38f47e61c4b6de904fa53"
         }
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-24T13:07:48.233Z"
+      "publishedAt": "2026-11-24T13:11:18.059Z"
     }
   ],
   "mode": "incremental",
@@ -5475,5 +5485,6 @@
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
   "publicVersion": "10.3.57",
-  "repair": false
+  "repair": true,
+  "repairId": "reparo-aviso-destino-10.3.57"
 }
