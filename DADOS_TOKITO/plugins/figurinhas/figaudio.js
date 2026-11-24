@@ -20,7 +20,7 @@ const instrucoes = ctx => ctx.reply(ctx.mess.padraoUso({
   emoji: '🎭', titulo: 'FIGURINHA COM ÁUDIO',
   uso: ctx.prefix + 'figaudio',
   exemplos: [
-    ctx.prefix + 'figaudio respondendo um áudio',
+    ctx.prefix + 'figaudio respondendo um áudio de até 1 minuto',
     ctx.prefix + 'figaudio respondendo um vídeo de até 9,9 segundos',
     ctx.prefix + 'figaudio respondendo uma imagem com um áudio citado',
     ctx.prefix + 'figaudio nome da música',
@@ -36,13 +36,10 @@ dylan.setCommand({
   info: {
     descricao: 'Envia figurinha registrada, imagem ou vídeo curto com áudio; permite buscar música por nome ou link do YouTube.',
     uso: 'figaudio | figaudio nome da música | figaudio link do YouTube | rgfigaudio | verfigaudio | delfigaudio',
-    permissao: 'Livre (registro e exclusão exclusivos do dono)'
+    permissao: 'Livre para todos os membros'
   },
   async executar(ctx) {
     const comando = String(ctx.command || '').toLowerCase()
-    if (['rgfigaudio', 'delfigaudio'].includes(comando) && ctx.SoDono !== true) {
-      return ctx.reply(ctx.mess.onlyOwner())
-    }
     try {
       if (comando === 'rgfigaudio') {
         if (!sistema.stickerAtual(ctx)) return ctx.reply(ctx.mess.padraoUso({
@@ -132,7 +129,7 @@ dylan.setCommand({
         'VÍDEO': 'Figurinha animada gerada com o som original.',
         'IMAGEM': 'Imagem convertida em figurinha com som.',
         'FIGURINHA': 'Figurinha marcada enviada com áudio.',
-        'ÁUDIO': 'Figurinha registrada enviada com áudio.'
+        'ÁUDIO': 'Figurinha registrada enviada com áudio de até 1 minuto.'
       }
       return sucesso(ctx, 'FIGURINHA COM ÁUDIO ENVIADA',
         'Envio concluído.', detalhes[modo] || 'Mídia preparada e enviada.')
