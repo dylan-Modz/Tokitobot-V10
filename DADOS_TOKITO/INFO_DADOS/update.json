@@ -1,36 +1,32 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.59",
+  "version": "10.3.60",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T13:33:56.818Z",
+  "publishedAt": "2026-11-24T13:37:54.536Z",
   "changelog": [
-    "[Take/Rename] Uso do fileSha256 da mensagem citada para localizar a trilha sonora exata no cache do /figaudio, antes do fallback pelo WebP.",
-    "[Figurinha sonora] Registro da assinatura SHA-256 enviada pelo WhatsApp junto aos metadados sonoros, mantido entre reinícios.",
-    "[Segurança] Recuperação restrita ao mesmo grupo/contato e recusada quando a mesma figurinha tem mais de um áudio diferente.",
-    "[Continuidade] Mantidos o registro por ID, a busca por WebP, o envio pela Stone WPP, os áudios de até 1 minuto e a troca da marca d’água.",
-    "[Limitação] A recuperação depende de a mensagem original ter sido registrada com os dados do áudio; figurinhas externas sem metadados não permitem reconstruir o som apenas do WebP."
+    "[Take] Aplica a marca cadastrada no /rgtake passando pelo mesmo processamento de metadados do /rename.",
+    "[Áudio] /take e /rename compartilham a mesma sequência de recuperação pela mensagem original, ID, fileSha256 e WebP.",
+    "[Figurinha] Mantém todos os quadros de animação e reenvia o áudio original quando os metadados estão disponíveis.",
+    "[Compatibilidade] Normaliza registros antigos de marca em texto e objetos, sem acrescentar o nome do bot.",
+    "[Testes] Cenários simulados verificaram que /take e /rename reenviam figurinhas com som pelo mesmo método."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Take e Rename: recuperação por identificador original da figurinha",
-  "notice": "Tokito Bot V10.3.59 disponível: o áudio da figurinha citada pode ser recuperado também por fileSha256 quando o WhatsApp não entrega o campo audioMessage nem encontra o ID original.",
+  "title": "Take usa o mesmo fluxo sonoro do Rename",
+  "notice": "Tokito Bot V10.3.60 disponível: o comando /take reutiliza a mesma rotina de renomeação e recuperação de áudio do /rename, com a marca registrada do usuário.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "0f8cf3562d2dca969c2e449af340bebb87f68daf"
-    },
-    {
       "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
-      "gitSha": "a3a7c726f10b4d8b2d9f4b2c2f517da2b7bb85d5"
+      "gitSha": "aa6eeb35d7dd3b891503064ada58fca5b99b1d6c"
     },
     {
       "path": "package.json",
-      "gitSha": "84d50f39ba6d7b55832a1ba56ebfde3254e9bc5a"
+      "gitSha": "57af35cbaa8ca96142ba82f0b780bdc2bee05800"
     }
   ],
   "releases": [
@@ -5529,17 +5525,45 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T13:33:56.818Z"
+    },
+    {
+      "version": "10.3.60",
+      "fromVersion": "10.3.59",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Take usa o mesmo fluxo sonoro do Rename",
+      "notice": "Tokito Bot V10.3.60 disponível: o comando /take reutiliza a mesma rotina de renomeação e recuperação de áudio do /rename, com a marca registrada do usuário.",
+      "changelog": [
+        "[Take] Aplica a marca cadastrada no /rgtake passando pelo mesmo processamento de metadados do /rename.",
+        "[Áudio] /take e /rename compartilham a mesma sequência de recuperação pela mensagem original, ID, fileSha256 e WebP.",
+        "[Figurinha] Mantém todos os quadros de animação e reenvia o áudio original quando os metadados estão disponíveis.",
+        "[Compatibilidade] Normaliza registros antigos de marca em texto e objetos, sem acrescentar o nome do bot.",
+        "[Testes] Cenários simulados verificaram que /take e /rename reenviam figurinhas com som pelo mesmo método."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
+          "gitSha": "aa6eeb35d7dd3b891503064ada58fca5b99b1d6c"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "57af35cbaa8ca96142ba82f0b780bdc2bee05800"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T13:37:54.536Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.58",
+  "fromVersion": "10.3.59",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.59",
+  "publicVersion": "10.3.60",
   "repair": false
 }
