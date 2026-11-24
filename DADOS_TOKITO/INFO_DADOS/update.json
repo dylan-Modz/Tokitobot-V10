@@ -1,91 +1,42 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.47",
+  "version": "10.3.48",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-23T21:41:44.269Z",
+  "publishedAt": "2026-11-24T12:09:45.035Z",
   "changelog": [
-    "[Melhorias] Os arquivos dos comandos oficiais voltam a ser entregues juntos em uma nova atualização, evitando instalações incompletas.",
-    "[Comandos] Gitbot, Site e Stone WPP novamente disponíveis na categoria Informações, com suas apresentações e acessos.",
-    "[Figurinhas] Restaurados figaudio, rgfigaudio, verfigaudio, delfigaudio e autostickeraudio nas categorias certas; o áudio depende da compatibilidade do WhatsApp.",
-    "[Menus] Entradas dos comandos restaurados presentes nos menus de Informações e Figurinhas.",
-    "[Limpeza] Os comandos setchannel e channel continuam removidos, inclusive das permissões e menus.",
-    "[Diagnóstico] O update diag agora exibe se os comandos estão carregados e quais arquivos estão ausentes."
+    "[Figurinhas] figaudio mantém o modo original com áudio e figurinha registrada.",
+    "[Vídeos] Converte vídeos com menos de 10 segundos (até 9,9s) pelo conversor WebP do comando s e aproveita o som original.",
+    "[Imagens] Imagem respondendo áudio gera figurinha com o som citado.",
+    "[Música] figaudio aceita nome da música ou link do YouTube e prepara até 30 segundos pela API de áudio existente.",
+    "[Visual] Respostas padronizadas do Tokito, sem avisos desnecessários sobre compatibilidade do WhatsApp.",
+    "[Menus] Exemplos genéricos: figaudio nome da música e figaudio link do YouTube.",
+    "[Continuidade] Nenhum comando removido; registro, visualização, exclusão e modo automático permanecem."
   ],
-  "delete": [
-    "DADOS_TOKITO/plugins/dono/channel.js"
-  ],
+  "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Comandos disponíveis novamente e atualização aprimorada",
-  "notice": "Tokito Bot V10.3.47 disponível: comandos oficiais e figurinhas com áudio reorganizados e entregues novamente, com melhorias na instalação e diagnóstico.",
+  "type": "Melhoria",
+  "title": "Figurinha com áudio: vídeo, imagem e músicas",
+  "notice": "Tokito Bot V10.3.48 disponível: figaudio aprimorado com vídeo curto, imagem com áudio, música por nome e link do YouTube.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "gitSha": "50e6ef1e22a5244f645b0a2731fe0a1d0bed557d"
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/projetos.js",
-      "gitSha": "57f0ce4d1dde9965761ad68f61eb60241692ca6f"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/update.js",
-      "gitSha": "d996eb29e1c6d712663068a7051861a20c1abbcf"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/eventos/autostickeraudio.js",
-      "gitSha": "e0171178f1267cd89c3a06af08ac632a5f0983cf"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/figurinhas/autostickeraudio.js",
-      "gitSha": "935d7a8bc6adab5b76e6cfb142bcb21042af84f7"
+      "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+      "gitSha": "10b8791ccde3150af3a3adb28561fc01638e8011"
     },
     {
       "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
-      "gitSha": "73769b0e8b320bfb36c84073a79cebdace6b0559"
+      "gitSha": "a8cc763f22f44f6ac90e937f3b2eef92444a975f"
     },
     {
-      "path": "DADOS_TOKITO/plugins/index.js",
-      "gitSha": "3534e883e81d3d7a3755432d692fca2902badbad"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/info/gitbot.js",
-      "gitSha": "92254b93c2ac41a0df1f486a93b0188e3db0ebb8"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/info/site.js",
-      "gitSha": "bbdf07096393c8967f0d7f3fac0be8ad78015c74"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/info/stone.js",
-      "gitSha": "6c7deb95afad40997e32bf83fb76421851e6accf"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/menus/menu.js",
-      "gitSha": "f168b5a0d3105814009c2e89a861a3be73725b1c"
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/divulgacao-projetos.js",
-      "gitSha": "97340a1f903019f05212a8380985ed058bb1e6b4"
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "458151da10dd0fcc3d914aaa624604eef27abc2b"
-    },
-    {
-      "path": "DADOS_TOKITO/sub/permissoes.js",
-      "gitSha": "ad1da6096284934eae013933fd20fce9bb1ac600"
+      "path": "DADOS_TOKITO/mensagens/menus.js",
+      "gitSha": "1f1744c0348f6e8997b7ae0407010b14799f86e4"
     },
     {
       "path": "package.json",
-      "gitSha": "be523b0f2739805390e5f6c0b7c8f2f76156a1e0"
-    },
-    {
-      "path": "tokito.js",
-      "gitSha": "f34404aefa0cf6bab569148cfc52fdf58252661a"
+      "gitSha": "84d1cac1d79de694e663887a517266b2f7e1fc24"
     }
   ],
   "releases": [
@@ -5192,17 +5143,55 @@
       ],
       "required": false,
       "publishedAt": "2026-11-23T21:41:44.269Z"
+    },
+    {
+      "version": "10.3.48",
+      "fromVersion": "10.3.47",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Figurinha com áudio: vídeo, imagem e músicas",
+      "notice": "Tokito Bot V10.3.48 disponível: figaudio aprimorado com vídeo curto, imagem com áudio, música por nome e link do YouTube.",
+      "changelog": [
+        "[Figurinhas] figaudio mantém o modo original com áudio e figurinha registrada.",
+        "[Vídeos] Converte vídeos com menos de 10 segundos (até 9,9s) pelo conversor WebP do comando s e aproveita o som original.",
+        "[Imagens] Imagem respondendo áudio gera figurinha com o som citado.",
+        "[Música] figaudio aceita nome da música ou link do YouTube e prepara até 30 segundos pela API de áudio existente.",
+        "[Visual] Respostas padronizadas do Tokito, sem avisos desnecessários sobre compatibilidade do WhatsApp.",
+        "[Menus] Exemplos genéricos: figaudio nome da música e figaudio link do YouTube.",
+        "[Continuidade] Nenhum comando removido; registro, visualização, exclusão e modo automático permanecem."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "10b8791ccde3150af3a3adb28561fc01638e8011"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
+          "gitSha": "a8cc763f22f44f6ac90e937f3b2eef92444a975f"
+        },
+        {
+          "path": "DADOS_TOKITO/mensagens/menus.js",
+          "gitSha": "1f1744c0348f6e8997b7ae0407010b14799f86e4"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "84d1cac1d79de694e663887a517266b2f7e1fc24"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T12:09:45.035Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.46",
+  "fromVersion": "10.3.47",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.47",
+  "publicVersion": "10.3.48",
   "repair": false
 }
