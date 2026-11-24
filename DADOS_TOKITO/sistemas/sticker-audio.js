@@ -285,39 +285,54 @@ function construirMensagem(fig, som) {
   return resultado
 }
 
-async function enviar(ctx, audioOrigem) {
-  if (!registrada()) throw new Error('Nenhuma figurinha registrada. Use rgfigaudio.')
-  if (!audioOrigem) throw new Error('Marque um áudio para usar figaudio.')
+async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}) {
+  if (!Buffer.isBuffer(figurinha) || !figurinha.length ||
+      figurinha.toString('ascii', 0, 4) !== 'RIFF' ||
+      figurinha.toString('ascii', 8, 12) !== 'WEBP') {
+    throw new Error('Não foi possível preparar a figurinha WebP.')
+  }
+  if (!Buffer.isBuffer(som) || !temOpus('audio/ogg', som)) {
+    throw new Error('Não foi possível preparar o áudio da figurinha.')
+  }
   if (typeof ctx.tokito?.relayMessage !== 'function' ||
       typeof ctx.tokito?.waUploadToServer !== 'function') {
     throw new Error('A conexão não disponibiliza envio de mídia.')
   }
-
-  const audio = await normalizarAudio(ctx, audioOrigem)
-  const dados = metadados()
   const upload = ctx.tokito.waUploadToServer
-  const [fig, som] = await Promise.all([
+  const [fig, audio] = await Promise.all([
     prepareWAMessageMedia({
-      sticker: fs.readFileSync(ARQUIVO),
-      mimetype: 'image/webp',
-      isAnimated: dados.isAnimated === true,
-      width: Number(dados.width) || 512,
-      height: Number(dados.height) || 512
+      sticker: figurinha, mimetype: 'image/webp',
+      isAnimated: animada, width: 512, height: 512
     }, { upload }),
     prepareWAMessageMedia({
-      audio,
-      mimetype: 'audio/ogg; codecs=opus',
-      ptt: false
+      audio: som, mimetype: 'audio/ogg; codecs=opus', ptt: false
     }, { upload })
   ])
-  const mensagem = construirMensagem(fig, som)
+  const mensagem = construirMensagem(fig, audio)
   await ctx.tokito.relayMessage(ctx.from, mensagem, {})
-  // Confirma apenas o envio pelo socket; a reprodução depende do app.
   return true
+}
+
+async function enviar(ctx, audioOrigem) {
+  if (!registrada()) throw new Error('Nenhuma figurinha registrada. Use rgfigaudio.')
+  if (!audioOrigem) throw new Error('Marque um áudio para usar figaudio.')
+  const som = await normalizarAudio(ctx, audioOrigem)
+  return enviarPersonalizada(ctx, {
+    figurinha: fs.readFileSync(ARQUIVO),
+    som,
+    animada: metadados().isAnimated === true
+  })
+}
+
+const usarRegistrada = som => {
+  if (!registrada()) throw new Error('Nenhuma figurinha registrada. Use rgfigaudio.')
+  return { figurinha: fs.readFileSync(ARQUIVO), animada: metadados().isAnimated === true, som }
 }
 
 module.exports = {
   ARQUIVO, META, registrada, metadados, stickerAtual, audioAtual,
-  registrar, remover, visualizar, enviar, patchProtocolo, construirMensagem,
-  normalizarAudio, MAX_SEGUNDOS
+  registrar, remover, visualizar, enviar, enviarPersonalizada, usarRegistrada,
+  prepararVideo, prepararImagem, prepararFigurinha, baixarMusica,
+  normalizarBufferAudio, normalizarAudio, patchProtocolo, construirMensagem,
+  MAX_SEGUNDOS, MAX_VIDEO_SEGUNDOS, MAX_MUSICA_SEGUNDOS, youtubeId
 }
