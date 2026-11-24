@@ -126,7 +126,11 @@ dylan.setCommand({
         mimetype: 'image/webp'
       }, marca)
       const novoWebp = fs.readFileSync(arquivo)
-      const audio = origem.audio
+      // Uma citação pode omitir o campo experimental e até o ID original.
+      // O WebP baixado permite recuperar a trilha armazenada pela própria
+      // emissão do /figaudio, sem usar outro áudio por engano.
+      const audio = origem.audio ||
+        stickerAudio.recuperarAudioPorFigurinha(ctx.from, buffer)
       if (audio) {
         // No figaudio o áudio fica nos metadados da StickerMessage,
         // e não dentro do WebP. Reenvia-o usando a rotina compartilhada.
@@ -138,6 +142,8 @@ dylan.setCommand({
       } else if (sticker.hasAudio === true || sticker.isAudio === true) {
         throw new Error('O WhatsApp não forneceu os metadados do áudio dessa figurinha.')
       } else {
+        // Sem indicação de áudio, mantém o fluxo normal. Não é possível
+        // reconstruir som ausente apenas a partir dos bytes da figurinha.
         await ctx.tokito.sendMessage(ctx.from, {
           sticker: novoWebp,
           isAnimated: sticker.isAnimated === true
