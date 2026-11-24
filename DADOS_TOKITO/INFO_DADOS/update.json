@@ -1,42 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.48",
+  "version": "10.3.49",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T12:09:45.035Z",
+  "publishedAt": "2026-11-24T12:17:13.855Z",
   "changelog": [
-    "[Figurinhas] figaudio mantém o modo original com áudio e figurinha registrada.",
-    "[Vídeos] Converte vídeos com menos de 10 segundos (até 9,9s) pelo conversor WebP do comando s e aproveita o som original.",
-    "[Imagens] Imagem respondendo áudio gera figurinha com o som citado.",
-    "[Música] figaudio aceita nome da música ou link do YouTube e prepara até 30 segundos pela API de áudio existente.",
-    "[Visual] Respostas padronizadas do Tokito, sem avisos desnecessários sobre compatibilidade do WhatsApp.",
-    "[Menus] Exemplos genéricos: figaudio nome da música e figaudio link do YouTube.",
-    "[Continuidade] Nenhum comando removido; registro, visualização, exclusão e modo automático permanecem."
+    "[Avisos] O monitor não bloqueia definitivamente as notificações depois de quatro tentativas.",
+    "[Confiabilidade] Se a atualização continuar pendente, novas tentativas são realizadas após um intervalo maior para evitar mensagens repetidas.",
+    "[Diagnóstico] O update diag mostra número de tentativas, horário do último envio e situação do destinatário.",
+    "[Continuidade] Mantidos o figaudio aprimorado com imagem, vídeo curto, YouTube e pesquisa musical da versão anterior.",
+    "[Segurança] Atualização incremental: preserva sessões, chaves, configurações e dados do bot."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Figurinha com áudio: vídeo, imagem e músicas",
-  "notice": "Tokito Bot V10.3.48 disponível: figaudio aprimorado com vídeo curto, imagem com áudio, música por nome e link do YouTube.",
+  "type": "Correção",
+  "title": "Avisos de atualização mais confiáveis",
+  "notice": "Tokito Bot V10.3.49 disponível: melhorias no aviso automático, novas tentativas para atualizações pendentes e diagnóstico mais completo.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "10b8791ccde3150af3a3adb28561fc01638e8011"
+      "path": "DADOS_TOKITO/sistemas/dados.js",
+      "gitSha": "6ce582246ce5524b00444cbce3b41e040a4cdfdb"
     },
     {
-      "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
-      "gitSha": "a8cc763f22f44f6ac90e937f3b2eef92444a975f"
-    },
-    {
-      "path": "DADOS_TOKITO/mensagens/menus.js",
-      "gitSha": "1f1744c0348f6e8997b7ae0407010b14799f86e4"
+      "path": "DADOS_TOKITO/plugins/dono/update.js",
+      "gitSha": "fd4ed5d39f2611daf5063982258d0e0aadcc7198"
     },
     {
       "path": "package.json",
-      "gitSha": "84d1cac1d79de694e663887a517266b2f7e1fc24"
+      "gitSha": "ea85797483f742b3ea594bf361046f0d28864a91"
     }
   ],
   "releases": [
@@ -5181,17 +5175,49 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T12:09:45.035Z"
+    },
+    {
+      "version": "10.3.49",
+      "fromVersion": "10.3.48",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Avisos de atualização mais confiáveis",
+      "notice": "Tokito Bot V10.3.49 disponível: melhorias no aviso automático, novas tentativas para atualizações pendentes e diagnóstico mais completo.",
+      "changelog": [
+        "[Avisos] O monitor não bloqueia definitivamente as notificações depois de quatro tentativas.",
+        "[Confiabilidade] Se a atualização continuar pendente, novas tentativas são realizadas após um intervalo maior para evitar mensagens repetidas.",
+        "[Diagnóstico] O update diag mostra número de tentativas, horário do último envio e situação do destinatário.",
+        "[Continuidade] Mantidos o figaudio aprimorado com imagem, vídeo curto, YouTube e pesquisa musical da versão anterior.",
+        "[Segurança] Atualização incremental: preserva sessões, chaves, configurações e dados do bot."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "gitSha": "6ce582246ce5524b00444cbce3b41e040a4cdfdb"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/dono/update.js",
+          "gitSha": "fd4ed5d39f2611daf5063982258d0e0aadcc7198"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "ea85797483f742b3ea594bf361046f0d28864a91"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T12:17:13.855Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.47",
+  "fromVersion": "10.3.48",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.48",
+  "publicVersion": "10.3.49",
   "repair": false
 }
