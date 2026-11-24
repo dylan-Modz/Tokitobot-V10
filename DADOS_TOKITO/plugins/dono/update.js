@@ -120,6 +120,13 @@ try {
   const configAtual = JSON.parse(fs.readFileSync(configDestinoArquivo, 'utf8'))
   telefoneConfigurado = String(configAtual?.ownerNumber || '').replace(/\D/g, '')
 } catch { telefoneConfigurado = String(ctx.ownerNumber || '').replace(/\D/g, '') }
+const numeroExtra = String(ctx.nescessario?.numero_dono1 || '').replace(/\D/g, '')
+const possuiDestino = /^[1-9]\d{10,14}$/.test(telefoneConfigurado) ||
+  /^[1-9]\d{10,14}$/.test(numeroExtra)
+const tentativasAviso = Math.max(0, Number(salvo?.lastNotifiedPrincipalAttempts || 0))
+const ultimoAviso = salvo?.lastNotifiedAt
+  ? new Date(salvo.lastNotifiedAt).toLocaleString('pt-BR', { timeZone: 'America/Fortaleza' })
+  : 'nenhum'
 const ativo = Boolean(global.__TOKITO_UPDATE_NOTICE_TIMER__ && global.__TOKITO_UPDATE_SOCKET__)
 const falhaInstalacao = global.__TOKITO_UPDATE_LAST_FAILURE__ || {}
 const versaoLocal = check?.local?.version || '—'
@@ -178,8 +185,11 @@ return ctx.reply([
 '- 🔔 \`𝙰𝚅𝙸𝚂𝙾 𝙰𝚄𝚃𝙾𝙼𝙰́𝚃𝙸𝙲𝙾\`',
 '',
 '> ⚙️ ׄ ( ᴍᴏɴɪᴛᴏʀ: ' + (ativo ? 'ATIVO' : 'INATIVO') + ' )',
-'> 👤 ׄ ( ᴅᴏɴᴏ ᴄᴏɴғɪɢᴜʀᴀᴅᴏ: ' + (telefoneConfigurado.length >= 11 ? 'SIM' : 'NÃO') + ' )',
+'> 👤 ׄ ( ᴅᴏɴᴏ ᴄᴏɴғɪɢᴜʀᴀᴅᴏ: ' + (possuiDestino ? 'SIM' : 'NÃO') + ' )',
 '> 📩 ׄ ( ᴜ́ʟᴛɪᴍᴀ ᴠᴇʀsᴀ̃ᴏ ɴᴏᴛɪғɪᴄᴀᴅᴀ: ' + notificada + ' )',
+'> 🔁 ׄ ( ᴛᴇɴᴛᴀᴛɪᴠᴀs ᴅᴇ ᴀᴠɪsᴏ: ' + tentativasAviso + ' )',
+'> 🕒 ׄ ( ᴜ́ʟᴛɪᴍᴏ ᴇɴᴠɪᴏ: ' + ultimoAviso + ' )',
+...(!possuiDestino ? ['> ⚠️ ׄ ( ᴄᴏɴғɪɢᴜʀᴇ ɴᴏ ᴘʀɪᴠᴀᴅᴏ: ' + ctx.prefix + 'update destino aqui )'] : []),
 '> 🎯 ׄ ( ᴅᴇsᴛɪɴᴏ ᴜᴛɪʟɪᴢᴀᴅᴏ: ' + (automatico.destino || 'ainda não definido') + ' )',
 '> 🕒 ׄ ( ᴜ́ʟᴛɪᴍᴀ ᴄᴏɴsᴜʟᴛᴀ ᴀᴜᴛᴏᴍᴀ́ᴛɪᴄᴀ: ' + quando + ' )',
 '> ⚠️ ׄ ( ᴜ́ʟᴛɪᴍᴏ ᴇʀʀᴏ: ' + (ultimaFalha || (check?.ok ? 'nenhum' : String(check?.error || 'consulta indisponível'))) + ' )',
