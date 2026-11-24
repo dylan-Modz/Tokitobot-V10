@@ -1,45 +1,37 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.57",
+  "version": "10.3.58",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T13:11:18.059Z",
+  "publishedAt": "2026-11-24T13:19:58.259Z",
   "changelog": [
-    "[Take/Rename] Recuperação do áudio original mesmo quando a citação contém apenas a figurinha WebP, usando o ID da mensagem enviada.",
-    "[Figurinhas sonoras] Reenvio com a mesma AudioMessage criptografada e sem recodificar ou cortar o áudio; somente a marca EXIF é alterada.",
-    "[Cache] Metadados sonoros das figurinhas enviadas são guardados por ID com expiração e persistência protegida para sobreviver a reinícios.",
-    "[Mídias citadas] Figurinhas passam a ter acesso ao cache da mensagem original recebida, como imagens, vídeos e áudios.",
-    "[Continuidade] /figaudio, música de até 60s, vídeos animados, marcas de usuários e figurinhas normais permanecem disponíveis.",
-    "[Aviso automático] Quando não existe telefone do dono configurado, envia a notificação ao próprio número WhatsApp conectado."
+    "[Causa] O /take podia entrar no envio de WebP comum quando a citação perdia o áudio e não encontrava a mensagem pelo ID.",
+    "[Recuperação] Figurinha com áudio gerada pelo bot agora registra também a impressão digital SHA-256 do WebP original.",
+    "[Take/Rename] Ao renomear, o bot consulta o áudio correspondente ao WebP original, mesmo quando os dados de áudio estão ausentes da mensagem citada.",
+    "[Segurança] Se o mesmo WebP possuir trilhas de áudio diferentes, o sistema não escolhe uma música arbitrariamente.",
+    "[Persistência] Identificação do WebP e do áudio preservada no cache existente através de reinícios.",
+    "[Continuidade] Mantidos animação, limite sonoro de 1 minuto, busca musical, permissões e formato quadrado."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Take/Rename com áudio e reparação do aviso de atualização",
-  "notice": "Tokito Bot V10.3.57: correção do take/rename com áudio e reparo do aviso automático de atualização.",
+  "title": "Take e Rename: recuperar áudio usando a figurinha original",
+  "notice": "Tokito Bot V10.3.58 disponível: correção na recuperação do som do /figaudio quando o WhatsApp omite o campo de áudio e o ID da figurinha citada.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "d6dfdb989bd592a1b22fed1516add8a48bf8db08"
+      "gitSha": "13649663795fdb9e513febbaac89e2625ba45764"
     },
     {
       "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
-      "gitSha": "3e54d51efe4e84306bd98333d3c0254cef5cc000"
-    },
-    {
-      "path": "DADOS_TOKITO/sistemas/midia-citada.js",
-      "gitSha": "a3716ed0de3f807119e477b275bcb7ae6e89ff73"
+      "gitSha": "cee365a5996b160ebec64073c65a7de5d10fcef5"
     },
     {
       "path": "package.json",
-      "gitSha": "0bde975629b33652c38b495a481817edb237f5fc"
-    },
-    {
-      "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "e6fba03125225af1d702defa3b05cb956f026bac"
+      "gitSha": "568dc1f95967b5a0f98506f7b51b478869bed6e8"
     }
   ],
   "releases": [
@@ -5473,18 +5465,50 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T13:11:18.059Z"
+    },
+    {
+      "version": "10.3.58",
+      "fromVersion": "10.3.57",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Take e Rename: recuperar áudio usando a figurinha original",
+      "notice": "Tokito Bot V10.3.58 disponível: correção na recuperação do som do /figaudio quando o WhatsApp omite o campo de áudio e o ID da figurinha citada.",
+      "changelog": [
+        "[Causa] O /take podia entrar no envio de WebP comum quando a citação perdia o áudio e não encontrava a mensagem pelo ID.",
+        "[Recuperação] Figurinha com áudio gerada pelo bot agora registra também a impressão digital SHA-256 do WebP original.",
+        "[Take/Rename] Ao renomear, o bot consulta o áudio correspondente ao WebP original, mesmo quando os dados de áudio estão ausentes da mensagem citada.",
+        "[Segurança] Se o mesmo WebP possuir trilhas de áudio diferentes, o sistema não escolhe uma música arbitrariamente.",
+        "[Persistência] Identificação do WebP e do áudio preservada no cache existente através de reinícios.",
+        "[Continuidade] Mantidos animação, limite sonoro de 1 minuto, busca musical, permissões e formato quadrado."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "13649663795fdb9e513febbaac89e2625ba45764"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
+          "gitSha": "cee365a5996b160ebec64073c65a7de5d10fcef5"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "568dc1f95967b5a0f98506f7b51b478869bed6e8"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T13:19:58.259Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.56",
+  "fromVersion": "10.3.57",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.57",
-  "repair": true,
-  "repairId": "reparo-aviso-destino-10.3.57"
+  "publicVersion": "10.3.58",
+  "repair": false
 }
