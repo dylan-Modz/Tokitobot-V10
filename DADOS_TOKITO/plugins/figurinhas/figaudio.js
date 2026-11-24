@@ -21,7 +21,7 @@ const instrucoes = ctx => ctx.reply(ctx.mess.padraoUso({
   uso: ctx.prefix + 'figaudio',
   exemplos: [
     ctx.prefix + 'figaudio respondendo um áudio de até 1 minuto',
-    ctx.prefix + 'figaudio respondendo um vídeo de até 9,9 segundos',
+    ctx.prefix + 'figaudio respondendo um vídeo (animação até 9,9s e áudio até 1 minuto)',
     ctx.prefix + 'figaudio respondendo uma imagem com um áudio citado',
     ctx.prefix + 'figaudio nome da música',
     ctx.prefix + 'figaudio link do YouTube'
@@ -126,7 +126,7 @@ dylan.setCommand({
       }
       const detalhes = {
         'MÚSICA': 'Trecho de até 30 segundos preparado.',
-        'VÍDEO': 'Figurinha animada gerada com o som original.',
+        'VÍDEO': 'Figurinha animada de até 9,9s com áudio original de até 1 minuto.',
         'IMAGEM': 'Imagem convertida em figurinha com som.',
         'FIGURINHA': 'Figurinha marcada enviada com áudio.',
         'ÁUDIO': 'Figurinha registrada enviada com áudio de até 1 minuto.'
