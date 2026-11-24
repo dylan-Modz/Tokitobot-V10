@@ -328,9 +328,12 @@ const verificar = async tokito => {
     const installed = String(check.local?.version || '').trim()
     const reparo = check.repair === true
     if (!version || (version === installed && !reparo)) return false
+    // Uma nova publicação de reparo deve iniciar seu próprio ciclo de avisos,
+    // mesmo que o número da versão pública continue igual.
     const assinatura = reparo
-    ? (check.pendingFiles || []).map(item => item.gitSha || item.sha256 || '').join(':') +
-    '|' + (check.pendingDelete || []).map(item => item.path || '').join(':')
+    ? String(check.remote?.repairId || '').trim() ||
+      ((check.pendingFiles || []).map(item => item.gitSha || item.sha256 || '').join(':') +
+      '|' + (check.pendingDelete || []).map(item => item.path || '').join(':'))
     : ''
     const chaveAviso = reparo ? version + '@' + assinatura : version
     const destino = destinatario(tokito)

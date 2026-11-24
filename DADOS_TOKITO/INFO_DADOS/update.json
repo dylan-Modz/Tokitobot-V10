@@ -4,8 +4,13 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T18:54:51.381Z",
+  "publishedAt": "2026-11-24T19:09:18.520Z",
   "changelog": [
+    "[FigAudio] Processamento separado da fila normal de comandos, com limite de conversões simultâneas.",
+    "[Desempenho] FFmpeg com carga controlada, arquivos temporários e cache assíncronos e limites de tempo.",
+    "[AutoStickerAudio] Fila própria de mídia compartilhada, sem bloquear comandos comuns.",
+    "[Avisos] Cada reparação identificada inicia um novo ciclo de notificações, mantendo o intervalo contra spam.",
+    "[Continuidade] Mantidas as correções de conexão, áudio, figurinhas e organização das versões anteriores.",
     "[Conexão] Registro de eventos de mídia antecipado para antes do pareamento e inicialização dos serviços.",
     "[Recepção] Mensagens recebidas e atualizações de mídia passam pelo cache antes dos comandos; falhas do cache não interrompem o restante da recepção.",
     "[Pareamento] Processamento de eventos e gravação de credenciais registrados antes de solicitar o código.",
@@ -33,8 +38,8 @@
   ],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Conexão e recepção de mídias",
-  "notice": "A versão 10.3.65 já está disponível. Melhorias na ordem dos eventos de recepção e pareamento, mantendo as correções anteriores.",
+  "title": "Reparação V10.3.65 — FigAudio sem bloquear comandos",
+  "notice": "Reparação da V10.3.65 disponível: processamento independente do FigAudio e otimização da fila de comandos.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -56,7 +61,7 @@
     },
     {
       "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "d67531249938b6d9cd03143855b06120e7a1887e"
+      "gitSha": "88c5f5e70f88e93991d5af998027d55c65a4f5fe"
     },
     {
       "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
@@ -4665,9 +4670,14 @@
       "fromVersion": "10.3.64",
       "channel": "stable",
       "type": "Correção",
-      "title": "Conexão e recepção de mídias",
-      "notice": "A versão 10.3.65 já está disponível. Melhorias na ordem dos eventos de recepção e pareamento, mantendo as correções anteriores.",
+      "title": "Reparação V10.3.65 — FigAudio sem bloquear comandos",
+      "notice": "Reparação da V10.3.65 disponível: processamento independente do FigAudio e otimização da fila de comandos.",
       "changelog": [
+        "[FigAudio] Processamento separado da fila normal de comandos, com limite de conversões simultâneas.",
+        "[Desempenho] FFmpeg com carga controlada, arquivos temporários e cache assíncronos e limites de tempo.",
+        "[AutoStickerAudio] Fila própria de mídia compartilhada, sem bloquear comandos comuns.",
+        "[Avisos] Cada reparação identificada inicia um novo ciclo de notificações, mantendo o intervalo contra spam.",
+        "[Continuidade] Mantidas as correções de conexão, áudio, figurinhas e organização das versões anteriores.",
         "[Conexão] Registro de eventos de mídia antecipado para antes do pareamento e inicialização dos serviços.",
         "[Recepção] Mensagens recebidas e atualizações de mídia passam pelo cache antes dos comandos; falhas do cache não interrompem o restante da recepção.",
         "[Pareamento] Processamento de eventos e gravação de credenciais registrados antes de solicitar o código.",
@@ -4694,7 +4704,7 @@
         },
         {
           "path": "DADOS_TOKITO/connect.js",
-          "gitSha": "d67531249938b6d9cd03143855b06120e7a1887e"
+          "gitSha": "88c5f5e70f88e93991d5af998027d55c65a4f5fe"
         },
         {
           "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
@@ -4744,7 +4754,7 @@
         "tests/tiktoksearch-rotation.test.js"
       ],
       "required": false,
-      "publishedAt": "2026-11-24T18:54:51.381Z"
+      "publishedAt": "2026-11-24T19:09:18.520Z"
     }
   ],
   "mode": "incremental",
@@ -4758,5 +4768,5 @@
   },
   "publicVersion": "10.3.65",
   "repair": true,
-  "repairId": "recepcao-e-figaudio-fila-10.3.65"
+  "repairId": "figaudio-fila-aviso-10.3.65-r2"
 }
