@@ -492,6 +492,9 @@ return String(marker.id || '').trim() !== migration.id
 // Mantém um número pequeno de novas tentativas para atualizações pendentes.
 const UPDATE_NOTICE_RETRY_MS = 3 * 60 * 1000
 const UPDATE_NOTICE_MAX_ATTEMPTS = 4
+// Após quatro confirmações de envio, continua verificando enquanto houver
+// atualização pendente, mas com intervalo maior para não gerar spam.
+const UPDATE_NOTICE_BACKOFF_MS = 6 * 60 * 60 * 1000
 
 function deveAvisarUpdate(version, ownerJid = '') {
 const valor = String(version || '').trim()
@@ -501,10 +504,10 @@ const anterior = state()
 if (String(anterior.lastNotifiedPrincipalVersion || '') !== valor) return true
 if (destino && String(anterior.lastNotifiedPrincipalJid || '') !== destino) return true
 const tentativas = Number(anterior.lastNotifiedPrincipalAttempts || 0)
-// Versões antigas não guardavam o número de tentativas: oferece uma nova chance.
-if (tentativas >= UPDATE_NOTICE_MAX_ATTEMPTS) return false
 const anteriorEm = Date.parse(anterior.lastNotifiedAt || '')
-return !Number.isFinite(anteriorEm) || Date.now() - anteriorEm >= UPDATE_NOTICE_RETRY_MS
+const espera = tentativas >= UPDATE_NOTICE_MAX_ATTEMPTS
+  ? UPDATE_NOTICE_BACKOFF_MS : UPDATE_NOTICE_RETRY_MS
+return !Number.isFinite(anteriorEm) || Date.now() - anteriorEm >= espera
 }
 
 function registrarAvisoUpdate(version, ownerJid = '') {
@@ -514,9 +517,14 @@ if (!valor) return state()
 const anterior = state()
 const mesmoAviso = String(anterior.lastNotifiedPrincipalVersion || '') === valor &&
 String(anterior.lastNotifiedPrincipalJid || '') === destino
-const tentativas = mesmoAviso
-? Math.min(UPDATE_NOTICE_MAX_ATTEMPTS, Math.max(0, Number(anterior.lastNotifiedPrincipalAttempts) || 0) + 1)
-: 1
+const ultimaTentativa = Date.parse(anterior.lastNotifiedAt || '')
+const terminouCiclo = mesmoAviso &&
+  Number(anterior.lastNotifiedPrincipalAttempts || 0) >= UPDATE_NOTICE_MAX_ATTEMPTS &&
+  Number.isFinite(ultimaTentativa) &&
+  Date.now() - ultimaTentativa >= UPDATE_NOTICE_BACKOFF_MS
+const tentativas = mesmoAviso && !terminouCiclo
+  ? Math.min(UPDATE_NOTICE_MAX_ATTEMPTS, Math.max(0, Number(anterior.lastNotifiedPrincipalAttempts) || 0) + 1)
+  : 1
 return saveState({
 lastNotifiedPrincipalVersion: valor,
 lastNotifiedPrincipalJid: destino,
