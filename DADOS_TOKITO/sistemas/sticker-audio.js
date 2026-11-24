@@ -114,7 +114,7 @@ function temOpus(mime, bytes) {
 
 const MAX_VIDEO_SEGUNDOS = 9.9
 const MAX_MUSICA_SEGUNDOS = 30
-const MAX_VIDEO_BYTES = 22 * 1024 * 1024
+const MAX_VIDEO_BYTES = 85 * 1024 * 1024
 const MAX_IMAGEM_BYTES = 10 * 1024 * 1024
 const { imageToWebp2, videoToWebp2 } = require('../plugins/figurinhas/exif2')
 const midiaCitada = require('./midia-citada')
@@ -151,8 +151,8 @@ const transcodificar = async (bytes, extensao, args, formato = '.ogg') => {
 }
 
 const opcoesOpus = segundos => [
-  '-t', String(segundos), '-vn', '-ac', '1', '-ar', '48000',
-  '-c:a', 'libopus', '-b:a', '32k', '-f', 'ogg'
+  '-map', '0:a:0', '-t', String(segundos), '-vn', '-ac', '1', '-ar', '48000',
+  '-c:a', 'libopus', '-application', 'audio', '-b:a', '48k', '-vbr', 'on', '-f', 'ogg'
 ]
 
 async function normalizarBufferAudio(buffer, mime = '', duracao = 0, segundos = MAX_SEGUNDOS) {
@@ -201,38 +201,137 @@ const apiUrl = (ctx, endpoint, params) => {
   return link.toString()
 }
 
-async function baixarMusica(ctx, termo) {
-  let id = youtubeId(termo)
-  if (!id) {
-    if (/^https?:\/\//i.test(termo)) throw new Error('Use um link válido do YouTube.')
-    if (String(termo || '').trim().length < 2 || String(termo).length > 140) {
-      throw new Error('Informe o nome da música para pesquisar.')
+const enderecoAudio = objeto => {
+  if (typeof objeto === 'string') return /^https:\/\//i.test(objeto) ? objeto : ''
+  if (!objeto || typeof objeto !== 'object') return ''
+  for (const chave of ['url', 'download', 'downloadUrl', 'download_url', 'audio', 'link', 'src']) {
+    const url = enderecoAudio(objeto[chave])
+    if (url) return url
+  }
+  for (const chave of ['resultado', 'result', 'data', 'response']) {
+    const url = enderecoAudio(objeto[chave])
+    if (url) return url
+  }
+  return ''
+}
+
+const linkAudioSeguro = valor => {
+  try {
+    const url = new URL(valor)
+    if (url.protocol !== 'https:' || url.username || url.password) return false
+    const host = url.hostname.toLowerCase()
+    if (host === 'localhost' || host.endsWith('.local') || host.endsWith('.internal')) return false
+    if (/^(?:127|10|0)\.|^192\.168\.|^169\.254\.|^172\.(?:1[6-9]|2\d|3[01])\.|^\[?::1\]?$/.test(host)) return false
+    return true
+  } catch { return false }
+}
+
+const retornoMusica = (resp, tipo = '') => {
+  const status = Number(resp?.status || 0)
+  if (status !== 200) throw new Error('A API de músicas retornou HTTP ' + status + '.')
+  const dados = resp.data
+  const contentType = String(resp.headers?.['content-type'] || '').toLowerCase()
+  if (dados && typeof dados === 'object' && !Buffer.isBuffer(dados) &&
+      !(dados instanceof Uint8Array) && !Array.isArray(dados)) {
+    return { url: enderecoAudio(dados), bytes: null }
+  }
+  const bytes = Buffer.isBuffer(dados) ? dados : Buffer.from(dados || [])
+  if (!bytes.length) throw new Error('A API não retornou áudio.')
+  const prefixo = bytes.subarray(0, Math.min(bytes.length, 80)).toString('utf8').trim()
+  if (contentType.includes('json') || prefixo[0] === '{' || prefixo[0] === '[') {
+    try {
+      const data = JSON.parse(bytes.toString('utf8'))
+      return { url: enderecoAudio(data), bytes: null }
+    } catch {
+      throw new Error('A API retornou dados de música inválidos.')
     }
-    const busca = await axios.get(apiUrl(ctx, '/api/youtube-search', { query: termo }), {
-      timeout: 20000, validateStatus: () => true
+  }
+  if (contentType.includes('text/html') || /^<!doctype|^<html/i.test(prefixo)) {
+    throw new Error('A API retornou uma página em vez do áudio.')
+  }
+  return { bytes, mime: contentType, url: '' }
+}
+
+async function baixarMusica(ctx, termo) {
+  const entrada = String(termo || '').trim()
+  let id = youtubeId(entrada)
+  if (!id) {
+    if (/^https?:\/\//i.test(entrada)) throw new Error('Use um link válido do YouTube.')
+    if (entrada.length < 2 || entrada.length > 140) throw new Error('Informe o nome da música.')
+    const busca = await axios.get(apiUrl(ctx, '/api/youtube-search', { query: entrada }), {
+      timeout: 25000, validateStatus: () => true
     })
-    const resultados = busca.data?.resultado
-    const encontrado = busca.status === 200 && Array.isArray(resultados)
-      ? resultados.find(item => item?.type === 'video' && (item?.videoId || youtubeId(item?.url))) : null
+    const data = busca.data
+    const lista = Array.isArray(data?.resultado) ? data.resultado
+      : Array.isArray(data?.result) ? data.result
+      : Array.isArray(data?.data) ? data.data : []
+    const encontrado = lista.find(item => item?.type === 'video' && (item.videoId || item.url))
+      || lista.find(item => item?.videoId || youtubeId(item?.url))
     id = encontrado?.videoId && /^[a-zA-Z0-9_-]{11}$/.test(encontrado.videoId)
       ? encontrado.videoId : youtubeId(encontrado?.url)
-    if (!id) throw new Error('Não encontrei essa música no YouTube.')
+    if (!id) throw new Error('Não foi possível localizar essa música pela pesquisa.')
   }
   const url = 'https://www.youtube.com/watch?v=' + id
-  const resposta = await axios.get(apiUrl(ctx, '/api/youtube-audio', { q: url }), {
+  const parametros = { q: url }
+  const resposta = await axios.get(apiUrl(ctx, '/api/youtube-audio', parametros), {
     timeout: 90000, responseType: 'arraybuffer',
     maxContentLength: 35 * 1024 * 1024, maxBodyLength: 35 * 1024 * 1024,
     validateStatus: () => true
   })
-  const mime = String(resposta.headers?.['content-type'] || '').toLowerCase()
-  if (resposta.status !== 200 || mime.includes('json') || mime.includes('text/html')) {
-    throw new Error('Não foi possível obter o áudio dessa música.')
+  let midia = retornoMusica(resposta)
+  if (midia.url) {
+    if (!linkAudioSeguro(midia.url)) throw new Error('A API retornou um link de áudio inválido.')
+    const download = await axios.get(midia.url, {
+      responseType: 'arraybuffer', timeout: 90000,
+      maxContentLength: 35 * 1024 * 1024,
+      maxBodyLength: 35 * 1024 * 1024,
+      maxRedirects: 2, validateStatus: () => true
+    })
+    midia = retornoMusica(download)
   }
-  const bytes = Buffer.from(resposta.data || [])
-  if (!bytes.length || bytes.length > 35 * 1024 * 1024) {
-    throw new Error('A música não está disponível para conversão.')
+  if (!midia.bytes) throw new Error('A API não retornou um arquivo de áudio reproduzível.')
+  return normalizarBufferAudio(midia.bytes, midia.mime || '', 0, MAX_MUSICA_SEGUNDOS)
+}
+async function converterVideoAdaptativo(bytes) {
+  // Prioriza o conversor existente do /s. Se o WebP ultrapassar 1 MB,
+  // reduz resolução, FPS e qualidade progressivamente sem excluir o vídeo.
+  try {
+    const padrao = await videoToWebp2(bytes)
+    if (padrao?.length && padrao.length <= MAX_WEBP) return padrao
+  } catch (error) {
+    console.warn('[FIGAUDIO WEBP BASE]', error?.message || error)
   }
-  return normalizarBufferAudio(bytes, mime, 0, MAX_MUSICA_SEGUNDOS)
+  const perfis = [
+    { pixels: 448, fps: 9, qualidade: 38 },
+    { pixels: 384, fps: 8, qualidade: 32 },
+    { pixels: 320, fps: 7, qualidade: 26 },
+    { pixels: 288, fps: 6, qualidade: 20 },
+    { pixels: 256, fps: 5, qualidade: 16 }
+  ]
+  return temporario(async dir => {
+    const entrada = path.join(dir, 'video.mp4')
+    fs.writeFileSync(entrada, bytes)
+    for (let i = 0; i < perfis.length; i++) {
+      const perfil = perfis[i]
+      const saida = path.join(dir, 'sticker-' + i + '.webp')
+      try {
+        await executar(process.env.FFMPEG_PATH || 'ffmpeg', [
+          '-hide_banner', '-loglevel', 'error', '-y', '-i', entrada,
+          '-t', '9.5', '-an',
+          '-vf', 'fps=' + perfil.fps + ',scale=' + perfil.pixels + ':' + perfil.pixels +
+            ':force_original_aspect_ratio=decrease,pad=' + perfil.pixels + ':' + perfil.pixels + ':(ow-iw)/2:(oh-ih)/2:color=0x00000000,format=yuva420p',
+          '-c:v', 'libwebp', '-lossless', '0', '-compression_level', '5',
+          '-q:v', String(perfil.qualidade), '-loop', '0', '-f', 'webp', saida
+        ], { timeout: 75000, maxBuffer: 1024 * 1024 })
+        const convertido = fs.readFileSync(saida)
+        if (convertido.length <= MAX_WEBP && convertido.length > 12 &&
+            convertido.toString('ascii', 0, 4) === 'RIFF') return convertido
+      } catch (error) {
+        console.warn('[FIGAUDIO WEBP ADAPTATIVO]', i, error?.message || error)
+      }
+    }
+    throw new Error('Não foi possível compactar esse vídeo em uma figurinha de até 1 MB.')
+  })
 }
 
 async function prepararVideo(ctx, lista, referencia) {
@@ -240,16 +339,14 @@ async function prepararVideo(ctx, lista, referencia) {
   const duracao = Number(media?.seconds || 0)
   if (duracao >= 10) throw new Error('O vídeo deve ter menos de 10 segundos (até 9,9s).')
   const bytes = await midiaCitada.baixar(ctx, 'video', lista, referencia)
-  if (bytes.length > MAX_VIDEO_BYTES) throw new Error('O vídeo ultrapassou 22 MB.')
-  const som = await transcodificar(bytes, 'mp4', opcoesOpus(9.5))
-  // Mesmo conversor usado pelo comando /s; preserva a animação em WebP.
-  const figurinha = await videoToWebp2(bytes)
-  if (!figurinha?.length || figurinha.length > MAX_WEBP) {
-    throw new Error('A figurinha animada excedeu 1 MB.')
-  }
+  if (bytes.length > MAX_VIDEO_BYTES) throw new Error('O vídeo ultrapassou 85 MB.')
+  // Converte vídeo e áudio a partir do mesmo original, com a mesma duração.
+  const [som, figurinha] = await Promise.all([
+    transcodificar(bytes, 'mp4', opcoesOpus(9.5)),
+    converterVideoAdaptativo(bytes)
+  ])
   return { figurinha, som, animada: true }
 }
-
 async function prepararImagem(ctx, lista, referencia) {
   const bytes = await midiaCitada.baixar(ctx, 'image', lista, referencia)
   if (bytes.length > MAX_IMAGEM_BYTES) throw new Error('A imagem ultrapassou 10 MB.')
@@ -305,10 +402,20 @@ async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}
       isAnimated: animada, width: 512, height: 512
     }, { upload }),
     prepareWAMessageMedia({
-      audio: som, mimetype: 'audio/ogg; codecs=opus', ptt: false
+      audio: som, mimetype: 'audio/ogg; codecs=opus', ptt: true
     }, { upload })
   ])
+  // Os clientes esperam AudioMessage com MIME/tempo coerentes para tocar.
+  const audioMsg = audio.audioMessage
+  audioMsg.mimetype = 'audio/ogg; codecs=opus'
+  audioMsg.ptt = true
+  audioMsg.seconds = Math.max(1, Math.min(MAX_MUSICA_SEGUNDOS,
+    Number(audioMsg.seconds || 0) || 10))
   const mensagem = construirMensagem(fig, audio)
+  // O encoder da figurinha pode ter o campo extra 26, mesmo sem o
+  // decoder nativo conhecer esse campo. Confirmamos o trecho de bytes.
+  const codificado = proto.Message.encode(mensagem).finish()
+  if (!codificado?.length) throw new Error('A mensagem da figurinha não foi codificada.')
   await ctx.tokito.relayMessage(ctx.from, mensagem, {})
   return true
 }
