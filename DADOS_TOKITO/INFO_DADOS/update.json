@@ -8,7 +8,8 @@
   "changelog": [
     "[Melhoria] docs: corrigir foto do desenvolvedor no README",
     "A versão 10.3.63 já está disponível para atualização.",
-    "README atualizado"
+    "README atualizado",
+    "[Figurinhas] /fig e /figaudio avisam antes da preparação e enviam a figurinha sem confirmação adicional de sucesso; erros e comandos de registro preservados."
   ],
   "delete": [],
   "archiveSha256": "",
@@ -22,6 +23,14 @@
       "path": "README.md",
       "sha256": "0eef4a34a07ca9e1171412e509ebe70d20c45baddfcace108719f3904fa5a9f7",
       "size": 9060
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/figurinhas/s.js",
+      "gitSha": "8d5646f5200c62cba501008f54433ff58c72b3b7"
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
+      "gitSha": "94c2ecca29d94567cb8bba68968d79cd20a2d64f"
     }
   ],
   "releases": [
@@ -4495,13 +4504,22 @@
       "title": "docs: corrigir foto do desenvolvedor no README",
       "notice": "A versão 10.3.63 já está disponível para atualização.",
       "changelog": [
-        "README atualizado"
+        "README atualizado",
+        "[Figurinhas] /fig e /figaudio avisam antes da preparação e enviam a figurinha sem confirmação adicional de sucesso; erros e comandos de registro preservados."
       ],
       "files": [
         {
           "path": "README.md",
           "sha256": "0eef4a34a07ca9e1171412e509ebe70d20c45baddfcace108719f3904fa5a9f7",
           "size": 9060
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/s.js",
+          "gitSha": "8d5646f5200c62cba501008f54433ff58c72b3b7"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
+          "gitSha": "94c2ecca29d94567cb8bba68968d79cd20a2d64f"
         }
       ],
       "delete": [],
@@ -4520,5 +4538,5 @@
   },
   "publicVersion": "10.3.61",
   "repair": true,
-  "repairId": "restaurar-audio-limpar-validacao-config-e-package-10.3.61"
+  "repairId": "fluxo-fig-figaudio-10.3.63"
 }

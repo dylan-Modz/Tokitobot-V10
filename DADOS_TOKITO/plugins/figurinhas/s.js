@@ -70,6 +70,11 @@ dylan.setCommand({
 
     let arquivo
     try {
+      await ctx.reply(ctx.mess.padraoAviso({
+        emoji: '⏳', titulo: 'CRIANDO FIGURINHA',
+        descricao: 'Preparando sua figurinha...',
+        detalhe: 'Aguarde um instante.'
+      }))
       if (imagens.length) {
         const buffer = await midiaCitada.baixar(ctx, 'image', imagens, referencia)
         arquivo = await ctx.sendImageAsSticker2(ctx.tokito, ctx.from, buffer, ctx.selo, dados)

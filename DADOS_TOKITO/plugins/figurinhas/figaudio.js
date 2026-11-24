@@ -81,15 +81,24 @@ dylan.setCommand({
         midia.extrair(ctx.mensagem, 'sticker')
       )
       let dados = null
-      let modo = ''
+
+      if (pesquisa && videos.length && midiaCitadaOuAtual) {
+        return aviso(ctx, 'USE IMAGEM OU FIGURINHA',
+          'Para música pesquisada, marque uma imagem ou figurinha. Para vídeo, use ' + ctx.prefix + 'figaudio sem pesquisa.')
+      }
+      if (!pesquisa && !(videos.length && midiaCitadaOuAtual) && !audios.length) {
+        return instrucoes(ctx)
+      }
+
+      await ctx.reply(ctx.mess.padraoAviso({
+        emoji: '⏳', titulo: 'CRIANDO FIGURINHA COM ÁUDIO',
+        descricao: 'Preparando sua figurinha com áudio...',
+        detalhe: 'Aguarde um instante.'
+      }))
 
       if (pesquisa) {
         // Se houver mídia visual marcada, usa ela; caso contrário, usa a registrada.
         // A pesquisa é limitada a uma única música (até 30 s).
-        if (videos.length && midiaCitadaOuAtual) {
-          return aviso(ctx, 'USE IMAGEM OU FIGURINHA',
-            'Para música pesquisada, marque uma imagem ou figurinha. Para vídeo, use ' + ctx.prefix + 'figaudio sem pesquisa.')
-        }
         const som = await sistema.baixarMusica(ctx, pesquisa)
         if (stickers.length && midiaCitadaOuAtual) {
           dados = { ...(await sistema.prepararFigurinha(ctx, stickers, referencia)), som }
@@ -98,41 +107,30 @@ dylan.setCommand({
         } else {
           dados = sistema.usarRegistrada(som)
         }
-        modo = 'MÚSICA'
+
       } else if (videos.length && midiaCitadaOuAtual) {
         dados = await sistema.prepararVideo(ctx, videos, referencia)
-        modo = 'VÍDEO'
+
       } else if (imagens.length && audios.length && midiaCitadaOuAtual) {
         const imagem = await sistema.prepararImagem(ctx, imagens, referencia)
         const som = await sistema.normalizarAudio(ctx, audios[0])
         dados = { ...imagem, som }
-        modo = 'IMAGEM'
+
       } else if (stickers.length && audios.length && midiaCitadaOuAtual) {
         const sticker = await sistema.prepararFigurinha(ctx, stickers, referencia)
         const som = await sistema.normalizarAudio(ctx, audios[0])
         dados = { ...sticker, som }
-        modo = 'FIGURINHA'
+
       } else if (audios.length) {
         const som = await sistema.normalizarAudio(ctx, audios[0])
         dados = sistema.usarRegistrada(som)
-        modo = 'ÁUDIO'
+
       } else {
         return instrucoes(ctx)
       }
 
       await sistema.enviarPersonalizada(ctx, dados)
-      if (typeof ctx.reagir === 'function') {
-        await ctx.reagir(ctx.from, '✅').catch(() => {})
-      }
-      const detalhes = {
-        'MÚSICA': 'Áudio da música preparado com até 1 minuto.',
-        'VÍDEO': 'Figurinha animada de até 9,9s com áudio original de até 1 minuto.',
-        'IMAGEM': 'Imagem convertida em figurinha com som.',
-        'FIGURINHA': 'Figurinha marcada enviada com áudio.',
-        'ÁUDIO': 'Figurinha registrada enviada com áudio de até 1 minuto.'
-      }
-      return sucesso(ctx, 'FIGURINHA COM ÁUDIO ENVIADA',
-        'Envio concluído.', detalhes[modo] || 'Mídia preparada e enviada.')
+      return true
     } catch (e) {
       console.warn('[FIGAUDIO]', e?.code || e?.message || e)
       return erro(ctx, 'FALHA NA FIGURINHA COM ÁUDIO',
