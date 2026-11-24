@@ -47,12 +47,18 @@ const dados = (texto, padrao = '') => {
 }
 
 const fonteSticker = ctx => {
-  const { fontes } = midiaCitada.preparar(ctx)
-  for (const fonte of fontes) {
-    const sticker = midiaCitada.extrair(fonte, 'sticker')
-    if (sticker) return sticker
-  }
-  return null
+  const dados = midiaCitada.preparar(ctx)
+  const stickers = midiaCitada.candidatos(dados.fontes, 'sticker')
+  const sticker = stickers.find(item => item.audioMessage?.mediaKey) ||
+    stickers[0] || null
+  const identificado = dados.contexto?.stanzaId || ''
+  // Em respostas a figurinhas, o WhatsApp pode enviar somente o WebP e
+  // omitir o campo experimental do áudio. Recuperamos pelo ID original.
+  const audio = sticker?.audioMessage?.mediaKey
+    ? sticker.audioMessage
+    : (dados.original?.message?.stickerMessage?.audioMessage ||
+      stickerAudio.recuperarAudioMensagem(ctx.from, identificado))
+  return { sticker, audio, identificado }
 }
 
 dylan.setCommand({
@@ -93,7 +99,8 @@ dylan.setCommand({
       }))
     }
 
-    const sticker = fonteSticker(ctx)
+    const origem = fonteSticker(ctx)
+    const sticker = origem.sticker
     if (!sticker) {
       return ctx.reply(ctx.mess.padraoUso({
         emoji: '🧊', titulo: 'RENOMEAR FIGURINHA',
@@ -119,7 +126,7 @@ dylan.setCommand({
         mimetype: 'image/webp'
       }, marca)
       const novoWebp = fs.readFileSync(arquivo)
-      const audio = sticker.audioMessage
+      const audio = origem.audio
       if (audio) {
         // No figaudio o áudio fica nos metadados da StickerMessage,
         // e não dentro do WebP. Reenvia-o usando a rotina compartilhada.
