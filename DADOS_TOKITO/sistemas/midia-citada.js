@@ -191,24 +191,7 @@ const registrarRecebidas = (socket, mensagens) => {
       extrair(anterior.message, 'video') ||
       extrair(anterior.message, 'audio') || extrair(anterior.message, 'sticker')
     )
-    // Figurinhas sonoras vindas de outros bots não foram enviadas pelo
-    // nosso /figaudio. Registra o áudio recebido ANTES da citação perder
-    // o campo experimental. Não regrava o registro com dados incompletos.
-    const sticker = conteudo?.stickerMessage
-    const audioSticker = sticker?.audioMessage
-    if (audioSticker?.mediaKey && (audioSticker.directPath || audioSticker.url)) {
-      try {
-        require('./sticker-audio').registrarAudioMensagem(
-          jid, id, audioSticker, null, sticker.fileSha256
-        )
-      } catch (erro) {
-        console.warn('[MIDIA STICKER AUDIO]', erro?.message || erro)
-      }
-    }
-    const originalTemSom = Boolean(mediaAnterior?.audioMessage?.mediaKey)
-    const atualTemSom = Boolean(sticker?.audioMessage?.mediaKey)
-    if (media.mediaKey && (!completo(mediaAnterior) || completo(media) &&
-        (!originalTemSom || atualTemSom))) {
+    if (media.mediaKey && (!completo(mediaAnterior) || completo(media))) {
       cache.delete(chave)
       cache.set(chave, { message: mensagem, key: item.key, at: agora })
     }
