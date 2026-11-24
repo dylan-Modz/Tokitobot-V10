@@ -14,7 +14,8 @@
     "[Reparação] Restaurado take.js da V10.3.59 que teve /rename com áudio confirmado; incluídos take.js, sticker-audio.js, midia-citada.js e connect.js na verificação de integridade e reinstalação do reparo.",
     "[Organização] Validação do TikTok movida para DADOS_TOKITO/database/validacao e incluída no npm test; removida a automação exclusiva do GitHub Actions.",
     "[Reparação] Remoção das antigas pastas de validação quando vazias, inclusive após reiniciar instalações que já receberam a versão 10.3.61; preserva arquivos particulares.",
-    "[Reparação] Limpeza local dos campos obsoletos channelName e channelServerMessageId ao carregar o sistema, preservando todas as demais configurações."
+    "[Reparação] Limpeza local dos campos obsoletos channelName e channelServerMessageId ao carregar o sistema, preservando todas as demais configurações.",
+    "[Organização] Removidos os atalhos npm install:bot e npm test do package.json; mantidos start, update, dependências e validações internas."
   ],
   "delete": [
     "tests/tiktoksearch-rotation.test.js",
@@ -45,7 +46,7 @@
     },
     {
       "path": "package.json",
-      "gitSha": "a87c3d91967550fcb6007370855bf09fd22dd37b"
+      "gitSha": "727a5b1ad0490f16a28192155a1e1e61aacbbeec"
     },
     {
       "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
@@ -5597,7 +5598,8 @@
         "[Reparação] Restaurado take.js da V10.3.59 que teve /rename com áudio confirmado; incluídos take.js, sticker-audio.js, midia-citada.js e connect.js na verificação de integridade e reinstalação do reparo.",
         "[Organização] Validação do TikTok movida para DADOS_TOKITO/database/validacao e incluída no npm test; removida a automação exclusiva do GitHub Actions.",
         "[Reparação] Remoção das antigas pastas de validação quando vazias, inclusive após reiniciar instalações que já receberam a versão 10.3.61; preserva arquivos particulares.",
-        "[Reparação] Limpeza local dos campos obsoletos channelName e channelServerMessageId ao carregar o sistema, preservando todas as demais configurações."
+        "[Reparação] Limpeza local dos campos obsoletos channelName e channelServerMessageId ao carregar o sistema, preservando todas as demais configurações.",
+        "[Organização] Removidos os atalhos npm install:bot e npm test do package.json; mantidos start, update, dependências e validações internas."
       ],
       "files": [
         {
@@ -5618,7 +5620,7 @@
         },
         {
           "path": "package.json",
-          "gitSha": "a87c3d91967550fcb6007370855bf09fd22dd37b"
+          "gitSha": "727a5b1ad0490f16a28192155a1e1e61aacbbeec"
         },
         {
           "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
@@ -5648,5 +5650,5 @@
   },
   "publicVersion": "10.3.61",
   "repair": true,
-  "repairId": "restaurar-audio-limpar-validacao-e-config-canal-10.3.61"
+  "repairId": "restaurar-audio-limpar-validacao-config-e-package-10.3.61"
 }
