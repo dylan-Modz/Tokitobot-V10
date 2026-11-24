@@ -1,19 +1,16 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.64",
+  "version": "10.3.65",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T18:43:19.629Z",
+  "publishedAt": "2026-11-24T18:54:51.381Z",
   "changelog": [
-    "[Figurinhas] /fig, /s, /sticker e /figurinha avisam antes de preparar a mídia e enviam a figurinha sem mensagem final desnecessária.",
-    "[FigAudio] /figaudio segue o mesmo padrão: aviso antes da preparação e figurinha com áudio depois, sem confirmação adicional. Registro, visualização, remoção e mensagens de erro mantidos.",
-    "[Take/Rename] Consolidadas as correções para preservar áudio e animação quando os metadados da mídia original estão disponíveis. Não é possível reconstruir áudio ausente a partir do WebP.",
-    "[Organização] Validação interna do TikTok movida para DADOS_TOKITO/database/validacao; removidos os arquivos oficiais antigos de tests e .github/workflows, e diretórios quando vazios.",
-    "[Configuração] Limpeza dos campos obsoletos channelName e channelServerMessageId no config-all.json local; tokens, credenciais e configurações restantes preservados.",
-    "[Package] Removidos install:bot e test do package.json, mantidos start, update e a instalação automática das dependências.",
-    "[README] Link do canal oficial, foto do desenvolvedor e selo de versão atualizados.",
-    "[Atualização] Versão 10.3.64 alinhada no package.json e manifesto; reparações anteriores consolidadas para instalações que ainda não receberam todos os arquivos."
+    "[Conexão] Registro de eventos de mídia antecipado para antes do pareamento e inicialização dos serviços.",
+    "[Recepção] Mensagens recebidas e atualizações de mídia passam pelo cache antes dos comandos; falhas do cache não interrompem o restante da recepção.",
+    "[Pareamento] Processamento de eventos e gravação de credenciais registrados antes de solicitar o código.",
+    "[Limitação] A conexão Web continua usando a Stone WPP existente: se o WhatsApp não enviar o conteúdo ou a chave, o bot não pode recriá-los. Nenhuma mudança forçada de transporte.",
+    "[Continuidade] Mantidas todas as limpezas, melhorias nas figurinhas e reparações da V10.3.64."
   ],
   "delete": [
     ".github/workflows/controle-remoto.yml",
@@ -34,19 +31,19 @@
     "tests/tiktoksearch-rotation.test.js"
   ],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Figurinhas, reparação e organização do Tokito V10",
-  "notice": "A versão 10.3.64 já está disponível! Melhorias nas figurinhas, limpeza de arquivos antigos e configurações, organização do package.json e README atualizado.",
+  "type": "Correção",
+  "title": "Conexão e recepção de mídias",
+  "notice": "A versão 10.3.65 já está disponível. Melhorias na ordem dos eventos de recepção e pareamento, mantendo as correções anteriores.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "package.json",
-      "gitSha": "82af3bbc45ff88a1d9a49ea6719801df875a0b27"
+      "gitSha": "c01d244ba338ae2f707a7af1a0fff8a5a7656f9c"
     },
     {
       "path": "README.md",
-      "gitSha": "aa7332dff7af7b9f4ceb2d866b723e2e086e5a4e"
+      "gitSha": "fcc41c93fb389c810fd22a8eb72f84cd82cbe3dc"
     },
     {
       "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
@@ -62,7 +59,7 @@
     },
     {
       "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "e6fba03125225af1d702defa3b05cb956f026bac"
+      "gitSha": "d67531249938b6d9cd03143855b06120e7a1887e"
     },
     {
       "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
@@ -4653,18 +4650,95 @@
       ],
       "required": false,
       "publishedAt": "2026-11-24T18:43:19.629Z"
+    },
+    {
+      "version": "10.3.65",
+      "fromVersion": "10.3.64",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Conexão e recepção de mídias",
+      "notice": "A versão 10.3.65 já está disponível. Melhorias na ordem dos eventos de recepção e pareamento, mantendo as correções anteriores.",
+      "changelog": [
+        "[Conexão] Registro de eventos de mídia antecipado para antes do pareamento e inicialização dos serviços.",
+        "[Recepção] Mensagens recebidas e atualizações de mídia passam pelo cache antes dos comandos; falhas do cache não interrompem o restante da recepção.",
+        "[Pareamento] Processamento de eventos e gravação de credenciais registrados antes de solicitar o código.",
+        "[Limitação] A conexão Web continua usando a Stone WPP existente: se o WhatsApp não enviar o conteúdo ou a chave, o bot não pode recriá-los. Nenhuma mudança forçada de transporte.",
+        "[Continuidade] Mantidas todas as limpezas, melhorias nas figurinhas e reparações da V10.3.64."
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "gitSha": "c01d244ba338ae2f707a7af1a0fff8a5a7656f9c"
+        },
+        {
+          "path": "README.md",
+          "gitSha": "fcc41c93fb389c810fd22a8eb72f84cd82cbe3dc"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
+          "gitSha": "a3a7c726f10b4d8b2d9f4b2c2f517da2b7bb85d5"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "0f8cf3562d2dca969c2e449af340bebb87f68daf"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/midia-citada.js",
+          "gitSha": "a3716ed0de3f807119e477b275bcb7ae6e89ff73"
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "d67531249938b6d9cd03143855b06120e7a1887e"
+        },
+        {
+          "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
+          "gitSha": "cf0adb4b7f5a0fa333c3eb470861a46f86c49f74"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "gitSha": "4ff495db0083885f15ed8d8a7ffc355596bac712"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/s.js",
+          "gitSha": "8d5646f5200c62cba501008f54433ff58c72b3b7"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
+          "gitSha": "94c2ecca29d94567cb8bba68968d79cd20a2d64f"
+        }
+      ],
+      "delete": [
+        ".github/workflows/controle-remoto.yml",
+        ".github/workflows/controle.yml",
+        ".github/workflows/tiktoksearch.yml",
+        "tests/adv.test.js",
+        "tests/remote-control.test.js",
+        "tests/reparo-audio-canal.test.js",
+        "tests/reparo-botao-canal.test.js",
+        "tests/reparo-botao-nativo-canal.test.js",
+        "tests/reparo-deteccao.test.js",
+        "tests/reparo-entrega-reparo.test.js",
+        "tests/reparo-mesma-versao.test.js",
+        "tests/reparo-resposta-segura.test.js",
+        "tests/reparo-respostas-canal.test.js",
+        "tests/reparo-setchannel.test.js",
+        "tests/sticker-audio.test.js",
+        "tests/tiktoksearch-rotation.test.js"
+      ],
+      "required": false,
+      "publishedAt": "2026-11-24T18:54:51.381Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.63",
+  "fromVersion": "10.3.64",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.64",
+  "publicVersion": "10.3.65",
   "repair": true,
-  "repairId": "consolidacao-figurinhas-limpeza-10.3.64"
+  "repairId": "recepcao-e-pareamento-10.3.65"
 }

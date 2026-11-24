@@ -720,6 +720,19 @@ async function conectar() {
     vincular(tokito)
     bot = tokito
     global.tokito = tokito
+    // Registra a recepção antes de iniciar pareamento, serviços ou comandos.
+    // Apenas metadados efetivamente entregues pela Stone são encaminhados.
+    const receberMidias = itens => {
+      if (bot !== tokito || !Array.isArray(itens) || !itens.length) return
+      try {
+        midias(tokito, itens)
+      } catch (error) {
+        // Não deixa falha de cache bloquear a recepção de outras mensagens.
+        erroSistema('Registro de mídia recebida', error)
+      }
+    }
+    tokito.ev.on('messages.upsert', evento => receberMidias(evento?.messages))
+    tokito.ev.on('messages.update', receberMidias)
     tokito.ev.on('tokito.security.ciphertext', dados => {
       Promise.resolve(invisivel.registrar(tokito, dados)).catch(error => {
         erroSistema('Anti-Invisivel', error)
@@ -732,12 +745,10 @@ async function conectar() {
     global.qrTokitoAtual = null
     global.mostrarQrTokito = false
     funcoes.iniciar(tokito, prefix)
-    if (!state.creds.registered && metodo === 'codigo') await parear(tokito)
     if (!state.creds.registered && metodo === 'qr') info('Aguardando geração do QR-Code...')
     const pendentesPorChat = new Map()
     const mensagens = upsert => {
       if (!Array.isArray(upsert?.messages) || upsert.messages.length === 0) return
-      midias(tokito, upsert.messages)
       const gruposDoLote = new Map()
       for (const mensagem of upsert.messages) {
         const jid = String(mensagem?.key?.remoteJid || '')
@@ -773,7 +784,6 @@ async function conectar() {
     }
     tokito.ev.process(async events => {
       if (bot !== tokito) return
-      if (events['messages.update']) midias(tokito, events['messages.update'])
       if (events['messages.upsert']) mensagens(events['messages.upsert'])
       recarregar()
       if (events['call'] && !runtime.isSubBot) {
@@ -1300,6 +1310,8 @@ async function conectar() {
       }
       if (events['creds.update']) await saveCreds()
     })
+    // O processamento e a gravação de credenciais já estão registrados antes do código.
+    if (bot === tokito && !state.creds.registered && metodo === 'codigo') await parear(tokito)
     iniciando = false
   } catch (error) {
     erroSistema('Ocorreu um erro ao iniciar a conexão', error)
