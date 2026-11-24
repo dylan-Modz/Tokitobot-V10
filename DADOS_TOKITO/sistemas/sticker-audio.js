@@ -12,7 +12,7 @@ const os = require('os')
 const { promisify } = require('util')
 const { execFile } = require('child_process')
 const { randomBytes } = require('crypto')
-const { proto, prepareWAMessageMedia } = require('@stone-wpp/ofc')
+const { proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
 const modulos = require('./modulos')
 
 const executar = promisify(execFile)
@@ -22,6 +22,55 @@ const PATCH = Symbol.for('tokito.stickerAudio.sticker26.v2')
 const MAX_WEBP = 1024 * 1024
 const MAX_AUDIO = 20 * 1024 * 1024
 const MAX_SEGUNDOS = 60
+
+// Áudio de figurinha não fica no arquivo WebP. Guarda os metadados do
+// envio original por ID de mensagem para /take e /rename recuperarem o som.
+const AUDIO_CACHE_TTL = 24 * 60 * 60 * 1000
+const AUDIO_CACHE_MAX = 500
+const audiosPorMensagem = new Map()
+const chaveMensagem = (jid, id) => String(jid || '') + '|' + String(id || '')
+function registrarAudioMensagem(jid, id, audioMessage) {
+  if (!jid || !id || !audioMessage?.mediaKey ||
+      !(audioMessage.directPath || audioMessage.url)) return false
+  const agora = Date.now()
+  for (const [chave, item] of audiosPorMensagem) {
+    if (agora - item.at > AUDIO_CACHE_TTL) audiosPorMensagem.delete(chave)
+  }
+  const chave = chaveMensagem(jid, id)
+  audiosPorMensagem.delete(chave)
+  audiosPorMensagem.set(chave, { audioMessage, at: agora })
+  while (audiosPorMensagem.size > AUDIO_CACHE_MAX) {
+    audiosPorMensagem.delete(audiosPorMensagem.keys().next().value)
+  }
+  return true
+}
+function recuperarAudioMensagem(jid, id) {
+  if (!jid || !id) return null
+  const chave = chaveMensagem(jid, id)
+  const encontrado = audiosPorMensagem.get(chave)
+  if (!encontrado) return null
+  if (Date.now() - encontrado.at > AUDIO_CACHE_TTL) {
+    audiosPorMensagem.delete(chave)
+    return null
+  }
+  return encontrado.audioMessage
+}
+async function relayFigurinhaSonora(ctx, mensagem, audioMessage) {
+  if (typeof generateWAMessageFromContent !== 'function') {
+    throw new Error('A conexão não disponibiliza identificador de mensagem para figurinha sonora.')
+  }
+  const gerada = generateWAMessageFromContent(ctx.from, mensagem, {
+    userJid: ctx.tokito.user?.id
+  })
+  const id = gerada?.key?.id
+  if (!id) throw new Error('Não foi possível identificar a figurinha sonora.')
+  // Utilizar a mensagem original: o campo 26 é experimental e a normalização
+  // da mensagem gerada pode descartá-lo.
+  await ctx.tokito.relayMessage(ctx.from, mensagem, { messageId: id })
+  registrarAudioMensagem(ctx.from, id, audioMessage)
+  return true
+}
+
 
 const registrada = () => fs.existsSync(ARQUIVO)
 const metadados = () => {
@@ -557,7 +606,7 @@ async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}
   // decoder nativo conhecer esse campo. Confirmamos o trecho de bytes.
   const codificado = proto.Message.encode(mensagem).finish()
   if (!codificado?.length) throw new Error('A mensagem da figurinha não foi codificada.')
-  await ctx.tokito.relayMessage(ctx.from, mensagem, {})
+  await relayFigurinhaSonora(ctx, mensagem, audioMsg)
   return true
 }
 
@@ -592,7 +641,7 @@ async function enviarComAudioExistente(ctx, { figurinha, audioMessage, animada =
   if (!proto.Message.encode(mensagem).finish().length) {
     throw new Error('Falha ao codificar a figurinha renomeada com áudio.')
   }
-  await ctx.tokito.relayMessage(ctx.from, mensagem, {})
+  await relayFigurinhaSonora(ctx, mensagem, audio)
   return true
 }
 
@@ -614,7 +663,8 @@ const usarRegistrada = som => {
 
 module.exports = {
   ARQUIVO, META, registrada, metadados, stickerAtual, audioAtual,
-  registrar, remover, visualizar, enviar, enviarPersonalizada, enviarComAudioExistente, usarRegistrada,
+  registrar, remover, visualizar, enviar, enviarPersonalizada, enviarComAudioExistente,
+  registrarAudioMensagem, recuperarAudioMensagem, usarRegistrada,
   prepararVideo, prepararImagem, prepararFigurinha, baixarMusica,
   normalizarBufferAudio, normalizarAudio, patchProtocolo, construirMensagem,
   MAX_SEGUNDOS, MAX_VIDEO_SEGUNDOS, MAX_SOM_VIDEO_SEGUNDOS, MAX_MUSICA_SEGUNDOS, youtubeId
