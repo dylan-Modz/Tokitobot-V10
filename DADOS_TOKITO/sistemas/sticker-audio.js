@@ -115,7 +115,7 @@ function temOpus(mime, bytes) {
 const MAX_VIDEO_SEGUNDOS = 9.9
 // Apenas a animação fica em até 9,5s. O som mantém até 60s do vídeo original.
 const MAX_SOM_VIDEO_SEGUNDOS = 60
-const MAX_MUSICA_SEGUNDOS = 30
+const MAX_MUSICA_SEGUNDOS = 60
 const MAX_VIDEO_BYTES = 85 * 1024 * 1024
 const MAX_IMAGEM_BYTES = 10 * 1024 * 1024
 const { imageToWebp2, videoToWebp2 } = require('../plugins/figurinhas/exif2')
@@ -254,48 +254,80 @@ const retornoMusica = resp => {
   return { bytes, mime: contentType, url: '' }
 }
 
+// Usa os mesmos endpoints do play_audio e do play. Falhas transitórias
+// (rede, HTTP 429 e 5xx) recebem mais uma tentativa, sem pesquisar infinitamente.
+async function requisitarMusica(url, opcoes = {}) {
+  let ultima
+  for (let tentativa = 0; tentativa < 2; tentativa++) {
+    try {
+      const resp = await axios.get(url, { ...opcoes, validateStatus: () => true })
+      if (resp.status !== 429 && resp.status < 500) return resp
+      ultima = new Error('Serviço de música temporariamente indisponível (HTTP ' + resp.status + ').')
+    } catch (erro) {
+      ultima = erro
+    }
+    if (tentativa === 0) await new Promise(resolve => setTimeout(resolve, 900))
+  }
+  throw new Error('Não foi possível acessar a API de música. Tente novamente.')
+}
+
 async function baixarMusica(ctx, termo) {
   const entrada = String(termo || '').trim()
   let id = youtubeId(entrada)
   if (!id) {
     if (/^https?:\/\//i.test(entrada)) throw new Error('Use um link válido do YouTube.')
     if (entrada.length < 2 || entrada.length > 140) throw new Error('Informe o nome da música.')
-    const busca = await axios.get(apiUrl(ctx, '/api/youtube-search', { query: entrada }), {
-      timeout: 25000, validateStatus: () => true
-    })
-    const data = busca.data
-    const lista = Array.isArray(data?.resultado) ? data.resultado
-      : Array.isArray(data?.result) ? data.result
-      : Array.isArray(data?.data) ? data.data : []
-    const encontrado = lista.find(item => item?.type === 'video' && (item.videoId || item.url))
-      || lista.find(item => item?.videoId || youtubeId(item?.url))
-    id = encontrado?.videoId && /^[a-zA-Z0-9_-]{11}$/.test(encontrado.videoId)
-      ? encontrado.videoId : youtubeId(encontrado?.url)
-    // O comando play_audio da base também aceita pesquisa diretamente na rota.
-    // Quando a busca retorna um formato inesperado, tentamos a API com o
-    // nome da música, em vez de falhar antes do download.
+    try {
+      const busca = await requisitarMusica(apiUrl(ctx, '/api/youtube-search', { query: entrada }), {
+        timeout: 25000
+      })
+      const data = busca.data
+      const lista = Array.isArray(data?.resultado) ? data.resultado
+        : Array.isArray(data?.result) ? data.result
+        : Array.isArray(data?.data) ? data.data
+        : Array.isArray(data) ? data : []
+      const encontrado = lista.find(item => item?.type === 'video' && (item.videoId || youtubeId(item.url)))
+        || lista.find(item => item?.videoId || youtubeId(item?.url))
+      id = encontrado?.videoId && /^[a-zA-Z0-9_-]{11}$/.test(encontrado.videoId)
+        ? encontrado.videoId : youtubeId(encontrado?.url)
+    } catch (erro) {
+      // Não bloqueia o play_audio por erro de busca: o endpoint de áudio
+      // também pesquisa por texto e costuma continuar funcionando.
+      console.warn('[FIGAUDIO BUSCA]', erro?.code || erro?.message || erro)
+    }
   }
-  const url = id ? 'https://www.youtube.com/watch?v=' + id : entrada
-  const parametros = { q: url }
-  const resposta = await axios.get(apiUrl(ctx, '/api/youtube-audio', parametros), {
-    timeout: 90000, responseType: 'arraybuffer',
-    maxContentLength: 35 * 1024 * 1024, maxBodyLength: 35 * 1024 * 1024,
-    validateStatus: () => true
-  })
-  let midia = retornoMusica(resposta)
+  const alvo = id ? 'https://www.youtube.com/watch?v=' + id : entrada
+  const solicitar = async q => {
+    const resposta = await requisitarMusica(apiUrl(ctx, '/api/youtube-audio', { q }), {
+      timeout: 90000, responseType: 'arraybuffer',
+      maxContentLength: 35 * 1024 * 1024,
+      maxBodyLength: 35 * 1024 * 1024
+    })
+    return retornoMusica(resposta)
+  }
+  let midia
+  try {
+    midia = await solicitar(alvo)
+  } catch (erro) {
+    if (!id || alvo === entrada) throw erro
+    // Às vezes o vídeo está indisponível pelo link, mas a busca textual
+    // do endpoint de áudio encontra outra fonte.
+    midia = await solicitar(entrada)
+  }
   if (midia.url) {
     if (!linkAudioSeguro(midia.url)) throw new Error('A API retornou um link de áudio inválido.')
-    const download = await axios.get(midia.url, {
+    const download = await requisitarMusica(midia.url, {
       responseType: 'arraybuffer', timeout: 90000,
       maxContentLength: 35 * 1024 * 1024,
       maxBodyLength: 35 * 1024 * 1024,
-      maxRedirects: 2, validateStatus: () => true
+      maxRedirects: 2
     })
     midia = retornoMusica(download)
   }
   if (!midia.bytes) throw new Error('A API não retornou um arquivo de áudio reproduzível.')
   return normalizarBufferAudio(midia.bytes, midia.mime || '', 0, MAX_MUSICA_SEGUNDOS)
 }
+
 async function converterVideoAdaptativo(bytes) {
   // Prioriza o conversor existente do /s. Se o WebP ultrapassar 1 MB,
   // reduz resolução, FPS e qualidade progressivamente sem excluir o vídeo.
