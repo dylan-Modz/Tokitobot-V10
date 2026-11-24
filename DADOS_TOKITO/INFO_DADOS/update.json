@@ -12,7 +12,8 @@
     "[Preservação] Não substitui uma mensagem original com áudio por atualização parcial sem o áudio; /take e /rename reaproveitam o fluxo sonoro já compartilhado.",
     "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP.",
     "[Reparação] Restaurado take.js da V10.3.59 que teve /rename com áudio confirmado; incluídos take.js, sticker-audio.js, midia-citada.js e connect.js na verificação de integridade e reinstalação do reparo.",
-    "[Organização] Validação do TikTok movida para DADOS_TOKITO/database/validacao e incluída no npm test; removida a automação exclusiva do GitHub Actions."
+    "[Organização] Validação do TikTok movida para DADOS_TOKITO/database/validacao e incluída no npm test; removida a automação exclusiva do GitHub Actions.",
+    "[Reparação] Remoção das antigas pastas de validação quando vazias, inclusive após reiniciar instalações que já receberam a versão 10.3.61; preserva arquivos particulares."
   ],
   "delete": [
     "tests/tiktoksearch-rotation.test.js",
@@ -48,6 +49,10 @@
     {
       "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
       "gitSha": "cf0adb4b7f5a0fa333c3eb470861a46f86c49f74"
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/dados.js",
+      "gitSha": "facd89b5c827e82e618b9255c9df50262c97bfe5"
     }
   ],
   "releases": [
@@ -5589,7 +5594,8 @@
         "[Preservação] Não substitui uma mensagem original com áudio por atualização parcial sem o áudio; /take e /rename reaproveitam o fluxo sonoro já compartilhado.",
         "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP.",
         "[Reparação] Restaurado take.js da V10.3.59 que teve /rename com áudio confirmado; incluídos take.js, sticker-audio.js, midia-citada.js e connect.js na verificação de integridade e reinstalação do reparo.",
-        "[Organização] Validação do TikTok movida para DADOS_TOKITO/database/validacao e incluída no npm test; removida a automação exclusiva do GitHub Actions."
+        "[Organização] Validação do TikTok movida para DADOS_TOKITO/database/validacao e incluída no npm test; removida a automação exclusiva do GitHub Actions.",
+        "[Reparação] Remoção das antigas pastas de validação quando vazias, inclusive após reiniciar instalações que já receberam a versão 10.3.61; preserva arquivos particulares."
       ],
       "files": [
         {
@@ -5615,6 +5621,10 @@
         {
           "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
           "gitSha": "cf0adb4b7f5a0fa333c3eb470861a46f86c49f74"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "gitSha": "facd89b5c827e82e618b9255c9df50262c97bfe5"
         }
       ],
       "delete": [
@@ -5636,5 +5646,5 @@
   },
   "publicVersion": "10.3.61",
   "repair": true,
-  "repairId": "restaurar-take-rename-audio-10.3.61"
+  "repairId": "restaurar-take-rename-audio-e-limpeza-validacao-10.3.61"
 }

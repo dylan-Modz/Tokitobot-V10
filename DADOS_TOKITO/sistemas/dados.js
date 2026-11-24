@@ -870,6 +870,25 @@ throw new Error(`Caminho inseguro: ${rel}`)
 return full
 }
 
+// Remove somente diretórios vazios deixados pelas antigas validações oficiais.
+// Nunca segue links simbólicos nem apaga arquivos personalizados.
+function limparPastasValidacaoAntigas() {
+const removerSeVazia = rel => {
+try {
+const target = safeInside(ROOT, rel)
+if (fs.lstatSync(target).isDirectory()) fs.rmdirSync(target)
+} catch {}
+}
+
+removerSeVazia('tests')
+try {
+if (fs.lstatSync(safeInside(ROOT, '.github')).isDirectory()) {
+removerSeVazia('.github/workflows')
+removerSeVazia('.github')
+}
+} catch {}
+}
+
 function createBackup() {
 ensure(BACKUP_DIR)
 
@@ -1060,6 +1079,7 @@ deleted++
 }
 }
 
+limparPastasValidacaoAntigas()
 return { added, copied, deleted }
 }
 
@@ -1309,6 +1329,7 @@ ensure(path.dirname(target))
 fs.copyFileSync(source, target)
 }
 
+limparPastasValidacaoAntigas()
 return added
 }
 
@@ -1659,6 +1680,9 @@ ok: true,
 version: current.previousVersion || 'anterior'
 }
 }
+
+// Também limpa no primeiro carregamento após um reparo instalado pelo atualizador antigo.
+limparPastasValidacaoAntigas()
 
 module.exports = {
 validarInicio,
