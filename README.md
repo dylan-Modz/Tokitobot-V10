@@ -414,7 +414,7 @@ O projeto pode receber modificações e personalizações conforme a necessidade
 
 <td align="right" valign="middle">
 
-<img src="https://github.com/dylanModz.png?size=120" width="120" height="120">
+<a href="https://github.com/dylan-Modz"><img src="https://avatars.githubusercontent.com/u/224679922?v=4&amp;s=240" width="120" height="120" alt="Dylan Modz"></a>
 
 </td>
 
