@@ -437,7 +437,7 @@ function duracaoOpus(bytes) {
     if (Number.isSafeInteger(amostras) && amostras > ultima) ultima = amostras
     pos = tabela + segmentos + tamanho
   }
-  return Math.max(1, Math.min(MAX_MUSICA_SEGUNDOS, Math.ceil(ultima / 48000) || 10))
+  return Math.max(1, Math.min(MAX_MUSICA_SEGUNDOS, Math.round(ultima / 48000) || 10))
 }
 
 async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}) {
