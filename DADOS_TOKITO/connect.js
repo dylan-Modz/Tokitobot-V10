@@ -30,6 +30,9 @@
 
 const { default: socket, useMultiFileAuthState, DisconnectReason, fetchLatestStoneWPPVersion, fetchLatestWaWebVersion, makeCacheableSignalKeyStore, delay, proto, prepareWAMessageMedia, generateWAMessageFromContent, Browsers } = require('@stone-wpp/ofc')
 const { fs, path, util, NodeCache, colors, pino, readline, Boom, estado, banner2, banner3, mess, nescessario, cacheGp } = require('./database/lib/exports.js')
+// Instala a leitura do campo de áudio de figurinhas antes de decodificar
+// mensagens recebidas (incluindo figurinhas de outros bots).
+require('./sistemas/sticker-audio.js').patchProtocolo()
 const funcoes = require('./sistemas/funcoes.js')
 const registro = require('./sistemas/registro.js')
 const modulos = require('./sistemas/modulos.js')
