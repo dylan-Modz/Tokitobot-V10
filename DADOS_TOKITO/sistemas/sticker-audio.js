@@ -20,8 +20,8 @@ const ARQUIVO = path.join(__dirname, '..', 'database', 'sistemas', 'sticker-audi
 const META = path.join(__dirname, '..', 'database', 'sistemas', 'sticker-audio.json')
 const PATCH = Symbol.for('tokito.stickerAudio.sticker26.v2')
 const MAX_WEBP = 1024 * 1024
-const MAX_AUDIO = 8 * 1024 * 1024
-const MAX_SEGUNDOS = 10
+const MAX_AUDIO = 20 * 1024 * 1024
+const MAX_SEGUNDOS = 60
 
 const registrada = () => fs.existsSync(ARQUIVO)
 const metadados = () => {
@@ -437,7 +437,7 @@ function duracaoOpus(bytes) {
     if (Number.isSafeInteger(amostras) && amostras > ultima) ultima = amostras
     pos = tabela + segmentos + tamanho
   }
-  return Math.max(1, Math.min(MAX_MUSICA_SEGUNDOS, Math.round(ultima / 48000) || 10))
+  return Math.max(1, Math.min(MAX_SEGUNDOS, Math.round(ultima / 48000) || 10))
 }
 
 async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}) {
