@@ -1,36 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.53",
+  "version": "10.3.54",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T12:40:50.218Z",
+  "publishedAt": "2026-11-24T12:47:43.697Z",
   "changelog": [
-    "[Vídeo] /figaudio aceita vídeos com duração superior a 10 segundos e prepara apenas os primeiros 9,5 segundos como figurinha WebP animada.",
-    "[Som] O áudio extraído do mesmo vídeo é preparado independentemente, preservando até 60 segundos.",
-    "[Mensagens] Orientações do comando esclarecem o limite visual de 9,9s e o limite sonoro de 1 minuto.",
-    "[Continuidade] Pesquisa por nome, links do YouTube, registro livre e demais comandos não foram alterados.",
-    "[Observação] A reprodução contínua do som depende do suporte do cliente WhatsApp ao áudio embutido com duração maior do que a animação."
+    "[Música] /figaudio por nome e por link do YouTube passa a preparar áudio de até 60 segundos, sem o corte anterior de 30 segundos.",
+    "[Busca] Quando a pesquisa não retorna um vídeo válido, tenta a rota youtube-audio diretamente com o nome da música.",
+    "[Estabilidade] Uma nova tentativa é realizada em erros temporários de rede, HTTP 429 e falhas do servidor.",
+    "[Interface] Mensagem de sucesso ajustada para indicar duração máxima de um minuto.",
+    "[Continuidade] Não alterados os limites do WebP animado, o áudio do vídeo, o registro e o modo automático."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Vídeo com animação curta e áudio original prolongado",
-  "notice": "Tokito Bot V10.3.53 disponível: o figaudio transforma até 9,9 segundos do vídeo em figurinha e preserva até 60 segundos do áudio original.",
+  "type": "Correção",
+  "title": "Pesquisa musical mais estável e áudios de até 1 minuto",
+  "notice": "Tokito Bot V10.3.54 disponível: pesquisa e links de música com até 60 segundos de áudio, novas tentativas para falhas temporárias da API.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "336e3484aeb34f98e4f1eaf68be6d2ff3a8438fe"
+      "gitSha": "8122c82f6d46c080cb8bf72d8115300c2d28148d"
     },
     {
       "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
-      "gitSha": "d7f91b7362d22cc410b1cdd4665cc22f877ea14f"
+      "gitSha": "3e817e576e7c0ce6248a0ae1c114271ac30c93ea"
     },
     {
       "path": "package.json",
-      "gitSha": "8018e482eb2cbf91fc55eca767eab729cafb5336"
+      "gitSha": "50d73476fe960443b701274fd4cb892d8f256717"
     }
   ],
   "releases": [
@@ -5332,17 +5332,49 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T12:40:50.218Z"
+    },
+    {
+      "version": "10.3.54",
+      "fromVersion": "10.3.53",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Pesquisa musical mais estável e áudios de até 1 minuto",
+      "notice": "Tokito Bot V10.3.54 disponível: pesquisa e links de música com até 60 segundos de áudio, novas tentativas para falhas temporárias da API.",
+      "changelog": [
+        "[Música] /figaudio por nome e por link do YouTube passa a preparar áudio de até 60 segundos, sem o corte anterior de 30 segundos.",
+        "[Busca] Quando a pesquisa não retorna um vídeo válido, tenta a rota youtube-audio diretamente com o nome da música.",
+        "[Estabilidade] Uma nova tentativa é realizada em erros temporários de rede, HTTP 429 e falhas do servidor.",
+        "[Interface] Mensagem de sucesso ajustada para indicar duração máxima de um minuto.",
+        "[Continuidade] Não alterados os limites do WebP animado, o áudio do vídeo, o registro e o modo automático."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "8122c82f6d46c080cb8bf72d8115300c2d28148d"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
+          "gitSha": "3e817e576e7c0ce6248a0ae1c114271ac30c93ea"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "50d73476fe960443b701274fd4cb892d8f256717"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T12:47:43.697Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.52",
+  "fromVersion": "10.3.53",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.53",
+  "publicVersion": "10.3.54",
   "repair": false
 }
