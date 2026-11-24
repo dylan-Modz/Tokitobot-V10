@@ -46,6 +46,16 @@ const dados = (texto, padrao = '') => {
   }
 }
 
+// /take usa a marca registrada; /rename usa o texto digitado.
+// Ambos passam pelo mesmo envio, sem tratamento diferente de áudio.
+const marcaDoComando = (ctx, comando, db, id) => {
+  const registrada = db[id] && typeof db[id] === 'object'
+    ? dados([db[id].packname, db[id].author].filter(Boolean).join('|'))
+    : (typeof db[id] === 'string' ? dados(db[id]) : null)
+  const padrao = registrada || dados('', ctx.pushname || 'Minha Marca')
+  return comando === 'rename' ? (dados(ctx.q) || padrao) : padrao
+}
+
 const fonteSticker = ctx => {
   const dados = midiaCitada.preparar(ctx)
   const stickers = midiaCitada.candidatos(dados.fontes, 'sticker')
@@ -111,9 +121,7 @@ dylan.setCommand({
       }))
     }
 
-    const marca = comando === 'rename'
-      ? (dados(ctx.q) || db[id] || dados('', ctx.pushname || 'Minha Marca'))
-      : (db[id] || dados('', ctx.pushname || 'Minha Marca'))
+    const marca = marcaDoComando(ctx, comando, db, id)
     let arquivo
     try {
       const buffer = await ctx.getFileBuffer(sticker, 'sticker')
@@ -126,10 +134,11 @@ dylan.setCommand({
         mimetype: 'image/webp'
       }, marca)
       const novoWebp = fs.readFileSync(arquivo)
-      // Uma citação pode omitir o campo experimental e até o ID original.
-      // O WebP baixado permite recuperar a trilha armazenada pela própria
-      // emissão do /figaudio, sem usar outro áudio por engano.
+      // /take e /rename executam exatamente a mesma recuperação.
+      // Prioriza a mensagem citada; depois o SHA do WebP informado
+      // pelo WhatsApp e, por último, os bytes originais.
       const audio = origem.audio ||
+        stickerAudio.recuperarAudioMensagem(ctx.from, origem.identificado) ||
         stickerAudio.recuperarAudioPorSha(ctx.from, origem.fileSha256) ||
         stickerAudio.recuperarAudioPorFigurinha(ctx.from, buffer)
       if (audio) {
