@@ -31,7 +31,7 @@ dylan.setCommand({
     if (acao === '1' && !sistema.registrada()) {
       return ctx.reply(ctx.mess.padraoAviso({
         emoji, titulo: 'FIGURINHA NÃO REGISTRADA',
-        descricao: `Peça ao dono para registrar uma figurinha com ${ctx.prefix}rgfigaudio.`
+        descricao: `Registre uma figurinha com ${ctx.prefix}rgfigaudio. O comando está liberado para todos.`
       }))
     }
     const ativo = acao === '1'
