@@ -113,8 +113,8 @@ function temOpus(mime, bytes) {
 }
 
 const MAX_VIDEO_SEGUNDOS = 9.9
-// A figurinha animada segue 9,9s, mas o clipe sonoro de vídeo é curto.
-const MAX_SOM_VIDEO_SEGUNDOS = 5
+// Apenas a animação fica em até 9,5s. O som mantém até 60s do vídeo original.
+const MAX_SOM_VIDEO_SEGUNDOS = 60
 const MAX_MUSICA_SEGUNDOS = 30
 const MAX_VIDEO_BYTES = 85 * 1024 * 1024
 const MAX_IMAGEM_BYTES = 10 * 1024 * 1024
@@ -361,7 +361,7 @@ async function extrairSomDoVideo(bytes) {
     const arquivo = path.join(dir, 'audio.ogg')
     fs.writeFileSync(arquivo, som)
     try {
-      // Validar a decodificação real, não só o cabeçalho OpusHead.
+      // Confirma o áudio extraído (até 60s), sem restringir à duração do WebP.
       await executar(process.env.FFMPEG_PATH || 'ffmpeg', [
         '-nostdin', '-hide_banner', '-loglevel', 'error',
         '-i', arquivo, '-map', '0:a:0', '-t', String(MAX_SOM_VIDEO_SEGUNDOS),
@@ -377,10 +377,10 @@ async function extrairSomDoVideo(bytes) {
 async function prepararVideo(ctx, lista, referencia) {
   const media = lista[0]
   const duracao = Number(media?.seconds || 0)
-  if (duracao >= 10) throw new Error('O vídeo deve ter menos de 10 segundos (até 9,9s).')
+  if (duracao < 0) throw new Error('Duração de vídeo inválida.')
   const bytes = await midiaCitada.baixar(ctx, 'video', lista, referencia)
   if (bytes.length > MAX_VIDEO_BYTES) throw new Error('O vídeo ultrapassou 85 MB.')
-  // Converte vídeo e áudio a partir do mesmo original, com a mesma duração.
+  // Prepara a animação de até 9,5s e o áudio de até 60s separadamente.
   const [som, figurinha] = await Promise.all([
     extrairSomDoVideo(bytes),
     converterVideoAdaptativo(bytes)
