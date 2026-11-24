@@ -43,20 +43,69 @@ function patchProtocolo() {
   if (sticker[PATCH]) return
   const anterior = sticker.encode
   // Se uma versão futura da Stone já codificar audioMessage, não duplicar.
-  if (/\baudioMessage\b/.test(Function.prototype.toString.call(anterior))) {
-    Object.defineProperty(sticker, PATCH, { value: true })
-    return
-  }
-  sticker.encode = function (valor, writer) {
+  const possuiEncoderNativo = /\baudioMessage\b/.test(Function.prototype.toString.call(anterior))
+  if (!possuiEncoderNativo) sticker.encode = function (valor, writer) {
     const resultado = anterior.call(this, valor, writer)
-    // Campo 26, wire type 2 -> tag varint 210. Não duplicar se o schema
-    // da Stone passar a suportar o campo nativamente.
     if (valor?.audioMessage) {
       audio.encode(valor.audioMessage, resultado.uint32(210).fork()).ldelim()
     }
     return resultado
   }
+
+  // O schema pode ignorar o campo experimental 26 ao receber uma mensagem.
+  // Reconstituímos a AudioMessage diretamente dos bytes protobuf originais.
+  const decodeAntigo = sticker.decode
+  sticker.decode = function (reader, length) {
+    const mensagem = decodeAntigo.call(this, reader, length)
+    try {
+      const base = reader?.buf
+      if (!(base instanceof Uint8Array)) return mensagem
+      const posicao = reader.pos
+      const inicio = Number.isInteger(length) ? posicao - length : 0
+      if (inicio < 0 || inicio >= posicao) return mensagem
+      // Lê somente o trecho codificado da StickerMessage (sem decodificar
+      // novamente os quadros/bytes do arquivo WebP).
+      const trecho = base.subarray(inicio, posicao)
+      let p = 0
+      const varint = () => {
+        let valor = 0
+        for (let i = 0; i < 5 && p < trecho.length; i++) {
+          const byte = trecho[p++]
+          valor += (byte & 127) * (2 ** (7 * i))
+          if (!(byte & 128)) return valor
+        }
+        throw new Error('varint inválida')
+      }
+      while (p < trecho.length) {
+        const tag = varint()
+        const campo = Math.floor(tag / 8)
+        const tipo = tag % 8
+        if (tipo === 2) {
+          const len = varint()
+          if (len < 0 || p + len > trecho.length) break
+          if (campo === 26 && !mensagem.audioMessage) {
+            mensagem.audioMessage = audio.decode(trecho.subarray(p, p + len))
+          }
+          p += len
+        } else if (tipo === 0) {
+          while (p < trecho.length && (trecho[p++] & 128)) {}
+        } else if (tipo === 1) p += 8
+        else if (tipo === 5) p += 4
+        else break
+        if (p > trecho.length) break
+      }
+    } catch {
+      // Mantém o decoder original funcional mesmo para campo desconhecido.
+    }
+    return mensagem
+  }
   Object.defineProperty(sticker, PATCH, { value: true })
+}
+
+// Instala o decoder assim que este módulo for carregado, antes de receber
+// novas figurinhas sonoras citadas por /take ou /rename.
+try { patchProtocolo() } catch (error) {
+  console.warn('[STICKER AUDIO PROTO]', error?.message || error)
 }
 
 async function registrar(ctx) {
