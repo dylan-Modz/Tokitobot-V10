@@ -286,10 +286,13 @@ const destinatario = tokito => {
   ['ownerNumber', ownerNumber],
   ['numero_dono1', nescessario?.numero_dono1]
   ]
+  // Prioriza o telefone do proprietário; sem configuração, usa o
+  // próprio número conectado para não perder o aviso de atualização.
+  candidatos.push(['whatsapp_conectado', tokito?.user?.id], ['whatsapp_lid', tokito?.user?.lid])
   for (const [origem, valor] of candidatos) {
-    const jid = normalizar(valor)
-    const numero = telefone(jid)
-    if (jid.endsWith('@s.whatsapp.net') && /^[1-9]\d{10,14}$/.test(numero))
+    const numero = telefone(valor)
+    if (!/^[1-9]\d{10,14}$/.test(numero)) continue
+    const jid = numero + '@s.whatsapp.net'
     return { jid, origem }
   }
   return null
