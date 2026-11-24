@@ -13,7 +13,8 @@
     "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP.",
     "[Reparação] Restaurado take.js da V10.3.59 que teve /rename com áudio confirmado; incluídos take.js, sticker-audio.js, midia-citada.js e connect.js na verificação de integridade e reinstalação do reparo.",
     "[Organização] Validação do TikTok movida para DADOS_TOKITO/database/validacao e incluída no npm test; removida a automação exclusiva do GitHub Actions.",
-    "[Reparação] Remoção das antigas pastas de validação quando vazias, inclusive após reiniciar instalações que já receberam a versão 10.3.61; preserva arquivos particulares."
+    "[Reparação] Remoção das antigas pastas de validação quando vazias, inclusive após reiniciar instalações que já receberam a versão 10.3.61; preserva arquivos particulares.",
+    "[Reparação] Limpeza local dos campos obsoletos channelName e channelServerMessageId ao carregar o sistema, preservando todas as demais configurações."
   ],
   "delete": [
     "tests/tiktoksearch-rotation.test.js",
@@ -52,7 +53,7 @@
     },
     {
       "path": "DADOS_TOKITO/sistemas/dados.js",
-      "gitSha": "facd89b5c827e82e618b9255c9df50262c97bfe5"
+      "gitSha": "4ff495db0083885f15ed8d8a7ffc355596bac712"
     }
   ],
   "releases": [
@@ -5595,7 +5596,8 @@
         "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP.",
         "[Reparação] Restaurado take.js da V10.3.59 que teve /rename com áudio confirmado; incluídos take.js, sticker-audio.js, midia-citada.js e connect.js na verificação de integridade e reinstalação do reparo.",
         "[Organização] Validação do TikTok movida para DADOS_TOKITO/database/validacao e incluída no npm test; removida a automação exclusiva do GitHub Actions.",
-        "[Reparação] Remoção das antigas pastas de validação quando vazias, inclusive após reiniciar instalações que já receberam a versão 10.3.61; preserva arquivos particulares."
+        "[Reparação] Remoção das antigas pastas de validação quando vazias, inclusive após reiniciar instalações que já receberam a versão 10.3.61; preserva arquivos particulares.",
+        "[Reparação] Limpeza local dos campos obsoletos channelName e channelServerMessageId ao carregar o sistema, preservando todas as demais configurações."
       ],
       "files": [
         {
@@ -5624,7 +5626,7 @@
         },
         {
           "path": "DADOS_TOKITO/sistemas/dados.js",
-          "gitSha": "facd89b5c827e82e618b9255c9df50262c97bfe5"
+          "gitSha": "4ff495db0083885f15ed8d8a7ffc355596bac712"
         }
       ],
       "delete": [
@@ -5646,5 +5648,5 @@
   },
   "publicVersion": "10.3.61",
   "repair": true,
-  "repairId": "restaurar-take-rename-audio-e-limpeza-validacao-10.3.61"
+  "repairId": "restaurar-audio-limpar-validacao-e-config-canal-10.3.61"
 }

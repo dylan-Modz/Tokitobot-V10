@@ -91,6 +91,41 @@ fs.renameSync(tmp, file)
 return data
 }
 
+// Migração local: elimina somente os campos desativados do antigo /setchannel.
+function removerCamposCanalObsoletos(data) {
+if (!data || typeof data !== 'object' || Array.isArray(data)) return false
+let mudou = false
+for (const campo of ['channelName', 'channelServerMessageId']) {
+if (!Object.prototype.hasOwnProperty.call(data, campo)) continue
+delete data[campo]
+mudou = true
+}
+return mudou
+}
+
+function limparConfigCanalObsoleto() {
+let tmp = ''
+try {
+const stat = fs.lstatSync(CONFIG_FILE)
+if (!stat.isFile()) return false
+const data = JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8'))
+if (!removerCamposCanalObsoletos(data)) return false
+tmp = CONFIG_FILE + '.' + process.pid + '.' + crypto.randomBytes(8).toString('hex') + '.tmp'
+fs.writeFileSync(tmp, JSON.stringify(data, null, 2) + '\n', { mode: stat.mode & 0o777, flag: 'wx' })
+fs.renameSync(tmp, CONFIG_FILE)
+tmp = ''
+// Atualiza futuras leituras sem expor nenhum dado da configuração.
+delete require.cache[CONFIG_FILE]
+return true
+} catch (error) {
+if (tmp) {
+try { fs.unlinkSync(tmp) } catch {}
+}
+if (error.code !== 'ENOENT') console.warn('[TOKITO] Não foi possível limpar os campos antigos do canal; configuração preservada.')
+return false
+}
+}
+
 const mesclarPadroes = (padrao, atual) => {
 if (Array.isArray(padrao)) {
 return Array.isArray(atual) ? atual : padrao
@@ -1596,7 +1631,9 @@ copied = copiados.copied
 deleted = copiados.deleted
 
 // Mantém os dados do usuário e acrescenta somente novos campos padrão da versão.
-writeJson(CONFIG_FILE, mesclarPadroes(configPadraoNovo, configAtual))
+const configMesclado = mesclarPadroes(configPadraoNovo, configAtual)
+removerCamposCanalObsoletos(configMesclado)
+writeJson(CONFIG_FILE, configMesclado)
 writeJson(NESS_FILE, mesclarPadroes(necessarioPadraoNovo, necessarioAtual))
 
 writeJson(
@@ -1683,6 +1720,7 @@ version: current.previousVersion || 'anterior'
 
 // Também limpa no primeiro carregamento após um reparo instalado pelo atualizador antigo.
 limparPastasValidacaoAntigas()
+limparConfigCanalObsoleto()
 
 module.exports = {
 validarInicio,
