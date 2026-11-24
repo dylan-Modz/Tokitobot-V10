@@ -32,6 +32,16 @@ const audiosPorMensagem = new Map()
 const chaveMensagem = (jid, id) => String(jid || '') + '|' + String(id || '')
 const hashFigurinha = bytes => Buffer.isBuffer(bytes) && bytes.length
   ? require('crypto').createHash('sha256').update(bytes).digest('hex') : ''
+// A chave fileSha256 na mensagem citada é um digest do arquivo original.
+const shaFigurinha = valor => {
+  if (!valor) return ''
+  if (Buffer.isBuffer(valor)) return valor.length === 32 ? valor.toString('base64') : ''
+  if (valor instanceof Uint8Array) {
+    return valor.length === 32 ? Buffer.from(valor).toString('base64') : ''
+  }
+  if (typeof valor !== 'string' || !/^[A-Za-z0-9+/]{43}=$/.test(valor)) return ''
+  return valor
+}
 
 function limparCacheAudio() {
   for (const [chave, item] of audiosPorMensagem) {
@@ -45,7 +55,7 @@ function salvarCacheAudio() {
   try {
     fs.mkdirSync(path.dirname(AUDIO_CACHE_FILE), { recursive: true })
     const dados = Array.from(audiosPorMensagem, ([chave, item]) => ({
-      chave, at: item.at, stickerHash: item.stickerHash || '',
+      chave, at: item.at, stickerHash: item.stickerHash || '', stickerSha: item.stickerSha || '',
       audio: proto.Message.AudioMessage.toObject(item.audioMessage, { bytes: String, longs: String })
     }))
     const tmp = AUDIO_CACHE_FILE + '.' + process.pid + '.tmp'
@@ -70,7 +80,8 @@ function carregarCacheAudio() {
       if (audioMessage?.mediaKey && (audioMessage.directPath || audioMessage.url)) {
         audiosPorMensagem.set(item.chave, {
           audioMessage, at: item.at,
-          stickerHash: /^[a-f0-9]{64}$/.test(item.stickerHash || '') ? item.stickerHash : ''
+          stickerHash: /^[a-f0-9]{64}$/.test(item.stickerHash || '') ? item.stickerHash : '',
+          stickerSha: shaFigurinha(item.stickerSha)
         })
       }
     }
@@ -79,14 +90,15 @@ function carregarCacheAudio() {
 }
 carregarCacheAudio()
 
-function registrarAudioMensagem(jid, id, audioMessage, stickerBytes) {
+function registrarAudioMensagem(jid, id, audioMessage, stickerBytes, fileSha256) {
   if (!jid || !id || !audioMessage?.mediaKey ||
       !(audioMessage.directPath || audioMessage.url)) return false
   limparCacheAudio()
   const chave = chaveMensagem(jid, id)
   audiosPorMensagem.delete(chave)
   audiosPorMensagem.set(chave, {
-    audioMessage, at: Date.now(), stickerHash: hashFigurinha(stickerBytes)
+    audioMessage, at: Date.now(), stickerHash: hashFigurinha(stickerBytes),
+    stickerSha: shaFigurinha(fileSha256) || (Buffer.isBuffer(stickerBytes) ? shaFigurinha(require('crypto').createHash('sha256').update(stickerBytes).digest()) : '')
   })
   limparCacheAudio()
   salvarCacheAudio()
@@ -125,6 +137,26 @@ function recuperarAudioPorFigurinha(jid, figurinha) {
   return encontrado
 }
 
+// Procura o identificador que o WhatsApp mantém na citação, mesmo
+// quando omite o campo experimental audioMessage ou modifica o WebP.
+function recuperarAudioPorSha(jid, fileSha256) {
+  const sha = shaFigurinha(fileSha256)
+  if (!jid || !sha) return null
+  limparCacheAudio()
+  let encontrado = null
+  let caminho = ''
+  for (const [chave, item] of audiosPorMensagem) {
+    if (!chave.startsWith(String(jid) + '|') || item.stickerSha !== sha) continue
+    const audio = item.audioMessage
+    const atual = String(audio?.directPath || audio?.url || '')
+    if (!atual) continue
+    if (encontrado && caminho !== atual) return null
+    encontrado = audio
+    caminho = atual
+  }
+  return encontrado
+}
+
 async function relayFigurinhaSonora(ctx, mensagem, audioMessage, stickerBytes) {
   if (typeof generateWAMessageFromContent !== 'function') {
     throw new Error('A conexão não disponibiliza identificador de mensagem para figurinha sonora.')
@@ -137,7 +169,7 @@ async function relayFigurinhaSonora(ctx, mensagem, audioMessage, stickerBytes) {
   // Utilizar a mensagem original: o campo 26 é experimental e a normalização
   // da mensagem gerada pode descartá-lo.
   await ctx.tokito.relayMessage(ctx.from, mensagem, { messageId: id })
-  registrarAudioMensagem(ctx.from, id, audioMessage, stickerBytes)
+  registrarAudioMensagem(ctx.from, id, audioMessage, stickerBytes, mensagem?.stickerMessage?.fileSha256)
   return true
 }
 
@@ -734,7 +766,8 @@ const usarRegistrada = som => {
 module.exports = {
   ARQUIVO, META, registrada, metadados, stickerAtual, audioAtual,
   registrar, remover, visualizar, enviar, enviarPersonalizada, enviarComAudioExistente,
-  registrarAudioMensagem, recuperarAudioMensagem, recuperarAudioPorFigurinha, usarRegistrada,
+  registrarAudioMensagem, recuperarAudioMensagem, recuperarAudioPorFigurinha,
+  recuperarAudioPorSha, usarRegistrada,
   prepararVideo, prepararImagem, prepararFigurinha, baixarMusica,
   normalizarBufferAudio, normalizarAudio, patchProtocolo, construirMensagem,
   MAX_SEGUNDOS, MAX_VIDEO_SEGUNDOS, MAX_SOM_VIDEO_SEGUNDOS, MAX_MUSICA_SEGUNDOS, youtubeId
