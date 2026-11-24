@@ -58,7 +58,7 @@ const fonteSticker = ctx => {
     ? sticker.audioMessage
     : (dados.original?.message?.stickerMessage?.audioMessage ||
       stickerAudio.recuperarAudioMensagem(ctx.from, identificado))
-  return { sticker, audio, identificado }
+  return { sticker, audio, identificado, fileSha256: sticker?.fileSha256 }
 }
 
 dylan.setCommand({
@@ -130,6 +130,7 @@ dylan.setCommand({
       // O WebP baixado permite recuperar a trilha armazenada pela própria
       // emissão do /figaudio, sem usar outro áudio por engano.
       const audio = origem.audio ||
+        stickerAudio.recuperarAudioPorSha(ctx.from, origem.fileSha256) ||
         stickerAudio.recuperarAudioPorFigurinha(ctx.from, buffer)
       if (audio) {
         // No figaudio o áudio fica nos metadados da StickerMessage,
