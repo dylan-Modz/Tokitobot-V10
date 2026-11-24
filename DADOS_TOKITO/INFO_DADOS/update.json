@@ -1,40 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.52",
+  "version": "10.3.53",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T12:32:07.932Z",
+  "publishedAt": "2026-11-24T12:40:50.218Z",
   "changelog": [
-    "[Permissões] /rgfigaudio e /delfigaudio liberados a todos, como comandos de figurinhas comuns.",
-    "[Áudios] /figaudio usando áudio marcado prepara até 60 segundos sem cortar em 10s.",
-    "[Metadados] Duração do áudio OGG/Opus enviada corretamente, até um minuto.",
-    "[Modo automático] Instruções atualizadas para que qualquer membro possa registrar a figurinha.",
-    "[Continuidade] Vídeos com menos de 10 segundos, som extraído de vídeo até 5s e pesquisa musical de até 30s permanecem com seus limites."
+    "[Vídeo] /figaudio aceita vídeos com duração superior a 10 segundos e prepara apenas os primeiros 9,5 segundos como figurinha WebP animada.",
+    "[Som] O áudio extraído do mesmo vídeo é preparado independentemente, preservando até 60 segundos.",
+    "[Mensagens] Orientações do comando esclarecem o limite visual de 9,9s e o limite sonoro de 1 minuto.",
+    "[Continuidade] Pesquisa por nome, links do YouTube, registro livre e demais comandos não foram alterados.",
+    "[Observação] A reprodução contínua do som depende do suporte do cliente WhatsApp ao áudio embutido com duração maior do que a animação."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "Figurinha com áudio liberada para membros e áudios até 1 minuto",
-  "notice": "Tokito Bot V10.3.52 disponível: registro e exclusão de figurinha sonora para todos e suporte a áudio marcado de até 60 segundos.",
+  "title": "Vídeo com animação curta e áudio original prolongado",
+  "notice": "Tokito Bot V10.3.53 disponível: o figaudio transforma até 9,9 segundos do vídeo em figurinha e preserva até 60 segundos do áudio original.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
-      "gitSha": "12fbb17ea3d8ef59a5508469e3782d459dcfa654"
-    },
-    {
       "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "bc1e3caba7ace11d25c1fd78d7c360dc46b22ad9"
+      "gitSha": "336e3484aeb34f98e4f1eaf68be6d2ff3a8438fe"
     },
     {
-      "path": "DADOS_TOKITO/plugins/figurinhas/autostickeraudio.js",
-      "gitSha": "756c978cb23d57976bbcfae36ccab4380b1771da"
+      "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
+      "gitSha": "d7f91b7362d22cc410b1cdd4665cc22f877ea14f"
     },
     {
       "path": "package.json",
-      "gitSha": "721e21e139fd223026dffdbfa0371204139a84fd"
+      "gitSha": "8018e482eb2cbf91fc55eca767eab729cafb5336"
     }
   ],
   "releases": [
@@ -5304,17 +5300,49 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T12:32:07.932Z"
+    },
+    {
+      "version": "10.3.53",
+      "fromVersion": "10.3.52",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Vídeo com animação curta e áudio original prolongado",
+      "notice": "Tokito Bot V10.3.53 disponível: o figaudio transforma até 9,9 segundos do vídeo em figurinha e preserva até 60 segundos do áudio original.",
+      "changelog": [
+        "[Vídeo] /figaudio aceita vídeos com duração superior a 10 segundos e prepara apenas os primeiros 9,5 segundos como figurinha WebP animada.",
+        "[Som] O áudio extraído do mesmo vídeo é preparado independentemente, preservando até 60 segundos.",
+        "[Mensagens] Orientações do comando esclarecem o limite visual de 9,9s e o limite sonoro de 1 minuto.",
+        "[Continuidade] Pesquisa por nome, links do YouTube, registro livre e demais comandos não foram alterados.",
+        "[Observação] A reprodução contínua do som depende do suporte do cliente WhatsApp ao áudio embutido com duração maior do que a animação."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "336e3484aeb34f98e4f1eaf68be6d2ff3a8438fe"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
+          "gitSha": "d7f91b7362d22cc410b1cdd4665cc22f877ea14f"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "8018e482eb2cbf91fc55eca767eab729cafb5336"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T12:40:50.218Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.51",
+  "fromVersion": "10.3.52",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.52",
+  "publicVersion": "10.3.53",
   "repair": false
 }
