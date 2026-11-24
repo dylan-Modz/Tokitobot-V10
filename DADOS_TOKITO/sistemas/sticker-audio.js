@@ -226,7 +226,7 @@ const linkAudioSeguro = valor => {
   } catch { return false }
 }
 
-const retornoMusica = (resp, tipo = '') => {
+const retornoMusica = resp => {
   const status = Number(resp?.status || 0)
   if (status !== 200) throw new Error('A API de músicas retornou HTTP ' + status + '.')
   const dados = resp.data
@@ -269,9 +269,11 @@ async function baixarMusica(ctx, termo) {
       || lista.find(item => item?.videoId || youtubeId(item?.url))
     id = encontrado?.videoId && /^[a-zA-Z0-9_-]{11}$/.test(encontrado.videoId)
       ? encontrado.videoId : youtubeId(encontrado?.url)
-    if (!id) throw new Error('Não foi possível localizar essa música pela pesquisa.')
+    // O comando play_audio da base também aceita pesquisa diretamente na rota.
+    // Quando a busca retorna um formato inesperado, tentamos a API com o
+    // nome da música, em vez de falhar antes do download.
   }
-  const url = 'https://www.youtube.com/watch?v=' + id
+  const url = id ? 'https://www.youtube.com/watch?v=' + id : entrada
   const parametros = { q: url }
   const resposta = await axios.get(apiUrl(ctx, '/api/youtube-audio', parametros), {
     timeout: 90000, responseType: 'arraybuffer',
@@ -382,6 +384,24 @@ function construirMensagem(fig, som) {
   return resultado
 }
 
+function duracaoOpus(bytes) {
+  let pos = 0
+  let ultima = 0
+  while (pos + 27 <= bytes.length) {
+    const offset = bytes.indexOf('OggS', pos, 'ascii')
+    if (offset < 0 || offset + 27 > bytes.length) break
+    const segmentos = bytes[offset + 26]
+    const tabela = offset + 27
+    if (tabela + segmentos > bytes.length) break
+    let tamanho = 0
+    for (let i = 0; i < segmentos; i++) tamanho += bytes[tabela + i]
+    const amostras = Number(bytes.readBigUInt64LE(offset + 6))
+    if (Number.isSafeInteger(amostras) && amostras > ultima) ultima = amostras
+    pos = tabela + segmentos + tamanho
+  }
+  return Math.max(1, Math.min(MAX_MUSICA_SEGUNDOS, Math.ceil(ultima / 48000) || 10))
+}
+
 async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}) {
   if (!Buffer.isBuffer(figurinha) || !figurinha.length ||
       figurinha.toString('ascii', 0, 4) !== 'RIFF' ||
@@ -409,8 +429,9 @@ async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}
   const audioMsg = audio.audioMessage
   audioMsg.mimetype = 'audio/ogg; codecs=opus'
   audioMsg.ptt = true
-  audioMsg.seconds = Math.max(1, Math.min(MAX_MUSICA_SEGUNDOS,
-    Number(audioMsg.seconds || 0) || 10))
+  // Calcula a duração real pelas granule positions do OGG (48 kHz).
+  // Um tempo incorreto pode provocar falha de reprodução no cliente.
+  audioMsg.seconds = duracaoOpus(som)
   const mensagem = construirMensagem(fig, audio)
   // O encoder da figurinha pode ter o campo extra 26, mesmo sem o
   // decoder nativo conhecer esse campo. Confirmamos o trecho de bytes.
