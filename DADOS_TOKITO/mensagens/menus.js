@@ -161,7 +161,9 @@ exports.menu = ( NomeDoBot, sender, isCargo, isChVip, hora, prefix,  ownerName, 
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figperfil
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}packfig tema
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figpack criar Nome do Pack
-┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}figaudio — áudio marcado
+┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}figaudio — áudio, imagem ou vídeo
+┃࣪ ╎—̳͟͞͞ 🎧 ${prefix}figaudio nome da música
+┃࣪ ╎—̳͟͞͞ 🔗 ${prefix}figaudio link do YouTube
 ┃࣪ ╎—̳͟͞͞ 🔊 ${prefix}verfigaudio
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figu 5
 ┃࣪ ╎—̳͟͞͞ 🎭 ${prefix}figuemoji 5
