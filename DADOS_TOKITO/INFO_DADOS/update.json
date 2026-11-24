@@ -1,36 +1,33 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.49",
+  "version": "10.3.50",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T12:17:13.855Z",
+  "publishedAt": "2026-11-24T12:24:01.846Z",
   "changelog": [
-    "[Avisos] O monitor não bloqueia definitivamente as notificações depois de quatro tentativas.",
-    "[Confiabilidade] Se a atualização continuar pendente, novas tentativas são realizadas após um intervalo maior para evitar mensagens repetidas.",
-    "[Diagnóstico] O update diag mostra número de tentativas, horário do último envio e situação do destinatário.",
-    "[Continuidade] Mantidos o figaudio aprimorado com imagem, vídeo curto, YouTube e pesquisa musical da versão anterior.",
-    "[Segurança] Atualização incremental: preserva sessões, chaves, configurações e dados do bot."
+    "[Áudio] Ajustada a preparação do OGG/Opus, modo de voz e duração real enviada junto à figurinha.",
+    "[Pesquisa] A API de música agora aceita arquivos e respostas JSON com URLs de download.",
+    "[YouTube] Correção do tratamento de links de vídeos e busca pelo nome da música, reaproveitando a rota atual do play_audio.",
+    "[Vídeo] Conversão de vídeos menores que 10 segundos com compressão adaptativa quando WebP passa de 1 MB.",
+    "[Qualidade] Ajustes graduais em FPS, resolução e qualidade para salvar vídeos maiores sem quebrar o envio.",
+    "[Continuidade] Mantidos o modo antigo de figurinha registrada, menus e configurações existentes."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Avisos de atualização mais confiáveis",
-  "notice": "Tokito Bot V10.3.49 disponível: melhorias no aviso automático, novas tentativas para atualizações pendentes e diagnóstico mais completo.",
+  "title": "Figurinha com áudio: correções de reprodução, música e vídeo",
+  "notice": "Tokito Bot V10.3.50 disponível: correções na figurinha com áudio, na música por link ou pesquisa e na conversão de vídeos pesados.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/sistemas/dados.js",
-      "gitSha": "6ce582246ce5524b00444cbce3b41e040a4cdfdb"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/dono/update.js",
-      "gitSha": "fd4ed5d39f2611daf5063982258d0e0aadcc7198"
+      "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+      "gitSha": "4d6610d1b10697ac703330a5aed9a38c385ce923"
     },
     {
       "path": "package.json",
-      "gitSha": "ea85797483f742b3ea594bf361046f0d28864a91"
+      "gitSha": "7c38a103716d9c99597a2fb928fc627afe8a8cfc"
     }
   ],
   "releases": [
@@ -5207,17 +5204,46 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T12:17:13.855Z"
+    },
+    {
+      "version": "10.3.50",
+      "fromVersion": "10.3.49",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Figurinha com áudio: correções de reprodução, música e vídeo",
+      "notice": "Tokito Bot V10.3.50 disponível: correções na figurinha com áudio, na música por link ou pesquisa e na conversão de vídeos pesados.",
+      "changelog": [
+        "[Áudio] Ajustada a preparação do OGG/Opus, modo de voz e duração real enviada junto à figurinha.",
+        "[Pesquisa] A API de música agora aceita arquivos e respostas JSON com URLs de download.",
+        "[YouTube] Correção do tratamento de links de vídeos e busca pelo nome da música, reaproveitando a rota atual do play_audio.",
+        "[Vídeo] Conversão de vídeos menores que 10 segundos com compressão adaptativa quando WebP passa de 1 MB.",
+        "[Qualidade] Ajustes graduais em FPS, resolução e qualidade para salvar vídeos maiores sem quebrar o envio.",
+        "[Continuidade] Mantidos o modo antigo de figurinha registrada, menus e configurações existentes."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "4d6610d1b10697ac703330a5aed9a38c385ce923"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "7c38a103716d9c99597a2fb928fc627afe8a8cfc"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T12:24:01.846Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.48",
+  "fromVersion": "10.3.49",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.49",
+  "publicVersion": "10.3.50",
   "repair": false
 }
