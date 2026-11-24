@@ -125,7 +125,7 @@ dylan.setCommand({
         await ctx.reagir(ctx.from, '✅').catch(() => {})
       }
       const detalhes = {
-        'MÚSICA': 'Trecho de até 30 segundos preparado.',
+        'MÚSICA': 'Áudio da música preparado com até 1 minuto.',
         'VÍDEO': 'Figurinha animada de até 9,9s com áudio original de até 1 minuto.',
         'IMAGEM': 'Imagem convertida em figurinha com som.',
         'FIGURINHA': 'Figurinha marcada enviada com áudio.',
