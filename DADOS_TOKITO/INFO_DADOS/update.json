@@ -4,29 +4,30 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T13:46:23.994Z",
+  "publishedAt": "2026-11-24T13:55:13.785Z",
   "changelog": [
     "[Causa] Figurinhas de outros bots não constavam do cache do figaudio; ao citar a mídia, o WhatsApp podia omitir audioMessage e o /take reenviava apenas o WebP.",
     "[Recepção] O cache de mídias recebidas registra o audioMessage das figurinhas externas quando a Stone WPP o disponibiliza na mensagem original.",
     "[Protocolo] Instala a decodificação experimental do áudio da figurinha antes de receber mensagens, para não descartar a trilha sonora no processamento.",
     "[Preservação] Não substitui uma mensagem original com áudio por atualização parcial sem o áudio; /take e /rename reaproveitam o fluxo sonoro já compartilhado.",
-    "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP."
+    "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP.",
+    "[Reparação] Restaurada a inicialização estável da conexão e o processamento anterior de mídias para evitar regressões em take, rename e figaudio."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Take e Rename: áudio de figurinhas recebidas de outros bots",
-  "notice": "Tokito Bot V10.3.61: agora o bot registra os dados de áudio das figurinhas sonoras recebidas de outros contatos antes da citação perder o campo de áudio.",
+  "title": "Reparação do Take, Rename e conexão",
+  "notice": "Reparação V10.3.61: restaura a conexão e a leitura estável de figurinhas após regressão, sem alterar a versão.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/sistemas/midia-citada.js",
-      "gitSha": "3fa3b170509ec8497003a231f9adeb950171114d"
+      "gitSha": "a3716ed0de3f807119e477b275bcb7ae6e89ff73"
     },
     {
       "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "e0156b3193f586c48449f7bb39019d2fe026e191"
+      "gitSha": "e6fba03125225af1d702defa3b05cb956f026bac"
     },
     {
       "path": "package.json",
@@ -5563,23 +5564,24 @@
       "fromVersion": "10.3.60",
       "channel": "stable",
       "type": "Correção",
-      "title": "Take e Rename: áudio de figurinhas recebidas de outros bots",
-      "notice": "Tokito Bot V10.3.61: agora o bot registra os dados de áudio das figurinhas sonoras recebidas de outros contatos antes da citação perder o campo de áudio.",
+      "title": "Reparação do Take, Rename e conexão",
+      "notice": "Reparação V10.3.61: restaura a conexão e a leitura estável de figurinhas após regressão, sem alterar a versão.",
       "changelog": [
         "[Causa] Figurinhas de outros bots não constavam do cache do figaudio; ao citar a mídia, o WhatsApp podia omitir audioMessage e o /take reenviava apenas o WebP.",
         "[Recepção] O cache de mídias recebidas registra o audioMessage das figurinhas externas quando a Stone WPP o disponibiliza na mensagem original.",
         "[Protocolo] Instala a decodificação experimental do áudio da figurinha antes de receber mensagens, para não descartar a trilha sonora no processamento.",
         "[Preservação] Não substitui uma mensagem original com áudio por atualização parcial sem o áudio; /take e /rename reaproveitam o fluxo sonoro já compartilhado.",
-        "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP."
+        "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP.",
+        "[Reparação] Restaurada a inicialização estável da conexão e o processamento anterior de mídias para evitar regressões em take, rename e figaudio."
       ],
       "files": [
         {
           "path": "DADOS_TOKITO/sistemas/midia-citada.js",
-          "gitSha": "3fa3b170509ec8497003a231f9adeb950171114d"
+          "gitSha": "a3716ed0de3f807119e477b275bcb7ae6e89ff73"
         },
         {
           "path": "DADOS_TOKITO/connect.js",
-          "gitSha": "e0156b3193f586c48449f7bb39019d2fe026e191"
+          "gitSha": "e6fba03125225af1d702defa3b05cb956f026bac"
         },
         {
           "path": "package.json",
@@ -5588,7 +5590,7 @@
       ],
       "delete": [],
       "required": false,
-      "publishedAt": "2026-11-24T13:46:23.994Z"
+      "publishedAt": "2026-11-24T13:55:13.785Z"
     }
   ],
   "mode": "incremental",
@@ -5601,5 +5603,6 @@
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
   "publicVersion": "10.3.61",
-  "repair": false
+  "repair": true,
+  "repairId": "restaurar-conexao-sticker-10.3.61"
 }
