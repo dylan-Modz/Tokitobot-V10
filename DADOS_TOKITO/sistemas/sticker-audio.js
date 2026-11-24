@@ -331,6 +331,7 @@ async function baixarMusica(ctx, termo) {
 async function converterVideoAdaptativo(bytes) {
   // Prioriza o conversor existente do /s. Se o WebP ultrapassar 1 MB,
   // reduz resolução, FPS e qualidade progressivamente sem excluir o vídeo.
+  // Todos os perfis esticam o quadro para um quadrado, igual ao comando /s.
   try {
     const padrao = await videoToWebp2(bytes)
     if (padrao?.length && padrao.length <= MAX_WEBP) return padrao
@@ -355,7 +356,7 @@ async function converterVideoAdaptativo(bytes) {
           '-hide_banner', '-loglevel', 'error', '-y', '-i', entrada,
           '-t', '9.5', '-an',
           '-vf', 'fps=' + perfil.fps + ',scale=' + perfil.pixels + ':' + perfil.pixels +
-            ':force_original_aspect_ratio=decrease,pad=' + perfil.pixels + ':' + perfil.pixels + ':(ow-iw)/2:(oh-ih)/2:color=0x00000000,format=yuva420p',
+            ':flags=lanczos,setsar=1,format=yuva420p',
           '-c:v', 'libwebp', '-lossless', '0', '-compression_level', '5',
           '-q:v', String(perfil.qualidade), '-loop', '0', '-f', 'webp', saida
         ], { timeout: 75000, maxBuffer: 1024 * 1024 })
