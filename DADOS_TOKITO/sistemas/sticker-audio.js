@@ -241,7 +241,7 @@ async function prepararVideo(ctx, lista, referencia) {
   if (duracao >= 10) throw new Error('O vídeo deve ter menos de 10 segundos (até 9,9s).')
   const bytes = await midiaCitada.baixar(ctx, 'video', lista, referencia)
   if (bytes.length > MAX_VIDEO_BYTES) throw new Error('O vídeo ultrapassou 22 MB.')
-  const som = await transcodificar(bytes, 'mp4', opcoesOpus(MAX_SEGUNDOS))
+  const som = await transcodificar(bytes, 'mp4', opcoesOpus(9.5))
   // Mesmo conversor usado pelo comando /s; preserva a animação em WebP.
   const figurinha = await videoToWebp2(bytes)
   if (!figurinha?.length || figurinha.length > MAX_WEBP) {
