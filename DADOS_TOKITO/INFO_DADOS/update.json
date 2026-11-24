@@ -10,7 +10,8 @@
     "[Recepção] Mensagens recebidas e atualizações de mídia passam pelo cache antes dos comandos; falhas do cache não interrompem o restante da recepção.",
     "[Pareamento] Processamento de eventos e gravação de credenciais registrados antes de solicitar o código.",
     "[Limitação] A conexão Web continua usando a Stone WPP existente: se o WhatsApp não enviar o conteúdo ou a chave, o bot não pode recriá-los. Nenhuma mudança forçada de transporte.",
-    "[Continuidade] Mantidas todas as limpezas, melhorias nas figurinhas e reparações da V10.3.64."
+    "[Continuidade] Mantidas todas as limpezas, melhorias nas figurinhas e reparações da V10.3.64.",
+    "[Reparação FigAudio] Fila de mídia independente e limitada, conversões com CPU controlada, arquivos temporários/cache assíncronos e timeouts de conversão/download/upload; mantém aviso inicial, áudio e animação, sem mensagem final de sucesso."
   ],
   "delete": [
     ".github/workflows/controle-remoto.yml",
@@ -50,10 +51,6 @@
       "gitSha": "a3a7c726f10b4d8b2d9f4b2c2f517da2b7bb85d5"
     },
     {
-      "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "0f8cf3562d2dca969c2e449af340bebb87f68daf"
-    },
-    {
       "path": "DADOS_TOKITO/sistemas/midia-citada.js",
       "gitSha": "a3716ed0de3f807119e477b275bcb7ae6e89ff73"
     },
@@ -75,7 +72,19 @@
     },
     {
       "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
-      "gitSha": "94c2ecca29d94567cb8bba68968d79cd20a2d64f"
+      "gitSha": "fcf36045b10672fa794e2ff504807e9b3d2e6468"
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+      "gitSha": "39a5563b188e7cc4ee7ff861b6e51115f651e4fd"
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/figurinhas/exif2.js",
+      "gitSha": "d0a060380b3faf809f1f574a937da6395d911ea3"
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/eventos/autostickeraudio.js",
+      "gitSha": "bc82078f72754414c25af4b146eb656c920c3b49"
     }
   ],
   "releases": [
@@ -4663,7 +4672,8 @@
         "[Recepção] Mensagens recebidas e atualizações de mídia passam pelo cache antes dos comandos; falhas do cache não interrompem o restante da recepção.",
         "[Pareamento] Processamento de eventos e gravação de credenciais registrados antes de solicitar o código.",
         "[Limitação] A conexão Web continua usando a Stone WPP existente: se o WhatsApp não enviar o conteúdo ou a chave, o bot não pode recriá-los. Nenhuma mudança forçada de transporte.",
-        "[Continuidade] Mantidas todas as limpezas, melhorias nas figurinhas e reparações da V10.3.64."
+        "[Continuidade] Mantidas todas as limpezas, melhorias nas figurinhas e reparações da V10.3.64.",
+        "[Reparação FigAudio] Fila de mídia independente e limitada, conversões com CPU controlada, arquivos temporários/cache assíncronos e timeouts de conversão/download/upload; mantém aviso inicial, áudio e animação, sem mensagem final de sucesso."
       ],
       "files": [
         {
@@ -4677,10 +4687,6 @@
         {
           "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
           "gitSha": "a3a7c726f10b4d8b2d9f4b2c2f517da2b7bb85d5"
-        },
-        {
-          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-          "gitSha": "0f8cf3562d2dca969c2e449af340bebb87f68daf"
         },
         {
           "path": "DADOS_TOKITO/sistemas/midia-citada.js",
@@ -4704,7 +4710,19 @@
         },
         {
           "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
-          "gitSha": "94c2ecca29d94567cb8bba68968d79cd20a2d64f"
+          "gitSha": "fcf36045b10672fa794e2ff504807e9b3d2e6468"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "39a5563b188e7cc4ee7ff861b6e51115f651e4fd"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/exif2.js",
+          "gitSha": "d0a060380b3faf809f1f574a937da6395d911ea3"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/eventos/autostickeraudio.js",
+          "gitSha": "bc82078f72754414c25af4b146eb656c920c3b49"
         }
       ],
       "delete": [
@@ -4740,5 +4758,5 @@
   },
   "publicVersion": "10.3.65",
   "repair": true,
-  "repairId": "recepcao-e-pareamento-10.3.65"
+  "repairId": "recepcao-e-figaudio-fila-10.3.65"
 }

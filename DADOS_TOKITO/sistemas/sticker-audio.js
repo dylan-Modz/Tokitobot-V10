@@ -23,6 +23,39 @@ const MAX_WEBP = 1024 * 1024
 const MAX_AUDIO = 20 * 1024 * 1024
 const MAX_SEGUNDOS = 60
 
+// Fila independente da fila de mensagens, compartilhada pelo evento automático.
+// Um trabalho ativo e até dois aguardando por processo, sem acumular mídia ilimitada.
+const MAX_FILA_SONORA = 3
+const filaSonora = []
+let processandoSonora = false
+function iniciarFilaSonora() {
+  if (processandoSonora || !filaSonora.length) return
+  processandoSonora = true
+  setImmediate(async () => {
+    try {
+      while (filaSonora.length) {
+        const job = filaSonora.shift()
+        try { await job() }
+        catch (error) { console.warn('[FIGAUDIO FILA]', error?.code || 'FALHA') }
+      }
+    } finally {
+      processandoSonora = false
+      iniciarFilaSonora()
+    }
+  })
+}
+let trabalhoAtivo = false
+function agendarSonora(funcao) {
+  if (typeof funcao !== 'function' ||
+      filaSonora.length + Number(trabalhoAtivo) >= MAX_FILA_SONORA) return false
+  filaSonora.push(async () => {
+    trabalhoAtivo = true
+    try { await funcao() } finally { trabalhoAtivo = false }
+  })
+  iniciarFilaSonora()
+  return true
+}
+
 // Áudio de figurinha não fica no arquivo WebP. Guarda os metadados do
 // envio original por ID de mensagem para /take e /rename recuperarem o som.
 const AUDIO_CACHE_TTL = 7 * 24 * 60 * 60 * 1000
@@ -51,23 +84,36 @@ function limparCacheAudio() {
     audiosPorMensagem.delete(audiosPorMensagem.keys().next().value)
   }
 }
+let cacheAlterado = false
+let salvandoCache = false
 function salvarCacheAudio() {
-  try {
-    fs.mkdirSync(path.dirname(AUDIO_CACHE_FILE), { recursive: true })
-    const dados = Array.from(audiosPorMensagem, ([chave, item]) => ({
-      chave, at: item.at, stickerHash: item.stickerHash || '', stickerSha: item.stickerSha || '',
-      audio: proto.Message.AudioMessage.toObject(item.audioMessage, { bytes: String, longs: String })
-    }))
-    const tmp = AUDIO_CACHE_FILE + '.' + process.pid + '.tmp'
+  cacheAlterado = true
+  if (salvandoCache) return
+  salvandoCache = true
+  setImmediate(async () => {
     try {
-      fs.writeFileSync(tmp, JSON.stringify(dados), { mode: 0o600 })
-      fs.renameSync(tmp, AUDIO_CACHE_FILE)
+      while (cacheAlterado) {
+        cacheAlterado = false
+        const dados = Array.from(audiosPorMensagem, ([chave, item]) => ({
+          chave, at: item.at, stickerHash: item.stickerHash || '', stickerSha: item.stickerSha || '',
+          audio: proto.Message.AudioMessage.toObject(item.audioMessage, { bytes: String, longs: String })
+        }))
+        const tmp = AUDIO_CACHE_FILE + '.' + process.pid + '.tmp'
+        try {
+          await fs.promises.mkdir(path.dirname(AUDIO_CACHE_FILE), { recursive: true })
+          await fs.promises.writeFile(tmp, JSON.stringify(dados), { mode: 0o600 })
+          await fs.promises.rename(tmp, AUDIO_CACHE_FILE)
+        } finally {
+          await fs.promises.rm(tmp, { force: true }).catch(() => {})
+        }
+      }
+    } catch (erro) {
+      console.warn('[FIGAUDIO CACHE]', erro?.code || 'FALHA')
     } finally {
-      if (fs.existsSync(tmp)) fs.rmSync(tmp, { force: true })
+      salvandoCache = false
+      if (cacheAlterado) salvarCacheAudio()
     }
-  } catch (erro) {
-    console.warn('[FIGAUDIO CACHE]', erro?.message || erro)
-  }
+  })
 }
 function carregarCacheAudio() {
   try {
@@ -322,11 +368,10 @@ const { imageToWebp2, videoToWebp2 } = require('../plugins/figurinhas/exif2')
 const midiaCitada = require('./midia-citada')
 const axios = require('axios')
 
-const temporario = funcao => {
-  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'tokito-figaudio-'))
-  return Promise.resolve().then(() => funcao(dir)).finally(() => {
-    fs.rmSync(dir, { recursive: true, force: true })
-  })
+const temporario = async funcao => {
+  const dir = await fs.promises.mkdtemp(path.join(os.tmpdir(), 'tokito-figaudio-'))
+  try { return await funcao(dir) }
+  finally { await fs.promises.rm(dir, { recursive: true, force: true }).catch(() => {}) }
 }
 
 const transcodificar = async (bytes, extensao, args, formato = '.ogg') => {
@@ -334,17 +379,17 @@ const transcodificar = async (bytes, extensao, args, formato = '.ogg') => {
   return temporario(async dir => {
     const entrada = path.join(dir, 'entrada.' + extensao)
     const saida = path.join(dir, 'saida' + formato)
-    fs.writeFileSync(entrada, bytes)
+    await fs.promises.writeFile(entrada, bytes)
     try {
       await executar(process.env.FFMPEG_PATH || 'ffmpeg', [
-        '-hide_banner', '-loglevel', 'error', '-y',
-        '-i', entrada, ...args, saida
+        '-nostdin', '-hide_banner', '-loglevel', 'error', '-y', '-threads', '1', '-filter_threads', '1',
+        '-i', entrada, ...args, '-threads', '1', saida
       ], { timeout: 45000, maxBuffer: 1024 * 1024 })
     } catch (error) {
       if (error?.code === 'ENOENT') throw new Error('FFmpeg não está instalado na hospedagem.')
       throw new Error('Não foi possível extrair ou converter o áudio da mídia.')
     }
-    const resultado = fs.readFileSync(saida)
+    const resultado = await fs.promises.readFile(saida)
     if (!resultado.length || resultado.length > MAX_AUDIO) {
       throw new Error('O áudio convertido excedeu o limite permitido.')
     }
@@ -479,7 +524,7 @@ async function baixarMusica(ctx, termo) {
     if (entrada.length < 2 || entrada.length > 140) throw new Error('Informe o nome da música.')
     try {
       const busca = await requisitarMusica(apiUrl(ctx, '/api/youtube-search', { query: entrada }), {
-        timeout: 25000
+        timeout: 15000
       })
       const data = busca.data
       const lista = Array.isArray(data?.resultado) ? data.resultado
@@ -499,7 +544,7 @@ async function baixarMusica(ctx, termo) {
   const alvo = id ? 'https://www.youtube.com/watch?v=' + id : entrada
   const solicitar = async q => {
     const resposta = await requisitarMusica(apiUrl(ctx, '/api/youtube-audio', { q }), {
-      timeout: 90000, responseType: 'arraybuffer',
+      timeout: 45000, responseType: 'arraybuffer',
       maxContentLength: 35 * 1024 * 1024,
       maxBodyLength: 35 * 1024 * 1024
     })
@@ -517,7 +562,7 @@ async function baixarMusica(ctx, termo) {
   if (midia.url) {
     if (!linkAudioSeguro(midia.url)) throw new Error('A API retornou um link de áudio inválido.')
     const download = await requisitarMusica(midia.url, {
-      responseType: 'arraybuffer', timeout: 90000,
+      responseType: 'arraybuffer', timeout: 45000,
       maxContentLength: 35 * 1024 * 1024,
       maxBodyLength: 35 * 1024 * 1024,
       maxRedirects: 2
@@ -533,7 +578,7 @@ async function converterVideoAdaptativo(bytes) {
   // reduz resolução, FPS e qualidade progressivamente sem excluir o vídeo.
   // Todos os perfis esticam o quadro para um quadrado, igual ao comando /s.
   try {
-    const padrao = await videoToWebp2(bytes)
+    const padrao = await videoToWebp2(bytes, { leve: true })
     if (padrao?.length && padrao.length <= MAX_WEBP) return padrao
   } catch (error) {
     console.warn('[FIGAUDIO WEBP BASE]', error?.message || error)
@@ -547,20 +592,20 @@ async function converterVideoAdaptativo(bytes) {
   ]
   return temporario(async dir => {
     const entrada = path.join(dir, 'video.mp4')
-    fs.writeFileSync(entrada, bytes)
+    await fs.promises.writeFile(entrada, bytes)
     for (let i = 0; i < perfis.length; i++) {
       const perfil = perfis[i]
       const saida = path.join(dir, 'sticker-' + i + '.webp')
       try {
         await executar(process.env.FFMPEG_PATH || 'ffmpeg', [
-          '-hide_banner', '-loglevel', 'error', '-y', '-i', entrada,
+          '-nostdin', '-hide_banner', '-loglevel', 'error', '-y', '-threads', '1', '-filter_threads', '1', '-i', entrada,
           '-t', '9.5', '-an',
           '-vf', 'fps=' + perfil.fps + ',scale=' + perfil.pixels + ':' + perfil.pixels +
             ':flags=lanczos,setsar=1,format=yuva420p',
           '-c:v', 'libwebp', '-lossless', '0', '-compression_level', '5',
-          '-q:v', String(perfil.qualidade), '-loop', '0', '-f', 'webp', saida
-        ], { timeout: 75000, maxBuffer: 1024 * 1024 })
-        const convertido = fs.readFileSync(saida)
+          '-q:v', String(perfil.qualidade), '-threads', '1', '-loop', '0', '-f', 'webp', saida
+        ], { timeout: 45000, maxBuffer: 1024 * 1024 })
+        const convertido = await fs.promises.readFile(saida)
         if (convertido.length <= MAX_WEBP && convertido.length > 12 &&
             convertido.toString('ascii', 0, 4) === 'RIFF') return convertido
       } catch (error) {
@@ -592,11 +637,11 @@ async function extrairSomDoVideo(bytes) {
   }
   await temporario(async dir => {
     const arquivo = path.join(dir, 'audio.ogg')
-    fs.writeFileSync(arquivo, som)
+    await fs.promises.writeFile(arquivo, som)
     try {
       // Confirma o áudio extraído (até 60s), sem restringir à duração do WebP.
       await executar(process.env.FFMPEG_PATH || 'ffmpeg', [
-        '-nostdin', '-hide_banner', '-loglevel', 'error',
+        '-nostdin', '-hide_banner', '-loglevel', 'error', '-threads', '1',
         '-i', arquivo, '-map', '0:a:0', '-t', String(MAX_SOM_VIDEO_SEGUNDOS),
         '-f', 'null', '-'
       ], { timeout: 15000, maxBuffer: 1024 * 1024 })
@@ -614,16 +659,15 @@ async function prepararVideo(ctx, lista, referencia) {
   const bytes = await midiaCitada.baixar(ctx, 'video', lista, referencia)
   if (bytes.length > MAX_VIDEO_BYTES) throw new Error('O vídeo ultrapassou 85 MB.')
   // Prepara a animação de até 9,5s e o áudio de até 60s separadamente.
-  const [som, figurinha] = await Promise.all([
-    extrairSomDoVideo(bytes),
-    converterVideoAdaptativo(bytes)
-  ])
+  // Evita duas conversões FFmpeg disputando CPU no mesmo processo.
+  const som = await extrairSomDoVideo(bytes)
+  const figurinha = await converterVideoAdaptativo(bytes)
   return { figurinha, som, animada: true }
 }
 async function prepararImagem(ctx, lista, referencia) {
   const bytes = await midiaCitada.baixar(ctx, 'image', lista, referencia)
   if (bytes.length > MAX_IMAGEM_BYTES) throw new Error('A imagem ultrapassou 10 MB.')
-  const figurinha = await imageToWebp2(bytes)
+  const figurinha = await imageToWebp2(bytes, { leve: true })
   if (!figurinha?.length || figurinha.length > MAX_WEBP) {
     throw new Error('A figurinha gerada excedeu 1 MB.')
   }
@@ -687,14 +731,15 @@ async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}
     throw new Error('A conexão não disponibiliza envio de mídia.')
   }
   const upload = ctx.tokito.waUploadToServer
+  const segundos = duracaoOpus(som)
   const [fig, audio] = await Promise.all([
     prepareWAMessageMedia({
       sticker: figurinha, mimetype: 'image/webp',
       isAnimated: animada, width: 512, height: 512
-    }, { upload }),
+    }, { upload, mediaUploadTimeoutMs: 45000 }),
     prepareWAMessageMedia({
-      audio: som, mimetype: 'audio/ogg; codecs=opus', ptt: true
-    }, { upload })
+      audio: som, mimetype: 'audio/ogg; codecs=opus', ptt: true, seconds: segundos
+    }, { upload, mediaUploadTimeoutMs: 45000 })
   ])
   // Os clientes esperam AudioMessage com MIME/tempo coerentes para tocar.
   const audioMsg = audio.audioMessage
@@ -702,7 +747,7 @@ async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}
   audioMsg.ptt = true
   // Calcula a duração real pelas granule positions do OGG (48 kHz).
   // Um tempo incorreto pode provocar falha de reprodução no cliente.
-  audioMsg.seconds = duracaoOpus(som)
+  audioMsg.seconds = segundos
   const mensagem = construirMensagem(fig, audio)
   // O encoder da figurinha pode ter o campo extra 26, mesmo sem o
   // decoder nativo conhecer esse campo. Confirmamos o trecho de bytes.
@@ -770,5 +815,5 @@ module.exports = {
   recuperarAudioPorSha, usarRegistrada,
   prepararVideo, prepararImagem, prepararFigurinha, baixarMusica,
   normalizarBufferAudio, normalizarAudio, patchProtocolo, construirMensagem,
-  MAX_SEGUNDOS, MAX_VIDEO_SEGUNDOS, MAX_SOM_VIDEO_SEGUNDOS, MAX_MUSICA_SEGUNDOS, youtubeId
+  agendarSonora, MAX_SEGUNDOS, MAX_VIDEO_SEGUNDOS, MAX_SOM_VIDEO_SEGUNDOS, MAX_MUSICA_SEGUNDOS, youtubeId
 }

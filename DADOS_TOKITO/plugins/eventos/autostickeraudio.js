@@ -29,12 +29,10 @@ module.exports = {
     if (chave && recentes.has(chave)) return false
     if (chave) recentes.set(chave, agora)
 
-    try {
-      await sistema.enviar(ctx, audio)
-    } catch (e) {
-      console.warn('[AUTOSTICKERAUDIO]', e?.message || e)
-      // Evita mensagens de erro repetidas a cada áudio recebido.
-    }
+    sistema.agendarSonora(async () => {
+      try { await sistema.enviar(ctx, audio) }
+      catch (e) { console.warn('[AUTOSTICKERAUDIO]', e?.code || 'FALHA') }
+    })
     // Permite que outros eventos de áudio (como transcrição) continuem.
     return false
   }

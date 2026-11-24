@@ -90,46 +90,59 @@ dylan.setCommand({
         return instrucoes(ctx)
       }
 
-      await ctx.reply(ctx.mess.padraoAviso({
-        emoji: '⏳', titulo: 'CRIANDO FIGURINHA COM ÁUDIO',
-        descricao: 'Preparando sua figurinha com áudio...',
-        detalhe: 'Aguarde um instante.'
-      }))
+      const aceito = sistema.agendarSonora(async () => {
+        try {
+          await ctx.reply(ctx.mess.padraoAviso({
+            emoji: '⏳', titulo: 'CRIANDO FIGURINHA COM ÁUDIO',
+            descricao: 'Preparando sua figurinha com áudio...',
+            detalhe: 'Aguarde um instante.'
+          }))
 
-      if (pesquisa) {
-        // Se houver mídia visual marcada, usa ela; caso contrário, usa a registrada.
-        // A pesquisa é limitada a uma única música (até 30 s).
-        const som = await sistema.baixarMusica(ctx, pesquisa)
-        if (stickers.length && midiaCitadaOuAtual) {
-          dados = { ...(await sistema.prepararFigurinha(ctx, stickers, referencia)), som }
-        } else if (imagens.length && midiaCitadaOuAtual) {
-          dados = { ...(await sistema.prepararImagem(ctx, imagens, referencia)), som }
-        } else {
-          dados = sistema.usarRegistrada(som)
+          const usaRegistrada = pesquisa ? !(midiaCitadaOuAtual && (stickers.length || imagens.length)) : !(midiaCitadaOuAtual && (videos.length || imagens.length || stickers.length))
+          const baseRegistrada = usaRegistrada ? sistema.usarRegistrada(null) : null
+          if (pesquisa) {
+            // Se houver mídia visual marcada, usa ela; caso contrário, usa a registrada.
+            // A pesquisa é limitada a uma única música (até 60 s).
+            const som = await sistema.baixarMusica(ctx, pesquisa)
+            if (stickers.length && midiaCitadaOuAtual) {
+              dados = { ...(await sistema.prepararFigurinha(ctx, stickers, referencia)), som }
+            } else if (imagens.length && midiaCitadaOuAtual) {
+              dados = { ...(await sistema.prepararImagem(ctx, imagens, referencia)), som }
+            } else {
+              dados = { ...(baseRegistrada || sistema.usarRegistrada(null)), som }
+            }
+
+          } else if (videos.length && midiaCitadaOuAtual) {
+            dados = await sistema.prepararVideo(ctx, videos, referencia)
+
+          } else if (imagens.length && audios.length && midiaCitadaOuAtual) {
+            const imagem = await sistema.prepararImagem(ctx, imagens, referencia)
+            const som = await sistema.normalizarAudio(ctx, audios[0])
+            dados = { ...imagem, som }
+
+          } else if (stickers.length && audios.length && midiaCitadaOuAtual) {
+            const sticker = await sistema.prepararFigurinha(ctx, stickers, referencia)
+            const som = await sistema.normalizarAudio(ctx, audios[0])
+            dados = { ...sticker, som }
+
+          } else if (audios.length) {
+            const som = await sistema.normalizarAudio(ctx, audios[0])
+            dados = { ...(baseRegistrada || sistema.usarRegistrada(null)), som }
+
+          } else {
+            return instrucoes(ctx)
+          }
+
+          await sistema.enviarPersonalizada(ctx, dados)
+
+        } catch (e) {
+          console.warn('[FIGAUDIO]', e?.code || 'FALHA')
+          await erro(ctx, 'FALHA NA FIGURINHA COM ÁUDIO',
+            String(e?.message || 'Não foi possível concluir a operação.'))
         }
-
-      } else if (videos.length && midiaCitadaOuAtual) {
-        dados = await sistema.prepararVideo(ctx, videos, referencia)
-
-      } else if (imagens.length && audios.length && midiaCitadaOuAtual) {
-        const imagem = await sistema.prepararImagem(ctx, imagens, referencia)
-        const som = await sistema.normalizarAudio(ctx, audios[0])
-        dados = { ...imagem, som }
-
-      } else if (stickers.length && audios.length && midiaCitadaOuAtual) {
-        const sticker = await sistema.prepararFigurinha(ctx, stickers, referencia)
-        const som = await sistema.normalizarAudio(ctx, audios[0])
-        dados = { ...sticker, som }
-
-      } else if (audios.length) {
-        const som = await sistema.normalizarAudio(ctx, audios[0])
-        dados = sistema.usarRegistrada(som)
-
-      } else {
-        return instrucoes(ctx)
-      }
-
-      await sistema.enviarPersonalizada(ctx, dados)
+      })
+      if (!aceito) return aviso(ctx, 'FIGURINHA EM PROCESSAMENTO',
+        'O bot está preparando outras figurinhas com áudio. Tente novamente em instantes.')
       return true
     } catch (e) {
       console.warn('[FIGAUDIO]', e?.code || e?.message || e)

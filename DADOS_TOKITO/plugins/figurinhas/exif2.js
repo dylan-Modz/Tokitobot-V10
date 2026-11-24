@@ -54,13 +54,14 @@ catch {
 }
 }
 
-const executarFFmpeg = args => {
+const executarFFmpeg = (args, leve = false) => {
 return new Promise((resolve, reject) => {
 execFile(
-'ffmpeg',
-args,
+process.env.FFMPEG_PATH || 'ffmpeg',
+leve ? ['-nostdin', '-threads', '1', '-filter_threads', '1', ...args.slice(0, -1), '-threads', '1', args.at(-1)] : args,
 {
-maxBuffer: 50 * 1024 * 1024
+maxBuffer: 50 * 1024 * 1024,
+timeout: leve ? 45000 : 90000
 },
 (erro, stdout, stderr) => {
 if (erro) {
@@ -104,7 +105,7 @@ return fs.readFileSync(media)
 return Buffer.alloc(0)
 }
 
-async function converterWebp2(media, tipo = 'image') {
+async function converterWebp2(media, tipo = 'image', opcoes = {}) {
 const entrada = temporario(
 tipo === 'video'
 ? '.mp4'
@@ -125,12 +126,8 @@ throw new Error(
 )
 }
 
-fs.writeFileSync(
-entrada,
-buffer
-)
-
 try {
+await fs.promises.writeFile(entrada, buffer)
 const filtro = tipo === 'video'
 ? 'fps=10,scale=512:512'
 : 'scale=512:512'
@@ -202,9 +199,7 @@ filtro,
 saida
 ]
 
-await executarFFmpeg(
-args
-)
+await executarFFmpeg(args, opcoes.leve === true)
 
 if (
 !fs.existsSync(saida) ||
@@ -215,13 +210,10 @@ throw new Error(
 )
 }
 
-return fs.readFileSync(
-saida
-)
+return await fs.promises.readFile(saida)
 }
 finally {
-apagar(entrada)
-apagar(saida)
+await Promise.all([entrada, saida].map(file => fs.promises.rm(file, { force: true }).catch(() => {})))
 }
 }
 
@@ -608,18 +600,12 @@ corpo
 ])
 }
 
-async function imageToWebp2(media) {
-return converterWebp2(
-media,
-'image'
-)
+async function imageToWebp2(media, opcoes = {}) {
+return converterWebp2(media, 'image', opcoes)
 }
 
-async function videoToWebp2(media) {
-return converterWebp2(
-media,
-'video'
-)
+async function videoToWebp2(media, opcoes = {}) {
+return converterWebp2(media, 'video', opcoes)
 }
 
 async function escreverExif2(
