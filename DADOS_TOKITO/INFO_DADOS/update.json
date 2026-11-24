@@ -1,36 +1,31 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.54",
+  "version": "10.3.55",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T12:47:43.697Z",
+  "publishedAt": "2026-11-24T12:51:55.807Z",
   "changelog": [
-    "[Música] /figaudio por nome e por link do YouTube passa a preparar áudio de até 60 segundos, sem o corte anterior de 30 segundos.",
-    "[Busca] Quando a pesquisa não retorna um vídeo válido, tenta a rota youtube-audio diretamente com o nome da música.",
-    "[Estabilidade] Uma nova tentativa é realizada em erros temporários de rede, HTTP 429 e falhas do servidor.",
-    "[Interface] Mensagem de sucesso ajustada para indicar duração máxima de um minuto.",
-    "[Continuidade] Não alterados os limites do WebP animado, o áudio do vídeo, o registro e o modo automático."
+    "[Figurinhas] Corrigido o WebP adaptativo do figaudio que mantinha o formato comprido do vídeo e criava bordas.",
+    "[Visual] Todos os perfis de compressão esticam o quadro para um quadrado, igual ao comando /s.",
+    "[Qualidade] Mantidos os perfis de compressão para vídeos pesados sem ultrapassar o limite de WebP.",
+    "[Continuidade] Áudio original de até 60 segundos, busca musical, links, permissões e demais comandos preservados."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Pesquisa musical mais estável e áudios de até 1 minuto",
-  "notice": "Tokito Bot V10.3.54 disponível: pesquisa e links de música com até 60 segundos de áudio, novas tentativas para falhas temporárias da API.",
+  "title": "Figurinha com áudio em formato quadrado",
+  "notice": "Tokito Bot V10.3.55 disponível: vídeos no figaudio agora ocupam o quadrado inteiro também na conversão adaptativa, como no comando s.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "8122c82f6d46c080cb8bf72d8115300c2d28148d"
-    },
-    {
-      "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
-      "gitSha": "3e817e576e7c0ce6248a0ae1c114271ac30c93ea"
+      "gitSha": "3ec23595dc426b6e53c759c6dc2313237a2fa455"
     },
     {
       "path": "package.json",
-      "gitSha": "50d73476fe960443b701274fd4cb892d8f256717"
+      "gitSha": "983f87fe4a46ff8f8df3731a2069c267c75467f3"
     }
   ],
   "releases": [
@@ -5364,17 +5359,44 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T12:47:43.697Z"
+    },
+    {
+      "version": "10.3.55",
+      "fromVersion": "10.3.54",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Figurinha com áudio em formato quadrado",
+      "notice": "Tokito Bot V10.3.55 disponível: vídeos no figaudio agora ocupam o quadrado inteiro também na conversão adaptativa, como no comando s.",
+      "changelog": [
+        "[Figurinhas] Corrigido o WebP adaptativo do figaudio que mantinha o formato comprido do vídeo e criava bordas.",
+        "[Visual] Todos os perfis de compressão esticam o quadro para um quadrado, igual ao comando /s.",
+        "[Qualidade] Mantidos os perfis de compressão para vídeos pesados sem ultrapassar o limite de WebP.",
+        "[Continuidade] Áudio original de até 60 segundos, busca musical, links, permissões e demais comandos preservados."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "3ec23595dc426b6e53c759c6dc2313237a2fa455"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "983f87fe4a46ff8f8df3731a2069c267c75467f3"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T12:51:55.807Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.53",
+  "fromVersion": "10.3.54",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.54",
+  "publicVersion": "10.3.55",
   "repair": false
 }
