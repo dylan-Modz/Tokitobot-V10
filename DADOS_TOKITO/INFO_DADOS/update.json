@@ -1,32 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.60",
+  "version": "10.3.61",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T13:37:54.536Z",
+  "publishedAt": "2026-11-24T13:46:23.994Z",
   "changelog": [
-    "[Take] Aplica a marca cadastrada no /rgtake passando pelo mesmo processamento de metadados do /rename.",
-    "[Áudio] /take e /rename compartilham a mesma sequência de recuperação pela mensagem original, ID, fileSha256 e WebP.",
-    "[Figurinha] Mantém todos os quadros de animação e reenvia o áudio original quando os metadados estão disponíveis.",
-    "[Compatibilidade] Normaliza registros antigos de marca em texto e objetos, sem acrescentar o nome do bot.",
-    "[Testes] Cenários simulados verificaram que /take e /rename reenviam figurinhas com som pelo mesmo método."
+    "[Causa] Figurinhas de outros bots não constavam do cache do figaudio; ao citar a mídia, o WhatsApp podia omitir audioMessage e o /take reenviava apenas o WebP.",
+    "[Recepção] O cache de mídias recebidas registra o audioMessage das figurinhas externas quando a Stone WPP o disponibiliza na mensagem original.",
+    "[Protocolo] Instala a decodificação experimental do áudio da figurinha antes de receber mensagens, para não descartar a trilha sonora no processamento.",
+    "[Preservação] Não substitui uma mensagem original com áudio por atualização parcial sem o áudio; /take e /rename reaproveitam o fluxo sonoro já compartilhado.",
+    "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Take usa o mesmo fluxo sonoro do Rename",
-  "notice": "Tokito Bot V10.3.60 disponível: o comando /take reutiliza a mesma rotina de renomeação e recuperação de áudio do /rename, com a marca registrada do usuário.",
+  "title": "Take e Rename: áudio de figurinhas recebidas de outros bots",
+  "notice": "Tokito Bot V10.3.61: agora o bot registra os dados de áudio das figurinhas sonoras recebidas de outros contatos antes da citação perder o campo de áudio.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
-      "gitSha": "aa6eeb35d7dd3b891503064ada58fca5b99b1d6c"
+      "path": "DADOS_TOKITO/sistemas/midia-citada.js",
+      "gitSha": "3fa3b170509ec8497003a231f9adeb950171114d"
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "gitSha": "e0156b3193f586c48449f7bb39019d2fe026e191"
     },
     {
       "path": "package.json",
-      "gitSha": "57af35cbaa8ca96142ba82f0b780bdc2bee05800"
+      "gitSha": "9f24f24d15c68af349011ae1a9d3a4eac5f83d80"
     }
   ],
   "releases": [
@@ -5553,17 +5557,49 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T13:37:54.536Z"
+    },
+    {
+      "version": "10.3.61",
+      "fromVersion": "10.3.60",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Take e Rename: áudio de figurinhas recebidas de outros bots",
+      "notice": "Tokito Bot V10.3.61: agora o bot registra os dados de áudio das figurinhas sonoras recebidas de outros contatos antes da citação perder o campo de áudio.",
+      "changelog": [
+        "[Causa] Figurinhas de outros bots não constavam do cache do figaudio; ao citar a mídia, o WhatsApp podia omitir audioMessage e o /take reenviava apenas o WebP.",
+        "[Recepção] O cache de mídias recebidas registra o audioMessage das figurinhas externas quando a Stone WPP o disponibiliza na mensagem original.",
+        "[Protocolo] Instala a decodificação experimental do áudio da figurinha antes de receber mensagens, para não descartar a trilha sonora no processamento.",
+        "[Preservação] Não substitui uma mensagem original com áudio por atualização parcial sem o áudio; /take e /rename reaproveitam o fluxo sonoro já compartilhado.",
+        "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/midia-citada.js",
+          "gitSha": "3fa3b170509ec8497003a231f9adeb950171114d"
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "e0156b3193f586c48449f7bb39019d2fe026e191"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "9f24f24d15c68af349011ae1a9d3a4eac5f83d80"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T13:46:23.994Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.59",
+  "fromVersion": "10.3.60",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.60",
+  "publicVersion": "10.3.61",
   "repair": false
 }
