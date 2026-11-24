@@ -1,36 +1,40 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.56",
+  "version": "10.3.57",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T13:01:03.088Z",
+  "publishedAt": "2026-11-24T13:07:48.233Z",
   "changelog": [
-    "[Take/Rename] Figurinhas com áudio recebem nova marca e são reenviadas com a trilha original quando ela é disponibilizada na mensagem.",
-    "[Protocolo] Leitura do campo de áudio das figurinhas sonoras no decoder de mensagens recebidas, com reenvio pela mesma lógica do figaudio.",
-    "[Marca] /rgtake nome permite registrar apenas uma marca, sem adicionar automaticamente o nome do Tokito Bot como autor.",
-    "[Segurança] Se uma figurinha indica áudio, mas não fornece dados para preservá-lo, o comando não envia uma figurinha muda por engano.",
-    "[Continuidade] Figurinhas normais e animadas, /figaudio, músicas, links e sistema automático mantidos."
+    "[Take/Rename] Recuperação do áudio original mesmo quando a citação contém apenas a figurinha WebP, usando o ID da mensagem enviada.",
+    "[Figurinhas sonoras] Reenvio com a mesma AudioMessage criptografada e sem recodificar ou cortar o áudio; somente a marca EXIF é alterada.",
+    "[Cache] Metadados sonoros das figurinhas enviadas são guardados por ID com expiração e persistência protegida para sobreviver a reinícios.",
+    "[Mídias citadas] Figurinhas passam a ter acesso ao cache da mensagem original recebida, como imagens, vídeos e áudios.",
+    "[Continuidade] /figaudio, música de até 60s, vídeos animados, marcas de usuários e figurinhas normais permanecem disponíveis."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Melhoria",
-  "title": "Take e Rename com marca personalizada em figurinhas sonoras",
-  "notice": "Tokito Bot V10.3.56 disponível: take e rename permitem alterar a marca de figurinhas sonoras preservando o áudio quando seus metadados são fornecidos pelo WhatsApp.",
+  "type": "Correção",
+  "title": "Take e Rename preservam som da figurinha",
+  "notice": "Tokito Bot V10.3.57 disponível: /take e /rename agora recuperam o áudio da figurinha original pelo ID da mensagem, evitando reenviar figurinhas sonoras sem o som.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
-      "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
-      "gitSha": "89fcffbcc67bd7853ccdc8e8c5b6d810f587272f"
+      "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+      "gitSha": "d6dfdb989bd592a1b22fed1516add8a48bf8db08"
     },
     {
-      "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "1aa549327a53dc211df7ddadcdd5a2f1de3d1c16"
+      "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
+      "gitSha": "3e54d51efe4e84306bd98333d3c0254cef5cc000"
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/midia-citada.js",
+      "gitSha": "a3716ed0de3f807119e477b275bcb7ae6e89ff73"
     },
     {
       "path": "package.json",
-      "gitSha": "b8cdd07878941b62eadc7b1590378fccaf07a711"
+      "gitSha": "0bde975629b33652c38b495a481817edb237f5fc"
     }
   ],
   "releases": [
@@ -5423,17 +5427,53 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T13:01:03.088Z"
+    },
+    {
+      "version": "10.3.57",
+      "fromVersion": "10.3.56",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Take e Rename preservam som da figurinha",
+      "notice": "Tokito Bot V10.3.57 disponível: /take e /rename agora recuperam o áudio da figurinha original pelo ID da mensagem, evitando reenviar figurinhas sonoras sem o som.",
+      "changelog": [
+        "[Take/Rename] Recuperação do áudio original mesmo quando a citação contém apenas a figurinha WebP, usando o ID da mensagem enviada.",
+        "[Figurinhas sonoras] Reenvio com a mesma AudioMessage criptografada e sem recodificar ou cortar o áudio; somente a marca EXIF é alterada.",
+        "[Cache] Metadados sonoros das figurinhas enviadas são guardados por ID com expiração e persistência protegida para sobreviver a reinícios.",
+        "[Mídias citadas] Figurinhas passam a ter acesso ao cache da mensagem original recebida, como imagens, vídeos e áudios.",
+        "[Continuidade] /figaudio, música de até 60s, vídeos animados, marcas de usuários e figurinhas normais permanecem disponíveis."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "d6dfdb989bd592a1b22fed1516add8a48bf8db08"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
+          "gitSha": "3e54d51efe4e84306bd98333d3c0254cef5cc000"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/midia-citada.js",
+          "gitSha": "a3716ed0de3f807119e477b275bcb7ae6e89ff73"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "0bde975629b33652c38b495a481817edb237f5fc"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T13:07:48.233Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.55",
+  "fromVersion": "10.3.56",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.56",
+  "publicVersion": "10.3.57",
   "repair": false
 }
