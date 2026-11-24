@@ -30,91 +30,124 @@
 
 const fs = require('fs')
 const modulos = require('../../sistemas/modulos')
+const midiaCitada = require('../../sistemas/midia-citada')
+const stickerAudio = require('../../sistemas/sticker-audio')
 const { writeExif2 } = require('./exif2')
-
-const st = ctx => ctx.ctxMsg?.quotedMessage?.stickerMessage || ctx.mensagem?.stickerMessage
-
-const dados = s => {
-const [packname, author] = String(s || '').split('|').map(v => String(v || '').trim())
-return {
-packname: packname || 'TokitoBot-MD',
-author: author || 'Dylan Modz'
-}
-}
-
 const dylan = require('../../database/lib/comandos')
 
+const dados = (texto, padrao = '') => {
+  const [nome, autor] = String(texto || '').split('|').map(v => v.trim())
+  const packname = (nome || padrao).slice(0, 100)
+  if (!packname) return null
+  return {
+    packname,
+    // Um único nome informado => sem segunda marca visível/assinatura do bot.
+    author: (autor || ' ').slice(0, 100)
+  }
+}
+
+const fonteSticker = ctx => {
+  const { fontes } = midiaCitada.preparar(ctx)
+  for (const fonte of fontes) {
+    const sticker = midiaCitada.extrair(fonte, 'sticker')
+    if (sticker) return sticker
+  }
+  return null
+}
+
 dylan.setCommand({
-nome: 'rgtake',
-comandos: ['rgtake', 'rntake', 'take', 'roubar', 'rename'],
-categoria: 'figurinhas',
-info: {
-descricao: 'Registra e aplica nome/autor em figurinhas.',
-uso: 'rgtake nome|autor'
-},
-async executar(ctx) {
-const db = modulos.takes()
-const id = ctx.normalizar(ctx.sender)
-if (['rgtake', 'rntake'].includes(ctx.command)) {
-if (ctx.command === 'rntake' && !db[id])
-return ctx.reply(ctx.mess.padraoAviso({
-emoji: '🧊',
-titulo: 'TAKE NÃO REGISTRADO',
-descricao: `Registre primeiro com ${ctx.prefix}rgtake nome|autor.`
-}))
-const d = dados(ctx.q)
-db[id] = d
-modulos.salvarTakes(db)
-return ctx.reply(ctx.mess.padraoSucesso({
-emoji: '🧊',
-titulo: ctx.command === 'rntake' ? 'TAKE ATUALIZADO' : 'TAKE REGISTRADO',
-descricao: `Pack: ${d.packname}`,
-detalhe: `Autor: ${d.author}`
-}))
-}
-const s = st(ctx)
-if (!s)
-return ctx.reply(ctx.mess.padraoUso({
-emoji: '🧊',
-titulo: 'TAKE',
-uso: `${ctx.prefix}${ctx.command}`,
-descricao: 'Responda a uma figurinha para continuar.'
-}))
-const buffer = await ctx.getFileBuffer(s, 'sticker')
-if (!buffer?.length)
-return ctx.reply(ctx.mess.padraoErro({
-titulo: 'ERRO NA FIGURINHA',
-descricao: 'Não consegui baixar a figurinha.'
-}))
-const d = ctx.command === 'rename' ? dados(ctx.q) : (db[id] || {
-packname: `🧊 ${ctx.NomeDoBot}`,
-author: ctx.pushname || 'Dylan Modz'
+  nome: 'rgtake',
+  comandos: ['rgtake', 'rntake', 'take', 'roubar', 'rename'],
+  categoria: 'figurinhas',
+  info: {
+    descricao: 'Registra e altera a marca de figurinhas comuns, animadas e sonoras.',
+    uso: 'rgtake nome | rename nome|autor | take respondendo figurinha',
+    permissao: 'Livre'
+  },
+  async executar(ctx) {
+    const comando = String(ctx.command || '').toLowerCase()
+    const db = modulos.takes()
+    const id = ctx.normalizar(ctx.sender)
+    if (comando === 'rgtake' || comando === 'rntake') {
+      if (comando === 'rntake' && !db[id]) {
+        return ctx.reply(ctx.mess.padraoAviso({
+          emoji: '🧊', titulo: 'TAKE NÃO REGISTRADO',
+          descricao: 'Registre primeiro com ' + ctx.prefix + 'rgtake nome.'
+        }))
+      }
+      const marca = dados(ctx.q)
+      if (!marca) {
+        return ctx.reply(ctx.mess.padraoUso({
+          emoji: '🧊', titulo: 'REGISTRAR MARCA',
+          uso: ctx.prefix + comando + ' nome|autor',
+          descricao: 'Informe só o nome se não quiser autor adicional.'
+        }))
+      }
+      db[id] = marca
+      modulos.salvarTakes(db)
+      return ctx.reply(ctx.mess.padraoSucesso({
+        emoji: '🧊',
+        titulo: comando === 'rntake' ? 'TAKE ATUALIZADO' : 'TAKE REGISTRADO',
+        descricao: 'Marca: ' + marca.packname,
+        ...(marca.author.trim() ? { detalhe: 'Autor: ' + marca.author } : {})
+      }))
+    }
+
+    const sticker = fonteSticker(ctx)
+    if (!sticker) {
+      return ctx.reply(ctx.mess.padraoUso({
+        emoji: '🧊', titulo: 'RENOMEAR FIGURINHA',
+        uso: comando === 'rename'
+          ? ctx.prefix + 'rename nome|autor'
+          : ctx.prefix + comando,
+        descricao: 'Responda a uma figurinha. Figurinhas sonoras mantêm o áudio quando os dados originais estão disponíveis.'
+      }))
+    }
+
+    const marca = comando === 'rename'
+      ? (dados(ctx.q) || db[id] || dados('', ctx.pushname || 'Minha Marca'))
+      : (db[id] || dados('', ctx.pushname || 'Minha Marca'))
+    let arquivo
+    try {
+      const buffer = await ctx.getFileBuffer(sticker, 'sticker')
+      if (!Buffer.isBuffer(buffer) || !buffer.length) {
+        throw new Error('Não foi possível baixar a figurinha.')
+      }
+      // Apenas altera o EXIF: mantém todos os quadros da animação intactos.
+      arquivo = await writeExif2({
+        data: buffer,
+        mimetype: 'image/webp'
+      }, marca)
+      const novoWebp = fs.readFileSync(arquivo)
+      const audio = sticker.audioMessage
+      if (audio) {
+        // No figaudio o áudio fica nos metadados da StickerMessage,
+        // e não dentro do WebP. Reenvia-o usando a rotina compartilhada.
+        await stickerAudio.enviarComAudioExistente(ctx, {
+          figurinha: novoWebp,
+          audioMessage: audio,
+          animada: sticker.isAnimated === true
+        })
+      } else if (sticker.hasAudio === true || sticker.isAudio === true) {
+        throw new Error('O WhatsApp não forneceu os metadados do áudio dessa figurinha.')
+      } else {
+        await ctx.tokito.sendMessage(ctx.from, {
+          sticker: novoWebp,
+          isAnimated: sticker.isAnimated === true
+        }, { quoted: ctx.selo })
+      }
+      return true
+    } catch (erro) {
+      console.warn('[TAKE]', erro?.code || erro?.message || erro)
+      return ctx.reply(ctx.mess.padraoErro({
+        titulo: 'ERRO AO RENOMEAR',
+        descricao: 'Não foi possível renomear essa figurinha.',
+        detalhe: String(erro?.message || 'Falha ao processar figurinha.')
+      }))
+    } finally {
+      if (arquivo) {
+        try { fs.rmSync(arquivo, { force: true }) } catch {}
+      }
+    }
+  }
 })
-let arq
-try {
-arq = await writeExif2({
-data: buffer,
-mimetype: 'image/webp'
-}, d)
-await ctx.tokito.sendMessage(ctx.from, { sticker: { url: arq } }, { quoted: ctx.selo })
-return true
-}
-catch (e) {
-console.log('[TAKE]', e?.message || e)
-return ctx.reply(ctx.mess.padraoErro({
-titulo: 'ERRO AO RENOMEAR',
-descricao: 'Não foi possível renomear a figurinha.',
-detalhe: e.message
-}))
-}
-finally {
-try {
-if (arq && fs.existsSync(arq))
-fs.unlinkSync(arq)
-}
-catch {
-}
-}
-}
-}
-)
