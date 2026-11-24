@@ -25,23 +25,64 @@ const MAX_SEGUNDOS = 60
 
 // Áudio de figurinha não fica no arquivo WebP. Guarda os metadados do
 // envio original por ID de mensagem para /take e /rename recuperarem o som.
-const AUDIO_CACHE_TTL = 24 * 60 * 60 * 1000
+const AUDIO_CACHE_TTL = 7 * 24 * 60 * 60 * 1000
 const AUDIO_CACHE_MAX = 500
+const AUDIO_CACHE_FILE = path.join(__dirname, '..', 'database', 'sistemas', 'figaudio-mensagens.json')
 const audiosPorMensagem = new Map()
 const chaveMensagem = (jid, id) => String(jid || '') + '|' + String(id || '')
-function registrarAudioMensagem(jid, id, audioMessage) {
-  if (!jid || !id || !audioMessage?.mediaKey ||
-      !(audioMessage.directPath || audioMessage.url)) return false
-  const agora = Date.now()
+
+function limparCacheAudio() {
   for (const [chave, item] of audiosPorMensagem) {
-    if (agora - item.at > AUDIO_CACHE_TTL) audiosPorMensagem.delete(chave)
+    if (Date.now() - item.at > AUDIO_CACHE_TTL) audiosPorMensagem.delete(chave)
   }
-  const chave = chaveMensagem(jid, id)
-  audiosPorMensagem.delete(chave)
-  audiosPorMensagem.set(chave, { audioMessage, at: agora })
   while (audiosPorMensagem.size > AUDIO_CACHE_MAX) {
     audiosPorMensagem.delete(audiosPorMensagem.keys().next().value)
   }
+}
+function salvarCacheAudio() {
+  try {
+    fs.mkdirSync(path.dirname(AUDIO_CACHE_FILE), { recursive: true })
+    const dados = Array.from(audiosPorMensagem, ([chave, item]) => ({
+      chave, at: item.at,
+      audio: proto.Message.AudioMessage.toObject(item.audioMessage, { bytes: String, longs: String })
+    }))
+    const tmp = AUDIO_CACHE_FILE + '.' + process.pid + '.tmp'
+    try {
+      fs.writeFileSync(tmp, JSON.stringify(dados), { mode: 0o600 })
+      fs.renameSync(tmp, AUDIO_CACHE_FILE)
+    } finally {
+      if (fs.existsSync(tmp)) fs.rmSync(tmp, { force: true })
+    }
+  } catch (erro) {
+    console.warn('[FIGAUDIO CACHE]', erro?.message || erro)
+  }
+}
+function carregarCacheAudio() {
+  try {
+    const dados = JSON.parse(fs.readFileSync(AUDIO_CACHE_FILE, 'utf8'))
+    if (!Array.isArray(dados)) return
+    for (const item of dados.slice(-AUDIO_CACHE_MAX)) {
+      if (typeof item?.chave !== 'string' || !Number.isFinite(item.at) ||
+          Date.now() - item.at > AUDIO_CACHE_TTL) continue
+      const audioMessage = proto.Message.AudioMessage.fromObject(item.audio || {})
+      if (audioMessage?.mediaKey && (audioMessage.directPath || audioMessage.url)) {
+        audiosPorMensagem.set(item.chave, { audioMessage, at: item.at })
+      }
+    }
+    limparCacheAudio()
+  } catch {}
+}
+carregarCacheAudio()
+
+function registrarAudioMensagem(jid, id, audioMessage) {
+  if (!jid || !id || !audioMessage?.mediaKey ||
+      !(audioMessage.directPath || audioMessage.url)) return false
+  limparCacheAudio()
+  const chave = chaveMensagem(jid, id)
+  audiosPorMensagem.delete(chave)
+  audiosPorMensagem.set(chave, { audioMessage, at: Date.now() })
+  limparCacheAudio()
+  salvarCacheAudio()
   return true
 }
 function recuperarAudioMensagem(jid, id) {
@@ -51,10 +92,12 @@ function recuperarAudioMensagem(jid, id) {
   if (!encontrado) return null
   if (Date.now() - encontrado.at > AUDIO_CACHE_TTL) {
     audiosPorMensagem.delete(chave)
+    salvarCacheAudio()
     return null
   }
   return encontrado.audioMessage
 }
+
 async function relayFigurinhaSonora(ctx, mensagem, audioMessage) {
   if (typeof generateWAMessageFromContent !== 'function') {
     throw new Error('A conexão não disponibiliza identificador de mensagem para figurinha sonora.')
