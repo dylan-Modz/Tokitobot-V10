@@ -113,6 +113,8 @@ function temOpus(mime, bytes) {
 }
 
 const MAX_VIDEO_SEGUNDOS = 9.9
+// A figurinha animada segue 9,9s, mas o clipe sonoro de vídeo é curto.
+const MAX_SOM_VIDEO_SEGUNDOS = 5
 const MAX_MUSICA_SEGUNDOS = 30
 const MAX_VIDEO_BYTES = 85 * 1024 * 1024
 const MAX_IMAGEM_BYTES = 10 * 1024 * 1024
@@ -336,6 +338,42 @@ async function converterVideoAdaptativo(bytes) {
   })
 }
 
+// Mesma técnica de extração FFmpeg dos alteradores: seleciona o áudio
+// original do vídeo, corrige timestamps e codifica em OGG/Opus.
+async function extrairSomDoVideo(bytes) {
+  const som = await transcodificar(bytes, 'mp4', [
+    '-map', '0:a:0',
+    '-t', String(MAX_SOM_VIDEO_SEGUNDOS),
+    '-vn', '-af', 'aresample=async=1:first_pts=0',
+    '-ac', '1', '-ar', '48000',
+    '-c:a', 'libopus', '-application', 'voip',
+    '-frame_duration', '20', '-b:a', '32k', '-vbr', 'on',
+    '-f', 'ogg'
+  ])
+  if (!temOpus('audio/ogg', som)) {
+    throw new Error('O vídeo não gerou um áudio OGG/Opus válido.')
+  }
+  const segundos = duracaoOpus(som)
+  if (segundos > MAX_SOM_VIDEO_SEGUNDOS) {
+    throw new Error('O áudio extraído ultrapassou o limite da figurinha sonora.')
+  }
+  await temporario(async dir => {
+    const arquivo = path.join(dir, 'audio.ogg')
+    fs.writeFileSync(arquivo, som)
+    try {
+      // Validar a decodificação real, não só o cabeçalho OpusHead.
+      await executar(process.env.FFMPEG_PATH || 'ffmpeg', [
+        '-nostdin', '-hide_banner', '-loglevel', 'error',
+        '-i', arquivo, '-map', '0:a:0', '-t', String(MAX_SOM_VIDEO_SEGUNDOS),
+        '-f', 'null', '-'
+      ], { timeout: 15000, maxBuffer: 1024 * 1024 })
+    } catch {
+      throw new Error('Falha ao validar o áudio extraído do vídeo.')
+    }
+  })
+  return som
+}
+
 async function prepararVideo(ctx, lista, referencia) {
   const media = lista[0]
   const duracao = Number(media?.seconds || 0)
@@ -344,7 +382,7 @@ async function prepararVideo(ctx, lista, referencia) {
   if (bytes.length > MAX_VIDEO_BYTES) throw new Error('O vídeo ultrapassou 85 MB.')
   // Converte vídeo e áudio a partir do mesmo original, com a mesma duração.
   const [som, figurinha] = await Promise.all([
-    transcodificar(bytes, 'mp4', opcoesOpus(9.5)),
+    extrairSomDoVideo(bytes),
     converterVideoAdaptativo(bytes)
   ])
   return { figurinha, som, animada: true }
@@ -462,5 +500,5 @@ module.exports = {
   registrar, remover, visualizar, enviar, enviarPersonalizada, usarRegistrada,
   prepararVideo, prepararImagem, prepararFigurinha, baixarMusica,
   normalizarBufferAudio, normalizarAudio, patchProtocolo, construirMensagem,
-  MAX_SEGUNDOS, MAX_VIDEO_SEGUNDOS, MAX_MUSICA_SEGUNDOS, youtubeId
+  MAX_SEGUNDOS, MAX_VIDEO_SEGUNDOS, MAX_SOM_VIDEO_SEGUNDOS, MAX_MUSICA_SEGUNDOS, youtubeId
 }
