@@ -53,7 +53,8 @@ const obterOriginal = (socket, jid, id) => {
   const alternativa = global.messageStore?.[id]
   if (alternativa?.key?.remoteJid !== jid) return null
   const mensagem = desenrolar(alternativa.message)
-  const media = extrair(mensagem, 'image') || extrair(mensagem, 'video') || extrair(mensagem, 'audio')
+  const media = extrair(mensagem, 'image') || extrair(mensagem, 'video') ||
+    extrair(mensagem, 'audio') || extrair(mensagem, 'sticker')
   if (!completo(media)) return null
   return { message: mensagem, key: alternativa.key }
 }
@@ -180,7 +181,7 @@ const registrarRecebidas = (socket, mensagens) => {
     }
     const conteudo = desenrolar(mensagem)
     const media = conteudo?.imageMessage || conteudo?.videoMessage ||
-      conteudo?.ptvMessage || conteudo?.audioMessage
+      conteudo?.ptvMessage || conteudo?.audioMessage || conteudo?.stickerMessage
     if (!media) continue
     const chave = jid + '|' + id
     // Atualizacoes parciais nao substituem o original completo ja recebido.
@@ -188,7 +189,7 @@ const registrarRecebidas = (socket, mensagens) => {
     const mediaAnterior = anterior && (
       extrair(anterior.message, 'image') ||
       extrair(anterior.message, 'video') ||
-      extrair(anterior.message, 'audio')
+      extrair(anterior.message, 'audio') || extrair(anterior.message, 'sticker')
     )
     if (media.mediaKey && (!completo(mediaAnterior) || completo(media))) {
       cache.delete(chave)
