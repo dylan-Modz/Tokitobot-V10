@@ -11,9 +11,13 @@
     "[Protocolo] Instala a decodificação experimental do áudio da figurinha antes de receber mensagens, para não descartar a trilha sonora no processamento.",
     "[Preservação] Não substitui uma mensagem original com áudio por atualização parcial sem o áudio; /take e /rename reaproveitam o fluxo sonoro já compartilhado.",
     "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP.",
-    "[Reparação] Restaurado take.js da V10.3.59 que teve /rename com áudio confirmado; incluídos take.js, sticker-audio.js, midia-citada.js e connect.js na verificação de integridade e reinstalação do reparo."
+    "[Reparação] Restaurado take.js da V10.3.59 que teve /rename com áudio confirmado; incluídos take.js, sticker-audio.js, midia-citada.js e connect.js na verificação de integridade e reinstalação do reparo.",
+    "[Organização] Validação do TikTok movida para DADOS_TOKITO/database/validacao e incluída no npm test; removida a automação exclusiva do GitHub Actions."
   ],
-  "delete": [],
+  "delete": [
+    "tests/tiktoksearch-rotation.test.js",
+    ".github/workflows/tiktoksearch.yml"
+  ],
   "archiveSha256": "",
   "type": "Correção",
   "title": "Reparação do Take/Rename e arquivos de áudio",
@@ -39,7 +43,11 @@
     },
     {
       "path": "package.json",
-      "gitSha": "9f24f24d15c68af349011ae1a9d3a4eac5f83d80"
+      "gitSha": "a87c3d91967550fcb6007370855bf09fd22dd37b"
+    },
+    {
+      "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
+      "gitSha": "cf0adb4b7f5a0fa333c3eb470861a46f86c49f74"
     }
   ],
   "releases": [
@@ -5580,7 +5588,8 @@
         "[Protocolo] Instala a decodificação experimental do áudio da figurinha antes de receber mensagens, para não descartar a trilha sonora no processamento.",
         "[Preservação] Não substitui uma mensagem original com áudio por atualização parcial sem o áudio; /take e /rename reaproveitam o fluxo sonoro já compartilhado.",
         "[Limitação] Se o WhatsApp não fornecer o áudio na mensagem original, a marca pode ser alterada, mas o som não pode ser extraído apenas do WebP.",
-        "[Reparação] Restaurado take.js da V10.3.59 que teve /rename com áudio confirmado; incluídos take.js, sticker-audio.js, midia-citada.js e connect.js na verificação de integridade e reinstalação do reparo."
+        "[Reparação] Restaurado take.js da V10.3.59 que teve /rename com áudio confirmado; incluídos take.js, sticker-audio.js, midia-citada.js e connect.js na verificação de integridade e reinstalação do reparo.",
+        "[Organização] Validação do TikTok movida para DADOS_TOKITO/database/validacao e incluída no npm test; removida a automação exclusiva do GitHub Actions."
       ],
       "files": [
         {
@@ -5601,10 +5610,17 @@
         },
         {
           "path": "package.json",
-          "gitSha": "9f24f24d15c68af349011ae1a9d3a4eac5f83d80"
+          "gitSha": "a87c3d91967550fcb6007370855bf09fd22dd37b"
+        },
+        {
+          "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
+          "gitSha": "cf0adb4b7f5a0fa333c3eb470861a46f86c49f74"
         }
       ],
-      "delete": [],
+      "delete": [
+        "tests/tiktoksearch-rotation.test.js",
+        ".github/workflows/tiktoksearch.yml"
+      ],
       "required": false,
       "publishedAt": "2026-11-24T13:59:37.085Z"
     }

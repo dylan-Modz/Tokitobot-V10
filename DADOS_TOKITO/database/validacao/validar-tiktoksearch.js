@@ -6,8 +6,8 @@ const fs=require('node:fs');
 const path=require('node:path');
 const vm=require('node:vm');
 
-const scraperFile=path.join(__dirname,'..','DADOS_TOKITO','scrapers','downloads','tiktoksearch.js');
-const pluginFile=path.join(__dirname,'..','DADOS_TOKITO','plugins','downloads','tiktoksearch.js');
+const scraperFile=path.join(__dirname,'..','..','scrapers','downloads','tiktoksearch.js');
+const pluginFile=path.join(__dirname,'..','..','plugins','downloads','tiktoksearch.js');
 const scraperSource=fs.readFileSync(scraperFile,'utf8');
 const pluginSource=fs.readFileSync(pluginFile,'utf8');
 const ids=['7351234567890123456','7351234567890123457','7351234567890123458'];
