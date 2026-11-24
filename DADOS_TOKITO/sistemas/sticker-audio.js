@@ -512,6 +512,41 @@ async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}
   return true
 }
 
+// Renomeia uma figurinha sonora sem tocar ou recodificar o áudio original.
+// O WebP contém apenas imagem/EXIF: a trilha está em stickerMessage.audioMessage.
+async function enviarComAudioExistente(ctx, { figurinha, audioMessage, animada = false } = {}) {
+  if (!Buffer.isBuffer(figurinha) || figurinha.length < 12 ||
+      figurinha.length > MAX_WEBP ||
+      figurinha.toString('ascii', 0, 4) !== 'RIFF' ||
+      figurinha.toString('ascii', 8, 12) !== 'WEBP') {
+    throw new Error('A figurinha renomeada precisa ser um WebP válido de até 1 MB.')
+  }
+  if (!audioMessage?.mediaKey ||
+      !(audioMessage.directPath || audioMessage.url)) {
+    throw new Error('Não recebi os dados do áudio dessa figurinha. Peça para reenviar a figurinha sonora original.')
+  }
+  if (typeof ctx.tokito?.relayMessage !== 'function' ||
+      typeof ctx.tokito?.waUploadToServer !== 'function') {
+    throw new Error('A conexão não disponibiliza o envio de figurinha com áudio.')
+  }
+  const fig = await prepareWAMessageMedia({
+    sticker: figurinha,
+    mimetype: 'image/webp',
+    isAnimated: animada,
+    width: 512,
+    height: 512
+  }, { upload: ctx.tokito.waUploadToServer })
+  // Mantém mediaKey, directPath, SHA e os demais campos da trilha existente.
+  // ConstruirMensagem aplica o mesmo patch de protocolo do /figaudio.
+  const audio = proto.Message.AudioMessage.fromObject(audioMessage)
+  const mensagem = construirMensagem(fig, { audioMessage: audio })
+  if (!proto.Message.encode(mensagem).finish().length) {
+    throw new Error('Falha ao codificar a figurinha renomeada com áudio.')
+  }
+  await ctx.tokito.relayMessage(ctx.from, mensagem, {})
+  return true
+}
+
 async function enviar(ctx, audioOrigem) {
   if (!registrada()) throw new Error('Nenhuma figurinha registrada. Use rgfigaudio.')
   if (!audioOrigem) throw new Error('Marque um áudio para usar figaudio.')
@@ -530,7 +565,7 @@ const usarRegistrada = som => {
 
 module.exports = {
   ARQUIVO, META, registrada, metadados, stickerAtual, audioAtual,
-  registrar, remover, visualizar, enviar, enviarPersonalizada, usarRegistrada,
+  registrar, remover, visualizar, enviar, enviarPersonalizada, enviarComAudioExistente, usarRegistrada,
   prepararVideo, prepararImagem, prepararFigurinha, baixarMusica,
   normalizarBufferAudio, normalizarAudio, patchProtocolo, construirMensagem,
   MAX_SEGUNDOS, MAX_VIDEO_SEGUNDOS, MAX_SOM_VIDEO_SEGUNDOS, MAX_MUSICA_SEGUNDOS, youtubeId
