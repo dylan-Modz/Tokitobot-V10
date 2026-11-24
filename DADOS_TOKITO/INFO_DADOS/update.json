@@ -1,37 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.58",
+  "version": "10.3.59",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T13:19:58.259Z",
+  "publishedAt": "2026-11-24T13:33:56.818Z",
   "changelog": [
-    "[Causa] O /take podia entrar no envio de WebP comum quando a citação perdia o áudio e não encontrava a mensagem pelo ID.",
-    "[Recuperação] Figurinha com áudio gerada pelo bot agora registra também a impressão digital SHA-256 do WebP original.",
-    "[Take/Rename] Ao renomear, o bot consulta o áudio correspondente ao WebP original, mesmo quando os dados de áudio estão ausentes da mensagem citada.",
-    "[Segurança] Se o mesmo WebP possuir trilhas de áudio diferentes, o sistema não escolhe uma música arbitrariamente.",
-    "[Persistência] Identificação do WebP e do áudio preservada no cache existente através de reinícios.",
-    "[Continuidade] Mantidos animação, limite sonoro de 1 minuto, busca musical, permissões e formato quadrado."
+    "[Take/Rename] Uso do fileSha256 da mensagem citada para localizar a trilha sonora exata no cache do /figaudio, antes do fallback pelo WebP.",
+    "[Figurinha sonora] Registro da assinatura SHA-256 enviada pelo WhatsApp junto aos metadados sonoros, mantido entre reinícios.",
+    "[Segurança] Recuperação restrita ao mesmo grupo/contato e recusada quando a mesma figurinha tem mais de um áudio diferente.",
+    "[Continuidade] Mantidos o registro por ID, a busca por WebP, o envio pela Stone WPP, os áudios de até 1 minuto e a troca da marca d’água.",
+    "[Limitação] A recuperação depende de a mensagem original ter sido registrada com os dados do áudio; figurinhas externas sem metadados não permitem reconstruir o som apenas do WebP."
   ],
   "delete": [],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Take e Rename: recuperar áudio usando a figurinha original",
-  "notice": "Tokito Bot V10.3.58 disponível: correção na recuperação do som do /figaudio quando o WhatsApp omite o campo de áudio e o ID da figurinha citada.",
+  "title": "Take e Rename: recuperação por identificador original da figurinha",
+  "notice": "Tokito Bot V10.3.59 disponível: o áudio da figurinha citada pode ser recuperado também por fileSha256 quando o WhatsApp não entrega o campo audioMessage nem encontra o ID original.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
       "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "13649663795fdb9e513febbaac89e2625ba45764"
+      "gitSha": "0f8cf3562d2dca969c2e449af340bebb87f68daf"
     },
     {
       "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
-      "gitSha": "cee365a5996b160ebec64073c65a7de5d10fcef5"
+      "gitSha": "a3a7c726f10b4d8b2d9f4b2c2f517da2b7bb85d5"
     },
     {
       "path": "package.json",
-      "gitSha": "568dc1f95967b5a0f98506f7b51b478869bed6e8"
+      "gitSha": "84d50f39ba6d7b55832a1ba56ebfde3254e9bc5a"
     }
   ],
   "releases": [
@@ -5498,17 +5497,49 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T13:19:58.259Z"
+    },
+    {
+      "version": "10.3.59",
+      "fromVersion": "10.3.58",
+      "channel": "stable",
+      "type": "Correção",
+      "title": "Take e Rename: recuperação por identificador original da figurinha",
+      "notice": "Tokito Bot V10.3.59 disponível: o áudio da figurinha citada pode ser recuperado também por fileSha256 quando o WhatsApp não entrega o campo audioMessage nem encontra o ID original.",
+      "changelog": [
+        "[Take/Rename] Uso do fileSha256 da mensagem citada para localizar a trilha sonora exata no cache do /figaudio, antes do fallback pelo WebP.",
+        "[Figurinha sonora] Registro da assinatura SHA-256 enviada pelo WhatsApp junto aos metadados sonoros, mantido entre reinícios.",
+        "[Segurança] Recuperação restrita ao mesmo grupo/contato e recusada quando a mesma figurinha tem mais de um áudio diferente.",
+        "[Continuidade] Mantidos o registro por ID, a busca por WebP, o envio pela Stone WPP, os áudios de até 1 minuto e a troca da marca d’água.",
+        "[Limitação] A recuperação depende de a mensagem original ter sido registrada com os dados do áudio; figurinhas externas sem metadados não permitem reconstruir o som apenas do WebP."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "0f8cf3562d2dca969c2e449af340bebb87f68daf"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
+          "gitSha": "a3a7c726f10b4d8b2d9f4b2c2f517da2b7bb85d5"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "84d50f39ba6d7b55832a1ba56ebfde3254e9bc5a"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T13:33:56.818Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.57",
+  "fromVersion": "10.3.58",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.58",
+  "publicVersion": "10.3.59",
   "repair": false
 }
