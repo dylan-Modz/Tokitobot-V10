@@ -1,31 +1,36 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.55",
+  "version": "10.3.56",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T12:51:55.807Z",
+  "publishedAt": "2026-11-24T13:01:03.088Z",
   "changelog": [
-    "[Figurinhas] Corrigido o WebP adaptativo do figaudio que mantinha o formato comprido do vídeo e criava bordas.",
-    "[Visual] Todos os perfis de compressão esticam o quadro para um quadrado, igual ao comando /s.",
-    "[Qualidade] Mantidos os perfis de compressão para vídeos pesados sem ultrapassar o limite de WebP.",
-    "[Continuidade] Áudio original de até 60 segundos, busca musical, links, permissões e demais comandos preservados."
+    "[Take/Rename] Figurinhas com áudio recebem nova marca e são reenviadas com a trilha original quando ela é disponibilizada na mensagem.",
+    "[Protocolo] Leitura do campo de áudio das figurinhas sonoras no decoder de mensagens recebidas, com reenvio pela mesma lógica do figaudio.",
+    "[Marca] /rgtake nome permite registrar apenas uma marca, sem adicionar automaticamente o nome do Tokito Bot como autor.",
+    "[Segurança] Se uma figurinha indica áudio, mas não fornece dados para preservá-lo, o comando não envia uma figurinha muda por engano.",
+    "[Continuidade] Figurinhas normais e animadas, /figaudio, músicas, links e sistema automático mantidos."
   ],
   "delete": [],
   "archiveSha256": "",
-  "type": "Correção",
-  "title": "Figurinha com áudio em formato quadrado",
-  "notice": "Tokito Bot V10.3.55 disponível: vídeos no figaudio agora ocupam o quadrado inteiro também na conversão adaptativa, como no comando s.",
+  "type": "Melhoria",
+  "title": "Take e Rename com marca personalizada em figurinhas sonoras",
+  "notice": "Tokito Bot V10.3.56 disponível: take e rename permitem alterar a marca de figurinhas sonoras preservando o áudio quando seus metadados são fornecidos pelo WhatsApp.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
+      "gitSha": "89fcffbcc67bd7853ccdc8e8c5b6d810f587272f"
+    },
+    {
       "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "3ec23595dc426b6e53c759c6dc2313237a2fa455"
+      "gitSha": "1aa549327a53dc211df7ddadcdd5a2f1de3d1c16"
     },
     {
       "path": "package.json",
-      "gitSha": "983f87fe4a46ff8f8df3731a2069c267c75467f3"
+      "gitSha": "b8cdd07878941b62eadc7b1590378fccaf07a711"
     }
   ],
   "releases": [
@@ -5386,17 +5391,49 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T12:51:55.807Z"
+    },
+    {
+      "version": "10.3.56",
+      "fromVersion": "10.3.55",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Take e Rename com marca personalizada em figurinhas sonoras",
+      "notice": "Tokito Bot V10.3.56 disponível: take e rename permitem alterar a marca de figurinhas sonoras preservando o áudio quando seus metadados são fornecidos pelo WhatsApp.",
+      "changelog": [
+        "[Take/Rename] Figurinhas com áudio recebem nova marca e são reenviadas com a trilha original quando ela é disponibilizada na mensagem.",
+        "[Protocolo] Leitura do campo de áudio das figurinhas sonoras no decoder de mensagens recebidas, com reenvio pela mesma lógica do figaudio.",
+        "[Marca] /rgtake nome permite registrar apenas uma marca, sem adicionar automaticamente o nome do Tokito Bot como autor.",
+        "[Segurança] Se uma figurinha indica áudio, mas não fornece dados para preservá-lo, o comando não envia uma figurinha muda por engano.",
+        "[Continuidade] Figurinhas normais e animadas, /figaudio, músicas, links e sistema automático mantidos."
+      ],
+      "files": [
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
+          "gitSha": "89fcffbcc67bd7853ccdc8e8c5b6d810f587272f"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "1aa549327a53dc211df7ddadcdd5a2f1de3d1c16"
+        },
+        {
+          "path": "package.json",
+          "gitSha": "b8cdd07878941b62eadc7b1590378fccaf07a711"
+        }
+      ],
+      "delete": [],
+      "required": false,
+      "publishedAt": "2026-11-24T13:01:03.088Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.54",
+  "fromVersion": "10.3.55",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.55",
+  "publicVersion": "10.3.56",
   "repair": false
 }
