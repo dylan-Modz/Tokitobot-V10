@@ -39,7 +39,7 @@
     },
     {
       "path": "DADOS_TOKITO/connect.js",
-      "gitSha": "19ba3a81c48d7d4362e38f47e61c4b6de904fa53"
+      "gitSha": "e6fba03125225af1d702defa3b05cb956f026bac"
     }
   ],
   "releases": [
@@ -5467,7 +5467,7 @@
         },
         {
           "path": "DADOS_TOKITO/connect.js",
-          "gitSha": "19ba3a81c48d7d4362e38f47e61c4b6de904fa53"
+          "gitSha": "e6fba03125225af1d702defa3b05cb956f026bac"
         }
       ],
       "delete": [],
