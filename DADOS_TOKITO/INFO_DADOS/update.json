@@ -1,28 +1,76 @@
 {
   "bot": "Tokito Bot V10",
-  "version": "10.3.63",
+  "version": "10.3.64",
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T18:37:13.823Z",
+  "publishedAt": "2026-11-24T18:43:19.629Z",
   "changelog": [
-    "[Melhoria] docs: corrigir foto do desenvolvedor no README",
-    "A versão 10.3.63 já está disponível para atualização.",
-    "README atualizado",
-    "[Figurinhas] /fig e /figaudio avisam antes da preparação e enviam a figurinha sem confirmação adicional de sucesso; erros e comandos de registro preservados."
+    "[Figurinhas] /fig, /s, /sticker e /figurinha avisam antes de preparar a mídia e enviam a figurinha sem mensagem final desnecessária.",
+    "[FigAudio] /figaudio segue o mesmo padrão: aviso antes da preparação e figurinha com áudio depois, sem confirmação adicional. Registro, visualização, remoção e mensagens de erro mantidos.",
+    "[Take/Rename] Consolidadas as correções para preservar áudio e animação quando os metadados da mídia original estão disponíveis. Não é possível reconstruir áudio ausente a partir do WebP.",
+    "[Organização] Validação interna do TikTok movida para DADOS_TOKITO/database/validacao; removidos os arquivos oficiais antigos de tests e .github/workflows, e diretórios quando vazios.",
+    "[Configuração] Limpeza dos campos obsoletos channelName e channelServerMessageId no config-all.json local; tokens, credenciais e configurações restantes preservados.",
+    "[Package] Removidos install:bot e test do package.json, mantidos start, update e a instalação automática das dependências.",
+    "[README] Link do canal oficial, foto do desenvolvedor e selo de versão atualizados.",
+    "[Atualização] Versão 10.3.64 alinhada no package.json e manifesto; reparações anteriores consolidadas para instalações que ainda não receberam todos os arquivos."
   ],
-  "delete": [],
+  "delete": [
+    ".github/workflows/controle-remoto.yml",
+    ".github/workflows/controle.yml",
+    ".github/workflows/tiktoksearch.yml",
+    "tests/adv.test.js",
+    "tests/remote-control.test.js",
+    "tests/reparo-audio-canal.test.js",
+    "tests/reparo-botao-canal.test.js",
+    "tests/reparo-botao-nativo-canal.test.js",
+    "tests/reparo-deteccao.test.js",
+    "tests/reparo-entrega-reparo.test.js",
+    "tests/reparo-mesma-versao.test.js",
+    "tests/reparo-resposta-segura.test.js",
+    "tests/reparo-respostas-canal.test.js",
+    "tests/reparo-setchannel.test.js",
+    "tests/sticker-audio.test.js",
+    "tests/tiktoksearch-rotation.test.js"
+  ],
   "archiveSha256": "",
   "type": "Melhoria",
-  "title": "docs: corrigir foto do desenvolvedor no README",
-  "notice": "A versão 10.3.63 já está disponível para atualização.",
+  "title": "Figurinhas, reparação e organização do Tokito V10",
+  "notice": "A versão 10.3.64 já está disponível! Melhorias nas figurinhas, limpeza de arquivos antigos e configurações, organização do package.json e README atualizado.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
     {
+      "path": "package.json",
+      "gitSha": "82af3bbc45ff88a1d9a49ea6719801df875a0b27"
+    },
+    {
       "path": "README.md",
-      "sha256": "0eef4a34a07ca9e1171412e509ebe70d20c45baddfcace108719f3904fa5a9f7",
-      "size": 9060
+      "gitSha": "aa7332dff7af7b9f4ceb2d866b723e2e086e5a4e"
+    },
+    {
+      "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
+      "gitSha": "a3a7c726f10b4d8b2d9f4b2c2f517da2b7bb85d5"
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+      "gitSha": "0f8cf3562d2dca969c2e449af340bebb87f68daf"
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/midia-citada.js",
+      "gitSha": "a3716ed0de3f807119e477b275bcb7ae6e89ff73"
+    },
+    {
+      "path": "DADOS_TOKITO/connect.js",
+      "gitSha": "e6fba03125225af1d702defa3b05cb956f026bac"
+    },
+    {
+      "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
+      "gitSha": "cf0adb4b7f5a0fa333c3eb470861a46f86c49f74"
+    },
+    {
+      "path": "DADOS_TOKITO/sistemas/dados.js",
+      "gitSha": "4ff495db0083885f15ed8d8a7ffc355596bac712"
     },
     {
       "path": "DADOS_TOKITO/plugins/figurinhas/s.js",
@@ -4525,18 +4573,98 @@
       "delete": [],
       "required": false,
       "publishedAt": "2026-11-24T18:37:13.822Z"
+    },
+    {
+      "version": "10.3.64",
+      "fromVersion": "10.3.63",
+      "channel": "stable",
+      "type": "Melhoria",
+      "title": "Figurinhas, reparação e organização do Tokito V10",
+      "notice": "A versão 10.3.64 já está disponível! Melhorias nas figurinhas, limpeza de arquivos antigos e configurações, organização do package.json e README atualizado.",
+      "changelog": [
+        "[Figurinhas] /fig, /s, /sticker e /figurinha avisam antes de preparar a mídia e enviam a figurinha sem mensagem final desnecessária.",
+        "[FigAudio] /figaudio segue o mesmo padrão: aviso antes da preparação e figurinha com áudio depois, sem confirmação adicional. Registro, visualização, remoção e mensagens de erro mantidos.",
+        "[Take/Rename] Consolidadas as correções para preservar áudio e animação quando os metadados da mídia original estão disponíveis. Não é possível reconstruir áudio ausente a partir do WebP.",
+        "[Organização] Validação interna do TikTok movida para DADOS_TOKITO/database/validacao; removidos os arquivos oficiais antigos de tests e .github/workflows, e diretórios quando vazios.",
+        "[Configuração] Limpeza dos campos obsoletos channelName e channelServerMessageId no config-all.json local; tokens, credenciais e configurações restantes preservados.",
+        "[Package] Removidos install:bot e test do package.json, mantidos start, update e a instalação automática das dependências.",
+        "[README] Link do canal oficial, foto do desenvolvedor e selo de versão atualizados.",
+        "[Atualização] Versão 10.3.64 alinhada no package.json e manifesto; reparações anteriores consolidadas para instalações que ainda não receberam todos os arquivos."
+      ],
+      "files": [
+        {
+          "path": "package.json",
+          "gitSha": "82af3bbc45ff88a1d9a49ea6719801df875a0b27"
+        },
+        {
+          "path": "README.md",
+          "gitSha": "aa7332dff7af7b9f4ceb2d866b723e2e086e5a4e"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/take.js",
+          "gitSha": "a3a7c726f10b4d8b2d9f4b2c2f517da2b7bb85d5"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
+          "gitSha": "0f8cf3562d2dca969c2e449af340bebb87f68daf"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/midia-citada.js",
+          "gitSha": "a3716ed0de3f807119e477b275bcb7ae6e89ff73"
+        },
+        {
+          "path": "DADOS_TOKITO/connect.js",
+          "gitSha": "e6fba03125225af1d702defa3b05cb956f026bac"
+        },
+        {
+          "path": "DADOS_TOKITO/database/validacao/validar-tiktoksearch.js",
+          "gitSha": "cf0adb4b7f5a0fa333c3eb470861a46f86c49f74"
+        },
+        {
+          "path": "DADOS_TOKITO/sistemas/dados.js",
+          "gitSha": "4ff495db0083885f15ed8d8a7ffc355596bac712"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/s.js",
+          "gitSha": "8d5646f5200c62cba501008f54433ff58c72b3b7"
+        },
+        {
+          "path": "DADOS_TOKITO/plugins/figurinhas/figaudio.js",
+          "gitSha": "94c2ecca29d94567cb8bba68968d79cd20a2d64f"
+        }
+      ],
+      "delete": [
+        ".github/workflows/controle-remoto.yml",
+        ".github/workflows/controle.yml",
+        ".github/workflows/tiktoksearch.yml",
+        "tests/adv.test.js",
+        "tests/remote-control.test.js",
+        "tests/reparo-audio-canal.test.js",
+        "tests/reparo-botao-canal.test.js",
+        "tests/reparo-botao-nativo-canal.test.js",
+        "tests/reparo-deteccao.test.js",
+        "tests/reparo-entrega-reparo.test.js",
+        "tests/reparo-mesma-versao.test.js",
+        "tests/reparo-resposta-segura.test.js",
+        "tests/reparo-respostas-canal.test.js",
+        "tests/reparo-setchannel.test.js",
+        "tests/sticker-audio.test.js",
+        "tests/tiktoksearch-rotation.test.js"
+      ],
+      "required": false,
+      "publishedAt": "2026-11-24T18:43:19.629Z"
     }
   ],
   "mode": "incremental",
   "notify": true,
   "incremental": true,
-  "fromVersion": "10.3.60",
+  "fromVersion": "10.3.63",
   "migration": {
     "id": "tokito-v10-recovery-20261009",
     "required": true,
     "marker": "DADOS_TOKITO/INFO_DADOS/update-structure.json"
   },
-  "publicVersion": "10.3.61",
+  "publicVersion": "10.3.64",
   "repair": true,
-  "repairId": "fluxo-fig-figaudio-10.3.63"
+  "repairId": "consolidacao-figurinhas-limpeza-10.3.64"
 }
