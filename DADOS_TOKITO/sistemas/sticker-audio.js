@@ -631,24 +631,6 @@ async function extrairSomDoVideo(bytes) {
   if (!temOpus('audio/ogg', som)) {
     throw new Error('O vídeo não gerou um áudio OGG/Opus válido.')
   }
-  const segundos = duracaoOpus(som)
-  if (segundos > MAX_SOM_VIDEO_SEGUNDOS) {
-    throw new Error('O áudio extraído ultrapassou o limite da figurinha sonora.')
-  }
-  await temporario(async dir => {
-    const arquivo = path.join(dir, 'audio.ogg')
-    await fs.promises.writeFile(arquivo, som)
-    try {
-      // Confirma o áudio extraído (até 60s), sem restringir à duração do WebP.
-      await executar(process.env.FFMPEG_PATH || 'ffmpeg', [
-        '-nostdin', '-hide_banner', '-loglevel', 'error', '-threads', '1',
-        '-i', arquivo, '-map', '0:a:0', '-t', String(MAX_SOM_VIDEO_SEGUNDOS),
-        '-f', 'null', '-'
-      ], { timeout: 15000, maxBuffer: 1024 * 1024 })
-    } catch {
-      throw new Error('Falha ao validar o áudio extraído do vídeo.')
-    }
-  })
   return som
 }
 
@@ -661,8 +643,9 @@ async function prepararVideo(ctx, lista, referencia) {
   // Prepara a animação de até 9,5s e o áudio de até 60s separadamente.
   // Evita duas conversões FFmpeg disputando CPU no mesmo processo.
   const som = await extrairSomDoVideo(bytes)
+  const metadadosSom = await analisarSom(som)
   const figurinha = await converterVideoAdaptativo(bytes)
-  return { figurinha, som, animada: true }
+  return { figurinha, som, animada: true, metadadosSom }
 }
 async function prepararImagem(ctx, lista, referencia) {
   const bytes = await midiaCitada.baixar(ctx, 'image', lista, referencia)
@@ -699,25 +682,61 @@ function construirMensagem(fig, som) {
   return resultado
 }
 
-function duracaoOpus(bytes) {
-  let pos = 0
-  let ultima = 0
-  while (pos + 27 <= bytes.length) {
-    const offset = bytes.indexOf('OggS', pos, 'ascii')
-    if (offset < 0 || offset + 27 > bytes.length) break
-    const segmentos = bytes[offset + 26]
-    const tabela = offset + 27
-    if (tabela + segmentos > bytes.length) break
-    let tamanho = 0
-    for (let i = 0; i < segmentos; i++) tamanho += bytes[tabela + i]
-    const amostras = Number(bytes.readBigUInt64LE(offset + 6))
-    if (Number.isSafeInteger(amostras) && amostras > ultima) ultima = amostras
-    pos = tabela + segmentos + tamanho
-  }
-  return Math.max(1, Math.min(MAX_SEGUNDOS, Math.round(ultima / 48000) || 10))
+// Decodifica uma única vez para validar som, duração real e waveform.
+// Envia waveform explícito: a Stone não guarda o arquivo original quando
+// seconds já é informado, portanto não consegue gerar as ondas nesse caso.
+async function analisarSom(som) {
+  return temporario(async dir => {
+    const arquivo = path.join(dir, 'audio.ogg')
+    await fs.promises.writeFile(arquivo, som)
+    let pcm
+    try {
+      const { stdout } = await executar(process.env.FFMPEG_PATH || 'ffmpeg', [
+        '-nostdin', '-hide_banner', '-loglevel', 'error', '-xerror', '-threads', '1',
+        '-i', arquivo, '-map', '0:a:0', '-vn', '-t', String(MAX_SEGUNDOS + 1),
+        '-ac', '1', '-ar', '48000', '-c:a', 'pcm_s16le', '-f', 's16le', 'pipe:1'
+      ], { encoding: 'buffer', timeout: 15000, maxBuffer: 7 * 1024 * 1024 })
+      pcm = stdout
+    } catch {
+      throw new Error('Não foi possível decodificar o áudio da figurinha.')
+    }
+    const amostras = Math.floor(pcm.length / 2)
+    if (!amostras || amostras > 48000 * (MAX_SEGUNDOS + 0.05)) {
+      throw new Error('O áudio está vazio ou ultrapassa 60 segundos.')
+    }
+    const picos = new Uint32Array(64)
+    let maior = 0
+    for (let i = 0; i < amostras; i++) {
+      const pico = Math.abs(pcm.readInt16LE(i * 2))
+      const bloco = Math.min(63, Math.floor(i * 64 / amostras))
+      if (pico > picos[bloco]) picos[bloco] = pico
+      if (pico > maior) maior = pico
+    }
+    if (maior <= 1) throw new Error('O áudio extraído está silencioso. Envie um vídeo ou áudio com som.')
+    return {
+      segundos: Math.min(MAX_SEGUNDOS, Math.max(1, Math.ceil(amostras / 48000))),
+      waveform: Uint8Array.from(picos, pico => Math.round(pico * 100 / maior))
+    }
+  })
 }
 
-async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}) {
+function validarAudioCodificado(mensagem, esperado) {
+  const bytes = proto.Message.encode(mensagem).finish()
+  const recebido = proto.Message.decode(bytes)?.stickerMessage?.audioMessage
+  const iguais = (a, b) => Boolean(a?.length && b?.length && Buffer.from(a).equals(Buffer.from(b)))
+  if (!recebido || !iguais(recebido.mediaKey, esperado.mediaKey) ||
+      !iguais(recebido.fileSha256, esperado.fileSha256) ||
+      !iguais(recebido.fileEncSha256, esperado.fileEncSha256) ||
+      recebido.directPath !== esperado.directPath || recebido.url !== esperado.url ||
+      Number(recebido.seconds) !== Number(esperado.seconds) ||
+      recebido.mimetype !== esperado.mimetype || recebido.ptt !== esperado.ptt ||
+      (esperado.waveform?.length && !iguais(recebido.waveform, esperado.waveform))) {
+    throw new Error('O áudio da figurinha não foi preservado na codificação da mensagem.')
+  }
+  return true
+}
+
+async function enviarPersonalizada(ctx, { figurinha, som, animada = false, metadadosSom } = {}) {
   if (!Buffer.isBuffer(figurinha) || !figurinha.length ||
       figurinha.toString('ascii', 0, 4) !== 'RIFF' ||
       figurinha.toString('ascii', 8, 12) !== 'WEBP') {
@@ -731,28 +750,26 @@ async function enviarPersonalizada(ctx, { figurinha, som, animada = false } = {}
     throw new Error('A conexão não disponibiliza envio de mídia.')
   }
   const upload = ctx.tokito.waUploadToServer
-  const segundos = duracaoOpus(som)
+  const { segundos, waveform } = metadadosSom || await analisarSom(som)
   const [fig, audio] = await Promise.all([
     prepareWAMessageMedia({
       sticker: figurinha, mimetype: 'image/webp',
       isAnimated: animada, width: 512, height: 512
     }, { upload, mediaUploadTimeoutMs: 45000 }),
     prepareWAMessageMedia({
-      audio: som, mimetype: 'audio/ogg; codecs=opus', ptt: true, seconds: segundos
+      audio: som, mimetype: 'audio/ogg; codecs=opus', ptt: true, seconds: segundos, waveform
     }, { upload, mediaUploadTimeoutMs: 45000 })
   ])
   // Os clientes esperam AudioMessage com MIME/tempo coerentes para tocar.
   const audioMsg = audio.audioMessage
   audioMsg.mimetype = 'audio/ogg; codecs=opus'
   audioMsg.ptt = true
-  // Calcula a duração real pelas granule positions do OGG (48 kHz).
-  // Um tempo incorreto pode provocar falha de reprodução no cliente.
+  // Duração e ondas são calculadas diretamente das amostras decodificadas.
   audioMsg.seconds = segundos
+  audioMsg.waveform = waveform
   const mensagem = construirMensagem(fig, audio)
-  // O encoder da figurinha pode ter o campo extra 26, mesmo sem o
-  // decoder nativo conhecer esse campo. Confirmamos o trecho de bytes.
-  const codificado = proto.Message.encode(mensagem).finish()
-  if (!codificado?.length) throw new Error('A mensagem da figurinha não foi codificada.')
+  // Confirma o áudio dentro do protobuf, não apenas que algum byte foi gerado.
+  validarAudioCodificado(mensagem, audioMsg)
   await relayFigurinhaSonora(ctx, mensagem, audioMsg, figurinha)
   return true
 }

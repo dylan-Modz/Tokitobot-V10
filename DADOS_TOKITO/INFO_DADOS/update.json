@@ -4,8 +4,9 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-24T19:09:18.520Z",
+  "publishedAt": "2026-11-25T03:21:34.743Z",
   "changelog": [
+    "[FigAudio] Validação do áudio decodificado, duração real e waveform explícito; rejeita áudio vazio/silencioso e confere a trilha no protobuf antes de enviar. Fila independente e limite de 60 segundos preservados.",
     "[FigAudio] Processamento separado da fila normal de comandos, com limite de conversões simultâneas.",
     "[Desempenho] FFmpeg com carga controlada, arquivos temporários e cache assíncronos e limites de tempo.",
     "[AutoStickerAudio] Fila própria de mídia compartilhada, sem bloquear comandos comuns.",
@@ -38,8 +39,8 @@
   ],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Reparação V10.3.65 — FigAudio sem bloquear comandos",
-  "notice": "Reparação da V10.3.65 disponível: processamento independente do FigAudio e otimização da fila de comandos.",
+  "title": "Reparação V10.3.65 — Áudio das figurinhas de vídeo",
+  "notice": "Correção do FigAudio: validação da trilha sonora, duração, waveform e codificação antes do envio.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -81,7 +82,7 @@
     },
     {
       "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "39a5563b188e7cc4ee7ff861b6e51115f651e4fd"
+      "gitSha": "44c71490c56c41b15f1bf707f74ed939edbc1110"
     },
     {
       "path": "DADOS_TOKITO/plugins/figurinhas/exif2.js",
@@ -4670,9 +4671,10 @@
       "fromVersion": "10.3.64",
       "channel": "stable",
       "type": "Correção",
-      "title": "Reparação V10.3.65 — FigAudio sem bloquear comandos",
-      "notice": "Reparação da V10.3.65 disponível: processamento independente do FigAudio e otimização da fila de comandos.",
+      "title": "Reparação V10.3.65 — Áudio das figurinhas de vídeo",
+      "notice": "Correção do FigAudio: validação da trilha sonora, duração, waveform e codificação antes do envio.",
       "changelog": [
+        "[FigAudio] Validação do áudio decodificado, duração real e waveform explícito; rejeita áudio vazio/silencioso e confere a trilha no protobuf antes de enviar. Fila independente e limite de 60 segundos preservados.",
         "[FigAudio] Processamento separado da fila normal de comandos, com limite de conversões simultâneas.",
         "[Desempenho] FFmpeg com carga controlada, arquivos temporários e cache assíncronos e limites de tempo.",
         "[AutoStickerAudio] Fila própria de mídia compartilhada, sem bloquear comandos comuns.",
@@ -4724,7 +4726,7 @@
         },
         {
           "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-          "gitSha": "39a5563b188e7cc4ee7ff861b6e51115f651e4fd"
+          "gitSha": "44c71490c56c41b15f1bf707f74ed939edbc1110"
         },
         {
           "path": "DADOS_TOKITO/plugins/figurinhas/exif2.js",
@@ -4754,7 +4756,7 @@
         "tests/tiktoksearch-rotation.test.js"
       ],
       "required": false,
-      "publishedAt": "2026-11-24T19:09:18.520Z"
+      "publishedAt": "2026-11-25T03:21:34.743Z"
     }
   ],
   "mode": "incremental",
@@ -4768,5 +4770,5 @@
   },
   "publicVersion": "10.3.65",
   "repair": true,
-  "repairId": "figaudio-fila-aviso-10.3.65-r2"
+  "repairId": "figaudio-audio-validado-10.3.65-r3"
 }
