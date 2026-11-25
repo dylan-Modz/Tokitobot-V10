@@ -18,7 +18,7 @@ const modulos = require('./modulos')
 const executar = promisify(execFile)
 const ARQUIVO = path.join(__dirname, '..', 'database', 'sistemas', 'sticker-audio.webp')
 const META = path.join(__dirname, '..', 'database', 'sistemas', 'sticker-audio.json')
-const PATCH = Symbol.for('tokito.stickerAudio.sticker26.v2')
+const PATCH = Symbol.for('tokito.stickerAudio.sticker26.v3')
 const MAX_WEBP = 1024 * 1024
 const MAX_AUDIO = 20 * 1024 * 1024
 const MAX_SEGUNDOS = 60
@@ -212,10 +212,12 @@ async function relayFigurinhaSonora(ctx, mensagem, audioMessage, stickerBytes) {
   })
   const id = gerada?.key?.id
   if (!id) throw new Error('Não foi possível identificar a figurinha sonora.')
-  // Utilizar a mensagem original: o campo 26 é experimental e a normalização
-  // da mensagem gerada pode descartá-lo.
-  await ctx.tokito.relayMessage(ctx.from, mensagem, { messageId: id })
-  registrarAudioMensagem(ctx.from, id, audioMessage, stickerBytes, mensagem?.stickerMessage?.fileSha256)
+  // Usa a mensagem efetivamente gerada pela Stone (como no envio padrão),
+  // só após verificar que a normalização manteve toda a trilha sonora.
+  const conteudo = gerada?.message
+  validarAudioCodificado(conteudo, audioMessage)
+  await ctx.tokito.relayMessage(ctx.from, conteudo, { messageId: id })
+  registrarAudioMensagem(ctx.from, id, audioMessage, stickerBytes, conteudo?.stickerMessage?.fileSha256)
   return true
 }
 
@@ -249,17 +251,43 @@ function patchProtocolo() {
     return resultado
   }
 
+  // O protocolo fixado não declara o campo 26: fromObject/toObject
+  // descartam o áudio mesmo quando o encoder já foi corrigido.
+  // Isso afeta WebMessageInfo.fromObject, normalização e sincronização.
+  if (!possuiEncoderNativo) {
+    const fromObject = sticker.fromObject
+    const toObject = sticker.toObject
+    sticker.fromObject = function (valor) {
+      const convertido = fromObject.call(this, valor)
+      if (valor?.audioMessage != null) {
+        convertido.audioMessage = audio.fromObject(valor.audioMessage)
+      }
+      return convertido
+    }
+    sticker.toObject = function (valor, opcoes) {
+      const convertido = toObject.call(this, valor, opcoes)
+      if (valor?.audioMessage != null) {
+        convertido.audioMessage = audio.toObject(valor.audioMessage, opcoes)
+      }
+      return convertido
+    }
+  }
+
   // O schema pode ignorar o campo experimental 26 ao receber uma mensagem.
   // Reconstituímos a AudioMessage diretamente dos bytes protobuf originais.
   const decodeAntigo = sticker.decode
   sticker.decode = function (reader, length) {
+    // O decoder gerado aceita tanto um Reader quanto bytes diretos.
+    const inicio = reader instanceof Uint8Array ? 0 : reader?.pos
     const mensagem = decodeAntigo.call(this, reader, length)
     try {
-      const base = reader?.buf
+      if (mensagem.audioMessage) return mensagem
+      const base = reader instanceof Uint8Array ? reader : reader?.buf
       if (!(base instanceof Uint8Array)) return mensagem
-      const posicao = reader.pos
-      const inicio = Number.isInteger(length) ? posicao - length : 0
-      if (inicio < 0 || inicio >= posicao) return mensagem
+      const posicao = reader instanceof Uint8Array
+        ? (Number.isInteger(length) ? length : base.length)
+        : reader.pos
+      if (!Number.isInteger(inicio) || inicio < 0 || inicio >= posicao || posicao > base.length) return mensagem
       // Lê somente o trecho codificado da StickerMessage (sem decodificar
       // novamente os quadros/bytes do arquivo WebP).
       const trecho = base.subarray(inicio, posicao)
@@ -669,12 +697,14 @@ function construirMensagem(fig, som) {
   }
   patchProtocolo()
   const resultado = proto.Message.fromObject({
-    stickerMessage: fig.stickerMessage,
+    stickerMessage: {
+      ...fig.stickerMessage,
+      stickerSentTs: Date.now(),
+      audioMessage: som.audioMessage
+    },
     messageContextInfo: { messageSecret: randomBytes(32) }
   })
-  // fromObject normalmente ignora campos experimentais desconhecidos;
-  // adicionar o áudio DEPOIS do fromObject garante o encoder patchado.
-  resultado.stickerMessage.audioMessage = som.audioMessage
+  // O patch mantém o campo também durante fromObject. Confere antes de enviar.
   if (!resultado.stickerMessage.audioMessage?.mediaKey ||
       !(resultado.stickerMessage.audioMessage?.directPath || resultado.stickerMessage.audioMessage?.url)) {
     throw new Error('Áudio sem metadados de upload; não é seguro anunciar envio com som.')

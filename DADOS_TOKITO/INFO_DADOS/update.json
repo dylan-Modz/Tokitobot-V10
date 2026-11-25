@@ -4,8 +4,9 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-25T04:00:42.637Z",
+  "publishedAt": "2026-11-25T04:02:34.703Z",
   "changelog": [
+    "[FigAudio/Protocolo] Preserva o campo de áudio 26 nas conversões fromObject/toObject e na leitura direta de bytes; utiliza a mensagem normalizada pela Stone com validação da trilha antes do relay e timestamp da figurinha. Sem encaminhamento artificial, sem reduzir a duração.",
     "[FigAudio] Revertido somente o teste de envio como encaminhamento no iOS. Preservadas a fila independente, validação de áudio, waveform e duração de até 60 segundos.",
     "[FigAudio] Validação do áudio decodificado, duração real e waveform explícito; rejeita áudio vazio/silencioso e confere a trilha no protobuf antes de enviar. Fila independente e limite de 60 segundos preservados.",
     "[FigAudio] Processamento separado da fila normal de comandos, com limite de conversões simultâneas.",
@@ -40,8 +41,8 @@
   ],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Reparação V10.3.65 — Restaurar envio original FigAudio",
-  "notice": "Envio original restaurado após teste de compatibilidade iOS; demais correções mantidas.",
+  "title": "Reparação V10.3.65 — Normalização do protocolo de FigAudio",
+  "notice": "Corrigida a preservação dos dados da figurinha sonora durante as conversões de objetos da Stone WPP.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -83,7 +84,7 @@
     },
     {
       "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "44c71490c56c41b15f1bf707f74ed939edbc1110"
+      "gitSha": "40ae9f27e5fd5a5cb8ecdf43de3b5a9951dc7bd2"
     },
     {
       "path": "DADOS_TOKITO/plugins/figurinhas/exif2.js",
@@ -4672,9 +4673,10 @@
       "fromVersion": "10.3.64",
       "channel": "stable",
       "type": "Correção",
-      "title": "Reparação V10.3.65 — Restaurar envio original FigAudio",
-      "notice": "Envio original restaurado após teste de compatibilidade iOS; demais correções mantidas.",
+      "title": "Reparação V10.3.65 — Normalização do protocolo de FigAudio",
+      "notice": "Corrigida a preservação dos dados da figurinha sonora durante as conversões de objetos da Stone WPP.",
       "changelog": [
+        "[FigAudio/Protocolo] Preserva o campo de áudio 26 nas conversões fromObject/toObject e na leitura direta de bytes; utiliza a mensagem normalizada pela Stone com validação da trilha antes do relay e timestamp da figurinha. Sem encaminhamento artificial, sem reduzir a duração.",
         "[FigAudio] Revertido somente o teste de envio como encaminhamento no iOS. Preservadas a fila independente, validação de áudio, waveform e duração de até 60 segundos.",
         "[FigAudio] Validação do áudio decodificado, duração real e waveform explícito; rejeita áudio vazio/silencioso e confere a trilha no protobuf antes de enviar. Fila independente e limite de 60 segundos preservados.",
         "[FigAudio] Processamento separado da fila normal de comandos, com limite de conversões simultâneas.",
@@ -4728,7 +4730,7 @@
         },
         {
           "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-          "gitSha": "44c71490c56c41b15f1bf707f74ed939edbc1110"
+          "gitSha": "40ae9f27e5fd5a5cb8ecdf43de3b5a9951dc7bd2"
         },
         {
           "path": "DADOS_TOKITO/plugins/figurinhas/exif2.js",
@@ -4758,7 +4760,7 @@
         "tests/tiktoksearch-rotation.test.js"
       ],
       "required": false,
-      "publishedAt": "2026-11-25T04:00:42.637Z"
+      "publishedAt": "2026-11-25T04:02:34.703Z"
     }
   ],
   "mode": "incremental",
@@ -4772,5 +4774,5 @@
   },
   "publicVersion": "10.3.65",
   "repair": true,
-  "repairId": "figaudio-restaurar-envio-10.3.65-r5"
+  "repairId": "figaudio-normalizacao-protocolo-10.3.65-r6"
 }
