@@ -4,8 +4,9 @@
   "channel": "stable",
   "repository": "dylan-Modz/Tokitobot-V10",
   "ref": "main",
-  "publishedAt": "2026-11-25T03:21:34.743Z",
+  "publishedAt": "2026-11-25T03:52:02.368Z",
   "changelog": [
+    "[FigAudio/iOS — teste] Envio de novas figurinhas sonoras com a normalização de encaminhamento da Stone, validação do áudio antes do relay e uma única mensagem. Mantidos 60 segundos, fila otimizada e caminho anterior de /take e /rename.",
     "[FigAudio] Validação do áudio decodificado, duração real e waveform explícito; rejeita áudio vazio/silencioso e confere a trilha no protobuf antes de enviar. Fila independente e limite de 60 segundos preservados.",
     "[FigAudio] Processamento separado da fila normal de comandos, com limite de conversões simultâneas.",
     "[Desempenho] FFmpeg com carga controlada, arquivos temporários e cache assíncronos e limites de tempo.",
@@ -39,8 +40,8 @@
   ],
   "archiveSha256": "",
   "type": "Correção",
-  "title": "Reparação V10.3.65 — Áudio das figurinhas de vídeo",
-  "notice": "Correção do FigAudio: validação da trilha sonora, duração, waveform e codificação antes do envio.",
+  "title": "Reparação V10.3.65 — Teste de envio sonoro no iOS",
+  "notice": "Teste de compatibilidade do envio de figurinhas com áudio usando a normalização de encaminhamento.",
   "required": false,
   "minimumVersion": "10.0.0",
   "files": [
@@ -82,7 +83,7 @@
     },
     {
       "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-      "gitSha": "44c71490c56c41b15f1bf707f74ed939edbc1110"
+      "gitSha": "3b7620849f3254d8fa0f8f3321fe7af63cd0a995"
     },
     {
       "path": "DADOS_TOKITO/plugins/figurinhas/exif2.js",
@@ -4671,9 +4672,10 @@
       "fromVersion": "10.3.64",
       "channel": "stable",
       "type": "Correção",
-      "title": "Reparação V10.3.65 — Áudio das figurinhas de vídeo",
-      "notice": "Correção do FigAudio: validação da trilha sonora, duração, waveform e codificação antes do envio.",
+      "title": "Reparação V10.3.65 — Teste de envio sonoro no iOS",
+      "notice": "Teste de compatibilidade do envio de figurinhas com áudio usando a normalização de encaminhamento.",
       "changelog": [
+        "[FigAudio/iOS — teste] Envio de novas figurinhas sonoras com a normalização de encaminhamento da Stone, validação do áudio antes do relay e uma única mensagem. Mantidos 60 segundos, fila otimizada e caminho anterior de /take e /rename.",
         "[FigAudio] Validação do áudio decodificado, duração real e waveform explícito; rejeita áudio vazio/silencioso e confere a trilha no protobuf antes de enviar. Fila independente e limite de 60 segundos preservados.",
         "[FigAudio] Processamento separado da fila normal de comandos, com limite de conversões simultâneas.",
         "[Desempenho] FFmpeg com carga controlada, arquivos temporários e cache assíncronos e limites de tempo.",
@@ -4726,7 +4728,7 @@
         },
         {
           "path": "DADOS_TOKITO/sistemas/sticker-audio.js",
-          "gitSha": "44c71490c56c41b15f1bf707f74ed939edbc1110"
+          "gitSha": "3b7620849f3254d8fa0f8f3321fe7af63cd0a995"
         },
         {
           "path": "DADOS_TOKITO/plugins/figurinhas/exif2.js",
@@ -4756,7 +4758,7 @@
         "tests/tiktoksearch-rotation.test.js"
       ],
       "required": false,
-      "publishedAt": "2026-11-25T03:21:34.743Z"
+      "publishedAt": "2026-11-25T03:52:02.368Z"
     }
   ],
   "mode": "incremental",
@@ -4770,5 +4772,5 @@
   },
   "publicVersion": "10.3.65",
   "repair": true,
-  "repairId": "figaudio-audio-validado-10.3.65-r3"
+  "repairId": "figaudio-ios-encaminhamento-10.3.65-r4"
 }
