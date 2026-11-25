@@ -12,7 +12,7 @@ const os = require('os')
 const { promisify } = require('util')
 const { execFile } = require('child_process')
 const { randomBytes } = require('crypto')
-const { proto, prepareWAMessageMedia, generateWAMessageFromContent, generateForwardMessageContent } = require('@stone-wpp/ofc')
+const { proto, prepareWAMessageMedia, generateWAMessageFromContent } = require('@stone-wpp/ofc')
 const modulos = require('./modulos')
 
 const executar = promisify(execFile)
@@ -203,41 +203,19 @@ function recuperarAudioPorSha(jid, fileSha256) {
   return encontrado
 }
 
-async function relayFigurinhaSonora(ctx, mensagem, audioMessage, stickerBytes, testarEncaminhamento = false) {
+async function relayFigurinhaSonora(ctx, mensagem, audioMessage, stickerBytes) {
   if (typeof generateWAMessageFromContent !== 'function') {
     throw new Error('A conexão não disponibiliza identificador de mensagem para figurinha sonora.')
   }
-  let conteudo = mensagem
-  // Experimento isolado para iOS: usa a normalização de encaminhamento
-  // da própria Stone, sem enviar uma segunda mensagem nem recodificar mídia.
-  // /take e /rename mantêm o caminho original.
-  if (testarEncaminhamento) {
-    if (typeof generateForwardMessageContent !== 'function') {
-      throw new Error('A conexão não disponibiliza a normalização de encaminhamento.')
-    }
-    const encaminhada = generateForwardMessageContent({
-      key: { fromMe: true, remoteJid: ctx.from },
-      message: mensagem
-    }, true)
-    if (!encaminhada?.stickerMessage ||
-        encaminhada.stickerMessage.contextInfo?.isForwarded !== true ||
-        Number(encaminhada.stickerMessage.contextInfo?.forwardingScore) < 1) {
-      throw new Error('Não foi possível normalizar a figurinha sonora para encaminhamento.')
-    }
-    // Impede que um campo experimental perdido no clone resulte em
-    // figurinha muda. Não substitui ou inventa a chave da mídia.
-    validarAudioCodificado(encaminhada, audioMessage)
-    conteudo = encaminhada
-  }
-  const gerada = generateWAMessageFromContent(ctx.from, conteudo, {
+  const gerada = generateWAMessageFromContent(ctx.from, mensagem, {
     userJid: ctx.tokito.user?.id
   })
   const id = gerada?.key?.id
   if (!id) throw new Error('Não foi possível identificar a figurinha sonora.')
-  // WebMessageInfo.fromObject pode descartar o campo experimental 26.
-  // Envia o conteúdo validado, usando apenas o ID da mensagem gerada.
-  await ctx.tokito.relayMessage(ctx.from, conteudo, { messageId: id })
-  registrarAudioMensagem(ctx.from, id, audioMessage, stickerBytes, conteudo?.stickerMessage?.fileSha256)
+  // Utilizar a mensagem original: o campo 26 é experimental e a normalização
+  // da mensagem gerada pode descartá-lo.
+  await ctx.tokito.relayMessage(ctx.from, mensagem, { messageId: id })
+  registrarAudioMensagem(ctx.from, id, audioMessage, stickerBytes, mensagem?.stickerMessage?.fileSha256)
   return true
 }
 
@@ -792,7 +770,7 @@ async function enviarPersonalizada(ctx, { figurinha, som, animada = false, metad
   const mensagem = construirMensagem(fig, audio)
   // Confirma o áudio dentro do protobuf, não apenas que algum byte foi gerado.
   validarAudioCodificado(mensagem, audioMsg)
-  await relayFigurinhaSonora(ctx, mensagem, audioMsg, figurinha, true)
+  await relayFigurinhaSonora(ctx, mensagem, audioMsg, figurinha)
   return true
 }
 
